@@ -4,8 +4,55 @@
   "description": "visualization of import export data for the NEB",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "webpack": "webpack --config webpack.prod.config.js",
+    "start": "node servers/DevelopmentServer/DevelopmentServer.js",
+    "lint": "eslint --ext .jsx,.js app/**",
+    "build": "node ./build.js"
   },
   "author": "Patrick King, Rahul Bhaskar, Charlie Cheung",
-  "license": "Open Government Liscense - Canada"
+  "license": "Open Government Liscense - Canada",
+  "dependencies": {
+    "ajv": "^5.2.2",
+    "babel-cli": "^6.24.1",
+    "babel-core": "^6.25.0",
+    "babel-loader": "^7.1.1",
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-env": "^1.6.0",
+    "babel-preset-react": "^6.24.1",
+    "bluebird": "^3.5.0",
+    "browser-cookies": "^1.1.0",
+    "client-request": "^2.0.0",
+    "css-loader": "^0.28.4",
+    "domready": "^1.0.8",
+    "dot-env": "0.0.1",
+    "dotenv": "^4.0.0",
+    "dotenv-webpack": "^1.5.4",
+    "express": "^4.15.3",
+    "history": "^4.7.2",
+    "immutable": "^3.8.1",
+    "lodash": "^4.17.4",
+    "memoize-immutable": "^3.0.0",
+    "mustache": "^2.3.0",
+    "mustache-express": "^1.2.5",
+    "node-sass": "^4.5.3",
+    "nsp": "^2.7.0",
+    "query-string": "^5.0.0",
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1",
+    "react-hot-loader": "^1.3.1",
+    "react-redux": "^5.0.5",
+    "redux": "^3.7.2",
+    "sass-loader": "^6.0.6",
+    "should": "^11.2.1",
+    "style-loader": "^0.18.2",
+    "webpack": "^3.4.1",
+    "webpack-dev-middleware": "^1.12.0",
+    "webpack-dev-server": "^2.6.1",
+    "webpack-hot-middleware": "^2.18.2"
+  },
+  "devDependencies": {
+    "eslint": "^4.3.0",
+    "eslint-plugin-react": "^7.1.0"
+  }
 }
