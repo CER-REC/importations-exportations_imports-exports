@@ -1,0 +1,11 @@
+{
+  "name": "import-export-visualization",
+  "version": "0.0.0",
+  "description": "visualization of import export data for the NEB",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Patrick King, Rahul Bhaskar, Charlie Cheung",
+  "license": "Open Government Liscense - Canada"
+}
