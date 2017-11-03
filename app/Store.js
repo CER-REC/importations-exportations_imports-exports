@@ -1,8 +1,10 @@
 
 const Redux = require('redux')
 
-const reducers = Redux.combineReducers({
+const ViewportReducer = require('./reducers/ViewportReducer.js')
 
+const reducers = Redux.combineReducers({
+  viewport: ViewportReducer,
 })
 
 module.exports = function () {
