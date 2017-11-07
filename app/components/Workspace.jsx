@@ -2,6 +2,8 @@
 const React = require('react')
 const ReactRedux = require('react-redux')
 
+const MenuBar = require('./MenuBar.jsx')
+
 require('./Workspace.scss')
 
 class Workspace extends React.Component {
@@ -10,8 +12,9 @@ class Workspace extends React.Component {
 
     return  <svg className="Workspace" width={this.props.viewport.get('x')}
       height={this.props.viewport.get('y')}> 
-      <rect fill='blue' height='400' width='300'/>
-      <rect fill = 'red' height ='300' width = '150' x='234' />
+
+      <MenuBar />
+      
     </svg>
   }
 }

@@ -1,4 +1,4 @@
-const Constants = require('./Constants.js')
+const Constants = require('../Constants.js')
 
 const WorkspaceComputations = {}
 
@@ -7,6 +7,15 @@ const WorkspaceComputations = {}
 WorkspaceComputations.workspaceWidth = function (viewport) {
   return viewport.get('x')
 }
+
+WorkspaceComputations.topHeightMargin = function () {
+  return Constants.get('topHeightMargin')
+}
+
+WorkspaceComputations.menuBarHeight = function (viewport) {
+  return viewport.get('y') - WorkspaceComputations.topHeightMargin()
+}
+
 
 
 module.exports = WorkspaceComputations
