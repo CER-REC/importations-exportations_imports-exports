@@ -29,12 +29,12 @@ const Constants = Immutable.fromJS({
 
   visualizationContainer: {
     leftMargin: 165,
-    widthPadding: 330,
+    widthPadding: 450,
     heightPadding: 200,
   },
 
   rightContainer: {
-    width: 150,
+    width: 270,
   },
 
 
