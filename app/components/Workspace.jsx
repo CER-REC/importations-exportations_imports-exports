@@ -6,6 +6,7 @@ const Constants = require('../Constants.js')
 const MenuBar = require('./MenuBar.jsx')
 const Legend = require('./Legend.jsx')
 const SocialBar = require('./SocialBar.jsx')
+const VisualizationContainer = require('./VisualizationContainer.jsx')
 
 require('./Workspace.scss')
 
@@ -15,6 +16,9 @@ class Workspace extends React.Component {
 
     return  <svg className="Workspace" width={this.props.viewport.get('x')}
       height={ this.props.viewport.get('y') + Constants.getIn(['workspace','viewportPadding']) }> 
+
+
+      <VisualizationContainer />
 
       <SocialBar />
       <Legend />

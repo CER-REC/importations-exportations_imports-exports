@@ -25,7 +25,10 @@ WorkspaceComputations.socialBarY = function (viewport) {
   return WorkspaceComputations.legendY(viewport)
   + Constants.getIn(['legend','height']) 
   + Constants.getIn(['socialBar','topMargin'])
+}
 
+WorkspaceComputations.visualizationContainerWidth = function (viewport) {
+  return viewport.get('x') - Constants.getIn(['visualizationContainer','widthPadding'])
 }
 
 
