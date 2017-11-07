@@ -7,6 +7,7 @@ const MenuBar = require('./MenuBar.jsx')
 const Legend = require('./Legend.jsx')
 const SocialBar = require('./SocialBar.jsx')
 const VisualizationContainer = require('./VisualizationContainer.jsx')
+const RightContainer = require('./RightContainer.jsx')
 
 require('./Workspace.scss')
 
@@ -19,6 +20,8 @@ class Workspace extends React.Component {
 
 
       <VisualizationContainer />
+
+      <RightContainer />
 
       <SocialBar />
       <Legend />

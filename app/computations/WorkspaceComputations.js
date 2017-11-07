@@ -31,6 +31,14 @@ WorkspaceComputations.visualizationContainerWidth = function (viewport) {
   return viewport.get('x') - Constants.getIn(['visualizationContainer','widthPadding'])
 }
 
+WorkspaceComputations.visualizationContainerHeight = function (viewport) {
+  return viewport.get('y') + Constants.getIn(['visualizationContainer','heightPadding'])
+}
+
+WorkspaceComputations.rightContainerX = function (viewport) {
+  return WorkspaceComputations.workspaceWidth(viewport) 
+  - Constants.getIn(['rightContainer','width'])
+}
 
 
 

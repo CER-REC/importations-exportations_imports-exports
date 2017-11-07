@@ -10,7 +10,6 @@ const Constants = Immutable.fromJS({
 
   topHeightMargin: 100,
 
-
   menuBar: {
     width: 150,
   },
@@ -18,19 +17,24 @@ const Constants = Immutable.fromJS({
   legend: {
     topMargin: 170,
     width: 150,
-    height: 200,
+    height: 230,
   },
 
   socialBar: {
-    topMargin: 50,
+    topMargin: 20,
     width: 400,
     height: 32,
     bottomMargin: 20,
   },
 
   visualizationContainer: {
-    leftMargin: 175,
-    widthPadding: 350,
+    leftMargin: 165,
+    widthPadding: 330,
+    heightPadding: 200,
+  },
+
+  rightContainer: {
+    width: 150,
   },
 
 

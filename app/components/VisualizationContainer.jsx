@@ -14,8 +14,8 @@ class VisualizationContainer extends React.Component {
         x = { Constants.getIn(['visualizationContainer','leftMargin']) }
         y = { WorkspaceComputations.topHeightMargin() }
         width = { WorkspaceComputations.visualizationContainerWidth(this.props.viewport)}
-        height = { this.props.viewport.get('y') + Constants.getIn(['workspace','viewportPadding']) }
-        fill = '#AA947E' 
+        height = { WorkspaceComputations.visualizationContainerHeight(this.props.viewport) }
+        fill = 'white' stroke ='#2b2b2b' 
       />
     </g>
   }
