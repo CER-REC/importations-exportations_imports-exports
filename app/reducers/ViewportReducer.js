@@ -1,6 +1,6 @@
 const Immutable = require('immutable')
 
-const Constants = require('../Constants.js')
+//const Constants = require('../Constants.js')
 
 const defaults = Immutable.fromJS({
   x: 0,
@@ -12,24 +12,10 @@ const ViewportReducer = (state = defaults, action) => {
   switch(action.type) {
 
   case 'ResizeScreen':
-    // Check that the action is a valid object.
-    if (action && action.x && action.y)
-    {
-      // Check that the dimensions are valid.
-      if (action.x > Constants.getIn(['workspace', 'maxWidth'])) 
-      {
-        action.x = Math.min(Constants.getIn(['workspace', 'maxWidth']), action.x)
-        action.y = action.x * Constants.getIn(['workspace', 'heightToWidthRatio'])
-      }
-
-      return state.set('x', action.x).set('y', action.y)
-    }
-    return state
-
+    return state.set('x', action.x).set('y', action.y)
   default:
     return state
   }
-
 
 
 
