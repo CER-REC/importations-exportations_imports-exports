@@ -1,12 +1,14 @@
 // TODO: Delete this file
 
-const Immutable = require('immutable')
 const MemoizeImmutable = require('memoize-immutable')
 
 const SampleComputations = {
+
+  // listA and listB: immutable.js lists
   concat: function (listA, listB) {
     return listA.concat(listB)
   }
+
 }
 
 
