@@ -32,7 +32,7 @@ const Constants = Immutable.fromJS({
     heightPadding: 200,
   },
 
-  rightContainer: {
+  VisualizationDetailContainer: {
     width: 270,
   },
 

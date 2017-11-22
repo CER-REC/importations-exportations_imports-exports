@@ -4,16 +4,16 @@ const ReactRedux = require('react-redux')
 const Constants = require('../Constants.js')
 const WorkspaceComputations = require('../computations/WorkspaceComputations.js')
 
-require('./RightContainer.scss')
+require('./VisualizationDetailContainer.scss')
 
-class RightContainer extends React.Component {
+class VisualizationDetailContainer extends React.Component {
 
   render() {
     return <g>
       <rect 
-        x = { WorkspaceComputations.rightContainerX(this.props.viewport) }
+        x = { WorkspaceComputations.VisualizationDetailContainerX(this.props.viewport) }
         y = { WorkspaceComputations.topHeightMargin() }
-        width = { Constants.getIn(['rightContainer','width'])}
+        width = { Constants.getIn(['VisualizationDetailContainer','width'])}
         height = { this.props.viewport.get('y') + Constants.getIn(['workspace','viewportPadding']) }
         fill = '#355B50' 
       />
@@ -28,4 +28,4 @@ const mapStateToProps = state => {
 }
 
 
-module.exports = ReactRedux.connect(mapStateToProps)(RightContainer)
+module.exports = ReactRedux.connect(mapStateToProps)(VisualizationDetailContainer)
