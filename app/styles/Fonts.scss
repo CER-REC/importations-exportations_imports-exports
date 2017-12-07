@@ -1,0 +1,35 @@
+@import "./Colours.scss";
+@import "./FontVariables.scss";
+
+
+// NB: The fonts stylesheet only needs to be imported into the project once, 
+// at the root. If you want to use font variables, import FontVariables.scss
+// instead.
+
+@font-face {
+  font-family: "FiraSansCondensed";
+  src:url("fonts/FiraSansCondensed-Regular.eot");
+  src:url("fonts/FiraSansCondensed-Regular.eot") format("eot"),
+      url("fonts/FiraSansCondensed-Regular.woff2") format("woff2"),
+      url("fonts/FiraSansCondensed-Regular.woff") format("woff"),
+      url("fonts/FiraSansCondensed-Regular.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "FiraSansCondensedMedium";
+  src:url("fonts/FiraSansCondensed-Medium.eot");
+  src:url("fonts/FiraSansCondensed-Medium.eot") format("eot"),
+      url("fonts/FiraSansCondensed-Medium.woff2") format("woff2"),
+      url("fonts/FiraSansCondensed-Medium.woff") format("woff"),
+      url("fonts/FiraSansCondensed-Medium.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "FiraSansCondensedSemibold";
+  src:url("fonts/FiraSansCondensed-SemiBold.eot");
+  src:url("fonts/FiraSansCondensed-SemiBold.eot") format("eot"),
+      url("fonts/FiraSansCondensed-SemiBold.woff2") format("woff2"),
+      url("fonts/FiraSansCondensed-SemiBold.woff") format("woff"),
+      url("fonts/FiraSansCondensed-SemiBold.ttf") format("truetype");
+}
+
