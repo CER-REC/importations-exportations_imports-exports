@@ -35,21 +35,13 @@ const Constants = Immutable.fromJS({
   VisualizationDetailContainer: {
     width: 270,
   },
-
-
-
-
-
-
-
-
+  VisualizationType: [
+    'electricity',
+    'crudeOil',
+    'naturalGas',
+    'refinedPetroleumProducts',
+    'naturalGasLiquids'
+  ]
 
 })
-
-
-
-
-
-
 module.exports = Constants
-
