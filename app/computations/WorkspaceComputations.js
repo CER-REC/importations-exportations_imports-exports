@@ -13,7 +13,8 @@ WorkspaceComputations.topHeightMargin = function () {
 }
 
 WorkspaceComputations.menuBarHeight = function (viewport) {
-  return viewport.get('y') - WorkspaceComputations.topHeightMargin()
+  return viewport.get('y') - WorkspaceComputations.topHeightMargin() 
+    + Constants.getIn(['visualizationContainer','heightPadding']) + 100
 }
 
 WorkspaceComputations.legendY = function (viewport) {
@@ -23,8 +24,7 @@ WorkspaceComputations.legendY = function (viewport) {
 
 WorkspaceComputations.socialBarY = function (viewport) {
   return WorkspaceComputations.legendY(viewport)
-  + Constants.getIn(['legend','height']) 
-  + Constants.getIn(['socialBar','topMargin'])
+  + Constants.getIn(['socialBar','topMargin']) - 70
 }
 
 WorkspaceComputations.visualizationContainerWidth = function (viewport) {

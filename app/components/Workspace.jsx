@@ -4,7 +4,6 @@ const ReactRedux = require('react-redux')
 const Constants = require('../Constants.js')
 
 const MenuBar = require('./MenuBar.jsx')
-const Legend = require('./Legend.jsx')
 const SocialBar = require('./SocialBar.jsx')
 const VisualizationContainer = require('./VisualizationContainer.jsx')
 const VisualizationDetailContainer = require('./VisualizationDetailContainer.jsx')
@@ -24,10 +23,7 @@ class Workspace extends React.Component {
 
       <SocialBar />
       <MenuBar />
-      <Legend />
    
-      
-      
     </svg>
   }
 }
