@@ -11,16 +11,17 @@ const Constants = Immutable.fromJS({
 
   menuBar: {
     width: 150,
+    containerHeight: 300,
   },
 
   legend: {
-    topMargin: 170,
+    topMargin: 200,
     width: 150,
     height: 200,
   },
 
   socialBar: {
-    topMargin: 20,
+    topMargin: 300,
     width: 400,
     height: 32,
     bottomMargin: 20,
@@ -29,7 +30,7 @@ const Constants = Immutable.fromJS({
   visualizationContainer: {
     leftMargin: 165,
     widthPadding: 450,
-    heightPadding: 200,
+    heightPadding: 300,
   },
 
   VisualizationDetailContainer: {
@@ -42,14 +43,17 @@ const Constants = Immutable.fromJS({
 
   electricitySortMenu: {
     height: 150,
+    topMargin: 200,
   },
 
   electricityAmountPriceMenu: {
     height: 100,
+    topMargin: 160,
   },
 
-  showExplanations: {
+  electricityShowExplanations: {
     height: 30,
+    topMargin: 110,
   },
 
 

@@ -12,9 +12,9 @@ class ShowExplanations extends React.Component {
   render() {
     return <rect
       x = { 0 }
-      y = { WorkspaceComputations.topHeightMargin() + 470 }
+      y = { WorkspaceComputations.electricityShowExplanationsY() }
       width = { Constants.getIn(['menuBar','width']) }
-      height = { Constants.getIn(['showExplanations','height']) }
+      height = { Constants.getIn(['electricityShowExplanations','height']) }
       fill = '#b7ddf1' 
     />
 

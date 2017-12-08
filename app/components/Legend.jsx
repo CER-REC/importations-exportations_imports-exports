@@ -12,7 +12,7 @@ class Legend extends React.Component {
     return <g>
       <rect 
         x = { 0 }
-        y = {WorkspaceComputations.topHeightMargin() + 720 }
+        y = {WorkspaceComputations.legendY(this.props.viewport)}
         width = { Constants.getIn(['legend','width']) }
         height = { Constants.getIn(['legend','height']) }
         fill = '#ebf2bc' 

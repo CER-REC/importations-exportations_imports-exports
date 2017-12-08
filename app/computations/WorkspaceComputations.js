@@ -14,17 +14,32 @@ WorkspaceComputations.topHeightMargin = function () {
 
 WorkspaceComputations.menuBarHeight = function (viewport) {
   return viewport.get('y') - WorkspaceComputations.topHeightMargin() 
-    + Constants.getIn(['visualizationContainer','heightPadding']) + 100
+    + Constants.getIn(['menuBar','containerHeight'])
+}
+
+WorkspaceComputations.electricitySortMenuY = function (viewport) {
+  return WorkspaceComputations.topHeightMargin(viewport)
+    + Constants.getIn(['electricitySortMenu','topMargin'])
+}
+
+WorkspaceComputations.electricityAmountPriceMenuY = function (viewport) {
+  return WorkspaceComputations.electricitySortMenuY(viewport) 
+    + Constants.getIn(['electricityAmountPriceMenu','topMargin'])
+}
+
+WorkspaceComputations.electricityShowExplanationsY = function (viewport) {
+  return WorkspaceComputations.electricityAmountPriceMenuY(viewport) 
+    + Constants.getIn(['electricityShowExplanations','topMargin'])
 }
 
 WorkspaceComputations.legendY = function (viewport) {
-  return WorkspaceComputations.menuBarHeight(viewport) 
+  return WorkspaceComputations.electricityShowExplanationsY(viewport) 
   + Constants.getIn(['legend','topMargin']) 
 }
 
 WorkspaceComputations.socialBarY = function (viewport) {
   return WorkspaceComputations.legendY(viewport)
-  + Constants.getIn(['socialBar','topMargin']) - 70
+  + Constants.getIn(['socialBar','topMargin'])
 }
 
 WorkspaceComputations.visualizationContainerWidth = function (viewport) {

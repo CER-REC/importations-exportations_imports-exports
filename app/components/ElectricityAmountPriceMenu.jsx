@@ -11,7 +11,7 @@ class ElectricityAmountPriceMenu extends React.Component {
   render() {
     return <rect
       x = { 0 }
-      y = { WorkspaceComputations.topHeightMargin() + 360 }
+      y = { WorkspaceComputations.electricityAmountPriceMenuY() }
       width = { Constants.getIn(['menuBar','width']) }
       height = { Constants.getIn(['electricityAmountPriceMenu','height'])  }
       fill = '#d2f2b8' 

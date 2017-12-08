@@ -11,7 +11,7 @@ class ElectricitySortMenu extends React.Component {
   render() {
     return <rect
       x = { 0 }
-      y = { WorkspaceComputations.topHeightMargin() + 200 }
+      y = { WorkspaceComputations.electricitySortMenuY() }
       width = { Constants.getIn(['menuBar','width']) }
       height = { Constants.getIn(['electricitySortMenu','height'])  }
       fill = '#ced6e2' 
