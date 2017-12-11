@@ -33,7 +33,7 @@ const Constants = Immutable.fromJS({
     heightPadding: 300,
   },
 
-  VisualizationDetailContainer: {
+  visualizationDetailContainer: {
     width: 270,
   },
 
@@ -56,14 +56,14 @@ const Constants = Immutable.fromJS({
     topMargin: 110,
   },
 
+  visualizationTypes: [
+    'electricity',
+    'crudeOil',
+    'naturalGas',
+    'refinedPetroleumProducts',
+    'naturalGasLiquids'
+  ]
 
 
 })
-
-
-
-
-
-
 module.exports = Constants
-

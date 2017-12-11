@@ -52,7 +52,7 @@ WorkspaceComputations.visualizationContainerHeight = function (viewport) {
 
 WorkspaceComputations.VisualizationDetailContainerX = function (viewport) {
   return WorkspaceComputations.workspaceWidth(viewport) 
-  - Constants.getIn(['VisualizationDetailContainer','width'])
+  - Constants.getIn(['visualizationDetailContainer','width'])
 }
 
 

@@ -13,7 +13,7 @@ class VisualizationDetailContainer extends React.Component {
       <rect 
         x = { WorkspaceComputations.VisualizationDetailContainerX(this.props.viewport) }
         y = { WorkspaceComputations.topHeightMargin() }
-        width = { Constants.getIn(['VisualizationDetailContainer','width'])}
+        width = { Constants.getIn(['visualizationDetailContainer','width'])}
         height = { this.props.viewport.get('y') + Constants.getIn(['workspace','viewportPadding']) }
         fill = '#355B50' 
       />
