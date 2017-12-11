@@ -41,6 +41,10 @@ const Constants = Immutable.fromJS({
     'naturalGas',
     'refinedPetroleumProducts',
     'naturalGasLiquids'
+  ],
+  language: [
+    'en',
+    'fr'
   ]
 
 })
