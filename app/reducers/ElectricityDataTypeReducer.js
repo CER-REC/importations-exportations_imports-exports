@@ -7,8 +7,8 @@ const ElectricityDataTypeReducer = (state = 'price', action) => {
 
   case 'SetElectricityDataType':
     //Only valid datatype name is allowed i.e. 'price' or 'mwh'
-    if(Constants.get('electircityDataType').contains(action.electircityDataType)){
-      return action.electircityDataType
+    if(Constants.get('electricityDataTypes').contains(action.electricityDataType)){
+      return action.electricityDataType
     }
     return state
   default:
