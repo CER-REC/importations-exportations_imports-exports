@@ -41,6 +41,10 @@ const Constants = Immutable.fromJS({
     'naturalGas',
     'refinedPetroleumProducts',
     'naturalGasLiquids'
+  ],
+  electircityDataType:[
+    'price',
+    'mwh'
   ]
 
 })
