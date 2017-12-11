@@ -71,6 +71,10 @@ const Constants = Immutable.fromJS({
   language: [
     'en',
     'fr'
+    ],
+  electricityDataTypes:[
+    'price',
+    'mwh'
   ]
 
 
