@@ -67,6 +67,10 @@ const Constants = Immutable.fromJS({
     'location',
     'import',
     'export'
+  ],
+  language: [
+    'en',
+    'fr'
   ]
 
 
