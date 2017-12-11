@@ -7,7 +7,7 @@ const ElectricitySortStateReducer = (state = 'location', action) => {
 
   case 'SortElectricityData':
     //Only valid sort value is allowed i.e. 'location', 'import', 'export'
-    if(Constants.get('electricitySortState').contains(action.sortBy)){
+    if(Constants.get('electricitySortStates').contains(action.sortBy)){
       return action.sortBy
     }
     return state

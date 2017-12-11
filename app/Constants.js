@@ -63,7 +63,7 @@ const Constants = Immutable.fromJS({
     'refinedPetroleumProducts',
     'naturalGasLiquids'
   ],
-  electricitySortState:[
+  electricitySortStates:[
     'location',
     'import',
     'export'
