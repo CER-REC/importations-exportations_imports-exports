@@ -1,4 +1,4 @@
-const ElectricityExplanationReducer = (state = false, action) => {
+const ElectricityExplanationShownReducer = (state = false, action) => {
 
 
   switch(action.type) {
@@ -11,4 +11,4 @@ const ElectricityExplanationReducer = (state = false, action) => {
 }
 
 
-module.exports = ElectricityExplanationReducer
+module.exports = ElectricityExplanationShownReducer
