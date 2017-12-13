@@ -63,6 +63,10 @@ const TranslationTable = Immutable.fromJS({
       fr:'Show AMOUNT (MW. h) FR'
     }
   },
+  explanationShown:{
+    en:'Show EXPLANATIONS',
+    fr:'Show EXPLANATIONS FR'
+  }
 
 })
 
