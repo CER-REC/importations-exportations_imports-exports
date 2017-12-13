@@ -85,7 +85,11 @@ const Constants = Immutable.fromJS({
   electricityDataTypes:[
     'price',
     'mwh'
-  ]
+  ],
+  electricityDataTypesStyle:{
+    color: 'grey',
+    lineWidth: 3
+  }
 
 
 })

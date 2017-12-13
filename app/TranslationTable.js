@@ -38,7 +38,17 @@ const TranslationTable = Immutable.fromJS({
       en:'Sort By EXPORTS',
       fr:'Sort By EXPORTS FR'
     }
-  }
+  },
+  electricityDataTypes:{
+    price:{
+      en:'Show PRICE',
+      fr:'Show PRICE FR'
+    },
+    mwh:{
+      en:'Show AMOUNT (MW. h)',
+      fr:'Show AMOUNT (MW. h) FR'
+    }
+  },
 
 })
 
