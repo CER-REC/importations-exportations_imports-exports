@@ -2,6 +2,7 @@ const React = require('react')
 const ReactRedux = require('react-redux')
 
 const Constants = require('../Constants.js')
+const Tr = require('../TranslationTable.js')
 const WorkspaceComputations = require('../computations/WorkspaceComputations.js')
 
 const Legend = require('./Legend.jsx')
@@ -18,7 +19,7 @@ class MenuBar extends React.Component {
     // TODO: add logic to determine if visualization is in electricity state
 
     // if(!this.props.electricity) { return null }
-
+   
     return <g>
       <Legend />
       
@@ -43,7 +44,7 @@ class MenuBar extends React.Component {
 
   naturalGasLiquids() {
     return
-  }
+  } 
 
   render() {
     return <g className='MenuBar'>
