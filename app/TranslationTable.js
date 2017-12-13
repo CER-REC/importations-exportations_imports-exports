@@ -26,6 +26,20 @@ const TranslationTable = Immutable.fromJS({
   },
 
   electricitySortStates:{
+    title:{
+      import: {
+        en:'Imports',
+        fr:'Imports'
+      },
+      ampersand: {
+        en:'&',
+        fr:'&'
+      },
+      export: {
+        en:'Exports',
+        fr:'Exports'
+      }
+    },
     location:{
       en:'Sort By LOCATION',
       fr:'Sort By LOCATION FR'

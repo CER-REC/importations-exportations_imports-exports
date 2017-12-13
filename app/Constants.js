@@ -49,12 +49,12 @@ const Constants = Immutable.fromJS({
 
   electricitySortMenu: {
     height: 150,
-    topMargin: 200,
+    topMargin: 180,
   },
 
   electricityAmountPriceMenu: {
     height: 100,
-    topMargin: 160,
+    topMargin: 100,
   },
 
   electricityShowExplanations: {
@@ -76,15 +76,29 @@ const Constants = Immutable.fromJS({
   ],
   electricitySortStatesStyle:{
     color: 'grey',
-    lineWidth: 3
+    lineWidth: 3,
+    title: {
+      import:{
+        xPadding: 5,
+        color: 'orange'
+      },
+      ampersand:{
+        xPadding: 70, 
+        color:''
+      },
+      export: {
+        xPadding: 90,
+        color:'#6495ED'
+      }
+    }
   },
   language: [
     'en',
     'fr'
   ],
   electricityDataTypes:[
-    'price',
-    'mwh'
+    'mwh',
+    'price'
   ],
   electricityDataTypesStyle:{
     color: 'grey',
