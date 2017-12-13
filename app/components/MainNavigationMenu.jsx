@@ -20,7 +20,7 @@ class MainNavigationMenu extends React.Component {
       selectedOption = {this.props.importExportVisualization}
       optionXaxisPadding = {Constants.getIn(['menuBarOptions', 'optionXaxisPadding'])}
       optionPadding = {Constants.getIn(['menuBarOptions', 'optionPadding'])}
-      trKey = 'menuBar' 
+      trKey = 'mainMenuBar' 
       color = {Constants.getIn(['mainNavigationMenu', 'color'])}
       lineWidth = {Constants.getIn(['mainNavigationMenu', 'lineWidth'])}
       lang = {this.props.lang}

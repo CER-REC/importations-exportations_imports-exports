@@ -2,7 +2,7 @@ const Immutable = require('immutable')
 
 const TranslationTable = Immutable.fromJS({ 
 
-  menuBar:{
+  mainMenuBar:{
     electricity:{
       en:'Electricity',
       fr:'Electricity FR'
@@ -22,6 +22,21 @@ const TranslationTable = Immutable.fromJS({
     refinedPetroleumProducts:{
       en:'Refin. Petroleum Prod',
       fr:'Refin. Petroleum Prod FR'
+    }
+  },
+
+  electricitySortStates:{
+    location:{
+      en:'Sort By LOCATION',
+      fr:'Sort By LOCATION FR'
+    },
+    import:{
+      en:'Sort By IMPORTS',
+      fr:'Sort By IMPORTS FR'
+    },
+    export:{
+      en:'Sort By EXPORTS',
+      fr:'Sort By EXPORTS FR'
     }
   }
 
