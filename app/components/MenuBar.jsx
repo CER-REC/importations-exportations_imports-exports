@@ -48,22 +48,11 @@ class MenuBar extends React.Component {
 
   render() {
     return <g className='MenuBar'>
-      <rect 
-        x = { 0 }
-        y = { WorkspaceComputations.topHeightMargin() }
-        width = { Constants.getIn(['menuBar','width']) }
-        height = { WorkspaceComputations.menuBarHeight(this.props.viewport)}
-        fill = '#F3D7D8' 
-      />
-
-
       <MainNavigationMenu />
-
       {this.electricity()}
       {this.crudeOil()}
       {this.refinedPetroleumProducts()}
       {this.naturalGasLiquids()}
-
     </g>
   }
 }

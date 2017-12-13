@@ -59,7 +59,7 @@ const Constants = Immutable.fromJS({
 
   electricityShowExplanations: {
     height: 30,
-    topMargin: 90,
+    topMargin: 80,
     arrowColor:'red',
     arrowLineWidth: 2
   },
