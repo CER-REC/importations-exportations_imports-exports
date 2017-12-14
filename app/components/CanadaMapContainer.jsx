@@ -5,11 +5,11 @@ class CanadaMapContainer extends React.Component {
 
 	render(){
 		//Mock data need to be replaced by actual content 
-		return <g>
+    return <g>
       <text x={this.props.xaxis} y = {this.props.yaxis}>
         Canada Map Container
       </text>
-		</g>
+    </g>
 	}
 }
 

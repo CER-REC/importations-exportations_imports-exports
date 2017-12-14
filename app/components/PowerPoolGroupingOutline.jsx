@@ -4,12 +4,12 @@ const ReactRedux = require('react-redux')
 class PowerPoolGroupingOutline extends React.Component {
 
 	render(){
-		//Mock data need to be replaced by actual content 
-		return <g>
-			<text x= {this.props.xaxis} y = {this.props.yaxis}>
+    //Mock data need to be replaced by actual content 
+    return <g>
+    	<text x= {this.props.xaxis} y = {this.props.yaxis}>
         outline
       </text>
-		</g>
+    </g>
 	}
 }
 

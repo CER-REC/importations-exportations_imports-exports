@@ -13,7 +13,7 @@ const ExplanationPopovers = require('./ExplanationPopovers.jsx')
 class ElectricityVisualizationContainer extends React.Component {
 
 	render(){
-		return <g>
+    return <g>
       <CanadaMapContainer 
        xaxis = {this.props.xaxis} 
        yaxis = {this.props.yaxis} 
@@ -38,7 +38,7 @@ class ElectricityVisualizationContainer extends React.Component {
        xaxis = {this.props.xaxis } 
        yaxis = {this.props.yaxis + this.props.height}
       />
-		</g>
+    </g>
 	}
 }
 
