@@ -52,7 +52,6 @@ const mapStateToProps = state => {
   return {
     viewport: state.viewport,
     importExportVisualization: state.importExportVisualization
-
   }
 }
 
