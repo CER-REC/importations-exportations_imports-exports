@@ -1,9 +1,6 @@
 const React = require('react')
 const ReactRedux = require('react-redux')
 
-const Constants = require('../Constants.js')
-const WorkspaceComputations = require('../computations/WorkspaceComputations.js')
-
 class ElectricityTimelineContainer extends React.Component {
 
 	render(){

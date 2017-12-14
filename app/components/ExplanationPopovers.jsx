@@ -1,9 +1,6 @@
 const React = require('react')
 const ReactRedux = require('react-redux')
 
-const Constants = require('../Constants.js')
-const WorkspaceComputations = require('../computations/WorkspaceComputations.js')
-
 //Sample code for svg popups https://codepen.io/demianpt/pen/zragBN
 class ExplanationPopovers extends React.Component {
 

@@ -2,7 +2,6 @@ const React = require('react')
 const ReactRedux = require('react-redux')
 
 const Constants = require('../Constants.js')
-const WorkspaceComputations = require('../computations/WorkspaceComputations.js')
 
 const CanadaMapContainer = require('./CanadaMapContainer.jsx')
 const ElectricityTimelineContainer = require('./ElectricityTimelineContainer.jsx')
@@ -45,8 +44,7 @@ class ElectricityVisualizationContainer extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    viewport: state.viewport,
-    importExportVisualization: state.importExportVisualization
+    viewport: state.viewport
 
   }
 }
