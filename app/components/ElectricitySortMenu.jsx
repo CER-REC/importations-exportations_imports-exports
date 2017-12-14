@@ -20,17 +20,17 @@ class ElectricitySortMenu extends React.Component {
         y = {titleYaxis} 
         fill={Constants.getIn(['electricitySortStatesStyle', 'title', 'import','color'])} 
         className='ElectricitySortMenuTitle'> 
-        {Tr.getIn(['electricitySortStates', 'title', 'import',this.props.lang])} 
+        {Tr.getIn(['electricitySortStates', 'title', 'import',this.props.language])} 
       </text>
       <text x = {Constants.getIn(['electricitySortStatesStyle', 'title', 'ampersand','xPadding']) }
       y = {titleYaxis} className='ElectricitySortMenuTitle'> 
-        {Tr.getIn(['electricitySortStates', 'title', 'ampersand',this.props.lang])} 
+        {Tr.getIn(['electricitySortStates', 'title', 'ampersand',this.props.language])} 
       </text>
       <text x = {Constants.getIn(['electricitySortStatesStyle', 'title', 'export','xPadding']) }
         y = {titleYaxis} 
         fill= {Constants.getIn(['electricitySortStatesStyle', 'title', 'export','color']) } 
         className='ElectricitySortMenuTitle'> 
-        {Tr.getIn(['electricitySortStates', 'title', 'export',this.props.lang])}
+        {Tr.getIn(['electricitySortStates', 'title', 'export',this.props.language])}
       </text>
       <MenuBarOption 
         key='electricitySortStateMenu'
@@ -43,7 +43,7 @@ class ElectricitySortMenu extends React.Component {
         trKey = 'electricitySortStates' 
         color = {Constants.getIn(['electricitySortStatesStyle', 'color'])}
         lineWidth = {Constants.getIn(['electricitySortStatesStyle', 'lineWidth'])}
-        lang = {this.props.lang}
+        language = {this.props.language}
       />
     </g>
   }
@@ -53,7 +53,7 @@ const mapStateToProps = state => {
   return {
     viewport: state.viewport,
     electricitySortState: state.electricitySortState,
-    lang: state.lang
+    language: state.language
   }
 }
 

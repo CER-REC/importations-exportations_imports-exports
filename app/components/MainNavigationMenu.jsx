@@ -23,7 +23,7 @@ class MainNavigationMenu extends React.Component {
       trKey = 'mainMenuBar' 
       color = {Constants.getIn(['mainNavigationMenu', 'color'])}
       lineWidth = {Constants.getIn(['mainNavigationMenu', 'lineWidth'])}
-      lang = {this.props.lang}
+      language = {this.props.language}
     />
   }
 }
@@ -32,7 +32,7 @@ const mapStateToProps = state => {
   return {
     viewport: state.viewport,
     importExportVisualization: state.importExportVisualization,
-    lang: state.lang
+    language: state.language
   }
 }
 const mapDispatchToProps = dispatch => {

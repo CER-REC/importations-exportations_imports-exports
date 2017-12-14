@@ -10,7 +10,7 @@ const ElectricityDataTypeReducer = require('./reducers/ElectricityDataTypeReduce
 const reducers = Redux.combineReducers({
   viewport: ViewportReducer,
   importExportVisualization: ImportExportVisualizationReducer,
-  lang: LanguageReducer,
+  language: LanguageReducer,
   electricitySortState: ElectricitySortStateReducer,
   electricityDataTypes: ElectricityDataTypeReducer
 

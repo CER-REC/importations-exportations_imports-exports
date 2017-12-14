@@ -20,7 +20,7 @@ class ShowExplanations extends React.Component {
       <text x = '5' 
             y = { yaxis } 
             className='ShowExplanationFont'> 
-              {Tr.getIn(['explanationShown', this.props.lang])} 
+              {Tr.getIn(['explanationShown', this.props.language])} 
       </text>
       <ArrowTabLine 
         yaxis = {yaxis} 
@@ -35,7 +35,7 @@ class ShowExplanations extends React.Component {
 const mapStateToProps = state => {
   return {
     viewport: state.viewport,
-    lang: state.lang
+    language: state.language
   }
 }
 

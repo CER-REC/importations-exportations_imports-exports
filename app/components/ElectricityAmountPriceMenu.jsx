@@ -24,7 +24,7 @@ class ElectricityAmountPriceMenu extends React.Component {
       trKey = 'electricityDataTypes' 
       color = {Constants.getIn(['electricityDataTypesStyle', 'color'])}
       lineWidth = {Constants.getIn(['electricityDataTypesStyle', 'lineWidth'])}
-      lang = {this.props.lang}
+      language = {this.props.language}
     />
 
   }
@@ -34,7 +34,7 @@ const mapStateToProps = state => {
   return {
     viewport: state.viewport,
     electricityDataTypes: state.electricityDataTypes,
-    lang: state.lang
+    language: state.language
   }
 }
 
