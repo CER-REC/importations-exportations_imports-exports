@@ -9,15 +9,118 @@ require('./SocialBar.scss')
 class SocialBar extends React.Component {
 
   render() {
-    return <g>
+    return <svg>
       <rect 
         x = { 0 }
         y = { WorkspaceComputations.socialBarY(this.props.viewport) }
         width = { Constants.getIn(['socialBar','width']) }
         height = { Constants.getIn(['socialBar','height']) }
-        fill = '#C1C5A3' 
+        fill = '#d4d7db' 
       />
-    </g>
+      <g>
+        <title>about this project</title>
+        <image className = 'socialBarIcon'
+          height = {22}
+          width = {35}
+          x = {2}
+          y = { WorkspaceComputations.socialBarY(this.props.viewport) + 4.5 }
+          xlinkHref = 'images/methodology-icon-black.svg'
+        ></image>
+      </g>
+      <g>
+        <title>stories</title>
+        <image className = 'socialBarIcon'
+          height = {22}
+          width = {35}
+          x = {32}
+          y = { WorkspaceComputations.socialBarY(this.props.viewport) + 4.5 }
+          xlinkHref = 'images/methodology-icon-black.svg'
+        ></image>
+      </g>
+      <g>
+        <title>methodology</title>
+        <image className = 'socialBarIcon'
+          height = {22}
+          width = {35}
+          x = {62}
+          y = { WorkspaceComputations.socialBarY(this.props.viewport) + 4.5 }
+          xlinkHref = 'images/methodology-icon-black.svg'
+        ></image>
+      </g>
+      <g>
+        <title>reset visualization</title>
+        <image className = 'socialBarIcon'
+          height = {22}
+          width = {35}
+          x = {92}
+          y = { WorkspaceComputations.socialBarY(this.props.viewport) + 4.5 }
+          xlinkHref = 'images/methodology-icon-black.svg'
+        ></image>
+      </g>
+      <line x1={130} y1={WorkspaceComputations.socialBarY(this.props.viewport) + 6.5}
+        x2={130} y2={WorkspaceComputations.socialBarY(this.props.viewport) + 25}
+        strokeWidth="1.5" stroke = "#666666" />
+      <g>
+        <title>twitter</title>
+        <image className = 'socialBarIcon'
+          height = {22}
+          width = {35}
+          x = {134}
+          y = { WorkspaceComputations.socialBarY(this.props.viewport) + 4.5 }
+          xlinkHref = 'images/methodology-icon-black.svg'
+        ></image>
+      </g>
+      <g>
+        <title>email</title>
+        <image className = 'socialBarIcon'
+          height = {22}
+          width = {35}
+          x = {164}
+          y = { WorkspaceComputations.socialBarY(this.props.viewport) + 4.5 }
+          xlinkHref = 'images/methodology-icon-black.svg'
+        ></image>
+      </g>
+      <g>
+        <title>facebook</title>
+        <image className = 'socialBarIcon'
+          height = {22}
+          width = {35}
+          x = {194}
+          y = { WorkspaceComputations.socialBarY(this.props.viewport) + 4.5 }
+          xlinkHref = 'images/methodology-icon-black.svg'
+        ></image>
+      </g>
+      <g>
+        <title>linkedin</title>
+        <image className = 'socialBarIcon'
+          height = {22}
+          width = {35}
+          x = {224}
+          y = { WorkspaceComputations.socialBarY(this.props.viewport) + 4.5 }
+          xlinkHref = 'images/methodology-icon-black.svg'
+        ></image>
+      </g>
+      <g>
+        <title>download image</title>
+        <image className = 'socialBarIcon'
+          height = {22}
+          width = {35}
+          x = {254}
+          y = { WorkspaceComputations.socialBarY(this.props.viewport) + 4.5 }
+          xlinkHref = 'images/methodology-icon-black.svg'
+        ></image>
+      </g>
+      <g>
+        <title>download data</title>
+        <image className = 'socialBarIcon'
+          height = {22}
+          width = {35}
+          x = {284}
+          y = { WorkspaceComputations.socialBarY(this.props.viewport) + 4.5 }
+          xlinkHref = 'images/methodology-icon-black.svg'
+        ></image>
+      </g>
+    </svg>
   }
 }
 
