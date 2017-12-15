@@ -5,7 +5,7 @@ const BUILD_DIR = Path.resolve(__dirname, 'public/script')
 
 module.exports = {
   entry: {
-    bundle: ['./app/app.jsx']
+    bundle: ['./app/App.jsx']
   },
   output: {
     path: BUILD_DIR,
