@@ -17,7 +17,7 @@ const TranslationTable = Immutable.fromJS({
     },
     resetVisualzation: {
       en: 'Reset Visualization',
-      fr: 'Réinitialiser Visualisation',
+      fr: 'Réinitialiser visualisation',
     },
 
   },
