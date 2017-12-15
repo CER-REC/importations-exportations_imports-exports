@@ -11,7 +11,6 @@ const PowerPoolGroupingOutline = require('./PowerPoolGroupingOutline.jsx')
 const ExplanationPopovers = require('./ExplanationPopovers.jsx')
 
 class ElectricityVisualizationContainer extends React.Component {
-  
   render(){
     return <g>
       <CanadaMapContainer 
