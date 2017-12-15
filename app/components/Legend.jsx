@@ -2,6 +2,7 @@ const React = require('react')
 const ReactRedux = require('react-redux')
 
 const Constants = require('../Constants.js')
+const Tr = require('../TranslationTable.js')
 const WorkspaceComputations = require('../computations/WorkspaceComputations.js')
 
 require('../styles/Fonts.scss')
@@ -34,40 +35,40 @@ class Legend extends React.Component {
         <g>
           <image 
             className = 'legendImage'
-            height = {22}
-            width = {35}
+            height = {Constants.getIn(['legend','iconHeight'])}
+            width = {Constants.getIn(['legend','iconHWidth'])}
             x = {12}
             y = { 880 }
             xlinkHref = 'images/close-2.svg'
           ></image>
           <image 
             className = 'legendImage'
-            height = {22}
-            width = {35}
+            height = {Constants.getIn(['legend','iconHeight'])}
+            width = {Constants.getIn(['legend','iconHWidth'])}
             x = {12}
             y = { 915 }
             xlinkHref = 'images/close-2.svg'
           ></image>
           <image 
             className = 'legendImage'
-            height = {22}
-            width = {35}
+            height = {Constants.getIn(['legend','iconHeight'])}
+            width = {Constants.getIn(['legend','iconHWidth'])}
             x = {12}
             y = { 950 }
             xlinkHref = 'images/close-2.svg'
           ></image>
           <image 
             className = 'legendImage'
-            height = {22}
-            width = {35}
+            height = {Constants.getIn(['legend','iconHeight'])}
+            width = {Constants.getIn(['legend','iconHWidth'])}
             x = {12}
             y = { 985 }
             xlinkHref = 'images/close-2.svg'
           ></image>
           <image 
             className = 'legendImage'
-            height = {22}
-            width = {35}
+            height = {Constants.getIn(['legend','iconHeight'])}
+            width = {Constants.getIn(['legend','iconHWidth'])}
             x = {12}
             y = { 1020 }
             xlinkHref = 'images/close-2.svg'
@@ -161,27 +162,27 @@ class Legend extends React.Component {
           <text className='theLegendValues'
             x = {88} 
             y={897} 
-          > 1 - 9,9999
+          > {Tr.getIn(['theLegendValues','rangeOne', this.props.language])}
           </text>
           <text className='theLegendValues'
             x = {88} 
             y={932} 
-          > 10,000 - 99, 999
+          > {Tr.getIn(['theLegendValues','rangeTwo', this.props.language])}
           </text>
           <text className='theLegendValues'
             x = {88} 
             y={967} 
-          > 100,000 - 999,999
+          > {Tr.getIn(['theLegendValues','rangeThree', this.props.language])}
           </text>
           <text className='theLegendValues'
             x = {88} 
             y={1002} 
-          > 1,000,000 - 1,999,999
+          > {Tr.getIn(['theLegendValues','rangeFour', this.props.language])}
           </text>
           <text className='theLegendValues'
             x = {88} 
             y={1037} 
-          > 2,000,000 >
+          > {Tr.getIn(['theLegendValues','rangeFive', this.props.language])}
           </text>
         </g>
 
@@ -202,7 +203,8 @@ class Legend extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    viewport: state.viewport
+    viewport: state.viewport,
+    language: state.language
   }
 }
 

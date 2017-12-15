@@ -18,6 +18,8 @@ const Constants = Immutable.fromJS({
     topMargin: 200,
     width: 150,
     height: 200,
+    iconHeight: 22,
+    iconWidth: 35,
   },
 
   socialBar: {
