@@ -25,6 +25,8 @@ const Constants = Immutable.fromJS({
     width: 320,
     height: 32,
     bottomMargin: 20,
+    iconHeight: 22,
+    iconWidth: 35,
   },
 
   visualizationContainer: {

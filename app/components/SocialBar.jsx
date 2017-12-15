@@ -2,6 +2,7 @@ const React = require('react')
 const ReactRedux = require('react-redux')
 
 const Constants = require('../Constants.js')
+const Tr = require('../TranslationTable.js')
 const WorkspaceComputations = require('../computations/WorkspaceComputations.js')
 
 require('./SocialBar.scss')
@@ -18,40 +19,40 @@ class SocialBar extends React.Component {
         fill = '#d4d7db' 
       />
       <g>
-        <title>about this project</title>
+        <title>{Tr.getIn(['socialBar','aboutThisProject', this.props.language])}</title>
         <image className = 'socialBarIcon'
-          height = {22}
-          width = {35}
+          height = {Constants.getIn(['socialBar','iconHeight'])}
+          width = {Constants.getIn(['socialBar','iconWidth'])}
           x = {2}
           y = { WorkspaceComputations.socialBarY(this.props.viewport) + 4.5 }
           xlinkHref = 'images/methodology-icon-black.svg'
         ></image>
       </g>
       <g>
-        <title>stories</title>
+        <title>{Tr.getIn(['socialBar','tellMeAStory', this.props.language])}</title>
         <image className = 'socialBarIcon'
-          height = {22}
-          width = {35}
+          height = {Constants.getIn(['socialBar','iconHeight'])}
+          width = {Constants.getIn(['socialBar','iconWidth'])}
           x = {32}
           y = { WorkspaceComputations.socialBarY(this.props.viewport) + 4.5 }
           xlinkHref = 'images/methodology-icon-black.svg'
         ></image>
       </g>
       <g>
-        <title>methodology</title>
+        <title>{Tr.getIn(['socialBar','methodology', this.props.language])}</title>
         <image className = 'socialBarIcon'
-          height = {22}
-          width = {35}
+          height = {Constants.getIn(['socialBar','iconHeight'])}
+          width = {Constants.getIn(['socialBar','iconWidth'])}
           x = {62}
           y = { WorkspaceComputations.socialBarY(this.props.viewport) + 4.5 }
           xlinkHref = 'images/methodology-icon-black.svg'
         ></image>
       </g>
       <g>
-        <title>reset visualization</title>
+        <title>{Tr.getIn(['socialBar','resetVisualization', this.props.language])}</title>
         <image className = 'socialBarIcon'
-          height = {22}
-          width = {35}
+          height = {Constants.getIn(['socialBar','iconHeight'])}
+          width = {Constants.getIn(['socialBar','iconWidth'])}
           x = {92}
           y = { WorkspaceComputations.socialBarY(this.props.viewport) + 4.5 }
           xlinkHref = 'images/methodology-icon-black.svg'
@@ -63,8 +64,8 @@ class SocialBar extends React.Component {
       <g>
         <title>twitter</title>
         <image className = 'socialBarIcon'
-          height = {22}
-          width = {35}
+          height = {Constants.getIn(['socialBar','iconHeight'])}
+          width = {Constants.getIn(['socialBar','iconWidth'])}
           x = {134}
           y = { WorkspaceComputations.socialBarY(this.props.viewport) + 4.5 }
           xlinkHref = 'images/methodology-icon-black.svg'
@@ -73,8 +74,8 @@ class SocialBar extends React.Component {
       <g>
         <title>email</title>
         <image className = 'socialBarIcon'
-          height = {22}
-          width = {35}
+          height = {Constants.getIn(['socialBar','iconHeight'])}
+          width = {Constants.getIn(['socialBar','iconWidth'])}
           x = {164}
           y = { WorkspaceComputations.socialBarY(this.props.viewport) + 4.5 }
           xlinkHref = 'images/methodology-icon-black.svg'
@@ -83,8 +84,8 @@ class SocialBar extends React.Component {
       <g>
         <title>facebook</title>
         <image className = 'socialBarIcon'
-          height = {22}
-          width = {35}
+          height = {Constants.getIn(['socialBar','iconHeight'])}
+          width = {Constants.getIn(['socialBar','iconWidth'])}
           x = {194}
           y = { WorkspaceComputations.socialBarY(this.props.viewport) + 4.5 }
           xlinkHref = 'images/methodology-icon-black.svg'
@@ -93,8 +94,8 @@ class SocialBar extends React.Component {
       <g>
         <title>linkedin</title>
         <image className = 'socialBarIcon'
-          height = {22}
-          width = {35}
+          height = {Constants.getIn(['socialBar','iconHeight'])}
+          width = {Constants.getIn(['socialBar','iconWidth'])}
           x = {224}
           y = { WorkspaceComputations.socialBarY(this.props.viewport) + 4.5 }
           xlinkHref = 'images/methodology-icon-black.svg'
@@ -103,8 +104,8 @@ class SocialBar extends React.Component {
       <g>
         <title>download image</title>
         <image className = 'socialBarIcon'
-          height = {22}
-          width = {35}
+          height = {Constants.getIn(['socialBar','iconHeight'])}
+          width = {Constants.getIn(['socialBar','iconWidth'])}
           x = {254}
           y = { WorkspaceComputations.socialBarY(this.props.viewport) + 4.5 }
           xlinkHref = 'images/methodology-icon-black.svg'
@@ -113,8 +114,8 @@ class SocialBar extends React.Component {
       <g>
         <title>download data</title>
         <image className = 'socialBarIcon'
-          height = {22}
-          width = {35}
+          height = {Constants.getIn(['socialBar','iconHeight'])}
+          width = {Constants.getIn(['socialBar','iconWidth'])}
           x = {284}
           y = { WorkspaceComputations.socialBarY(this.props.viewport) + 4.5 }
           xlinkHref = 'images/methodology-icon-black.svg'
@@ -126,7 +127,8 @@ class SocialBar extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    viewport: state.viewport
+    viewport: state.viewport,
+    language: state.language
   }
 }
 
