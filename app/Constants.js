@@ -71,34 +71,11 @@ const Constants = Immutable.fromJS({
   language: [
     'en',
     'fr'
-    ],
+  ],
   electricityDataTypes:[
     'price',
     'mwh'
   ],
-  countries:{
-    us:{
-      stateOrProvinces:[
-      ]
-    },
-    ca:{
-      statesOrProvinces: [
-        'YT',
-        'NT',
-        'NU',
-        'NF',
-        'PE',
-        'BC',
-        'AB',
-        'SK',
-        'MB',
-        'ON',
-        'QC',
-        'NB',
-        'NS'
-      ]
-    }
-  }
 
 })
 module.exports = Constants
