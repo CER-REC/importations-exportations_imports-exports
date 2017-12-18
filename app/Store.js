@@ -11,7 +11,11 @@ const reducers = Redux.combineReducers({
 })
 
 module.exports = function () {
-  return Redux.createStore(reducers)
+  // Enable Redux Dev Tools if they are installed in the browser
+  return Redux.createStore(
+    reducers,
+    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+  )
 }
 
 
