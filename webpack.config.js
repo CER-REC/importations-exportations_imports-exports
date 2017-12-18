@@ -1,14 +1,19 @@
 const Path = require('path')
+const Webpack = require('webpack')
 
 const BUILD_DIR = Path.resolve(__dirname, 'public/script')
 
-
 module.exports = {
   entry: {
-    bundle: ['./app/App.jsx']
+    bundle: [
+      'react-hot-loader/patch',
+      'webpack-hot-middleware/client?path=/import-export-visualization/script/__webpack_hmr',
+      './app/App.jsx',
+    ]
   },
   output: {
     path: BUILD_DIR,
+    publicPath: '/import-export-visualization/script/',
     filename: '[name].js',
   },
   devtool: 'cheap-module-eval-source-map',
@@ -20,7 +25,8 @@ module.exports = {
         use: {
           loader: 'babel-loader',
           options: {
-            presets: ['env', 'react']
+            presets: ['env', 'react'],
+            plugins: ['react-hot-loader/babel'],
           }
         }
       },
@@ -48,5 +54,7 @@ module.exports = {
 
   // NB: Plugins object is *replaced* in production!
   // See webpack.prod.config.js
-  plugins: []
+  plugins: [
+    new Webpack.HotModuleReplacementPlugin(),
+  ]
 }
