@@ -4,17 +4,16 @@ const ReactRedux = require('react-redux')
 class MapPiece extends React.Component {
   render(){
     //intial x and y coordinates
-    let xaxis = parseInt(this.props.xaxis)
-    let yaxis = parseInt(this.props.yaxis)
+    let startCoordinateXaxis = parseInt(this.props.startCoordinateXaxis)
+    let startCoordinateYaxis = parseInt(this.props.startCoordinateYaxis)
 
     //Map Piece width and height
     const width = parseInt(this.props.dimensions.get('width'))
     const height = parseInt(this.props.dimensions.get('height'))
 
-    console.log(this.props)
     //calculated x and y coordinate
-    xaxis = xaxis + (this.props.position.get('x') * ( width + this.props.dimensions.get('xAxisPadding')))
-    yaxis = yaxis + (this.props.position.get('y') * (height + this.props.dimensions.get('yAxisPadding')))
+    const xaxis = startCoordinateXaxis + (this.props.position.get('x') * ( width + this.props.dimensions.get('xAxisPadding')))
+    const yaxis = startCoordinateYaxis + (this.props.position.get('y') * (height + this.props.dimensions.get('yAxisPadding')))
 
     //Mock data need to be replaced by actual content 
     return <g>

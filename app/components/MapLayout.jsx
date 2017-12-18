@@ -23,8 +23,8 @@ class MapLayout extends React.Component {
     return layout.map( (position,key) =>{
       return <MapPiece 
         key = { key } 
-        xaxis = { this.props.xaxis }
-        yaxis = { this.props.yaxis }
+        startCoordinateXaxis = { this.props.xaxis }
+        startCoordinateYaxis = { this.props.yaxis }
         data = { mapPieceData.get(position.get('name')) } 
         position = { position }
         dimensions = { dimensions }
