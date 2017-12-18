@@ -13,5 +13,12 @@ config.plugins = [
 
 ]
 
+// Disable sourcemaps for production builds
+config.devtool = false
+// Remove react-hot-loader and webpack-hot-middleware
+config.entry.bundle = './app/App.jsx'
+config.output.publicPath = ''
+config.module.rules[0].use.options.plugins = []
+
 module.exports = config
 
