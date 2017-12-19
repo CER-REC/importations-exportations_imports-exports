@@ -2,23 +2,29 @@ const React = require('react')
 
 const Animation = require('./SVGAnimation')
 
-const BarChart = ({ data, minMax, height = 200, flipped = false }) => {
-  const heightPerUnit = height / (minMax.maxVal - minMax.minVal)
+const BarChart = ({
+  data,
+  scale,
+  height = 200,
+  flipped = false,
+  valueKey,
+}) => {
+  const heightPerUnit = height / (scale.y[1] - scale.y[0])
   const elements = []
   let year, quarter
   let xOffset = 0
-  for (year = minMax.minYear; year <= minMax.maxYear; year++) {
+  for (year = scale.x[0]; year <= scale.x[1]; year++) {
     for (quarter = 1; quarter <= 4; quarter++) {
       const point = data[year][quarter]
       if (point) {
         elements.push(
           <Animation.SVGAnimation
-            key={`${point.year}-${point.quarter}-import`}
+            key={`${point.year}-${point.quarter}-${valueKey}`}
             tween={{
               x1: xOffset,
               x2: xOffset,
               y2: height,
-              y1: (height - point.import * heightPerUnit),
+              y1: (height - point[valueKey] * heightPerUnit),
             }}
           >
             <line strokeWidth="4" stroke="black" strokeLinecap="round" />

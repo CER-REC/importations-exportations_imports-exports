@@ -7,6 +7,12 @@ function randBetween(min, max) {
 }
 
 class Timeline extends React.PureComponent {
+  static get defaultProps() {
+    return {
+      scaleLinked: true,
+    }
+  }
+
   constructor(props) {
     super(props)
     this.state = {
@@ -32,7 +38,7 @@ class Timeline extends React.PureComponent {
           year,
           quarter,
           import: randBetween(0, 15),
-          export: randBetween(0, 15),
+          export: randBetween(0, 50),
         })
       }
     }
@@ -41,8 +47,10 @@ class Timeline extends React.PureComponent {
 
   render() {
     const minMax = {
-      minVal: Number.MAX_SAFE_INTEGER,
-      maxVal: -Number.MAX_SAFE_INTEGER,
+      minImport: Number.MAX_SAFE_INTEGER,
+      maxImport: -Number.MAX_SAFE_INTEGER,
+      minExport: Number.MAX_SAFE_INTEGER,
+      maxExport: -Number.MAX_SAFE_INTEGER,
     }
 
     const formattedData = this.state.data.reduce((acc, point) => {
@@ -50,8 +58,10 @@ class Timeline extends React.PureComponent {
         acc[point.year] = {}
       }
       acc[point.year][point.quarter] = point
-      minMax.minVal = Math.min(minMax.minVal, point.import)
-      minMax.maxVal = Math.max(minMax.maxVal, point.import)
+      minMax.minImport = Math.min(minMax.minImport, point.import)
+      minMax.maxImport = Math.max(minMax.maxImport, point.import)
+      minMax.minExport = Math.min(minMax.minExport, point.export)
+      minMax.maxExport = Math.max(minMax.maxExport, point.export)
       return acc
     }, {})
 
@@ -79,11 +89,33 @@ class Timeline extends React.PureComponent {
       // Gap between years
       xOffset += 25 + 20
     }
+
     return (
       <g>
-        <BarChart data={formattedData} minMax={minMax} height={200} />
+        <BarChart
+          data={formattedData}
+          scale={{
+            x: [minMax.minYear, minMax.maxYear],
+            y: this.props.scaleLinked
+              ? [Math.min(minMax.minImport, minMax.minExport), Math.max(minMax.maxImport, minMax.maxExport)]
+              : [minMax.minImport, minMax.maxImport],
+          }}
+          valueKey="import"
+          height={200}
+        />
         <g transform="translate(0, 250)">
-          <BarChart data={formattedData} minMax={minMax} height={200} flipped />
+          <BarChart
+            data={formattedData}
+            scale={{
+              x: [minMax.minYear, minMax.maxYear],
+              y: this.props.scaleLinked
+                ? [Math.min(minMax.minImport, minMax.minExport), Math.max(minMax.maxImport, minMax.maxExport)]
+                : [minMax.minExport, minMax.maxExport],
+            }}
+            valueKey="export"
+            height={200}
+            flipped
+          />
         </g>
         <g>{elements}</g>
       </g>

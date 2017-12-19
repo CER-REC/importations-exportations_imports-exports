@@ -26,7 +26,7 @@ class Workspace extends React.Component {
       <MenuBar />
 
       <g transform="translate(450 0)">
-        <Timeline/>
+        <Timeline scaleLinked={true} />
       </g>
     </svg>
   }
