@@ -6,27 +6,27 @@ const DataLoader = Immutable.fromJS({
       YT: {
         name: 'YT',
         importData: 299,
-        exportData: 4987
+        exportData: 99
       },
       NT: {
         name: 'NT',
         importData: 400,
-        exportData: 7895
+        exportData: 99998
       },
       NU: {
         name: 'NU',
         importData: 100,
-        exportData: 3658
+        exportData: 999998
       },
       NF: {
         name: 'NF',
         importData: 50,
-        exportData: 6985
+        exportData: 1999998
       },
       PE: {
         name: 'PE',
         importData: 220,
-        exportData: 4785
+        exportData: 2000001
       },
       BC: {
         name: 'BC',

@@ -27,7 +27,33 @@ const MapLayoutGridConstant = Immutable.fromJS({
         { name:'NB',  x:6.5,  y:1 },
         { name:'NS',  x:7.5,  y:1 } 
       ]
-    } 
+    },
+    legends:[{
+        lower:1,
+        upper: 9999,
+        import:'grey',
+        export:'grey'
+      },{
+        lower:10000,
+        upper: 99999,
+        import:'#ffcc66',
+        export:'#66ffff'
+      },{
+        lower:100000,
+        upper: 999999,
+        import:'#ff6600',
+        export:'#3399ff'
+      },{
+        lower:1000000,
+        upper: 1999999,
+        import:'#ff3300',
+        export:'#3333ff'
+      },{
+        lower:2000000,
+        upper: 'NA',
+        import:'#800000',
+        export:'#000099'
+      }] 
   } 
 })
 module.exports = MapLayoutGridConstant

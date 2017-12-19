@@ -25,13 +25,13 @@ class MapLayout extends React.Component {
     const mapPieceData = mapData.get(this.props.country)
     const xaxis = this.props.xaxis
     const yaxis = this.props.yaxis
-    
     return layout.map( (position,key) =>{
       
       return <g  key = { key }  transform={this.mapPieceTransform(xaxis, yaxis, position, dimensions)} >
                 <MapPiece 
                 data = { mapPieceData.get(position.get('name')) } 
                 dimensions = { dimensions }
+                legends = {MapLayoutGridConstant.getIn([type,'legends'])}
                 styles = { styles }/>
             </g>
     })

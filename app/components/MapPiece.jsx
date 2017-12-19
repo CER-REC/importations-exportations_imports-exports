@@ -4,6 +4,16 @@ const ReactFauxDOM = require('react-faux-dom')
 const D3 = require('d3')
 class MapPiece extends React.Component {
 
+  getArrowColor(legends, value){
+      return legends.find(data => {
+        if(data.get('lower') < value && data.get('upper') === 'NA'){
+          return true
+        }
+        if(data.get('lower') < value && data.get('upper') >= value ){
+          return true
+        }
+      }) 
+  }
   render(){
     //Create the element
     const g = new ReactFauxDOM.Element('g')
@@ -48,12 +58,14 @@ class MapPiece extends React.Component {
        D3.select(g).append("text")
         .attr("dx", initialX + (width / 3) )
         .attr("dy", intiailY + (height / 5) )
+        .attr('stroke', this.getArrowColor(this.props.legends, this.props.data.get('importData')).get('import'))
         .text(this.props.data.get('importData'))
 
       //append export data
       D3.select(g).append("text")
         .attr("dx", initialX + (width / 3) )
         .attr("dy", intiailY + (height * 0.8) )
+        .attr('stroke', this.getArrowColor(this.props.legends, this.props.data.get('exportData')).get('export'))
         .text(this.props.data.get('exportData'))
 
     //DOM manipulations done, convert to React
