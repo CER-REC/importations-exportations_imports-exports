@@ -24,7 +24,7 @@ class SocialBar extends React.Component {
           height = {Constants.getIn(['socialBar','iconHeight'])}
           width = {Constants.getIn(['socialBar','iconWidth'])}
           x = {2}
-          y = { WorkspaceComputations.socialBarY(this.props.viewport) + 4.5 }
+          y = { WorkspaceComputations.socialBarY(this.props.viewport) + Constants.getIn(['socialBar','iconPadding']) }
           xlinkHref = 'images/methodology-icon-black.svg'
         ></image>
       </g>
@@ -34,7 +34,7 @@ class SocialBar extends React.Component {
           height = {Constants.getIn(['socialBar','iconHeight'])}
           width = {Constants.getIn(['socialBar','iconWidth'])}
           x = {32}
-          y = { WorkspaceComputations.socialBarY(this.props.viewport) + 4.5 }
+          y = { WorkspaceComputations.socialBarY(this.props.viewport) + Constants.getIn(['socialBar','iconPadding']) }
           xlinkHref = 'images/methodology-icon-black.svg'
         ></image>
       </g>
@@ -44,7 +44,7 @@ class SocialBar extends React.Component {
           height = {Constants.getIn(['socialBar','iconHeight'])}
           width = {Constants.getIn(['socialBar','iconWidth'])}
           x = {62}
-          y = { WorkspaceComputations.socialBarY(this.props.viewport) + 4.5 }
+          y = { WorkspaceComputations.socialBarY(this.props.viewport) + Constants.getIn(['socialBar','iconPadding']) }
           xlinkHref = 'images/methodology-icon-black.svg'
         ></image>
       </g>
@@ -54,7 +54,7 @@ class SocialBar extends React.Component {
           height = {Constants.getIn(['socialBar','iconHeight'])}
           width = {Constants.getIn(['socialBar','iconWidth'])}
           x = {92}
-          y = { WorkspaceComputations.socialBarY(this.props.viewport) + 4.5 }
+          y = { WorkspaceComputations.socialBarY(this.props.viewport) + Constants.getIn(['socialBar','iconPadding']) }
           xlinkHref = 'images/methodology-icon-black.svg'
         ></image>
       </g>
@@ -67,7 +67,7 @@ class SocialBar extends React.Component {
           height = {Constants.getIn(['socialBar','iconHeight'])}
           width = {Constants.getIn(['socialBar','iconWidth'])}
           x = {134}
-          y = { WorkspaceComputations.socialBarY(this.props.viewport) + 4.5 }
+          y = { WorkspaceComputations.socialBarY(this.props.viewport) + Constants.getIn(['socialBar','iconPadding']) }
           xlinkHref = 'images/methodology-icon-black.svg'
         ></image>
       </g>
@@ -77,7 +77,7 @@ class SocialBar extends React.Component {
           height = {Constants.getIn(['socialBar','iconHeight'])}
           width = {Constants.getIn(['socialBar','iconWidth'])}
           x = {164}
-          y = { WorkspaceComputations.socialBarY(this.props.viewport) + 4.5 }
+          y = { WorkspaceComputations.socialBarY(this.props.viewport) + Constants.getIn(['socialBar','iconPadding']) }
           xlinkHref = 'images/methodology-icon-black.svg'
         ></image>
       </g>
@@ -87,7 +87,7 @@ class SocialBar extends React.Component {
           height = {Constants.getIn(['socialBar','iconHeight'])}
           width = {Constants.getIn(['socialBar','iconWidth'])}
           x = {194}
-          y = { WorkspaceComputations.socialBarY(this.props.viewport) + 4.5 }
+          y = { WorkspaceComputations.socialBarY(this.props.viewport) + Constants.getIn(['socialBar','iconPadding']) }
           xlinkHref = 'images/methodology-icon-black.svg'
         ></image>
       </g>
@@ -97,7 +97,7 @@ class SocialBar extends React.Component {
           height = {Constants.getIn(['socialBar','iconHeight'])}
           width = {Constants.getIn(['socialBar','iconWidth'])}
           x = {224}
-          y = { WorkspaceComputations.socialBarY(this.props.viewport) + 4.5 }
+          y = { WorkspaceComputations.socialBarY(this.props.viewport) + Constants.getIn(['socialBar','iconPadding']) }
           xlinkHref = 'images/methodology-icon-black.svg'
         ></image>
       </g>
@@ -107,7 +107,7 @@ class SocialBar extends React.Component {
           height = {Constants.getIn(['socialBar','iconHeight'])}
           width = {Constants.getIn(['socialBar','iconWidth'])}
           x = {254}
-          y = { WorkspaceComputations.socialBarY(this.props.viewport) + 4.5 }
+          y = { WorkspaceComputations.socialBarY(this.props.viewport) + Constants.getIn(['socialBar','iconPadding']) }
           xlinkHref = 'images/methodology-icon-black.svg'
         ></image>
       </g>
@@ -117,7 +117,7 @@ class SocialBar extends React.Component {
           height = {Constants.getIn(['socialBar','iconHeight'])}
           width = {Constants.getIn(['socialBar','iconWidth'])}
           x = {284}
-          y = { WorkspaceComputations.socialBarY(this.props.viewport) + 4.5 }
+          y = { WorkspaceComputations.socialBarY(this.props.viewport) + Constants.getIn(['socialBar','iconPadding']) }
           xlinkHref = 'images/methodology-icon-black.svg'
         ></image>
       </g>
