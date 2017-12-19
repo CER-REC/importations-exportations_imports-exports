@@ -29,7 +29,6 @@ class MapLayout extends React.Component {
                                           mapPieceData,
                                           mapLayoutGrid.get('defaultColumns')
                                         )
-
     const xaxis = this.props.xaxis
     const yaxis = this.props.yaxis
     return layout.map( (position,key) =>{
