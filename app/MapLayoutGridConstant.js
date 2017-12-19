@@ -3,6 +3,7 @@ const Immutable = require('immutable')
 const MapLayoutGridConstant = Immutable.fromJS({
   electricity:{
     ca:{
+      defaultColumns:8,
       dimensions:{
         height: 70,
         width: 70,
@@ -29,31 +30,31 @@ const MapLayoutGridConstant = Immutable.fromJS({
       ]
     },
     legends:[{
-        lower:1,
-        upper: 9999,
-        import:'grey',
-        export:'grey'
-      },{
-        lower:10000,
-        upper: 99999,
-        import:'#ffcc66',
-        export:'#66ffff'
-      },{
-        lower:100000,
-        upper: 999999,
-        import:'#ff6600',
-        export:'#3399ff'
-      },{
-        lower:1000000,
-        upper: 1999999,
-        import:'#ff3300',
-        export:'#3333ff'
-      },{
-        lower:2000000,
-        upper: 'NA',
-        import:'#800000',
-        export:'#000099'
-      }] 
+      lower:1,
+      upper: 9999,
+      import:'grey',
+      export:'grey'
+    },{
+      lower:10000,
+      upper: 99999,
+      import:'#ffcc66',
+      export:'#66ffff'
+    },{
+      lower:100000,
+      upper: 999999,
+      import:'#ff6600',
+      export:'#3399ff'
+    },{
+      lower:1000000,
+      upper: 1999999,
+      import:'#ff3300',
+      export:'#3333ff'
+    },{
+      lower:2000000,
+      upper: 'NA',
+      import:'#800000',
+      export:'#000099'
+    }] 
   } 
 })
 module.exports = MapLayoutGridConstant
