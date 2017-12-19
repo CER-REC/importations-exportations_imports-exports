@@ -26,11 +26,11 @@ class ElectricityVisualizationContainer extends React.Component {
        yaxis = {this.props.yaxis + this.props.height/2}
       />
       <PowerPoolContainer 
-       xaxis = {this.props.xaxis } 
+       xaxis = {this.props.xaxis + this.props.width*0.4 } 
        yaxis = {this.props.yaxis + this.props.height}
       />
       <PowerPoolGroupingOutline 
-       xaxis = {this.props.xaxis + this.props.width * (0.60) } 
+       xaxis = {this.props.xaxis} 
        yaxis = {this.props.yaxis + this.props.height}
       />
       <ExplanationPopovers 
