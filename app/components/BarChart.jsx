@@ -1,6 +1,7 @@
 const React = require('react')
 
 const Animation = require('./SVGAnimation')
+const AxisGuide = require('./AxisGuide')
 
 const BarChart = ({
   data,
@@ -50,7 +51,12 @@ const BarChart = ({
   const transform = (flipped === true)
     ? `scale(1,-1) translate(0 -${height})`
     : ''
-  return <g transform={transform}>{elements}</g>
+  return (
+    <g transform={transform}>
+      {elements}
+      <AxisGuide flipped={flipped} />
+    </g>
+  )
 }
 
 BarChart.defaultProps = {

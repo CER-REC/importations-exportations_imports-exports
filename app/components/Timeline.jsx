@@ -26,9 +26,12 @@ class Timeline extends React.PureComponent {
   }
 
   componentDidMount() {
+    // Enable if you want to see animations
+    /*
     this.dataInterval = setInterval(() => {
       this.setState({ data: this.generateData() })
     }, 5000)
+    */
   }
 
   componentWillUnmount() {
