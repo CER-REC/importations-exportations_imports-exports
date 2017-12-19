@@ -3,6 +3,14 @@ const Immutable = require('immutable')
 const TranslationTable = Immutable.fromJS({ 
 
   theLegendValues: {
+    importations: {
+      en: 'imp',
+      fr: 'imp',
+    },
+    exportations: {
+      en: 'exp',
+      fr: 'exp',
+    },
     rangeOne: {
       en: '1 - 9,999',
       fr: '1 - 9 999',

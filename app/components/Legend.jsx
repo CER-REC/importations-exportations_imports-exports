@@ -28,7 +28,7 @@ class Legend extends React.Component {
           <text className='theLegendHeading'
             x = {15} 
             y={870} 
-          > IMP
+          > {Tr.getIn(['theLegendValues','importations', this.props.language])}
           </text>
         </g>
 
@@ -95,7 +95,7 @@ class Legend extends React.Component {
           <text className='theLegendHeading'
             x = {55} 
             y={870} 
-          > EXP
+          > {Tr.getIn(['theLegendValues','exportations', this.props.language])}
           </text>
         </g>
 
