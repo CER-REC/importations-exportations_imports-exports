@@ -1,9 +1,14 @@
 const React = require('react')
 
 const BarChart = require('./BarChart')
+const Axis = require('./Axis')
 
 function randBetween(min, max) {
   return Math.floor(Math.random() * max) + min
+}
+
+function groupByYear(a, b) {
+  return a.year === b.year
 }
 
 class Timeline extends React.PureComponent {
@@ -68,32 +73,16 @@ class Timeline extends React.PureComponent {
     minMax.minYear = Math.min(...Object.keys(formattedData))
     minMax.maxYear = Math.max(...Object.keys(formattedData))
 
-    let xOffset = 0
 
-    const elements = []
-
-    let year
-    for (year = minMax.minYear; year <= minMax.maxYear; year++) {
-      elements.push(
-        <text
-          key={`label-${year}`}
-          x={xOffset + 10}
-          y="225"
-          textAnchor="middle"
-          alignmentBaseline="middle"
-        >
-          {year}
-        </text>
-      )
-
-      // Gap between years
-      xOffset += 25 + 20
+    const sharedProps = {
+      data: formattedData,
+      groupPadding: 5,
+      groupComparator: groupByYear,
     }
 
     return (
       <g>
         <BarChart
-          data={formattedData}
           scale={{
             x: [minMax.minYear, minMax.maxYear],
             y: this.props.scaleLinked
@@ -102,10 +91,11 @@ class Timeline extends React.PureComponent {
           }}
           valueKey="import"
           height={200}
+          color="rgb(255,119,76)"
+          {...sharedProps}
         />
-        <g transform="translate(0, 250)">
+        <g transform="translate(0, 230)">
           <BarChart
-            data={formattedData}
             scale={{
               x: [minMax.minYear, minMax.maxYear],
               y: this.props.scaleLinked
@@ -114,10 +104,15 @@ class Timeline extends React.PureComponent {
             }}
             valueKey="export"
             height={200}
+            color="rgb(28,100,178)"
+            {...sharedProps}
             flipped
           />
         </g>
-        <g>{elements}</g>
+        <Axis
+          {...sharedProps}
+          scale={{ x: [minMax.minYear, minMax.maxYear ] }}
+        />
       </g>
     )
   }

@@ -5,17 +5,27 @@ const Animation = require('./SVGAnimation')
 const BarChart = ({
   data,
   scale,
-  height = 200,
-  flipped = false,
+  height,
+  flipped,
   valueKey,
+  color,
+  groupComparator,
+  groupPadding,
 }) => {
   const heightPerUnit = height / (scale.y[1] - scale.y[0])
   const elements = []
   let year, quarter
   let xOffset = 0
+  let lastPoint
   for (year = scale.x[0]; year <= scale.x[1]; year++) {
     for (quarter = 1; quarter <= 4; quarter++) {
       const point = data[year][quarter]
+
+      // Gap between grouped values
+      if (groupComparator && lastPoint && !groupComparator(lastPoint, point)) {
+        xOffset += groupPadding
+      }
+
       if (point) {
         elements.push(
           <Animation.SVGAnimation
@@ -27,20 +37,27 @@ const BarChart = ({
               y1: (height - point[valueKey] * heightPerUnit),
             }}
           >
-            <line strokeWidth="4" stroke="black" strokeLinecap="round" />
+            <line strokeWidth="4" stroke={color} strokeLinecap="round" />
           </Animation.SVGAnimation>
         )
       }
       // Gap between quarters
       xOffset += 5
+
+      lastPoint = point
     }
-    // Gap between years
-    xOffset += 25
   }
   const transform = (flipped === true)
     ? `scale(1,-1) translate(0 -${height})`
     : ''
   return <g transform={transform}>{elements}</g>
+}
+
+BarChart.defaultProps = {
+  height: 200,
+  flipped: false,
+  color: 'black',
+  groupPadding: 0,
 }
 
 module.exports = BarChart

@@ -24,6 +24,7 @@ class SVGAnimation extends React.PureComponent {
   render() {
     const props = Object.assign({}, this.state.current, this.props)
     delete props._gsTweenID
+    delete props.tween
     delete props.children
     return React.cloneElement(this.props.children, props)
   }
