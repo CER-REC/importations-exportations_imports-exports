@@ -120,6 +120,11 @@ const DataLoader = Immutable.fromJS({
       GA: { name: 'GA', importData: 91032 , exportData: 5 },
       TX: { name: 'TX', importData: 53102 , exportData: 6 },
       FL: { name: 'FL', importData: 91023 , exportData: 6 },
+    },
+    powerpool:{
+      MN: { name: 'MN', importData: 91032 , exportData: 5 },
+      NE: { name: 'NE', importData: 53102 , exportData: 6 },
+      PJM: { name: 'PJM', importData: 91023 , exportData: 6 }
     }
   }
 })

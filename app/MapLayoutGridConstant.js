@@ -93,6 +93,23 @@ const MapLayoutGridConstant = Immutable.fromJS({
         { name: 'FL', x: 7.5 , y: 6 },
       ]
     },
+    powerpool:{
+      defaultColumns:12,
+      dimensions:{
+        height: 45,
+        width: 50,
+        yAxisPadding: 1,
+        xAxisPadding: 5
+      },
+      styles: {
+        color: 'orange',
+      },
+      layout:[
+        { name: 'MN', x: 0, y: 0 },
+        { name: 'NE', x: 1, y: 0 },
+        { name: 'PJM', x: 2, y : 0},
+      ]
+    },
     legends:[{
       lower:1,
       upper: 9999,

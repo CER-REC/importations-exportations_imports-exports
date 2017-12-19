@@ -1,13 +1,14 @@
 const React = require('react')
 const ReactRedux = require('react-redux')
+const MapLayout = require('./MapLayout.jsx')
 
 class PowerPoolContainer extends React.Component {
   render(){
-    return <g>
-      <text x = {this.props.xaxis} y = {this.props.yaxis}>
-        Power Pool Container
-      </text>
-    </g>
+    return <MapLayout
+              xaxis={this.props.xaxis} 
+              yaxis = {this.props.yaxis}
+              country = 'powerpool'
+              />
   }
 }
 
