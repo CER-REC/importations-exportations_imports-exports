@@ -18,7 +18,7 @@ class ElectricityAmountPriceMenu extends React.Component {
       yaxis = { WorkspaceComputations.electricityAmountPriceMenuY() }
       options = {Constants.get('electricityDataTypes')}
       onOptionClick = {this.props.setElectricityDataType.bind(this)}
-      selectedOption = {this.props.electricityDataTypes}
+      selectedOption = {this.props.electricityDataType}
       optionXaxisPadding = {Constants.getIn(['menuBarOptions', 'optionXaxisPadding'])}
       optionPadding = {Constants.getIn(['menuBarOptions', 'optionPadding'])}
       trKey = 'electricityDataTypes' 
@@ -33,7 +33,7 @@ class ElectricityAmountPriceMenu extends React.Component {
 const mapStateToProps = state => {
   return {
     viewport: state.viewport,
-    electricityDataTypes: state.electricityDataTypes,
+    electricityDataType: state.electricityDataTypes,
     language: state.language
   }
 }
