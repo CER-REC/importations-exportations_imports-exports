@@ -11,7 +11,7 @@ const MapLayoutGridConstant = Immutable.fromJS({
         xAxisPadding: 10
       },
       styles: {
-        color: 'orange',
+        color: '#D3D3D3',
       },
       layout: [
         { name:'YT',  x:0,  y:0 },
@@ -38,7 +38,7 @@ const MapLayoutGridConstant = Immutable.fromJS({
         xAxisPadding: 5
       },
       styles: {
-        color: 'orange',
+        color: '#D3D3D3',
       },
       layout:[
         { name: 'VT', x: 9.5, y: 0 },
@@ -102,7 +102,7 @@ const MapLayoutGridConstant = Immutable.fromJS({
         xAxisPadding: 5
       },
       styles: {
-        color: 'orange',
+        color: '#D3D3D3',
       },
       layout:[
         { name: 'MN', x: 0, y: 0 },
