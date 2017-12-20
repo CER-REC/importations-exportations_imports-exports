@@ -1,6 +1,7 @@
 const React = require('react')
 
 const TextBox = require('./TextBox')
+const SVGDrag = require('./SVGDrag/')
 
 class AxisGuide extends React.PureComponent {
   static get defaultProps() {
@@ -9,14 +10,29 @@ class AxisGuide extends React.PureComponent {
     }
   }
 
+  adjustOffset(offset) {
+    return {
+      x: 0,
+      y: offset.y,
+    }
+  }
+
+  dragStop(offset) {
+    console.info('Drag stopped', offset)
+  }
+
   render() {
     return (
-      <g>
+      <SVGDrag
+        flipped={this.props.flipped}
+        adjustOffset={this.adjustOffset}
+        dragStop={this.dragStop}
+      >
         <polyline
           strokeWidth={1}
           stroke="black"
           points="-12,150 -7,140 -2,150 -7,160 -12,150"
-          fill="none"
+          fill="transparent"
         />
         <line
           x1={-2}
@@ -43,7 +59,7 @@ class AxisGuide extends React.PureComponent {
         >
           6,200,000 MW.h
         </TextBox>
-      </g>
+      </SVGDrag>
     )
   }
 }
