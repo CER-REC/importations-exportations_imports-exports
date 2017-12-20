@@ -7,10 +7,6 @@ const TranslationTable = Immutable.fromJS({
       en: 'About this project',
       fr: 'Le projet',
     },
-    tellMeAStory: {
-      en: 'Tell me a story',
-      fr: 'Une histoire à raconter?',
-    },
     methodology: {
       en: 'Methodology',
       fr: 'Méthodologie',
