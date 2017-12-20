@@ -27,10 +27,10 @@ const Constants = Immutable.fromJS({
   socialBar: {
     topMargin: 300,
     width: 320,
-    height: 32,
+    height: 27,
     bottomMargin: 20,
-    iconHeight: 22,
-    iconWidth: 35,
+    iconHeight: 20,
+    iconWidth: 20,
     iconPadding: 4.5,
     iconMargin: 30,
     iconXOffset: 2,
@@ -113,6 +113,7 @@ const Constants = Immutable.fromJS({
   },
 
   appHost: 'https://apps2.neb-one.gc.ca',
+  screenshotPath: 'screenshot',
 
 })
 module.exports = Constants

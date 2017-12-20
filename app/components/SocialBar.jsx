@@ -56,11 +56,6 @@ class SocialBar extends React.Component {
     console.log('about this project')
   }
 
-  tellMeAStoryClick() {
-    // TODO
-    console.log('tell me a story')
-  }
-
   methodologyClick() {
     // TODO
     console.log('methodology')
@@ -105,7 +100,10 @@ class SocialBar extends React.Component {
   }
 
   downloadImageClick() {
+    // TODO
+    const screenshotUrl = `${RouteComputations.screenshotOrigin(location)}/${Constants.get('screenshotPath')}/?pageUrl=${RouteComputations.screenshotParameter(document.location)}&width=${TODO}&height=${TODO}`
 
+    window.open(screenshotUrl)
   }
 
   downloadDataClick() {
@@ -131,19 +129,8 @@ class SocialBar extends React.Component {
           width = {Constants.getIn(['socialBar','iconWidth'])}
           x = { Constants.getIn(['socialBar','iconXOffset'])}
           y = { WorkspaceComputations.socialBarY(this.props.viewport) + Constants.getIn(['socialBar','iconPadding']) }
-          xlinkHref = 'images/methodology-icon-black.svg'
+          xlinkHref = 'images/info_about.svg'
           onClick = {this.aboutThisProjectClick.bind(this)}
-        ></image>
-      </g>
-      <g>
-        <title>{Tr.getIn(['socialBar','tellMeAStory', this.props.language])}</title>
-        <image className = 'socialBarIcon'
-          height = {Constants.getIn(['socialBar','iconHeight'])}
-          width = {Constants.getIn(['socialBar','iconWidth'])}
-          x = {Constants.getIn(['socialBar','iconXOffset']) + Constants.getIn(['socialBar','iconMargin'])}
-          y = { WorkspaceComputations.socialBarY(this.props.viewport) + Constants.getIn(['socialBar','iconPadding']) }
-          xlinkHref = 'images/methodology-icon-black.svg'
-          onClick = {this.tellMeAStoryClick.bind(this)}
         ></image>
       </g>
       <g>
@@ -153,7 +140,7 @@ class SocialBar extends React.Component {
           width = {Constants.getIn(['socialBar','iconWidth'])}
           x = {Constants.getIn(['socialBar','iconXOffset']) + (Constants.getIn(['socialBar','iconMargin']) * 2)}
           y = { WorkspaceComputations.socialBarY(this.props.viewport) + Constants.getIn(['socialBar','iconPadding']) }
-          xlinkHref = 'images/methodology-icon-black.svg'
+          xlinkHref = 'images/info_methodology.svg'
           onClick = {this.methodologyClick.bind(this)}
         ></image>
       </g>
@@ -164,13 +151,10 @@ class SocialBar extends React.Component {
           width = {Constants.getIn(['socialBar','iconWidth'])}
           x = {Constants.getIn(['socialBar','iconXOffset']) + (Constants.getIn(['socialBar','iconMargin']) * 3)}
           y = { WorkspaceComputations.socialBarY(this.props.viewport) + Constants.getIn(['socialBar','iconPadding']) }
-          xlinkHref = 'images/methodology-icon-black.svg'
+          xlinkHref = 'images/reset.svg'
           onClick = {this.resetVisualizationClick.bind(this)}
         ></image>
       </g>
-      <line x1={130} y1={WorkspaceComputations.socialBarY(this.props.viewport) + 6.5}
-        x2={130} y2={WorkspaceComputations.socialBarY(this.props.viewport) + 25}
-        strokeWidth="1.5" stroke = "#666666" />
       <g>
         <title>twitter</title>
         <image className = 'socialBarIcon'
@@ -178,7 +162,7 @@ class SocialBar extends React.Component {
           width = {Constants.getIn(['socialBar','iconWidth'])}
           x = {14 + (Constants.getIn(['socialBar','iconMargin']) * 4)}
           y = { WorkspaceComputations.socialBarY(this.props.viewport) + Constants.getIn(['socialBar','iconPadding']) }
-          xlinkHref = 'images/methodology-icon-black.svg'
+          xlinkHref = 'images/sm_twitter.svg'
           onClick = {this.twitterClick.bind(this)}
         ></image>
       </g>
@@ -189,7 +173,7 @@ class SocialBar extends React.Component {
           width = {Constants.getIn(['socialBar','iconWidth'])}
           x = {14 + (Constants.getIn(['socialBar','iconMargin']) * 5)}
           y = { WorkspaceComputations.socialBarY(this.props.viewport) + Constants.getIn(['socialBar','iconPadding']) }
-          xlinkHref = 'images/methodology-icon-black.svg'
+          xlinkHref = 'images/sm_email.svg'
           onClick = {this.emailClick.bind(this)}
         ></image>
       </g>
@@ -200,7 +184,7 @@ class SocialBar extends React.Component {
           width = {Constants.getIn(['socialBar','iconWidth'])}
           x = {14 + (Constants.getIn(['socialBar','iconMargin']) * 6)}
           y = { WorkspaceComputations.socialBarY(this.props.viewport) + Constants.getIn(['socialBar','iconPadding']) }
-          xlinkHref = 'images/methodology-icon-black.svg'
+          xlinkHref = 'images/sm_facebook.svg'
           onClick = {this.facebookClick.bind(this)}
         ></image>
       </g>
@@ -211,7 +195,7 @@ class SocialBar extends React.Component {
           width = {Constants.getIn(['socialBar','iconWidth'])}
           x = {14 + (Constants.getIn(['socialBar','iconMargin']) * 7)}
           y = { WorkspaceComputations.socialBarY(this.props.viewport) + Constants.getIn(['socialBar','iconPadding']) }
-          xlinkHref = 'images/methodology-icon-black.svg'
+          xlinkHref = 'images/sm_linkedin.svg'
           onClick = {this.linkedInClick.bind(this)}
         ></image>
       </g>
@@ -222,7 +206,7 @@ class SocialBar extends React.Component {
           width = {Constants.getIn(['socialBar','iconWidth'])}
           x = {14 + (Constants.getIn(['socialBar','iconMargin']) * 8)}
           y = { WorkspaceComputations.socialBarY(this.props.viewport) + Constants.getIn(['socialBar','iconPadding']) }
-          xlinkHref = 'images/methodology-icon-black.svg'
+          xlinkHref = 'images/download_image.svg'
           onClick = {this.downloadImageClick.bind(this)}
         ></image>
       </g>
@@ -233,7 +217,7 @@ class SocialBar extends React.Component {
           width = {Constants.getIn(['socialBar','iconWidth'])}
           x = {14 + (Constants.getIn(['socialBar','iconMargin']) * 9)}
           y = { WorkspaceComputations.socialBarY(this.props.viewport) + Constants.getIn(['socialBar','iconPadding']) }
-          xlinkHref = 'images/methodology-icon-black.svg'
+          xlinkHref = 'images/download_file.svg'
           onClick = {this.downloadDataClick.bind(this)}
         ></image>
       </g>
