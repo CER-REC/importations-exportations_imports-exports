@@ -1,5 +1,8 @@
 const React = require('react')
 const ReactRedux = require('react-redux')
+const Request = require('client-request/promise')
+
+const RouteComputations = require('../computations/RouteComputations.js')
 
 const Constants = require('../Constants.js')
 const Tr = require('../TranslationTable.js')
@@ -8,6 +11,45 @@ const WorkspaceComputations = require('../computations/WorkspaceComputations.js'
 require('./SocialBar.scss')
 
 class SocialBar extends React.Component {
+
+  makeBitlyPromise() {
+
+    const bitlyEndpoint = RouteComputations.bitlyEndpoint(document.location, this.props.language)
+    const shortenUrl = RouteComputations.bitlyParameter(document.location, this.props.language)
+
+    const options = {
+      uri: `${bitlyEndpoint}?shortenUrl=${shortenUrl}`,
+      json: true
+    }
+
+    return Request(options)
+      .then(function (response) {
+        // The server proxies our request through to Bitly. If our request
+        // to our server succeeds but the one to bitly fails, the returned
+        // object will detail the error
+
+        // A reponse for a successful request to the bitly shortening service 
+        // is a JSON string like:
+        //{
+        //  "status_code": 200,
+        //  "status_txt": "OK",
+        //  "data": {
+        //    "url": "http://bit.ly/2xzn2HN",
+        //    "hash": "2xzn2HN",
+        //    "global_hash": "46frEb",
+        //    "long_url": "https://www.google.ca/",
+        //    "new_hash": 1
+        //  }
+        //}
+
+        if (response.body.status_code !== 200) {
+          // throw new Error(response.body.status_txt)
+          return Constants.get('appHost')
+        }
+        return response.body.data.url
+      })
+      .catch( () => Constants.get('appHost'))
+  }
 
   aboutThisProjectClick() {
     // TODO
@@ -30,19 +72,36 @@ class SocialBar extends React.Component {
   }
 
   twitterClick() {
-
+    this.makeBitlyPromise().then(function(url){
+      const twitterUrl = `https://twitter.com/intent/tweet?url=${url}`
+      window.open(twitterUrl , 'targetWindow' , 'width=650,height=650') 
+    })
   }
 
   emailClick() {
+    const self = this
+    this.makeBitlyPromise().then(function(url){
 
+      const emailBody = `${url}%0A%0A ${Tr.getIn(['shareEmail', 'body', self.props.language])}`
+
+      const emailUrl = `mailto:?subject=${Tr.getIn(['shareEmail', 'subject', self.props.language])} &body= ${emailBody}`
+
+      window.location.href = emailUrl
+    })
   }
 
   facebookClick() {
-
+    this.makeBitlyPromise().then(function(url){
+      const facebookUrl = `https://www.facebook.com/sharer/sharer.php?u=${url}`
+      window.open(facebookUrl , 'targetWindow' , 'width=650,height=650') 
+    })
   }
 
-  linkedIn() {
-
+  linkedInClick() {
+    this.makeBitlyPromise().then(function(url){
+      const linkedinUrl = `https://www.linkedin.com/shareArticle?mini=true&url=${url}&summary=${url}`
+      window.open(linkedinUrl , 'targetWindow' , 'width=650,height=650') 
+    })
   }
 
   downloadImageClick() {
@@ -50,7 +109,9 @@ class SocialBar extends React.Component {
   }
 
   downloadDataClick() {
-
+    const appRoot = RouteComputations.appRoot(document.location, this.props.language)
+    const fileName = Tr.getIn(['downloadable', 'csv', this.props.language])
+    window.open(`${appRoot}data/${fileName}`, 'data:text/csv;charset=utf-8,data/' + escape())  
   }
 
 
@@ -118,6 +179,7 @@ class SocialBar extends React.Component {
           x = {14 + (Constants.getIn(['socialBar','iconMargin']) * 4)}
           y = { WorkspaceComputations.socialBarY(this.props.viewport) + Constants.getIn(['socialBar','iconPadding']) }
           xlinkHref = 'images/methodology-icon-black.svg'
+          onClick = {this.twitterClick.bind(this)}
         ></image>
       </g>
       <g>
@@ -128,6 +190,7 @@ class SocialBar extends React.Component {
           x = {14 + (Constants.getIn(['socialBar','iconMargin']) * 5)}
           y = { WorkspaceComputations.socialBarY(this.props.viewport) + Constants.getIn(['socialBar','iconPadding']) }
           xlinkHref = 'images/methodology-icon-black.svg'
+          onClick = {this.emailClick.bind(this)}
         ></image>
       </g>
       <g>
@@ -138,6 +201,7 @@ class SocialBar extends React.Component {
           x = {14 + (Constants.getIn(['socialBar','iconMargin']) * 6)}
           y = { WorkspaceComputations.socialBarY(this.props.viewport) + Constants.getIn(['socialBar','iconPadding']) }
           xlinkHref = 'images/methodology-icon-black.svg'
+          onClick = {this.facebookClick.bind(this)}
         ></image>
       </g>
       <g>
@@ -148,6 +212,7 @@ class SocialBar extends React.Component {
           x = {14 + (Constants.getIn(['socialBar','iconMargin']) * 7)}
           y = { WorkspaceComputations.socialBarY(this.props.viewport) + Constants.getIn(['socialBar','iconPadding']) }
           xlinkHref = 'images/methodology-icon-black.svg'
+          onClick = {this.linkedInClick.bind(this)}
         ></image>
       </g>
       <g>
@@ -158,6 +223,7 @@ class SocialBar extends React.Component {
           x = {14 + (Constants.getIn(['socialBar','iconMargin']) * 8)}
           y = { WorkspaceComputations.socialBarY(this.props.viewport) + Constants.getIn(['socialBar','iconPadding']) }
           xlinkHref = 'images/methodology-icon-black.svg'
+          onClick = {this.downloadImageClick.bind(this)}
         ></image>
       </g>
       <g>
@@ -168,6 +234,7 @@ class SocialBar extends React.Component {
           x = {14 + (Constants.getIn(['socialBar','iconMargin']) * 9)}
           y = { WorkspaceComputations.socialBarY(this.props.viewport) + Constants.getIn(['socialBar','iconPadding']) }
           xlinkHref = 'images/methodology-icon-black.svg'
+          onClick = {this.downloadDataClick.bind(this)}
         ></image>
       </g>
     </svg>

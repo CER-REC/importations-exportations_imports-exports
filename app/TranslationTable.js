@@ -72,6 +72,7 @@ const TranslationTable = Immutable.fromJS({
       fr:'Sort By EXPORTS FR'
     }
   },
+
   electricityDataTypes:{
     price:{
       en:'Show PRICE',
@@ -82,10 +83,26 @@ const TranslationTable = Immutable.fromJS({
       fr:'Show AMOUNT (MW. h) FR'
     }
   },
+
   explanationShown:{
     en:'Show EXPLANATIONS',
     fr:'Show EXPLANATIONS FR'
-  }
+  },
+
+
+  applicationPath: {
+    en: '/pipeline-incidents/',
+    fr: '/incidents-pipeliniers/',
+  },
+
+
+  downloadable: {
+    csv: {
+      en: 'TODO',
+      fr: 'TODO FR',
+    },
+  },
+
 
 })
 

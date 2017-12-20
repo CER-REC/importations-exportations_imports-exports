@@ -110,8 +110,9 @@ const Constants = Immutable.fromJS({
   electricityDataTypesStyle:{
     color: 'grey',
     lineWidth: 3
-  }
+  },
 
+  appHost: 'https://apps2.neb-one.gc.ca',
 
 })
 module.exports = Constants
