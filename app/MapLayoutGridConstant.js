@@ -4,6 +4,7 @@ const MapLayoutGridConstant = Immutable.fromJS({
   electricity:{
     ca:{
       defaultColumns:8,
+      sortingRowPadding: 1.5,
       dimensions:{
         height: 70,
         width: 70,
@@ -31,6 +32,7 @@ const MapLayoutGridConstant = Immutable.fromJS({
     },
     us:{
       defaultColumns:12,
+      sortingRowPadding: -0.5,
       dimensions:{
         height: 45,
         width: 50,

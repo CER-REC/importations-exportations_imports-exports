@@ -27,7 +27,8 @@ class MapLayout extends React.Component {
                                           this.props.electricitySortState, 
                                           mapLayoutGrid.get('layout'), 
                                           mapPieceData,
-                                          mapLayoutGrid.get('defaultColumns')
+                                          mapLayoutGrid.get('defaultColumns'), 
+                                          mapLayoutGrid.get('sortingRowPadding')
                                         )
     const xaxis = this.props.xaxis
     const yaxis = this.props.yaxis
