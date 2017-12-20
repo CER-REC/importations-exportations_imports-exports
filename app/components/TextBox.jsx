@@ -49,7 +49,7 @@ class TextBox extends React.PureComponent {
 
   render() {
     const transform = this.props.flipped
-      ? `scale(1,-1) translate(0 -${this.state.y * 2 + this.state.height})`
+      ? `scale(1,-1) translate(0 ${-(this.state.y * 2 + this.state.height)})`
       : ''
     return (
       <g transform={transform}>

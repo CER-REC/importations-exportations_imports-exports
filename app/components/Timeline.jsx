@@ -54,11 +54,16 @@ class Timeline extends React.PureComponent {
   }
 
   render() {
-    const minMax = {
-      minImport: Number.MAX_SAFE_INTEGER,
-      maxImport: -Number.MAX_SAFE_INTEGER,
-      minExport: Number.MAX_SAFE_INTEGER,
-      maxExport: -Number.MAX_SAFE_INTEGER,
+    const scale = {
+      import: {
+        min: Number.MAX_SAFE_INTEGER,
+        max: -Number.MAX_SAFE_INTEGER,
+      },
+      export: {
+        min: Number.MAX_SAFE_INTEGER,
+        max: -Number.MAX_SAFE_INTEGER,
+      },
+      year: {},
     }
 
     const formattedData = this.state.data.reduce((acc, point) => {
@@ -66,15 +71,15 @@ class Timeline extends React.PureComponent {
         acc[point.year] = {}
       }
       acc[point.year][point.quarter] = point
-      minMax.minImport = Math.min(minMax.minImport, point.import)
-      minMax.maxImport = Math.max(minMax.maxImport, point.import)
-      minMax.minExport = Math.min(minMax.minExport, point.export)
-      minMax.maxExport = Math.max(minMax.maxExport, point.export)
+      scale.import.min = Math.min(scale.import.min, point.import)
+      scale.import.max = Math.max(scale.import.max, point.import)
+      scale.export.min = Math.min(scale.export.min, point.export)
+      scale.export.max = Math.max(scale.export.max, point.export)
       return acc
     }, {})
 
-    minMax.minYear = Math.min(...Object.keys(formattedData))
-    minMax.maxYear = Math.max(...Object.keys(formattedData))
+    scale.year.min = Math.min(...Object.keys(formattedData))
+    scale.year.max = Math.max(...Object.keys(formattedData))
 
 
     const sharedProps = {
@@ -83,27 +88,36 @@ class Timeline extends React.PureComponent {
       groupComparator: groupByYear,
     }
 
+    const combinedScale = {
+      min: Math.min(scale.import.min, scale.export.min),
+      max: Math.max(scale.import.max, scale.export.max),
+    }
+
     return (
       <g>
         <BarChart
           scale={{
-            x: [minMax.minYear, minMax.maxYear],
-            y: this.props.scaleLinked
-              ? [Math.min(minMax.minImport, minMax.minExport), Math.max(minMax.maxImport, minMax.maxExport)]
-              : [minMax.minImport, minMax.maxImport],
+            x: scale.year,
+            y: this.props.scaleLinked ? combinedScale : scale.import,
+          }}
+          trueScale={{
+            x: scale.year,
+            y: scale.import,
           }}
           valueKey="import"
           height={200}
           color="rgb(255,119,76)"
           {...sharedProps}
         />
-        <g transform="translate(0, 230)">
+        <g transform="translate(0 230)">
           <BarChart
             scale={{
-              x: [minMax.minYear, minMax.maxYear],
-              y: this.props.scaleLinked
-                ? [Math.min(minMax.minImport, minMax.minExport), Math.max(minMax.maxImport, minMax.maxExport)]
-                : [minMax.minExport, minMax.maxExport],
+              x: scale.year,
+              y: this.props.scaleLinked ? combinedScale : scale.export,
+            }}
+            trueScale={{
+              x: scale.year,
+              y: scale.export,
             }}
             valueKey="export"
             height={200}
@@ -114,7 +128,7 @@ class Timeline extends React.PureComponent {
         </g>
         <Axis
           {...sharedProps}
-          scale={{ x: [minMax.minYear, minMax.maxYear ] }}
+          scale={{ x: scale.year }}
         />
       </g>
     )

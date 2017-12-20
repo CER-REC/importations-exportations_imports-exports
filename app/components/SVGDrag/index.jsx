@@ -112,7 +112,7 @@ class SVGDrag extends React.PureComponent {
         onTouchStart={this.onDragStart}
         onTouchMove={this.onDragMove}
         onTouchEnd={this.onDragStop}
-        transform={`translate(${offset.x}, ${offset.y})`}
+        transform={`translate(${offset.x} ${offset.y})`}
         className="SVGDrag"
       >
         {this.props.children}

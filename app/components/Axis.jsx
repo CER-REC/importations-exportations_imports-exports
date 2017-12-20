@@ -9,7 +9,7 @@ const Axis = ({
   const elements = []
 
   let year
-  for (year = scale.x[0]; year <= scale.x[1]; year++) {
+  for (year = scale.x.min; year <= scale.x.max; year++) {
     elements.push(
       <text
         key={`label-${year}`}
