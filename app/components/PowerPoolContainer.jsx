@@ -4,7 +4,7 @@ const MapLayout = require('./MapLayout.jsx')
 
 class PowerPoolContainer extends React.Component {
   render(){
-    //Scale is temporary adjustment as it's too small if we use dimensions mentioned in the desien document
+    //Scale is temporary adjustment as it's too small if we use dimensions mentioned in the design document
     //TODO: scale map dynamically when screen size change
     return <g transform='scale(1.2)'> <MapLayout
               xaxis={this.props.xaxis} 
