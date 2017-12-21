@@ -1,6 +1,6 @@
 const Immutable = require('immutable')
 
-const DataLoader = Immutable.fromJS({
+const DummyDataLoader = Immutable.fromJS({
   electricity:{
     ca:{
       YT: {
@@ -129,4 +129,4 @@ const DataLoader = Immutable.fromJS({
   }
 })
 
-module.exports = DataLoader
+module.exports = DummyDataLoader

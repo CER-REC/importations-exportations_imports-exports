@@ -1,7 +1,7 @@
 const React = require('react')
 const ReactRedux = require('react-redux')
 const MapPiece = require('./MapPiece.jsx')
-const DataLoader = require('../DataLoader.js')
+const DataLoader = require('../DummyDataLoader.js')
 const MapLayoutGridConstant = require('../MapLayoutGridConstant.js')
 const MapLayoutComputation = require('../computations/MapLayoutComputation.js')
 
