@@ -1,4 +1,5 @@
 const React = require('react')
+const connect = require('react-redux').connect
 
 const TextBox = require('./TextBox')
 const SVGDrag = require('./SVGDrag/')
@@ -53,7 +54,7 @@ class AxisGuide extends React.PureComponent {
   }
 
   render() {
-    const text = `${this.state.positionDisplay} MW.h`
+    const text = `${this.state.positionDisplay} ${this.props.unit}`
     const offset = this.props.chartHeight
       - (this.props.position * this.props.heightPerUnit)
       + (this.props.barSize / 2)
@@ -101,4 +102,6 @@ class AxisGuide extends React.PureComponent {
   }
 }
 
-module.exports = AxisGuide
+module.exports = connect(
+  state => ({ unit: state.electricityDataTypes })
+)(AxisGuide)

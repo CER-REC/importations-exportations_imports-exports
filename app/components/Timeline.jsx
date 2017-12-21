@@ -1,14 +1,13 @@
 const React = require('react')
+const connect = require('react-redux').connect
 
 const BarChart = require('./BarChart')
 const Axis = require('./Axis')
 
-function randBetween(min, max) {
-  return Math.floor(Math.random() * max) + min
-}
+const DataSelectors = require('../selectors/data')
 
 function groupByYear(a, b) {
-  return a.year === b.year
+  return a.get('year') === b.get('year')
 }
 
 class Timeline extends React.PureComponent {
@@ -22,42 +21,10 @@ class Timeline extends React.PureComponent {
     }
   }
 
-  constructor(props) {
-    super(props)
-    this.state = {
-      data: this.generateData(),
-    }
-  }
-
-  componentDidMount() {
-    // Enable if you want to see animations
-    /*
-    this.dataInterval = setInterval(() => {
-      this.setState({ data: this.generateData() })
-    }, 5000)
-    */
-  }
-
-  componentWillUnmount() {
-    clearInterval(this.dataInterval)
-  }
-
-  generateData() {
-    const data = []
-    for (let year = 1990; year < 2000; year++) {
-      for (let quarter = 1; quarter <= 4; quarter++) {
-        data.push({
-          year,
-          quarter,
-          import: randBetween(0, 15),
-          export: randBetween(0, 50),
-        })
-      }
-    }
-    return data
-  }
-
   render() {
+    // Don't render until we have data
+    if (this.props.data.count() === 0) { return null }
+
     const scale = {
       import: {
         min: Number.MAX_SAFE_INTEGER,
@@ -70,24 +37,20 @@ class Timeline extends React.PureComponent {
       year: {},
     }
 
-    const formattedData = this.state.data.reduce((acc, point) => {
-      if (typeof acc[point.year] === 'undefined') {
-        acc[point.year] = {}
-      }
-      acc[point.year][point.quarter] = point
-      scale.import.min = Math.min(scale.import.min, point.import)
-      scale.import.max = Math.max(scale.import.max, point.import)
-      scale.export.min = Math.min(scale.export.min, point.export)
-      scale.export.max = Math.max(scale.export.max, point.export)
-      return acc
-    }, {})
+    const years = this.props.data.map(point => {
+      scale.import.min = Math.min(scale.import.min, point.get('imports'))
+      scale.import.max = Math.max(scale.import.max, point.get('imports'))
+      scale.export.min = Math.min(scale.export.min, point.get('exports'))
+      scale.export.max = Math.max(scale.export.max, point.get('exports'))
+      return point.get('year')
+    }).toSet().toArray() // toSet to keep unique values
 
-    scale.year.min = Math.min(...Object.keys(formattedData))
-    scale.year.max = Math.max(...Object.keys(formattedData))
+    scale.year.min = Math.min(...years)
+    scale.year.max = Math.max(...years)
 
 
     const sharedProps = {
-      data: formattedData,
+      data: this.props.data,
       groupPadding: 5,
       groupComparator: groupByYear,
       barPadding: 0.5,
@@ -118,7 +81,7 @@ class Timeline extends React.PureComponent {
             x: scale.year,
             y: scale.import,
           }}
-          valueKey="import"
+          valueKey="imports"
           height={chartHeight}
           color="rgb(255,119,76)"
           {...sharedProps}
@@ -133,7 +96,7 @@ class Timeline extends React.PureComponent {
               x: scale.year,
               y: scale.export,
             }}
-            valueKey="export"
+            valueKey="exports"
             height={chartHeight}
             color="rgb(28,100,178)"
             {...sharedProps}
@@ -151,4 +114,6 @@ class Timeline extends React.PureComponent {
   }
 }
 
-module.exports = Timeline
+module.exports = connect(state => ({
+  data: DataSelectors.sortTimelineSelector(state),
+}))(Timeline)

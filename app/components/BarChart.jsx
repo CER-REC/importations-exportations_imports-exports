@@ -33,43 +33,39 @@ class BarChart extends React.PureComponent {
 
     const heightPerUnit = height / (scale.y.max - scale.y.min)
     const elements = []
-    let year, quarter
     let xOffset = 0
     let lastPoint
-    for (year = scale.x.min; year <= scale.x.max; year++) {
-      for (quarter = 1; quarter <= 4; quarter++) {
-        const point = data[year][quarter]
 
-        // Gap between grouped values
-        if (groupComparator && lastPoint && !groupComparator(lastPoint, point)) {
-          xOffset += groupPadding
-        }
-
-        if (point) {
-          elements.push(
-            <Animation.SVGAnimation
-              key={`${point.year}-${point.quarter}-${valueKey}`}
-              tween={{
-                x1: xOffset,
-                x2: xOffset,
-                y2: height,
-                y1: (height - point[valueKey] * heightPerUnit),
-              }}
-            >
-              <line
-                strokeWidth={barSize}
-                stroke={color}
-                strokeLinecap="round"
-              />
-            </Animation.SVGAnimation>
-          )
-        }
-        // Gap between quarters
-        xOffset += barSize + barPadding
-
-        lastPoint = point
+    data.forEach(point => {
+      // Gap between grouped values
+      if (groupComparator && lastPoint && !groupComparator(lastPoint, point)) {
+        xOffset += groupPadding
       }
-    }
+
+      if (point) {
+        elements.push(
+          <Animation.SVGAnimation
+            key={`${point.get('year')}-${point.get('quarter')}-${valueKey}`}
+            tween={{
+              x1: xOffset,
+              x2: xOffset,
+              y2: height,
+              y1: (height - point.get(valueKey) * heightPerUnit),
+            }}
+          >
+            <line
+              strokeWidth={barSize}
+              stroke={color}
+              strokeLinecap="round"
+            />
+          </Animation.SVGAnimation>
+        )
+      }
+      // Gap between quarters
+      xOffset += barSize + barPadding
+
+      lastPoint = point
+    })
     const transform = (flipped === true)
       ? `scale(1,-1) translate(0 ${-height})`
       : ''
