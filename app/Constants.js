@@ -105,6 +105,10 @@ const Constants = Immutable.fromJS({
   electricityDataTypesStyle:{
     color: 'grey',
     lineWidth: 3
+  },
+  mapPieceTextStyle:{
+    x: 9.58,
+    y:24
   }
 
 })
