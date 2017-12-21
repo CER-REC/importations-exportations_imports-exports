@@ -2,6 +2,7 @@ const React = require('react')
 const ReactRedux = require('react-redux')
 const ReactFauxDOM = require('react-faux-dom')
 const D3 = require('d3')
+require('./MapPiece.scss')
 class MapPiece extends React.Component {
 
   getArrowColor(legends, value){
@@ -61,11 +62,8 @@ class MapPiece extends React.Component {
         .attr("dx", initialX+width/2)
         .attr("dy", intiailY+height/2)
         .text(this.props.data.get('name'))
-
-   
-
     //DOM manipulations done, convert to React
-    return g.toReact()
+    return <polygon className='hexagonColor' points="37.09 9.68 18.54 0 0 9.68 0 29.05 18.54 38.73 37.09 29.05 37.09 9.68"/>
     
   }
 }

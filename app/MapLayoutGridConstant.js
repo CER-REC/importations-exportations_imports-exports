@@ -3,11 +3,12 @@ const Immutable = require('immutable')
 const MapLayoutGridConstant = Immutable.fromJS({
   electricity:{
     ca:{
+      mapPieceScale:1,
       defaultColumns:8,
       sortingRowPadding: 1.5,
       dimensions:{
-        height: 70,
-        width: 70,
+        height: 37.09,
+        width: 38.75,
         yAxisPadding: 10,
         xAxisPadding: 10
       },
@@ -31,11 +32,12 @@ const MapLayoutGridConstant = Immutable.fromJS({
       ]
     },
     us:{
+      mapPieceScale:0.58,
       defaultColumns:12,
       sortingRowPadding: -0.5,
       dimensions:{
-        height: 45,
-        width: 50,
+        height: 37.09,
+        width: 38.75,
         yAxisPadding: 1,
         xAxisPadding: 5
       },
@@ -96,6 +98,7 @@ const MapLayoutGridConstant = Immutable.fromJS({
       ]
     },
     powerpool:{
+      mapPieceScale:0.58,
       defaultColumns:12,
       dimensions:{
         height: 45,
