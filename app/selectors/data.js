@@ -103,8 +103,6 @@ const sortAggregatedLocationsSelector = createSelector(
   aggregateLocationSelector,
   (sortBy, points) => {
     switch (sortBy) {
-      // TODO: imports/exports sorts probably need to support the ForReexport
-      // and ForReimport variants
       case 'imports':
         return points.sort((a, b) => (b.get('imports', 0) - a.get('imports', 0)))
       case 'exports':
