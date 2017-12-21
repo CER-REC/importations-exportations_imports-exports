@@ -89,8 +89,8 @@ const aggregateQuarterSelector = createSelector(
       }
 
       const activity = next.get('activity')
-      const currentVal = acc[origin][activity] || 0
-      acc[origin][activity] = (currentVal + next.get('value'))
+      const currentVal = acc[period][activity] || 0
+      acc[period][activity] = (currentVal + next.get('value'))
 
       return acc
     }, {})
