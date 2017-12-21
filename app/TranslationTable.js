@@ -44,24 +44,22 @@ const TranslationTable = Immutable.fromJS({
       en:'Sort By LOCATION',
       fr:'Sort By LOCATION FR'
     },
-    import:{
+    imports:{
       en:'Sort By IMPORTS',
       fr:'Sort By IMPORTS FR'
     },
-    export:{
+    exports:{
       en:'Sort By EXPORTS',
       fr:'Sort By EXPORTS FR'
     }
   },
   electricityDataTypes:{
-    price:{
-      en:'Show PRICE',
-      fr:'Show PRICE FR'
-    },
-    mwh:{
-      en:'Show AMOUNT (MW. h)',
-      fr:'Show AMOUNT (MW. h) FR'
-    }
+    'CAN$': { en: 'CAN$', fr: 'CAN$' },
+    'CAN$/MW.h': { en: 'CAN$/MW.h', fr: 'CAN$/MW.h' },
+    'CN$/GJ': { en: 'CN$/GJ', fr: 'CN$/GJ' },
+    'm3/d': { en: 'm3/d', fr: 'm3/d' },
+    'MW.h': { en: 'MW.h', fr: 'MW.h' },
+    'thousand m3/d': { en: 'thousand m3/d', fr: 'thousand m3/d' }
   },
   explanationShown:{
     en:'Show EXPLANATIONS',

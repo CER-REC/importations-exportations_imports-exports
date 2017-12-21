@@ -73,8 +73,8 @@ const Constants = Immutable.fromJS({
   ],
   electricitySortStates:[
     'location',
-    'import',
-    'export'
+    'imports',
+    'exports'
   ],
   electricitySortStatesStyle:{
     color: 'grey',
@@ -99,8 +99,12 @@ const Constants = Immutable.fromJS({
     'fr'
   ],
   electricityDataTypes:[
-    'mwh',
-    'price'
+    'CAN$',
+    'CAN$/MW.h',
+    'CN$/GJ',
+    'm3/d',
+    'MW.h',
+    'thousand m3/d'
   ],
   electricityDataTypesStyle:{
     color: 'grey',
