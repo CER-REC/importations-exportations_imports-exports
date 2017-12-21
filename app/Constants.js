@@ -108,7 +108,7 @@ const Constants = Immutable.fromJS({
   },
   mapPieceTextStyle:{
     x: 9.58,
-    y:24
+    y: 10,
   }
 
 })

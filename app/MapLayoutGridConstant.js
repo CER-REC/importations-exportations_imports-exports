@@ -14,6 +14,10 @@ const MapLayoutGridConstant = Immutable.fromJS({
       },
       styles: {
         color: '#D3D3D3',
+        labelPosition:'up',
+        arrowPosition:'down',
+        bottomMargin: 5,
+        topMargin: 5
       },
       layout: [
         { name:'YT',  x:0,  y:0 },
@@ -43,6 +47,10 @@ const MapLayoutGridConstant = Immutable.fromJS({
       },
       styles: {
         color: '#D3D3D3',
+        labelPosition:'down',
+        arrowPosition:'up',
+        bottomMargin: 5,
+        topMargin: 5
       },
       layout:[
         { name: 'VT', x: 9.5, y: 0 },
@@ -108,6 +116,10 @@ const MapLayoutGridConstant = Immutable.fromJS({
       },
       styles: {
         color: '#D3D3D3',
+        labelPosition:'down',
+        arrowPosition:'up',
+        bottomMargin: 5,
+        topMargin: 5
       },
       layout:[
         { name: 'MN', x: 0, y: 0 },
