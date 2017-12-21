@@ -1,6 +1,6 @@
 const Constants = require('../Constants.js')
 
-const ElectricityDataTypeReducer = (state = 'price', action) => {
+const ElectricityDataTypeReducer = (state = 'MW.h', action) => {
 
 
   switch(action.type) {

@@ -4,15 +4,15 @@ const Immutable = require('immutable')
 const emptyMap = new Immutable.Map()
 const emptyList = new Immutable.List()
 
-//const selectedVisualization = state => state.importExportVisualization
-//const selectedSort = state => state.electricitySortState
-//const selectedUnit = state => state.electricityDataTypes
-const selectedVisualization = () => 'Electricity'
-const selectedSort = () => 'import'
-const selectedUnit = () => 'MW.h'
-//const selectedActivity = state => state.selectedActivity || 'both'
-const selectedActivity = state => state.selectedActivity || 'exports'
+const selectedVisualization = state => state.importExportVisualization
+const selectedSort = state => state.electricitySortState
+const selectedUnit = state => state.electricityDataTypes
+const selectedActivityGroup =
+  state => state.selectedActivity || 'importsExports'
 const dataSelector = state => state.data
+
+//selectedVisualization = () => 'Electricity'
+//selectedUnit = () => 'MW.h'
 
 const productSelector = createSelector(
   dataSelector,
@@ -26,24 +26,15 @@ const unitSelector = createSelector(
   (product, unit) => product.get(unit, emptyList)
 )
 
-const activitySelector = createSelector(
+const activityGroupSelector = createSelector(
   unitSelector,
-  selectedActivity,
-  (points, filterActivity) => {
-    if (filterActivity === 'both') { return points }
-    return points.filter(point => {
-      const activity = point.get('activity')
-      return (
-        activity === filterActivity ||
-        activity.startsWith(filterActivity) || // importReexports
-        activity.startsWith(`re${filterActivity}`) // reimportExports
-      )
-    })
-  }
+  selectedActivityGroup,
+  (points, filterActivityGroup) =>
+    points.filter(point => (point.get('activityGroup') === filterActivityGroup))
 )
 
 const filterByTimelineSelector = createSelector(
-  activitySelector,
+  activityGroupSelector,
   points => {
     // TODO: Add filtering by timeline year-domain
     return points
@@ -51,7 +42,7 @@ const filterByTimelineSelector = createSelector(
 )
 
 const filterByHexSelector = createSelector(
-  activitySelector,
+  activityGroupSelector,
   points => {
     // TODO: Add filtering by selected hexes
     return points
@@ -67,14 +58,14 @@ const aggregateLocationSelector = createSelector(
       // Safe to mutate the acc argument as we created it for only this reduce
       if (!acc[origin]) {
         acc[origin] = {
-          imports: 0,
-          exports: 0,
           units: next.get('units'),
           origin,
         }
       }
 
-      acc[origin][next.get('activity')] += next.get('value')
+      const activity = next.get('activity')
+      const currentVal = acc[origin][activity] || 0
+      acc[origin][activity] = (currentVal + next.get('value'))
 
       return acc
     }, {})
@@ -90,8 +81,6 @@ const aggregateQuarterSelector = createSelector(
       // Safe to mutate the acc argument as we created it for only this reduce
       if (!acc[period]) {
         acc[period] = {
-          imports: 0,
-          exports: 0,
           units: next.get('units'),
           period,
           year: next.get('year'),
@@ -99,7 +88,9 @@ const aggregateQuarterSelector = createSelector(
         }
       }
 
-      acc[period][next.get('activity')] += next.get('value')
+      const activity = next.get('activity')
+      const currentVal = acc[origin][activity] || 0
+      acc[origin][activity] = (currentVal + next.get('value'))
 
       return acc
     }, {})
@@ -107,22 +98,23 @@ const aggregateQuarterSelector = createSelector(
   }
 )
 
-const sortLocationSelector = createSelector(
+const sortAggregatedLocationsSelector = createSelector(
+  selectedSort,
   aggregateLocationSelector,
-  points => points.sort((a, b) => {
-    // TODO: Use constants to sort for the map
-    return 0
-  })
-)
-
-const sortImportsSelector = createSelector(
-  aggregateLocationSelector,
-  points => points.sort((a, b) => (b.get('imports') - a.get('imports')))
-)
-
-const sortExportsSelector = createSelector(
-  aggregateLocationSelector,
-  points => points.sort((a, b) => (b.get('exports') - a.get('exports')))
+  (sortBy, points) => {
+    switch (sortBy) {
+      // TODO: imports/exports sorts probably need to support the ForReexport
+      // and ForReimport variants
+      case 'imports':
+        return points.sort((a, b) => (b.get('imports', 0) - a.get('imports', 0)))
+      case 'exports':
+        return points.sort((a, b) => (b.get('exports', 0) - a.get('exports', 0)))
+      case location:
+        // TODO Use constants to sort for the map
+      default:
+        return points
+    }
+  }
 )
 
 const sortTimelineSelector = createSelector(
@@ -144,13 +136,9 @@ const sortQuarterSelector = createSelector(
 module.exports = {
   aggregateLocationSelector,
   aggregateQuarterSelector,
-  sortImportsSelector,
-  sortExportsSelector,
+  sortAggregatedLocationsSelector,
   sortTimelineSelector,
   sortQuarterSelector,
-  // Temporary
-  filterByTimelineSelector,
-  activitySelector,
   unitSelector,
-  productSelector,
+  activityGroupSelector,
 }
