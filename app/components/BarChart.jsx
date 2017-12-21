@@ -27,6 +27,8 @@ class BarChart extends React.PureComponent {
       color,
       groupComparator,
       groupPadding,
+      barSize,
+      barPadding,
     } = this.props
 
     const heightPerUnit = height / (scale.y.max - scale.y.min)
@@ -54,12 +56,16 @@ class BarChart extends React.PureComponent {
                 y1: (height - point[valueKey] * heightPerUnit),
               }}
             >
-              <line strokeWidth="4" stroke={color} strokeLinecap="round" />
+              <line
+                strokeWidth={barSize}
+                stroke={color}
+                strokeLinecap="round"
+              />
             </Animation.SVGAnimation>
           )
         }
         // Gap between quarters
-        xOffset += 5
+        xOffset += barSize + barPadding
 
         lastPoint = point
       }
@@ -77,6 +83,8 @@ class BarChart extends React.PureComponent {
           chartHeight={height}
           heightPerUnit={heightPerUnit}
           updatePosition={this.updateAxisGuide}
+          width={this.props.width}
+          barSize={this.props.barSize}
         />
       </g>
     )
@@ -88,6 +96,8 @@ BarChart.defaultProps = {
   flipped: false,
   color: 'black',
   groupPadding: 0,
+  barSize: 4,
+  barPadding: 1,
 }
 
 module.exports = BarChart

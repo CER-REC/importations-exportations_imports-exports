@@ -15,6 +15,10 @@ class Timeline extends React.PureComponent {
   static get defaultProps() {
     return {
       scaleLinked: true,
+      x: 0,
+      y: 0,
+      width: 400,
+      height: 215,
     }
   }
 
@@ -86,6 +90,8 @@ class Timeline extends React.PureComponent {
       data: formattedData,
       groupPadding: 5,
       groupComparator: groupByYear,
+      barPadding: 0.5,
+      width: this.props.width,
     }
 
     const combinedScale = {
@@ -93,8 +99,16 @@ class Timeline extends React.PureComponent {
       max: Math.max(scale.import.max, scale.export.max),
     }
 
+    const chartHeight = (this.props.height - 15) / 2
+
+    const totalYears = (scale.year.max - scale.year.min)
+    const widthAfterPads = this.props.width
+      - ((totalYears) * sharedProps.groupPadding)
+      - ((totalYears * 4) * sharedProps.barPadding)
+    sharedProps.barSize = widthAfterPads / ((totalYears + 1) * 4)
+
     return (
-      <g>
+      <g transform={`translate(${this.props.x} ${this.props.y})`}>
         <BarChart
           scale={{
             x: scale.year,
@@ -105,11 +119,11 @@ class Timeline extends React.PureComponent {
             y: scale.import,
           }}
           valueKey="import"
-          height={200}
+          height={chartHeight}
           color="rgb(255,119,76)"
           {...sharedProps}
         />
-        <g transform="translate(0 230)">
+        <g transform="translate(0 130)">
           <BarChart
             scale={{
               x: scale.year,
@@ -120,13 +134,15 @@ class Timeline extends React.PureComponent {
               y: scale.export,
             }}
             valueKey="export"
-            height={200}
+            height={chartHeight}
             color="rgb(28,100,178)"
             {...sharedProps}
             flipped
           />
         </g>
         <Axis
+          x={0}
+          y={chartHeight + 15}
           {...sharedProps}
           scale={{ x: scale.year }}
         />

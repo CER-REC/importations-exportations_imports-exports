@@ -54,7 +54,9 @@ class AxisGuide extends React.PureComponent {
 
   render() {
     const text = `${this.state.positionDisplay} MW.h`
-    const offset = this.props.chartHeight - (this.props.position * this.props.heightPerUnit) - 2 // 2px accounts for line width and stroke caps
+    const offset = this.props.chartHeight
+      - (this.props.position * this.props.heightPerUnit)
+      + (this.props.barSize / 2)
     return (
       <SVGDrag
         flipped={this.props.flipped}
@@ -70,7 +72,7 @@ class AxisGuide extends React.PureComponent {
           />
           <line
             x1={-2}
-            x2={242}
+            x2={this.props.width + 2}
             y1={0}
             y2={0}
             strokeWidth={1}
@@ -80,7 +82,7 @@ class AxisGuide extends React.PureComponent {
 
           <TextBox
             textStyles={{
-              x: 120,
+              x: (this.props.width / 2),
               y: -6,
               textAnchor: 'middle',
               alignmentBaseline: 'bottom',

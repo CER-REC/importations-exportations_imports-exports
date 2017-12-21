@@ -7,7 +7,6 @@ const MenuBar = require('./MenuBar.jsx')
 const SocialBar = require('./SocialBar.jsx')
 const VisualizationContainer = require('./VisualizationContainer.jsx')
 const VisualizationDetailContainer = require('./VisualizationDetailContainer.jsx')
-const Timeline = require('./Timeline')
 
 require('./Workspace.scss')
 
@@ -24,10 +23,6 @@ class Workspace extends React.Component {
 
       <SocialBar />
       <MenuBar />
-
-      <g transform="translate(450 0)">
-        <Timeline scaleLinked={true} />
-      </g>
     </svg>
   }
 }

@@ -4,7 +4,7 @@ const ReactRedux = require('react-redux')
 const Constants = require('../Constants.js')
 
 const CanadaMapContainer = require('./CanadaMapContainer.jsx')
-const ElectricityTimelineContainer = require('./ElectricityTimelineContainer.jsx')
+const Timeline = require('./Timeline')
 const USMapContainer = require('./USMapContainer.jsx')
 const PowerPoolContainer = require('./PowerPoolContainer.jsx')
 const PowerPoolGroupingOutline = require('./PowerPoolGroupingOutline.jsx')
@@ -18,9 +18,11 @@ class ElectricityVisualizationContainer extends React.Component {
        xaxis = {this.props.xaxis} 
        yaxis = {this.props.yaxis} 
       />
-      <ElectricityTimelineContainer 
-       xaxis = {this.props.xaxis } 
-       yaxis = {this.props.yaxis + this.props.height/4} 
+      <Timeline
+        x={this.props.xaxis}
+        y={this.props.yaxis}
+        width={this.props.width * 0.6}
+        height={215}
       />
       <USMapContainer 
        xaxis = {this.props.xaxis } 
