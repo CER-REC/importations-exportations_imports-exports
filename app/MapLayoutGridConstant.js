@@ -9,8 +9,8 @@ const MapLayoutGridConstant = Immutable.fromJS({
       dimensions:{
         height: 37.09,
         width: 38.75,
-        yAxisPadding: 10,
-        xAxisPadding: 10
+        yAxisPadding: 8.528,
+        xAxisPadding: 12.528
       },
       styles: {
         color: '#D3D3D3',
@@ -38,8 +38,8 @@ const MapLayoutGridConstant = Immutable.fromJS({
       dimensions:{
         height: 37.09,
         width: 38.75,
-        yAxisPadding: 1,
-        xAxisPadding: 5
+        yAxisPadding: 4.5,
+        xAxisPadding: 7.5
       },
       styles: {
         color: '#D3D3D3',
