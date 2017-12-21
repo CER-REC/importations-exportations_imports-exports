@@ -13,6 +13,15 @@ class BarChart extends React.PureComponent {
     this.updateAxisGuide = this.updateAxisGuide.bind(this)
   }
 
+  componentWillReceiveProps(props) {
+    // Reset the axis guide when the scale changes.
+    // Watch scale since that changes the bar height, but use trueScale in order
+    // to put the guide on top of the tallest bar
+    if (props.scale.y.max !== this.props.scale.y.max) {
+      this.updateAxisGuide(props.trueScale.y.max)
+    }
+  }
+
   updateAxisGuide(position) {
     this.setState({ axisGuide: position })
   }
@@ -71,7 +80,7 @@ class BarChart extends React.PureComponent {
       : ''
     return (
       <g transform={transform}>
-        {elements}
+        <g>{elements}</g>
         <AxisGuide
           flipped={flipped}
           scale={scale.y}

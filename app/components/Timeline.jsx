@@ -1,5 +1,6 @@
 const React = require('react')
 const connect = require('react-redux').connect
+const memoize = require('memoize-immutable')
 
 const BarChart = require('./BarChart')
 const Axis = require('./Axis')
@@ -13,7 +14,6 @@ function groupByYear(a, b) {
 class Timeline extends React.PureComponent {
   static get defaultProps() {
     return {
-      scaleLinked: true,
       x: 0,
       y: 0,
       width: 400,
@@ -21,10 +21,12 @@ class Timeline extends React.PureComponent {
     }
   }
 
-  render() {
-    // Don't render until we have data
-    if (this.props.data.count() === 0) { return null }
+  constructor(props) {
+    super(props)
+    this.calculateScale = memoize(this.calculateScale)
+  }
 
+  calculateScale(data) {
     const scale = {
       import: {
         min: Number.MAX_SAFE_INTEGER,
@@ -37,7 +39,7 @@ class Timeline extends React.PureComponent {
       year: {},
     }
 
-    const years = this.props.data.map(point => {
+    const years = data.map(point => {
       scale.import.min = Math.min(scale.import.min, point.get('imports'))
       scale.import.max = Math.max(scale.import.max, point.get('imports'))
       scale.export.min = Math.min(scale.export.min, point.get('exports'))
@@ -48,6 +50,14 @@ class Timeline extends React.PureComponent {
     scale.year.min = Math.min(...years)
     scale.year.max = Math.max(...years)
 
+    return scale
+  }
+
+  render() {
+    // Don't render until we have data
+    if (this.props.data.count() === 0) { return null }
+
+    const scale = this.calculateScale(this.props.data)
 
     const sharedProps = {
       data: this.props.data,
@@ -116,4 +126,5 @@ class Timeline extends React.PureComponent {
 
 module.exports = connect(state => ({
   data: DataSelectors.sortTimelineSelector(state),
+  scaleLinked: state.ui.get('barGraphScaleLinked'),
 }))(Timeline)

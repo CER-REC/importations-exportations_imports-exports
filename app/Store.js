@@ -7,6 +7,7 @@ const LanguageReducer = require('./reducers/LanguageReducer.js')
 const ElectricitySortStateReducer = require('./reducers/ElectricitySortStateReducer.js')
 const ElectricityDataTypeReducer = require('./reducers/ElectricityDataTypeReducer.js')
 const DataReducer = require('./actions/data').reducer
+const UIReducer = require('./actions/ui').reducer
 
 const reducers = Redux.combineReducers({
   viewport: ViewportReducer,
@@ -15,6 +16,7 @@ const reducers = Redux.combineReducers({
   electricitySortState: ElectricitySortStateReducer,
   electricityDataTypes: ElectricityDataTypeReducer,
   data: DataReducer,
+  ui: UIReducer,
 })
 
 module.exports = function () {
@@ -24,5 +26,3 @@ module.exports = function () {
     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
   )
 }
-
-
