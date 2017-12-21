@@ -1,11 +1,9 @@
 const React = require('react')
 const ReactRedux = require('react-redux')
-const ReactFauxDOM = require('react-faux-dom')
 const Constants = require('../Constants.js')
 
 const ImportExportArrow = require('./ImportExportArrow.jsx')
 const MapPieceLabel = require('./MapPieceLabel.jsx')
-const D3 = require('d3')
 
 class MapPiece extends React.Component {
 
