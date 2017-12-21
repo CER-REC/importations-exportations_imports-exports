@@ -3,16 +3,11 @@ const React = require('react')
 class ImportExportArrow extends React.Component {
 
   render() {
-    //1. get arrow SVG
-    //2. fill color
-    //3. resize arrow
-    //4. relocate arrow
-    
-    //5. rotate if needed
     let transform = 'rotate(0)'
-    if(this.props.arrowPosition == 'down'){
-        transform = 'rotate(180)'
+    if(this.props.type == 'import'){
+        transform = `rotate(180, 18.5, ${this.props.arrowSpacing})`
     }
+    transform = transform +' scale(1.2)'
 
     return <polygon fill = {this.props.color} 
                     transform = {transform}

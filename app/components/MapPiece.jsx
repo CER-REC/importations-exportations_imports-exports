@@ -1,6 +1,7 @@
 const React = require('react')
 const ReactRedux = require('react-redux')
 const ReactFauxDOM = require('react-faux-dom')
+const Constants = require('../Constants.js')
 
 const ImportExportArrow = require('./ImportExportArrow.jsx')
 const MapPieceLabel = require('./MapPieceLabel.jsx')
@@ -20,11 +21,11 @@ class MapPiece extends React.Component {
   }
 
   render(){
-    //map piece arrow
-    const exportArrow = <ImportExportArrow
-                          arrowPosition = {this.props.styles.get('arrowPosition')} 
-                          color='red'
-                          />
+
+    let arrowTransform = `translate(${Constants.getIn(['mapPieceArrowStyle', 'x'])}, ${Constants.getIn(['mapPieceArrowStyle', 'y'])})`
+    if(this.props.styles.get('arrowPosition') == 'down'){
+      arrowTransform = `translate(${Constants.getIn(['mapPieceArrowStyle', 'x'])}, ${this.props.dimensions.get('height') - Constants.getIn(['mapPieceArrowStyle', 'y'])})`   
+    }
     return <g>
         <polygon 
           fill={this.props.styles.get('color')} 
@@ -36,7 +37,18 @@ class MapPiece extends React.Component {
           mapPieceHeight = {this.props.dimensions.get('height')}
           name = {this.props.data.get('name')}
         />
-        {exportArrow}
+        <g transform={arrowTransform}>
+          <ImportExportArrow
+            arrowSpacing = {this.props.styles.get('arrowSpacing')}
+            type = 'export' 
+            color = {this.getArrowColor(this.props.legends, this.props.data.get('exportData')).get('export')}
+            />
+          <ImportExportArrow
+            arrowSpacing = {this.props.styles.get('arrowSpacing')}
+            type = 'import' 
+            color = {this.getArrowColor(this.props.legends, this.props.data.get('importData')).get('import')}
+            />
+          </g>
       </g>
   }
 }

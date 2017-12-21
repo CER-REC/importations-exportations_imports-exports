@@ -16,6 +16,7 @@ const MapLayoutGridConstant = Immutable.fromJS({
         color: '#D3D3D3',
         labelPosition:'up',
         arrowPosition:'down',
+        arrowSpacing: -1,
         bottomMargin: 5,
         topMargin: 5
       },
@@ -49,6 +50,7 @@ const MapLayoutGridConstant = Immutable.fromJS({
         color: '#D3D3D3',
         labelPosition:'down',
         arrowPosition:'up',
+        arrowSpacing: -1,
         bottomMargin: 5,
         topMargin: 5
       },
@@ -109,15 +111,16 @@ const MapLayoutGridConstant = Immutable.fromJS({
       mapPieceScale:0.58,
       defaultColumns:12,
       dimensions:{
-        height: 45,
-        width: 50,
-        yAxisPadding: 1,
-        xAxisPadding: 5
+        height: 37.09,
+        width: 38.75,
+        yAxisPadding: 4.5,
+        xAxisPadding: 7.5
       },
       styles: {
         color: '#D3D3D3',
         labelPosition:'down',
         arrowPosition:'up',
+        arrowSpacing: -1,
         bottomMargin: 5,
         topMargin: 5
       },

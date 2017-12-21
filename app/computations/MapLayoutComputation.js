@@ -32,10 +32,10 @@ MapLayoutComputation.sortData = function(a,b,type){
   a = parseInt(a.get(type))
   b = parseInt(b.get(type))
   if (a < b) {
-    return -1
+    return 1
   }
   if (a > b) {
-    return 1
+    return -1
   }
   return 0
 }

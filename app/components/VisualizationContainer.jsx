@@ -38,6 +38,7 @@ class VisualizationContainer extends React.Component {
         </text>
       case 'electricity':
       default:
+        //TODO: adjust x and y coordinates need to be adjusted according to the control area and heading data
         return <ElectricityVisualizationContainer xaxis={xaxis} yaxis={yaxis} height={height} width={width}/> 
     }
   }
