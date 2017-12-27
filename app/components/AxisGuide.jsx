@@ -60,7 +60,7 @@ class AxisGuide extends React.PureComponent {
       + (this.props.barSize / 2)
     return (
       <SVGDrag
-        flipped={this.props.flipped}
+        invertedY={this.props.flipped}
         adjustOffset={this.adjustOffset}
         dragStop={this.dragStop}
       >

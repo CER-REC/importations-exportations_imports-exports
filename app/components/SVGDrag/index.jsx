@@ -5,7 +5,8 @@ require('./SVGDrag.scss')
 class SVGDrag extends React.PureComponent {
   static get defaultProps() {
     return {
-      flipped: false,
+      invertedX: false,
+      invertedY: false,
     }
   }
 
@@ -35,10 +36,10 @@ class SVGDrag extends React.PureComponent {
       ? this.props.adjustOffset(offset)
       : offset
 
-    const flippedInverter = this.props.flipped ? -1 : 1
+    const { invertedX, invertedY } = this.props
     return {
-      x: newOffset.x,
-      y: newOffset.y * flippedInverter,
+      x: newOffset.x * (invertedX ? -1 : 1),
+      y: newOffset.y * (invertedY ? -1 : 1)
     }
   }
 
@@ -90,10 +91,10 @@ class SVGDrag extends React.PureComponent {
     window.removeEventListener('touchend', this.onDragStop)
 
     if (typeof this.props.dragStop === 'function') {
-      const flippedInverter = this.props.flipped ? -1 : 1
+      const { invertedX, invertedY } = this.props
       this.props.dragStop({
-        x: this.state.offset.x,
-        y: this.state.offset.y * flippedInverter,
+        x: this.state.offset.x * (invertedX ? -1 : 1),
+        y: this.state.offset.y * (invertedY ? -1 : 1),
       })
     }
 

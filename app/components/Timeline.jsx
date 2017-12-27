@@ -4,6 +4,7 @@ const memoize = require('memoize-immutable')
 
 const BarChart = require('./BarChart')
 const Axis = require('./Axis')
+const TimelineSeek = require('./TimelineSeek')
 
 const DataSelectors = require('../selectors/data')
 
@@ -72,7 +73,7 @@ class Timeline extends React.PureComponent {
       max: Math.max(scale.import.max, scale.export.max),
     }
 
-    const chartHeight = (this.props.height - 15) / 2
+    const chartHeight = (this.props.height - 30) / 2
 
     const totalYears = (scale.year.max - scale.year.min)
     const widthAfterPads = this.props.width
@@ -96,7 +97,7 @@ class Timeline extends React.PureComponent {
           color="rgb(255,119,76)"
           {...sharedProps}
         />
-        <g transform="translate(0 130)">
+        <g transform={`translate(0 ${chartHeight + 30})`}>
           <BarChart
             scale={{
               x: scale.year,
@@ -118,6 +119,19 @@ class Timeline extends React.PureComponent {
           y={chartHeight + 15}
           {...sharedProps}
           scale={{ x: scale.year }}
+        />
+        <TimelineSeek
+          {...sharedProps}
+          width={this.props.width}
+          height={this.props.height}
+          chartHeight={chartHeight}
+        />
+        <TimelineSeek
+          {...sharedProps}
+          width={this.props.width}
+          height={this.props.height}
+          chartHeight={chartHeight}
+          side="right"
         />
       </g>
     )
