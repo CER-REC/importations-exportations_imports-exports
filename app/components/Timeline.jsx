@@ -29,11 +29,11 @@ class Timeline extends React.PureComponent {
   calculateScale(data) {
     const scale = {
       import: {
-        min: Number.MAX_SAFE_INTEGER,
+        min: 0,
         max: -Number.MAX_SAFE_INTEGER,
       },
       export: {
-        min: Number.MAX_SAFE_INTEGER,
+        min: 0,
         max: -Number.MAX_SAFE_INTEGER,
       },
       year: {},
