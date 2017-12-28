@@ -39,7 +39,7 @@ class Legend extends React.Component {
             width = {Constants.getIn(['legend','iconHWidth'])}
             x = {12}
             y = { 880 }
-            xlinkHref = 'images/close-2.svg'
+            xlinkHref = 'images/arrow_import.svg'
           ></image>
           <image 
             className = 'legendImage'
@@ -47,7 +47,7 @@ class Legend extends React.Component {
             width = {Constants.getIn(['legend','iconHWidth'])}
             x = {12}
             y = { 915 }
-            xlinkHref = 'images/close-2.svg'
+            xlinkHref = 'images/arrow_import.svg'
           ></image>
           <image 
             className = 'legendImage'
@@ -55,7 +55,7 @@ class Legend extends React.Component {
             width = {Constants.getIn(['legend','iconHWidth'])}
             x = {12}
             y = { 950 }
-            xlinkHref = 'images/close-2.svg'
+            xlinkHref = 'images/arrow_import.svg'
           ></image>
           <image 
             className = 'legendImage'
@@ -63,7 +63,7 @@ class Legend extends React.Component {
             width = {Constants.getIn(['legend','iconHWidth'])}
             x = {12}
             y = { 985 }
-            xlinkHref = 'images/close-2.svg'
+            xlinkHref = 'images/arrow_import.svg'
           ></image>
           <image 
             className = 'legendImage'
@@ -71,7 +71,7 @@ class Legend extends React.Component {
             width = {Constants.getIn(['legend','iconHWidth'])}
             x = {12}
             y = { 1020 }
-            xlinkHref = 'images/close-2.svg'
+            xlinkHref = 'images/arrow_import.svg'
           ></image>
         </g>
       </g>
@@ -106,7 +106,7 @@ class Legend extends React.Component {
             width = {35}
             x = {52}
             y = { 880 }
-            xlinkHref = 'images/close-2.svg'
+            xlinkHref = 'images/arrow_export.svg'
           ></image>
           <image 
             className = 'legendImage'
@@ -114,7 +114,7 @@ class Legend extends React.Component {
             width = {35}
             x = {52}
             y = { 915 }
-            xlinkHref = 'images/close-2.svg'
+            xlinkHref = 'images/arrow_export.svg'
           ></image>
           <image 
             className = 'legendImage'
@@ -122,7 +122,7 @@ class Legend extends React.Component {
             width = {35}
             x = {52}
             y = { 950 }
-            xlinkHref = 'images/close-2.svg'
+            xlinkHref = 'images/arrow_export.svg'
           ></image>
           <image 
             className = 'legendImage'
@@ -130,7 +130,7 @@ class Legend extends React.Component {
             width = {35}
             x = {52}
             y = { 985 }
-            xlinkHref = 'images/close-2.svg'
+            xlinkHref = 'images/arrow_export.svg'
           ></image>
           <image 
             className = 'legendImage'
@@ -138,7 +138,7 @@ class Legend extends React.Component {
             width = {35}
             x = {52}
             y = { 1020 }
-            xlinkHref = 'images/close-2.svg'
+            xlinkHref = 'images/arrow_export.svg'
           ></image>
         </g>
 
