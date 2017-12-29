@@ -1,11 +1,13 @@
 const React = require('react')
+const connect = require('react-redux').connect
 
 const SVGDrag = require('./SVGDrag/')
+const timelineFilter = require('../actions/ui').timelineFilter
 
 class TimelineSeek extends React.PureComponent {
   static get defaultProps() {
     return {
-      side: 'left',
+      side: 'start',
     }
   }
 
@@ -16,15 +18,15 @@ class TimelineSeek extends React.PureComponent {
 
   adjustOffset(rawOffset) {
     const offset = { x: rawOffset.x, y: 0 }
-    if (this.props.side !== 'left') { offset.x *= -1 }
+    if (this.props.side !== 'start') { offset.x *= -1 }
     if (offset.x < 0) { offset.x = 0 }
     else if (offset.x > this.props.width) { offset.x = this.props.width }
-    if (this.props.side !== 'left') { offset.x *= -1 }
+    if (this.props.side !== 'start') { offset.x *= -1 }
     return offset
   }
 
   render() {
-    const transform = (this.props.side === 'left')
+    const transform = (this.props.side === 'start')
       ? ''
       : `scale(-1,1) translate(${-this.props.width} 0)`
     return (
@@ -34,7 +36,7 @@ class TimelineSeek extends React.PureComponent {
         >
           <SVGDrag
             adjustOffset={this.adjustOffset}
-            invertedX={this.props.side !== 'left'}
+            invertedX={this.props.side !== 'start'}
           >
             <polygon
               points="7,0 10,0 10,26 0,26"
@@ -48,4 +50,7 @@ class TimelineSeek extends React.PureComponent {
   }
 }
 
-module.exports = TimelineSeek
+module.exports = connect(
+  () => ({}),
+  { timelineFilter }
+)(TimelineSeek)

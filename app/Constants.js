@@ -109,8 +109,10 @@ const Constants = Immutable.fromJS({
   electricityDataTypesStyle:{
     color: 'grey',
     lineWidth: 3
-  }
-
-
+  },
+  timeline: {
+    barPadding: 0.5,
+    groupPadding: 5,
+  },
 })
 module.exports = Constants

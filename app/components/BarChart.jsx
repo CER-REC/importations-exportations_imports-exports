@@ -34,30 +34,20 @@ class BarChart extends React.PureComponent {
       flipped,
       valueKey,
       color,
-      groupComparator,
-      groupPadding,
       barSize,
-      barPadding,
     } = this.props
 
     const heightPerUnit = height / (scale.y.max - scale.y.min)
     const elements = []
-    let xOffset = 0
-    let lastPoint
 
     data.forEach(point => {
-      // Gap between grouped values
-      if (groupComparator && lastPoint && !groupComparator(lastPoint, point)) {
-        xOffset += groupPadding
-      }
-
       if (point) {
         elements.push(
           <Animation.SVGAnimation
             key={`${point.get('year')}-${point.get('quarter')}-${valueKey}`}
             tween={{
-              x1: xOffset,
-              x2: xOffset,
+              x1: point.get('offsetX'),
+              x2: point.get('offsetX'),
               y2: height,
               y1: (height - point.get(valueKey) * heightPerUnit),
             }}
@@ -70,10 +60,6 @@ class BarChart extends React.PureComponent {
           </Animation.SVGAnimation>
         )
       }
-      // Gap between quarters
-      xOffset += barSize + barPadding
-
-      lastPoint = point
     })
     const transform = (flipped === true)
       ? `scale(1,-1) translate(0 ${-height})`
@@ -89,7 +75,7 @@ class BarChart extends React.PureComponent {
           heightPerUnit={heightPerUnit}
           updatePosition={this.updateAxisGuide}
           width={this.props.width}
-          barSize={this.props.barSize}
+          barSize={barSize}
         />
       </g>
     )
@@ -100,9 +86,7 @@ BarChart.defaultProps = {
   height: 200,
   flipped: false,
   color: 'black',
-  groupPadding: 0,
   barSize: 4,
-  barPadding: 1,
 }
 
 module.exports = BarChart

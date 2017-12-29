@@ -7,6 +7,7 @@ const Axis = require('./Axis')
 const TimelineSeek = require('./TimelineSeek')
 
 const DataSelectors = require('../selectors/data')
+const TimelineSelectors = require('../selectors/timeline')
 
 function groupByYear(a, b) {
   return a.get('year') === b.get('year')
@@ -22,50 +23,16 @@ class Timeline extends React.PureComponent {
     }
   }
 
-  constructor(props) {
-    super(props)
-    this.calculateScale = memoize(this.calculateScale)
-  }
-
-  calculateScale(data) {
-    const scale = {
-      import: {
-        min: 0,
-        max: -Number.MAX_SAFE_INTEGER,
-      },
-      export: {
-        min: 0,
-        max: -Number.MAX_SAFE_INTEGER,
-      },
-      year: {},
-    }
-
-    const years = data.map(point => {
-      scale.import.min = Math.min(scale.import.min, point.get('imports'))
-      scale.import.max = Math.max(scale.import.max, point.get('imports'))
-      scale.export.min = Math.min(scale.export.min, point.get('exports'))
-      scale.export.max = Math.max(scale.export.max, point.get('exports'))
-      return point.get('year')
-    }).toSet().toArray() // toSet to keep unique values
-
-    scale.year.min = Math.min(...years)
-    scale.year.max = Math.max(...years)
-
-    return scale
-  }
-
   render() {
-    // Don't render until we have data
-    if (this.props.data.count() === 0) { return null }
+    const { data } = this.props
 
-    const scale = this.calculateScale(this.props.data)
+    // Don't render until we have data
+    if (data.get('bars').count() === 0) { return null }
+
+    const scale = data.get('scale').toJS()
 
     const sharedProps = {
-      data: this.props.data,
-      groupPadding: 5,
-      groupComparator: groupByYear,
-      barPadding: 0.5,
-      width: this.props.width,
+      width: data.getIn(['layout', 'width']),
     }
 
     const combinedScale = {
@@ -74,12 +41,6 @@ class Timeline extends React.PureComponent {
     }
 
     const chartHeight = (this.props.height - 30) / 2
-
-    const totalYears = (scale.year.max - scale.year.min)
-    const widthAfterPads = this.props.width
-      - ((totalYears) * sharedProps.groupPadding)
-      - ((totalYears * 4) * sharedProps.barPadding)
-    sharedProps.barSize = widthAfterPads / ((totalYears + 1) * 4)
 
     return (
       <g transform={`translate(${this.props.x} ${this.props.y})`}>
@@ -96,6 +57,7 @@ class Timeline extends React.PureComponent {
           height={chartHeight}
           color="rgb(255,119,76)"
           {...sharedProps}
+          data={data.get('bars')}
         />
         <g transform={`translate(0 ${chartHeight + 30})`}>
           <BarChart
@@ -111,6 +73,7 @@ class Timeline extends React.PureComponent {
             height={chartHeight}
             color="rgb(28,100,178)"
             {...sharedProps}
+            data={data.get('bars')}
             flipped
           />
         </g>
@@ -118,20 +81,19 @@ class Timeline extends React.PureComponent {
           x={0}
           y={chartHeight + 15}
           {...sharedProps}
+          labels={data.get('labels')}
           scale={{ x: scale.year }}
         />
         <TimelineSeek
           {...sharedProps}
-          width={this.props.width}
           height={this.props.height}
           chartHeight={chartHeight}
         />
         <TimelineSeek
           {...sharedProps}
-          width={this.props.width}
           height={this.props.height}
           chartHeight={chartHeight}
-          side="right"
+          side="end"
         />
       </g>
     )
@@ -139,6 +101,6 @@ class Timeline extends React.PureComponent {
 }
 
 module.exports = connect(state => ({
-  data: DataSelectors.sortTimelineSelector(state),
+  data: TimelineSelectors.timelinePositionSelector(state),
   scaleLinked: state.ui.get('barGraphScaleLinked'),
 }))(Timeline)
