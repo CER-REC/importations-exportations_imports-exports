@@ -17,7 +17,10 @@ const timelineFilter = (side, point) => ({
 
 const initialState = fromJS({
   barGraphScaleLinked: true,
-  timelineRange: { start: 0, end: 100 },
+  timelineRange: {
+    start: { year: 0, quarter: 0 },
+    end: { year: 9999, quarter: 9999 },
+  },
   timelineGroup: 'year',
 })
 
@@ -26,7 +29,10 @@ const reducer = (state = initialState, action) => {
     case Types.BARGRAPH_SCALE_LINKED:
       return state.set('barGraphScaleLinked', action.payload.linked)
     case Types.TIMELINE_FILTER:
-      return state.setIn(['timelineRange', action.payload.side], action.payload.point)
+      return state.setIn(
+        ['timelineRange', action.payload.side],
+        fromJS(action.payload.point)
+      )
     default: return state
   }
 }

@@ -1,17 +1,11 @@
 const React = require('react')
 const connect = require('react-redux').connect
-const memoize = require('memoize-immutable')
 
 const BarChart = require('./BarChart')
 const Axis = require('./Axis')
 const TimelineSeek = require('./TimelineSeek')
 
-const DataSelectors = require('../selectors/data')
 const TimelineSelectors = require('../selectors/timeline')
-
-function groupByYear(a, b) {
-  return a.get('year') === b.get('year')
-}
 
 class Timeline extends React.PureComponent {
   static get defaultProps() {
@@ -33,6 +27,9 @@ class Timeline extends React.PureComponent {
 
     const sharedProps = {
       width: data.getIn(['layout', 'width']),
+      barWidth: data.getIn(['layout', 'barWidth']),
+      data: data.get('bars'),
+      timelineRange: this.props.timelineRange,
     }
 
     const combinedScale = {
@@ -57,7 +54,6 @@ class Timeline extends React.PureComponent {
           height={chartHeight}
           color="rgb(255,119,76)"
           {...sharedProps}
-          data={data.get('bars')}
         />
         <g transform={`translate(0 ${chartHeight + 30})`}>
           <BarChart
@@ -73,7 +69,6 @@ class Timeline extends React.PureComponent {
             height={chartHeight}
             color="rgb(28,100,178)"
             {...sharedProps}
-            data={data.get('bars')}
             flipped
           />
         </g>
@@ -102,5 +97,6 @@ class Timeline extends React.PureComponent {
 
 module.exports = connect(state => ({
   data: TimelineSelectors.timelinePositionSelector(state),
+  timelineRange: TimelineSelectors.timelineRange(state),
   scaleLinked: state.ui.get('barGraphScaleLinked'),
 }))(Timeline)

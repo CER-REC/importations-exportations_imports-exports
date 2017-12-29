@@ -35,32 +35,40 @@ class BarChart extends React.PureComponent {
       valueKey,
       color,
       barSize,
+      timelineRange,
     } = this.props
 
     const heightPerUnit = height / (scale.y.max - scale.y.min)
-    const elements = []
-
-    data.forEach(point => {
-      if (point) {
-        elements.push(
-          <Animation.SVGAnimation
-            key={`${point.get('year')}-${point.get('quarter')}-${valueKey}`}
-            tween={{
-              x1: point.get('offsetX'),
-              x2: point.get('offsetX'),
-              y2: height,
-              y1: (height - point.get(valueKey) * heightPerUnit),
-            }}
-          >
-            <line
-              strokeWidth={barSize}
-              stroke={color}
-              strokeLinecap="round"
-            />
-          </Animation.SVGAnimation>
-        )
+    const elements = data.map(point => {
+      let opacity = 1
+      const year = point.get('year')
+      const quarter = point.get('quarter')
+      const start = timelineRange.get('start').toJS()
+      const end = timelineRange.get('end').toJS()
+      if (year < start.year || year > end.year ||
+          (year === start.year && quarter < start.quarter) ||
+          (year === end.year && quarter > end.quarter)) {
+        opacity = 0.5
       }
-    })
+      return (
+        <Animation.SVGAnimation
+          key={`${point.get('year')}-${point.get('quarter')}-${valueKey}`}
+          tween={{
+            x1: point.get('offsetX'),
+            x2: point.get('offsetX'),
+            y2: height,
+            y1: (height - point.get(valueKey) * heightPerUnit),
+          }}
+        >
+          <line
+            strokeWidth={barSize}
+            stroke={color}
+            strokeLinecap="round"
+            opacity={opacity}
+          />
+        </Animation.SVGAnimation>
+      )
+    }).toArray()
     const transform = (flipped === true)
       ? `scale(1,-1) translate(0 ${-height})`
       : ''
