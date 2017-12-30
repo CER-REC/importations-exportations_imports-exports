@@ -1,6 +1,6 @@
 const React = require('react')
 
-const Animation = require('./SVGAnimation')
+const AnimatedLine = require('./SVGAnimation/AnimatedLine')
 const AxisGuide = require('./AxisGuide')
 
 class BarChart extends React.PureComponent {
@@ -51,22 +51,18 @@ class BarChart extends React.PureComponent {
         opacity = 0.5
       }
       return (
-        <Animation.SVGAnimation
+        <AnimatedLine
+          x1={point.get('offsetX')}
+          x2={point.get('offsetX')}
+          y2={height}
+          y1={height - point.get(valueKey) * heightPerUnit}
           key={`${point.get('year')}-${point.get('quarter')}-${valueKey}`}
-          tween={{
-            x1: point.get('offsetX'),
-            x2: point.get('offsetX'),
-            y2: height,
-            y1: (height - point.get(valueKey) * heightPerUnit),
-          }}
-        >
-          <line
-            strokeWidth={barSize}
-            stroke={color}
-            strokeLinecap="round"
-            opacity={opacity}
-          />
-        </Animation.SVGAnimation>
+          strokeWidth={barSize}
+          stroke={color}
+          strokeLinecap="round"
+          opacity={opacity}
+          animate={{ y1: '1s' }}
+        />
       )
     }).toArray()
     const transform = (flipped === true)
