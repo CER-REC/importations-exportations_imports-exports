@@ -4,6 +4,8 @@ const ReactRedux = require('react-redux')
 const Constants = require('../Constants.js')
 const WorkspaceComputations = require('../computations/WorkspaceComputations.js')
 const ElectricityVisualizationContainer = require('./ElectricityVisualizationContainer.jsx')
+const NaturalGasVisualizationContainer = require('./NaturalGasVisualizationContainer.jsx')
+const NaturalGasLiquidsVisualizationContainer = require('./NaturalGasLiquidsVisualizationContainer.jsx')
 
 require('./VisualizationContainer.scss')
 
@@ -22,20 +24,14 @@ class VisualizationContainer extends React.Component {
           crude oil place holder
         </text>
       case 'naturalGas':
-      //Mock data need to be replaced by actual content 
-        return <text x = {xaxis} y = {yaxis}>
-          natural gas place holder
-        </text>
+        return <NaturalGasVisualizationContainer xaxis={xaxis} yaxis={yaxis} height={height} width={width}/> 
       case 'refinedPetroleumProducts':
       //Mock data need to be replaced by actual content 
         return <text x = {xaxis} y = {yaxis}>
           refine petroleum place holder
         </text>
       case 'naturalGasLiquids':
-      //Mock data need to be replaced by actual content 
-        return <text x = {xaxis} y = {yaxis}>
-          natural gas liquid place holder
-        </text>
+        return <NaturalGasLiquidsVisualizationContainer xaxis={xaxis} yaxis={yaxis} height={height} width={width}/> 
       case 'electricity':
       default:
         return <ElectricityVisualizationContainer xaxis={xaxis} yaxis={yaxis} height={height} width={width}/> 

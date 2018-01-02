@@ -85,6 +85,8 @@ const aggregateQuarterSelector = createSelector(
           period,
           year: next.get('year'),
           quarter: next.get('quarter'),
+          imports: 0,
+          exports: 0,
         }
       }
 
