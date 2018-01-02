@@ -4,6 +4,7 @@ const connect = require('react-redux').connect
 const BarChart = require('./BarChart')
 const Axis = require('./Axis')
 const TimelineSeek = require('./TimelineSeek')
+const TimelinePlay = require('./TimelinePlay')
 
 const TimelineSelectors = require('../selectors/timeline')
 
@@ -89,6 +90,10 @@ class Timeline extends React.PureComponent {
           height={this.props.height}
           chartHeight={chartHeight}
           side="end"
+        />
+        <TimelinePlay
+          x={-15}
+          y={chartHeight + 15}
         />
       </g>
     )

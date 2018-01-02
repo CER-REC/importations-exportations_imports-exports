@@ -1,4 +1,3 @@
-
 const Redux = require('redux')
 
 const ViewportReducer = require('./reducers/ViewportReducer.js')
@@ -8,6 +7,8 @@ const ElectricitySortStateReducer = require('./reducers/ElectricitySortStateRedu
 const ElectricityDataTypeReducer = require('./reducers/ElectricityDataTypeReducer.js')
 const DataReducer = require('./actions/data').reducer
 const UIReducer = require('./actions/ui').reducer
+
+const TimelineRangeMiddleware = require('./middleware/timelineRange')
 
 const reducers = Redux.combineReducers({
   viewport: ViewportReducer,
@@ -20,9 +21,13 @@ const reducers = Redux.combineReducers({
 })
 
 module.exports = function () {
+  const composeEnhancers =
+    window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || Redux.compose
   // Enable Redux Dev Tools if they are installed in the browser
   return Redux.createStore(
     reducers,
-    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+    composeEnhancers(Redux.applyMiddleware(
+      TimelineRangeMiddleware
+    ))
   )
 }

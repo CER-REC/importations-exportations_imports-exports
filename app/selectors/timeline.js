@@ -106,6 +106,7 @@ const timelineSeekPositionSelector = createSelector(
 )
 
 module.exports = {
+  timelineScaleSelector,
   timelinePositionSelector,
   timelineSeekPositionSelector,
   timelineRange,
