@@ -2,6 +2,21 @@ const Immutable = require('immutable')
 
 const TranslationTable = Immutable.fromJS({ 
 
+  socialBar: {
+    aboutThisProject: {
+      en: 'About this project',
+      fr: 'Le projet',
+    },
+    methodology: {
+      en: 'Methodology',
+      fr: 'Méthodologie',
+    },
+    resetVisualzation: {
+      en: 'Reset Visualization',
+      fr: 'Réinitialiser visualisation',
+    },
+
+  },
   mainMenuBar:{
     electricity:{
       en:'Electricity',
@@ -53,6 +68,7 @@ const TranslationTable = Immutable.fromJS({
       fr:'Sort By EXPORTS FR'
     }
   },
+
   electricityDataTypes:{
     price:{
       en:'Show PRICE',
@@ -63,10 +79,26 @@ const TranslationTable = Immutable.fromJS({
       fr:'Show AMOUNT (MW. h) FR'
     }
   },
+
   explanationShown:{
     en:'Show EXPLANATIONS',
     fr:'Show EXPLANATIONS FR'
-  }
+  },
+
+
+  applicationPath: {
+    en: '/pipeline-incidents/',
+    fr: '/incidents-pipeliniers/',
+  },
+
+
+  downloadable: {
+    csv: {
+      en: 'TODO',
+      fr: 'TODO FR',
+    },
+  },
+
 
 })
 
