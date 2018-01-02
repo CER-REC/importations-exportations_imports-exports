@@ -15,7 +15,7 @@ MapLayoutComputation.createSortedLayout = function(sortedData, columns, rowPaddi
         columns = columns-1  
       }
     }
-    let x = row + column++
+    let x = row + column
     if(row !== 0){
       x = x + (row*rowPadding)
     }
@@ -24,6 +24,9 @@ MapLayoutComputation.createSortedLayout = function(sortedData, columns, rowPaddi
       x: x,
       y : row
     })
+    
+    //Column value is updated for the next iteration
+    column = column + 1
   })
   return Immutable.fromJS(sortedArray)
 }
