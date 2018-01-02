@@ -16,6 +16,7 @@ const Axis = ({ labels, y = 0, seekPosition, barWidth, width }) => {
     </text>
   ))
   // TODO: Replace colour with SandMedium constant
+  const endWidth = width - seekPosition.end - (barWidth / 2) - 1
   return (
     <g>
       <rect
@@ -28,7 +29,7 @@ const Axis = ({ labels, y = 0, seekPosition, barWidth, width }) => {
       <rect
         x={seekPosition.end + (barWidth / 2)}
         y={y - 13}
-        width={width - seekPosition.end - (barWidth / 2) - 1}
+        width={endWidth < 0 ? 0 : endWidth}
         height="26"
         fill="rgb(211, 193, 152)"
       />

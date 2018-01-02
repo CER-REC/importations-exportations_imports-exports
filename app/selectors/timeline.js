@@ -88,7 +88,8 @@ const timelinePositionSelector = createSelector(
 const timelineSeekPositionSelector = createSelector(
   timelinePositionSelector,
   timelineRange,
-  (data, range) => {
+  visualizationWidth,
+  (data, range, width) => {
     const bars = data.get('bars')
     const start = bars.find(point => (
       point.get('year') >= range.getIn(['start', 'year']) &&
@@ -99,8 +100,8 @@ const timelineSeekPositionSelector = createSelector(
       point.get('quarter') <= range.getIn(['end', 'quarter'])
     ))
     return {
-      start: start.get('offsetX'),
-      end: end.get('offsetX'),
+      start: start && start.get('offsetX') || 0,
+      end: end && end.get('offsetX') || width,
     }
   }
 )
