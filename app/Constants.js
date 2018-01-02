@@ -7,7 +7,19 @@ const Constants = Immutable.fromJS({
     viewportPadding: 350,
   },
 
-  topHeightMargin: 100,
+  topHeightMargin: 70,
+
+  metaBar: {
+    width: 27,
+    height: 70,
+    iconSize: 17,
+    resetTextOffset: 62,
+    iconMargin: 22,
+    aboutThisProjectIconMargin: 5,
+    methodologyIconMargin: 27,
+    resetIconMargin: 49,
+    resetTextY: 63,
+  },
 
   menuBar: {
     width: 150,
