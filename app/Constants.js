@@ -98,19 +98,16 @@ const Constants = Immutable.fromJS({
     'en',
     'fr'
   ],
-  electricityDataTypes:[
-    'CAN$',
-    'CAN$/MW.h',
-    'CN$/GJ',
-    'm3/d',
-    'MW.h',
-    'thousand m3/d'
-  ],
   electricityDataTypesStyle:{
     color: 'grey',
     lineWidth: 3
-  }
-
-
+  },
+  energyMeasurementTypes: {
+    'electricity': ['MW.h', 'CAN$', 'CAN$/MW.h'],
+    'crudeOil': ['thousand m3/d'],
+    'naturalGas': ['thousand m3/d', 'CN$/GJ'],
+    'naturalGasLiquids': ['m3/d'],
+    'refinedPetroleumProducts': ['thousand m3/d'],
+  },
 })
 module.exports = Constants
