@@ -28,9 +28,14 @@ const Constants = Immutable.fromJS({
 
   socialBar: {
     topMargin: 300,
-    width: 400,
-    height: 32,
+    width: 320,
+    height: 27,
     bottomMargin: 20,
+    iconHeight: 20,
+    iconWidth: 20,
+    iconPadding: 4.5,
+    iconMargin: 30,
+    iconXOffset: 2,
   },
 
   visualizationContainer: {
@@ -107,8 +112,10 @@ const Constants = Immutable.fromJS({
   electricityDataTypesStyle:{
     color: 'grey',
     lineWidth: 3
-  }
+  },
 
+  appHost: 'https://apps2.neb-one.gc.ca',
+  screenshotPath: 'screenshot',
 
 })
 module.exports = Constants

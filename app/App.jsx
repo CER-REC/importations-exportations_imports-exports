@@ -4,6 +4,7 @@ const ReactDOM = require('react-dom')
 const DomReady = require('domready')
 const ReactRedux = require('react-redux')
 const React = require('react')
+const ReactHotLoader = require('react-hot-loader')
 
 const Constants = require('./Constants.js')
 const Root = require('./components/Root.jsx')
@@ -13,16 +14,24 @@ const Store = require('./Store.js')
 
 const store = Store()
 
+function render(Component) {
+  const app = (
+    <ReactHotLoader.AppContainer>
+      <ReactRedux.Provider store={store}>
+        <Component />
+      </ReactRedux.Provider>
+    </ReactHotLoader.AppContainer>
+  )
+
+  ReactDOM.render(app, document.getElementById('reactRoot'))
+}
+
 DomReady( () => {
 
   resizeScreenHandler()
   window.addEventListener('resize', resizeScreenHandler)
 
-  const app = <ReactRedux.Provider store={store}>
-    <Root />
-  </ReactRedux.Provider>
-
-  ReactDOM.render(app, document.getElementById('reactRoot'))
+  render(Root)
 })
 
 function resizeScreenHandler()  
@@ -33,4 +42,11 @@ function resizeScreenHandler()
   const w = document.getElementById('reactRoot').clientWidth
   const h = w * Constants.getIn(['workspace', 'heightToWidthRatio'])
   store.dispatch(Resized(w,h))
+}
+
+// Webpack Hot Module Replacement API
+if (module.hot) {
+  module.hot.accept('./components/Root.jsx', () => {
+    render(require('./components/Root.jsx'))
+  })
 }

@@ -33,6 +33,22 @@ const TranslationTable = Immutable.fromJS({
     },
   },
 
+  socialBar: {
+    aboutThisProject: {
+      en: 'About this project',
+      fr: 'Le projet',
+    },
+    methodology: {
+      en: 'Methodology',
+      fr: 'Méthodologie',
+    },
+    resetVisualzation: {
+      en: 'Reset Visualization',
+      fr: 'Réinitialiser visualisation',
+    },
+
+  },
+
   mainMenuBar:{
     electricity:{
       en:'Electricity',
@@ -52,7 +68,7 @@ const TranslationTable = Immutable.fromJS({
     },
     refinedPetroleumProducts:{
       en:'Refin. Petroleum Prod',
-      fr:'Refin. Petroleum Prod FR'
+      fr:'Refin. Petroleum Prod FR',
     },
   },
 
@@ -68,7 +84,7 @@ const TranslationTable = Immutable.fromJS({
       },
       export: {
         en:'Exports',
-        fr:'Exports'
+        fr:'Exports',
       },
     },
     location:{
@@ -84,6 +100,7 @@ const TranslationTable = Immutable.fromJS({
       fr:'Sort By EXPORTS FR',
     },
   },
+
   electricityDataTypes:{
     price:{
       en:'Show PRICE',
@@ -94,9 +111,24 @@ const TranslationTable = Immutable.fromJS({
       fr:'Show AMOUNT (MW. h) FR',
     },
   },
+
   explanationShown:{
     en:'Show EXPLANATIONS',
     fr:'Show EXPLANATIONS FR',
+  },
+
+
+  applicationPath: {
+    en: '/pipeline-incidents/',
+    fr: '/incidents-pipeliniers/',
+  },
+
+
+  downloadable: {
+    csv: {
+      en: 'TODO',
+      fr: 'TODO FR',
+    },
   },
 
 
