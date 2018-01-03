@@ -17,7 +17,7 @@ class Legend extends React.Component {
     >
       <g>
         <rect
-          y = {850}
+          y = {800}
           x={5}
           width = {50}
           height = { Constants.getIn(['legend','height']) }
@@ -27,7 +27,7 @@ class Legend extends React.Component {
         <g>
           <text className='theLegendHeading'
             x = {15} 
-            y={870} 
+            y={800} 
           > {Tr.getIn(['theLegendValues','importations', this.props.language])}
           </text>
         </g>
@@ -94,7 +94,7 @@ class Legend extends React.Component {
         <g>
           <text className='theLegendHeading'
             x = {55} 
-            y={870} 
+            y={800} 
           > {Tr.getIn(['theLegendValues','exportations', this.props.language])}
           </text>
         </g>
@@ -102,40 +102,40 @@ class Legend extends React.Component {
         <g>
           <image 
             className = 'legendImage'
-            height = {22}
-            width = {35}
+            height = {Constants.getIn(['legend','iconHeight'])}
+            width = {Constants.getIn(['legend','iconHWidth'])}
             x = {52}
             y = { 880 }
             xlinkHref = 'images/arrow_export.svg'
           ></image>
           <image 
             className = 'legendImage'
-            height = {22}
-            width = {35}
+            height = {Constants.getIn(['legend','iconHeight'])}
+            width = {Constants.getIn(['legend','iconHWidth'])}
             x = {52}
             y = { 915 }
             xlinkHref = 'images/arrow_export.svg'
           ></image>
           <image 
             className = 'legendImage'
-            height = {22}
-            width = {35}
+            height = {Constants.getIn(['legend','iconHeight'])}
+            width = {Constants.getIn(['legend','iconHWidth'])}
             x = {52}
             y = { 950 }
             xlinkHref = 'images/arrow_export.svg'
           ></image>
           <image 
             className = 'legendImage'
-            height = {22}
-            width = {35}
+            height = {Constants.getIn(['legend','iconHeight'])}
+            width = {Constants.getIn(['legend','iconHWidth'])}
             x = {52}
             y = { 985 }
             xlinkHref = 'images/arrow_export.svg'
           ></image>
           <image 
             className = 'legendImage'
-            height = {22}
-            width = {35}
+            height = {Constants.getIn(['legend','iconHeight'])}
+            width = {Constants.getIn(['legend','iconHWidth'])}
             x = {52}
             y = { 1020 }
             xlinkHref = 'images/arrow_export.svg'
@@ -162,27 +162,27 @@ class Legend extends React.Component {
           <text className='theLegendValues'
             x = {88} 
             y={897} 
-          > {Tr.getIn(['theLegendValues','rangeOne', this.props.language])}
+          > {Tr.getIn(['theLegendValues', 'electricity', 'rangeOne', this.props.language])}
           </text>
           <text className='theLegendValues'
             x = {88} 
             y={932} 
-          > {Tr.getIn(['theLegendValues','rangeTwo', this.props.language])}
+          > {Tr.getIn(['theLegendValues', 'electricity','rangeTwo', this.props.language])}
           </text>
           <text className='theLegendValues'
             x = {88} 
             y={967} 
-          > {Tr.getIn(['theLegendValues','rangeThree', this.props.language])}
+          > {Tr.getIn(['theLegendValues', 'electricity','rangeThree', this.props.language])}
           </text>
           <text className='theLegendValues'
             x = {88} 
             y={1002} 
-          > {Tr.getIn(['theLegendValues','rangeFour', this.props.language])}
+          > {Tr.getIn(['theLegendValues', 'electricity','rangeFour', this.props.language])}
           </text>
           <text className='theLegendValues'
             x = {88} 
             y={1037} 
-          > {Tr.getIn(['theLegendValues','rangeFive', this.props.language])}
+          > {Tr.getIn(['theLegendValues', 'electricity','rangeFive', this.props.language])}
           </text>
         </g>
 
