@@ -19,11 +19,12 @@ class Workspace extends React.Component {
 
       <VisualizationContainer />
 
+
       <VisualizationDetailContainer />
 
-      <SocialBar />
+      
       <MenuBar />
-   
+      <SocialBar />
     </svg>
   }
 }
