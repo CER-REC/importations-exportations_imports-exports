@@ -5,8 +5,10 @@ const DomReady = require('domready')
 const ReactRedux = require('react-redux')
 const React = require('react')
 const ReactHotLoader = require('react-hot-loader')
+const Request = require('client-request/promise')
 
 const Constants = require('./Constants.js')
+const RouteComputations = require('./computations/RouteComputations.js')
 const Root = require('./components/Root.jsx')
 const Resized = require('./actionCreators/ResizeScreenCreator.js')
 const LoadDataCreator = require('./actions/data').LoadData
@@ -45,10 +47,11 @@ function resizeScreenHandler()
   store.dispatch(Resized(w,h))
 }
 
-// Use jQuery since it is already in the WET4 template, and there isn't any
-// point in adding additional fetch libs if we can just reuse jQuery
-$.get('./data/data.json', data => { // eslint-disable-line no-undef
-  store.dispatch(LoadDataCreator(data))
+Request({
+  uri: RouteComputations.dataEndpoint(),
+  json: true,
+}).then(data => { // eslint-disable-line no-undef
+  store.dispatch(LoadDataCreator(data.body))
 })
 
 // Webpack Hot Module Replacement API

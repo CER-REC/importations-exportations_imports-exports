@@ -105,9 +105,9 @@ const TranslationTable = Immutable.fromJS({
     'CAN$': { en: 'CAN$', fr: 'CAN$' },
     'CAN$/MW.h': { en: 'CAN$/MW.h', fr: 'CAN$/MW.h' },
     'CN$/GJ': { en: 'CN$/GJ', fr: 'CN$/GJ' },
-    'm3/d': { en: 'm3/d', fr: 'm3/d' },
+    'm3/d': { en: 'm³/d', fr: 'm³/d' },
     'MW.h': { en: 'MW.h', fr: 'MW.h' },
-    'thousand m3/d': { en: 'thousand m3/d', fr: 'thousand m3/d' },
+    'thousand m3/d': { en: 'thousand m³/d', fr: 'thousand m³/d' },
   },
 
   explanationShown:{
@@ -117,8 +117,8 @@ const TranslationTable = Immutable.fromJS({
 
 
   applicationPath: {
-    en: '/pipeline-incidents/',
-    fr: '/incidents-pipeliniers/',
+    en: '/import-export-visualization/',
+    fr: '/import-export-visualization/',
   },
 
 
