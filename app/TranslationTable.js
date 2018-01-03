@@ -62,19 +62,19 @@ const TranslationTable = Immutable.fromJS({
       },
       rangeTwo: {
         en: '2.7M - 4.6M',
-        fr: '2.7M - 4.6M',
+        fr: '2,7M - 4,6M',
       },
       rangeThree: {
         en: '5.7M - 5.8M',
-        fr: '5.7M - 5.8M',
+        fr: '5,7M - 5,8M',
       },
       rangeFour: {
         en: '7.6M - 7.7M',
-        fr: '7.6M - 7.7M',
+        fr: '7,6M - 7,7M',
       },
       rangeFive: {
         en: '11.2M - 12.9M',
-        fr: '11.2M - 12.9M',
+        fr: '11,2M - 12,9M',
       },
     },
     naturalGasLiquids: {
@@ -96,7 +96,7 @@ const TranslationTable = Immutable.fromJS({
       },
       rangeFive: {
         en: '1.53M - 1.54M',
-        fr: '1.53M - 1.54M',
+        fr: '1,53M - 1,54M',
       },
     },
   },

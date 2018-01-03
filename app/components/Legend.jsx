@@ -18,7 +18,7 @@ class Legend extends React.Component {
       <g>
         <rect
           y = {800}
-          x={5}
+          x={11.5}
           width = {50}
           height = { Constants.getIn(['legend','height']) }
           fill = "#fff"
@@ -26,7 +26,7 @@ class Legend extends React.Component {
 
         <g>
           <text className='theLegendHeading'
-            x = {15} 
+            x = {15.045} 
             y={800} 
           > {Tr.getIn(['theLegendValues','importations', this.props.language])}
           </text>
@@ -37,40 +37,40 @@ class Legend extends React.Component {
             className = 'legendImage'
             height = {Constants.getIn(['legend','iconHeight'])}
             width = {Constants.getIn(['legend','iconHWidth'])}
-            x = {12}
-            y = { 880 }
+            x = {11.5}
+            y = { 806.8 }
             xlinkHref = 'images/arrow_import.svg'
           ></image>
           <image 
             className = 'legendImage'
             height = {Constants.getIn(['legend','iconHeight'])}
             width = {Constants.getIn(['legend','iconHWidth'])}
-            x = {12}
-            y = { 915 }
+            x = {11.5}
+            y = { 824.69 }
             xlinkHref = 'images/arrow_import.svg'
           ></image>
           <image 
             className = 'legendImage'
             height = {Constants.getIn(['legend','iconHeight'])}
             width = {Constants.getIn(['legend','iconHWidth'])}
-            x = {12}
-            y = { 950 }
+            x = {11.5}
+            y = { 842.58 }
             xlinkHref = 'images/arrow_import.svg'
           ></image>
           <image 
             className = 'legendImage'
             height = {Constants.getIn(['legend','iconHeight'])}
             width = {Constants.getIn(['legend','iconHWidth'])}
-            x = {12}
-            y = { 985 }
+            x = {11.5}
+            y = { 860.47 }
             xlinkHref = 'images/arrow_import.svg'
           ></image>
           <image 
             className = 'legendImage'
             height = {Constants.getIn(['legend','iconHeight'])}
             width = {Constants.getIn(['legend','iconHWidth'])}
-            x = {12}
-            y = { 1020 }
+            x = {11.5}
+            y = { 878.36 }
             xlinkHref = 'images/arrow_import.svg'
           ></image>
         </g>
@@ -84,16 +84,16 @@ class Legend extends React.Component {
     >
       <g>
         <rect
-          y = {850}
-          x={55}
-          width = {50}
+          y = {800}
+          x={40}
+          width = {40}
           height = { Constants.getIn(['legend','height']) }
           fill = "#fff"
         />
 
         <g>
           <text className='theLegendHeading'
-            x = {55} 
+            x = {52.5} 
             y={800} 
           > {Tr.getIn(['theLegendValues','exportations', this.props.language])}
           </text>
@@ -104,40 +104,40 @@ class Legend extends React.Component {
             className = 'legendImage'
             height = {Constants.getIn(['legend','iconHeight'])}
             width = {Constants.getIn(['legend','iconHWidth'])}
-            x = {52}
-            y = { 880 }
+            x = {47.99}
+            y = { 806.8 }
             xlinkHref = 'images/arrow_export.svg'
           ></image>
           <image 
             className = 'legendImage'
             height = {Constants.getIn(['legend','iconHeight'])}
             width = {Constants.getIn(['legend','iconHWidth'])}
-            x = {52}
-            y = { 915 }
+            x = {47.99}
+            y = { 824.69 }
             xlinkHref = 'images/arrow_export.svg'
           ></image>
           <image 
             className = 'legendImage'
             height = {Constants.getIn(['legend','iconHeight'])}
             width = {Constants.getIn(['legend','iconHWidth'])}
-            x = {52}
-            y = { 950 }
+            x = {47.99}
+            y = { 842.58 }
             xlinkHref = 'images/arrow_export.svg'
           ></image>
           <image 
             className = 'legendImage'
             height = {Constants.getIn(['legend','iconHeight'])}
             width = {Constants.getIn(['legend','iconHWidth'])}
-            x = {52}
-            y = { 985 }
+            x = {47.99}
+            y = { 860.47 }
             xlinkHref = 'images/arrow_export.svg'
           ></image>
           <image 
             className = 'legendImage'
             height = {Constants.getIn(['legend','iconHeight'])}
             width = {Constants.getIn(['legend','iconHWidth'])}
-            x = {52}
-            y = { 1020 }
+            x = {47.99}
+            y = { 878.36 }
             xlinkHref = 'images/arrow_export.svg'
           ></image>
         </g>
@@ -151,37 +151,37 @@ class Legend extends React.Component {
       <g>
 
         <rect
-          y = {850}
+          y = {800}
           x={95}
-          width = {170}
+          width = {80}
           height = { Constants.getIn(['legend','height']) }
           fill = "#fff"
         />
 
         <g>
           <text className='theLegendValues'
-            x = {88} 
-            y={897} 
+            x = {84.48} 
+            y={814.8} 
           > {Tr.getIn(['theLegendValues', 'electricity', 'rangeOne', this.props.language])}
           </text>
           <text className='theLegendValues'
-            x = {88} 
-            y={932} 
+            x = {84.48} 
+            y={832.69} 
           > {Tr.getIn(['theLegendValues', 'electricity','rangeTwo', this.props.language])}
           </text>
           <text className='theLegendValues'
-            x = {88} 
-            y={967} 
+            x = {84.48} 
+            y={850.58} 
           > {Tr.getIn(['theLegendValues', 'electricity','rangeThree', this.props.language])}
           </text>
           <text className='theLegendValues'
-            x = {88} 
-            y={1002} 
+            x = {84.48} 
+            y={868.47} 
           > {Tr.getIn(['theLegendValues', 'electricity','rangeFour', this.props.language])}
           </text>
           <text className='theLegendValues'
-            x = {88} 
-            y={1037} 
+            x = {84.48} 
+            y={886.36} 
           > {Tr.getIn(['theLegendValues', 'electricity','rangeFive', this.props.language])}
           </text>
         </g>
@@ -204,7 +204,8 @@ class Legend extends React.Component {
 const mapStateToProps = state => {
   return {
     viewport: state.viewport,
-    language: state.language
+    language: state.language,
+    importExportVisualization: state.importExportVisualization,
   }
 }
 
