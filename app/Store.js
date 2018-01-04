@@ -8,6 +8,7 @@ const ElectricityDataTypeReducer = require('./reducers/ElectricityDataTypeReduce
 const DataReducer = require('./actions/data').reducer
 const UIReducer = require('./actions/ui').reducer
 
+const AmountUnitMiddleware = require('./middleware/amountUnit')
 const TimelineRangeMiddleware = require('./middleware/timelineRange')
 
 const reducers = Redux.combineReducers({
@@ -27,6 +28,7 @@ module.exports = function () {
   return Redux.createStore(
     reducers,
     composeEnhancers(Redux.applyMiddleware(
+      AmountUnitMiddleware,
       TimelineRangeMiddleware
     ))
   )
