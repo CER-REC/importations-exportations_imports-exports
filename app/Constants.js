@@ -22,13 +22,20 @@ const Constants = Immutable.fromJS({
     topMargin: 200,
     width: 150,
     height: 200,
+    iconHeight: 20,
+    iconWidth: 20,
   },
 
   socialBar: {
     topMargin: 300,
-    width: 400,
-    height: 32,
+    width: 320,
+    height: 27,
     bottomMargin: 20,
+    iconHeight: 20,
+    iconWidth: 20,
+    iconPadding: 4.5,
+    iconMargin: 30,
+    iconXOffset: 2,
   },
 
   visualizationContainer: {
@@ -98,14 +105,6 @@ const Constants = Immutable.fromJS({
     'en',
     'fr'
   ],
-  electricityDataTypes:[
-    'CAN$',
-    'CAN$/MW.h',
-    'CN$/GJ',
-    'm3/d',
-    'MW.h',
-    'thousand m3/d'
-  ],
   electricityDataTypesStyle:{
     color: 'grey',
     lineWidth: 3
@@ -114,5 +113,14 @@ const Constants = Immutable.fromJS({
     barPadding: 0.5,
     groupPadding: 5,
   },
+  energyMeasurementTypes: {
+    'electricity': ['MW.h', 'CAN$', 'CAN$/MW.h'],
+    'crudeOil': ['thousand m3/d'],
+    'naturalGas': ['thousand m3/d', 'CN$/GJ'],
+    'naturalGasLiquids': ['m3/d'],
+    'refinedPetroleumProducts': ['thousand m3/d'],
+  },
+  appHost: 'https://apps2.neb-one.gc.ca',
+  screenshotPath: 'screenshot',
 })
 module.exports = Constants

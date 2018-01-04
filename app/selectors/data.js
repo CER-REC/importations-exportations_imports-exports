@@ -11,9 +11,6 @@ const selectedActivityGroup =
   state => state.selectedActivity || 'importsExports'
 const dataSelector = state => state.data
 
-//selectedVisualization = () => 'Electricity'
-//selectedUnit = () => 'MW.h'
-
 const productSelector = createSelector(
   dataSelector,
   selectedVisualization,
