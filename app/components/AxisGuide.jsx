@@ -3,6 +3,7 @@ const connect = require('react-redux').connect
 
 const TextBox = require('./TextBox')
 const SVGDrag = require('./SVGDrag/')
+const Constants = require('../Constants')
 
 class AxisGuide extends React.PureComponent {
   static get defaultProps() {
@@ -89,7 +90,7 @@ class AxisGuide extends React.PureComponent {
               alignmentBaseline: 'bottom',
             }}
             boxStyles={{
-              fill: 'olive',
+              fill: Constants.getIn(['styleGuide', 'colours', 'SandMedium']),
             }}
             padding={2}
             flipped={this.props.flipped}

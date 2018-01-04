@@ -5,6 +5,7 @@ const BarChart = require('./BarChart')
 const Axis = require('./Axis')
 const TimelineSeek = require('./TimelineSeek')
 const TimelinePlay = require('./TimelinePlay')
+const Constants = require('../Constants')
 
 const TimelineSelectors = require('../selectors/timeline')
 
@@ -20,7 +21,7 @@ class Timeline extends React.PureComponent {
       BottomChart: BarChart,
       topHeight: 100,
       bottomHeight: 100,
-      timelineHeight: 30,
+      axisHeight: Constants.getIn(['timeline', 'axisHeight']),
     }
   }
 
@@ -29,7 +30,7 @@ class Timeline extends React.PureComponent {
       data,
       topHeight,
       bottomHeight,
-      timelineHeight,
+      axisHeight,
       TopChart,
       BottomChart,
     } = this.props
@@ -67,7 +68,7 @@ class Timeline extends React.PureComponent {
           color="rgb(255,119,76)"
           {...sharedProps}
         />
-        <g transform={`translate(0 ${topHeight + timelineHeight})`}>
+        <g transform={`translate(0 ${topHeight + axisHeight})`}>
           <BottomChart
             scale={{
               x: scale.year,
@@ -86,7 +87,8 @@ class Timeline extends React.PureComponent {
         </g>
         <Axis
           x={0}
-          y={topHeight + timelineHeight / 2}
+          y={topHeight + axisHeight / 2}
+          height={axisHeight}
           {...sharedProps}
           labels={data.get('labels')}
           scale={{ x: scale.year }}
@@ -105,8 +107,8 @@ class Timeline extends React.PureComponent {
               side="end"
             />
             <TimelinePlay
-              x={-timelineHeight / 2}
-              y={topHeight + timelineHeight / 2}
+              x={-axisHeight / 2}
+              y={topHeight + axisHeight / 2}
             />
           </g>
         )}
