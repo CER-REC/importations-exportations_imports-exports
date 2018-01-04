@@ -27,15 +27,18 @@ const Constants = Immutable.fromJS({
   },
 
   socialBar: {
-    topMargin: 300,
-    width: 320,
-    height: 27,
+    topMargin: 177,
+    width: 27,
+    height: 132,
     bottomMargin: 20,
-    iconHeight: 20,
-    iconWidth: 20,
-    iconPadding: 4.5,
-    iconMargin: 30,
-    iconXOffset: 2,
+    iconSize: 17,
+    emailIconPadding: 5,
+    downloadFileIconPadding: 26,
+    downloadImageIconPadding: 47,
+    twitterIconPadding: 68,
+    facebookIconPadding: 89,
+    linkedInIconPadding: 110,
+    iconMargin: 22,
   },
 
   visualizationContainer: {
