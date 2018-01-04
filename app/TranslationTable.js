@@ -113,12 +113,17 @@ const TranslationTable = Immutable.fromJS({
   },
 
   explanationShown:{
-    en:'Show EXPLANATIONS',
-    fr:'Show EXPLANATIONS FR',
+    en:'show EXPLANATIONS',
+    fr:'show EXPLANATIONS FR',
+  },
+  explanationHide: {
+    en: 'hide EXPLANATIONS',
+    fr: 'TODO',
   },
 
 
   applicationPath: {
+    // TODO: change to import-export once path is set up
     en: '/pipeline-incidents/',
     fr: '/incidents-pipeliniers/',
   },

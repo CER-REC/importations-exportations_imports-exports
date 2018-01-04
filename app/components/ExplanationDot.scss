@@ -1,0 +1,29 @@
+
+.pulse {
+  animation: pulse 3s ease-in-out infinite;
+  opacity: 1.0;
+  background: rgba(255, 112, 138, 0.9);
+  box-shadow: 0 0 0 rgba(255, 112, 138, 0.5);
+}
+
+/* to make the circle */
+.circle {
+  cursor: pointer;
+  border-radius: 25px;
+  height: 15px;
+  width: 15px;
+  position: relative;
+  display: inline-block;
+  text-align: center;
+  color: red;  
+}
+
+.pulse:hover {
+  animation: none;
+}
+
+@-webkit-keyframes pulse {
+  0% {  -webkit-box-shadow: 0 0 0 0 rgba(255, 112, 138, 0.6); }
+  70% { -webkit-box-shadow: 0 0 0 10px rgba(255, 112, 138, 0); }
+  100% { -webkit-box-shadow: 0 0 0 0 rgba(255, 112, 138, 0); }
+}
