@@ -1,3 +1,13 @@
-.Legend {
+@import "../styles/Colours.scss";
 
+.legendContainer {
+  position: relative;
+}
+
+.importColumn {
+  position: relative;
+}
+
+.exportColumn {
+  position: relative;
 }
