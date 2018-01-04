@@ -4,8 +4,6 @@ const ReactRedux = require('react-redux')
 const Constants = require('../Constants.js')
 const Tr = require('../TranslationTable.js')
 
-const ExplanationDot = require('./ExplanationDot.jsx')
-
 const ShowExplanationsCreator = require('../actionCreators/ShowExplanationsCreator.js')
 const WorkspaceComputations = require('../computations/WorkspaceComputations.js')
 
@@ -64,7 +62,6 @@ class ShowExplanations extends React.Component {
     return <g onClick = {this.onClick}>
       {this.showText()}
       {this.triangleLineColor()}
-      <ExplanationDot />
     </g>
   }
 }

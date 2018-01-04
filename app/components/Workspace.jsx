@@ -15,8 +15,10 @@ class Workspace extends React.Component {
 
   render() {
 
-    return  <div className = 'Workspace' height='200' width='200' x = {200} y={200}>
-      
+    return  <div className = 'Workspace' x = {this.props.viewport.get('x')} y={this.props.viewport.get('y')}>
+
+      <ExplanationDot />
+
       <svg className="Workspace" width={this.props.viewport.get('x')}
         height={ this.props.viewport.get('y') + Constants.getIn(['workspace','viewportPadding']) }> 
 
@@ -26,7 +28,7 @@ class Workspace extends React.Component {
 
         <SocialBar />
         <MenuBar />
-        
+         
      
       </svg>
       
