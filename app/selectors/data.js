@@ -131,6 +131,7 @@ const sortQuarterSelector = createSelector(
 )
 
 module.exports = {
+  filterByHexSelector,
   aggregateLocationSelector,
   aggregateQuarterSelector,
   sortAggregatedLocationsSelector,

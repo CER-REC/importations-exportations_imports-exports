@@ -122,5 +122,14 @@ const Constants = Immutable.fromJS({
   },
   appHost: 'https://apps2.neb-one.gc.ca',
   screenshotPath: 'screenshot',
+  styleGuide: {
+    categoryColours: [
+      'rgb(139, 192, 155)',
+      'rgb(87, 187, 149)',
+      'rgb(50, 155, 157)',
+      'rgb(39, 135, 144)',
+      'rgb(30, 97, 114)',
+    ],
+  },
 })
 module.exports = Constants

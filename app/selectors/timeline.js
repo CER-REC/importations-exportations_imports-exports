@@ -8,6 +8,15 @@ const Constants = require('../Constants.js')
 const timelineGrouping = state => state.ui.get('timelineGroup')
 const timelineRange = state => state.ui.get('timelineRange')
 
+const timelineYearScaleCalculation = data => {
+  const years = data
+    .map(point => point.get('year'))
+    .toSet() // toSet to keep unique values
+    .toArray()
+
+  return { min: Math.min(...years), max: Math.max(...years) }
+}
+
 const timelineScaleSelector = createSelector(
   sortTimelineSelector,
   data => {
@@ -38,51 +47,53 @@ const timelineScaleSelector = createSelector(
   }
 )
 
+const timelinePositionCalculation = (points, scale, grouping, width) => {
+  const groupPadding = Constants.getIn(['timeline', 'groupPadding'])
+  const barPadding = Constants.getIn(['timeline', 'barPadding'])
+  if (grouping === 'year') {
+    const totalYears = (scale.year.max - scale.year.min)
+    const widthAfterPads = width
+      - (totalYears * groupPadding)
+      - ((totalYears * 4) * barPadding)
+    const barWidth = widthAfterPads / ((totalYears + 1) * 4)
+
+    let offset = 0
+    let lastPoint
+    const labels = []
+    const bars = points.map(point => {
+      if (!lastPoint || lastPoint.get('year') !== point.get('year')) {
+        if (lastPoint) { offset += groupPadding }
+        labels.push({
+          // Add two bars width, and then subtract half a bar for centering
+          offsetX: offset + (barWidth + barPadding) * 2 - (barWidth / 2),
+          label: point.get('year').toString().substr(-2),
+        })
+      }
+      const newPoint = point.set('offsetX', offset)
+      offset += barPadding + barWidth
+      lastPoint = newPoint
+      return newPoint
+    })
+    return fromJS({
+      bars,
+      labels,
+      scale,
+      layout: {
+        width,
+        groupPadding,
+        barPadding,
+        barWidth,
+      },
+    })
+  }
+}
+
 const timelinePositionSelector = createSelector(
   sortTimelineSelector,
   timelineScaleSelector,
   timelineGrouping,
   visualizationWidth,
-  (points, scale, grouping, width) => {
-    const groupPadding = Constants.getIn(['timeline', 'groupPadding'])
-    const barPadding = Constants.getIn(['timeline', 'barPadding'])
-    if (grouping === 'year') {
-      const totalYears = (scale.year.max - scale.year.min)
-      const widthAfterPads = width
-        - (totalYears * groupPadding)
-        - ((totalYears * 4) * barPadding)
-      const barWidth = widthAfterPads / ((totalYears + 1) * 4)
-
-      let offset = 0
-      let lastPoint
-      const labels = []
-      const bars = points.map(point => {
-        if (!lastPoint || lastPoint.get('year') !== point.get('year')) {
-          if (lastPoint) { offset += groupPadding }
-          labels.push({
-            // Add two bars width, and then subtract half a bar for centering
-            offsetX: offset + (barWidth + barPadding) * 2 - (barWidth / 2),
-            label: point.get('year').toString().substr(-2),
-          })
-        }
-        const newPoint = point.set('offsetX', offset)
-        offset += barPadding + barWidth
-        lastPoint = newPoint
-        return newPoint
-      })
-      return fromJS({
-        bars,
-        labels,
-        scale,
-        layout: {
-          width,
-          groupPadding,
-          barPadding,
-          barWidth,
-        },
-      })
-    }
-  }
+  timelinePositionCalculation
 )
 
 const timelineSeekPositionSelector = createSelector(
@@ -107,8 +118,11 @@ const timelineSeekPositionSelector = createSelector(
 )
 
 module.exports = {
+  timelineGrouping,
   timelineScaleSelector,
+  timelinePositionCalculation,
   timelinePositionSelector,
   timelineSeekPositionSelector,
   timelineRange,
+  timelineYearScaleCalculation,
 }

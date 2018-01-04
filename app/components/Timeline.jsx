@@ -15,11 +15,24 @@ class Timeline extends React.PureComponent {
       y: 0,
       width: 400,
       height: 215,
+      canSeek: true,
+      TopChart: BarChart,
+      BottomChart: BarChart,
+      topHeight: 100,
+      bottomHeight: 100,
+      timelineHeight: 30,
     }
   }
 
   render() {
-    const { data } = this.props
+    const {
+      data,
+      topHeight,
+      bottomHeight,
+      timelineHeight,
+      TopChart,
+      BottomChart,
+    } = this.props
 
     // Don't render until we have data
     if (data.get('bars').count() === 0) { return null }
@@ -38,11 +51,9 @@ class Timeline extends React.PureComponent {
       max: Math.max(scale.import.max, scale.export.max),
     }
 
-    const chartHeight = (this.props.height - 30) / 2
-
     return (
       <g transform={`translate(${this.props.x} ${this.props.y})`}>
-        <BarChart
+        <TopChart
           scale={{
             x: scale.year,
             y: this.props.scaleLinked ? combinedScale : scale.import,
@@ -52,12 +63,12 @@ class Timeline extends React.PureComponent {
             y: scale.import,
           }}
           valueKey="imports"
-          height={chartHeight}
+          height={topHeight}
           color="rgb(255,119,76)"
           {...sharedProps}
         />
-        <g transform={`translate(0 ${chartHeight + 30})`}>
-          <BarChart
+        <g transform={`translate(0 ${topHeight + timelineHeight})`}>
+          <BottomChart
             scale={{
               x: scale.year,
               y: this.props.scaleLinked ? combinedScale : scale.export,
@@ -67,7 +78,7 @@ class Timeline extends React.PureComponent {
               y: scale.export,
             }}
             valueKey="exports"
-            height={chartHeight}
+            height={bottomHeight}
             color="rgb(28,100,178)"
             {...sharedProps}
             flipped
@@ -75,26 +86,30 @@ class Timeline extends React.PureComponent {
         </g>
         <Axis
           x={0}
-          y={chartHeight + 15}
+          y={topHeight + timelineHeight / 2}
           {...sharedProps}
           labels={data.get('labels')}
           scale={{ x: scale.year }}
         />
-        <TimelineSeek
-          {...sharedProps}
-          height={this.props.height}
-          chartHeight={chartHeight}
-        />
-        <TimelineSeek
-          {...sharedProps}
-          height={this.props.height}
-          chartHeight={chartHeight}
-          side="end"
-        />
-        <TimelinePlay
-          x={-15}
-          y={chartHeight + 15}
-        />
+        {!this.props.canSeek ? null : (
+          <g>
+            <TimelineSeek
+              {...sharedProps}
+              height={this.props.height}
+              chartHeight={topHeight}
+            />
+            <TimelineSeek
+              {...sharedProps}
+              height={this.props.height}
+              chartHeight={topHeight}
+              side="end"
+            />
+            <TimelinePlay
+              x={-timelineHeight / 2}
+              y={topHeight + timelineHeight / 2}
+            />
+          </g>
+        )}
       </g>
     )
   }
