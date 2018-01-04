@@ -80,8 +80,8 @@ const Constants = Immutable.fromJS({
   ],
   electricitySortStates:[
     'location',
-    'import',
-    'export'
+    'imports',
+    'exports'
   ],
   electricitySortStatesStyle:{
     color: 'grey',
@@ -105,17 +105,18 @@ const Constants = Immutable.fromJS({
     'en',
     'fr'
   ],
-  electricityDataTypes:[
-    'mwh',
-    'price'
-  ],
   electricityDataTypesStyle:{
     color: 'grey',
     lineWidth: 3
   },
-
+  energyMeasurementTypes: {
+    'electricity': ['MW.h', 'CAN$', 'CAN$/MW.h'],
+    'crudeOil': ['thousand m3/d'],
+    'naturalGas': ['thousand m3/d', 'CN$/GJ'],
+    'naturalGasLiquids': ['m3/d'],
+    'refinedPetroleumProducts': ['thousand m3/d'],
+  },
   appHost: 'https://apps2.neb-one.gc.ca',
   screenshotPath: 'screenshot',
-
 })
 module.exports = Constants

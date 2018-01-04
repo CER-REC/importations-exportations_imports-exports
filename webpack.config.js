@@ -56,5 +56,10 @@ module.exports = {
   // See webpack.prod.config.js
   plugins: [
     new Webpack.HotModuleReplacementPlugin(),
+    new Webpack.DefinePlugin({
+      'process.env': {
+        'NODE_ENV': JSON.stringify('development')
+      },
+    }),
   ]
 }
