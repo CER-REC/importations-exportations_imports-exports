@@ -7,7 +7,19 @@ const Constants = Immutable.fromJS({
     viewportPadding: 350,
   },
 
-  topHeightMargin: 100,
+  topHeightMargin: 70,
+
+  metaBar: {
+    width: 27,
+    height: 70,
+    iconSize: 17,
+    resetTextOffset: 62,
+    iconMargin: 22,
+    aboutThisProjectIconMargin: 5,
+    methodologyIconMargin: 27,
+    resetIconMargin: 49,
+    resetTextY: 63,
+  },
 
   menuBar: {
     width: 150,
@@ -27,15 +39,18 @@ const Constants = Immutable.fromJS({
   },
 
   socialBar: {
-    topMargin: 300,
-    width: 320,
-    height: 27,
+    topMargin: 177,
+    width: 27,
+    height: 132,
     bottomMargin: 20,
-    iconHeight: 20,
-    iconWidth: 20,
-    iconPadding: 4.5,
-    iconMargin: 30,
-    iconXOffset: 2,
+    iconSize: 17,
+    emailIconPadding: 5,
+    downloadFileIconPadding: 26,
+    downloadImageIconPadding: 47,
+    twitterIconPadding: 68,
+    facebookIconPadding: 89,
+    linkedInIconPadding: 110,
+    iconMargin: 22,
   },
 
   visualizationContainer: {
@@ -80,8 +95,8 @@ const Constants = Immutable.fromJS({
   ],
   electricitySortStates:[
     'location',
-    'import',
-    'export'
+    'imports',
+    'exports'
   ],
   electricitySortStatesStyle:{
     color: 'grey',
@@ -105,17 +120,18 @@ const Constants = Immutable.fromJS({
     'en',
     'fr'
   ],
-  electricityDataTypes:[
-    'mwh',
-    'price'
-  ],
   electricityDataTypesStyle:{
     color: 'grey',
     lineWidth: 3
   },
-
+  energyMeasurementTypes: {
+    'electricity': ['MW.h', 'CAN$', 'CAN$/MW.h'],
+    'crudeOil': ['thousand m3/d'],
+    'naturalGas': ['thousand m3/d', 'CN$/GJ'],
+    'naturalGasLiquids': ['m3/d'],
+    'refinedPetroleumProducts': ['thousand m3/d'],
+  },
   appHost: 'https://apps2.neb-one.gc.ca',
   screenshotPath: 'screenshot',
-
 })
 module.exports = Constants

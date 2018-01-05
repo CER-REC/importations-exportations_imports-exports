@@ -48,6 +48,15 @@ const RouteComputations = {
 
   },
 
+  dataEndpoint: () => {
+    if (process.env.NODE_ENV === 'development') {
+      // FIXME: Hardcoded language because the data isn't language specific
+      const root = RouteComputations.appRoot(document.location, 'en')
+      return `${root}data/data.json`
+    }
+    return `${location.origin}/data/data.json`
+  },
+
   // A string for the root of the application, a suitable place for making rest
   // requests or building other URLs. E.g.:
   // http://localhost:3001/pipeline-incidents/

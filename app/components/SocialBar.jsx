@@ -51,21 +51,6 @@ class SocialBar extends React.Component {
       .catch( () => Constants.get('appHost'))
   }
 
-  aboutThisProjectClick() {
-    // TODO
-    console.log('about this project')
-  }
-
-  methodologyClick() {
-    // TODO
-    console.log('methodology')
-  }
-
-  resetVisualizationClick() {
-    // TODO
-    console.log('reset visualization')
-  }
-
   twitterClick() {
     this.makeBitlyPromise().then(function(url){
       const twitterUrl = `https://twitter.com/intent/tweet?url=${url}`
@@ -114,111 +99,58 @@ class SocialBar extends React.Component {
 
 
   render() {
+    let transformSocialBarIcons = `translate(${this.props.viewport.get('x') - Constants.getIn(['socialBar', 'iconMargin'])}, 0)`
+
     return <svg>
       <rect 
-        x = { 0 }
+        x = { this.props.viewport.get('x') - Constants.getIn(['socialBar','width']) }
         y = { WorkspaceComputations.socialBarY(this.props.viewport) }
         width = { Constants.getIn(['socialBar','width']) }
         height = { Constants.getIn(['socialBar','height']) }
-        fill = '#d4d7db' 
+        fill = '#e6e6e6' 
       />
-      <g>
-        <title>{Tr.getIn(['socialBar','aboutThisProject', this.props.language])}</title>
+      <g transform = { transformSocialBarIcons }>
         <image className = 'socialBarIcon'
-          height = {Constants.getIn(['socialBar','iconHeight'])}
-          width = {Constants.getIn(['socialBar','iconWidth'])}
-          x = { Constants.getIn(['socialBar','iconXOffset'])}
-          y = { WorkspaceComputations.socialBarY(this.props.viewport) + Constants.getIn(['socialBar','iconPadding']) }
-          xlinkHref = 'images/info_about.svg'
-          onClick = {this.aboutThisProjectClick.bind(this)}
-        ></image>
-      </g>
-      <g>
-        <title>{Tr.getIn(['socialBar','methodology', this.props.language])}</title>
-        <image className = 'socialBarIcon'
-          height = {Constants.getIn(['socialBar','iconHeight'])}
-          width = {Constants.getIn(['socialBar','iconWidth'])}
-          x = {Constants.getIn(['socialBar','iconXOffset']) + (Constants.getIn(['socialBar','iconMargin']) * 2)}
-          y = { WorkspaceComputations.socialBarY(this.props.viewport) + Constants.getIn(['socialBar','iconPadding']) }
-          xlinkHref = 'images/info_methodology.svg'
-          onClick = {this.methodologyClick.bind(this)}
-        ></image>
-      </g>
-      <g>
-        <title>{Tr.getIn(['socialBar','resetVisualization', this.props.language])}</title>
-        <image className = 'socialBarIcon'
-          height = {Constants.getIn(['socialBar','iconHeight'])}
-          width = {Constants.getIn(['socialBar','iconWidth'])}
-          x = {Constants.getIn(['socialBar','iconXOffset']) + (Constants.getIn(['socialBar','iconMargin']) * 3)}
-          y = { WorkspaceComputations.socialBarY(this.props.viewport) + Constants.getIn(['socialBar','iconPadding']) }
-          xlinkHref = 'images/reset.svg'
-          onClick = {this.resetVisualizationClick.bind(this)}
-        ></image>
-      </g>
-      <g>
-        <title>twitter</title>
-        <image className = 'socialBarIcon'
-          height = {Constants.getIn(['socialBar','iconHeight'])}
-          width = {Constants.getIn(['socialBar','iconWidth'])}
-          x = {14 + (Constants.getIn(['socialBar','iconMargin']) * 4)}
-          y = { WorkspaceComputations.socialBarY(this.props.viewport) + Constants.getIn(['socialBar','iconPadding']) }
-          xlinkHref = 'images/sm_twitter.svg'
-          onClick = {this.twitterClick.bind(this)}
-        ></image>
-      </g>
-      <g>
-        <title>email</title>
-        <image className = 'socialBarIcon'
-          height = {Constants.getIn(['socialBar','iconHeight'])}
-          width = {Constants.getIn(['socialBar','iconWidth'])}
-          x = {14 + (Constants.getIn(['socialBar','iconMargin']) * 5)}
-          y = { WorkspaceComputations.socialBarY(this.props.viewport) + Constants.getIn(['socialBar','iconPadding']) }
+          height = {Constants.getIn(['socialBar','iconSize'])}
+          width = {Constants.getIn(['socialBar','iconSize'])}
+          y = { WorkspaceComputations.socialBarY(this.props.viewport) + Constants.getIn(['socialBar','emailIconPadding']) }
           xlinkHref = 'images/sm_email.svg'
           onClick = {this.emailClick.bind(this)}
         ></image>
-      </g>
-      <g>
-        <title>facebook</title>
         <image className = 'socialBarIcon'
-          height = {Constants.getIn(['socialBar','iconHeight'])}
-          width = {Constants.getIn(['socialBar','iconWidth'])}
-          x = {14 + (Constants.getIn(['socialBar','iconMargin']) * 6)}
-          y = { WorkspaceComputations.socialBarY(this.props.viewport) + Constants.getIn(['socialBar','iconPadding']) }
-          xlinkHref = 'images/sm_facebook.svg'
-          onClick = {this.facebookClick.bind(this)}
+          height = {Constants.getIn(['socialBar','iconSize'])}
+          width = {Constants.getIn(['socialBar','iconSize'])}
+          y = { WorkspaceComputations.socialBarY(this.props.viewport) + Constants.getIn(['socialBar','downloadFileIconPadding']) }
+          xlinkHref = 'images/download_file.svg'
+          onClick = {this.downloadDataClick.bind(this)}
         ></image>
-      </g>
-      <g>
-        <title>linkedin</title>
         <image className = 'socialBarIcon'
-          height = {Constants.getIn(['socialBar','iconHeight'])}
-          width = {Constants.getIn(['socialBar','iconWidth'])}
-          x = {14 + (Constants.getIn(['socialBar','iconMargin']) * 7)}
-          y = { WorkspaceComputations.socialBarY(this.props.viewport) + Constants.getIn(['socialBar','iconPadding']) }
-          xlinkHref = 'images/sm_linkedin.svg'
-          onClick = {this.linkedInClick.bind(this)}
-        ></image>
-      </g>
-      <g>
-        <title>download image</title>
-        <image className = 'socialBarIcon'
-          height = {Constants.getIn(['socialBar','iconHeight'])}
-          width = {Constants.getIn(['socialBar','iconWidth'])}
-          x = {14 + (Constants.getIn(['socialBar','iconMargin']) * 8)}
-          y = { WorkspaceComputations.socialBarY(this.props.viewport) + Constants.getIn(['socialBar','iconPadding']) }
+          height = {Constants.getIn(['socialBar','iconSize'])}
+          width = {Constants.getIn(['socialBar','iconSize'])}
+          y = { WorkspaceComputations.socialBarY(this.props.viewport) + Constants.getIn(['socialBar','downloadImageIconPadding']) }
           xlinkHref = 'images/download_image.svg'
           onClick = {this.downloadImageClick.bind(this)}
         ></image>
-      </g>
-      <g>
-        <title>download data</title>
         <image className = 'socialBarIcon'
-          height = {Constants.getIn(['socialBar','iconHeight'])}
-          width = {Constants.getIn(['socialBar','iconWidth'])}
-          x = {14 + (Constants.getIn(['socialBar','iconMargin']) * 9)}
-          y = { WorkspaceComputations.socialBarY(this.props.viewport) + Constants.getIn(['socialBar','iconPadding']) }
-          xlinkHref = 'images/download_file.svg'
-          onClick = {this.downloadDataClick.bind(this)}
+          height = {Constants.getIn(['socialBar','iconSize'])}
+          width = {Constants.getIn(['socialBar','iconSize'])}
+          y = { WorkspaceComputations.socialBarY(this.props.viewport) + Constants.getIn(['socialBar','twitterIconPadding']) }
+          xlinkHref = 'images/sm_twitter.svg'
+          onClick = {this.twitterClick.bind(this)}
+        ></image>
+        <image className = 'socialBarIcon'
+          height = {Constants.getIn(['socialBar','iconSize'])}
+          width = {Constants.getIn(['socialBar','iconSize'])}
+          y = { WorkspaceComputations.socialBarY(this.props.viewport) + Constants.getIn(['socialBar','facebookIconPadding']) }
+          xlinkHref = 'images/sm_facebook.svg'
+          onClick = {this.facebookClick.bind(this)}
+        ></image>
+        <image className = 'socialBarIcon'
+          height = {Constants.getIn(['socialBar','iconSize'])}
+          width = {Constants.getIn(['socialBar','iconSize'])}
+          y = { WorkspaceComputations.socialBarY(this.props.viewport) + Constants.getIn(['socialBar','linkedInIconPadding']) }
+          xlinkHref = 'images/sm_linkedin.svg'
+          onClick = {this.linkedInClick.bind(this)}
         ></image>
       </g>
     </svg>
