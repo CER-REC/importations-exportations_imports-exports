@@ -2,7 +2,7 @@ const createSelector = require('reselect').createSelector
 const fromJS = require('immutable').fromJS
 
 const sortTimelineSelector = require('./data').sortTimelineSelector
-const visualizationWidth = require('./viewport').visualizationContainerWidth
+const visContentSize = require('./viewport').visualizationContentSize
 const Constants = require('../Constants.js')
 
 const timelineGrouping = state => state.ui.get('timelineGroup')
@@ -47,12 +47,12 @@ const timelineScaleSelector = createSelector(
   }
 )
 
-const timelinePositionCalculation = (points, scale, grouping, width) => {
+const timelinePositionCalculation = (points, scale, grouping, size) => {
   const groupPadding = Constants.getIn(['timeline', 'groupPadding'])
   const barPadding = Constants.getIn(['timeline', 'barPadding'])
   if (grouping === 'year') {
     const totalYears = (scale.year.max - scale.year.min)
-    const widthAfterPads = width
+    const widthAfterPads = size.width
       - (totalYears * groupPadding)
       - ((totalYears * 4) * barPadding)
     const barWidth = widthAfterPads / ((totalYears + 1) * 4)
@@ -79,7 +79,7 @@ const timelinePositionCalculation = (points, scale, grouping, width) => {
       labels,
       scale,
       layout: {
-        width,
+        width: size.width,
         groupPadding,
         barPadding,
         barWidth,
@@ -92,15 +92,15 @@ const timelinePositionSelector = createSelector(
   sortTimelineSelector,
   timelineScaleSelector,
   timelineGrouping,
-  visualizationWidth,
+  visContentSize,
   timelinePositionCalculation
 )
 
 const timelineSeekPositionSelector = createSelector(
   timelinePositionSelector,
   timelineRange,
-  visualizationWidth,
-  (data, range, width) => {
+  visContentSize,
+  (data, range, size) => {
     const bars = data.get('bars')
     const start = bars.find(point => (
       point.get('year') >= range.getIn(['start', 'year']) &&
@@ -112,7 +112,7 @@ const timelineSeekPositionSelector = createSelector(
     ))
     return {
       start: start && start.get('offsetX') || 0,
-      end: end && end.get('offsetX') || width,
+      end: end && end.get('offsetX') || size.width,
     }
   }
 )
