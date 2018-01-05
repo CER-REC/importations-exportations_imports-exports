@@ -5,14 +5,24 @@ const Constants = require('../Constants.js')
 const WorkspaceComputations = require('../computations/WorkspaceComputations.js')
 
 const MenuBarOption = require('./MenuBarOption.jsx')
+const ExplanationDot = require('./ExplanationDot.jsx')
 
 const SetVisualizationCreator = require('../actionCreators/SetVisualizationCreator.js')
 
 require('./MainNavigationMenu.scss')
 
 class MainNavigationMenu extends React.Component {
+
+  explanationDot() {
+    const xPosition = '125'
+    return <ExplanationDot 
+      xPosition = {xPosition}
+      yPosition = {WorkspaceComputations.topHeightMargin() - Constants.getIn(['explanationDot','yOffset'])}
+    />
+  }
+
   render() {
-    return <MenuBarOption 
+    return <g><MenuBarOption 
       key='mainNavigationMenu'
       yaxis ={WorkspaceComputations.topHeightMargin()}
       options = {Constants.get('visualizationTypes')}
@@ -25,6 +35,8 @@ class MainNavigationMenu extends React.Component {
       lineWidth = {Constants.getIn(['mainNavigationMenu', 'lineWidth'])}
       language = {this.props.language}
     />
+    {this.explanationDot()}
+    </g>
   }
 }
 

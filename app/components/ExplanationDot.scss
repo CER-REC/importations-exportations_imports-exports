@@ -1,26 +1,8 @@
 
-
-.pulse {
-  animation: pulse 3s ease-in-out infinite;
-  opacity: 1.0;
-  background: rgba(255, 112, 138, 0.9);
-  box-shadow: 0 0 0 rgba(255, 112, 138, 0.5);
-  cursor: pointer;
-  border-radius: 10px;
-  height: 15px;
-  width: 15px;
-  position: relative;
-  display: inline-block;
-  -moz-border-radius: 10px;
-  -webkit-border-radius: 10px;
+.front {
+  fill: fadeOut(#ff708a, 10);
 }
-
-.pulse:hover {
-  animation: none;
-}
-
-@-webkit-keyframes pulse {
-  0% {  -webkit-box-shadow: 0 0 0 0 rgba(255, 112, 138, 0.6); }
-  70% { -webkit-box-shadow: 0 0 0 10px rgba(255, 112, 138, 0); }
-  100% { -webkit-box-shadow: 0 0 0 0 rgba(255, 112, 138, 0); }
+.back {
+  fill: transparent;
+  stroke: fadeOut(#ff708a, 20); 
 }

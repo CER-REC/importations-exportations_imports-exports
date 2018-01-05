@@ -7,8 +7,6 @@ const Tr = require('../TranslationTable.js')
 const ShowExplanationsCreator = require('../actionCreators/ShowExplanationsCreator.js')
 const WorkspaceComputations = require('../computations/WorkspaceComputations.js')
 
-
-
 require ('../styles/Fonts.scss')
 
 
@@ -23,7 +21,7 @@ class ShowExplanations extends React.Component {
     e.preventDefault()
   }
 
-  triangleLineColor() {
+  triangleLine() {
     const yaxis = WorkspaceComputations.showExplanationsY()
     let triangleLineColor = '#666666'
     if(this.props.showExplanations) {
@@ -31,11 +29,14 @@ class ShowExplanations extends React.Component {
     }
     return <svg 
       x = {0}
-      y = {yaxis - 3}
-      width = {150}>
+      y = {yaxis - Constants.getIn(['showExplanations','triangleLineYOffset'])}>
       <g>
         <polyline fill= {triangleLineColor} points="0 8 0 0 9.1 8.1 0 8.1"/>
-        <line stroke = {triangleLineColor}   x1="0.5" y1="7.6" x2="150" y2="7.6"/>
+        <line stroke = {triangleLineColor}   
+          x1='0.5' 
+          y1={Constants.getIn(['showExplanations','triangleLineY'])} 
+          x2={Constants.getIn(['showExplanations','triangleLineWidth'])} 
+          y2={Constants.getIn(['showExplanations','triangleLineY'])} />
       </g>
     </svg>
   }
@@ -50,7 +51,7 @@ class ShowExplanations extends React.Component {
       explanationsText = `${Tr.getIn(['explanationHide', this.props.language])}`
     }
 
-    return <text x = {13} 
+    return <text x = {Constants.getIn(['showExplanations','labelOffset'])} 
       y = { yaxis } 
       className='showHideExplanations'
       fill= {textColour}> 
@@ -61,7 +62,7 @@ class ShowExplanations extends React.Component {
   render() {
     return <g onClick = {this.onClick}>
       {this.showText()}
-      {this.triangleLineColor()}
+      {this.triangleLine()}
     </g>
   }
 }
