@@ -7,47 +7,75 @@ const Tr = require('../TranslationTable.js')
 require('./ExplanationDot.scss')
 
 class ExplanationDot extends React.Component {
+  constructor(props) {
+    super(props)
+    this.onClick = this.explanationDotClick.bind(this)
+  }
 
-  explanationDot() {
-    return <g><animate 
-       xlinkHref='#back'
-       attributeName='r'
-       from={Constants.getIn(['explanationDot','radiusStart'])}
-       to={Constants.getIn(['explanationDot','radiusEnd'])}
-       dur='1.6s'
-       begin='0'
-       repeatCount='indefinite'
-       fill='freeze'
-      />
-     <animate 
-       xlinkHref='#back'
-       attributeName='opacity'
-       from='1'
-       to='0'
-       dur='1.6s'
-       begin='0'
-       repeatCount='indefinite' 
-       fill='freeze' 
-      />
-     <circle id='back' 
-       cx={this.props.xPosition}
-       cy={this.props.yPosition} 
-       r={Constants.getIn(['explanationDot','radiusEnd'])} 
-       strokeWidth= {Constants.getIn(['explanationDot','strokeWidth'])}
-       fill='#ff708a'/>
-     <circle 
+  explanationDotClick(e) {
+    e.stopPropagation()
+    console.log('explanation dot clicked', this)
+  }
+
+  basicDot() {
+    // draws a opaque circle
+    return <circle id='back'
        cx={this.props.xPosition}
        cy={this.props.yPosition} 
        r={Constants.getIn(['explanationDot','radiusStart'])} 
        fill='#ff708a'/>
+  }
+
+  dotAnimation() {
+    // animates on the dot
+    return <g><defs>
+     <circle id='back'
+       cx={this.props.xPosition}
+       cy={this.props.yPosition} 
+       r={Constants.getIn(['explanationDot','radiusStart'])} 
+       fill='#ff708a'>
+     <animate 
+       xlinkHref='#back'
+       attributeName='r'
+       from={Constants.getIn(['explanationDot','radiusStart'])}
+       to={Constants.getIn(['explanationDot','radiusEnd'])}
+       dur='1.5s'
+       begin='0'
+       repeatCount='indefinite'
+       fill='freeze'
+       id="circ-anim"
+      />
+     <animate 
+       xlinkHref='#back'
+       attributeName='opacity'
+       from='0.3'
+       to='0'
+       dur='1.5s'
+       begin='0'
+       repeatCount='indefinite' 
+       fill='freeze'
+       id="circ-anim"
+      />
+       </circle>
+     </defs>
+      {this.basicDot()}
      </g>
+  }
+
+  explanationDot() {
+    return <g> {this.dotAnimation()}
+     <use xlinkHref="#back"/> 
+     <use x = {100} y={205} xlinkHref="#back"/>
+     <use x = {100} y={305} xlinkHref="#back"/>  
+    </g>
   }
 
   render() {
     if(!this.props.showExplanations) {
       return null
     } else {
-    return <svg>{this.explanationDot()}</svg>
+    return <svg onClick = {this.onClick}>
+      {this.explanationDot()}</svg>
     }
   }
 }

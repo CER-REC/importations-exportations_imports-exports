@@ -15,9 +15,28 @@ class MainNavigationMenu extends React.Component {
 
   explanationDot() {
     const xPosition = '125'
-    return <ExplanationDot 
+    return <ExplanationDot
+      key = 'mainNavDot' 
       xPosition = {xPosition}
       yPosition = {WorkspaceComputations.topHeightMargin() - Constants.getIn(['explanationDot','yOffset'])}
+    />
+  }
+
+  explanationDotTwo() {
+    const xPosition = '225'
+    return <ExplanationDot
+      key = 'mainNavDotTwo' 
+      xPosition = {xPosition}
+      yPosition = {WorkspaceComputations.topHeightMargin() + 200}
+    />
+  }
+
+  explanationDotThree() {
+    const xPosition = '225'
+    return <ExplanationDot
+      key = 'mainNavDotThree' 
+      xPosition = {xPosition}
+      yPosition = {WorkspaceComputations.topHeightMargin() + 300}
     />
   }
 
@@ -36,7 +55,8 @@ class MainNavigationMenu extends React.Component {
       language = {this.props.language}
     />
     {this.explanationDot()}
-    </g>
+    {this.explanationDotTwo()}
+    {this.explanationDotThree()}</g>
   }
 }
 

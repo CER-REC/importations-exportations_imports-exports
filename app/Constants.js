@@ -91,7 +91,7 @@ const Constants = Immutable.fromJS({
   explanationDot: {
     strokeWidth: 1.3,
     radiusStart: 5.5,
-    radiusEnd: 10.5,
+    radiusEnd: 18.5,
     yOffset: 5,
   },
 
