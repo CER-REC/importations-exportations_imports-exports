@@ -9,14 +9,17 @@ require('./ExplanationDot.scss')
 class ExplanationDot extends React.Component {
 
   explanationDot() {
-    return <div className='pulse'><div className='circle' />
+    return <div className='pulse'>
     </div>
   }
 
   render() {
-
+    if(!this.props.showExplanations) {
+      return null
+    } else {
     return <div>{this.explanationDot()}
-</div>
+    </div>
+    }
   }
 }
 
@@ -24,6 +27,7 @@ const mapStateToProps = state => {
   return {
     viewport: state.viewport,
     language: state.language,
+    showExplanations: state.showExplanations,
   }
 }
 
