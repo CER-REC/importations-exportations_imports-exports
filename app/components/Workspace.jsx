@@ -7,7 +7,6 @@ const Header = require('./Header.jsx')
 const MenuBar = require('./MenuBar.jsx')
 const SocialBar = require('./SocialBar.jsx')
 const VisualizationContainer = require('./VisualizationContainer.jsx')
-const VisualizationDetailContainer = require('./VisualizationDetailContainer.jsx')
 
 require('./Workspace.scss')
 
@@ -24,8 +23,6 @@ class Workspace extends React.Component {
         height={this.props.viewport.get('y') + Constants.getIn(['workspace','viewportPadding'])}
       > 
         <VisualizationContainer />
-
-        <VisualizationDetailContainer />
 
         <SocialBar />
         <MenuBar />
