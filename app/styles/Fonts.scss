@@ -33,6 +33,7 @@
       url("fonts/FiraSansCondensed-SemiBold.ttf") format("truetype");
 }
 
+
 .headingBase {
   font-family: $fira-sans-condensed-semibold;
   font-size: 21px;
@@ -68,4 +69,18 @@
   font-family: $fira-sans-condensed;
   font-size: 13px;
   fill: $neutral-medium;
+}
+
+.theLegendHeading {
+  font-family: $fira-sans-condensed-medium;
+  font-size: 20px;
+  fill: $neutral-medium-dark;
+  text-align: center;
+}
+
+.theLegendValues {
+  font-family: $fira-sans-condensed;
+  font-size: 20px;
+  fill: $neutral-medium;
+  text-align: left;
 }

@@ -5,10 +5,13 @@ const DomReady = require('domready')
 const ReactRedux = require('react-redux')
 const React = require('react')
 const ReactHotLoader = require('react-hot-loader')
+const Request = require('client-request/promise')
 
 const Constants = require('./Constants.js')
+const RouteComputations = require('./computations/RouteComputations.js')
 const Root = require('./components/Root.jsx')
 const Resized = require('./actionCreators/ResizeScreenCreator.js')
+const LoadDataCreator = require('./actions/data').LoadData
 
 const Store = require('./Store.js')
 
@@ -43,6 +46,13 @@ function resizeScreenHandler()
   const h = w * Constants.getIn(['workspace', 'heightToWidthRatio'])
   store.dispatch(Resized(w,h))
 }
+
+Request({
+  uri: RouteComputations.dataEndpoint(),
+  json: true,
+}).then(data => { // eslint-disable-line no-undef
+  store.dispatch(LoadDataCreator(data.body))
+})
 
 // Webpack Hot Module Replacement API
 if (module.hot) {
