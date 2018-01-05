@@ -6,35 +6,40 @@ const Header = require('./Header.jsx')
 const MenuBar = require('./MenuBar.jsx')
 const SocialBar = require('./SocialBar.jsx')
 const VisualizationContainer = require('./VisualizationContainer.jsx')
+const ViewportSelectors = require('../selectors/viewport/')
 
 require('./Workspace.scss')
 
-class Workspace extends React.Component {
-  render() {
-    return <div>
-      <div className = 'Workspace'>
-        <Header />
-      </div>
-
-      <svg
-        className="Workspace"
-        width={this.props.viewport.get('x')}
-        height={this.props.viewport.get('y') + Constants.getIn(['workspace','viewportPadding'])}
-      > 
-        <VisualizationContainer />
-
-        <SocialBar />
-        <MenuBar />
-      </svg>
+const Workspace = ({ viewport, detailSidebarPosition }) => (
+  <div style={{ position: 'relative' }}>
+    <div className = 'Workspace'>
+      <Header />
     </div>
-  }
-}
+    <div
+      id="detailSidebar"
+      style={{
+        position: 'absolute',
+        top: detailSidebarPosition.top,
+        left: detailSidebarPosition.left,
+        width: detailSidebarPosition.width,
+      }}
+    />
+    <svg
+      id="workspace"
+      className="Workspace"
+      width={viewport.get('x')}
+      height={viewport.get('y') + Constants.getIn(['workspace','viewportPadding'])}
+    >
+      <VisualizationContainer />
+      <SocialBar />
+      <MenuBar />
+    </svg>
+  </div>
+)
 
-const mapStateToProps = state => {
-  return {
+module.exports = connect(
+  (state, props) => ({
     viewport: state.viewport,
-    language: state.language,
-  }
-}
-
-module.exports = connect(mapStateToProps)(Workspace)
+    detailSidebarPosition: ViewportSelectors.detailSidebarPosition(state, props),
+  })
+)(Workspace)

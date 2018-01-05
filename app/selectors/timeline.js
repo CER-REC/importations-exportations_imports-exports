@@ -2,11 +2,16 @@ const createSelector = require('reselect').createSelector
 const fromJS = require('immutable').fromJS
 
 const sortTimelineSelector = require('./data').sortTimelineSelector
-const visContentSize = require('./viewport').visualizationContentSize
+const { visualizationContentPosition: visContentSize } = require('./viewport/')
 const Constants = require('../Constants.js')
 
 const timelineGrouping = state => state.ui.get('timelineGroup')
 const timelineRange = state => state.ui.get('timelineRange')
+const chartScaleBy = (_, props) => ({
+  primary: props.valueKey,
+  others: props.linkedKeys || [],
+})
+const linkedScale = state => state.ui.get('barGraphScaleLinked')
 
 const timelineYearScaleCalculation = data => {
   const years = data
@@ -17,33 +22,75 @@ const timelineYearScaleCalculation = data => {
   return { min: Math.min(...years), max: Math.max(...years) }
 }
 
-const timelineScaleSelector = createSelector(
+const mapToValue = (data, key) => data.map(v => v.get(key))
+
+const timelineXScale = createSelector(
   sortTimelineSelector,
   data => {
-    const scale = {
-      import: {
-        min: 0,
-        max: -Number.MAX_SAFE_INTEGER,
-      },
-      export: {
-        min: 0,
-        max: -Number.MAX_SAFE_INTEGER,
-      },
-      year: {},
+    const years = mapToValue(data, 'year')
+    return {
+      min: years.min(),
+      max: years.max(),
     }
+  }
+)
 
-    const years = data.map(point => {
-      scale.import.min = Math.min(scale.import.min, point.get('imports'))
-      scale.import.max = Math.max(scale.import.max, point.get('imports'))
-      scale.export.min = Math.min(scale.export.min, point.get('exports'))
-      scale.export.max = Math.max(scale.export.max, point.get('exports'))
-      return point.get('year')
-    }).toSet().toArray() // toSet to keep unique values
-
-    scale.year.min = Math.min(...years)
-    scale.year.max = Math.max(...years)
+const timelineYScales = createSelector(
+  sortTimelineSelector,
+  chartScaleBy,
+  (data, scaleBy, linked) => {
+    const primaryValues = mapToValue(data, scaleBy.primary)
+    const scale = {
+      [scaleBy.primary]: {
+        min: Math.min(primaryValues.min(), 0),
+        max: primaryValues.max(),
+      },
+    }
+    scaleBy.others.forEach(key => {
+      const values = mapToValue(data, key)
+      scale[key] = {
+        min: Math.min(values.min(), 0),
+        max: values.max(),
+      }
+    })
 
     return scale
+  }
+)
+
+const timelineTrueScale = createSelector(
+  chartScaleBy,
+  timelineXScale,
+  timelineYScales,
+  (scaleBy, xScale, yScales) => {
+    return {
+      x: xScale,
+      y: yScales[scaleBy.primary],
+    }
+  }
+)
+
+const timelineScaleSelector = createSelector(
+  chartScaleBy,
+  timelineXScale,
+  timelineYScales,
+  linkedScale,
+  (scaleBy, xScale, yScales, linked) => {
+    if (linked === false) {
+      return {
+        x: xScale,
+        y: yScales[scaleBy.primary],
+      }
+    }
+
+    const yScaleImmutable = fromJS(yScales)
+    return {
+      x: xScale,
+      y: {
+        min: yScaleImmutable.minBy(v => v.get('min')).get('min'),
+        max: yScaleImmutable.maxBy(v => v.get('max')).get('max'),
+      },
+    }
   }
 )
 
@@ -51,7 +98,7 @@ const timelinePositionCalculation = (points, scale, grouping, size) => {
   const groupPadding = Constants.getIn(['timeline', 'groupPadding'])
   const barPadding = Constants.getIn(['timeline', 'barPadding'])
   if (grouping === 'year') {
-    const totalYears = (scale.year.max - scale.year.min)
+    const totalYears = (scale.x.max - scale.x.min)
     const widthAfterPads = size.width
       - (totalYears * groupPadding)
       - ((totalYears * 4) * barPadding)
@@ -119,10 +166,12 @@ const timelineSeekPositionSelector = createSelector(
 
 module.exports = {
   timelineGrouping,
+  timelineXScale,
   timelineScaleSelector,
   timelinePositionCalculation,
   timelinePositionSelector,
   timelineSeekPositionSelector,
   timelineRange,
   timelineYearScaleCalculation,
+  timelineTrueScale,
 }

@@ -1,6 +1,6 @@
 const DataTypes = require('../actions/data').Types
 const timelineFilter = require('../actions/ui').timelineFilter
-const timelineScaleSelector = require('../selectors/timeline').timelineScaleSelector
+const { timelineXScale }= require('../selectors/timeline')
 
 const timelineRange = store => next => action => {
   // Process the action immediately
@@ -12,13 +12,13 @@ const timelineRange = store => next => action => {
     return
   }
 
-  const scale = timelineScaleSelector(store.getState())
+  const scale = timelineXScale(store.getState())
   store.dispatch(timelineFilter('start', {
-    year: scale.year.min,
+    year: scale.min,
     quarter: 1,
   }))
   store.dispatch(timelineFilter('end', {
-    year: scale.year.max,
+    year: scale.max,
     quarter: 4,
   }))
 }

@@ -1,7 +1,7 @@
 const createSelector = require('reselect').createSelector
 const Immutable = require('immutable')
 
-const { visualizationContentSize } = require('./viewport')
+const { visualizationContentPosition } = require('./viewport/')
 const { filterByHexSelector } = require('./data')
 const {
   timelineGrouping,
@@ -11,7 +11,7 @@ const {
 
 const timelineCrudeScaleCalculation = createSelector(
   filterByHexSelector,
-  data => ({ year: timelineYearScaleCalculation(data) })
+  data => ({ x: timelineYearScaleCalculation(data) })
 )
 
 const transportOrder = ['Pipeline', 'Marine', 'Railroad', 'Truck']
@@ -62,7 +62,7 @@ const timelineCrudeTransportQuarterSelector = createSelector(
   aggregateCrudeTransportQuarterSelector,
   timelineCrudeScaleCalculation,
   timelineGrouping,
-  visualizationContentSize,
+  visualizationContentPosition,
   timelinePositionCalculation
 )
 
@@ -113,7 +113,7 @@ const timelineCrudeSubtypeQuarterSelector = createSelector(
   aggregateCrudeSubtypeQuarterSelector,
   timelineCrudeScaleCalculation,
   timelineGrouping,
-  visualizationContentSize,
+  visualizationContentPosition,
   timelinePositionCalculation
 )
 

@@ -1,7 +1,7 @@
 const React = require('react')
 const ReactRedux = require('react-redux')
 
-const ViewportSelectors = require('../selectors/viewport')
+const ViewportSelectors = require('../selectors/viewport/')
 const Constants = require('../Constants.js')
 const WorkspaceComputations = require('../computations/WorkspaceComputations.js')
 const ElectricityVisualizationContainer = require('./ElectricityVisualizationContainer.jsx')
@@ -14,7 +14,7 @@ require('./VisualizationContainer.scss')
 class VisualizationContainer extends React.Component {
 
   changeVisualization(){
-    const { width, height } = this.props.visualizationSize
+    const { width, height } = this.props.visualizationPosition
     const visualizationContainerType = this.props.importExportVisualization
     const xaxis = this.props.menuWidth
     const yaxis = WorkspaceComputations.topHeightMargin() 
@@ -57,8 +57,8 @@ class VisualizationContainer extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    visualizationSize: ViewportSelectors.visualizationContainerSize(state),
-    contentSize: ViewportSelectors.visualizationContentSize(state),
+    visualizationPosition: ViewportSelectors.visualizationContainerPosition(state),
+    contentSize: ViewportSelectors.visualizationContentPosition(state),
     menuWidth: ViewportSelectors.menuWidth(state),
     importExportVisualization: state.importExportVisualization,
   }

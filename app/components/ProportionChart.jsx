@@ -57,8 +57,8 @@ class ProportionChart extends React.PureComponent {
       return <g key={`${point.get('year')}-${point.get('quarter')}`}>{lines}</g>
     }).toArray()
     const transform = (flipped === true)
-      ? `scale(1,-1) translate(0 ${-height})`
-      : ''
+      ? `scale(1,-1) translate(${this.props.left} ${-height - this.props.top})`
+      : `translate(${this.props.left} ${this.props.top})`
     return (
       <g transform={transform}>
         {elements}

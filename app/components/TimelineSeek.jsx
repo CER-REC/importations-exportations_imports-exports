@@ -78,8 +78,8 @@ class TimelineSeek extends React.PureComponent {
 
   render() {
     const sideTransform = (this.props.side === 'start')
-      ? ''
-      : `scale(-1,1) translate(${-this.props.width} 0)`
+      ? `translate(${this.props.left} ${this.props.top})`
+      : `scale(-1,1) translate(${-this.props.width - this.props.left} ${this.props.top})`
     return (
       <g transform={sideTransform}>
         <SVGDrag
@@ -88,7 +88,7 @@ class TimelineSeek extends React.PureComponent {
           invertedX={this.props.side !== 'start'}
         >
           <g
-            transform={`translate(${this.state.offset - 12} ${this.props.chartHeight + 2})`}
+            transform={`translate(${this.state.offset - 12} 0)`}
           >
             <polygon
               points="7,0 10,0 10,26 0,26"
@@ -103,8 +103,8 @@ class TimelineSeek extends React.PureComponent {
 }
 
 module.exports = connect(
-  state => ({
-    seekPosition: timelineSelectors.timelineSeekPositionSelector(state),
+  (state, props) => ({
+    seekPosition: timelineSelectors.timelineSeekPositionSelector(state, props),
   }),
   { timelineFilter }
 )(TimelineSeek)
