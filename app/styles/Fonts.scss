@@ -33,16 +33,54 @@
       url("fonts/FiraSansCondensed-SemiBold.ttf") format("truetype");
 }
 
+
+.headingBase {
+  font-family: $fira-sans-condensed-semibold;
+  font-size: 21px;
+  color: $neutral-medium;
+  margin: 0.5em 0 0 0;
+  padding: 0;
+  display: inline-block;
+}
+
+.headingImports {
+  font-family: $fira-sans-condensed-semibold;
+  font-size: 21px;
+  color: $import-default;
+  display: inline-block;
+}
+
+.headingExports {
+  font-family: $fira-sans-condensed-semibold;
+  font-size: 21px;
+  color: $export-default;
+  display: inline-block;
+}
+
+.subheading {
+  font-family: $fira-sans-condensed;
+  font-size: 12px;
+  color: $neutral-medium-dark;
+  margin: 0.0 0 0 3.75em;
+  padding: 0;
+}
+
+.resetLabel {
+  font-family: $fira-sans-condensed;
+  font-size: 13px;
+  fill: $neutral-medium;
+}
+
 .theLegendHeading {
   font-family: $fira-sans-condensed-medium;
   font-size: 20px;
-  fill: $dark-grey;
+  fill: $neutral-medium-dark;
   text-align: center;
 }
 
 .theLegendValues {
   font-family: $fira-sans-condensed;
   font-size: 20px;
-  fill: $light-grey;
+  fill: $neutral-medium;
   text-align: left;
 }

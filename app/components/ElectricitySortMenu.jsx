@@ -23,7 +23,7 @@ class ElectricitySortMenu extends React.Component {
         {Tr.getIn(['electricitySortStates', 'title', 'import',this.props.language])} 
       </text>
       <text x = {Constants.getIn(['electricitySortStatesStyle', 'title', 'ampersand','xPadding']) }
-      y = {titleYaxis} className='ElectricitySortMenuTitle'> 
+        y = {titleYaxis} className='ElectricitySortMenuTitle'> 
         {Tr.getIn(['electricitySortStates', 'title', 'ampersand',this.props.language])} 
       </text>
       <text x = {Constants.getIn(['electricitySortStatesStyle', 'title', 'export','xPadding']) }

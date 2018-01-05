@@ -111,8 +111,36 @@ const TranslationTable = Immutable.fromJS({
   },
 
   explanationShown:{
-    en:'Show EXPLANATIONS',
-    fr:'Show EXPLANATIONS FR',
+    en:'show EXPLANATIONS',
+    fr:'show EXPLANATIONS FR'
+  },
+
+  mainHeading: {
+    imports: {
+      en: 'Imports',
+      fr: 'TODO',
+    },
+    ampersand: {
+      en: ' & ',
+      fr: '&',
+    },
+    exports: {
+      en: ' Exports ',
+      fr: 'TODO',
+    },
+    base: {
+      en: 'of Energy Products to and from Canada',
+      fr: 'TODO',
+    },
+  },
+
+  mainSubheading: {
+    en: 'This visualization shows the quarterly energy trade data between Canada and the USA for various energy sources.',
+    fr: 'TODO',
+  },
+  resetLabel: {
+    en: 'reset',
+    fr: 'réinitialiser',
   },
 
 
@@ -128,7 +156,6 @@ const TranslationTable = Immutable.fromJS({
       fr: 'TODO FR',
     },
   },
-
 
 })
 
