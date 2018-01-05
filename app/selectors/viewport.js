@@ -2,27 +2,31 @@ const createSelector = require('reselect').createSelector
 
 const Constants = require('../Constants.js')
 
-const visualizationContainerWidth = state =>
-  state.viewport.get('x') -
-  Constants.getIn(['visualizationContainer', 'widthPadding'])
-const visualizationContainerHeight = state =>
-  state.viewport.get('y') -
-  Constants.getIn(['visualizationContainer', 'heightPadding'])
+const menuWidth = () => Constants.getIn(['visualizationContainer','leftMargin'])
+const viewport = state => state.viewport
+const visualizationContainerSize = createSelector(
+  viewport,
+  menuWidth,
+  (viewport, menuWidth) => ({
+    width: (viewport.get('x') - menuWidth),
+    height: viewport.get('y') -
+      Constants.getIn(['visualizationContainer', 'heightPadding']),
+  })
+)
 
 const visualizationContentSize = createSelector(
-  visualizationContainerWidth,
-  visualizationContainerHeight,
-  (width, height) => ({ width: width * 0.8, height })
+  visualizationContainerSize,
+  ({ width, height }) => ({ width: width * 0.8, height })
 )
 
 const detailSidebarOffset = createSelector(
-  visualizationContainerWidth,
-  width => width * 0.8
+  visualizationContainerSize,
+  ({ width }) => width * 0.8
 )
 
 module.exports = {
-  visualizationContainerWidth,
-  visualizationContainerHeight,
+  menuWidth,
+  visualizationContainerSize,
   visualizationContentSize,
   detailSidebarOffset,
 }

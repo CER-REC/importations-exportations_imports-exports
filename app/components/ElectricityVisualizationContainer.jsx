@@ -1,5 +1,4 @@
 const React = require('react')
-const ReactRedux = require('react-redux')
 
 const CanadaMapContainer = require('./CanadaMapContainer.jsx')
 const Timeline = require('./Timeline')
@@ -11,6 +10,7 @@ const ExplanationPopovers = require('./ExplanationPopovers.jsx')
 class ElectricityVisualizationContainer extends React.Component {
   
   render(){
+    const contentWidth = this.props.contentSize.width
     return <g>
       <CanadaMapContainer 
         xaxis = {this.props.xaxis} 
@@ -19,7 +19,7 @@ class ElectricityVisualizationContainer extends React.Component {
       <Timeline
         x={this.props.xaxis}
         y={this.props.yaxis}
-        width={this.props.width * 0.6}
+        width={contentWidth}
         height={215}
       />
       <USMapContainer 
@@ -31,7 +31,7 @@ class ElectricityVisualizationContainer extends React.Component {
         yaxis = {this.props.yaxis + this.props.height}
       />
       <PowerPoolGroupingOutline 
-        xaxis = {this.props.xaxis + this.props.width * (0.60) } 
+        xaxis = {this.props.xaxis + contentWidth}
         yaxis = {this.props.yaxis + this.props.height}
       />
       <ExplanationPopovers 
@@ -42,8 +42,4 @@ class ElectricityVisualizationContainer extends React.Component {
   }
 }
 
-const mapStateToProps = state => ({
-  viewport: state.viewport,
-})
-
-module.exports = ReactRedux.connect(mapStateToProps)(ElectricityVisualizationContainer)
+module.exports = ElectricityVisualizationContainer

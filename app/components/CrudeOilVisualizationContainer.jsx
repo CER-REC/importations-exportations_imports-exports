@@ -9,6 +9,7 @@ const PowerPoolGroupingOutline = require('./PowerPoolGroupingOutline.jsx')
 const ExplanationPopovers = require('./ExplanationPopovers.jsx')
 const ProportionChart = require('./ProportionChart')
 
+const ViewportSelectors = require('../selectors/viewport')
 const CrudeOilSelectors = require('../selectors/crudeOil')
 
 const TopChart = props => {
@@ -51,41 +52,38 @@ const TopChartConnected = ReactRedux.connect(
 
 class CrudeOilVisualizationContainer extends React.Component {
   render(){
+    const contentWidth = this.props.contentSize.width
     return <g>
-      <CanadaMapContainer 
-        xaxis = {this.props.xaxis} 
-        yaxis = {this.props.yaxis} 
+      <CanadaMapContainer
+        xaxis = {this.props.xaxis}
+        yaxis = {this.props.yaxis}
       />
       <Timeline
         x={this.props.xaxis}
         y={this.props.yaxis}
-        width={this.props.width * 0.6}
+        width={contentWidth}
         height={330}
         topHeight={215}
         TopChart={TopChartConnected}
       />
-      <USMapContainer 
-        xaxis = {this.props.xaxis } 
-        yaxis = {this.props.yaxis + this.props.height/2}
+      <USMapContainer
+        xaxis = {this.props.xaxis}
+        yaxis = {this.props.yaxis + this.props.height / 2}
       />
-      <PowerPoolContainer 
-        xaxis = {this.props.xaxis } 
+      <PowerPoolContainer
+        xaxis = {this.props.xaxis}
         yaxis = {this.props.yaxis + this.props.height}
       />
-      <PowerPoolGroupingOutline 
-        xaxis = {this.props.xaxis + this.props.width * (0.60) } 
+      <PowerPoolGroupingOutline
+        xaxis = {this.props.xaxis + contentWidth}
         yaxis = {this.props.yaxis + this.props.height}
       />
-      <ExplanationPopovers 
-        xaxis = {this.props.xaxis } 
+      <ExplanationPopovers
+        xaxis = {this.props.xaxis}
         yaxis = {this.props.yaxis + this.props.height}
       />
     </g>
   }
 }
 
-const mapStateToProps = state => ({
-  viewport: state.viewport,
-})
-
-module.exports = ReactRedux.connect(mapStateToProps)(CrudeOilVisualizationContainer)
+module.exports = CrudeOilVisualizationContainer

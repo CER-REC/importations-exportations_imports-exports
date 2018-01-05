@@ -14,27 +14,39 @@ require('./VisualizationContainer.scss')
 class VisualizationContainer extends React.Component {
 
   changeVisualization(){
+    const { width, height } = this.props.visualizationSize
     const visualizationContainerType = this.props.importExportVisualization
-    const xaxis = Constants.getIn(['visualizationContainer','leftMargin'])
+    const xaxis = this.props.menuWidth
     const yaxis = WorkspaceComputations.topHeightMargin() 
-    const width = this.props.visualizationWidth
-    const height = this.props.visualizationHeight
+    let VisComponent = null
     switch(visualizationContainerType){
       case 'crudeOil':
-        return <CrudeOilVisualizationContainer xaxis={xaxis} yaxis={yaxis} height={height} width={width}/> 
+        VisComponent = CrudeOilVisualizationContainer
+        break
       case 'naturalGas':
-        return <NaturalGasVisualizationContainer xaxis={xaxis} yaxis={yaxis} height={height} width={width}/> 
+        VisComponent = NaturalGasVisualizationContainer
+        break
       case 'refinedPetroleumProducts':
       //Mock data need to be replaced by actual content 
-        return <text x = {xaxis} y = {yaxis}>
+        return <text x={xaxis} y={yaxis}>
           refine petroleum place holder
         </text>
       case 'naturalGasLiquids':
-        return <NaturalGasLiquidsVisualizationContainer xaxis={xaxis} yaxis={yaxis} height={height} width={width}/> 
+        VisComponent = NaturalGasLiquidsVisualizationContainer
+        break
       case 'electricity':
       default:
-        return <ElectricityVisualizationContainer xaxis={xaxis} yaxis={yaxis} height={height} width={width}/> 
+        VisComponent = ElectricityVisualizationContainer
     }
+    return (
+      <VisComponent
+        xaxis={xaxis}
+        yaxis={yaxis}
+        height={height}
+        width={width}
+        contentSize={this.props.contentSize}
+      />
+    )
   }
   render() {
     return <g>
@@ -45,9 +57,10 @@ class VisualizationContainer extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    visualizationWidth: ViewportSelectors.visualizationContainerWidth(state),
-    visualizationHeight: ViewportSelectors.visualizationContainerHeight(state),
-    importExportVisualization: state.importExportVisualization
+    visualizationSize: ViewportSelectors.visualizationContainerSize(state),
+    contentSize: ViewportSelectors.visualizationContentSize(state),
+    menuWidth: ViewportSelectors.menuWidth(state),
+    importExportVisualization: state.importExportVisualization,
   }
 }
 

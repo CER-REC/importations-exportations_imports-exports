@@ -1,7 +1,7 @@
 const createSelector = require('reselect').createSelector
 const Immutable = require('immutable')
 
-const { visualizationContainerWidth } = require('./viewport')
+const { visualizationContentSize } = require('./viewport')
 const { filterByHexSelector } = require('./data')
 const {
   timelineGrouping,
@@ -62,7 +62,7 @@ const timelineCrudeTransportQuarterSelector = createSelector(
   aggregateCrudeTransportQuarterSelector,
   timelineCrudeScaleCalculation,
   timelineGrouping,
-  visualizationContainerWidth,
+  visualizationContentSize,
   timelinePositionCalculation
 )
 
@@ -113,7 +113,7 @@ const timelineCrudeSubtypeQuarterSelector = createSelector(
   aggregateCrudeSubtypeQuarterSelector,
   timelineCrudeScaleCalculation,
   timelineGrouping,
-  visualizationContainerWidth,
+  visualizationContentSize,
   timelinePositionCalculation
 )
 

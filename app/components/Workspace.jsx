@@ -1,6 +1,5 @@
-
 const React = require('react')
-const ReactRedux = require('react-redux')
+const { connect } = require('react-redux')
 const Constants = require('../Constants.js')
 
 const Header = require('./Header.jsx')
@@ -38,4 +37,4 @@ const mapStateToProps = state => {
   }
 }
 
-module.exports = ReactRedux.connect(mapStateToProps)(Workspace)
+module.exports = connect(mapStateToProps)(Workspace)
