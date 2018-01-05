@@ -1,6 +1,7 @@
 const React = require('react')
 const connect = require('react-redux').connect
 
+const DetailSidebar = require('./DetailSidebar')
 const timelineSelectors = require('../selectors/timeline')
 const Constants = require('../Constants')
 
@@ -35,6 +36,9 @@ const Axis = ({ labels, y = 0, seekPosition, barWidth, width, height }) => {
         fill={Constants.getIn(['styleGuide', 'colours', 'SandMedium'])}
       />
       {elements}
+      <DetailSidebar y={y}>
+        <text>Hello World</text>
+      </DetailSidebar>
     </g>
   )
 }
