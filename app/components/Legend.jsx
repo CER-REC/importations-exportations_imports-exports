@@ -1,6 +1,7 @@
 const React = require('react')
 const ReactRedux = require('react-redux')
 
+const LegendArrow = require('./LegendArrow.jsx')
 const Constants = require('../Constants.js')
 const Tr = require('../TranslationTable.js')
 const WorkspaceComputations = require('../computations/WorkspaceComputations.js')
@@ -33,14 +34,13 @@ class Legend extends React.Component {
         </g>
 
         <g>
-          <image 
-            className = 'legendImage'
-            height = {Constants.getIn(['legend','iconHeight'])}
-            width = {Constants.getIn(['legend','iconHWidth'])}
-            x = {11.5}
-            y = { 806.8 }
-            xlinkHref = 'images/arrow_import.svg'
-          ></image>
+          <g>
+            <LegendArrow 
+              xPosition = {11.5}
+              yPosition = { 806.8 }
+              colour = 'red'/>
+          </g>
+
           <image 
             className = 'legendImage'
             height = {Constants.getIn(['legend','iconHeight'])}
@@ -100,6 +100,14 @@ class Legend extends React.Component {
         </g>
 
         <g>
+          <svg className = 'legendImage'  x = {47.99}
+            y = { 806.8 }>
+            <polygon fill='green'
+              points="30.46 4.09 15.17 11.38 0 4.07 0 3.41 2.75 3.41 2.76 0.01 28.03 0 28.05 3.41 30.47 3.42 30.46 4.09"/>
+          </svg>
+
+
+
           <image 
             className = 'legendImage'
             height = {Constants.getIn(['legend','iconHeight'])}
@@ -149,15 +157,13 @@ class Legend extends React.Component {
   textValues() {
     return <svg> 
       <g>
-
         <rect
           y = {800}
           x={95}
           width = {80}
           height = { Constants.getIn(['legend','height']) }
-          fill = "#fff"
+          fill = 'none'
         />
-
         <g>
           <text className='theLegendValues'
             x = {84.48} 
@@ -185,18 +191,46 @@ class Legend extends React.Component {
           > {Tr.getIn(['theLegendValues', 'electricity','rangeFive', this.props.language])}
           </text>
         </g>
-
       </g>
     </svg>
   }
+  // if text values change then conditions in text values 
+  // let range one = blah if....
+  // change transform of crude oil group 
 
 
+  changeDisplayedLegend() {
+    const visualizationContainerType = this.props.importExportVisualization
+    switch(visualizationContainerType){
+    case 'crudeOil':
+      return <g>
+        {this.exportColumn()}
+        {this.textValues()}
+      </g>
+    case 'naturalGas':
+      return <g>{this.importColumn()}
+        {this.exportColumn()}
+        {this.textValues()}
+      </g>
+    case 'naturalGasLiquids':
+      return <g>{this.importColumn()}
+        {this.exportColumn()}
+        {this.textValues()}
+      </g>
+    case 'refinedPetroleumProducts':
+      return null
+    case 'electricity':
+    default:
+      return <g>{this.importColumn()}
+        {this.exportColumn()}
+        {this.textValues()}
+      </g>
+    }
+  }
 
   render() {
     return <g>
-      {this.importColumn()}
-      {this.exportColumn()}
-      {this.textValues()}
+      {this.changeDisplayedLegend()}
     </g>
   }
 }

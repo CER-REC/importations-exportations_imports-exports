@@ -21,7 +21,7 @@ const Constants = Immutable.fromJS({
   legend: {
     topMargin: 200,
     width: 150,
-    height: 200,
+    height: 180,
     iconHeight: 11.09,
     iconWidth: 29.69,
   },
