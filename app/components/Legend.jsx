@@ -17,193 +17,139 @@ class Legend extends React.Component {
       className='importColumn'
     >
       <g>
-        <rect
-          y = {800}
-          x={11.5}
-          width = {50}
-          height = { Constants.getIn(['legend','height']) }
-          fill = "#fff"
-        />
-
         <g>
           <text className='theLegendHeading'
-            x = {15.045} 
-            y={800} 
+            x = {Constants.getIn(['legend','importHeadingX'])} 
+            y={ Constants.getIn(['legend','headingY']) } 
           > {Tr.getIn(['theLegendValues','importations', this.props.language])}
           </text>
         </g>
 
-        <g>
-          <g>
-            <LegendArrow 
-              xPosition = {11.5}
-              yPosition = { 806.8 }
-              colour = 'red'/>
-          </g>
-
-          <image 
-            className = 'legendImage'
-            height = {Constants.getIn(['legend','iconHeight'])}
-            width = {Constants.getIn(['legend','iconHWidth'])}
-            x = {11.5}
-            y = { 824.69 }
-            xlinkHref = 'images/arrow_import.svg'
-          ></image>
-          <image 
-            className = 'legendImage'
-            height = {Constants.getIn(['legend','iconHeight'])}
-            width = {Constants.getIn(['legend','iconHWidth'])}
-            x = {11.5}
-            y = { 842.58 }
-            xlinkHref = 'images/arrow_import.svg'
-          ></image>
-          <image 
-            className = 'legendImage'
-            height = {Constants.getIn(['legend','iconHeight'])}
-            width = {Constants.getIn(['legend','iconHWidth'])}
-            x = {11.5}
-            y = { 860.47 }
-            xlinkHref = 'images/arrow_import.svg'
-          ></image>
-          <image 
-            className = 'legendImage'
-            height = {Constants.getIn(['legend','iconHeight'])}
-            width = {Constants.getIn(['legend','iconHWidth'])}
-            x = {11.5}
-            y = { 878.36 }
-            xlinkHref = 'images/arrow_import.svg'
-          ></image>
+        <g transform = 'translate(11.5 0)'>
+          <LegendArrow 
+            yPosition = { Constants.getIn(['legend','bin1Y']) }
+            colour = '#fed190'
+          />
+          <LegendArrow 
+            yPosition = { Constants.getIn(['legend','bin2Y']) }
+            colour = '#fdae61'
+          />
+          <LegendArrow 
+            yPosition = { Constants.getIn(['legend','bin3Y']) }
+            colour = '#ff774c'
+          />
+          <LegendArrow 
+            yPosition = { Constants.getIn(['legend','bin4Y']) }
+            colour = '#d71c27'
+          />
+          <LegendArrow 
+            yPosition = { Constants.getIn(['legend','bin5Y']) }
+            colour = '#a50026'
+          />
         </g>
       </g>
     </svg>
   }
 
   exportColumn() {
+    let transformExportColumn = `translate(${Constants.getIn(['legend','exportColumn'])} 0)`
     return <svg
       className='exportColumn'
     >
-      <g>
-        <rect
-          y = {800}
-          x={40}
-          width = {40}
-          height = { Constants.getIn(['legend','height']) }
-          fill = "#fff"
+      <text className='theLegendHeading'
+        x = { Constants.getIn(['legend','exportHeadingX']) } 
+        y={ Constants.getIn(['legend','headingY']) } 
+      > {Tr.getIn(['theLegendValues','exportations', this.props.language])}
+      </text>
+
+      <g transform = {transformExportColumn}>
+        <LegendArrow 
+          yPosition = { Constants.getIn(['legend','bin1Y']) }
+          colour = '#d6eaf6'
         />
-
-        <g>
-          <text className='theLegendHeading'
-            x = {52.5} 
-            y={800} 
-          > {Tr.getIn(['theLegendValues','exportations', this.props.language])}
-          </text>
-        </g>
-
-        <g>
-          <svg className = 'legendImage'  x = {47.99}
-            y = { 806.8 }>
-            <polygon fill='green'
-              points="30.46 4.09 15.17 11.38 0 4.07 0 3.41 2.75 3.41 2.76 0.01 28.03 0 28.05 3.41 30.47 3.42 30.46 4.09"/>
-          </svg>
-
-
-
-          <image 
-            className = 'legendImage'
-            height = {Constants.getIn(['legend','iconHeight'])}
-            width = {Constants.getIn(['legend','iconHWidth'])}
-            x = {47.99}
-            y = { 806.8 }
-            xlinkHref = 'images/arrow_export.svg'
-          ></image>
-          <image 
-            className = 'legendImage'
-            height = {Constants.getIn(['legend','iconHeight'])}
-            width = {Constants.getIn(['legend','iconHWidth'])}
-            x = {47.99}
-            y = { 824.69 }
-            xlinkHref = 'images/arrow_export.svg'
-          ></image>
-          <image 
-            className = 'legendImage'
-            height = {Constants.getIn(['legend','iconHeight'])}
-            width = {Constants.getIn(['legend','iconHWidth'])}
-            x = {47.99}
-            y = { 842.58 }
-            xlinkHref = 'images/arrow_export.svg'
-          ></image>
-          <image 
-            className = 'legendImage'
-            height = {Constants.getIn(['legend','iconHeight'])}
-            width = {Constants.getIn(['legend','iconHWidth'])}
-            x = {47.99}
-            y = { 860.47 }
-            xlinkHref = 'images/arrow_export.svg'
-          ></image>
-          <image 
-            className = 'legendImage'
-            height = {Constants.getIn(['legend','iconHeight'])}
-            width = {Constants.getIn(['legend','iconHWidth'])}
-            x = {47.99}
-            y = { 878.36 }
-            xlinkHref = 'images/arrow_export.svg'
-          ></image>
-        </g>
-
+        <LegendArrow 
+          yPosition = { Constants.getIn(['legend','bin2Y']) }
+          colour = '#9ecae1'
+        />
+        <LegendArrow 
+          yPosition = { Constants.getIn(['legend','bin3Y']) }
+          colour = '#5698cb'
+        />
+        <LegendArrow 
+          yPosition = { Constants.getIn(['legend','bin4Y']) }
+          colour = '#1c64b2'
+        />
+        <LegendArrow 
+          yPosition = { Constants.getIn(['legend','bin5Y']) }
+          colour = '#084594'
+        />
       </g>
     </svg>
   }
 
   textValues() {
+    let rangeOne = `${Tr.getIn(['theLegendValues', 'electricity', 'rangeOne', this.props.language])}`
+    let rangeTwo = `${Tr.getIn(['theLegendValues', 'electricity', 'rangeTwo', this.props.language])}`
+    let rangeThree = `${Tr.getIn(['theLegendValues', 'electricity', 'rangeThree', this.props.language])}`
+    let rangeFour = `${Tr.getIn(['theLegendValues', 'electricity', 'rangeFour', this.props.language])}`
+    let rangeFive = `${Tr.getIn(['theLegendValues', 'electricity', 'rangeFive', this.props.language])}`
+
+    let transformString = `translate(${Constants.getIn(['legend','textValuePosition'])} 0)`
+
+    if(this.props.importExportVisualization === 'crudeOil') {
+      rangeOne = `${Tr.getIn(['theLegendValues', 'crudeOil', 'rangeOne', this.props.language])}`
+      rangeTwo = `${Tr.getIn(['theLegendValues', 'crudeOil', 'rangeTwo', this.props.language])}`
+      rangeThree = `${Tr.getIn(['theLegendValues', 'crudeOil', 'rangeThree', this.props.language])}`
+      rangeFour = `${Tr.getIn(['theLegendValues', 'crudeOil', 'rangeFour', this.props.language])}`
+      rangeFive = `${Tr.getIn(['theLegendValues', 'crudeOil', 'rangeFive', this.props.language])}`
+    } 
+    if(this.props.importExportVisualization === 'naturalGas') {
+      rangeOne = `${Tr.getIn(['theLegendValues', 'naturalGas', 'rangeOne', this.props.language])}`
+      rangeTwo = `${Tr.getIn(['theLegendValues', 'naturalGas', 'rangeTwo', this.props.language])}`
+      rangeThree = `${Tr.getIn(['theLegendValues', 'naturalGas', 'rangeThree', this.props.language])}`
+      rangeFour = `${Tr.getIn(['theLegendValues', 'naturalGas', 'rangeFour', this.props.language])}`
+      rangeFive = `${Tr.getIn(['theLegendValues', 'naturalGas', 'rangeFive', this.props.language])}`
+    }
+    if(this.props.importExportVisualization === 'naturalGasLiquids') {
+      rangeOne = `${Tr.getIn(['theLegendValues', 'naturalGasLiquids', 'rangeOne', this.props.language])}`
+      rangeTwo = `${Tr.getIn(['theLegendValues', 'naturalGasLiquids', 'rangeTwo', this.props.language])}`
+      rangeThree = `${Tr.getIn(['theLegendValues', 'naturalGasLiquids', 'rangeThree', this.props.language])}`
+      rangeFour = `${Tr.getIn(['theLegendValues', 'naturalGasLiquids', 'rangeFour', this.props.language])}`
+      rangeFive = `${Tr.getIn(['theLegendValues', 'naturalGasLiquids', 'rangeFive', this.props.language])}`
+    }
+
     return <svg> 
-      <g>
-        <rect
-          y = {800}
-          x={95}
-          width = {80}
-          height = { Constants.getIn(['legend','height']) }
-          fill = 'none'
-        />
-        <g>
-          <text className='theLegendValues'
-            x = {84.48} 
-            y={814.8} 
-          > {Tr.getIn(['theLegendValues', 'electricity', 'rangeOne', this.props.language])}
-          </text>
-          <text className='theLegendValues'
-            x = {84.48} 
-            y={832.69} 
-          > {Tr.getIn(['theLegendValues', 'electricity','rangeTwo', this.props.language])}
-          </text>
-          <text className='theLegendValues'
-            x = {84.48} 
-            y={850.58} 
-          > {Tr.getIn(['theLegendValues', 'electricity','rangeThree', this.props.language])}
-          </text>
-          <text className='theLegendValues'
-            x = {84.48} 
-            y={868.47} 
-          > {Tr.getIn(['theLegendValues', 'electricity','rangeFour', this.props.language])}
-          </text>
-          <text className='theLegendValues'
-            x = {84.48} 
-            y={886.36} 
-          > {Tr.getIn(['theLegendValues', 'electricity','rangeFive', this.props.language])}
-          </text>
-        </g>
+      <g transform = {transformString}>
+        <text className='theLegendValues'
+          y={Constants.getIn(['legend','rangeOneY'])} 
+        > {rangeOne}
+        </text>
+        <text className='theLegendValues'
+          y={Constants.getIn(['legend','rangeTwoY'])}  
+        > {rangeTwo}
+        </text>
+        <text className='theLegendValues'
+          y={Constants.getIn(['legend','rangeThreeY'])}  
+        > {rangeThree}
+        </text>
+        <text className='theLegendValues'
+          y={Constants.getIn(['legend','rangeFourY'])}  
+        > {rangeFour}
+        </text>
+        <text className='theLegendValues' 
+          y={Constants.getIn(['legend','rangeFiveY'])}  
+        > {rangeFive}
+        </text>
       </g>
     </svg>
   }
-  // if text values change then conditions in text values 
-  // let range one = blah if....
-  // change transform of crude oil group 
 
-
-  changeDisplayedLegend() {
+  shownLegend() {
     const visualizationContainerType = this.props.importExportVisualization
+    let transformCrudeOil = `translate(${Constants.getIn(['legend','crudeOilLegendPosition'])} 0)`
     switch(visualizationContainerType){
     case 'crudeOil':
-      return <g>
+      return <g transform = {transformCrudeOil}>
         {this.exportColumn()}
         {this.textValues()}
       </g>
@@ -230,7 +176,7 @@ class Legend extends React.Component {
 
   render() {
     return <g>
-      {this.changeDisplayedLegend()}
+      {this.shownLegend()}
     </g>
   }
 }

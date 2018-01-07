@@ -13,9 +13,9 @@ class LegendArrow extends React.Component {
           width = {Constants.getIn(['legend','iconHWidth'])}>
         <polygon 
           fill = {this.props.colour}
-          points="0 8.3 15.3 0 30.47 8.32 30.47 
+          points='0 8.3 15.3 0 30.47 8.32 30.47 
           8.97 27.71 8.97 27.71 12.38 2.44 12.38 2.42 
-          8.97 0 8.97 0 8.3"/>
+          8.97 0 8.97 0 8.3'/>
     </svg>
   }
 
