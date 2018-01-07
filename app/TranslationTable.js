@@ -159,36 +159,62 @@ const TranslationTable = Immutable.fromJS({
       en:'Sort By LOCATION',
       fr:'Sort By LOCATION FR'
     },
-    import:{
+    imports:{
       en:'Sort By IMPORTS',
       fr:'Sort By IMPORTS FR',
     },
-    export:{
+    exports:{
       en:'Sort By EXPORTS',
       fr:'Sort By EXPORTS FR',
     },
   },
 
   electricityDataTypes:{
-    price:{
-      en:'Show PRICE',
-      fr:'Show PRICE FR',
-    },
-    mwh:{
-      en:'Show AMOUNT (MW. h)',
-      fr:'Show AMOUNT (MW. h) FR',
-    },
+    'CAN$': { en: 'CAN$', fr: 'CAN$' },
+    'CAN$/MW.h': { en: 'CAN$/MW.h', fr: 'CAN$/MW.h' },
+    'CN$/GJ': { en: 'CN$/GJ', fr: 'CN$/GJ' },
+    'm3/d': { en: 'm³/d', fr: 'm³/d' },
+    'MW.h': { en: 'MW.h', fr: 'MW.h' },
+    'thousand m3/d': { en: 'thousand m³/d', fr: 'thousand m³/d' },
   },
 
   explanationShown:{
-    en:'Show EXPLANATIONS',
-    fr:'Show EXPLANATIONS FR',
+    en:'show EXPLANATIONS',
+    fr:'show EXPLANATIONS FR'
+  },
+
+  mainHeading: {
+    imports: {
+      en: 'Imports',
+      fr: 'TODO',
+    },
+    ampersand: {
+      en: ' & ',
+      fr: '&',
+    },
+    exports: {
+      en: ' Exports ',
+      fr: 'TODO',
+    },
+    base: {
+      en: 'of Energy Products to and from Canada',
+      fr: 'TODO',
+    },
+  },
+
+  mainSubheading: {
+    en: 'This visualization shows the quarterly energy trade data between Canada and the USA for various energy sources.',
+    fr: 'TODO',
+  },
+  resetLabel: {
+    en: 'reset',
+    fr: 'réinitialiser',
   },
 
 
   applicationPath: {
-    en: '/pipeline-incidents/',
-    fr: '/incidents-pipeliniers/',
+    en: '/import-export-visualization/',
+    fr: '/import-export-visualization/',
   },
 
 
@@ -198,7 +224,6 @@ const TranslationTable = Immutable.fromJS({
       fr: 'TODO FR',
     },
   },
-
 
 })
 

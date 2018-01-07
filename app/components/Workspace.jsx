@@ -3,6 +3,7 @@ const React = require('react')
 const ReactRedux = require('react-redux')
 const Constants = require('../Constants.js')
 
+const Header = require('./Header.jsx')
 const MenuBar = require('./MenuBar.jsx')
 const SocialBar = require('./SocialBar.jsx')
 const VisualizationContainer = require('./VisualizationContainer.jsx')
@@ -14,23 +15,33 @@ class Workspace extends React.Component {
 
   render() {
 
-    return  <svg className="Workspace" width={this.props.viewport.get('x')}
-      height={ this.props.viewport.get('y') + Constants.getIn(['workspace','viewportPadding']) }> 
+    return <div>
+      <div className = 'Workspace'>
+        <Header />
+      </div>
 
-      <VisualizationContainer />
+      <svg className="Workspace" width={this.props.viewport.get('x')}
+        height={ this.props.viewport.get('y') + Constants.getIn(['workspace','viewportPadding']) }> 
 
-      <VisualizationDetailContainer />
 
-      <SocialBar />
-      <MenuBar />
-   
-    </svg>
+        <VisualizationContainer />
+
+        <VisualizationDetailContainer />
+
+        <SocialBar />
+        <MenuBar />
+        
+     
+      </svg>
+
+    </div>
   }
 }
 
 const mapStateToProps = state => {
   return {
     viewport: state.viewport,
+    language: state.language,
   }
 }
 

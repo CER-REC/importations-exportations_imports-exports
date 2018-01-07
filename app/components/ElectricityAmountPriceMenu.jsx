@@ -13,10 +13,11 @@ require('./ElectricityAmountPriceMenu.scss')
 class ElectricityAmountPriceMenu extends React.Component {
 
   render() {
+    const { selectedEnergy } = this.props
     return <MenuBarOption 
       key='electricityAmountPriceMenu'
       yaxis = { WorkspaceComputations.electricityAmountPriceMenuY() }
-      options = {Constants.get('electricityDataTypes')}
+      options={Constants.getIn(['energyMeasurementTypes', selectedEnergy])}
       onOptionClick = {this.props.setElectricityDataType.bind(this)}
       selectedOption = {this.props.electricityDataType}
       optionXaxisPadding = {Constants.getIn(['menuBarOptions', 'optionXaxisPadding'])}
@@ -26,7 +27,6 @@ class ElectricityAmountPriceMenu extends React.Component {
       lineWidth = {Constants.getIn(['electricityDataTypesStyle', 'lineWidth'])}
       language = {this.props.language}
     />
-
   }
 }
 
@@ -34,6 +34,7 @@ const mapStateToProps = state => {
   return {
     viewport: state.viewport,
     electricityDataType: state.electricityDataTypes,
+    selectedEnergy: state.importExportVisualization,
     language: state.language
   }
 }
