@@ -13,9 +13,7 @@ const VisualizationDetailContainer = require('./VisualizationDetailContainer.jsx
 require('./Workspace.scss')
 
 class Workspace extends React.Component {
-
   render() {
-
     return  <div className = 'Workspace' x = {this.props.viewport.get('x')} y={this.props.viewport.get('y')}>
 
       <Header />
@@ -30,9 +28,9 @@ class Workspace extends React.Component {
 
         <SocialBar />
         <MenuBar />
-   
-      </svg>
 
+  
+      </svg>
     </div>
   }
 }

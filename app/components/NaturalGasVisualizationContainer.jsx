@@ -8,7 +8,7 @@ const PowerPoolContainer = require('./PowerPoolContainer.jsx')
 const PowerPoolGroupingOutline = require('./PowerPoolGroupingOutline.jsx')
 const ExplanationPopovers = require('./ExplanationPopovers.jsx')
 
-class ElectricityVisualizationContainer extends React.Component {
+class NaturalGasVisualizationContainer extends React.Component {
   
   render(){
     return <g>
@@ -46,4 +46,4 @@ const mapStateToProps = state => ({
   viewport: state.viewport,
 })
 
-module.exports = ReactRedux.connect(mapStateToProps)(ElectricityVisualizationContainer)
+module.exports = ReactRedux.connect(mapStateToProps)(NaturalGasVisualizationContainer)

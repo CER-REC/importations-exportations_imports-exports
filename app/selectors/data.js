@@ -82,6 +82,8 @@ const aggregateQuarterSelector = createSelector(
           period,
           year: next.get('year'),
           quarter: next.get('quarter'),
+          imports: 0,
+          exports: 0,
         }
       }
 
@@ -129,6 +131,7 @@ const sortQuarterSelector = createSelector(
 )
 
 module.exports = {
+  filterByHexSelector,
   aggregateLocationSelector,
   aggregateQuarterSelector,
   sortAggregatedLocationsSelector,
