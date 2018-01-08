@@ -6,6 +6,7 @@ const Constants = require('../Constants.js')
 const Header = require('./Header.jsx')
 const MenuBar = require('./MenuBar.jsx')
 const SocialBar = require('./SocialBar.jsx')
+const ShowConfidentiality = require('./ShowConfidentiality.jsx')
 const VisualizationContainer = require('./VisualizationContainer.jsx')
 const VisualizationDetailContainer = require('./VisualizationDetailContainer.jsx')
 
@@ -29,6 +30,7 @@ class Workspace extends React.Component {
 
         <SocialBar />
         <MenuBar />
+        <ShowConfidentiality />
       </svg>
     </div>
   }
