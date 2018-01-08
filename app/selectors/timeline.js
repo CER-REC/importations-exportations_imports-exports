@@ -40,18 +40,20 @@ const aggregateQuarterSelector = createSelector(
   }
 )
 
+const sortTimeline = (points, grouping) => points.sort((a, b) => {
+  if (grouping === 'year') {
+    const year = a.get('year') - b.get('year')
+    return (year !== 0) ? year : (a.get('quarter') - b.get('quarter'))
+  }
+
+  const quarter = a.get('quarter') - b.get('quarter')
+  return (quarter !== 0) ? quarter : (a.get('year') - b.get('year'))
+})
+
 const sortTimelineSelector = createSelector(
   aggregateQuarterSelector,
   timelineGrouping,
-  (points, grouping) => points.sort((a, b) => {
-    if (grouping === 'year') {
-      const year = a.get('year') - b.get('year')
-      return (year !== 0) ? year : (a.get('quarter') - b.get('quarter'))
-    }
-
-    const quarter = a.get('quarter') - b.get('quarter')
-    return (quarter !== 0) ? quarter : (a.get('year') - b.get('year'))
-  })
+  sortTimeline
 )
 
 const timelineYearScaleCalculation = data => {
@@ -271,4 +273,5 @@ module.exports = {
   timelineRange,
   timelineYearScaleCalculation,
   timelineTrueScale,
+  sortTimeline,
 }

@@ -7,6 +7,7 @@ const {
   timelineGrouping,
   timelinePositionCalculation,
   timelineYearScaleCalculation,
+  sortTimeline,
 } = require('./timeline')
 
 const timelineCrudeScaleCalculation = createSelector(
@@ -17,8 +18,9 @@ const timelineCrudeScaleCalculation = createSelector(
 const transportOrder = ['Pipeline', 'Marine', 'Railroad', 'Truck']
 const aggregateCrudeTransportQuarterSelector = createSelector(
   filterByHexSelector,
-  points => {
-    const result = points
+  timelineGrouping,
+  (points, grouping) => {
+    const unsortedResult = points
       .filter(point => point.get('transport'))
       .reduce((acc, next) => {
         const period = next.get('period')
@@ -40,7 +42,7 @@ const aggregateCrudeTransportQuarterSelector = createSelector(
 
         return acc
       }, {})
-    return Immutable.fromJS(result)
+    const result = Immutable.fromJS(unsortedResult)
       // Sort the types in each point
       .map(point => {
         return point.update('transport', transport => transport.sortBy(
@@ -48,13 +50,7 @@ const aggregateCrudeTransportQuarterSelector = createSelector(
           (a, b) => (transportOrder.indexOf(b) - transportOrder.indexOf(a))
         ))
       })
-      // Sort the points
-      .sort((a, b) => {
-        if (a.get('year') === b.get('year')) {
-          return a.get('quarter') - b.get('quarter')
-        }
-        return a.get('year') - b.get('year')
-      })
+    return sortTimeline(result, grouping)
   }
 )
 
@@ -68,8 +64,9 @@ const timelineCrudeTransportQuarterSelector = createSelector(
 
 const aggregateCrudeSubtypeQuarterSelector = createSelector(
   filterByHexSelector,
-  points => {
-    const result = points
+  timelineGrouping,
+  (points, grouping) => {
+    const unsortedResult = points
       .filter(point => point.get('productSubtype'))
       .reduce((acc, next) => {
         const period = next.get('period')
@@ -91,7 +88,7 @@ const aggregateCrudeSubtypeQuarterSelector = createSelector(
 
         return acc
       }, {})
-    return Immutable.fromJS(result)
+    const result = Immutable.fromJS(unsortedResult)
       // Sort the types in each point
       .map(point => {
         return point.update('subtype', subtype => subtype.sortBy(
@@ -99,13 +96,7 @@ const aggregateCrudeSubtypeQuarterSelector = createSelector(
           (key) => (key === 'Heavy' ? 1 : -1)
         ))
       })
-      // Sort the points
-      .sort((a, b) => {
-        if (a.get('year') === b.get('year')) {
-          return a.get('quarter') - b.get('quarter')
-        }
-        return a.get('year') - b.get('year')
-      })
+    return sortTimeline(result, grouping)
   }
 )
 

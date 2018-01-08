@@ -1,4 +1,5 @@
 const React = require('react')
+const { connect } = require('react-redux')
 
 const AnimatedLine = require('./SVGAnimation/AnimatedLine')
 const Constants = require('../Constants')
@@ -26,9 +27,15 @@ class ProportionChart extends React.PureComponent {
       const quarter = point.get('quarter')
       const start = timelineRange.get('start').toJS()
       const end = timelineRange.get('end').toJS()
-      if (year < start.year || year > end.year ||
-          (year === start.year && quarter < start.quarter) ||
-          (year === end.year && quarter > end.quarter)) {
+      if (this.props.timelineGroup === 'quarter') {
+        // If the start and end quarters don't match, no filtering is applied
+        if (start.quarter === end.quarter &&
+          (quarter !== start.quarter || year < start.year || year > end.year)) {
+          opacity = 0.5
+        }
+      } else if (year < start.year || year > end.year ||
+        (year === start.year && quarter < start.quarter) ||
+        (year === end.year && quarter > end.quarter)) {
         opacity = 0.5
       }
       const lines = point
@@ -74,4 +81,6 @@ ProportionChart.defaultProps = {
   barSize: 4,
 }
 
-module.exports = ProportionChart
+module.exports = connect(
+  ({ ui }) => ({ timelineGroup: ui.get('timelineGroup') })
+)(ProportionChart)
