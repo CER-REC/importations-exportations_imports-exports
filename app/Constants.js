@@ -42,6 +42,7 @@ const Constants = Immutable.fromJS({
     rangeFourY: 868.47,
     rangeFiveY: 886.36,
     exportColumn: 47.99,
+    importColumn: 11.5,
     bin1Y: 806.8,
     bin2Y: 824.69,
     bin3Y: 842.58,

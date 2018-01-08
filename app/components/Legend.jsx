@@ -13,6 +13,7 @@ require('./Legend.scss')
 class Legend extends React.Component {
 
   importColumn() {
+    let transformImportColumn = `translate(${Constants.getIn(['legend','importColumn'])} 0)` 
     return <svg
       className='importColumn'
     >
@@ -25,7 +26,7 @@ class Legend extends React.Component {
           </text>
         </g>
 
-        <g transform = 'translate(11.5 0)'>
+        <g transform = {transformImportColumn}>
           <LegendArrow 
             yPosition = { Constants.getIn(['legend','bin1Y']) }
             colour = '#fed190'
@@ -53,6 +54,7 @@ class Legend extends React.Component {
 
   exportColumn() {
     let transformExportColumn = `translate(${Constants.getIn(['legend','exportColumn'])} 0)`
+    let rotateArrow = 'rotate(180, 15, 5.5)'
     return <svg
       className='exportColumn'
     >
@@ -66,22 +68,27 @@ class Legend extends React.Component {
         <LegendArrow 
           yPosition = { Constants.getIn(['legend','bin1Y']) }
           colour = '#d6eaf6'
+          transformArrow = {rotateArrow}
         />
         <LegendArrow 
           yPosition = { Constants.getIn(['legend','bin2Y']) }
           colour = '#9ecae1'
+          transformArrow = {rotateArrow}
         />
         <LegendArrow 
           yPosition = { Constants.getIn(['legend','bin3Y']) }
           colour = '#5698cb'
+          transformArrow = {rotateArrow}
         />
         <LegendArrow 
           yPosition = { Constants.getIn(['legend','bin4Y']) }
           colour = '#1c64b2'
+          transformArrow = {rotateArrow}
         />
         <LegendArrow 
           yPosition = { Constants.getIn(['legend','bin5Y']) }
           colour = '#084594'
+          transformArrow = {rotateArrow}
         />
       </g>
     </svg>
