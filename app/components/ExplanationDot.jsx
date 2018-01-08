@@ -16,7 +16,7 @@ class ExplanationDot extends React.Component {
     console.log('explanation dot clicked', this)
   }
 
-  basicDot() {
+  explanationDot() {
     return <circle id='back'
       cx={this.props.xPosition}
       cy={this.props.yPosition} 
@@ -25,44 +25,38 @@ class ExplanationDot extends React.Component {
   }
 
   dotAnimation() {
-    return <g><defs>
-      <circle id='back'
-        cx={this.props.xPosition}
-        cy={this.props.yPosition} 
-        r={Constants.getIn(['explanationDot','radiusStart'])} 
-        fill='#ff708a'>
-        <animate 
-          xlinkHref='#back'
-          attributeName='r'
-          from={Constants.getIn(['explanationDot','radiusStart'])}
-          to={Constants.getIn(['explanationDot','radiusEnd'])}
-          dur='1.5s'
-          begin='0'
-          repeatCount='indefinite'
-          fill='freeze'
-          id="circ-anim"
-        />
-        <animate 
-          xlinkHref='#back'
-          attributeName='opacity'
-          from='0.3'
-          to='0'
-          dur='1.5s'
-          begin='0'
-          repeatCount='indefinite' 
-          fill='freeze'
-          id="circ-anim"
-        />
-      </circle>
-    </defs>
-    {this.basicDot()}
-    </g>
-  }
-
-  explanationDot() {
-    return <g> {this.dotAnimation()}
-      <use xlinkHref="#back"/> 
-    </g>
+    return <svg>
+      <g>{this.explanationDot()}
+        <circle id='back'
+          r={Constants.getIn(['explanationDot','radiusStart'])}      
+          cx={this.props.xPosition}
+          cy={this.props.yPosition} 
+          fill='#ff708a'>
+          <animate 
+            xlinkHref='#back'
+            attributeName='r'
+            from={Constants.getIn(['explanationDot','radiusStart'])}
+            to={Constants.getIn(['explanationDot','radiusEnd'])}
+            dur='1.5s'
+            begin='0s'
+            repeatCount='indefinite'
+            fill='freeze'
+            id="circ-anim"
+          />
+          <animate 
+            xlinkHref='#back'
+            attributeName='opacity'
+            from='0.3'
+            to='0'
+            dur='1.5s'
+            begin='0s'
+            repeatCount='indefinite' 
+            fill='freeze'
+            id="circ-anim"
+          />
+        </circle>
+      </g>
+    </svg>
   }
 
   render() {
@@ -70,7 +64,8 @@ class ExplanationDot extends React.Component {
       return null
     } else {
       return <svg onClick = {this.onClick}>
-        {this.explanationDot()}</svg>
+        {this.dotAnimation()}
+      </svg>
     }
   }
 }
