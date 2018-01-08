@@ -60,7 +60,7 @@ class ChartOptions extends React.PureComponent {
         {this.renderScaleToggle()}
         <div style={{ float: 'right' }}>
           <a onClick={this.changeTimelineGroup}>
-            by {this.props.timelineGroup.toUpperCase()} +
+            by {this.props.timelineGroup.toUpperCase()}
           </a>
         </div>
       </div>

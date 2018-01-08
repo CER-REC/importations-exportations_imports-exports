@@ -121,5 +121,3 @@ module.exports = {
   timelineCrudeTransportQuarterSelector,
   timelineCrudeSubtypeQuarterSelector,
 }
-
-window.__test = module.exports

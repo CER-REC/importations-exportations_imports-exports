@@ -1,5 +1,6 @@
 const React = require('react')
 const connect = require('react-redux').connect
+const { fromJS } = require('immutable')
 
 const SVGDrag = require('./SVGDrag/')
 const timelineFilter = require('../actions/ui').timelineFilter
@@ -63,17 +64,33 @@ class TimelineSeek extends React.PureComponent {
   }
 
   dragStop(rawOffset) {
-    const { data, side } = this.props
+    const { data, side, timelineGroup } = this.props
     const offset = (side === 'start')
       ? this.state.offset + rawOffset.x
       : this.state.offset - rawOffset.x
     const filterPoint = (side === 'start')
       ? data.find(p => p.get('offsetX') > offset - 1)
       : data.findLast(p => p.get('offsetX') < (this.props.width - offset + 1))
-    this.props.timelineFilter(side, {
+
+    const newRange = this.props.timelineRange.set(side, {
       year: filterPoint.get('year'),
       quarter: filterPoint.get('quarter'),
-    })
+    }).toJS()
+    if (timelineGroup === 'quarter') {
+      const otherSide = (side === 'start') ? 'end' : 'start'
+      const firstPoint = data.first().toJS()
+      const lastPoint = data.last().toJS()
+      if ((firstPoint.year !== newRange.start.year) ||
+          (firstPoint.quarter !== newRange.start.quarter) ||
+          (lastPoint.year !== newRange.end.year) ||
+          (lastPoint.quarter !== newRange.end.quarter)) {
+        newRange[otherSide].quarter = filterPoint.get('quarter')
+        if (newRange.start.year > newRange.end.year) {
+          newRange[otherSide].year = newRange[side].year
+        }
+      }
+    }
+    this.props.timelineFilter(fromJS(newRange))
   }
 
   render() {
@@ -105,6 +122,8 @@ class TimelineSeek extends React.PureComponent {
 module.exports = connect(
   (state, props) => ({
     seekPosition: timelineSelectors.timelineSeekPositionSelector(state, props),
+    timelineRange: state.ui.get('timelineRange'),
+    timelineGroup: state.ui.get('timelineGroup'),
   }),
   { timelineFilter }
 )(TimelineSeek)

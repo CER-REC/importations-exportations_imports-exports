@@ -20,8 +20,10 @@ class TimelinePlay extends React.PureComponent {
     const { x: yearScale } = this.props.timelineScale
     clearInterval(this.playInterval)
     this.playInterval = null
-    this.props.timelineFilter('start', { year: yearScale.min, quarter: 1 })
-    this.props.timelineFilter('end', { year: yearScale.max, quarter: 4 })
+    this.props.timelineFilter({
+      start: { year: yearScale.min, quarter: 1 },
+      end: { year: yearScale.max, quarter: 4 },
+    })
   }
 
   onClick(e) {
@@ -39,11 +41,15 @@ class TimelinePlay extends React.PureComponent {
         quarter = 1
       }
       if (year === yearScale.max && quarter === 4) { return this.resetPlay() }
-      this.props.timelineFilter('start', { year, quarter })
-      this.props.timelineFilter('end', { year, quarter })
+      this.props.timelineFilter({
+        start: { year, quarter },
+        end: { year, quarter },
+      })
     }, 1000)
-    this.props.timelineFilter('start', { year: yearScale.min, quarter: 1 })
-    this.props.timelineFilter('end', { year: yearScale.min, quarter: 1 })
+    this.props.timelineFilter({
+      start: { year: yearScale.min, quarter: 1 },
+      end: { year: yearScale.min, quarter: 1 },
+    })
   }
 
   render() {

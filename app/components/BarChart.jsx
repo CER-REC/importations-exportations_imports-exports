@@ -50,9 +50,15 @@ class BarChart extends React.PureComponent {
       const quarter = point.get('quarter')
       const start = timelineRange.get('start').toJS()
       const end = timelineRange.get('end').toJS()
-      if (year < start.year || year > end.year ||
-          (year === start.year && quarter < start.quarter) ||
-          (year === end.year && quarter > end.quarter)) {
+      if (this.props.timelineGroup === 'quarter') {
+        // If the start and end quarters don't match, no filtering is applied
+        if (start.quarter === end.quarter &&
+          (quarter !== start.quarter || year < start.year || year > end.year)) {
+          opacity = 0.5
+        }
+      } else if (year < start.year || year > end.year ||
+        (year === start.year && quarter < start.quarter) ||
+        (year === end.year && quarter > end.quarter)) {
         opacity = 0.5
       }
       return (
@@ -106,5 +112,6 @@ module.exports = connect(
   (state, props) => ({
     scale: TimelineSelector.timelineScaleSelector(state, props),
     trueScale: TimelineSelector.timelineTrueScale(state, props),
+    timelineGroup: state.ui.get('timelineGroup'),
   })
 )(BarChart)

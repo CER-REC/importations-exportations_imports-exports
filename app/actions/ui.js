@@ -11,9 +11,9 @@ const bargraphScaleLinked = linked => ({
   payload: { linked },
 })
 
-const timelineFilter = (side, point) => ({
+const timelineFilter = payload => ({
   type: Types.TIMELINE_FILTER,
-  payload: { side, point },
+  payload,
 })
 
 const timelineGroup = group => ({
@@ -35,10 +35,7 @@ const reducer = (state = initialState, action) => {
     case Types.BARGRAPH_SCALE_LINKED:
       return state.set('barGraphScaleLinked', action.payload.linked)
     case Types.TIMELINE_FILTER:
-      return state.setIn(
-        ['timelineRange', action.payload.side],
-        fromJS(action.payload.point)
-      )
+      return state.set('timelineRange', fromJS(action.payload))
     case Types.TIMELINE_GROUP:
       return state.set('timelineGroup', action.payload.timelineGroup)
     default: return state

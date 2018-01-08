@@ -48,14 +48,14 @@ const Axis = props => {
         y={top}
         width={seekPosition.start}
         height={rectHeight}
-        fill={Constants.getIn(['styleGuide', 'colours', 'SandMedium'])}
+        fill={Constants.getIn(['styleGuide', 'colours', 'SandLight'])}
       />
       <rect
         x={left + seekPosition.end + (barWidth / 2)}
         y={top}
         width={endWidth < 0 ? 0 : endWidth}
         height={rectHeight}
-        fill={Constants.getIn(['styleGuide', 'colours', 'SandMedium'])}
+        fill={Constants.getIn(['styleGuide', 'colours', 'SandLight'])}
       />
       {elements}
       <TimelinePlay
