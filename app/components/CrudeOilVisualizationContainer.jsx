@@ -50,6 +50,7 @@ class CrudeOilVisualizationContainer extends React.Component {
         barWidth={4}
         labels={this.props.exportData.get('labels')}
         scale={{ x: { min: 1990, max: 2017 }}}
+        canChangeScale={false}
       />
       <BarChart
         {...this.props.exportChart}

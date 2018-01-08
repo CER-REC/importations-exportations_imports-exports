@@ -11,17 +11,34 @@ const Constants = require('../Constants')
 const Axis = props => {
   const { labels, top = 0, left = 0, seekPosition, barWidth, width, height, data } = props
   if (data.count() === 0) { return null }
-  const elements = labels.map(label => (
-    <text
-      key={`label-${label.get('label')}`}
-      x={left + label.get('offsetX')}
-      y={top + height / 2}
-      textAnchor="middle"
-      alignmentBaseline="middle"
-    >
-      {label.get('label')}
-    </text>
-  ))
+  const elements = labels.map(label => {
+    const key = label.get('key', `label-${label.get('label')}`)
+    if (label.get('label') !== '|') {
+      return (
+        <text
+          key={key}
+          x={left + label.get('offsetX')}
+          y={top + height / 2}
+          textAnchor="middle"
+          alignmentBaseline="middle"
+          fontWeight={label.get('fontWeight', 'normal')}
+        >
+          {label.get('label')}
+        </text>
+      )
+    }
+    return (
+      <line
+        key={key}
+        x1={left + label.get('offsetX')}
+        x2={left + label.get('offsetX')}
+        y1={top + barWidth / 2}
+        y2={top + height - barWidth / 2}
+        strokeWidth={Constants.getIn(['timeline', 'barPadding'])}
+        stroke="black"
+      />
+    )
+  })
   const endWidth = width - seekPosition.end - (barWidth / 2)
   const rectHeight = (height - barWidth)
   return (
@@ -61,7 +78,7 @@ const Axis = props => {
         side="end"
       />
       <DetailSidebar top={top} height={rectHeight}>
-        <ChartOptions height={rectHeight} />
+        <ChartOptions height={rectHeight} canChangeScale={props.canChangeScale} />
       </DetailSidebar>
     </g>
   )

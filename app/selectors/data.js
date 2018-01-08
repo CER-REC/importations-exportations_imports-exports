@@ -70,33 +70,6 @@ const aggregateLocationSelector = createSelector(
   }
 )
 
-const aggregateQuarterSelector = createSelector(
-  filterByHexSelector,
-  points => {
-    const result = points.reduce((acc, next) => {
-      const period = next.get('period')
-      // Safe to mutate the acc argument as we created it for only this reduce
-      if (!acc[period]) {
-        acc[period] = {
-          units: next.get('units'),
-          period,
-          year: next.get('year'),
-          quarter: next.get('quarter'),
-          imports: 0,
-          exports: 0,
-        }
-      }
-
-      const activity = next.get('activity')
-      const currentVal = acc[period][activity] || 0
-      acc[period][activity] = (currentVal + next.get('value'))
-
-      return acc
-    }, {})
-    return Immutable.fromJS(result)
-  }
-)
-
 const sortAggregatedLocationsSelector = createSelector(
   selectedSort,
   aggregateLocationSelector,
@@ -114,29 +87,10 @@ const sortAggregatedLocationsSelector = createSelector(
   }
 )
 
-const sortTimelineSelector = createSelector(
-  aggregateQuarterSelector,
-  points => points.sort((a, b) => {
-    const year = a.get('year') - b.get('year')
-    return (year !== 0) ? year : (a.get('quarter') - b.get('quarter'))
-  })
-)
-
-const sortQuarterSelector = createSelector(
-  aggregateQuarterSelector,
-  points => points.sort((a, b) => {
-    const quarter = a.get('quarter') - b.get('quarter')
-    return (quarter !== 0) ? quarter : (a.get('year') - b.get('year'))
-  })
-)
-
 module.exports = {
   filterByHexSelector,
   aggregateLocationSelector,
-  aggregateQuarterSelector,
   sortAggregatedLocationsSelector,
-  sortTimelineSelector,
-  sortQuarterSelector,
   unitSelector,
   activityGroupSelector,
 }

@@ -1,7 +1,7 @@
 const createSelector = require('reselect').createSelector
 const fromJS = require('immutable').fromJS
 
-const sortTimelineSelector = require('./data').sortTimelineSelector
+const { filterByHexSelector }= require('./data')
 const { visualizationContentPosition: visContentSize } = require('./viewport/')
 const Constants = require('../Constants.js')
 
@@ -12,6 +12,47 @@ const chartScaleBy = (_, props) => ({
   others: props.linkedKeys || [],
 })
 const linkedScale = state => state.ui.get('barGraphScaleLinked')
+
+const aggregateQuarterSelector = createSelector(
+  filterByHexSelector,
+  points => {
+    const result = points.reduce((acc, next) => {
+      const period = next.get('period')
+      // Safe to mutate the acc argument as we created it for only this reduce
+      if (!acc[period]) {
+        acc[period] = {
+          units: next.get('units'),
+          period,
+          year: next.get('year'),
+          quarter: next.get('quarter'),
+          imports: 0,
+          exports: 0,
+        }
+      }
+
+      const activity = next.get('activity')
+      const currentVal = acc[period][activity] || 0
+      acc[period][activity] = (currentVal + next.get('value'))
+
+      return acc
+    }, {})
+    return fromJS(result)
+  }
+)
+
+const sortTimelineSelector = createSelector(
+  aggregateQuarterSelector,
+  timelineGrouping,
+  (points, grouping) => points.sort((a, b) => {
+    if (grouping === 'year') {
+      const year = a.get('year') - b.get('year')
+      return (year !== 0) ? year : (a.get('quarter') - b.get('quarter'))
+    }
+
+    const quarter = a.get('quarter') - b.get('quarter')
+    return (quarter !== 0) ? quarter : (a.get('year') - b.get('year'))
+  })
+)
 
 const timelineYearScaleCalculation = data => {
   const years = data
@@ -97,16 +138,17 @@ const timelineScaleSelector = createSelector(
 const timelinePositionCalculation = (points, scale, grouping, size) => {
   const groupPadding = Constants.getIn(['timeline', 'groupPadding'])
   const barPadding = Constants.getIn(['timeline', 'barPadding'])
+  const totalYears = (scale.x.max - scale.x.min)
+  let offset = 0
+  let lastPoint
+  const labels = []
+
   if (grouping === 'year') {
-    const totalYears = (scale.x.max - scale.x.min)
     const widthAfterPads = size.width
       - (totalYears * groupPadding)
       - ((totalYears * 4) * barPadding)
     const barWidth = widthAfterPads / ((totalYears + 1) * 4)
 
-    let offset = 0
-    let lastPoint
-    const labels = []
     const bars = points.map(point => {
       if (!lastPoint || lastPoint.get('year') !== point.get('year')) {
         if (lastPoint) { offset += groupPadding }
@@ -121,6 +163,61 @@ const timelinePositionCalculation = (points, scale, grouping, size) => {
       lastPoint = newPoint
       return newPoint
     })
+    return fromJS({
+      bars,
+      labels,
+      scale,
+      layout: {
+        width: size.width,
+        groupPadding,
+        barPadding,
+        barWidth,
+      },
+    })
+  } else {
+    const barWidth = (size.width - (points.count() * barPadding)) / points.count()
+
+    const labelYears = [
+      scale.x.min + 2,
+      scale.x.min + Math.floor(totalYears / 3),
+      scale.x.max - Math.ceil(totalYears / 3),
+      scale.x.max - 2,
+    ]
+    let quarterStart = 0
+
+    const bars = points.map(point => {
+      if (lastPoint && lastPoint.get('quarter') !== point.get('quarter')) {
+        const dividerOffset = offset - barWidth / 2
+        labels.push({
+          offsetX: dividerOffset,
+          label: '|',
+          key: `divider-${point.get('quarter')}`
+        })
+        labels.push({
+          offsetX: (dividerOffset - quarterStart) / 2 + quarterStart,
+          label: `Q${lastPoint.get('quarter')}`,
+          fontWeight: 'bold',
+        })
+        quarterStart = dividerOffset
+      }
+      if (labelYears.includes(point.get('year'))) {
+        labels.push({
+          offsetX: offset,
+          label: point.get('year').toString().substr(-2),
+          key: point.get('period'),
+        })
+      }
+      const newPoint = point.set('offsetX', offset)
+      offset += barPadding + barWidth
+      lastPoint = newPoint
+      return newPoint
+    })
+
+    labels.push({
+      offsetX: (offset - quarterStart) / 2 + quarterStart,
+      label: `Q${points.last().get('quarter')}`
+    })
+
     return fromJS({
       bars,
       labels,

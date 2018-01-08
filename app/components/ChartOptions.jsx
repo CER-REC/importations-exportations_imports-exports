@@ -2,12 +2,13 @@ const React = require('react')
 const { connect } = require('react-redux')
 
 const Constants = require('../Constants')
-const { bargraphScaleLinked } = require('../actions/ui')
+const { bargraphScaleLinked, timelineGroup } = require('../actions/ui')
 
 class ChartOptions extends React.PureComponent {
   constructor(props) {
     super(props)
     this.scaleLinkedChanged = this.scaleLinkedChanged.bind(this)
+    this.changeTimelineGroup = this.changeTimelineGroup.bind(this)
   }
 
   scaleLinkedChanged(e) {
@@ -16,8 +17,15 @@ class ChartOptions extends React.PureComponent {
     this.props.bargraphScaleLinked(e.target.checked)
   }
 
+  changeTimelineGroup(e) {
+    e.preventDefault()
+    this.props.changeTimelineGroup(
+      this.props.timelineGroup === 'year' ? 'quarter' : 'year'
+    )
+  }
+
   renderScaleToggle() {
-    if (this.props.changeScale === false) { return null }
+    if (this.props.canChangeScale === false) { return null }
 
     const image = this.props.scaleLinked
       ? 'images/link.svg'
@@ -51,7 +59,9 @@ class ChartOptions extends React.PureComponent {
       >
         {this.renderScaleToggle()}
         <div style={{ float: 'right' }}>
-          by YEAR +
+          <a onClick={this.changeTimelineGroup}>
+            by {this.props.timelineGroup.toUpperCase()} +
+          </a>
         </div>
       </div>
     )
@@ -61,6 +71,7 @@ class ChartOptions extends React.PureComponent {
 module.exports = connect(
   state => ({
     scaleLinked: state.ui.get('barGraphScaleLinked'),
+    timelineGroup: state.ui.get('timelineGroup'),
   }),
-  { bargraphScaleLinked }
+  { bargraphScaleLinked, changeTimelineGroup: timelineGroup }
 )(ChartOptions)

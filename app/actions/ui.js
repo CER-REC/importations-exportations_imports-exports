@@ -3,6 +3,7 @@ const fromJS = require('immutable').fromJS
 const Types = {
   BARGRAPH_SCALE_LINKED: 'bargraph.scaleLinked',
   TIMELINE_FILTER: 'timeline.filter',
+  TIMELINE_GROUP: 'timeline.group',
 }
 
 const bargraphScaleLinked = linked => ({
@@ -13,6 +14,11 @@ const bargraphScaleLinked = linked => ({
 const timelineFilter = (side, point) => ({
   type: Types.TIMELINE_FILTER,
   payload: { side, point },
+})
+
+const timelineGroup = group => ({
+  type: Types.TIMELINE_GROUP,
+  payload: { timelineGroup: group },
 })
 
 const initialState = fromJS({
@@ -33,6 +39,8 @@ const reducer = (state = initialState, action) => {
         ['timelineRange', action.payload.side],
         fromJS(action.payload.point)
       )
+    case Types.TIMELINE_GROUP:
+      return state.set('timelineGroup', action.payload.timelineGroup)
     default: return state
   }
 }
@@ -41,5 +49,6 @@ module.exports = {
   Types,
   bargraphScaleLinked,
   timelineFilter,
+  timelineGroup,
   reducer,
 }

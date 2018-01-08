@@ -23,6 +23,7 @@ class NaturalGasVisualizationContainer extends React.Component {
       <BarChart
         {...this.props.importChart}
         valueKey="imports"
+        linkedKeys={['exports']}
         data={this.props.chartData.get('bars')}
         timelineRange={this.props.timelineRange}
         colour={Constants.getIn(['styleGuide', 'colours', 'ImportDefault'])}
@@ -37,6 +38,7 @@ class NaturalGasVisualizationContainer extends React.Component {
       <BarChart
         {...this.props.exportChart}
         valueKey="exports"
+        linkedKeys={['imports']}
         flipped
         data={this.props.chartData.get('bars')}
         timelineRange={this.props.timelineRange}
