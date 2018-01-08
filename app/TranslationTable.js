@@ -115,6 +115,15 @@ const TranslationTable = Immutable.fromJS({
     fr:'show EXPLANATIONS FR'
   },
 
+  confidentialityShown: {
+    en:'show CONFIDENTIALITY',
+    fr:'show CONFIDENTIALITY FR'
+  },
+  confidentialityHide: {
+    en:'hide CONFIDENTIALITY',
+    fr:'hide CONFIDENTIALITY FR'
+  },
+
   mainHeading: {
     imports: {
       en: 'Imports',

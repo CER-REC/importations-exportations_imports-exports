@@ -12,40 +12,32 @@ require ('../styles/Fonts.scss')
 
 class ShowConfidentiality extends React.Component {
 
-  triangleLineColor() {
+  triangleLine() {
     
-    let triangleLineColor = '#666666'
-    if(this.props.showExplanations) {
-      triangleLineColor = '#ff708a'
-    }
     return <svg 
       x = {0}
       y = {503}
       width = {150}>
       <g>
-        <polyline fill= {triangleLineColor} points="0 8 0 0 9.1 8.1 0 8.1"/>
-        <line stroke = {triangleLineColor}   x1="0.5" y1="7.6" x2="150" y2="7.6"/>
+        <polyline fill= 'black' points="0 8 0 0 9.1 8.1 0 8.1"/>
+        <line stroke = 'black'   x1="0.5" y1="7.6" x2="150" y2="7.6"/>
       </g>
     </svg>
   }
 
   showText() {
-
-
-    let textColour = '#999999'
-
     return <text x = {13} 
-      y = { 500 } 
-      
-      fill= {textColour}> 
-      asfd
+      y = { 506 } 
+      className = 'showHideConfidentiality'
+      fill= '#999999'> 
+      { Tr.getIn(['confidentialityShown', this.props.language])}
     </text>
   }
 
   render() {
-    return <g >
+    return <g>
       {this.showText()}
-      {this.triangleLineColor()}
+      {this.triangleLine()}
     </g>
   }
 }

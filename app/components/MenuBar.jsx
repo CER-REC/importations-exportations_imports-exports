@@ -7,6 +7,7 @@ const WorkspaceComputations = require('../computations/WorkspaceComputations.js'
 
 const Legend = require('./Legend.jsx')
 const ShowExplanations = require('./ShowExplanations.jsx')
+const ShowConfidentiality = require('./ShowConfidentiality.jsx')
 const ElectricityAmountPriceMenu = require('./ElectricityAmountPriceMenu.jsx')
 const ElectricitySortMenu = require('./ElectricitySortMenu.jsx')
 const MainNavigationMenu = require('./MainNavigationMenu.jsx')
@@ -22,7 +23,7 @@ class MenuBar extends React.Component {
    
     return <g>
       <Legend />
-      
+      <ShowConfidentiality />
       <ShowExplanations />
       <ElectricityAmountPriceMenu />
       <ElectricitySortMenu />
