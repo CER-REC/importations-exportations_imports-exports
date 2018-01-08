@@ -22,24 +22,6 @@ class MainNavigationMenu extends React.Component {
     />
   }
 
-  explanationDotTwo() {
-    const xPosition = '225'
-    return <ExplanationDot
-      key = 'mainNavDotTwo' 
-      xPosition = {xPosition}
-      yPosition = {WorkspaceComputations.topHeightMargin() + 200}
-    />
-  }
-
-  explanationDotThree() {
-    const xPosition = '225'
-    return <ExplanationDot
-      key = 'mainNavDotThree' 
-      xPosition = {xPosition}
-      yPosition = {WorkspaceComputations.topHeightMargin() + 300}
-    />
-  }
-
   render() {
     return <g><MenuBarOption 
       key='mainNavigationMenu'
@@ -55,8 +37,7 @@ class MainNavigationMenu extends React.Component {
       language = {this.props.language}
     />
     {this.explanationDot()}
-    {this.explanationDotTwo()}
-    {this.explanationDotThree()}</g>
+    </g>
   }
 }
 
