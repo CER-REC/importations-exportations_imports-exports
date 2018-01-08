@@ -38,7 +38,7 @@ const timelineXScale = createSelector(
 const timelineYScales = createSelector(
   sortTimelineSelector,
   chartScaleBy,
-  (data, scaleBy, linked) => {
+  (data, scaleBy) => {
     const primaryValues = mapToValue(data, scaleBy.primary)
     const scale = {
       [scaleBy.primary]: {

@@ -2,6 +2,7 @@ const React = require('react')
 const connect = require('react-redux').connect
 
 const DetailSidebar = require('./DetailSidebar')
+const ChartOptions = require('./ChartOptions')
 const TimelineSeek = require('./TimelineSeek')
 const TimelinePlay = require('./TimelinePlay')
 const timelineSelectors = require('../selectors/timeline')
@@ -59,6 +60,9 @@ const Axis = props => {
         data={data}
         side="end"
       />
+      <DetailSidebar top={top} height={rectHeight}>
+        <ChartOptions height={rectHeight} />
+      </DetailSidebar>
     </g>
   )
 }

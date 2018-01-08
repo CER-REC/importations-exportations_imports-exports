@@ -6,6 +6,16 @@ const menuWidth = () => Constants.getIn(['visualizationContainer','leftMargin'])
 const detailSidebarWidth = () =>
   Constants.getIn(['visualizationDetailContainer', 'width'])
 const viewport = state => state.viewport
+
+const svgSize = createSelector(
+  viewport,
+  detailSidebarWidth,
+  (viewport, sidebarWidth) => ({
+    width: (viewport.get('x') - sidebarWidth),
+    height: (viewport.get('y') + Constants.getIn(['workspace', 'viewportPadding'])),
+  })
+)
+
 const visualizationContainerPosition = createSelector(
   viewport,
   menuWidth,
@@ -34,14 +44,15 @@ const detailSidebarPosition = createSelector(
   visualizationContainerPosition,
   menuWidth,
   detailSidebarWidth,
-  ({ width: visualizationWidth }, computedMenuWidth, width) => ({
-    top: 0, // Constants.getIn(['topHeightMargin']),
+  ({ width: visualizationWidth, top }, computedMenuWidth, width) => ({
+    top,
     left: computedMenuWidth + visualizationWidth - width,
     width,
   })
 )
 
 module.exports = {
+  svgSize,
   menuWidth,
   visualizationContainerPosition,
   visualizationContentPosition,

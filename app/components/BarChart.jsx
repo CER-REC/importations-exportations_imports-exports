@@ -1,4 +1,5 @@
 const React = require('react')
+const PropTypes = require('prop-types')
 const { connect } = require('react-redux')
 
 const DetailSidebar = require('./DetailSidebar')
@@ -88,6 +89,10 @@ class BarChart extends React.PureComponent {
       </g>
     )
   }
+}
+
+BarChart.propTypes = {
+  valueKey: PropTypes.string.isRequired,
 }
 
 BarChart.defaultProps = {

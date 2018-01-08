@@ -10,7 +10,7 @@ const ViewportSelectors = require('../selectors/viewport/')
 
 require('./Workspace.scss')
 
-const Workspace = ({ viewport, detailSidebarPosition }) => (
+const Workspace = ({ svgSize, detailSidebarPosition }) => (
   <div style={{ position: 'relative' }}>
     <div className = 'Workspace'>
       <Header />
@@ -27,8 +27,7 @@ const Workspace = ({ viewport, detailSidebarPosition }) => (
     <svg
       id="workspace"
       className="Workspace"
-      width={viewport.get('x')}
-      height={viewport.get('y') + Constants.getIn(['workspace','viewportPadding'])}
+      {...svgSize}
     >
       <VisualizationContainer />
       <SocialBar />
@@ -39,7 +38,7 @@ const Workspace = ({ viewport, detailSidebarPosition }) => (
 
 module.exports = connect(
   (state, props) => ({
-    viewport: state.viewport,
+    svgSize: ViewportSelectors.svgSize(state, props),
     detailSidebarPosition: ViewportSelectors.detailSidebarPosition(state, props),
   })
 )(Workspace)

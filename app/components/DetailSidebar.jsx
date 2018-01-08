@@ -1,9 +1,9 @@
 const React = require('react')
 const ReactDOM = require('react-dom')
-const { connect } = require('react-redux')
+
+const Constants = require('../Constants')
 
 let detailSidebarRoot
-let workspaceRoot
 
 const getSidebarRoot = () => {
   if (process.env.NODE_ENV === 'development') {
@@ -14,17 +14,6 @@ const getSidebarRoot = () => {
     detailSidebarRoot = document.getElementById('detailSidebar')
   }
   return detailSidebarRoot
-}
-
-const getWorkspaceRoot = () => {
-  if (process.env.NODE_ENV === 'development') {
-    // Hot-reload unmounts the div, so we refetch it every time
-    return document.getElementById('workspace')
-  }
-  if (!workspaceRoot) {
-    workspaceRoot = document.getElementById('workspace')
-  }
-  return workspaceRoot
 }
 
 class DetailSidebar extends React.PureComponent {
@@ -43,8 +32,9 @@ class DetailSidebar extends React.PureComponent {
 
   render() {
     const { top, height } = this.props
+    const width = Constants.getIn(['visualizationDetailContainer', 'width'])
     const container = (
-      <div style={{ position: 'absolute', top, height }}>
+      <div style={{ position: 'absolute', top, width, height }}>
         {this.props.children}
       </div>
     )

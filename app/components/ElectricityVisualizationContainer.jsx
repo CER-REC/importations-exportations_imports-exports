@@ -25,6 +25,7 @@ class ElectricityVisualizationContainer extends React.Component {
       <BarChart
         {...this.props.importChart}
         valueKey="imports"
+        linkedKeys={['exports']}
         data={this.props.chartData.get('bars')}
         timelineRange={this.props.timelineRange}
         colour={Constants.getIn(['styleGuide', 'colours', 'ImportDefault'])}
@@ -39,6 +40,7 @@ class ElectricityVisualizationContainer extends React.Component {
       <BarChart
         {...this.props.exportChart}
         valueKey="exports"
+        linkedKeys={['imports']}
         flipped
         data={this.props.chartData.get('bars')}
         timelineRange={this.props.timelineRange}
