@@ -4,6 +4,9 @@ const Immutable = require('immutable')
 const emptyMap = new Immutable.Map()
 const emptyList = new Immutable.List()
 
+
+const OriginVaildator = require('../validators/OriginValidator.js')
+
 const selectedVisualization = state => state.importExportVisualization
 const selectedSort = state => state.electricitySortState
 const selectedUnit = state => state.electricityDataTypes
@@ -51,20 +54,23 @@ const aggregateLocationSelector = createSelector(
   points => {
     const result = points.reduce((acc, next) => {
       const origin = next.get('origin') || next.get('port')
-
-      // Safe to mutate the acc argument as we created it for only this reduce
-      if (!acc[origin]) {
-        acc[origin] = {
-          units: next.get('units'),
-          origin,
+      const region = OriginVaildator.originNameValidator(origin)
+      const originKey = region.get('originKey')
+      if(region.get('isValid') === true){
+        // Safe to mutate the acc argument as we created it for only this reduce
+        if (!acc[originKey]) {
+          acc[originKey] = {
+            units: next.get('units'),
+            origin,
+          }
         }
+        acc[originKey]['country'] = region.get('country')
+        acc[originKey]['originKey'] = region.get('originKey')
+        const activity = next.get('activity')
+        const currentVal = acc[originKey][activity] || 0
+        acc[originKey][activity] = (currentVal + next.get('value'))
       }
-
-      const activity = next.get('activity')
-      const currentVal = acc[origin][activity] || 0
-      acc[origin][activity] = (currentVal + next.get('value'))
-
-      return acc
+      return acc  
     }, {})
     return Immutable.fromJS(result)
   }

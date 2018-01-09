@@ -18,6 +18,18 @@ class MapPiece extends React.Component {
       }) 
   }
 
+  drawArrow(legends, data, type, styles){
+    if(data.get(type) !== 0 ){
+      return <ImportExportArrow
+            arrowSpacing = {styles.get('arrowSpacing')}
+            type = 'export' 
+            color = {this.getArrowColor(legends, data.get(type)).get(type)}
+            />  
+    }
+    return ''
+    
+  }
+
   render(){
 
     let arrowTransform = `translate(${Constants.getIn(['mapPieceArrowStyle', 'x'])}, ${Constants.getIn(['mapPieceArrowStyle', 'y'])})`
@@ -36,17 +48,9 @@ class MapPiece extends React.Component {
           name = {this.props.data.get('name')}
         />
         <g transform={arrowTransform}>
-          <ImportExportArrow
-            arrowSpacing = {this.props.styles.get('arrowSpacing')}
-            type = 'export' 
-            color = {this.getArrowColor(this.props.legends, this.props.data.get('exportData')).get('export')}
-            />
-          <ImportExportArrow
-            arrowSpacing = {this.props.styles.get('arrowSpacing')}
-            type = 'import' 
-            color = {this.getArrowColor(this.props.legends, this.props.data.get('importData')).get('import')}
-            />
-          </g>
+          {this.drawArrow(this.props.legends, this.props.data, 'exports', this.props.styles)}
+          {this.drawArrow(this.props.legends, this.props.data, 'imports', this.props.styles)}
+        </g>
       </g>
   }
 }

@@ -44,7 +44,6 @@ class ElectricityVisualizationContainer extends React.Component {
 const mapStateToProps = state => {
   return {
     viewport: state.viewport
-
   }
 }
 
