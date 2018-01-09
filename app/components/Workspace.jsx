@@ -12,9 +12,16 @@ const VisualizationDetailContainer = require('./VisualizationDetailContainer.jsx
 require('./Workspace.scss')
 
 class Workspace extends React.Component {
+
   render() {
-    return <div>
-      <div className = 'Workspace'>
+
+    const workspaceStyle = {
+      width:  this.props.viewport.get('x'),
+      height: this.props.viewport.get('y'),
+    }
+
+    return <div style = { workspaceStyle }>
+      <div className = 'Workspace' >
         <Header />
       </div>
 

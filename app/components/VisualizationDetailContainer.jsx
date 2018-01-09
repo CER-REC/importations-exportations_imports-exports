@@ -14,7 +14,8 @@ class VisualizationDetailContainer extends React.Component {
         x = { WorkspaceComputations.VisualizationDetailContainerX(this.props.viewport) }
         y = { WorkspaceComputations.topHeightMargin() }
         width = { Constants.getIn(['visualizationDetailContainer','width'])}
-        height = { this.props.viewport.get('y') + Constants.getIn(['workspace','viewportPadding']) }
+        height = { this.props.viewport.get('y') - Constants.getIn(['metaBar','height'])
+          - Constants.get('topHeightMargin') }
         fill = '#355B50' 
       />
     </g>
