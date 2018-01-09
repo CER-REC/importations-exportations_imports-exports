@@ -21,7 +21,7 @@ class Workspace extends React.Component {
       <svg
         className="Workspace"
         width={this.props.viewport.get('x')}
-        height={this.props.viewport.get('y') + Constants.getIn(['workspace','viewportPadding'])}
+        height={this.props.viewport.get('y')}
       > 
         <VisualizationContainer />
 
