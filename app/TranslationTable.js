@@ -72,42 +72,61 @@ const TranslationTable = Immutable.fromJS({
     },
   },
 
-  electricitySortStates:{
-    title:{
-      import: {
-        en:'Imports',
-        fr:'Imports'
-      },
-      ampersand: {
-        en:'&',
-        fr:'&'
-      },
-      export: {
-        en:'Exports',
-        fr:'Exports',
-      },
+  importExportMenu: {
+    imports: {
+      en: 'IMPORTS',
+      fr: 'IMPORTS FR',
     },
+    and: {
+      en: 'and',
+      fr: 'and FR',
+    },
+    exports: {
+      en: 'EXPORTS +',
+      fr: 'EXPORTS + FR',
+    },
+  },
+
+  electricitySortStates:{
     location:{
-      en:'Sort By LOCATION',
-      fr:'Sort By LOCATION FR'
+      en:'LOCATION',
+      fr:'LOCATION FR'
     },
     imports:{
-      en:'Sort By IMPORTS',
-      fr:'Sort By IMPORTS FR',
+      en:'IMPORTS',
+      fr:'IMPORTS FR',
     },
     exports:{
-      en:'Sort By EXPORTS',
-      fr:'Sort By EXPORTS FR',
+      en:'EXPORTS',
+      fr:'EXPORTS FR',
     },
   },
 
   electricityDataTypes:{
-    'CAN$': { en: 'CAN$', fr: 'CAN$' },
-    'CAN$/MW.h': { en: 'CAN$/MW.h', fr: 'CAN$/MW.h' },
-    'CN$/GJ': { en: 'CN$/GJ', fr: 'CN$/GJ' },
-    'm3/d': { en: 'm³/d', fr: 'm³/d' },
-    'MW.h': { en: 'MW.h', fr: 'MW.h' },
-    'thousand m3/d': { en: 'thousand m³/d', fr: 'thousand m³/d' },
+    'CAN$': { 
+      en: 'CAN$', 
+      fr: 'CAN$' 
+    },
+    'CAN$/MW.h': { 
+      en: 'CAN$/MW.h', 
+      fr: 'CAN$/MW.h' 
+    },
+    'CN$/GJ': { 
+      en: 'CN$/GJ', 
+      fr: 'CN$/GJ' 
+    },
+    'm3/d': { 
+      en: 'm³/d', 
+      fr: 'm³/d' 
+    },
+    'MW.h': { 
+      en: 'MW.h', 
+      fr: 'MW.h' 
+    },
+    'thousand m3/d': { 
+      en: 'thousand m³/d', 
+      fr: 'thousand m³/d' 
+    },
   },
 
   explanationShown:{

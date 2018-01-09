@@ -11,10 +11,21 @@ const SetVisualizationCreator = require('../actionCreators/SetVisualizationCreat
 require('./MainNavigationMenu.scss')
 
 class MainNavigationMenu extends React.Component {
+
+  controlArrowImage() {
+    return <image
+      height = {15}
+      width = {15}
+      x = { 0 }
+      y = { 76 }
+      xlinkHref = 'images/control_arrow.svg'
+    />
+  }
+
   render() {
-    return <MenuBarOption 
+    return <g><MenuBarOption 
       key='mainNavigationMenu'
-      yaxis ={WorkspaceComputations.topHeightMargin()}
+      yaxis ={WorkspaceComputations.topHeightMargin() + 18}
       options = {Constants.get('visualizationTypes')}
       onOptionClick = {this.props.setImportExportVisualization.bind(this)}
       selectedOption = {this.props.importExportVisualization}
@@ -25,6 +36,8 @@ class MainNavigationMenu extends React.Component {
       lineWidth = {Constants.getIn(['mainNavigationMenu', 'lineWidth'])}
       language = {this.props.language}
     />
+    {this.controlArrowImage()}
+    </g>
   }
 }
 

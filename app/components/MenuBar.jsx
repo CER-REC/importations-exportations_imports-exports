@@ -11,6 +11,7 @@ const ShowConfidentiality = require('./ShowConfidentiality.jsx')
 const ElectricityAmountPriceMenu = require('./ElectricityAmountPriceMenu.jsx')
 const ElectricitySortMenu = require('./ElectricitySortMenu.jsx')
 const MainNavigationMenu = require('./MainNavigationMenu.jsx')
+const ImportExportMenu = require('./ImportExportMenu.jsx')
 
 require('./MenuBar.scss')
 
@@ -27,6 +28,7 @@ class MenuBar extends React.Component {
       <ShowExplanations />
       <ElectricityAmountPriceMenu />
       <ElectricitySortMenu />
+      <ImportExportMenu />
 
     </g>
   }

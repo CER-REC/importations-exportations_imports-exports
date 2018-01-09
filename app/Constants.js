@@ -26,8 +26,8 @@ const Constants = Immutable.fromJS({
     containerHeight: 300
   },
   menuBarOptions:{
-    optionPadding: 25,
-    optionXaxisPadding: 5
+    optionPadding: 19,
+    optionXaxisPadding: 22,
   },
 
   legend: {
