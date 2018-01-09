@@ -12,6 +12,7 @@ const ElectricityAmountPriceMenu = require('./ElectricityAmountPriceMenu.jsx')
 const ElectricitySortMenu = require('./ElectricitySortMenu.jsx')
 const MainNavigationMenu = require('./MainNavigationMenu.jsx')
 const ImportExportMenu = require('./ImportExportMenu.jsx')
+const NglSubproductMenu = require('./NglSubproductMenu.jsx')
 
 require('./MenuBar.scss')
 
@@ -26,6 +27,8 @@ class MenuBar extends React.Component {
       <Legend />
       <ShowConfidentiality />
       <ShowExplanations />
+
+      <NglSubproductMenu />
       <ElectricityAmountPriceMenu />
       <ElectricitySortMenu />
       <ImportExportMenu />

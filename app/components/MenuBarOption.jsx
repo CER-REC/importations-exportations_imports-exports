@@ -13,8 +13,6 @@ class MenuBarOption extends React.Component {
 
       if(key === this.props.selectedOption){
         return <g key = {key}>
-          <text x = {this.props.optionXaxisPadding - 9} y = {yaxis} className='bodyText'>of</text>
-
           <text x = {this.props.optionXaxisPadding + 7} y = {yaxis} className='selectableDropdown'>
             {Tr.getIn([this.props.trKey, key, this.props.language]).toUpperCase() } 
           </text>

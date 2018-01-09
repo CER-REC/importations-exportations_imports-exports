@@ -23,8 +23,21 @@ const Constants = Immutable.fromJS({
 
   menuBar: {
     width: 150,
-    containerHeight: 300
+    containerHeight: 300,
+    controlArrowSize: 15,
+    importExportMenuLabelMargin: 16,
+    importExportTextLabelYOffset: 12,
+    textLabelOffset: 13,
+    sortMenuYMargin: 116,
+    sortMenuTextY: 182,
+    sortTextButtonLabelOffset: 73,
+    amountMenuYMargin: 137,
+    amountMenuTextY: 203,
+    amountTextButtonLabelOffset: 109,
+    nglMenuYMargin: 158,
+    nglSubproductTextY: 223,
   },
+
   menuBarOptions:{
     optionPadding: 19,
     optionXaxisPadding: 22,
@@ -64,9 +77,8 @@ const Constants = Immutable.fromJS({
   },
 
   mainNavigationMenu: {
-    height: 160,
-    color: 'orange',
-    lineWidth: 3
+    menuYPadding: 22,
+    textYPosition: 88,
   },
 
   electricitySortMenu: {

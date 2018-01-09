@@ -67,8 +67,8 @@ const TranslationTable = Immutable.fromJS({
       fr:'Natural Gas Liquids FR',
     },
     refinedPetroleumProducts:{
-      en:'Refin. Petroleum Prod',
-      fr:'Refin. Petroleum Prod FR',
+      en:'Refin. Petroleum Prod.',
+      fr:'Refin. Petroleum Prod. FR',
     },
   },
 
@@ -116,16 +116,50 @@ const TranslationTable = Immutable.fromJS({
       fr: 'CN$/GJ' 
     },
     'm3/d': { 
-      en: 'm³/d', 
-      fr: 'm³/d' 
+      en: '(m³/d)', 
+      fr: '(m³/d)' 
     },
     'MW.h': { 
-      en: 'MW.h', 
-      fr: 'MW.h' 
+      en: '(MW.h)', 
+      fr: '(MW.h)' 
     },
     'thousand m3/d': { 
-      en: 'thousand m³/d', 
-      fr: 'thousand m³/d' 
+      en: '(thousand m³/d)', 
+      fr: '(thousand m³/d)' 
+    },
+  },
+
+  arrangedBy: {
+    en: 'arrange by',
+    fr: 'TODO',
+  },
+
+  showing: {
+    en: 'showing',
+    fr: 'TODO',
+  },
+
+  amount: {
+    en: 'amount',
+    fr: 'TODO'
+  },
+
+  nglSubproductMenu: {
+    of: {
+      en: 'of',
+      fr: 'TODO',
+    },
+    butane: {
+      en: 'BUTANE',
+      fr: 'TODO',
+    },
+    and: {
+      en: 'and',
+      fr: 'TODO',
+    },
+    propane: {
+      en: 'PROPANE',
+      fr: 'PROPANE',
     },
   },
 

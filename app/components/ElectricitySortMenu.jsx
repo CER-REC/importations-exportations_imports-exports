@@ -12,24 +12,35 @@ const SortElectricityData = require('../actionCreators/SortElectricityData.js')
 require('./ElectricitySortMenu.scss')
 
 class ElectricitySortMenu extends React.Component {
+  constructor(props) {
+    super(props)
+    this.onClick = this.dropDownClick.bind(this)
+  }
 
   controlArrowImage() {
     return <image
-      height = {15}
-      width = {15}
+      height = { Constants.getIn(['menuBar','controlArrowSize']) }
+      width = { Constants.getIn(['menuBar','controlArrowSize']) }
       x = { 0 }
-      y = { 171 }
+      y = { WorkspaceComputations.importExportMenuY(this.props.viewport) + 
+          Constants.getIn(['menuBar','sortMenuYMargin']) } 
       xlinkHref = 'images/control_arrow.svg'
     />
   }
 
   sortMenuText() {
     return <g>
-      <text x = {13} y = {182}
+      <text x = { Constants.getIn(['menuBar','textLabelOffset']) } 
+        y = { Constants.getIn(['menuBar','sortMenuTextY']) }
         className = 'bodyText'>
-        arranged by
+        { Tr.getIn(['arrangedBy', this.props.language]) }
       </text>
     </g>
+  }
+
+  dropDownClick(e) {
+    e.preventDefault()
+    console.log('Clicked', this) 
   }
 
   sortMenuFunctionality() {
@@ -43,7 +54,6 @@ class ElectricitySortMenu extends React.Component {
       optionPadding = {Constants.getIn(['menuBarOptions', 'optionPadding'])}
       trKey = 'electricitySortStates' 
       color = {Constants.getIn(['electricitySortStatesStyle', 'color'])}
-      lineWidth = {Constants.getIn(['electricitySortStatesStyle', 'lineWidth'])}
       language = {this.props.language}
     />
     </g>
@@ -59,10 +69,11 @@ class ElectricitySortMenu extends React.Component {
     }
 
     return <g>
-      <text x = {80} y = {182} 
+      <text x = { Constants.getIn(['menuBar','sortTextButtonLabelOffset']) } 
+        y = { Constants.getIn(['menuBar','sortMenuTextY']) } 
         className = 'selectableDropdown'>
         {sortString} 
-        <tspan> + </tspan>
+        <tspan onClick = {this.onClick}> + </tspan>
       </text>
     </g>
   }

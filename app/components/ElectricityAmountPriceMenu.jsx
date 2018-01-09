@@ -12,24 +12,36 @@ const SetElectricityDataTypeCreator = require('../actionCreators/SetElectricityD
 require('./ElectricityAmountPriceMenu.scss')
 
 class ElectricityAmountPriceMenu extends React.Component {
+  constructor(props) {
+    super(props)
+    this.onClick = this.dropDownClick.bind(this)
+  }
 
   controlArrowImage() {
     return <image
-      height = {15}
-      width = {15}
+      height = { Constants.getIn(['menuBar','controlArrowSize']) }
+      width = {Constants.getIn(['menuBar','controlArrowSize']) }
       x = { 0 }
-      y = { 192 }
+      y = { WorkspaceComputations.importExportMenuY(this.props.viewport) + 
+          Constants.getIn(['menuBar','amountMenuYMargin']) }
       xlinkHref = 'images/control_arrow.svg'
     />
   }
 
   amountMenuText() {
     return <g>
-      <text x = {13} y = {203}
+      <text x = { Constants.getIn(['menuBar','textLabelOffset']) } 
+        y = { Constants.getIn(['menuBar','amountMenuTextY']) }
         className = 'bodyText'>
-        showing <tspan className = 'selectableDropdown'> AMOUNT </tspan>
+        { Tr.getIn(['showing',this.props.language]) }
+        <tspan className = 'selectableDropdown'> { Tr.getIn(['amount',this.props.language]).toUpperCase() } </tspan>
       </text>
     </g>
+  }
+
+  dropDownClick(e) {
+    e.preventDefault()
+    console.log('Clicked', this) 
   }
 
   amountMenuOptions() {
@@ -43,8 +55,6 @@ class ElectricityAmountPriceMenu extends React.Component {
       optionXaxisPadding = {Constants.getIn(['menuBarOptions', 'optionXaxisPadding'])}
       optionPadding = {Constants.getIn(['menuBarOptions', 'optionPadding'])}
       trKey = 'electricityDataTypes' 
-      color = {Constants.getIn(['electricityDataTypesStyle', 'color'])}
-      lineWidth = {Constants.getIn(['electricityDataTypesStyle', 'lineWidth'])}
       language = {this.props.language}
     /></g>
   }
@@ -59,10 +69,11 @@ class ElectricityAmountPriceMenu extends React.Component {
     }
 
     return <g>
-      <text x = {109} y = {203} 
+      <text x = { Constants.getIn(['menuBar','amountTextButtonLabelOffset']) } 
+        y = { Constants.getIn(['menuBar','amountMenuTextY']) }
         className = 'selectableDropdown'>
         {amountString}
-        <tspan> + </tspan>
+        <tspan onClick = {this.onClick}> + </tspan>
       </text>
     </g>
   }

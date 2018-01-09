@@ -2,6 +2,7 @@ const React = require('react')
 const ReactRedux = require('react-redux')
 
 const Constants = require('../Constants.js')
+const Tr = require('../TranslationTable.js')
 const WorkspaceComputations = require('../computations/WorkspaceComputations.js')
 
 const MenuBarOption = require('./MenuBarOption.jsx')
@@ -13,13 +14,19 @@ require('./MainNavigationMenu.scss')
 class MainNavigationMenu extends React.Component {
 
   controlArrowImage() {
-    return <image
-      height = {15}
-      width = {15}
+    return <g><image
+      height = { Constants.getIn(['menuBar','controlArrowSize']) }
+      width = { Constants.getIn(['menuBar','controlArrowSize']) }
       x = { 0 }
-      y = { 76 }
+      y = { WorkspaceComputations.importExportMenuY(this.props.viewport) + 
+          Constants.getIn(['mainNavigationMenu','menuYPadding']) }
       xlinkHref = 'images/control_arrow.svg'
     />
+    <text x = { Constants.getIn(['menuBar','textLabelOffset']) }
+      y = { Constants.getIn(['mainNavigationMenu','textYPosition']) } className = 'bodyText'>
+      { Tr.getIn(['nglSubproductMenu','of',this.props.language]) }
+    </text>
+    </g>
   }
 
   render() {
@@ -33,7 +40,6 @@ class MainNavigationMenu extends React.Component {
       optionPadding = {Constants.getIn(['menuBarOptions', 'optionPadding'])}
       trKey = 'mainMenuBar' 
       color = {Constants.getIn(['mainNavigationMenu', 'color'])}
-      lineWidth = {Constants.getIn(['mainNavigationMenu', 'lineWidth'])}
       language = {this.props.language}
     />
     {this.controlArrowImage()}

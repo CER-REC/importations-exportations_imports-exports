@@ -17,6 +17,11 @@ WorkspaceComputations.menuBarHeight = function (viewport) {
     + Constants.getIn(['menuBar','containerHeight'])
 }
 
+WorkspaceComputations.importExportMenuY = function(viewport) {
+  return WorkspaceComputations.topHeightMargin(viewport) 
+    - Constants.getIn(['menuBar','importExportMenuLabelMargin'])
+}
+
 WorkspaceComputations.electricitySortMenuY = function (viewport) {
   return WorkspaceComputations.topHeightMargin(viewport)
     + Constants.getIn(['electricitySortMenu','topMargin'])
