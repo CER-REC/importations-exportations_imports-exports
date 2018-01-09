@@ -30,7 +30,7 @@ const Constants = Immutable.fromJS({
     textLabelOffset: 13,
     sortMenuYMargin: 116,
     sortMenuTextY: 182,
-    sortTextButtonLabelOffset: 73,
+    sortTextButtonLabelOffset: 79,
     amountMenuYMargin: 137,
     amountMenuTextY: 203,
     amountTextButtonLabelOffset: 109,

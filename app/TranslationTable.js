@@ -130,7 +130,7 @@ const TranslationTable = Immutable.fromJS({
   },
 
   arrangedBy: {
-    en: 'arrange by',
+    en: 'arranged by',
     fr: 'TODO',
   },
 
