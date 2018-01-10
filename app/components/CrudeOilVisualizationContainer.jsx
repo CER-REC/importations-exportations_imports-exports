@@ -3,9 +3,6 @@ const ReactRedux = require('react-redux')
 
 const CanadaMapContainer = require('./CanadaMapContainer.jsx')
 const Timeline = require('./Timeline')
-const USMapContainer = require('./USMapContainer.jsx')
-const PowerPoolContainer = require('./PowerPoolContainer.jsx')
-const PowerPoolGroupingOutline = require('./PowerPoolGroupingOutline.jsx')
 const ExplanationPopovers = require('./ExplanationPopovers.jsx')
 const ProportionChart = require('./ProportionChart')
 
@@ -52,10 +49,6 @@ const TopChartConnected = ReactRedux.connect(
 class CrudeOilVisualizationContainer extends React.Component {
   render(){
     return <g>
-      <CanadaMapContainer 
-        xaxis = {this.props.xaxis} 
-        yaxis = {this.props.yaxis} 
-      />
       <Timeline
         x={this.props.xaxis}
         y={this.props.yaxis}
@@ -63,18 +56,6 @@ class CrudeOilVisualizationContainer extends React.Component {
         height={330}
         topHeight={215}
         TopChart={TopChartConnected}
-      />
-      <USMapContainer 
-        xaxis = {this.props.xaxis } 
-        yaxis = {this.props.yaxis + this.props.height/2}
-      />
-      <PowerPoolContainer 
-        xaxis = {this.props.xaxis } 
-        yaxis = {this.props.yaxis + this.props.height}
-      />
-      <PowerPoolGroupingOutline 
-        xaxis = {this.props.xaxis + this.props.width * (0.60) } 
-        yaxis = {this.props.yaxis + this.props.height}
       />
       <ExplanationPopovers 
         xaxis = {this.props.xaxis } 

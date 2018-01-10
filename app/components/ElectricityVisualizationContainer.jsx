@@ -9,7 +9,6 @@ const PowerPoolGroupingOutline = require('./PowerPoolGroupingOutline.jsx')
 const ExplanationPopovers = require('./ExplanationPopovers.jsx')
 
 class ElectricityVisualizationContainer extends React.Component {
-  
   render(){
     return <g>
       <CanadaMapContainer 
@@ -18,21 +17,21 @@ class ElectricityVisualizationContainer extends React.Component {
       />
       <Timeline
         x={this.props.xaxis}
-        y={this.props.yaxis}
+        y={this.props.yaxis + this.props.height * 0.25}
         width={this.props.width * 0.6}
         height={215}
       />
       <USMapContainer 
         xaxis = {this.props.xaxis } 
-        yaxis = {this.props.yaxis + this.props.height/2}
+        yaxis = {this.props.yaxis + this.props.height * 0.45}
       />
       <PowerPoolContainer 
-        xaxis = {this.props.xaxis } 
-        yaxis = {this.props.yaxis + this.props.height}
+       xaxis = {this.props.xaxis + this.props.width * 0.4 } 
+       yaxis = {this.props.yaxis + this.props.height * 0.9}
       />
       <PowerPoolGroupingOutline 
-        xaxis = {this.props.xaxis + this.props.width * (0.60) } 
-        yaxis = {this.props.yaxis + this.props.height}
+       xaxis = {this.props.xaxis} 
+       yaxis = {this.props.yaxis + this.props.height}
       />
       <ExplanationPopovers 
         xaxis = {this.props.xaxis } 

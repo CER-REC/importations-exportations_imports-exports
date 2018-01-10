@@ -61,8 +61,9 @@ class ExplanationDot extends React.Component {
       return null
     } else {
       return <g onClick = {this.onClick}>
-      {this.explanationDot()}
-      {this.dotAnimation()}</g>
+        {this.explanationDot()}
+        {this.dotAnimation()}
+      </g>
     }
   }
 }
