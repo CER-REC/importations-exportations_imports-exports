@@ -37,7 +37,7 @@ class ElectricitySortMenu extends React.Component {
         key='electricitySortStateMenu'
         yaxis = { WorkspaceComputations.electricitySortMenuY() }
         options = {Constants.get('electricitySortStates')}
-        onOptionClick = {this.props.setArrangeBy.bind(this)}
+        onOptionClick = {this.props.setArrangeBy}
         selectedOption = {this.props.arrangeBy}
         optionXaxisPadding = {Constants.getIn(['menuBarOptions', 'optionXaxisPadding'])}
         optionPadding = {Constants.getIn(['menuBarOptions', 'optionPadding'])}

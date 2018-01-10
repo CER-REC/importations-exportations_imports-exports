@@ -3,11 +3,9 @@ const Redux = require('redux')
 const ViewportReducer = require('./reducers/ViewportReducer.js')
 const ImportExportVisualizationReducer = require('./reducers/ImportExportVisualizationReducer.js')
 const LanguageReducer = require('./reducers/LanguageReducer.js')
-const ElectricityDataTypeReducer = require('./reducers/ElectricityDataTypeReducer.js')
 const DataReducer = require('./actions/data').reducer
 const { reducer: visualizationSettings } = require('./actions/visualizationSettings')
 
-const AmountUnitMiddleware = require('./middleware/amountUnit')
 const TimelineRangeMiddleware = require('./middleware/timelineRange')
 const InitialVisualizationSettingsMiddleware = require('./middleware/initialVisualizationSettings')
 const ActionLogMiddleware = require('./middleware/actionLog')
@@ -17,7 +15,6 @@ const reducers = Redux.combineReducers({
   viewport: ViewportReducer,
   importExportVisualization: ImportExportVisualizationReducer,
   language: LanguageReducer,
-  electricityDataTypes: ElectricityDataTypeReducer,
   data: DataReducer,
   visualizationSettings,
 })
@@ -31,7 +28,6 @@ module.exports = function () {
     composeEnhancers(Redux.applyMiddleware(
       InitialVisualizationSettingsMiddleware,
       TagVisualizationSettingsMiddleware,
-      AmountUnitMiddleware,
       TimelineRangeMiddleware,
       ActionLogMiddleware
     ))

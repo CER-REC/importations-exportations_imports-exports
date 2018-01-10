@@ -5,6 +5,7 @@ const Types = {
   RESET_VISUALIZATION: 'visualizationSettings.reset',
   TIMELINE_FILTER: 'visualizationSettings.timelineFilter',
   ARRANGE_BY: 'visualizationSettings.arrangeBy',
+  SET_AMOUNT: 'visualizationSettings.setAmount',
 }
 
 const timelineFilter = (side, point) => ({
@@ -15,6 +16,11 @@ const timelineFilter = (side, point) => ({
 const setArrangeBy = value => ({
   type: Types.ARRANGE_BY,
   payload: { arrangeBy: value },
+})
+
+const setAmount = amount => ({
+  type: Types.SET_AMOUNT,
+  payload: { amount },
 })
 
 const initialState = fromJS({
@@ -45,6 +51,8 @@ const subReducer = visualization => (state = initialState, action) => {
       )
     case Types.ARRANGE_BY:
       return state.set('arrangeBy', action.payload.arrangeBy)
+    case Types.SET_AMOUNT:
+      return state.set('amount', action.payload.amount)
     case Types.RESET_VISUALIZATION:
       return fromJS(action.payload.settings)
     default: return state
@@ -64,4 +72,5 @@ module.exports = {
   reducer,
   timelineFilter,
   setArrangeBy,
+  setAmount,
 }
