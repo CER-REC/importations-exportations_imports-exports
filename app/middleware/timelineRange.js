@@ -1,10 +1,11 @@
 const DataTypes = require('../actions/data').Types
-const timelineFilter = require('../actions/ui').timelineFilter
-const timelineScaleSelector = require('../selectors/timeline').timelineScaleSelector
+const { timelineFilter } = require('../actions/visualizationSettings')
+const { timelineScaleSelector } = require('../selectors/timeline')
 
 const timelineRange = store => next => action => {
   // Process the action immediately
   next(action)
+  return
 
   // TODO: Convert SetVisualization to constant
   // If we aren't changing the data displayed, don't process timeline ranges

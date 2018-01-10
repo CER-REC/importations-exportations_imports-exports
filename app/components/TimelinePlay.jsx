@@ -1,7 +1,7 @@
 const React = require('react')
 const connect = require('react-redux').connect
 
-const timelineFilter = require('../actions/ui').timelineFilter
+const { timelineFilter } = require('../actions/visualizationSettings')
 const timelineSelectors = require('../selectors/timeline')
 
 class TimelinePlay extends React.PureComponent {

@@ -1,14 +1,27 @@
 const createSelector = require('reselect').createSelector
 const Immutable = require('immutable')
 
+const { visualizationSettings } = require('./visualizationSettings')
+
 const emptyMap = new Immutable.Map()
 const emptyList = new Immutable.List()
 
+const arrangeBy = createSelector(
+  visualizationSettings,
+  settings => settings.get('arrangeBy')
+)
+
+const amount = createSelector(
+  visualizationSettings,
+  settings => settings.get('amount')
+)
+
+const selectedActivityGroup = createSelector(
+  visualizationSettings,
+  settings => settings.get('activity')
+)
+
 const selectedVisualization = state => state.importExportVisualization
-const selectedSort = state => state.electricitySortState
-const selectedUnit = state => state.electricityDataTypes
-const selectedActivityGroup =
-  state => state.selectedActivity || 'importsExports'
 const dataSelector = state => state.data
 
 const productSelector = createSelector(
@@ -19,7 +32,7 @@ const productSelector = createSelector(
 
 const unitSelector = createSelector(
   productSelector,
-  selectedUnit,
+  amount,
   (product, unit) => product.get(unit, emptyList)
 )
 
@@ -103,7 +116,7 @@ const aggregateQuarterSelector = createSelector(
 )
 
 const sortAggregatedLocationsSelector = createSelector(
-  selectedSort,
+  arrangeBy,
   aggregateLocationSelector,
   (sortBy, points) => {
     switch (sortBy) {

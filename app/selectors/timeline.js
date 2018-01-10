@@ -3,10 +3,17 @@ const fromJS = require('immutable').fromJS
 
 const sortTimelineSelector = require('./data').sortTimelineSelector
 const visualizationWidth = require('./viewport').visualizationContainerWidth
+const { visualizationSettings } = require('./visualizationSettings')
 const Constants = require('../Constants.js')
 
-const timelineGrouping = state => state.ui.get('timelineGroup')
-const timelineRange = state => state.ui.get('timelineRange')
+const timelineGrouping = createSelector(
+  visualizationSettings,
+  settings => settings.getIn(['timeline', 'grouping'])
+)
+const timelineRange = createSelector(
+  visualizationSettings,
+  settings => settings.getIn(['timeline', 'range'])
+)
 
 const timelineYearScaleCalculation = data => {
   const years = data
