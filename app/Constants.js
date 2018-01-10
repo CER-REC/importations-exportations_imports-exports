@@ -94,11 +94,20 @@ const Constants = Immutable.fromJS({
     topMargin: 100,
   },
 
-  electricityShowExplanations: {
+  showExplanations: {
     height: 30,
     topMargin: 80,
-    arrowColor:'red',
-    arrowLineWidth: 2
+    triangleLineWidth: 150,
+    triangleLineYOffset: 3,
+    triangleLineY: 7.6,
+    labelOffset: 13,
+  },
+
+  explanationDot: {
+    strokeWidth: 1.3,
+    radiusStart: 5.5,
+    radiusEnd: 18.5,
+    yOffset: 5,
   },
 
   visualizationTypes: [

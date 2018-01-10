@@ -1,7 +1,11 @@
 const React = require('react')
+const PropTypes = require('prop-types')
+const { connect } = require('react-redux')
 
+const DetailSidebar = require('./DetailSidebar')
 const AnimatedLine = require('./SVGAnimation/AnimatedLine')
 const AxisGuide = require('./AxisGuide')
+const TimelineSelector = require('../selectors/timeline')
 
 class BarChart extends React.PureComponent {
   constructor(props) {
@@ -33,10 +37,11 @@ class BarChart extends React.PureComponent {
       height,
       flipped,
       valueKey,
-      color,
+      colour,
       barSize,
       timelineRange,
     } = this.props
+    if (data.count() === 0) { return null }
 
     const heightPerUnit = height / (scale.y.max - scale.y.min)
     const elements = data.map(point => {
@@ -45,9 +50,15 @@ class BarChart extends React.PureComponent {
       const quarter = point.get('quarter')
       const start = timelineRange.get('start').toJS()
       const end = timelineRange.get('end').toJS()
-      if (year < start.year || year > end.year ||
-          (year === start.year && quarter < start.quarter) ||
-          (year === end.year && quarter > end.quarter)) {
+      if (this.props.timelineGroup === 'quarter') {
+        // If the start and end quarters don't match, no filtering is applied
+        if (start.quarter === end.quarter &&
+          (quarter !== start.quarter || year < start.year || year > end.year)) {
+          opacity = 0.5
+        }
+      } else if (year < start.year || year > end.year ||
+        (year === start.year && quarter < start.quarter) ||
+        (year === end.year && quarter > end.quarter)) {
         opacity = 0.5
       }
       return (
@@ -58,7 +69,7 @@ class BarChart extends React.PureComponent {
           y1={height - point.get(valueKey) * heightPerUnit}
           key={`${point.get('year')}-${point.get('quarter')}-${valueKey}`}
           strokeWidth={barSize}
-          stroke={color}
+          stroke={colour}
           strokeLinecap="round"
           opacity={opacity}
           animate={{ y1: '1s' }}
@@ -66,8 +77,8 @@ class BarChart extends React.PureComponent {
       )
     }).toArray()
     const transform = (flipped === true)
-      ? `scale(1,-1) translate(0 ${-height})`
-      : ''
+      ? `scale(1,-1) translate(${this.props.left} ${-this.props.top - height})`
+      : `translate(${this.props.left} ${this.props.top})`
     return (
       <g transform={transform}>
         <g>{elements}</g>
@@ -86,11 +97,21 @@ class BarChart extends React.PureComponent {
   }
 }
 
+BarChart.propTypes = {
+  valueKey: PropTypes.string.isRequired,
+}
+
 BarChart.defaultProps = {
   height: 200,
   flipped: false,
-  color: 'black',
+  colour: 'black',
   barSize: 4,
 }
 
-module.exports = BarChart
+module.exports = connect(
+  (state, props) => ({
+    scale: TimelineSelector.timelineScaleSelector(state, props),
+    trueScale: TimelineSelector.timelineTrueScale(state, props),
+    timelineGroup: TimelineSelector.timelineGrouping(state, props),
+  })
+)(BarChart)

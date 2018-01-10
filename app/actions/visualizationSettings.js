@@ -6,11 +6,13 @@ const Types = {
   TIMELINE_FILTER: 'visualizationSettings.timelineFilter',
   ARRANGE_BY: 'visualizationSettings.arrangeBy',
   SET_AMOUNT: 'visualizationSettings.setAmount',
+  SET_GROUPING: 'visualizationSettings.setGrouping',
+  SET_SCALE_LINKED: 'visualizationSettings.setScaleLinked',
 }
 
-const timelineFilter = (side, point) => ({
+const timelineFilter = range => ({
   type: Types.TIMELINE_FILTER,
-  payload: { side, point },
+  payload: { range },
 })
 
 const setArrangeBy = value => ({
@@ -21,6 +23,16 @@ const setArrangeBy = value => ({
 const setAmount = amount => ({
   type: Types.SET_AMOUNT,
   payload: { amount },
+})
+
+const setGrouping = grouping => ({
+  type: Types.SET_GROUPING,
+  payload: { grouping },
+})
+
+const setScaleLinked = scaleLinked => ({
+  type: Types.SET_SCALE_LINKED,
+  payload: { scaleLinked },
 })
 
 const initialState = fromJS({
@@ -45,14 +57,15 @@ const subReducer = visualization => (state = initialState, action) => {
 
   switch (action.type) {
     case Types.TIMELINE_FILTER:
-      return state.setIn(
-        ['timeline', 'range', action.payload.side],
-        fromJS(action.payload.point)
-      )
+      return state.setIn(['timeline', 'range'], fromJS(action.payload.range))
     case Types.ARRANGE_BY:
       return state.set('arrangeBy', action.payload.arrangeBy)
     case Types.SET_AMOUNT:
       return state.set('amount', action.payload.amount)
+    case Types.SET_GROUPING:
+      return state.set('grouping', action.payload.grouping)
+    case Types.SET_SCALE_LINKED:
+      return state.setIn(['timeline', 'scaleLinked'], action.payload.scaleLinked)
     case Types.RESET_VISUALIZATION:
       return fromJS(action.payload.settings)
     default: return state
@@ -73,4 +86,6 @@ module.exports = {
   timelineFilter,
   setArrangeBy,
   setAmount,
+  setGrouping,
+  setScaleLinked,
 }

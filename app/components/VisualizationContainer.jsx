@@ -1,6 +1,7 @@
 const React = require('react')
 const ReactRedux = require('react-redux')
 
+const ViewportSelectors = require('../selectors/viewport/')
 const Constants = require('../Constants.js')
 const WorkspaceComputations = require('../computations/WorkspaceComputations.js')
 const ElectricityVisualizationContainer = require('./ElectricityVisualizationContainer.jsx')
@@ -13,28 +14,39 @@ require('./VisualizationContainer.scss')
 class VisualizationContainer extends React.Component {
 
   changeVisualization(){
+    const { width, height } = this.props.visualizationPosition
     const visualizationContainerType = this.props.importExportVisualization
-    const xaxis = Constants.getIn(['visualizationContainer','leftMargin'])
+    const xaxis = this.props.menuWidth
     const yaxis = WorkspaceComputations.topHeightMargin() 
-    const width = WorkspaceComputations.visualizationContainerHeight(this.props.viewport) 
-    const height = WorkspaceComputations.visualizationContainerWidth(this.props.viewport)
+    let VisComponent = null
     switch(visualizationContainerType){
       case 'crudeOil':
-        return <CrudeOilVisualizationContainer xaxis={xaxis} yaxis={yaxis} height={height} width={width}/> 
+        VisComponent = CrudeOilVisualizationContainer
+        break
       case 'naturalGas':
-        return <NaturalGasVisualizationContainer xaxis={xaxis} yaxis={yaxis} height={height} width={width}/> 
+        VisComponent = NaturalGasVisualizationContainer
+        break
       case 'refinedPetroleumProducts':
       //Mock data need to be replaced by actual content 
-        return <text x = {xaxis} y = {yaxis}>
+        return <text x={xaxis} y={yaxis}>
           refine petroleum place holder
         </text>
       case 'naturalGasLiquids':
-        return <NaturalGasLiquidsVisualizationContainer xaxis={xaxis} yaxis={yaxis} height={height} width={width}/> 
+        VisComponent = NaturalGasLiquidsVisualizationContainer
+        break
       case 'electricity':
       default:
-        //TODO: x and y coordinates need to be adjusted according to the control area and heading data
-        return <ElectricityVisualizationContainer xaxis={xaxis} yaxis={yaxis} height={height} width={width}/> 
+        VisComponent = ElectricityVisualizationContainer
     }
+    return (
+      <VisComponent
+        xaxis={xaxis}
+        yaxis={yaxis}
+        height={height}
+        width={width}
+        contentSize={this.props.contentSize}
+      />
+    )
   }
   render() {
     return <g>
@@ -45,8 +57,10 @@ class VisualizationContainer extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    viewport: state.viewport,
-    importExportVisualization: state.importExportVisualization
+    visualizationPosition: ViewportSelectors.visualizationContainerPosition(state),
+    contentSize: ViewportSelectors.visualizationContentPosition(state),
+    menuWidth: ViewportSelectors.menuWidth(state),
+    importExportVisualization: state.importExportVisualization,
   }
 }
 
