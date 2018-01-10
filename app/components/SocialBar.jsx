@@ -101,7 +101,7 @@ class SocialBar extends React.Component {
   render() {
     let transformSocialBarIcons = `translate(${this.props.viewport.get('x') - Constants.getIn(['socialBar', 'iconMargin'])}, 0)`
 
-    return <svg>
+    return <svg alignment-baseline = 'baseline'>
       <rect 
         x = { this.props.viewport.get('x') - Constants.getIn(['socialBar','width']) }
         y = { WorkspaceComputations.socialBarY(this.props.viewport) }

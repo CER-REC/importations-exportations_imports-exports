@@ -9,6 +9,8 @@ const SocialBar = require('./SocialBar.jsx')
 const VisualizationContainer = require('./VisualizationContainer.jsx')
 const VisualizationDetailContainer = require('./VisualizationDetailContainer.jsx')
 
+const WorkspaceComputations = require('../computations/WorkspaceComputations.js')
+
 require('./Workspace.scss')
 
 class Workspace extends React.Component {
@@ -17,7 +19,7 @@ class Workspace extends React.Component {
 
     const workspaceStyle = {
       width:  this.props.viewport.get('x'),
-      height: this.props.viewport.get('y'),
+      height: WorkspaceComputations.visualizationHeight(this.props.viewport),
     }
 
     return <div style = { workspaceStyle }>
@@ -28,7 +30,7 @@ class Workspace extends React.Component {
       <svg
         className="Workspace"
         width={this.props.viewport.get('x')}
-        height={this.props.viewport.get('y')}
+        height={WorkspaceComputations.visualizationHeight(this.props.viewport)}
       > 
         <VisualizationContainer />
 
