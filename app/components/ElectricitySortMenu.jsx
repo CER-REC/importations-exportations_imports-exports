@@ -7,7 +7,8 @@ const WorkspaceComputations = require('../computations/WorkspaceComputations.js'
 
 const MenuBarOption = require('./MenuBarOption.jsx')
 
-const SortElectricityData = require('../actionCreators/SortElectricityData.js')
+const { setArrangeBy } = require('../actions/visualizationSettings')
+const { visualizationSettings } = require('../selectors/visualizationSettings')
 
 require('./ElectricitySortMenu.scss')
 
@@ -36,8 +37,8 @@ class ElectricitySortMenu extends React.Component {
         key='electricitySortStateMenu'
         yaxis = { WorkspaceComputations.electricitySortMenuY() }
         options = {Constants.get('electricitySortStates')}
-        onOptionClick = {this.props.setElectricitySortState.bind(this)}
-        selectedOption = {this.props.electricitySortState}
+        onOptionClick = {this.props.setArrangeBy.bind(this)}
+        selectedOption = {this.props.arrangeBy}
         optionXaxisPadding = {Constants.getIn(['menuBarOptions', 'optionXaxisPadding'])}
         optionPadding = {Constants.getIn(['menuBarOptions', 'optionPadding'])}
         trKey = 'electricitySortStates' 
@@ -49,20 +50,14 @@ class ElectricitySortMenu extends React.Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state, props) => {
   return {
     viewport: state.viewport,
-    electricitySortState: state.electricitySortState,
-    language: state.language
+    language: state.language,
+    arrangeBy: visualizationSettings(state, props).get('arrangeBy'),
   }
 }
 
-const mapDispatchToProps = dispatch => {
-  return {
-    setElectricitySortState(sortState) {
-      dispatch(SortElectricityData(sortState))
-    }
-  }
-}
+const mapDispatchToProps = { setArrangeBy }
 
 module.exports = ReactRedux.connect(mapStateToProps, mapDispatchToProps)(ElectricitySortMenu)
