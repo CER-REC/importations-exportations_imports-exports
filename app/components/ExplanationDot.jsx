@@ -25,46 +25,44 @@ class ExplanationDot extends React.Component {
   }
 
   dotAnimation() {
-    return <g onClick = {this.onClick}>
-      <g>{this.explanationDot()}
-        <circle id='animationCircle'
-          r={Constants.getIn(['explanationDot','radiusStart'])}      
-          cx={this.props.xPosition}
-          cy={this.props.yPosition} 
-          fill='#ff708a'>
-          <defs>
-            <animate 
-              xlinkHref='#back'
-              attributeName='r'
-              from={Constants.getIn(['explanationDot','radiusStart'])}
-              to={Constants.getIn(['explanationDot','radiusEnd'])}
-              dur='1.5s'
-              begin='0s'
-              repeatCount='indefinite'
-              fill='freeze'
-              id="circ-anim"
-            />
-            <animate 
-              xlinkHref='#back'
-              attributeName='opacity'
-              from='0.3'
-              to='0'
-              dur='1.5s'
-              begin='0s'
-              repeatCount='indefinite' 
-              fill='freeze'
-              id="circ-anim"
-            /></defs>
-        </circle>
-      </g>
-    </g>
+    return <circle id='animationCircle'
+      r={Constants.getIn(['explanationDot','radiusStart'])}      
+      cx={this.props.xPosition}
+      cy={this.props.yPosition} 
+      fill='#ff708a'>
+      <defs>
+        <animate 
+          xlinkHref='#back'
+          attributeName='r'
+          from={Constants.getIn(['explanationDot','radiusStart'])}
+          to={Constants.getIn(['explanationDot','radiusEnd'])}
+          dur='1.5s'
+          begin='0s'
+          repeatCount='indefinite'
+          fill='freeze'
+          id="circ-anim"
+        />
+        <animate 
+          xlinkHref='#back'
+          attributeName='opacity'
+          from='0.3'
+          to='0'
+          dur='1.5s'
+          begin='0s'
+          repeatCount='indefinite' 
+          fill='freeze'
+          id="circ-anim"
+        /></defs>
+    </circle>
   }
 
   render() {
     if(!this.props.showExplanations) {
       return null
     } else {
-      return <g>{this.dotAnimation()}</g>
+      return <g onClick = {this.onClick}>
+      {this.explanationDot()}
+      {this.dotAnimation()}</g>
     }
   }
 }
