@@ -145,6 +145,32 @@ const MapLayoutGridConstant = Immutable.fromJS({
         { name:  'PJM PP', originKey: 'PJMPP', x: 2, y : 0},
       ]
     },
+    powerPoolMapping:{
+      'MN/ND':['MN', 'ND'],
+      'NE-ISO':[
+        'CT', 
+        'ME', 
+        'MA', 
+        'NH', 
+        'RI', 
+        'VT'
+      ],
+      'PJMPP':[
+        'DE',
+        'IL',
+        'IN',
+        'KY',
+        'MD',
+        'MI',
+        'NJ',
+        'NC',
+        'OH',
+        'PA',
+        'TN',
+        'VA',
+        'WV'
+      ]
+    },
     legends:[{
       lower:1,
       upper: 9999,
