@@ -63,7 +63,7 @@ const subReducer = visualization => (state = initialState, action) => {
     case Types.SET_AMOUNT:
       return state.set('amount', action.payload.amount)
     case Types.SET_GROUPING:
-      return state.set('grouping', action.payload.grouping)
+      return state.setIn(['timeline', 'grouping'], action.payload.grouping)
     case Types.SET_SCALE_LINKED:
       return state.setIn(['timeline', 'scaleLinked'], action.payload.scaleLinked)
     case Types.RESET_VISUALIZATION:
