@@ -1,7 +1,7 @@
 const React = require('react')
 const ReactRedux = require('react-redux')
 
-class PowerPoolGroupingOutline extends React.Component {
+class PowerPoolGrouping extends React.Component {
   render(){
     //Mock data need to be replaced by actual content 
     return <g>
@@ -20,4 +20,4 @@ const mapStateToProps = state => {
 }
 
 
-module.exports = ReactRedux.connect(mapStateToProps)(PowerPoolGroupingOutline)
+module.exports = ReactRedux.connect(mapStateToProps)(PowerPoolGrouping)

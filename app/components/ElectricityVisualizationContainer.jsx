@@ -4,7 +4,7 @@ const { connect } = require('react-redux')
 const CanadaMapContainer = require('./CanadaMapContainer.jsx')
 const USMapContainer = require('./USMapContainer.jsx')
 const PowerPoolContainer = require('./PowerPoolContainer.jsx')
-const PowerPoolGroupingOutline = require('./PowerPoolGroupingOutline.jsx')
+const PowerPoolGrouping = require('./PowerPoolGrouping.jsx')
 const ExplanationPopovers = require('./ExplanationPopovers.jsx')
 
 const BarChart = require('./BarChart')
@@ -49,10 +49,6 @@ class ElectricityVisualizationContainer extends React.Component {
       />
       <PowerPoolContainer 
         {...this.props.powerPool}
-      />
-      <PowerPoolGroupingOutline 
-        xaxis = {this.props.xaxis} 
-        yaxis = {this.props.yaxis + this.props.height}
       />
       <ExplanationPopovers 
         xaxis = {this.props.xaxis } 
