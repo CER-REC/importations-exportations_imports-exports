@@ -38,6 +38,7 @@ class MapPiece extends React.Component {
     }
     let confidentialIcon = ''      
     if(typeof this.props.data.get('confidentialCount')  !== 'undefined' && this.props.data.get('confidentialCount') !== 0){
+      //TODO: on click show pop over to show confidential values
       confidentialIcon = <ConfidentialIcon styles={this.props.styles.get('confidentialStyle')}/>
     }
     return <g>
