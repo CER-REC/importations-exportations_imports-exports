@@ -8,6 +8,8 @@ const Types = {
   SET_AMOUNT: 'visualizationSettings.setAmount',
   SET_GROUPING: 'visualizationSettings.setGrouping',
   SET_SCALE_LINKED: 'visualizationSettings.setScaleLinked',
+  SET_ACTIVITY: 'visualizationSettings.setActivity',
+  SET_SUBTYPE: 'visualizationSettings.setSubtype',
 }
 
 const timelineFilter = range => ({
@@ -33,6 +35,16 @@ const setGrouping = grouping => ({
 const setScaleLinked = scaleLinked => ({
   type: Types.SET_SCALE_LINKED,
   payload: { scaleLinked },
+})
+
+const setActivity = activity => ({
+  type: Types.SET_ACTIVITY,
+  payload: { activity },
+})
+
+const setSubtype = subtype => ({
+  type: Types.SET_SUBTYPE,
+  payload: { subtype },
 })
 
 const initialState = fromJS({
@@ -62,6 +74,10 @@ const subReducer = visualization => (state = initialState, action) => {
       return state.set('arrangeBy', action.payload.arrangeBy)
     case Types.SET_AMOUNT:
       return state.set('amount', action.payload.amount)
+    case Types.SET_ACTIVITY:
+      return state.set('activity', action.payload.activity)
+    case Types.SET_SUBTYPE:
+      return state.set('subtype', action.payload.subtype)
     case Types.SET_GROUPING:
       return state.setIn(['timeline', 'grouping'], action.payload.grouping)
     case Types.SET_SCALE_LINKED:
@@ -88,4 +104,6 @@ module.exports = {
   setAmount,
   setGrouping,
   setScaleLinked,
+  setActivity,
+  setSubtype,
 }
