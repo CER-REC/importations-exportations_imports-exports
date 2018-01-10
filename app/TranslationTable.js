@@ -178,11 +178,6 @@ const TranslationTable = Immutable.fromJS({
     'thousand m3/d': { en: 'thousand m³/d', fr: 'thousand m³/d' },
   },
 
-  explanationShown:{
-    en:'show EXPLANATIONS',
-    fr:'show EXPLANATIONS FR'
-  },
-
   mainHeading: {
     imports: {
       en: 'Imports',
@@ -200,6 +195,16 @@ const TranslationTable = Immutable.fromJS({
       en: 'of Energy Products to and from Canada',
       fr: 'TODO',
     },
+  },
+
+
+  explanationShown:{
+    en:'show EXPLANATIONS',
+    fr:'show EXPLANATIONS FR',
+  },
+  explanationHide: {
+    en: 'hide EXPLANATIONS',
+    fr: 'TODO',
   },
 
   mainSubheading: {

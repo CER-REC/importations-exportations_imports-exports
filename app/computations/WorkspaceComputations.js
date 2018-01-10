@@ -27,13 +27,13 @@ WorkspaceComputations.electricityAmountPriceMenuY = function (viewport) {
     + Constants.getIn(['electricityAmountPriceMenu','topMargin'])
 }
 
-WorkspaceComputations.electricityShowExplanationsY = function (viewport) {
+WorkspaceComputations.showExplanationsY = function (viewport) {
   return WorkspaceComputations.electricityAmountPriceMenuY(viewport) 
-    + Constants.getIn(['electricityShowExplanations','topMargin'])
+    + Constants.getIn(['showExplanations','topMargin'])
 }
 
 WorkspaceComputations.legendY = function (viewport) {
-  return WorkspaceComputations.electricityShowExplanationsY(viewport) 
+  return WorkspaceComputations.showExplanationsY(viewport) 
   + Constants.getIn(['legend','topMargin']) 
 }
 
