@@ -25,7 +25,7 @@ class ExplanationDot extends React.Component {
   }
 
   dotAnimation() {
-    return <g>
+    return <g onClick = {this.onClick}>
       <g>{this.explanationDot()}
         <circle id='animationCircle'
           r={Constants.getIn(['explanationDot','radiusStart'])}      
@@ -64,9 +64,7 @@ class ExplanationDot extends React.Component {
     if(!this.props.showExplanations) {
       return null
     } else {
-      return <svg onClick = {this.onClick}>
-        {this.dotAnimation()}
-      </svg>
+      return <g>{this.dotAnimation()}</g>
     }
   }
 }
