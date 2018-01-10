@@ -60,3 +60,5 @@ if (module.hot) {
     render(require('./components/Root.jsx'))
   })
 }
+
+require('./selectors/crudeOil')
