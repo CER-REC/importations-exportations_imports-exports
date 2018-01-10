@@ -94,7 +94,7 @@ class SocialBar extends React.Component {
   downloadDataClick() {
     const appRoot = RouteComputations.appRoot(document.location, this.props.language)
     const fileName = Tr.getIn(['downloadable', 'csv', this.props.language])
-    window.open(`${appRoot}data/${fileName}`, 'data:text/csv;charset=utf-8,data/' + escape())  
+    window.open(`${appRoot}data/${fileName}`, 'data:text/csv;charset=utf-8,data/') 
   }
 
 

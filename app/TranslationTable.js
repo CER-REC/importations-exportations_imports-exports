@@ -152,7 +152,7 @@ const TranslationTable = Immutable.fromJS({
 
   downloadable: {
     csv: {
-      en: 'TODO',
+      en: 'data.csv',
       fr: 'TODO FR',
     },
   },
