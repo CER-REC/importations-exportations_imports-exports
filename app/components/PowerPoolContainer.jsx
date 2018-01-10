@@ -8,8 +8,8 @@ class PowerPoolContainer extends React.Component {
     //TODO: scale map dynamically when screen size change
     return <g transform='scale(1.2)'> 
               <ElectricityMapLayout
-                xaxis={this.props.xaxis} 
-                yaxis = {this.props.yaxis}
+                left={this.props.left} 
+                top = {this.props.top}
                 country = 'powerpool'
                 />
             </g>

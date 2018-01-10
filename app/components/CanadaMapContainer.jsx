@@ -9,8 +9,8 @@ class CanadaMapContainer extends React.Component {
     //Scale is temporary adjustment as it's too small if we use dimensions mentioned in the design document
     ////TODO: scale map dynamically when screen size change
     return <g transform='scale(1.4)'> <ElectricityMapLayout
-              xaxis={this.props.xaxis} 
-              yaxis = {this.props.yaxis}
+              left={this.props.left} 
+              top={this.props.top}
               country = 'ca'
               />
             </g>

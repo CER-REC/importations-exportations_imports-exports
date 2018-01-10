@@ -1,37 +1,58 @@
 const React = require('react')
-const ReactRedux = require('react-redux')
+const { connect } = require('react-redux')
 
 const CanadaMapContainer = require('./CanadaMapContainer.jsx')
-const Timeline = require('./Timeline')
 const USMapContainer = require('./USMapContainer.jsx')
 const PowerPoolContainer = require('./PowerPoolContainer.jsx')
 const PowerPoolGroupingOutline = require('./PowerPoolGroupingOutline.jsx')
 const ExplanationPopovers = require('./ExplanationPopovers.jsx')
 
+const BarChart = require('./BarChart')
+const Axis = require('./Axis')
+const ElectricityViewport = require('../selectors/viewport/electricity')
+const TimelineSelectors = require('../selectors/timeline')
+const Constants = require('../Constants')
+
 class ElectricityVisualizationContainer extends React.Component {
   render(){
+    const contentWidth = this.props.contentSize.width
     return <g>
       <CanadaMapContainer 
-        xaxis = {this.props.xaxis} 
-        yaxis = {this.props.yaxis} 
+        {...this.props.canadaMap}
       />
-      <Timeline
-        x={this.props.xaxis}
-        y={this.props.yaxis + this.props.height * 0.25}
-        width={this.props.width * 0.6}
-        height={215}
+      <BarChart
+        {...this.props.importChart}
+        valueKey="imports"
+        linkedKeys={['exports']}
+        data={this.props.chartData.get('bars')}
+        timelineRange={this.props.timelineRange}
+        colour={Constants.getIn(['styleGuide', 'colours', 'ImportDefault'])}
+      />
+      <Axis
+        {...this.props.axisPosition}
+        data={this.props.chartData.get('bars')}
+        barWidth={4}
+        labels={this.props.chartData.get('labels')}
+        scale={{ x: { min: 1990, max: 2017 }}}
+      />
+      <BarChart
+        {...this.props.exportChart}
+        valueKey="exports"
+        linkedKeys={['imports']}
+        flipped
+        data={this.props.chartData.get('bars')}
+        timelineRange={this.props.timelineRange}
+        colour={Constants.getIn(['styleGuide', 'colours', 'ExportDefault'])}
       />
       <USMapContainer 
-        xaxis = {this.props.xaxis } 
-        yaxis = {this.props.yaxis + this.props.height * 0.45}
+        {...this.props.usMap}
       />
       <PowerPoolContainer 
-       xaxis = {this.props.xaxis + this.props.width * 0.4 } 
-       yaxis = {this.props.yaxis + this.props.height * 0.9}
+        {...this.props.powerPool}
       />
       <PowerPoolGroupingOutline 
-       xaxis = {this.props.xaxis} 
-       yaxis = {this.props.yaxis + this.props.height}
+        xaxis = {this.props.xaxis} 
+        yaxis = {this.props.yaxis + this.props.height}
       />
       <ExplanationPopovers 
         xaxis = {this.props.xaxis } 
@@ -41,8 +62,15 @@ class ElectricityVisualizationContainer extends React.Component {
   }
 }
 
-const mapStateToProps = state => ({
-  viewport: state.viewport,
-})
-
-module.exports = ReactRedux.connect(mapStateToProps)(ElectricityVisualizationContainer)
+module.exports = connect(
+  (state, props) => ({
+    canadaMap: ElectricityViewport.canadaMapPosition(state, props),
+    usMap: ElectricityViewport.usMapPosition(state, props),
+    powerPool: ElectricityViewport.powerPoolPosition(state, props),
+    importChart: ElectricityViewport.chartImportPosition(state, props),
+    axisPosition: ElectricityViewport.chartAxisPosition(state, props),
+    exportChart: ElectricityViewport.chartExportPosition(state, props),
+    chartData: TimelineSelectors.timelinePositionSelector(state, props),
+    timelineRange: TimelineSelectors.timelineRange(state, props),
+  })
+)(ElectricityVisualizationContainer)
