@@ -1,7 +1,7 @@
 const React = require('react')
 
 const Constants = require('../Constants.js')
-require('./MapPiece.scss')
+require('../styles/Fonts.scss')
 class MapPieceLabel extends React.Component {
 
   render() {
