@@ -1,6 +1,5 @@
 const Constants = require('../Constants.js')
 const Immutable = require('immutable')
-const {ErrorMessageTable} = require('../DebuggingMessageTable.js')
 
 const originNameValidator = (origin)=>{
   //get country regions 
@@ -8,6 +7,7 @@ const originNameValidator = (origin)=>{
   let result = {
     country: '',
     originKey: '',
+    error:'',
     isValid: false
 
   }
@@ -27,10 +27,8 @@ const originNameValidator = (origin)=>{
     result.isValid = true
   }else{
     //also return on console that data is not valid 
-    //and also the state name with all value 
-    ErrorMessageTable('originNameValidator', 
-      'Missing Mapping', 
-      `Not a valid origin: ${origin}`)  
+    //and also the state name with all value
+    result.error =  `Not a valid mapping ${origin}` 
   }
   return Immutable.fromJS(result) 
 }

@@ -45,7 +45,7 @@ const getElectricityImportAndExport = createSelector(
   getCountry,
   (points,unit,country) => {
     points = points.filter( point=> point.get('country') === country)
-    //append missing states or regions 
+    //append missing states or provinces 
     const statesOrProvinces = Constants.getIn(['dataloader','mapping','country', country])
     if(typeof statesOrProvinces !== 'undefined'){
       let missingstatesOrProvincesMap = {}
@@ -62,6 +62,8 @@ const getElectricityImportAndExport = createSelector(
             missingstatesOrProvincesMap[originKey]['originKey'] = originKey
             missingstatesOrProvincesMap[originKey]['exports'] = 0
             missingstatesOrProvincesMap[originKey]['imports'] = 0
+            missingstatesOrProvincesMap[originKey]['totalCount'] = 0
+            missingstatesOrProvincesMap[originKey]['confidentialCount'] = 0
           }
         }
       )
@@ -96,6 +98,8 @@ const createSortedLayout = createSelector(
         name: statesOrProvinces.get('originKey'),
         exports: statesOrProvinces.get('exports') || 0,
         imports: statesOrProvinces.get('imports') || 0,
+        totalCount: statesOrProvinces.get('totalCount') || 0,
+        confidentialCount: statesOrProvinces.get('confidentialCount') || 0,
         x: x,
         y : row
       })
@@ -120,7 +124,9 @@ const parseLocationData = createSelector(
           exports: data.getIn([originKey, 'exports']) || 0,
           imports: data.getIn([originKey, 'imports']) || 0,
           x: statesOrProvinces.get('x'),
-          y: statesOrProvinces.get('y')
+          y: statesOrProvinces.get('y'),
+          totalCount: statesOrProvinces.get('totalCount') || 0,
+          confidentialCount: statesOrProvinces.get('confidentialCount') || 0,
         }
         resultList.push(result)
       })

@@ -4,9 +4,6 @@ const Immutable = require('immutable')
 const emptyMap = new Immutable.Map()
 const emptyList = new Immutable.List()
 
-
-const OriginVaildator = require('../validators/OriginValidator.js')
-
 const selectedVisualization = state => state.importExportVisualization
 const selectedSort = state => state.electricitySortState
 const selectedUnit = state => state.electricityDataTypes
@@ -54,22 +51,24 @@ const aggregateLocationSelector = createSelector(
   points => {
     const result = points.reduce((acc, next) => {
       const origin = next.get('origin') || next.get('port')
-      const region = OriginVaildator.originNameValidator(origin)
-      const originKey = region.get('originKey')
-      if(region.get('isValid') === true){
-        // Safe to mutate the acc argument as we created it for only this reduce
-        if (!acc[originKey]) {
-          acc[originKey] = {
-            units: next.get('units'),
-            origin,
-          }
+      const originKey = next.get('originKey')
+      // Safe to mutate the acc argument as we created it for only this reduce
+      if (!acc[originKey]) {
+        acc[originKey] = {
+          units: next.get('units'),
+          origin,
         }
-        acc[originKey]['country'] = region.get('country')
-        acc[originKey]['originKey'] = region.get('originKey')
-        const activity = next.get('activity')
-        const currentVal = acc[originKey][activity] || 0
-        acc[originKey][activity] = (currentVal + next.get('value'))
       }
+      acc[originKey]['country'] = next.get('country')
+      acc[originKey]['originKey'] = originKey
+      const activity = next.get('activity')
+      const currentVal = acc[originKey][activity] || 0
+      acc[originKey][activity] = (currentVal + next.get('value'))
+      
+      const totalCount = acc[originKey]['totalCount'] || 0
+      const confidentialCount = acc[originKey]['confidentialCount'] || 0
+      acc[originKey]['totalCount'] = (totalCount + 1)
+      acc[originKey]['confidentialCount'] = (confidentialCount + next.get('confidential'))
       return acc  
     }, {})
     return Immutable.fromJS(result)

@@ -4,6 +4,7 @@ const Constants = require('../Constants.js')
 
 const ImportExportArrow = require('./ImportExportArrow.jsx')
 const MapPieceLabel = require('./MapPieceLabel.jsx')
+const ConfidentialIcon = require('./ConfidentialIcon.jsx')
 
 class MapPiece extends React.Component {
 
@@ -27,7 +28,6 @@ class MapPiece extends React.Component {
             />  
     }
     return ''
-    
   }
 
   render(){
@@ -35,6 +35,10 @@ class MapPiece extends React.Component {
     let arrowTransform = `translate(${Constants.getIn(['mapPieceArrowStyle', 'x'])}, ${Constants.getIn(['mapPieceArrowStyle', 'y'])})`
     if(this.props.styles.get('arrowPosition') == 'down'){
       arrowTransform = `translate(${Constants.getIn(['mapPieceArrowStyle', 'x'])}, ${this.props.dimensions.get('height') - Constants.getIn(['mapPieceArrowStyle', 'y'])})`   
+    }
+    let confidentialIcon = ''      
+    if(typeof this.props.data.get('confidentialCount')  !== 'undefined' && this.props.data.get('confidentialCount') !== 0){
+      confidentialIcon = <ConfidentialIcon styles={this.props.styles.get('confidentialStyle')}/>
     }
     return <g>
         <polygon 
@@ -51,6 +55,7 @@ class MapPiece extends React.Component {
           {this.drawArrow(this.props.legends, this.props.data, 'exports', this.props.styles)}
           {this.drawArrow(this.props.legends, this.props.data, 'imports', this.props.styles)}
         </g>
+        {confidentialIcon}
       </g>
   }
 }

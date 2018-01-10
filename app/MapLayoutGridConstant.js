@@ -18,7 +18,12 @@ const MapLayoutGridConstant = Immutable.fromJS({
         arrowPosition:'down',
         arrowSpacing: -1,
         bottomMargin: 5,
-        topMargin: 5
+        topMargin: 5,
+        confidentialStyle:{
+          fill: '#999',
+          stroke: '#999',
+          exclamationFill:'#fff'
+        }
       },
       layout: [
         { name: 'YT',  originKey:'YT',  x:0,  y:0 },
@@ -52,7 +57,12 @@ const MapLayoutGridConstant = Immutable.fromJS({
         arrowPosition:'up',
         arrowSpacing: -1,
         bottomMargin: 5,
-        topMargin: 5
+        topMargin: 5,
+        confidentialStyle:{
+          fill: '#999',
+          stroke: '#999',
+          exclamationFill:'#fff'
+        }
       },
       layout:[
         { name:  'VT', originKey: 'VT', x: 9.5, y: 0 },
@@ -122,7 +132,12 @@ const MapLayoutGridConstant = Immutable.fromJS({
         arrowPosition:'up',
         arrowSpacing: -1,
         bottomMargin: 5,
-        topMargin: 5
+        topMargin: 5,
+        confidentialStyle:{
+          fill: '#999',
+          stroke: '#999',
+          exclamationFill:'#fff'
+        }
       },
       layout:[
         { name:  'MN', originKey: 'MN', x: 0, y: 0 },
