@@ -25,9 +25,9 @@ class ExplanationDot extends React.Component {
   }
 
   dotAnimation() {
-    return <svg>
+    return <g>
       <g>{this.explanationDot()}
-        <circle id='back'
+        <circle id='animationCircle'
           r={Constants.getIn(['explanationDot','radiusStart'])}      
           cx={this.props.xPosition}
           cy={this.props.yPosition} 
@@ -57,7 +57,7 @@ class ExplanationDot extends React.Component {
             /></defs>
         </circle>
       </g>
-    </svg>
+    </g>
   }
 
   render() {
