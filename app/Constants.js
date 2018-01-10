@@ -128,6 +128,9 @@ const Constants = Immutable.fromJS({
   screenshotPath: 'screenshot',
   dataloader:{
     mapping:{
+      value:{
+        'confidential': 'Confidential'
+      },
       country:{
         ca:{
           'Yukon': 'YT',
@@ -195,6 +198,11 @@ const Constants = Immutable.fromJS({
           'West Virginia':'WV',
           'Wisconsin':'WI',
           'Wyoming':'WY',
+        },
+        'powerpool':{
+          'New England-ISO': 'NE-ISO',
+          'Minn / N. Dakota': 'MN/ND',
+          'Pennsylvania Jersey Maryland Power Pool': 'PJMPP'
         }
       }
     }

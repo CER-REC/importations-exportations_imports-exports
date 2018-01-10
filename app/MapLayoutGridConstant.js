@@ -140,9 +140,9 @@ const MapLayoutGridConstant = Immutable.fromJS({
         }
       },
       layout:[
-        { name:  'MN', originKey: 'MN', x: 0, y: 0 },
-        { name:  'NE', originKey: 'NE', x: 1, y: 0 },
-        { name:  'PJM', originKey: 'PJM', x: 2, y : 0},
+        { name:  'MN/ND', originKey: 'MN/ND', x: 0, y: 0 },
+        { name:  'NE-ISO', originKey: 'NE-ISO', x: 1, y: 0 },
+        { name:  'PJM PP', originKey: 'PJMPP', x: 2, y : 0},
       ]
     },
     legends:[{
