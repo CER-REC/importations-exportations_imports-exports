@@ -17,17 +17,17 @@ class ElectricityVisualizationContainer extends React.Component {
       />
       <Timeline
         x={this.props.xaxis}
-        y={this.props.yaxis}
+        y={this.props.yaxis + this.props.height * 0.3}
         width={this.props.width * 0.6}
         height={215}
       />
       <USMapContainer 
         xaxis = {this.props.xaxis } 
-        yaxis = {this.props.yaxis + this.props.height/2}
+        yaxis = {this.props.yaxis + this.props.height * 0.4}
       />
       <PowerPoolContainer 
-       xaxis = {this.props.xaxis + this.props.width*0.4 } 
-       yaxis = {this.props.yaxis + this.props.height}
+       xaxis = {this.props.xaxis + this.props.width * 0.4 } 
+       yaxis = {this.props.yaxis + this.props.height * 0.8}
       />
       <PowerPoolGroupingOutline 
        xaxis = {this.props.xaxis} 
