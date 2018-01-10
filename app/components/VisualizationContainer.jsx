@@ -32,6 +32,7 @@ class VisualizationContainer extends React.Component {
         return <NaturalGasLiquidsVisualizationContainer xaxis={xaxis} yaxis={yaxis} height={height} width={width}/> 
       case 'electricity':
       default:
+        //TODO: x and y coordinates need to be adjusted according to the control area and heading data
         return <ElectricityVisualizationContainer xaxis={xaxis} yaxis={yaxis} height={height} width={width}/> 
     }
   }

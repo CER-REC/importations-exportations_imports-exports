@@ -1,13 +1,18 @@
 const React = require('react')
 const ReactRedux = require('react-redux')
+const ElectricityMapLayout = require('./ElectricityMapLayout.jsx')
 
 class PowerPoolContainer extends React.Component {
   render(){
-    return <g>
-      <text x = {this.props.xaxis} y = {this.props.yaxis}>
-        Power Pool Container
-      </text>
-    </g>
+    //Scale is temporary adjustment as it's too small if we use dimensions mentioned in the design document
+    //TODO: scale map dynamically when screen size change
+    return <g transform='scale(1.2)'> 
+              <ElectricityMapLayout
+                xaxis={this.props.xaxis} 
+                yaxis = {this.props.yaxis}
+                country = 'powerpool'
+                />
+            </g>
   }
 }
 
