@@ -1,53 +1,48 @@
-
 const React = require('react')
-const ReactRedux = require('react-redux')
+const { connect } = require('react-redux')
 const Constants = require('../Constants.js')
 
 const Header = require('./Header.jsx')
 const MenuBar = require('./MenuBar.jsx')
 const SocialBar = require('./SocialBar.jsx')
-const VisualizationContainer = require('./VisualizationContainer.jsx')
-const VisualizationDetailContainer = require('./VisualizationDetailContainer.jsx')
 
-const WorkspaceComputations = require('../computations/WorkspaceComputations.js')
+const VisualizationContainer = require('./VisualizationContainer.jsx')
+const ViewportSelectors = require('../selectors/viewport/')
 
 require('./Workspace.scss')
 
-class Workspace extends React.Component {
-
-  render() {
-
-    const workspaceStyle = {
-      width:  this.props.viewport.get('x'),
-      height: WorkspaceComputations.visualizationHeight(this.props.viewport),
-    }
-
-    return <div style = { workspaceStyle }>
-      <div className = 'Workspace' >
-        <Header />
-      </div>
-
-      <svg
-        className="Workspace"
-        width={this.props.viewport.get('x')}
-        height={WorkspaceComputations.visualizationHeight(this.props.viewport)}
-      > 
-        <VisualizationContainer />
-
-        <VisualizationDetailContainer />
-
-        <SocialBar />
-        <MenuBar />
-      </svg>
+const Workspace = ({ svgSize, detailSidebarPosition }) => (
+  <div style={{ position: 'relative' }}>
+    <div className = 'Workspace'>
+      <Header />
     </div>
-  }
-}
+    <div
+      id="detailSidebar"
+      style={{
+        position: 'absolute',
+        top: detailSidebarPosition.top,
+        left: detailSidebarPosition.left,
+        width: detailSidebarPosition.width,
+      }}
+    />
+    <svg
+      id="workspace"
+      className="Workspace"
+      {...svgSize}
+    >
 
-const mapStateToProps = state => {
-  return {
-    viewport: state.viewport,
-    language: state.language,
-  }
-}
+      <VisualizationContainer />
+      
+      <MenuBar />
+      <SocialBar />
+    </svg>
 
-module.exports = ReactRedux.connect(mapStateToProps)(Workspace)
+  </div>
+)
+
+module.exports = connect(
+  (state, props) => ({
+    svgSize: ViewportSelectors.svgSize(state, props),
+    detailSidebarPosition: ViewportSelectors.detailSidebarPosition(state, props),
+  })
+)(Workspace)

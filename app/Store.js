@@ -5,6 +5,7 @@ const ImportExportVisualizationReducer = require('./reducers/ImportExportVisuali
 const LanguageReducer = require('./reducers/LanguageReducer.js')
 const ElectricitySortStateReducer = require('./reducers/ElectricitySortStateReducer.js')
 const ElectricityDataTypeReducer = require('./reducers/ElectricityDataTypeReducer.js')
+const ShowExplanationsReducer = require('./reducers/ShowExplanationsReducer.js')
 const DataReducer = require('./actions/data').reducer
 const UIReducer = require('./actions/ui').reducer
 
@@ -17,6 +18,7 @@ const reducers = Redux.combineReducers({
   language: LanguageReducer,
   electricitySortState: ElectricitySortStateReducer,
   electricityDataTypes: ElectricityDataTypeReducer,
+  showExplanations: ShowExplanationsReducer,
   data: DataReducer,
   ui: UIReducer,
 })

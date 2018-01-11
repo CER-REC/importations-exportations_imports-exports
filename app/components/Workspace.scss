@@ -2,3 +2,9 @@
   // Position relative is important for sizing of heading elements
   position: relative;
 }
+svg {
+  pointer-events: none;
+  > * {
+  pointer-events: auto;
+  }
+}

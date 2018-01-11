@@ -2,20 +2,18 @@ const SetElectricityDataTypeCreator = require('../actionCreators/SetElectricityD
 const Constants = require ('../Constants')
 
 const amountUnit = store => next => action => {
-  // Process the action immediately
-  next(action)
-
   // TODO: Convert SetVisualization to constant
-  // If we aren't changing the data displayed, don't reset the amount unit
-  if (action.type !== 'SetVisualization') { return }
+  if (action.type === 'SetVisualization') {
+    const validUnits =
+      Constants.getIn(['energyMeasurementTypes', action.visualization])
 
-  const validUnits =
-    Constants.getIn(['energyMeasurementTypes', action.visualization])
+    // Only dispatch an event if the current unit will be invalid
+    if (validUnits.contains(store.getState().electricityDataTypes) === false) {
+      store.dispatch(SetElectricityDataTypeCreator(validUnits.get(0)))
+    }
+  }
 
-  // If the current unit is valid, don't dispatch a new event
-  if (validUnits.contains(store.getState().electricityDataTypes)) { return }
-
-  store.dispatch(SetElectricityDataTypeCreator(validUnits.get(0)))
+  next(action)
 }
 
 module.exports = amountUnit

@@ -106,7 +106,7 @@ class Header extends React.Component {
 
 
   render() {
-    return <div>
+    return <div style={{ height: Constants.get('topHeightMargin') }}>
       {this.leftHeading()}
       {this.metaBar()}
     </div>

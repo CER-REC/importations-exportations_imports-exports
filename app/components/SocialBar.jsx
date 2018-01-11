@@ -94,14 +94,14 @@ class SocialBar extends React.Component {
   downloadDataClick() {
     const appRoot = RouteComputations.appRoot(document.location, this.props.language)
     const fileName = Tr.getIn(['downloadable', 'csv', this.props.language])
-    window.open(`${appRoot}data/${fileName}`, 'data:text/csv;charset=utf-8,data/' + escape())  
+    window.open(`${appRoot}data/${fileName}`, 'data:text/csv;charset=utf-8,data/') 
   }
 
 
   render() {
     let transformSocialBarIcons = `translate(${this.props.viewport.get('x') - Constants.getIn(['socialBar', 'iconMargin'])}, 0)`
 
-    return <svg alignment-baseline = 'baseline'>
+    return <svg>
       <rect 
         x = { this.props.viewport.get('x') - Constants.getIn(['socialBar','width']) }
         y = { WorkspaceComputations.socialBarY(this.props.viewport) }
