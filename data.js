@@ -1,6 +1,7 @@
 const fs = require('fs')
 const Path = require('path')
 const CSVParse = require('csv-parse')
+const OriginVaildator = require('./app/validators/OriginValidator.js')
 
 function stripNA(input) {
   if (input.toUpperCase() === 'N/A') { return '' }
@@ -41,7 +42,7 @@ const parser = CSVParse({
 }, (err, data) => {
   if (err) { throw err }
   const output = {}
-
+  const parsingIssue = {}
   data.forEach(point => {
     // Normalize the data. We can safely mutate args in this situation
     point.product = productMap[point.product]
@@ -51,7 +52,24 @@ const parser = CSVParse({
     const outProd = output[point.product]
     if (!outProd[point.units]) { outProd[point.units] = [] }
 
-    // Normalize the columns before adding the data point
+    let confidential = false
+    //check for the confidential data
+    if(point.value.toLowerCase() === 'confidential'){
+      confidential = true
+    }
+    //Data Vaildation and parsing
+    const region = OriginVaildator.originNameValidator(point.origin)
+    
+    //Printing error on the UI so that data can be verified
+    if(region.get('isValid') === false){
+      if(typeof parsingIssue[region.get('error')] === 'undefined'){
+        parsingIssue[region.get('error')]= {product: point.product , numberOfRows : 0}
+      }else{
+        parsingIssue[region.get('error')].numberOfRows = parsingIssue[region.get('error')].numberOfRows+1 
+      }
+    }
+
+
     outProd[point.units].push({
       period: stripNA(point.period),
       year: parseInt(point.period.substr(0, 4), 10),
@@ -60,15 +78,22 @@ const parser = CSVParse({
       productSubtype: stripNA(point.productSubtype),
       transport: stripNA(point.transport),
       origin: stripNA(point.origin),
+      country: region.get('country')||'',
+      originKey: region.get('originKey')||'',
       destination: stripNA(point.destination),
       port: stripNA(point.port),
       activityGroup: stripNA(activityGroupMap[point.activity]),
       activity: stripNA(activityMap[point.activity]),
       originalActivity: stripNA(point.activity),
       units: stripNA(point.units),
+      confidential: confidential,
       value: parseInt(stripNA(point.value), 10) || 0,
     })
   })
+
+  console.log('/********************* Starts: Error in validating data *********************/')
+  console.log(parsingIssue)
+  console.log('/********************* Finish: Error in validating data *********************/')
 
   fs.writeFileSync(
     Path.resolve(__dirname, 'public/data/data.json'),

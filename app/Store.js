@@ -3,22 +3,22 @@ const Redux = require('redux')
 const ViewportReducer = require('./reducers/ViewportReducer.js')
 const ImportExportVisualizationReducer = require('./reducers/ImportExportVisualizationReducer.js')
 const LanguageReducer = require('./reducers/LanguageReducer.js')
-const ElectricitySortStateReducer = require('./reducers/ElectricitySortStateReducer.js')
-const ElectricityDataTypeReducer = require('./reducers/ElectricityDataTypeReducer.js')
+const ShowExplanationsReducer = require('./reducers/ShowExplanationsReducer.js')
 const DataReducer = require('./actions/data').reducer
-const UIReducer = require('./actions/ui').reducer
+const { reducer: visualizationSettings } = require('./actions/visualizationSettings')
 
-const AmountUnitMiddleware = require('./middleware/amountUnit')
 const TimelineRangeMiddleware = require('./middleware/timelineRange')
+const InitialVisualizationSettingsMiddleware = require('./middleware/initialVisualizationSettings')
+const ActionLogMiddleware = require('./middleware/actionLog')
+const TagVisualizationSettingsMiddleware = require('./middleware/tagVisualizationSettings')
 
 const reducers = Redux.combineReducers({
   viewport: ViewportReducer,
   importExportVisualization: ImportExportVisualizationReducer,
   language: LanguageReducer,
-  electricitySortState: ElectricitySortStateReducer,
-  electricityDataTypes: ElectricityDataTypeReducer,
+  showExplanations: ShowExplanationsReducer,
   data: DataReducer,
-  ui: UIReducer,
+  visualizationSettings,
 })
 
 module.exports = function () {
@@ -28,8 +28,10 @@ module.exports = function () {
   return Redux.createStore(
     reducers,
     composeEnhancers(Redux.applyMiddleware(
-      AmountUnitMiddleware,
-      TimelineRangeMiddleware
+      InitialVisualizationSettingsMiddleware,
+      TagVisualizationSettingsMiddleware,
+      TimelineRangeMiddleware,
+      ActionLogMiddleware
     ))
   )
 }

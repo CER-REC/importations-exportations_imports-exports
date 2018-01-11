@@ -1,38 +1,40 @@
 const React = require('react')
-const ReactRedux = require('react-redux')
+const { connect } = require('react-redux')
 
 const CanadaMapContainer = require('./CanadaMapContainer.jsx')
-const Timeline = require('./Timeline')
-const USMapContainer = require('./USMapContainer.jsx')
-const PowerPoolContainer = require('./PowerPoolContainer.jsx')
-const PowerPoolGroupingOutline = require('./PowerPoolGroupingOutline.jsx')
 const ExplanationPopovers = require('./ExplanationPopovers.jsx')
+const BarChart = require('./BarChart')
+const Axis = require('./Axis')
+const NaturalGasViewport = require('../selectors/viewport/naturalGas')
+const TimelineSelectors = require('../selectors/timeline')
+const Constants = require('../Constants')
 
 class NaturalGasVisualizationContainer extends React.Component {
-  
   render(){
     return <g>
-      <CanadaMapContainer 
-        xaxis = {this.props.xaxis} 
-        yaxis = {this.props.yaxis} 
+      <BarChart
+        {...this.props.importChart}
+        valueKey="imports"
+        linkedKeys={['exports']}
+        data={this.props.chartData.get('bars')}
+        timelineRange={this.props.timelineRange}
+        colour={Constants.getIn(['styleGuide', 'colours', 'ImportDefault'])}
       />
-      <Timeline
-        x={this.props.xaxis}
-        y={this.props.yaxis}
-        width={this.props.width * 0.6}
-        height={215}
+      <Axis
+        {...this.props.axisPosition}
+        data={this.props.chartData.get('bars')}
+        barWidth={4}
+        labels={this.props.chartData.get('labels')}
+        scale={{ x: { min: 1990, max: 2017 }}}
       />
-      <USMapContainer 
-        xaxis = {this.props.xaxis } 
-        yaxis = {this.props.yaxis + this.props.height/2}
-      />
-      <PowerPoolContainer 
-        xaxis = {this.props.xaxis } 
-        yaxis = {this.props.yaxis + this.props.height}
-      />
-      <PowerPoolGroupingOutline 
-        xaxis = {this.props.xaxis + this.props.width * (0.60) } 
-        yaxis = {this.props.yaxis + this.props.height}
+      <BarChart
+        {...this.props.exportChart}
+        valueKey="exports"
+        linkedKeys={['imports']}
+        flipped
+        data={this.props.chartData.get('bars')}
+        timelineRange={this.props.timelineRange}
+        colour={Constants.getIn(['styleGuide', 'colours', 'ExportDefault'])}
       />
       <ExplanationPopovers 
         xaxis = {this.props.xaxis } 
@@ -42,8 +44,12 @@ class NaturalGasVisualizationContainer extends React.Component {
   }
 }
 
-const mapStateToProps = state => ({
-  viewport: state.viewport,
-})
-
-module.exports = ReactRedux.connect(mapStateToProps)(NaturalGasVisualizationContainer)
+module.exports = connect(
+  (state, props) => ({
+    importChart: NaturalGasViewport.chartImportPosition(state, props),
+    axisPosition: NaturalGasViewport.chartAxisPosition(state, props),
+    exportChart: NaturalGasViewport.chartExportPosition(state, props),
+    chartData: TimelineSelectors.timelinePositionSelector(state, props),
+    timelineRange: TimelineSelectors.timelineRange(state, props),
+  })
+)(NaturalGasVisualizationContainer)

@@ -50,7 +50,7 @@ class MenuBar extends React.Component {
 
   naturalGasLiquids() {
     return
-  } 
+  }
 
   render() {
     return <g className='MenuBar'>

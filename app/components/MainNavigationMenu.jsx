@@ -6,6 +6,7 @@ const Tr = require('../TranslationTable.js')
 const WorkspaceComputations = require('../computations/WorkspaceComputations.js')
 
 const MenuBarOption = require('./MenuBarOption.jsx')
+const ExplanationDot = require('./ExplanationDot.jsx')
 
 const SetVisualizationCreator = require('../actionCreators/SetVisualizationCreator.js')
 
@@ -29,6 +30,15 @@ class MainNavigationMenu extends React.Component {
     </g>
   }
 
+  explanationDot() {
+    const xPosition = '125'
+    return <ExplanationDot
+      key = 'mainNavDot' 
+      xPosition = {xPosition}
+      yPosition = {WorkspaceComputations.topHeightMargin() - Constants.getIn(['explanationDot','yOffset'])}
+    />
+  }
+
   render() {
     return <g><MenuBarOption 
       key='mainNavigationMenu'
@@ -43,6 +53,7 @@ class MainNavigationMenu extends React.Component {
       language = {this.props.language}
     />
     {this.controlArrowImage()}
+    {this.explanationDot()}
     </g>
   }
 }

@@ -7,7 +7,8 @@ const WorkspaceComputations = require('../computations/WorkspaceComputations.js'
 
 const MenuBarOption = require('./MenuBarOption.jsx')
 
-const SetElectricityDataTypeCreator = require('../actionCreators/SetElectricityDataTypeCreator.js')
+const { setAmount } = require('../actions/visualizationSettings')
+const { visualizationSettings } = require('../selectors/visualizationSettings')
 
 require('./ElectricityAmountPriceMenu.scss')
 
@@ -50,8 +51,8 @@ class ElectricityAmountPriceMenu extends React.Component {
       key='electricityAmountPriceMenu'
       yaxis = { WorkspaceComputations.electricityAmountPriceMenuY() }
       options={Constants.getIn(['energyMeasurementTypes', selectedEnergy])}
-      onOptionClick = {this.props.setElectricityDataType.bind(this)}
-      selectedOption = {this.props.electricityDataType}
+      onOptionClick = {this.props.setAmount}
+      selectedOption = {this.props.amount}
       optionXaxisPadding = {Constants.getIn(['menuBarOptions', 'optionXaxisPadding'])}
       optionPadding = {Constants.getIn(['menuBarOptions', 'optionPadding'])}
       trKey = 'electricityDataTypes' 
@@ -89,21 +90,15 @@ class ElectricityAmountPriceMenu extends React.Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state, props) => {
   return {
     viewport: state.viewport,
-    electricityDataType: state.electricityDataTypes,
     selectedEnergy: state.importExportVisualization,
-    language: state.language
+    language: state.language,
+    amount: visualizationSettings(state, props).get('amount'),
   }
 }
 
-const mapDispatchToProps = dispatch => {
-  return {
-    setElectricityDataType(dataType) {
-      dispatch(SetElectricityDataTypeCreator(dataType))
-    }
-  }
-}
+const mapDispatchToProps = ({ setAmount })
 
 module.exports = ReactRedux.connect(mapStateToProps, mapDispatchToProps)(ElectricityAmountPriceMenu)

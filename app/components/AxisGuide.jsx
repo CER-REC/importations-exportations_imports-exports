@@ -4,6 +4,7 @@ const connect = require('react-redux').connect
 const TextBox = require('./TextBox')
 const SVGDrag = require('./SVGDrag/')
 const Constants = require('../Constants')
+const { visualizationSettings } = require('../selectors/visualizationSettings')
 
 class AxisGuide extends React.PureComponent {
   static get defaultProps() {
@@ -103,6 +104,6 @@ class AxisGuide extends React.PureComponent {
   }
 }
 
-module.exports = connect(
-  state => ({ unit: state.electricityDataTypes })
-)(AxisGuide)
+module.exports = connect((state, props) => ({
+  unit: visualizationSettings(state, props).get('amount'),
+}))(AxisGuide)
