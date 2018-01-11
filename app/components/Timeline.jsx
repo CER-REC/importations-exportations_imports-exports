@@ -8,6 +8,7 @@ const TimelinePlay = require('./TimelinePlay')
 const Constants = require('../Constants')
 
 const TimelineSelectors = require('../selectors/timeline')
+const { visualizationSettings } = require('../selectors/visualizationSettings')
 
 class Timeline extends React.PureComponent {
   static get defaultProps() {
@@ -120,5 +121,5 @@ class Timeline extends React.PureComponent {
 module.exports = connect(state => ({
   data: TimelineSelectors.timelinePositionSelector(state),
   timelineRange: TimelineSelectors.timelineRange(state),
-  scaleLinked: state.ui.get('barGraphScaleLinked'),
+  scaleLinked: visualizationSettings(state).getIn(['timeline', 'scaleLinked']),
 }))(Timeline)

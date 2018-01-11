@@ -3,6 +3,7 @@ const { connect } = require('react-redux')
 
 const AnimatedLine = require('./SVGAnimation/AnimatedLine')
 const Constants = require('../Constants')
+const TimelineSelector = require('../selectors/timeline')
 
 class ProportionChart extends React.PureComponent {
   render() {
@@ -82,5 +83,7 @@ ProportionChart.defaultProps = {
 }
 
 module.exports = connect(
-  ({ ui }) => ({ timelineGroup: ui.get('timelineGroup') })
+  (state, props) => ({
+    timelineGroup: TimelineSelector.timelineGrouping(state, props),
+  })
 )(ProportionChart)

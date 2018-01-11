@@ -3,8 +3,8 @@ const connect = require('react-redux').connect
 const { fromJS } = require('immutable')
 
 const SVGDrag = require('./SVGDrag/')
-const timelineFilter = require('../actions/ui').timelineFilter
-const timelineSelectors = require('../selectors/timeline')
+const { timelineFilter } = require('../actions/visualizationSettings')
+const TimelineSelector = require('../selectors/timeline')
 
 class TimelineSeek extends React.PureComponent {
   static get defaultProps() {
@@ -121,9 +121,9 @@ class TimelineSeek extends React.PureComponent {
 
 module.exports = connect(
   (state, props) => ({
-    seekPosition: timelineSelectors.timelineSeekPositionSelector(state, props),
-    timelineRange: state.ui.get('timelineRange'),
-    timelineGroup: state.ui.get('timelineGroup'),
+    seekPosition: TimelineSelector.timelineSeekPositionSelector(state, props),
+    timelineRange: TimelineSelector.timelineRange(state, props),
+    timelineGroup: TimelineSelector.timelineGrouping(state, props),
   }),
   { timelineFilter }
 )(TimelineSeek)
