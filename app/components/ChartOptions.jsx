@@ -2,7 +2,8 @@ const React = require('react')
 const { connect } = require('react-redux')
 
 const Constants = require('../Constants')
-const { bargraphScaleLinked, timelineGroup } = require('../actions/ui')
+const { setScaleLinked, setGrouping } = require('../actions/visualizationSettings')
+const TimelineSelector = require('../selectors/timeline')
 
 class ChartOptions extends React.PureComponent {
   constructor(props) {
@@ -14,12 +15,12 @@ class ChartOptions extends React.PureComponent {
   scaleLinkedChanged(e) {
     // FIXME: Controlled checkbox doesn't seem to be working properly. If I
     // prevent the default action for the event, the checkbox takes two clicks
-    this.props.bargraphScaleLinked(e.target.checked)
+    this.props.setScaleLinked(e.target.checked)
   }
 
   changeTimelineGroup(e) {
     e.preventDefault()
-    this.props.changeTimelineGroup(
+    this.props.setGrouping(
       this.props.timelineGroup === 'year' ? 'quarter' : 'year'
     )
   }
@@ -69,9 +70,9 @@ class ChartOptions extends React.PureComponent {
 }
 
 module.exports = connect(
-  state => ({
-    scaleLinked: state.ui.get('barGraphScaleLinked'),
-    timelineGroup: state.ui.get('timelineGroup'),
+  (state, props) => ({
+    scaleLinked: TimelineSelector.timelineScaleLinked(state, props),
+    timelineGroup: TimelineSelector.timelineGrouping(state, props),
   }),
-  { bargraphScaleLinked, changeTimelineGroup: timelineGroup }
+  { setScaleLinked, setGrouping }
 )(ChartOptions)

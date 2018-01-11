@@ -1,17 +1,28 @@
 const createSelector = require('reselect').createSelector
 const fromJS = require('immutable').fromJS
 
+const { visualizationSettings } = require('./visualizationSettings')
 const { filterByHexSelector }= require('./data')
 const { visualizationContentPosition: visContentSize } = require('./viewport/')
 const Constants = require('../Constants.js')
 
-const timelineGrouping = state => state.ui.get('timelineGroup')
-const timelineRange = state => state.ui.get('timelineRange')
 const chartScaleBy = (_, props) => ({
   primary: props.valueKey,
   others: props.linkedKeys || [],
 })
-const linkedScale = state => state.ui.get('barGraphScaleLinked')
+
+const timelineGrouping = createSelector(
+  visualizationSettings,
+  settings => settings.getIn(['timeline', 'grouping'])
+)
+const timelineRange = createSelector(
+  visualizationSettings,
+  settings => settings.getIn(['timeline', 'range'])
+)
+const timelineScaleLinked = createSelector(
+  visualizationSettings,
+  settings => settings.getIn(['timeline', 'scaleLinked'])
+)
 
 const aggregateQuarterSelector = createSelector(
   filterByHexSelector,
@@ -117,7 +128,7 @@ const timelineScaleSelector = createSelector(
   chartScaleBy,
   timelineXScale,
   timelineYScales,
-  linkedScale,
+  timelineScaleLinked,
   (scaleBy, xScale, yScales, linked) => {
     if (linked === false) {
       return {
@@ -265,6 +276,7 @@ const timelineSeekPositionSelector = createSelector(
 
 module.exports = {
   timelineGrouping,
+  timelineScaleLinked,
   timelineXScale,
   timelineScaleSelector,
   timelinePositionCalculation,

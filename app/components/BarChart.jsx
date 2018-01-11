@@ -112,6 +112,6 @@ module.exports = connect(
   (state, props) => ({
     scale: TimelineSelector.timelineScaleSelector(state, props),
     trueScale: TimelineSelector.timelineTrueScale(state, props),
-    timelineGroup: state.ui.get('timelineGroup'),
+    timelineGroup: TimelineSelector.timelineGrouping(state, props),
   })
 )(BarChart)
