@@ -42,7 +42,7 @@ WorkspaceComputations.legendY = function (viewport) {
 }
 
 WorkspaceComputations.socialBarY = function (viewport) {
-  return viewport.get('y')
+  return viewport.get('y') + 120
 }
 
 WorkspaceComputations.visualizationContainerWidth = function (viewport) {

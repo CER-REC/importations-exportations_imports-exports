@@ -109,7 +109,7 @@ class TimelineSeek extends React.PureComponent {
           >
             <polygon
               points="7,0 10,0 10,26 0,26"
-              stroke="black"
+              stroke='#a99372'
               fill="white"
             />
           </g>

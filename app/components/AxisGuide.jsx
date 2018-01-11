@@ -69,7 +69,7 @@ class AxisGuide extends React.PureComponent {
         <g transform={`translate(0 ${offset})`}>
           <polyline
             strokeWidth={1}
-            stroke="black"
+            stroke='#a99372'
             points="-12,0 -7,-10 -2,0 -7,10 -12,0"
             fill="transparent"
           />
@@ -79,7 +79,7 @@ class AxisGuide extends React.PureComponent {
             y1={0}
             y2={0}
             strokeWidth={1}
-            stroke="black"
+            stroke='#a99372'
             strokeDasharray="4, 2"
           />
 
@@ -89,6 +89,8 @@ class AxisGuide extends React.PureComponent {
               y: -6,
               textAnchor: 'middle',
               alignmentBaseline: 'bottom',
+              fill: 'white',
+              fontSize: 11,
             }}
             boxStyles={{
               fill: Constants.getIn(['styleGuide', 'colours', 'SandMedium']),
