@@ -5,11 +5,11 @@ const DetailSidebar = require('./DetailSidebar')
 const ChartOptions = require('./ChartOptions')
 const TimelineSeek = require('./TimelineSeek')
 const TimelinePlay = require('./TimelinePlay')
-const timelineSelectors = require('../selectors/timeline')
+const TimelineSelector = require('../selectors/timeline')
 const Constants = require('../Constants')
 
 const Axis = props => {
-  const { labels, top = 0, left = 0, seekPosition, barWidth, width, height, data } = props
+  const { labels, top = 0, left = 0, seekPosition, barWidth, width, height, bars: data } = props
   if (data.count() === 0) { return null }
   const elements = labels.map(label => {
     const key = label.get('key', `label-${label.get('label')}`)
@@ -84,8 +84,8 @@ const Axis = props => {
   )
 }
 
-module.exports = connect(
-  (state, props) => ({
-    seekPosition: timelineSelectors.timelineSeekPositionSelector(state, props),
-  })
-)(Axis)
+module.exports = connect((state, props) => {
+  return Object.assign({
+    seekPosition: TimelineSelector.timelineSeekPositionSelector(state, props),
+  }, TimelineSelector.timelineData(state, props))
+})(Axis)

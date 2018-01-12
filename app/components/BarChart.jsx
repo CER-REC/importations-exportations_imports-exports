@@ -2,7 +2,6 @@ const React = require('react')
 const PropTypes = require('prop-types')
 const { connect } = require('react-redux')
 
-const DetailSidebar = require('./DetailSidebar')
 const AnimatedLine = require('./SVGAnimation/AnimatedLine')
 const AxisGuide = require('./AxisGuide')
 const TimelineSelector = require('../selectors/timeline')
@@ -11,7 +10,7 @@ class BarChart extends React.PureComponent {
   constructor(props) {
     super(props)
     this.state = {
-      axisGuide: props.trueScale.y.max,
+      axisGuide: props.trueScale.get('max'),
     }
 
     this.updateAxisGuide = this.updateAxisGuide.bind(this)
@@ -21,8 +20,8 @@ class BarChart extends React.PureComponent {
     // Reset the axis guide when the scale changes.
     // Watch scale since that changes the bar height, but use trueScale in order
     // to put the guide on top of the tallest bar
-    if (props.scale.y.max !== this.props.scale.y.max) {
-      this.updateAxisGuide(props.trueScale.y.max)
+    if (props.scale.getIn(['y', 'max']) !== this.props.scale.getIn(['y', 'max'])) {
+      this.updateAxisGuide(props.trueScale.get('max'))
     }
   }
 
@@ -32,7 +31,7 @@ class BarChart extends React.PureComponent {
 
   render() {
     const {
-      data,
+      bars: data,
       scale,
       height,
       flipped,
@@ -43,7 +42,7 @@ class BarChart extends React.PureComponent {
     } = this.props
     if (data.count() === 0) { return null }
 
-    const heightPerUnit = height / (scale.y.max - scale.y.min)
+    const heightPerUnit = height / (scale.getIn(['y', 'max']) - scale.getIn(['y', 'min']))
     const elements = data.map(point => {
       let opacity = 1
       const year = point.get('year')
@@ -66,7 +65,7 @@ class BarChart extends React.PureComponent {
           x1={point.get('offsetX')}
           x2={point.get('offsetX')}
           y2={height}
-          y1={height - point.get(valueKey) * heightPerUnit}
+          y1={height - point.getIn(['values', valueKey], 0) * heightPerUnit}
           key={`${point.get('year')}-${point.get('quarter')}-${valueKey}`}
           strokeWidth={barSize}
           stroke={colour}
@@ -84,7 +83,7 @@ class BarChart extends React.PureComponent {
         <g>{elements}</g>
         <AxisGuide
           flipped={flipped}
-          scale={scale.y}
+          scale={scale.get('y').toJS()}
           position={this.state.axisGuide}
           chartHeight={height}
           heightPerUnit={heightPerUnit}
@@ -98,7 +97,10 @@ class BarChart extends React.PureComponent {
 }
 
 BarChart.propTypes = {
-  valueKey: PropTypes.string.isRequired,
+  valueKey: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.arrayOf(PropTypes.string),
+  ]).isRequired,
 }
 
 BarChart.defaultProps = {
@@ -108,10 +110,8 @@ BarChart.defaultProps = {
   barSize: 4,
 }
 
-module.exports = connect(
-  (state, props) => ({
-    scale: TimelineSelector.timelineScaleSelector(state, props),
-    trueScale: TimelineSelector.timelineTrueScale(state, props),
+module.exports = connect((state, props) => {
+  return Object.assign({
     timelineGroup: TimelineSelector.timelineGrouping(state, props),
-  })
-)(BarChart)
+  }, TimelineSelector.timelineData(state, props))
+})(BarChart)

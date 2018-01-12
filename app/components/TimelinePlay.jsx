@@ -17,7 +17,7 @@ class TimelinePlay extends React.PureComponent {
   }
 
   resetPlay() {
-    const { x: yearScale } = this.props.timelineScale
+    const { timelineScale: yearScale } = this.props
     clearInterval(this.playInterval)
     this.playInterval = null
     this.props.timelineFilter({
@@ -32,7 +32,7 @@ class TimelinePlay extends React.PureComponent {
 
     if (this.playInterval) { return this.resetPlay() }
 
-    const { x: yearScale } = this.props.timelineScale
+    const { timelineScale: yearScale } = this.props
     this.playInterval = setInterval(() => {
       let year = this.props.timelineRange.getIn(['start', 'year'])
       let quarter = this.props.timelineRange.getIn(['start', 'quarter']) + 1
@@ -69,7 +69,7 @@ class TimelinePlay extends React.PureComponent {
 module.exports = connect(
   (state, props) => ({
     timelineRange: timelineSelectors.timelineRange(state, props),
-    timelineScale: timelineSelectors.timelineScaleSelector(state, props),
+    timelineScale: timelineSelectors.timelineYearScaleCalculation(state, props),
   }),
   { timelineFilter }
 )(TimelinePlay)

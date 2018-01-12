@@ -10,12 +10,10 @@ const ExplanationPopovers = require('./ExplanationPopovers.jsx')
 const BarChart = require('./BarChart')
 const Axis = require('./Axis')
 const ElectricityViewport = require('../selectors/viewport/electricity')
-const TimelineSelectors = require('../selectors/timeline')
 const Constants = require('../Constants')
 
 class ElectricityVisualizationContainer extends React.Component {
   render(){
-    const contentWidth = this.props.contentSize.width
     return <g>
       <CanadaMapContainer 
         {...this.props.canadaMap}
@@ -23,25 +21,18 @@ class ElectricityVisualizationContainer extends React.Component {
       <BarChart
         {...this.props.importChart}
         valueKey="imports"
-        linkedKeys={['exports']}
-        data={this.props.chartData.get('bars')}
-        timelineRange={this.props.timelineRange}
+        aggregateKey="activity"
         colour={Constants.getIn(['styleGuide', 'colours', 'ImportDefault'])}
       />
       <Axis
         {...this.props.axisPosition}
-        data={this.props.chartData.get('bars')}
         barWidth={4}
-        labels={this.props.chartData.get('labels')}
-        scale={{ x: { min: 1990, max: 2017 }}}
       />
       <BarChart
         {...this.props.exportChart}
         valueKey="exports"
-        linkedKeys={['imports']}
+        aggregateKey="activity"
         flipped
-        data={this.props.chartData.get('bars')}
-        timelineRange={this.props.timelineRange}
         colour={Constants.getIn(['styleGuide', 'colours', 'ExportDefault'])}
       />
       <USMapContainer 
@@ -70,7 +61,5 @@ module.exports = connect(
     importChart: ElectricityViewport.chartImportPosition(state, props),
     axisPosition: ElectricityViewport.chartAxisPosition(state, props),
     exportChart: ElectricityViewport.chartExportPosition(state, props),
-    chartData: TimelineSelectors.timelinePositionSelector(state, props),
-    timelineRange: TimelineSelectors.timelineRange(state, props),
   })
 )(ElectricityVisualizationContainer)
