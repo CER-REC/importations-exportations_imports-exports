@@ -1,6 +1,8 @@
 const React = require('react')
 const ReactRedux = require('react-redux')
 
+const MapLayoutGridConstant = require('../MapLayoutGridConstant.js')
+
 class PowerPoolGrouping extends React.Component {
   render(){
     //Mock data need to be replaced by actual content 
@@ -15,7 +17,6 @@ class PowerPoolGrouping extends React.Component {
 const mapStateToProps = state => {
   return {
     viewport: state.viewport
-
   }
 }
 

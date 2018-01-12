@@ -11,6 +11,14 @@ class ElectricityMapLayout extends React.Component {
     let startYaxis = yaxis + (position.get('y') * (mapPieceScale * dimensions.get('height') + dimensions.get('yAxisPadding')))
     return`translate(${startXaxis+','+startYaxis}) scale(${mapPieceScale})`
   }
+  activatePowerPool(value){
+    const states = MapLayoutGridConstant.getIn([this.props.importExportVisualization, 'powerPoolMapping', this.props.selectedPowerPool])
+    if(typeof states !== 'undefined'){
+      const isExists = states.indexOf(value)
+      return isExists !== -1 ? true: false
+    }
+    return false
+  }
 
   render(){
     //Data from constant file
@@ -31,7 +39,9 @@ class ElectricityMapLayout extends React.Component {
                 data = { position } 
                 dimensions = { dimensions }
                 legends = {MapLayoutGridConstant.getIn([type,'legends'])}
-                styles = { styles }/>
+                styles = { styles }
+                powerpool = {this.activatePowerPool(position.get('name'))}
+                />
             </g>
     })
   }
@@ -42,7 +52,8 @@ const mapStateToProps = (state,props) => {
   return {
     importExportVisualization: state.importExportVisualization,
     layout: ElectrictySelector.getElectrictyMapLayout(state,props),
-    electricitySortState: state.electricitySortState
+    electricitySortState: state.electricitySortState,
+    selectedPowerPool: 'NE-ISO'
   }
 }
 
