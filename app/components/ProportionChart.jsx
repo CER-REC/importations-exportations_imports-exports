@@ -8,10 +8,9 @@ const TimelineSelector = require('../selectors/timeline')
 class ProportionChart extends React.PureComponent {
   render() {
     const {
-      data,
+      bars: data,
       height,
       flipped,
-      valueKey,
       barSize,
       timelineRange,
     } = this.props
@@ -23,7 +22,7 @@ class ProportionChart extends React.PureComponent {
       let opacity = 1
       let offsetY = 0
       let stackIndex = 0
-      const colourOffset = (categoryColours.count() - point.get(valueKey).count())
+      const colourOffset = (categoryColours.count() - point.get('values').count())
       const year = point.get('year')
       const quarter = point.get('quarter')
       const start = timelineRange.get('start').toJS()
@@ -40,7 +39,7 @@ class ProportionChart extends React.PureComponent {
         opacity = 0.5
       }
       const lines = point
-        .get(valueKey)
+        .get('values')
         .map((value, type) => {
           const lineColor = categoryColours.get(stackIndex + colourOffset)
           const line = (
@@ -82,8 +81,8 @@ ProportionChart.defaultProps = {
   barSize: 4,
 }
 
-module.exports = connect(
-  (state, props) => ({
+module.exports = connect((state, props) => {
+  return Object.assign({
     timelineGroup: TimelineSelector.timelineGrouping(state, props),
-  })
-)(ProportionChart)
+  }, TimelineSelector.timelineData(state, props))
+})(ProportionChart)

@@ -6,8 +6,6 @@ const ProportionChart = require('./ProportionChart')
 const BarChart = require('./BarChart')
 const Axis = require('./Axis')
 const CrudeOilViewport = require('../selectors/viewport/crudeOil')
-const CrudeOilSelectors = require('../selectors/crudeOil')
-const TimelineSelectors = require('../selectors/timeline')
 const Constants = require('../Constants')
 
 class CrudeOilVisualizationContainer extends React.Component {
@@ -15,9 +13,8 @@ class CrudeOilVisualizationContainer extends React.Component {
     return <g>
       <ProportionChart
         {...this.props.transportChart}
-        data={this.props.transportData.get('bars')}
-        timelineRange={this.props.timelineRange}
-        valueKey="transport"
+        aggregateKey="transport"
+        scaleKey="total"
         color={{
           Pipeline: 'red',
           Marine: 'green',
@@ -27,9 +24,8 @@ class CrudeOilVisualizationContainer extends React.Component {
       />
       <ProportionChart
         {...this.props.subtypeChart}
-        data={this.props.subtypeData.get('bars')}
-        timelineRange={this.props.timelineRange}
-        valueKey="subtype"
+        aggregateKey="productSubtype"
+        scaleKey="total"
         color={{
           Heavy: 'red',
           Light: 'green',
@@ -37,18 +33,14 @@ class CrudeOilVisualizationContainer extends React.Component {
       />
       <Axis
         {...this.props.axisPosition}
-        data={this.props.exportData.get('bars')}
         barWidth={4}
-        labels={this.props.exportData.get('labels')}
-        scale={{ x: { min: 1990, max: 2017 }}}
         canChangeScale={false}
       />
       <BarChart
         {...this.props.exportChart}
         valueKey="exports"
+        aggregateKey="activity"
         flipped
-        data={this.props.exportData.get('bars')}
-        timelineRange={this.props.timelineRange}
         colour={Constants.getIn(['styleGuide', 'colours', 'ExportDefault'])}
       />
       <ExplanationPopovers 
@@ -65,9 +57,5 @@ module.exports = connect(
     subtypeChart: CrudeOilViewport.chartSubtypePosition(state, props),
     axisPosition: CrudeOilViewport.chartAxisPosition(state, props),
     exportChart: CrudeOilViewport.chartExportPosition(state, props),
-    exportData: TimelineSelectors.timelinePositionSelector(state, props),
-    transportData: CrudeOilSelectors.timelineCrudeTransportQuarterSelector(state),
-    subtypeData: CrudeOilSelectors.timelineCrudeSubtypeQuarterSelector(state),
-    timelineRange: TimelineSelectors.timelineRange(state, props),
   })
 )(CrudeOilVisualizationContainer)
