@@ -17,7 +17,7 @@ class StackedChart extends Chart {
     const {
       bars: data,
       height,
-      barSize,
+      layout,
       scale,
       color,
       colors: categoryColours,
@@ -40,7 +40,7 @@ class StackedChart extends Chart {
               y2={height - offsetY}
               y1={height - (offsetY + value * heightPerUnit)}
               key={type}
-              strokeWidth={barSize}
+              strokeWidth={layout.get('barWidth')}
               stroke={lineColor}
               strokeLinecap="round"
               opacity={opacity}
