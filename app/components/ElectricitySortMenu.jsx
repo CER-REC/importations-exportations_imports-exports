@@ -1,5 +1,6 @@
 const React = require('react')
 const ReactRedux = require('react-redux')
+const PropTypes = require('prop-types')
 
 const Constants = require('../Constants.js')
 const Tr = require('../TranslationTable.js')
@@ -12,24 +13,24 @@ const { visualizationSettings } = require('../selectors/visualizationSettings')
 
 require('./ElectricitySortMenu.scss')
 
-class ElectricitySortMenu extends React.Component {
-  render() {
-    const titleYaxis = WorkspaceComputations.electricitySortMenuY() - 30
-    return (<g>
+const ElectricitySortMenu = (props) => {
+  const titleYaxis = WorkspaceComputations.electricitySortMenuY() - 30
+  return (
+    <g>
       <text
         x={Constants.getIn(['electricitySortStatesStyle', 'title', 'import', 'xPadding'])}
         y={titleYaxis}
         fill={Constants.getIn(['electricitySortStatesStyle', 'title', 'import', 'color'])}
         className="ElectricitySortMenuTitle"
       >
-        {Tr.getIn(['electricitySortStates', 'title', 'import', this.props.language])}
+        {Tr.getIn(['electricitySortStates', 'title', 'import', props.language])}
       </text>
       <text
         x={Constants.getIn(['electricitySortStatesStyle', 'title', 'ampersand', 'xPadding'])}
         y={titleYaxis}
         className="ElectricitySortMenuTitle"
       >
-        {Tr.getIn(['electricitySortStates', 'title', 'ampersand', this.props.language])}
+        {Tr.getIn(['electricitySortStates', 'title', 'ampersand', props.language])}
       </text>
       <text
         x={Constants.getIn(['electricitySortStatesStyle', 'title', 'export', 'xPadding'])}
@@ -37,23 +38,29 @@ class ElectricitySortMenu extends React.Component {
         fill={Constants.getIn(['electricitySortStatesStyle', 'title', 'export', 'color'])}
         className="ElectricitySortMenuTitle"
       >
-        {Tr.getIn(['electricitySortStates', 'title', 'export', this.props.language])}
+        {Tr.getIn(['electricitySortStates', 'title', 'export', props.language])}
       </text>
       <MenuBarOption
         key="electricitySortStateMenu"
         yaxis={WorkspaceComputations.electricitySortMenuY()}
         options={Constants.get('electricitySortStates')}
-        onOptionClick={this.props.setArrangeBy}
-        selectedOption={this.props.arrangeBy}
+        onOptionClick={props.setArrangeBy}
+        selectedOption={props.arrangeBy}
         optionXaxisPadding={Constants.getIn(['menuBarOptions', 'optionXaxisPadding'])}
         optionPadding={Constants.getIn(['menuBarOptions', 'optionPadding'])}
         trKey="electricitySortStates"
         color={Constants.getIn(['electricitySortStatesStyle', 'color'])}
         lineWidth={Constants.getIn(['electricitySortStatesStyle', 'lineWidth'])}
-        language={this.props.language}
+        language={props.language}
       />
-            </g>)
-  }
+    </g>
+  )
+}
+
+ElectricitySortMenu.propTypes = {
+  language: PropTypes.string.isRequired,
+  setArrangeBy: PropTypes.func.isRequired,
+  arrangeBy: PropTypes.string.isRequired,
 }
 
 const mapStateToProps = (state, props) => ({

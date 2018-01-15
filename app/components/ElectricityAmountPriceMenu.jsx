@@ -1,5 +1,6 @@
 const React = require('react')
 const ReactRedux = require('react-redux')
+const PropTypes = require('prop-types')
 
 const Constants = require('../Constants.js')
 const WorkspaceComputations = require('../computations/WorkspaceComputations.js')
@@ -11,23 +12,27 @@ const { visualizationSettings } = require('../selectors/visualizationSettings')
 
 require('./ElectricityAmountPriceMenu.scss')
 
-class ElectricityAmountPriceMenu extends React.Component {
-  render() {
-    const { selectedEnergy } = this.props
-    return (<MenuBarOption
-      key="electricityAmountPriceMenu"
-      yaxis={WorkspaceComputations.electricityAmountPriceMenuY()}
-      options={Constants.getIn(['energyMeasurementTypes', selectedEnergy])}
-      onOptionClick={this.props.setAmount}
-      selectedOption={this.props.amount}
-      optionXaxisPadding={Constants.getIn(['menuBarOptions', 'optionXaxisPadding'])}
-      optionPadding={Constants.getIn(['menuBarOptions', 'optionPadding'])}
-      trKey="electricityDataTypes"
-      color={Constants.getIn(['electricityDataTypesStyle', 'color'])}
-      lineWidth={Constants.getIn(['electricityDataTypesStyle', 'lineWidth'])}
-      language={this.props.language}
-    />)
-  }
+const ElectricityAmountPriceMenu = props => (
+  <MenuBarOption
+    key="electricityAmountPriceMenu"
+    yaxis={WorkspaceComputations.electricityAmountPriceMenuY()}
+    options={Constants.getIn(['energyMeasurementTypes', props.selectedEnergy])}
+    onOptionClick={props.setAmount}
+    selectedOption={props.amount}
+    optionXaxisPadding={Constants.getIn(['menuBarOptions', 'optionXaxisPadding'])}
+    optionPadding={Constants.getIn(['menuBarOptions', 'optionPadding'])}
+    trKey="electricityDataTypes"
+    color={Constants.getIn(['electricityDataTypesStyle', 'color'])}
+    lineWidth={Constants.getIn(['electricityDataTypesStyle', 'lineWidth'])}
+    language={props.language}
+  />
+)
+
+ElectricityAmountPriceMenu.propTypes = {
+  selectedEnergy: PropTypes.string.isRequired,
+  setAmount: PropTypes.func.isRequired,
+  amount: PropTypes.string.isRequired,
+  language: PropTypes.string.isRequired,
 }
 
 const mapStateToProps = (state, props) => ({

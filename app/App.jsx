@@ -29,13 +29,6 @@ function render(Component) {
   ReactDOM.render(app, document.getElementById('reactRoot'))
 }
 
-DomReady(() => {
-  resizeScreenHandler()
-  window.addEventListener('resize', resizeScreenHandler)
-
-  render(Root)
-})
-
 function resizeScreenHandler() {
   // Ensures the width and height of the workspace keep the ratio 900:600
   // TODO: Increase the height of the workspace by emptyCategoryOffsetRatio if
@@ -44,6 +37,13 @@ function resizeScreenHandler() {
   const h = w * Constants.getIn(['workspace', 'heightToWidthRatio'])
   store.dispatch(Resized(w, h))
 }
+
+DomReady(() => {
+  resizeScreenHandler()
+  window.addEventListener('resize', resizeScreenHandler)
+
+  render(Root)
+})
 
 Request({
   uri: RouteComputations.dataEndpoint(),
@@ -55,6 +55,6 @@ Request({
 // Webpack Hot Module Replacement API
 if (module.hot) {
   module.hot.accept('./components/Root.jsx', () => {
-    render(require('./components/Root.jsx'))
+    render(require('./components/Root.jsx')) // eslint-disable-line global-require
   })
 }

@@ -1,9 +1,12 @@
-/* Purpose of this class is to store all debugging message so that we can avoid printing something on console */
+/* eslint-disable no-underscore-dangle */
+
+// Purpose of this class is to store all debugging message so that we can avoid
+// printing something on console
 
 /*
 Function updates windows object
  */
-const updateWindowsBadDataObject = function (error) {
+const updateWindowsBadDataObject = (error) => {
   // check for the prod environment
   if (process.env.NODE_ENV !== 'production') {
     let baddata = window._badData
