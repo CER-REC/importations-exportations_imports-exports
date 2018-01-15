@@ -114,7 +114,6 @@ const mapStateToProps = (state,props) => {
   return {
     importExportVisualization: state.importExportVisualization,
     layout: ElectrictySelector.getElectrictyMapLayout(state,props),
-    electricitySortState: state.electricitySortState,
     selection: ElectrictySelector.getSelectionSettings(state,props),
     dataPoints: sortAggregatedLocationsSelector(state)
   }
