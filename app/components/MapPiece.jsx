@@ -40,14 +40,17 @@ class MapPiece extends React.Component {
       //TODO: on click show pop over to show confidential values
       confidentialIcon = <ConfidentialIcon styles={this.props.styles.get('confidentialStyle')}/>
     }
-    let stroke = this.props.styles.get('color')
-    if(this.props.powerpool === true){
+    let stroke = 'none'
+    if(this.props.isMapPieceSelected === true){
       stroke = 'black' 
     }
-    return <g>
+    let opacity = 1
+    if(this.props.isSelected === true && this.props.isMapPieceSelected === false){
+      opacity = 0.10
+    }
+    return <g stroke ={stroke} fillOpacity = {opacity} >
         <polygon 
           fill={this.props.styles.get('color')} 
-          stroke ={stroke}
           points="37.09 9.68 18.54 0 0 9.68 0 29.05 18.54 38.73 37.09 29.05 37.09 9.68"/>
         <MapPieceLabel
           labelPosition = {this.props.styles.get('labelPosition')} 

@@ -10,6 +10,7 @@ const Types = {
   SET_SCALE_LINKED: 'visualizationSettings.setScaleLinked',
   SET_ACTIVITY: 'visualizationSettings.setActivity',
   SET_SUBTYPE: 'visualizationSettings.setSubtype',
+  SET_SELECTION: 'visualizationSettings.setSelection',
 }
 
 const timelineFilter = range => ({
@@ -47,11 +48,21 @@ const setSubtype = subtype => ({
   payload: { subtype },
 })
 
+const setSelection = selection => ({
+  type: Types.SET_SELECTION,
+  payload: { selection },
+})
+
 const initialState = fromJS({
   amount: '',
   arrangeBy: 'location',
   activity: 'importsExports',
   subtype: '',
+  selection:{
+    country: null,
+    selectedMapPieces:[],
+    highlightedMapPieces:{}
+  },
   timeline: {
     scaleLinked: true,
     grouping: 'year',
@@ -84,6 +95,8 @@ const subReducer = visualization => (state = initialState, action) => {
       return state.setIn(['timeline', 'scaleLinked'], action.payload.scaleLinked)
     case Types.RESET_VISUALIZATION:
       return fromJS(action.payload.settings)
+    case Types.SET_SELECTION:
+      return state.set('selection', fromJS(action.payload.selection))
     default: return state
   }
 }
@@ -106,4 +119,5 @@ module.exports = {
   setScaleLinked,
   setActivity,
   setSubtype,
+  setSelection
 }
