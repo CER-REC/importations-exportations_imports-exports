@@ -117,7 +117,6 @@ const mapStateToProps = (state,props) => {
     electricitySortState: state.electricitySortState,
     selection: ElectrictySelector.getSelectionSettings(state,props),
     dataPoints: sortAggregatedLocationsSelector(state)
-    //selectedPowerPool: 'NE-ISO'
   }
 }
 
