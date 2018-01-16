@@ -19,12 +19,13 @@ class MapPiece extends React.Component {
       }) 
   }
 
-  drawArrow(legends, data, type, styles){
+  drawArrow(legends, data, type, styles, arrowProps){
     if(data.get(type) !== 0 ){
       return <ImportExportArrow
             arrowSpacing = {styles.get('arrowSpacing')}
-            type = 'export' 
+            type = {type} 
             color = {this.getArrowColor(legends, data.get(type)).get(type)}
+            arrowProps = {arrowProps}
             />  
     }
     return ''
@@ -41,8 +42,16 @@ class MapPiece extends React.Component {
       //TODO: on click show pop over to show confidential values
       confidentialIcon = <ConfidentialIcon styles={this.props.styles.get('confidentialStyle')}/>
     }
+    let stroke = 'none';
+    if(typeof this.props.mapPieceProps !== 'undefined' 
+      && typeof this.props.mapPieceProps.get('stroke') !== 'undefined' 
+      && this.props.mapPieceProps.get('stroke') !== ''){
+        stroke = this.props.mapPieceProps.get('stroke')
+    }
+
     return <g>
         <polygon 
+          stroke = {stroke}
           fill={this.props.styles.get('color')} 
           points="37.09 9.68 18.54 0 0 9.68 0 29.05 18.54 38.73 37.09 29.05 37.09 9.68"/>
         <MapPieceLabel
@@ -51,10 +60,11 @@ class MapPiece extends React.Component {
           bottomMargin = {this.props.styles.get('topMargin')} 
           mapPieceHeight = {this.props.dimensions.get('height')}
           name = {this.props.data.get('name')}
+          mapPieceProps = {this.props.mapPieceProps}
         />
         <g transform={arrowTransform}>
-          {this.drawArrow(this.props.legends, this.props.data, 'exports', this.props.styles)}
-          {this.drawArrow(this.props.legends, this.props.data, 'imports', this.props.styles)}
+          {this.drawArrow(this.props.legends, this.props.data, 'exports', this.props.styles, this.props.arrowProps)}
+          {this.drawArrow(this.props.legends, this.props.data, 'imports', this.props.styles, this.props.arrowProps)}
         </g>
         {confidentialIcon}
       </g>
