@@ -13,10 +13,20 @@ class MenuBarOption extends React.Component {
 
       if(key === this.props.selectedOption){
         return <g key = {key}>
-          <text x = {this.props.optionXaxisPadding + 7} y = {yaxis} className='selectableDropdown'>
-            {Tr.getIn([this.props.trKey, key, this.props.language]).toUpperCase() } 
+          <rect 
+            x = {0} 
+            y = { yaxis - 15}
+            width="170" 
+            height="20" 
+            fill = '#999999'
+          />
+          <text x = {this.props.optionXaxisPadding - 7} 
+            y = {yaxis} >
+            <tspan fill = '#666' 
+              className='visSelectOfText'> of </tspan>
+            <tspan className='visSelect'>{Tr.getIn([this.props.trKey, key, this.props.language]).toUpperCase()}</tspan> 
           </text>
-
+          
         </g>
       }
       

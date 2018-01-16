@@ -20,7 +20,7 @@ class ElectricityAmountPriceMenu extends React.Component {
     this.onClick = this.props.onClick.bind(this)
   }
 
-  controlArrowImage() {
+  controlRect() {
     let rectYPosition = `${ WorkspaceComputations.importExportMenuY(this.props.viewport) + 
           Constants.getIn(['menuBar','amountMenuYMargin']) }`
     if(this.props.expandImportExportMenu || this.props.expandElectricitySortMenu) {
@@ -121,7 +121,7 @@ class ElectricityAmountPriceMenu extends React.Component {
   render() {
     return <g>
       {this.amountMenuText()}
-      {this.controlArrowImage()}
+      {this.controlRect()}
       {this.amountOption()}
       {this.expandedAmountMenu()}
     </g>

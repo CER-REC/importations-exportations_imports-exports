@@ -14,13 +14,13 @@ class NglSubproductMenu extends React.Component {
   }
 
   controlArrowImage() {
-    return <image
-      height = { Constants.getIn(['menuBar','controlArrowSize']) }
-      width = { Constants.getIn(['menuBar','controlArrowSize']) }
-      x = { 0 }
-      y = { WorkspaceComputations.importExportMenuY(this.props.viewport) + 
-          Constants.getIn(['menuBar','nglMenuYMargin']) }
-      xlinkHref = 'images/control_arrow.svg'
+    return <rect 
+      x={ 0 } 
+      y= { WorkspaceComputations.importExportMenuY(this.props.viewport) + 
+          Constants.getIn(['menuBar','nglMenuYMargin']) } 
+      width={ 5} 
+      height={ 16 }
+      fill = '#666666'
     />
   }
 

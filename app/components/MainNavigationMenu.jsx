@@ -14,19 +14,6 @@ require('./MainNavigationMenu.scss')
 
 class MainNavigationMenu extends React.Component {
 
-  controlArrowImage() {
-    let textPosition = `${ Constants.getIn(['mainNavigationMenu','textYPosition']) }`
-    if(this.props.expandImportExportMenu) {
-      textPosition = `${ Constants.getIn(['mainNavigationMenu','textYPosition']) + 30}`
-    }
-    return <g>
-      <text x = { Constants.getIn(['menuBar','textLabelOffset']) }
-        y = { textPosition } className = 'bodyText'>
-        { Tr.getIn(['nglSubproductMenu','of',this.props.language]) }
-      </text>
-    </g>
-  }
-
   explanationDot() {
     const xPosition = '155'
     return <ExplanationDot
@@ -50,7 +37,6 @@ class MainNavigationMenu extends React.Component {
         color = {Constants.getIn(['mainNavigationMenu', 'color'])}
         language = {this.props.language}
       />
-      {this.controlArrowImage()}
       {this.explanationDot()}
       </g>
     } else {
@@ -66,7 +52,7 @@ class MainNavigationMenu extends React.Component {
         color = {Constants.getIn(['mainNavigationMenu', 'color'])}
         language = {this.props.language}
       />
-      {this.controlArrowImage()}
+
       {this.explanationDot()}
       </g>
     }

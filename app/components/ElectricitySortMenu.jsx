@@ -20,7 +20,7 @@ class ElectricitySortMenu extends React.Component {
     this.onClick = this.props.onClick.bind(this)
   }
 
-  controlArrowImage() {
+  controlRect() {
     let rectYPosition = `${ WorkspaceComputations.importExportMenuY(this.props.viewport) + 
           116 }`
     if(this.props.expandImportExportMenu) {
@@ -121,7 +121,7 @@ class ElectricitySortMenu extends React.Component {
     return <g>
       {this.sortOption()}
       {this.sortMenuText()}
-      {this.controlArrowImage()}
+      {this.controlRect()}
       {this.expandedMenu()}
     </g>
   }

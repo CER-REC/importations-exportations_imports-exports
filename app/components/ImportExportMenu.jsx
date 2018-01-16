@@ -18,7 +18,7 @@ class ImportExportMenu extends React.Component {
     this.onClick = this.props.onClick.bind(this)
   }
 
-  controlArrowImage() {
+  controlRect() {
     return <rect 
       x={ 0 } 
       y= { WorkspaceComputations.importExportMenuY(this.props.viewport) } 
@@ -53,6 +53,9 @@ class ImportExportMenu extends React.Component {
   }
 
   expandedMenu() {
+    if(!this.props.expandImportExportMenu) {
+      return null
+    }
     return <g><text x = { Constants.getIn(['menuBar','textLabelOffset']) } 
       y = { WorkspaceComputations.importExportMenuY(this.props.viewport) 
         + Constants.getIn(['menuBar','importExportTextLabelYOffset']) + 0 } 
@@ -68,16 +71,10 @@ class ImportExportMenu extends React.Component {
   }
 
   render() {
-    if(this.props.expandImportExportMenu) {
-      return <g> 
-        {this.showText()}
-        {this.controlArrowImage()}
-        {this.expandedMenu()}</g>
-    } else 
-      return <g>
-        {this.showText()}
-        {this.controlArrowImage()}
-      </g>
+    return <g> 
+      {this.showText()}
+      {this.controlRect()}
+      {this.expandedMenu()}</g>
   }
 }
 
