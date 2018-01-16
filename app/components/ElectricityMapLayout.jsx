@@ -147,7 +147,7 @@ const mapStateToProps = (state,props) => {
     layout: ElectrictySelector.getElectrictyMapLayout(state,props),
     selection: ElectrictySelector.getSelectionSettings(state,props),
     dataPoints: sortAggregatedLocationsSelector(state),
-    arrangeBy: arrangeBy(state) 
+    arrangeBy: arrangeBy(state, props) 
   }
 }
 
