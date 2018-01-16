@@ -80,6 +80,13 @@ const aggregateLocationSelector = createSelector(
       
       const totalCount = acc[originKey]['totalCount'] || 0
       const confidentialCount = acc[originKey]['confidentialCount'] || 0
+      const destinationKey = next.get('destinationKey')
+      const destinationCountry = next.get('destinationCountry')
+      acc[originKey]['destinationCountry'] = acc[originKey]['destinationCountry']||{}
+      acc[originKey]['destinationCountry'][destinationCountry] = acc[originKey]['destinationCountry'][destinationCountry]||[]
+      if((acc[originKey]['destinationCountry'][destinationCountry]).indexOf(destinationKey ) === -1){
+        (acc[originKey]['destinationCountry'][destinationCountry]).push(destinationKey)  
+      }
       acc[originKey]['totalCount'] = (totalCount + 1)
       acc[originKey]['confidentialCount'] = (confidentialCount + next.get('confidential'))
       return acc  
@@ -111,4 +118,5 @@ module.exports = {
   sortAggregatedLocationsSelector,
   unitSelector,
   activityGroupSelector,
+  arrangeBy
 }

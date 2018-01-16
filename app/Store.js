@@ -8,6 +8,7 @@ const ExpandImportExportMenuReducer = require('./reducers/ExpandImportExportMenu
 const ExpandElectricitySortMenuReducer = require('./reducers/ExpandElectricitySortMenuReducer.js')
 const ExpandElectricityAmountMenuReducer = require('./reducers/ExpandElectricityAmountMenuReducer.js')
 const DataReducer = require('./actions/data').reducer
+const ElectricityExplanationReducer = require('./reducers/ElectricityExplanationReducer.js')
 const { reducer: visualizationSettings } = require('./actions/visualizationSettings')
 
 const TimelineRangeMiddleware = require('./middleware/timelineRange')
@@ -19,6 +20,7 @@ const reducers = Redux.combineReducers({
   viewport: ViewportReducer,
   importExportVisualization: ImportExportVisualizationReducer,
   language: LanguageReducer,
+  electricityExplanation: ElectricityExplanationReducer,
   showExplanations: ShowExplanationsReducer,
   expandImportExportMenu: ExpandImportExportMenuReducer,
   expandElectricitySortMenu: ExpandElectricitySortMenuReducer,
