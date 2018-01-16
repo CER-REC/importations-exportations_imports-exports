@@ -8,6 +8,7 @@ const ElectricityVisualizationContainer = require('./ElectricityVisualizationCon
 const CrudeOilVisualizationContainer = require('./CrudeOilVisualizationContainer.jsx')
 const NaturalGasVisualizationContainer = require('./NaturalGasVisualizationContainer.jsx')
 const NaturalGasLiquidsVisualizationContainer = require('./NaturalGasLiquidsVisualizationContainer.jsx')
+const RefinedPetroleumProductsVisualizationContainer = require('./RefinedPetroleumProductsVisualizationContainer.jsx')
 
 require('./VisualizationContainer.scss')
 
@@ -27,10 +28,8 @@ class VisualizationContainer extends React.Component {
         VisComponent = NaturalGasVisualizationContainer
         break
       case 'refinedPetroleumProducts':
-      //Mock data need to be replaced by actual content 
-        return <text x={xaxis} y={yaxis}>
-          refine petroleum place holder
-        </text>
+        VisComponent = RefinedPetroleumProductsVisualizationContainer
+        break
       case 'naturalGasLiquids':
         VisComponent = NaturalGasLiquidsVisualizationContainer
         break

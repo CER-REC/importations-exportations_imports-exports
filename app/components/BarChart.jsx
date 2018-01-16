@@ -2,16 +2,22 @@ const React = require('react')
 const PropTypes = require('prop-types')
 const { connect } = require('react-redux')
 
-const DetailSidebar = require('./DetailSidebar')
+const Chart = require('./Chart')
 const AnimatedLine = require('./SVGAnimation/AnimatedLine')
 const AxisGuide = require('./AxisGuide')
 const TimelineSelector = require('../selectors/timeline')
 
-class BarChart extends React.PureComponent {
+class BarChart extends Chart {
+  static get propTypes() {
+    return Object.assign({}, super.propTypes, {
+      valueKey: PropTypes.string.isRequired,
+    })
+  }
+
   constructor(props) {
     super(props)
     this.state = {
-      axisGuide: props.trueScale.y.max,
+      axisGuide: props.trueScale.get('max'),
     }
 
     this.updateAxisGuide = this.updateAxisGuide.bind(this)
@@ -21,8 +27,8 @@ class BarChart extends React.PureComponent {
     // Reset the axis guide when the scale changes.
     // Watch scale since that changes the bar height, but use trueScale in order
     // to put the guide on top of the tallest bar
-    if (props.scale.y.max !== this.props.scale.y.max) {
-      this.updateAxisGuide(props.trueScale.y.max)
+    if (props.scale.getIn(['y', 'max']) !== this.props.scale.getIn(['y', 'max'])) {
+      this.updateAxisGuide(props.trueScale.get('max'))
     }
   }
 
@@ -32,41 +38,27 @@ class BarChart extends React.PureComponent {
 
   render() {
     const {
-      data,
+      bars: data,
       scale,
       height,
       flipped,
       valueKey,
       colour,
-      barSize,
-      timelineRange,
+      layout,
     } = this.props
     if (data.count() === 0) { return null }
 
-    const heightPerUnit = height / (scale.y.max - scale.y.min)
+    const barSize = layout.get('barWidth')
+
+    const heightPerUnit = height / (scale.getIn(['y', 'max']) - scale.getIn(['y', 'min']))
     const elements = data.map(point => {
-      let opacity = 1
-      const year = point.get('year')
-      const quarter = point.get('quarter')
-      const start = timelineRange.get('start').toJS()
-      const end = timelineRange.get('end').toJS()
-      if (this.props.timelineGroup === 'quarter') {
-        // If the start and end quarters don't match, no filtering is applied
-        if (start.quarter === end.quarter &&
-          (quarter !== start.quarter || year < start.year || year > end.year)) {
-          opacity = 0.5
-        }
-      } else if (year < start.year || year > end.year ||
-        (year === start.year && quarter < start.quarter) ||
-        (year === end.year && quarter > end.quarter)) {
-        opacity = 0.5
-      }
+      const opacity = this.isTimelinePointFiltered(point) ? 0.5 : 1
       return (
         <AnimatedLine
           x1={point.get('offsetX')}
           x2={point.get('offsetX')}
           y2={height}
-          y1={height - point.get(valueKey) * heightPerUnit}
+          y1={height - point.getIn(['values', valueKey], 0) * heightPerUnit}
           key={`${point.get('year')}-${point.get('quarter')}-${valueKey}`}
           strokeWidth={barSize}
           stroke={colour}
@@ -76,15 +68,12 @@ class BarChart extends React.PureComponent {
         />
       )
     }).toArray()
-    const transform = (flipped === true)
-      ? `scale(1,-1) translate(${this.props.left} ${-this.props.top - height})`
-      : `translate(${this.props.left} ${this.props.top})`
     return (
-      <g transform={transform}>
+      <g transform={this.getTransform()}>
         <g>{elements}</g>
         <AxisGuide
           flipped={flipped}
-          scale={scale.y}
+          scale={scale.get('y').toJS()}
           position={this.state.axisGuide}
           chartHeight={height}
           heightPerUnit={heightPerUnit}
@@ -97,21 +86,8 @@ class BarChart extends React.PureComponent {
   }
 }
 
-BarChart.propTypes = {
-  valueKey: PropTypes.string.isRequired,
-}
-
-BarChart.defaultProps = {
-  height: 200,
-  flipped: false,
-  colour: 'black',
-  barSize: 4,
-}
-
-module.exports = connect(
-  (state, props) => ({
-    scale: TimelineSelector.timelineScaleSelector(state, props),
-    trueScale: TimelineSelector.timelineTrueScale(state, props),
+module.exports = connect((state, props) => {
+  return Object.assign({
     timelineGroup: TimelineSelector.timelineGrouping(state, props),
-  })
-)(BarChart)
+  }, TimelineSelector.timelineData(state, props))
+})(BarChart)

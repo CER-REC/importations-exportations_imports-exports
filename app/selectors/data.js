@@ -6,22 +6,30 @@ const { visualizationSettings } = require('./visualizationSettings')
 const emptyMap = new Immutable.Map()
 const emptyList = new Immutable.List()
 
+const arrangeByOverride = (_, props) => props._overrideArrangeBy
+const amountOverride = (_, props) => props._overrideAmount
+const activityGroupOverride = (_, props) => props._overrideActivityGroup
+
 const arrangeBy = createSelector(
   visualizationSettings,
-  settings => settings.get('arrangeBy')
+  arrangeByOverride,
+  (settings, override) => override || settings.get('arrangeBy')
 )
 
 const amount = createSelector(
   visualizationSettings,
-  settings => settings.get('amount')
+  amountOverride,
+  (settings, override) => override || settings.get('amount')
 )
 
 const selectedActivityGroup = createSelector(
   visualizationSettings,
-  settings => settings.get('activity')
+  activityGroupOverride,
+  (settings, override) => override || settings.get('activity')
 )
 
-const selectedVisualization = state => state.importExportVisualization
+const selectedVisualization = (state, props) =>
+  props._overrideVisualization || state.importExportVisualization
 const dataSelector = state => state.data
 
 const productSelector = createSelector(
@@ -118,5 +126,5 @@ module.exports = {
   sortAggregatedLocationsSelector,
   unitSelector,
   activityGroupSelector,
-  arrangeBy
+  arrangeBy,
 }

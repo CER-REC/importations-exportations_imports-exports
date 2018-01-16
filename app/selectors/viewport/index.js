@@ -7,6 +7,14 @@ const detailSidebarWidth = () =>
   Constants.getIn(['visualizationDetailContainer', 'width'])
 const viewport = state => state.viewport
 
+const positionHelper = (prev, height) => createSelector(
+  prev,
+  prevPos => Object.assign({}, prevPos, {
+    top: prevPos.top + prevPos.height,
+    height,
+  })
+)
+
 const svgSize = createSelector(
   viewport,
   detailSidebarWidth,
@@ -52,6 +60,7 @@ const detailSidebarPosition = createSelector(
 )
 
 module.exports = {
+  positionHelper,
   svgSize,
   menuWidth,
   visualizationContainerPosition,

@@ -1,5 +1,4 @@
 const React = require('react')
-const PropTypes = require('prop-types')
 const { connect } = require('react-redux')
 
 const Chart = require('./Chart')
@@ -7,13 +6,7 @@ const AnimatedLine = require('./SVGAnimation/AnimatedLine')
 const Constants = require('../Constants')
 const TimelineSelector = require('../selectors/timeline')
 
-class ProportionChart extends Chart {
-  static get propTypes() {
-    return Object.assign({}, super.propTypes, {
-      color: PropTypes.objectOf(PropTypes.string).isRequired,
-    })
-  }
-
+class StackedChart extends Chart {
   static get defaultProps() {
     return Object.assign({}, super.defaultProps, {
       colors: Constants.getIn(['styleGuide', 'categoryColours']),
@@ -25,12 +18,13 @@ class ProportionChart extends Chart {
       bars: data,
       height,
       layout,
+      scale,
       color,
       colors: categoryColours,
     } = this.props
 
     const elements = data.map(point => {
-      const heightPerUnit = height / point.get('total')
+      const heightPerUnit = height / (scale.getIn(['y', 'max']) - scale.getIn(['y', 'min']))
       const opacity = this.isTimelinePointFiltered(point) ? 0.5 : 1
       let offsetY = 0
       let stackIndex = 0
@@ -72,4 +66,4 @@ module.exports = connect((state, props) => {
   return Object.assign({
     timelineGroup: TimelineSelector.timelineGrouping(state, props),
   }, TimelineSelector.timelineData(state, props))
-})(ProportionChart)
+})(StackedChart)
