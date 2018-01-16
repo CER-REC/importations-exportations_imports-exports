@@ -29,7 +29,7 @@ class ProportionChart extends Chart {
       colors: categoryColours,
     } = this.props
 
-    const elements = data.map(point => {
+    const elements = data.map((point) => {
       const heightPerUnit = height / point.get('total')
       const opacity = this.isTimelinePointFiltered(point) ? 0.5 : 1
       let offsetY = 0
@@ -68,8 +68,6 @@ class ProportionChart extends Chart {
   }
 }
 
-module.exports = connect((state, props) => {
-  return Object.assign({
-    timelineGroup: TimelineSelector.timelineGrouping(state, props),
-  }, TimelineSelector.timelineData(state, props))
-})(ProportionChart)
+module.exports = connect((state, props) => Object.assign({
+  timelineGroup: TimelineSelector.timelineGrouping(state, props),
+}, TimelineSelector.timelineData(state, props)))(ProportionChart)

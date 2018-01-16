@@ -9,7 +9,7 @@ const chartImportPosition = createSelector(
     left: visContent.left,
     width: visContent.width,
     height: 100,
-  })
+  }),
 )
 
 const chartAxisPosition = createSelector(
@@ -19,7 +19,7 @@ const chartAxisPosition = createSelector(
     left: importPosition.left,
     width: importPosition.width,
     height: 30,
-  })
+  }),
 )
 
 const chartExportPosition = createSelector(
@@ -29,7 +29,7 @@ const chartExportPosition = createSelector(
     left: axisPosition.left,
     width: axisPosition.width,
     height: 100,
-  })
+  }),
 )
 
 module.exports = {

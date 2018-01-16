@@ -6,7 +6,7 @@ const {
 const { timelineXScale } = require('../selectors/timeline')
 const { visualizationSettings } = require('../selectors/visualizationSettings')
 
-const timelineRange = store => next => action => {
+const timelineRange = store => next => (action) => {
   // Process the action immediately
   next(action)
   return
@@ -22,9 +22,7 @@ const timelineRange = store => next => action => {
   } else if (action.type === VisualizationSettingsTypes.SET_GROUPING) {
     const range = visualizationSettings(store.getState(), {}).getIn(['timeline', 'range'])
     if (range.getIn(['start', 'quarter']) !== range.getIn(['end', 'quarter'])) {
-      store.dispatch(timelineFilter(
-        range.setIn(['end', 'quarter'], range.getIn(['start', 'quarter']))
-      ))
+      store.dispatch(timelineFilter(range.setIn(['end', 'quarter'], range.getIn(['start', 'quarter']))))
     }
   }
 }

@@ -1,7 +1,7 @@
-function ShowElectricityDataExplanationCreator (isElectricityExplanationVisible) {
+function ShowElectricityDataExplanationCreator(isElectricityExplanationVisible) {
   return {
     type: 'ShowElectricityDataExplanation',
-    isElectricityExplanationVisible: isElectricityExplanationVisible
+    isElectricityExplanationVisible,
   }
 }
 

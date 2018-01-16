@@ -19,7 +19,9 @@ class Axis extends React.PureComponent {
   }
 
   seekControls() {
-    const { top, left, width, height, bars: data } = this.props
+    const {
+      top, left, width, height, bars: data,
+    } = this.props
     return (
       <g>
         <TimelinePlay
@@ -66,7 +68,7 @@ class Axis extends React.PureComponent {
       bars: data,
     } = this.props
     if (data.count() === 0) { return null }
-    const elements = labels.map(label => {
+    const elements = labels.map((label) => {
       const key = label.get('key', `label-${label.get('label')}`)
       if (label.get('label') !== '|') {
         return (
@@ -120,8 +122,6 @@ class Axis extends React.PureComponent {
   }
 }
 
-module.exports = connect((state, props) => {
-  return Object.assign({
-    seekPosition: TimelineSelector.timelineSeekPositionSelector(state, props),
-  }, TimelineSelector.timelineData(state, props))
-})(Axis)
+module.exports = connect((state, props) => Object.assign({
+  seekPosition: TimelineSelector.timelineSeekPositionSelector(state, props),
+}, TimelineSelector.timelineData(state, props)))(Axis)

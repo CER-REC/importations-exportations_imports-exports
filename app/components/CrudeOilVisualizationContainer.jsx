@@ -9,8 +9,8 @@ const CrudeOilViewport = require('../selectors/viewport/crudeOil')
 const Constants = require('../Constants')
 
 class CrudeOilVisualizationContainer extends React.Component {
-  render(){
-    return <g>
+  render() {
+    return (<g>
       <ProportionChart
         {...this.props.transportChart}
         aggregateKey="transport"
@@ -43,19 +43,17 @@ class CrudeOilVisualizationContainer extends React.Component {
         flipped
         colour={Constants.getIn(['styleGuide', 'colours', 'ExportDefault'])}
       />
-      <ExplanationPopovers 
-        xaxis = {this.props.xaxis } 
-        yaxis = {this.props.yaxis + this.props.height}
+      <ExplanationPopovers
+        xaxis={this.props.xaxis}
+        yaxis={this.props.yaxis + this.props.height}
       />
-    </g>
+            </g>)
   }
 }
 
-module.exports = connect(
-  (state, props) => ({
-    transportChart: CrudeOilViewport.chartTransportPosition(state, props),
-    subtypeChart: CrudeOilViewport.chartSubtypePosition(state, props),
-    axisPosition: CrudeOilViewport.chartAxisPosition(state, props),
-    exportChart: CrudeOilViewport.chartExportPosition(state, props),
-  })
-)(CrudeOilVisualizationContainer)
+module.exports = connect((state, props) => ({
+  transportChart: CrudeOilViewport.chartTransportPosition(state, props),
+  subtypeChart: CrudeOilViewport.chartSubtypePosition(state, props),
+  axisPosition: CrudeOilViewport.chartAxisPosition(state, props),
+  exportChart: CrudeOilViewport.chartExportPosition(state, props),
+}))(CrudeOilVisualizationContainer)

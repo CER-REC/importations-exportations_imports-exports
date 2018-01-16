@@ -1,7 +1,7 @@
-function SetVisualizationCreator (visualization) {
+function SetVisualizationCreator(visualization) {
   return {
     type: 'SetVisualization',
-    visualization: visualization
+    visualization,
   }
 }
 

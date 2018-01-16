@@ -51,7 +51,7 @@ class BarChart extends Chart {
     const barSize = layout.get('barWidth')
 
     const heightPerUnit = height / (scale.getIn(['y', 'max']) - scale.getIn(['y', 'min']))
-    const elements = data.map(point => {
+    const elements = data.map((point) => {
       const opacity = this.isTimelinePointFiltered(point) ? 0.5 : 1
       return (
         <AnimatedLine
@@ -86,8 +86,6 @@ class BarChart extends Chart {
   }
 }
 
-module.exports = connect((state, props) => {
-  return Object.assign({
-    timelineGroup: TimelineSelector.timelineGrouping(state, props),
-  }, TimelineSelector.timelineData(state, props))
-})(BarChart)
+module.exports = connect((state, props) => Object.assign({
+  timelineGroup: TimelineSelector.timelineGrouping(state, props),
+}, TimelineSelector.timelineData(state, props)))(BarChart)

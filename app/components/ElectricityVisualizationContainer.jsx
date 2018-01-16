@@ -15,9 +15,9 @@ const ElectricityViewport = require('../selectors/viewport/electricity')
 const Constants = require('../Constants')
 
 class ElectricityVisualizationContainer extends React.Component {
-  render(){
-    return <g>
-      <CanadaMapContainer 
+  render() {
+    return (<g>
+      <CanadaMapContainer
         {...this.props.canadaMap}
       />
       <BarChart
@@ -37,34 +37,32 @@ class ElectricityVisualizationContainer extends React.Component {
         flipped
         colour={Constants.getIn(['styleGuide', 'colours', 'ExportDefault'])}
       />
-      <USMapContainer 
+      <USMapContainer
         {...this.props.usMap}
       />
-      <PowerPoolContainer 
+      <PowerPoolContainer
         {...this.props.powerPool}
       />
       <PowerPoolGrouping
         {...this.props.powerPool}
       />
-      <ExplanationPopovers 
-        xaxis = {this.props.xaxis } 
-        yaxis = {this.props.yaxis + this.props.height}
+      <ExplanationPopovers
+        xaxis={this.props.xaxis}
+        yaxis={this.props.yaxis + this.props.height}
       />
-      <ElectrictyMapPieceActivityExplantion 
+      <ElectrictyMapPieceActivityExplantion
         {...this.props.mapPieceActivityExplantion}
       />
-    </g>
+            </g>)
   }
 }
 
-module.exports = connect(
-  (state, props) => ({
-    canadaMap: ElectricityViewport.canadaMapPosition(state, props),
-    usMap: ElectricityViewport.usMapPosition(state, props),
-    powerPool: ElectricityViewport.powerPoolPosition(state, props),
-    mapPieceActivityExplantion: ElectricityViewport.mapPieceActivityExplantionPosition(state, props),
-    importChart: ElectricityViewport.chartImportPosition(state, props),
-    axisPosition: ElectricityViewport.chartAxisPosition(state, props),
-    exportChart: ElectricityViewport.chartExportPosition(state, props),
-  })
-)(ElectricityVisualizationContainer)
+module.exports = connect((state, props) => ({
+  canadaMap: ElectricityViewport.canadaMapPosition(state, props),
+  usMap: ElectricityViewport.usMapPosition(state, props),
+  powerPool: ElectricityViewport.powerPoolPosition(state, props),
+  mapPieceActivityExplantion: ElectricityViewport.mapPieceActivityExplantionPosition(state, props),
+  importChart: ElectricityViewport.chartImportPosition(state, props),
+  axisPosition: ElectricityViewport.chartAxisPosition(state, props),
+  exportChart: ElectricityViewport.chartExportPosition(state, props),
+}))(ElectricityVisualizationContainer)

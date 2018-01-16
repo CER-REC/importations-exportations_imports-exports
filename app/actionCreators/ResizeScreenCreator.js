@@ -1,8 +1,8 @@
-function ResizeScreenCreator (x, y) {
+function ResizeScreenCreator(x, y) {
   return {
     type: 'ResizeScreen',
-    x: x,
-    y: y
+    x,
+    y,
   }
 }
 

@@ -5,9 +5,9 @@ const MemoizeImmutable = require('memoize-immutable')
 const SampleComputations = {
 
   // listA and listB: immutable.js lists
-  concat: function (listA, listB) {
+  concat(listA, listB) {
     return listA.concat(listB)
-  }
+  },
 
 }
 
@@ -19,6 +19,4 @@ for (const name of Object.keys(SampleComputations)) {
 }
 
 module.exports = MemoizedComputations
-
-
 

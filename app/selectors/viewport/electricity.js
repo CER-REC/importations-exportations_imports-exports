@@ -9,7 +9,7 @@ const canadaMapPosition = createSelector(
     left: visContent.left,
     width: visContent.width,
     height: 200,
-  })
+  }),
 )
 
 const chartImportPosition = createSelector(
@@ -19,7 +19,7 @@ const chartImportPosition = createSelector(
     left: prev.left,
     width: prev.width,
     height: 100,
-  })
+  }),
 )
 
 const chartAxisPosition = createSelector(
@@ -29,7 +29,7 @@ const chartAxisPosition = createSelector(
     left: prev.left,
     width: prev.width,
     height: 30,
-  })
+  }),
 )
 
 const chartExportPosition = createSelector(
@@ -39,7 +39,7 @@ const chartExportPosition = createSelector(
     left: prev.left,
     width: prev.width,
     height: 100,
-  })
+  }),
 )
 
 const usMapPosition = createSelector(
@@ -49,7 +49,7 @@ const usMapPosition = createSelector(
     left: prev.left,
     width: prev.width,
     height: 300,
-  })
+  }),
 )
 
 const powerPoolPosition = createSelector(
@@ -59,19 +59,19 @@ const powerPoolPosition = createSelector(
     left: prev.left + prev.width - 375,
     width: 150,
     height: 50,
-  })
+  }),
 )
 
 const mapPieceActivityExplantionPosition = createSelector(
   usMapPosition,
   prev => ({
-    //Currently this is hardcoded value
-    //TODO: replace by dynamic value once new navigation bar is merged
+    // Currently this is hardcoded value
+    // TODO: replace by dynamic value once new navigation bar is merged
     top: 550,
     left: 10,
     width: 150,
     height: 50,
-  })
+  }),
 )
 
 module.exports = {
@@ -81,5 +81,5 @@ module.exports = {
   chartExportPosition,
   usMapPosition,
   powerPoolPosition,
-  mapPieceActivityExplantionPosition
+  mapPieceActivityExplantionPosition,
 }

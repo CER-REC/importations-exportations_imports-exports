@@ -23,7 +23,7 @@ class StackedChart extends Chart {
       colors: categoryColours,
     } = this.props
 
-    const elements = data.map(point => {
+    const elements = data.map((point) => {
       const heightPerUnit = height / (scale.getIn(['y', 'max']) - scale.getIn(['y', 'min']))
       const opacity = this.isTimelinePointFiltered(point) ? 0.5 : 1
       let offsetY = 0
@@ -62,8 +62,6 @@ class StackedChart extends Chart {
   }
 }
 
-module.exports = connect((state, props) => {
-  return Object.assign({
-    timelineGroup: TimelineSelector.timelineGrouping(state, props),
-  }, TimelineSelector.timelineData(state, props))
-})(StackedChart)
+module.exports = connect((state, props) => Object.assign({
+  timelineGroup: TimelineSelector.timelineGrouping(state, props),
+}, TimelineSelector.timelineData(state, props)))(StackedChart)

@@ -13,17 +13,17 @@ const stackedChartPosition = createSelector(
       top: startPos.top + 30,
       height: 500,
     }),
-  })
+  }),
 )
 
 const basePos = createSelector(
   visualizationContentPosition,
-  visContent => Object.assign({}, visContent, { height: -50 })
+  visContent => Object.assign({}, visContent, { height: -50 }),
 )
 
 const individualChartsPosition = createSelector(
   basePos,
-  startPos => {
+  (startPos) => {
     let lastPos = startPos
     const positions = {}
     const types = [
@@ -33,7 +33,7 @@ const individualChartsPosition = createSelector(
       'Motor Gasoline',
       'Middle Distillate',
     ]
-    types.forEach(key => {
+    types.forEach((key) => {
       positions[key] = {
         axis: Object.assign({}, lastPos, {
           top: lastPos.top + lastPos.height + 50,
@@ -47,7 +47,7 @@ const individualChartsPosition = createSelector(
       lastPos = positions[key].chart
     })
     return positions
-  }
+  },
 )
 
 module.exports = {
