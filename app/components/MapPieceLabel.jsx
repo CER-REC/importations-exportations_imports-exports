@@ -13,11 +13,11 @@ class MapPieceLabel extends React.Component {
       const label = mapPieceProps.getIn(['stateOrProvince', this.props.language])
       if(typeof label !== 'undefined' && label !== ''){
         labelElement = <g>
-                      <line x1="28.5" y1={lineY} x2="45" y2={lineY} strokeWidth="1" stroke="black"/>
-                      <text className="explanationLabel" y={labelY} x = '49' >
-                        {label}
-                      </text>
-                    </g>
+          <line x1="28.5" y1={lineY} x2="45" y2={lineY} strokeWidth="1" stroke="#999999"/>
+          <text className="explanationLabel" y={labelY} x = '49' >
+            {label}
+          </text>
+        </g>
       }
     }
     return labelElement
@@ -30,13 +30,13 @@ class MapPieceLabel extends React.Component {
     const xAxis = Constants.getIn(['mapPieceTextStyle', 'x'])
     const name = this.props.name
     if(this.props.labelPosition === 'down'){
-        yAxis = this.props.mapPieceHeight - this.props.bottomMargin
+      yAxis = this.props.mapPieceHeight - this.props.bottomMargin
     }
     return <g> 
-    <text className='mapPieceText' x = {xAxis} y = {yAxis} >
+      <text className='mapPieceText' x = {xAxis} y = {yAxis} >
         {name}
-    </text>
-    {this.drawLabel(this.props.mapPieceProps, yAxis)}
+      </text>
+      {this.drawLabel(this.props.mapPieceProps, yAxis)}
     </g>
 
   }
