@@ -27,8 +27,8 @@ const initialVisualizationSettings = store => next => action => {
           subtype: '',
           selection:{
             country: null,
-            selectedMapPieces:[],
-            highlightedMapPieces:{}
+            origins:[],
+            destinations:{}
           },
           timeline: {
             scaleLinked: true,

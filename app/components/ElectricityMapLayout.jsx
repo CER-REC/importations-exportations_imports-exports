@@ -20,54 +20,51 @@ class ElectricityMapLayout extends React.Component {
 
   onClick(country, originKey){
     const selection = this.props.selection
-    let resultSelectedMapPieces = []
+    let origins = []
     if(selection.get('country') === country){
-      const originKeyExists = selection.get('selectedMapPieces').indexOf(originKey)
+      const originKeyExists = selection.get('origins').indexOf(originKey)
       if(originKeyExists === -1){
-        resultSelectedMapPieces = selection.get('selectedMapPieces').push(originKey).toJS()
+        origins = selection.get('origins').push(originKey).toJS()
       }else{
-        resultSelectedMapPieces = selection.get('selectedMapPieces').delete(originKeyExists)
+        origins = selection.get('origins').delete(originKeyExists)
       }
     } else{
-      resultSelectedMapPieces = [originKey]
+      origins = [originKey]
     }
 
 
     //find all highlighted pieces destination
-    let highlighted = {}
-    resultSelectedMapPieces.forEach(destination => {
+    let destinations = {}
+    origins.forEach(destination => {
       let dataPoint =  this.props.dataPoints.get(destination)
       if(typeof dataPoint !== 'undefined'){
         let destinationCountries = dataPoint.get('destinationCountry')
         destinationCountries.forEach((value, key) => {
           if(key !== ''){
-            highlighted[key] = highlighted[key]||[]
-            highlighted[key] = highlighted[key].concat( value.toJS() )  
+            destinations[key] = destinations[key]||[]
+            destinations[key] = destinations[key].concat( value.toJS() )  
           }
         })
       }  
     })
     this.props.onMapPieceClick({
       country: country,
-      selectedMapPieces: resultSelectedMapPieces,
-      highlightedMapPieces : highlighted,
+      origins: origins,
+      destinations : destinations,
     })
   }
 
   isMapPieceSelected(key, country){
-    let isSelected = this.props.selection.get('selectedMapPieces').indexOf(key)
+    let isSelected = this.props.selection.get('origins').indexOf(key)
     let result = false 
     if(isSelected !== -1){
       return true
     } 
-    if(typeof this.props.selection.get('highlightedMapPieces').get(country) !== 'undefined'){
-      return this.props.selection.getIn(['highlightedMapPieces', country], new Immutable.List()).includes(key)
-    }
-    return result
+    return this.props.selection.getIn(['destinations', country], new Immutable.List()).includes(key)
   }
 
   isSelected(){
-    let length = this.props.selection.get('selectedMapPieces').count() + this.props.selection.get('highlightedMapPieces').count()
+    let length = this.props.selection.get('origins').count() + this.props.selection.get('destinations').count()
     return (length > 0)
   }
 
