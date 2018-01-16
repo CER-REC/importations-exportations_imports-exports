@@ -4,10 +4,10 @@ const Constants = require('../Constants.js')
 const MapPiece = require('./MapPiece.jsx')
 const MapPieceExplantionConstant = require('../MapPieceExplantionConstant.js')
 
-class MapPieceActivityExplantion extends React.Component {
+class ElectrictyMapPieceActivityExplantion extends React.Component {
 
   render(){
-    return <g transform='translate(10,550)'> 
+    return <g transform={`translate(${this.props.left},${this.props.top})`}> 
       <MapPiece 
         data = { MapPieceExplantionConstant.getIn(['electricity','ca', 'datapoint']) } 
         dimensions = { MapPieceExplantionConstant.getIn(['electricity','ca', 'dimensions']) }
@@ -30,4 +30,4 @@ class MapPieceActivityExplantion extends React.Component {
 }
 
 
-module.exports = MapPieceActivityExplantion
+module.exports = ElectrictyMapPieceActivityExplantion
