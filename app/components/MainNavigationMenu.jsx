@@ -15,25 +15,15 @@ require('./MainNavigationMenu.scss')
 class MainNavigationMenu extends React.Component {
 
   controlArrowImage() {
-    let arrowYPosition = `${ WorkspaceComputations.importExportMenuY(this.props.viewport) + 
-          Constants.getIn(['mainNavigationMenu','menuYPadding']) }`
     let textPosition = `${ Constants.getIn(['mainNavigationMenu','textYPosition']) }`
     if(this.props.expandImportExportMenu) {
-      arrowYPosition = `${ WorkspaceComputations.importExportMenuY(this.props.viewport) + 
-          Constants.getIn(['mainNavigationMenu','menuYPadding']) + 30 }`
       textPosition = `${ Constants.getIn(['mainNavigationMenu','textYPosition']) + 30}`
     }
-    return <g><image
-      height = { Constants.getIn(['menuBar','controlArrowSize']) }
-      width = { Constants.getIn(['menuBar','controlArrowSize']) }
-      x = { 0 }
-      y = { arrowYPosition }
-      xlinkHref = 'images/control_arrow.svg'
-    />
-    <text x = { Constants.getIn(['menuBar','textLabelOffset']) }
-      y = { textPosition } className = 'bodyText'>
-      { Tr.getIn(['nglSubproductMenu','of',this.props.language]) }
-    </text>
+    return <g>
+      <text x = { Constants.getIn(['menuBar','textLabelOffset']) }
+        y = { textPosition } className = 'bodyText'>
+        { Tr.getIn(['nglSubproductMenu','of',this.props.language]) }
+      </text>
     </g>
   }
 

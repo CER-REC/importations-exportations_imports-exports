@@ -21,18 +21,18 @@ class ElectricityAmountPriceMenu extends React.Component {
   }
 
   controlArrowImage() {
-    let arrowYPosition = `${ WorkspaceComputations.importExportMenuY(this.props.viewport) + 
+    let rectYPosition = `${ WorkspaceComputations.importExportMenuY(this.props.viewport) + 
           Constants.getIn(['menuBar','amountMenuYMargin']) }`
     if(this.props.expandImportExportMenu || this.props.expandElectricitySortMenu) {
-      arrowYPosition = `${ WorkspaceComputations.importExportMenuY(this.props.viewport) + 
+      rectYPosition = `${ WorkspaceComputations.importExportMenuY(this.props.viewport) + 
           Constants.getIn(['menuBar','amountMenuYMargin']) + 30 }`
     }
-    return <image
-      height = { Constants.getIn(['menuBar','controlArrowSize']) }
-      width = {Constants.getIn(['menuBar','controlArrowSize']) }
-      x = { 0 }
-      y = { arrowYPosition }
-      xlinkHref = 'images/control_arrow.svg'
+    return <rect 
+      x={ 0 } 
+      y= { rectYPosition } 
+      width={ 5} 
+      height={ 16 }
+      fill = '#666666'
     />
   }
 
@@ -145,7 +145,7 @@ const mapDispatchToProps = dispatch => {
     onClick: () => {
       dispatch(ExpandElectricityAmountMenuCreator())
     }
-    //({ setAmount } )
+  //({ setAmount } )
   }
 }
 

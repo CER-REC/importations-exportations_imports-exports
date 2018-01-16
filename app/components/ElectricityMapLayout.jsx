@@ -27,12 +27,12 @@ class ElectricityMapLayout extends React.Component {
     const yaxis = this.props.top
     return layout.map( (position,key) =>{
       return <g  key = { key }  transform={this.mapPieceTransform(xaxis, yaxis, position, dimensions, mapPieceScale)} >
-                <MapPiece 
-                data = { position } 
-                dimensions = { dimensions }
-                legends = {MapLayoutGridConstant.getIn([type,'legends'])}
-                styles = { styles }/>
-            </g>
+        <MapPiece 
+          data = { position } 
+          dimensions = { dimensions }
+          legends = {MapLayoutGridConstant.getIn([type,'legends'])}
+          styles = { styles }/>
+      </g>
     })
   }
 }

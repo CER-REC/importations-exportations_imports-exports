@@ -19,12 +19,12 @@ class ImportExportMenu extends React.Component {
   }
 
   controlArrowImage() {
-    return <image
-      height = { Constants.getIn(['menuBar','controlArrowSize']) }
-      width = { Constants.getIn(['menuBar','controlArrowSize']) }
-      x = { 0 }
-      y = { WorkspaceComputations.importExportMenuY(this.props.viewport) }
-      xlinkHref = 'images/control_arrow.svg'
+    return <rect 
+      x={ 0 } 
+      y= { WorkspaceComputations.importExportMenuY(this.props.viewport) } 
+      width={ 5} 
+      height={ 16 }
+      fill = '#666666'
     />
   }
 

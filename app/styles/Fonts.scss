@@ -107,7 +107,22 @@
 }
 
 .mapPieceText {
-  font-family: FiraSansCondensed-Regular;
+  font-family: $fira-sans-condensed;
   font-size: 13px;
-  fill: #666666;
+  fill: $neutral-medium;
+}
+
+.timelineLabel {
+  font-family: $fira-sans-condensed;
+  font-size: 11px;
+  fill: $neutral-light;
+  text-align: center;
+}
+
+.chartOptions a {
+  font-family: $fira-sans-condensed-medium;
+  color: $neutral-medium;
+  font-size: 14px;
+  text-decoration: none;
+  cursor: pointer;
 }

@@ -21,18 +21,18 @@ class ElectricitySortMenu extends React.Component {
   }
 
   controlArrowImage() {
-    let arrowYPosition = `${ WorkspaceComputations.importExportMenuY(this.props.viewport) + 
-          118 }`
+    let rectYPosition = `${ WorkspaceComputations.importExportMenuY(this.props.viewport) + 
+          116 }`
     if(this.props.expandImportExportMenu) {
-      arrowYPosition = `${ WorkspaceComputations.importExportMenuY(this.props.viewport) + 
-          148 }`
+      rectYPosition = `${ WorkspaceComputations.importExportMenuY(this.props.viewport) + 
+          146 }`
     }
-    return <image
-      height = { Constants.getIn(['menuBar','controlArrowSize']) }
-      width = { Constants.getIn(['menuBar','controlArrowSize']) }
-      x = { 0 }
-      y = { arrowYPosition } 
-      xlinkHref = 'images/control_arrow.svg'
+    return <rect 
+      x={ 0 } 
+      y= { rectYPosition } 
+      width={ 5} 
+      height={ 16 }
+      fill = '#666666'
     />
   }
 

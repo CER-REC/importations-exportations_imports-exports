@@ -4,7 +4,7 @@ const Constants = Immutable.fromJS({
 
   workspace: {
     heightToWidthRatio: 0.66,
-    viewportPadding: 350,
+    viewportPadding: 250,
   },
 
   topHeightMargin: 70,
@@ -49,19 +49,19 @@ const Constants = Immutable.fromJS({
     iconWidth: 29.69,
     crudeOilLegendPosition: -36.49,
     textValuePosition: 84.48,
-    rangeOneY: 814.8,
-    rangeTwoY: 832.69,
-    rangeThreeY: 850.58,
-    rangeFourY: 868.47,
-    rangeFiveY: 886.36,
+    rangeOneY: 794.8,
+    rangeTwoY: 812.69,
+    rangeThreeY: 830.58,
+    rangeFourY: 848.47,
+    rangeFiveY: 866.36,
     exportColumn: 47.99,
     importColumn: 11.5,
-    bin1Y: 806.8,
-    bin2Y: 824.69,
-    bin3Y: 842.58,
-    bin4Y: 860.47,
-    bin5Y: 878.36,
-    headingY: 800,
+    bin1Y: 786.8,
+    bin2Y: 804.69,
+    bin3Y: 822.58,
+    bin4Y: 840.47,
+    bin5Y: 858.36,
+    headingY: 770,
     importHeadingX: 15.045,
     exportHeadingX: 52.5,
   },
@@ -134,6 +134,7 @@ const Constants = Immutable.fromJS({
     'imports',
     'exports'
   ],
+
   electricitySortStatesStyle:{
     color: 'grey',
     lineWidth: 3,
@@ -152,19 +153,23 @@ const Constants = Immutable.fromJS({
       }
     }
   },
+
   language: [
     'en',
     'fr'
   ],
+
   electricityDataTypesStyle:{
     color: 'grey',
     lineWidth: 3
   },
+
   timeline: {
     barPadding: 0.5,
     groupPadding: 5,
     axisHeight: 30,
   },
+
   mapPieceTextStyle:{
     x: 9.58,
     y: 10,
@@ -173,6 +178,7 @@ const Constants = Immutable.fromJS({
     x: -1,
     y: 5,
   },
+
   energyMeasurementTypes: {
     'electricity': ['MW.h', 'CAN$', 'CAN$/MW.h'],
     'crudeOil': ['thousand m3/d'],
@@ -180,8 +186,10 @@ const Constants = Immutable.fromJS({
     'naturalGasLiquids': ['m3/d'],
     'refinedPetroleumProducts': ['thousand m3/d'],
   },
+
   appHost: 'https://apps2.neb-one.gc.ca',
   screenshotPath: 'screenshot',
+  
   styleGuide: {
     colours: {
       NeutralWhite: 'rgb(255, 255, 255)',

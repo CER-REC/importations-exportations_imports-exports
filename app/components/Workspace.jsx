@@ -30,10 +30,13 @@ const Workspace = ({ svgSize, detailSidebarPosition }) => (
       className="Workspace"
       {...svgSize}
     >
+
       <VisualizationContainer />
-      <SocialBar />
+      
       <MenuBar />
+      <SocialBar />
     </svg>
+
   </div>
 )
 
