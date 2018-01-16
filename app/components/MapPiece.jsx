@@ -48,8 +48,8 @@ class MapPiece extends React.Component {
     if(this.props.isSelected === true && this.props.isMapPieceSelected === false){
       opacity = 0.10
     }
-    return <g stroke ={stroke} fillOpacity = {opacity} >
-        <polygon 
+    return <g fillOpacity = {opacity} >
+        <polygon stroke ={stroke}
           fill={this.props.styles.get('color')} 
           points="37.09 9.68 18.54 0 0 9.68 0 29.05 18.54 38.73 37.09 29.05 37.09 9.68"/>
         <MapPieceLabel

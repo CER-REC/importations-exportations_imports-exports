@@ -2,6 +2,7 @@ const React = require('react')
 const ReactRedux = require('react-redux')
 const MapPiece = require('./MapPiece.jsx')
 const MapLayoutGridConstant = require('../MapLayoutGridConstant.js')
+const Immutable = require('immutable')
 
 import { setSelection } from '../actions/visualizationSettings.js'
 
@@ -23,9 +24,9 @@ class ElectricityMapLayout extends React.Component {
     if(selection.get('country') === country){
       const originKeyExists = selection.get('selectedMapPieces').indexOf(originKey)
       if(originKeyExists === -1){
-        resultSelectedMapPieces = [ ...selection.get('selectedMapPieces'), originKey ]
+        resultSelectedMapPieces = selection.get('selectedMapPieces').push(originKey).toJS()
       }else{
-        resultSelectedMapPieces = selection.get('selectedMapPieces').filter(mappiece => mappiece !== originKey)
+        resultSelectedMapPieces = selection.get('selectedMapPieces').delete(originKeyExists)
       }
     } else{
       resultSelectedMapPieces = [originKey]
@@ -57,18 +58,17 @@ class ElectricityMapLayout extends React.Component {
     let isSelected = this.props.selection.get('selectedMapPieces').indexOf(key)
     let result = false 
     if(isSelected !== -1){
-      result = true
+      return true
     } 
     if(typeof this.props.selection.get('highlightedMapPieces').get(country) !== 'undefined'){
-      const existInList = this.props.selection.get('highlightedMapPieces').get(country).indexOf(key)
-      result = result || ((existInList !== -1)?true: false)
+      return this.props.selection.getIn(['highlightedMapPieces', country], new Immutable.List()).includes(key)
     }
     return result
   }
 
   isSelected(){
-    let length = this.props.selection.get('selectedMapPieces').size + this.props.selection.get('highlightedMapPieces').size
-    return length > 0? true: false
+    let length = this.props.selection.get('selectedMapPieces').count() + this.props.selection.get('highlightedMapPieces').count()
+    return (length > 0)
   }
 
 
@@ -102,13 +102,7 @@ class ElectricityMapLayout extends React.Component {
   }
 }
 
-const mapDispatchToProps = dispatch => {
-  return {
-    onMapPieceClick: selection => {
-      dispatch(setSelection(selection))
-    }
-  }
-}
+const mapDispatchToProps = { onMapPieceClick: setSelection }
 
 const mapStateToProps = (state,props) => {
   return {
