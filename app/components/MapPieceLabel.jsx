@@ -5,8 +5,8 @@ const Constants = require('../Constants.js')
 require('../styles/Fonts.scss')
 class MapPieceLabel extends React.Component {
   drawLabel(mapPieceProps, yAxis){
-    const lineY = yAxis -4
-    const labelY = yAxis -4
+    const lineY = yAxis - 4
+    const labelY = yAxis - 4
     let labelElement = ''
 
     if(typeof mapPieceProps !== 'undefined'){
