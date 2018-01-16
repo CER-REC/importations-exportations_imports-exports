@@ -7,7 +7,13 @@ const selectedVisualization = state => state.importExportVisualization
 const { sortAggregatedLocationsSelector, arrangeBy, unitSelector } = require('./data.js')
 const MapLayoutGridConstant = require('../MapLayoutGridConstant.js')
 const Constants = require('../Constants.js')
-                                          
+
+const { visualizationSettings } = require('./visualizationSettings')
+
+const getSelectionSettings = createSelector(
+  visualizationSettings,
+  settings => settings.get('selection')
+)
 
 const getCountry = (state,props)=>{
   return props.country
@@ -37,12 +43,17 @@ const getPadding = createSelector(
   }
 )
 
-const getElectricityImportAndExport = createSelector(
+const getPointsByCountry = createSelector(
   sortAggregatedLocationsSelector,
+  getCountry,
+  (points,country) => points.filter( point=> point.get('country') === country)
+)
+
+const getElectricityImportAndExport = createSelector(
+  getPointsByCountry,
   unitSelector,
   getCountry,
   (points,unit,country) => {
-    points = points.filter( point=> point.get('country') === country)
     //append missing states or provinces 
     const statesOrProvinces = Constants.getIn(['dataloader','mapping','country', country])
     if(typeof statesOrProvinces !== 'undefined'){
@@ -150,7 +161,8 @@ const getElectrictyMapLayout = createSelector(
   }
 )
 
-
 module.exports = {
-  getElectrictyMapLayout
+  getElectrictyMapLayout,
+  getSelectionSettings,
+  getPointsByCountry
 }

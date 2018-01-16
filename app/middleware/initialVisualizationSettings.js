@@ -25,6 +25,11 @@ const initialVisualizationSettings = store => next => action => {
           arrangeBy: 'location',
           activity: 'importsExports',
           subtype: '',
+          selection:{
+            country: null,
+            origins:[],
+            destinations:{}
+          },
           timeline: {
             scaleLinked: true,
             grouping: 'year',
