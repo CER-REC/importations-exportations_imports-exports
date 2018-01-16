@@ -13,7 +13,7 @@ require('./Workspace.scss')
 
 const Workspace = ({ svgSize, detailSidebarPosition }) => (
   <div style={{ position: 'relative' }}>
-    <div className = 'Workspace'>
+    <div className="Workspace">
       <Header />
     </div>
     <div
@@ -32,7 +32,7 @@ const Workspace = ({ svgSize, detailSidebarPosition }) => (
     >
 
       <VisualizationContainer />
-      
+
       <MenuBar />
       <SocialBar />
     </svg>
@@ -40,9 +40,7 @@ const Workspace = ({ svgSize, detailSidebarPosition }) => (
   </div>
 )
 
-module.exports = connect(
-  (state, props) => ({
-    svgSize: ViewportSelectors.svgSize(state, props),
-    detailSidebarPosition: ViewportSelectors.detailSidebarPosition(state, props),
-  })
-)(Workspace)
+module.exports = connect((state, props) => ({
+  svgSize: ViewportSelectors.svgSize(state, props),
+  detailSidebarPosition: ViewportSelectors.detailSidebarPosition(state, props),
+}))(Workspace)

@@ -1,7 +1,7 @@
-function SetElectricityDataTypeCreator (electricityDataType) {
+function SetElectricityDataTypeCreator(electricityDataType) {
   return {
     type: 'SetElectricityDataType',
-    electricityDataType: electricityDataType
+    electricityDataType,
   }
 }
 

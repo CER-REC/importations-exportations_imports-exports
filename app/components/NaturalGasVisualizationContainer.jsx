@@ -8,8 +8,8 @@ const NaturalGasViewport = require('../selectors/viewport/naturalGas')
 const Constants = require('../Constants')
 
 class NaturalGasVisualizationContainer extends React.Component {
-  render(){
-    return <g>
+  render() {
+    return (<g>
       <BarChart
         {...this.props.importChart}
         valueKey="imports"
@@ -27,18 +27,16 @@ class NaturalGasVisualizationContainer extends React.Component {
         flipped
         colour={Constants.getIn(['styleGuide', 'colours', 'ExportDefault'])}
       />
-      <ExplanationPopovers 
-        xaxis = {this.props.xaxis } 
-        yaxis = {this.props.yaxis + this.props.height}
+      <ExplanationPopovers
+        xaxis={this.props.xaxis}
+        yaxis={this.props.yaxis + this.props.height}
       />
-    </g>
+            </g>)
   }
 }
 
-module.exports = connect(
-  (state, props) => ({
-    importChart: NaturalGasViewport.chartImportPosition(state, props),
-    axisPosition: NaturalGasViewport.chartAxisPosition(state, props),
-    exportChart: NaturalGasViewport.chartExportPosition(state, props),
-  })
-)(NaturalGasVisualizationContainer)
+module.exports = connect((state, props) => ({
+  importChart: NaturalGasViewport.chartImportPosition(state, props),
+  axisPosition: NaturalGasViewport.chartAxisPosition(state, props),
+  exportChart: NaturalGasViewport.chartExportPosition(state, props),
+}))(NaturalGasVisualizationContainer)

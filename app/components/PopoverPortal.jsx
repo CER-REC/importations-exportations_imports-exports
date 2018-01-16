@@ -40,7 +40,7 @@ class PopoverPortal extends React.PureComponent {
     )
     return ReactDOM.createPortal(
       container,
-      this.el
+      this.el,
     )
   }
 }

@@ -110,7 +110,7 @@ class TimelineSeek extends React.PureComponent {
           >
             <polygon
               points="7,0 10,0 10,26 0,26"
-              stroke={ Constants.getIn(['styleGuide', 'colours', 'SandExtraDark'])}
+              stroke={Constants.getIn(['styleGuide', 'colours', 'SandExtraDark'])}
               fill="white"
             />
           </g>
@@ -126,5 +126,5 @@ module.exports = connect(
     timelineRange: TimelineSelector.timelineRange(state, props),
     timelineGroup: TimelineSelector.timelineGrouping(state, props),
   }),
-  { timelineFilter }
+  { timelineFilter },
 )(TimelineSeek)

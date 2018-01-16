@@ -1,6 +1,6 @@
 const Immutable = require('immutable')
 
-const TranslationTable = Immutable.fromJS({ 
+const TranslationTable = Immutable.fromJS({
 
   theLegendValues: {
     importations: {
@@ -117,60 +117,60 @@ const TranslationTable = Immutable.fromJS({
 
   },
 
-  mainMenuBar:{
-    electricity:{
-      en:'Electricity',
-      fr:'Electricity FR',
+  mainMenuBar: {
+    electricity: {
+      en: 'Electricity',
+      fr: 'Electricity FR',
     },
-    crudeOil:{
-      en:'Crude Oil',
-      fr:'Crude Oil FR',
+    crudeOil: {
+      en: 'Crude Oil',
+      fr: 'Crude Oil FR',
     },
-    naturalGas:{
-      en:'Natural Gas',
-      fr:'Natural Gas FR',
+    naturalGas: {
+      en: 'Natural Gas',
+      fr: 'Natural Gas FR',
     },
-    naturalGasLiquids:{
-      en:'Natural Gas Liquids',
-      fr:'Natural Gas Liquids FR',
+    naturalGasLiquids: {
+      en: 'Natural Gas Liquids',
+      fr: 'Natural Gas Liquids FR',
     },
-    refinedPetroleumProducts:{
-      en:'Refin. Petroleum Prod',
-      fr:'Refin. Petroleum Prod FR',
+    refinedPetroleumProducts: {
+      en: 'Refin. Petroleum Prod',
+      fr: 'Refin. Petroleum Prod FR',
     },
   },
 
-  electricitySortStates:{
-    title:{
+  electricitySortStates: {
+    title: {
       import: {
-        en:'Imports',
-        fr:'Imports'
+        en: 'Imports',
+        fr: 'Imports',
       },
       ampersand: {
-        en:'&',
-        fr:'&'
+        en: '&',
+        fr: '&',
       },
       export: {
-        en:'Exports',
-        fr:'Exports',
+        en: 'Exports',
+        fr: 'Exports',
       },
     },
-    location:{
-      en:'Sort By LOCATION',
-      fr:'Sort By LOCATION FR'
+    location: {
+      en: 'Sort By LOCATION',
+      fr: 'Sort By LOCATION FR',
     },
-    imports:{
-      en:'Sort By IMPORTS',
-      fr:'Sort By IMPORTS FR',
+    imports: {
+      en: 'Sort By IMPORTS',
+      fr: 'Sort By IMPORTS FR',
     },
-    exports:{
-      en:'Sort By EXPORTS',
-      fr:'Sort By EXPORTS FR',
+    exports: {
+      en: 'Sort By EXPORTS',
+      fr: 'Sort By EXPORTS FR',
     },
   },
 
-  electricityDataTypes:{
-    'CAN$': { en: 'CAN$', fr: 'CAN$' },
+  electricityDataTypes: {
+    CAN$: { en: 'CAN$', fr: 'CAN$' },
     'CAN$/MW.h': { en: 'CAN$/MW.h', fr: 'CAN$/MW.h' },
     'CN$/GJ': { en: 'CN$/GJ', fr: 'CN$/GJ' },
     'm3/d': { en: 'm³/d', fr: 'm³/d' },
@@ -198,9 +198,9 @@ const TranslationTable = Immutable.fromJS({
   },
 
 
-  explanationShown:{
-    en:'show EXPLANATIONS',
-    fr:'show EXPLANATIONS FR',
+  explanationShown: {
+    en: 'show EXPLANATIONS',
+    fr: 'show EXPLANATIONS FR',
   },
   explanationHide: {
     en: 'hide EXPLANATIONS',

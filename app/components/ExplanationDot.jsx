@@ -17,64 +17,66 @@ class ExplanationDot extends React.Component {
   }
 
   explanationDot() {
-    return <circle id='back'
+    return (<circle
+      id="back"
       cx={this.props.xPosition}
-      cy={this.props.yPosition} 
-      r={Constants.getIn(['explanationDot','radiusStart'])} 
-      fill='#ff708a'/>
+      cy={this.props.yPosition}
+      r={Constants.getIn(['explanationDot', 'radiusStart'])}
+      fill="#ff708a"
+    />)
   }
 
   dotAnimation() {
-    return <circle id='animationCircle'
-      r={Constants.getIn(['explanationDot','radiusStart'])}      
+    return (<circle
+      id="animationCircle"
+      r={Constants.getIn(['explanationDot', 'radiusStart'])}
       cx={this.props.xPosition}
-      cy={this.props.yPosition} 
-      fill='#ff708a'>
+      cy={this.props.yPosition}
+      fill="#ff708a"
+    >
       <defs>
-        <animate 
-          xlinkHref='#back'
-          attributeName='r'
-          from={Constants.getIn(['explanationDot','radiusStart'])}
-          to={Constants.getIn(['explanationDot','radiusEnd'])}
-          dur='1.5s'
-          begin='0s'
-          repeatCount='indefinite'
-          fill='freeze'
+        <animate
+          xlinkHref="#back"
+          attributeName="r"
+          from={Constants.getIn(['explanationDot', 'radiusStart'])}
+          to={Constants.getIn(['explanationDot', 'radiusEnd'])}
+          dur="1.5s"
+          begin="0s"
+          repeatCount="indefinite"
+          fill="freeze"
           id="circ-anim"
         />
-        <animate 
-          xlinkHref='#back'
-          attributeName='opacity'
-          from='0.3'
-          to='0'
-          dur='1.5s'
-          begin='0s'
-          repeatCount='indefinite' 
-          fill='freeze'
+        <animate
+          xlinkHref="#back"
+          attributeName="opacity"
+          from="0.3"
+          to="0"
+          dur="1.5s"
+          begin="0s"
+          repeatCount="indefinite"
+          fill="freeze"
           id="circ-anim"
-        /></defs>
-    </circle>
+        />
+      </defs>
+            </circle>)
   }
 
   render() {
-    if(!this.props.showExplanations) {
+    if (!this.props.showExplanations) {
       return null
-    } else {
-      return <g onClick = {this.onClick}>
-        {this.explanationDot()}
-        {this.dotAnimation()}
-      </g>
     }
+    return (<g onClick={this.onClick}>
+      {this.explanationDot()}
+      {this.dotAnimation()}
+    </g>)
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    viewport: state.viewport,
-    language: state.language,
-    showExplanations: state.showExplanations,
-  }
-}
+const mapStateToProps = state => ({
+  viewport: state.viewport,
+  language: state.language,
+  showExplanations: state.showExplanations,
+})
 
 
 module.exports = ReactRedux.connect(mapStateToProps)(ExplanationDot)

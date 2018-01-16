@@ -13,19 +13,19 @@ const activityGroupOverride = (_, props) => props._overrideActivityGroup
 const arrangeBy = createSelector(
   visualizationSettings,
   arrangeByOverride,
-  (settings, override) => override || settings.get('arrangeBy')
+  (settings, override) => override || settings.get('arrangeBy'),
 )
 
 const amount = createSelector(
   visualizationSettings,
   amountOverride,
-  (settings, override) => override || settings.get('amount')
+  (settings, override) => override || settings.get('amount'),
 )
 
 const selectedActivityGroup = createSelector(
   visualizationSettings,
   activityGroupOverride,
-  (settings, override) => override || settings.get('activity')
+  (settings, override) => override || settings.get('activity'),
 )
 
 const selectedVisualization = (state, props) =>
@@ -35,41 +35,41 @@ const dataSelector = state => state.data
 const productSelector = createSelector(
   dataSelector,
   selectedVisualization,
-  (data, viz) => data.get(viz, emptyMap)
+  (data, viz) => data.get(viz, emptyMap),
 )
 
 const unitSelector = createSelector(
   productSelector,
   amount,
-  (product, unit) => product.get(unit, emptyList)
+  (product, unit) => product.get(unit, emptyList),
 )
 
 const activityGroupSelector = createSelector(
   unitSelector,
   selectedActivityGroup,
   (points, filterActivityGroup) =>
-    points.filter(point => (point.get('activityGroup') === filterActivityGroup))
+    points.filter(point => (point.get('activityGroup') === filterActivityGroup)),
 )
 
 const filterByTimelineSelector = createSelector(
   activityGroupSelector,
-  points => {
+  points =>
     // TODO: Add filtering by timeline year-domain
-    return points
-  }
+    points,
+
 )
 
 const filterByHexSelector = createSelector(
   activityGroupSelector,
-  points => {
+  points =>
     // TODO: Add filtering by selected hexes
-    return points
-  }
+    points,
+
 )
 
 const aggregateLocationSelector = createSelector(
   filterByTimelineSelector,
-  points => {
+  (points) => {
     const result = points.reduce((acc, next) => {
       const origin = next.get('origin') || next.get('port')
       const originKey = next.get('originKey')
@@ -80,27 +80,27 @@ const aggregateLocationSelector = createSelector(
           origin,
         }
       }
-      acc[originKey]['country'] = next.get('country')
-      acc[originKey]['originKey'] = originKey
+      acc[originKey].country = next.get('country')
+      acc[originKey].originKey = originKey
       const activity = next.get('activity')
       const currentVal = acc[originKey][activity] || 0
       acc[originKey][activity] = (currentVal + next.get('value'))
-      
-      const totalCount = acc[originKey]['totalCount'] || 0
-      const confidentialCount = acc[originKey]['confidentialCount'] || 0
+
+      const totalCount = acc[originKey].totalCount || 0
+      const confidentialCount = acc[originKey].confidentialCount || 0
       const destinationKey = next.get('destinationKey')
       const destinationCountry = next.get('destinationCountry')
-      acc[originKey]['destinationCountry'] = acc[originKey]['destinationCountry']||{}
-      acc[originKey]['destinationCountry'][destinationCountry] = acc[originKey]['destinationCountry'][destinationCountry]||[]
-      if((acc[originKey]['destinationCountry'][destinationCountry]).indexOf(destinationKey ) === -1){
-        (acc[originKey]['destinationCountry'][destinationCountry]).push(destinationKey)  
+      acc[originKey].destinationCountry = acc[originKey].destinationCountry || {}
+      acc[originKey].destinationCountry[destinationCountry] = acc[originKey].destinationCountry[destinationCountry] || []
+      if ((acc[originKey].destinationCountry[destinationCountry]).indexOf(destinationKey) === -1) {
+        (acc[originKey].destinationCountry[destinationCountry]).push(destinationKey)
       }
-      acc[originKey]['totalCount'] = (totalCount + 1)
-      acc[originKey]['confidentialCount'] = (confidentialCount + next.get('confidential'))
-      return acc  
+      acc[originKey].totalCount = (totalCount + 1)
+      acc[originKey].confidentialCount = (confidentialCount + next.get('confidential'))
+      return acc
     }, {})
     return Immutable.fromJS(result)
-  }
+  },
 )
 
 const sortAggregatedLocationsSelector = createSelector(
@@ -117,7 +117,7 @@ const sortAggregatedLocationsSelector = createSelector(
       default:
         return points
     }
-  }
+  },
 )
 
 module.exports = {

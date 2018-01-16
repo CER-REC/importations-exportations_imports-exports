@@ -36,10 +36,14 @@ class TextBox extends React.PureComponent {
 
   calculateSize() {
     if (!this.textRef) { return }
-    const { width, height, x, y } = this.textRef.getBBox()
+    const {
+      width, height, x, y,
+    } = this.textRef.getBBox()
     if (this.state.width !== width || this.state.height !== height ||
         this.state.x !== x || this.state.y !== y) {
-      this.setState({ width, height, x, y })
+      this.setState({
+        width, height, x, y,
+      })
     }
   }
 

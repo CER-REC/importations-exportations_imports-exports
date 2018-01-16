@@ -23,12 +23,12 @@ const Constants = Immutable.fromJS({
 
   menuBar: {
     width: 150,
-    containerHeight: 300
+    containerHeight: 300,
   },
 
-  menuBarOptions:{
+  menuBarOptions: {
     optionPadding: 25,
-    optionXaxisPadding: 5
+    optionXaxisPadding: 5,
   },
 
   legend: {
@@ -82,7 +82,7 @@ const Constants = Immutable.fromJS({
   mainNavigationMenu: {
     height: 160,
     color: 'orange',
-    lineWidth: 3
+    lineWidth: 3,
   },
 
   electricitySortMenu: {
@@ -118,39 +118,39 @@ const Constants = Immutable.fromJS({
     'naturalGasLiquids',
     'refinedPetroleumProducts',
   ],
-  electricitySortStates:[
+  electricitySortStates: [
     'location',
     'imports',
-    'exports'
+    'exports',
   ],
 
-  electricitySortStatesStyle:{
+  electricitySortStatesStyle: {
     color: 'grey',
     lineWidth: 3,
     title: {
-      import:{
+      import: {
         xPadding: 5,
-        color: 'orange'
+        color: 'orange',
       },
-      ampersand:{
-        xPadding: 70, 
-        color:''
+      ampersand: {
+        xPadding: 70,
+        color: '',
       },
       export: {
         xPadding: 90,
-        color:'#6495ED'
-      }
-    }
+        color: '#6495ED',
+      },
+    },
   },
 
   language: [
     'en',
-    'fr'
+    'fr',
   ],
 
-  electricityDataTypesStyle:{
+  electricityDataTypesStyle: {
     color: 'grey',
-    lineWidth: 3
+    lineWidth: 3,
   },
 
   timeline: {
@@ -159,26 +159,26 @@ const Constants = Immutable.fromJS({
     axisHeight: 30,
   },
 
-  mapPieceTextStyle:{
+  mapPieceTextStyle: {
     x: 9.58,
     y: 10,
   },
-  mapPieceArrowStyle:{
+  mapPieceArrowStyle: {
     x: -1,
     y: 5,
   },
 
   energyMeasurementTypes: {
-    'electricity': ['MW.h', 'CAN$', 'CAN$/MW.h'],
-    'crudeOil': ['thousand m3/d'],
-    'naturalGas': ['thousand m3/d', 'CN$/GJ'],
-    'naturalGasLiquids': ['m3/d'],
-    'refinedPetroleumProducts': ['thousand m3/d'],
+    electricity: ['MW.h', 'CAN$', 'CAN$/MW.h'],
+    crudeOil: ['thousand m3/d'],
+    naturalGas: ['thousand m3/d', 'CN$/GJ'],
+    naturalGasLiquids: ['m3/d'],
+    refinedPetroleumProducts: ['thousand m3/d'],
   },
 
   appHost: 'https://apps2.neb-one.gc.ca',
   screenshotPath: 'screenshot',
-  
+
   styleGuide: {
     colours: {
       NeutralWhite: 'rgb(255, 255, 255)',
@@ -218,86 +218,86 @@ const Constants = Immutable.fromJS({
       'rgb(30, 97, 114)',
     ],
   },
-  dataloader:{
-    mapping:{
-      value:{
-        'confidential': 'Confidential'
+  dataloader: {
+    mapping: {
+      value: {
+        confidential: 'Confidential',
       },
-      country:{
-        ca:{
-          'Yukon': 'YT',
+      country: {
+        ca: {
+          Yukon: 'YT',
           'Northwest Territories': 'NT',
-          'Nunavut': 'NU',
+          Nunavut: 'NU',
           'Newfoundland and Labrador': 'NF',
           'Prince Edward Island': 'PE',
           'British Columbia': 'BC',
-          'Alberta': 'AB',
-          'Saskatchewan': 'SK',
-          'Manitoba': 'MB',
-          'Ontario': 'ON',
-          'Québec': 'QB',
+          Alberta: 'AB',
+          Saskatchewan: 'SK',
+          Manitoba: 'MB',
+          Ontario: 'ON',
+          Québec: 'QB',
           'New Brunswick': 'NB',
-          'Nova Scotia': 'NS'
+          'Nova Scotia': 'NS',
         },
-        us:{
-          'Alabama':'AL',
-          'Alaska':'AK',
-          'Arizona':'AZ',
-          'Arkansas':'AR',
-          'California':'CA',
-          'Colorado':'CO',
-          'Connecticut':'CT',
-          'Delaware':'DE',
-          'Florida':'FL',
-          'Georgia':'GA',
-          'Hawaii':'HI',
-          'Idaho':'ID',
-          'Illinois':'IL',
-          'Indiana':'IN',
-          'Iowa':'IA',
-          'Kansas':'KS',
-          'Kentucky':'KY',
-          'Louisiana':'LA',
-          'Maine':'ME',
-          'Maryland':'MD',
-          'Massachusetts':'MA',
-          'Michigan':'MI',
-          'Minnesota':'MN',
-          'Mississippi':'MS',
-          'Missouri':'MO',
-          'Montana':'MT',
-          'Nebraska':'NE',
-          'Nevada':'NV',
-          'New Hampshire':'NH',
-          'New Jersey':'NJ',
-          'New Mexico':'NM',
-          'New York':'NY',
-          'North Carolina':'NC',
-          'North Dakota':'ND',
-          'Ohio':'OH',
-          'Oklahoma':'OK',
-          'Oregon':'OR',
-          'Pennsylvania':'PA',
-          'Rhode Island':'RI',
-          'South Carolina':'SC',
-          'South Dakota':'SD',
-          'Tennessee':'TN',
-          'Texas':'TX',
-          'Utah':'UT',
-          'Vermont':'VT',
-          'Virginia':'VA',
-          'Washington':'WA',
-          'West Virginia':'WV',
-          'Wisconsin':'WI',
-          'Wyoming':'WY',
+        us: {
+          Alabama: 'AL',
+          Alaska: 'AK',
+          Arizona: 'AZ',
+          Arkansas: 'AR',
+          California: 'CA',
+          Colorado: 'CO',
+          Connecticut: 'CT',
+          Delaware: 'DE',
+          Florida: 'FL',
+          Georgia: 'GA',
+          Hawaii: 'HI',
+          Idaho: 'ID',
+          Illinois: 'IL',
+          Indiana: 'IN',
+          Iowa: 'IA',
+          Kansas: 'KS',
+          Kentucky: 'KY',
+          Louisiana: 'LA',
+          Maine: 'ME',
+          Maryland: 'MD',
+          Massachusetts: 'MA',
+          Michigan: 'MI',
+          Minnesota: 'MN',
+          Mississippi: 'MS',
+          Missouri: 'MO',
+          Montana: 'MT',
+          Nebraska: 'NE',
+          Nevada: 'NV',
+          'New Hampshire': 'NH',
+          'New Jersey': 'NJ',
+          'New Mexico': 'NM',
+          'New York': 'NY',
+          'North Carolina': 'NC',
+          'North Dakota': 'ND',
+          Ohio: 'OH',
+          Oklahoma: 'OK',
+          Oregon: 'OR',
+          Pennsylvania: 'PA',
+          'Rhode Island': 'RI',
+          'South Carolina': 'SC',
+          'South Dakota': 'SD',
+          Tennessee: 'TN',
+          Texas: 'TX',
+          Utah: 'UT',
+          Vermont: 'VT',
+          Virginia: 'VA',
+          Washington: 'WA',
+          'West Virginia': 'WV',
+          Wisconsin: 'WI',
+          Wyoming: 'WY',
         },
-        'powerpool':{
+        powerpool: {
           'New England-ISO': 'NE-ISO',
           'Minn / N. Dakota': 'MN/ND',
-          'Pennsylvania Jersey Maryland Power Pool': 'PJMPP'
-        }
-      }
-    }
-  }
+          'Pennsylvania Jersey Maryland Power Pool': 'PJMPP',
+        },
+      },
+    },
+  },
 })
 module.exports = Constants

@@ -1,20 +1,16 @@
 const defaultState = true
 
 const ShowExplanationsReducer = (state = defaultState, action) => {
-  
-  switch(action.type) {
+  switch (action.type) {
+    case 'ShowExplanations':
+      return !state
 
-  case 'ShowExplanations':
-    return !state
+      // TODO: reset visualization state
+      // case 'ResetVisualization':
+      //   return defaultState
 
-  // TODO: reset visualization state
-  // case 'ResetVisualization':
-  //   return defaultState
- 
-  default:
-    return defaultState
-
-
+    default:
+      return defaultState
   }
 }
 

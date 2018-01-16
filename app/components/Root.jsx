@@ -7,10 +7,9 @@ require('../styles/Common.scss')
 
 class Root extends React.Component {
   render() {
-    return <div>
+    return (<div>
       <Workspace />
-    </div>
-
+            </div>)
   }
 }
 

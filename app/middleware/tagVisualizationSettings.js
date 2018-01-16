@@ -2,7 +2,7 @@ const { Types: VisSettingsTypesRaw } = require('../actions/visualizationSettings
 
 const VisualizationSettingsTypes = Object.values(VisSettingsTypesRaw)
 
-const tagVisualizationSettings = store => next => action => {
+const tagVisualizationSettings = store => next => (action) => {
   if (!VisualizationSettingsTypes.includes(action.type)) { return next(action) }
 
   if (!action.meta) { action.meta = {} }
