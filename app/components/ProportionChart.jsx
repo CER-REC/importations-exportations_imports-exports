@@ -1,4 +1,5 @@
 const React = require('react')
+const PropTypes = require('prop-types')
 const { connect } = require('react-redux')
 
 const Chart = require('./Chart')
@@ -7,10 +8,16 @@ const Constants = require('../Constants')
 const TimelineSelector = require('../selectors/timeline')
 
 class ProportionChart extends Chart {
+  static get propTypes() {
+    return Object.assign({}, super.propTypes, {
+      color: PropTypes.objectOf(PropTypes.string).isRequired,
+    })
+  }
+
   static get defaultProps() {
-    return Object.assign({
+    return Object.assign({}, super.defaultProps, {
       colors: Constants.getIn(['styleGuide', 'categoryColours']),
-    }, super.defaultProps)
+    })
   }
 
   render() {

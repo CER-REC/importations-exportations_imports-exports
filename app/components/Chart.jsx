@@ -5,7 +5,6 @@ class Chart extends React.PureComponent {
   static get propTypes() {
     return {
       aggregateKey: PropTypes.string.isRequired,
-      valueKey: PropTypes.string.isRequired,
       scaleKey: PropTypes.string,
       top: PropTypes.number.isRequired,
       left: PropTypes.number.isRequired,

@@ -8,6 +8,12 @@ const AxisGuide = require('./AxisGuide')
 const TimelineSelector = require('../selectors/timeline')
 
 class BarChart extends Chart {
+  static get propTypes() {
+    return Object.assign({}, super.propTypes, {
+      valueKey: PropTypes.string.isRequired,
+    })
+  }
+
   constructor(props) {
     super(props)
     this.state = {

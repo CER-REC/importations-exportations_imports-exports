@@ -8,9 +8,9 @@ const TimelineSelector = require('../selectors/timeline')
 
 class StackedChart extends Chart {
   static get defaultProps() {
-    return Object.assign({
+    return Object.assign({}, super.defaultProps, {
       colors: Constants.getIn(['styleGuide', 'categoryColours']),
-    }, super.defaultProps)
+    })
   }
 
   render() {
