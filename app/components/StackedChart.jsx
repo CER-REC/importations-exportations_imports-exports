@@ -6,7 +6,7 @@ const AnimatedLine = require('./SVGAnimation/AnimatedLine')
 const Constants = require('../Constants')
 const TimelineSelector = require('../selectors/timeline')
 
-class ProportionChart extends Chart {
+class StackedChart extends Chart {
   static get defaultProps() {
     return Object.assign({
       colors: Constants.getIn(['styleGuide', 'categoryColours']),
@@ -18,12 +18,13 @@ class ProportionChart extends Chart {
       bars: data,
       height,
       layout,
+      scale,
       color,
       colors: categoryColours,
     } = this.props
 
     const elements = data.map(point => {
-      const heightPerUnit = height / point.get('total')
+      const heightPerUnit = height / (scale.getIn(['y', 'max']) - scale.getIn(['y', 'min']))
       const opacity = this.isTimelinePointFiltered(point) ? 0.5 : 1
       let offsetY = 0
       let stackIndex = 0
@@ -65,4 +66,4 @@ module.exports = connect((state, props) => {
   return Object.assign({
     timelineGroup: TimelineSelector.timelineGrouping(state, props),
   }, TimelineSelector.timelineData(state, props))
-})(ProportionChart)
+})(StackedChart)
