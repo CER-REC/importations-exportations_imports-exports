@@ -5,6 +5,8 @@ const Constants = require('../Constants.js')
 const Tr = require('../TranslationTable.js')
 const WorkspaceComputations = require('../computations/WorkspaceComputations.js')
 
+const ExpandElectricitySortMenuCreator = require('../actionCreators/ExpandElectricitySortMenuCreator.js')
+
 const MenuBarOption = require('./MenuBarOption.jsx')
 
 const { setArrangeBy } = require('../actions/visualizationSettings')
@@ -15,33 +17,41 @@ require('./ElectricitySortMenu.scss')
 class ElectricitySortMenu extends React.Component {
   constructor(props) {
     super(props)
-    this.onClick = this.dropDownClick.bind(this)
+    this.onClick = this.props.onClick.bind(this)
   }
 
   controlArrowImage() {
+    let arrowYPosition = `${ WorkspaceComputations.importExportMenuY(this.props.viewport) + 
+          118 }`
+    if(this.props.expandImportExportMenu) {
+      arrowYPosition = `${ WorkspaceComputations.importExportMenuY(this.props.viewport) + 
+          148 }`
+    }
     return <image
       height = { Constants.getIn(['menuBar','controlArrowSize']) }
       width = { Constants.getIn(['menuBar','controlArrowSize']) }
       x = { 0 }
-      y = { WorkspaceComputations.importExportMenuY(this.props.viewport) + 
-          Constants.getIn(['menuBar','sortMenuYMargin']) } 
+      y = { arrowYPosition } 
       xlinkHref = 'images/control_arrow.svg'
     />
   }
 
   sortMenuText() {
+    let textPosition = `${ Constants.getIn(['menuBar','sortMenuTextY']) }`
+    if(this.props.expandImportExportMenu) {
+      textPosition = `${ Constants.getIn(['menuBar','sortMenuTextY']) + 30}`
+    }
     return <g>
       <text x = { Constants.getIn(['menuBar','textLabelOffset']) } 
-        y = { Constants.getIn(['menuBar','sortMenuTextY']) }
+        y = { textPosition }
         className = 'bodyText'>
         { Tr.getIn(['arrangedBy', this.props.language]) }
       </text>
     </g>
   }
 
-  dropDownClick(e) {
+  onClick(e) {
     e.preventDefault()
-    console.log('Clicked', this) 
   }
 
   sortMenuFunctionality() {
@@ -60,7 +70,35 @@ class ElectricitySortMenu extends React.Component {
     </g>
   }
 
+  expandedMenu() {
+    if(!this.props.expandElectricitySortMenu) {
+      return null
+    }
+    return <g><text x = { Constants.getIn(['menuBar','textLabelOffset']) } 
+      y = { WorkspaceComputations.importExportMenuY(this.props.viewport) 
+        + Constants.getIn(['menuBar','sortMenuTextY']) - 35 } 
+      className = 'bodyText'> 
+      <tspan x = { Constants.getIn(['menuBar','textLabelOffset']) + 12 }  
+        dy="0em"> {Tr.getIn(['electricitySortStates', 'imports', this.props.language])} </tspan>
+      <tspan x = { Constants.getIn(['menuBar','textLabelOffset']) + 12 }  
+        dy="1.2em"> 
+        {Tr.getIn(['electricitySortStates', 'exports', this.props.language])}
+      </tspan>   
+    </text>
+    </g>
+  }
+
   sortOption() {
+    let expandedSign = '+'
+    if(this.props.expandElectricitySortMenu) {
+      expandedSign = '-'
+    }
+
+    let labelPosition = `${ Constants.getIn(['menuBar','sortMenuTextY']) } `
+    if(this.props.expandImportExportMenu) {
+      labelPosition = `${ Constants.getIn(['menuBar','sortMenuTextY']) + 30} `
+    }
+
     let sortString = `${Tr.getIn(['electricitySortStates','location', this.props.language])}`
     if(this.props.electricitySortState === 'imports') {
       sortString = `${Tr.getIn(['electricitySortStates','imports', this.props.language])}`
@@ -71,10 +109,10 @@ class ElectricitySortMenu extends React.Component {
 
     return <g>
       <text x = { Constants.getIn(['menuBar','sortTextButtonLabelOffset']) } 
-        y = { Constants.getIn(['menuBar','sortMenuTextY']) } 
+        y = { labelPosition } 
         className = 'selectableDropdown'>
         {sortString} 
-        <tspan onClick = {this.onClick}> + </tspan>
+        <tspan onClick = {this.onClick}> {expandedSign} </tspan>
       </text>
     </g>
   }
@@ -84,6 +122,7 @@ class ElectricitySortMenu extends React.Component {
       {this.sortOption()}
       {this.sortMenuText()}
       {this.controlArrowImage()}
+      {this.expandedMenu()}
     </g>
   }
 }
@@ -93,9 +132,18 @@ const mapStateToProps = (state, props) => {
     viewport: state.viewport,
     language: state.language,
     arrangeBy: visualizationSettings(state, props).get('arrangeBy'),
+    expandImportExportMenu: state.expandImportExportMenu,
+    expandElectricitySortMenu: state.expandElectricitySortMenu,
   }
 }
 
-const mapDispatchToProps = { setArrangeBy }
+const mapDispatchToProps = dispatch => {
+  return { 
+    onClick: () => {
+      dispatch(ExpandElectricitySortMenuCreator())
+    }
+    //({ setArrangeBy } )
+  }
+}
 
 module.exports = ReactRedux.connect(mapStateToProps, mapDispatchToProps)(ElectricitySortMenu)

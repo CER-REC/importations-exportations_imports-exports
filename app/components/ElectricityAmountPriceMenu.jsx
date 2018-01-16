@@ -5,6 +5,8 @@ const Constants = require('../Constants.js')
 const Tr = require('../TranslationTable.js')
 const WorkspaceComputations = require('../computations/WorkspaceComputations.js')
 
+const ExpandElectricityAmountMenuCreator = require('../actionCreators/ExpandElectricityAmountMenuCreator.js')
+
 const MenuBarOption = require('./MenuBarOption.jsx')
 
 const { setAmount } = require('../actions/visualizationSettings')
@@ -15,24 +17,33 @@ require('./ElectricityAmountPriceMenu.scss')
 class ElectricityAmountPriceMenu extends React.Component {
   constructor(props) {
     super(props)
-    this.onClick = this.dropDownClick.bind(this)
+    this.onClick = this.props.onClick.bind(this)
   }
 
   controlArrowImage() {
+    let arrowYPosition = `${ WorkspaceComputations.importExportMenuY(this.props.viewport) + 
+          Constants.getIn(['menuBar','amountMenuYMargin']) }`
+    if(this.props.expandImportExportMenu || this.props.expandElectricitySortMenu) {
+      arrowYPosition = `${ WorkspaceComputations.importExportMenuY(this.props.viewport) + 
+          Constants.getIn(['menuBar','amountMenuYMargin']) + 30 }`
+    }
     return <image
       height = { Constants.getIn(['menuBar','controlArrowSize']) }
       width = {Constants.getIn(['menuBar','controlArrowSize']) }
       x = { 0 }
-      y = { WorkspaceComputations.importExportMenuY(this.props.viewport) + 
-          Constants.getIn(['menuBar','amountMenuYMargin']) }
+      y = { arrowYPosition }
       xlinkHref = 'images/control_arrow.svg'
     />
   }
 
   amountMenuText() {
+    let textPosition = `${ Constants.getIn(['menuBar','amountMenuTextY']) }`
+    if(this.props.expandImportExportMenu || this.props.expandElectricitySortMenu) {
+      textPosition = `${ Constants.getIn(['menuBar','amountMenuTextY']) + 30}`
+    }
     return <g>
       <text x = { Constants.getIn(['menuBar','textLabelOffset']) } 
-        y = { Constants.getIn(['menuBar','amountMenuTextY']) }
+        y = { textPosition }
         className = 'bodyText'>
         { Tr.getIn(['showing',this.props.language]) }
         <tspan className = 'selectableDropdown'> { Tr.getIn(['amount',this.props.language]).toUpperCase() } </tspan>
@@ -40,9 +51,8 @@ class ElectricityAmountPriceMenu extends React.Component {
     </g>
   }
 
-  dropDownClick(e) {
+  onClick(e) {
     e.preventDefault()
-    console.log('Clicked', this) 
   }
 
   amountMenuOptions() {
@@ -60,7 +70,36 @@ class ElectricityAmountPriceMenu extends React.Component {
     /></g>
   }
 
+
+  expandedAmountMenu() {
+    if(!this.props.expandElectricityAmountMenu) {
+      return null
+    }
+    return <g><text x = { Constants.getIn(['menuBar','textLabelOffset']) } 
+      y = { WorkspaceComputations.importExportMenuY(this.props.viewport) 
+        + Constants.getIn(['menuBar','sortMenuTextY']) - 15 } 
+      className = 'bodyText'> 
+      <tspan x = { Constants.getIn(['menuBar','textLabelOffset']) + 10 }  
+        dy="0em"> amount option 1 </tspan>
+      <tspan x = { Constants.getIn(['menuBar','textLabelOffset']) + 10 }  
+        dy="1.2em"> 
+        amount option 2
+      </tspan>   
+    </text>
+    </g>
+  }
+  
   amountOption() {
+    let expandedSign = '+'
+    if(this.props.expandElectricityAmountMenu) {
+      expandedSign = '-'
+    }
+
+    let textAmountPosition = `${ Constants.getIn(['menuBar','amountMenuTextY']) }`
+    if(this.props.expandImportExportMenu || this.props.expandElectricitySortMenu) {
+      textAmountPosition = `${ Constants.getIn(['menuBar','amountMenuTextY']) + 30}`
+    }
+
     let amountString = `${Tr.getIn(['electricityDataTypes','MW.h', this.props.language])}`
     if(this.props.electricitySortState === 'imports') {
       amountString = `${Tr.getIn(['electricityDataTypes','CAN$', this.props.language])}`
@@ -71,21 +110,20 @@ class ElectricityAmountPriceMenu extends React.Component {
 
     return <g>
       <text x = { Constants.getIn(['menuBar','amountTextButtonLabelOffset']) } 
-        y = { Constants.getIn(['menuBar','amountMenuTextY']) }
+        y = { textAmountPosition }
         className = 'selectableDropdown'>
         {amountString}
-        <tspan onClick = {this.onClick}> + </tspan>
+        <tspan onClick = {this.onClick}> {expandedSign} </tspan>
       </text>
     </g>
   }
-
 
   render() {
     return <g>
       {this.amountMenuText()}
       {this.controlArrowImage()}
       {this.amountOption()}
-    }
+      {this.expandedAmountMenu()}
     </g>
   }
 }
@@ -96,9 +134,20 @@ const mapStateToProps = (state, props) => {
     selectedEnergy: state.importExportVisualization,
     language: state.language,
     amount: visualizationSettings(state, props).get('amount'),
+    expandImportExportMenu: state.expandImportExportMenu,
+    expandElectricitySortMenu: state.expandElectricitySortMenu,
+    expandElectricityAmountMenu: state.expandElectricityAmountMenu
   }
 }
 
-const mapDispatchToProps = ({ setAmount })
+const mapDispatchToProps = dispatch => {
+  return { 
+    onClick: () => {
+      dispatch(ExpandElectricityAmountMenuCreator())
+    }
+    //({ setAmount } )
+  }
+}
+
 
 module.exports = ReactRedux.connect(mapStateToProps, mapDispatchToProps)(ElectricityAmountPriceMenu)

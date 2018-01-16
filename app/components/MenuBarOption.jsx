@@ -17,7 +17,6 @@ class MenuBarOption extends React.Component {
             {Tr.getIn([this.props.trKey, key, this.props.language]).toUpperCase() } 
           </text>
 
-          <line x1="27" y1={yaxis + 5} x2="165" y2={yaxis + 5} strokeWidth="2" stroke="#fbb03b" />
         </g>
       }
       

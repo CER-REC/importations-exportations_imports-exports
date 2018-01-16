@@ -4,6 +4,9 @@ const ViewportReducer = require('./reducers/ViewportReducer.js')
 const ImportExportVisualizationReducer = require('./reducers/ImportExportVisualizationReducer.js')
 const LanguageReducer = require('./reducers/LanguageReducer.js')
 const ShowExplanationsReducer = require('./reducers/ShowExplanationsReducer.js')
+const ExpandImportExportMenuReducer = require('./reducers/ExpandImportExportMenuReducer.js')
+const ExpandElectricitySortMenuReducer = require('./reducers/ExpandElectricitySortMenuReducer.js')
+const ExpandElectricityAmountMenuReducer = require('./reducers/ExpandElectricityAmountMenuReducer.js')
 const DataReducer = require('./actions/data').reducer
 const { reducer: visualizationSettings } = require('./actions/visualizationSettings')
 
@@ -17,6 +20,9 @@ const reducers = Redux.combineReducers({
   importExportVisualization: ImportExportVisualizationReducer,
   language: LanguageReducer,
   showExplanations: ShowExplanationsReducer,
+  expandImportExportMenu: ExpandImportExportMenuReducer,
+  expandElectricitySortMenu: ExpandElectricitySortMenuReducer,
+  expandElectricityAmountMenuReducer: ExpandElectricityAmountMenuReducer,
   data: DataReducer,
   visualizationSettings,
 })

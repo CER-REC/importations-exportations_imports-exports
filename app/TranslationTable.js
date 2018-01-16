@@ -150,8 +150,16 @@ const TranslationTable = Immutable.fromJS({
       fr: 'and FR',
     },
     exports: {
-      en: 'EXPORTS +',
-      fr: 'EXPORTS + FR',
+      en: 'EXPORTS',
+      fr: 'EXPORTS FR',
+    },
+    importsOnly: {
+      en: 'IMPORTS only',
+      fr: 'IMPORTS only FR',
+    },
+    exportsOnly: {
+      en: 'EXPORTS only',
+      fr: 'EXPORTS only FR',
     },
   },
 
@@ -161,12 +169,12 @@ const TranslationTable = Immutable.fromJS({
       fr:'LOCATION FR'
     },
     imports:{
-      en:'IMPORTS',
-      fr:'IMPORTS FR',
+      en:'MOST IMPORTS',
+      fr:'MOST IMPORTS FR',
     },
     exports:{
-      en:'EXPORTS',
-      fr:'EXPORTS FR',
+      en:'MOST EXPORTS',
+      fr:'MOST EXPORTS FR',
     },
   },
 
@@ -234,6 +242,11 @@ const TranslationTable = Immutable.fromJS({
   explanationShown:{
     en:'show EXPLANATIONS',
     fr:'show EXPLANATIONS FR'
+  },
+
+  explanationHide:{
+    en:'hide EXPLANATIONS',
+    fr:'hide EXPLANATIONS FR'
   },
 
   confidentialityShown: {

@@ -15,23 +15,30 @@ require('./MainNavigationMenu.scss')
 class MainNavigationMenu extends React.Component {
 
   controlArrowImage() {
+    let arrowYPosition = `${ WorkspaceComputations.importExportMenuY(this.props.viewport) + 
+          Constants.getIn(['mainNavigationMenu','menuYPadding']) }`
+    let textPosition = `${ Constants.getIn(['mainNavigationMenu','textYPosition']) }`
+    if(this.props.expandImportExportMenu) {
+      arrowYPosition = `${ WorkspaceComputations.importExportMenuY(this.props.viewport) + 
+          Constants.getIn(['mainNavigationMenu','menuYPadding']) + 30 }`
+      textPosition = `${ Constants.getIn(['mainNavigationMenu','textYPosition']) + 30}`
+    }
     return <g><image
       height = { Constants.getIn(['menuBar','controlArrowSize']) }
       width = { Constants.getIn(['menuBar','controlArrowSize']) }
       x = { 0 }
-      y = { WorkspaceComputations.importExportMenuY(this.props.viewport) + 
-          Constants.getIn(['mainNavigationMenu','menuYPadding']) }
+      y = { arrowYPosition }
       xlinkHref = 'images/control_arrow.svg'
     />
     <text x = { Constants.getIn(['menuBar','textLabelOffset']) }
-      y = { Constants.getIn(['mainNavigationMenu','textYPosition']) } className = 'bodyText'>
+      y = { textPosition } className = 'bodyText'>
       { Tr.getIn(['nglSubproductMenu','of',this.props.language]) }
     </text>
     </g>
   }
 
   explanationDot() {
-    const xPosition = '125'
+    const xPosition = '155'
     return <ExplanationDot
       key = 'mainNavDot' 
       xPosition = {xPosition}
@@ -40,29 +47,49 @@ class MainNavigationMenu extends React.Component {
   }
 
   render() {
-    return <g><MenuBarOption 
-      key='mainNavigationMenu'
-      yaxis ={WorkspaceComputations.topHeightMargin() + 18}
-      options = {Constants.get('visualizationTypes')}
-      onOptionClick = {this.props.setImportExportVisualization.bind(this)}
-      selectedOption = {this.props.importExportVisualization}
-      optionXaxisPadding = {Constants.getIn(['menuBarOptions', 'optionXaxisPadding'])}
-      optionPadding = {Constants.getIn(['menuBarOptions', 'optionPadding'])}
-      trKey = 'mainMenuBar' 
-      color = {Constants.getIn(['mainNavigationMenu', 'color'])}
-      language = {this.props.language}
-    />
-    {this.controlArrowImage()}
-    {this.explanationDot()}
-    </g>
+    if(this.props.expandImportExportMenu) {
+      return <g><MenuBarOption 
+        key='mainNavigationMenu'
+        yaxis ={WorkspaceComputations.topHeightMargin() + 49}
+        options = {Constants.get('visualizationTypes')}
+        onOptionClick = {this.props.setImportExportVisualization.bind(this)}
+        selectedOption = {this.props.importExportVisualization}
+        optionXaxisPadding = {Constants.getIn(['menuBarOptions', 'optionXaxisPadding'])}
+        optionPadding = {Constants.getIn(['menuBarOptions', 'optionPadding'])}
+        trKey = 'mainMenuBar' 
+        color = {Constants.getIn(['mainNavigationMenu', 'color'])}
+        language = {this.props.language}
+      />
+      {this.controlArrowImage()}
+      {this.explanationDot()}
+      </g>
+    } else {
+      return <g><MenuBarOption 
+        key='mainNavigationMenu'
+        yaxis ={WorkspaceComputations.topHeightMargin() + 18}
+        options = {Constants.get('visualizationTypes')}
+        onOptionClick = {this.props.setImportExportVisualization.bind(this)}
+        selectedOption = {this.props.importExportVisualization}
+        optionXaxisPadding = {Constants.getIn(['menuBarOptions', 'optionXaxisPadding'])}
+        optionPadding = {Constants.getIn(['menuBarOptions', 'optionPadding'])}
+        trKey = 'mainMenuBar' 
+        color = {Constants.getIn(['mainNavigationMenu', 'color'])}
+        language = {this.props.language}
+      />
+      {this.controlArrowImage()}
+      {this.explanationDot()}
+      </g>
+    }
   }
+
 }
 
 const mapStateToProps = state => {
   return {
     viewport: state.viewport,
     importExportVisualization: state.importExportVisualization,
-    language: state.language
+    language: state.language,
+    expandImportExportMenu: state.expandImportExportMenu
   }
 }
 const mapDispatchToProps = dispatch => {
