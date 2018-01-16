@@ -3,6 +3,7 @@ const connect = require('react-redux').connect
 const { fromJS } = require('immutable')
 
 const SVGDrag = require('./SVGDrag/')
+const Constants = require('../Constants.js')
 const { timelineFilter } = require('../actions/visualizationSettings')
 const TimelineSelector = require('../selectors/timeline')
 
@@ -109,7 +110,7 @@ class TimelineSeek extends React.PureComponent {
           >
             <polygon
               points="7,0 10,0 10,26 0,26"
-              stroke='#a99372'
+              stroke={ Constants.getIn(['styleGuide', 'colours', 'SandExtraDark'])}
               fill="white"
             />
           </g>
