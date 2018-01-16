@@ -143,9 +143,9 @@ const mapDispatchToProps = { onMapPieceClick: setSelection }
 const mapStateToProps = (state,props) => {
   return {
     importExportVisualization: state.importExportVisualization,
-    layout: ElectrictySelector.getElectrictyMapLayout(state,props),
-    selection: ElectrictySelector.getSelectionSettings(state,props),
-    dataPoints: sortAggregatedLocationsSelector(state),
+    layout: ElectrictySelector.getElectrictyMapLayout(state, props),
+    selection: ElectrictySelector.getSelectionSettings(state, props),
+    dataPoints: sortAggregatedLocationsSelector(state, props),
     arrangeBy: arrangeBy(state, props) 
   }
 }

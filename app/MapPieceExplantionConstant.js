@@ -48,14 +48,14 @@ const MapPieceExplantionConstant = Immutable.fromJS({
             fr: 'exports into Canada'
           }
         },
-        stroke: 'black'
+        stroke: '#999999'
       },
       mapPieceProps: {
         stateOrProvince : {
           en: 'province',
           fr: 'province'
         },
-        stroke: 'black'
+        stroke: '#999999'
       }
     },
     us:{
@@ -104,14 +104,14 @@ const MapPieceExplantionConstant = Immutable.fromJS({
             fr: 'exports into USA'
           }
         },
-        stroke: 'black'
+        stroke: '#999999'
       },
       mapPieceProps: {
         stateOrProvince : {
           en: 'state',
           fr: 'state'
         },
-        stroke: 'black'
+        stroke: '#999999'
       }
     },
     
