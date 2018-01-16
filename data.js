@@ -36,6 +36,18 @@ const productMap = {
   'RPPs': 'refinedPetroleumProducts',
 }
 
+const printingValidationError = (errorArray, region, point, type)=>{
+  //Printing error on the UI so that data can be verified
+  if(region.get('isValid') === false){
+    if(typeof errorArray[region.get('error')] === 'undefined'){
+      errorArray[region.get('error')]= {product: point.product , numberOfRows : 0, type}
+    }else{
+      errorArray[region.get('error')].numberOfRows = errorArray[region.get('error')].numberOfRows+1 
+    }
+  }
+  return errorArray
+}
+
 const parser = CSVParse({
   // Use the callback method to replace the file headers with our own
   columns: () => ['period', 'product', 'productSubtype', 'transport', 'origin', 'destination', 'port', 'activity', 'units', 'value'],
@@ -58,17 +70,11 @@ const parser = CSVParse({
       confidential = true
     }
     //Data Vaildation and parsing
-    const region = OriginVaildator.originNameValidator(point.origin)
+    const originRegion = OriginVaildator.originNameValidator(point.origin)
+    const destinationRegion = OriginVaildator.originNameValidator(point.destination)
     
-    //Printing error on the UI so that data can be verified
-    if(region.get('isValid') === false){
-      if(typeof parsingIssue[region.get('error')] === 'undefined'){
-        parsingIssue[region.get('error')]= {product: point.product , numberOfRows : 0}
-      }else{
-        parsingIssue[region.get('error')].numberOfRows = parsingIssue[region.get('error')].numberOfRows+1 
-      }
-    }
-
+    printingValidationError(parsingIssue, originRegion, point, 'origin')
+    printingValidationError(parsingIssue, destinationRegion, point, 'destination')
 
     outProd[point.units].push({
       period: stripNA(point.period),
@@ -78,8 +84,10 @@ const parser = CSVParse({
       productSubtype: stripNA(point.productSubtype),
       transport: stripNA(point.transport),
       origin: stripNA(point.origin),
-      country: region.get('country')||'',
-      originKey: region.get('originKey')||'',
+      country: originRegion.get('country')||'',
+      originKey: originRegion.get('originKey')||'',
+      destinationCountry: destinationRegion.get('country')||'',
+      destinationKey: destinationRegion.get('originKey')||'',
       destination: stripNA(point.destination),
       port: stripNA(point.port),
       activityGroup: stripNA(activityGroupMap[point.activity]),

@@ -146,6 +146,7 @@ const MapLayoutGridConstant = Immutable.fromJS({
       ]
     },
     powerPoolMapping:{
+      'none': [],
       'MN/ND':['MN', 'ND'],
       'NE-ISO':[
         'CT', 

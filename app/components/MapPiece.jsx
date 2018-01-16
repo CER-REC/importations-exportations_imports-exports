@@ -32,7 +32,6 @@ class MapPiece extends React.Component {
   }
 
   render(){
-
     let arrowTransform = `translate(${Constants.getIn(['mapPieceArrowStyle', 'x'])}, ${Constants.getIn(['mapPieceArrowStyle', 'y'])})`
     if(this.props.styles.get('arrowPosition') === 'down'){
       arrowTransform = `translate(${Constants.getIn(['mapPieceArrowStyle', 'x'])}, ${this.props.dimensions.get('height') - Constants.getIn(['mapPieceArrowStyle', 'y'])})`   
@@ -42,16 +41,24 @@ class MapPiece extends React.Component {
       //TODO: on click show pop over to show confidential values
       confidentialIcon = <ConfidentialIcon styles={this.props.styles.get('confidentialStyle')}/>
     }
-    let stroke = 'none';
+
+    let stroke = 'none'
+    if(this.props.isMapPieceSelected === true){
+      stroke = 'black' 
+    }
+    let opacity = 1
+    if(this.props.isSelected === true && this.props.isMapPieceSelected === false){
+      opacity = 0.10
+    }
+
     if(typeof this.props.mapPieceProps !== 'undefined' 
       && typeof this.props.mapPieceProps.get('stroke') !== 'undefined' 
       && this.props.mapPieceProps.get('stroke') !== ''){
         stroke = this.props.mapPieceProps.get('stroke')
     }
 
-    return <g>
-        <polygon 
-          stroke = {stroke}
+    return <g fillOpacity = {opacity} >
+        <polygon stroke ={stroke}
           fill={this.props.styles.get('color')} 
           points="37.09 9.68 18.54 0 0 9.68 0 29.05 18.54 38.73 37.09 29.05 37.09 9.68"/>
         <MapPieceLabel
