@@ -6,6 +6,8 @@ const USMapContainer = require('./USMapContainer.jsx')
 const PowerPoolContainer = require('./PowerPoolContainer.jsx')
 const PowerPoolGroupingOutline = require('./PowerPoolGroupingOutline.jsx')
 const ExplanationPopovers = require('./ExplanationPopovers.jsx')
+const ElectrictyMapPieceActivityExplantion = require('./ElectrictyMapPieceActivityExplantion.jsx')
+
 
 const BarChart = require('./BarChart')
 const Axis = require('./Axis')
@@ -58,6 +60,9 @@ class ElectricityVisualizationContainer extends React.Component {
         xaxis = {this.props.xaxis } 
         yaxis = {this.props.yaxis + this.props.height}
       />
+      <ElectrictyMapPieceActivityExplantion 
+        {...this.props.mapPieceActivityExplantion}
+      />
     </g>
   }
 }
@@ -67,6 +72,7 @@ module.exports = connect(
     canadaMap: ElectricityViewport.canadaMapPosition(state, props),
     usMap: ElectricityViewport.usMapPosition(state, props),
     powerPool: ElectricityViewport.powerPoolPosition(state, props),
+    mapPieceActivityExplantion: ElectricityViewport.mapPieceActivityExplantionPosition(state, props),
     importChart: ElectricityViewport.chartImportPosition(state, props),
     axisPosition: ElectricityViewport.chartAxisPosition(state, props),
     exportChart: ElectricityViewport.chartExportPosition(state, props),

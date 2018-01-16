@@ -111,4 +111,5 @@ module.exports = {
   sortAggregatedLocationsSelector,
   unitSelector,
   activityGroupSelector,
+  arrangeBy
 }
