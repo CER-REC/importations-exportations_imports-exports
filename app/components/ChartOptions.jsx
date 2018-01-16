@@ -43,7 +43,7 @@ class ChartOptions extends React.PureComponent {
           />
           <div className="slider round" />
         </div>
-        <img src={image} height="20"/>
+        <img src={image} height="18"/>
       </label>
     )
   }
@@ -59,10 +59,11 @@ class ChartOptions extends React.PureComponent {
         }}
       >
         {this.renderScaleToggle()}
-        <div style={{ float: 'right' }}>
+        <div className = 'chartOptions' style={{ float: 'right'}}>
           <a onClick={this.changeTimelineGroup}>
-            by {this.props.timelineGroup.toUpperCase()}
+            by {this.props.timelineGroup.toUpperCase()} +
           </a>
+          <img className = 'detailBarArrow' src='images/control_arrow.svg' />
         </div>
       </div>
     )

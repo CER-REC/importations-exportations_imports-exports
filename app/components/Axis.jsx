@@ -19,6 +19,7 @@ const Axis = props => {
           key={key}
           x={left + label.get('offsetX')}
           y={top + height / 2}
+          className = 'timelineLabel'
           textAnchor="middle"
           alignmentBaseline="middle"
           fontWeight={label.get('fontWeight', 'normal')}
