@@ -8,7 +8,6 @@ class PowerPoolGrouping extends React.Component {
     //Mock data need to be replaced by actual content 
     return <g>
       <text x= {this.props.xaxis} y = {this.props.yaxis}>
-        outline
       </text>
     </g>
   }

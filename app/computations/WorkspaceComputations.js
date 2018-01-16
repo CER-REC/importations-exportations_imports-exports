@@ -8,6 +8,10 @@ WorkspaceComputations.workspaceWidth = function (viewport) {
   return viewport.get('x')
 }
 
+WorkspaceComputations.visualizationHeight = function (viewport) {
+  return viewport.get('y') + 500
+}
+
 WorkspaceComputations.topHeightMargin = function () {
   return Constants.get('topHeightMargin')
 }
@@ -38,8 +42,7 @@ WorkspaceComputations.legendY = function (viewport) {
 }
 
 WorkspaceComputations.socialBarY = function (viewport) {
-  return WorkspaceComputations.legendY(viewport)
-  + Constants.getIn(['socialBar','topMargin'])
+  return viewport.get('y') + 120
 }
 
 WorkspaceComputations.visualizationContainerWidth = function (viewport) {

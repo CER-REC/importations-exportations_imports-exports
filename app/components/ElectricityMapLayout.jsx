@@ -121,7 +121,6 @@ class ElectricityMapLayout extends React.Component {
     const isSelected = this.isSelected()
 
     return layout.map( (position,key) =>{
-
       return <g key = { key } >
               <g  className='mappiece' onClick={this.onClick.bind(this, this.props.country, position.get('name'))} transform={this.mapPieceTransform(xaxis, yaxis, position, dimensions, mapPieceScale)} >
                   <MapPiece 

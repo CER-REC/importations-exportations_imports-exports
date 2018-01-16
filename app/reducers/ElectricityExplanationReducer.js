@@ -1,6 +1,5 @@
 const ElectricityExplanationShownReducer = (state = false, action) => {
 
-
   switch(action.type) {
 
   case 'ShowElectricityDataExplanation':

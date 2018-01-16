@@ -1,4 +1,4 @@
-const defaultState = false
+const defaultState = true
 
 const ShowExplanationsReducer = (state = defaultState, action) => {
   

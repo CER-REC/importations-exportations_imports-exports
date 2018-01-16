@@ -62,6 +62,18 @@ const powerPoolPosition = createSelector(
   })
 )
 
+const mapPieceActivityExplantionPosition = createSelector(
+  usMapPosition,
+  prev => ({
+    //Currently this is hardcoded value
+    //TODO: replace by dynamic value once new navigation bar is merged
+    top: 550,
+    left: 10,
+    width: 150,
+    height: 50,
+  })
+)
+
 module.exports = {
   canadaMapPosition,
   chartImportPosition,
@@ -69,4 +81,5 @@ module.exports = {
   chartExportPosition,
   usMapPosition,
   powerPoolPosition,
+  mapPieceActivityExplantionPosition
 }
