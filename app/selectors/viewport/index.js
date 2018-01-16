@@ -10,8 +10,8 @@ const viewport = state => state.viewport
 const svgSize = createSelector(
   viewport,
   detailSidebarWidth,
-  (viewport, sidebarWidth) => ({
-    width: (viewport.get('x') - sidebarWidth),
+  (viewport) => ({
+    width: (viewport.get('x')),
     height: (viewport.get('y') + Constants.getIn(['workspace', 'viewportPadding'])),
   })
 )

@@ -9,14 +9,14 @@ const ConfidentialIcon = require('./ConfidentialIcon.jsx')
 class MapPiece extends React.Component {
 
   getArrowColor(legends, value){
-      return legends.find(data => {
-        if(data.get('lower') < value && data.get('upper') === 'NA'){
-          return true
-        }
-        if(data.get('lower') < value && data.get('upper') >= value ){
-          return true
-        }
-      }) 
+    return legends.find(data => {
+      if(data.get('lower') < value && data.get('upper') === 'NA'){
+        return true
+      }
+      if(data.get('lower') < value && data.get('upper') >= value ){
+        return true
+      }
+    }) 
   }
 
   drawArrow(legends, data, type, styles, arrowProps){
@@ -34,7 +34,7 @@ class MapPiece extends React.Component {
   render(){
 
     let arrowTransform = `translate(${Constants.getIn(['mapPieceArrowStyle', 'x'])}, ${Constants.getIn(['mapPieceArrowStyle', 'y'])})`
-    if(this.props.styles.get('arrowPosition') == 'down'){
+    if(this.props.styles.get('arrowPosition') === 'down'){
       arrowTransform = `translate(${Constants.getIn(['mapPieceArrowStyle', 'x'])}, ${this.props.dimensions.get('height') - Constants.getIn(['mapPieceArrowStyle', 'y'])})`   
     }
     let confidentialIcon = ''      
@@ -66,8 +66,8 @@ class MapPiece extends React.Component {
           {this.drawArrow(this.props.legends, this.props.data, 'exports', this.props.styles, this.props.arrowProps)}
           {this.drawArrow(this.props.legends, this.props.data, 'imports', this.props.styles, this.props.arrowProps)}
         </g>
-        {confidentialIcon}
-      </g>
+      {confidentialIcon}
+    </g>
   }
 }
 

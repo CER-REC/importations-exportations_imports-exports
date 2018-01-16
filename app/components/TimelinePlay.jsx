@@ -57,7 +57,7 @@ class TimelinePlay extends React.PureComponent {
       <g transform={`translate(${this.props.left} ${this.props.top})`}>
         <polyline
           points="0,-10 10,0 0,10 0,-10"
-          stroke="black"
+          stroke='#a99372'
           fill="white"
           onClick={this.onClick}
         />
