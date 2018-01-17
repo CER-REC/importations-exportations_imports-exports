@@ -241,6 +241,11 @@ const TranslationTable = Immutable.fromJS({
     en: ['', 'K', 'M', 'B'],
     fr: ['', 'K FR', 'M FR', 'B FR'],
   },
+
+  confidentialCount: {
+    en: '$0 of $1 values Confidential',
+    fr: 'FR $0 of $1 values Confidential',
+  }
 })
 
 module.exports = TranslationTable

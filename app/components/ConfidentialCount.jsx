@@ -1,11 +1,10 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
-import { fromJS } from 'immutable'
 
 import ConfidentialIcon from './ConfidentialIcon'
 import { confidentialTotal } from '../selectors/details'
-import TR from '../TranslationTable'
+import TRSelector from '../selectors/translate'
 import MapLayoutGridConstant from '../MapLayoutGridConstant'
 
 // TODO: Temporary until we refactor where this is stored
@@ -22,13 +21,13 @@ const ConfidentialCount = (props) => {
           <ConfidentialIcon styles={iconStyle} />
         </g>
       </svg>
-      <span>{props.value.confidential} of {props.value.total} values Confidential</span>
+      <span>{props.TR('confidentialCount', props.value.confidential, props.value.total)}</span>
     </div>
   )
 }
 
 ConfidentialCount.propTypes = {
-  language: PropTypes.string.isRequired,
+  TR: PropTypes.func.isRequired,
   value: PropTypes.shape({
     confidential: PropTypes.number.isRequired,
     total: PropTypes.number.isRequired,
@@ -38,4 +37,5 @@ ConfidentialCount.propTypes = {
 export default connect((state, props) => ({
   language: state.language,
   value: confidentialTotal(state, props),
+  TR: TRSelector(state, props),
 }))(ConfidentialCount)
