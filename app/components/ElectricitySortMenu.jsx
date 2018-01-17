@@ -7,8 +7,6 @@ const WorkspaceComputations = require('../computations/WorkspaceComputations.js'
 
 const ExpandElectricitySortMenuCreator = require('../actionCreators/ExpandElectricitySortMenuCreator.js')
 
-const MenuBarOption = require('./MenuBarOption.jsx')
-
 const { setArrangeBy } = require('../actions/visualizationSettings')
 const { visualizationSettings } = require('../selectors/visualizationSettings')
 
@@ -54,22 +52,6 @@ class ElectricitySortMenu extends React.Component {
     e.preventDefault()
   }
 
-  sortMenuFunctionality() {
-    return <g><MenuBarOption 
-      key='electricitySortStateMenu'
-      yaxis = { 183 }
-      options = {Constants.get('electricitySortStates')}
-      onOptionClick = {this.props.setElectricitySortState.bind(this)}
-      selectedOption = {this.props.electricitySortState}
-      optionXaxisPadding = {100}
-      optionPadding = {Constants.getIn(['menuBarOptions', 'optionPadding'])}
-      trKey = 'electricitySortStates' 
-      color = {Constants.getIn(['electricitySortStatesStyle', 'color'])}
-      language = {this.props.language}
-    />
-    </g>
-  }
-
   expandedMenu() {
     if(!this.props.expandElectricitySortMenu) {
       return null
@@ -79,9 +61,12 @@ class ElectricitySortMenu extends React.Component {
         + Constants.getIn(['menuBar','sortMenuTextY']) - 35 } 
       className = 'bodyText'> 
       <tspan x = { Constants.getIn(['menuBar','textLabelOffset']) + 12 }  
-        dy="0em"> {Tr.getIn(['electricitySortStates', 'imports', this.props.language])} </tspan>
+        dy="0em"
+        onClick = {() => this.props.setArrangeBy('imports') }
+      > {Tr.getIn(['electricitySortStates', 'imports', this.props.language])} </tspan>
       <tspan x = { Constants.getIn(['menuBar','textLabelOffset']) + 12 }  
-        dy="1.2em"> 
+        dy="1.2em"
+        onClick = {() => this.props.setArrangeBy('exports') }> 
         {Tr.getIn(['electricitySortStates', 'exports', this.props.language])}
       </tspan>   
     </text>
@@ -111,7 +96,7 @@ class ElectricitySortMenu extends React.Component {
       <text x = { Constants.getIn(['menuBar','sortTextButtonLabelOffset']) } 
         y = { labelPosition } 
         className = 'selectableDropdown'>
-        {sortString} 
+        <tspan onClick = {() => this.props.setArrangeBy('location') }>{sortString}</tspan>
         <tspan onClick = {this.onClick}> {expandedSign} </tspan>
       </text>
     </g>
@@ -141,8 +126,10 @@ const mapDispatchToProps = dispatch => {
   return { 
     onClick: () => {
       dispatch(ExpandElectricitySortMenuCreator())
+    },
+    setArrangeBy: (value) => {
+      dispatch(setArrangeBy(value))
     }
-    //({ setArrangeBy } )
   }
 }
 

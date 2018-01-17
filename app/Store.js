@@ -23,8 +23,8 @@ const reducers = Redux.combineReducers({
   electricityExplanation: ElectricityExplanationReducer,
   showExplanations: ShowExplanationsReducer,
   expandImportExportMenu: ExpandImportExportMenuReducer,
+  expandElectricityAmountMenu: ExpandElectricityAmountMenuReducer,
   expandElectricitySortMenu: ExpandElectricitySortMenuReducer,
-  expandElectricityAmountMenuReducer: ExpandElectricityAmountMenuReducer,
   data: DataReducer,
   visualizationSettings,
 })

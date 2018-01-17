@@ -55,23 +55,8 @@ class ElectricityAmountPriceMenu extends React.Component {
     e.preventDefault()
   }
 
-  amountMenuOptions() {
-    const { selectedEnergy } = this.props
-    return <g><MenuBarOption 
-      key='electricityAmountPriceMenu'
-      yaxis = { WorkspaceComputations.electricityAmountPriceMenuY() }
-      options={Constants.getIn(['energyMeasurementTypes', selectedEnergy])}
-      onOptionClick = {this.props.setAmount}
-      selectedOption = {this.props.amount}
-      optionXaxisPadding = {Constants.getIn(['menuBarOptions', 'optionXaxisPadding'])}
-      optionPadding = {Constants.getIn(['menuBarOptions', 'optionPadding'])}
-      trKey = 'electricityDataTypes' 
-      language = {this.props.language}
-    /></g>
-  }
-
-
   expandedAmountMenu() {
+    console.log(this.props.expandElectricitySortMenu, this.props.expandElectricityAmountMenu)
     if(!this.props.expandElectricityAmountMenu) {
       return null
     }
@@ -80,10 +65,12 @@ class ElectricityAmountPriceMenu extends React.Component {
         + Constants.getIn(['menuBar','sortMenuTextY']) - 15 } 
       className = 'bodyText'> 
       <tspan x = { Constants.getIn(['menuBar','textLabelOffset']) + 10 }  
-        dy="0em"> amount option 1 </tspan>
+        dy="0em"
+        onClick = {() => this.props.setAmount('CAN$')}> {Tr.getIn(['electricityDataTypes','CAN$', this.props.language])}</tspan>
       <tspan x = { Constants.getIn(['menuBar','textLabelOffset']) + 10 }  
-        dy="1.2em"> 
-        amount option 2
+        dy="1.2em"
+        onClick = {() => this.props.setAmount('CAN$/MW.h')}> 
+        {Tr.getIn(['electricityDataTypes','CAN$/MW.h', this.props.language])}
       </tspan>   
     </text>
     </g>
@@ -112,7 +99,7 @@ class ElectricityAmountPriceMenu extends React.Component {
       <text x = { Constants.getIn(['menuBar','amountTextButtonLabelOffset']) } 
         y = { textAmountPosition }
         className = 'selectableDropdown'>
-        {amountString}
+        <tspan onClick = {() => this.props.setAmount('MW.h')}>{Tr.getIn(['electricityDataTypes','MW.h', this.props.language])}</tspan>
         <tspan onClick = {this.onClick}> {expandedSign} </tspan>
       </text>
     </g>
@@ -144,8 +131,10 @@ const mapDispatchToProps = dispatch => {
   return { 
     onClick: () => {
       dispatch(ExpandElectricityAmountMenuCreator())
+    },
+    setAmount: (amount) => {
+      dispatch(setAmount(amount))
     }
-  //({ setAmount } )
   }
 }
 

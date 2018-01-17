@@ -79,25 +79,25 @@ const subReducer = visualization => (state = initialState, action) => {
   }
 
   switch (action.type) {
-    case Types.TIMELINE_FILTER:
-      return state.setIn(['timeline', 'range'], fromJS(action.payload.range))
-    case Types.ARRANGE_BY:
-      return state.set('arrangeBy', action.payload.arrangeBy)
-    case Types.SET_AMOUNT:
-      return state.set('amount', action.payload.amount)
-    case Types.SET_ACTIVITY:
-      return state.set('activity', action.payload.activity)
-    case Types.SET_SUBTYPE:
-      return state.set('subtype', action.payload.subtype)
-    case Types.SET_GROUPING:
-      return state.setIn(['timeline', 'grouping'], action.payload.grouping)
-    case Types.SET_SCALE_LINKED:
-      return state.setIn(['timeline', 'scaleLinked'], action.payload.scaleLinked)
-    case Types.RESET_VISUALIZATION:
-      return fromJS(action.payload.settings)
-    case Types.SET_SELECTION:
-      return state.set('selection', fromJS(action.payload.selection))
-    default: return state
+  case Types.TIMELINE_FILTER:
+    return state.setIn(['timeline', 'range'], fromJS(action.payload.range))
+  case Types.ARRANGE_BY:
+    return state.set('arrangeBy', action.payload.arrangeBy)
+  case Types.SET_AMOUNT:
+    return state.set('amount', action.payload.amount)
+  case Types.SET_ACTIVITY:
+    return state.set('activity', action.payload.activity)
+  case Types.SET_SUBTYPE:
+    return state.set('subtype', action.payload.subtype)
+  case Types.SET_GROUPING:
+    return state.setIn(['timeline', 'grouping'], action.payload.grouping)
+  case Types.SET_SCALE_LINKED:
+    return state.setIn(['timeline', 'scaleLinked'], action.payload.scaleLinked)
+  case Types.RESET_VISUALIZATION:
+    return fromJS(action.payload.settings)
+  case Types.SET_SELECTION:
+    return state.set('selection', fromJS(action.payload.selection))
+  default: return state
   }
 }
 
