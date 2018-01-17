@@ -5,6 +5,7 @@ const BarChart = require('./BarChart')
 const Axis = require('./Axis')
 const TimelineSeek = require('./TimelineSeek')
 const TimelinePlay = require('./TimelinePlay')
+const ExplanationDot = require('./ExplanationDot.jsx')
 const Constants = require('../Constants')
 
 const TimelineSelectors = require('../selectors/timeline')

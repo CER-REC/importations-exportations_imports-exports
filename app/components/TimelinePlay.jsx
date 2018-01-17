@@ -4,6 +4,8 @@ const connect = require('react-redux').connect
 const { timelineFilter } = require('../actions/visualizationSettings')
 const timelineSelectors = require('../selectors/timeline')
 
+const ExplanationDot = require('./ExplanationDot.jsx')
+
 class TimelinePlay extends React.PureComponent {
   static get defaultProps() {
     return {
@@ -61,6 +63,11 @@ class TimelinePlay extends React.PureComponent {
           fill="white"
           onClick={this.onClick}
         />
+        <ExplanationDot
+      key="mainNavDot"
+      xPosition={-10}
+      yPosition={0}
+    />
       </g>
     )
   }

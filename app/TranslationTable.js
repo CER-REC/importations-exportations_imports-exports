@@ -212,6 +212,22 @@ const TranslationTable = Immutable.fromJS({
       en: 'Click + to see more options',
       fr: 'Click + to see more options FR',
     },
+    electricity: {
+      en: 'electricity is the selected energy product',
+      fr: 'electricity is the selected energy product FR',
+    },
+    timeSeek: {
+      en: 'Drag to select time frame',
+      fr: 'Drag to select time frame FR',
+    },
+    playButton: {
+      en: 'Click play to see how electricity changes over time',
+      fr: 'Click play to see how electricity changes over time FR',
+    },
+    newYork: {
+      en: 'New York has the highest exports into the US as well as the highest imports from the US',
+      fr: 'New York has the highest exports into the US as well as the highest imports from the US FR',
+    },
   },
 
   mainSubheading: {
