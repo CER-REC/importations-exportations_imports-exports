@@ -115,3 +115,13 @@
   font-size: 13px;
   fill: $neutral-light;
 }
+
+.detailTotal {
+  font-family: $fira-sans-condensed;
+  font-size: 12px;
+  color: $neutral-dark;
+
+  .totalType {
+    font-family: $fira-sans-condensed-semibold;
+  }
+}

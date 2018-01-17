@@ -5,6 +5,8 @@ const { connect } = require('react-redux')
 const Chart = require('./Chart')
 const AnimatedLine = require('./SVGAnimation/AnimatedLine')
 const AxisGuide = require('./AxisGuide')
+const DetailSidebar = require('./DetailSidebar')
+const DetailTotal = require('./DetailTotal').default
 const TimelineSelector = require('../selectors/timeline')
 
 class BarChart extends Chart {
@@ -81,6 +83,13 @@ class BarChart extends Chart {
           width={this.props.width}
           barSize={barSize}
         />
+        <DetailSidebar top={this.props.top} height={height}>
+          <DetailTotal
+            type={flipped ? 'exports' : 'imports'}
+            valueKey={this.props.valueKey}
+            aggregateKey={this.props.aggregateKey}
+          />
+        </DetailSidebar>
       </g>
     )
   }

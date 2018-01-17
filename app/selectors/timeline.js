@@ -253,4 +253,5 @@ module.exports = {
   timelinePositionCalculation,
   timelineData,
   timelineSeekPositionSelector,
+  getValueKey,
 }

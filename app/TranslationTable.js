@@ -237,6 +237,10 @@ const TranslationTable = Immutable.fromJS({
     },
   },
 
+  formatNumberUnit: {
+    en: ['', 'K', 'M', 'B'],
+    fr: ['', 'K FR', 'M FR', 'B FR'],
+  },
 })
 
 module.exports = TranslationTable

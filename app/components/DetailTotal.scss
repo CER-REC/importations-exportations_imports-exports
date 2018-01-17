@@ -1,0 +1,22 @@
+@import '../styles/Colours';
+
+.detailTotal {
+  .totalType { font-weight: bold; }
+
+  .detailText {
+    padding-left: 2px;
+    margin-right: 20px;
+    background: #fff;
+  }
+
+  &.imports {
+    padding-top: 2px;
+    background: $import-default;
+    .totalType { color: $import-default; }
+  }
+  &.exports {
+    padding-bottom: 2px;
+    background: $export-default;
+    .totalType { color: $export-default; }
+  }
+}
