@@ -68,6 +68,7 @@ const mapStateToProps = state => {
     expandImportExportMenu: state.expandImportExportMenu
   }
 }
+
 const mapDispatchToProps = dispatch => {
   return {
     setImportExportVisualization(importExportVisualization) {

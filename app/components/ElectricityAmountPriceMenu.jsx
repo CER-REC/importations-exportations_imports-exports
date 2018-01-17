@@ -7,8 +7,6 @@ const WorkspaceComputations = require('../computations/WorkspaceComputations.js'
 
 const ExpandElectricityAmountMenuCreator = require('../actionCreators/ExpandElectricityAmountMenuCreator.js')
 
-const MenuBarOption = require('./MenuBarOption.jsx')
-
 const { setAmount } = require('../actions/visualizationSettings')
 const { visualizationSettings } = require('../selectors/visualizationSettings')
 
@@ -56,7 +54,6 @@ class ElectricityAmountPriceMenu extends React.Component {
   }
 
   expandedAmountMenu() {
-    console.log(this.props.expandElectricitySortMenu, this.props.expandElectricityAmountMenu)
     if(!this.props.expandElectricityAmountMenu) {
       return null
     }

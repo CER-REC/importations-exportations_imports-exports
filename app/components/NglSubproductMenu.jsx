@@ -5,19 +5,23 @@ const Constants = require('../Constants.js')
 const Tr = require('../TranslationTable.js')
 const WorkspaceComputations = require('../computations/WorkspaceComputations.js')
 
-const MenuBarOption = require('./MenuBarOption.jsx')
-
 class NglSubproductMenu extends React.Component {
   constructor(props) {
     super(props)
     this.onClick = this.dropDownClick.bind(this)
   }
 
-  controlArrowImage() {
+  controlRect() {
+    let rectYPosition = `${ WorkspaceComputations.importExportMenuY(this.props.viewport) + 
+          Constants.getIn(['menuBar','nglMenuYMargin']) }`
+    if(this.props.expandImportExportMenu || this.props.expandElectricitySortMenu ||
+      this.props.expandElectricityAmountMenu) {
+      rectYPosition = `${ WorkspaceComputations.importExportMenuY(this.props.viewport) + 
+          Constants.getIn(['menuBar','nglMenuYMargin']) + 30 }`
+    }
     return <rect 
       x={ 0 } 
-      y= { WorkspaceComputations.importExportMenuY(this.props.viewport) + 
-          Constants.getIn(['menuBar','nglMenuYMargin']) } 
+      y= { rectYPosition } 
       width={ 5} 
       height={ 16 }
       fill = '#666666'
@@ -25,9 +29,14 @@ class NglSubproductMenu extends React.Component {
   }
 
   subproductText() {
+    let textPosition = `${Constants.getIn(['menuBar','nglSubproductTextY'])}`
+    if(this.props.expandImportExportMenu || this.props.expandElectricitySortMenu ||
+      this.props.expandElectricityAmountMenu) {
+      textPosition = `${Constants.getIn(['menuBar','nglSubproductTextY']) + 30}`
+    }
     return <g>
       <text x = { Constants.getIn(['menuBar','textLabelOffset']) } 
-        y = {Constants.getIn(['menuBar','nglSubproductTextY'])}
+        y = {textPosition}
         className = 'bodyText'>
         { Tr.getIn(['nglSubproductMenu','of',this.props.language]) }
         <tspan className = 'selectableDropdown'> { Tr.getIn(['nglSubproductMenu','butane',this.props.language]) } </tspan>
@@ -43,30 +52,14 @@ class NglSubproductMenu extends React.Component {
     console.log('Clicked', this) 
   }
 
-  amountMenuOptions() {
-    const { selectedEnergy } = this.props
-    return <g><MenuBarOption 
-      key='electricityAmountPriceMenu'
-      yaxis = { WorkspaceComputations.electricityAmountPriceMenuY() }
-      options={Constants.getIn(['energyMeasurementTypes', selectedEnergy])}
-      onOptionClick = {this.props.setElectricityDataType.bind(this)}
-      selectedOption = {this.props.electricityDataType}
-      optionXaxisPadding = {Constants.getIn(['menuBarOptions', 'optionXaxisPadding'])}
-      optionPadding = {Constants.getIn(['menuBarOptions', 'optionPadding'])}
-      trKey = 'electricityDataTypes' 
-      language = {this.props.language}
-    /></g>
-  }
-
   render() {
     if(this.props.importExportVisualization !== 'naturalGasLiquids') {
       return null
     } else 
-    return <g>
-      {this.subproductText()}
-      {this.controlArrowImage()}
-    </g>
-    
+      return <g>
+        {this.subproductText()}
+        {this.controlRect()}
+      </g>
   }
 }
 
@@ -74,7 +67,10 @@ const mapStateToProps = state => {
   return {
     viewport: state.viewport,
     importExportVisualization: state.importExportVisualization,
-    language: state.language
+    language: state.language,
+    expandImportExportMenu: state.expandImportExportMenu,
+    expandElectricitySortMenu: state.expandElectricitySortMenu,
+    expandElectricityAmountMenu: state.expandElectricityAmountMenu
   }
 }
 

@@ -1,10 +1,27 @@
 const React = require('react')
+const ReactRedux = require('react-redux')
+
 const Constants = require('../Constants.js')
 const Tr = require('../TranslationTable.js')
 
 require('./MenuBarOption.scss')
 
 class MenuBarOption extends React.Component {
+
+  mainVisGreyWidth() {
+    if(this.props.importExportVisualization === 'electricity') {
+      return '110'
+    } else if(this.props.importExportVisualization === 'crudeOil') {
+      return '100'
+    } else if(this.props.importExportVisualization === 'naturalGas') {
+      return '120'
+    } else if(this.props.importExportVisualization === 'naturalGasLiquids') {
+      return '160'
+    } else if(this.props.importExportVisualization === 'refinedPetroleumProducts') {
+      return '170'
+    }
+  }
+
   render() {
     const options = this.props.options
 
@@ -16,7 +33,7 @@ class MenuBarOption extends React.Component {
           <rect 
             x = {0} 
             y = { yaxis - 15}
-            width="170" 
+            width={this.mainVisGreyWidth()} 
             height="20" 
             fill = '#999999'
           />
@@ -40,4 +57,13 @@ class MenuBarOption extends React.Component {
   }
 }
 
-module.exports = MenuBarOption
+const mapStateToProps = state => {
+  return {
+    viewport: state.viewport,
+    importExportVisualization: state.importExportVisualization,
+    language: state.language,
+    expandImportExportMenu: state.expandImportExportMenu
+  }
+}
+
+module.exports = ReactRedux.connect(mapStateToProps)(MenuBarOption)
