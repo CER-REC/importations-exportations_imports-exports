@@ -41,6 +41,8 @@ const aggregateQuarter = createSelector(
             quarter: next.get('quarter'),
             total: 0,
             values: {},
+            confidential: {},
+            totalPoints: {},
           }
         }
 
@@ -48,10 +50,11 @@ const aggregateQuarter = createSelector(
         if (!key) { return acc }
 
         if (!valueKeys.includes(key)) { valueKeys.push(key) }
-        const values = acc[period].values
-        if (!values[key]) { values[key] = 0 }
-        values[key] += next.get('value', 0)
+        acc[period].values[key] = (acc[period].values[key] || 0) + next.get('value', 0)
         acc[period].total += next.get('value', 0)
+        acc[period].confidential[key] = (acc[period].confidential[key] || 0) +
+          (next.get('confidential', false) ? 1 : 0)
+        acc[period].totalPoints[key] = (acc[period].totalPoints[key] || 0) + 1
         return acc
       }, {})
     return { points: fromJS(result), valueKeys }

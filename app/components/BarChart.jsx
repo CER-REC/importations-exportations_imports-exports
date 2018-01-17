@@ -7,6 +7,7 @@ const AnimatedLine = require('./SVGAnimation/AnimatedLine')
 const AxisGuide = require('./AxisGuide')
 const DetailSidebar = require('./DetailSidebar')
 const DetailTotal = require('./DetailTotal').default
+const ConfidentialCount = require('./ConfidentialCount').default
 const TimelineSelector = require('../selectors/timeline')
 
 class BarChart extends Chart {
@@ -70,6 +71,21 @@ class BarChart extends Chart {
         />
       )
     }).toArray()
+
+    const sidebarContent = [
+      <ConfidentialCount
+        key="confidential"
+        valueKey={this.props.valueKey}
+        aggregateKey={this.props.aggregateKey}
+      />,
+      <DetailTotal
+        key="total"
+        type={flipped ? 'exports' : 'imports'}
+        valueKey={this.props.valueKey}
+        aggregateKey={this.props.aggregateKey}
+      />,
+    ]
+
     return (
       <g transform={this.getTransform()}>
         <g>{elements}</g>
@@ -84,11 +100,7 @@ class BarChart extends Chart {
           barSize={barSize}
         />
         <DetailSidebar top={this.props.top} height={height}>
-          <DetailTotal
-            type={flipped ? 'exports' : 'imports'}
-            valueKey={this.props.valueKey}
-            aggregateKey={this.props.aggregateKey}
-          />
+          {flipped ? sidebarContent.reverse() : sidebarContent}
         </DetailSidebar>
       </g>
     )
