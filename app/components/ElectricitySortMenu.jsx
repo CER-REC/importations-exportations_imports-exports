@@ -56,6 +56,7 @@ class ElectricitySortMenu extends React.Component {
     if(!this.props.expandElectricitySortMenu) {
       return null
     }
+
     return <g><text x = { Constants.getIn(['menuBar','textLabelOffset']) } 
       y = { WorkspaceComputations.importExportMenuY(this.props.viewport) 
         + Constants.getIn(['menuBar','sortMenuTextY']) - 35 } 
@@ -116,6 +117,7 @@ const mapStateToProps = (state, props) => {
   return {
     viewport: state.viewport,
     language: state.language,
+    importExportVisualization: state.importExportVisualization,
     arrangeBy: visualizationSettings(state, props).get('arrangeBy'),
     expandImportExportMenu: state.expandImportExportMenu,
     expandElectricitySortMenu: state.expandElectricitySortMenu,
