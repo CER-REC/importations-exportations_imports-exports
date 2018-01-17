@@ -39,7 +39,7 @@ module.exports = function () {
       InitialVisualizationSettingsMiddleware,
       TagVisualizationSettingsMiddleware,
       TimelineRangeMiddleware,
-      ActionLogMiddleware
-    ))
+      ActionLogMiddleware,
+    )),
   )
 }

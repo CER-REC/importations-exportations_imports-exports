@@ -13,14 +13,13 @@ const RefinedPetroleumProductsVisualizationContainer = require('./RefinedPetrole
 require('./VisualizationContainer.scss')
 
 class VisualizationContainer extends React.Component {
-
-  changeVisualization(){
+  changeVisualization() {
     const { width, height } = this.props.visualizationPosition
     const visualizationContainerType = this.props.importExportVisualization
     const xaxis = this.props.menuWidth
-    const yaxis = WorkspaceComputations.topHeightMargin() 
+    const yaxis = WorkspaceComputations.topHeightMargin()
     let VisComponent = null
-    switch(visualizationContainerType){
+    switch (visualizationContainerType) {
       case 'crudeOil':
         VisComponent = CrudeOilVisualizationContainer
         break
@@ -48,20 +47,18 @@ class VisualizationContainer extends React.Component {
     )
   }
   render() {
-    return <g>
+    return (<g>
       {this.changeVisualization()}
-    </g>
+            </g>)
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    visualizationPosition: ViewportSelectors.visualizationContainerPosition(state),
-    contentSize: ViewportSelectors.visualizationContentPosition(state),
-    menuWidth: ViewportSelectors.menuWidth(state),
-    importExportVisualization: state.importExportVisualization,
-  }
-}
+const mapStateToProps = state => ({
+  visualizationPosition: ViewportSelectors.visualizationContainerPosition(state),
+  contentSize: ViewportSelectors.visualizationContentPosition(state),
+  menuWidth: ViewportSelectors.menuWidth(state),
+  importExportVisualization: state.importExportVisualization,
+})
 
 
 module.exports = ReactRedux.connect(mapStateToProps)(VisualizationContainer)

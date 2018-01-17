@@ -4,7 +4,7 @@ const {
 } = require('../actions/visualizationSettings')
 const { timelineYearScaleCalculation } = require('../selectors/timeline')
 
-const initialVisualizationSettings = store => next => action => {
+const initialVisualizationSettings = store => next => (action) => {
   // Process the action immediately
   next(action)
 
@@ -13,7 +13,7 @@ const initialVisualizationSettings = store => next => action => {
 
   const state = store.getState()
   const { data } = state
-  data.keySeq().forEach(visualization => {
+  data.keySeq().forEach((visualization) => {
     const visData = data.get(visualization)
     const amount = visData.keySeq().first()
     // TODO: This needs to somehow not use reselect
@@ -31,10 +31,10 @@ const initialVisualizationSettings = store => next => action => {
           arrangeBy: 'location',
           activity: 'importsExports',
           subtype: '',
-          selection:{
+          selection: {
             country: null,
-            origins:[],
-            destinations:{}
+            origins: [],
+            destinations: {},
           },
           timeline: {
             scaleLinked: true,

@@ -39,7 +39,7 @@ class SVGDrag extends React.PureComponent {
     const { invertedX, invertedY } = this.props
     return {
       x: newOffset.x * (invertedX ? -1 : 1),
-      y: newOffset.y * (invertedY ? -1 : 1)
+      y: newOffset.y * (invertedY ? -1 : 1),
     }
   }
 

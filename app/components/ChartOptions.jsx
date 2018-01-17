@@ -20,9 +20,7 @@ class ChartOptions extends React.PureComponent {
 
   changeTimelineGroup(e) {
     e.preventDefault()
-    this.props.setGrouping(
-      this.props.timelineGroup === 'year' ? 'quarter' : 'year'
-    )
+    this.props.setGrouping(this.props.timelineGroup === 'year' ? 'quarter' : 'year')
   }
 
   renderScaleToggle() {
@@ -43,7 +41,7 @@ class ChartOptions extends React.PureComponent {
           />
           <div className="slider round" />
         </div>
-        <img src={image} height="18"/>
+        <img src={image} height="18" />
       </label>
     )
   }
@@ -59,11 +57,11 @@ class ChartOptions extends React.PureComponent {
         }}
       >
         {this.renderScaleToggle()}
-        <div className = 'chartOptions' style={{ float: 'right'}}>
+        <div className="chartOptions" style={{ float: 'right' }}>
           <a onClick={this.changeTimelineGroup}>
             by {this.props.timelineGroup.toUpperCase()} +
           </a>
-          <img className = 'detailBarArrow' src='images/control_arrow.svg' />
+          <img className="detailBarArrow" src="images/control_arrow.svg" />
         </div>
       </div>
     )
@@ -75,5 +73,5 @@ module.exports = connect(
     scaleLinked: TimelineSelector.timelineScaleLinked(state, props),
     timelineGroup: TimelineSelector.timelineGrouping(state, props),
   }),
-  { setScaleLinked, setGrouping }
+  { setScaleLinked, setGrouping },
 )(ChartOptions)

@@ -17,15 +17,16 @@ const NglSubproductMenu = require('./NglSubproductMenu.jsx')
 require('./MenuBar.scss')
 
 class MenuBar extends React.Component {
-
   electricity() {
     // TODO: add logic to determine if visualization is in electricity state
 
     // if(!this.props.electricity) { return null }
-   
-    return <g>
+
+    return (<g>
       <Legend />
+
       <ShowConfidentiality />
+
       <ShowExplanations />
 
       <NglSubproductMenu />
@@ -33,41 +34,39 @@ class MenuBar extends React.Component {
       <ElectricitySortMenu />
       <ImportExportMenu />
 
-    </g>
+            </g>)
   }
 
   crudeOil() {
-    return
+
   }
 
   naturalGas() {
-    return
+
   }
 
   refinedPetroleumProducts() {
-    return
+
   }
 
   naturalGasLiquids() {
-    return
+
   }
 
   render() {
-    return <g className='MenuBar'>
+    return (<g className="MenuBar">
       <MainNavigationMenu />
       {this.electricity()}
       {this.crudeOil()}
       {this.refinedPetroleumProducts()}
       {this.naturalGasLiquids()}
-    </g>
+            </g>)
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    viewport: state.viewport
-  }
-}
+const mapStateToProps = state => ({
+  viewport: state.viewport,
+})
 
 
 module.exports = ReactRedux.connect(mapStateToProps)(MenuBar)

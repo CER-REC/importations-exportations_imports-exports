@@ -14,15 +14,15 @@ const mapToValue = (data, key) => data.map(v => v.get(key))
 
 const timelineGrouping = createSelector(
   visualizationSettings,
-  settings => settings.getIn(['timeline', 'grouping'])
+  settings => settings.getIn(['timeline', 'grouping']),
 )
 const timelineRange = createSelector(
   visualizationSettings,
-  settings => settings.getIn(['timeline', 'range'])
+  settings => settings.getIn(['timeline', 'range']),
 )
 const timelineScaleLinked = createSelector(
   visualizationSettings,
-  settings => settings.getIn(['timeline', 'scaleLinked'])
+  settings => settings.getIn(['timeline', 'scaleLinked']),
 )
 
 const aggregateQuarter = createSelector(
@@ -55,7 +55,7 @@ const aggregateQuarter = createSelector(
         return acc
       }, {})
     return { points: fromJS(result), valueKeys }
-  }
+  },
 )
 
 const sortTimeline = createSelector(
@@ -69,15 +69,15 @@ const sortTimeline = createSelector(
 
     const quarter = a.get('quarter') - b.get('quarter')
     return (quarter !== 0) ? quarter : (a.get('year') - b.get('year'))
-  })
+  }),
 )
 
 const timelineYearScaleCalculation = createSelector(
   sortTimeline,
-  points => {
+  (points) => {
     const years = mapToValue(points, 'year')
     return { min: years.min() || 0, max: years.max() || 0 }
-  }
+  },
 )
 
 const timelineScaleCalculation = createSelector(
@@ -98,7 +98,7 @@ const timelineScaleCalculation = createSelector(
         },
       })
     }, fromJS({}))
-    
+
     if (scaleKey === 'total') {
       const totals = points.map(p => p.get('total'))
       valuesScale = valuesScale.set('total', fromJS({
@@ -118,7 +118,7 @@ const timelineScaleCalculation = createSelector(
       scale: fromJS({ x: yearScale, y: scaleY }),
       trueScale: valuesScale.get(scaleKey, fromJS({ min: 0, max: 0 })),
     }
-  }
+  },
 )
 
 const timelinePositionCalculation = createSelector(
@@ -143,7 +143,7 @@ const timelinePositionCalculation = createSelector(
         - ((totalYears * 4) * barPadding)
       barWidth = widthAfterPads / ((totalYears + 1) * 4)
 
-      bars = points.map(point => {
+      bars = points.map((point) => {
         if (!lastPoint || lastPoint.get('year') !== point.get('year')) {
           if (lastPoint) { offset += groupPadding }
           labels.push({
@@ -168,13 +168,13 @@ const timelinePositionCalculation = createSelector(
       ]
       let quarterStart = 0
 
-      bars = points.map(point => {
+      bars = points.map((point) => {
         if (lastPoint && lastPoint.get('quarter') !== point.get('quarter')) {
           const dividerOffset = offset - barWidth / 2
           labels.push({
             offsetX: dividerOffset,
             label: '|',
-            key: `divider-${point.get('quarter')}`
+            key: `divider-${point.get('quarter')}`,
           })
           labels.push({
             offsetX: (dividerOffset - quarterStart) / 2 + quarterStart,
@@ -198,7 +198,7 @@ const timelinePositionCalculation = createSelector(
 
       labels.push({
         offsetX: (offset - quarterStart) / 2 + quarterStart,
-        label: `Q${points.last().get('quarter')}`
+        label: `Q${points.last().get('quarter')}`,
       })
     }
 
@@ -212,7 +212,7 @@ const timelinePositionCalculation = createSelector(
         barWidth,
       }),
     }
-  }
+  },
 )
 
 const timelineData = createSelector(
@@ -220,7 +220,7 @@ const timelineData = createSelector(
   timelinePositionCalculation,
   timelineRange,
   (scale, position, range) =>
-    Object.assign({ timelineRange: range }, scale, position)
+    Object.assign({ timelineRange: range }, scale, position),
 )
 
 const timelineSeekPositionSelector = createSelector(
@@ -239,7 +239,7 @@ const timelineSeekPositionSelector = createSelector(
       start: start && start.get('offsetX') || 0,
       end: end && end.get('offsetX') || size.width,
     }
-  }
+  },
 )
 
 module.exports = {

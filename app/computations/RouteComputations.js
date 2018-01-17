@@ -17,7 +17,7 @@ These items are represented as URL parameters:
   showEmptyCategories
   pinnedIncidents
 
-Language is also represented, but is inferred from the application path. 
+Language is also represented, but is inferred from the application path.
   en: /pipeline-incidents
   fr: /incidents-pipeliniers
 See applicationPath in TranslationTable.js
@@ -31,21 +31,19 @@ meaning associated with absence.
 const RouteComputations = {
 
 
-  bitlyParameter: function (location, language) {
+  bitlyParameter(location, language) {
     return `${Constants.get('appHost')}${Tr.getIn(['applicationPath', language])}${encodeURIComponent(location.search)}`
   },
 
-  bitlyEndpoint: function (location, language) {
-
-    switch(process.env.NODE_ENV) {
-    case 'development': { 
-      const root = RouteComputations.appRoot(location, language)
-      return `${root}bitly_url`
+  bitlyEndpoint(location, language) {
+    switch (process.env.NODE_ENV) {
+      case 'development': {
+        const root = RouteComputations.appRoot(location, language)
+        return `${root}bitly_url`
+      }
+      case 'production':
+        return `${location.origin}/bitlyService/api/bitlyShortlink`
     }
-    case 'production':
-      return `${location.origin}/bitlyService/api/bitlyShortlink`
-    }
-
   },
 
   dataEndpoint: () => {
@@ -61,11 +59,11 @@ const RouteComputations = {
   // requests or building other URLs. E.g.:
   // http://localhost:3001/pipeline-incidents/
   // https://apps2.neb-one.gc.ca/incidents-pipeliniers/
-  appRoot: function (location, language) {
+  appRoot(location, language) {
     return `${location.origin}${Tr.getIn(['applicationPath', language])}`
   },
 
-  screenshotMode: function (location) {
+  screenshotMode(location) {
     return !!location.pathname.match(`/${Constants.get('screenshotPath')}$`)
   },
 
@@ -75,29 +73,21 @@ const RouteComputations = {
   // the remainder of the path
   // NB: Location.pathname includes the leading slash in the url, e.g.:
   // In 'foo.com/bar', pathname is '/bar'
-  screenshotParameter: function (location) {
+  screenshotParameter(location) {
     return encodeURIComponent(`${location.pathname}screenshot${location.search}`)
   },
 
-  screenshotOrigin: function (location) {
-    switch(process.env.NODE_ENV) {
-    case 'development':
-      return 'http://localhost:3004'
-    case 'production':
-      return location.origin
+  screenshotOrigin(location) {
+    switch (process.env.NODE_ENV) {
+      case 'development':
+        return 'http://localhost:3004'
+      case 'production':
+        return location.origin
     }
   },
 
 
-
-
-
-
-
-
 }
-
-
 
 
 module.exports = RouteComputations

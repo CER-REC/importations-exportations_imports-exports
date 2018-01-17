@@ -2,7 +2,7 @@ const createSelector = require('reselect').createSelector
 
 const Constants = require('../../Constants.js')
 
-const menuWidth = () => Constants.getIn(['visualizationContainer','leftMargin'])
+const menuWidth = () => Constants.getIn(['visualizationContainer', 'leftMargin'])
 const detailSidebarWidth = () =>
   Constants.getIn(['visualizationDetailContainer', 'width'])
 const viewport = state => state.viewport
@@ -12,16 +12,16 @@ const positionHelper = (prev, height) => createSelector(
   prevPos => Object.assign({}, prevPos, {
     top: prevPos.top + prevPos.height,
     height,
-  })
+  }),
 )
 
 const svgSize = createSelector(
   viewport,
   detailSidebarWidth,
-  (viewport) => ({
+  viewport => ({
     width: (viewport.get('x')),
     height: (viewport.get('y') + Constants.getIn(['workspace', 'viewportPadding'])),
-  })
+  }),
 )
 
 const visualizationContainerPosition = createSelector(
@@ -33,7 +33,7 @@ const visualizationContainerPosition = createSelector(
     width: (viewport.get('x') - menuWidth),
     height: viewport.get('y') -
       Constants.getIn(['visualizationContainer', 'heightPadding']),
-  })
+  }),
 )
 
 const visualizationContentPosition = createSelector(
@@ -45,7 +45,7 @@ const visualizationContentPosition = createSelector(
     left: computedMenuWidth,
     width: width - sidebarWidth,
     height,
-  })
+  }),
 )
 
 const detailSidebarPosition = createSelector(
@@ -56,7 +56,7 @@ const detailSidebarPosition = createSelector(
     top,
     left: computedMenuWidth + visualizationWidth - width,
     width,
-  })
+  }),
 )
 
 module.exports = {

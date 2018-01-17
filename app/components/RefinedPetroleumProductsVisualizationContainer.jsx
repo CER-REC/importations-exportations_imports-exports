@@ -62,10 +62,8 @@ class RefinedPetroleumProductsVisualizationContainer extends React.Component {
   }
 }
 
-module.exports = connect(
-  (state, props) => ({
-    stackedChart: RefinedPetroleumProductsViewport.stackedChartPosition(state, props),
-    individualCharts: RefinedPetroleumProductsViewport.individualChartsPosition(state, props),
-    arrangeBy: DataSelectors.arrangeBy(state, props),
-  })
-)(RefinedPetroleumProductsVisualizationContainer)
+module.exports = connect((state, props) => ({
+  stackedChart: RefinedPetroleumProductsViewport.stackedChartPosition(state, props),
+  individualCharts: RefinedPetroleumProductsViewport.individualChartsPosition(state, props),
+  arrangeBy: DataSelectors.arrangeBy(state, props),
+}))(RefinedPetroleumProductsVisualizationContainer)

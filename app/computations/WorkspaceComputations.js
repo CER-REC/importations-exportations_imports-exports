@@ -17,8 +17,8 @@ WorkspaceComputations.topHeightMargin = function () {
 }
 
 WorkspaceComputations.menuBarHeight = function (viewport) {
-  return viewport.get('y') - WorkspaceComputations.topHeightMargin() 
-    + Constants.getIn(['menuBar','containerHeight'])
+  return viewport.get('y') - WorkspaceComputations.topHeightMargin()
+    + Constants.getIn(['menuBar', 'containerHeight'])
 }
 
 WorkspaceComputations.importExportMenuY = function(viewport) {
@@ -28,22 +28,22 @@ WorkspaceComputations.importExportMenuY = function(viewport) {
 
 WorkspaceComputations.electricitySortMenuY = function (viewport) {
   return WorkspaceComputations.topHeightMargin(viewport)
-    + Constants.getIn(['electricitySortMenu','topMargin'])
+    + Constants.getIn(['electricitySortMenu', 'topMargin'])
 }
 
 WorkspaceComputations.electricityAmountPriceMenuY = function (viewport) {
-  return WorkspaceComputations.electricitySortMenuY(viewport) 
-    + Constants.getIn(['electricityAmountPriceMenu','topMargin'])
+  return WorkspaceComputations.electricitySortMenuY(viewport)
+    + Constants.getIn(['electricityAmountPriceMenu', 'topMargin'])
 }
 
 WorkspaceComputations.showExplanationsY = function (viewport) {
-  return WorkspaceComputations.electricityAmountPriceMenuY(viewport) 
-    + 130
+  return WorkspaceComputations.electricityAmountPriceMenuY(viewport)
+    + Constants.getIn(['showExplanations', 'topMargin'])
 }
 
 WorkspaceComputations.legendY = function (viewport) {
-  return WorkspaceComputations.showExplanationsY(viewport) 
-  + Constants.getIn(['legend','topMargin']) 
+  return WorkspaceComputations.showExplanationsY(viewport)
+  + Constants.getIn(['legend', 'topMargin'])
 }
 
 WorkspaceComputations.socialBarY = function (viewport) {
@@ -51,18 +51,17 @@ WorkspaceComputations.socialBarY = function (viewport) {
 }
 
 WorkspaceComputations.visualizationContainerWidth = function (viewport) {
-  return viewport.get('x') - Constants.getIn(['visualizationContainer','widthPadding'])
+  return viewport.get('x') - Constants.getIn(['visualizationContainer', 'widthPadding'])
 }
 
 WorkspaceComputations.visualizationContainerHeight = function (viewport) {
-  return viewport.get('y') + Constants.getIn(['visualizationContainer','heightPadding'])
+  return viewport.get('y') + Constants.getIn(['visualizationContainer', 'heightPadding'])
 }
 
 WorkspaceComputations.VisualizationDetailContainerX = function (viewport) {
-  return WorkspaceComputations.workspaceWidth(viewport) 
-  - Constants.getIn(['visualizationDetailContainer','width'])
+  return WorkspaceComputations.workspaceWidth(viewport)
+  - Constants.getIn(['visualizationDetailContainer', 'width'])
 }
-
 
 
 module.exports = WorkspaceComputations

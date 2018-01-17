@@ -58,10 +58,10 @@ const initialState = fromJS({
   arrangeBy: 'location',
   activity: 'importsExports',
   subtype: '',
-  selection:{
+  selection: {
     country: null,
-    origins:[],
-    destinations:{}
+    origins: [],
+    destinations: {},
   },
   timeline: {
     scaleLinked: true,
@@ -106,7 +106,7 @@ const reducer = combineReducers([
   'crudeOil',
   'naturalGas',
   'naturalGasLiquids',
-  'refinedPetroleumProducts'
+  'refinedPetroleumProducts',
 ].reduce((acc, next) => { acc[next] = subReducer(next); return acc }, {}))
 
 module.exports = {
@@ -119,5 +119,5 @@ module.exports = {
   setScaleLinked,
   setActivity,
   setSubtype,
-  setSelection
+  setSelection,
 }

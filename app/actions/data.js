@@ -4,7 +4,7 @@ const Types = {
   LOAD_DATA: 'loadData',
 }
 
-const LoadData = (data) => ({
+const LoadData = data => ({
   type: Types.LOAD_DATA,
   payload: { data },
 })

@@ -57,7 +57,7 @@ class TimelinePlay extends React.PureComponent {
       <g transform={`translate(${this.props.left} ${this.props.top})`}>
         <polyline
           points="0,-10 10,0 0,10 0,-10"
-          stroke='#a99372'
+          stroke="#a99372"
           fill="white"
           onClick={this.onClick}
         />
@@ -71,5 +71,5 @@ module.exports = connect(
     timelineRange: timelineSelectors.timelineRange(state, props),
     timelineScale: timelineSelectors.timelineYearScaleCalculation(state, props),
   }),
-  { timelineFilter }
+  { timelineFilter },
 )(TimelinePlay)

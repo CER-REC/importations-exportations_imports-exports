@@ -13,7 +13,6 @@ const SetVisualizationCreator = require('../actionCreators/SetVisualizationCreat
 require('./MainNavigationMenu.scss')
 
 class MainNavigationMenu extends React.Component {
-
   explanationDot() {
     const xPosition = '155'
     return <ExplanationDot
@@ -57,7 +56,6 @@ class MainNavigationMenu extends React.Component {
       </g>
     }
   }
-
 }
 
 const mapStateToProps = state => {
@@ -73,7 +71,8 @@ const mapDispatchToProps = dispatch => {
   return {
     setImportExportVisualization(importExportVisualization) {
       dispatch(SetVisualizationCreator(importExportVisualization))
-    }
+    },
   }
 }
+
 module.exports = ReactRedux.connect(mapStateToProps, mapDispatchToProps)(MainNavigationMenu)

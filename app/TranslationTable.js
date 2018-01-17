@@ -1,6 +1,6 @@
 const Immutable = require('immutable')
 
-const TranslationTable = Immutable.fromJS({ 
+const TranslationTable = Immutable.fromJS({
 
   theLegendValues: {
     importations: {
@@ -117,22 +117,22 @@ const TranslationTable = Immutable.fromJS({
 
   },
 
-  mainMenuBar:{
-    electricity:{
-      en:'Electricity',
-      fr:'Electricity FR',
+  mainMenuBar: {
+    electricity: {
+      en: 'Electricity',
+      fr: 'Electricity FR',
     },
-    crudeOil:{
-      en:'Crude Oil',
-      fr:'Crude Oil FR',
+    crudeOil: {
+      en: 'Crude Oil',
+      fr: 'Crude Oil FR',
     },
-    naturalGas:{
-      en:'Natural Gas',
-      fr:'Natural Gas FR',
+    naturalGas: {
+      en: 'Natural Gas',
+      fr: 'Natural Gas FR',
     },
-    naturalGasLiquids:{
-      en:'Natural Gas Liquids',
-      fr:'Natural Gas Liquids FR',
+    naturalGasLiquids: {
+      en: 'Natural Gas Liquids',
+      fr: 'Natural Gas Liquids FR',
     },
     refinedPetroleumProducts:{
       en:'Refin. Petroleum Prod.',
@@ -258,6 +258,44 @@ const TranslationTable = Immutable.fromJS({
     fr:'hide CONFIDENTIALITY FR'
   },
 
+  electricitySortStates: {
+    title: {
+      import: {
+        en: 'Imports',
+        fr: 'Imports',
+      },
+      ampersand: {
+        en: '&',
+        fr: '&',
+      },
+      export: {
+        en: 'Exports',
+        fr: 'Exports',
+      },
+    },
+    location: {
+      en: 'Sort By LOCATION',
+      fr: 'Sort By LOCATION FR',
+    },
+    imports: {
+      en: 'Sort By IMPORTS',
+      fr: 'Sort By IMPORTS FR',
+    },
+    exports: {
+      en: 'Sort By EXPORTS',
+      fr: 'Sort By EXPORTS FR',
+    },
+  },
+
+  electricityDataTypes: {
+    CAN$: { en: 'CAN$', fr: 'CAN$' },
+    'CAN$/MW.h': { en: 'CAN$/MW.h', fr: 'CAN$/MW.h' },
+    'CN$/GJ': { en: 'CN$/GJ', fr: 'CN$/GJ' },
+    'm3/d': { en: 'm³/d', fr: 'm³/d' },
+    'MW.h': { en: 'MW.h', fr: 'MW.h' },
+    'thousand m3/d': { en: 'thousand m³/d', fr: 'thousand m³/d' },
+  },
+
   mainHeading: {
     imports: {
       en: 'Imports',
@@ -275,6 +313,15 @@ const TranslationTable = Immutable.fromJS({
       en: 'of Energy Products to and from Canada',
       fr: 'TODO',
     },
+  },
+
+  explanationShown: {
+    en: 'show EXPLANATIONS',
+    fr: 'show EXPLANATIONS FR',
+  },
+  explanationHide: {
+    en: 'hide EXPLANATIONS',
+    fr: 'TODO',
   },
 
   explanations: {

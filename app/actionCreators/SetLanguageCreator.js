@@ -1,7 +1,7 @@
-function SetLanguageCreator (language) {
+function SetLanguageCreator(language) {
   return {
     type: 'SetLanguage',
-    language: language,
+    language,
   }
 }
 

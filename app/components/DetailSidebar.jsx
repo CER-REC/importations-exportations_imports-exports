@@ -34,13 +34,16 @@ class DetailSidebar extends React.PureComponent {
     const { top, height } = this.props
     const width = Constants.getIn(['visualizationDetailContainer', 'width'])
     const container = (
-      <div style={{ position: 'absolute', top, width, height }}>
+      <div style={{
+ position: 'absolute', top, width, height,
+}}
+      >
         {this.props.children}
       </div>
     )
     return ReactDOM.createPortal(
       container,
-      this.el
+      this.el,
     )
   }
 }

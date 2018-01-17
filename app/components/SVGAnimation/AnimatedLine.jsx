@@ -11,7 +11,7 @@ class AnimatedLine extends React.PureComponent {
   }
 
   componentWillReceiveProps(props) {
-    Object.keys(props.animate).forEach(key => {
+    Object.keys(props.animate).forEach((key) => {
       if (props[key] !== this.props[key] && this.animateRefs[key]) {
         const animRef = this.animateRefs[key]
         this.previousVals[key] = animRef.parentNode[key].animVal.value

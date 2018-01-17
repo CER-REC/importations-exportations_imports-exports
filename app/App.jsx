@@ -29,28 +29,26 @@ function render(Component) {
   ReactDOM.render(app, document.getElementById('reactRoot'))
 }
 
-DomReady( () => {
-
+DomReady(() => {
   resizeScreenHandler()
   window.addEventListener('resize', resizeScreenHandler)
 
   render(Root)
 })
 
-function resizeScreenHandler()  
-{
+function resizeScreenHandler() {
   // Ensures the width and height of the workspace keep the ratio 900:600
   // TODO: Increase the height of the workspace by emptyCategoryOffsetRatio if
   // the empty categories are visible (i.e. empty categories state is visible).
   const w = document.getElementById('reactRoot').clientWidth
   const h = w * Constants.getIn(['workspace', 'heightToWidthRatio'])
-  store.dispatch(Resized(w,h))
+  store.dispatch(Resized(w, h))
 }
 
 Request({
   uri: RouteComputations.dataEndpoint(),
   json: true,
-}).then(data => { // eslint-disable-line no-undef
+}).then((data) => { // eslint-disable-line no-undef
   store.dispatch(LoadDataCreator(data.body))
 })
 
