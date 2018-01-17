@@ -80,6 +80,10 @@ class ElectricitySortMenu extends React.Component {
       expandedSign = '-'
     }
 
+    if(this.props.setArrangeBy === 'imports') {
+      console.log('hi')
+    }
+
     let labelPosition = `${ Constants.getIn(['menuBar','sortMenuTextY']) } `
     if(this.props.expandImportExportMenu) {
       labelPosition = `${ Constants.getIn(['menuBar','sortMenuTextY']) + 30} `

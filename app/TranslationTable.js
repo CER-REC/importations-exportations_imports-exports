@@ -274,16 +274,16 @@ const TranslationTable = Immutable.fromJS({
       },
     },
     location: {
-      en: 'Sort By LOCATION',
-      fr: 'Sort By LOCATION FR',
+      en: 'LOCATION',
+      fr: 'LOCATION FR',
     },
     imports: {
-      en: 'Sort By IMPORTS',
-      fr: 'Sort By IMPORTS FR',
+      en: 'MOST IMPORTS',
+      fr: 'MOST IMPORTS FR',
     },
     exports: {
-      en: 'Sort By EXPORTS',
-      fr: 'Sort By EXPORTS FR',
+      en: 'MOST EXPORTS',
+      fr: 'MOST EXPORTS FR',
     },
   },
 
