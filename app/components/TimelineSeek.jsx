@@ -7,6 +7,10 @@ const Constants = require('../Constants.js')
 const { timelineFilter } = require('../actions/visualizationSettings')
 const TimelineSelector = require('../selectors/timeline')
 
+const WorkspaceComputations = require('../computations/WorkspaceComputations.js')
+
+const ExplanationDot = require('./ExplanationDot.jsx')
+
 class TimelineSeek extends React.PureComponent {
   static get defaultProps() {
     return {
@@ -94,6 +98,17 @@ class TimelineSeek extends React.PureComponent {
     this.props.timelineFilter(fromJS(newRange))
   }
 
+  explanationDot() {
+    const xPosition = '0'
+    return (<g><ExplanationDot
+      key="timeSeekDot"
+      xPosition={xPosition}
+      yPosition={12}
+    />
+      <use xlinkHref="#back" x={12} y={12} />
+    </g>)
+  }
+
   render() {
     const sideTransform = (this.props.side === 'start')
       ? `translate(${this.props.left} ${this.props.top})`
@@ -114,6 +129,7 @@ class TimelineSeek extends React.PureComponent {
               fill="white"
             />
           </g>
+          { this.explanationDot() }
         </SVGDrag>
       </g>
     )

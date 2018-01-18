@@ -64,7 +64,7 @@ class TimelinePlay extends React.PureComponent {
           onClick={this.onClick}
         />
         <ExplanationDot
-      key="mainNavDot"
+      key="timePlayDot"
       xPosition={-10}
       yPosition={0}
     />

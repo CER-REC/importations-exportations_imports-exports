@@ -6,6 +6,8 @@ const ImportExportArrow = require('./ImportExportArrow.jsx')
 const MapPieceLabel = require('./MapPieceLabel.jsx')
 const ConfidentialIcon = require('./ConfidentialIcon.jsx')
 
+const ExplanationDot = require('./ExplanationDot.jsx')
+
 class MapPiece extends React.Component {
   getArrowColor(legends, value) {
     return legends.find((data) => {
@@ -30,7 +32,19 @@ class MapPiece extends React.Component {
     return ''
   }
 
+  explanationDot() {
+    const xPosition = '0'
+    return (<g><ExplanationDot
+      key="mainNavDot"
+      xPosition={xPosition}
+      yPosition={12}
+    />
+      <use xlinkHref="#back" x={12} y={12} />
+    </g>)
+  }
+
   render() {
+
     let arrowTransform = `translate(${Constants.getIn(['mapPieceArrowStyle', 'x'])}, ${Constants.getIn(['mapPieceArrowStyle', 'y'])})`
     if (this.props.styles.get('arrowPosition') === 'down') {
       arrowTransform = `translate(${Constants.getIn(['mapPieceArrowStyle', 'x'])}, ${this.props.dimensions.get('height') - Constants.getIn(['mapPieceArrowStyle', 'y'])})`
@@ -45,6 +59,12 @@ class MapPiece extends React.Component {
     if (this.props.isMapPieceSelected === true) {
       stroke = 'black'
     }
+
+    let explanationDot = ''
+    if (typeof this.props.data.get('NY') === true) {
+      explanationDot = <ExplanationDot key="newYorkDot" xPosition={0} yPosition={12} />
+    }
+
     let opacity = 1
     if (this.props.isSelected === true && this.props.isMapPieceSelected === false) {
       opacity = 0.10
@@ -75,6 +95,7 @@ class MapPiece extends React.Component {
         {this.drawArrow(this.props.legends, this.props.data, 'imports', this.props.styles, this.props.arrowProps)}
       </g>
       {confidentialIcon}
+      {explanationDot}
             </g>)
   }
 }

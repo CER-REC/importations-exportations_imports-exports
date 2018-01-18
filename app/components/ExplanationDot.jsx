@@ -58,7 +58,8 @@ class ExplanationDot extends React.Component {
           id="circ-anim"
         />
       </defs>
-            </circle>)
+
+        </circle>)
   }
 
   render() {
@@ -68,6 +69,7 @@ class ExplanationDot extends React.Component {
     return (<g onClick={this.onClick}>
       {this.explanationDot()}
       {this.dotAnimation()}
+
     </g>)
   }
 }
