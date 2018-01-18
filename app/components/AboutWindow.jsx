@@ -8,6 +8,21 @@ require('./AboutWindow.scss')
 const Tr = require('../TranslationTable.js')
 
 class AboutWindow extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {showModal: false}
+
+    this.handleShow = this.handleShow.bind(this)
+    this.handleHide = this.handleHide.bind(this)
+  }
+
+  handleShow() {
+    this.setState({showModal: true})
+  }
+
+  handleHide() {
+    this.setState({showModal: false})
+  }
 
   closeButton() {
     return <img
@@ -139,13 +154,16 @@ class AboutWindow extends React.Component {
   }
 
   render() {
-    return <div className = 'aboutWindow'>
+    return <Modal><div 
+    id = 'AboutWindow'
+    className = 'aboutWindow'>
     { this.closeButton() }
     { this.heading() }
     { this.intro() }
     { this.contributors() }
     { this.dataVisualization() }
     </div>
+    </Modal>
   }
 }
 

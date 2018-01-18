@@ -41,6 +41,11 @@ const Workspace = ({ svgSize, detailSidebarPosition }) => (
       <MenuBar />
       <SocialBar />
     </svg>
+    <div id='AboutWindow'
+      style = {{
+        position: 'absolute',
+        top: AboutWindow.top,
+      }}/>
       <AboutWindow />
   </div>
 )
