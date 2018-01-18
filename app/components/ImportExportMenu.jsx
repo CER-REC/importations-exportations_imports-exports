@@ -8,10 +8,6 @@ const ExpandImportExportMenuCreator = require('../actionCreators/ExpandImportExp
 
 const WorkspaceComputations = require('../computations/WorkspaceComputations.js')
 
-
-require ('../styles/Fonts.scss')
-
-
 class ImportExportMenu extends React.Component {
   constructor(props) {
     super(props)

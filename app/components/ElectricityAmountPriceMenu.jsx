@@ -44,7 +44,7 @@ class ElectricityAmountPriceMenu extends React.Component {
         y = { textPosition }
         className = 'bodyText'>
         { Tr.getIn(['showing',this.props.language]) }
-        <tspan className = 'selectableDropdown'> { Tr.getIn(['amount',this.props.language]).toUpperCase() } </tspan>
+        <tspan className = 'selectableDropdown' onClick={this.onClick}> { Tr.getIn(['amount',this.props.language]).toUpperCase() } </tspan>
       </text>
     </g>
   }
@@ -57,7 +57,40 @@ class ElectricityAmountPriceMenu extends React.Component {
     if(!this.props.expandElectricityAmountMenu) {
       return null
     }
+
+    if(this.props.amount === 'CAN$') {
+      return <g><text x = { Constants.getIn(['menuBar','textLabelOffset']) } 
+      y = { WorkspaceComputations.importExportMenuY(this.props.viewport) 
+        + Constants.getIn(['menuBar','sortMenuTextY']) - 15 } 
+      className = 'bodyText'> 
+      <tspan x = { Constants.getIn(['menuBar','textLabelOffset']) + 10 }  
+        dy="0em"
+        onClick = {() => this.props.setAmount('MW.h')}> {Tr.getIn(['electricityDataTypes','MW.h', this.props.language])}</tspan>
+      <tspan x = { Constants.getIn(['menuBar','textLabelOffset']) + 10 }  
+        dy="1.2em"
+        onClick = {() => this.props.setAmount('CAN$/MW.h')}> 
+        {Tr.getIn(['electricityDataTypes','CAN$/MW.h', this.props.language])}
+      </tspan>   
+    </text>
+    </g>
+    }
+
+    if(this.props.amount === 'CAN$/MW.h')
     return <g><text x = { Constants.getIn(['menuBar','textLabelOffset']) } 
+      y = { WorkspaceComputations.importExportMenuY(this.props.viewport) 
+        + Constants.getIn(['menuBar','sortMenuTextY']) - 15 } 
+      className = 'bodyText'> 
+      <tspan x = { Constants.getIn(['menuBar','textLabelOffset']) + 10 }  
+        dy="0em"
+        onClick = {() => this.props.setAmount('MW.h')}> {Tr.getIn(['electricityDataTypes','MW.h', this.props.language])}</tspan>
+      <tspan x = { Constants.getIn(['menuBar','textLabelOffset']) + 10 }  
+        dy="1.2em"
+        onClick = {() => this.props.setAmount('CAN$')}> 
+        {Tr.getIn(['electricityDataTypes','CAN$', this.props.language])}
+      </tspan>   
+    </text>
+    </g>
+      return <g><text x = { Constants.getIn(['menuBar','textLabelOffset']) } 
       y = { WorkspaceComputations.importExportMenuY(this.props.viewport) 
         + Constants.getIn(['menuBar','sortMenuTextY']) - 15 } 
       className = 'bodyText'> 
@@ -83,12 +116,11 @@ class ElectricityAmountPriceMenu extends React.Component {
     if(this.props.expandImportExportMenu || this.props.expandElectricitySortMenu) {
       textAmountPosition = `${ Constants.getIn(['menuBar','amountMenuTextY']) + 30}`
     }
-
     let amountString = `${Tr.getIn(['electricityDataTypes','MW.h', this.props.language])}`
-    if(this.props.electricitySortState === 'imports') {
+    if(this.props.amount === 'CAN$') {
       amountString = `${Tr.getIn(['electricityDataTypes','CAN$', this.props.language])}`
     }
-    if(this.props.electricitySortState === 'exports') {
+    if(this.props.amount === 'CAN$/MW.h') {
       amountString = `${Tr.getIn(['electricityDataTypes','CAN$/MW.h', this.props.language])}`
     }
 
@@ -96,8 +128,7 @@ class ElectricityAmountPriceMenu extends React.Component {
       <text x = { Constants.getIn(['menuBar','amountTextButtonLabelOffset']) } 
         y = { textAmountPosition }
         className = 'selectableDropdown'>
-        <tspan onClick = {() => this.props.setAmount('MW.h')}>{Tr.getIn(['electricityDataTypes','MW.h', this.props.language])}</tspan>
-        <tspan onClick = {this.onClick}> {expandedSign} </tspan>
+        <tspan onClick = {this.onClick}>({amountString}) {expandedSign} </tspan>
       </text>
     </g>
   }

@@ -163,21 +163,6 @@ const TranslationTable = Immutable.fromJS({
     },
   },
 
-  electricitySortStates:{
-    location:{
-      en:'LOCATION',
-      fr:'LOCATION FR'
-    },
-    imports:{
-      en:'MOST IMPORTS',
-      fr:'MOST IMPORTS FR',
-    },
-    exports:{
-      en:'MOST EXPORTS',
-      fr:'MOST EXPORTS FR',
-    },
-  },
-
   electricityDataTypes:{
     'CAN$': { 
       en: 'CAN$', 

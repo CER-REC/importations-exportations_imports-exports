@@ -53,23 +53,66 @@ class ElectricitySortMenu extends React.Component {
   }
 
   expandedMenu() {
-    if(!this.props.expandElectricitySortMenu) {
+    const location = `${Tr.getIn(['electricitySortStates','location', this.props.language])}`
+    const mostImports = `${Tr.getIn(['electricitySortStates','imports', this.props.language])}`
+    const mostExports = `${Tr.getIn(['electricitySortStates','exports', this.props.language])}`
+
+    if(!this.props.expandElectricitySortMenu || this.props.importExportVisualization !== 'electricity') {
       return null
     }
 
-    return <g><text x = { Constants.getIn(['menuBar','textLabelOffset']) } 
-      y = { WorkspaceComputations.importExportMenuY(this.props.viewport) 
-        + Constants.getIn(['menuBar','sortMenuTextY']) - 35 } 
+    if(this.props.arrangeBy === 'imports') {
+      return <g>
+        <text x={ Constants.getIn(['menuBar','textLabelOffset']) }
+      y = { WorkspaceComputations.importExportMenuY(this.props.viewport)
+        + Constants.getIn(['menuBar','sortMenuTextY']) - 35 }
       className = 'bodyText'> 
-      <tspan x = { Constants.getIn(['menuBar','textLabelOffset']) + 12 }  
+      <tspan x = { Constants.getIn(['menuBar','textLabelOffset']) + 12 } 
+        dy="0em"
+        onClick = {() => this.props.setArrangeBy('location') }
+      > {location} </tspan>
+      <tspan x = { Constants.getIn(['menuBar','textLabelOffset']) + 12 } 
+        dy="1.2em"
+        onClick = {() => this.props.setArrangeBy('exports') }>
+        {mostExports}
+      </tspan>
+    </text>
+
+      </g>
+    }
+    if(this.props.arrangeBy === 'exports') {
+      return <g>
+        <text x={ Constants.getIn(['menuBar','textLabelOffset']) }
+      y = { WorkspaceComputations.importExportMenuY(this.props.viewport)
+        + Constants.getIn(['menuBar','sortMenuTextY']) - 35 }
+      className = 'bodyText'> 
+      <tspan x = { Constants.getIn(['menuBar','textLabelOffset']) + 12 } 
+        dy="0em"
+        onClick = {() => this.props.setArrangeBy('location') }
+      > {location} </tspan>
+      <tspan x = { Constants.getIn(['menuBar','textLabelOffset']) + 12 } 
+        dy="1.2em"
+        onClick = {() => this.props.setArrangeBy('imports')}>
+        {mostImports}
+      </tspan>
+    </text>
+
+      </g>
+    }
+
+    return <g><text x={ Constants.getIn(['menuBar','textLabelOffset']) }
+      y = { WorkspaceComputations.importExportMenuY(this.props.viewport)
+        + Constants.getIn(['menuBar','sortMenuTextY']) - 35 }
+      className = 'bodyText'> 
+      <tspan x = { Constants.getIn(['menuBar','textLabelOffset']) + 12 } 
         dy="0em"
         onClick = {() => this.props.setArrangeBy('imports') }
-      > {Tr.getIn(['electricitySortStates', 'imports', this.props.language])} </tspan>
-      <tspan x = { Constants.getIn(['menuBar','textLabelOffset']) + 12 }  
+      > {mostImports} </tspan>
+      <tspan x = { Constants.getIn(['menuBar','textLabelOffset']) + 12 } 
         dy="1.2em"
-        onClick = {() => this.props.setArrangeBy('exports') }> 
-        {Tr.getIn(['electricitySortStates', 'exports', this.props.language])}
-      </tspan>   
+        onClick = {() => this.props.setArrangeBy('exports') }>
+        {mostExports}
+      </tspan>
     </text>
     </g>
   }
@@ -80,20 +123,16 @@ class ElectricitySortMenu extends React.Component {
       expandedSign = '-'
     }
 
-    if(this.props.setArrangeBy === 'imports') {
-      console.log('hi')
-    }
-
     let labelPosition = `${ Constants.getIn(['menuBar','sortMenuTextY']) } `
     if(this.props.expandImportExportMenu) {
       labelPosition = `${ Constants.getIn(['menuBar','sortMenuTextY']) + 30} `
     }
 
     let sortString = `${Tr.getIn(['electricitySortStates','location', this.props.language])}`
-    if(this.props.electricitySortState === 'imports') {
+    if(this.props.arrangeBy === 'imports') {
       sortString = `${Tr.getIn(['electricitySortStates','imports', this.props.language])}`
-    }
-    if(this.props.electricitySortState === 'exports') {
+    } 
+    if(this.props.arrangeBy === 'exports') {
       sortString = `${Tr.getIn(['electricitySortStates','exports', this.props.language])}`
     }
 
@@ -101,8 +140,7 @@ class ElectricitySortMenu extends React.Component {
       <text x = { Constants.getIn(['menuBar','sortTextButtonLabelOffset']) } 
         y = { labelPosition } 
         className = 'selectableDropdown'>
-        <tspan onClick = {() => this.props.setArrangeBy('location') }>{sortString}</tspan>
-        <tspan onClick = {this.onClick}> {expandedSign} </tspan>
+        <tspan onClick = {this.onClick}>{sortString} {expandedSign} </tspan>
       </text>
     </g>
   }
