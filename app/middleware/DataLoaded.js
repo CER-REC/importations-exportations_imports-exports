@@ -7,15 +7,12 @@ const DataLoaded = store => next => (action) => {
 
   const state = store.getState()
   const { data } = state
-
-  const dataLoaderState = {
-    type: Types.DATA_LOADING_COMPLETE,
-    payload: { isLoadingComplete: false },
-  }
   if (data.count() > 0) {
-    dataLoaderState.payload.isLoadingComplete = true
+    store.dispatch({
+      type: Types.DATA_LOADING_COMPLETE,
+      payload: { isLoadingComplete: true },
+    })
   }
-  store.dispatch(dataLoaderState)
 }
 
 module.exports = DataLoaded
