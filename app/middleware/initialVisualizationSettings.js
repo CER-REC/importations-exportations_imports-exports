@@ -4,12 +4,16 @@ const {
 } = require('../actions/visualizationSettings')
 const { timelineYearScaleCalculation } = require('../selectors/timeline')
 
+let initializedFromURL = false
+
 const initialVisualizationSettings = store => next => (action) => {
   // Process the action immediately
   next(action)
 
+  if (action.type === 'urlRouteChanged') { initializedFromURL = true }
+
   // If we aren't loading data, don't change the visualization settings
-  if (action.type !== DataTypes.LOAD_DATA) { return }
+  if (initializedFromURL || action.type !== DataTypes.LOAD_DATA) { return }
 
   const state = store.getState()
   const { data } = state

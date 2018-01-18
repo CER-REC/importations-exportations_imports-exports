@@ -32,6 +32,7 @@
     "history": "^4.7.2",
     "immutable": "^3.8.1",
     "lodash": "^4.17.4",
+    "lzutf8": "^0.4.7",
     "memoize-immutable": "^3.0.0",
     "mustache": "^2.3.0",
     "mustache-express": "^1.2.5",
