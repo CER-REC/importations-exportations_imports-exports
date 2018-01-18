@@ -102,16 +102,32 @@
   text-align: center;
 }
 
-.chartOptions a {
-  font-family: $fira-sans-condensed-medium;
-  color: $neutral-medium;
-  font-size: 14px;
-  text-decoration: none;
-  cursor: pointer;
-}
-
 .explanationLabel {
   font-family: $fira-sans-condensed;
   font-size: 13px;
   fill: $neutral-light;
+}
+
+#detailSidebar {
+  font-family: $fira-sans-condensed;
+  font-size: 11px;
+  color: $neutral-light;
+
+  .chartOptions a {
+    font-family: $fira-sans-condensed-medium;
+    color: $neutral-medium;
+    font-size: 14px;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  .detailTotal {
+    font-family: $fira-sans-condensed;
+    font-size: 12px;
+    color: $neutral-dark;
+
+    .totalType {
+      font-family: $fira-sans-condensed-semibold;
+    }
+  }
 }
