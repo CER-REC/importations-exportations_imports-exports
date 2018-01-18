@@ -37,7 +37,7 @@ module.exports = function () {
       TagVisualizationSettingsMiddleware,
       TimelineRangeMiddleware,
       ActionLogMiddleware,
-      DataLoaded
+      DataLoaded,
     )),
   )
 }
