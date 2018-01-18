@@ -1,11 +1,13 @@
 const Redux = require('redux')
 
 const reducer = require('./reducer').default
+
 const TimelineRangeMiddleware = require('./middleware/timelineRange')
 const InitialVisualizationSettingsMiddleware = require('./middleware/initialVisualizationSettings')
 const ActionLogMiddleware = require('./middleware/actionLog')
 const TagVisualizationSettingsMiddleware = require('./middleware/tagVisualizationSettings')
 const { default: SaveStateToRouteMiddleware, updateStateFromURL } = require('./middleware/saveStateToRoute')
+const DataLoaded = require('./middleware/DataLoaded')
 
 module.exports = () => {
   // Enable Redux Dev Tools if they are installed in the browser
@@ -21,6 +23,7 @@ module.exports = () => {
       TagVisualizationSettingsMiddleware,
       TimelineRangeMiddleware,
       ActionLogMiddleware,
+      DataLoaded,
     )),
   )
 

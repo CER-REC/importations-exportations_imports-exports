@@ -8,6 +8,7 @@ import ShowExplanationsReducer from './reducers/ShowExplanationsReducer'
 import { reducer as DataReducer } from './actions/data'
 import ElectricityExplanationReducer from './reducers/ElectricityExplanationReducer'
 import { reducer as visualizationSettings } from './actions/visualizationSettings'
+import { reducer as DataLoadCompleteReducer } from './actions/DataLoadComplete'
 
 const mergeDeep = (old, merge) => {
   if (old === Object(old) && Array.isArray(old) === false) {
@@ -29,6 +30,7 @@ const nestedReducers = combineReducers({
   electricityExplanation: ElectricityExplanationReducer,
   showExplanations: ShowExplanationsReducer,
   data: DataReducer,
+  dataLoadingComplete: DataLoadCompleteReducer,
   visualizationSettings,
 })
 
