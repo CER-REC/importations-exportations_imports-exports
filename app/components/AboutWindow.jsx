@@ -154,7 +154,7 @@ class AboutWindow extends React.Component {
   }
 
   render() {
-    return <Modal><div 
+    return <div 
     id = 'AboutWindow'
     className = 'aboutWindow'>
     { this.closeButton() }
@@ -163,7 +163,6 @@ class AboutWindow extends React.Component {
     { this.contributors() }
     { this.dataVisualization() }
     </div>
-    </Modal>
   }
 }
 

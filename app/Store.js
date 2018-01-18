@@ -7,11 +7,13 @@ const ShowExplanationsReducer = require('./reducers/ShowExplanationsReducer.js')
 const DataReducer = require('./actions/data').reducer
 const ElectricityExplanationReducer = require('./reducers/ElectricityExplanationReducer.js')
 const { reducer: visualizationSettings } = require('./actions/visualizationSettings')
+const DataLoadCompleteReducer = require('./actions/DataLoadComplete').reducer
 
 const TimelineRangeMiddleware = require('./middleware/timelineRange')
 const InitialVisualizationSettingsMiddleware = require('./middleware/initialVisualizationSettings')
 const ActionLogMiddleware = require('./middleware/actionLog')
 const TagVisualizationSettingsMiddleware = require('./middleware/tagVisualizationSettings')
+const DataLoaded = require('./middleware/DataLoaded')
 
 const reducers = Redux.combineReducers({
   viewport: ViewportReducer,
@@ -20,6 +22,7 @@ const reducers = Redux.combineReducers({
   electricityExplanation: ElectricityExplanationReducer,
   showExplanations: ShowExplanationsReducer,
   data: DataReducer,
+  dataLoadingComplete: DataLoadCompleteReducer,
   visualizationSettings,
 })
 
@@ -34,6 +37,7 @@ module.exports = function () {
       TagVisualizationSettingsMiddleware,
       TimelineRangeMiddleware,
       ActionLogMiddleware,
+      DataLoaded,
     )),
   )
 }
