@@ -63,6 +63,7 @@ class ChartOptions extends React.PureComponent {
           </a>
           <img className="detailBarArrow" src="images/control_arrow.svg" />
         </div>
+        <div style={{ clear: 'both' }} />
       </div>
     )
   }
