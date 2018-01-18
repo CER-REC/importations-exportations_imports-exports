@@ -6,6 +6,10 @@ const Header = require('./Header.jsx')
 const MenuBar = require('./MenuBar.jsx')
 const SocialBar = require('./SocialBar.jsx')
 
+const AboutWindow = require('./AboutWindow.jsx')
+
+const ModalPortal = require('./ModalPortal.jsx')
+
 const VisualizationContainer = require('./VisualizationContainer.jsx')
 const ViewportSelectors = require('../selectors/viewport/')
 
@@ -15,6 +19,7 @@ const Workspace = ({ svgSize, detailSidebarPosition }) => (
   <div style={{ position: 'relative' }}>
     <div className="Workspace">
       <Header />
+
     </div>
     <div
       id="detailSidebar"
@@ -36,7 +41,7 @@ const Workspace = ({ svgSize, detailSidebarPosition }) => (
       <MenuBar />
       <SocialBar />
     </svg>
-
+      <AboutWindow />
   </div>
 )
 

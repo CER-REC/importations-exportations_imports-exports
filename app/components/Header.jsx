@@ -11,7 +11,7 @@ require('../styles/Colours.scss')
 class Header extends React.Component {
   aboutThisProjectClick() {
     // TODO: summon 'About This Project' window
-
+    console.log('hei')
   }
 
   methodologyClick() {
@@ -113,7 +113,7 @@ class Header extends React.Component {
     return (<div style={{ height: Constants.get('topHeightMargin') }}>
       {this.leftHeading()}
       {this.metaBar()}
-            </div>)
+    </div>)
   }
 }
 

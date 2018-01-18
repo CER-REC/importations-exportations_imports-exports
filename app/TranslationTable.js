@@ -114,7 +114,89 @@ const TranslationTable = Immutable.fromJS({
       en: 'Reset Visualization',
       fr: 'Réinitialiser visualisation',
     },
+  },
 
+  aboutWindow: {
+    heading: {
+      en: 'ABOUT THIS PROJECT',
+      fr: 'ABOUT THIS PROJECT FR',
+    },
+    p1: {
+      en: 'Paragraph one is really long and I do not feel like typing it out until we get the official stuff from the NEB',
+      fr: 'la french FR',
+    },
+    p2: {
+      en: 'paragraph two is slightly shorter but still not confirmed so here is a placeholder',
+      fr: 'la french placeholder FR',
+    },
+    p3: {
+      en: 'paragraph three in case there is one',
+      fr: 'la french paragraph trois FR',
+    },
+    p4: {
+      en: 'still one more paragraph',
+      fr: 'oui oui FR',
+    },
+    contributors: {
+      en: 'CONTRIBUTORS',
+      fr: 'CONTRIBUTORS FR',
+    },
+    dataSource: {
+      en: 'DATA SOURCE',
+      fr: 'DATA SOURCE',
+    },
+    dataNamesfromNEB: {
+      en: 'sir sir maam maam',
+      fr: 'sir sir',
+    },
+    nebCoordinators: {
+      en: 'Annette...',
+      fr: 'Annette...',
+    },
+    dataVisualization: {
+      en: 'DATA VISUALIZATION',
+      fr: 'DATA VISUALIZATION FR',
+    },
+    leadDesignResearch: {
+      en: 'LEAD DESIGN RESEARCH',
+      fr: 'LEAD DESIGN RESEARCH FR',
+    },
+    leadDesigners: {
+      en: 'designer names sir sir miss ms',
+      fr: 'designer names sir sir miss ms',
+    },
+    coordination: {
+      en: 'COORDINATION',
+      fr: 'COORDINATION FR',
+    },
+    coordi: {
+      en: 'Claudia Maurer',
+      fr: 'Claudia Maurer',
+    },
+    design: {
+      en: 'DESIGN',
+      fr: 'DESIGN',
+    },
+    designers: {
+      en: 'uofc designers',
+      fr: 'uofc designers',
+    },
+    leadTechnical: {
+      en: 'LEAD TECHNICAL',
+      fr: 'LEAD TECHNICAL FR',
+    },
+    vizworx: {
+      en: 'VizworX',
+      fr: 'VizworX',
+    },
+    technical: {
+      en: 'TECHNICAL',
+      fr: 'TECHNICAL',
+    },
+    technicalTeam: {
+      en: 'Patrick King, Spenser Jones, Rahul Kamal Bhaskar, Ben Cousins, Abhishek Sharma, and Charlie Cheung',
+      fr: 'Patrick King, Spenser Jones, Rahul Kamal Bhaskar, Ben Cousins, Abhishek Sharma, and Charlie Cheung',
+    },
   },
 
   mainMenuBar: {
