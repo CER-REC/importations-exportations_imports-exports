@@ -4,9 +4,7 @@ const MustacheExpress = require('mustache-express')
 
 const ApplicationRoot = require('../../ApplicationRoot.js')
 
-
-const DevelopmentPageMiddleware = function () {
- 
+const DevelopmentPageMiddleware = () => {
   const app = Express()
 
   // view engine setup
@@ -17,26 +15,21 @@ const DevelopmentPageMiddleware = function () {
 
   const router = Express.Router()
 
-  // Direct the root to the newer template
-  router.get('/', function (req, res) {
-    res.render('app', {title: 'WET 4.0.20'})
-  })
-
-  router.get('/screenshot', function(req, res) {
+  router.get('/screenshot', (req, res) => {
     res.render('screenshot')
   })
-  
+
+  // Direct the root to the newer template
+  router.get('/(\\w+)?', (req, res) => {
+    res.render('app', { title: 'WET 4.0.20' })
+  })
+
   app.use(router)
 
   // Turn off caching!
   app.disable('view cache')
 
   return app
-
-
 }
-
-
-
 
 module.exports = DevelopmentPageMiddleware

@@ -2,6 +2,8 @@ import LZUTF8 from 'lzutf8'
 import createHistory from 'history/createBrowserHistory'
 import QueryString from 'query-string'
 
+import TR from '../TranslationTable'
+
 let unlistenHistory
 let lastSave = {}
 let updatingHistory = false
@@ -59,7 +61,8 @@ export default (store) => {
 
     const compressed = encodeURIComponent(LZUTF8.compress(JSON.stringify(toSave), { outputEncoding: 'Base64' }))
     updatingHistory = true
-    history.push({ search: `?config=${compressed}` })
+    const baseURL = TR.getIn(['applicationPath', state.language])
+    history.push(`${baseURL}${state.importExportVisualization}?config=${compressed}`)
     updatingHistory = false
   }
 }
