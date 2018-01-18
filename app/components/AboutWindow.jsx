@@ -27,7 +27,8 @@ class AboutWindow extends React.Component {
   closeButton() {
     return <img
       className='closeButton'
-      src='images/about_close.svg'>
+      src='images/about_close.svg'
+      onClick = {this.handleHide}>
     </img>
   }
 
@@ -154,9 +155,21 @@ class AboutWindow extends React.Component {
   }
 
   render() {
+    const modal = this.state.showModal ? (
+      <div 
+        id = 'aboutWindow'
+        className = 'aboutWindow'>
+        { this.closeButton() }
+        { this.heading() }
+        { this.intro() }
+        { this.contributors() }
+        { this.dataVisualization() }
+      </div>
+      ) : null
     return <div 
-    id = 'AboutWindow'
-    className = 'aboutWindow'>
+    id = 'aboutWindow'
+    className = 'aboutWindow'
+    onClick = {this.handleShow}>
     { this.closeButton() }
     { this.heading() }
     { this.intro() }
@@ -169,7 +182,7 @@ class AboutWindow extends React.Component {
 const mapStateToProps = state => {
   return {
     language: state.language,
-    about: state.about,
+    viewport: state.viewport,
   }
 }
 

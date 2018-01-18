@@ -16,12 +16,10 @@ class Header extends React.Component {
 
   methodologyClick() {
     // TODO: add methodology click functionality
-
   }
 
   resetClick() {
     // TODO: add reset visualization functionality
-
   }
 
   leftHeading() {
@@ -47,7 +45,7 @@ class Header extends React.Component {
       >
         { Tr.getIn(['mainSubheading', this.props.language]) }
       </p>
-            </div>)
+      </div>)
   }
 
   metaBar() {
