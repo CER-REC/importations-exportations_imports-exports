@@ -1,17 +1,21 @@
 const React = require('react')
 const PropTypes = require('prop-types')
+const Immutable = require('immutable')
 
 class Chart extends React.PureComponent {
   static get propTypes() {
     return {
-      aggregateKey: PropTypes.string.isRequired,
-      scaleKey: PropTypes.string,
+      // Unused prop-types are used by reselect
+      aggregateKey: PropTypes.string.isRequired, // eslint-disable-line react/no-unused-prop-types
+      scaleKey: PropTypes.string, // eslint-disable-line react/no-unused-prop-types
       top: PropTypes.number.isRequired,
       left: PropTypes.number.isRequired,
-      width: PropTypes.number.isRequired,
+      width: PropTypes.number.isRequired, // eslint-disable-line react/no-unused-prop-types
       height: PropTypes.number.isRequired,
       flipped: PropTypes.bool,
-      color: PropTypes.string,
+      color: PropTypes.string, // eslint-disable-line react/no-unused-prop-types
+      timelineRange: PropTypes.instanceOf(Immutable.Map).isRequired,
+      timelineGroup: PropTypes.oneOf(['year', 'quarter']).isRequired,
     }
   }
 
@@ -21,6 +25,13 @@ class Chart extends React.PureComponent {
       color: 'black',
       scaleKey: '', // The selector will default this to the valueKey if not set
     }
+  }
+
+  getTransform() {
+    const { left, top, height } = this.props
+    return (this.props.flipped === true)
+      ? `scale(1,-1) translate(${left} ${-top - height})`
+      : `translate(${left} ${top})`
   }
 
   isTimelinePointFiltered(point) {
@@ -41,13 +52,6 @@ class Chart extends React.PureComponent {
       return true
     }
     return false
-  }
-
-  getTransform() {
-    const { left, top, height } = this.props
-    return (this.props.flipped === true)
-      ? `scale(1,-1) translate(${left} ${-top - height})`
-      : `translate(${left} ${top})`
   }
 
   render() {
