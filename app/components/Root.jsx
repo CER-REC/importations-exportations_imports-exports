@@ -1,35 +1,30 @@
-
 const React = require('react')
 const ReactRedux = require('react-redux')
+const PropTypes = require('prop-types')
+const Immutable = require('immutable')
 
 const Workspace = require('./Workspace')
 
 require('../styles/Common.scss')
 
-class Root extends React.Component {
-  render() {
-  	if(this.props.dataLoadingComplete){
-		return (<div>
-			<Workspace />
-		</div>)  		
-  	} else {
-      const loaderStyle =  {
-          height: this.props.viewport.get('y'),
-          width: this.props.viewport.get('x'),
-      }
-      return (<div style={loaderStyle}>
-        <div className="loader"></div>
-      </div>)
-  	}
+const Root = ({ dataLoadingComplete, viewport }) => {
+  if (dataLoadingComplete) { return <div><Workspace /></div> }
 
+  const loaderStyle = {
+    height: viewport.get('y'),
+    width: viewport.get('x'),
   }
+  return <div style={loaderStyle}><div className="loader" /></div>
 }
 
-const mapStateToProps = (state, props) => ({
+Root.propTypes = {
+  dataLoadingComplete: PropTypes.bool.isRequired,
+  viewport: PropTypes.instanceOf(Immutable.Map).isRequired,
+}
+
+const mapStateToProps = state => ({
   viewport: state.viewport,
-  dataLoadingComplete: state.dataLoadingComplete
+  dataLoadingComplete: state.dataLoadingComplete,
 })
 
-module.exports = ReactRedux.connect(
-  mapStateToProps,
-)(Root)
+module.exports = ReactRedux.connect(mapStateToProps)(Root)

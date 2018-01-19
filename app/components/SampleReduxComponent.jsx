@@ -1,14 +1,16 @@
 const React = require('react')
+const PropTypes = require('prop-types')
 const ReactRedux = require('react-redux')
 
-class SampleReduxComponent extends React.Component {
-  render() {
-    return (<div>
-      <p>{ `Why hello there ${this.props.name}` }</p>
-            </div>)
-  }
-}
+const SampleReduxComponent = props => (
+  <div>
+    <p>{`Why hello there ${props.name}`}</p>
+  </div>
+)
 
+SampleReduxComponent.propTypes = {
+  name: PropTypes.string.isRequired,
+}
 
 const mapStateToProps = state => ({
   name: state.name,

@@ -26,8 +26,9 @@ const reducers = Redux.combineReducers({
   visualizationSettings,
 })
 
-module.exports = function () {
+module.exports = () => {
   const composeEnhancers =
+    // eslint-disable-next-line no-underscore-dangle
     window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || Redux.compose
   // Enable Redux Dev Tools if they are installed in the browser
   return Redux.createStore(

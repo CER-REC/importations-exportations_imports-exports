@@ -1,5 +1,6 @@
 const React = require('react')
 const ReactDOM = require('react-dom')
+const PropTypes = require('prop-types')
 
 const Constants = require('../Constants')
 
@@ -48,8 +49,10 @@ class DetailSidebar extends React.PureComponent {
   }
 }
 
-DetailSidebar.defaultProps = {
-  top: 0,
+DetailSidebar.propTypes = {
+  top: PropTypes.number.isRequired,
+  height: PropTypes.number.isRequired,
+  children: PropTypes.node.isRequired,
 }
 
 module.exports = DetailSidebar

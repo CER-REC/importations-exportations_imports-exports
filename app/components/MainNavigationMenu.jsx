@@ -13,7 +13,7 @@ require('./MainNavigationMenu.scss')
 
 class MainNavigationMenu extends React.Component {
   explanationDot() {
-    const xPosition = '125'
+    const xPosition = 125
     return (<ExplanationDot
       key="mainNavDot"
       xPosition={xPosition}

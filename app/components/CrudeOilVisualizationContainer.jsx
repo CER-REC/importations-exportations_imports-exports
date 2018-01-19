@@ -1,4 +1,6 @@
 const React = require('react')
+const PropTypes = require('prop-types')
+const Immutable = require('immutable')
 const { connect } = require('react-redux')
 
 const ExplanationPopovers = require('./ExplanationPopovers.jsx')

@@ -1,98 +1,110 @@
 const React = require('react')
 const ReactRedux = require('react-redux')
+const PropTypes = require('prop-types')
 
 const LegendArrow = require('./LegendArrow.jsx')
 const Constants = require('../Constants.js')
 const Tr = require('../TranslationTable.js')
-const WorkspaceComputations = require('../computations/WorkspaceComputations.js')
 
 require('../styles/Fonts.scss')
 
 require('./Legend.scss')
 
 class Legend extends React.Component {
+  static get propTypes() {
+    return {
+      language: PropTypes.string.isRequired,
+      importExportVisualization: PropTypes.string.isRequired,
+    }
+  }
+
   importColumn() {
     const transformImportColumn = `translate(${Constants.getIn(['legend', 'importColumn'])} 0)`
-    return (<svg
-      className="importColumn"
-    >
-      <g>
+    return (
+      <svg
+        className="importColumn"
+      >
         <g>
-          <text
-            className="theLegendHeading"
-            x={Constants.getIn(['legend', 'importHeadingX'])}
-            y={Constants.getIn(['legend', 'headingY'])}
-          > {Tr.getIn(['theLegendValues', 'importations', this.props.language])}
-          </text>
-        </g>
+          <g>
+            <text
+              className="theLegendHeading"
+              x={Constants.getIn(['legend', 'importHeadingX'])}
+              y={Constants.getIn(['legend', 'headingY'])}
+            >
+              {Tr.getIn(['theLegendValues', 'importations', this.props.language])}
+            </text>
+          </g>
 
-        <g transform={transformImportColumn}>
-          <LegendArrow
-            yPosition={Constants.getIn(['legend', 'bin1Y'])}
-            colour="#fed190"
-          />
-          <LegendArrow
-            yPosition={Constants.getIn(['legend', 'bin2Y'])}
-            colour="#fdae61"
-          />
-          <LegendArrow
-            yPosition={Constants.getIn(['legend', 'bin3Y'])}
-            colour="#ff774c"
-          />
-          <LegendArrow
-            yPosition={Constants.getIn(['legend', 'bin4Y'])}
-            colour="#d71c27"
-          />
-          <LegendArrow
-            yPosition={Constants.getIn(['legend', 'bin5Y'])}
-            colour="#a50026"
-          />
+          <g transform={transformImportColumn}>
+            <LegendArrow
+              yPosition={Constants.getIn(['legend', 'bin1Y'])}
+              colour="#fed190"
+            />
+            <LegendArrow
+              yPosition={Constants.getIn(['legend', 'bin2Y'])}
+              colour="#fdae61"
+            />
+            <LegendArrow
+              yPosition={Constants.getIn(['legend', 'bin3Y'])}
+              colour="#ff774c"
+            />
+            <LegendArrow
+              yPosition={Constants.getIn(['legend', 'bin4Y'])}
+              colour="#d71c27"
+            />
+            <LegendArrow
+              yPosition={Constants.getIn(['legend', 'bin5Y'])}
+              colour="#a50026"
+            />
+          </g>
         </g>
-      </g>
-            </svg>)
+      </svg>
+    )
   }
 
   exportColumn() {
     const transformExportColumn = `translate(${Constants.getIn(['legend', 'exportColumn'])} 0)`
     const rotateArrow = 'rotate(180, 15, 5.5)'
-    return (<svg
-      className="exportColumn"
-    >
-      <text
-        className="theLegendHeading"
-        x={Constants.getIn(['legend', 'exportHeadingX'])}
-        y={Constants.getIn(['legend', 'headingY'])}
-      > {Tr.getIn(['theLegendValues', 'exportations', this.props.language])}
-      </text>
+    return (
+      <svg
+        className="exportColumn"
+      >
+        <text
+          className="theLegendHeading"
+          x={Constants.getIn(['legend', 'exportHeadingX'])}
+          y={Constants.getIn(['legend', 'headingY'])}
+        > {Tr.getIn(['theLegendValues', 'exportations', this.props.language])}
+        </text>
 
-      <g transform={transformExportColumn}>
-        <LegendArrow
-          yPosition={Constants.getIn(['legend', 'bin1Y'])}
-          colour="#d6eaf6"
-          transformArrow={rotateArrow}
-        />
-        <LegendArrow
-          yPosition={Constants.getIn(['legend', 'bin2Y'])}
-          colour="#9ecae1"
-          transformArrow={rotateArrow}
-        />
-        <LegendArrow
-          yPosition={Constants.getIn(['legend', 'bin3Y'])}
-          colour="#5698cb"
-          transformArrow={rotateArrow}
-        />
-        <LegendArrow
-          yPosition={Constants.getIn(['legend', 'bin4Y'])}
-          colour="#1c64b2"
-          transformArrow={rotateArrow}
-        />
-        <LegendArrow
-          yPosition={Constants.getIn(['legend', 'bin5Y'])}
-          colour="#084594"
-          transformArrow={rotateArrow}
-        />
-      </g>
-            </svg>)
+        <g transform={transformExportColumn}>
+          <LegendArrow
+            yPosition={Constants.getIn(['legend', 'bin1Y'])}
+            colour="#d6eaf6"
+            transformArrow={rotateArrow}
+          />
+          <LegendArrow
+            yPosition={Constants.getIn(['legend', 'bin2Y'])}
+            colour="#9ecae1"
+            transformArrow={rotateArrow}
+          />
+          <LegendArrow
+            yPosition={Constants.getIn(['legend', 'bin3Y'])}
+            colour="#5698cb"
+            transformArrow={rotateArrow}
+          />
+          <LegendArrow
+            yPosition={Constants.getIn(['legend', 'bin4Y'])}
+            colour="#1c64b2"
+            transformArrow={rotateArrow}
+          />
+          <LegendArrow
+            yPosition={Constants.getIn(['legend', 'bin5Y'])}
+            colour="#084594"
+            transformArrow={rotateArrow}
+          />
+        </g>
+      </svg>
+    )
   }
 
   textValues() {
@@ -126,71 +138,78 @@ class Legend extends React.Component {
       rangeFive = `${Tr.getIn(['theLegendValues', 'naturalGasLiquids', 'rangeFive', this.props.language])}`
     }
 
-    return (<svg>
-      <g transform={transformString}>
-        <text
-          className="theLegendValues"
-          y={Constants.getIn(['legend', 'rangeOneY'])}
-        > {rangeOne}
-        </text>
-        <text
-          className="theLegendValues"
-          y={Constants.getIn(['legend', 'rangeTwoY'])}
-        > {rangeTwo}
-        </text>
-        <text
-          className="theLegendValues"
-          y={Constants.getIn(['legend', 'rangeThreeY'])}
-        > {rangeThree}
-        </text>
-        <text
-          className="theLegendValues"
-          y={Constants.getIn(['legend', 'rangeFourY'])}
-        > {rangeFour}
-        </text>
-        <text
-          className="theLegendValues"
-          y={Constants.getIn(['legend', 'rangeFiveY'])}
-        > {rangeFive}
-        </text>
-      </g>
-            </svg>)
+    return (
+      <svg>
+        <g transform={transformString}>
+          <text
+            className="theLegendValues"
+            y={Constants.getIn(['legend', 'rangeOneY'])}
+          > {rangeOne}
+          </text>
+          <text
+            className="theLegendValues"
+            y={Constants.getIn(['legend', 'rangeTwoY'])}
+          > {rangeTwo}
+          </text>
+          <text
+            className="theLegendValues"
+            y={Constants.getIn(['legend', 'rangeThreeY'])}
+          > {rangeThree}
+          </text>
+          <text
+            className="theLegendValues"
+            y={Constants.getIn(['legend', 'rangeFourY'])}
+          > {rangeFour}
+          </text>
+          <text
+            className="theLegendValues"
+            y={Constants.getIn(['legend', 'rangeFiveY'])}
+          > {rangeFive}
+          </text>
+        </g>
+      </svg>
+    )
   }
 
   shownLegend() {
     const visualizationContainerType = this.props.importExportVisualization
     const transformCrudeOil = `translate(${Constants.getIn(['legend', 'crudeOilLegendPosition'])} 0)`
     switch (visualizationContainerType) {
-      case 'crudeOil':
-        return (<g transform={transformCrudeOil}>
+      case 'crudeOil': return (
+        <g transform={transformCrudeOil}>
           {this.exportColumn()}
           {this.textValues()}
-        </g>)
-      case 'naturalGas':
-        return (<g>{this.importColumn()}
+        </g>
+      )
+      case 'naturalGas': return (
+        <g>
+          {this.importColumn()}
           {this.exportColumn()}
           {this.textValues()}
-                </g>)
-      case 'naturalGasLiquids':
-        return (<g>{this.importColumn()}
+        </g>
+      )
+      case 'naturalGasLiquids': return (
+        <g>
+          {this.importColumn()}
           {this.exportColumn()}
           {this.textValues()}
-                </g>)
+        </g>
+      )
       case 'refinedPetroleumProducts':
         return null
       case 'electricity':
-      default:
-        return (<g>{this.importColumn()}
+      default: return (
+        <g>
+          {this.importColumn()}
           {this.exportColumn()}
           {this.textValues()}
-        </g>)
+        </g>
+      )
     }
   }
 
   render() {
-    return (<g>
-      {this.shownLegend()}
-            </g>)
+    return <g>{this.shownLegend()}</g>
   }
 }
 
