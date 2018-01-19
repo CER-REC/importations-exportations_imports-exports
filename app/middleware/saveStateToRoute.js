@@ -46,10 +46,13 @@ export default (store) => {
     if (updatingState) { return }
 
     const state = store.getState()
+    const { importExportVisualization: visualization } = state
     const toSave = {
-      visualizationSettings: state.visualizationSettings,
+      visualizationSettings: {
+        [visualization]: state.visualizationSettings[visualization],
+      },
       electricityExplanation: state.electricityExplanation,
-      importExportVisualization: state.importExportVisualization,
+      importExportVisualization: visualization,
       language: state.language,
       showExplanations: state.showExplanations,
     }
