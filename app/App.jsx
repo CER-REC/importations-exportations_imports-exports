@@ -49,7 +49,8 @@ Request({
   uri: RouteComputations.dataEndpoint(),
   json: true,
 }).then((data) => { // eslint-disable-line no-undef
-  store.dispatch(LoadDataCreator(data.body))
+  console.log(data.body.bins)
+  store.dispatch(LoadDataCreator(data.body.data))
 })
 
 // Webpack Hot Module Replacement API

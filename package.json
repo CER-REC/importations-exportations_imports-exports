@@ -67,6 +67,7 @@
     "fs-extra": "^5.0.0",
     "mocha": "^4.0.1",
     "mocha-webpack": "^1.0.1",
-    "react-test-renderer": "^16.1.1"
+    "react-test-renderer": "^16.1.1",
+    "simple-statistics": "^0.9.2"
   }
 }
