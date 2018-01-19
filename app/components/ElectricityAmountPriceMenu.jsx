@@ -58,6 +58,10 @@ class ElectricityAmountPriceMenu extends React.Component {
       return null
     }
 
+    if(this.props.selectedEnergy === 'naturalGas' && this.props.amount === 'thousand m3/d') {
+      console.log('asdf')
+    }
+
     if(this.props.amount === 'CAN$') {
       return <g><text x = { Constants.getIn(['menuBar','textLabelOffset']) } 
       y = { WorkspaceComputations.importExportMenuY(this.props.viewport) 
@@ -90,7 +94,7 @@ class ElectricityAmountPriceMenu extends React.Component {
       </tspan>   
     </text>
     </g>
-      return <g><text x = { Constants.getIn(['menuBar','textLabelOffset']) } 
+    return <g><text x = { Constants.getIn(['menuBar','textLabelOffset']) } 
       y = { WorkspaceComputations.importExportMenuY(this.props.viewport) 
         + Constants.getIn(['menuBar','sortMenuTextY']) - 15 } 
       className = 'bodyText'> 
@@ -122,6 +126,42 @@ class ElectricityAmountPriceMenu extends React.Component {
     }
     if(this.props.amount === 'CAN$/MW.h') {
       amountString = `${Tr.getIn(['electricityDataTypes','CAN$/MW.h', this.props.language])}`
+    }
+
+    if(this.props.selectedEnergy === 'naturalGas' && this.props.amount === 'thousand m3/d') {
+      amountString = `${Tr.getIn(['electricityDataTypes','thousand m3/d', this.props.language])}`
+    }
+
+    if(this.props.selectedEnergy === 'crudeOil' || this.props.selectedEnergy === 'refinedPetroleumProducts') {
+      return <g>
+      <text x = { Constants.getIn(['menuBar','amountTextButtonLabelOffset']) } 
+        y = { textAmountPosition }
+        className = 'selectableDropdown' 
+        onClick = {() => this.props.setAmount('thousand m3/d')}>
+        {Tr.getIn(['electricityDataTypes', 'thousand m3/d', this.props.language])}
+      </text>
+      </g>
+    }
+
+    if(this.props.selectedEnergy === 'naturalGasLiquids') {
+      return <g>
+      <text x = { Constants.getIn(['menuBar','amountTextButtonLabelOffset']) } 
+        y = { textAmountPosition }
+        className = 'selectableDropdown' 
+        onClick = {() => this.props.setAmount('m3/d')}>
+        ({Tr.getIn(['electricityDataTypes', 'm3/d', this.props.language])})
+      </text>
+      </g>
+    }
+
+    if(this.props.selectedEnergy === 'naturalGas') {
+      return <g>
+      <text x = { Constants.getIn(['menuBar','amountTextButtonLabelOffset']) } 
+        y = { textAmountPosition }
+        className = 'selectableDropdown'>
+        <tspan onClick = {this.onClick}>({amountString}) {expandedSign} </tspan>
+      </text>
+    </g>
     }
 
     return <g>

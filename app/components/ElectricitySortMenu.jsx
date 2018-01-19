@@ -18,6 +18,10 @@ class ElectricitySortMenu extends React.Component {
     this.onClick = this.props.onClick.bind(this)
   }
 
+  onClick(e) {
+    e.preventDefault()
+  }
+
   controlRect() {
     let rectYPosition = `${ WorkspaceComputations.importExportMenuY(this.props.viewport) + 
           116 }`
@@ -46,10 +50,6 @@ class ElectricitySortMenu extends React.Component {
         { Tr.getIn(['arrangedBy', this.props.language]) }
       </text>
     </g>
-  }
-
-  onClick(e) {
-    e.preventDefault()
   }
 
   expandedMenu() {
@@ -119,20 +119,20 @@ class ElectricitySortMenu extends React.Component {
 
   sortOption() {
     let expandedSign = '+'
-    if(this.props.expandElectricitySortMenu) {
+    if (this.props.expandElectricitySortMenu) {
       expandedSign = '-'
     }
 
     let labelPosition = `${ Constants.getIn(['menuBar','sortMenuTextY']) } `
-    if(this.props.expandImportExportMenu) {
+    if (this.props.expandImportExportMenu) {
       labelPosition = `${ Constants.getIn(['menuBar','sortMenuTextY']) + 30} `
     }
 
     let sortString = `${Tr.getIn(['electricitySortStates','location', this.props.language])}`
-    if(this.props.arrangeBy === 'imports') {
+    if (this.props.arrangeBy === 'imports') {
       sortString = `${Tr.getIn(['electricitySortStates','imports', this.props.language])}`
     } 
-    if(this.props.arrangeBy === 'exports') {
+    if (this.props.arrangeBy === 'exports') {
       sortString = `${Tr.getIn(['electricitySortStates','exports', this.props.language])}`
     }
 
