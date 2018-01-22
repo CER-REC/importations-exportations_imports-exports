@@ -4,7 +4,7 @@ const Constants = require('../Constants.js')
 const MapPiece = require('./MapPiece.jsx')
 const MapPieceExplantionConstant = require('../MapPieceExplantionConstant.js')
 
-class ElectrictyMapPieceActivityExplantion extends React.Component {
+class ElectricityMapPieceActivityExplantion extends React.Component {
   render() {
     return (<g transform={`translate(${this.props.left},${this.props.top})`}>
       <MapPiece
@@ -30,4 +30,4 @@ class ElectrictyMapPieceActivityExplantion extends React.Component {
 }
 
 
-module.exports = ElectrictyMapPieceActivityExplantion
+module.exports = ElectricityMapPieceActivityExplantion

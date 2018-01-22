@@ -8,7 +8,7 @@ const USMapContainer = require('./USMapContainer.jsx')
 const PowerPoolContainer = require('./PowerPoolContainer.jsx')
 const PowerPoolGrouping = require('./PowerPoolGrouping.jsx')
 const ExplanationPopovers = require('./ExplanationPopovers.jsx')
-const ElectrictyMapPieceActivityExplantion = require('./ElectrictyMapPieceActivityExplantion.jsx')
+const ElectricityMapPieceActivityExplantion = require('./ElectricityMapPieceActivityExplantion.jsx')
 
 
 const BarChart = require('./BarChart')
@@ -52,7 +52,7 @@ class ElectricityVisualizationContainer extends React.Component {
         xaxis={this.props.xaxis}
         yaxis={this.props.yaxis + this.props.height}
       />
-      <ElectrictyMapPieceActivityExplantion
+      <ElectricityMapPieceActivityExplantion
         {...this.props.mapPieceActivityExplantion}
       />
             </g>)
