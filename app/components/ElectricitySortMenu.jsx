@@ -32,8 +32,8 @@ class ElectricitySortMenu extends React.Component {
     return <rect 
       x={ 0 } 
       y= { rectYPosition } 
-      width={ 5} 
-      height={ 16 }
+      width={ Constants.getIn(['menuBar','barWidth'])} 
+      height={ Constants.getIn(['menuBar','barHeight'])}
       fill = '#666666'
     />
   }
@@ -41,7 +41,7 @@ class ElectricitySortMenu extends React.Component {
   sortMenuText() {
     let textPosition = `${ Constants.getIn(['menuBar','sortMenuTextY']) }`
     if(this.props.expandImportExportMenu) {
-      textPosition = `${ Constants.getIn(['menuBar','sortMenuTextY']) + 30}`
+      textPosition = `${ Constants.getIn(['menuBar','sortMenuTextY']) + Constants.getIn(['menuBar','menuExpandedPadding'])}`
     }
     return <g>
       <text x = { Constants.getIn(['menuBar','textLabelOffset']) } 
@@ -65,13 +65,13 @@ class ElectricitySortMenu extends React.Component {
       return <g>
         <text x={ Constants.getIn(['menuBar','textLabelOffset']) }
       y = { WorkspaceComputations.importExportMenuY(this.props.viewport)
-        + Constants.getIn(['menuBar','sortMenuTextY']) - 35 }
+        + Constants.getIn(['menuBar','sortMenuTextY']) - Constants.getIn(['menuBar','sortMenuTextOffsetY']) }
       className = 'bodyText'> 
-      <tspan x = { Constants.getIn(['menuBar','textLabelOffset']) + 12 } 
+      <tspan x = { Constants.getIn(['menuBar','textLabelOffset']) + Constants.getIn(['menuBar','expandedMenuTextMargin']) } 
         dy="0em"
         onClick = {() => this.props.setArrangeBy('location') }
       > {location} </tspan>
-      <tspan x = { Constants.getIn(['menuBar','textLabelOffset']) + 12 } 
+      <tspan x = { Constants.getIn(['menuBar','textLabelOffset']) + Constants.getIn(['menuBar','expandedMenuTextMargin']) } 
         dy="1.2em"
         onClick = {() => this.props.setArrangeBy('exports') }>
         {mostExports}
@@ -84,13 +84,13 @@ class ElectricitySortMenu extends React.Component {
       return <g>
         <text x={ Constants.getIn(['menuBar','textLabelOffset']) }
       y = { WorkspaceComputations.importExportMenuY(this.props.viewport)
-        + Constants.getIn(['menuBar','sortMenuTextY']) - 35 }
+        + Constants.getIn(['menuBar','sortMenuTextY']) - Constants.getIn(['menuBar','sortMenuTextOffsetY']) }
       className = 'bodyText'> 
-      <tspan x = { Constants.getIn(['menuBar','textLabelOffset']) + 12 } 
+      <tspan x = { Constants.getIn(['menuBar','textLabelOffset']) + Constants.getIn(['menuBar','expandedMenuTextMargin']) } 
         dy="0em"
         onClick = {() => this.props.setArrangeBy('location') }
       > {location} </tspan>
-      <tspan x = { Constants.getIn(['menuBar','textLabelOffset']) + 12 } 
+      <tspan x = { Constants.getIn(['menuBar','textLabelOffset']) + Constants.getIn(['menuBar','expandedMenuTextMargin']) } 
         dy="1.2em"
         onClick = {() => this.props.setArrangeBy('imports')}>
         {mostImports}
@@ -102,13 +102,13 @@ class ElectricitySortMenu extends React.Component {
 
     return <g><text x={ Constants.getIn(['menuBar','textLabelOffset']) }
       y = { WorkspaceComputations.importExportMenuY(this.props.viewport)
-        + Constants.getIn(['menuBar','sortMenuTextY']) - 35 }
+        + Constants.getIn(['menuBar','sortMenuTextY']) - Constants.getIn(['menuBar','sortMenuTextOffsetY']) }
       className = 'bodyText'> 
-      <tspan x = { Constants.getIn(['menuBar','textLabelOffset']) + 12 } 
+      <tspan x = { Constants.getIn(['menuBar','textLabelOffset']) + Constants.getIn(['menuBar','expandedMenuTextMargin']) } 
         dy="0em"
         onClick = {() => this.props.setArrangeBy('imports') }
       > {mostImports} </tspan>
-      <tspan x = { Constants.getIn(['menuBar','textLabelOffset']) + 12 } 
+      <tspan x = { Constants.getIn(['menuBar','textLabelOffset']) + Constants.getIn(['menuBar','expandedMenuTextMargin']) } 
         dy="1.2em"
         onClick = {() => this.props.setArrangeBy('exports') }>
         {mostExports}
@@ -125,7 +125,7 @@ class ElectricitySortMenu extends React.Component {
 
     let labelPosition = `${ Constants.getIn(['menuBar','sortMenuTextY']) } `
     if (this.props.expandImportExportMenu) {
-      labelPosition = `${ Constants.getIn(['menuBar','sortMenuTextY']) + 30} `
+      labelPosition = `${ Constants.getIn(['menuBar','sortMenuTextY']) + Constants.getIn(['menuBar','sortMenuLabelOffsetY'])} `
     }
 
     let sortString = `${Tr.getIn(['electricitySortStates','location', this.props.language])}`

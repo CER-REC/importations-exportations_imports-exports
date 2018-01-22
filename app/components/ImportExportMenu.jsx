@@ -18,8 +18,8 @@ class ImportExportMenu extends React.Component {
     return <rect 
       x={ 0 } 
       y= { WorkspaceComputations.importExportMenuY(this.props.viewport) } 
-      width={ 5} 
-      height={ 16 }
+      width={ Constants.getIn(['menuBar','barWidth'])} 
+      height={ Constants.getIn(['menuBar','barHeight'])}
       fill = '#666666'
     />
   }
@@ -52,13 +52,13 @@ class ImportExportMenu extends React.Component {
     if(!this.props.expandImportExportMenu) {
       return null
     }
-    return <g><text x = { Constants.getIn(['menuBar','textLabelOffset']) } 
-      y = { WorkspaceComputations.importExportMenuY(this.props.viewport) 
-        + Constants.getIn(['menuBar','importExportTextLabelYOffset']) + 0 } 
+    return <g><text x = { Constants.getIn(['menuBar','textLabelOffset']) }
+      y = { WorkspaceComputations.importExportMenuY(this.props.viewport)
+        + Constants.getIn(['menuBar','importExportTextLabelYOffset']) + 0 }
       className = 'bodyText'> 
-      <tspan x = { Constants.getIn(['menuBar','textLabelOffset']) + 12 }  
+      <tspan x = { Constants.getIn(['menuBar','textLabelOffset']) + Constants.getIn(['menuBar','expandedMenuTextMargin']) }
         dy="1.2em"> {Tr.getIn(['importExportMenu', 'importsOnly', this.props.language])} </tspan>
-      <tspan x = { Constants.getIn(['menuBar','textLabelOffset']) + 12 }  
+      <tspan x = { Constants.getIn(['menuBar','textLabelOffset']) + Constants.getIn(['menuBar','expandedMenuTextMargin']) } 
         dy="1.2em"> 
         {Tr.getIn(['importExportMenu', 'exportsOnly', this.props.language])}
       </tspan>   

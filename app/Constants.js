@@ -36,9 +36,16 @@ const Constants = Immutable.fromJS({
     amountTextButtonLabelOffset: 109,
     nglMenuYMargin: 158,
     nglSubproductTextY: 223,
+    barWidth: 5,
+    barHeight: 16,
+    menuExpandedPadding: 30,
+    expandedMenuTextMargin: 12,
+    sortMenuTextOffsetY: 35,
+    sortMenuLabelOffsetY: 30,
+    amountMenuTextOffsetY: 15,
   },
 
-  menuBarOptions:{
+  menuBarOptions: {
     optionPadding: 19,
     optionXaxisPadding: 22,
   },

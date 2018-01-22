@@ -35,7 +35,7 @@ class ShowConfidentiality extends React.Component {
   }
 
   render() {
-    return <g>
+    return <g transform='translate(0 30)'>
       {this.showText()}
       {this.triangleLine()}
     </g>

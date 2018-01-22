@@ -64,7 +64,7 @@ class ShowExplanations extends React.Component {
   }
 
   render() {
-    return (<g onClick={this.onClick}>
+    return (<g transform='translate(0 80)' onClick={this.onClick}>
       {this.showText()}
       {this.triangleLine()}
             </g>)
