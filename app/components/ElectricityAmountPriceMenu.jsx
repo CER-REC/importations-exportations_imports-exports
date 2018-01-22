@@ -54,12 +54,9 @@ class ElectricityAmountPriceMenu extends React.Component {
   }
 
   expandedAmountMenu() {
-    if(!this.props.expandElectricityAmountMenu) {
+    if(!this.props.expandElectricityAmountMenu || this.props.selectedEnergy === 'crudeOil'
+      || this.props.selectedEnergy === 'naturalGasLiquids' || this.props.selectedEnergy === 'refinedPetroleumProducts') {
       return null
-    }
-
-    if(this.props.selectedEnergy === 'naturalGas' && this.props.amount === 'thousand m3/d') {
-      console.log('asdf')
     }
 
     if(this.props.amount === 'CAN$') {
@@ -79,6 +76,32 @@ class ElectricityAmountPriceMenu extends React.Component {
     </g>
     }
 
+    if(this.props.selectedEnergy === 'naturalGas' && this.props.expandElectricityAmountMenu &&
+        this.props.amount === 'thousand m3/d') {
+      return <g><text x = { Constants.getIn(['menuBar','textLabelOffset']) } 
+      y = { WorkspaceComputations.importExportMenuY(this.props.viewport) 
+        + Constants.getIn(['menuBar','sortMenuTextY']) - 15 } 
+      className = 'bodyText'> 
+      <tspan x = { Constants.getIn(['menuBar','textLabelOffset']) + 10 }  
+        dy="0em"
+        onClick = {() => this.props.setAmount('CN$/GJ')}> {Tr.getIn(['electricityDataTypes','CN$/GJ', this.props.language])}</tspan>
+    </text>
+    </g>   
+    }
+
+    if(this.props.selectedEnergy === 'naturalGas' && this.props.amount === 'CN$/GJ'
+        && this.props.expandElectricityAmountMenu) {
+      return <g><text x = { Constants.getIn(['menuBar','textLabelOffset']) } 
+      y = { WorkspaceComputations.importExportMenuY(this.props.viewport) 
+        + Constants.getIn(['menuBar','sortMenuTextY']) - 15 } 
+      className = 'bodyText'> 
+      <tspan x = { Constants.getIn(['menuBar','textLabelOffset']) + 10 }  
+        dy="0em"
+        onClick = {() => this.props.setAmount('thousand m3/d')}> {Tr.getIn(['electricityDataTypes','thousand m3/d', this.props.language])}</tspan>
+    </text>
+    </g> 
+    }
+
     if(this.props.amount === 'CAN$/MW.h')
     return <g><text x = { Constants.getIn(['menuBar','textLabelOffset']) } 
       y = { WorkspaceComputations.importExportMenuY(this.props.viewport) 
@@ -94,6 +117,7 @@ class ElectricityAmountPriceMenu extends React.Component {
       </tspan>   
     </text>
     </g>
+
     return <g><text x = { Constants.getIn(['menuBar','textLabelOffset']) } 
       y = { WorkspaceComputations.importExportMenuY(this.props.viewport) 
         + Constants.getIn(['menuBar','sortMenuTextY']) - 15 } 
@@ -128,8 +152,12 @@ class ElectricityAmountPriceMenu extends React.Component {
       amountString = `${Tr.getIn(['electricityDataTypes','CAN$/MW.h', this.props.language])}`
     }
 
-    if(this.props.selectedEnergy === 'naturalGas' && this.props.amount === 'thousand m3/d') {
+    if(this.props.selectedEnergy === 'naturalGas') {
       amountString = `${Tr.getIn(['electricityDataTypes','thousand m3/d', this.props.language])}`
+    }
+
+    if(this.props.selectedEnergy === 'naturalGas' && this.props.amount !== 'thousand m3/d') {
+      amountString = `${Tr.getIn(['electricityDataTypes','CN$/GJ', this.props.language])}`
     }
 
     if(this.props.selectedEnergy === 'crudeOil' || this.props.selectedEnergy === 'refinedPetroleumProducts') {

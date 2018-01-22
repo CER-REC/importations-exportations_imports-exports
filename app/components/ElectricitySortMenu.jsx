@@ -57,11 +57,11 @@ class ElectricitySortMenu extends React.Component {
     const mostImports = `${Tr.getIn(['electricitySortStates','imports', this.props.language])}`
     const mostExports = `${Tr.getIn(['electricitySortStates','exports', this.props.language])}`
 
-    if(!this.props.expandElectricitySortMenu || this.props.importExportVisualization !== 'electricity') {
+    if(!this.props.expandElectricitySortMenu || this.props.selectedEnergy !== 'electricity') {
       return null
     }
 
-    if(this.props.arrangeBy === 'imports') {
+    if(this.props.arrangeBy === 'imports' && this.props.selectedEnergy === 'electricity') {
       return <g>
         <text x={ Constants.getIn(['menuBar','textLabelOffset']) }
       y = { WorkspaceComputations.importExportMenuY(this.props.viewport)
@@ -159,7 +159,7 @@ const mapStateToProps = (state, props) => {
   return {
     viewport: state.viewport,
     language: state.language,
-    importExportVisualization: state.importExportVisualization,
+    selectedEnergy: state.importExportVisualization,
     arrangeBy: visualizationSettings(state, props).get('arrangeBy'),
     expandImportExportMenu: state.expandImportExportMenu,
     expandElectricitySortMenu: state.expandElectricitySortMenu,
