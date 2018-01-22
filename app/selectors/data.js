@@ -44,6 +44,13 @@ const unitSelector = createSelector(
   (product, unit) => product.get(unit, emptyList),
 )
 
+const binSelector = createSelector(
+  selectedVisualization,
+  amount,
+  state => state.bins,
+  (vis, unit, bins) => bins.getIn([vis, unit], emptyList),
+)
+
 const activityGroupSelector = createSelector(
   unitSelector,
   selectedActivityGroup,
@@ -127,4 +134,5 @@ module.exports = {
   unitSelector,
   activityGroupSelector,
   arrangeBy,
+  binSelector,
 }

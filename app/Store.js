@@ -5,6 +5,7 @@ const ImportExportVisualizationReducer = require('./reducers/ImportExportVisuali
 const LanguageReducer = require('./reducers/LanguageReducer.js')
 const ShowExplanationsReducer = require('./reducers/ShowExplanationsReducer.js')
 const DataReducer = require('./actions/data').reducer
+const BinsReducer = require('./actions/bins').reducer
 const ElectricityExplanationReducer = require('./reducers/ElectricityExplanationReducer.js')
 const { reducer: visualizationSettings } = require('./actions/visualizationSettings')
 const DataLoadCompleteReducer = require('./actions/DataLoadComplete').reducer
@@ -22,6 +23,7 @@ const reducers = Redux.combineReducers({
   electricityExplanation: ElectricityExplanationReducer,
   showExplanations: ShowExplanationsReducer,
   data: DataReducer,
+  bins: BinsReducer,
   dataLoadingComplete: DataLoadCompleteReducer,
   visualizationSettings,
 })

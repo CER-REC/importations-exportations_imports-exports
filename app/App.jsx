@@ -12,6 +12,7 @@ const RouteComputations = require('./computations/RouteComputations.js')
 const Root = require('./components/Root.jsx')
 const Resized = require('./actionCreators/ResizeScreenCreator.js')
 const LoadDataCreator = require('./actions/data').LoadData
+const LoadBinsCreator = require('./actions/bins').LoadBins
 
 const Store = require('./Store.js')
 
@@ -49,7 +50,7 @@ Request({
   uri: RouteComputations.dataEndpoint(),
   json: true,
 }).then((data) => { // eslint-disable-line no-undef
-  console.log(data.body.bins)
+  store.dispatch(LoadBinsCreator(data.body.bins))
   store.dispatch(LoadDataCreator(data.body.data))
 })
 

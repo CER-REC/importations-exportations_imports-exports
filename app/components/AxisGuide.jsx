@@ -70,7 +70,7 @@ class AxisGuide extends React.PureComponent {
   }
 
   render() {
-    const text = `${this.state.positionDisplay} ${this.props.unit}`
+    const text = `${this.state.positionDisplay.toLocaleString()} ${this.props.unit}`
     const offset = (this.props.chartHeight + (this.props.barSize / 2))
       - (this.props.position * this.props.heightPerUnit)
     return (
