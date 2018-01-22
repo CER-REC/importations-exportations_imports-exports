@@ -6,6 +6,9 @@ const Header = require('./Header.jsx')
 const MenuBar = require('./MenuBar.jsx')
 const SocialBar = require('./SocialBar.jsx')
 
+const ExplanationLine = require('./ExplanationLine.jsx')
+const ExplanationText = require('./ExplanationText.jsx')
+
 const VisualizationContainer = require('./VisualizationContainer.jsx')
 const ViewportSelectors = require('../selectors/viewport/')
 
@@ -29,14 +32,14 @@ const Workspace = ({ svgSize, detailSidebarPosition }) => (
       id="workspace"
       className="Workspace"
       {...svgSize}
-    >
-
+    > 
       <VisualizationContainer />
 
       <MenuBar />
       <SocialBar />
+      <ExplanationLine />
     </svg>
-
+    <ExplanationText />
   </div>
 )
 

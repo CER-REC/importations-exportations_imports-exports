@@ -3,6 +3,8 @@ const ReactRedux = require('react-redux')
 
 const Constants = require('../Constants.js')
 
+const ExplanationSummonedCreator = require('../actionCreators/ExplanationSummonedCreator.js')
+
 require('./ExplanationDot.scss')
 
 class ExplanationDot extends React.Component {
@@ -78,6 +80,7 @@ const mapStateToProps = state => ({
   viewport: state.viewport,
   language: state.language,
   showExplanations: state.showExplanations,
+  explanation: state.explanation,
 })
 
 

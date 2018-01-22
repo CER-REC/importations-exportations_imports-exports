@@ -99,13 +99,15 @@ class TimelineSeek extends React.PureComponent {
   }
 
   explanationDot() {
-    const xPosition = '0'
+    if(this.props.side !== 'start') {
+      return null
+    }
     return (<g><ExplanationDot
       key="timeSeekDot"
-      xPosition={xPosition}
+      xPosition={12}
       yPosition={12}
     />
-      <use xlinkHref="#back" x={12} y={12} />
+      <use xlinkHref="#back" x={22} y={12} />
     </g>)
   }
 
@@ -128,8 +130,8 @@ class TimelineSeek extends React.PureComponent {
               stroke={Constants.getIn(['styleGuide', 'colours', 'SandExtraDark'])}
               fill="white"
             />
+            { this.explanationDot() }
           </g>
-          { this.explanationDot() }
         </SVGDrag>
       </g>
     )

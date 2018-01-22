@@ -209,24 +209,54 @@ const TranslationTable = Immutable.fromJS({
 
   explanations: {
     importExportTitle: {
-      en: 'Click + to see more options',
-      fr: 'Click + to see more options FR',
+      bolded: {
+        en: 'Click',
+        fr: 'Click',
+      },
+      text: {
+        en: ' + to see more options',
+        fr: ' + to see more options FR',
+      },
     },
     electricity: {
-      en: 'electricity is the selected energy product',
-      fr: 'electricity is the selected energy product FR',
+      bolded: {
+        en: 'Electricity',
+        fr: 'Electricity',
+      },
+      text: {
+        en: ' is the selected energy product',
+        fr: ' is the selected energy product FR',
+      },
     },
     timeSeek: {
-      en: 'Drag to select time frame',
-      fr: 'Drag to select time frame FR',
+      bolded: {
+        en: 'Drag',
+        fr: 'TODO',
+      },
+      text: {
+        en: ' to select time frame',
+        fr: ' to select time frame FR',
+      },
     },
     playButton: {
-      en: 'Click play to see how electricity changes over time',
-      fr: 'Click play to see how electricity changes over time FR',
+      bolded: {
+        en: 'Click',
+        fr: 'Click TODO',
+      },
+      text: {
+        en: ' play to see how electricity changes over time',
+        fr: ' play to see how electricity changes over time FR',
+      },
     },
     newYork: {
-      en: 'New York has the highest exports into the US as well as the highest imports from the US',
-      fr: 'New York has the highest exports into the US as well as the highest imports from the US FR',
+      bolded: {
+        en: 'New York',
+        fr: 'New York',
+      },
+      text: {
+        en: ' has the highest exports into the US as well as the highest imports from the US',
+        fr: ' has the highest exports into the US as well as the highest imports from the US FR',
+      },
     },
   },
 
