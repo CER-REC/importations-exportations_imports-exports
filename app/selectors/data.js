@@ -1,4 +1,4 @@
-const createSelector = require('reselect').createSelector
+const { createSelector } = require('reselect')
 const Immutable = require('immutable')
 
 const { visualizationSettings } = require('./visualizationSettings')

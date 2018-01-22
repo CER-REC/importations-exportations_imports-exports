@@ -14,6 +14,7 @@ class ElectricityMapPieceActivityExplantion extends React.Component {
         styles={MapPieceExplantionConstant.getIn(['electricity', 'ca', 'styles'])}
         arrowProps={MapPieceExplantionConstant.getIn(['electricity', 'ca', 'arrowProps'])}
         mapPieceProps={MapPieceExplantionConstant.getIn(['electricity', 'ca', 'mapPieceProps'])}
+        legend
       />
       <g transform="translate(0,70)">
         <MapPiece
@@ -23,6 +24,7 @@ class ElectricityMapPieceActivityExplantion extends React.Component {
           styles={MapPieceExplantionConstant.getIn(['electricity', 'us', 'styles'])}
           arrowProps={MapPieceExplantionConstant.getIn(['electricity', 'us', 'arrowProps'])}
           mapPieceProps={MapPieceExplantionConstant.getIn(['electricity', 'us', 'mapPieceProps'])}
+          legend
         />
       </g>
             </g>)
