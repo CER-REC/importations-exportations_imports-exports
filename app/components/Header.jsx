@@ -6,7 +6,7 @@ const PropTypes = require('prop-types')
 const Constants = require('../Constants.js')
 const Tr = require('../TranslationTable.js')
 
-const AboutWindow = require('./AboutWindow.jsx')
+const ShowAboutWindowCreator = require('../actions/modal.js').OpenModal
 
 require('./Header.scss')
 require('../styles/Fonts.scss')
@@ -28,8 +28,7 @@ class Header extends React.Component {
   }
 
   aboutThisProjectClick() { // eslint-disable-line class-methods-use-this
-    // TODO: summon 'About This Project' window
-    <AboutWindow/>
+    this.props.onClick()
   }
 
   methodologyClick() { // eslint-disable-line class-methods-use-this
@@ -77,7 +76,6 @@ class Header extends React.Component {
           x={this.props.viewport.get('x') - Constants.getIn(['metaBar', 'width'])}
           className="metaBarBackground"
         />
-
         <g>
           <text
             className="resetLabel"
@@ -135,4 +133,10 @@ const mapStateToProps = state => ({
   language: state.language,
 })
 
-module.exports = ReactRedux.connect(mapStateToProps)(Header)
+const mapDispatchToProps = dispatch => ({
+  onClick() {
+    dispatch(ShowAboutWindowCreator('about'))
+  },
+})
+
+module.exports = ReactRedux.connect(mapStateToProps, mapDispatchToProps)(Header)

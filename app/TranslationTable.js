@@ -122,19 +122,19 @@ const TranslationTable = Immutable.fromJS({
       fr: 'ABOUT THIS PROJECT FR',
     },
     p1: {
-      en: 'Paragraph one is really long and I do not feel like typing it out until we get the official stuff from the NEB',
+      en: 'Paragraph one',
       fr: 'la french FR',
     },
     p2: {
-      en: 'paragraph two is slightly shorter but still not confirmed so here is a placeholder',
+      en: 'paragraph two',
       fr: 'la french placeholder FR',
     },
     p3: {
-      en: 'paragraph three in case there is one',
+      en: 'paragraph three',
       fr: 'la french paragraph trois FR',
     },
     p4: {
-      en: 'still one more paragraph',
+      en: 'paragraph four',
       fr: 'oui oui FR',
     },
     contributors: {
@@ -146,12 +146,12 @@ const TranslationTable = Immutable.fromJS({
       fr: 'DATA SOURCE',
     },
     dataNamesfromNEB: {
-      en: 'sir sir maam maam',
-      fr: 'sir sir',
+      en: 'Andrew Benson, Karen Duckworth, Randy Cooke',
+      fr: 'Andrew Benson, Karen Duckworth, Randy Cooke',
     },
     nebCoordinators: {
-      en: 'Annette...',
-      fr: 'Annette...',
+      en: 'Annette Hester (Concept and Coordination); Katherine Murphy (Project Manager); Faiza Hussain (Administrative support); Stephen Chow (Data Coordination)',
+      fr: 'TODO',
     },
     dataVisualization: {
       en: 'DATA VISUALIZATION',
@@ -162,8 +162,8 @@ const TranslationTable = Immutable.fromJS({
       fr: 'LEAD DESIGN RESEARCH FR',
     },
     leadDesigners: {
-      en: 'designer names sir sir miss ms',
-      fr: 'designer names sir sir miss ms',
+      en: 'Sheelagh Carpendale and Wesley Willett, iLab, University of Calgary',
+      fr: 'TODO',
     },
     coordination: {
       en: 'COORDINATION',
@@ -178,8 +178,8 @@ const TranslationTable = Immutable.fromJS({
       fr: 'DESIGN',
     },
     designers: {
-      en: 'uofc designers',
-      fr: 'uofc designers',
+      en: 'Jagoda Walny Nix, Peter Buk, Doris Kosminsky, Lien Quach, and Mieka West',
+      fr: 'TODO',
     },
     leadTechnical: {
       en: 'LEAD TECHNICAL',

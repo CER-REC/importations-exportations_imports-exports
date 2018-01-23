@@ -9,6 +9,7 @@ const ElectricityExplanationReducer = require('./reducers/ElectricityExplanation
 const ShowAboutWindowReducer = require('./reducers/ShowAboutWindowReducer.js')
 const { reducer: visualizationSettings } = require('./actions/visualizationSettings')
 const DataLoadCompleteReducer = require('./actions/DataLoadComplete').reducer
+const ModalReducer = require('./actions/modal').reducer
 
 const TimelineRangeMiddleware = require('./middleware/timelineRange')
 const InitialVisualizationSettingsMiddleware = require('./middleware/initialVisualizationSettings')
@@ -26,6 +27,7 @@ const reducers = Redux.combineReducers({
   showAboutWindow: ShowAboutWindowReducer,
   dataLoadingComplete: DataLoadCompleteReducer,
   visualizationSettings,
+  modal: ModalReducer,
 })
 
 module.exports = () => {

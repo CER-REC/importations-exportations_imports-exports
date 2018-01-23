@@ -3,8 +3,7 @@ const React = require('react')
 const ReactRedux = require('react-redux')
 const Constants = require('../Constants.js')
 
-const ShowAboutWindowCreator = require('../actionCreators/ShowAboutWindowCreator.js')
-
+const CloseModal = require('../actions/modal.js').CloseModal
 
 require('./AboutWindow.scss')
 
@@ -13,25 +12,18 @@ const Tr = require('../TranslationTable.js')
 class AboutWindow extends React.Component {
   constructor(props) {
     super(props)
-    this.state = {showAboutWindow: false}
-
-    this.handleShow = this.handleShow.bind(this)
-    this.handleHide = this.handleHide.bind(this)
+    this.handleClose = this.handleClose.bind(this)
   }
 
-  handleShow() {
-    this.setState({showAboutWindow: true})
-  }
-
-  handleHide() {
-    this.setState({showAboutWindow: false})
+  handleClose() {
+    this.props.onClick()
   }
 
   closeButton() {
     return <img
       className='closeButton'
       src='images/about_close.svg'
-      onClick = {this.handleHide}>
+      onClick = {this.handleClose}>
     </img>
   }
 
@@ -158,8 +150,7 @@ class AboutWindow extends React.Component {
   }
 
   render() {
-    const modal = this.state.showAboutWindow ? (
-      <div 
+    return <div 
         id = 'aboutWindow'
         className = 'aboutWindow'>
         { this.closeButton() }
@@ -168,11 +159,6 @@ class AboutWindow extends React.Component {
         { this.contributors() }
         { this.dataVisualization() }
       </div>
-      ) : null
-    return <div>This div has overflow: hidden.
-        <button onClick={this.handleShow}>Show modal</button>
-        {modal}
-        </div>
   }
 }
 
@@ -186,7 +172,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => ({
   onClick() {
-    dispatch(ShowAboutWindowCreator())
+    dispatch(CloseModal())
   },
 })
 
