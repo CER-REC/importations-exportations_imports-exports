@@ -1,5 +1,6 @@
 const React = require('react')
 const ReactRedux = require('react-redux')
+const PropTypes = require('prop-types')
 
 const Constants = require('../Constants.js')
 const WorkspaceComputations = require('../computations/WorkspaceComputations.js')
@@ -11,33 +12,38 @@ const SetVisualizationCreator = require('../actionCreators/SetVisualizationCreat
 
 require('./MainNavigationMenu.scss')
 
-class MainNavigationMenu extends React.Component {
-  explanationDot() {
-    const xPosition = 125
-    return (<ExplanationDot
-      key="mainNavDot"
-      xPosition={xPosition}
-      yPosition={WorkspaceComputations.topHeightMargin() - Constants.getIn(['explanationDot', 'yOffset'])}
-    />)
-  }
+const explanationDot = () => {
+  const xPosition = 125
+  return (<ExplanationDot
+    key="mainNavDot"
+    xPosition={xPosition}
+    yPosition={WorkspaceComputations.topHeightMargin() - Constants.getIn(['explanationDot', 'yOffset'])}
+  />)
+}
 
-  render() {
-    return (<g><MenuBarOption
+const MainNavigationMenu = props => (
+  <g>
+    <MenuBarOption
       key="mainNavigationMenu"
       yaxis={WorkspaceComputations.topHeightMargin()}
       options={Constants.get('visualizationTypes')}
-      onOptionClick={this.props.setImportExportVisualization.bind(this)}
-      selectedOption={this.props.importExportVisualization}
+      onOptionClick={props.setImportExportVisualization}
+      selectedOption={props.importExportVisualization}
       optionXaxisPadding={Constants.getIn(['menuBarOptions', 'optionXaxisPadding'])}
       optionPadding={Constants.getIn(['menuBarOptions', 'optionPadding'])}
       trKey="mainMenuBar"
       color={Constants.getIn(['mainNavigationMenu', 'color'])}
       lineWidth={Constants.getIn(['mainNavigationMenu', 'lineWidth'])}
-      language={this.props.language}
+      language={props.language}
     />
-      {this.explanationDot()}
-            </g>)
-  }
+    {explanationDot()}
+  </g>
+)
+
+MainNavigationMenu.propTypes = {
+  setImportExportVisualization: PropTypes.func.isRequired,
+  importExportVisualization: PropTypes.string.isRequired,
+  language: PropTypes.string.isRequired,
 }
 
 const mapStateToProps = state => ({

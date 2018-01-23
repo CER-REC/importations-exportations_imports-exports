@@ -245,7 +245,7 @@ const TranslationTable = Immutable.fromJS({
   confidentialCount: {
     en: '$0 of $1 values Confidential',
     fr: 'FR $0 of $1 values Confidential',
-  }
+  },
 })
 
 module.exports = TranslationTable
