@@ -24,11 +24,30 @@ const Constants = Immutable.fromJS({
   menuBar: {
     width: 150,
     containerHeight: 300,
+    controlArrowSize: 15,
+    importExportMenuLabelMargin: 16,
+    importExportTextLabelYOffset: 12,
+    textLabelOffset: 13,
+    sortMenuYMargin: 116,
+    sortMenuTextY: 182,
+    sortTextButtonLabelOffset: 79,
+    amountMenuYMargin: 137,
+    amountMenuTextY: 203,
+    amountTextButtonLabelOffset: 109,
+    nglMenuYMargin: 158,
+    nglSubproductTextY: 223,
+    barWidth: 5,
+    barHeight: 16,
+    menuExpandedPadding: 30,
+    expandedMenuTextMargin: 12,
+    sortMenuTextOffsetY: 35,
+    sortMenuLabelOffsetY: 30,
+    amountMenuTextOffsetY: 15,
   },
 
   menuBarOptions: {
-    optionPadding: 25,
-    optionXaxisPadding: 5,
+    optionPadding: 19,
+    optionXaxisPadding: 22,
   },
 
   legend: {
@@ -80,9 +99,9 @@ const Constants = Immutable.fromJS({
   },
 
   mainNavigationMenu: {
+    menuYPadding: 22,
+    textYPosition: 88,
     height: 160,
-    color: 'orange',
-    lineWidth: 3,
   },
 
   electricitySortMenu: {
@@ -222,6 +241,27 @@ const Constants = Immutable.fromJS({
       'rgb(39, 135, 144)',
       'rgb(30, 97, 114)',
     ],
+  },
+  detailBreakDown: {
+    ca: {
+      required: true,
+      type: 'imports',
+      displayPosition: 'bottom',
+      color: '#ff774c',
+      height: 100,
+      showDefault: true,
+    },
+    us: {
+      required: true,
+      type: 'exports',
+      displayPosition: 'top',
+      color: '#1c64b2',
+      height: 100,
+      showDefault: false,
+    },
+    powerpool: {
+      require: false,
+    },
   },
   dataloader: {
     mapping: {

@@ -13,6 +13,9 @@ WorkspaceComputations.menuBarHeight = viewport =>
   (viewport.get('y') - WorkspaceComputations.topHeightMargin())
     + Constants.getIn(['menuBar', 'containerHeight'])
 
+WorkspaceComputations.importExportMenuY = viewport =>
+  WorkspaceComputations.topHeightMargin(viewport) - Constants.getIn(['menuBar', 'importExportMenuLabelMargin'])
+
 WorkspaceComputations.electricitySortMenuY = viewport =>
   WorkspaceComputations.topHeightMargin(viewport) + Constants.getIn(['electricitySortMenu', 'topMargin'])
 

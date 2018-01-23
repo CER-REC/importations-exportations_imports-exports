@@ -82,7 +82,7 @@ class ChartOptions extends React.PureComponent {
           <a onClick={this.changeTimelineGroup}>
             by {this.props.timelineGroup.toUpperCase()} +
           </a>
-          <img className="detailBarArrow" src="images/control_arrow.svg" />
+          <div className="detailBarArrow" />
         </div>
         <div style={{ clear: 'both' }} />
       </div>

@@ -2,32 +2,51 @@ const React = require('react')
 const ReactRedux = require('react-redux')
 const MapPiece = require('./MapPiece.jsx')
 const MapLayoutGridConstant = require('../MapLayoutGridConstant.js')
+const Constants = require('../Constants.js')
+const Tr = require('../TranslationTable.js')
 const Immutable = require('immutable')
-
+const memoize = require('memoize-immutable')
+const PropTypes = require('prop-types')
 
 import { setSelection } from '../actions/visualizationSettings.js'
 
 require('./ElectricityMapLayout.scss')
 
-const ElectrictySelector = require('../selectors/ElectricitySelector.js')
+const ElectricitySelector = require('../selectors/ElectricitySelector.js')
 const { sortAggregatedLocationsSelector } = require('../selectors/data.js')
-const { arrangeBy } = require('../selectors/data.js')
+const { arrangeBy, binSelector } = require('../selectors/data.js')
+const DetailSidebar = require('./DetailSidebar')
+const DetailBreakdown = require('./DetailBreakdown').default
+
+
+
+const mapPieceTransform = (xaxis, yaxis, position, dimensions, mapPieceScale) => {
+  const startXaxis = xaxis + (position.get('x') * ((mapPieceScale * dimensions.get('width')) + dimensions.get('xAxisPadding')))
+  const startYaxis = yaxis + (position.get('y') * ((mapPieceScale * dimensions.get('height')) + dimensions.get('yAxisPadding')))
+  return `translate(${`${startXaxis},${startYaxis}`}) scale(${mapPieceScale})`
+}
+
+const powerPoolTransform = (xaxis, yaxis, position, dimensions, mapPieceScale) => {
+  const startXaxis = xaxis + (position.get('x') * ((mapPieceScale * dimensions.get('width')) + dimensions.get('xAxisPadding')))
+  const startYaxis = yaxis + (position.get('y') * ((mapPieceScale * dimensions.get('height')) + dimensions.get('yAxisPadding')))
+  return `translate(${`${startXaxis},${startYaxis}`}) scale(${mapPieceScale})`
+}
 
 class ElectricityMapLayout extends React.Component {
-  mapPieceTransform(xaxis, yaxis, position, dimensions, mapPieceScale) {
-    const startXaxis = xaxis + (position.get('x') * (mapPieceScale * dimensions.get('width') + dimensions.get('xAxisPadding')))
-    const startYaxis = yaxis + (position.get('y') * (mapPieceScale * dimensions.get('height') + dimensions.get('yAxisPadding')))
-    return `translate(${`${startXaxis},${startYaxis}`}) scale(${mapPieceScale})`
+  static propTypes = {
+    selection: PropTypes.instanceOf(Immutable.Map).isRequired,
+    dataPoints: PropTypes.instanceOf(Immutable.Map).isRequired,
+    onMapPieceClick: PropTypes.func.isRequired,
+    arrangeBy: PropTypes.string.isRequired,
+    importExportVisualization: PropTypes.string.isRequired,
+    layout: PropTypes.instanceOf(Immutable.List).isRequired,
+    top: PropTypes.number.isRequired,
+    left: PropTypes.number.isRequired,
+    country: PropTypes.string.isRequired,
   }
 
-  powerPoolTransform(xaxis, yaxis, position, dimensions, mapPieceScale) {
-    const startXaxis = xaxis + (position.get('x') * (mapPieceScale * dimensions.get('width') + dimensions.get('xAxisPadding')))
-    const startYaxis = yaxis + (position.get('y') * (mapPieceScale * dimensions.get('height') + dimensions.get('yAxisPadding')))
-    return `translate(${`${startXaxis},${startYaxis}`}) scale(${mapPieceScale})`
-  }
-
-  onClick(country, originKey) {
-    const selection = this.props.selection
+  onClick = memoize((country, originKey) => () => {
+    const { selection } = this.props
     let origins = []
     if (selection.get('country') === country) {
       const originKeyExists = selection.get('origins').indexOf(originKey)
@@ -60,21 +79,7 @@ class ElectricityMapLayout extends React.Component {
       origins,
       destinations,
     })
-  }
-
-  isMapPieceSelected(key, country) {
-    const isSelected = this.props.selection.get('origins').indexOf(key)
-    const result = false
-    if (isSelected !== -1) {
-      return true
-    }
-    return this.props.selection.getIn(['destinations', country], new Immutable.List()).includes(key)
-  }
-
-  isSelected() {
-    const length = this.props.selection.get('origins').count() + this.props.selection.get('destinations').count()
-    return (length > 0)
-  }
+  })
 
   getPowerPoolsOutline(key, country, xaxis, yaxis, position, dimensions, mapPieceScale) {
     if (this.isMapPieceSelected(key, country) && country === 'powerpool' && this.props.arrangeBy === 'location') {
@@ -107,14 +112,26 @@ class ElectricityMapLayout extends React.Component {
         default:
           result = ''
       }
-      return (<g transform={this.powerPoolTransform(xaxis, yaxis, position, dimensions, mapPieceScale)} >
-        {result}
-      </g>)
+      return (
+        <g transform={powerPoolTransform(xaxis, yaxis, position, dimensions, mapPieceScale)} >
+          {result}
+        </g>
+      )
     }
+    return null
   }
 
+  isMapPieceSelected(key, country) {
+    const isSelected = this.props.selection.get('origins').indexOf(key)
+    if (isSelected !== -1) { return true }
+    return this.props.selection.getIn(['destinations', country], new Immutable.List()).includes(key)
+  }
+  isSelected() {
+    const length = this.props.selection.get('origins').count() + this.props.selection.get('destinations').count()
+    return (length > 0)
+  }
 
-  render() {
+ renderMapPiece(){
     // Data from constant file
     const type = this.props.importExportVisualization
 
@@ -123,25 +140,62 @@ class ElectricityMapLayout extends React.Component {
 
     const dimensions = mapLayoutGrid.get('dimensions')
     const styles = mapLayoutGrid.get('styles')
-    const layout = this.props.layout
+    const { layout } = this.props
     const mapPieceScale = mapLayoutGrid.get('mapPieceScale')
     const xaxis = this.props.left
     const yaxis = this.props.top
     const isSelected = this.isSelected()
 
-    return layout.map((position, key) => (<g key={key} >
-      <g className="mappiece" onClick={this.onClick.bind(this, this.props.country, position.get('name'))} transform={this.mapPieceTransform(xaxis, yaxis, position, dimensions, mapPieceScale)} >
-        <MapPiece
-          data={position}
-          dimensions={dimensions}
-          legends={MapLayoutGridConstant.getIn([type, 'legends'])}
-          styles={styles}
-          isMapPieceSelected={this.isMapPieceSelected(position.get('name'), this.props.country)}
-          isSelected={isSelected}
-        />
+    return layout.map((position, key) => (
+      // eslint-disable-next-line react/no-array-index-key
+      <g key={key}>
+        <g
+          className="mappiece"
+          onClick={this.onClick( this.props.country, position.get('name'))}
+          transform={mapPieceTransform(xaxis, yaxis, position, dimensions, mapPieceScale)}
+        >
+          <MapPiece
+            data={position}
+            dimensions={dimensions}
+            legends={MapLayoutGridConstant.getIn([type, 'legends'])}
+            bins={this.props.bins}
+            styles={styles}
+            isMapPieceSelected={this.isMapPieceSelected(position.get('name'), this.props.country)}
+            isSelected={isSelected}
+          />
+        </g>
+        {this.getPowerPoolsOutline(position.get('name'), this.props.country, xaxis, yaxis, position, dimensions, mapPieceScale)}
       </g>
-      {this.getPowerPoolsOutline(position.get('name'), this.props.country, xaxis, yaxis, position, dimensions, mapPieceScale)}
-                                          </g>))
+    ))
+  }
+
+  renderDetailBreakdown(data){
+    const detailBreakdownData = Constants.getIn(['detailBreakDown', this.props.country])
+    if(typeof detailBreakdownData !== 'undefined' && detailBreakdownData.get('required', false)){
+      return <DetailBreakdown
+        data={data}
+        type={detailBreakdownData.get('type')}
+        trContent={Tr.getIn(['detailBreakDown', this.props.importExportVisualization, detailBreakdownData.get('type')])}
+        veritcalPosition={detailBreakdownData.get('displayPosition')}
+        color={detailBreakdownData.get('color')}
+        height = {detailBreakdownData.get('height')}
+        showDefault={detailBreakdownData.get('showDefault', false)}
+      />
+    }
+    return null
+  }
+
+  renderDetailSidebar(){
+    return <DetailSidebar top={this.props.top} height={Constants.getIn(['detailBreakDown', this.props.country, 'height'], 0)}>
+         {this.renderDetailBreakdown(this.props.detailBreakDownData)}
+        </DetailSidebar>
+  }
+
+  render() {
+    return <g>
+      {this.renderMapPiece()}
+      {this.renderDetailSidebar()}
+      </g>
   }
 }
 
@@ -149,12 +203,12 @@ const mapDispatchToProps = { onMapPieceClick: setSelection }
 
 const mapStateToProps = (state, props) => ({
   importExportVisualization: state.importExportVisualization,
-  layout: ElectrictySelector.getElectrictyMapLayout(state, props),
-  selection: ElectrictySelector.getSelectionSettings(state, props),
+  layout: ElectricitySelector.getElectricityMapLayout(state, props),
+  selection: ElectricitySelector.getSelectionSettings(state, props),
   dataPoints: sortAggregatedLocationsSelector(state, props),
   arrangeBy: arrangeBy(state, props),
+  bins: binSelector(state, props),
 })
-
 
 module.exports = ReactRedux.connect(
   mapStateToProps,

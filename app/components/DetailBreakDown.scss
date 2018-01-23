@@ -1,0 +1,26 @@
+@import '../styles/Colours';
+
+.detailBreakDown {
+  overflow: auto;
+  overflow-x: hidden;
+  .header { 
+    padding-bottom: 4px;
+  }
+
+  .detailBreakDownText {
+    padding: 0 0 4px 2px;
+    margin-right: 20px;
+    background: #fff;
+  }
+  .progress-bar {
+    background-color: $sand-medium;
+    width: 40px;
+    position: relative;
+    float: right;
+  }
+    
+  .progress-bar > span {
+    height: 15px;
+    display: block;
+  }
+}

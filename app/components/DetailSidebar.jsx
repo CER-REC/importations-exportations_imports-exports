@@ -52,7 +52,7 @@ class DetailSidebar extends React.PureComponent {
 DetailSidebar.propTypes = {
   top: PropTypes.number.isRequired,
   height: PropTypes.number.isRequired,
-  children: PropTypes.node.isRequired,
+  children: PropTypes.node,
 }
 
 module.exports = DetailSidebar

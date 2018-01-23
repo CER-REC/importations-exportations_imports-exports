@@ -75,6 +75,7 @@ class Axis extends React.PureComponent {
       if (label.get('label') !== '|') {
         return (
           <text
+            className = 'timelineLabel'
             key={key}
             x={left + label.get('offsetX')}
             y={top + height / 2}
