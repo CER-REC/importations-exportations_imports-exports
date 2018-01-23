@@ -4,16 +4,22 @@ const {
 } = require('../actions/visualizationSettings')
 const { timelineYearScaleCalculation } = require('../selectors/timeline')
 
+let initializedFromURL = []
+
 const initialVisualizationSettings = store => next => (action) => {
   // Process the action immediately
   next(action)
+
+  if (action.type === 'urlRouteChanged') {
+    initializedFromURL = Object.keys(action.payload.visualizationSettings)
+  }
 
   // If we aren't loading data, don't change the visualization settings
   if (action.type !== DataTypes.LOAD_DATA) { return }
 
   const state = store.getState()
   const { data } = state
-  data.keySeq().forEach((visualization) => {
+  data.keySeq().filter(v => !initializedFromURL.includes(v)).forEach((visualization) => {
     const visData = data.get(visualization)
     const amount = visData.keySeq().first()
     // TODO: This needs to somehow not use reselect
