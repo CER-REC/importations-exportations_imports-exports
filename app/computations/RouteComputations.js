@@ -52,7 +52,7 @@ const RouteComputations = {
       const root = RouteComputations.appRoot(document.location, 'en')
       return `${root}data/data.json`
     }
-    return `${location.origin}/data/data.json`
+    return `${location.origin}/import-export-visualization/data/data.json`
   },
 
   // A string for the root of the application, a suitable place for making rest

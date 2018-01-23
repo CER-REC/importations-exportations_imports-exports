@@ -7,6 +7,7 @@ import { visualizationSettings } from '../selectors/visualizationSettings'
 import TR from '../TranslationTable'
 import { timelineYearScaleCalculation } from '../selectors/timeline'
 import TRSelector from '../selectors/translate'
+import { humanNumber } from '../utilities'
 
 //Add langauge compatibility
 class DetailBreakdown extends React.Component {
@@ -15,11 +16,6 @@ class DetailBreakdown extends React.Component {
     const total = props.data.reduce((acc, curr) =>acc+curr)
     const result = props.data.map((value,key) => {
       const exportOrImportPercentage = ((value/total)*100).toFixed(2)
-      let valueScale = 0
-      while (value >= 1000000) {
-        value = Math.round(value / 1000)
-        valueScale += 1
-      }
 
       const progressBarStyle ={
         width: `${exportOrImportPercentage}%`,
@@ -29,7 +25,7 @@ class DetailBreakdown extends React.Component {
       return <div key={key} className="detailBreakDownText">
         {bodyContent.getIn(['action',props.language])} &nbsp; 
         {TR.getIn(['country', 'us', key, props.language], '')}&nbsp;
-        {value.toLocaleString()}{TR.getIn(['formatNumberUnit', props.language, valueScale])}&nbsp;
+        {humanNumber(value, props.language)}
         {TR.getIn(['electricityDataTypes', props.amountUnit, props.language])}&nbsp;
         {exportOrImportPercentage}%&nbsp;
         <div className="progress-bar">

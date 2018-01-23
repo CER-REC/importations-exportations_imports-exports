@@ -62,7 +62,7 @@ const powerPoolPosition = createSelector(
   }),
 )
 
-const mapPieceActivityExplantionPosition = createSelector(
+const mapPieceActivityExplanationPosition = createSelector(
   usMapPosition,
   prev => ({
     // Currently this is hardcoded value
@@ -81,5 +81,5 @@ module.exports = {
   chartExportPosition,
   usMapPosition,
   powerPoolPosition,
-  mapPieceActivityExplantionPosition,
+  mapPieceActivityExplanationPosition,
 }
