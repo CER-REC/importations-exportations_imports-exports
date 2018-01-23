@@ -151,7 +151,7 @@ class ElectricityMapLayout extends React.Component {
       <g key={key}>
         <g
           className="mappiece"
-          onClick={this.onClick.bind(this, this.props.country, position.get('name'))}
+          onClick={this.onClick( this.props.country, position.get('name'))}
           transform={mapPieceTransform(xaxis, yaxis, position, dimensions, mapPieceScale)}
         >
           <MapPiece
