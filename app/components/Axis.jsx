@@ -1,5 +1,7 @@
 const React = require('react')
-const connect = require('react-redux').connect
+const PropTypes = require('prop-types')
+const Immutable = require('immutable')
+const { connect } = require('react-redux')
 
 const DetailSidebar = require('./DetailSidebar')
 const ChartOptions = require('./ChartOptions')
@@ -48,10 +50,10 @@ class Axis extends React.PureComponent {
   }
 
   chartOptions() {
-    const { top, rectHeight } = this.props
+    const { top, height } = this.props
     return (
-      <DetailSidebar top={top} height={rectHeight}>
-        <ChartOptions height={rectHeight} canChangeScale={this.props.canChangeScale} />
+      <DetailSidebar top={top} height={height}>
+        <ChartOptions height={height} canChangeScale={this.props.canChangeScale} />
       </DetailSidebar>
     )
   }

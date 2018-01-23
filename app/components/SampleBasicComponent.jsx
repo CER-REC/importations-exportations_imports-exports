@@ -1,12 +1,14 @@
 const React = require('react')
+const PropTypes = require('prop-types')
 
-class SampleBasicComponent extends React.Component {
-  render() {
-    return (<div>
-      <p>{ `Why hello there ${this.props.name}` }</p>
-            </div>)
-  }
+const SampleBasicComponent = props => (
+  <div>
+    <p>{`Why hello there ${props.name}`}</p>
+  </div>
+)
+
+SampleBasicComponent.propTypes = {
+  name: PropTypes.string.isRequired,
 }
-
 
 module.exports = SampleBasicComponent

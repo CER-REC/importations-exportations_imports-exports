@@ -11,8 +11,6 @@ class ExplanationPopovers extends React.Component {
 
 const mapStateToProps = state => ({
   viewport: state.viewport,
-
 })
-
 
 module.exports = ReactRedux.connect(mapStateToProps)(ExplanationPopovers)

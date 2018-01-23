@@ -61,7 +61,7 @@ class BarChart extends Chart {
           x1={point.get('offsetX')}
           x2={point.get('offsetX')}
           y2={height}
-          y1={height - point.getIn(['values', valueKey], 0) * heightPerUnit}
+          y1={height - (point.getIn(['values', valueKey], 0) * heightPerUnit)}
           key={`${point.get('year')}-${point.get('quarter')}-${valueKey}`}
           strokeWidth={barSize}
           stroke={colour}

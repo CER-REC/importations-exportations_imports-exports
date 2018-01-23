@@ -1,6 +1,8 @@
 const React = require('react')
 const ReactRedux = require('react-redux')
 const Request = require('client-request/promise')
+const PropTypes = require('prop-types')
+const Immutable = require('immutable')
 
 const RouteComputations = require('../computations/RouteComputations.js')
 
@@ -11,6 +13,23 @@ const WorkspaceComputations = require('../computations/WorkspaceComputations.js'
 require('./SocialBar.scss')
 
 class SocialBar extends React.Component {
+  static get propTypes() {
+    return {
+      language: PropTypes.string.isRequired,
+      viewport: PropTypes.instanceOf(Immutable.Map).isRequired,
+    }
+  }
+
+  constructor(props) {
+    super(props)
+    this.twitterClick = this.twitterClick.bind(this)
+    this.emailClick = this.emailClick.bind(this)
+    this.facebookClick = this.facebookClick.bind(this)
+    this.linkedInClick = this.linkedInClick.bind(this)
+    this.downloadImageClick = this.downloadImageClick.bind(this)
+    this.downloadDataClick = this.downloadDataClick.bind(this)
+  }
+
   makeBitlyPromise() {
     const bitlyEndpoint = RouteComputations.bitlyEndpoint(document.location, this.props.language)
     const shortenUrl = RouteComputations.bitlyParameter(document.location, this.props.language)
@@ -83,7 +102,8 @@ class SocialBar extends React.Component {
 
   downloadImageClick() {
     // TODO
-    const screenshotUrl = `${RouteComputations.screenshotOrigin(location)}/${Constants.get('screenshotPath')}/?pageUrl=${RouteComputations.screenshotParameter(document.location)}&width=${TODO}&height=${TODO}`
+    const TODO = 100
+    const screenshotUrl = `${RouteComputations.screenshotOrigin(document.location)}/${Constants.get('screenshotPath')}/?pageUrl=${RouteComputations.screenshotParameter(document.location)}&width=${TODO}&height=${TODO}`
 
     window.open(screenshotUrl)
   }
@@ -98,65 +118,67 @@ class SocialBar extends React.Component {
   render() {
     const transformSocialBarIcons = `translate(${this.props.viewport.get('x') - Constants.getIn(['socialBar', 'iconMargin'])}, 0)`
 
-    return (<svg>
-      <rect
-        x={this.props.viewport.get('x') - Constants.getIn(['socialBar', 'width'])}
-        y={WorkspaceComputations.socialBarY(this.props.viewport)}
-        width={Constants.getIn(['socialBar', 'width'])}
-        height={Constants.getIn(['socialBar', 'height'])}
-        fill="#e6e6e6"
-      />
-      <g transform={transformSocialBarIcons}>
-        <image
-          className="socialBarIcon"
-          height={Constants.getIn(['socialBar', 'iconSize'])}
-          width={Constants.getIn(['socialBar', 'iconSize'])}
-          y={WorkspaceComputations.socialBarY(this.props.viewport) + Constants.getIn(['socialBar', 'emailIconPadding'])}
-          xlinkHref="images/sm_email.svg"
-          onClick={this.emailClick.bind(this)}
+    return (
+      <svg>
+        <rect
+          x={this.props.viewport.get('x') - Constants.getIn(['socialBar', 'width'])}
+          y={WorkspaceComputations.socialBarY(this.props.viewport)}
+          width={Constants.getIn(['socialBar', 'width'])}
+          height={Constants.getIn(['socialBar', 'height'])}
+          fill="#e6e6e6"
         />
-        <image
-          className="socialBarIcon"
-          height={Constants.getIn(['socialBar', 'iconSize'])}
-          width={Constants.getIn(['socialBar', 'iconSize'])}
-          y={WorkspaceComputations.socialBarY(this.props.viewport) + Constants.getIn(['socialBar', 'downloadFileIconPadding'])}
-          xlinkHref="images/download_file.svg"
-          onClick={this.downloadDataClick.bind(this)}
-        />
-        <image
-          className="socialBarIcon"
-          height={Constants.getIn(['socialBar', 'iconSize'])}
-          width={Constants.getIn(['socialBar', 'iconSize'])}
-          y={WorkspaceComputations.socialBarY(this.props.viewport) + Constants.getIn(['socialBar', 'downloadImageIconPadding'])}
-          xlinkHref="images/download_image.svg"
-          onClick={this.downloadImageClick.bind(this)}
-        />
-        <image
-          className="socialBarIcon"
-          height={Constants.getIn(['socialBar', 'iconSize'])}
-          width={Constants.getIn(['socialBar', 'iconSize'])}
-          y={WorkspaceComputations.socialBarY(this.props.viewport) + Constants.getIn(['socialBar', 'twitterIconPadding'])}
-          xlinkHref="images/sm_twitter.svg"
-          onClick={this.twitterClick.bind(this)}
-        />
-        <image
-          className="socialBarIcon"
-          height={Constants.getIn(['socialBar', 'iconSize'])}
-          width={Constants.getIn(['socialBar', 'iconSize'])}
-          y={WorkspaceComputations.socialBarY(this.props.viewport) + Constants.getIn(['socialBar', 'facebookIconPadding'])}
-          xlinkHref="images/sm_facebook.svg"
-          onClick={this.facebookClick.bind(this)}
-        />
-        <image
-          className="socialBarIcon"
-          height={Constants.getIn(['socialBar', 'iconSize'])}
-          width={Constants.getIn(['socialBar', 'iconSize'])}
-          y={WorkspaceComputations.socialBarY(this.props.viewport) + Constants.getIn(['socialBar', 'linkedInIconPadding'])}
-          xlinkHref="images/sm_linkedin.svg"
-          onClick={this.linkedInClick.bind(this)}
-        />
-      </g>
-            </svg>)
+        <g transform={transformSocialBarIcons}>
+          <image
+            className="socialBarIcon"
+            height={Constants.getIn(['socialBar', 'iconSize'])}
+            width={Constants.getIn(['socialBar', 'iconSize'])}
+            y={WorkspaceComputations.socialBarY(this.props.viewport) + Constants.getIn(['socialBar', 'emailIconPadding'])}
+            xlinkHref="images/sm_email.svg"
+            onClick={this.emailClick}
+          />
+          <image
+            className="socialBarIcon"
+            height={Constants.getIn(['socialBar', 'iconSize'])}
+            width={Constants.getIn(['socialBar', 'iconSize'])}
+            y={WorkspaceComputations.socialBarY(this.props.viewport) + Constants.getIn(['socialBar', 'downloadFileIconPadding'])}
+            xlinkHref="images/download_file.svg"
+            onClick={this.downloadDataClick}
+          />
+          <image
+            className="socialBarIcon"
+            height={Constants.getIn(['socialBar', 'iconSize'])}
+            width={Constants.getIn(['socialBar', 'iconSize'])}
+            y={WorkspaceComputations.socialBarY(this.props.viewport) + Constants.getIn(['socialBar', 'downloadImageIconPadding'])}
+            xlinkHref="images/download_image.svg"
+            onClick={this.downloadImageClick}
+          />
+          <image
+            className="socialBarIcon"
+            height={Constants.getIn(['socialBar', 'iconSize'])}
+            width={Constants.getIn(['socialBar', 'iconSize'])}
+            y={WorkspaceComputations.socialBarY(this.props.viewport) + Constants.getIn(['socialBar', 'twitterIconPadding'])}
+            xlinkHref="images/sm_twitter.svg"
+            onClick={this.twitterClick}
+          />
+          <image
+            className="socialBarIcon"
+            height={Constants.getIn(['socialBar', 'iconSize'])}
+            width={Constants.getIn(['socialBar', 'iconSize'])}
+            y={WorkspaceComputations.socialBarY(this.props.viewport) + Constants.getIn(['socialBar', 'facebookIconPadding'])}
+            xlinkHref="images/sm_facebook.svg"
+            onClick={this.facebookClick}
+          />
+          <image
+            className="socialBarIcon"
+            height={Constants.getIn(['socialBar', 'iconSize'])}
+            width={Constants.getIn(['socialBar', 'iconSize'])}
+            y={WorkspaceComputations.socialBarY(this.props.viewport) + Constants.getIn(['socialBar', 'linkedInIconPadding'])}
+            xlinkHref="images/sm_linkedin.svg"
+            onClick={this.linkedInClick}
+          />
+        </g>
+      </svg>
+    )
   }
 }
 

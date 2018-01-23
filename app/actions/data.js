@@ -1,4 +1,4 @@
-const fromJS = require('immutable').fromJS
+const { fromJS } = require('immutable')
 
 const Types = {
   LOAD_DATA: 'loadData',
