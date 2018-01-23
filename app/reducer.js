@@ -6,6 +6,9 @@ import ImportExportVisualizationReducer from './reducers/ImportExportVisualizati
 import LanguageReducer from './reducers/LanguageReducer'
 import ShowExplanationsReducer from './reducers/ShowExplanationsReducer'
 import ElectricityExplanationReducer from './reducers/ElectricityExplanationReducer'
+import ExpandImportExportMenuReducer from './reducers/ExpandImportExportMenuReducer.js'
+import ExpandElectricitySortMenuReducer from './reducers/ExpandElectricitySortMenuReducer.js'
+import ExpandElectricityAmountMenuReducer from './reducers/ExpandElectricityAmountMenuReducer.js'
 import { reducer as DataReducer } from './actions/data'
 import { reducer as BinsReducer } from './actions/bins'
 import { reducer as visualizationSettings } from './actions/visualizationSettings'
@@ -30,6 +33,9 @@ const nestedReducers = combineReducers({
   language: LanguageReducer,
   electricityExplanation: ElectricityExplanationReducer,
   showExplanations: ShowExplanationsReducer,
+  expandImportExportMenu: ExpandImportExportMenuReducer,
+  expandElectricityAmountMenu: ExpandElectricityAmountMenuReducer,
+  expandElectricitySortMenu: ExpandElectricitySortMenuReducer,
   data: DataReducer,
   bins: BinsReducer,
   dataLoadingComplete: DataLoadCompleteReducer,

@@ -6,69 +6,177 @@ const Constants = require('../Constants.js')
 const Tr = require('../TranslationTable.js')
 const WorkspaceComputations = require('../computations/WorkspaceComputations.js')
 
-const MenuBarOption = require('./MenuBarOption.jsx')
+const ExpandElectricitySortMenuCreator = require('../actionCreators/ExpandElectricitySortMenuCreator.js')
 
 const { setArrangeBy } = require('../actions/visualizationSettings')
 const { visualizationSettings } = require('../selectors/visualizationSettings')
 
 require('./ElectricitySortMenu.scss')
 
-const ElectricitySortMenu = (props) => {
-  const titleYaxis = WorkspaceComputations.electricitySortMenuY() - 30
-  return (
-    <g>
-      <text
-        x={Constants.getIn(['electricitySortStatesStyle', 'title', 'import', 'xPadding'])}
-        y={titleYaxis}
-        fill={Constants.getIn(['electricitySortStatesStyle', 'title', 'import', 'color'])}
-        className="ElectricitySortMenuTitle"
-      >
-        {Tr.getIn(['electricitySortStates', 'title', 'import', props.language])}
+class ElectricitySortMenu extends React.Component {
+  constructor(props) {
+    super(props)
+    this.onClick = this.props.onClick.bind(this)
+  }
+
+  onClick(e) {
+    e.preventDefault()
+  }
+
+  controlRect() {
+    let rectYPosition = `${ WorkspaceComputations.importExportMenuY(this.props.viewport) + 
+          116 }`
+    if(this.props.expandImportExportMenu) {
+      rectYPosition = `${ WorkspaceComputations.importExportMenuY(this.props.viewport) + 
+          146 }`
+    }
+    return <rect 
+      x={ 0 } 
+      y= { rectYPosition } 
+      width={ Constants.getIn(['menuBar','barWidth'])} 
+      height={ Constants.getIn(['menuBar','barHeight'])}
+      fill = '#666666'
+    />
+  }
+
+  sortMenuText() {
+    let textPosition = `${ Constants.getIn(['menuBar','sortMenuTextY']) }`
+    if(this.props.expandImportExportMenu) {
+      textPosition = `${ Constants.getIn(['menuBar','sortMenuTextY']) + Constants.getIn(['menuBar','menuExpandedPadding'])}`
+    }
+    return <g>
+      <text x = { Constants.getIn(['menuBar','textLabelOffset']) } 
+        y = { textPosition }
+        className = 'bodyText'>
+        { Tr.getIn(['arrangedBy', this.props.language]) }
       </text>
-      <text
-        x={Constants.getIn(['electricitySortStatesStyle', 'title', 'ampersand', 'xPadding'])}
-        y={titleYaxis}
-        className="ElectricitySortMenuTitle"
-      >
-        {Tr.getIn(['electricitySortStates', 'title', 'ampersand', props.language])}
-      </text>
-      <text
-        x={Constants.getIn(['electricitySortStatesStyle', 'title', 'export', 'xPadding'])}
-        y={titleYaxis}
-        fill={Constants.getIn(['electricitySortStatesStyle', 'title', 'export', 'color'])}
-        className="ElectricitySortMenuTitle"
-      >
-        {Tr.getIn(['electricitySortStates', 'title', 'export', props.language])}
-      </text>
-      <MenuBarOption
-        key="electricitySortStateMenu"
-        yaxis={WorkspaceComputations.electricitySortMenuY()}
-        options={Constants.get('electricitySortStates')}
-        onOptionClick={props.setArrangeBy}
-        selectedOption={props.arrangeBy}
-        optionXaxisPadding={Constants.getIn(['menuBarOptions', 'optionXaxisPadding'])}
-        optionPadding={Constants.getIn(['menuBarOptions', 'optionPadding'])}
-        trKey="electricitySortStates"
-        color={Constants.getIn(['electricitySortStatesStyle', 'color'])}
-        lineWidth={Constants.getIn(['electricitySortStatesStyle', 'lineWidth'])}
-        language={props.language}
-      />
     </g>
-  )
+  }
+
+  expandedMenu() {
+    const location = `${Tr.getIn(['electricitySortStates','location', this.props.language])}`
+    const mostImports = `${Tr.getIn(['electricitySortStates','imports', this.props.language])}`
+    const mostExports = `${Tr.getIn(['electricitySortStates','exports', this.props.language])}`
+
+    if(!this.props.expandElectricitySortMenu || this.props.selectedEnergy !== 'electricity') {
+      return null
+    }
+
+    if(this.props.arrangeBy === 'imports' && this.props.selectedEnergy === 'electricity') {
+      return <g>
+        <text x={ Constants.getIn(['menuBar','textLabelOffset']) }
+      y = { WorkspaceComputations.importExportMenuY(this.props.viewport)
+        + Constants.getIn(['menuBar','sortMenuTextY']) - Constants.getIn(['menuBar','sortMenuTextOffsetY']) }
+      className = 'bodyText'> 
+      <tspan x = { Constants.getIn(['menuBar','textLabelOffset']) + Constants.getIn(['menuBar','expandedMenuTextMargin']) } 
+        dy="0em"
+        onClick = {() => this.props.setArrangeBy('location') }
+      > {location} </tspan>
+      <tspan x = { Constants.getIn(['menuBar','textLabelOffset']) + Constants.getIn(['menuBar','expandedMenuTextMargin']) } 
+        dy="1.2em"
+        onClick = {() => this.props.setArrangeBy('exports') }>
+        {mostExports}
+      </tspan>
+    </text>
+
+      </g>
+    }
+    if(this.props.arrangeBy === 'exports') {
+      return <g>
+        <text x={ Constants.getIn(['menuBar','textLabelOffset']) }
+      y = { WorkspaceComputations.importExportMenuY(this.props.viewport)
+        + Constants.getIn(['menuBar','sortMenuTextY']) - Constants.getIn(['menuBar','sortMenuTextOffsetY']) }
+      className = 'bodyText'> 
+      <tspan x = { Constants.getIn(['menuBar','textLabelOffset']) + Constants.getIn(['menuBar','expandedMenuTextMargin']) } 
+        dy="0em"
+        onClick = {() => this.props.setArrangeBy('location') }
+      > {location} </tspan>
+      <tspan x = { Constants.getIn(['menuBar','textLabelOffset']) + Constants.getIn(['menuBar','expandedMenuTextMargin']) } 
+        dy="1.2em"
+        onClick = {() => this.props.setArrangeBy('imports')}>
+        {mostImports}
+      </tspan>
+    </text>
+
+      </g>
+    }
+
+    return <g><text x={ Constants.getIn(['menuBar','textLabelOffset']) }
+      y = { WorkspaceComputations.importExportMenuY(this.props.viewport)
+        + Constants.getIn(['menuBar','sortMenuTextY']) - Constants.getIn(['menuBar','sortMenuTextOffsetY']) }
+      className = 'bodyText'> 
+      <tspan x = { Constants.getIn(['menuBar','textLabelOffset']) + Constants.getIn(['menuBar','expandedMenuTextMargin']) } 
+        dy="0em"
+        onClick = {() => this.props.setArrangeBy('imports') }
+      > {mostImports} </tspan>
+      <tspan x = { Constants.getIn(['menuBar','textLabelOffset']) + Constants.getIn(['menuBar','expandedMenuTextMargin']) } 
+        dy="1.2em"
+        onClick = {() => this.props.setArrangeBy('exports') }>
+        {mostExports}
+      </tspan>
+    </text>
+    </g>
+  }
+
+  sortOption() {
+    let expandedSign = '+'
+    if (this.props.expandElectricitySortMenu) {
+      expandedSign = '-'
+    }
+
+    let labelPosition = `${ Constants.getIn(['menuBar','sortMenuTextY']) } `
+    if (this.props.expandImportExportMenu) {
+      labelPosition = `${ Constants.getIn(['menuBar','sortMenuTextY']) + Constants.getIn(['menuBar','sortMenuLabelOffsetY'])} `
+    }
+
+    let sortString = `${Tr.getIn(['electricitySortStates','location', this.props.language])}`
+    if (this.props.arrangeBy === 'imports') {
+      sortString = `${Tr.getIn(['electricitySortStates','imports', this.props.language])}`
+    } 
+    if (this.props.arrangeBy === 'exports') {
+      sortString = `${Tr.getIn(['electricitySortStates','exports', this.props.language])}`
+    }
+
+    return <g>
+      <text x = { Constants.getIn(['menuBar','sortTextButtonLabelOffset']) } 
+        y = { labelPosition } 
+        className = 'selectableDropdown'>
+        <tspan onClick = {this.onClick}>{sortString} {expandedSign} </tspan>
+      </text>
+    </g>
+  }
+
+  render() {
+    return <g>
+      {this.sortOption()}
+      {this.sortMenuText()}
+      {this.controlRect()}
+      {this.expandedMenu()}
+    </g>
+  }
 }
 
-ElectricitySortMenu.propTypes = {
-  language: PropTypes.string.isRequired,
-  setArrangeBy: PropTypes.func.isRequired,
-  arrangeBy: PropTypes.string.isRequired,
+const mapStateToProps = (state, props) => {
+  return {
+    viewport: state.viewport,
+    language: state.language,
+    selectedEnergy: state.importExportVisualization,
+    arrangeBy: visualizationSettings(state, props).get('arrangeBy'),
+    expandImportExportMenu: state.expandImportExportMenu,
+    expandElectricitySortMenu: state.expandElectricitySortMenu,
+  }
 }
 
-const mapStateToProps = (state, props) => ({
-  viewport: state.viewport,
-  language: state.language,
-  arrangeBy: visualizationSettings(state, props).get('arrangeBy'),
-})
 
-const mapDispatchToProps = { setArrangeBy }
+const mapDispatchToProps = dispatch => {
+  return { 
+    onClick: () => {
+      dispatch(ExpandElectricitySortMenuCreator())
+    },
+    setArrangeBy: (value) => {
+      dispatch(setArrangeBy(value))
+    }
+  }
+}
 
 module.exports = ReactRedux.connect(mapStateToProps, mapDispatchToProps)(ElectricitySortMenu)
