@@ -7,7 +7,6 @@ import { visualizationSettings } from '../selectors/visualizationSettings'
 import TR from '../TranslationTable'
 import { timelineYearScaleCalculation } from '../selectors/timeline'
 import TRSelector from '../selectors/translate'
-import Constants from '../Constants'
 
 //Add langauge compatibility
 class DetailBreakdown extends React.Component {
@@ -38,7 +37,7 @@ class DetailBreakdown extends React.Component {
         </div>
       </div>
       })
-    return Array.from(result.values())
+    return result.toArray()
   }
 
   renderDetailBreakdownHeader(props){
@@ -63,7 +62,7 @@ class DetailBreakdown extends React.Component {
         {props.TRSelector( ['detailBreakDown', props.importExportVisualization, 'defaultText'], props.timelineYears.min, props.timelineYears.max)}
       </div>
     }else{
-      return <span></span>
+      return null
     }
   }
 }

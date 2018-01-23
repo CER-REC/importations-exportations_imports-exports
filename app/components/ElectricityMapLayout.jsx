@@ -148,7 +148,7 @@ class ElectricityMapLayout extends React.Component {
   }
 
   renderDetailBreakdown(data){
-    const detailBreakdownData = Constants.getIn(['detialBreakdown', this.props.country])
+    const detailBreakdownData = Constants.getIn(['detailBreakDown', this.props.country])
     if(typeof detailBreakdownData !== 'undefined' && detailBreakdownData.get('required', false)){
       return <DetailBreakdown
         data={data}
@@ -160,11 +160,11 @@ class ElectricityMapLayout extends React.Component {
         showDefault={detailBreakdownData.get('showDefault', false)}
       />
     }
-    return <span></span>
+    return null
   }
 
   renderDetailSidebar(){
-    return <DetailSidebar top={this.props.top} height={Constants.getIn(['detialBreakdown', this.props.country, 'height'], 0)}>
+    return <DetailSidebar top={this.props.top} height={Constants.getIn(['detailBreakDown', this.props.country, 'height'], 0)}>
          {this.renderDetailBreakdown(this.props.detailBreakDownData)}
         </DetailSidebar>
   }

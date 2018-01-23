@@ -218,7 +218,7 @@ const Constants = Immutable.fromJS({
       'rgb(30, 97, 114)',
     ],
   },
-  detialBreakdown: {
+  detailBreakDown: {
     ca: {
       required: true,
       type: 'imports',
