@@ -1,5 +1,6 @@
 const React = require('react')
 const ReactRedux = require('react-redux')
+const PropTypes = require('prop-types')
 
 const Constants = require('../Constants.js')
 
@@ -8,6 +9,14 @@ const ExplanationSummonedCreator = require('../actionCreators/ExplanationSummone
 require('./ExplanationDot.scss')
 
 class ExplanationDot extends React.Component {
+  static get propTypes() {
+    return {
+      xPosition: PropTypes.number.isRequired,
+      yPosition: PropTypes.number.isRequired,
+      showExplanations: PropTypes.bool.isRequired,
+    }
+  }
+
   constructor(props) {
     super(props)
     this.onClick = this.explanationDotClick.bind(this)

@@ -1,4 +1,5 @@
 const React = require('react')
+const PropTypes = require('prop-types')
 const { connect } = require('react-redux')
 
 const Constants = require('../Constants')
@@ -6,6 +7,23 @@ const { setScaleLinked, setGrouping } = require('../actions/visualizationSetting
 const TimelineSelector = require('../selectors/timeline')
 
 class ChartOptions extends React.PureComponent {
+  static get propTypes() {
+    return {
+      setScaleLinked: PropTypes.func.isRequired,
+      setGrouping: PropTypes.func.isRequired,
+      canChangeScale: PropTypes.bool,
+      scaleLinked: PropTypes.bool.isRequired,
+      timelineGroup: PropTypes.string.isRequired,
+      height: PropTypes.number.isRequired,
+    }
+  }
+
+  static get defaultProps() {
+    return {
+      canChangeScale: true,
+    }
+  }
+
   constructor(props) {
     super(props)
     this.scaleLinkedChanged = this.scaleLinkedChanged.bind(this)
@@ -29,6 +47,9 @@ class ChartOptions extends React.PureComponent {
     const image = this.props.scaleLinked
       ? 'images/link.svg'
       : 'images/link_broken.svg'
+    const imageAlt = this.props.scaleLinked
+      ? 'Chart Scale Linked'
+      : 'Chart Scale Unlinked'
 
     return (
       <label htmlFor="scaleLinked">
@@ -41,7 +62,7 @@ class ChartOptions extends React.PureComponent {
           />
           <div className="slider round" />
         </div>
-        <img src={image} height="18" />
+        <img src={image} height="20" alt={imageAlt} />
       </label>
     )
   }
@@ -61,8 +82,9 @@ class ChartOptions extends React.PureComponent {
           <a onClick={this.changeTimelineGroup}>
             by {this.props.timelineGroup.toUpperCase()} +
           </a>
-          <img className="detailBarArrow" src="images/control_arrow.svg" />
+          <div className="detailBarArrow" />
         </div>
+        <div style={{ clear: 'both' }} />
       </div>
     )
   }

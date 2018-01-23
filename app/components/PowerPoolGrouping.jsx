@@ -1,4 +1,5 @@
 const React = require('react')
+const PropTypes = require('prop-types')
 const ReactRedux = require('react-redux')
 
 const MapLayoutGridConstant = require('../MapLayoutGridConstant.js')

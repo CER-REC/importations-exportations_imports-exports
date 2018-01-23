@@ -1,13 +1,24 @@
 const React = require('react')
+const PropTypes = require('prop-types')
 const memoize = require('memoize-immutable')
 
 class AnimatedLine extends React.PureComponent {
+  static get propTypes() {
+    return {
+      animate: PropTypes.objectOf(PropTypes.string).isRequired,
+      x1: PropTypes.number.isRequired,
+      x2: PropTypes.number.isRequired,
+      y1: PropTypes.number.isRequired,
+      y2: PropTypes.number.isRequired,
+    }
+  }
+
   constructor(props) {
     super(props)
     this.previousVals = {}
     this.animateRefs = {}
 
-    this.trackRef = memoize(key => ref => this.animateRefs[key] = ref)
+    this.trackRef = memoize(key => (ref) => { this.animateRefs[key] = ref })
   }
 
   componentWillReceiveProps(props) {
@@ -18,12 +29,6 @@ class AnimatedLine extends React.PureComponent {
         animRef.beginElement()
       }
     })
-    if (props.y1 !== this.props.y1 && this.animateRef) {
-      /*
-      this.previousVal = this.animateRef.parentNode.y1.animVal.value
-      this.animateRef.beginElement()
-      */
-    }
   }
 
   render() {
@@ -43,10 +48,6 @@ class AnimatedLine extends React.PureComponent {
       ))
     return <line {...this.props}>{animate}</line>
   }
-}
-
-AnimatedLine.defaultProps = {
-  animate: {},
 }
 
 module.exports = AnimatedLine

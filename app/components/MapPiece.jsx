@@ -1,23 +1,43 @@
 const React = require('react')
 const ReactRedux = require('react-redux')
-const Constants = require('../Constants.js')
+const PropTypes = require('prop-types')
+const Immutable = require('immutable')
 
 const ImportExportArrow = require('./ImportExportArrow.jsx')
 const MapPieceLabel = require('./MapPieceLabel.jsx')
 const ConfidentialIcon = require('./ConfidentialIcon.jsx')
+const Constants = require('../Constants')
 
 const ExplanationDot = require('./ExplanationDot.jsx')
 
 class MapPiece extends React.Component {
-  getArrowColor(legends, value) {
-    return legends.find((data) => {
-      if (data.get('lower') < value && data.get('upper') === 'NA') {
-        return true
-      }
-      if (data.get('lower') < value && data.get('upper') >= value) {
-        return true
-      }
-    })
+  static propTypes = {
+    bins: PropTypes.instanceOf(Immutable.List),
+    styles: PropTypes.instanceOf(Immutable.Map).isRequired,
+    dimensions: PropTypes.instanceOf(Immutable.Map).isRequired,
+    data: PropTypes.instanceOf(Immutable.Map).isRequired,
+    legend: PropTypes.bool,
+  }
+
+  static defaultProps = {
+    bins: new Immutable.List(),
+    legend: false,
+  }
+
+  getArrowColor(type, value) {
+    if (this.props.legend) { return '#fff' }
+
+    const index = this.props.bins.findIndex(range => range.get(0) < value && value < range.get(1))
+    if (type === 'imports') {
+      return Constants.getIn(
+        ['styleGuide', 'importColours', index],
+        Constants.getIn(['styleGuide', 'colours', 'ImportDefault']),
+      )
+    }
+    return Constants.getIn(
+      ['styleGuide', 'exportColours', index],
+      Constants.getIn(['styleGuide', 'colours', 'ExportDefault']),
+    )
   }
 
   drawArrow(legends, data, type, styles, arrowProps) {
@@ -25,7 +45,7 @@ class MapPiece extends React.Component {
       return (<ImportExportArrow
         arrowSpacing={styles.get('arrowSpacing')}
         type={type}
-        color={this.getArrowColor(legends, data.get(type)).get(type)}
+        color={this.getArrowColor(type, data.get(type))}
         arrowProps={arrowProps}
       />)
     }

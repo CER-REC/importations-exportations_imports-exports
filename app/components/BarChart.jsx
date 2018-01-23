@@ -5,6 +5,9 @@ const { connect } = require('react-redux')
 const Chart = require('./Chart')
 const AnimatedLine = require('./SVGAnimation/AnimatedLine')
 const AxisGuide = require('./AxisGuide')
+const DetailSidebar = require('./DetailSidebar')
+const DetailTotal = require('./DetailTotal').default
+const ConfidentialCount = require('./ConfidentialCount').default
 const TimelineSelector = require('../selectors/timeline')
 
 class BarChart extends Chart {
@@ -58,7 +61,7 @@ class BarChart extends Chart {
           x1={point.get('offsetX')}
           x2={point.get('offsetX')}
           y2={height}
-          y1={height - point.getIn(['values', valueKey], 0) * heightPerUnit}
+          y1={height - (point.getIn(['values', valueKey], 0) * heightPerUnit)}
           key={`${point.get('year')}-${point.get('quarter')}-${valueKey}`}
           strokeWidth={barSize}
           stroke={colour}
@@ -68,6 +71,21 @@ class BarChart extends Chart {
         />
       )
     }).toArray()
+
+    const sidebarContent = [
+      <ConfidentialCount
+        key="confidential"
+        valueKey={this.props.valueKey}
+        aggregateKey={this.props.aggregateKey}
+      />,
+      <DetailTotal
+        key="total"
+        type={flipped ? 'exports' : 'imports'}
+        valueKey={this.props.valueKey}
+        aggregateKey={this.props.aggregateKey}
+      />,
+    ]
+
     return (
       <g transform={this.getTransform()}>
         <g>{elements}</g>
@@ -81,6 +99,9 @@ class BarChart extends Chart {
           width={this.props.width}
           barSize={barSize}
         />
+        <DetailSidebar top={this.props.top} height={height}>
+          {flipped ? sidebarContent.reverse() : sidebarContent}
+        </DetailSidebar>
       </g>
     )
   }

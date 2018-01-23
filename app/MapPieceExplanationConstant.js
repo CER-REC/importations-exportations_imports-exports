@@ -1,6 +1,6 @@
 const Immutable = require('immutable')
 
-const MapPieceExplantionConstant = Immutable.fromJS({
+const MapPieceExplanationConstant = Immutable.fromJS({
   electricity: {
     ca: {
       datapoint: {
@@ -117,4 +117,4 @@ const MapPieceExplantionConstant = Immutable.fromJS({
 
   },
 })
-module.exports = MapPieceExplantionConstant
+module.exports = MapPieceExplanationConstant

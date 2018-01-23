@@ -1,12 +1,38 @@
 const React = require('react')
+const PropTypes = require('prop-types')
 
 require('./SVGDrag.scss')
 
+const stopEvent = (e) => {
+  e.stopPropagation()
+  e.preventDefault()
+}
+
+const getPosition = (e) => {
+  const baseEventPosition = e.touches ? e.touches[0] : e
+  return {
+    x: baseEventPosition.clientX,
+    y: baseEventPosition.clientY,
+  }
+}
+
 class SVGDrag extends React.PureComponent {
+  static get propTypes() {
+    return {
+      invertedX: PropTypes.bool,
+      invertedY: PropTypes.bool,
+      dragStop: PropTypes.func,
+      adjustOffset: PropTypes.func,
+      children: PropTypes.node.isRequired,
+    }
+  }
+
   static get defaultProps() {
     return {
       invertedX: false,
       invertedY: false,
+      dragStop: null,
+      adjustOffset: null,
     }
   }
 
@@ -26,36 +52,11 @@ class SVGDrag extends React.PureComponent {
     this.onDragStop = this.onDragStop.bind(this)
   }
 
-  stopEvent(e) {
-    e.stopPropagation()
-    e.preventDefault()
-  }
-
-  adjustOffset(offset) {
-    const newOffset = (typeof this.props.adjustOffset === 'function')
-      ? this.props.adjustOffset(offset)
-      : offset
-
-    const { invertedX, invertedY } = this.props
-    return {
-      x: newOffset.x * (invertedX ? -1 : 1),
-      y: newOffset.y * (invertedY ? -1 : 1),
-    }
-  }
-
-  getPosition(e) {
-    const baseEventPosition = e.touches ? e.touches[0] : e
-    return {
-      x: baseEventPosition.clientX,
-      y: baseEventPosition.clientY,
-    }
-  }
-
   onDragStart(e) {
-    this.stopEvent(e)
+    stopEvent(e)
     this.isDragging = true
     this.setState({
-      dragStart: this.getPosition(e),
+      dragStart: getPosition(e),
       offset: { x: 0, y: 0 },
     })
 
@@ -70,9 +71,9 @@ class SVGDrag extends React.PureComponent {
   onDragMove(e) {
     // Don't handle the mouse moving if we're not dragging
     if (this.isDragging === false) { return }
-    this.stopEvent(e)
+    stopEvent(e)
 
-    const position = this.getPosition(e)
+    const position = getPosition(e)
     this.setState({
       offset: this.adjustOffset({
         x: position.x - this.state.dragStart.x,
@@ -82,7 +83,7 @@ class SVGDrag extends React.PureComponent {
   }
 
   onDragStop(e) {
-    this.stopEvent(e)
+    stopEvent(e)
     this.isDragging = false
 
     window.removeEventListener('mousemove', this.onDragMove)
@@ -101,6 +102,18 @@ class SVGDrag extends React.PureComponent {
     this.setState({
       offset: { x: 0, y: 0 },
     })
+  }
+
+  adjustOffset(offset) {
+    const newOffset = (typeof this.props.adjustOffset === 'function')
+      ? this.props.adjustOffset(offset)
+      : offset
+
+    const { invertedX, invertedY } = this.props
+    return {
+      x: newOffset.x * (invertedX ? -1 : 1),
+      y: newOffset.y * (invertedY ? -1 : 1),
+    }
   }
 
   render() {

@@ -12,6 +12,7 @@ const RouteComputations = require('./computations/RouteComputations.js')
 const Root = require('./components/Root.jsx')
 const Resized = require('./actionCreators/ResizeScreenCreator.js')
 const LoadDataCreator = require('./actions/data').LoadData
+const LoadBinsCreator = require('./actions/bins').LoadBins
 
 const Store = require('./Store.js')
 
@@ -29,13 +30,6 @@ function render(Component) {
   ReactDOM.render(app, document.getElementById('reactRoot'))
 }
 
-DomReady(() => {
-  resizeScreenHandler()
-  window.addEventListener('resize', resizeScreenHandler)
-
-  render(Root)
-})
-
 function resizeScreenHandler() {
   // Ensures the width and height of the workspace keep the ratio 900:600
   // TODO: Increase the height of the workspace by emptyCategoryOffsetRatio if
@@ -45,16 +39,24 @@ function resizeScreenHandler() {
   store.dispatch(Resized(w, h))
 }
 
+DomReady(() => {
+  resizeScreenHandler()
+  window.addEventListener('resize', resizeScreenHandler)
+
+  render(Root)
+})
+
 Request({
   uri: RouteComputations.dataEndpoint(),
   json: true,
 }).then((data) => { // eslint-disable-line no-undef
-  store.dispatch(LoadDataCreator(data.body))
+  store.dispatch(LoadBinsCreator(data.body.bins))
+  store.dispatch(LoadDataCreator(data.body.data))
 })
 
 // Webpack Hot Module Replacement API
 if (module.hot) {
   module.hot.accept('./components/Root.jsx', () => {
-    render(require('./components/Root.jsx'))
+    render(require('./components/Root.jsx')) // eslint-disable-line global-require
   })
 }

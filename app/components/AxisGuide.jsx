@@ -1,5 +1,6 @@
 const React = require('react')
-const connect = require('react-redux').connect
+const PropTypes = require('prop-types')
+const { connect } = require('react-redux')
 
 const TextBox = require('./TextBox')
 const SVGDrag = require('./SVGDrag/')
@@ -7,6 +8,19 @@ const Constants = require('../Constants')
 const { visualizationSettings } = require('../selectors/visualizationSettings')
 
 class AxisGuide extends React.PureComponent {
+  static get propTypes() {
+    return {
+      flipped: PropTypes.bool,
+      width: PropTypes.number.isRequired,
+      chartHeight: PropTypes.number.isRequired,
+      barSize: PropTypes.number.isRequired,
+      heightPerUnit: PropTypes.number.isRequired,
+      unit: PropTypes.string.isRequired,
+      updatePosition: PropTypes.func.isRequired,
+      position: PropTypes.number.isRequired,
+    }
+  }
+
   static get defaultProps() {
     return {
       flipped: false,
@@ -56,10 +70,9 @@ class AxisGuide extends React.PureComponent {
   }
 
   render() {
-    const text = `${this.state.positionDisplay} ${this.props.unit}`
-    const offset = this.props.chartHeight
+    const text = `${this.state.positionDisplay.toLocaleString()} ${this.props.unit}`
+    const offset = (this.props.chartHeight + (this.props.barSize / 2))
       - (this.props.position * this.props.heightPerUnit)
-      + (this.props.barSize / 2)
     return (
       <SVGDrag
         invertedY={this.props.flipped}

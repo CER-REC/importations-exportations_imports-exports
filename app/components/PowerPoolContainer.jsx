@@ -1,5 +1,7 @@
 const React = require('react')
 const ReactRedux = require('react-redux')
+const PropTypes = require('prop-types')
+
 const ElectricityMapLayout = require('./ElectricityMapLayout.jsx')
 
 class PowerPoolContainer extends React.Component {
@@ -19,6 +21,5 @@ class PowerPoolContainer extends React.Component {
 const mapStateToProps = state => ({
   viewport: state.viewport,
 })
-
 
 module.exports = ReactRedux.connect(mapStateToProps)(PowerPoolContainer)

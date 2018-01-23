@@ -17,7 +17,7 @@ const getSelectionSettings = createSelector(
 
 const getCountry = (state, props) => props.country
 
-const getElectrictyMapLayoutConstants = createSelector(
+const getElectricityMapLayoutConstants = createSelector(
   selectedVisualization,
   getCountry,
   (visualization, country) => MapLayoutGridConstant.getIn([visualization, country, 'layout']),
@@ -112,7 +112,7 @@ const createSortedLayout = createSelector(
 
 const parseLocationData = createSelector(
   getElectricityImportAndExport,
-  getElectrictyMapLayoutConstants,
+  getElectricityMapLayoutConstants,
   (data, layout) => {
     const resultList = []
     if (data.size > 0 && typeof layout !== 'undefined') {
@@ -135,7 +135,7 @@ const parseLocationData = createSelector(
 )
 
 
-const getElectrictyMapLayout = createSelector(
+const getElectricityMapLayout = createSelector(
   createSortedLayout,
   parseLocationData,
   arrangeBy,
@@ -152,7 +152,7 @@ const getElectrictyMapLayout = createSelector(
 )
 
 module.exports = {
-  getElectrictyMapLayout,
+  getElectricityMapLayout,
   getSelectionSettings,
   getPointsByCountry,
 }

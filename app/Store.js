@@ -1,41 +1,34 @@
 const Redux = require('redux')
 
-const ViewportReducer = require('./reducers/ViewportReducer.js')
-const ImportExportVisualizationReducer = require('./reducers/ImportExportVisualizationReducer.js')
-const LanguageReducer = require('./reducers/LanguageReducer.js')
-const ShowExplanationsReducer = require('./reducers/ShowExplanationsReducer.js')
-const DataReducer = require('./actions/data').reducer
-const ElectricityExplanationReducer = require('./reducers/ElectricityExplanationReducer.js')
-const ExplanationReducer = require('./reducers/ExplanationReducer.js')
-const { reducer: visualizationSettings } = require('./actions/visualizationSettings')
+const reducer = require('./reducer').default
 
 const TimelineRangeMiddleware = require('./middleware/timelineRange')
 const InitialVisualizationSettingsMiddleware = require('./middleware/initialVisualizationSettings')
 const ActionLogMiddleware = require('./middleware/actionLog')
 const TagVisualizationSettingsMiddleware = require('./middleware/tagVisualizationSettings')
+const { default: SaveStateToRouteMiddleware, updateStateFromURL } = require('./middleware/saveStateToRoute')
+const DataLoaded = require('./middleware/DataLoaded')
 
-const reducers = Redux.combineReducers({
-  viewport: ViewportReducer,
-  importExportVisualization: ImportExportVisualizationReducer,
-  language: LanguageReducer,
-  electricityExplanation: ElectricityExplanationReducer,
-  showExplanations: ShowExplanationsReducer,
-  data: DataReducer,
-  explanation: ExplanationReducer,
-  visualizationSettings,
-})
-
-module.exports = function () {
-  const composeEnhancers =
-    window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || Redux.compose
+module.exports = () => {
   // Enable Redux Dev Tools if they are installed in the browser
-  return Redux.createStore(
-    reducers,
+  const composeEnhancers =
+    // eslint-disable-next-line no-underscore-dangle
+    window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || Redux.compose
+
+  const store = Redux.createStore(
+    reducer,
     composeEnhancers(Redux.applyMiddleware(
+      SaveStateToRouteMiddleware,
       InitialVisualizationSettingsMiddleware,
       TagVisualizationSettingsMiddleware,
       TimelineRangeMiddleware,
       ActionLogMiddleware,
+      DataLoaded,
     )),
   )
+
+  // Reload the visualization settings from the URL
+  updateStateFromURL(document.location.search, store)
+
+  return store
 }

@@ -84,9 +84,37 @@
   text-align: left;
 }
 
+.showHideConfidentiality {
+  font-family: $fira-sans-condensed;
+  font-size: 14px;
+}
+
 .showHideExplanations {
   font-family: $fira-sans-condensed;
   font-size: 14px;
+}
+
+.selectableDropdown {
+  font-family: $fira-sans-condensed-semibold;
+  fill: $neutral-medium;
+  font-size: 13px; 
+}
+
+.visSelect {
+  font-family: $fira-sans-condensed-semibold;
+  font-size: 13px; 
+  fill: white;
+}
+
+.visSelectOfText {
+  font-family: $fira-sans-condensed;
+  font-size: 13px;
+}
+
+.bodyText {
+  font-family: $fira-sans-condensed;
+  fill: $neutral-light;
+  font-size: 13px;
 }
 
 .mapPieceText {
@@ -102,14 +130,6 @@
   text-align: center;
 }
 
-.chartOptions a {
-  font-family: $fira-sans-condensed-medium;
-  color: $neutral-medium;
-  font-size: 14px;
-  text-decoration: none;
-  cursor: pointer;
-}
-
 .explanationLabel {
   font-family: $fira-sans-condensed;
   font-size: 13px;
@@ -120,4 +140,46 @@
   font-family: $fira-sans-condensed;
   font-size: 11px;
   color: $explanation;
+}
+
+.detailBreakDown {
+  .header{
+    &.imports {
+      font-size: 12PX;
+      font-family: $fira-sans-condensed-semibold;
+    }
+    &.exports {
+      font-size: 12PX;
+      font-family: $fira-sans-condensed-semibold;
+    }
+  }
+  .detailBreakDownText {
+    font-size: 11PX;
+    font-family: $fira-sans-condensed;
+  }
+  
+}
+
+#detailSidebar {
+  font-family: $fira-sans-condensed;
+  font-size: 11px;
+  color: $neutral-light;
+
+  .chartOptions a {
+    font-family: $fira-sans-condensed-medium;
+    color: $neutral-medium;
+    font-size: 14px;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  .detailTotal {
+    font-family: $fira-sans-condensed;
+    font-size: 12px;
+    color: $neutral-dark;
+
+    .totalType {
+      font-family: $fira-sans-condensed-semibold;
+    }
+  }
 }

@@ -1,24 +1,36 @@
 const React = require('react')
 const ReactRedux = require('react-redux')
+const PropTypes = require('prop-types')
+const Immutable = require('immutable')
 
 const ElectricityMapLayout = require('./ElectricityMapLayout.jsx')
-
-class CanadaMapContainer extends React.Component {
-  render() {
-    // Scale is temporary adjustment as it's too small if we use dimensions mentioned in the design document
-    // //TODO: scale map dynamically when screen size change
-    return (<g transform="scale(1.4)"> <ElectricityMapLayout
-      left={this.props.left}
-      top={this.props.top}
+const detailBreakDownData = Immutable.fromJS({
+      "WA": 9589756,
+      "VA": 465467,
+      "ID": 4678971,
+      "OR": 5548646 
+    })
+const CanadaMapContainer = props => (
+  // Scale is temporary adjustment as it's too small if we use dimensions
+  // mentioned in the design document
+  // TODO: scale map dynamically when screen size change
+  <g transform="scale(1.4)">
+    <ElectricityMapLayout
+      left={props.left}
+      top={props.top}
+      detailBreakDownData={detailBreakDownData}
       country="ca"
     />
-    </g>)
-  }
+  </g>
+)
+
+CanadaMapContainer.propTypes = {
+  top: PropTypes.number.isRequired,
+  left: PropTypes.number.isRequired,
 }
 
 const mapStateToProps = state => ({
   viewport: state.viewport,
-
 })
 
 
