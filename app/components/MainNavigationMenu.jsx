@@ -3,6 +3,7 @@ const ReactRedux = require('react-redux')
 const PropTypes = require('prop-types')
 
 const Constants = require('../Constants.js')
+const Tr = require('../TranslationTable.js')
 const WorkspaceComputations = require('../computations/WorkspaceComputations.js')
 
 const MenuBarOption = require('./MenuBarOption.jsx')
@@ -12,48 +13,67 @@ const SetVisualizationCreator = require('../actionCreators/SetVisualizationCreat
 
 require('./MainNavigationMenu.scss')
 
-const explanationDot = () => {
-  const xPosition = 125
-  return (<ExplanationDot
-    key="mainNavDot"
-    xPosition={xPosition}
-    yPosition={WorkspaceComputations.topHeightMargin() - Constants.getIn(['explanationDot', 'yOffset'])}
-  />)
-}
-
-const MainNavigationMenu = props => (
-  <g>
-    <MenuBarOption
-      key="mainNavigationMenu"
-      yaxis={WorkspaceComputations.topHeightMargin()}
-      options={Constants.get('visualizationTypes')}
-      onOptionClick={props.setImportExportVisualization}
-      selectedOption={props.importExportVisualization}
-      optionXaxisPadding={Constants.getIn(['menuBarOptions', 'optionXaxisPadding'])}
-      optionPadding={Constants.getIn(['menuBarOptions', 'optionPadding'])}
-      trKey="mainMenuBar"
-      color={Constants.getIn(['mainNavigationMenu', 'color'])}
-      lineWidth={Constants.getIn(['mainNavigationMenu', 'lineWidth'])}
-      language={props.language}
+class MainNavigationMenu extends React.Component {
+  explanationDot() {
+    const xPosition = 155
+    return <ExplanationDot
+      key = 'mainNavDot' 
+      xPosition = {xPosition}
+      yPosition = {WorkspaceComputations.topHeightMargin() - Constants.getIn(['explanationDot','yOffset'])}
     />
-    {explanationDot()}
-  </g>
-)
+  }
 
-MainNavigationMenu.propTypes = {
-  setImportExportVisualization: PropTypes.func.isRequired,
-  importExportVisualization: PropTypes.string.isRequired,
-  language: PropTypes.string.isRequired,
+  render() {
+    if(this.props.expandImportExportMenu) {
+      return <g><MenuBarOption 
+        key='mainNavigationMenu'
+        yaxis ={WorkspaceComputations.topHeightMargin() + 49}
+        options = {Constants.get('visualizationTypes')}
+        onOptionClick = {this.props.setImportExportVisualization.bind(this)}
+        selectedOption = {this.props.importExportVisualization}
+        optionXaxisPadding = {Constants.getIn(['menuBarOptions', 'optionXaxisPadding'])}
+        optionPadding = {Constants.getIn(['menuBarOptions', 'optionPadding'])}
+        trKey = 'mainMenuBar' 
+        color = {Constants.getIn(['mainNavigationMenu', 'color'])}
+        language = {this.props.language}
+      />
+      {this.explanationDot()}
+      </g>
+    } else {
+      return <g><MenuBarOption 
+        key='mainNavigationMenu'
+        yaxis ={WorkspaceComputations.topHeightMargin() + 18}
+        options = {Constants.get('visualizationTypes')}
+        onOptionClick = {this.props.setImportExportVisualization.bind(this)}
+        selectedOption = {this.props.importExportVisualization}
+        optionXaxisPadding = {Constants.getIn(['menuBarOptions', 'optionXaxisPadding'])}
+        optionPadding = {Constants.getIn(['menuBarOptions', 'optionPadding'])}
+        trKey = 'mainMenuBar' 
+        color = {Constants.getIn(['mainNavigationMenu', 'color'])}
+        language = {this.props.language}
+      />
+
+      {this.explanationDot()}
+      </g>
+    }
+  }
 }
 
-const mapStateToProps = state => ({
-  viewport: state.viewport,
-  importExportVisualization: state.importExportVisualization,
-  language: state.language,
-})
-const mapDispatchToProps = dispatch => ({
-  setImportExportVisualization(importExportVisualization) {
-    dispatch(SetVisualizationCreator(importExportVisualization))
-  },
-})
+const mapStateToProps = state => {
+  return {
+    viewport: state.viewport,
+    importExportVisualization: state.importExportVisualization,
+    language: state.language,
+    expandImportExportMenu: state.expandImportExportMenu
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    setImportExportVisualization(importExportVisualization) {
+      dispatch(SetVisualizationCreator(importExportVisualization))
+    },
+  }
+}
+
 module.exports = ReactRedux.connect(mapStateToProps, mapDispatchToProps)(MainNavigationMenu)

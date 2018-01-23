@@ -134,10 +134,113 @@ const TranslationTable = Immutable.fromJS({
       en: 'Natural Gas Liquids',
       fr: 'Natural Gas Liquids FR',
     },
-    refinedPetroleumProducts: {
-      en: 'Refin. Petroleum Prod',
-      fr: 'Refin. Petroleum Prod FR',
+    refinedPetroleumProducts:{
+      en:'Refin. Petroleum Prod.',
+      fr:'Refin. Petroleum Prod. FR',
     },
+  },
+
+  importExportMenu: {
+    imports: {
+      en: 'IMPORTS',
+      fr: 'IMPORTS FR',
+    },
+    and: {
+      en: 'and',
+      fr: 'and FR',
+    },
+    exports: {
+      en: 'EXPORTS',
+      fr: 'EXPORTS FR',
+    },
+    importsOnly: {
+      en: 'IMPORTS only',
+      fr: 'IMPORTS only FR',
+    },
+    exportsOnly: {
+      en: 'EXPORTS only',
+      fr: 'EXPORTS only FR',
+    },
+  },
+
+  electricityDataTypes:{
+    'CAN$': { 
+      en: 'CAN$', 
+      fr: 'CAN$' 
+    },
+    'CAN$/MW.h': { 
+      en: 'CAN$/MW.h', 
+      fr: 'CAN$/MW.h' 
+    },
+    'CN$/GJ': { 
+      en: 'CN$/GJ', 
+      fr: 'CN$/GJ' 
+    },
+    'm3/d': { 
+      en: '(m³/d)', 
+      fr: '(m³/d)' 
+    },
+    'MW.h': { 
+      en: '(MW.h)', 
+      fr: '(MW.h)' 
+    },
+    'thousand m3/d': { 
+      en: '(thousand m³/d)', 
+      fr: '(thousand m³/d)' 
+    },
+  },
+
+  arrangedBy: {
+    en: 'arranged by',
+    fr: 'TODO',
+  },
+
+  showing: {
+    en: 'showing',
+    fr: 'TODO',
+  },
+
+  amount: {
+    en: 'amount',
+    fr: 'TODO'
+  },
+
+  nglSubproductMenu: {
+    of: {
+      en: 'of',
+      fr: 'TODO',
+    },
+    butane: {
+      en: 'BUTANE',
+      fr: 'TODO',
+    },
+    and: {
+      en: 'and',
+      fr: 'TODO',
+    },
+    propane: {
+      en: 'PROPANE',
+      fr: 'PROPANE',
+    },
+  },
+
+  explanationShown:{
+    en:'show EXPLANATIONS',
+    fr:'show EXPLANATIONS FR'
+  },
+
+  explanationHide:{
+    en:'hide EXPLANATIONS',
+    fr:'hide EXPLANATIONS FR'
+  },
+
+  confidentialityShown: {
+    en:'show CONFIDENTIALITY',
+    fr:'show CONFIDENTIALITY FR'
+  },
+  confidentialityHide: {
+    en:'hide CONFIDENTIALITY',
+    fr:'hide CONFIDENTIALITY FR'
   },
 
   electricitySortStates: {
@@ -156,16 +259,16 @@ const TranslationTable = Immutable.fromJS({
       },
     },
     location: {
-      en: 'Sort By LOCATION',
-      fr: 'Sort By LOCATION FR',
+      en: 'LOCATION',
+      fr: 'LOCATION FR',
     },
     imports: {
-      en: 'Sort By IMPORTS',
-      fr: 'Sort By IMPORTS FR',
+      en: 'MOST IMPORTS',
+      fr: 'MOST IMPORTS FR',
     },
     exports: {
-      en: 'Sort By EXPORTS',
-      fr: 'Sort By EXPORTS FR',
+      en: 'MOST EXPORTS',
+      fr: 'MOST EXPORTS FR',
     },
   },
 
@@ -196,7 +299,6 @@ const TranslationTable = Immutable.fromJS({
       fr: 'TODO',
     },
   },
-
 
   explanationShown: {
     en: 'show EXPLANATIONS',
