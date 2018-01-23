@@ -3,6 +3,9 @@ const React = require('react')
 const ReactRedux = require('react-redux')
 const Constants = require('../Constants.js')
 
+const ShowAboutWindowCreator = require('../actionCreators/ShowAboutWindowCreator.js')
+
+
 require('./AboutWindow.scss')
 
 const Tr = require('../TranslationTable.js')
@@ -10,18 +13,18 @@ const Tr = require('../TranslationTable.js')
 class AboutWindow extends React.Component {
   constructor(props) {
     super(props)
-    this.state = {showModal: false}
+    this.state = {showAboutWindow: false}
 
     this.handleShow = this.handleShow.bind(this)
     this.handleHide = this.handleHide.bind(this)
   }
 
   handleShow() {
-    this.setState({showModal: true})
+    this.setState({showAboutWindow: true})
   }
 
   handleHide() {
-    this.setState({showModal: false})
+    this.setState({showAboutWindow: false})
   }
 
   closeButton() {
@@ -36,7 +39,7 @@ class AboutWindow extends React.Component {
     return <p
       className='aboutHeading'>
       {Tr.getIn(['aboutWindow', 'heading', this.props.language])}
-    </p> 
+    </p>
   }
 
   intro() {
@@ -44,23 +47,23 @@ class AboutWindow extends React.Component {
       <p className = 'intro'>
         <span>
           {Tr.getIn(['aboutWindow', 'p1', this.props.language])}
-        </span>        
+        </span>      
       </p>
       <p>
         <span>
           {Tr.getIn(['aboutWindow', 'p2', this.props.language])}
         </span>
-      </p> 
+      </p>
       <p>
         <span>
           {Tr.getIn(['aboutWindow', 'p3', this.props.language])}
         </span>
-      </p> 
+      </p>
       <p>
         <span>
           {Tr.getIn(['aboutWindow', 'p4', this.props.language])}
         </span>
-      </p> 
+      </p>
     </div>
   }
 
@@ -155,7 +158,7 @@ class AboutWindow extends React.Component {
   }
 
   render() {
-    const modal = this.state.showModal ? (
+    const modal = this.state.showAboutWindow ? (
       <div 
         id = 'aboutWindow'
         className = 'aboutWindow'>
@@ -166,16 +169,10 @@ class AboutWindow extends React.Component {
         { this.dataVisualization() }
       </div>
       ) : null
-    return <div 
-    id = 'aboutWindow'
-    className = 'aboutWindow'
-    onClick = {this.handleShow}>
-    { this.closeButton() }
-    { this.heading() }
-    { this.intro() }
-    { this.contributors() }
-    { this.dataVisualization() }
-    </div>
+    return <div>This div has overflow: hidden.
+        <button onClick={this.handleShow}>Show modal</button>
+        {modal}
+        </div>
   }
 }
 
@@ -183,7 +180,14 @@ const mapStateToProps = state => {
   return {
     language: state.language,
     viewport: state.viewport,
+    showAboutWindow: state.showAboutWindow,
   }
 }
 
-module.exports = ReactRedux.connect(mapStateToProps)(AboutWindow)
+const mapDispatchToProps = dispatch => ({
+  onClick() {
+    dispatch(ShowAboutWindowCreator())
+  },
+})
+
+module.exports = ReactRedux.connect(mapStateToProps, mapDispatchToProps)(AboutWindow)

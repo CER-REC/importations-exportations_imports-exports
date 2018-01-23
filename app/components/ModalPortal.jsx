@@ -7,7 +7,7 @@ const Tr = require('../TranslationTable.js')
 let modalPortalRoot
 
 // TODO: create a state to check whether a modal has been summoned already
-//  and allow for only one modal to be open at a time. Also use this as an 
+//  and allow for only one modal to be open at a time. Also use this as an
 //  implementation layer for handling keyboard tab focus for accessibility =)
  
 const getModalPortalRoot = () => {

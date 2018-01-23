@@ -6,6 +6,8 @@ const PropTypes = require('prop-types')
 const Constants = require('../Constants.js')
 const Tr = require('../TranslationTable.js')
 
+const AboutWindow = require('./AboutWindow.jsx')
+
 require('./Header.scss')
 require('../styles/Fonts.scss')
 require('../styles/Colours.scss')
@@ -27,7 +29,7 @@ class Header extends React.Component {
 
   aboutThisProjectClick() { // eslint-disable-line class-methods-use-this
     // TODO: summon 'About This Project' window
-    console.log('hei')
+    <AboutWindow/>
   }
 
   methodologyClick() { // eslint-disable-line class-methods-use-this
