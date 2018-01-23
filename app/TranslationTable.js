@@ -245,7 +245,340 @@ const TranslationTable = Immutable.fromJS({
   confidentialCount: {
     en: '$0 of $1 values Confidential',
     fr: 'FR $0 of $1 values Confidential',
-  }
+  },
+  detailBreakDown: {
+    electricity: {
+      defaultText: {
+        en: 'This visualization shows imports to Canada and exports from Canada between the years $0 and $1. Drag the timeline bar to change. Click a province to view Detail',
+        fr: 'This visualization shows imports to Canada and exports from Canada between the years $0 and $1. Drag the timeline bar to change. Click a province to view Detail',
+      },
+      exports: {
+        header: {
+          type: {
+            en: 'Exports',
+            fr: 'Exports',
+          },
+          action: {
+            en: 'from',
+            fr: 'from',
+          },
+          adjective: {
+            en: 'selected',
+            fr: 'selected',
+          },
+          place: {
+            en: 'Provinces',
+            fr: 'Provinces',
+          },
+        },
+        body: {
+          action: {
+            en: 'to',
+            fr: 'to',
+          },
+        },
+      },
+      imports: {
+        header: {
+          type: {
+            en: 'Imports',
+            fr: 'Imports',
+          },
+          action: {
+            en: 'to',
+            fr: 'to',
+          },
+          adjective: {
+            en: 'selected',
+            fr: 'selected',
+          },
+          place: {
+            en: 'Provinces',
+            fr: 'Provinces',
+          },
+        },
+        body: {
+          action: {
+            en: 'from',
+            fr: 'from',
+          },
+        },
+      },
+    },
+  },
+
+  country: {
+    ca: {
+      YT: {
+        en: 'Yukon',
+        fr: 'Yukon',
+      },
+      NT: {
+        en: 'Northwest Territories',
+        fr: 'Northwest Territories',
+      },
+      NU: {
+        en: 'Nunavut',
+        fr: 'Nunavut',
+      },
+      NF: {
+        en: 'Newfoundland and Labrador',
+        fr: 'Newfoundland and Labrador',
+      },
+      PE: {
+        en: 'Prince Edward Island',
+        fr: 'Prince Edward Island',
+      },
+      BC: {
+        en: 'British Columbia',
+        fr: 'British Columbia',
+      },
+      AB: {
+        en: 'Alberta',
+        fr: 'Alberta',
+      },
+      SK: {
+        en: 'Saskatchewan',
+        fr: 'Saskatchewan',
+      },
+      MB: {
+        en: 'Manitoba',
+        fr: 'Manitoba',
+      },
+      ON: {
+        en: 'Ontario',
+        fr: 'Ontario',
+      },
+      QB: {
+        en: 'Québec',
+        fr: 'Québec',
+      },
+      NB: {
+        en: 'New Brunswick',
+        fr: 'New Brunswick',
+      },
+      NS: {
+        en: 'Nova Scotia',
+        fr: 'Nova Scotia',
+      },
+    },
+    us: {
+      AL: {
+        en: 'Alabama',
+        fr: 'Alabama',
+      },
+      AK: {
+        en: 'Alaska',
+        fr: 'Alaska',
+      },
+      AZ: {
+        en: 'Arizona',
+        fr: 'Arizona',
+      },
+      AR: {
+        en: 'Arkansas',
+        fr: 'Arkansas',
+      },
+      CA: {
+        en: 'California',
+        fr: 'California',
+      },
+      CO: {
+        en: 'Colorado',
+        fr: 'Colorado',
+      },
+      CT: {
+        en: 'Connecticut',
+        fr: 'Connecticut',
+      },
+      DE: {
+        en: 'Delaware',
+        fr: 'Delaware',
+      },
+      FL: {
+        en: 'Florida',
+        fr: 'Florida',
+      },
+      GA: {
+        en: 'Georgia',
+        fr: 'Georgia',
+      },
+      HI: {
+        en: 'Hawaii',
+        fr: 'Hawaii',
+      },
+      ID: {
+        en: 'Idaho',
+        fr: 'Idaho',
+      },
+      IL: {
+        en: 'Illinois',
+        fr: 'Illinois',
+      },
+      IN: {
+        en: 'Indiana',
+        fr: 'Indiana',
+      },
+      IA: {
+        en: 'Iowa',
+        fr: 'Iowa',
+      },
+      KS: {
+        en: 'Kansas',
+        fr: 'Kansas',
+      },
+      KY: {
+        en: 'Kentucky',
+        fr: 'Kentucky',
+      },
+      LA: {
+        en: 'Louisiana',
+        fr: 'Louisiana',
+      },
+      ME: {
+        en: 'Maine',
+        fr: 'Maine',
+      },
+      MD: {
+        en: 'Maryland',
+        fr: 'Maryland',
+      },
+      MA: {
+        en: 'Massachusetts',
+        fr: 'Massachusetts',
+      },
+      MI: {
+        en: 'Michigan',
+        fr: 'Michigan',
+      },
+      MN: {
+        en: 'Minnesota',
+        fr: 'Minnesota',
+      },
+      MS: {
+        en: 'Mississippi',
+        fr: 'Mississippi',
+      },
+      MO: {
+        en: 'Missouri',
+        fr: 'Missouri',
+      },
+      MT: {
+        en: 'Montana',
+        fr: 'Montana',
+      },
+      NE: {
+        en: 'Nebraska',
+        fr: 'Nebraska',
+      },
+      NV: {
+        en: 'Nevada',
+        fr: 'Nevada',
+      },
+      NH: {
+        en: 'New Hampshire',
+        fr: 'New Hampshire',
+      },
+      NJ: {
+        en: 'New Jersey',
+        fr: 'New Jersey',
+      },
+      NM: {
+        en: 'New Mexico',
+        fr: 'New Mexico',
+      },
+      NY: {
+        en: 'New York',
+        fr: 'New York',
+      },
+      NC: {
+        en: 'North Carolina',
+        fr: 'North Carolina',
+      },
+      ND: {
+        en: 'North Dakota',
+        fr: 'North Dakota',
+      },
+      OH: {
+        en: 'Ohio',
+        fr: 'Ohio',
+      },
+      OK: {
+        en: 'Oklahoma',
+        fr: 'Oklahoma',
+      },
+      OR: {
+        en: 'Oregon',
+        fr: 'Oregon',
+      },
+      PA: {
+        en: 'Pennsylvania',
+        fr: 'Pennsylvania',
+      },
+      RI: {
+        en: 'Rhode Island',
+        fr: 'Rhode Island',
+      },
+      SC: {
+        en: 'South Carolina',
+        fr: 'South Carolina',
+      },
+      SD: {
+        en: 'South Dakota',
+        fr: 'South Dakota',
+      },
+      TN: {
+        en: 'Tennessee',
+        fr: 'Tennessee',
+      },
+      TX: {
+        en: 'Texas',
+        fr: 'Texas',
+      },
+      UT: {
+        en: 'Utah',
+        fr: 'Utah',
+      },
+      VT: {
+        en: 'Vermont',
+        fr: 'Vermont',
+      },
+      VA: {
+        en: 'Virginia',
+        fr: 'Virginia',
+      },
+      WA: {
+        en: 'Washington',
+        fr: 'Washington',
+      },
+      WV: {
+        en: 'West Virginia',
+        fr: 'West Virginia',
+      },
+      WI: {
+        en: 'Wisconsin',
+        fr: 'Wisconsin',
+      },
+      WY: {
+        en: 'Wyoming',
+        fr: 'Wyoming',
+      },
+    },
+    powerpool: {
+      'NE-ISO': {
+        en: 'New England-ISO',
+        fr: 'New England-ISO',
+      },
+      'MN/ND': {
+        en: 'Minn / N. Dakota',
+        fr: 'Minn / N. Dakota',
+      },
+      PJMPP: {
+        en: 'Pennsylvania Jersey Maryland Power Pool',
+        fr: 'Pennsylvania Jersey Maryland Power Pool',
+      },
+    },
+  },
 })
 
 module.exports = TranslationTable

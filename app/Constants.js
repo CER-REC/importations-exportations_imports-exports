@@ -218,6 +218,27 @@ const Constants = Immutable.fromJS({
       'rgb(30, 97, 114)',
     ],
   },
+  detialBreakdown: {
+    ca: {
+      required: true,
+      type: 'imports',
+      displayPosition: 'bottom',
+      color: '#ff774c',
+      height: 100,
+      showDefault: true,
+    },
+    us: {
+      required: true,
+      type: 'exports',
+      displayPosition: 'top',
+      color: '#1c64b2',
+      height: 100,
+      showDefault: false,
+    },
+    powerpool: {
+      require: false,
+    },
+  },
   dataloader: {
     mapping: {
       value: {
