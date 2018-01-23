@@ -1,4 +1,4 @@
-const createSelector = require('reselect').createSelector
+const { createSelector } = require('reselect')
 const Immutable = require('immutable')
 
 const { visualizationSettings } = require('./visualizationSettings')
@@ -42,6 +42,13 @@ const unitSelector = createSelector(
   productSelector,
   amount,
   (product, unit) => product.get(unit, emptyList),
+)
+
+const binSelector = createSelector(
+  selectedVisualization,
+  amount,
+  state => state.bins,
+  (vis, unit, bins) => bins.getIn([vis, unit], emptyList),
 )
 
 const activityGroupSelector = createSelector(
@@ -127,4 +134,5 @@ module.exports = {
   unitSelector,
   activityGroupSelector,
   arrangeBy,
+  binSelector,
 }

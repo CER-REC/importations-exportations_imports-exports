@@ -4,14 +4,13 @@ const MapPiece = require('./MapPiece.jsx')
 const MapLayoutGridConstant = require('../MapLayoutGridConstant.js')
 const Immutable = require('immutable')
 
-
 import { setSelection } from '../actions/visualizationSettings.js'
 
 require('./ElectricityMapLayout.scss')
 
-const ElectrictySelector = require('../selectors/ElectricitySelector.js')
+const ElectricitySelector = require('../selectors/ElectricitySelector.js')
 const { sortAggregatedLocationsSelector } = require('../selectors/data.js')
-const { arrangeBy } = require('../selectors/data.js')
+const { arrangeBy, binSelector } = require('../selectors/data.js')
 
 class ElectricityMapLayout extends React.Component {
   mapPieceTransform(xaxis, yaxis, position, dimensions, mapPieceScale) {
@@ -135,6 +134,7 @@ class ElectricityMapLayout extends React.Component {
           data={position}
           dimensions={dimensions}
           legends={MapLayoutGridConstant.getIn([type, 'legends'])}
+          bins={this.props.bins}
           styles={styles}
           isMapPieceSelected={this.isMapPieceSelected(position.get('name'), this.props.country)}
           isSelected={isSelected}
@@ -149,10 +149,11 @@ const mapDispatchToProps = { onMapPieceClick: setSelection }
 
 const mapStateToProps = (state, props) => ({
   importExportVisualization: state.importExportVisualization,
-  layout: ElectrictySelector.getElectrictyMapLayout(state, props),
-  selection: ElectrictySelector.getSelectionSettings(state, props),
+  layout: ElectricitySelector.getElectricityMapLayout(state, props),
+  selection: ElectricitySelector.getSelectionSettings(state, props),
   dataPoints: sortAggregatedLocationsSelector(state, props),
   arrangeBy: arrangeBy(state, props),
+  bins: binSelector(state, props),
 })
 
 

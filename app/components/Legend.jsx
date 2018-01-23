@@ -1,10 +1,13 @@
 const React = require('react')
 const ReactRedux = require('react-redux')
 const PropTypes = require('prop-types')
+const Immutable = require('immutable')
 
 const LegendArrow = require('./LegendArrow.jsx')
 const Constants = require('../Constants.js')
 const Tr = require('../TranslationTable.js')
+const { humanNumber } = require('../utilities')
+const { binSelector } = require('../selectors/data')
 
 require('../styles/Fonts.scss')
 
@@ -15,6 +18,7 @@ class Legend extends React.Component {
     return {
       language: PropTypes.string.isRequired,
       importExportVisualization: PropTypes.string.isRequired,
+      bins: PropTypes.instanceOf(Immutable.List).isRequired,
     }
   }
 
@@ -108,63 +112,36 @@ class Legend extends React.Component {
   }
 
   textValues() {
-    let rangeOne = `${Tr.getIn(['theLegendValues', 'electricity', 'rangeOne', this.props.language])}`
-    let rangeTwo = `${Tr.getIn(['theLegendValues', 'electricity', 'rangeTwo', this.props.language])}`
-    let rangeThree = `${Tr.getIn(['theLegendValues', 'electricity', 'rangeThree', this.props.language])}`
-    let rangeFour = `${Tr.getIn(['theLegendValues', 'electricity', 'rangeFour', this.props.language])}`
-    let rangeFive = `${Tr.getIn(['theLegendValues', 'electricity', 'rangeFive', this.props.language])}`
-
+    const bins = this.props.bins.toJS()
     const transformString = `translate(${Constants.getIn(['legend', 'textValuePosition'])} 0)`
-
-    if (this.props.importExportVisualization === 'crudeOil') {
-      rangeOne = `${Tr.getIn(['theLegendValues', 'crudeOil', 'rangeOne', this.props.language])}`
-      rangeTwo = `${Tr.getIn(['theLegendValues', 'crudeOil', 'rangeTwo', this.props.language])}`
-      rangeThree = `${Tr.getIn(['theLegendValues', 'crudeOil', 'rangeThree', this.props.language])}`
-      rangeFour = `${Tr.getIn(['theLegendValues', 'crudeOil', 'rangeFour', this.props.language])}`
-      rangeFive = `${Tr.getIn(['theLegendValues', 'crudeOil', 'rangeFive', this.props.language])}`
-    }
-    if (this.props.importExportVisualization === 'naturalGas') {
-      rangeOne = `${Tr.getIn(['theLegendValues', 'naturalGas', 'rangeOne', this.props.language])}`
-      rangeTwo = `${Tr.getIn(['theLegendValues', 'naturalGas', 'rangeTwo', this.props.language])}`
-      rangeThree = `${Tr.getIn(['theLegendValues', 'naturalGas', 'rangeThree', this.props.language])}`
-      rangeFour = `${Tr.getIn(['theLegendValues', 'naturalGas', 'rangeFour', this.props.language])}`
-      rangeFive = `${Tr.getIn(['theLegendValues', 'naturalGas', 'rangeFive', this.props.language])}`
-    }
-    if (this.props.importExportVisualization === 'naturalGasLiquids') {
-      rangeOne = `${Tr.getIn(['theLegendValues', 'naturalGasLiquids', 'rangeOne', this.props.language])}`
-      rangeTwo = `${Tr.getIn(['theLegendValues', 'naturalGasLiquids', 'rangeTwo', this.props.language])}`
-      rangeThree = `${Tr.getIn(['theLegendValues', 'naturalGasLiquids', 'rangeThree', this.props.language])}`
-      rangeFour = `${Tr.getIn(['theLegendValues', 'naturalGasLiquids', 'rangeFour', this.props.language])}`
-      rangeFive = `${Tr.getIn(['theLegendValues', 'naturalGasLiquids', 'rangeFive', this.props.language])}`
-    }
-
+    const humanNumberLang = v => humanNumber(v, this.props.language)
     return (
       <svg>
         <g transform={transformString}>
           <text
             className="theLegendValues"
             y={Constants.getIn(['legend', 'rangeOneY'])}
-          > {rangeOne}
+          > {bins[0].map(humanNumberLang).join('-')}
           </text>
           <text
             className="theLegendValues"
             y={Constants.getIn(['legend', 'rangeTwoY'])}
-          > {rangeTwo}
+          > {bins[1].map(humanNumberLang).join('-')}
           </text>
           <text
             className="theLegendValues"
             y={Constants.getIn(['legend', 'rangeThreeY'])}
-          > {rangeThree}
+          > {bins[2].map(humanNumberLang).join('-')}
           </text>
           <text
             className="theLegendValues"
             y={Constants.getIn(['legend', 'rangeFourY'])}
-          > {rangeFour}
+          > {bins[3].map(humanNumberLang).join('-')}
           </text>
           <text
             className="theLegendValues"
             y={Constants.getIn(['legend', 'rangeFiveY'])}
-          > {rangeFive}
+          > {bins[4].map(humanNumberLang).join('-')}
           </text>
         </g>
       </svg>
@@ -209,14 +186,16 @@ class Legend extends React.Component {
   }
 
   render() {
+    if (!this.props.bins || this.props.bins.count() === 0) { return null }
     return <g>{this.shownLegend()}</g>
   }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state, props) => ({
   viewport: state.viewport,
   language: state.language,
   importExportVisualization: state.importExportVisualization,
+  bins: binSelector(state, props),
 })
 
 
