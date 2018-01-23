@@ -1,9 +1,15 @@
 const React = require('react')
 const ReactRedux = require('react-redux')
 const PropTypes = require('prop-types')
+const Immutable = require('immutable')
 
 const ElectricityMapLayout = require('./ElectricityMapLayout.jsx')
-
+const detailBreakDownData = Immutable.fromJS({
+      "WA": 9589756,
+      "VA": 465467,
+      "ID": 4678971,
+      "OR": 5548646 
+    })
 const CanadaMapContainer = props => (
   // Scale is temporary adjustment as it's too small if we use dimensions
   // mentioned in the design document
@@ -12,6 +18,7 @@ const CanadaMapContainer = props => (
     <ElectricityMapLayout
       left={props.left}
       top={props.top}
+      detailBreakDownData={detailBreakDownData}
       country="ca"
     />
   </g>

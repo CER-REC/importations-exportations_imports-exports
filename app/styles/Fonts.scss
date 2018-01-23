@@ -136,6 +136,24 @@
   fill: $neutral-light;
 }
 
+.detailBreakDown {
+  .header{
+    &.imports {
+      font-size: 12PX;
+      font-family: $fira-sans-condensed-semibold;
+    }
+    &.exports {
+      font-size: 12PX;
+      font-family: $fira-sans-condensed-semibold;
+    }
+  }
+  .detailBreakDownText {
+    font-size: 11PX;
+    font-family: $fira-sans-condensed;
+  }
+  
+}
+
 #detailSidebar {
   font-family: $fira-sans-condensed;
   font-size: 11px;

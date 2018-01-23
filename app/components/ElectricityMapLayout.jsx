@@ -2,6 +2,8 @@ const React = require('react')
 const ReactRedux = require('react-redux')
 const MapPiece = require('./MapPiece.jsx')
 const MapLayoutGridConstant = require('../MapLayoutGridConstant.js')
+const Constants = require('../Constants.js')
+const Tr = require('../TranslationTable.js')
 const Immutable = require('immutable')
 const memoize = require('memoize-immutable')
 const PropTypes = require('prop-types')
@@ -13,6 +15,10 @@ require('./ElectricityMapLayout.scss')
 const ElectricitySelector = require('../selectors/ElectricitySelector.js')
 const { sortAggregatedLocationsSelector } = require('../selectors/data.js')
 const { arrangeBy, binSelector } = require('../selectors/data.js')
+const DetailSidebar = require('./DetailSidebar')
+const DetailBreakdown = require('./DetailBreakdown').default
+
+
 
 const mapPieceTransform = (xaxis, yaxis, position, dimensions, mapPieceScale) => {
   const startXaxis = xaxis + (position.get('x') * ((mapPieceScale * dimensions.get('width')) + dimensions.get('xAxisPadding')))
@@ -120,13 +126,12 @@ class ElectricityMapLayout extends React.Component {
     if (isSelected !== -1) { return true }
     return this.props.selection.getIn(['destinations', country], new Immutable.List()).includes(key)
   }
-
   isSelected() {
     const length = this.props.selection.get('origins').count() + this.props.selection.get('destinations').count()
     return (length > 0)
   }
 
-  render() {
+ renderMapPiece(){
     // Data from constant file
     const type = this.props.importExportVisualization
 
@@ -162,6 +167,35 @@ class ElectricityMapLayout extends React.Component {
         {this.getPowerPoolsOutline(position.get('name'), this.props.country, xaxis, yaxis, position, dimensions, mapPieceScale)}
       </g>
     ))
+  }
+
+  renderDetailBreakdown(data){
+    const detailBreakdownData = Constants.getIn(['detailBreakDown', this.props.country])
+    if(typeof detailBreakdownData !== 'undefined' && detailBreakdownData.get('required', false)){
+      return <DetailBreakdown
+        data={data}
+        type={detailBreakdownData.get('type')}
+        trContent={Tr.getIn(['detailBreakDown', this.props.importExportVisualization, detailBreakdownData.get('type')])}
+        veritcalPosition={detailBreakdownData.get('displayPosition')}
+        color={detailBreakdownData.get('color')}
+        height = {detailBreakdownData.get('height')}
+        showDefault={detailBreakdownData.get('showDefault', false)}
+      />
+    }
+    return null
+  }
+
+  renderDetailSidebar(){
+    return <DetailSidebar top={this.props.top} height={Constants.getIn(['detailBreakDown', this.props.country, 'height'], 0)}>
+         {this.renderDetailBreakdown(this.props.detailBreakDownData)}
+        </DetailSidebar>
+  }
+
+  render() {
+    return <g>
+      {this.renderMapPiece()}
+      {this.renderDetailSidebar()}
+      </g>
   }
 }
 
