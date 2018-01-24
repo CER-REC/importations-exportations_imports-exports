@@ -114,7 +114,89 @@ const TranslationTable = fromJS({
       en: 'Reset Visualization',
       fr: 'Réinitialiser visualisation',
     },
+  },
 
+  aboutWindow: {
+    heading: {
+      en: 'ABOUT THIS PROJECT',
+      fr: 'ABOUT THIS PROJECT FR',
+    },
+    p1: {
+      en: 'Paragraph one',
+      fr: 'la french FR',
+    },
+    p2: {
+      en: 'paragraph two',
+      fr: 'la french placeholder FR',
+    },
+    p3: {
+      en: 'paragraph three',
+      fr: 'la french paragraph trois FR',
+    },
+    p4: {
+      en: 'paragraph four',
+      fr: 'oui oui FR',
+    },
+    contributors: {
+      en: 'CONTRIBUTORS',
+      fr: 'CONTRIBUTORS FR',
+    },
+    dataSource: {
+      en: 'DATA SOURCE',
+      fr: 'DATA SOURCE',
+    },
+    dataNamesfromNEB: {
+      en: 'Andrew Benson, Karen Duckworth, Randy Cooke',
+      fr: 'Andrew Benson, Karen Duckworth, Randy Cooke',
+    },
+    nebCoordinators: {
+      en: 'Annette Hester (Concept and Coordination); Katherine Murphy (Project Manager); Faiza Hussain (Administrative support); Stephen Chow (Data Coordination)',
+      fr: 'TODO',
+    },
+    dataVisualization: {
+      en: 'DATA VISUALIZATION',
+      fr: 'DATA VISUALIZATION FR',
+    },
+    leadDesignResearch: {
+      en: 'LEAD DESIGN RESEARCH',
+      fr: 'LEAD DESIGN RESEARCH FR',
+    },
+    leadDesigners: {
+      en: 'Sheelagh Carpendale and Wesley Willett, iLab, University of Calgary',
+      fr: 'TODO',
+    },
+    coordination: {
+      en: 'COORDINATION',
+      fr: 'COORDINATION FR',
+    },
+    coordi: {
+      en: 'Claudia Maurer',
+      fr: 'Claudia Maurer',
+    },
+    design: {
+      en: 'DESIGN',
+      fr: 'DESIGN',
+    },
+    designers: {
+      en: 'Jagoda Walny Nix, Peter Buk, Doris Kosminsky, Lien Quach, and Mieka West',
+      fr: 'TODO',
+    },
+    leadTechnical: {
+      en: 'LEAD TECHNICAL',
+      fr: 'LEAD TECHNICAL FR',
+    },
+    vizworx: {
+      en: 'VizworX',
+      fr: 'VizworX',
+    },
+    technical: {
+      en: 'TECHNICAL',
+      fr: 'TECHNICAL',
+    },
+    technicalTeam: {
+      en: 'Patrick King, Spenser Jones, Rahul Kamal Bhaskar, Ben Cousins, Abhishek Sharma, and Charlie Cheung',
+      fr: 'Patrick King, Spenser Jones, Rahul Kamal Bhaskar, Ben Cousins, Abhishek Sharma, and Charlie Cheung',
+    },
   },
 
   mainMenuBar: {

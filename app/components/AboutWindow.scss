@@ -1,0 +1,33 @@
+
+.aboutWindow {
+  position:absolute;
+  right: 3%;
+  width:380px;
+  height: auto;
+  top:10px;
+  background-color: white;
+  border: 1px solid rgba(0,0,0,0.15);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.closeButton {
+  float: right;
+  width: 10px;
+  position: absolute;
+  top: 17px;
+  right: 17px;
+  cursor: pointer;
+}
+
+.intro {
+  position: relative;
+  width: 90%;
+}
+
+.aboutBodyText {
+  margin-top: -15px;
+}
+
+.contributorsSection {
+  margin-top: -10px;
+}

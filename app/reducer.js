@@ -9,6 +9,7 @@ import ElectricityExplanationReducer from './reducers/ElectricityExplanationRedu
 import ExpandImportExportMenuReducer from './reducers/ExpandImportExportMenuReducer.js'
 import ExpandElectricitySortMenuReducer from './reducers/ExpandElectricitySortMenuReducer.js'
 import ExpandElectricityAmountMenuReducer from './reducers/ExpandElectricityAmountMenuReducer.js'
+import { reducer as ModalReducer } from './actions/modal'
 import { reducer as DataReducer } from './actions/data'
 import { reducer as BinsReducer } from './actions/bins'
 import { reducer as visualizationSettings } from './actions/visualizationSettings'
@@ -40,6 +41,7 @@ const nestedReducers = combineReducers({
   bins: BinsReducer,
   dataLoadingComplete: DataLoadCompleteReducer,
   visualizationSettings,
+  modal: ModalReducer,
 })
 
 export default (initialState = {}, action) => {

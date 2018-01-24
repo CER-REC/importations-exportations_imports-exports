@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import Header from './Header'
 import MenuBar from './MenuBar'
 import SocialBar from './SocialBar'
-
+import ModalSelector from './ModalSelector'
 import VisualizationContainer from './VisualizationContainer'
 import ViewportSelectors from '../selectors/viewport/'
 
@@ -14,6 +14,7 @@ const Workspace = ({ svgSize, detailSidebarPosition }) => (
   <div style={{ position: 'relative' }}>
     <div className="Workspace">
       <Header />
+
     </div>
     <div
       id="detailSidebar"
@@ -35,7 +36,7 @@ const Workspace = ({ svgSize, detailSidebarPosition }) => (
       <MenuBar />
       <SocialBar />
     </svg>
-
+    <ModalSelector />
   </div>
 )
 
