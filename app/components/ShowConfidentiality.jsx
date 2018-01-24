@@ -1,19 +1,34 @@
 const React = require('react')
 const ReactRedux = require('react-redux')
+const PropTypes = require('prop-types')
 
 const Constants = require('../Constants.js')
 const Tr = require('../TranslationTable.js')
 
 const WorkspaceComputations = require('../computations/WorkspaceComputations.js')
 
-
-require ('../styles/Fonts.scss')
-
+const ConfidentialityToggle = require('../actions/confidentiality').ShowConfidentiality
 
 class ShowConfidentiality extends React.Component {
+  static get propTypes() {
+    return {
+      onClick: PropTypes.func.isRequired,
+      confidentiality: PropTypes.bool.isRequired,
+      language: PropTypes.string.isRequired,
+    }
+  }
+
+  constructor(props) {
+    super(props)
+    this.onClick = this.props.onClick.bind(this)
+  }
+
+  onClick(e) {
+    e.preventDefault()
+    console.log('asdf')
+  }
 
   triangleLine() {
-    
     return <svg 
       x = {0}
       y = {503}
@@ -26,16 +41,20 @@ class ShowConfidentiality extends React.Component {
   }
 
   showText() {
+    let textString = `${Tr.getIn(['confidentialityShown', this.props.language])}`
+    if(this.props.confidentiality) {
+      textString = `${Tr.getIn(['confidentialityHide' , this.props.language])}`
+    }
     return <text x = {13} 
       y = { 506 } 
       className = 'showHideConfidentiality'
       fill= '#999999'> 
-      { Tr.getIn(['confidentialityShown', this.props.language])}
+      { textString }
     </text>
   }
 
   render() {
-    return <g transform='translate(0 30)'>
+    return <g transform='translate(0 30)' onClick = {this.onClick}>
       {this.showText()}
       {this.triangleLine()}
     </g>
@@ -46,9 +65,15 @@ const mapStateToProps = state => {
   return {
     viewport: state.viewport,
     language: state.language,
+    confidentiality: state.confidentiality,
   }
 }
 
+const mapDispatchToProps = dispatch => ({
+  onClick() {
+    dispatch(ConfidentialityToggle())
+  },
+})
 
 
-module.exports = ReactRedux.connect(mapStateToProps)(ShowConfidentiality)
+module.exports = ReactRedux.connect(mapStateToProps, mapDispatchToProps)(ShowConfidentiality)

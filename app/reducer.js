@@ -13,6 +13,7 @@ import { reducer as DataReducer } from './actions/data'
 import { reducer as BinsReducer } from './actions/bins'
 import { reducer as visualizationSettings } from './actions/visualizationSettings'
 import { reducer as DataLoadCompleteReducer } from './actions/DataLoadComplete'
+import { reducer as ConfidentialityReducer } from './actions/confidentiality'
 
 const mergeDeep = (old, merge) => {
   if (old === Object(old) && Array.isArray(old) === false) {
@@ -36,8 +37,10 @@ const nestedReducers = combineReducers({
   expandImportExportMenu: ExpandImportExportMenuReducer,
   expandElectricityAmountMenu: ExpandElectricityAmountMenuReducer,
   expandElectricitySortMenu: ExpandElectricitySortMenuReducer,
+  confidentiality: ConfidentialityReducer,
   data: DataReducer,
   bins: BinsReducer,
+
   dataLoadingComplete: DataLoadCompleteReducer,
   visualizationSettings,
 })
