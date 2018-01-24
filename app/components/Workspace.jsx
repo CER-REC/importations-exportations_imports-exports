@@ -5,6 +5,7 @@ const Constants = require('../Constants.js')
 const Header = require('./Header.jsx')
 const MenuBar = require('./MenuBar.jsx')
 const SocialBar = require('./SocialBar.jsx')
+const ModalSelector = require('./ModalSelector')
 
 // Render popover here for now until AboutWindow gets merged in
 const ImageDownloadWindow = require('./ImageDownloadWindow')
@@ -18,6 +19,7 @@ const Workspace = ({ svgSize, detailSidebarPosition }) => (
   <div style={{ position: 'relative' }}>
     <div className="Workspace">
       <Header />
+
     </div>
     <div
       id="detailSidebar"
@@ -40,7 +42,7 @@ const Workspace = ({ svgSize, detailSidebarPosition }) => (
       <SocialBar />
     </svg>
     <ImageDownloadWindow />
-
+    <ModalSelector />
   </div>
 )
 

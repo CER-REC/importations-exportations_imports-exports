@@ -191,6 +191,11 @@ const Constants = Immutable.fromJS({
     y: 5,
   },
 
+  aboutWindow: {
+    width: 380,
+  },
+
+
   energyMeasurementTypes: {
     electricity: ['MW.h', 'CAN$', 'CAN$/MW.h'],
     crudeOil: ['thousand m3/d'],
