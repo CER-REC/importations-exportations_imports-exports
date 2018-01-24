@@ -130,6 +130,10 @@ const Constants = Immutable.fromJS({
     yOffset: 5,
   },
 
+  imageDownload: {
+    previewImageWidth: 430,
+  },
+
   visualizationTypes: [
     'electricity',
     'crudeOil',

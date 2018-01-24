@@ -6,6 +6,9 @@ const Header = require('./Header.jsx')
 const MenuBar = require('./MenuBar.jsx')
 const SocialBar = require('./SocialBar.jsx')
 
+// Render popover here for now until AboutWindow gets merged in
+const ImageDownloadWindow = require('./ImageDownloadWindow')
+
 const VisualizationContainer = require('./VisualizationContainer.jsx')
 const ViewportSelectors = require('../selectors/viewport/')
 
@@ -36,6 +39,7 @@ const Workspace = ({ svgSize, detailSidebarPosition }) => (
       <MenuBar />
       <SocialBar />
     </svg>
+    <ImageDownloadWindow />
 
   </div>
 )

@@ -331,6 +331,16 @@ const TranslationTable = Immutable.fromJS({
     fr: '/import-export-visualization/',
   },
 
+  imageDownload: {
+    en: 'Image Download',
+    fr: 'TODO',
+  },
+
+  saveImage: {
+    en: 'Save Image',
+    fr: 'TODO',
+  },
+
 
   downloadable: {
     csv: {
