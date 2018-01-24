@@ -138,10 +138,18 @@
 
 .imageDownloadHeading {
   font-family: $fira-sans-condensed;
-  font-size: 18px;
+  font-size: 22px;
   color: $neutral-medium;
   margin-left: 25px;
   margin-top: 25px;
+}
+
+.saveImage {
+  font-family: $fira-sans-condensed;
+  font-size: 18px;
+  color: $neutral-medium;
+  margin-left: 25px;
+  margin-top: 395px;
 }
 
 .aboutHeading {

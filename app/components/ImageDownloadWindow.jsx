@@ -3,7 +3,8 @@ const Immutable = require('immutable')
 const React = require('react')
 const ReactRedux = require('react-redux')
 const ReactDOM = require('react-dom')
-const PropTypes = require('prop-types')
+
+const CloseModal = require('../actions/modal.js').CloseModal
 
 const Constants = require('../Constants.js')
 const Tr = require('../TranslationTable.js')
@@ -11,17 +12,20 @@ const Tr = require('../TranslationTable.js')
 require('./ImageDownloadWindow.scss')
 
 class ImageDownloadWindow extends React.Component {
-  static get propTypes() {
-    return {
-      viewport: PropTypes.instanceOf(Immutable.Map).isRequired,
-      language: PropTypes.string.isRequired,
-    }
+  constructor(props) {
+    super(props)
+    this.handleClose = this.handleClose.bind(this)
+  }
+
+  handleClose() {
+    this.props.closeWindowClick()
   }
 
   closeButton() {
     return <img 
       className = 'closeButton'
       src='images/hide_(close).svg'
+      onClick = {this.handleClose}
     />
   }
 
@@ -32,17 +36,23 @@ class ImageDownloadWindow extends React.Component {
       </p>
   }
 
+  imagePreview() {
+    return <div
+      className = 'imagePreview'
+      />
+  }
+
   saveImageButton() {
     return <p
-      className='imageDownloadHeading'>
+      className='saveImage'>
       { Tr.getIn(['saveImage', this.props.language]).toUpperCase() }
     </p>
   }
 
   render() {
    return <div 
-    id = 'imageDownloadWindow'
     className='imageDownloadWindow'>
+    {this.imagePreview()}
     {this.closeButton()}
     {this.heading()}
     {this.saveImageButton()}
@@ -55,4 +65,10 @@ const mapStateToProps = state => ({
   language: state.language,
 })
 
-module.exports = ReactRedux.connect(mapStateToProps)(ImageDownloadWindow)
+const mapDispatchToProps = dispatch => ({
+  closeWindowClick() {
+    dispatch(CloseModal())
+  },
+})
+
+module.exports = ReactRedux.connect(mapStateToProps, mapDispatchToProps)(ImageDownloadWindow)

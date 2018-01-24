@@ -1,10 +1,12 @@
 
 
 .imageDownloadWindow {
-  position:relative;
-  margin: 0 auto;
-  width:510px;
-  height: auto;
+  position:absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width:610px;
+  height: 510px;
   background-color: white;
   border: 1px solid rgba(0,0,0,0.15);
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -17,4 +19,14 @@
   top: 17px;
   right: 17px;
   cursor: pointer;
+}
+
+.imagePreview {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 430px;
+  height: 330px;
+  border: 1px solid #666666;
 }

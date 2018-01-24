@@ -10,6 +10,8 @@ const Constants = require('../Constants.js')
 const Tr = require('../TranslationTable.js')
 const WorkspaceComputations = require('../computations/WorkspaceComputations.js')
 
+const ShowImageDownloadWindow = require('../actions/modal.js').OpenModal
+
 require('./SocialBar.scss')
 
 class SocialBar extends React.Component {
@@ -101,11 +103,7 @@ class SocialBar extends React.Component {
   }
 
   downloadImageClick() {
-    // TODO
-    const TODO = 100
-    const screenshotUrl = `${RouteComputations.screenshotOrigin(document.location)}/${Constants.get('screenshotPath')}/?pageUrl=${RouteComputations.screenshotParameter(document.location)}&width=${TODO}&height=${TODO}`
-
-    window.open(screenshotUrl)
+    this.onClick = this.props.onClick()
   }
 
   downloadDataClick() {
@@ -115,7 +113,7 @@ class SocialBar extends React.Component {
   }
 
 
-  render() {
+  icons() {
     const transformSocialBarIcons = `translate(${this.props.viewport.get('x') - Constants.getIn(['socialBar', 'iconMargin'])}, 0)`
 
     return (
@@ -180,6 +178,10 @@ class SocialBar extends React.Component {
       </svg>
     )
   }
+
+  render() {
+    return (<g>{this.icons()}</g>)
+  }
 }
 
 const mapStateToProps = state => ({
@@ -187,5 +189,10 @@ const mapStateToProps = state => ({
   language: state.language,
 })
 
+const mapDispatchToProps = dispatch => ({
+  onClick() {
+    dispatch(ShowImageDownloadWindow('imageDownload'))
+  },
+})
 
-module.exports = ReactRedux.connect(mapStateToProps)(SocialBar)
+module.exports = ReactRedux.connect(mapStateToProps, mapDispatchToProps)(SocialBar)
