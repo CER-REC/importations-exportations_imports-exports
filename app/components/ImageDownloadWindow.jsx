@@ -49,12 +49,20 @@ class ImageDownloadWindow extends React.Component {
     </p>
   }
 
+  bitlyText() {
+    return <p
+      className = 'bitlyText'>
+      placeholder for bitly link
+    </p>
+  }
+
   render() {
    return <div 
     className='imageDownloadWindow'>
     {this.imagePreview()}
     {this.closeButton()}
     {this.heading()}
+    {this.bitlyText()}
     {this.saveImageButton()}
    </div>
   }

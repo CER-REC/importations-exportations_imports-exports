@@ -2,11 +2,11 @@
 
 .imageDownloadWindow {
   position:absolute;
-  top: 50%;
+  top: 40%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width:610px;
-  height: 510px;
+  width:550px;
+  height: 490px;
   background-color: white;
   border: 1px solid rgba(0,0,0,0.15);
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -29,4 +29,20 @@
   width: 430px;
   height: 330px;
   border: 1px solid #666666;
+}
+
+.saveImage {
+  margin-left: 25px;
+  margin-top: 380px;
+}
+
+.imageDownloadHeading {
+  margin-left: 25px;
+  margin-top: 25px;
+}
+
+.bitlyText {
+  position: absolute;
+  top: 78%;
+  right: 12%;
 }
