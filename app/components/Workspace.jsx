@@ -5,6 +5,7 @@ const Constants = require('../Constants.js')
 const Header = require('./Header.jsx')
 const MenuBar = require('./MenuBar.jsx')
 const SocialBar = require('./SocialBar.jsx')
+const ModalSelector = require('./ModalSelector')
 
 const VisualizationContainer = require('./VisualizationContainer.jsx')
 const ViewportSelectors = require('../selectors/viewport/')
@@ -15,6 +16,7 @@ const Workspace = ({ svgSize, detailSidebarPosition }) => (
   <div style={{ position: 'relative' }}>
     <div className="Workspace">
       <Header />
+
     </div>
     <div
       id="detailSidebar"
@@ -36,7 +38,7 @@ const Workspace = ({ svgSize, detailSidebarPosition }) => (
       <MenuBar />
       <SocialBar />
     </svg>
-
+    <ModalSelector />
   </div>
 )
 
