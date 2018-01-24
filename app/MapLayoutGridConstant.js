@@ -57,7 +57,7 @@ const MapLayoutGridConstant = Immutable.fromJS({
           name: 'ON', originKey: 'ON', x: 4.5, y: 1,
         },
         {
-          name: 'QC', originKey: 'QC', x: 5.5, y: 1,
+          name: 'QB', originKey: 'QB', x: 5.5, y: 1,
         },
         {
           name: 'NB', originKey: 'NB', x: 6.5, y: 1,

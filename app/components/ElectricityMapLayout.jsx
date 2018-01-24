@@ -145,8 +145,7 @@ class ElectricityMapLayout extends React.Component {
     const yaxis = this.props.top
     const isSelected = this.isSelected()
     return layout.map((position, key) => (
-      // eslint-disable-next-line react/no-array-index-key
-      <g key={key}>
+      <g key = {`mapPieceKey_${this.props.country}_${position.get('name')}`}>
         <g
           className="mappiece"
           onClick={this.onClick( this.props.country, position.get('name'))}
@@ -164,7 +163,6 @@ class ElectricityMapLayout extends React.Component {
             x1= {mapPieceTransformStartXaxis( position, dimensions, mapPieceScale)}
             y1= {mapPieceTransformStartYaxis( position, dimensions, mapPieceScale)}
             id = {`mapPiece_${this.props.country}_${position.get('name')}`}
-            key = {`mapPieceKey_${this.props.country}_${position.get('name')}`}
           />
         </g>
         {this.getPowerPoolsOutline(position.get('name'), this.props.country, xaxis, yaxis, position, dimensions, mapPieceScale)}

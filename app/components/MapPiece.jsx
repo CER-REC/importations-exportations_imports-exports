@@ -50,15 +50,6 @@ class MapPiece extends React.Component {
     }
     return ''
   }
-   componentWillMount() {
-     console.log(this.props.data.get('name'), this.props.x1, this.props.y1)
-    
-  }
-  componentWillReceiveProps(props) {
-    console.log(this.props.data.get('name'), this.props.x1, this.props.y1)
-    console.log(props.data.get('name'), props.x1, props.y1)
-  }
-
 
   render() {
     let arrowTransform = `translate(${Constants.getIn(['mapPieceArrowStyle', 'x'])}, ${Constants.getIn(['mapPieceArrowStyle', 'y'])})`
@@ -110,7 +101,6 @@ class MapPiece extends React.Component {
         x2= {this.props.x1 || 0}
         y2= {this.props.y1 || 0}
         id= {this.props.id}
-        key= {this.props.id}
       />
       </g>)
   }
