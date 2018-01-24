@@ -18,12 +18,11 @@ const { arrangeBy, binSelector } = require('../selectors/data.js')
 const DetailSidebar = require('./DetailSidebar')
 const DetailBreakdown = require('./DetailBreakdown').default
 
-
-
-const mapPieceTransform = (xaxis, yaxis, position, dimensions, mapPieceScale) => {
-  const startXaxis = xaxis + (position.get('x') * ((mapPieceScale * dimensions.get('width')) + dimensions.get('xAxisPadding')))
-  const startYaxis = yaxis + (position.get('y') * ((mapPieceScale * dimensions.get('height')) + dimensions.get('yAxisPadding')))
-  return `translate(${`${startXaxis},${startYaxis}`}) scale(${mapPieceScale})`
+const mapPieceTransformStartXaxis = ( position, dimensions, mapPieceScale) => {
+  return (position.get('x') * ((mapPieceScale * dimensions.get('width')) + dimensions.get('xAxisPadding')))
+}
+const mapPieceTransformStartYaxis = ( position, dimensions, mapPieceScale) => {
+  return (position.get('y') * ((mapPieceScale * dimensions.get('height')) + dimensions.get('yAxisPadding')))
 }
 
 const powerPoolTransform = (xaxis, yaxis, position, dimensions, mapPieceScale) => {
@@ -145,14 +144,14 @@ class ElectricityMapLayout extends React.Component {
     const xaxis = this.props.left
     const yaxis = this.props.top
     const isSelected = this.isSelected()
-
     return layout.map((position, key) => (
       // eslint-disable-next-line react/no-array-index-key
       <g key={key}>
         <g
           className="mappiece"
           onClick={this.onClick( this.props.country, position.get('name'))}
-          transform={mapPieceTransform(xaxis, yaxis, position, dimensions, mapPieceScale)}
+          transform={`scale(${mapPieceScale})`}
+          id = {`mapPiece_${this.props.country}_${position.get('name')}`}
         >
           <MapPiece
             data={position}
@@ -162,6 +161,10 @@ class ElectricityMapLayout extends React.Component {
             styles={styles}
             isMapPieceSelected={this.isMapPieceSelected(position.get('name'), this.props.country)}
             isSelected={isSelected}
+            x1= {mapPieceTransformStartXaxis( position, dimensions, mapPieceScale)}
+            y1= {mapPieceTransformStartYaxis( position, dimensions, mapPieceScale)}
+            id = {`mapPiece_${this.props.country}_${position.get('name')}`}
+            key = {`mapPieceKey_${this.props.country}_${position.get('name')}`}
           />
         </g>
         {this.getPowerPoolsOutline(position.get('name'), this.props.country, xaxis, yaxis, position, dimensions, mapPieceScale)}

@@ -7,6 +7,7 @@ const ImportExportArrow = require('./ImportExportArrow.jsx')
 const MapPieceLabel = require('./MapPieceLabel.jsx')
 const ConfidentialIcon = require('./ConfidentialIcon.jsx')
 const Constants = require('../Constants')
+const AnimatedMapPiece = require('./SVGAnimation/AnimatedMapPiece')
 
 class MapPiece extends React.Component {
   static propTypes = {
@@ -49,6 +50,15 @@ class MapPiece extends React.Component {
     }
     return ''
   }
+   componentWillMount() {
+     console.log(this.props.data.get('name'), this.props.x1, this.props.y1)
+    
+  }
+  componentWillReceiveProps(props) {
+    console.log(this.props.data.get('name'), this.props.x1, this.props.y1)
+    console.log(props.data.get('name'), props.x1, props.y1)
+  }
+
 
   render() {
     let arrowTransform = `translate(${Constants.getIn(['mapPieceArrowStyle', 'x'])}, ${Constants.getIn(['mapPieceArrowStyle', 'y'])})`
@@ -75,7 +85,6 @@ class MapPiece extends React.Component {
       && this.props.mapPieceProps.get('stroke') !== '') {
       stroke = this.props.mapPieceProps.get('stroke')
     }
-
     return (<g fillOpacity={opacity} >
       <polygon
         stroke={stroke}
@@ -95,7 +104,15 @@ class MapPiece extends React.Component {
         {this.drawArrow(this.props.legends, this.props.data, 'imports', this.props.styles, this.props.arrowProps)}
       </g>
       {confidentialIcon}
-            </g>)
+      <AnimatedMapPiece
+        x1= {this.props.x1 || 0}
+        y1= {this.props.y1 || 0}
+        x2= {this.props.x1 || 0}
+        y2= {this.props.y1 || 0}
+        id= {this.props.id}
+        key= {this.props.id}
+      />
+      </g>)
   }
 }
 
