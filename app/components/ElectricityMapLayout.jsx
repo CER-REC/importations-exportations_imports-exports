@@ -150,7 +150,6 @@ class ElectricityMapLayout extends React.Component {
           className="mappiece"
           onClick={this.onClick( this.props.country, position.get('name'))}
           transform={`scale(${mapPieceScale})`}
-          id = {`mapPiece_${this.props.country}_${position.get('name')}`}
         >
           <MapPiece
             data={position}
