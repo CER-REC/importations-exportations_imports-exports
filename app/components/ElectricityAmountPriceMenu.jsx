@@ -1,17 +1,17 @@
-const React = require('react')
-const ReactRedux = require('react-redux')
-const PropTypes = require('prop-types')
+import React from 'react'
+import { connect } from 'react-redux'
+import PropTypes from 'prop-types'
 
-const Constants = require('../Constants.js')
-const Tr = require('../TranslationTable.js')
-const WorkspaceComputations = require('../computations/WorkspaceComputations.js')
+import Constants from '../Constants'
+import Tr from '../TranslationTable'
+import WorkspaceComputations from '../computations/WorkspaceComputations'
 
-const ExpandElectricityAmountMenuCreator = require('../actionCreators/ExpandElectricityAmountMenuCreator.js')
+import ExpandElectricityAmountMenuCreator from '../actionCreators/ExpandElectricityAmountMenuCreator'
 
-const { setAmount } = require('../actions/visualizationSettings')
-const { visualizationSettings } = require('../selectors/visualizationSettings')
+import { setAmount } from '../actions/visualizationSettings'
+import { visualizationSettings } from '../selectors/visualizationSettings'
 
-require('./ElectricityAmountPriceMenu.scss')
+import './ElectricityAmountPriceMenu.scss'
 
 class ElectricityAmountPriceMenu extends React.Component {
   constructor(props) {
@@ -236,4 +236,4 @@ const mapDispatchToProps = dispatch => {
 }
 
 
-module.exports = ReactRedux.connect(mapStateToProps, mapDispatchToProps)(ElectricityAmountPriceMenu)
+module.exports = connect(mapStateToProps, mapDispatchToProps)(ElectricityAmountPriceMenu)

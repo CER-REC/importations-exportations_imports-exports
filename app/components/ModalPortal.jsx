@@ -1,8 +1,5 @@
-const React = require('react')
-const ReactDOM = require('react-dom')
-
-const Constants = require('../Constants.js')
-const Tr = require('../TranslationTable.js')
+import React from 'react'
+import ReactDOM from 'react-dom'
 
 let modalPortalRoot
 

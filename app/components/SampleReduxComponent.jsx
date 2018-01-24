@@ -1,6 +1,6 @@
-const React = require('react')
-const PropTypes = require('prop-types')
-const ReactRedux = require('react-redux')
+import React from 'react'
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
 
 const SampleReduxComponent = props => (
   <div>
@@ -16,5 +16,5 @@ const mapStateToProps = state => ({
   name: state.name,
 })
 
-module.exports = ReactRedux.connect(mapStateToProps)(SampleReduxComponent)
+module.exports = connect(mapStateToProps)(SampleReduxComponent)
 module.exports.unwrapped = SampleReduxComponent

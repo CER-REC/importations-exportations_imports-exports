@@ -1,5 +1,5 @@
-const { fromJS } = require('immutable')
-const { combineReducers } = require('redux')
+import { fromJS } from 'immutable'
+import { combineReducers } from 'redux'
 
 const Types = {
   RESET_VISUALIZATION: 'visualizationSettings.reset',

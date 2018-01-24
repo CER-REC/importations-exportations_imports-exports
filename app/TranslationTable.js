@@ -1,6 +1,6 @@
-const Immutable = require('immutable')
+import { fromJS } from 'immutable'
 
-const TranslationTable = Immutable.fromJS({
+const TranslationTable = fromJS({
 
   theLegendValues: {
     importations: {

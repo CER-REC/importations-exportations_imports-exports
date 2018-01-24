@@ -1,7 +1,6 @@
-const Immutable = require('immutable')
+import { fromJS } from 'immutable'
 
-const Constants = Immutable.fromJS({
-
+const Constants = fromJS({
   workspace: {
     heightToWidthRatio: 0.66,
     viewportPadding: 250,

@@ -1,4 +1,4 @@
-const Constants = require('../Constants.js')
+import Constants from '../Constants'
 
 const WorkspaceComputations = {}
 

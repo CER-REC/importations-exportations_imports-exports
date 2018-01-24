@@ -1,8 +1,8 @@
-const React = require('react')
-const ReactRedux = require('react-redux')
-const PropTypes = require('prop-types')
+import React from 'react'
+import { connect } from 'react-redux'
+import PropTypes from 'prop-types'
 
-const Constants = require('../Constants.js')
+import Constants from '../Constants'
 
 const LegendArrow = props => (
   <g>
@@ -37,4 +37,4 @@ LegendArrow.defaultProps = {
 }
 
 const mapStateToProps = ({ viewport }) => ({ viewport })
-module.exports = ReactRedux.connect(mapStateToProps)(LegendArrow)
+module.exports = connect(mapStateToProps)(LegendArrow)

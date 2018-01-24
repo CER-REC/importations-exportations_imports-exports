@@ -1,13 +1,13 @@
-const React = require('react')
-const PropTypes = require('prop-types')
-const Immutable = require('immutable')
-const { connect } = require('react-redux')
+import React from 'react'
+import PropTypes from 'prop-types'
+import Immutable from 'immutable'
+import { connect } from 'react-redux'
 
-const ExplanationPopovers = require('./ExplanationPopovers.jsx')
-const BarChart = require('./BarChart')
-const Axis = require('./Axis')
-const NaturalGasViewport = require('../selectors/viewport/naturalGas')
-const Constants = require('../Constants')
+import ExplanationPopovers from './ExplanationPopovers'
+import BarChart from './BarChart'
+import Axis from './Axis'
+import NaturalGasViewport from '../selectors/viewport/naturalGas'
+import Constants from '../Constants'
 
 class NaturalGasVisualizationContainer extends React.Component {
   render() {

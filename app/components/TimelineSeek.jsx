@@ -1,11 +1,11 @@
-const React = require('react')
-const connect = require('react-redux').connect
-const { fromJS } = require('immutable')
+import React from 'react'
+import { connect } from 'react-redux'
+import { fromJS } from 'immutable'
 
-const SVGDrag = require('./SVGDrag/')
-const Constants = require('../Constants.js')
-const { timelineFilter } = require('../actions/visualizationSettings')
-const TimelineSelector = require('../selectors/timeline')
+import SVGDrag from './SVGDrag/'
+import Constants from '../Constants'
+import { timelineFilter } from '../actions/visualizationSettings'
+import TimelineSelector from '../selectors/timeline'
 
 class TimelineSeek extends React.PureComponent {
   static get defaultProps() {

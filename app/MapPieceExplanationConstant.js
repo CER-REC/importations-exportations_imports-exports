@@ -1,6 +1,6 @@
-const Immutable = require('immutable')
+import { fromJS } from 'immutable'
 
-const MapPieceExplanationConstant = Immutable.fromJS({
+const MapPieceExplanationConstant = fromJS({
   electricity: {
     ca: {
       datapoint: {

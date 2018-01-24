@@ -1,8 +1,7 @@
-const React = require('react')
-const ReactRedux = require('react-redux')
-const ElectricityMapLayout = require('./ElectricityMapLayout.jsx')
-const Immutable = require('immutable')
-
+import React from 'react'
+import { connect } from 'react-redux'
+import ElectricityMapLayout from './ElectricityMapLayout.jsx'
+import Immutable from 'immutable'
 
 class USMapContainer extends React.Component {
   render() {
@@ -30,4 +29,4 @@ const mapStateToProps = state => ({
 })
 
 
-module.exports = ReactRedux.connect(mapStateToProps)(USMapContainer)
+module.exports = connect(mapStateToProps)(USMapContainer)

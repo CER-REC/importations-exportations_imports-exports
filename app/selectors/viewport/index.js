@@ -1,6 +1,6 @@
-const createSelector = require('reselect').createSelector
+import { createSelector } from 'reselect'
 
-const Constants = require('../../Constants.js')
+import Constants from '../../Constants'
 
 const menuWidth = () => Constants.getIn(['visualizationContainer', 'leftMargin'])
 const detailSidebarWidth = () =>

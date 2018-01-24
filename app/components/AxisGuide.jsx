@@ -1,11 +1,11 @@
-const React = require('react')
-const PropTypes = require('prop-types')
-const { connect } = require('react-redux')
+import React from 'react'
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
 
-const TextBox = require('./TextBox')
-const SVGDrag = require('./SVGDrag/')
-const Constants = require('../Constants')
-const { visualizationSettings } = require('../selectors/visualizationSettings')
+import TextBox from './TextBox'
+import SVGDrag from './SVGDrag/'
+import Constants from '../Constants'
+import { visualizationSettings } from '../selectors/visualizationSettings'
 
 class AxisGuide extends React.PureComponent {
   static get propTypes() {

@@ -1,10 +1,10 @@
-const React = require('react')
-const PropTypes = require('prop-types')
-const { connect } = require('react-redux')
+import React from 'react'
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
 
-const Constants = require('../Constants')
-const { setScaleLinked, setGrouping } = require('../actions/visualizationSettings')
-const TimelineSelector = require('../selectors/timeline')
+import Constants from '../Constants'
+import { setScaleLinked, setGrouping } from '../actions/visualizationSettings'
+import TimelineSelector from '../selectors/timeline'
 
 class ChartOptions extends React.PureComponent {
   static get propTypes() {

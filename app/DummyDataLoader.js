@@ -1,6 +1,6 @@
-const Immutable = require('immutable')
+import { fromJS } from 'immutable'
 
-const DummyDataLoader = Immutable.fromJS({
+const DummyDataLoader = fromJS({
   electricity: {
     ca: {
       YT: {
