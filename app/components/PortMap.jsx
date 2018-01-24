@@ -106,12 +106,13 @@ class PortMap extends React.PureComponent {
 
     const xySize = [xMax - xMin, yMax - yMin]
     const center = projection.invert(xyCenter)
-    const scale = Math.min(viewbox.width / xySize[0], viewbox.height / xySize[1]) * baseScale
+    const scale = Math.min(viewbox.width / xySize[0], viewbox.height / xySize[1]) * baseScale * 1.25
 
     return projection
       .center([0, center[1]])
       .scale(scale)
-      .translate([viewbox.width / 2, viewbox.height / 2])
+      // Need to manually center it a bit, as the bounding box extends beyond Canada
+      .translate([(viewbox.width / 2) - 75, viewbox.height / 2])
       .precision(0.2)
   }
 
@@ -119,7 +120,7 @@ class PortMap extends React.PureComponent {
     if (!this.state.topoData.bbox) { return null }
     const projection = geoPath().projection(this.projection())
     const portDots = Ports.map((port) => {
-      const position = projection({
+      const position = projection.pointRadius(10)({
         type: 'Point',
         coordinates: [port.Longitude, port.Latitude],
       })
@@ -131,6 +132,7 @@ class PortMap extends React.PureComponent {
         />
       )
     })
+
     return (
       <svg width="100%" height="100%" viewBox={`0 0 ${viewbox.width} ${viewbox.height}`}>
         <g className="regions">
