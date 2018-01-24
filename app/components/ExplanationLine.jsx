@@ -28,7 +28,7 @@ class ElectricityExplanationPopovers extends React.Component {
   }
 
   importExportMenuLine() {
-    return <g transform ='translate(123 35)'><g transform='scale(0.3)'>
+    return <g transform ='translate(128 45)'><g transform='scale(0.3)'>
     <path d="M89,67 C87,286 352,236 444,245"  stroke='#ff708a' strokeWidth ='2' fill='transparent'/>
     </g></g>
   }

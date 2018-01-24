@@ -57,7 +57,7 @@ class ExplanationText extends React.Component {
   importExportText() {
     return <div style={{
           position: 'absolute',
-          top: 180,
+          top: 190,
           left: 190,
           height: 'auto',
           width: 80,

@@ -6,6 +6,8 @@ const Tr = require('../TranslationTable.js')
 
 const ExpandImportExportMenuCreator = require('../actionCreators/ExpandImportExportMenuCreator.js')
 
+const ExplanationDot = require('./ExplanationDot.jsx')
+
 const WorkspaceComputations = require('../computations/WorkspaceComputations.js')
 
 class ImportExportMenu extends React.Component {
@@ -22,6 +24,16 @@ class ImportExportMenu extends React.Component {
       height={ Constants.getIn(['menuBar','barHeight'])}
       fill = '#666666'
     />
+  }
+
+  explanationDot() {
+    const xPosition = 155
+    return (<g><ExplanationDot
+      key="mainNavDot"
+      xPosition={xPosition}
+      yPosition={62}
+    />
+    <use xlinkHref="#back" x={165} y={62} /> </g>)
   }
 
   onClick(e) {
@@ -70,7 +82,9 @@ class ImportExportMenu extends React.Component {
     return <g> 
       {this.showText()}
       {this.controlRect()}
-      {this.expandedMenu()}</g>
+      {this.expandedMenu()}
+
+      {this.explanationDot()}</g>
   }
 }
 

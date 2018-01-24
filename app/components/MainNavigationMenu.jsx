@@ -15,13 +15,13 @@ require('./MainNavigationMenu.scss')
 
 class MainNavigationMenu extends React.Component {
   explanationDot() {
-    const xPosition = '125'
+    const xPosition = 125
     return (<g><ExplanationDot
       key="mainNavDot"
       xPosition={xPosition}
-      yPosition={WorkspaceComputations.topHeightMargin() - Constants.getIn(['explanationDot', 'yOffset'])}
+      yPosition={83}
     />
-    <use xlinkHref="#back" x={135} y={65} /> </g>)
+    <use xlinkHref="#back" x={135} y={83} /> </g>)
   }
 
   render() {

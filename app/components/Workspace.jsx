@@ -9,6 +9,9 @@ const SocialBar = require('./SocialBar.jsx')
 const ExplanationLine = require('./ExplanationLine.jsx')
 const ExplanationText = require('./ExplanationText.jsx')
 
+const PopoverPortal = require('./PopoverPortal.jsx')
+const ExplanationDot = require('./ExplanationDot.jsx')
+
 const VisualizationContainer = require('./VisualizationContainer.jsx')
 const ViewportSelectors = require('../selectors/viewport/')
 
@@ -39,6 +42,7 @@ const Workspace = ({ svgSize, detailSidebarPosition }) => (
       <SocialBar />
       <ExplanationLine />
     </svg>
+    <div id="popoverPortal" />
     <ExplanationText />
   </div>
 )
