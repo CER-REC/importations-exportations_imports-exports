@@ -162,7 +162,6 @@ class ElectricityMapLayout extends React.Component {
             isSelected={isSelected}
             x1= {mapPieceTransformStartXaxis( position, dimensions, mapPieceScale)}
             y1= {mapPieceTransformStartYaxis( position, dimensions, mapPieceScale)}
-            id = {`mapPiece_${this.props.country}_${position.get('name')}`}
           />
         </g>
         {this.getPowerPoolsOutline(position.get('name'), this.props.country, xaxis, yaxis, position, dimensions, mapPieceScale)}

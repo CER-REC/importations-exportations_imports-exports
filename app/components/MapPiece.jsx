@@ -100,7 +100,6 @@ class MapPiece extends React.Component {
         y1= {this.props.y1 || 0}
         x2= {this.props.x1 || 0}
         y2= {this.props.y1 || 0}
-        id= {this.props.id}
       />
       </g>)
   }
