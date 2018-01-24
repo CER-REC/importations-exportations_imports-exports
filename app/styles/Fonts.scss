@@ -136,6 +136,28 @@
   fill: $neutral-light;
 }
 
+.aboutHeading {
+  font-family: $fira-sans-condensed;
+  font-size: 16px;
+  color: $neutral-medium-dark;
+  margin-left: 25px;
+  margin-top: 25px;
+}
+
+.aboutSubheading {
+  font-family: $fira-sans-condensed;
+  font-size: 13px;
+  fill: $neutral-medium-dark;
+  margin-left: 25px;
+}
+
+.aboutBodyText {
+  font-family: $fira-sans-condensed;
+  font-size: 11px;
+  color: $neutral-medium;
+  margin-left: 25px;
+}
+
 .detailBreakDown {
   .header{
     &.imports {
