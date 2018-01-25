@@ -104,11 +104,15 @@ class SocialBar extends React.Component {
   }
 
   aboutThisProjectClick() { 
-    this.props.onClick()
+    if(this.props.expandSocialBar) {
+      this.props.onClick()
+    } 
   }
 
   methodologyClick() { // eslint-disable-line class-methods-use-this
-    // TODO: add methodology click functionality
+    if(this.props.expandSocialBar){
+      // TODO: add methodology click functionality once pdf is given
+    }
   }
 
   twitterClick() {
@@ -144,17 +148,20 @@ class SocialBar extends React.Component {
   }
 
   downloadImageClick() {
-    // TODO
-    const TODO = 100
-    const screenshotUrl = `${RouteComputations.screenshotOrigin(document.location)}/${Constants.get('screenshotPath')}/?pageUrl=${RouteComputations.screenshotParameter(document.location)}&width=${TODO}&height=${TODO}`
+    if(this.props.expandSocialBar){
+      const TODO = 100
+      const screenshotUrl = `${RouteComputations.screenshotOrigin(document.location)}/${Constants.get('screenshotPath')}/?pageUrl=${RouteComputations.screenshotParameter(document.location)}&width=${TODO}&height=${TODO}`
 
-    window.open(screenshotUrl)
+      window.open(screenshotUrl)
+    }
   }
 
   downloadDataClick() {
-    const appRoot = RouteComputations.appRoot(document.location, this.props.language)
-    const fileName = Tr.getIn(['downloadable', 'csv', this.props.language])
-    window.open(`${appRoot}data/${fileName}`, 'data:text/csv;charset=utf-8,data/')
+    if(this.props.expandSocialBar) {
+      const appRoot = RouteComputations.appRoot(document.location, this.props.language)
+      const fileName = Tr.getIn(['downloadable', 'csv', this.props.language])
+      window.open(`${appRoot}data/${fileName}`, 'data:text/csv;charset=utf-8,data/')
+    }
   }
 
 
@@ -168,14 +175,13 @@ class SocialBar extends React.Component {
       transformSocialBarIcons = `translate(${this.props.viewport.get('x') - 129}, 0)`
     }
     return (
-      <svg>
+      <svg onClick={this.controlArrowClick}>
         <rect
           x={rectXPosition}
           y={WorkspaceComputations.socialBarY(this.props.viewport)}
           width={rectWidth}
           height={Constants.getIn(['socialBar', 'height'])}
-          fill="#e6e6e6"
-        />
+          fill="#e6e6e6"/>
         <g transform={transformSocialBarIcons}>
           <image
             className="socialBarIcon"
@@ -215,6 +221,7 @@ class SocialBar extends React.Component {
             width={Constants.getIn(['socialBar', 'iconSize'])}
             y={WorkspaceComputations.socialBarY(this.props.viewport) + 102}
             xlinkHref="images/share.svg"
+            onClick={this.controlArrowClick}
           />
         </g>
       </svg>
@@ -222,7 +229,7 @@ class SocialBar extends React.Component {
   }
 
   expandedMenu() {
-    const iconTransformString = `translate(${this.props.viewport.get('x') - 103} ${this.props.viewport.get('y') + 223})`
+    const iconTransformString = `translate(${this.props.viewport.get('x') - 105} ${this.props.viewport.get('y') + 223})`
     if(!this.props.expandSocialBar) {
       return null
     }
@@ -242,7 +249,7 @@ class SocialBar extends React.Component {
         width={Constants.getIn(['socialBar', 'iconSize'])}
         y={WorkspaceComputations.socialBarY(this.props.viewport) + Constants.getIn(['socialBar', 'twitterIconPadding'])}
         xlinkHref="images/sm_twitter.svg"
-        x={22}
+        x={29}
         onClick={this.twitterClick}
       />
       <image
@@ -251,7 +258,7 @@ class SocialBar extends React.Component {
         width={Constants.getIn(['socialBar', 'iconSize'])}
         y={WorkspaceComputations.socialBarY(this.props.viewport) + Constants.getIn(['socialBar', 'facebookIconPadding'])}
         xlinkHref="images/sm_facebook.svg"
-        x={44}
+        x={51}
         onClick={this.facebookClick}
       />
       <image
@@ -260,7 +267,7 @@ class SocialBar extends React.Component {
         width={Constants.getIn(['socialBar', 'iconSize'])}
         y={WorkspaceComputations.socialBarY(this.props.viewport) + Constants.getIn(['socialBar', 'linkedInIconPadding'])}
         xlinkHref="images/sm_linkedin.svg"
-        x={66}
+        x={74}
         onClick={this.linkedInClick}
       />
       </g>)
@@ -273,7 +280,7 @@ class SocialBar extends React.Component {
     }
     return (<g transform={transformString}>
       <text className = 'socialBarText'>
-      <tspan onClick={this.aboutThisProjectClick}> {Tr.getIn(['socialBarText','about',this.props.language])}</tspan>
+      <tspan dy='0.1em'onClick={this.aboutThisProjectClick}> {Tr.getIn(['socialBarText','about',this.props.language])}</tspan>
       <tspan dx='-2.6em' dy='1.8em' onClick={this.methodologyClick}> {Tr.getIn(['socialBarText','methodology',this.props.language])}</tspan>
       <tspan dx='-5.6em' dy='1.8em' onClick={this.downloadDataClick}> {Tr.getIn(['socialBarText','downloadData',this.props.language])}</tspan>
       <tspan dx='-6.35em' dy='1.8em' onClick={this.downloadImageClick}> {Tr.getIn(['socialBarText','downloadImage',this.props.language])}</tspan>

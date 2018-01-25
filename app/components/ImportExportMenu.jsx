@@ -79,7 +79,7 @@ const mapStateToProps = state => {
     viewport: state.viewport,
     language: state.language,
     expandImportExportMenu: state.expandImportExportMenu
-  }
+    }
 }
 
 const mapDispatchToProps = dispatch => {

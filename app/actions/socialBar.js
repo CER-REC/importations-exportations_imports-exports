@@ -11,7 +11,7 @@ export const ExpandSocialBar = () => ({
 const initialState = false
 export const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case Types.EXPAND_SOCIALBAR: return !state
+    case Types.EXPAND_SOCIALBAR: return true
     default: return initialState
   }
 }
