@@ -79,7 +79,7 @@ class SocialBar extends React.Component {
     return (<rect
       x={this.props.viewport.get('x') - 5}
       y={this.props.viewport.get('y') + 120}
-      width={5}
+      width={ Constants.getIn(['menuBar','barWidth'])}
       height={125}
       fill="#666666"
     />)
@@ -163,9 +163,9 @@ class SocialBar extends React.Component {
     let rectWidth = `${Constants.getIn(['socialBar','width'])}`
     let rectXPosition = `${this.props.viewport.get('x') - Constants.getIn(['socialBar', 'width']) - 5}`
     if(this.props.expandSocialBar) {
-      rectWidth = `${Constants.getIn(['socialBar','width']) + 120}`
-      rectXPosition = `${this.props.viewport.get('x') - Constants.getIn(['socialBar', 'width']) - 120}`
-      transformSocialBarIcons = `translate(${this.props.viewport.get('x') - 139}, 0)`
+      rectWidth = `${Constants.getIn(['socialBar','width']) + 110}`
+      rectXPosition = `${this.props.viewport.get('x') - Constants.getIn(['socialBar', 'width']) - 110}`
+      transformSocialBarIcons = `translate(${this.props.viewport.get('x') - 129}, 0)`
     }
     return (
       <svg>
@@ -182,7 +182,7 @@ class SocialBar extends React.Component {
             height={Constants.getIn(['socialBar', 'iconSize'])}
             width={Constants.getIn(['socialBar', 'iconSize'])}
             xlinkHref="images/info_about.svg"
-            y={WorkspaceComputations.socialBarY(this.props.viewport) + 5}
+            y={WorkspaceComputations.socialBarY(this.props.viewport) + 6}
             onClick={this.aboutThisProjectClick}
           />
           <image
@@ -190,14 +190,14 @@ class SocialBar extends React.Component {
             height={Constants.getIn(['socialBar', 'iconSize'])}
             width={Constants.getIn(['socialBar', 'iconSize'])}
             xlinkHref="images/info_methodology.svg"
-            y={WorkspaceComputations.socialBarY(this.props.viewport) + 27}
+            y={WorkspaceComputations.socialBarY(this.props.viewport) + 30}
             onClick={this.methodologyClick}
           />
           <image
             className="socialBarIcon"
             height={Constants.getIn(['socialBar', 'iconSize'])}
             width={Constants.getIn(['socialBar', 'iconSize'])}
-            y={WorkspaceComputations.socialBarY(this.props.viewport) + 49 }
+            y={WorkspaceComputations.socialBarY(this.props.viewport) + 54}
             xlinkHref="images/download_file.svg"
             onClick={this.downloadDataClick}
           />
@@ -205,9 +205,16 @@ class SocialBar extends React.Component {
             className="socialBarIcon"
             height={Constants.getIn(['socialBar', 'iconSize'])}
             width={Constants.getIn(['socialBar', 'iconSize'])}
-            y={WorkspaceComputations.socialBarY(this.props.viewport) + 71}
+            y={WorkspaceComputations.socialBarY(this.props.viewport) + 78}
             xlinkHref="images/download_image.svg"
             onClick={this.downloadImageClick}
+          />
+          <image
+            className="socialBarIcon"
+            height={Constants.getIn(['socialBar', 'iconSize'])}
+            width={Constants.getIn(['socialBar', 'iconSize'])}
+            y={WorkspaceComputations.socialBarY(this.props.viewport) + 102}
+            xlinkHref="images/share.svg"
           />
         </g>
       </svg>
@@ -215,15 +222,17 @@ class SocialBar extends React.Component {
   }
 
   expandedMenu() {
+    const iconTransformString = `translate(${this.props.viewport.get('x') - 103} ${this.props.viewport.get('y') + 223})`
     if(!this.props.expandSocialBar) {
       return null
     }
-    return (<g>
+    return (<g transform={iconTransformString}>
       <image
         className="socialBarIcon"
         height={Constants.getIn(['socialBar', 'iconSize'])}
         width={Constants.getIn(['socialBar', 'iconSize'])}
         y={WorkspaceComputations.socialBarY(this.props.viewport) + Constants.getIn(['socialBar', 'emailIconPadding'])}
+        x={0}
         xlinkHref="images/sm_email.svg"
         onClick={this.emailClick}
       />
@@ -233,6 +242,7 @@ class SocialBar extends React.Component {
         width={Constants.getIn(['socialBar', 'iconSize'])}
         y={WorkspaceComputations.socialBarY(this.props.viewport) + Constants.getIn(['socialBar', 'twitterIconPadding'])}
         xlinkHref="images/sm_twitter.svg"
+        x={22}
         onClick={this.twitterClick}
       />
       <image
@@ -241,6 +251,7 @@ class SocialBar extends React.Component {
         width={Constants.getIn(['socialBar', 'iconSize'])}
         y={WorkspaceComputations.socialBarY(this.props.viewport) + Constants.getIn(['socialBar', 'facebookIconPadding'])}
         xlinkHref="images/sm_facebook.svg"
+        x={44}
         onClick={this.facebookClick}
       />
       <image
@@ -249,6 +260,7 @@ class SocialBar extends React.Component {
         width={Constants.getIn(['socialBar', 'iconSize'])}
         y={WorkspaceComputations.socialBarY(this.props.viewport) + Constants.getIn(['socialBar', 'linkedInIconPadding'])}
         xlinkHref="images/sm_linkedin.svg"
+        x={66}
         onClick={this.linkedInClick}
       />
       </g>)
@@ -260,11 +272,11 @@ class SocialBar extends React.Component {
       return null
     }
     return (<g transform={transformString}>
-      <text className = 'aboutSubheading'>
-      <tspan> {Tr.getIn(['socialBarText','about',this.props.language])}</tspan>
-      <tspan dx='-2.6em' dy='1.2em'> {Tr.getIn(['socialBarText','methodology',this.props.language])}</tspan>
-      <tspan dx='-5.6em' dy='1.4em'> {Tr.getIn(['socialBarText','downloadData',this.props.language])}</tspan>
-      <tspan dx='-6.35em' dy='1.6em'> {Tr.getIn(['socialBarText','downloadImage',this.props.language])}</tspan>
+      <text className = 'socialBarText'>
+      <tspan onClick={this.aboutThisProjectClick}> {Tr.getIn(['socialBarText','about',this.props.language])}</tspan>
+      <tspan dx='-2.6em' dy='1.8em' onClick={this.methodologyClick}> {Tr.getIn(['socialBarText','methodology',this.props.language])}</tspan>
+      <tspan dx='-5.6em' dy='1.8em' onClick={this.downloadDataClick}> {Tr.getIn(['socialBarText','downloadData',this.props.language])}</tspan>
+      <tspan dx='-6.35em' dy='1.8em' onClick={this.downloadImageClick}> {Tr.getIn(['socialBarText','downloadImage',this.props.language])}</tspan>
       </text>
     </g>)
   }

@@ -34,7 +34,7 @@ const Constants = Immutable.fromJS({
     amountTextButtonLabelOffset: 109,
     nglMenuYMargin: 158,
     nglSubproductTextY: 223,
-    barWidth: 5,
+    barWidth: 6,
     barHeight: 16,
     menuExpandedPadding: 30,
     expandedMenuTextMargin: 12,
