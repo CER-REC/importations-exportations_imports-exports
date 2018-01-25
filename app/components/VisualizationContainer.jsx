@@ -1,16 +1,15 @@
-const React = require('react')
-const ReactRedux = require('react-redux')
+import React from 'react'
+import { connect } from 'react-redux'
 
-const ViewportSelectors = require('../selectors/viewport/')
-const Constants = require('../Constants.js')
-const WorkspaceComputations = require('../computations/WorkspaceComputations.js')
-const ElectricityVisualizationContainer = require('./ElectricityVisualizationContainer.jsx')
-const CrudeOilVisualizationContainer = require('./CrudeOilVisualizationContainer.jsx')
-const NaturalGasVisualizationContainer = require('./NaturalGasVisualizationContainer.jsx')
-const NaturalGasLiquidsVisualizationContainer = require('./NaturalGasLiquidsVisualizationContainer.jsx')
-const RefinedPetroleumProductsVisualizationContainer = require('./RefinedPetroleumProductsVisualizationContainer.jsx')
+import ViewportSelectors from '../selectors/viewport/'
+import WorkspaceComputations from '../computations/WorkspaceComputations'
+import ElectricityVisualizationContainer from './ElectricityVisualizationContainer'
+import CrudeOilVisualizationContainer from './CrudeOilVisualizationContainer'
+import NaturalGasVisualizationContainer from './NaturalGasVisualizationContainer'
+import NaturalGasLiquidsVisualizationContainer from './NaturalGasLiquidsVisualizationContainer'
+import RefinedPetroleumProductsVisualizationContainer from './RefinedPetroleumProductsVisualizationContainer'
 
-require('./VisualizationContainer.scss')
+import './VisualizationContainer.scss'
 
 class VisualizationContainer extends React.Component {
   changeVisualization() {
@@ -61,4 +60,4 @@ const mapStateToProps = state => ({
 })
 
 
-module.exports = ReactRedux.connect(mapStateToProps)(VisualizationContainer)
+module.exports = connect(mapStateToProps)(VisualizationContainer)

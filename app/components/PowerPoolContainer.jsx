@@ -1,14 +1,14 @@
-const React = require('react')
-const ReactRedux = require('react-redux')
-const PropTypes = require('prop-types')
+import React from 'react'
+import { connect } from 'react-redux'
+import PropTypes from 'prop-types'
 
-const ElectricityMapLayout = require('./ElectricityMapLayout.jsx')
+import ElectricityMapLayout from './ElectricityMapLayout'
 
 class PowerPoolContainer extends React.Component {
   render() {
     // Scale is temporary adjustment as it's too small if we use dimensions mentioned in the design document
     // TODO: scale map dynamically when screen size change
-    return (<g transform="scale(1.2) translate(0 -70)">
+    return (<g transform={`translate(${this.props.left + 150} ${this.props.top})`}>
       <ElectricityMapLayout
         left={this.props.left}
         top={this.props.top}
@@ -22,4 +22,4 @@ const mapStateToProps = state => ({
   viewport: state.viewport,
 })
 
-module.exports = ReactRedux.connect(mapStateToProps)(PowerPoolContainer)
+module.exports = connect(mapStateToProps)(PowerPoolContainer)

@@ -1,20 +1,16 @@
-const React = require('react')
-const ReactRedux = require('react-redux')
+import React from 'react'
+import { connect } from 'react-redux'
 
-const Constants = require('../Constants.js')
-const Tr = require('../TranslationTable.js')
-const WorkspaceComputations = require('../computations/WorkspaceComputations.js')
+import Legend from './Legend'
+import ShowExplanations from './ShowExplanations'
+import ShowConfidentiality from './ShowConfidentiality'
+import ElectricityAmountPriceMenu from './ElectricityAmountPriceMenu'
+import ElectricitySortMenu from './ElectricitySortMenu'
+import MainNavigationMenu from './MainNavigationMenu'
+import ImportExportMenu from './ImportExportMenu'
+import NglSubproductMenu from './NglSubproductMenu'
 
-const Legend = require('./Legend.jsx')
-const ShowExplanations = require('./ShowExplanations.jsx')
-const ShowConfidentiality = require('./ShowConfidentiality.jsx')
-const ElectricityAmountPriceMenu = require('./ElectricityAmountPriceMenu.jsx')
-const ElectricitySortMenu = require('./ElectricitySortMenu.jsx')
-const MainNavigationMenu = require('./MainNavigationMenu.jsx')
-const ImportExportMenu = require('./ImportExportMenu.jsx')
-const NglSubproductMenu = require('./NglSubproductMenu.jsx')
-
-require('./MenuBar.scss')
+import './MenuBar.scss'
 
 class MenuBar extends React.Component {
   electricity() {
@@ -68,5 +64,4 @@ const mapStateToProps = state => ({
   viewport: state.viewport,
 })
 
-
-module.exports = ReactRedux.connect(mapStateToProps)(MenuBar)
+module.exports = connect(mapStateToProps)(MenuBar)

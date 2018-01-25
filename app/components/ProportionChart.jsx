@@ -1,11 +1,11 @@
-const React = require('react')
-const PropTypes = require('prop-types')
-const { connect } = require('react-redux')
+import React from 'react'
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
 
-const Chart = require('./Chart')
-const AnimatedLine = require('./SVGAnimation/AnimatedLine')
-const Constants = require('../Constants')
-const TimelineSelector = require('../selectors/timeline')
+import Chart from './Chart'
+import AnimatedLine from './SVGAnimation/AnimatedLine'
+import Constants from '../Constants'
+import TimelineSelector from '../selectors/timeline'
 
 class ProportionChart extends Chart {
   static get propTypes() {

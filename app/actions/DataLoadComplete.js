@@ -1,6 +1,3 @@
-const { fromJS } = require('immutable')
-const { combineReducers } = require('redux')
-
 const Types = {
   DATA_LOADING_COMPLETE: 'data_loading_complete',
 }

@@ -1,8 +1,7 @@
-const React = require('react')
-const ReactRedux = require('react-redux')
-const ElectricityMapLayout = require('./ElectricityMapLayout.jsx')
-const Immutable = require('immutable')
-
+import React from 'react'
+import { connect } from 'react-redux'
+import ElectricityMapLayout from './ElectricityMapLayout.jsx'
+import Immutable from 'immutable'
 
 class USMapContainer extends React.Component {
   render() {
@@ -12,15 +11,14 @@ class USMapContainer extends React.Component {
       "ID": 4678971,
       "OR": 5548646 
     })
-    // Scale is temporary adjustment as it's too small if we use dimensions mentioned in the design document
-    // //TODO: scale map dynamically when screen size change
-    return (<g transform="scale(1.4) translate(0 -70)"> <ElectricityMapLayout
-      left={this.props.left}
-      top={this.props.top}
-      country="us"
-      detailBreakDownData={detailBreakDownData}
-    />
-            </g>)
+    return (
+      <g transform={`translate(${this.props.left + 150} ${this.props.top})`}> <ElectricityMapLayout
+        left={this.props.left}
+        top={this.props.top}
+        country="us"
+        detailBreakDownData={detailBreakDownData}
+      />
+      </g>)
   }
 }
 
@@ -30,4 +28,4 @@ const mapStateToProps = state => ({
 })
 
 
-module.exports = ReactRedux.connect(mapStateToProps)(USMapContainer)
+module.exports = connect(mapStateToProps)(USMapContainer)

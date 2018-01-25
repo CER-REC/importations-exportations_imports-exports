@@ -1,11 +1,11 @@
-const React = require('react')
-const ReactRedux = require('react-redux')
-const PropTypes = require('prop-types')
-const Immutable = require('immutable')
+import React from 'react'
+import { connect } from 'react-redux'
+import PropTypes from 'prop-types'
+import Immutable from 'immutable'
 
-const Workspace = require('./Workspace')
+import Workspace from './Workspace'
 
-require('../styles/Common.scss')
+import '../styles/Common.scss'
 
 const Root = ({ dataLoadingComplete, viewport }) => {
   if (dataLoadingComplete) { return <div><Workspace /></div> }
@@ -27,4 +27,4 @@ const mapStateToProps = state => ({
   dataLoadingComplete: state.dataLoadingComplete,
 })
 
-module.exports = ReactRedux.connect(mapStateToProps)(Root)
+module.exports = connect(mapStateToProps)(Root)

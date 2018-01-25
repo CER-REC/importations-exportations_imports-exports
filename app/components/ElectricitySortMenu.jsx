@@ -1,17 +1,17 @@
-const React = require('react')
-const ReactRedux = require('react-redux')
-const PropTypes = require('prop-types')
+import React from 'react'
+import { connect } from 'react-redux'
+import PropTypes from 'prop-types'
 
-const Constants = require('../Constants.js')
-const Tr = require('../TranslationTable.js')
-const WorkspaceComputations = require('../computations/WorkspaceComputations.js')
+import Constants from '../Constants'
+import Tr from '../TranslationTable'
+import WorkspaceComputations from '../computations/WorkspaceComputations'
 
-const ExpandElectricitySortMenuCreator = require('../actionCreators/ExpandElectricitySortMenuCreator.js')
+import ExpandElectricitySortMenuCreator from '../actionCreators/ExpandElectricitySortMenuCreator'
 
-const { setArrangeBy } = require('../actions/visualizationSettings')
-const { visualizationSettings } = require('../selectors/visualizationSettings')
+import { setArrangeBy } from '../actions/visualizationSettings'
+import { visualizationSettings } from '../selectors/visualizationSettings'
 
-require('./ElectricitySortMenu.scss')
+import './ElectricitySortMenu.scss'
 
 class ElectricitySortMenu extends React.Component {
   constructor(props) {
@@ -179,4 +179,4 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-module.exports = ReactRedux.connect(mapStateToProps, mapDispatchToProps)(ElectricitySortMenu)
+module.exports = connect(mapStateToProps, mapDispatchToProps)(ElectricitySortMenu)

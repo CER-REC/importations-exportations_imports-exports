@@ -1,12 +1,12 @@
-const React = require('react')
-const ReactRedux = require('react-redux')
-const PropTypes = require('prop-types')
-const Immutable = require('immutable')
+import React from 'react'
+import PropTypes from 'prop-types'
+import Immutable from 'immutable'
 
-const ImportExportArrow = require('./ImportExportArrow.jsx')
-const MapPieceLabel = require('./MapPieceLabel.jsx')
-const ConfidentialIcon = require('./ConfidentialIcon.jsx')
-const Constants = require('../Constants')
+import ImportExportArrow from './ImportExportArrow'
+import MapPieceLabel from './MapPieceLabel'
+import ConfidentialIcon from './ConfidentialIcon'
+import Constants from '../Constants'
+import AnimatedMapPiece from './SVGAnimation/AnimatedMapPiece'
 
 class MapPiece extends React.Component {
   static propTypes = {
@@ -75,7 +75,6 @@ class MapPiece extends React.Component {
       && this.props.mapPieceProps.get('stroke') !== '') {
       stroke = this.props.mapPieceProps.get('stroke')
     }
-
     return (<g fillOpacity={opacity} >
       <polygon
         stroke={stroke}
@@ -95,9 +94,14 @@ class MapPiece extends React.Component {
         {this.drawArrow(this.props.legends, this.props.data, 'imports', this.props.styles, this.props.arrowProps)}
       </g>
       {confidentialIcon}
-            </g>)
+      <AnimatedMapPiece
+        x1= {this.props.x1 || 0}
+        y1= {this.props.y1 || 0}
+        x2= {this.props.x1 || 0}
+        y2= {this.props.y1 || 0}
+      />
+      </g>)
   }
 }
-
 
 module.exports = MapPiece

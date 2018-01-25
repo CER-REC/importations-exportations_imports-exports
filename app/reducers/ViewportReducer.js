@@ -1,6 +1,4 @@
-const Immutable = require('immutable')
-
-// const Constants = require('../Constants.js')
+import Immutable from 'immutable'
 
 const defaults = Immutable.fromJS({
   x: 0,

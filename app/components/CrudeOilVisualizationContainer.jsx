@@ -1,14 +1,14 @@
-const React = require('react')
-const PropTypes = require('prop-types')
-const { connect } = require('react-redux')
+import React from 'react'
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
 
-const ExplanationPopovers = require('./ExplanationPopovers.jsx')
-const ProportionChart = require('./ProportionChart')
-const BarChart = require('./BarChart')
-const Axis = require('./Axis')
-const CrudeOilViewport = require('../selectors/viewport/crudeOil')
-const Constants = require('../Constants')
-const { positionShape } = require('../propTypeShapes')
+import ExplanationPopovers from './ExplanationPopovers'
+import ProportionChart from './ProportionChart'
+import BarChart from './BarChart'
+import Axis from './Axis'
+import CrudeOilViewport from '../selectors/viewport/crudeOil'
+import Constants from '../Constants'
+import { positionShape } from '../propTypeShapes'
 import USPadd from './Padds/USPadd'
 
 const CrudeOilVisualizationContainer = props => (
