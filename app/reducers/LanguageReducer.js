@@ -1,5 +1,4 @@
-
-const Constants = require('../Constants.js')
+import Constants from '../Constants'
 
 // State: one of 'en' or 'fr'
 const LanguageReducer = (state = 'en', action) => {

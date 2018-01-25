@@ -1,24 +1,22 @@
-const React = require('react')
-const ReactRedux = require('react-redux')
-const MapPiece = require('./MapPiece.jsx')
-const MapLayoutGridConstant = require('../MapLayoutGridConstant.js')
-const Constants = require('../Constants.js')
-const Tr = require('../TranslationTable.js')
-const Immutable = require('immutable')
-const memoize = require('memoize-immutable')
-const PropTypes = require('prop-types')
+import React from 'react'
+import { connect } from 'react-redux'
+import Immutable from 'immutable'
+import memoize from 'memoize-immutable'
+import PropTypes from 'prop-types'
 
-import { setSelection } from '../actions/visualizationSettings.js'
+import MapPiece from './MapPiece'
+import MapLayoutGridConstant from '../MapLayoutGridConstant'
+import Constants from '../Constants'
+import Tr from '../TranslationTable'
 
-require('./ElectricityMapLayout.scss')
+import { setSelection } from '../actions/visualizationSettings'
 
-const ElectricitySelector = require('../selectors/ElectricitySelector.js')
-const { sortAggregatedLocationsSelector } = require('../selectors/data.js')
-const { arrangeBy, binSelector } = require('../selectors/data.js')
-const DetailSidebar = require('./DetailSidebar')
-const DetailBreakdown = require('./DetailBreakdown').default
+import './ElectricityMapLayout.scss'
 
-
+import ElectricitySelector from '../selectors/ElectricitySelector'
+import { arrangeBy, binSelector, sortAggregatedLocationsSelector } from '../selectors/data'
+import DetailSidebar from './DetailSidebar'
+import DetailBreakdown from './DetailBreakdown'
 
 const mapPieceTransform = (xaxis, yaxis, position, dimensions, mapPieceScale) => {
   const startXaxis = xaxis + (position.get('x') * ((mapPieceScale * dimensions.get('width')) + dimensions.get('xAxisPadding')))
@@ -210,7 +208,4 @@ const mapStateToProps = (state, props) => ({
   bins: binSelector(state, props),
 })
 
-module.exports = ReactRedux.connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(ElectricityMapLayout)
+module.exports = connect(mapStateToProps, mapDispatchToProps)(ElectricityMapLayout)

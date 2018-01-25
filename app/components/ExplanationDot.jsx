@@ -1,12 +1,12 @@
-const React = require('react')
-const ReactRedux = require('react-redux')
-const PropTypes = require('prop-types')
+import React from 'react'
+import { connect } from 'react-redux'
+import PropTypes from 'prop-types'
 
-const Constants = require('../Constants.js')
+import Constants from '../Constants'
 
 const ExplanationSummonedCreator = require('../actionCreators/ExplanationSummonedCreator.js')
 
-require('./ExplanationDot.scss')
+import './ExplanationDot.scss'
 
 class ExplanationDot extends React.Component {
   static get propTypes() {
@@ -92,5 +92,4 @@ const mapStateToProps = state => ({
   explanation: state.explanation,
 })
 
-
-module.exports = ReactRedux.connect(mapStateToProps)(ExplanationDot)
+module.exports = connect(mapStateToProps)(ExplanationDot)

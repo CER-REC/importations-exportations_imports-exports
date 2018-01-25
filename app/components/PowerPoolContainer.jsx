@@ -1,8 +1,8 @@
-const React = require('react')
-const ReactRedux = require('react-redux')
-const PropTypes = require('prop-types')
+import React from 'react'
+import { connect } from 'react-redux'
+import PropTypes from 'prop-types'
 
-const ElectricityMapLayout = require('./ElectricityMapLayout.jsx')
+import ElectricityMapLayout from './ElectricityMapLayout'
 
 class PowerPoolContainer extends React.Component {
   render() {
@@ -22,4 +22,4 @@ const mapStateToProps = state => ({
   viewport: state.viewport,
 })
 
-module.exports = ReactRedux.connect(mapStateToProps)(PowerPoolContainer)
+module.exports = connect(mapStateToProps)(PowerPoolContainer)

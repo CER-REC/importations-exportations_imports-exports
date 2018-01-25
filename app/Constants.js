@@ -1,7 +1,6 @@
-const Immutable = require('immutable')
+import { fromJS } from 'immutable'
 
-const Constants = Immutable.fromJS({
-
+const Constants = fromJS({
   workspace: {
     heightToWidthRatio: 0.66,
     viewportPadding: 250,
@@ -186,6 +185,11 @@ const Constants = Immutable.fromJS({
     x: -1,
     y: 5,
   },
+
+  aboutWindow: {
+    width: 380,
+  },
+
 
   energyMeasurementTypes: {
     electricity: ['MW.h', 'CAN$', 'CAN$/MW.h'],

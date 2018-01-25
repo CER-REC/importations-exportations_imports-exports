@@ -1,13 +1,13 @@
-const React = require('react')
-const ReactRedux = require('react-redux')
+import React from 'react'
+import { connect } from 'react-redux'
 
-const Constants = require('../Constants.js')
-const Tr = require('../TranslationTable.js')
+import Constants from '../Constants'
+import Tr from '../TranslationTable'
 
-const WorkspaceComputations = require('../computations/WorkspaceComputations.js')
+import WorkspaceComputations from '../computations/WorkspaceComputations'
 
 
-require ('../styles/Fonts.scss')
+import '../styles/Fonts.scss'
 
 
 class ShowConfidentiality extends React.Component {
@@ -51,4 +51,4 @@ const mapStateToProps = state => {
 
 
 
-module.exports = ReactRedux.connect(mapStateToProps)(ShowConfidentiality)
+module.exports = connect(mapStateToProps)(ShowConfidentiality)

@@ -1,15 +1,14 @@
-const React = require('react')
-const connect = require('react-redux').connect
+import React from 'react'
+import { connect } from 'react-redux'
 
-const BarChart = require('./BarChart')
-const Axis = require('./Axis')
-const TimelineSeek = require('./TimelineSeek')
-const TimelinePlay = require('./TimelinePlay')
-const ExplanationDot = require('./ExplanationDot.jsx')
-const Constants = require('../Constants')
+import BarChart from './BarChart'
+import Axis from './Axis'
+import TimelineSeek from './TimelineSeek'
+import TimelinePlay from './TimelinePlay'
+import Constants from '../Constants'
 
-const TimelineSelectors = require('../selectors/timeline')
-const { visualizationSettings } = require('../selectors/visualizationSettings')
+import TimelineSelectors from '../selectors/timeline'
+import { visualizationSettings } from '../selectors/visualizationSettings'
 
 class Timeline extends React.PureComponent {
   static get defaultProps() {

@@ -1,6 +1,6 @@
-const React = require('react')
-const PropTypes = require('prop-types')
-const memoize = require('memoize-immutable')
+import React from 'react'
+import PropTypes from 'prop-types'
+import memoize from 'memoize-immutable'
 
 class AnimatedLine extends React.PureComponent {
   static get propTypes() {

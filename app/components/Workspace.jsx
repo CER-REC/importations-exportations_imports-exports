@@ -1,10 +1,12 @@
-const React = require('react')
-const { connect } = require('react-redux')
-const Constants = require('../Constants.js')
+import React from 'react'
+import { connect } from 'react-redux'
 
-const Header = require('./Header.jsx')
-const MenuBar = require('./MenuBar.jsx')
-const SocialBar = require('./SocialBar.jsx')
+import Header from './Header'
+import MenuBar from './MenuBar'
+import SocialBar from './SocialBar'
+import ModalSelector from './ModalSelector'
+import VisualizationContainer from './VisualizationContainer'
+import ViewportSelectors from '../selectors/viewport/'
 
 const ExplanationLine = require('./ExplanationLine.jsx')
 const ExplanationText = require('./ExplanationText.jsx')
@@ -12,15 +14,13 @@ const ExplanationText = require('./ExplanationText.jsx')
 const PopoverPortal = require('./PopoverPortal.jsx')
 const ExplanationDot = require('./ExplanationDot.jsx')
 
-const VisualizationContainer = require('./VisualizationContainer.jsx')
-const ViewportSelectors = require('../selectors/viewport/')
-
-require('./Workspace.scss')
+import './Workspace.scss'
 
 const Workspace = ({ svgSize, detailSidebarPosition }) => (
   <div style={{ position: 'relative' }}>
     <div className="Workspace">
       <Header />
+
     </div>
     <div
       id="detailSidebar"
@@ -42,8 +42,11 @@ const Workspace = ({ svgSize, detailSidebarPosition }) => (
       <SocialBar />
       <ExplanationLine />
     </svg>
+
     <div id="popoverPortal" />
     <ExplanationText />
+    <ModalSelector />
+
   </div>
 )
 

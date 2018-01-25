@@ -1,17 +1,16 @@
-const React = require('react')
-const ReactRedux = require('react-redux')
-const PropTypes = require('prop-types')
+import React from 'react'
+import { connect } from 'react-redux'
+import PropTypes from 'prop-types'
 
-const Constants = require('../Constants.js')
-const Tr = require('../TranslationTable.js')
-const WorkspaceComputations = require('../computations/WorkspaceComputations.js')
+import Constants from '../Constants'
+import WorkspaceComputations from '../computations/WorkspaceComputations'
 
-const MenuBarOption = require('./MenuBarOption.jsx')
-const ExplanationDot = require('./ExplanationDot.jsx')
+import MenuBarOption from './MenuBarOption'
+import ExplanationDot from './ExplanationDot'
 
-const SetVisualizationCreator = require('../actionCreators/SetVisualizationCreator.js')
+import SetVisualizationCreator from '../actionCreators/SetVisualizationCreator'
 
-require('./MainNavigationMenu.scss')
+import './MainNavigationMenu.scss'
 
 class MainNavigationMenu extends React.Component {
   explanationDot() {
@@ -77,4 +76,4 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-module.exports = ReactRedux.connect(mapStateToProps, mapDispatchToProps)(MainNavigationMenu)
+module.exports = connect(mapStateToProps, mapDispatchToProps)(MainNavigationMenu)

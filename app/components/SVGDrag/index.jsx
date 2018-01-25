@@ -1,7 +1,7 @@
-const React = require('react')
-const PropTypes = require('prop-types')
+import React from 'react'
+import PropTypes from 'prop-types'
 
-require('./SVGDrag.scss')
+import './SVGDrag.scss'
 
 const stopEvent = (e) => {
   e.stopPropagation()

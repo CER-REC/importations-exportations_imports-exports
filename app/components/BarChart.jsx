@@ -1,14 +1,14 @@
-const React = require('react')
-const PropTypes = require('prop-types')
-const { connect } = require('react-redux')
+import React from 'react'
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
 
-const Chart = require('./Chart')
-const AnimatedLine = require('./SVGAnimation/AnimatedLine')
-const AxisGuide = require('./AxisGuide')
-const DetailSidebar = require('./DetailSidebar')
-const DetailTotal = require('./DetailTotal').default
-const ConfidentialCount = require('./ConfidentialCount').default
-const TimelineSelector = require('../selectors/timeline')
+import Chart from './Chart'
+import AnimatedLine from './SVGAnimation/AnimatedLine'
+import AxisGuide from './AxisGuide'
+import DetailSidebar from './DetailSidebar'
+import DetailTotal from './DetailTotal'
+import ConfidentialCount from './ConfidentialCount'
+import TimelineSelector from '../selectors/timeline'
 
 class BarChart extends Chart {
   static get propTypes() {
