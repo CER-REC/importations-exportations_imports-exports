@@ -1,8 +1,8 @@
-const React = require('react')
-const ReactRedux = require('react-redux')
+import React from 'react'
+import { connect } from 'react-redux'
 
-const Constants = require('../Constants.js')
-require('../styles/Fonts.scss')
+import Constants from '../Constants'
+import '../styles/Fonts.scss'
 
 class MapPieceLabel extends React.Component {
   drawLabel(mapPieceProps, yAxis) {
@@ -44,5 +44,4 @@ const mapStateToProps = (state, props) => ({
   language: state.language,
 })
 
-
-module.exports = ReactRedux.connect(mapStateToProps)(MapPieceLabel)
+module.exports = connect(mapStateToProps)(MapPieceLabel)

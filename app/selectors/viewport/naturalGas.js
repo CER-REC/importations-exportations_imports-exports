@@ -1,6 +1,6 @@
-const createSelector = require('reselect').createSelector
+import { createSelector } from 'reselect'
 
-const ViewportSelectors = require('./index')
+import ViewportSelectors from './index'
 
 const chartImportPosition = createSelector(
   ViewportSelectors.visualizationContentPosition,
@@ -32,8 +32,25 @@ const chartExportPosition = createSelector(
   }),
 )
 
+const mapTilesPosition = createSelector(
+  chartExportPosition,
+  chartPosition => ({
+    top: chartPosition.top + chartPosition.height,
+    left: chartPosition.left,
+    width: chartPosition.width,
+    height: 400,
+  }),
+)
+
+const portMapPosition = createSelector(
+  mapTilesPosition,
+  mapTiles => mapTiles,
+)
+
 module.exports = {
   chartImportPosition,
   chartAxisPosition,
   chartExportPosition,
+  mapTilesPosition,
+  portMapPosition,
 }

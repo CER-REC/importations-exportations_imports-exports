@@ -1,9 +1,9 @@
-const React = require('react')
-const ReactRedux = require('react-redux')
+import React from 'react'
+import { connect } from 'react-redux'
 
-const Constants = require('../Constants.js')
-const Tr = require('../TranslationTable.js')
-const WorkspaceComputations = require('../computations/WorkspaceComputations.js')
+import Constants from '../Constants'
+import Tr from '../TranslationTable'
+import WorkspaceComputations from '../computations/WorkspaceComputations'
 
 class NglSubproductMenu extends React.Component {
   constructor(props) {
@@ -74,4 +74,4 @@ const mapStateToProps = state => {
   }
 }
 
-module.exports = ReactRedux.connect(mapStateToProps)(NglSubproductMenu)
+module.exports = connect(mapStateToProps)(NglSubproductMenu)

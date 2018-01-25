@@ -1,5 +1,6 @@
-const Constants = require('../Constants.js')
-const Immutable = require('immutable')
+import Immutable from 'immutable'
+
+import Constants from '../Constants'
 
 const originNameValidator = (origin) => {
   // get country regions

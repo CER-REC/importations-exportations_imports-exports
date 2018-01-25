@@ -1,10 +1,10 @@
-const { createSelector } = require('reselect')
-const { fromJS } = require('immutable')
+import { createSelector } from 'reselect'
+import { fromJS } from 'immutable'
 
-const { filterByHexSelector } = require('./data')
-const { visualizationContentPosition: visContentSize } = require('./viewport/')
-const { visualizationSettings } = require('./visualizationSettings')
-const Constants = require('../Constants.js')
+import { filterByHexSelector } from './data'
+import { visualizationContentPosition as visContentSize } from './viewport/'
+import { visualizationSettings } from './visualizationSettings'
+import Constants from '../Constants'
 
 const getAggregateKey = (_, props) => props.aggregateKey
 const getValueKey = (_, props) => props.valueKey

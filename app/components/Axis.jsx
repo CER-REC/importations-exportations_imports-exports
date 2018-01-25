@@ -1,14 +1,12 @@
-const React = require('react')
-const PropTypes = require('prop-types')
-const Immutable = require('immutable')
-const { connect } = require('react-redux')
+import React from 'react'
+import { connect } from 'react-redux'
 
-const DetailSidebar = require('./DetailSidebar')
-const ChartOptions = require('./ChartOptions')
-const TimelineSeek = require('./TimelineSeek')
-const TimelinePlay = require('./TimelinePlay')
-const TimelineSelector = require('../selectors/timeline')
-const Constants = require('../Constants')
+import DetailSidebar from './DetailSidebar'
+import ChartOptions from './ChartOptions'
+import TimelineSeek from './TimelineSeek'
+import TimelinePlay from './TimelinePlay'
+import TimelineSelector from '../selectors/timeline'
+import Constants from '../Constants'
 
 class Axis extends React.PureComponent {
   static get defaultProps() {

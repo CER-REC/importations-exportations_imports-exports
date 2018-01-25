@@ -1,7 +1,7 @@
-const { createSelector } = require('reselect')
-const Immutable = require('immutable')
+import { createSelector } from 'reselect'
+import Immutable from 'immutable'
 
-const { visualizationSettings } = require('./visualizationSettings')
+import { visualizationSettings } from './visualizationSettings'
 
 const emptyMap = new Immutable.Map()
 const emptyList = new Immutable.List()

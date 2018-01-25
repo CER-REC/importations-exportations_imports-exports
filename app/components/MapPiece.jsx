@@ -1,13 +1,12 @@
-const React = require('react')
-const ReactRedux = require('react-redux')
-const PropTypes = require('prop-types')
-const Immutable = require('immutable')
+import React from 'react'
+import PropTypes from 'prop-types'
+import Immutable from 'immutable'
 
-const ImportExportArrow = require('./ImportExportArrow.jsx')
-const MapPieceLabel = require('./MapPieceLabel.jsx')
-const ConfidentialIcon = require('./ConfidentialIcon.jsx')
-const Constants = require('../Constants')
-const AnimatedMapPiece = require('./SVGAnimation/AnimatedMapPiece')
+import ImportExportArrow from './ImportExportArrow'
+import MapPieceLabel from './MapPieceLabel'
+import ConfidentialIcon from './ConfidentialIcon'
+import Constants from '../Constants'
+import AnimatedMapPiece from './SVGAnimation/AnimatedMapPiece'
 
 class MapPiece extends React.Component {
   static propTypes = {
@@ -104,6 +103,5 @@ class MapPiece extends React.Component {
       </g>)
   }
 }
-
 
 module.exports = MapPiece

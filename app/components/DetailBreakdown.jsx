@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
-import './DetailBreakdown.scss'
+import './DetailBreakDown.scss'
 import { visualizationSettings } from '../selectors/visualizationSettings'
 import TR from '../TranslationTable'
 import { timelineYearScaleCalculation } from '../selectors/timeline'

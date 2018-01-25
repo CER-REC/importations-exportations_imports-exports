@@ -1,12 +1,12 @@
-const React = require('react')
-const { connect } = require('react-redux')
+import React from 'react'
+import { connect } from 'react-redux'
 
-const BarChart = require('./BarChart')
-const StackedChart = require('./StackedChart')
-const Axis = require('./Axis')
-const RefinedPetroleumProductsViewport = require('../selectors/viewport/refinedPetroleumProducts')
-const DataSelectors = require('../selectors/data')
-const Constants = require('../Constants')
+import BarChart from './BarChart'
+import StackedChart from './StackedChart'
+import Axis from './Axis'
+import RefinedPetroleumProductsViewport from '../selectors/viewport/refinedPetroleumProducts'
+import DataSelectors from '../selectors/data'
+import Constants from '../Constants'
 
 class RefinedPetroleumProductsVisualizationContainer extends React.Component {
   renderStackedChart() {

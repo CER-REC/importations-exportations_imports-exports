@@ -1,14 +1,15 @@
-const React = require('react')
-const ReactRedux = require('react-redux')
-const Immutable = require('immutable')
-const PropTypes = require('prop-types')
+import React from 'react'
+import { connect } from 'react-redux'
+import Immutable from 'immutable'
+import PropTypes from 'prop-types'
 
-const Constants = require('../Constants.js')
-const Tr = require('../TranslationTable.js')
+import Constants from '../Constants'
+import Tr from '../TranslationTable'
+import { OpenModal as ShowAboutWindowCreator } from '../actions/modal'
 
-require('./Header.scss')
-require('../styles/Fonts.scss')
-require('../styles/Colours.scss')
+import './Header.scss'
+import '../styles/Fonts.scss'
+import '../styles/Colours.scss'
 
 class Header extends React.Component {
   static get propTypes() {
@@ -26,18 +27,15 @@ class Header extends React.Component {
   }
 
   aboutThisProjectClick() { // eslint-disable-line class-methods-use-this
-    // TODO: summon 'About This Project' window
-
+    this.props.onClick()
   }
 
   methodologyClick() { // eslint-disable-line class-methods-use-this
     // TODO: add methodology click functionality
-
   }
 
   resetClick() { // eslint-disable-line class-methods-use-this
     // TODO: add reset visualization functionality
-
   }
 
   leftHeading() {
@@ -77,7 +75,6 @@ class Header extends React.Component {
           x={this.props.viewport.get('x') - Constants.getIn(['metaBar', 'width'])}
           className="metaBarBackground"
         />
-
         <g>
           <text
             className="resetLabel"
@@ -122,12 +119,10 @@ class Header extends React.Component {
 
 
   render() {
-    return (
-      <div style={{ height: Constants.get('topHeightMargin') }}>
-        {this.leftHeading()}
-        {this.metaBar()}
-      </div>
-    )
+    return (<div style={{ height: Constants.get('topHeightMargin') }}>
+      {this.leftHeading()}
+      {this.metaBar()}
+    </div>)
   }
 }
 
@@ -137,4 +132,10 @@ const mapStateToProps = state => ({
   language: state.language,
 })
 
-module.exports = ReactRedux.connect(mapStateToProps)(Header)
+const mapDispatchToProps = dispatch => ({
+  onClick() {
+    dispatch(ShowAboutWindowCreator('about'))
+  },
+})
+
+module.exports = connect(mapStateToProps, mapDispatchToProps)(Header)

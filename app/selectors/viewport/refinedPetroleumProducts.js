@@ -1,6 +1,6 @@
-const { createSelector } = require('reselect')
+import { createSelector } from 'reselect'
 
-const { visualizationContentPosition } = require('./index')
+import { visualizationContentPosition } from './index'
 
 const stackedChartPosition = createSelector(
   visualizationContentPosition,
