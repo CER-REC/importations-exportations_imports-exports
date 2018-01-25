@@ -1,12 +1,12 @@
-const React = require('react')
-const ReactRedux = require('react-redux')
+import React from 'react'
+import { connect } from 'react-redux'
 
-const Constants = require('../Constants.js')
-const Tr = require('../TranslationTable.js')
+import Constants from '../Constants'
+import Tr from '../TranslationTable'
 
-const ExpandImportExportMenuCreator = require('../actionCreators/ExpandImportExportMenuCreator.js')
+import ExpandImportExportMenuCreator from '../actionCreators/ExpandImportExportMenuCreator'
 
-const WorkspaceComputations = require('../computations/WorkspaceComputations.js')
+import WorkspaceComputations from '../computations/WorkspaceComputations'
 
 class ImportExportMenu extends React.Component {
   constructor(props) {
@@ -91,4 +91,4 @@ const mapDispatchToProps = dispatch => {
 
 }
 
-module.exports = ReactRedux.connect(mapStateToProps, mapDispatchToProps)(ImportExportMenu)
+module.exports = connect(mapStateToProps, mapDispatchToProps)(ImportExportMenu)

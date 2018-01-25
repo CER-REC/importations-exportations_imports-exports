@@ -1,10 +1,7 @@
-const DataTypes = require('../actions/data').Types
-const {
-  Types: VisualizationSettingsTypes,
-  timelineFilter,
-} = require('../actions/visualizationSettings')
-const { timelineXScale } = require('../selectors/timeline')
-const { visualizationSettings } = require('../selectors/visualizationSettings')
+import { Types as DataTypes } from '../actions/data'
+import { Types as VisualizationSettingsTypes, timelineFilter } from '../actions/visualizationSettings'
+import { timelineXScale } from '../selectors/timeline'
+import { visualizationSettings } from '../selectors/visualizationSettings'
 
 const timelineRange = store => next => (action) => {
   // Process the action immediately

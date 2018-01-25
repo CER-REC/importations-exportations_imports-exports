@@ -1,14 +1,14 @@
-const React = require('react')
-const ReactRedux = require('react-redux')
-const PropTypes = require('prop-types')
+import React from 'react'
+import { connect } from 'react-redux'
+import PropTypes from 'prop-types'
 
-const Constants = require('../Constants.js')
-const Tr = require('../TranslationTable.js')
+import Constants from '../Constants'
+import Tr from '../TranslationTable'
 
-const ShowExplanationsCreator = require('../actionCreators/ShowExplanationsCreator.js')
-const WorkspaceComputations = require('../computations/WorkspaceComputations.js')
+import ShowExplanationsCreator from '../actionCreators/ShowExplanationsCreator'
+import WorkspaceComputations from '../computations/WorkspaceComputations'
 
-require('../styles/Fonts.scss')
+import '../styles/Fonts.scss'
 
 
 class ShowExplanations extends React.Component {
@@ -98,4 +98,4 @@ const mapDispatchToProps = dispatch => ({
   },
 })
 
-module.exports = ReactRedux.connect(mapStateToProps, mapDispatchToProps)(ShowExplanations)
+module.exports = connect(mapStateToProps, mapDispatchToProps)(ShowExplanations)

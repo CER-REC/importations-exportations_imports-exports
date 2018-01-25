@@ -1,4 +1,4 @@
-const React = require('react')
+import React from 'react'
 
 class TextBox extends React.PureComponent {
   static get defaultProps() {

@@ -1,14 +1,14 @@
-const createSelector = require('reselect').createSelector
-const Immutable = require('immutable')
+import { createSelector } from 'reselect'
+import Immutable from 'immutable'
+
+import { sortAggregatedLocationsSelector, arrangeBy, unitSelector } from './data'
+import MapLayoutGridConstant from '../MapLayoutGridConstant'
+import Constants from '../Constants'
+import { visualizationSettings } from './visualizationSettings'
 
 // get import data for the electricity visualization
 // rows from the CSV
 const selectedVisualization = state => state.importExportVisualization
-const { sortAggregatedLocationsSelector, arrangeBy, unitSelector } = require('./data.js')
-const MapLayoutGridConstant = require('../MapLayoutGridConstant.js')
-const Constants = require('../Constants.js')
-
-const { visualizationSettings } = require('./visualizationSettings')
 
 const getSelectionSettings = createSelector(
   visualizationSettings,

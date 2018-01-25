@@ -1,10 +1,9 @@
-const React = require('react')
-const ReactRedux = require('react-redux')
+import React from 'react'
+import { connect } from 'react-redux'
 
-const Constants = require('../Constants.js')
-const Tr = require('../TranslationTable.js')
+import Tr from '../TranslationTable'
 
-require('./MenuBarOption.scss')
+import './MenuBarOption.scss'
 
 class MenuBarOption extends React.Component {
 
@@ -66,4 +65,4 @@ const mapStateToProps = state => {
   }
 }
 
-module.exports = ReactRedux.connect(mapStateToProps)(MenuBarOption)
+module.exports = connect(mapStateToProps)(MenuBarOption)

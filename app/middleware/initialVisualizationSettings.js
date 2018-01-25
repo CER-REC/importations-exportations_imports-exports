@@ -1,8 +1,6 @@
-const DataTypes = require('../actions/data').Types
-const {
-  Types: visualizationSettingsTypes,
-} = require('../actions/visualizationSettings')
-const { timelineYearScaleCalculation } = require('../selectors/timeline')
+import { Types as DataTypes } from '../actions/data'
+import { Types as visualizationSettingsTypes } from '../actions/visualizationSettings'
+import { timelineYearScaleCalculation } from '../selectors/timeline'
 
 let initializedFromURL = []
 
