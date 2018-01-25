@@ -17,6 +17,7 @@ class Header extends React.Component {
     return {
       language: PropTypes.string.isRequired,
       viewport: PropTypes.instanceOf(Immutable.Map).isRequired,
+      screenshotMode: PropTypes.bool.isRequired,
     }
   }
 
@@ -120,6 +121,9 @@ class Header extends React.Component {
 
 
   render() {
+    if(this.props.screenshotMode === true) {
+      return null
+    }
     return (<div style={{ height: Constants.get('topHeightMargin') }}>
       {this.leftHeading()}
       {this.metaBar()}
@@ -131,6 +135,7 @@ class Header extends React.Component {
 const mapStateToProps = state => ({
   viewport: state.viewport,
   language: state.language,
+  screenshotMode: state.screenshotMode,
 })
 
 const mapDispatchToProps = dispatch => ({

@@ -77,6 +77,22 @@ const RouteComputations = {
     return encodeURIComponent(`${location.pathname}screenshot${location.search}`)
   },
 
+    // Given the URL parameters from the current location, emits an object with
+  // immutable members for each chunk of the state which is routable
+  // paramsString: the 'search' portion of the current location.
+  // data: the incidents state
+  // categories: the category display state
+  urlParamsToState: function (location, data, categories) {
+
+    const rawParams = QueryString.parse(location.search)
+
+    return {
+        language: RouteComputations.parseUrlLanguage(location),
+    }
+
+  },
+
+
   screenshotOrigin(location) {
     switch (process.env.NODE_ENV) {
       case 'development':

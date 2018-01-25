@@ -7,6 +7,7 @@ const Constants = Immutable.fromJS({
     viewportPadding: 250,
   },
 
+
   topHeightMargin: 70,
 
   metaBar: {
@@ -206,6 +207,9 @@ const Constants = Immutable.fromJS({
 
   appHost: 'https://apps2.neb-one.gc.ca',
   screenshotPath: 'screenshot',
+
+  screenshotWidth: 1500,
+  screenshotHeight: 1700,
 
   styleGuide: {
     colours: {
