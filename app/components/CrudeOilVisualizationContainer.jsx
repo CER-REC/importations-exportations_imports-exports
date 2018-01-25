@@ -9,6 +9,7 @@ const Axis = require('./Axis')
 const CrudeOilViewport = require('../selectors/viewport/crudeOil')
 const Constants = require('../Constants')
 const { positionShape } = require('../propTypeShapes')
+import USPadd from './Padds/USPadd'
 
 const CrudeOilVisualizationContainer = props => (
   <g>
@@ -48,6 +49,9 @@ const CrudeOilVisualizationContainer = props => (
       xaxis={props.xaxis}
       yaxis={props.yaxis + props.height}
     />
+    <USPadd 
+      {...props.canadaPaddChart}
+    />
   </g>
 )
 
@@ -66,4 +70,5 @@ module.exports = connect((state, props) => ({
   subtypeChart: CrudeOilViewport.chartSubtypePosition(state, props),
   axisPosition: CrudeOilViewport.chartAxisPosition(state, props),
   exportChart: CrudeOilViewport.chartExportPosition(state, props),
+  canadaPaddChart: CrudeOilViewport.canadaPaddPosition(state, props),
 }))(CrudeOilVisualizationContainer)

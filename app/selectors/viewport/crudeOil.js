@@ -2,12 +2,22 @@ const createSelector = require('reselect').createSelector
 
 const ViewportSelectors = require('./index')
 
-const chartTransportPosition = createSelector(
+const canadaPaddPosition = createSelector(
   ViewportSelectors.visualizationContentPosition,
   visContent => ({
     top: visContent.top,
     left: visContent.left,
     width: visContent.width,
+    height: 100,
+  }),
+)
+
+const chartTransportPosition = createSelector(
+  canadaPaddPosition,
+  canadaPadd => ({
+    top: canadaPadd.top + canadaPadd.height,
+    left: canadaPadd.left,
+    width: canadaPadd.width,
     height: 100,
   }),
 )
@@ -43,6 +53,7 @@ const chartExportPosition = createSelector(
 )
 
 module.exports = {
+  canadaPaddPosition,
   chartTransportPosition,
   chartSubtypePosition,
   chartAxisPosition,
