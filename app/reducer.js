@@ -42,7 +42,7 @@ const nestedReducers = combineReducers({
   bins: BinsReducer,
   dataLoadingComplete: DataLoadCompleteReducer,
   visualizationSettings,
-  socialBar: SocialBarReducer,
+  expandSocialBar: SocialBarReducer,
   modal: ModalReducer,
 })
 

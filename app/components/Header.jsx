@@ -6,8 +6,6 @@ const PropTypes = require('prop-types')
 const Constants = require('../Constants.js')
 const Tr = require('../TranslationTable.js')
 
-const ShowAboutWindowCreator = require('../actions/modal.js').OpenModal
-
 require('./Header.scss')
 require('../styles/Fonts.scss')
 require('../styles/Colours.scss')
@@ -22,17 +20,7 @@ class Header extends React.Component {
 
   constructor(props) {
     super(props)
-    this.aboutThisProjectClick = this.aboutThisProjectClick.bind(this)
-    this.methodologyClick = this.methodologyClick.bind(this)
     this.resetClick = this.resetClick.bind(this)
-  }
-
-  aboutThisProjectClick() { // eslint-disable-line class-methods-use-this
-    this.props.onClick()
-  }
-
-  methodologyClick() { // eslint-disable-line class-methods-use-this
-    // TODO: add methodology click functionality
   }
 
   resetClick() { // eslint-disable-line class-methods-use-this
@@ -91,24 +79,6 @@ class Header extends React.Component {
             className="metaBarButton"
             height={Constants.getIn(['metaBar', 'iconSize'])}
             width={Constants.getIn(['metaBar', 'iconSize'])}
-            xlinkHref="images/info_about.svg"
-            y={Constants.getIn(['metaBar', 'aboutThisProjectIconMargin'])}
-            onClick={this.aboutThisProjectClick}
-          />
-
-          <image
-            className="metaBarButton"
-            height={Constants.getIn(['metaBar', 'iconSize'])}
-            width={Constants.getIn(['metaBar', 'iconSize'])}
-            xlinkHref="images/info_methodology.svg"
-            y={Constants.getIn(['metaBar', 'methodologyIconMargin'])}
-            onClick={this.methodologyClick}
-          />
-
-          <image
-            className="metaBarButton"
-            height={Constants.getIn(['metaBar', 'iconSize'])}
-            width={Constants.getIn(['metaBar', 'iconSize'])}
             xlinkHref="images/reset.svg"
             onClick={this.resetClick}
             y={Constants.getIn(['metaBar', 'resetIconMargin'])}
@@ -133,10 +103,4 @@ const mapStateToProps = state => ({
   language: state.language,
 })
 
-const mapDispatchToProps = dispatch => ({
-  onClick() {
-    dispatch(ShowAboutWindowCreator('about'))
-  },
-})
-
-module.exports = ReactRedux.connect(mapStateToProps, mapDispatchToProps)(Header)
+module.exports = ReactRedux.connect(mapStateToProps)(Header)

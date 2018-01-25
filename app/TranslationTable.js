@@ -407,6 +407,24 @@ const TranslationTable = Immutable.fromJS({
     fr: 'réinitialiser',
   },
 
+  socialBarText: {
+    about: {
+      en: 'about',
+      fr: 'TODO',
+    },
+    methodology: {
+      en: 'methodology',
+      fr: 'TODO',
+    },
+    downloadData: {
+      en: 'download data',
+      fr: 'TODO',
+    },
+    downloadImage: {
+      en: 'download image',
+      fr: 'TODO',
+    },
+  },
 
   applicationPath: {
     en: '/import-export-visualization/',

@@ -12,13 +12,11 @@ const Constants = Immutable.fromJS({
   metaBar: {
     width: 27,
     height: 70,
-    iconSize: 17,
-    resetTextOffset: 62,
+    iconSize: 20,
+    resetTextOffset: 53,
     iconMargin: 22,
-    aboutThisProjectIconMargin: 5,
-    methodologyIconMargin: 27,
     resetIconMargin: 49,
-    resetTextY: 63,
+    resetTextY: 65,
   },
 
   menuBar: {
@@ -75,16 +73,10 @@ const Constants = Immutable.fromJS({
 
   socialBar: {
     topMargin: 177,
-    width: 27,
-    height: 132,
+    width: 25,
+    height: 125,
     bottomMargin: 20,
-    iconSize: 17,
-    emailIconPadding: 5,
-    downloadFileIconPadding: 26,
-    downloadImageIconPadding: 47,
-    twitterIconPadding: 68,
-    facebookIconPadding: 89,
-    linkedInIconPadding: 110,
+    iconSize: 15,
     iconMargin: 22,
   },
 

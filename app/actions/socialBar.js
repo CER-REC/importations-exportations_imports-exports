@@ -3,7 +3,7 @@ export const Types = {
   EXPAND_SOCIALBAR: 'expandSocialBar',
 }
 
-export const expandSocialBar = () => ({
+export const ExpandSocialBar = () => ({
   type: Types.EXPAND_SOCIALBAR,
   payload: { },
 })
