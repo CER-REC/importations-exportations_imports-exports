@@ -1,16 +1,14 @@
-const React = require('react')
-const { connect } = require('react-redux')
-const Constants = require('../Constants.js')
+import React from 'react'
+import { connect } from 'react-redux'
 
-const Header = require('./Header.jsx')
-const MenuBar = require('./MenuBar.jsx')
-const SocialBar = require('./SocialBar.jsx')
-const ModalSelector = require('./ModalSelector')
+import Header from './Header'
+import MenuBar from './MenuBar'
+import SocialBar from './SocialBar'
+import ModalSelector from './ModalSelector'
+import VisualizationContainer from './VisualizationContainer'
+import ViewportSelectors from '../selectors/viewport/'
 
-const VisualizationContainer = require('./VisualizationContainer.jsx')
-const ViewportSelectors = require('../selectors/viewport/')
-
-require('./Workspace.scss')
+import './Workspace.scss'
 
 const Workspace = ({ svgSize, detailSidebarPosition }) => (
   <div style={{ position: 'relative' }}>

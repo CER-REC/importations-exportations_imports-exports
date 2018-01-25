@@ -1,6 +1,6 @@
-const Immutable = require('immutable')
+import { fromJS } from 'immutable'
 
-const MapLayoutGridConstant = Immutable.fromJS({
+const MapLayoutGridConstant = fromJS({
   electricity: {
     ca: {
       mapPieceScale: 1,

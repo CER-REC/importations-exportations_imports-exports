@@ -1,8 +1,8 @@
-const React = require('react')
-const connect = require('react-redux').connect
+import React from 'react'
+import { connect } from 'react-redux'
 
-const { timelineFilter } = require('../actions/visualizationSettings')
-const timelineSelectors = require('../selectors/timeline')
+import { timelineFilter } from '../actions/visualizationSettings'
+import timelineSelectors from '../selectors/timeline'
 
 class TimelinePlay extends React.PureComponent {
   static get defaultProps() {

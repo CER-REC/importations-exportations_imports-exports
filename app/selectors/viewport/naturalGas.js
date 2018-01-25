@@ -1,6 +1,6 @@
-const createSelector = require('reselect').createSelector
+import { createSelector } from 'reselect'
 
-const ViewportSelectors = require('./index')
+import ViewportSelectors from './index'
 
 const chartImportPosition = createSelector(
   ViewportSelectors.visualizationContentPosition,

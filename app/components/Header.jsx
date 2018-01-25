@@ -1,16 +1,15 @@
-const React = require('react')
-const ReactRedux = require('react-redux')
-const Immutable = require('immutable')
-const PropTypes = require('prop-types')
+import React from 'react'
+import { connect } from 'react-redux'
+import Immutable from 'immutable'
+import PropTypes from 'prop-types'
 
-const Constants = require('../Constants.js')
-const Tr = require('../TranslationTable.js')
+import Constants from '../Constants'
+import Tr from '../TranslationTable'
+import { OpenModal as ShowAboutWindowCreator } from '../actions/modal'
 
-const ShowAboutWindowCreator = require('../actions/modal.js').OpenModal
-
-require('./Header.scss')
-require('../styles/Fonts.scss')
-require('../styles/Colours.scss')
+import './Header.scss'
+import '../styles/Fonts.scss'
+import '../styles/Colours.scss'
 
 class Header extends React.Component {
   static get propTypes() {
@@ -139,4 +138,4 @@ const mapDispatchToProps = dispatch => ({
   },
 })
 
-module.exports = ReactRedux.connect(mapStateToProps, mapDispatchToProps)(Header)
+module.exports = connect(mapStateToProps, mapDispatchToProps)(Header)

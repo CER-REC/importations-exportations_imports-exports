@@ -1,16 +1,16 @@
-const React = require('react')
-const ReactRedux = require('react-redux')
-const Request = require('client-request/promise')
-const PropTypes = require('prop-types')
-const Immutable = require('immutable')
+import React from 'react'
+import { connect } from 'react-redux'
+import Request from 'client-request/promise'
+import PropTypes from 'prop-types'
+import Immutable from 'immutable'
 
-const RouteComputations = require('../computations/RouteComputations.js')
+import RouteComputations from '../computations/RouteComputations'
 
-const Constants = require('../Constants.js')
-const Tr = require('../TranslationTable.js')
-const WorkspaceComputations = require('../computations/WorkspaceComputations.js')
+import Constants from '../Constants'
+import Tr from '../TranslationTable'
+import WorkspaceComputations from '../computations/WorkspaceComputations'
 
-require('./SocialBar.scss')
+import './SocialBar.scss'
 
 class SocialBar extends React.Component {
   static get propTypes() {
@@ -188,4 +188,4 @@ const mapStateToProps = state => ({
 })
 
 
-module.exports = ReactRedux.connect(mapStateToProps)(SocialBar)
+module.exports = connect(mapStateToProps)(SocialBar)

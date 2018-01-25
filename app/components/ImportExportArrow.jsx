@@ -1,9 +1,9 @@
-const React = require('react')
-const ReactRedux = require('react-redux')
-const PropTypes = require('prop-types')
-const Immutable = require('immutable')
+import React from 'react'
+import { connect } from 'react-redux'
+import PropTypes from 'prop-types'
+import Immutable from 'immutable'
 
-require('../styles/Fonts.scss')
+import '../styles/Fonts.scss'
 
 class ImportExportArrow extends React.Component {
   static propTypes = {
@@ -104,4 +104,4 @@ class ImportExportArrow extends React.Component {
 }
 
 const mapStateToProps = ({ language }) => ({ language })
-module.exports = ReactRedux.connect(mapStateToProps)(ImportExportArrow)
+module.exports = connect(mapStateToProps)(ImportExportArrow)

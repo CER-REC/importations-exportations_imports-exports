@@ -1,8 +1,7 @@
-const React = require('react')
-const Constants = require('../Constants.js')
+import React from 'react'
 
-const MapPiece = require('./MapPiece.jsx')
-const MapPieceExplanationConstant = require('../MapPieceExplanationConstant.js')
+import MapPiece from './MapPiece'
+import MapPieceExplanationConstant from '../MapPieceExplanationConstant'
 
 class ElectricityMapPieceActivityExplanation extends React.Component {
   render() {

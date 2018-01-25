@@ -1,5 +1,5 @@
-const DataTypes = require('../actions/data').Types
-const { Types } = require('../actions/DataLoadComplete.js')
+import { Types as DataTypes } from '../actions/data'
+import { Types } from '../actions/DataLoadComplete'
 
 const DataLoaded = store => next => (action) => {
   next(action)
