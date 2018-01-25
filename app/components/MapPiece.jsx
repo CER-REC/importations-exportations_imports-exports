@@ -6,6 +6,7 @@ import ImportExportArrow from './ImportExportArrow'
 import MapPieceLabel from './MapPieceLabel'
 import ConfidentialIcon from './ConfidentialIcon'
 import Constants from '../Constants'
+import AnimatedMapPiece from './SVGAnimation/AnimatedMapPiece'
 
 class MapPiece extends React.Component {
   static propTypes = {
@@ -74,7 +75,6 @@ class MapPiece extends React.Component {
       && this.props.mapPieceProps.get('stroke') !== '') {
       stroke = this.props.mapPieceProps.get('stroke')
     }
-
     return (<g fillOpacity={opacity} >
       <polygon
         stroke={stroke}
@@ -94,7 +94,13 @@ class MapPiece extends React.Component {
         {this.drawArrow(this.props.legends, this.props.data, 'imports', this.props.styles, this.props.arrowProps)}
       </g>
       {confidentialIcon}
-            </g>)
+      <AnimatedMapPiece
+        x1= {this.props.x1 || 0}
+        y1= {this.props.y1 || 0}
+        x2= {this.props.x1 || 0}
+        y2= {this.props.y1 || 0}
+      />
+      </g>)
   }
 }
 

@@ -8,7 +8,7 @@ const canadaMapPosition = createSelector(
     top: visContent.top,
     left: visContent.left,
     width: visContent.width,
-    height: 200,
+    height: 120,
   }),
 )
 
@@ -45,10 +45,10 @@ const chartExportPosition = createSelector(
 const usMapPosition = createSelector(
   chartExportPosition,
   prev => ({
-    top: prev.top + prev.height,
+    top: prev.top + prev.height + 50,
     left: prev.left,
     width: prev.width,
-    height: 300,
+    height: 200,
   }),
 )
 

@@ -57,7 +57,7 @@ const MapLayoutGridConstant = fromJS({
           name: 'ON', originKey: 'ON', x: 4.5, y: 1,
         },
         {
-          name: 'QC', originKey: 'QC', x: 5.5, y: 1,
+          name: 'QB', originKey: 'QB', x: 5.5, y: 1,
         },
         {
           name: 'NB', originKey: 'NB', x: 6.5, y: 1,
@@ -74,8 +74,8 @@ const MapLayoutGridConstant = fromJS({
       dimensions: {
         height: 37.09,
         width: 38.75,
-        yAxisPadding: 4.5,
-        xAxisPadding: 7.5,
+        yAxisPadding: 20.5,
+        xAxisPadding: 25.5,
       },
       styles: {
         color: '#ede3cb',
@@ -249,8 +249,8 @@ const MapLayoutGridConstant = fromJS({
       dimensions: {
         height: 37.09,
         width: 38.75,
-        yAxisPadding: 4.5,
-        xAxisPadding: 7.5,
+         yAxisPadding: 20.5,
+        xAxisPadding: 25.5,
       },
       styles: {
         color: '#ede3cb',
