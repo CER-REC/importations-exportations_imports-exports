@@ -12,7 +12,6 @@ const ExplanationLine = require('./ExplanationLine.jsx')
 const ExplanationText = require('./ExplanationText.jsx')
 
 const PopoverPortal = require('./PopoverPortal.jsx')
-const ExplanationDot = require('./ExplanationDot.jsx')
 
 import './Workspace.scss'
 
@@ -43,8 +42,9 @@ const Workspace = ({ svgSize, detailSidebarPosition }) => (
       <ExplanationLine />
     </svg>
 
-    <div id="popoverPortal" />
-    <ExplanationText />
+    <div id="popoverPortal">
+     <ExplanationText />
+    </div>
     <ModalSelector />
 
   </div>

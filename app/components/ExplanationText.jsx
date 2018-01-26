@@ -12,8 +12,8 @@ class ExplanationText extends React.Component {
   mainNavText() {
     return <div style={{
           position: 'absolute',
-          top: 245,
-          left: 190,
+          top: 215,
+          left: 140,
           height: 'auto',
           width: 100,
           background: 'white',
@@ -57,8 +57,8 @@ class ExplanationText extends React.Component {
   importExportText() {
     return <div style={{
           position: 'absolute',
-          top: 190,
-          left: 190,
+          top: 175,
+          left: 210,
           height: 'auto',
           width: 80,
           background: 'white',

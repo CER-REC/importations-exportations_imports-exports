@@ -10,7 +10,7 @@ const PopoverPortal = require('./PopoverPortal.jsx')
 class ElectricityExplanationPopovers extends React.Component {
 
   mainNavLine() {
-    return <g transform ='translate(95 105)'><g transform='scale(0.3)'>
+    return <g transform ='translate(43 80)'><g transform='scale(0.3)'>
     <path d="M110,43 C248,257 312,213 633,213" stroke='#ff708a' strokeWidth ='2' fill='transparent'/>
     </g></g>
   }
@@ -28,8 +28,8 @@ class ElectricityExplanationPopovers extends React.Component {
   }
 
   importExportMenuLine() {
-    return <g transform ='translate(128 45)'><g transform='scale(0.3)'>
-    <path d="M89,67 C87,286 352,236 444,245"  stroke='#ff708a' strokeWidth ='2' fill='transparent'/>
+    return <g transform ='translate(138 55)'><g transform='scale(0.3)'>
+    <path d="M62,30 C89,191 329,166 483,165"  stroke='#ff708a' strokeWidth ='2' fill='transparent'/>
     </g></g>
   }
 

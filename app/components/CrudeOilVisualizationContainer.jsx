@@ -2,7 +2,6 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
-import ExplanationPopovers from './ExplanationPopovers'
 import ProportionChart from './ProportionChart'
 import BarChart from './BarChart'
 import Axis from './Axis'
@@ -43,10 +42,6 @@ const CrudeOilVisualizationContainer = props => (
       aggregateKey="activity"
       flipped
       colour={Constants.getIn(['styleGuide', 'colours', 'ExportDefault'])}
-    />
-    <ExplanationPopovers
-      xaxis={props.xaxis}
-      yaxis={props.yaxis + props.height}
     />
   </g>
 )

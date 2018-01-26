@@ -3,6 +3,8 @@ import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
 import Constants from '../Constants'
+import ExplanationLine from './ExplanationLine'
+import ExplanationText from './ExplanationText'
 
 const ExplanationSummonedCreator = require('../actionCreators/ExplanationSummonedCreator.js')
 

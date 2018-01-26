@@ -6,7 +6,6 @@ import CanadaMapContainer from './CanadaMapContainer'
 import USMapContainer from './USMapContainer'
 import PowerPoolContainer from './PowerPoolContainer'
 import PowerPoolGrouping from './PowerPoolGrouping'
-import ExplanationPopovers from './ExplanationPopovers'
 import ElectricityMapPieceActivityExplanation from './ElectricityMapPieceActivityExplanation'
 
 import BarChart from './BarChart'
@@ -45,10 +44,6 @@ const ElectricityVisualizationContainer = props => (
     />
     <PowerPoolGrouping
       {...props.powerPool}
-    />
-    <ExplanationPopovers
-      xaxis={props.xaxis}
-      yaxis={props.yaxis + props.height}
     />
     <ElectricityMapPieceActivityExplanation
       {...props.mapPieceActivityExplanation}
