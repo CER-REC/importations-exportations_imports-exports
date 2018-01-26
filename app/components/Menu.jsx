@@ -39,6 +39,9 @@ class Menu extends React.PureComponent {
 
   renderTitle() {
     if (!this.props.title) { return null }
+    const expandIcon = (this.props.options.length > 1)
+      ? <tspan className="bold"> {this.props.expanded ? '-' : '+'}</tspan>
+      : null
     return (
       <g {...handleInteraction(this.toggleMenu)}>
         <rect
@@ -53,7 +56,7 @@ class Menu extends React.PureComponent {
           y={Constants.getIn(['menuBar', 'barHeight']) / 2}
         >
           {this.props.title}
-          <tspan className="bold"> {this.props.expanded ? '-' : '+'}</tspan>
+          {expandIcon}
         </text>
       </g>
     )
