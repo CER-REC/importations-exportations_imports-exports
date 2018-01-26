@@ -1,30 +1,18 @@
+import React from 'react'
+import { connect } from 'react-redux'
 
-const React = require('react')
-const ReactRedux = require('react-redux')
-const Constants = require('../Constants.js')
-
-const CloseModal = require('../actions/modal.js').CloseModal
-
-require('./AboutWindow.scss')
-
-const Tr = require('../TranslationTable.js')
+import { CloseModal } from '../actions/modal'
+import Tr from '../TranslationTable'
+import Constants from '../Constants'
+import { handleInteraction } from '../utilities'
+import './AboutWindow.scss'
 
 class AboutWindow extends React.Component {
-  constructor(props) {
-    super(props)
-    this.handleClose = this.handleClose.bind(this)
-  }
-
-  handleClose() {
-    this.props.onClick()
-  }
-
   closeButton() {
-    return <img
-      className='closeButton'
+    return <img className='closeButton'
       src='images/about_close.svg'
-      onClick = {this.handleClose}>
-    </img>
+      {...handleInteraction(this.props.closeModal)}
+    />
   }
 
   heading() {
@@ -170,10 +158,4 @@ const mapStateToProps = state => {
   }
 }
 
-const mapDispatchToProps = dispatch => ({
-  onClick() {
-    dispatch(CloseModal())
-  },
-})
-
-module.exports = ReactRedux.connect(mapStateToProps, mapDispatchToProps)(AboutWindow)
+module.exports = connect(mapStateToProps)(AboutWindow)
