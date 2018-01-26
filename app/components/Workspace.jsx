@@ -26,7 +26,6 @@ const Workspace = ({ svgSize, detailSidebarPosition }) => (
 
       <VisualizationContainer />
 
-      <SocialBar />
     </svg>
     <div
       id="detailSidebar"
@@ -37,6 +36,7 @@ const Workspace = ({ svgSize, detailSidebarPosition }) => (
         width: detailSidebarPosition.width,
       }}
     />
+    <SocialBar />
     <ModalSelector />
   </div>
 )
