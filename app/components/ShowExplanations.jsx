@@ -7,6 +7,7 @@ import Tr from '../TranslationTable'
 
 import ShowExplanationsCreator from '../actionCreators/ShowExplanationsCreator'
 import WorkspaceComputations from '../computations/WorkspaceComputations'
+import { handleInteraction } from '../utilities'
 
 import '../styles/Fonts.scss'
 
@@ -18,15 +19,6 @@ class ShowExplanations extends React.Component {
       showExplanations: PropTypes.bool.isRequired,
       language: PropTypes.string.isRequired,
     }
-  }
-
-  constructor(props) {
-    super(props)
-    this.onClick = this.props.onClick.bind(this)
-  }
-
-  onClick(e) {
-    e.preventDefault()
   }
 
   triangleLine() {
@@ -78,7 +70,7 @@ class ShowExplanations extends React.Component {
 
   render() {
     return (
-      <g transform="translate(0 80)" onClick={this.onClick}>
+      <g transform="translate(0 80)" {...handleInteraction(this.props.onClick)}>
         {this.showText()}
         {this.triangleLine()}
       </g>
@@ -92,10 +84,8 @@ const mapStateToProps = state => ({
   showExplanations: state.showExplanations,
 })
 
-const mapDispatchToProps = dispatch => ({
-  onClick: () => {
-    dispatch(ShowExplanationsCreator())
-  },
-})
+const mapDispatchToProps = {
+  onClick: ShowExplanationsCreator,
+}
 
 module.exports = connect(mapStateToProps, mapDispatchToProps)(ShowExplanations)

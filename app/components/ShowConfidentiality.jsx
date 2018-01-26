@@ -1,14 +1,12 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import Constants from '../Constants'
 import Tr from '../TranslationTable'
-
-import WorkspaceComputations from '../computations/WorkspaceComputations'
-
+import { handleInteraction } from '../utilities'
 
 import '../styles/Fonts.scss'
 
+const placeholderClick = () => alert('Clicked')
 
 class ShowConfidentiality extends React.Component {
 
@@ -35,10 +33,12 @@ class ShowConfidentiality extends React.Component {
   }
 
   render() {
-    return <g transform='translate(0 30)'>
-      {this.showText()}
-      {this.triangleLine()}
-    </g>
+    return (
+      <g transform='translate(0 30)' {...handleInteraction(placeholderClick)}>
+        {this.showText()}
+        {this.triangleLine()}
+      </g>
+    )
   }
 }
 
