@@ -1,7 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import Immutable from 'immutable'
-import memoize from 'memoize-immutable'
 import PropTypes from 'prop-types'
 
 import MapPiece from './MapPiece'
@@ -16,6 +15,7 @@ import ElectricitySelector from '../selectors/ElectricitySelector'
 import { arrangeBy, binSelector, sortAggregatedLocationsSelector } from '../selectors/data'
 import DetailSidebar from './DetailSidebar'
 import DetailBreakdown from './DetailBreakdown'
+import { handleInteraction } from '../utilities'
 
 const mapPieceTransformStartXaxis = ( position, dimensions, mapPieceScale) => {
   return (position.get('x') * ((mapPieceScale * dimensions.get('width')) + dimensions.get('xAxisPadding')))
@@ -43,7 +43,7 @@ class ElectricityMapLayout extends React.Component {
     country: PropTypes.string.isRequired,
   }
 
-  onClick = memoize((country, originKey) => () => {
+  onClick = (country, originKey) => {
     const { selection } = this.props
     let origins = []
     if (selection.get('country') === country) {
@@ -77,7 +77,7 @@ class ElectricityMapLayout extends React.Component {
       origins,
       destinations,
     })
-  })
+  }
 
   getPowerPoolsOutline(key, country, xaxis, yaxis, position, dimensions, mapPieceScale) {
     if (this.isMapPieceSelected(key, country) && country === 'powerpool' && this.props.arrangeBy === 'location') {
@@ -147,7 +147,7 @@ class ElectricityMapLayout extends React.Component {
       <g key = {`mapPieceKey_${this.props.country}_${position.get('name')}`}>
         <g
           className="mappiece"
-          onClick={this.onClick( this.props.country, position.get('name'))}
+          {...handleInteraction(this.onClick, this.props.country, position.get('name'))}
           transform={`scale(${mapPieceScale})`}
         >
           <MapPiece
