@@ -5,12 +5,13 @@ import { connect } from 'react-redux'
 import Constants from '../Constants'
 import { handleInteraction } from '../utilities'
 import { setActiveMenu } from '../actions/activeMenu'
+import TrSelector from '../selectors/translate'
 
 import './Menu.scss'
 
 class Menu extends React.PureComponent {
   static propTypes = {
-    title: PropTypes.node,
+    title: PropTypes.oneOfType([PropTypes.node, PropTypes.bool]),
     expanded: PropTypes.bool,
     options: PropTypes.arrayOf(PropTypes.string).isRequired,
     selected: PropTypes.string,
@@ -19,6 +20,7 @@ class Menu extends React.PureComponent {
     left: PropTypes.number,
     name: PropTypes.string.isRequired,
     setActiveMenu: PropTypes.func.isRequired,
+    Tr: PropTypes.func.isRequired,
   }
 
   static defaultProps = {
@@ -38,7 +40,14 @@ class Menu extends React.PureComponent {
   }
 
   renderTitle() {
-    if (!this.props.title) { return null }
+    if (this.props.title === false) { return null }
+    const { Tr } = this.props
+    const title = this.props.title || (
+      <tspan>
+        {Tr(['menu', this.props.name, 'prefix']) || ''}&nbsp;
+        <tspan className="bold">{Tr(['menu', this.props.name, 'options', this.props.selected])}</tspan>
+      </tspan>
+    )
     const expandIcon = (this.props.options.length > 1)
       ? <tspan className="bold"> {this.props.expanded ? '-' : '+'}</tspan>
       : null
@@ -55,7 +64,7 @@ class Menu extends React.PureComponent {
           x={Constants.getIn(['menuBar', 'textLabelOffset'])}
           y={Constants.getIn(['menuBar', 'barHeight']) / 2}
         >
-          {this.props.title}
+          {title}
           {expandIcon}
         </text>
       </g>
@@ -64,6 +73,7 @@ class Menu extends React.PureComponent {
 
   renderOptions() {
     if (!this.props.expanded) { return null }
+    const { Tr } = this.props
     const options = this.props.options
       .filter(v => (v !== this.props.selected))
       .map(option => (
@@ -74,7 +84,7 @@ class Menu extends React.PureComponent {
           key={option}
           {...handleInteraction(this.onChange, option)}
         >
-          <tspan className="optionText">{option}</tspan>
+          <tspan className="optionText">{Tr(['menu', this.props.name, 'options', option])}</tspan>
         </tspan>
       ))
 
@@ -101,6 +111,9 @@ class Menu extends React.PureComponent {
 }
 
 export default connect(
-  ({ activeMenu }, props) => ({ expanded: (activeMenu === props.name) }),
+  (state, props) => ({
+    expanded: (state.activeMenu === props.name),
+    Tr: TrSelector(state, props),
+  }),
   { setActiveMenu },
 )(Menu)

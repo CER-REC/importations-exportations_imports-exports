@@ -245,113 +245,118 @@ const TranslationTable = fromJS({
     },
   },
 
-  electricityDataTypes:{
-    'CAN$': { 
-      en: 'CAN$', 
-      fr: 'CAN$' 
-    },
-    'CAN$/MW.h': { 
-      en: 'CAN$/MW.h', 
-      fr: 'CAN$/MW.h' 
-    },
-    'CN$/GJ': { 
-      en: 'CN$/GJ', 
-      fr: 'CN$/GJ' 
-    },
-    'm3/d': { 
-      en: '(m³/d)', 
-      fr: '(m³/d)' 
-    },
-    'MW.h': { 
-      en: '(MW.h)', 
-      fr: '(MW.h)' 
-    },
-    'thousand m3/d': { 
-      en: '(thousand m³/d)', 
-      fr: '(thousand m³/d)' 
-    },
-  },
-
-  arrangedBy: {
-    en: 'arranged by',
-    fr: 'TODO',
-  },
-
-  showing: {
-    en: 'showing',
-    fr: 'TODO',
-  },
-
-  amount: {
-    en: 'amount',
-    fr: 'TODO'
-  },
-
-  nglSubproductMenu: {
-    of: {
-      en: 'of',
-      fr: 'TODO',
-    },
-    butane: {
-      en: 'BUTANE',
-      fr: 'TODO',
-    },
+  menu: {
     and: {
       en: 'and',
-      fr: 'TODO',
+      fr: 'and',
     },
-    propane: {
-      en: 'PROPANE',
-      fr: 'PROPANE',
+    activity: {
+      options: {
+        imports: {
+          en: 'Imports',
+          fr: 'Imports',
+        },
+        exports: {
+          en: 'Exports',
+          fr: 'Exports',
+        },
+        importsExports: {
+          en: 'Imports and Exports',
+          fr: 'Imports and Exports',
+        },
+      },
+    },
+    arrangeBy: {
+      prefix: {
+        en: 'arranged by',
+        fr: 'TODO',
+      },
+      options: {
+        location: {
+          en: 'LOCATION',
+          fr: 'LOCATION FR',
+        },
+        imports: {
+          en: 'MOST IMPORTS',
+          fr: 'MOST IMPORTS FR',
+        },
+        exports: {
+          en: 'MOST EXPORTS',
+          fr: 'MOST EXPORTS FR',
+        },
+      },
+    },
+    amount: {
+      prefix: {
+        en: 'showing',
+        fr: 'TODO',
+      },
+      options: {
+        CAN$: {
+          en: 'PRICE (CAN$)',
+          fr: 'CAN$',
+        },
+        'CAN$/MW.h': {
+          en: 'PRICE (CAN$/MW.h)',
+          fr: 'CAN$/MW.h',
+        },
+        'CN$/GJ': {
+          en: 'PRICE (CN$/GJ)',
+          fr: 'CN$/GJ',
+        },
+        'm3/d': {
+          en: 'AMOUNT (m³/d)',
+          fr: 'm³/d',
+        },
+        'MW.h': {
+          en: 'AMOUNT (MW.h)',
+          fr: 'MW.h',
+        },
+        'thousand m3/d': {
+          en: 'AMOUNT (thousand m³/d)',
+          fr: 'thousand m³/d',
+        },
+      },
+    },
+    subtype: {
+      prefix: {
+        en: 'of',
+        fr: 'TODO',
+      },
+      options: {
+        butane: {
+          en: 'BUTANE',
+          fr: 'TODO',
+        },
+        propane: {
+          en: 'PROPANE',
+          fr: 'PROPANE',
+        },
+        '': {
+          en: 'Butane and Propane',
+          fr: 'Butane and Propane',
+        },
+      },
     },
   },
 
-  explanationShown:{
-    en:'show EXPLANATIONS',
-    fr:'show EXPLANATIONS FR'
+  explanationShown: {
+    en: 'show EXPLANATIONS',
+    fr: 'show EXPLANATIONS FR',
   },
 
-  explanationHide:{
-    en:'hide EXPLANATIONS',
-    fr:'hide EXPLANATIONS FR'
+  explanationHide: {
+    en: 'hide EXPLANATIONS',
+    fr: 'hide EXPLANATIONS FR',
   },
 
   confidentialityShown: {
-    en:'show CONFIDENTIALITY',
-    fr:'show CONFIDENTIALITY FR'
+    en: 'show CONFIDENTIALITY',
+    fr: 'show CONFIDENTIALITY FR',
   },
   confidentialityHide: {
-    en:'hide CONFIDENTIALITY',
-    fr:'hide CONFIDENTIALITY FR'
-  },
-
-  electricitySortStates: {
-    title: {
-      import: {
-        en: 'Imports',
-        fr: 'Imports',
-      },
-      ampersand: {
-        en: '&',
-        fr: '&',
-      },
-      export: {
-        en: 'Exports',
-        fr: 'Exports',
-      },
-    },
-    location: {
-      en: 'LOCATION',
-      fr: 'LOCATION FR',
-    },
-    imports: {
-      en: 'MOST IMPORTS',
-      fr: 'MOST IMPORTS FR',
-    },
-    exports: {
-      en: 'MOST EXPORTS',
-      fr: 'MOST EXPORTS FR',
-    },
+    en: 'hide CONFIDENTIALITY',
+    fr: 'hide CONFIDENTIALITY FR',
   },
 
   electricityDataTypes: {

@@ -1,6 +1,6 @@
 import { createSelector } from 'reselect'
 
-import { activityOptions, arrangeByOptions, amountOptions } from '../menus'
+import { activityOptions, arrangeByOptions, amountOptions, subtypeOptions } from '../menus'
 import Constants from '../../Constants'
 
 const menuHeightCalc = name => (prev, active, options) => ({
@@ -52,4 +52,11 @@ export const amountPosition = createSelector(
   activeMenu,
   amountOptions,
   menuHeightCalc('amount'),
+)
+
+export const subtypePosition = createSelector(
+  amountPosition,
+  activeMenu,
+  subtypeOptions,
+  menuHeightCalc('subtype'),
 )
