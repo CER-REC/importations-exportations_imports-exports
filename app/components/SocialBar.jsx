@@ -12,7 +12,7 @@ import WorkspaceComputations from '../computations/WorkspaceComputations'
 
 import { ExpandSocialBar } from '../actions/socialBar'
 
-const ShowAboutWindowCreator = require('../actions/modal.js').OpenModal
+import { OpenModal as ShowAboutWindowCreator } from '../actions/modal'
 
 import './SocialBar.scss'
 
@@ -100,8 +100,9 @@ class SocialBar extends React.Component {
     />
   }
 
-  controlArrowClick() {
+  controlArrowClick(e) {
     this.props.controlArrowClick()
+    e.preventDefault()
   }
 
   aboutThisProjectClick() { 

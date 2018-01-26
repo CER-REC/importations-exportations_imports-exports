@@ -1,6 +1,7 @@
 
 export const Types = {
   EXPAND_SOCIALBAR: 'expandSocialBar',
+  DISMISS_POPOVER: 'dismissPopover',
 }
 
 export const ExpandSocialBar = () => ({
@@ -8,11 +9,16 @@ export const ExpandSocialBar = () => ({
   payload: { },
 })
 
-const initialState = false
-export const reducer = (state = initialState, action) => {
+export const DismissPopover = () => ({
+  type: Types.DISMISS_POPOVER,
+  payload: { },
+})
+
+export const reducer = (state = false, action) => {
   switch (action.type) {
     case Types.EXPAND_SOCIALBAR: return true
-    default: return initialState
+    case Types.DISMISS_POPOVER: return false
+    default: return false
   }
 }
 

@@ -13,6 +13,7 @@ import Root from './components/Root'
 import Resized from './actionCreators/ResizeScreenCreator'
 import { LoadData as LoadDataCreator } from './actions/data'
 import { LoadBins as LoadBinsCreator } from './actions/bins'
+import { DismissPopover as DismissPopoverCreator } from './actions/modal'
 import Store from './Store'
 
 const store = Store()
@@ -38,10 +39,14 @@ function resizeScreenHandler() {
   store.dispatch(Resized(w, h))
 }
 
+function windowClickHandler() {
+  store.dispatch(DismissPopoverCreator())
+}
+
 DomReady(() => {
   resizeScreenHandler()
   window.addEventListener('resize', resizeScreenHandler)
-
+  window.addEventListener('click', windowClickHandler)
   render(Root)
 })
 
