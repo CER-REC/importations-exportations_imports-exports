@@ -216,9 +216,9 @@ const TranslationTable = fromJS({
       en: 'Natural Gas Liquids',
       fr: 'Natural Gas Liquids FR',
     },
-    refinedPetroleumProducts:{
-      en:'Refin. Petroleum Prod.',
-      fr:'Refin. Petroleum Prod. FR',
+    refinedPetroleumProducts: {
+      en: 'Refin. Petroleum Prod.',
+      fr: 'Refin. Petroleum Prod. FR',
     },
   },
 
@@ -760,6 +760,15 @@ const TranslationTable = fromJS({
       PJMPP: {
         en: 'Pennsylvania Jersey Maryland Power Pool',
         fr: 'Pennsylvania Jersey Maryland Power Pool',
+      },
+    },
+  },
+
+  unabbreviated: {
+    mainMenuBar: {
+      refinedPetroleumProducts: {
+        en: 'Refined Petroleum Products',
+        fr: 'Refined Petroleum Products FR',
       },
     },
   },
