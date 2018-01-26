@@ -62,14 +62,11 @@ class MenuBar extends React.Component {
           title={<tspan>showing <tspan className="bold">Amount ({this.props.visualizationSettings.get('amount')})</tspan></tspan>}
           name="amount"
         />
-
-        <Legend />
-
-        <ShowConfidentiality />
+        <NglSubproductMenu />
 
         <ShowExplanations />
-
-        <NglSubproductMenu />
+        <ShowConfidentiality />
+        <Legend />
       </g>
     )
   }

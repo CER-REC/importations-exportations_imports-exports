@@ -6,6 +6,7 @@ import PropTypes from 'prop-types'
 import Constants from '../Constants'
 import Tr from '../TranslationTable'
 import { OpenModal as ShowAboutWindowCreator } from '../actions/modal'
+import { handleInteraction } from '../utilities'
 
 import './Header.scss'
 import '../styles/Fonts.scss'
@@ -78,7 +79,7 @@ class Header extends React.Component {
         <g>
           <text
             className="resetLabel"
-            onClick={this.resetClick}
+            {...handleInteraction(this.resetClick)}
             y={Constants.getIn(['metaBar', 'resetTextY'])}
             x={this.props.viewport.get('x') - Constants.getIn(['metaBar', 'resetTextOffset'])}
           >{ Tr.getIn(['resetLabel', this.props.language]) }
@@ -92,7 +93,7 @@ class Header extends React.Component {
             width={Constants.getIn(['metaBar', 'iconSize'])}
             xlinkHref="images/info_about.svg"
             y={Constants.getIn(['metaBar', 'aboutThisProjectIconMargin'])}
-            onClick={this.aboutThisProjectClick}
+            {...handleInteraction(this.aboutThisProjectClick)}
           />
 
           <image
@@ -101,7 +102,7 @@ class Header extends React.Component {
             width={Constants.getIn(['metaBar', 'iconSize'])}
             xlinkHref="images/info_methodology.svg"
             y={Constants.getIn(['metaBar', 'methodologyIconMargin'])}
-            onClick={this.methodologyClick}
+            {...handleInteraction(this.methodologyClick)}
           />
 
           <image
@@ -109,7 +110,7 @@ class Header extends React.Component {
             height={Constants.getIn(['metaBar', 'iconSize'])}
             width={Constants.getIn(['metaBar', 'iconSize'])}
             xlinkHref="images/reset.svg"
-            onClick={this.resetClick}
+            {...handleInteraction(this.resetClick)}
             y={Constants.getIn(['metaBar', 'resetIconMargin'])}
           />
         </g>

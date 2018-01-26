@@ -9,6 +9,7 @@ import RouteComputations from '../computations/RouteComputations'
 import Constants from '../Constants'
 import Tr from '../TranslationTable'
 import WorkspaceComputations from '../computations/WorkspaceComputations'
+import { handleInteraction } from '../utilities'
 
 import './SocialBar.scss'
 
@@ -134,7 +135,7 @@ class SocialBar extends React.Component {
             width={Constants.getIn(['socialBar', 'iconSize'])}
             y={WorkspaceComputations.socialBarY(this.props.viewport) + Constants.getIn(['socialBar', 'emailIconPadding'])}
             xlinkHref="images/sm_email.svg"
-            onClick={this.emailClick}
+            {...handleInteraction(this.emailClick)}
           />
           <image
             className="socialBarIcon"
@@ -142,7 +143,7 @@ class SocialBar extends React.Component {
             width={Constants.getIn(['socialBar', 'iconSize'])}
             y={WorkspaceComputations.socialBarY(this.props.viewport) + Constants.getIn(['socialBar', 'downloadFileIconPadding'])}
             xlinkHref="images/download_file.svg"
-            onClick={this.downloadDataClick}
+            {...handleInteraction(this.downloadDataClick)}
           />
           <image
             className="socialBarIcon"
@@ -150,7 +151,7 @@ class SocialBar extends React.Component {
             width={Constants.getIn(['socialBar', 'iconSize'])}
             y={WorkspaceComputations.socialBarY(this.props.viewport) + Constants.getIn(['socialBar', 'downloadImageIconPadding'])}
             xlinkHref="images/download_image.svg"
-            onClick={this.downloadImageClick}
+            {...handleInteraction(this.downloadImageClick)}
           />
           <image
             className="socialBarIcon"
@@ -158,7 +159,7 @@ class SocialBar extends React.Component {
             width={Constants.getIn(['socialBar', 'iconSize'])}
             y={WorkspaceComputations.socialBarY(this.props.viewport) + Constants.getIn(['socialBar', 'twitterIconPadding'])}
             xlinkHref="images/sm_twitter.svg"
-            onClick={this.twitterClick}
+            {...handleInteraction(this.twitterClick)}
           />
           <image
             className="socialBarIcon"
@@ -166,7 +167,7 @@ class SocialBar extends React.Component {
             width={Constants.getIn(['socialBar', 'iconSize'])}
             y={WorkspaceComputations.socialBarY(this.props.viewport) + Constants.getIn(['socialBar', 'facebookIconPadding'])}
             xlinkHref="images/sm_facebook.svg"
-            onClick={this.facebookClick}
+            {...handleInteraction(this.facebookClick)}
           />
           <image
             className="socialBarIcon"
@@ -174,7 +175,7 @@ class SocialBar extends React.Component {
             width={Constants.getIn(['socialBar', 'iconSize'])}
             y={WorkspaceComputations.socialBarY(this.props.viewport) + Constants.getIn(['socialBar', 'linkedInIconPadding'])}
             xlinkHref="images/sm_linkedin.svg"
-            onClick={this.linkedInClick}
+            {...handleInteraction(this.linkedInClick)}
           />
         </g>
       </svg>
