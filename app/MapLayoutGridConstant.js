@@ -249,7 +249,7 @@ const MapLayoutGridConstant = fromJS({
       dimensions: {
         height: 37.09,
         width: 38.75,
-         yAxisPadding: 20.5,
+        yAxisPadding: 20.5,
         xAxisPadding: 25.5,
       },
       styles: {
@@ -330,6 +330,271 @@ const MapLayoutGridConstant = fromJS({
       imports: '#800000',
       exports: '#000099',
     }],
+  },
+
+  PaddLayout: {
+    ca: {
+      mapPieceScale: 1,
+      sortingRowPadding: 1.5,
+      dimensions: {
+        height: 37.09,
+        width: 38.75,
+        yAxisPadding: -7,
+        xAxisPadding: -5,
+      },
+      styles: {
+        bottomMargin: 15,
+        topMargin: 5,
+      },
+      arrow: {
+        fontClass: 'paddArrowCanadaFonts',
+        textTranslate: {
+          1: '144 150',
+        },
+        orderBy: {
+          location: {
+            1: '71 30',
+          },
+          default: {
+            1: '71 30',
+          },
+        },
+      },
+      layout: [
+        {
+          paddGroup: 1, name: 'YT', originKey: 'YT', x: 0, y: 0,
+        },
+        {
+          paddGroup: 1, name: 'NT', originKey: 'NT', x: 1, y: 0,
+        },
+        {
+          paddGroup: 1, name: 'NU', originKey: 'NU', x: 2, y: 0,
+        },
+        {
+          paddGroup: 1, name: 'NF', originKey: 'NF', x: 6, y: 0,
+        },
+        {
+          paddGroup: 1, name: 'PE', originKey: 'PE', x: 7, y: 0,
+        },
+        {
+          paddGroup: 1, name: 'BC', originKey: 'BC', x: 0.5, y: 1,
+        },
+        {
+          paddGroup: 1, name: 'AB', originKey: 'AB', x: 1.5, y: 1,
+        },
+        {
+          paddGroup: 1, name: 'SK', originKey: 'SK', x: 2.5, y: 1,
+        },
+        {
+          paddGroup: 1, name: 'MB', originKey: 'MB', x: 3.5, y: 1,
+        },
+        {
+          paddGroup: 1, name: 'ON', originKey: 'ON', x: 4.5, y: 1,
+        },
+        {
+          paddGroup: 1, name: 'QB', originKey: 'QB', x: 5.5, y: 1,
+        },
+        {
+          paddGroup: 1, name: 'NB', originKey: 'NB', x: 6.5, y: 1,
+        },
+        {
+          paddGroup: 1, name: 'NS', originKey: 'NS', x: 7.5, y: 1,
+        },
+      ],
+    },
+    us: {
+      mapPieceScale: 0.58,
+      defaultColumns: 12,
+      sortingRowPadding: -0.5,
+      dimensions: {
+        height: 37.09,
+        width: 38.75,
+        yAxisPadding: 8,
+        xAxisPadding: 12,
+      },
+      styles: {
+        bottomMargin: 15,
+        topMargin: 5,
+      },
+      arrow: {
+        fontClass: 'paddArrowUSFonts',
+        textTranslate: {
+          1: '150 180',
+          2: '148 180',
+          3: '144 180',
+          4: '146 180',
+          5: '144 180',
+        },
+        orderBy: {
+          location: {
+            1: '680 200',
+            2: '545 10',
+            3: '570 200',
+            4: '440 10',
+            5: '440 200',
+          },
+          default: {
+            1: '',
+            2: '',
+            3: '',
+            4: '',
+            5: '',
+          },
+        },
+      },
+      layout: [
+        {
+          paddGroup: 1, name: 'VT', originKey: 'VT', x: 9.5, y: 0,
+        },
+        {
+          paddGroup: 1, name: 'ME', originKey: 'ME', x: 10.5, y: 0,
+        },
+        {
+          paddGroup: 5, name: 'AK', originKey: 'AK', x: 1, y: 1,
+        },
+        {
+          paddGroup: 5, name: 'WA', originKey: 'WA', x: 0.5, y: 2,
+        },
+        {
+          paddGroup: 4, name: 'MT', originKey: 'MT', x: 2, y: 1,
+        },
+        {
+          paddGroup: 2, name: 'ND', originKey: 'ND', x: 3, y: 1,
+        },
+        {
+          paddGroup: 2, name: 'MN', originKey: 'MN', x: 4, y: 1,
+        },
+        {
+          paddGroup: 2, name: 'WI', originKey: 'WI', x: 5, y: 1,
+        },
+        {
+          paddGroup: 2, name: 'MI', originKey: 'MI', x: 7, y: 1,
+        },
+        {
+          paddGroup: 1, name: 'NY', originKey: 'NY', x: 9, y: 1,
+        },
+        {
+          paddGroup: 1, name: 'MA', originKey: 'MA', x: 10, y: 1,
+        },
+        {
+          paddGroup: 1, name: 'NH', originKey: 'NH', x: 11, y: 1,
+        },
+        {
+          paddGroup: 4, name: 'ID', originKey: 'ID', x: 1.5, y: 2,
+        },
+        {
+          paddGroup: 4, name: 'WY', originKey: 'WY', x: 2.5, y: 2,
+        },
+        {
+          paddGroup: 2, name: 'SD', originKey: 'SD', x: 3.5, y: 2,
+        },
+        {
+          paddGroup: 2, name: 'IA', originKey: 'IA', x: 4.5, y: 2,
+        },
+        {
+          paddGroup: 2, name: 'IL', originKey: 'IL', x: 5.5, y: 2,
+        },
+        {
+          paddGroup: 2, name: 'IN', originKey: 'IN', x: 6.5, y: 2,
+        },
+        {
+          paddGroup: 2, name: 'OH', originKey: 'OH', x: 7.5, y: 2,
+        },
+        {
+          paddGroup: 1, name: 'PA', originKey: 'PA', x: 8.5, y: 2,
+        },
+        {
+          paddGroup: 1, name: 'NJ', originKey: 'NJ', x: 9.5, y: 2,
+        },
+        {
+          paddGroup: 1, name: 'RI', originKey: 'RI', x: 10.5, y: 2,
+        },
+        {
+          paddGroup: 5, name: 'HI', originKey: 'HI', x: 2, y: 5,
+        },
+        {
+          paddGroup: 5, name: 'OR', originKey: 'OR', x: 1, y: 3,
+        },
+        {
+          paddGroup: 5, name: 'NV', originKey: 'NV', x: 2, y: 3,
+        },
+        {
+          paddGroup: 4, name: 'CO', originKey: 'CO', x: 3, y: 3,
+        },
+        {
+          paddGroup: 2, name: 'NE', originKey: 'NE', x: 4, y: 3,
+        },
+        {
+          paddGroup: 2, name: 'MO', originKey: 'MO', x: 5, y: 3,
+        },
+        {
+          paddGroup: 2, name: 'KY', originKey: 'KY', x: 6, y: 3,
+        },
+        {
+          paddGroup: 1, name: 'WV', originKey: 'WV', x: 7, y: 3,
+        },
+        {
+          paddGroup: 1, name: 'VA', originKey: 'VA', x: 8, y: 3,
+        },
+        {
+          paddGroup: 1, name: 'MD', originKey: 'MD', x: 9, y: 3,
+        },
+        {
+          paddGroup: 1, name: 'CT', originKey: 'CT', x: 10, y: 3,
+        },
+        {
+          paddGroup: 5, name: 'CA', originKey: 'CA', x: 1.5, y: 4,
+        },
+        {
+          paddGroup: 4, name: 'UT', originKey: 'UT', x: 2.5, y: 4,
+        },
+        {
+          paddGroup: 2, name: 'OK', originKey: 'OK', x: 3.5, y: 4,
+        },
+        {
+          paddGroup: 2, name: 'KS', originKey: 'KS', x: 4.5, y: 4,
+        },
+        {
+          paddGroup: 3, name: 'AR', originKey: 'AR', x: 5.5, y: 4,
+        },
+        {
+          paddGroup: 2, name: 'TN', originKey: 'TN', x: 6.5, y: 4,
+        },
+        {
+          paddGroup: 1, name: 'NC', originKey: 'NC', x: 7.5, y: 4,
+        },
+        {
+          paddGroup: 1, name: 'SC', originKey: 'SC', x: 8.5, y: 4,
+        },
+        {
+          paddGroup: 1, name: 'DE', originKey: 'DE', x: 9.5, y: 4,
+        },
+        {
+          paddGroup: 5, name: 'AZ', originKey: 'AZ', x: 3, y: 5,
+        },
+        {
+          paddGroup: 3, name: 'NM', originKey: 'NM', x: 4, y: 5,
+        },
+        {
+          paddGroup: 3, name: 'LA', originKey: 'LA', x: 5, y: 5,
+        },
+        {
+          paddGroup: 3, name: 'MS', originKey: 'MS', x: 6, y: 5,
+        },
+        {
+          paddGroup: 3, name: 'AL', originKey: 'AL', x: 7, y: 5,
+        },
+        {
+          paddGroup: 1, name: 'GA', originKey: 'GA', x: 8, y: 5,
+        },
+        {
+          paddGroup: 3, name: 'TX', originKey: 'TX', x: 3.5, y: 6,
+        },
+        {
+          paddGroup: 1, name: 'FL', originKey: 'FL', x: 7.5, y: 6,
+        },
+      ],
+    },
   },
 })
 module.exports = MapLayoutGridConstant

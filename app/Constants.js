@@ -267,6 +267,18 @@ const Constants = fromJS({
       value: {
         confidential: 'Confidential',
       },
+      padd: {
+        us: {
+          1: 'PADD I',
+          2: 'PADD II',
+          3: 'PADD III',
+          4: 'PADD IV',
+          5: 'PADD V',
+        },
+        ca: {
+          1: 'ca',
+        },
+      },
       country: {
         ca: {
           Yukon: 'YT',

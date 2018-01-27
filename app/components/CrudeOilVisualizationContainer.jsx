@@ -10,9 +10,13 @@ import CrudeOilViewport from '../selectors/viewport/crudeOil'
 import Constants from '../Constants'
 import { positionShape } from '../propTypeShapes'
 import USPadd from './Padds/USPadd'
+import CAPadd from './Padds/CAPadd'
 
 const CrudeOilVisualizationContainer = props => (
   <g>
+  <CAPadd 
+      {...props.canadaPaddChart}
+    />
     <ProportionChart
       {...props.transportChart}
       aggregateKey="transport"
@@ -50,7 +54,7 @@ const CrudeOilVisualizationContainer = props => (
       yaxis={props.yaxis + props.height}
     />
     <USPadd 
-      {...props.canadaPaddChart}
+      {...props.usPaddChart}
     />
   </g>
 )
@@ -71,4 +75,5 @@ module.exports = connect((state, props) => ({
   axisPosition: CrudeOilViewport.chartAxisPosition(state, props),
   exportChart: CrudeOilViewport.chartExportPosition(state, props),
   canadaPaddChart: CrudeOilViewport.canadaPaddPosition(state, props),
+  usPaddChart: CrudeOilViewport.usPaddPosition(state, props),
 }))(CrudeOilVisualizationContainer)

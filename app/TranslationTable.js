@@ -763,6 +763,36 @@ const TranslationTable = fromJS({
       },
     },
   },
+  Padd: {
+    ca: {
+      1: {
+        en: 'CANADA',
+        fr: 'CANADA',
+      },
+    },
+    us: {
+      1: {
+        en: 'PADD I',
+        fr: 'PADD I',
+      },
+      2: {
+        en: 'PADD II',
+        fr: 'PADD II',
+      },
+      3: {
+        en: 'PADD III',
+        fr: 'PADD III',
+      },
+      4: {
+        en: 'PADD IV',
+        fr: 'PADD IV',
+      },
+      5: {
+        en: 'PADD V',
+        fr: 'PADD V',
+      },
+    },
+  },
 })
 
 module.exports = TranslationTable
