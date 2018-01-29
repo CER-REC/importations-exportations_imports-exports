@@ -13,7 +13,7 @@ const ExplanationText = require('./ExplanationText.jsx')
 
 import './Workspace.scss'
 
-const Workspace = ({ svgSize, detailSidebarPosition }) => (
+const Workspace = ({ svgSize, detailSidebarPosition, portalSvgSize }) => (
   <div style={{ position: 'relative' }}>
     <div className="Workspace">
       <Header />
@@ -37,10 +37,12 @@ const Workspace = ({ svgSize, detailSidebarPosition }) => (
 
       <MenuBar />
       <SocialBar />
-      <ExplanationLine />
     </svg>
 
     <div id="popoverPortal">
+      <svg id="portal" transform='translate(0 -880)'>
+        <ExplanationLine />
+      </svg>
       <ExplanationText />
     </div>
     <ModalSelector />

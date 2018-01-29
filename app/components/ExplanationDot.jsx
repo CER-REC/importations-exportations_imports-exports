@@ -23,6 +23,7 @@ class ExplanationDot extends React.Component {
   constructor(props) {
     super(props)
     this.onClick = this.explanationDotClick.bind(this)
+    this.state = { explanationPopover: false }
   }
 
   explanationDotClick(e) {

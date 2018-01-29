@@ -43,7 +43,7 @@ const nestedReducers = combineReducers({
   dataLoadingComplete: DataLoadCompleteReducer,
   visualizationSettings,
   modal: ModalReducer,
-  explanationPopover: ExplanationPopoverReducer,
+  explanation: ExplanationPopoverReducer,
 })
 
 export default (initialState = {}, action) => {

@@ -1,5 +1,5 @@
 import React from 'react'
-import { connect } from 'react-redux'
+const ReactRedux = require('react-redux')
 import PropTypes from 'prop-types'
 
 import Constants from '../Constants'
@@ -9,10 +9,6 @@ const PopoverPortal = require('./PopoverPortal.jsx')
 import ExplanationPopoverCreator from '../actions/explanations'
 
 class ExplanationText extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = { explanationPopover: false }
-  }
 
   mainNavText() {
     return <div style={{
