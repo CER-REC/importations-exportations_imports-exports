@@ -95,12 +95,12 @@ class MapPiece extends React.Component {
       </g>
       {confidentialIcon}
       <AnimatedMapPiece
-        x1= {this.props.x1 || 0}
-        y1= {this.props.y1 || 0}
-        x2= {this.props.x1 || 0}
-        y2= {this.props.y1 || 0}
+        x1={this.props.x1 || 0}
+        y1={this.props.y1 || 0}
+        x2={this.props.x1 || 0}
+        y2={this.props.y1 || 0}
       />
-      </g>)
+            </g>)
   }
 }
 

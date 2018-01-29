@@ -249,7 +249,7 @@ const MapLayoutGridConstant = fromJS({
       dimensions: {
         height: 37.09,
         width: 38.75,
-         yAxisPadding: 20.5,
+        yAxisPadding: 20.5,
         xAxisPadding: 25.5,
       },
       styles: {

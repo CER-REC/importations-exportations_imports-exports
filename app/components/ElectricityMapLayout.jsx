@@ -19,12 +19,8 @@ import DetailSidebar from './DetailSidebar'
 import DetailBreakdown from './DetailBreakdown'
 import { handleInteraction } from '../utilities'
 
-const mapPieceTransformStartXaxis = ( position, dimensions, mapPieceScale) => {
-  return (position.get('x') * ((mapPieceScale * dimensions.get('width')) + dimensions.get('xAxisPadding')))
-}
-const mapPieceTransformStartYaxis = ( position, dimensions, mapPieceScale) => {
-  return (position.get('y') * ((mapPieceScale * dimensions.get('height')) + dimensions.get('yAxisPadding')))
-}
+const mapPieceTransformStartXaxis = (position, dimensions, mapPieceScale) => (position.get('x') * ((mapPieceScale * dimensions.get('width')) + dimensions.get('xAxisPadding')))
+const mapPieceTransformStartYaxis = (position, dimensions, mapPieceScale) => (position.get('y') * ((mapPieceScale * dimensions.get('height')) + dimensions.get('yAxisPadding')))
 
 const powerPoolTransform = (xaxis, yaxis, position, dimensions, mapPieceScale) => {
   const startXaxis = xaxis + (position.get('x') * ((mapPieceScale * dimensions.get('width')) + dimensions.get('xAxisPadding')))
@@ -131,7 +127,7 @@ class ElectricityMapLayout extends React.Component {
     return (length > 0)
   }
 
- renderMapPiece() {
+  renderMapPiece() {
     // Data from constant file
     const type = this.props.importExportVisualization
 
@@ -148,7 +144,7 @@ class ElectricityMapLayout extends React.Component {
     return layout.map((position) => {
       const humanName = this.props.Tr(['country', this.props.country, position.get('name')])
       return (
-        <g key = {`mapPieceKey_${this.props.country}_${position.get('name')}`}>
+        <g key={`mapPieceKey_${this.props.country}_${position.get('name')}`}>
           <g
             className="mappiece"
             {...handleInteraction(this.onClick, this.props.country, position.get('name'))}
@@ -163,8 +159,8 @@ class ElectricityMapLayout extends React.Component {
               styles={styles}
               isMapPieceSelected={this.isMapPieceSelected(position.get('name'), this.props.country)}
               isSelected={isSelected}
-              x1= {mapPieceTransformStartXaxis( position, dimensions, mapPieceScale)}
-              y1= {mapPieceTransformStartYaxis( position, dimensions, mapPieceScale)}
+              x1={mapPieceTransformStartXaxis(position, dimensions, mapPieceScale)}
+              y1={mapPieceTransformStartYaxis(position, dimensions, mapPieceScale)}
             />
           </g>
           {this.getPowerPoolsOutline(position.get('name'), this.props.country, xaxis, yaxis, position, dimensions, mapPieceScale)}
@@ -173,33 +169,33 @@ class ElectricityMapLayout extends React.Component {
     })
   }
 
-  renderDetailBreakdown(data){
+  renderDetailBreakdown(data) {
     const detailBreakdownData = Constants.getIn(['detailBreakDown', this.props.country])
-    if(typeof detailBreakdownData !== 'undefined' && detailBreakdownData.get('required', false)){
-      return <DetailBreakdown
+    if (typeof detailBreakdownData !== 'undefined' && detailBreakdownData.get('required', false)) {
+      return (<DetailBreakdown
         data={data}
         type={detailBreakdownData.get('type')}
         trContent={Tr.getIn(['detailBreakDown', this.props.importExportVisualization, detailBreakdownData.get('type')])}
         veritcalPosition={detailBreakdownData.get('displayPosition')}
         color={detailBreakdownData.get('color')}
-        height = {detailBreakdownData.get('height')}
+        height={detailBreakdownData.get('height')}
         showDefault={detailBreakdownData.get('showDefault', false)}
-      />
+      />)
     }
     return null
   }
 
-  renderDetailSidebar(){
-    return <DetailSidebar top={this.props.top} height={Constants.getIn(['detailBreakDown', this.props.country, 'height'], 0)}>
-         {this.renderDetailBreakdown(this.props.detailBreakDownData)}
-        </DetailSidebar>
+  renderDetailSidebar() {
+    return (<DetailSidebar top={this.props.top} height={Constants.getIn(['detailBreakDown', this.props.country, 'height'], 0)}>
+      {this.renderDetailBreakdown(this.props.detailBreakDownData)}
+    </DetailSidebar>)
   }
 
   render() {
-    return <g>
+    return (<g>
       {this.renderMapPiece()}
       {this.renderDetailSidebar()}
-      </g>
+    </g>)
   }
 }
 

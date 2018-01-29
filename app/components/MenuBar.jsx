@@ -156,5 +156,7 @@ const mapStateToProps = (state, props) => ({
 
 module.exports = connect(
   mapStateToProps,
-  { setArrangeBy, setAmount, setActivity, setSubtype },
+  {
+    setArrangeBy, setAmount, setActivity, setSubtype,
+  },
 )(MenuBar)

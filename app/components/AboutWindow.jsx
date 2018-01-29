@@ -9,26 +9,28 @@ import './AboutWindow.scss'
 
 class AboutWindow extends React.Component {
   closeButton() {
-    return <img className='closeButton'
-      src='images/about_close.svg'
+    return (<img
+      className="closeButton"
+      src="images/about_close.svg"
       alt="Close About Window"
       {...handleInteraction(this.props.closeModal)}
-    />
+    />)
   }
 
   heading() {
-    return <p
-      className='aboutHeading'>
+    return (<p
+      className="aboutHeading"
+    >
       {Tr.getIn(['aboutWindow', 'heading', this.props.language])}
-    </p>
+            </p>)
   }
 
   intro() {
-    return <div className='aboutBodyText'>
-      <p className = 'intro'>
+    return (<div className="aboutBodyText">
+      <p className="intro">
         <span>
           {Tr.getIn(['aboutWindow', 'p1', this.props.language])}
-        </span>      
+        </span>
       </p>
       <p>
         <span>
@@ -45,118 +47,117 @@ class AboutWindow extends React.Component {
           {Tr.getIn(['aboutWindow', 'p4', this.props.language])}
         </span>
       </p>
-    </div>
+            </div>)
   }
 
   contributors() {
-    return <div className = 'contributorsSection'>
-      <p className = 'aboutHeading'>
+    return (<div className="contributorsSection">
+      <p className="aboutHeading">
         <span>
-        { Tr.getIn(['aboutWindow', 'contributors', this.props.language])}
+          { Tr.getIn(['aboutWindow', 'contributors', this.props.language])}
         </span>
       </p>
-      <p className = 'aboutSubheading'>
+      <p className="aboutSubheading">
         <span>
-        { Tr.getIn(['aboutWindow', 'dataSource', this.props.language])}
+          { Tr.getIn(['aboutWindow', 'dataSource', this.props.language])}
         </span>
       </p>
-      <p className = 'aboutBodyText'>
+      <p className="aboutBodyText">
         <span>
-        { Tr.getIn(['aboutWindow', 'dataNamesfromNEB', this.props.language])}
+          { Tr.getIn(['aboutWindow', 'dataNamesfromNEB', this.props.language])}
         </span>
       </p>
-      <p className = 'aboutSubheading'>
+      <p className="aboutSubheading">
         <span>
-        { Tr.getIn(['aboutWindow', 'coordination', this.props.language])}
+          { Tr.getIn(['aboutWindow', 'coordination', this.props.language])}
         </span>
       </p>
-      <p className = 'aboutBodyText'>
+      <p className="aboutBodyText">
         <span>
-        { Tr.getIn(['aboutWindow', 'nebCoordinators', this.props.language])}
+          { Tr.getIn(['aboutWindow', 'nebCoordinators', this.props.language])}
         </span>
       </p>
-    </div>
+            </div>)
   }
 
   dataVisualization() {
-    return <div className = 'dataVisSection'>
-      <p className = 'aboutHeading'>
+    return (<div className="dataVisSection">
+      <p className="aboutHeading">
         <span>
-        { Tr.getIn(['aboutWindow', 'dataVisualization', this.props.language])}
+          { Tr.getIn(['aboutWindow', 'dataVisualization', this.props.language])}
         </span>
       </p>
-      <p className = 'aboutSubheading'>
+      <p className="aboutSubheading">
         <span>
-        { Tr.getIn(['aboutWindow', 'leadDesignResearch', this.props.language])}
+          { Tr.getIn(['aboutWindow', 'leadDesignResearch', this.props.language])}
         </span>
       </p>
-      <p className = 'aboutBodyText'>
+      <p className="aboutBodyText">
         <span>
-        { Tr.getIn(['aboutWindow', 'leadDesigners', this.props.language])}
+          { Tr.getIn(['aboutWindow', 'leadDesigners', this.props.language])}
         </span>
       </p>
-      <p className = 'aboutSubheading'>
+      <p className="aboutSubheading">
         <span>
-        { Tr.getIn(['aboutWindow', 'coordination', this.props.language])}
+          { Tr.getIn(['aboutWindow', 'coordination', this.props.language])}
         </span>
       </p>
-      <p className = 'aboutBodyText'>
+      <p className="aboutBodyText">
         <span>
-        { Tr.getIn(['aboutWindow', 'coordi', this.props.language])}
+          { Tr.getIn(['aboutWindow', 'coordi', this.props.language])}
         </span>
       </p>
-      <p className = 'aboutSubheading'>
+      <p className="aboutSubheading">
         <span>
-        { Tr.getIn(['aboutWindow', 'design', this.props.language])}
+          { Tr.getIn(['aboutWindow', 'design', this.props.language])}
         </span>
       </p>
-      <p className = 'aboutBodyText'>
+      <p className="aboutBodyText">
         <span>
-        { Tr.getIn(['aboutWindow', 'designers', this.props.language])}
+          { Tr.getIn(['aboutWindow', 'designers', this.props.language])}
         </span>
       </p>
-      <p className = 'aboutSubheading'>
+      <p className="aboutSubheading">
         <span>
-        { Tr.getIn(['aboutWindow', 'leadTechnical', this.props.language])}
+          { Tr.getIn(['aboutWindow', 'leadTechnical', this.props.language])}
         </span>
       </p>
-      <p className = 'aboutBodyText'>
+      <p className="aboutBodyText">
         <span>
-        { Tr.getIn(['aboutWindow', 'vizworx', this.props.language])}
+          { Tr.getIn(['aboutWindow', 'vizworx', this.props.language])}
         </span>
       </p>
-      <p className = 'aboutSubheading'>
+      <p className="aboutSubheading">
         <span>
-        { Tr.getIn(['aboutWindow', 'technical', this.props.language])}
+          { Tr.getIn(['aboutWindow', 'technical', this.props.language])}
         </span>
       </p>
-      <p className = 'aboutBodyText'>
+      <p className="aboutBodyText">
         <span>
-        { Tr.getIn(['aboutWindow', 'technicalTeam', this.props.language])}
+          { Tr.getIn(['aboutWindow', 'technicalTeam', this.props.language])}
         </span>
       </p>
-    </div>
+            </div>)
   }
 
   render() {
-    return <div 
-        id = 'aboutWindow'
-        className = 'aboutWindow'>
-        { this.closeButton() }
-        { this.heading() }
-        { this.intro() }
-        { this.contributors() }
-        { this.dataVisualization() }
-      </div>
+    return (<div
+      id="aboutWindow"
+      className="aboutWindow"
+    >
+      { this.closeButton() }
+      { this.heading() }
+      { this.intro() }
+      { this.contributors() }
+      { this.dataVisualization() }
+            </div>)
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    language: state.language,
-    viewport: state.viewport,
-    showAboutWindow: state.showAboutWindow,
-  }
-}
+const mapStateToProps = state => ({
+  language: state.language,
+  viewport: state.viewport,
+  showAboutWindow: state.showAboutWindow,
+})
 
 module.exports = connect(mapStateToProps)(AboutWindow)
