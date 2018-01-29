@@ -21,6 +21,7 @@ const Workspace = ({ svgSize, detailSidebarPosition }) => (
       className="Workspace"
       {...svgSize}
       style={{ zIndex: 9999 }}
+      role="application"
     >
       <MenuBar />
 

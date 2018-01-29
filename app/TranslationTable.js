@@ -689,6 +689,11 @@ const TranslationTable = fromJS({
       },
     },
   },
+
+  mapTileLabel: {
+    en: '$0 imports $1 $3 and exports $2 $3',
+    fr: '$0 imports $1 $3 and exports $2 $3',
+  },
 })
 
 module.exports = TranslationTable

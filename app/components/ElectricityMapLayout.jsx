@@ -7,6 +7,8 @@ import MapPiece from './MapPiece'
 import MapLayoutGridConstant from '../MapLayoutGridConstant'
 import Constants from '../Constants'
 import Tr from '../TranslationTable'
+import TrSelector from '../selectors/translate'
+import { visualizationSettings } from '../selectors/visualizationSettings'
 
 import { setSelection } from '../actions/visualizationSettings'
 import './ElectricityMapLayout.scss'
@@ -129,7 +131,7 @@ class ElectricityMapLayout extends React.Component {
     return (length > 0)
   }
 
- renderMapPiece(){
+ renderMapPiece() {
     // Data from constant file
     const type = this.props.importExportVisualization
 
@@ -143,28 +145,32 @@ class ElectricityMapLayout extends React.Component {
     const xaxis = this.props.left
     const yaxis = this.props.top
     const isSelected = this.isSelected()
-    return layout.map((position, key) => (
-      <g key = {`mapPieceKey_${this.props.country}_${position.get('name')}`}>
-        <g
-          className="mappiece"
-          {...handleInteraction(this.onClick, this.props.country, position.get('name'))}
-          transform={`scale(${mapPieceScale})`}
-        >
-          <MapPiece
-            data={position}
-            dimensions={dimensions}
-            legends={MapLayoutGridConstant.getIn([type, 'legends'])}
-            bins={this.props.bins}
-            styles={styles}
-            isMapPieceSelected={this.isMapPieceSelected(position.get('name'), this.props.country)}
-            isSelected={isSelected}
-            x1= {mapPieceTransformStartXaxis( position, dimensions, mapPieceScale)}
-            y1= {mapPieceTransformStartYaxis( position, dimensions, mapPieceScale)}
-          />
+    return layout.map((position) => {
+      const humanName = this.props.Tr(['country', this.props.country, position.get('name')])
+      return (
+        <g key = {`mapPieceKey_${this.props.country}_${position.get('name')}`}>
+          <g
+            className="mappiece"
+            {...handleInteraction(this.onClick, this.props.country, position.get('name'))}
+            aria-label={this.props.Tr('mapTileLabel', humanName, position.get('imports').toLocaleString(), position.get('exports').toLocaleString(), this.props.unit)}
+            transform={`scale(${mapPieceScale})`}
+          >
+            <MapPiece
+              data={position}
+              dimensions={dimensions}
+              legends={MapLayoutGridConstant.getIn([type, 'legends'])}
+              bins={this.props.bins}
+              styles={styles}
+              isMapPieceSelected={this.isMapPieceSelected(position.get('name'), this.props.country)}
+              isSelected={isSelected}
+              x1= {mapPieceTransformStartXaxis( position, dimensions, mapPieceScale)}
+              y1= {mapPieceTransformStartYaxis( position, dimensions, mapPieceScale)}
+            />
+          </g>
+          {this.getPowerPoolsOutline(position.get('name'), this.props.country, xaxis, yaxis, position, dimensions, mapPieceScale)}
         </g>
-        {this.getPowerPoolsOutline(position.get('name'), this.props.country, xaxis, yaxis, position, dimensions, mapPieceScale)}
-      </g>
-    ))
+      )
+    })
   }
 
   renderDetailBreakdown(data){
@@ -206,6 +212,8 @@ const mapStateToProps = (state, props) => ({
   dataPoints: sortAggregatedLocationsSelector(state, props),
   arrangeBy: arrangeBy(state, props),
   bins: binSelector(state, props),
+  Tr: TrSelector(state, props),
+  unit: visualizationSettings(state, props).get('amount'),
 })
 
 module.exports = connect(mapStateToProps, mapDispatchToProps)(ElectricityMapLayout)
