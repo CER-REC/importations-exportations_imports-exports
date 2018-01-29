@@ -262,6 +262,13 @@ const TranslationTable = fromJS({
     fr: 'hide EXPLANATIONS FR',
   },
 
+  explanations: {
+    importExportTitle: {
+      en: 'Click + to see more options',
+      fr: 'Click + to see more options FR',
+    },
+  },
+
   confidentialityShown: {
     en: 'show CONFIDENTIALITY',
     fr: 'show CONFIDENTIALITY FR',
@@ -296,22 +303,6 @@ const TranslationTable = fromJS({
     base: {
       en: 'of Energy Products to and from Canada',
       fr: 'TODO',
-    },
-  },
-
-  explanationShown: {
-    en: 'show EXPLANATIONS',
-    fr: 'show EXPLANATIONS FR',
-  },
-  explanationHide: {
-    en: 'hide EXPLANATIONS',
-    fr: 'TODO',
-  },
-
-  explanations: {
-    importExportTitle: {
-      en: 'Click + to see more options',
-      fr: 'Click + to see more options FR',
     },
   },
 

@@ -9,9 +9,10 @@ import { timelineYearScaleCalculation } from '../selectors/timeline'
 import TRSelector from '../selectors/translate'
 import { humanNumber } from '../utilities'
 
-// Add langauge compatibility
+// Add language compatibility
 class DetailBreakdown extends React.Component {
-  renderDetailBreakdownBody(props) {
+  renderDetailBreakdownBody() {
+    const { props } = this
     const bodyContent = props.trContent.get('body')
     const total = props.data.reduce((acc, curr) => acc + curr)
     const result = props.data.map((value, key) => {
@@ -22,41 +23,50 @@ class DetailBreakdown extends React.Component {
         backgroundColor: props.color,
       }
       // get state name corresponding to the
-      return (<div key={key} className="detailBreakDownText">
-        {bodyContent.getIn(['action', props.language])} &nbsp;
-        {TR.getIn(['country', 'us', key, props.language], '')}&nbsp;
-        {humanNumber(value, props.language)}&nbsp;
-        {TR.getIn(['electricityDataTypes', props.amountUnit, props.language])}&nbsp;
-        {exportOrImportPercentage}%&nbsp;
-        <div className="progress-bar">
-          <span style={progressBarStyle} />
+      return (
+        <div key={key} className="detailBreakDownText">
+          {bodyContent.getIn(['action', props.language])} &nbsp;
+          {TR.getIn(['country', 'us', key, props.language], '')}&nbsp;
+          {humanNumber(value, props.language)}&nbsp;
+          {TR.getIn(['electricityDataTypes', props.amountUnit, props.language])}&nbsp;
+          {exportOrImportPercentage}%&nbsp;
+          <div className="progress-bar">
+            <span style={progressBarStyle} />
+          </div>
         </div>
-              </div>)
+      )
     })
     return result.toArray()
   }
 
-  renderDetailBreakdownHeader(props) {
+  renderDetailBreakdownHeader() {
+    const { props } = this
     const headerContent = props.trContent.get('header')
-    return (<div className={`header ${props.type}`}>
-      <span style={{ color: props.color }}>{headerContent.getIn(['type', props.language], '').toUpperCase()}</span> &nbsp;
-      {headerContent.getIn(['action', props.language], '')}&nbsp;
-      {headerContent.getIn(['adjective', props.language], '')}&nbsp;
-      {headerContent.getIn(['place', props.language], '')}&nbsp;
-            </div>)
+    return (
+      <div className={`header ${props.type}`}>
+        <span style={{ color: props.color }}>{headerContent.getIn(['type', props.language], '').toUpperCase()}</span> &nbsp;
+        {headerContent.getIn(['action', props.language], '')}&nbsp;
+        {headerContent.getIn(['adjective', props.language], '')}&nbsp;
+        {headerContent.getIn(['place', props.language], '')}&nbsp;
+      </div>
+    )
   }
 
   render() {
-    const props = this.props
+    const { props } = this
     if (typeof props.data !== 'undefined' && props.data.count() > 0) {
-      return (<div className="detailBreakDown" style={{ height: props.height }}>
-        {this.renderDetailBreakdownHeader(props)}
-        {this.renderDetailBreakdownBody(props)}
-      </div>)
+      return (
+        <div className="detailBreakDown" style={{ height: props.height }}>
+          {this.renderDetailBreakdownHeader()}
+          {this.renderDetailBreakdownBody()}
+        </div>
+      )
     } else if (typeof props.timelineYears !== 'undefined' && props.showDefault) {
-      return (<div>
-        {props.TRSelector(['detailBreakDown', props.importExportVisualization, 'defaultText'], props.timelineYears.min, props.timelineYears.max)}
-      </div>)
+      return (
+        <div>
+          {props.TRSelector(['detailBreakDown', props.importExportVisualization, 'defaultText'], props.timelineYears.min, props.timelineYears.max)}
+        </div>
+      )
     }
     return null
   }

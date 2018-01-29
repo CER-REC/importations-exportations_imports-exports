@@ -15,7 +15,7 @@ class RefinedPetroleumProductsVisualizationContainer extends React.Component {
       <g>
         <Axis
           {...positions.axis}
-          barWidth="4"
+          barWidth={4}
         />
         <StackedChart
           {...positions.chart}
@@ -39,7 +39,7 @@ class RefinedPetroleumProductsVisualizationContainer extends React.Component {
       <g key={key}>
         <Axis
           {...positions[key].axis}
-          barWidth="4"
+          barWidth={4}
           canSeek={key === 'Partially Processed Oil'}
           chartOptions={key === 'Partially Processed Oil'}
         />
