@@ -59,4 +59,4 @@ const mapStateToProps = (state, props) => ({
   Tr: TrSelector(state, props),
 })
 
-module.exports = connect(mapStateToProps)(ShowConfidentiality)
+export default connect(mapStateToProps)(ShowConfidentiality)

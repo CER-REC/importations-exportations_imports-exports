@@ -14,4 +14,4 @@ const tagVisualizationSettings = store => next => (action) => {
   next(action)
 }
 
-module.exports = tagVisualizationSettings
+export default tagVisualizationSettings

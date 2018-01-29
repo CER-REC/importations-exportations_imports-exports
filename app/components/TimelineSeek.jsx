@@ -6,7 +6,7 @@ import { Map, fromJS } from 'immutable'
 import SVGDrag from './SVGDrag/'
 import Constants from '../Constants'
 import { timelineFilter } from '../actions/visualizationSettings'
-import TimelineSelector from '../selectors/timeline'
+import * as TimelineSelector from '../selectors/timeline'
 
 class TimelineSeek extends React.PureComponent {
   static propTypes = {
@@ -174,7 +174,7 @@ class TimelineSeek extends React.PureComponent {
   }
 }
 
-module.exports = connect(
+export default connect(
   (state, props) => ({
     seekPosition: TimelineSelector.timelineSeekPositionSelector(state, props),
     timelineRange: TimelineSelector.timelineRange(state, props),

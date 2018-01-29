@@ -11,7 +11,7 @@ import ElectricityMapPieceActivityExplanation from './ElectricityMapPieceActivit
 
 import BarChart from './BarChart'
 import Axis from './Axis'
-import ElectricityViewport from '../selectors/viewport/electricity'
+import * as ElectricityViewport from '../selectors/viewport/electricity'
 import Constants from '../Constants'
 import { positionShape } from '../propTypeShapes'
 
@@ -69,7 +69,7 @@ ElectricityVisualizationContainer.propTypes = {
   mapPieceActivityExplanation: PropTypes.shape(positionShape).isRequired,
 }
 
-module.exports = connect((state, props) => ({
+export default connect((state, props) => ({
   canadaMap: ElectricityViewport.canadaMapPosition(state, props),
   usMap: ElectricityViewport.usMapPosition(state, props),
   powerPool: ElectricityViewport.powerPoolPosition(state, props),

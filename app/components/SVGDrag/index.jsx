@@ -146,4 +146,4 @@ class SVGDrag extends React.PureComponent {
   }
 }
 
-module.exports = SVGDrag
+export default SVGDrag

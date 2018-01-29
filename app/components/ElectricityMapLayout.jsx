@@ -13,7 +13,7 @@ import { visualizationSettings } from '../selectors/visualizationSettings'
 import { setSelection } from '../actions/visualizationSettings'
 import './ElectricityMapLayout.scss'
 
-import ElectricitySelector from '../selectors/ElectricitySelector'
+import { getElectricityMapLayout, getSelectionSettings } from '../selectors/ElectricitySelector'
 import { arrangeBy, binSelector, sortAggregatedLocationsSelector } from '../selectors/data'
 import DetailSidebar from './DetailSidebar'
 import DetailBreakdown from './DetailBreakdown'
@@ -207,8 +207,8 @@ const mapDispatchToProps = { onMapPieceClick: setSelection }
 
 const mapStateToProps = (state, props) => ({
   importExportVisualization: state.importExportVisualization,
-  layout: ElectricitySelector.getElectricityMapLayout(state, props),
-  selection: ElectricitySelector.getSelectionSettings(state, props),
+  layout: getElectricityMapLayout(state, props),
+  selection: getSelectionSettings(state, props),
   dataPoints: sortAggregatedLocationsSelector(state, props),
   arrangeBy: arrangeBy(state, props),
   bins: binSelector(state, props),
@@ -216,4 +216,4 @@ const mapStateToProps = (state, props) => ({
   unit: visualizationSettings(state, props).get('amount'),
 })
 
-module.exports = connect(mapStateToProps, mapDispatchToProps)(ElectricityMapLayout)
+export default connect(mapStateToProps, mapDispatchToProps)(ElectricityMapLayout)

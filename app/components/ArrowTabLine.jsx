@@ -31,4 +31,4 @@ ArrowTabLine.propTypes = {
   lineWidth: PropTypes.string.isRequired,
 }
 
-module.exports = ArrowTabLine
+export default ArrowTabLine

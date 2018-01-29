@@ -5,4 +5,4 @@ function ShowAboutWindowCreator() {
   }
 }
 
-module.exports = ShowAboutWindowCreator
+export default ShowAboutWindowCreator

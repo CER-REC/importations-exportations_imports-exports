@@ -58,4 +58,4 @@ const mapStateToProps = state => ({
   modal: state.modal,
 })
 
-module.exports = connect(mapStateToProps, { CloseModal })(ModalSelector)
+export default connect(mapStateToProps, { CloseModal })(ModalSelector)

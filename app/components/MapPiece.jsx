@@ -104,4 +104,4 @@ class MapPiece extends React.Component {
   }
 }
 
-module.exports = MapPiece
+export default MapPiece

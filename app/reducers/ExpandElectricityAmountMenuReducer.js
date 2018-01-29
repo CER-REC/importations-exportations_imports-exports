@@ -18,4 +18,4 @@ const ExpandElectricityAmountMenuReducer = (state = defaultState, action) => {
   }
 }
 
-module.exports = ExpandElectricityAmountMenuReducer
+export default ExpandElectricityAmountMenuReducer

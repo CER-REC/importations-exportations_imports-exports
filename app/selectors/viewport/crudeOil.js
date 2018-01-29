@@ -1,9 +1,9 @@
 import { createSelector } from 'reselect'
 
-import ViewportSelectors from './index'
+import { visualizationContentPosition } from './index'
 
-const chartTransportPosition = createSelector(
-  ViewportSelectors.visualizationContentPosition,
+export const chartTransportPosition = createSelector(
+  visualizationContentPosition,
   visContent => ({
     top: visContent.top,
     left: visContent.left,
@@ -12,7 +12,7 @@ const chartTransportPosition = createSelector(
   }),
 )
 
-const chartSubtypePosition = createSelector(
+export const chartSubtypePosition = createSelector(
   chartTransportPosition,
   transportPosition => ({
     top: transportPosition.top + transportPosition.height + 20,
@@ -22,7 +22,7 @@ const chartSubtypePosition = createSelector(
   }),
 )
 
-const chartAxisPosition = createSelector(
+export const chartAxisPosition = createSelector(
   chartSubtypePosition,
   subtypePosition => ({
     top: subtypePosition.top + subtypePosition.height,
@@ -32,7 +32,7 @@ const chartAxisPosition = createSelector(
   }),
 )
 
-const chartExportPosition = createSelector(
+export const chartExportPosition = createSelector(
   chartAxisPosition,
   axisPosition => ({
     top: axisPosition.top + axisPosition.height,
@@ -41,10 +41,3 @@ const chartExportPosition = createSelector(
     height: 100,
   }),
 )
-
-module.exports = {
-  chartTransportPosition,
-  chartSubtypePosition,
-  chartAxisPosition,
-  chartExportPosition,
-}

@@ -5,7 +5,7 @@ import DetailSidebar from './DetailSidebar'
 import ChartOptions from './ChartOptions'
 import TimelineSeek from './TimelineSeek'
 import TimelinePlay from './TimelinePlay'
-import TimelineSelector from '../selectors/timeline'
+import { timelineSeekPositionSelector, timelineData } from '../selectors/timeline'
 import Constants from '../Constants'
 
 class Axis extends React.PureComponent {
@@ -123,6 +123,6 @@ class Axis extends React.PureComponent {
   }
 }
 
-module.exports = connect((state, props) => Object.assign({
-  seekPosition: TimelineSelector.timelineSeekPositionSelector(state, props),
-}, TimelineSelector.timelineData(state, props)))(Axis)
+export default connect((state, props) => Object.assign({
+  seekPosition: timelineSeekPositionSelector(state, props),
+}, timelineData(state, props)))(Axis)

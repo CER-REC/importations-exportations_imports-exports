@@ -31,4 +31,4 @@ class ElectricityMapPieceActivityExplanation extends React.Component {
 }
 
 
-module.exports = ElectricityMapPieceActivityExplanation
+export default ElectricityMapPieceActivityExplanation

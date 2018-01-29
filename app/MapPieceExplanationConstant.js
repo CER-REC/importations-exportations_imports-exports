@@ -117,4 +117,4 @@ const MapPieceExplanationConstant = fromJS({
 
   },
 })
-module.exports = MapPieceExplanationConstant
+export default MapPieceExplanationConstant

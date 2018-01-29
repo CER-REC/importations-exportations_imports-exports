@@ -47,4 +47,4 @@ class AnimatedMapPiece extends React.PureComponent {
   }
 }
 
-module.exports = AnimatedMapPiece
+export default AnimatedMapPiece

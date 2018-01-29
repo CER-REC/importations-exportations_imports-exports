@@ -195,4 +195,4 @@ const mapStateToProps = state => ({
 })
 
 
-module.exports = connect(mapStateToProps)(SocialBar)
+export default connect(mapStateToProps)(SocialBar)

@@ -86,4 +86,4 @@ const RouteComputations = {
 }
 
 
-module.exports = RouteComputations
+export default RouteComputations

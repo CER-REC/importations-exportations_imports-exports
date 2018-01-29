@@ -332,4 +332,4 @@ const MapLayoutGridConstant = fromJS({
     }],
   },
 })
-module.exports = MapLayoutGridConstant
+export default MapLayoutGridConstant

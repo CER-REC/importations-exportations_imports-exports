@@ -104,4 +104,4 @@ class ImportExportArrow extends React.Component {
 }
 
 const mapStateToProps = ({ language }) => ({ language })
-module.exports = connect(mapStateToProps)(ImportExportArrow)
+export default connect(mapStateToProps)(ImportExportArrow)

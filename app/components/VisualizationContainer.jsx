@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import ViewportSelectors from '../selectors/viewport/'
+import { visualizationContainerPosition, visualizationContentPosition, menuWidth } from '../selectors/viewport/'
 import WorkspaceComputations from '../computations/WorkspaceComputations'
 import ElectricityVisualizationContainer from './ElectricityVisualizationContainer'
 import CrudeOilVisualizationContainer from './CrudeOilVisualizationContainer'
@@ -53,11 +53,11 @@ class VisualizationContainer extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  visualizationPosition: ViewportSelectors.visualizationContainerPosition(state),
-  contentSize: ViewportSelectors.visualizationContentPosition(state),
-  menuWidth: ViewportSelectors.menuWidth(state),
+  visualizationPosition: visualizationContainerPosition(state),
+  contentSize: visualizationContentPosition(state),
+  menuWidth: menuWidth(state),
   importExportVisualization: state.importExportVisualization,
 })
 
 
-module.exports = connect(mapStateToProps)(VisualizationContainer)
+export default connect(mapStateToProps)(VisualizationContainer)

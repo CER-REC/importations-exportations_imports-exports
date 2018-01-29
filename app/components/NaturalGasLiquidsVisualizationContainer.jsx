@@ -6,7 +6,7 @@ import { connect } from 'react-redux'
 import ExplanationPopovers from './ExplanationPopovers'
 import BarChart from './BarChart'
 import Axis from './Axis'
-import NaturalGasLiquidsViewport from '../selectors/viewport/naturalGasLiquids'
+import * as NaturalGasLiquidsViewport from '../selectors/viewport/naturalGasLiquids'
 import Constants from '../Constants'
 
 class NaturalGasLiquidsVisualizationContainer extends React.Component {
@@ -37,7 +37,7 @@ class NaturalGasLiquidsVisualizationContainer extends React.Component {
   }
 }
 
-module.exports = connect((state, props) => ({
+export default connect((state, props) => ({
   importChart: NaturalGasLiquidsViewport.chartImportPosition(state, props),
   axisPosition: NaturalGasLiquidsViewport.chartAxisPosition(state, props),
   exportChart: NaturalGasLiquidsViewport.chartExportPosition(state, props),

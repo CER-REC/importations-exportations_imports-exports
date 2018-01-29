@@ -50,4 +50,4 @@ class AnimatedLine extends React.PureComponent {
   }
 }
 
-module.exports = AnimatedLine
+export default AnimatedLine
