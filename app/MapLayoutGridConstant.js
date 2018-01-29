@@ -339,7 +339,7 @@ const MapLayoutGridConstant = fromJS({
       dimensions: {
         height: 37.09,
         width: 38.75,
-        yAxisPadding: -7,
+        yAxisPadding: -8,
         xAxisPadding: -5,
       },
       styles: {
@@ -362,13 +362,13 @@ const MapLayoutGridConstant = fromJS({
       },
       layout: [
         {
-          paddGroup: 1, name: 'YT', originKey: 'YT', x: 0, y: 0,
+          paddGroup: 1, name: 'YT', originKey: 'YT', x: 1, y: 0,
         },
         {
-          paddGroup: 1, name: 'NT', originKey: 'NT', x: 1, y: 0,
+          paddGroup: 1, name: 'NT', originKey: 'NT', x: 2, y: 0,
         },
         {
-          paddGroup: 1, name: 'NU', originKey: 'NU', x: 2, y: 0,
+          paddGroup: 1, name: 'NU', originKey: 'NU', x: 3, y: 0,
         },
         {
           paddGroup: 1, name: 'NF', originKey: 'NF', x: 6, y: 0,

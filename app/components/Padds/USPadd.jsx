@@ -39,7 +39,7 @@ const USPadd = props => {
       top = {props.top}
       paddGroup = {1}
       paddingX = {16}
-      paddingY = {0}
+      paddingY = {0.25}
       country='us'/>
       <PaddLayout 
       left={props.left} 
@@ -52,7 +52,7 @@ const USPadd = props => {
       left={props.left} 
       top = {props.top}
       paddGroup = {3}
-      paddingX = {13}
+      paddingX = {12.5}
       paddingY = {1}
       country='us'/>
       <PaddLayout 
