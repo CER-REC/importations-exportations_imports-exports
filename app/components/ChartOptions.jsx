@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 import Constants from '../Constants'
 import { setScaleLinked, setGrouping } from '../actions/visualizationSettings'
 import TimelineSelector from '../selectors/timeline'
+import { handleInteraction } from '../utilities'
 
 class ChartOptions extends React.PureComponent {
   static get propTypes() {
@@ -24,22 +25,10 @@ class ChartOptions extends React.PureComponent {
     }
   }
 
-  constructor(props) {
-    super(props)
-    this.scaleLinkedChanged = this.scaleLinkedChanged.bind(this)
-    this.changeTimelineGroup = this.changeTimelineGroup.bind(this)
-  }
+  scaleLinkedChanged = () => this.props.setScaleLinked(!this.props.scaleLinked)
 
-  scaleLinkedChanged(e) {
-    // FIXME: Controlled checkbox doesn't seem to be working properly. If I
-    // prevent the default action for the event, the checkbox takes two clicks
-    this.props.setScaleLinked(e.target.checked)
-  }
-
-  changeTimelineGroup(e) {
-    e.preventDefault()
+  changeTimelineGroup = () =>
     this.props.setGrouping(this.props.timelineGroup === 'year' ? 'quarter' : 'year')
-  }
 
   renderScaleToggle() {
     if (this.props.canChangeScale === false) { return null }
@@ -51,14 +40,15 @@ class ChartOptions extends React.PureComponent {
       ? 'Chart Scale Linked'
       : 'Chart Scale Unlinked'
 
+    const interactions = handleInteraction(this.scaleLinkedChanged)
     return (
-      <label htmlFor="scaleLinked">
+      <label htmlFor="scaleLinked" {...interactions}>
         <div className="switch">
           <input
             type="checkbox"
             id="scaleLinked"
             checked={this.props.scaleLinked}
-            onChange={this.scaleLinkedChanged}
+            onChange={interactions.onClick}
           />
           <div className="slider round" />
         </div>
@@ -79,7 +69,10 @@ class ChartOptions extends React.PureComponent {
       >
         {this.renderScaleToggle()}
         <div className="chartOptions" style={{ float: 'right' }}>
-          <a onClick={this.changeTimelineGroup}>
+          <a
+            {...handleInteraction(this.changeTimelineGroup)}
+            aria-label={`by ${this.props.timelineGroup}`}
+          >
             by {this.props.timelineGroup.toUpperCase()} +
           </a>
           <div className="detailBarArrow" />

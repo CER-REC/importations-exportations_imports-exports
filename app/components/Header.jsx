@@ -4,8 +4,9 @@ import Immutable from 'immutable'
 import PropTypes from 'prop-types'
 
 import Constants from '../Constants'
-import Tr from '../TranslationTable'
 import { OpenModal as ShowAboutWindowCreator } from '../actions/modal'
+import { handleInteraction } from '../utilities'
+import TrSelector from '../selectors/translate'
 
 import './Header.scss'
 import '../styles/Fonts.scss'
@@ -39,28 +40,30 @@ class Header extends React.Component {
   }
 
   leftHeading() {
+    const { Tr } = this.props
     return (
       <div className="leftHeader">
         <div className="headingImports">
-          {Tr.getIn(['mainHeading', 'imports', this.props.language])}
+          {Tr(['mainHeading', 'imports'])}
         </div>&nbsp;
         <div className="headingBase" >
-          {Tr.getIn(['mainHeading', 'ampersand', this.props.language])}
+          {Tr(['mainHeading', 'ampersand'])}
         </div>&nbsp;
         <div className="headingExports">
-          {Tr.getIn(['mainHeading', 'exports', this.props.language])}
+          {Tr(['mainHeading', 'exports'])}
         </div>&nbsp;
         <div className="headingBase">
-          {Tr.getIn(['mainHeading', 'base', this.props.language])}
+          {Tr(['mainHeading', 'base'])}
         </div>
         <p className="subheading">
-          {Tr.getIn(['mainSubheading', this.props.language])}
+          {Tr(['mainSubheading'])}
         </p>
       </div>
     )
   }
 
   metaBar() {
+    const { Tr } = this.props
     const transformMetaBarIcons = `translate(${this.props.viewport.get('x') - Constants.getIn(['metaBar', 'iconMargin'])}, 0)`
 
     return (
@@ -78,10 +81,12 @@ class Header extends React.Component {
         <g>
           <text
             className="resetLabel"
-            onClick={this.resetClick}
+            {...handleInteraction(this.resetClick)}
             y={Constants.getIn(['metaBar', 'resetTextY'])}
             x={this.props.viewport.get('x') - Constants.getIn(['metaBar', 'resetTextOffset'])}
-          >{ Tr.getIn(['resetLabel', this.props.language]) }
+            aria-label={Tr(['socialBar', 'resetVisualization'])}
+            role="menuitem"
+          >{Tr('resetLabel')}
           </text>
         </g>
 
@@ -92,7 +97,9 @@ class Header extends React.Component {
             width={Constants.getIn(['metaBar', 'iconSize'])}
             xlinkHref="images/info_about.svg"
             y={Constants.getIn(['metaBar', 'aboutThisProjectIconMargin'])}
-            onClick={this.aboutThisProjectClick}
+            {...handleInteraction(this.aboutThisProjectClick)}
+            aria-label={Tr(['socialBar', 'aboutThisProject'])}
+            role="menuitem"
           />
 
           <image
@@ -101,7 +108,9 @@ class Header extends React.Component {
             width={Constants.getIn(['metaBar', 'iconSize'])}
             xlinkHref="images/info_methodology.svg"
             y={Constants.getIn(['metaBar', 'methodologyIconMargin'])}
-            onClick={this.methodologyClick}
+            {...handleInteraction(this.methodologyClick)}
+            aria-label={Tr(['socialBar', 'methodology'])}
+            role="menuitem"
           />
 
           <image
@@ -109,8 +118,10 @@ class Header extends React.Component {
             height={Constants.getIn(['metaBar', 'iconSize'])}
             width={Constants.getIn(['metaBar', 'iconSize'])}
             xlinkHref="images/reset.svg"
-            onClick={this.resetClick}
+            {...handleInteraction(this.resetClick)}
             y={Constants.getIn(['metaBar', 'resetIconMargin'])}
+            aria-label={Tr(['socialBar', 'resetVisualization'])}
+            role="menuitem"
           />
         </g>
       </svg>
@@ -127,9 +138,10 @@ class Header extends React.Component {
 }
 
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state, props) => ({
   viewport: state.viewport,
   language: state.language,
+  Tr: TrSelector(state, props),
 })
 
 const mapDispatchToProps = dispatch => ({
