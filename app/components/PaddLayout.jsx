@@ -52,7 +52,6 @@ class PaddLayout extends React.Component {
       const transformTranslate =  mapLayoutGrid.getIn(['arrow', 'orderBy', orderBy, paddGroupId.toString()])
       const transformText =  mapLayoutGrid.getIn(['arrow', 'textTranslate', paddGroupId.toString()])
       const text = this.props.TRSelector( ['Padd', country, paddGroupId.toString()])
-      console.log(text)
       if(this.props.country === 'ca'){
         return <g className={fontClassName} transform={`translate(${transformTranslate})`}> 
         <text transform={`translate(${transformText})`}>{text}</text>

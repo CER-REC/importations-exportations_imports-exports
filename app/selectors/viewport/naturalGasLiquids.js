@@ -32,8 +32,19 @@ const chartExportPosition = createSelector(
   }),
 )
 
+const usPaddPosition = createSelector(
+  chartExportPosition,
+  chartPosition => ({
+    top: chartPosition.top + chartPosition.height,
+    left: chartPosition.left,
+    width: chartPosition.width,
+    height: 100,
+  }),
+)
+
 module.exports = {
   chartImportPosition,
   chartAxisPosition,
   chartExportPosition,
+  usPaddPosition,
 }

@@ -8,6 +8,7 @@ import BarChart from './BarChart'
 import Axis from './Axis'
 import NaturalGasLiquidsViewport from '../selectors/viewport/naturalGasLiquids'
 import Constants from '../Constants'
+import USPadd from './Padds/USPadd'
 
 class NaturalGasLiquidsVisualizationContainer extends React.Component {
   render() {
@@ -33,7 +34,10 @@ class NaturalGasLiquidsVisualizationContainer extends React.Component {
         xaxis={this.props.xaxis}
         yaxis={this.props.yaxis + this.props.height}
       />
-            </g>)
+       <USPadd 
+        {...this.props.usPaddChart}
+      />
+    </g>)
   }
 }
 
@@ -41,4 +45,5 @@ module.exports = connect((state, props) => ({
   importChart: NaturalGasLiquidsViewport.chartImportPosition(state, props),
   axisPosition: NaturalGasLiquidsViewport.chartAxisPosition(state, props),
   exportChart: NaturalGasLiquidsViewport.chartExportPosition(state, props),
+  usPaddChart: NaturalGasLiquidsViewport.usPaddPosition(state, props),
 }))(NaturalGasLiquidsVisualizationContainer)

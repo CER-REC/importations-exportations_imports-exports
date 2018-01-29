@@ -34,48 +34,40 @@ import PaddLayout from '../PaddLayout'
  */
 const USPadd = props => {
   return <g transform = {`translate(${props.left - 400} ${props.top - 100})`}>
-  <g transform={`translate(${props.left} 0)`}> 
-      <PaddOne color="#084594" arrowLabel="Padd1" sortBy={true} />
-    </g> 
     <PaddLayout 
       left={props.left} 
       top = {props.top}
       paddGroup = {1}
-      color='red'
-      paddingX = {15}
+      paddingX = {16}
       paddingY = {0}
       country='us'/>
       <PaddLayout 
       left={props.left} 
       top = {props.top}
       paddGroup = {2}
-      color='green'
-      paddingX = {10}
+      paddingX = {13}
       paddingY = {0}
       country='us'/>
       <PaddLayout 
       left={props.left} 
       top = {props.top}
       paddGroup = {3}
-      color='blue'
-      paddingX = {10}
-      paddingY = {2}
+      paddingX = {13}
+      paddingY = {1}
       country='us'/>
       <PaddLayout 
       left={props.left} 
       top = {props.top}
       paddGroup = {4}
-      color='orange'
-      paddingX = {5}
-      paddingY = {5}
+      paddingX = {10}
+      paddingY = {0}
       country='us'/>
       <PaddLayout 
       left={props.left} 
       top = {props.top}
       paddGroup = {5}
-      color='grey'
-      paddingX = {1}
-      paddingY = {5}
+      paddingX = {8}
+      paddingY = {0}
       country='us'/>
   </g>
 }
