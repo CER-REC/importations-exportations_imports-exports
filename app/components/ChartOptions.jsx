@@ -69,7 +69,10 @@ class ChartOptions extends React.PureComponent {
       >
         {this.renderScaleToggle()}
         <div className="chartOptions" style={{ float: 'right' }}>
-          <a {...handleInteraction(this.changeTimelineGroup)}>
+          <a
+            {...handleInteraction(this.changeTimelineGroup)}
+            aria-label={`by ${this.props.timelineGroup}`}
+          >
             by {this.props.timelineGroup.toUpperCase()} +
           </a>
           <div className="detailBarArrow" />

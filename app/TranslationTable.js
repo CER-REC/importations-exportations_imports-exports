@@ -11,94 +11,6 @@ const TranslationTable = fromJS({
       en: 'EXP',
       fr: 'EXP',
     },
-    electricity: {
-      rangeOne: {
-        en: '0 - 4M',
-        fr: '0 - 4M',
-      },
-      rangeTwo: {
-        en: '57M - 140M',
-        fr: '57M - 140M',
-      },
-      rangeThree: {
-        en: '160M - 235M',
-        fr: '160M - 235M',
-      },
-      rangeFour: {
-        en: '279M - 335M',
-        fr: '279M - 335M',
-      },
-      rangeFive: {
-        en: '448M - 449M',
-        fr: '448M - 449M',
-      },
-    },
-    crudeOil: {
-      rangeOne: {
-        en: '0 - 300',
-        fr: '0 - 300',
-      },
-      rangeTwo: {
-        en: '1,500 - 1,600',
-        fr: '1 500 - 1 600',
-      },
-      rangeThree: {
-        en: '2,000 - 2,800',
-        fr: '2 000 - 2 800',
-      },
-      rangeFour: {
-        en: '3,700 - 3,800',
-        fr: '3 700 - 3 800',
-      },
-      rangeFive: {
-        en: '21,100 - 21,200',
-        fr: '21 100 - 21 200',
-      },
-    },
-    naturalGas: {
-      rangeOne: {
-        en: '0 - 1.7M',
-        fr: '0 - 1.7M',
-      },
-      rangeTwo: {
-        en: '2.7M - 4.6M',
-        fr: '2,7M - 4,6M',
-      },
-      rangeThree: {
-        en: '5.7M - 5.8M',
-        fr: '5,7M - 5,8M',
-      },
-      rangeFour: {
-        en: '7.6M - 7.7M',
-        fr: '7,6M - 7,7M',
-      },
-      rangeFive: {
-        en: '11.2M - 12.9M',
-        fr: '11,2M - 12,9M',
-      },
-    },
-    naturalGasLiquids: {
-      rangeOne: {
-        en: '1K - 19K',
-        fr: '1K - 19K',
-      },
-      rangeTwo: {
-        en: '119K - 120K',
-        fr: '119K - 120K',
-      },
-      rangeThree: {
-        en: '339K - 340K',
-        fr: '339K - 340K',
-      },
-      rangeFour: {
-        en: '595K - 596K',
-        fr: '595K - 596K',
-      },
-      rangeFive: {
-        en: '1.53M - 1.54M',
-        fr: '1,53M - 1,54M',
-      },
-    },
   },
 
   socialBar: {
@@ -110,7 +22,7 @@ const TranslationTable = fromJS({
       en: 'Methodology',
       fr: 'Méthodologie',
     },
-    resetVisualzation: {
+    resetVisualization: {
       en: 'Reset Visualization',
       fr: 'Réinitialiser visualisation',
     },

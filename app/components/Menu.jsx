@@ -11,7 +11,13 @@ import './Menu.scss'
 
 class Menu extends React.PureComponent {
   static propTypes = {
-    title: PropTypes.oneOfType([PropTypes.node, PropTypes.bool]),
+    title: PropTypes.oneOfType([
+      PropTypes.shape({
+        render: PropTypes.node.isRequired,
+        aria: PropTypes.string.isRequired,
+      }),
+      PropTypes.bool,
+    ]),
     expanded: PropTypes.bool,
     options: PropTypes.arrayOf(PropTypes.string).isRequired,
     selected: PropTypes.string,
@@ -42,17 +48,28 @@ class Menu extends React.PureComponent {
   renderTitle() {
     if (this.props.title === false) { return null }
     const { Tr } = this.props
-    const title = this.props.title || (
-      <tspan>
-        {Tr(['menu', this.props.name, 'prefix']) || ''}&nbsp;
-        <tspan className="bold">{Tr(['menu', this.props.name, 'options', this.props.selected])}</tspan>
-      </tspan>
-    )
+    const title = {
+      render: (this.props.title && this.props.title.render) || (
+        <tspan>
+          {Tr(['menu', this.props.name, 'prefix']) || ''}&nbsp;
+          <tspan className="bold">{Tr(['menu', this.props.name, 'options', this.props.selected])}</tspan>
+        </tspan>
+      ),
+      aria: (this.props.title && this.props.title.aria) || [
+        Tr(['menu', this.props.name, 'prefix']) || '',
+        Tr(['menu', this.props.name, 'options', this.props.selected]),
+      ].join(' '),
+    }
     const expandIcon = (this.props.options.length > 1)
-      ? <tspan className="bold"> {this.props.expanded ? '-' : '+'}</tspan>
+      ? <tspan className="bold" aria-hidden> {this.props.expanded ? '-' : '+'}</tspan>
       : null
     return (
-      <g {...handleInteraction(this.toggleMenu)}>
+      <g
+        role="menu"
+        aria-expanded={this.props.expanded}
+        aria-label={title.aria}
+        {...handleInteraction(this.toggleMenu)}
+      >
         <rect
           x={0}
           y={0}
@@ -64,7 +81,7 @@ class Menu extends React.PureComponent {
           x={Constants.getIn(['menuBar', 'textLabelOffset'])}
           y={Constants.getIn(['menuBar', 'barHeight']) / 2}
         >
-          {title}
+          {title.render}
           {expandIcon}
         </text>
       </g>
@@ -83,6 +100,7 @@ class Menu extends React.PureComponent {
           className="menuOption"
           key={option}
           {...handleInteraction(this.onChange, option)}
+          role="menuitem"
         >
           <tspan className="optionText">{Tr(['menu', this.props.name, 'options', option])}</tspan>
         </tspan>

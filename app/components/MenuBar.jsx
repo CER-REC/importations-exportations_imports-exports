@@ -40,19 +40,27 @@ class MenuBar extends React.Component {
     setAmount: PropTypes.func.isRequired,
     setSubtype: PropTypes.func.isRequired,
     visualizationSettings: PropTypes.instanceOf(Immutable.Map).isRequired,
+    Tr: PropTypes.func.isRequired,
   }
 
   renderActivityMenu() {
     const { Tr } = this.props
     const title = (this.props.visualizationSettings.get('activity') !== 'importsExports')
       ? null
-      : (
-        <tspan>
-          <tspan className="bold">{Tr(['menu', 'activity', 'options', 'imports'])}</tspan>
-          &nbsp;{Tr(['menu', 'and'])}&nbsp;
-          <tspan className="bold">{Tr(['menu', 'activity', 'options', 'exports'])}</tspan>
-        </tspan>
-      )
+      : {
+        render: (
+          <tspan>
+            <tspan className="bold">{Tr(['menu', 'activity', 'options', 'imports'])}</tspan>
+            &nbsp;{Tr(['menu', 'and'])}&nbsp;
+            <tspan className="bold">{Tr(['menu', 'activity', 'options', 'exports'])}</tspan>
+          </tspan>
+        ),
+        aria: [
+          Tr(['menu', 'activity', 'options', 'imports']),
+          Tr(['menu', 'and']),
+          Tr(['menu', 'activity', 'options', 'exports']),
+        ].join(' '),
+      }
     return (
       <Menu
         {...this.props.activityPosition}
@@ -70,14 +78,21 @@ class MenuBar extends React.Component {
     const { Tr } = this.props
     const title = (this.props.visualizationSettings.get('subtype') !== '')
       ? null
-      : (
-        <tspan>
-          {Tr(['menu', 'subtype', 'prefix'])}&nbsp;
-          <tspan className="bold">{Tr(['menu', 'subtype', 'options', 'butane'])}</tspan>
-          &nbsp;{Tr(['menu', 'and'])}&nbsp;
-          <tspan className="bold">{Tr(['menu', 'subtype', 'options', 'propane'])}</tspan>
-        </tspan>
-      )
+      : {
+        render: (
+          <tspan>
+            {Tr(['menu', 'subtype', 'prefix'])}&nbsp;
+            <tspan className="bold">{Tr(['menu', 'subtype', 'options', 'butane'])}</tspan>
+            &nbsp;{Tr(['menu', 'and'])}&nbsp;
+            <tspan className="bold">{Tr(['menu', 'subtype', 'options', 'propane'])}</tspan>
+          </tspan>
+        ),
+        aria: [
+          Tr(['menu', 'subtype', 'options', 'butane']),
+          Tr(['menu', 'and']),
+          Tr(['menu', 'subtype', 'options', 'propane']),
+        ].join(' '),
+      }
     return (
       <Menu
         {...this.props.subtypePosition}
@@ -91,7 +106,6 @@ class MenuBar extends React.Component {
   }
 
   render() {
-    const { Tr } = this.props
     return (
       <g className="MenuBar">
         {this.renderActivityMenu()}
@@ -114,8 +128,10 @@ class MenuBar extends React.Component {
         />
         {this.renderNGLSubtypeMenu()}
 
-        <ShowExplanations />
-        <ShowConfidentiality />
+        <g role="menu">
+          <ShowExplanations />
+          <ShowConfidentiality />
+        </g>
         <Legend />
       </g>
     )

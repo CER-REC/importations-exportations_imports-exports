@@ -135,6 +135,7 @@ class SocialBar extends React.Component {
             width={Constants.getIn(['socialBar', 'iconSize'])}
             y={WorkspaceComputations.socialBarY(this.props.viewport) + Constants.getIn(['socialBar', 'emailIconPadding'])}
             xlinkHref="images/sm_email.svg"
+            aria-label="Share via Email"
             {...handleInteraction(this.emailClick)}
           />
           <image
@@ -143,6 +144,7 @@ class SocialBar extends React.Component {
             width={Constants.getIn(['socialBar', 'iconSize'])}
             y={WorkspaceComputations.socialBarY(this.props.viewport) + Constants.getIn(['socialBar', 'downloadFileIconPadding'])}
             xlinkHref="images/download_file.svg"
+            aria-label="Download CSV data"
             {...handleInteraction(this.downloadDataClick)}
           />
           <image
@@ -151,6 +153,7 @@ class SocialBar extends React.Component {
             width={Constants.getIn(['socialBar', 'iconSize'])}
             y={WorkspaceComputations.socialBarY(this.props.viewport) + Constants.getIn(['socialBar', 'downloadImageIconPadding'])}
             xlinkHref="images/download_image.svg"
+            aria-label="Download Image"
             {...handleInteraction(this.downloadImageClick)}
           />
           <image
@@ -159,6 +162,7 @@ class SocialBar extends React.Component {
             width={Constants.getIn(['socialBar', 'iconSize'])}
             y={WorkspaceComputations.socialBarY(this.props.viewport) + Constants.getIn(['socialBar', 'twitterIconPadding'])}
             xlinkHref="images/sm_twitter.svg"
+            aria-label="Share on Twitter"
             {...handleInteraction(this.twitterClick)}
           />
           <image
@@ -167,6 +171,7 @@ class SocialBar extends React.Component {
             width={Constants.getIn(['socialBar', 'iconSize'])}
             y={WorkspaceComputations.socialBarY(this.props.viewport) + Constants.getIn(['socialBar', 'facebookIconPadding'])}
             xlinkHref="images/sm_facebook.svg"
+            aria-label="Share on Facebook"
             {...handleInteraction(this.facebookClick)}
           />
           <image
@@ -175,6 +180,7 @@ class SocialBar extends React.Component {
             width={Constants.getIn(['socialBar', 'iconSize'])}
             y={WorkspaceComputations.socialBarY(this.props.viewport) + Constants.getIn(['socialBar', 'linkedInIconPadding'])}
             xlinkHref="images/sm_linkedin.svg"
+            aria-label="Share on LinkedIn"
             {...handleInteraction(this.linkedInClick)}
           />
         </g>

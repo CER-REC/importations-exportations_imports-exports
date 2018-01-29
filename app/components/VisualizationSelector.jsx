@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import TextBox from './TextBox'
 import { handleInteraction } from '../utilities'
 import Constants from '../Constants'
-import Tr from '../TranslationTable'
+import TrSelector from '../selectors/translate'
 import setVisualization from '../actionCreators/SetVisualizationCreator'
 
 const textOffset = Constants.getIn(['menuBar', 'textLabelOffset'])
@@ -20,7 +20,7 @@ const SelectedPrefix = ({ y, height }) => (
       height={height}
       fill="#666"
     />
-    <text x={0} y={0} fill="#999" textAnchor="end">of&nbsp;</text>
+    <text x={0} y={0} fill="#999" textAnchor="end" aria-hidden>of&nbsp;</text>
   </g>
 )
 
@@ -30,10 +30,11 @@ SelectedPrefix.propTypes = {
 }
 
 const VisualizationSelector = (props) => {
+  const { Tr } = props
   let yOffset = Constants.getIn(['menuBar', 'visualizationPadding']) / 2
   const options = ['electricity', 'crudeOil', 'naturalGas', 'naturalGasLiquids', 'refinedPetroleumProducts']
     .map((option) => {
-      const translated = Tr.getIn(['mainMenuBar', option, props.language])
+      const translated = Tr(['mainMenuBar', option])
       let el = (
         <text
           key={option}
@@ -41,6 +42,8 @@ const VisualizationSelector = (props) => {
           y={yOffset}
           className="menuOption"
           {...handleInteraction(props.setVisualization, option)}
+          role="menuitem"
+          aria-label={Tr(['unabbreviated', 'mainMenuBar', option])}
         >
           {translated}
         </text>
@@ -48,7 +51,14 @@ const VisualizationSelector = (props) => {
 
       if (option === props.importExportVisualization) {
         el = (
-          <g key={option} transform={`translate(0 ${yOffset})`}>
+          <g
+            key={option}
+            transform={`translate(0 ${yOffset})`}
+            aria-current
+            role="menuitem"
+            tabIndex="0"
+            aria-label={Tr(['unabbreviated', 'mainMenuBar', option])}
+          >
             <g transform={`translate(${textOffset} 0)`}>
               <TextBox
                 padding={0}
@@ -76,16 +86,16 @@ const VisualizationSelector = (props) => {
 VisualizationSelector.propTypes = {
   importExportVisualization: PropTypes.string.isRequired,
   setVisualization: PropTypes.func.isRequired,
-  language: PropTypes.string.isRequired,
   top: PropTypes.number.isRequired,
   left: PropTypes.number,
+  Tr: PropTypes.func.isRequired,
 }
 
 VisualizationSelector.defaultProps = {
   left: 0,
 }
 
-export default connect(state => ({
+export default connect((state, props) => ({
   importExportVisualization: state.importExportVisualization,
-  language: state.language,
+  Tr: TrSelector(state, props),
 }), { setVisualization })(VisualizationSelector)

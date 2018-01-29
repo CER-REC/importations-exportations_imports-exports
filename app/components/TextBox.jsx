@@ -8,6 +8,10 @@ class TextBox extends React.PureComponent {
     flipped: PropTypes.bool,
     padding: PropTypes.number,
     unsizedContent: PropTypes.func,
+    children: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.arrayOf(PropTypes.string),
+    ]).isRequired,
   }
 
   static defaultProps = {
