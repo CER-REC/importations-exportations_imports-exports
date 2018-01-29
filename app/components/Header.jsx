@@ -85,7 +85,7 @@ class Header extends React.Component {
             y={Constants.getIn(['metaBar', 'resetTextY'])}
             x={this.props.viewport.get('x') - Constants.getIn(['metaBar', 'resetTextOffset'])}
             aria-label={Tr(['socialBar', 'resetVisualization'])}
-            role="link"
+            role="menuitem"
           >{Tr('resetLabel')}
           </text>
         </g>
@@ -99,7 +99,7 @@ class Header extends React.Component {
             y={Constants.getIn(['metaBar', 'aboutThisProjectIconMargin'])}
             {...handleInteraction(this.aboutThisProjectClick)}
             aria-label={Tr(['socialBar', 'aboutThisProject'])}
-            role="link"
+            role="menuitem"
           />
 
           <image
@@ -110,7 +110,7 @@ class Header extends React.Component {
             y={Constants.getIn(['metaBar', 'methodologyIconMargin'])}
             {...handleInteraction(this.methodologyClick)}
             aria-label={Tr(['socialBar', 'methodology'])}
-            role="link"
+            role="menuitem"
           />
 
           <image
@@ -121,7 +121,7 @@ class Header extends React.Component {
             {...handleInteraction(this.resetClick)}
             y={Constants.getIn(['metaBar', 'resetIconMargin'])}
             aria-label={Tr(['socialBar', 'resetVisualization'])}
-            role="link"
+            role="menuitem"
           />
         </g>
       </svg>
