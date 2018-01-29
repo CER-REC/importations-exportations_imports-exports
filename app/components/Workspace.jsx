@@ -11,8 +11,6 @@ import ViewportSelectors from '../selectors/viewport/'
 const ExplanationLine = require('./ExplanationLine.jsx')
 const ExplanationText = require('./ExplanationText.jsx')
 
-const PopoverPortal = require('./PopoverPortal.jsx')
-
 import './Workspace.scss'
 
 const Workspace = ({ svgSize, detailSidebarPosition }) => (
@@ -34,7 +32,7 @@ const Workspace = ({ svgSize, detailSidebarPosition }) => (
       id="workspace"
       className="Workspace"
       {...svgSize}
-    > 
+    >
       <VisualizationContainer />
 
       <MenuBar />
@@ -43,7 +41,7 @@ const Workspace = ({ svgSize, detailSidebarPosition }) => (
     </svg>
 
     <div id="popoverPortal">
-     <ExplanationText />
+      <ExplanationText />
     </div>
     <ModalSelector />
 

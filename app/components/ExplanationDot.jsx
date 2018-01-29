@@ -8,6 +8,7 @@ import ExplanationText from './ExplanationText'
 
 const ExplanationSummonedCreator = require('../actionCreators/ExplanationSummonedCreator.js')
 
+
 import './ExplanationDot.scss'
 
 class ExplanationDot extends React.Component {
@@ -30,49 +31,21 @@ class ExplanationDot extends React.Component {
   }
 
   explanationDot() {
-    return (<circle
-      id="back"
+    return (<g id="circle">
+      <circle
       cx={this.props.xPosition}
       cy={this.props.yPosition}
       r={Constants.getIn(['explanationDot', 'radiusStart'])}
-      fill="#ff708a"
-    />)
+      fill="#ff708a"/></g>)
   }
 
   dotAnimation() {
-    return (<circle
-      id="animationCircle"
+    return (<g id="pulse">
+      <circle
       r={Constants.getIn(['explanationDot', 'radiusStart'])}
       cx={this.props.xPosition}
       cy={this.props.yPosition}
-      fill="#ff708a"
-    >
-      <defs>
-        <animate
-          xlinkHref="#back"
-          attributeName="r"
-          from={Constants.getIn(['explanationDot', 'radiusStart'])}
-          to={Constants.getIn(['explanationDot', 'radiusEnd'])}
-          dur="1.5s"
-          begin="0s"
-          repeatCount="indefinite"
-          fill="freeze"
-          id="circ-anim"
-        />
-        <animate
-          xlinkHref="#back"
-          attributeName="opacity"
-          from="0.3"
-          to="0"
-          dur="1.5s"
-          begin="0s"
-          repeatCount="indefinite"
-          fill="freeze"
-          id="circ-anim"
-        />
-      </defs>
-
-        </circle>)
+      /></g>)
   }
 
   render() {

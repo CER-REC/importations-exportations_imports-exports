@@ -3,3 +3,31 @@
   fill: transparent;
   stroke: fadeOut(#ff708a, 20px); 
 }
+
+/* pulse animation */
+#pulse {
+  animation: pulse 3s ease-in-out infinite;
+}
+
+#pulse:hover {
+  cursor: pointer;
+  animation: none;
+}
+
+@-webkit-keyframes pulse {
+  0% {
+    -webkit-transform: scale(1.2);
+    -webkit-transform: translate(10 20);
+    fill: #ff708a;
+    opacity: 0.3;
+    filter: drop-shadow( -50px 50px 50px blue);
+  }
+  70% {
+    fill: #ff708a;
+    opacity: 0.6;
+  }
+  100% {
+    fill: #ff708a;
+    opacity: 1;
+  }
+}

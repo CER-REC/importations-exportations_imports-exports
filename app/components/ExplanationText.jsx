@@ -1,13 +1,18 @@
-const React = require('react')
-const ReactRedux = require('react-redux')
-const ReactDOM = require('react-dom')
+import React from 'react'
+import { connect } from 'react-redux'
+import PropTypes from 'prop-types'
 
-const Constants = require('../Constants.js')
+import Constants from '../Constants'
 const Tr = require('../TranslationTable.js')
 const PopoverPortal = require('./PopoverPortal.jsx')
 
+import ExplanationPopoverCreator from '../actions/explanations'
 
 class ExplanationText extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = { explanationPopover: false }
+  }
 
   mainNavText() {
     return <div style={{
@@ -99,11 +104,11 @@ class ExplanationText extends React.Component {
 }
 
 
-
 const mapStateToProps = state => ({
   viewport: state.viewport,
   language: state.language,
   showExplanations: state.showExplanations,
+  explanationPopover: state.explanationPopover,
 })
 
 module.exports = ReactRedux.connect(mapStateToProps)(ExplanationText)

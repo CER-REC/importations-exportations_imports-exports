@@ -53,12 +53,11 @@ class ElectricityExplanationPopovers extends React.Component {
   }
 }
 
-
-
 const mapStateToProps = state => ({
   viewport: state.viewport,
   language: state.language,
   showExplanations: state.showExplanations,
+  explanationPopover: state.explanationPopover,
 })
 
 module.exports = ReactRedux.connect(mapStateToProps)(ElectricityExplanationPopovers)

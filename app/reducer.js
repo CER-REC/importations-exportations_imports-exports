@@ -14,6 +14,7 @@ import { reducer as DataReducer } from './actions/data'
 import { reducer as BinsReducer } from './actions/bins'
 import { reducer as visualizationSettings } from './actions/visualizationSettings'
 import { reducer as DataLoadCompleteReducer } from './actions/DataLoadComplete'
+import { reducer as ExplanationPopoverReducer } from './actions/explanations'
 
 const mergeDeep = (old, merge) => {
   if (old === Object(old) && Array.isArray(old) === false) {
@@ -42,6 +43,7 @@ const nestedReducers = combineReducers({
   dataLoadingComplete: DataLoadCompleteReducer,
   visualizationSettings,
   modal: ModalReducer,
+  explanationPopover: ExplanationPopoverReducer,
 })
 
 export default (initialState = {}, action) => {
