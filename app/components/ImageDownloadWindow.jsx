@@ -5,6 +5,7 @@ const ReactRedux = require('react-redux')
 const ReactDOM = require('react-dom')
 
 const CloseModal = require('../actions/modal.js').CloseModal
+const RouteComputations = require('../computations/RouteComputations.js')
 
 const Constants = require('../Constants.js')
 const Tr = require('../TranslationTable.js')
@@ -42,9 +43,15 @@ class ImageDownloadWindow extends React.Component {
       />
   }
 
+  saveImageClick() {
+    const screenshotUrl = `${RouteComputations.screenshotOrigin(location)}/${Constants.get('screenshotPath')}/?pageUrl=${RouteComputations.screenshotParameter(document.location)}&width=${horizontalPositions.getIn(['workspace', 'width'])}&height=${Constants.get('screenshotHeight')}`
+    window.open(screenshotUrl) 
+  }
+
   saveImageButton() {
     return <p
-      className='saveImage'>
+      className='saveImage'
+      onClick = {this.saveImageClick}>
       { Tr.getIn(['saveImage', this.props.language]).toUpperCase() }
     </p>
   }

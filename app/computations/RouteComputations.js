@@ -12,15 +12,14 @@ as the user navigates around the URL bar is kept up to date with the current
 state.
 
 These items are represented as URL parameters:
-  columns
-  categories
-  showEmptyCategories
-  pinnedIncidents
+ selected energy
 
 Language is also represented, but is inferred from the application path.
-  en: /pipeline-incidents
-  fr: /incidents-pipeliniers
+  en: /import-export-visualization
+  fr: /TODO
 See applicationPath in TranslationTable.js
+
+pathnames are subject to change depending on the final name given by NEB
 
 In each case, the meaning of an element's absence from the URL is specified, and
 the element is not added to the URL bar if the current state matches the
@@ -30,6 +29,10 @@ meaning associated with absence.
 
 const RouteComputations = {
 
+  paramsToUrlString: function (params) {
+    const urlParts = Object.keys(params).map(key => `${key}=${params[key]}`)
+    return `?${urlParts.join('&')}`
+  },
 
   bitlyParameter(location, language) {
     return `${Constants.get('appHost')}${Tr.getIn(['applicationPath', language])}${encodeURIComponent(location.search)}`
@@ -55,16 +58,37 @@ const RouteComputations = {
     return `${location.origin}/import-export-visualization/data/data.json`
   },
 
+  parseUrlLanguage: function (location) {
+    if (location.pathname.match(Tr.getIn(['applicationPath' , 'en']))) {
+      return 'en'
+    }
+    if (location.pathname.match(Tr.getIn(['applicationPath' , 'fr']))) {
+      return 'fr'
+    }
+
+    const gc_lang_cookie = BrowserCookies.get('_gc_lang')
+
+    switch (gc_lang_cookie) {
+      case 'E':
+        return 'en'
+      case 'F':
+        return 'fr'   
+    }
+
+    // Default to English
+    return 'en'
+  },
+
+  screenshotMode(location) {
+    return !!location.pathname.match(`/${Constants.get('screenshotPath')}$`)
+  },
+
   // A string for the root of the application, a suitable place for making rest
   // requests or building other URLs. E.g.:
   // http://localhost:3001/pipeline-incidents/
   // https://apps2.neb-one.gc.ca/incidents-pipeliniers/
   appRoot(location, language) {
     return `${location.origin}${Tr.getIn(['applicationPath', language])}`
-  },
-
-  screenshotMode(location) {
-    return !!location.pathname.match(`/${Constants.get('screenshotPath')}$`)
   },
 
   // Based on the current URL, construct a URL to the screenshottable version
@@ -82,12 +106,13 @@ const RouteComputations = {
   // paramsString: the 'search' portion of the current location.
   // data: the incidents state
   // categories: the category display state
-  urlParamsToState: function (location, data, categories) {
+  urlParamsToState: function (location, data, config) {
 
     const rawParams = QueryString.parse(location.search)
 
     return {
         language: RouteComputations.parseUrlLanguage(location),
+        config: RouteComputations.parseUrlConfig(rawParams, config),
     }
 
   },
