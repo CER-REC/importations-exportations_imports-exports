@@ -69,6 +69,23 @@ class AxisGuide extends React.PureComponent {
     this.props.updatePosition(this.state.positionDisplay)
   }
 
+  onArrowKey = (e) => {
+    const direction = (e.key === 'ArrowUp' || e.key === 'PageUp') ? -1 : 1
+    const scale = (e.key === 'ArrowUp' || e.key === 'ArrowDown') ? 1 : 10
+
+    const { heightPerUnit } = this.props
+    const flippedInverter = this.props.flipped ? -1 : 1
+    const currentY = this.props.position * heightPerUnit
+    let newY = (currentY - (direction * scale * flippedInverter))
+
+    if (newY > this.props.chartHeight) {
+      newY = this.props.chartHeight
+    } else if (newY < 0) {
+      newY = 0
+    }
+    this.props.updatePosition(Math.round(newY / heightPerUnit))
+  }
+
   render() {
     const text = `${this.state.positionDisplay.toLocaleString()} ${this.props.unit}`
     const offset = (this.props.chartHeight + (this.props.barSize / 2))
@@ -78,6 +95,8 @@ class AxisGuide extends React.PureComponent {
         invertedY={this.props.flipped}
         adjustOffset={this.adjustOffset}
         dragStop={this.dragStop}
+        onArrowKey={this.onArrowKey}
+        aria-label={text}
       >
         <g transform={`translate(0 ${offset})`}>
           <polyline
@@ -105,6 +124,7 @@ class AxisGuide extends React.PureComponent {
               fill: 'white',
               fontSize: 11,
             }}
+            aria-hidden
             boxStyles={{
               fill: Constants.getIn(['styleGuide', 'colours', 'SandMedium']),
             }}
