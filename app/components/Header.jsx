@@ -122,7 +122,9 @@ class Header extends React.Component {
 
   render() {
     if(this.props.screenshotMode === true) {
-      return null
+      return (<div style={{ height: Constants.get('topHeightMargin') }}>
+        {this.leftHeading()}
+      </div>)
     }
     return (<div style={{ height: Constants.get('topHeightMargin') }}>
       {this.leftHeading()}

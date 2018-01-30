@@ -6,14 +6,14 @@ export const Types = {
 export const SetFromRouterState = options => ({
   type: Types.SET_FROM_ROUTER_STATE,
   payload: { 
-    options:language,
-    options:visualizationContainer,
-    options:confidentiality,
-    options:explanations,
-    options:detailSidebar,
-    options:header,
-    options:menuBar,
-    options:screenshotMode,
+    options: language,
+    options: visualizationContainer,
+    options: confidentiality,
+    options: explanations,
+    options: detailSidebar,
+    options: header,
+    options: menuBar,
+    options: screenshotMode,
   },
 })
 

@@ -42,7 +42,7 @@ function resizeScreenHandler() {
   if(store.getState().screenshotMode) {
     h = Constants.get('screenshotHeight')
     w = Constants.get('screenshotWidth')
-  } 
+  }
   store.dispatch(Resized(w,h))
 }
 
