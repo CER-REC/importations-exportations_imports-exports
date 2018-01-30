@@ -30,6 +30,7 @@
     "client-request": "^2.0.0",
     "css-loader": "^0.28.4",
     "d3-geo": "^1.9.1",
+    "dialog-polyfill": "^0.4.9",
     "domready": "^1.0.8",
     "dot-env": "0.0.1",
     "dotenv": "^4.0.0",
