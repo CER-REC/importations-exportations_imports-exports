@@ -104,7 +104,7 @@ class PaddLayout extends React.Component {
             {paddLayout}
             { this.getArrow( props.arrangeBy, paddGroup, 0, 0, color, currentValue[1].get('confidentialCount', 0)) }
           </g>
-          acc.push(paddLayout)    
+          acc.push(paddLayout)
           left += paddingBetweenSortedElement
         }
       }
