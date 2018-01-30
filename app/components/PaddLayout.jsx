@@ -14,6 +14,7 @@ import PaddTwo from './Padds/PaddTwo'
 import PaddThree from './Padds/PaddThree'
 import PaddFour from './Padds/PaddFour'
 import PaddFive from './Padds/PaddFive'
+import ConfidentialIcon from './ConfidentialIcon'
 
 import './ElectricityMapLayout.scss'
 
@@ -36,10 +37,6 @@ class PaddLayout extends React.Component {
     left: PropTypes.number.isRequired,
     country: PropTypes.string.isRequired,
   }
-
-  onClick = () => {
-    console.log('clicked on the padd')
-  }
   getPaddColor(value) {
     if (value === -1) { return '#fff' }
 
@@ -49,7 +46,7 @@ class PaddLayout extends React.Component {
       Constants.getIn(['styleGuide', 'colours', 'ExportDefault']),
     )
   }
-  getArrow(orderBy, paddGroupId, left, top, color ){
+  getArrow(orderBy, paddGroupId, left, top, color, confidentialCount=0 ){
     if(paddGroupId > 0){
       orderBy = orderBy === 'location'? orderBy : 'default'
       const country = this.props.country
@@ -58,6 +55,13 @@ class PaddLayout extends React.Component {
       const transformTranslate =  mapLayoutGrid.getIn(['arrow', 'orderBy', orderBy, paddGroupId.toString()])
       const transformText =  mapLayoutGrid.getIn(['arrow', 'textTranslate', paddGroupId.toString()])
       const text = this.props.TRSelector( ['Padd', country, paddGroupId.toString()])
+      let confidentialIcon = null
+      const style = mapLayoutGrid.get('styles', false)
+      if (style && confidentialCount > 0) {
+        confidentialIcon = <g transform="translate(145 143)">
+          <ConfidentialIcon styles={style.get('confidentialStyle')} />
+        </g>
+      }
       if(this.props.country === 'ca'){
         return <g className={fontClassName} transform={`translate(${left + transformTranslate.get('left')} ${top +transformTranslate.get('top')})`}> 
         <text transform={`translate(${transformText.get('left')} ${transformText.get('top')})`}>{text}</text>
@@ -67,6 +71,7 @@ class PaddLayout extends React.Component {
         return <g className={fontClassName} transform={`translate(${left + transformTranslate.get('left')} ${top+ transformTranslate.get('top')})`}> 
           <text transform={`translate(${transformText.get('left')} ${transformText.get('top')})`}>{text}</text>
           <polygon fill={color} transform="translate(0 140)" points="149.98 18.68 168.81 26.14 187.48 18.66 187.48 17.99 184.09 17.99 184.08 14.51 152.98 14.5 152.95 17.99 149.98 17.99 149.98 18.68"/>
+          {confidentialIcon}
         </g>
       }
       
@@ -91,25 +96,25 @@ class PaddLayout extends React.Component {
         const color = this.getPaddColor(currentValue[1].get('value'))
         switch(paddGroup){
           case 1:
-            paddLayout = <PaddOne color={color} arrowLabel={text}/>
+            paddLayout = <PaddOne color={color}/>
           break;
           case 2:
-            paddLayout = <PaddTwo color={color} arrowLabel={text}/>
+            paddLayout = <PaddTwo color={color}/>
           break;
           case 3:
-            paddLayout = <PaddThree color={color} arrowLabel={text}/>
+            paddLayout = <PaddThree color={color}/>
           break;
           case 4:
-            paddLayout = <PaddFour color={color} arrowLabel={text}/>
+            paddLayout = <PaddFour color={color}/>
           break;
           case 5:
-            paddLayout =  <PaddFive color={color} arrowLabel={text}/>
+            paddLayout =  <PaddFive color={color}/>
           break;
         }
         if(paddLayout !== null){
           paddLayout = <g key={`${props.arrangeBy}_${currentValue[1].get('destination')}`} transform = {`translate(${ left} 0)`}>
             {paddLayout}
-            { this.getArrow( props.arrangeBy, paddGroup, 0, 0, color) }
+            { this.getArrow( props.arrangeBy, paddGroup, 0, 0, color, currentValue[1].get('confidentialCount', 0)) }
           </g>
           acc.push(paddLayout)    
           left += paddingBetweenSortedElement
@@ -149,7 +154,8 @@ class PaddLayout extends React.Component {
         this.props.paddGroup,
         this.props.left,
         this.props.top, 
-        color)}
+        color,
+        data.get('confidentialCount', 0))}
       </g>
   }
 

@@ -345,6 +345,11 @@ const MapLayoutGridConstant = fromJS({
       styles: {
         bottomMargin: 15,
         topMargin: 5,
+        confidentialStyle: {
+          fill: '#fff',
+          stroke: '#999',
+          exclamationFill: '#999',
+        },
       },
       arrow: {
         fontClass: 'paddArrowCanadaFonts',
@@ -415,6 +420,11 @@ const MapLayoutGridConstant = fromJS({
       styles: {
         bottomMargin: 15,
         topMargin: 5,
+        confidentialStyle: {
+          fill: '#fff',
+          stroke: '#999',
+          exclamationFill: '#999',
+        },
       },
       arrow: {
         fontClass: 'paddArrowUSFonts',
