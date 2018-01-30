@@ -50,12 +50,12 @@ const printingValidationError = (errorArray, region, point, type) => {
   return errorArray
 }
 
-const humanNumber = (v, floor = true) => {
+const humanNumber = (v) => {
   const digits = v.toString().length - 3
   if (digits < 0) { return 0 }
 
   const scale = parseInt(`1${new Array(digits).fill(0).join('')}`, 10)
-  return (floor ? Math.floor(v / scale) : Math.ceil(v / scale)) * scale
+  return Math.ceil(v / scale) * scale
 }
 
 const parsingIssue = {};
@@ -91,15 +91,19 @@ const parsingIssue = {};
     return points
   })
   // Extrapolate all of the data points into their inverse activities
-  .then(points => points.reduce((acc, next) => acc.concat(next, {
-    ...next,
-    // We want to flip the origin and destination, but not the activity because
-    // the activity is relative to Canada, and not the origin
-    // TODO: We need to confirm this is outputing the correct data
-    origin: next.destination,
-    destination: next.origin,
-    extrapolated: true,
-  }), []))
+  .then(points => points.reduce((acc, next) => {
+    // Don't duplicate rows that don't have an origin and destination
+    if (!next.origin && !next.destination) { return acc.concat(next) }
+    return acc.concat(next, {
+      ...next,
+      // We want to flip the origin and destination, but not the activity because
+      // the activity is relative to Canada, and not the origin
+      // TODO: We need to confirm this is outputing the correct data
+      origin: next.destination,
+      destination: next.origin,
+      extrapolated: true,
+    })
+  }, []))
   .then((points) => {
     console.log('Post extrapolation:', points.length, 'points')
     return points
@@ -122,7 +126,7 @@ const parsingIssue = {};
     }
   }))
   // Cluster the points into visualizations and units
-  .then((points) => points.reduce((acc, point) => {
+  .then(points => points.reduce((acc, point) => {
     if (!acc[point.product]) { acc[point.product] = {} }
     // Use an object reference to simplify the next creation
     const outProd = acc[point.product]
@@ -132,29 +136,40 @@ const parsingIssue = {};
   }, {}))
   // Calculate bins
   .then((output) => {
+    // Loop over the visualizations
     const valueBins = Object.keys(output)
+      // Filter out RPPs, as they don't have map tiles or need bins
       .filter(k => (k !== 'refinedPetroleumProducts'))
       .reduce((accBins, visName) => {
         accBins[visName] = {}
+        // Loop over the units in this vis
         Object.keys(output[visName]).forEach((unit) => {
-          const values = Object.keys(output[visName][unit]).map(k => output[visName][unit][k])
-          const regionValues = values
-            .reduce((acc, next) => Object.assign({}, acc, {
-              [next.origin]: (acc[next.origin] || 0) + next.value,
-              [next.destination]: (acc[next.destination] || 0) + next.value,
-              [next.port]: (acc[next.destination] || 0) + next.value,
+          // Take the values from the object for this unit
+          const unitPoints = Object.values(output[visName][unit])
+          const regionValues = unitPoints
+            .reduce((acc, next) => ({
+              ...acc,
+              [next.origin || next.port]:
+                (acc[next.origin || next.port] || 0) + next.value,
             }), {})
           const jenksValues = Object.keys(regionValues).map(k => regionValues[k])
-          /*
-          // Process the bins using ckmeans, which is recommended over Jenks
-          const jenksBins = ss.ckmeans(jenksValues, 5)
-          console.log(jenksBins.map(v => v[0].toLocaleString()))
-          */
-          accBins[visName][unit] = ss.jenks(jenksValues, 5)
-            .slice(0, -1)
-            .map((v, i, arr) => ([
-              humanNumber(v),
-              (i + 1 < arr.length) ? humanNumber(arr[i + 1]) : humanNumber(v, false),
+          if (jenksValues.length < 5) {
+            console.log(visName, jenksValues, unitPoints)
+          }
+          accBins[visName][unit] = ss.ckmeans(jenksValues, 5)
+            .map(v => ([
+              Math.min(...v),
+              Math.max(...v),
+            ]))
+            .reduce((acc, [, max], i, arr) => {
+              if (i + 1 === arr.length) { return acc.concat(max) }
+              const nextMin = arr[i + 1][0]
+              const maxMidpoint = ((nextMin - max) / 2) + max
+              return acc.concat(maxMidpoint)
+            }, [])
+            .map((max, i, arr) => ([
+              (i === 0) ? 0 : humanNumber(arr[i - 1]),
+              humanNumber(max),
             ]))
         })
         return accBins
