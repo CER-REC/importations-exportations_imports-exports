@@ -45,6 +45,13 @@ const USPadd = (props) => {
       paddingX = {8}
       paddingY = {0}
       country='us'/>
+    <PaddLayout   
+      left={props.left} 
+      top = {props.top}
+      paddGroup = {6}
+      paddingX = {8}
+      paddingY = {0}
+      country='us'/>
   </g>
   } else {
     return <g transform = {`scale(1.25) translate(${props.left} ${props.top})`}>

@@ -30,17 +30,14 @@ const mapPieceTransformStartLeft = ( left, position, dimensions, mapPieceScale) 
 
 class PaddLayout extends React.Component {
   static propTypes = {
-    dataPoints: PropTypes.instanceOf(Immutable.Map).isRequired,
     arrangeBy: PropTypes.string.isRequired,
-    importExportVisualization: PropTypes.string.isRequired,
     top: PropTypes.number.isRequired,
     left: PropTypes.number.isRequired,
     country: PropTypes.string.isRequired,
   }
   getPaddColor(value) {
     if (value === -1) { return '#fff' }
-
-    const index = this.props.bins.findIndex(range => range.get(0) < value && value < range.get(1))
+    const index = this.props.bins.findIndex(range => range.get(0) <= value && value < range.get(1))
     return Constants.getIn(
       ['styleGuide', 'exportColours', index],
       Constants.getIn(['styleGuide', 'colours', 'ExportDefault']),
@@ -70,7 +67,6 @@ class PaddLayout extends React.Component {
     }
     return null
   }
-
   renderDefault(props){
     const paddData = Array
       .from(props.Padd)
@@ -117,41 +113,38 @@ class PaddLayout extends React.Component {
       }, [])
     return layout
   }
-
   renderLocation(props){
-    const type = props.importExportVisualization
-      const mapLayoutGrid = MapLayoutGridConstant.getIn(['PaddLayout', props.country])
-      const dimensions = mapLayoutGrid.get('dimensions')
-      const styles = mapLayoutGrid.get('styles')
-      const mapPieceScale = mapLayoutGrid.get('mapPieceScale')
-      const layout = mapLayoutGrid.get('layout').filter(point => point.get('paddGroup') === props.paddGroup)
-      const paddGroup = Constants.getIn(['dataloader', 'mapping', 'padd', props.country, `${props.paddGroup}`])
-      const data = props.Padd.get(paddGroup)
-      const color = this.getPaddColor(data.get('value'))
-      return <g transform={`translate(${props.paddingX} ${props.paddingY})`}> 
-        {layout.map((position, key) => (
-          <PaddMapPiece
-            key={`paddLayout_${props.country}_${position.get('name')}`}
-            originKey= {position.get('originKey')}
-            dimensions={dimensions}
-            styles= {styles}
-            color= {color}
-            left = {mapPieceTransformStartLeft( props.left, position, dimensions, mapPieceScale)}
-            top = {mapPieceTransformStartTop( props.top, position, dimensions, mapPieceScale)}
-            isLabelRquired = {props.arrangeBy === 'location'}
-          />
-      ))}
-      {this.getArrow( 
-        this.props.arrangeBy,
-        this.props.paddGroup,
-        this.props.left,
-        this.props.top, 
-        color,
-        data.get('confidentialCount', 0))}
-      </g>
+    const mapLayoutGrid = MapLayoutGridConstant.getIn(['PaddLayout', props.country])
+    const dimensions = mapLayoutGrid.get('dimensions')
+    const styles = mapLayoutGrid.get('styles')
+    const mapPieceScale = mapLayoutGrid.get('mapPieceScale')
+    const layout = mapLayoutGrid.get('layout').filter(point => point.get('paddGroup') === props.paddGroup)
+    const paddGroup = Constants.getIn(['dataloader', 'mapping', 'padd', props.country, `${props.paddGroup}`])
+    const data = props.Padd.get(paddGroup)
+    const color = this.getPaddColor(data.get('value'))
+    return <g transform={`translate(${props.paddingX} ${props.paddingY})`}> 
+      {layout.map((position, key) => (
+        <PaddMapPiece
+          key={`paddLayout_${props.country}_${position.get('name')}`}
+          originKey= {position.get('originKey')}
+          dimensions={dimensions}
+          styles= {styles}
+          color= {color}
+          left = {mapPieceTransformStartLeft( props.left, position, dimensions, mapPieceScale)}
+          top = {mapPieceTransformStartTop( props.top, position, dimensions, mapPieceScale)}
+          isLabelRquired = {props.arrangeBy === 'location'}
+        />
+    ))}
+    {this.getArrow( 
+      this.props.arrangeBy,
+      this.props.paddGroup,
+      this.props.left,
+      this.props.top, 
+      color,
+      data.get('confidentialCount', 0))}
+    </g>
   }
-
- renderPaddMapPiece(){
+  renderPaddMapPiece(){
     if(this.props.arrangeBy === 'location' || this.props.country === 'ca'){
       return this.renderLocation(this.props)
     }
@@ -165,15 +158,11 @@ class PaddLayout extends React.Component {
   }
 }
 
-const mapDispatchToProps = { }
-
 const mapStateToProps = (state, props) => ({
-  importExportVisualization: state.importExportVisualization,
-  dataPoints: sortAggregatedLocationsSelector(state, props),
   arrangeBy: arrangeBy(state, props),
   bins: binSelector(state, props),
   Padd: PaddSelector(state, props),
   TRSelector: TRSelector(state, props),
 })
 
-module.exports = connect(mapStateToProps, mapDispatchToProps)(PaddLayout)
+module.exports = connect(mapStateToProps)(PaddLayout)

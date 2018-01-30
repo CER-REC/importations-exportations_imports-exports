@@ -708,6 +708,10 @@ const TranslationTable = fromJS({
         en: 'PADD V',
         fr: 'PADD V',
       },
+      6: {
+        en: 'NON-USA',
+        fr: 'NON-USA',
+      },
     },
   },
   unabbreviated: {

@@ -277,6 +277,7 @@ const Constants = fromJS({
           3: 'PADD III',
           4: 'PADD IV',
           5: 'PADD V',
+          6: 'Non-USA',
         },
         ca: {
           1: 'ca',

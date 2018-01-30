@@ -434,6 +434,7 @@ const MapLayoutGridConstant = fromJS({
           3: { left: 144, top: 180 },
           4: { left: 146, top: 180 },
           5: { left: 144, top: 180 },
+          6: { left: 140, top: 180 },
         },
         orderBy: {
           location: {
@@ -442,6 +443,7 @@ const MapLayoutGridConstant = fromJS({
             3: { left: 50, top: 50 },
             4: { left: -80, top: -160 },
             5: { left: -90, top: 50 },
+            6: { left: 281, top: -10 },
           },
           default: {
             1: { left: -130, top: -190 },
@@ -449,6 +451,7 @@ const MapLayoutGridConstant = fromJS({
             3: { left: -130, top: -190 },
             4: { left: -130, top: -190 },
             5: { left: -130, top: -190 },
+            6: { left: -130, top: -190 },
           },
         },
       },
@@ -602,6 +605,9 @@ const MapLayoutGridConstant = fromJS({
         },
         {
           paddGroup: 1, name: 'FL', originKey: 'FL', x: 7.5, y: 6,
+        },
+        {
+          paddGroup: 6, name: '', originKey: '', x: 12.5, y: 6,
         },
       ],
     },
