@@ -1,39 +1,14 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
-import PaddOne from './PaddOne'
-import PaddTwo from './PaddTwo'
-import PaddThree from './PaddThree'
-import PaddFour from './PaddFour'
-import PaddFive from './PaddFive'
 import PaddLayout from '../PaddLayout'
+import { PaddSelector } from '../../selectors/Padd'
+import Constants from '../../Constants'
 
-//fetch x axis of the padd using the left detail side bar location
-/*
-<g transform = {`scale(4) translate(${props.left/4} ${props.top/4})`}>
-    <g transform={`translate(${props.left} 0)`}> 
-      <PaddOne color="red" arrowLabel="Padd1"/>
-    </g> 
-    
-    <g transform={`translate(${props.left - 60} 6)`}> 
-      <PaddTwo color="blue" arrowLabel="Padd2"/>
-    </g>
-
-    <g transform={`translate(${props.left - 48} 45)`}> 
-      <PaddThree color="black" arrowLabel="Padd3"/>
-    </g>
-
-    <g transform={`translate(${props.left - 85} 5)`}> 
-      <PaddFour color="orange" arrowLabel="Padd4"/>
-    </g>
-
-    <g transform={`translate(${props.left - 101}  6)`}> 
-      <PaddFive color="blue" arrowLabel="Padd5"/>
-    </g>
-  </g>
- */
-const USPadd = props => {
-  return <g transform = {`translate(${props.left - 400} ${props.top - 100})`}>
+import { arrangeBy } from '../../selectors/data'
+const USPadd = (props) => {
+  if(props.arrangeBy === 'location'){
+    return <g transform = {`translate(${props.left - 400} ${props.top - 100})`}>
     <PaddLayout 
       left={props.left} 
       top = {props.top}
@@ -70,6 +45,19 @@ const USPadd = props => {
       paddingY = {0}
       country='us'/>
   </g>
+  } else {
+    return <g transform = {`translate(${props.left} ${props.top +100})`}>
+      <PaddLayout 
+        left={props.left} 
+        top = {props.top}
+        country='us'/>
+      </g>
+  }
 }
 
-module.exports = USPadd
+const mapStateToProps = (state, props) => ({
+  arrangeBy: arrangeBy(state, props),
+  Padd: PaddSelector(state, props),
+})
+
+module.exports = connect(mapStateToProps)(USPadd)

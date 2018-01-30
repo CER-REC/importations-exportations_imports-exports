@@ -9,6 +9,12 @@ import Constants from '../Constants'
 import {PaddSelector} from '../selectors/Padd'
 import TRSelector from '../selectors/translate'
 
+import PaddOne from './Padds/PaddOne'
+import PaddTwo from './Padds/PaddTwo'
+import PaddThree from './Padds/PaddThree'
+import PaddFour from './Padds/PaddFour'
+import PaddFive from './Padds/PaddFive'
+
 import './ElectricityMapLayout.scss'
 
 import ElectricitySelector from '../selectors/ElectricitySelector'
@@ -67,40 +73,84 @@ class PaddLayout extends React.Component {
     }
     return null
   }
+
+  renderDefault(props){
+    const paddData = Array
+      .from(props.Padd)
+      .sort((a, b) => {
+        return b[1].get('value') - a[1].get('value') ;
+      })
+    let left = props.left
+    const paddingBetweenSortedElement = 100
+    const layout = paddData.reduce((acc, currentValue) => { 
+      let paddLayout = null
+      if(currentValue[0] !== 'ca'){
+        let paddGroup = Constants.getIn(['dataloader', 'mapping', 'padd', 'us'],[]).toArray().indexOf(currentValue[1].get('destination'))
+        paddGroup = paddGroup+1
+        const text = props.TRSelector( ['Padd', props.country, paddGroup.toString()])
+        const color = this.getPaddColor(currentValue[1].get('value'))
+        switch(paddGroup){
+          case 1:
+            paddLayout = <PaddOne color={color} arrowLabel={text}/>
+          break;
+          case 2:
+            paddLayout = <PaddTwo color={color} arrowLabel={text}/>
+          break;
+          case 3:
+            paddLayout = <PaddThree color={color} arrowLabel={text}/>
+          break;
+          case 4:
+            paddLayout = <PaddFour color={color} arrowLabel={text}/>
+          break;
+          case 5:
+            paddLayout =  <PaddFive color={color} arrowLabel={text}/>
+          break;
+        }
+        paddLayout = <g key={`${props.arrangeBy}_${currentValue[1].get('destination')}`} transform = {`translate(${ left} 0)`}>
+          {paddLayout}
+          { this.getArrow( props.arrangeBy, paddGroup) }
+        </g>
+        left += paddingBetweenSortedElement
+      }
+      if(paddLayout !== null){
+        acc.push(paddLayout)    
+      }    
+      return acc
+      }, [])
+    return layout
+  }
+
+  renderLocation(props){
+    const type = props.importExportVisualization
+      const mapLayoutGrid = MapLayoutGridConstant.getIn(['PaddLayout', props.country])
+      const dimensions = mapLayoutGrid.get('dimensions')
+      const styles = mapLayoutGrid.get('styles')
+      const mapPieceScale = mapLayoutGrid.get('mapPieceScale')
+      const layout = mapLayoutGrid.get('layout').filter(point => point.get('paddGroup') === props.paddGroup)
+      const paddGroup = Constants.getIn(['dataloader', 'mapping', 'padd', props.country, `${props.paddGroup}`])
+      const data = props.Padd.get(paddGroup)
+      const color = this.getPaddColor(data.get('value'))
+      return layout.map((position, key) => (
+          <PaddMapPiece
+            key={`paddLayout_${props.country}_${position.get('name')}`}
+            originKey= {position.get('originKey')}
+            dimensions={dimensions}
+            styles= {styles}
+            color= {color}
+            left = {mapPieceTransformStartLeft( props.left, position, dimensions, mapPieceScale)}
+            top = {mapPieceTransformStartTop( props.top, position, dimensions, mapPieceScale)}
+            isLabelRquired = {props.arrangeBy === 'location'}
+          />
+      ))
+  }
+
  renderPaddMapPiece(){
-    // Data from constant file
-    const type = this.props.importExportVisualization
-
-    // fetching nested values
-    const mapLayoutGrid = MapLayoutGridConstant.getIn(['PaddLayout', this.props.country])
-
-    const dimensions = mapLayoutGrid.get('dimensions')
-    const styles = mapLayoutGrid.get('styles')
-    const mapPieceScale = mapLayoutGrid.get('mapPieceScale')
-    const layout = mapLayoutGrid.get('layout').filter(point => point.get('paddGroup') === this.props.paddGroup)
-    const paddGroup = Constants.getIn(['dataloader', 'mapping', 'padd', this.props.country, `${this.props.paddGroup}`])
-    const data = this.props.Padd.get(paddGroup)
-    const color = this.getPaddColor(data.get('value'))
-    /*
-    
-    <g
-          className="mappiece"
-          onClick={this.onClick( this.props.country, position.get('name'))}
-          transform={`scale(${mapPieceScale})`}
-        >
-     */
-    return layout.map((position, key) => (
-        <PaddMapPiece
-          key={`paddLayout_${this.props.country}_${position.get('name')}`}
-          originKey= {position.get('originKey')}
-          dimensions={dimensions}
-          styles= {styles}
-          color= {color}
-          left = {mapPieceTransformStartLeft( this.props.left, position, dimensions, mapPieceScale)}
-          top = {mapPieceTransformStartTop( this.props.top, position, dimensions, mapPieceScale)}
-          isLabelRquired = {this.props.arrangeBy === 'location'}
-        />
-    ))
+    if(this.props.arrangeBy === 'location' || this.props.country === 'ca'){
+      return this.renderLocation(this.props)
+    }
+    else {
+      return this.renderDefault(this.props)
+    }
   }
 
   render() {
