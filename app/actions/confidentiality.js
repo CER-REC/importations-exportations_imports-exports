@@ -9,10 +9,10 @@ const ShowConfidentiality = () => ({
   payload: { },
 })
 
-const reducer = (state = false, action) => {
+const reducer = (state = true, action) => {
   switch (action.type) {
     case Types.SHOW_CONFIDENTIALITY: return !state
-    default: return false
+    default: return true
   }
 }
 

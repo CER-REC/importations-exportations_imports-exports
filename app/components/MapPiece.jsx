@@ -8,6 +8,8 @@ const MapPieceLabel = require('./MapPieceLabel.jsx')
 const ConfidentialIcon = require('./ConfidentialIcon.jsx')
 const Constants = require('../Constants')
 
+import { showConfidentality } from '../actions/confidentiality'
+
 class MapPiece extends React.Component {
   static propTypes = {
     bins: PropTypes.instanceOf(Immutable.List),
@@ -15,6 +17,7 @@ class MapPiece extends React.Component {
     dimensions: PropTypes.instanceOf(Immutable.Map).isRequired,
     data: PropTypes.instanceOf(Immutable.Map).isRequired,
     legend: PropTypes.bool,
+    showConfidentality: PropTypes.bool.isRequired,
   }
 
   static defaultProps = {
@@ -55,6 +58,7 @@ class MapPiece extends React.Component {
     if (this.props.styles.get('arrowPosition') === 'down') {
       arrowTransform = `translate(${Constants.getIn(['mapPieceArrowStyle', 'x'])}, ${this.props.dimensions.get('height') - Constants.getIn(['mapPieceArrowStyle', 'y'])})`
     }
+
     let confidentialIcon = ''
     if (typeof this.props.data.get('confidentialCount') !== 'undefined' && this.props.data.get('confidentialCount') !== 0) {
       // TODO: on click show pop over to show confidential values
