@@ -349,14 +349,14 @@ const MapLayoutGridConstant = fromJS({
       arrow: {
         fontClass: 'paddArrowCanadaFonts',
         textTranslate: {
-          1: '144 150',
+          1: { left: 144, top: 150 },
         },
         orderBy: {
           location: {
-            1: '71 30',
+            1: { left: 0, top: -135 },
           },
           default: {
-            1: '71 30',
+            1: { left: 0, top: -135 },
           },
         },
       },
@@ -419,26 +419,26 @@ const MapLayoutGridConstant = fromJS({
       arrow: {
         fontClass: 'paddArrowUSFonts',
         textTranslate: {
-          1: '150 180',
-          2: '148 180',
-          3: '144 180',
-          4: '146 180',
-          5: '144 180',
+          1: { left: 150, top: 180 },
+          2: { left: 148, top: 180 },
+          3: { left: 144, top: 180 },
+          4: { left: 146, top: 180 },
+          5: { left: 144, top: 180 },
         },
         orderBy: {
           location: {
-            1: '680 200',
-            2: '545 10',
-            3: '570 200',
-            4: '440 10',
-            5: '440 200',
+            1: { left: 170, top: 50 },
+            2: { left: 25, top: -160 },
+            3: { left: 50, top: 50 },
+            4: { left: -80, top: -160 },
+            5: { left: -90, top: 50 },
           },
           default: {
-            1: '-140 -200',
-            2: '-140 -200',
-            3: '-140 -200',
-            4: '-140 -200',
-            5: '-140 -200',
+            1: { left: -130, top: -190 },
+            2: { left: -130, top: -190 },
+            3: { left: -130, top: -190 },
+            4: { left: -130, top: -190 },
+            5: { left: -130, top: -190 },
           },
         },
       },
@@ -588,7 +588,7 @@ const MapLayoutGridConstant = fromJS({
           paddGroup: 1, name: 'GA', originKey: 'GA', x: 8, y: 5,
         },
         {
-          paddGroup: 3, name: 'TX', originKey: 'TX', x: 3.5, y: 6,
+          paddGroup: 3, name: 'TX', originKey: 'TX', x: 4.5, y: 6,
         },
         {
           paddGroup: 1, name: 'FL', originKey: 'FL', x: 7.5, y: 6,

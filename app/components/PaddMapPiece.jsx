@@ -24,7 +24,7 @@ class PaddMapPiece extends React.Component {
     if (typeof this.props.isSelected ==='defined' && this.props.isSelected === true && this.props.isMapPieceSelected === false) {
       opacity = 0.10
     }
-    return (<g fillOpacity={opacity} transform={`translate(${this.props.top} ${this.props.left})`} >
+    return (<g fillOpacity={opacity} transform={`translate(${this.props.left} ${this.props.top} )`} >
       <polygon
         fill={this.props.color}
         points="37.09 9.68 18.54 0 0 9.68 0 29.05 18.54 38.73 37.09 29.05 37.09 9.68"

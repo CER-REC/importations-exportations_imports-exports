@@ -9,7 +9,6 @@ const PaddTwo = props => <polygon
 
 PaddTwo.propTypes = {
   color: PropTypes.string.isRequired,
-  arrowLabel: PropTypes.string.isRequired,
 }
 
 module.exports = PaddTwo

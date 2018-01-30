@@ -8,7 +8,7 @@ const canadaPaddPosition = createSelector(
     top: visContent.top,
     left: visContent.left,
     width: visContent.width,
-    height: 100,
+    height: 150,
   }),
 )
 

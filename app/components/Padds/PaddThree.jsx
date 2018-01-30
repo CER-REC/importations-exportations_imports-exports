@@ -10,7 +10,6 @@ const PaddThree = props => (<polygon
 
 PaddThree.propTypes = {
   color: PropTypes.string.isRequired,
-  arrowLabel: PropTypes.string.isRequired,
 }
 
 module.exports = PaddThree

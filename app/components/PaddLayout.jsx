@@ -21,10 +21,10 @@ import ElectricitySelector from '../selectors/ElectricitySelector'
 import { arrangeBy, binSelector, sortAggregatedLocationsSelector } from '../selectors/data'
 
 const mapPieceTransformStartTop = ( top, position, dimensions, mapPieceScale) => {
-  return top + (position.get('x') * ((mapPieceScale * dimensions.get('width')) + dimensions.get('xAxisPadding')))
+  return top + (position.get('y') * ((mapPieceScale * dimensions.get('height')) + dimensions.get('yAxisPadding')))
 }
 const mapPieceTransformStartLeft = ( left, position, dimensions, mapPieceScale) => {
-  return left + (position.get('y') * ((mapPieceScale * dimensions.get('height')) + dimensions.get('yAxisPadding')))
+  return left + (position.get('x') * ((mapPieceScale * dimensions.get('width')) + dimensions.get('xAxisPadding')))
 }
 
 class PaddLayout extends React.Component {
@@ -49,7 +49,7 @@ class PaddLayout extends React.Component {
       Constants.getIn(['styleGuide', 'colours', 'ExportDefault']),
     )
   }
-  getArrow(orderBy, paddGroupId ){
+  getArrow(orderBy, paddGroupId, left, top, color ){
     if(paddGroupId > 0){
       orderBy = orderBy === 'location'? orderBy : 'default'
       const country = this.props.country
@@ -59,14 +59,14 @@ class PaddLayout extends React.Component {
       const transformText =  mapLayoutGrid.getIn(['arrow', 'textTranslate', paddGroupId.toString()])
       const text = this.props.TRSelector( ['Padd', country, paddGroupId.toString()])
       if(this.props.country === 'ca'){
-        return <g className={fontClassName} transform={`translate(${transformTranslate})`}> 
-        <text transform={`translate(${transformText})`}>{text}</text>
-        <polygon transform="translate(0 140)" points="149.98 18.68 168.81 26.14 187.48 18.66 187.48 17.99 184.09 17.99 184.08 14.51 152.98 14.5 152.95 17.99 149.98 17.99 149.98 18.68"/>
+        return <g className={fontClassName} transform={`translate(${left + transformTranslate.get('left')} ${top +transformTranslate.get('top')})`}> 
+        <text transform={`translate(${transformText.get('left')} ${transformText.get('top')})`}>{text}</text>
+        <polygon fill={color} transform="translate(0 140)" points="149.98 18.68 168.81 26.14 187.48 18.66 187.48 17.99 184.09 17.99 184.08 14.51 152.98 14.5 152.95 17.99 149.98 17.99 149.98 18.68"/>
       </g>  
       } else {
-        return <g className={fontClassName} transform={`translate(${transformTranslate})`}> 
-          <text transform={`translate(${transformText})`}>{text}</text>
-          <polygon transform="translate(0 140)" points="149.98 18.68 168.81 26.14 187.48 18.66 187.48 17.99 184.09 17.99 184.08 14.51 152.98 14.5 152.95 17.99 149.98 17.99 149.98 18.68"/>
+        return <g className={fontClassName} transform={`translate(${left + transformTranslate.get('left')} ${top+ transformTranslate.get('top')})`}> 
+          <text transform={`translate(${transformText.get('left')} ${transformText.get('top')})`}>{text}</text>
+          <polygon fill={color} transform="translate(0 140)" points="149.98 18.68 168.81 26.14 187.48 18.66 187.48 17.99 184.09 17.99 184.08 14.51 152.98 14.5 152.95 17.99 149.98 17.99 149.98 18.68"/>
         </g>
       }
       
@@ -80,7 +80,7 @@ class PaddLayout extends React.Component {
       .sort((a, b) => {
         return b[1].get('value') - a[1].get('value') ;
       })
-    let left = props.left
+    let left = 0
     const paddingBetweenSortedElement = 100
     const layout = paddData.reduce((acc, currentValue) => { 
       let paddLayout = null
@@ -106,15 +106,16 @@ class PaddLayout extends React.Component {
             paddLayout =  <PaddFive color={color} arrowLabel={text}/>
           break;
         }
-        paddLayout = <g key={`${props.arrangeBy}_${currentValue[1].get('destination')}`} transform = {`translate(${ left} 0)`}>
-          {paddLayout}
-          { this.getArrow( props.arrangeBy, paddGroup) }
-        </g>
-        left += paddingBetweenSortedElement
+        if(paddLayout !== null){
+          paddLayout = <g key={`${props.arrangeBy}_${currentValue[1].get('destination')}`} transform = {`translate(${ left} 0)`}>
+            {paddLayout}
+            { this.getArrow( props.arrangeBy, paddGroup, 0, 0, color) }
+          </g>
+          acc.push(paddLayout)    
+          left += paddingBetweenSortedElement
+        }
       }
-      if(paddLayout !== null){
-        acc.push(paddLayout)    
-      }    
+          
       return acc
       }, [])
     return layout
@@ -130,7 +131,8 @@ class PaddLayout extends React.Component {
       const paddGroup = Constants.getIn(['dataloader', 'mapping', 'padd', props.country, `${props.paddGroup}`])
       const data = props.Padd.get(paddGroup)
       const color = this.getPaddColor(data.get('value'))
-      return layout.map((position, key) => (
+      return <g transform={`translate(${props.paddingX} ${props.paddingY})`}> 
+        {layout.map((position, key) => (
           <PaddMapPiece
             key={`paddLayout_${props.country}_${position.get('name')}`}
             originKey= {position.get('originKey')}
@@ -141,7 +143,14 @@ class PaddLayout extends React.Component {
             top = {mapPieceTransformStartTop( props.top, position, dimensions, mapPieceScale)}
             isLabelRquired = {props.arrangeBy === 'location'}
           />
-      ))
+      ))}
+      {this.getArrow( 
+        this.props.arrangeBy,
+        this.props.paddGroup,
+        this.props.left,
+        this.props.top, 
+        color)}
+      </g>
   }
 
  renderPaddMapPiece(){
@@ -154,14 +163,7 @@ class PaddLayout extends React.Component {
   }
 
   render() {
-    //here you can also add fill as well as on click
-    //add padding
-    return <g transform={`translate(${this.props.paddingX} ${this.props.paddingY})`}>
-      {this.renderPaddMapPiece()}
-      {this.getArrow( 
-        this.props.arrangeBy,
-        this.props.paddGroup)}
-      </g>
+    return this.renderPaddMapPiece()
   }
 }
 

@@ -11,7 +11,6 @@ const PaddFive = props => (
 
 PaddFive.propTypes = {
   color: PropTypes.string.isRequired,
-  arrowLabel: PropTypes.string.isRequired,
 }
 
 module.exports = PaddFive
