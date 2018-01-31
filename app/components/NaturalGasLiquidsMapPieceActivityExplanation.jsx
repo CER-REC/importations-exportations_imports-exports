@@ -29,4 +29,4 @@ class NaturalGasLiquidsMapPieceActivityExplanation extends React.Component {
 }
 
 
-module.exports = NaturalGasLiquidsMapPieceActivityExplanation
+export default NaturalGasLiquidsMapPieceActivityExplanation

@@ -169,4 +169,4 @@ const mapStateToProps = (state, props) => ({
   TRSelector: TRSelector(state, props),
 })
 
-module.exports = connect(mapStateToProps)(PaddLayout)
+export default connect(mapStateToProps)(PaddLayout)

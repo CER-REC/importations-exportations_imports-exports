@@ -41,4 +41,4 @@ class PaddMapPiece extends React.Component {
   }
 }
 
-module.exports = PaddMapPiece
+export default PaddMapPiece
