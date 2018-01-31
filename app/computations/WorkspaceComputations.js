@@ -39,4 +39,4 @@ WorkspaceComputations.visualizationContainerHeight = viewport =>
 WorkspaceComputations.VisualizationDetailContainerX = viewport =>
   WorkspaceComputations.workspaceWidth(viewport) - Constants.getIn(['visualizationDetailContainer', 'width'])
 
-module.exports = WorkspaceComputations
+export default WorkspaceComputations

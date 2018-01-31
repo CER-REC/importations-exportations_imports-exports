@@ -13,4 +13,4 @@ const mapStateToProps = state => ({
   viewport: state.viewport,
 })
 
-module.exports = connect(mapStateToProps)(ExplanationPopovers)
+export default connect(mapStateToProps)(ExplanationPopovers)

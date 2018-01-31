@@ -89,4 +89,4 @@ const mapStateToProps = state => ({
   showExplanations: state.showExplanations,
 })
 
-module.exports = connect(mapStateToProps)(ExplanationDot)
+export default connect(mapStateToProps)(ExplanationDot)

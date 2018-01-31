@@ -37,4 +37,4 @@ LegendArrow.defaultProps = {
 }
 
 const mapStateToProps = ({ viewport }) => ({ viewport })
-module.exports = connect(mapStateToProps)(LegendArrow)
+export default connect(mapStateToProps)(LegendArrow)

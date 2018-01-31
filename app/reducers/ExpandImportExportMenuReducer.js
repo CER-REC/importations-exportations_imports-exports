@@ -18,4 +18,4 @@ const ExpandImportExportMenuReducer = (state = defaultState, action) => {
   }
 }
 
-module.exports = ExpandImportExportMenuReducer
+export default ExpandImportExportMenuReducer

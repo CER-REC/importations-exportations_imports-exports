@@ -10,7 +10,7 @@ import { visualizationSettings } from './visualizationSettings'
 // rows from the CSV
 const selectedVisualization = state => state.importExportVisualization
 
-const getSelectionSettings = createSelector(
+export const getSelectionSettings = createSelector(
   visualizationSettings,
   settings => settings.get('selection'),
 )
@@ -35,7 +35,7 @@ const getPadding = createSelector(
   (visualization, country) => MapLayoutGridConstant.getIn([visualization, country, 'sortingRowPadding']),
 )
 
-const getPointsByCountry = createSelector(
+export const getPointsByCountry = createSelector(
   sortAggregatedLocationsSelector,
   getCountry,
   (points, country) => points.filter(point => point.get('country') === country),
@@ -135,7 +135,7 @@ const parseLocationData = createSelector(
 )
 
 
-const getElectricityMapLayout = createSelector(
+export const getElectricityMapLayout = createSelector(
   createSortedLayout,
   parseLocationData,
   arrangeBy,
@@ -150,9 +150,3 @@ const getElectricityMapLayout = createSelector(
     }
   },
 )
-
-module.exports = {
-  getElectricityMapLayout,
-  getSelectionSettings,
-  getPointsByCountry,
-}

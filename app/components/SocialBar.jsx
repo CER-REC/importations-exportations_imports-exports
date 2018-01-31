@@ -320,4 +320,4 @@ const mapDispatchToProps = dispatch => ({
   },
 })
 
-module.exports = connect(mapStateToProps, mapDispatchToProps)(SocialBar)
+export default connect(mapStateToProps, mapDispatchToProps)(SocialBar)

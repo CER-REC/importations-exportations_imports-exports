@@ -15,4 +15,4 @@ const ImportExportVisualizationReducer = (state = 'electricity', action) => {
 }
 
 
-module.exports = ImportExportVisualizationReducer
+export default ImportExportVisualizationReducer

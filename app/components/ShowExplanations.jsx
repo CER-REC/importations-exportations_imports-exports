@@ -93,4 +93,4 @@ const mapDispatchToProps = {
   onClick: ShowExplanationsCreator,
 }
 
-module.exports = connect(mapStateToProps, mapDispatchToProps)(ShowExplanations)
+export default connect(mapStateToProps, mapDispatchToProps)(ShowExplanations)

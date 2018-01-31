@@ -1,6 +1,6 @@
-const React = require('react')
-const PropTypes = require('prop-types')
-const memoize = require('memoize-immutable')
+import React from 'react'
+import PropTypes from 'prop-types'
+import memoize from 'memoize-immutable'
 
 class AnimatedMapPiece extends React.PureComponent {
   static get propTypes() {
@@ -47,4 +47,4 @@ class AnimatedMapPiece extends React.PureComponent {
   }
 }
 
-module.exports = AnimatedMapPiece
+export default AnimatedMapPiece

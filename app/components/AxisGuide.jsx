@@ -139,6 +139,6 @@ class AxisGuide extends React.PureComponent {
   }
 }
 
-module.exports = connect((state, props) => ({
+export default connect((state, props) => ({
   unit: visualizationSettings(state, props).get('amount'),
 }))(AxisGuide)

@@ -11,4 +11,4 @@ SampleBasicComponent.propTypes = {
   name: PropTypes.string.isRequired,
 }
 
-module.exports = SampleBasicComponent
+export default SampleBasicComponent

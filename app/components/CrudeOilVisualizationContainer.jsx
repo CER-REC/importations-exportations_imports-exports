@@ -6,7 +6,7 @@ import ExplanationPopovers from './ExplanationPopovers'
 import ProportionChart from './ProportionChart'
 import BarChart from './BarChart'
 import Axis from './Axis'
-import CrudeOilViewport from '../selectors/viewport/crudeOil'
+import * as CrudeOilViewport from '../selectors/viewport/crudeOil'
 import Constants from '../Constants'
 import { positionShape } from '../propTypeShapes'
 import USPadd from './Padds/USPadd'
@@ -69,7 +69,7 @@ CrudeOilVisualizationContainer.propTypes = {
   exportChart: PropTypes.shape(positionShape).isRequired,
 }
 
-module.exports = connect((state, props) => ({
+export default connect((state, props) => ({
   transportChart: CrudeOilViewport.chartTransportPosition(state, props),
   subtypeChart: CrudeOilViewport.chartSubtypePosition(state, props),
   axisPosition: CrudeOilViewport.chartAxisPosition(state, props),

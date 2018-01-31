@@ -50,4 +50,4 @@ PopoverPortal.defaultProps = {
   left: 0,
 }
 
-module.exports = PopoverPortal
+export default PopoverPortal

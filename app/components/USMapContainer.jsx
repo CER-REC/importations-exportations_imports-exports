@@ -28,4 +28,4 @@ const mapStateToProps = state => ({
 })
 
 
-module.exports = connect(mapStateToProps)(USMapContainer)
+export default connect(mapStateToProps)(USMapContainer)

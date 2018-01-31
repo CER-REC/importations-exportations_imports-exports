@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import Chart from './Chart'
 import AnimatedLine from './SVGAnimation/AnimatedLine'
 import Constants from '../Constants'
-import TimelineSelector from '../selectors/timeline'
+import { timelineGrouping, timelineData } from '../selectors/timeline'
 
 class ProportionChart extends Chart {
   static get propTypes() {
@@ -68,6 +68,6 @@ class ProportionChart extends Chart {
   }
 }
 
-module.exports = connect((state, props) => Object.assign({
-  timelineGroup: TimelineSelector.timelineGrouping(state, props),
-}, TimelineSelector.timelineData(state, props)))(ProportionChart)
+export default connect((state, props) => Object.assign({
+  timelineGroup: timelineGrouping(state, props),
+}, timelineData(state, props)))(ProportionChart)

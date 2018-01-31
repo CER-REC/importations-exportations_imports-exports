@@ -16,5 +16,5 @@ const mapStateToProps = state => ({
   name: state.name,
 })
 
-module.exports = connect(mapStateToProps)(SampleReduxComponent)
-module.exports.unwrapped = SampleReduxComponent
+export default connect(mapStateToProps)(SampleReduxComponent)
+export const unwrapped = SampleReduxComponent

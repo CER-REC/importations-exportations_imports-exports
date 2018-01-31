@@ -4,6 +4,7 @@
   "description": "visualization of import export data for the NEB",
   "main": "index.js",
   "scripts": {
+    "build:data": "babel-node ./data.js",
     "build:portmap:shp2json": "shp2json -n ./srcData/gpr_000b11a_e.shp -o ./srcData/shp2json.json",
     "build:portmap:geo2topo": "geo2topo -n regions=./srcData/shp2json.json -o ./srcData/geo2topo.json",
     "build:portmap:toposimplify": "toposimplify -n -S 1e-3 -F ./srcData/geo2topo.json -o ./srcData/toposimplify.json",

@@ -799,4 +799,4 @@ const TranslationTable = fromJS({
   },
 })
 
-module.exports = TranslationTable
+export default TranslationTable

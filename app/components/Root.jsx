@@ -27,4 +27,4 @@ const mapStateToProps = state => ({
   dataLoadingComplete: state.dataLoadingComplete,
 })
 
-module.exports = connect(mapStateToProps)(Root)
+export default connect(mapStateToProps)(Root)

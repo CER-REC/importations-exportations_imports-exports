@@ -21,4 +21,4 @@ ConfidentialIcon.propTypes = {
   styles: PropTypes.instanceOf(Immutable.Map).isRequired,
 }
 
-module.exports = ConfidentialIcon
+export default ConfidentialIcon

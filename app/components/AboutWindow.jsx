@@ -159,4 +159,4 @@ const mapStateToProps = state => {
   }
 }
 
-module.exports = connect(mapStateToProps)(AboutWindow)
+export default connect(mapStateToProps)(AboutWindow)
