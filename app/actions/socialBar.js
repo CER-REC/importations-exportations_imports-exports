@@ -1,7 +1,7 @@
 
 export const Types = {
   EXPAND_SOCIALBAR: 'expandSocialBar',
-  COLLAPSE_SOCIALBAR: 'collapseSocialBar',
+  DISMISS_COMPONENT: 'dismissComponent',
 }
 
 export const ExpandSocialBar = () => ({
@@ -9,15 +9,15 @@ export const ExpandSocialBar = () => ({
   payload: { },
 })
 
-export const CollapseSocialBar = () => ({
-  type: Types.COLLAPSE_SOCIALBAR,
+export const DismissComponent = () => ({
+  type: Types.DISMISS_COMPONENT,
   payload: { },
 })
 
 export const reducer = (state = false, action) => {
   switch (action.type) {
     case Types.EXPAND_SOCIALBAR: return true
-    case Types.COLLAPSE_SOCIALBAR: return false
+    case Types.DISMISS_COMPONENT: return false
     default: return state
   }
 }

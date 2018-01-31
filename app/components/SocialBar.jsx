@@ -103,6 +103,7 @@ class SocialBar extends React.Component {
   controlArrowClick(e) {
     this.props.controlArrowClick()
     e.preventDefault()
+    e.stopPropagation()
   }
 
   aboutThisProjectClick() { 

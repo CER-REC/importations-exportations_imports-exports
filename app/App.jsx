@@ -14,7 +14,7 @@ import Resized from './actionCreators/ResizeScreenCreator'
 import { LoadData as LoadDataCreator } from './actions/data'
 import { LoadBins as LoadBinsCreator } from './actions/bins'
 import Store from './Store'
-import { CollapseSocialBar as CollapseSocialBarCreator } from './actions/socialBar'
+import { DismissComponent as DismissComponentCreator } from './actions/socialBar'
 
 const store = Store()
 
@@ -41,13 +41,13 @@ function resizeScreenHandler() {
 
 // Handles collapsing the social bar.
 function windowClickHandler() {
-  store.dispatch(CollapseSocialBarCreator())
+  store.dispatch(DismissComponentCreator())
 }
 
 DomReady(() => {
   resizeScreenHandler()
   window.addEventListener('resize', resizeScreenHandler)
-  window.addEventListener('click', windowClickHandler())
+  window.addEventListener('click', windowClickHandler)
   render(Root)
 })
 
