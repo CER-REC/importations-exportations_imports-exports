@@ -24,7 +24,7 @@ class NaturalGasLiquidsMapPieceActivityExplanation extends React.Component {
           arrowProps={MapPieceExplanationConstant.getIn(['naturalGasLiquids', 'us', 'arrowProps'])}
         />
       </g>
-            </g>)
+    </g>)
   }
 }
 
