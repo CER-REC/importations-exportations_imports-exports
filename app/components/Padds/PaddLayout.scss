@@ -1,9 +1,11 @@
+@import "../styles/Fonts.scss";
+
 .padd-ca-cls-2{
     font-size:13px;
     fill:#fff;
 }
 .padd-ca-cls-2,.padd-ca-cls-3{
-    font-family:FiraSansCondensed-Regular, Fira Sans Condensed;
+    font-family:$fira-sans-condensed;
 }
 .padd-ca-cls-3{
     font-size:15px;
@@ -15,7 +17,7 @@
 .padd-us-cls-2{
     font-size:14.98px;
     fill:#fff;
-    font-family:FiraSansExtraCondensed-Regular, Fira Sans Extra Condensed;
+    font-family:$fira-sans-condensed;
 }
 .padd-us-cls-3{
     letter-spacing:-0.01em;

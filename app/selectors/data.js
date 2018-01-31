@@ -115,27 +115,28 @@ const aggregateLocationPaddSelector = createSelector(
   (points) => {
     const result = points.reduce((acc, next) => {
       let destination = next.get('destination')
-      if (typeof destination !== 'undefined'){
-        destination = destination === '' ? 'ca' : destination
-        if (!acc[destination]) {
-          acc[destination] = {
-            units: next.get('units'),
-            destination,
-          }
-        }
-        const activity = next.get('activity')
-        const currentVal = acc[destination].value || 0
-        acc[destination].activity = activity
-        acc[destination].value = (currentVal + next.get('value'))
-
-        const totalCount = acc[destination].totalCount || 0
-        const confidentialCount = acc[destination].confidentialCount || 0
-        const transport = next.get('transport')
-        acc[destination].transport = acc[destination].transport || {}
-        acc[destination].transport[transport] = acc[destination].transport[transport] + next.get('value') || 0
-        acc[destination].totalCount = (totalCount + 1)
-        acc[destination].confidentialCount = (confidentialCount + next.get('confidential'))
+      if (typeof destination === 'undefined') {
+        return acc
       }
+      destination = destination === '' ? 'ca' : destination
+      if (!acc[destination]) {
+        acc[destination] = {
+          units: next.get('units'),
+          destination,
+        }
+      }
+      const activity = next.get('activity')
+      const currentVal = acc[destination].value || 0
+      acc[destination].activity = activity
+      acc[destination].value = (currentVal + next.get('value'))
+
+      const totalCount = acc[destination].totalCount || 0
+      const confidentialCount = acc[destination].confidentialCount || 0
+      const transport = next.get('transport')
+      acc[destination].transport = acc[destination].transport || {}
+      acc[destination].transport[transport] = acc[destination].transport[transport] + next.get('value') || 0
+      acc[destination].totalCount = (totalCount + 1)
+      acc[destination].confidentialCount = (confidentialCount + next.get('confidential'))
       return acc
     }, {})
     return Immutable.fromJS(result)
