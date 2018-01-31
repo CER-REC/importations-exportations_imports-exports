@@ -19,8 +19,8 @@ class NaturalGasLiquidsMapPieceActivityExplanation extends React.Component {
       <g transform="translate(0,70)">
         <ImportExportArrow
           arrowSpacing={MapPieceExplanationConstant.getIn(['naturalGasLiquids', 'ca', 'styles', 'arrowSpacing'])}
-          type='exports'
-          color='#fff'
+          type="exports"
+          color="#fff"
           arrowProps={MapPieceExplanationConstant.getIn(['naturalGasLiquids', 'us', 'arrowProps'])}
         />
       </g>

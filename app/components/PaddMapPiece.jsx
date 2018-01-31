@@ -19,9 +19,8 @@ class PaddMapPiece extends React.Component {
   }
 
   render() {
-
     let opacity = 1
-    if (typeof this.props.isSelected ==='defined' && this.props.isSelected === true && this.props.isMapPieceSelected === false) {
+    if (typeof this.props.isSelected === 'defined' && this.props.isSelected === true && this.props.isMapPieceSelected === false) {
       opacity = 0.10
     }
     return (<g fillOpacity={opacity} transform={`translate(${this.props.left} ${this.props.top} )`} >
@@ -37,7 +36,7 @@ class PaddMapPiece extends React.Component {
         name={this.props.originKey}
         mapPieceProps={this.props.mapPieceProps}
       />
-      </g>)
+            </g>)
   }
 }
 

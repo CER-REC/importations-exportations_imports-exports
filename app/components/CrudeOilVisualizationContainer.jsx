@@ -14,7 +14,7 @@ import CAPadd from './Padds/CAPadd'
 
 const CrudeOilVisualizationContainer = props => (
   <g>
-  <CAPadd 
+    <CAPadd
       {...props.canadaPaddChart}
     />
     <ProportionChart
@@ -53,7 +53,7 @@ const CrudeOilVisualizationContainer = props => (
       xaxis={props.xaxis}
       yaxis={props.yaxis + props.height}
     />
-    <USPadd 
+    <USPadd
       {...props.usPaddChart}
     />
   </g>

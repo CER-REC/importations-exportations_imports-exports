@@ -4,9 +4,7 @@ import { aggregateLocationPaddSelector } from './data'
 
 const PaddSelector = createSelector(
   aggregateLocationPaddSelector,
-  (points) =>{
-    return points
-  },
+  points => points,
 )
 
 module.exports = {

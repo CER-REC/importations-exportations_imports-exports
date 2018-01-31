@@ -22,7 +22,7 @@ const Workspace = ({ svgSize, detailSidebarPosition }) => (
       {...svgSize}
       style={{ zIndex: 9999 }}
       viewBox={`0 0 ${svgSize.width} ${svgSize.height}`}
-      preserveAspectRatio = "xMinYMin meet"
+      preserveAspectRatio="xMinYMin meet"
       role="application"
     >
       <MenuBar />

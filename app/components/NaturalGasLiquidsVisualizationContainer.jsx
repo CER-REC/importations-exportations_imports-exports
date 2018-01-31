@@ -10,7 +10,7 @@ import * as NaturalGasLiquidsViewport from '../selectors/viewport/naturalGasLiqu
 import Constants from '../Constants'
 import USPadd from './Padds/USPadd'
 import CanadaMapContainer from './CanadaMapContainer'
-import {activityExplanationPosition} from '../selectors/viewport/menus'
+import { activityExplanationPosition } from '../selectors/viewport/menus'
 import NaturalGasLiquidsMapPieceActivityExplanation from './NaturalGasLiquidsMapPieceActivityExplanation'
 
 class NaturalGasLiquidsVisualizationContainer extends React.Component {
@@ -40,12 +40,12 @@ class NaturalGasLiquidsVisualizationContainer extends React.Component {
         xaxis={this.props.xaxis}
         yaxis={this.props.yaxis + this.props.height}
       />
-       <USPadd 
+      <USPadd
         {...this.props.usPaddChart}
       />
       <NaturalGasLiquidsMapPieceActivityExplanation
-      {...this.props.mapPieceActivityExplanation}
-    />
+        {...this.props.mapPieceActivityExplanation}
+      />
     </g>)
   }
 }
