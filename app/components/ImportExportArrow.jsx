@@ -60,7 +60,7 @@ class ImportExportArrow extends React.Component {
   }
 
   drawBottomText(arrowProps, type) {
-    let y = 25
+    let y = 27
     if (type === 'imports') {
       y = 10
     }
@@ -68,7 +68,7 @@ class ImportExportArrow extends React.Component {
     if (arrowProps) {
       const bottomText = arrowProps.getIn([type, 'bottomText', this.props.language])
       if (typeof bottomText !== 'undefined' && bottomText !== '') {
-        bottomTextElement = <text y={y}>{bottomText}</text>
+        bottomTextElement = <text className="explanationBottomText" y={y} x="3">{bottomText}</text>
       }
     }
     return bottomTextElement
