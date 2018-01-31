@@ -283,7 +283,7 @@ class SocialBar extends React.Component {
     }
     return (<g transform={transformString}>
       <text className = 'socialBarText'>
-      <tspan dy='0.1em'onClick={this.aboutThisProjectClick}> {Tr.getIn(['socialBarText','about',this.props.language])}</tspan>
+      <tspan dy='0.1em' onClick={this.aboutThisProjectClick}> {Tr.getIn(['socialBarText','about',this.props.language])}</tspan>
       <tspan dx='-2.6em' dy='1.8em' onClick={this.methodologyClick}> {Tr.getIn(['socialBarText','methodology',this.props.language])}</tspan>
       <tspan dx='-5.6em' dy='1.8em' onClick={this.downloadDataClick}> {Tr.getIn(['socialBarText','downloadData',this.props.language])}</tspan>
       <tspan dx='-6.35em' dy='1.8em' onClick={this.downloadImageClick}> {Tr.getIn(['socialBarText','downloadImage',this.props.language])}</tspan>
