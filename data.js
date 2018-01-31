@@ -1,7 +1,7 @@
 /* eslint-disable no-param-reassign, no-console */
 const fs = require('fs')
 const Path = require('path')
-const CSVParse = require('csv-parse')
+const csvParse = require('csv-parse/lib/sync')
 const OriginVaildator = require('./app/validators/OriginValidator.js')
 const ss = require('simple-statistics')
 
@@ -50,26 +50,66 @@ const printingValidationError = (errorArray, region, point, type) => {
   return errorArray
 }
 
-const parser = CSVParse({
-  // Use the callback method to replace the file headers with our own
-  columns: () => ['period', 'product', 'productSubtype', 'transport', 'origin', 'destination', 'port', 'activity', 'units', 'value'],
-}, (err, data) => {
-  if (err) { throw err }
-  const output = {}
-  const parsingIssue = {}
-  const valueBins = {}
-  data.forEach((point) => {
-    // Normalize the data. We can safely mutate args in this situation
-    point.product = productMap[point.product]
+const humanNumber = (v) => {
+  const digits = v.toString().length - 3
+  if (digits < 0) { return 0 }
 
-    if (!output[point.product]) { output[point.product] = {} }
-    // Use an object reference to simplify the next creation
-    const outProd = output[point.product]
-    if (!outProd[point.units]) { outProd[point.units] = [] }
+  const scale = parseInt(`1${new Array(digits).fill(0).join('')}`, 10)
+  return Math.ceil(v / scale) * scale
+}
 
-    // check for the confidential data
-    const confidential = (point.value.toLowerCase() === 'confidential')
+const parsingIssue = {};
 
+(new Promise(resolve => resolve(csvParse(
+  fs.readFileSync(Path.resolve(__dirname, 'public/data/data.csv')),
+  {
+    // Use the callback method to replace the file headers with our own
+    columns: () => ['period', 'product', 'productSubtype', 'transport', 'origin', 'destination', 'port', 'activity', 'units', 'value'],
+  },
+))))
+  // Map over the data and normalize it
+  .then(data => data.map(point => ({
+    period: stripNA(point.period),
+    year: parseInt(point.period.substr(0, 4), 10),
+    quarter: parseInt(point.period.substr(5, 1), 10),
+    product: productMap[point.product],
+    productSubtype: stripNA(point.productSubtype),
+    transport: stripNA(point.transport),
+    origin: stripNA(point.origin),
+    destination: stripNA(point.destination),
+    port: stripNA(point.port),
+    activityGroup: stripNA(activityGroupMap[point.activity]),
+    activity: stripNA(activityMap[point.activity]),
+    originalActivity: stripNA(point.activity),
+    units: stripNA(point.units),
+    confidential: (point.value.toLowerCase() === 'confidential'),
+    value: parseInt(stripNA(point.value), 10) || 0,
+    extrapolated: false,
+  })))
+  .then((points) => {
+    console.log('Post normalization:', points.length, 'points')
+    return points
+  })
+  // Extrapolate all of the data points into their inverse activities
+  .then(points => points.reduce((acc, next) => {
+    // Don't duplicate rows that don't have an origin and destination
+    if (!next.origin && !next.destination) { return acc.concat(next) }
+    return acc.concat(next, {
+      ...next,
+      // We want to flip the origin and destination, but not the activity because
+      // the activity is relative to Canada, and not the origin
+      // TODO: We need to confirm this is outputing the correct data
+      origin: next.destination,
+      destination: next.origin,
+      extrapolated: true,
+    })
+  }, []))
+  .then((points) => {
+    console.log('Post extrapolation:', points.length, 'points')
+    return points
+  })
+  // Validate points
+  .then(points => points.map((point) => {
     // Data Vaildation and parsing
     const originRegion = OriginVaildator.originNameValidator(point.origin)
     const destinationRegion = OriginVaildator.originNameValidator(point.destination)
@@ -77,72 +117,76 @@ const parser = CSVParse({
     printingValidationError(parsingIssue, originRegion, point, 'origin')
     printingValidationError(parsingIssue, destinationRegion, point, 'destination')
 
-    outProd[point.units].push({
-      period: stripNA(point.period),
-      year: parseInt(point.period.substr(0, 4), 10),
-      quarter: parseInt(point.period.substr(5, 1), 10),
-      product: point.product,
-      productSubtype: stripNA(point.productSubtype),
-      transport: stripNA(point.transport),
-      origin: stripNA(point.origin),
+    return {
+      ...point,
       country: originRegion.get('country') || '',
       originKey: originRegion.get('originKey') || '',
       destinationCountry: destinationRegion.get('country') || '',
       destinationKey: destinationRegion.get('originKey') || '',
-      destination: stripNA(point.destination),
-      port: stripNA(point.port),
-      activityGroup: stripNA(activityGroupMap[point.activity]),
-      activity: stripNA(activityMap[point.activity]),
-      originalActivity: stripNA(point.activity),
-      units: stripNA(point.units),
-      confidential,
-      value: parseInt(stripNA(point.value), 10) || 0,
-    })
+    }
+  }))
+  // Cluster the points into visualizations and units
+  .then(points => points.reduce((acc, point) => {
+    if (!acc[point.product]) { acc[point.product] = {} }
+    // Use an object reference to simplify the next creation
+    const outProd = acc[point.product]
+    if (!outProd[point.units]) { outProd[point.units] = [] }
+    outProd[point.units].push(point)
+    return acc
+  }, {}))
+  // Calculate bins
+  .then((output) => {
+    // Loop over the visualizations
+    const valueBins = Object.keys(output)
+      // Filter out RPPs, as they don't have map tiles or need bins
+      .filter(k => (k !== 'refinedPetroleumProducts'))
+      .reduce((accBins, visName) => {
+        accBins[visName] = {}
+        // Loop over the units in this vis
+        Object.keys(output[visName]).forEach((unit) => {
+          // Take the values from the object for this unit
+          const unitPoints = Object.values(output[visName][unit])
+          const regionValues = unitPoints
+            .reduce((acc, next) => ({
+              ...acc,
+              [next.origin || next.port]:
+                (acc[next.origin || next.port] || 0) + next.value,
+            }), {})
+          const jenksValues = Object.keys(regionValues).map(k => regionValues[k])
+          if (jenksValues.length < 5) {
+            console.log(visName, jenksValues, unitPoints)
+          }
+          accBins[visName][unit] = ss.ckmeans(jenksValues, 5)
+            .map(v => ([
+              Math.min(...v),
+              Math.max(...v),
+            ]))
+            .reduce((acc, [, max], i, arr) => {
+              if (i + 1 === arr.length) { return acc.concat(max) }
+              const nextMin = arr[i + 1][0]
+              const maxMidpoint = ((nextMin - max) / 2) + max
+              return acc.concat(maxMidpoint)
+            }, [])
+            .map((max, i, arr) => ([
+              (i === 0) ? 0 : humanNumber(arr[i - 1]),
+              humanNumber(max),
+            ]))
+        })
+        return accBins
+      }, {})
+    return { data: output, bins: valueBins }
   })
+  // Output validation and write the file
+  .then((finalOutput) => {
+    console.log('/********************* Starts: Error in validating data *********************/')
+    console.log(parsingIssue)
+    console.log('/********************* Finish: Error in validating data *********************/')
 
-  const humanNumber = (v, floor = true) => {
-    const digits = v.toString().length - 3
-    if (digits < 0) { return 0 }
-
-    const scale = parseInt(`1${new Array(digits).fill(0).join('')}`, 10)
-    return (floor ? Math.floor(v / scale) : Math.ceil(v / scale)) * scale
-  }
-
-  Object.keys(output).filter(k => (k !== 'refinedPetroleumProducts')).forEach((visName) => {
-    valueBins[visName] = {}
-    Object.keys(output[visName]).forEach((unit) => {
-      const values = Object.keys(output[visName][unit]).map(k => output[visName][unit][k])
-      const regionValues = values
-        .reduce((acc, next) => Object.assign({}, acc, {
-          [next.origin]: (acc[next.origin] || 0) + next.value,
-          [next.destination]: (acc[next.destination] || 0) + next.value,
-          [next.port]: (acc[next.destination] || 0) + next.value,
-        }), {})
-      const jenksValues = Object.keys(regionValues).map(k => regionValues[k])
-      console.log(visName, unit, jenksValues.length)
-      /*
-      // Process the bins using ckmeans, which is recommended over Jenks
-      const jenksBins = ss.ckmeans(jenksValues, 5)
-      console.log(jenksBins.map(v => v[0].toLocaleString()))
-      */
-      valueBins[visName][unit] = ss.jenks(jenksValues, 5)
-        .slice(0, -1)
-        .map((v, i, arr) => ([
-          humanNumber(v),
-          (i + 1 < arr.length) ? humanNumber(arr[i + 1]) : humanNumber(v, false),
-        ]))
-    })
+    fs.writeFileSync(
+      Path.resolve(__dirname, 'public/data/data.json'),
+      JSON.stringify(finalOutput),
+    )
   })
-  console.log(JSON.stringify(valueBins, null, '  '))
-
-  console.log('/********************* Starts: Error in validating data *********************/')
-  console.log(parsingIssue)
-  console.log('/********************* Finish: Error in validating data *********************/')
-
-  fs.writeFileSync(
-    Path.resolve(__dirname, 'public/data/data.json'),
-    JSON.stringify({ data: output, bins: valueBins })
-  )
-})
-
-fs.createReadStream(Path.resolve(__dirname, 'public/data/data.csv')).pipe(parser)
+  .catch((e) => {
+    console.log('Caught error while generating data:\n', e)
+  })

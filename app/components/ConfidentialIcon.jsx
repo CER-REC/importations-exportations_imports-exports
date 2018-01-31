@@ -6,7 +6,7 @@ const ConfidentialIcon = props => (
   <g transform="translate(30, 0)">
     <path
       fill={props.styles.get('fill')}
-      stoke={props.styles.get('stroke')}
+      stroke={props.styles.get('stroke')}
       d="M7.83.5A7.33,7.33,0,1,1,.5,7.83,7.33,7.33,0,0,1,7.83.5Z"
     />
     <path

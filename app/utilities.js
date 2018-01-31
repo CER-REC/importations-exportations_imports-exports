@@ -10,3 +10,18 @@ export const humanNumber = (valueRaw, language) => {
   }
   return `${value.toLocaleString()}${TR.getIn(['formatNumberUnit', language, valueScale])}`
 }
+
+export const handleInteraction = (func, ...boundArgs) => {
+  const handle = (e) => {
+    if (e.type === 'click') {
+      e.preventDefault()
+      func(...boundArgs)
+    } else if (e.type === 'keypress') {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault()
+        func(...boundArgs)
+      }
+    }
+  }
+  return { onClick: handle, onKeyPress: handle, onKeyDown: handle, tabIndex: 0 }
+}

@@ -16,6 +16,20 @@ const Workspace = ({ svgSize, detailSidebarPosition }) => (
       <Header />
 
     </div>
+    <svg
+      id="workspace"
+      className="Workspace"
+      {...svgSize}
+      style={{ zIndex: 9999 }}
+      viewBox={`0 0 ${svgSize.width} ${svgSize.height}`}
+      preserveAspectRatio = "xMinYMin meet"
+      role="application"
+    >
+      <MenuBar />
+
+      <VisualizationContainer />
+      <SocialBar />
+    </svg>
     <div
       id="detailSidebar"
       style={{
@@ -25,17 +39,6 @@ const Workspace = ({ svgSize, detailSidebarPosition }) => (
         width: detailSidebarPosition.width,
       }}
     />
-    <svg
-      id="workspace"
-      className="Workspace"
-      {...svgSize}
-    >
-
-      <VisualizationContainer />
-
-      <MenuBar />
-      <SocialBar />
-    </svg>
     <ModalSelector />
   </div>
 )

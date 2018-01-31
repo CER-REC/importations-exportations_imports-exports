@@ -34,7 +34,10 @@ const Constants = fromJS({
     nglMenuYMargin: 158,
     nglSubproductTextY: 223,
     barWidth: 6,
+    verticalPadding: 5,
     barHeight: 16,
+    optionHeight: 15,
+    visualizationPadding: 15,
     menuExpandedPadding: 30,
     expandedMenuTextMargin: 12,
     sortMenuTextOffsetY: 35,
@@ -272,6 +275,20 @@ const Constants = fromJS({
     mapping: {
       value: {
         confidential: 'Confidential',
+      },
+      padd: {
+        us: {
+          'PADD I': 'PADD I',
+          'PADD II': 'PADD II',
+          'PADD III': 'PADD III',
+          'PADD IV': 'PADD IV',
+          'PADD V': 'PADD V',
+          'Non-USA': 'Non-USA',
+          Mexico: 'Mexico',
+        },
+        ca: {
+          ca: 'ca',
+        },
       },
       country: {
         ca: {
