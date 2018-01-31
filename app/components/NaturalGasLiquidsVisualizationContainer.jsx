@@ -44,8 +44,8 @@ class NaturalGasLiquidsVisualizationContainer extends React.Component {
         {...this.props.usPaddChart}
       />
       <NaturalGasLiquidsMapPieceActivityExplanation
-      {...this.props.mapPieceActivityExplanation}
-    />
+        {...this.props.mapPieceActivityExplanation}
+      />
     </g>)
   }
 }

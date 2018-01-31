@@ -3,6 +3,7 @@ import React from 'react'
 import MapPiece from './MapPiece'
 import MapPieceExplanationConstant from '../MapPieceExplanationConstant'
 import ImportExportArrow from './ImportExportArrow'
+import Tr from '../TranslationTable'
 
 class CrudeOilPieceActivityExplanation extends React.Component {
   render() {
@@ -13,6 +14,7 @@ class CrudeOilPieceActivityExplanation extends React.Component {
           type='exports'
           color='#fff'
           arrowProps={MapPieceExplanationConstant.getIn(['crudeOil', 'arrowProps'])}
+          text= {Tr.getIn(['legendMapTiles','crudeOil'])}
         />
       </g>
     </g>)

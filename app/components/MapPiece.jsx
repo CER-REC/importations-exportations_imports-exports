@@ -40,11 +40,16 @@ class MapPiece extends React.Component {
 
   drawArrow(legends, data, type, styles, arrowProps) {
     if (data.get(type) !== 0) {
+      let color = this.getArrowColor(type, data.get(type))
+      if(typeof this.props.arrowProps !== 'undefined' && typeof this.props.arrowProps.get('fill') !== 'undefined'){
+        color = this.props.arrowProps.get('fill') 
+      }
       return (<ImportExportArrow
         arrowSpacing={styles.get('arrowSpacing')}
         type={type}
-        color={this.getArrowColor(type, data.get(type))}
+        color= {color}
         arrowProps={arrowProps}
+        text = {this.props.text}
       />)
     }
     return ''
@@ -88,6 +93,7 @@ class MapPiece extends React.Component {
         mapPieceHeight={this.props.dimensions.get('height')}
         name={this.props.data.get('name')}
         mapPieceProps={this.props.mapPieceProps}
+        text = {this.props.text}
       />
       <g transform={arrowTransform}>
         {this.drawArrow(this.props.legends, this.props.data, 'exports', this.props.styles, this.props.arrowProps)}
