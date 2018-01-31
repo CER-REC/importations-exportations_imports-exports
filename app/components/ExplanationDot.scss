@@ -16,17 +16,20 @@
 
 @-webkit-keyframes pulse {
   0% {
-    -webkit-transform: scale(1.2);
-    -webkit-transform: translate(10 20);
+    // -webkit-transform: scale(2.2);
+    // -webkit-transform: translate(-20 -20);
+     -webkit-border-radius: 100/2;
+     -moz-border-radius: 100/2;
     fill: #ff708a;
     opacity: 0.3;
-    filter: drop-shadow( -50px 50px 50px blue);
   }
   70% {
+   // -webkit-transform: scale(4.2);
     fill: #ff708a;
     opacity: 0.6;
   }
   100% {
+    //-webkit-transform: scale(6.2);
     fill: #ff708a;
     opacity: 1;
   }

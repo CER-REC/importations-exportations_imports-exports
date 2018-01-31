@@ -4,10 +4,8 @@ import PropTypes from 'prop-types'
 
 import Constants from '../Constants'
 import ExplanationLine from './ExplanationLine'
-import ExplanationText from './ExplanationText'
 
 const ExplanationSummonedCreator = require('../actionCreators/ExplanationSummonedCreator.js')
-
 
 import './ExplanationDot.scss'
 
@@ -23,7 +21,6 @@ class ExplanationDot extends React.Component {
   constructor(props) {
     super(props)
     this.onClick = this.explanationDotClick.bind(this)
-    this.state = { explanationPopover: false }
   }
 
   explanationDotClick(e) {
@@ -49,15 +46,22 @@ class ExplanationDot extends React.Component {
       /></g>)
   }
 
+  drawLine() {
+    console.log(this.props)
+    return <ExplanationLine
+    x={this.props.xCoord}
+    y={this.props.yCoord}/>
+  }
+
   render() {
     if (!this.props.showExplanations) {
       return null
     }
-    return (<g onClick={this.onClick}>
+    return (<g><g onClick={this.onClick}>
       {this.explanationDot()}
       {this.dotAnimation()}
-
-    </g>)
+    </g>
+    {this.drawLine()}</g>)
   }
 }
 

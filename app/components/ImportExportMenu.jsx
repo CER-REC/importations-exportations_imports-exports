@@ -6,9 +6,10 @@ import Tr from '../TranslationTable'
 
 import ExpandImportExportMenuCreator from '../actionCreators/ExpandImportExportMenuCreator'
 
-const ExplanationDot = require('./ExplanationDot.jsx')
+import ExplanationDot from './ExplanationDot'
 
 import WorkspaceComputations from '../computations/WorkspaceComputations'
+
 
 class ImportExportMenu extends React.Component {
   constructor(props) {
@@ -16,10 +17,14 @@ class ImportExportMenu extends React.Component {
     this.onClick = this.props.onClick.bind(this)
   }
 
+  onClick(e) {
+    e.preventDefault()
+  }
+
   controlRect() {
-    return <rect 
-      x={ 0 } 
-      y= { WorkspaceComputations.importExportMenuY(this.props.viewport) } 
+    return <rect
+      x={ 0 }
+      y= { WorkspaceComputations.importExportMenuY(this.props.viewport) }
       width={ Constants.getIn(['menuBar','barWidth'])} 
       height={ Constants.getIn(['menuBar','barHeight'])}
       fill = '#666666'
@@ -28,16 +33,11 @@ class ImportExportMenu extends React.Component {
 
   explanationDot() {
     const xPosition = 155
-    return (<g><ExplanationDot
+    return (<ExplanationDot
       key="mainNavDot"
       xPosition={xPosition}
       yPosition={62}
-    />
-    <use xlinkHref="#back" x={165} y={62} /> </g>)
-  }
-
-  onClick(e) {
-    e.preventDefault()
+    />)
   }
 
   showText() {
@@ -83,8 +83,8 @@ class ImportExportMenu extends React.Component {
       {this.showText()}
       {this.controlRect()}
       {this.expandedMenu()}
-
-      {this.explanationDot()}</g>
+      {this.explanationDot()}
+      </g>
   }
 }
 
@@ -92,7 +92,7 @@ const mapStateToProps = state => {
   return {
     viewport: state.viewport,
     language: state.language,
-    expandImportExportMenu: state.expandImportExportMenu
+    expandImportExportMenu: state.expandImportExportMenu,
   }
 }
 
@@ -100,7 +100,7 @@ const mapDispatchToProps = dispatch => {
   return {
     onClick: () => {
       dispatch(ExpandImportExportMenuCreator())
-    }
+    },
   }
 
 }

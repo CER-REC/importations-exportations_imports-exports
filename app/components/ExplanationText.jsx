@@ -13,7 +13,7 @@ class ExplanationText extends React.Component {
   mainNavText() {
     return <div style={{
           position: 'absolute',
-          top: 215,
+          top: 220,
           left: 140,
           height: 'auto',
           width: 100,
@@ -73,8 +73,8 @@ class ExplanationText extends React.Component {
   newYorkText() {
     return <div style={{
           position: 'absolute',
-          top: 790,
-          left: 675,
+          top: 765,
+          left: 665,
           height: 'auto',
           width: 60,
           background: 'white',
@@ -104,7 +104,6 @@ const mapStateToProps = state => ({
   viewport: state.viewport,
   language: state.language,
   showExplanations: state.showExplanations,
-  explanationPopover: state.explanationPopover,
 })
 
 module.exports = ReactRedux.connect(mapStateToProps)(ExplanationText)

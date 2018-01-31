@@ -107,7 +107,6 @@ class TimelineSeek extends React.PureComponent {
       xPosition={12}
       yPosition={12}
     />
-      <use xlinkHref="#back" x={22} y={12} />
     </g>)
   }
 

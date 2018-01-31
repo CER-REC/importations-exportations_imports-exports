@@ -8,7 +8,6 @@ import ModalSelector from './ModalSelector'
 import VisualizationContainer from './VisualizationContainer'
 import ViewportSelectors from '../selectors/viewport/'
 
-const ExplanationLine = require('./ExplanationLine.jsx')
 const ExplanationText = require('./ExplanationText.jsx')
 
 import './Workspace.scss'
@@ -39,10 +38,7 @@ const Workspace = ({ svgSize, detailSidebarPosition, portalSvgSize }) => (
       <SocialBar />
     </svg>
 
-    <div id="popoverPortal">
-      <svg id="portal" transform='translate(0 -880)'>
-        <ExplanationLine />
-      </svg>
+    <div id="popoverPortal">  
       <ExplanationText />
     </div>
     <ModalSelector />

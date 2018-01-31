@@ -57,8 +57,9 @@ class MapPiece extends React.Component {
       key="mainNavDot"
       xPosition={xPosition}
       yPosition={12}
+      yCoord={2}
+      xCoord={2}
     />
-      <use xlinkHref="#back" x={12} y={12} />
     </g>)
   }
 
@@ -80,8 +81,8 @@ class MapPiece extends React.Component {
     }
 
     let explanationDot = ''
-    if (typeof this.props.data.get('NY') === true) {
-      explanationDot = <ExplanationDot key="newYorkDot" xPosition={0} yPosition={12} />
+    if (this.props.data.get('name') === "NY") {
+      explanationDot = <ExplanationDot key="newYorkDot" xPosition={18} yPosition={12} />
     }
 
     let opacity = 1
@@ -114,7 +115,7 @@ class MapPiece extends React.Component {
         {this.drawArrow(this.props.legends, this.props.data, 'imports', this.props.styles, this.props.arrowProps)}
       </g>
       {confidentialIcon}
-      {explanationDot}
+      { explanationDot }
             </g>)
   }
 }

@@ -5,9 +5,9 @@ export const Types = {
   HIDE_EXPLANATION: 'hideExplanation',
 }
 
-export const ShowExplanation = popover => ({
+export const ShowExplanation = () => ({
   type: Types.SHOW_EXPLANATION,
-  payload: { popover },
+  payload: { },
 })
 
 export const HideExplanation = () => ({
@@ -15,11 +15,11 @@ export const HideExplanation = () => ({
   payload: { },
 })
 
-const initialState = ''
+const initialState = false
 export const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case Types.SHOW_EXPLANATION: return action.payload.popover
-    case Types.HIDE_EXPLANATION: return state
+    case Types.SHOW_EXPLANATION: return true
+    case Types.HIDE_EXPLANATION: return initialState
     default: return state
   }
 }
