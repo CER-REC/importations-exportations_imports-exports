@@ -2,13 +2,23 @@ import { createSelector } from 'reselect'
 
 import ViewportSelectors from './index'
 
-const chartImportPosition = createSelector(
+const canadaImportMap = createSelector(
   ViewportSelectors.visualizationContentPosition,
   visContent => ({
     top: visContent.top,
     left: visContent.left,
     width: visContent.width,
     height: 100,
+  }),
+)
+
+const chartImportPosition = createSelector(
+  canadaImportMap,
+  visContent => ({
+    top: visContent.top,
+    left: visContent.left,
+    width: visContent.width,
+    height: 200,
   }),
 )
 
@@ -43,6 +53,7 @@ const usPaddPosition = createSelector(
 )
 
 module.exports = {
+  canadaImportMap,
   chartImportPosition,
   chartAxisPosition,
   chartExportPosition,

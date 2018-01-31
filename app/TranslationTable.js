@@ -298,16 +298,6 @@ const TranslationTable = fromJS({
       fr: 'TODO',
     },
   },
-
-  explanationShown: {
-    en: 'show EXPLANATIONS',
-    fr: 'show EXPLANATIONS FR',
-  },
-  explanationHide: {
-    en: 'hide EXPLANATIONS',
-    fr: 'TODO',
-  },
-
   explanations: {
     importExportTitle: {
       en: 'Click + to see more options',
@@ -349,6 +339,64 @@ const TranslationTable = fromJS({
   },
   detailBreakDown: {
     electricity: {
+      defaultText: {
+        en: 'This visualization shows imports to Canada and exports from Canada between the years $0 and $1. Drag the timeline bar to change. Click a province to view Detail',
+        fr: 'This visualization shows imports to Canada and exports from Canada between the years $0 and $1. Drag the timeline bar to change. Click a province to view Detail',
+      },
+      exports: {
+        header: {
+          type: {
+            en: 'Exports',
+            fr: 'Exports',
+          },
+          action: {
+            en: 'from',
+            fr: 'from',
+          },
+          adjective: {
+            en: 'selected',
+            fr: 'selected',
+          },
+          place: {
+            en: 'Provinces',
+            fr: 'Provinces',
+          },
+        },
+        body: {
+          action: {
+            en: 'to',
+            fr: 'to',
+          },
+        },
+      },
+      imports: {
+        header: {
+          type: {
+            en: 'Imports',
+            fr: 'Imports',
+          },
+          action: {
+            en: 'to',
+            fr: 'to',
+          },
+          adjective: {
+            en: 'selected',
+            fr: 'selected',
+          },
+          place: {
+            en: 'Provinces',
+            fr: 'Provinces',
+          },
+        },
+        body: {
+          action: {
+            en: 'from',
+            fr: 'from',
+          },
+        },
+      },
+    },
+    naturalGasLiquids: {
       defaultText: {
         en: 'This visualization shows imports to Canada and exports from Canada between the years $0 and $1. Drag the timeline bar to change. Click a province to view Detail',
         fr: 'This visualization shows imports to Canada and exports from Canada between the years $0 and $1. Drag the timeline bar to change. Click a province to view Detail',

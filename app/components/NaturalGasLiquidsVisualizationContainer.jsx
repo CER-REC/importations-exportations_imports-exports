@@ -9,10 +9,14 @@ import Axis from './Axis'
 import NaturalGasLiquidsViewport from '../selectors/viewport/naturalGasLiquids'
 import Constants from '../Constants'
 import USPadd from './Padds/USPadd'
+import CanadaMapContainer from './CanadaMapContainer'
 
 class NaturalGasLiquidsVisualizationContainer extends React.Component {
   render() {
     return (<g>
+      <CanadaMapContainer
+        {...this.props.canadaMap}
+      />
       <BarChart
         {...this.props.importChart}
         valueKey="imports"
@@ -42,6 +46,7 @@ class NaturalGasLiquidsVisualizationContainer extends React.Component {
 }
 
 module.exports = connect((state, props) => ({
+  canadaMap: NaturalGasLiquidsViewport.canadaImportMap(state, props),
   importChart: NaturalGasLiquidsViewport.chartImportPosition(state, props),
   axisPosition: NaturalGasLiquidsViewport.chartAxisPosition(state, props),
   exportChart: NaturalGasLiquidsViewport.chartExportPosition(state, props),

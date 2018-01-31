@@ -331,6 +331,73 @@ const MapLayoutGridConstant = fromJS({
       exports: '#000099',
     }],
   },
+  naturalGasLiquids: {
+    ca: {
+      mapPieceScale: 1,
+      defaultColumns: 8,
+      sortingRowPadding: 1.5,
+      dimensions: {
+        height: 37.09,
+        width: 38.75,
+        yAxisPadding: 8.528,
+        xAxisPadding: 12.528,
+      },
+      styles: {
+        color: '#ede3cb',
+        labelPosition: 'up',
+        arrowPosition: 'down',
+        arrowSpacing: -1,
+        bottomMargin: 5,
+        topMargin: 5,
+        confidentialStyle: {
+          fill: '#999',
+          stroke: '#999',
+          exclamationFill: '#fff',
+        },
+      },
+      layout: [
+        {
+          name: 'YT', originKey: 'YT', x: 0, y: 0,
+        },
+        {
+          name: 'NT', originKey: 'NT', x: 1, y: 0,
+        },
+        {
+          name: 'NU', originKey: 'NU', x: 2, y: 0,
+        },
+        {
+          name: 'NF', originKey: 'NF', x: 6, y: 0,
+        },
+        {
+          name: 'PE', originKey: 'PE', x: 7, y: 0,
+        },
+        {
+          name: 'BC', originKey: 'BC', x: 0.5, y: 1,
+        },
+        {
+          name: 'AB', originKey: 'AB', x: 1.5, y: 1,
+        },
+        {
+          name: 'SK', originKey: 'SK', x: 2.5, y: 1,
+        },
+        {
+          name: 'MB', originKey: 'MB', x: 3.5, y: 1,
+        },
+        {
+          name: 'ON', originKey: 'ON', x: 4.5, y: 1,
+        },
+        {
+          name: 'QB', originKey: 'QB', x: 5.5, y: 1,
+        },
+        {
+          name: 'NB', originKey: 'NB', x: 6.5, y: 1,
+        },
+        {
+          name: 'NS', originKey: 'NS', x: 7.5, y: 1,
+        },
+      ],
+    },
+  },
 
   PaddLayout: {
     ca: {
