@@ -272,15 +272,16 @@ const Constants = fromJS({
       },
       padd: {
         us: {
-          1: 'PADD I',
-          2: 'PADD II',
-          3: 'PADD III',
-          4: 'PADD IV',
-          5: 'PADD V',
-          6: 'Non-USA',
+          'PADD I': 'PADD I',
+          'PADD II': 'PADD II',
+          'PADD III': 'PADD III',
+          'PADD IV': 'PADD IV',
+          'PADD V': 'PADD V',
+          'Non-USA': 'Non-USA',
+          Mexico: 'Mexico',
         },
         ca: {
-          1: 'ca',
+          ca: 'ca',
         },
       },
       country: {

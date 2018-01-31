@@ -12,8 +12,7 @@ const CAPadd = props => (
       top = {props.top}
       width={props.width}
       height={props.height}
-      paddGroup = {1}
-      color='pink'
+      paddGroup = 'ca'
       paddingX = {15}
       paddingY = {0}
       country='ca'/>

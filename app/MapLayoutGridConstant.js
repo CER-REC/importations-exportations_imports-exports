@@ -354,56 +354,56 @@ const MapLayoutGridConstant = fromJS({
       arrow: {
         fontClass: 'paddArrowCanadaFonts',
         textTranslate: {
-          1: { left: 144, top: 150 },
+          ca: { left: 144, top: 150 },
         },
         orderBy: {
           location: {
-            1: { left: 0, top: -135 },
+            ca: { left: 0, top: -135 },
           },
           default: {
-            1: { left: 0, top: -135 },
+            ca: { left: 0, top: -135 },
           },
         },
       },
       layout: [
         {
-          paddGroup: 1, name: 'YT', originKey: 'YT', x: 1, y: 0,
+          paddGroup: 'ca', name: 'YT', originKey: 'YT', x: 1, y: 0,
         },
         {
-          paddGroup: 1, name: 'NT', originKey: 'NT', x: 2, y: 0,
+          paddGroup: 'ca', name: 'NT', originKey: 'NT', x: 2, y: 0,
         },
         {
-          paddGroup: 1, name: 'NU', originKey: 'NU', x: 3, y: 0,
+          paddGroup: 'ca', name: 'NU', originKey: 'NU', x: 3, y: 0,
         },
         {
-          paddGroup: 1, name: 'NF', originKey: 'NF', x: 6, y: 0,
+          paddGroup: 'ca', name: 'NF', originKey: 'NF', x: 6, y: 0,
         },
         {
-          paddGroup: 1, name: 'PE', originKey: 'PE', x: 7, y: 0,
+          paddGroup: 'ca', name: 'PE', originKey: 'PE', x: 7, y: 0,
         },
         {
-          paddGroup: 1, name: 'BC', originKey: 'BC', x: 0.5, y: 1,
+          paddGroup: 'ca', name: 'BC', originKey: 'BC', x: 0.5, y: 1,
         },
         {
-          paddGroup: 1, name: 'AB', originKey: 'AB', x: 1.5, y: 1,
+          paddGroup: 'ca', name: 'AB', originKey: 'AB', x: 1.5, y: 1,
         },
         {
-          paddGroup: 1, name: 'SK', originKey: 'SK', x: 2.5, y: 1,
+          paddGroup: 'ca', name: 'SK', originKey: 'SK', x: 2.5, y: 1,
         },
         {
-          paddGroup: 1, name: 'MB', originKey: 'MB', x: 3.5, y: 1,
+          paddGroup: 'ca', name: 'MB', originKey: 'MB', x: 3.5, y: 1,
         },
         {
-          paddGroup: 1, name: 'ON', originKey: 'ON', x: 4.5, y: 1,
+          paddGroup: 'ca', name: 'ON', originKey: 'ON', x: 4.5, y: 1,
         },
         {
-          paddGroup: 1, name: 'QB', originKey: 'QB', x: 5.5, y: 1,
+          paddGroup: 'ca', name: 'QB', originKey: 'QB', x: 5.5, y: 1,
         },
         {
-          paddGroup: 1, name: 'NB', originKey: 'NB', x: 6.5, y: 1,
+          paddGroup: 'ca', name: 'NB', originKey: 'NB', x: 6.5, y: 1,
         },
         {
-          paddGroup: 1, name: 'NS', originKey: 'NS', x: 7.5, y: 1,
+          paddGroup: 'ca', name: 'NS', originKey: 'NS', x: 7.5, y: 1,
         },
       ],
     },
@@ -426,188 +426,206 @@ const MapLayoutGridConstant = fromJS({
           exclamationFill: '#999',
         },
       },
+      padding: {
+        'PADD I': { left: 16, top: 0.25 },
+        'PADD II': { left: 13, top: 0 },
+        'PADD III': { left: 12.5, top: 1 },
+        'PADD IV': { left: 10, top: 0 },
+        'PADD V': { left: 8, top: 0 },
+        'Non-USA': { left: 0, top: 0 },
+        Mexico: { left: 0, top: 0 },
+      },
       arrow: {
         fontClass: 'paddArrowUSFonts',
         textTranslate: {
-          1: { left: 150, top: 180 },
-          2: { left: 148, top: 180 },
-          3: { left: 144, top: 180 },
-          4: { left: 146, top: 180 },
-          5: { left: 144, top: 180 },
-          6: { left: 140, top: 180 },
+          'PADD I': { left: 150, top: 180 },
+          'PADD II': { left: 148, top: 180 },
+          'PADD III': { left: 144, top: 180 },
+          'PADD IV': { left: 146, top: 180 },
+          'PADD V': { left: 144, top: 180 },
+          'Non-USA': { left: 140, top: 180 },
+          Mexico: { left: 140, top: 180 },
+
         },
         orderBy: {
           location: {
-            1: { left: 170, top: 50 },
-            2: { left: 25, top: -160 },
-            3: { left: 50, top: 50 },
-            4: { left: -80, top: -160 },
-            5: { left: -90, top: 50 },
-            6: { left: 281, top: -10 },
+            'PADD I': { left: 170, top: 50 },
+            'PADD II': { left: 25, top: -160 },
+            'PADD III': { left: 50, top: 50 },
+            'PADD IV': { left: -80, top: -160 },
+            'PADD V': { left: -90, top: 50 },
+            'Non-USA': { left: 281, top: -10 },
+            Mexico: { left: 281, top: -10 },
+
           },
           default: {
-            1: { left: -130, top: -190 },
-            2: { left: -130, top: -190 },
-            3: { left: -130, top: -190 },
-            4: { left: -130, top: -190 },
-            5: { left: -130, top: -190 },
-            6: { left: -130, top: -190 },
+            'PADD I': { left: -130, top: -190 },
+            'PADD II': { left: -130, top: -190 },
+            'PADD III': { left: -130, top: -190 },
+            'PADD IV': { left: -130, top: -190 },
+            'PADD V': { left: -130, top: -190 },
+            'Non-USA': { left: -135, top: -190 },
+            Mexico: { left: -135, top: -190 },
+
           },
         },
       },
       layout: [
         {
-          paddGroup: 1, name: 'VT', originKey: 'VT', x: 9.5, y: 0,
+          paddGroup: 'PADD I', name: 'VT', originKey: 'VT', x: 9.5, y: 0,
         },
         {
-          paddGroup: 1, name: 'ME', originKey: 'ME', x: 10.5, y: 0,
+          paddGroup: 'PADD I', name: 'ME', originKey: 'ME', x: 10.5, y: 0,
         },
         {
-          paddGroup: 5, name: 'AK', originKey: 'AK', x: 1, y: 1,
+          paddGroup: 'PADD V', name: 'AK', originKey: 'AK', x: 1, y: 1,
         },
         {
-          paddGroup: 5, name: 'WA', originKey: 'WA', x: 0.5, y: 2,
+          paddGroup: 'PADD V', name: 'WA', originKey: 'WA', x: 0.5, y: 2,
         },
         {
-          paddGroup: 4, name: 'MT', originKey: 'MT', x: 2, y: 1,
+          paddGroup: 'PADD IV', name: 'MT', originKey: 'MT', x: 2, y: 1,
         },
         {
-          paddGroup: 2, name: 'ND', originKey: 'ND', x: 3, y: 1,
+          paddGroup: 'PADD II', name: 'ND', originKey: 'ND', x: 3, y: 1,
         },
         {
-          paddGroup: 2, name: 'MN', originKey: 'MN', x: 4, y: 1,
+          paddGroup: 'PADD II', name: 'MN', originKey: 'MN', x: 4, y: 1,
         },
         {
-          paddGroup: 2, name: 'WI', originKey: 'WI', x: 5, y: 1,
+          paddGroup: 'PADD II', name: 'WI', originKey: 'WI', x: 5, y: 1,
         },
         {
-          paddGroup: 2, name: 'MI', originKey: 'MI', x: 7, y: 1,
+          paddGroup: 'PADD II', name: 'MI', originKey: 'MI', x: 7, y: 1,
         },
         {
-          paddGroup: 1, name: 'NY', originKey: 'NY', x: 9, y: 1,
+          paddGroup: 'PADD I', name: 'NY', originKey: 'NY', x: 9, y: 1,
         },
         {
-          paddGroup: 1, name: 'MA', originKey: 'MA', x: 10, y: 1,
+          paddGroup: 'PADD I', name: 'MA', originKey: 'MA', x: 10, y: 1,
         },
         {
-          paddGroup: 1, name: 'NH', originKey: 'NH', x: 11, y: 1,
+          paddGroup: 'PADD I', name: 'NH', originKey: 'NH', x: 11, y: 1,
         },
         {
-          paddGroup: 4, name: 'ID', originKey: 'ID', x: 1.5, y: 2,
+          paddGroup: 'PADD IV', name: 'ID', originKey: 'ID', x: 1.5, y: 2,
         },
         {
-          paddGroup: 4, name: 'WY', originKey: 'WY', x: 2.5, y: 2,
+          paddGroup: 'PADD IV', name: 'WY', originKey: 'WY', x: 2.5, y: 2,
         },
         {
-          paddGroup: 2, name: 'SD', originKey: 'SD', x: 3.5, y: 2,
+          paddGroup: 'PADD II', name: 'SD', originKey: 'SD', x: 3.5, y: 2,
         },
         {
-          paddGroup: 2, name: 'IA', originKey: 'IA', x: 4.5, y: 2,
+          paddGroup: 'PADD II', name: 'IA', originKey: 'IA', x: 4.5, y: 2,
         },
         {
-          paddGroup: 2, name: 'IL', originKey: 'IL', x: 5.5, y: 2,
+          paddGroup: 'PADD II', name: 'IL', originKey: 'IL', x: 5.5, y: 2,
         },
         {
-          paddGroup: 2, name: 'IN', originKey: 'IN', x: 6.5, y: 2,
+          paddGroup: 'PADD II', name: 'IN', originKey: 'IN', x: 6.5, y: 2,
         },
         {
-          paddGroup: 2, name: 'OH', originKey: 'OH', x: 7.5, y: 2,
+          paddGroup: 'PADD II', name: 'OH', originKey: 'OH', x: 7.5, y: 2,
         },
         {
-          paddGroup: 1, name: 'PA', originKey: 'PA', x: 8.5, y: 2,
+          paddGroup: 'PADD I', name: 'PA', originKey: 'PA', x: 8.5, y: 2,
         },
         {
-          paddGroup: 1, name: 'NJ', originKey: 'NJ', x: 9.5, y: 2,
+          paddGroup: 'PADD I', name: 'NJ', originKey: 'NJ', x: 9.5, y: 2,
         },
         {
-          paddGroup: 1, name: 'RI', originKey: 'RI', x: 10.5, y: 2,
+          paddGroup: 'PADD I', name: 'RI', originKey: 'RI', x: 10.5, y: 2,
         },
         {
-          paddGroup: 5, name: 'HI', originKey: 'HI', x: 2, y: 5,
+          paddGroup: 'PADD V', name: 'HI', originKey: 'HI', x: 2, y: 5,
         },
         {
-          paddGroup: 5, name: 'OR', originKey: 'OR', x: 1, y: 3,
+          paddGroup: 'PADD V', name: 'OR', originKey: 'OR', x: 1, y: 3,
         },
         {
-          paddGroup: 5, name: 'NV', originKey: 'NV', x: 2, y: 3,
+          paddGroup: 'PADD V', name: 'NV', originKey: 'NV', x: 2, y: 3,
         },
         {
-          paddGroup: 4, name: 'CO', originKey: 'CO', x: 3, y: 3,
+          paddGroup: 'PADD IV', name: 'CO', originKey: 'CO', x: 3, y: 3,
         },
         {
-          paddGroup: 2, name: 'NE', originKey: 'NE', x: 4, y: 3,
+          paddGroup: 'PADD II', name: 'NE', originKey: 'NE', x: 4, y: 3,
         },
         {
-          paddGroup: 2, name: 'MO', originKey: 'MO', x: 5, y: 3,
+          paddGroup: 'PADD II', name: 'MO', originKey: 'MO', x: 5, y: 3,
         },
         {
-          paddGroup: 2, name: 'KY', originKey: 'KY', x: 6, y: 3,
+          paddGroup: 'PADD II', name: 'KY', originKey: 'KY', x: 6, y: 3,
         },
         {
-          paddGroup: 1, name: 'WV', originKey: 'WV', x: 7, y: 3,
+          paddGroup: 'PADD I', name: 'WV', originKey: 'WV', x: 7, y: 3,
         },
         {
-          paddGroup: 1, name: 'VA', originKey: 'VA', x: 8, y: 3,
+          paddGroup: 'PADD I', name: 'VA', originKey: 'VA', x: 8, y: 3,
         },
         {
-          paddGroup: 1, name: 'MD', originKey: 'MD', x: 9, y: 3,
+          paddGroup: 'PADD I', name: 'MD', originKey: 'MD', x: 9, y: 3,
         },
         {
-          paddGroup: 1, name: 'CT', originKey: 'CT', x: 10, y: 3,
+          paddGroup: 'PADD I', name: 'CT', originKey: 'CT', x: 10, y: 3,
         },
         {
-          paddGroup: 5, name: 'CA', originKey: 'CA', x: 1.5, y: 4,
+          paddGroup: 'PADD V', name: 'CA', originKey: 'CA', x: 1.5, y: 4,
         },
         {
-          paddGroup: 4, name: 'UT', originKey: 'UT', x: 2.5, y: 4,
+          paddGroup: 'PADD IV', name: 'UT', originKey: 'UT', x: 2.5, y: 4,
         },
         {
-          paddGroup: 2, name: 'OK', originKey: 'OK', x: 3.5, y: 4,
+          paddGroup: 'PADD II', name: 'OK', originKey: 'OK', x: 3.5, y: 4,
         },
         {
-          paddGroup: 2, name: 'KS', originKey: 'KS', x: 4.5, y: 4,
+          paddGroup: 'PADD II', name: 'KS', originKey: 'KS', x: 4.5, y: 4,
         },
         {
-          paddGroup: 3, name: 'AR', originKey: 'AR', x: 5.5, y: 4,
+          paddGroup: 'PADD III', name: 'AR', originKey: 'AR', x: 5.5, y: 4,
         },
         {
-          paddGroup: 2, name: 'TN', originKey: 'TN', x: 6.5, y: 4,
+          paddGroup: 'PADD II', name: 'TN', originKey: 'TN', x: 6.5, y: 4,
         },
         {
-          paddGroup: 1, name: 'NC', originKey: 'NC', x: 7.5, y: 4,
+          paddGroup: 'PADD I', name: 'NC', originKey: 'NC', x: 7.5, y: 4,
         },
         {
-          paddGroup: 1, name: 'SC', originKey: 'SC', x: 8.5, y: 4,
+          paddGroup: 'PADD I', name: 'SC', originKey: 'SC', x: 8.5, y: 4,
         },
         {
-          paddGroup: 1, name: 'DE', originKey: 'DE', x: 9.5, y: 4,
+          paddGroup: 'PADD I', name: 'DE', originKey: 'DE', x: 9.5, y: 4,
         },
         {
-          paddGroup: 5, name: 'AZ', originKey: 'AZ', x: 3, y: 5,
+          paddGroup: 'PADD V', name: 'AZ', originKey: 'AZ', x: 3, y: 5,
         },
         {
-          paddGroup: 3, name: 'NM', originKey: 'NM', x: 4, y: 5,
+          paddGroup: 'PADD III', name: 'NM', originKey: 'NM', x: 4, y: 5,
         },
         {
-          paddGroup: 3, name: 'LA', originKey: 'LA', x: 5, y: 5,
+          paddGroup: 'PADD III', name: 'LA', originKey: 'LA', x: 5, y: 5,
         },
         {
-          paddGroup: 3, name: 'MS', originKey: 'MS', x: 6, y: 5,
+          paddGroup: 'PADD III', name: 'MS', originKey: 'MS', x: 6, y: 5,
         },
         {
-          paddGroup: 3, name: 'AL', originKey: 'AL', x: 7, y: 5,
+          paddGroup: 'PADD III', name: 'AL', originKey: 'AL', x: 7, y: 5,
         },
         {
-          paddGroup: 1, name: 'GA', originKey: 'GA', x: 8, y: 5,
+          paddGroup: 'PADD I', name: 'GA', originKey: 'GA', x: 8, y: 5,
         },
         {
-          paddGroup: 3, name: 'TX', originKey: 'TX', x: 4.5, y: 6,
+          paddGroup: 'PADD III', name: 'TX', originKey: 'TX', x: 4.5, y: 6,
         },
         {
-          paddGroup: 1, name: 'FL', originKey: 'FL', x: 7.5, y: 6,
+          paddGroup: 'PADD I', name: 'FL', originKey: 'FL', x: 7.5, y: 6,
         },
         {
-          paddGroup: 6, name: '', originKey: '', x: 12.5, y: 6,
+          paddGroup: 'Non-USA', name: '', originKey: '', x: 12.5, y: 6,
+        },
+        {
+          paddGroup: 'Mexico', name: '', originKey: '', x: 12.5, y: 6,
         },
       ],
     },

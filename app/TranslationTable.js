@@ -682,35 +682,39 @@ const TranslationTable = fromJS({
   },
   Padd: {
     ca: {
-      1: {
+      ca: {
         en: 'CANADA',
         fr: 'CANADA',
       },
     },
     us: {
-      1: {
+      'PADD I': {
         en: 'PADD I',
         fr: 'PADD I',
       },
-      2: {
+      'PADD II': {
         en: 'PADD II',
         fr: 'PADD II',
       },
-      3: {
+      'PADD III': {
         en: 'PADD III',
         fr: 'PADD III',
       },
-      4: {
+      'PADD IV': {
         en: 'PADD IV',
         fr: 'PADD IV',
       },
-      5: {
+      'PADD V': {
         en: 'PADD V',
         fr: 'PADD V',
       },
-      6: {
+      'Non-USA': {
         en: 'NON-USA',
         fr: 'NON-USA',
+      },
+      Mexico: {
+        en: 'MEXICO',
+        fr: 'MEXICO',
       },
     },
   },

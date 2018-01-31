@@ -14,6 +14,7 @@ import PaddTwo from './Padds/PaddTwo'
 import PaddThree from './Padds/PaddThree'
 import PaddFour from './Padds/PaddFour'
 import PaddFive from './Padds/PaddFive'
+import PaddNonUSA from './Padds/PaddNonUSA'
 import ConfidentialIcon from './ConfidentialIcon'
 
 import './ElectricityMapLayout.scss'
@@ -44,14 +45,14 @@ class PaddLayout extends React.Component {
     )
   }
   getArrow(orderBy, paddGroupId, left, top, color, confidentialCount=0 ){
-    if(paddGroupId > 0){
+    if(typeof paddGroupId !== 'undefined' && paddGroupId !== ''){
       orderBy = orderBy === 'location'? orderBy : 'default'
       const country = this.props.country
       const mapLayoutGrid = MapLayoutGridConstant.getIn(['PaddLayout', country])
       const fontClassName = mapLayoutGrid.getIn(['arrow', 'fontClass'])
-      const transformTranslate =  mapLayoutGrid.getIn(['arrow', 'orderBy', orderBy, paddGroupId.toString()])
-      const transformText =  mapLayoutGrid.getIn(['arrow', 'textTranslate', paddGroupId.toString()])
-      const text = this.props.TRSelector( ['Padd', country, paddGroupId.toString()])
+      const transformTranslate =  mapLayoutGrid.getIn(['arrow', 'orderBy', orderBy, paddGroupId])
+      const transformText =  mapLayoutGrid.getIn(['arrow', 'textTranslate', paddGroupId])
+      const text = this.props.TRSelector( ['Padd', country, paddGroupId])
       let confidentialIcon = null
       const style = mapLayoutGrid.get('styles', false)
       if (style && confidentialCount > 0 && country !== 'ca') {
@@ -78,25 +79,28 @@ class PaddLayout extends React.Component {
     const layout = paddData.reduce((acc, currentValue) => { 
       let paddLayout = null
       if(currentValue[0] !== 'ca'){
-        let paddGroup = Constants.getIn(['dataloader', 'mapping', 'padd', 'us'],[]).toArray().indexOf(currentValue[1].get('destination'))
-        paddGroup = paddGroup+1
-        const text = props.TRSelector( ['Padd', props.country, paddGroup.toString()])
+        let paddGroup = currentValue[1].get('destination')
+        const text = props.TRSelector( ['Padd', props.country, paddGroup])
         const color = this.getPaddColor(currentValue[1].get('value'))
         switch(paddGroup){
-          case 1:
+          case 'PADD I':
             paddLayout = <PaddOne color={color}/>
           break;
-          case 2:
+          case 'PADD II':
             paddLayout = <PaddTwo color={color}/>
           break;
-          case 3:
+          case 'PADD III':
             paddLayout = <PaddThree color={color}/>
           break;
-          case 4:
+          case 'PADD IV':
             paddLayout = <PaddFour color={color}/>
           break;
-          case 5:
+          case 'PADD V':
             paddLayout =  <PaddFive color={color}/>
+          break;
+          case 'Mexico':
+          case 'Non-USA':
+            paddLayout =  <PaddNonUSA color={color}/>
           break;
         }
         if(paddLayout !== null){
@@ -119,7 +123,7 @@ class PaddLayout extends React.Component {
     const styles = mapLayoutGrid.get('styles')
     const mapPieceScale = mapLayoutGrid.get('mapPieceScale')
     const layout = mapLayoutGrid.get('layout').filter(point => point.get('paddGroup') === props.paddGroup)
-    const paddGroup = Constants.getIn(['dataloader', 'mapping', 'padd', props.country, `${props.paddGroup}`])
+    const paddGroup = Constants.getIn(['dataloader', 'mapping', 'padd', props.country, props.paddGroup])
     const data = props.Padd.get(paddGroup)
     const color = this.getPaddColor(data.get('value'))
     return <g transform={`translate(${props.paddingX} ${props.paddingY})`}> 
