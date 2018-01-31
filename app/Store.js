@@ -9,7 +9,7 @@ import TagVisualizationSettingsMiddleware from './middleware/tagVisualizationSet
 import SaveStateToRouteMiddleware, { updateStateFromURL } from './middleware/saveStateToRoute'
 import DataLoaded from './middleware/DataLoaded'
 
-module.exports = () => {
+export default () => {
   // Enable Redux Dev Tools if they are installed in the browser
   const composeEnhancers =
     // eslint-disable-next-line no-underscore-dangle

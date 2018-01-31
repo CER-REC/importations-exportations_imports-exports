@@ -18,4 +18,4 @@ const mapStateToProps = state => ({
 })
 
 
-module.exports = connect(mapStateToProps)(PowerPoolGrouping)
+export default connect(mapStateToProps)(PowerPoolGrouping)

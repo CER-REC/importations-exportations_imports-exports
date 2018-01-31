@@ -10,7 +10,7 @@ const arrangeByOverride = (_, props) => props._overrideArrangeBy
 const amountOverride = (_, props) => props._overrideAmount
 const activityGroupOverride = (_, props) => props._overrideActivityGroup
 
-const arrangeBy = createSelector(
+export const arrangeBy = createSelector(
   visualizationSettings,
   arrangeByOverride,
   (settings, override) => override || settings.get('arrangeBy'),
@@ -38,20 +38,20 @@ const productSelector = createSelector(
   (data, viz) => data.get(viz, emptyMap),
 )
 
-const unitSelector = createSelector(
+export const unitSelector = createSelector(
   productSelector,
   amount,
   (product, unit) => product.get(unit, emptyList),
 )
 
-const binSelector = createSelector(
+export const binSelector = createSelector(
   selectedVisualization,
   amount,
   state => state.bins,
   (vis, unit, bins) => bins.getIn([vis, unit], emptyList),
 )
 
-const activityGroupSelector = createSelector(
+export const activityGroupSelector = createSelector(
   unitSelector,
   selectedActivityGroup,
   (points, filterActivityGroup) =>
@@ -66,7 +66,7 @@ const filterByTimelineSelector = createSelector(
 
 )
 
-const filterByHexSelector = createSelector(
+export const filterByHexSelector = createSelector(
   activityGroupSelector,
   points =>
     // TODO: Add filtering by selected hexes
@@ -74,7 +74,7 @@ const filterByHexSelector = createSelector(
 
 )
 
-const aggregateLocationSelector = createSelector(
+export const aggregateLocationSelector = createSelector(
   filterByTimelineSelector,
   (points) => {
     const result = points.reduce((acc, next) => {
@@ -110,7 +110,7 @@ const aggregateLocationSelector = createSelector(
   },
 )
 
-const aggregateLocationPaddSelector = createSelector(
+export const aggregateLocationPaddSelector = createSelector(
   filterByTimelineSelector,
   (points) => {
     const result = points.reduce((acc, next) => {
@@ -143,7 +143,7 @@ const aggregateLocationPaddSelector = createSelector(
   },
 )
 
-const sortAggregatedLocationsSelector = createSelector(
+export const sortAggregatedLocationsSelector = createSelector(
   arrangeBy,
   aggregateLocationSelector,
   (sortBy, points) => {
@@ -159,14 +159,3 @@ const sortAggregatedLocationsSelector = createSelector(
     }
   },
 )
-
-module.exports = {
-  filterByHexSelector,
-  aggregateLocationPaddSelector,
-  aggregateLocationSelector,
-  sortAggregatedLocationsSelector,
-  unitSelector,
-  activityGroupSelector,
-  arrangeBy,
-  binSelector,
-}

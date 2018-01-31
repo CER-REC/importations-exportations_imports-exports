@@ -8,7 +8,7 @@ import AxisGuide from './AxisGuide'
 import DetailSidebar from './DetailSidebar'
 import DetailTotal from './DetailTotal'
 import ConfidentialCount from './ConfidentialCount'
-import TimelineSelector from '../selectors/timeline'
+import { timelineGrouping, timelineData } from '../selectors/timeline'
 
 class BarChart extends Chart {
   static get propTypes() {
@@ -107,6 +107,6 @@ class BarChart extends Chart {
   }
 }
 
-module.exports = connect((state, props) => Object.assign({
-  timelineGroup: TimelineSelector.timelineGrouping(state, props),
-}, TimelineSelector.timelineData(state, props)))(BarChart)
+export default connect((state, props) => Object.assign({
+  timelineGroup: timelineGrouping(state, props),
+}, timelineData(state, props)))(BarChart)

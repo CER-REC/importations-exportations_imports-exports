@@ -90,4 +90,4 @@ class TextBox extends React.PureComponent {
   }
 }
 
-module.exports = TextBox
+export default TextBox

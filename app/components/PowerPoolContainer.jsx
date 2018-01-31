@@ -22,4 +22,4 @@ const mapStateToProps = state => ({
   viewport: state.viewport,
 })
 
-module.exports = connect(mapStateToProps)(PowerPoolContainer)
+export default connect(mapStateToProps)(PowerPoolContainer)

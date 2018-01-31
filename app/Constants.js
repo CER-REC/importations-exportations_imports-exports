@@ -367,4 +367,4 @@ const Constants = fromJS({
     },
   },
 })
-module.exports = Constants
+export default Constants

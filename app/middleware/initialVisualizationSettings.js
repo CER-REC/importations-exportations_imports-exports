@@ -56,4 +56,4 @@ const initialVisualizationSettings = store => next => (action) => {
   })
 }
 
-module.exports = initialVisualizationSettings
+export default initialVisualizationSettings

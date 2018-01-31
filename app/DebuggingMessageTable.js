@@ -28,15 +28,11 @@ const updateWindowsBadDataObject = (error) => {
   It will create global object in the production enviroment
  */
 
-const ErrorMessageTable = (functionName, message, error) => {
+export const ErrorMessageTable = (functionName, message, error) => {
   const errorObject = {
     function: functionName,
     message,
     error,
   }
   updateWindowsBadDataObject(errorObject)
-}
-
-module.exports = {
-  ErrorMessageTable,
 }

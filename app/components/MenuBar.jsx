@@ -154,7 +154,9 @@ const mapStateToProps = (state, props) => ({
   Tr: TrSelector(state, props),
 })
 
-module.exports = connect(
+export default connect(
   mapStateToProps,
-  { setArrangeBy, setAmount, setActivity, setSubtype },
+  {
+    setArrangeBy, setAmount, setActivity, setSubtype,
+  },
 )(MenuBar)

@@ -262,6 +262,13 @@ const TranslationTable = fromJS({
     fr: 'hide EXPLANATIONS FR',
   },
 
+  explanations: {
+    importExportTitle: {
+      en: 'Click + to see more options',
+      fr: 'Click + to see more options FR',
+    },
+  },
+
   confidentialityShown: {
     en: 'show CONFIDENTIALITY',
     fr: 'show CONFIDENTIALITY FR',
@@ -296,12 +303,6 @@ const TranslationTable = fromJS({
     base: {
       en: 'of Energy Products to and from Canada',
       fr: 'TODO',
-    },
-  },
-  explanations: {
-    importExportTitle: {
-      en: 'Click + to see more options',
-      fr: 'Click + to see more options FR',
     },
   },
 
@@ -797,6 +798,94 @@ const TranslationTable = fromJS({
     en: '$0 imports $1 $3 and exports $2 $3',
     fr: '$0 imports $1 $3 and exports $2 $3',
   },
+  legendMapTiles: {
+    electricity: {
+      ca: {
+        imports: {
+          label: {
+            en: 'imports from Canada',
+            fr: 'imports from Canada',
+          },
+        },
+        exports: {
+          label: {
+            en: 'exports into Canada',
+            fr: 'exports into Canada',
+          },
+        },
+        stateOrProvince: {
+          en: 'province',
+          fr: 'province',
+        },
+      },
+      us: {
+        imports: {
+          label: {
+            en: 'imports from USA',
+            fr: 'imports from USA',
+          },
+        },
+        exports: {
+          label: {
+            en: 'exports into USA',
+            fr: 'exports into USA',
+          },
+        },
+        stateOrProvince: {
+          en: 'state',
+          fr: 'state',
+        },
+      },
+    },
+    crudeOil: {
+      exports: {
+        label: {
+          en: 'exports into US PADD',
+          fr: 'exports into US PADD',
+        },
+        bottomText: {
+          en: 'PADD',
+          fr: 'PADD',
+        },
+        topText: {
+          en: 'CANADA',
+          fr: 'CANADA',
+        },
+      },
+    },
+    naturalGasLiquids: {
+      ca: {
+        imports: {
+          label: {
+            en: 'imports from Canada',
+            fr: 'imports from Canada',
+          },
+        },
+        exports: {
+          label: {
+            en: 'exports into Canada',
+            fr: 'exports into Canada',
+          },
+        },
+        stateOrProvince: {
+          en: 'province',
+          fr: 'province',
+        },
+      },
+      us: {
+        exports: {
+          label: {
+            en: 'exports into US PADD',
+            fr: 'exports into US PADD',
+          },
+          bottomText: {
+            en: 'PADD',
+            fr: 'PADD',
+          },
+        },
+      },
+    },
+  },
 })
 
-module.exports = TranslationTable
+export default TranslationTable

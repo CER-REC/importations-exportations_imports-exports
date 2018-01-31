@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 
 import Constants from '../Constants'
 import { setScaleLinked, setGrouping } from '../actions/visualizationSettings'
-import TimelineSelector from '../selectors/timeline'
+import { timelineScaleLinked, timelineGrouping as timelineGroupingSelector } from '../selectors/timeline'
 import { handleInteraction } from '../utilities'
 
 class ChartOptions extends React.PureComponent {
@@ -83,10 +83,10 @@ class ChartOptions extends React.PureComponent {
   }
 }
 
-module.exports = connect(
+export default connect(
   (state, props) => ({
-    scaleLinked: TimelineSelector.timelineScaleLinked(state, props),
-    timelineGroup: TimelineSelector.timelineGrouping(state, props),
+    scaleLinked: timelineScaleLinked(state, props),
+    timelineGroup: timelineGroupingSelector(state, props),
   }),
   { setScaleLinked, setGrouping },
 )(ChartOptions)
