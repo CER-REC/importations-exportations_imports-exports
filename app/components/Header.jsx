@@ -22,17 +22,7 @@ class Header extends React.Component {
 
   constructor(props) {
     super(props)
-    this.aboutThisProjectClick = this.aboutThisProjectClick.bind(this)
-    this.methodologyClick = this.methodologyClick.bind(this)
     this.resetClick = this.resetClick.bind(this)
-  }
-
-  aboutThisProjectClick() { // eslint-disable-line class-methods-use-this
-    this.props.onClick()
-  }
-
-  methodologyClick() { // eslint-disable-line class-methods-use-this
-    // TODO: add methodology click functionality
   }
 
   resetClick() { // eslint-disable-line class-methods-use-this
@@ -95,28 +85,6 @@ class Header extends React.Component {
             className="metaBarButton"
             height={Constants.getIn(['metaBar', 'iconSize'])}
             width={Constants.getIn(['metaBar', 'iconSize'])}
-            xlinkHref="images/info_about.svg"
-            y={Constants.getIn(['metaBar', 'aboutThisProjectIconMargin'])}
-            {...handleInteraction(this.aboutThisProjectClick)}
-            aria-label={Tr(['socialBar', 'aboutThisProject'])}
-            role="menuitem"
-          />
-
-          <image
-            className="metaBarButton"
-            height={Constants.getIn(['metaBar', 'iconSize'])}
-            width={Constants.getIn(['metaBar', 'iconSize'])}
-            xlinkHref="images/info_methodology.svg"
-            y={Constants.getIn(['metaBar', 'methodologyIconMargin'])}
-            {...handleInteraction(this.methodologyClick)}
-            aria-label={Tr(['socialBar', 'methodology'])}
-            role="menuitem"
-          />
-
-          <image
-            className="metaBarButton"
-            height={Constants.getIn(['metaBar', 'iconSize'])}
-            width={Constants.getIn(['metaBar', 'iconSize'])}
             xlinkHref="images/reset.svg"
             {...handleInteraction(this.resetClick)}
             y={Constants.getIn(['metaBar', 'resetIconMargin'])}
@@ -143,6 +111,7 @@ const mapStateToProps = (state, props) => ({
   language: state.language,
   Tr: TrSelector(state, props),
 })
+
 
 const mapDispatchToProps = dispatch => ({
   onClick() {
