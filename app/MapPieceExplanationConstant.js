@@ -36,25 +36,10 @@ const MapPieceExplanationConstant = fromJS({
         exports: 'white',
       }],
       arrowProps: {
-        imports: {
-          label: {
-            en: 'imports from Canada',
-            fr: 'imports from Canada',
-          },
-        },
-        exports: {
-          label: {
-            en: 'exports into Canada',
-            fr: 'exports into Canada',
-          },
-        },
+        fill: '#fff',
         stroke: '#999999',
       },
       mapPieceProps: {
-        stateOrProvince: {
-          en: 'province',
-          fr: 'province',
-        },
         stroke: '#999999',
       },
     },
@@ -92,31 +77,46 @@ const MapPieceExplanationConstant = fromJS({
         exports: 'white',
       }],
       arrowProps: {
-        imports: {
-          label: {
-            en: 'imports from USA',
-            fr: 'imports from USA',
-          },
-        },
-        exports: {
-          label: {
-            en: 'exports into USA',
-            fr: 'exports into USA',
-          },
-        },
+        fill: '#fff',
         stroke: '#999999',
       },
       mapPieceProps: {
-        stateOrProvince: {
-          en: 'state',
-          fr: 'state',
-        },
         stroke: '#999999',
       },
     },
 
   },
-
+  crudeOil: {
+    datapoint: {
+      name: 'BC',
+      exports: 10,
+      imports: 10,
+      totalCount: 0,
+      confidentialCount: 0,
+    },
+    styles: {
+      color: 'white',
+      labelPosition: 'down',
+      arrowPosition: 'up',
+      arrowSpacing: -1,
+      bottomMargin: 5,
+      topMargin: 5,
+      confidentialStyle: {
+        fill: '#999',
+        stroke: '#999',
+        exclamationFill: '#fff',
+      },
+    },
+    legends: [{
+      lower: 1,
+      upper: 100,
+      imports: 'white',
+      exports: 'white',
+    }],
+    arrowProps: {
+      stroke: '#999',
+    },
+  },
   naturalGasLiquids: {
     ca: {
       datapoint: {
@@ -152,25 +152,10 @@ const MapPieceExplanationConstant = fromJS({
         exports: 'white',
       }],
       arrowProps: {
-        imports: {
-          label: {
-            en: 'imports from Canada',
-            fr: 'imports from Canada',
-          },
-        },
-        exports: {
-          label: {
-            en: 'exports into Canada',
-            fr: 'exports into Canada',
-          },
-        },
+        fill: '#fff',
         stroke: '#999999',
       },
       mapPieceProps: {
-        stateOrProvince: {
-          en: 'province',
-          fr: 'province',
-        },
         stroke: '#999999',
       },
     },
@@ -202,16 +187,7 @@ const MapPieceExplanationConstant = fromJS({
         exports: 'white',
       }],
       arrowProps: {
-        exports: {
-          label: {
-            en: 'exports into US PADD',
-            fr: 'exports into US PADD',
-          },
-          bottomText: {
-            en: 'PADD',
-            fr: 'PADD',
-          },
-        },
+        fill: '#fff',
         stroke: '#999',
       },
     },

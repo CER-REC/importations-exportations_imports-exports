@@ -2,7 +2,7 @@ import React from 'react'
 
 import MapPiece from './MapPiece'
 import MapPieceExplanationConstant from '../MapPieceExplanationConstant'
-
+import Tr from '../TranslationTable'
 class ElectricityMapPieceActivityExplanation extends React.Component {
   render() {
     return (<g transform={`translate(${this.props.left},${this.props.top})`}>
@@ -13,7 +13,7 @@ class ElectricityMapPieceActivityExplanation extends React.Component {
         styles={MapPieceExplanationConstant.getIn(['electricity', 'ca', 'styles'])}
         arrowProps={MapPieceExplanationConstant.getIn(['electricity', 'ca', 'arrowProps'])}
         mapPieceProps={MapPieceExplanationConstant.getIn(['electricity', 'ca', 'mapPieceProps'])}
-        legend
+        text= {Tr.getIn(['legendMapTiles','electricity', 'ca'])}
       />
       <g transform="translate(0,70)">
         <MapPiece
@@ -23,7 +23,7 @@ class ElectricityMapPieceActivityExplanation extends React.Component {
           styles={MapPieceExplanationConstant.getIn(['electricity', 'us', 'styles'])}
           arrowProps={MapPieceExplanationConstant.getIn(['electricity', 'us', 'arrowProps'])}
           mapPieceProps={MapPieceExplanationConstant.getIn(['electricity', 'us', 'mapPieceProps'])}
-          legend
+          text = {Tr.getIn(['legendMapTiles','electricity', 'us'])}
         />
       </g>
             </g>)

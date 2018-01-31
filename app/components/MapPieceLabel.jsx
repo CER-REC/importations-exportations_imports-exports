@@ -36,7 +36,7 @@ class MapPieceLabel extends React.Component {
       <text className="mapPieceText" x={xAxis} y={yAxis} aria-hidden>
         {name}
       </text>
-      {this.drawLabel(this.props.mapPieceProps, yAxis)}
+      {this.drawLabel(this.props.text, yAxis)}
             </g>)
   }
 }
