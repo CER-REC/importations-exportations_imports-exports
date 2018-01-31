@@ -53,7 +53,7 @@ class ImportExportArrow extends React.Component {
     if (arrowProps) {
       const topText = arrowProps.getIn([type, 'topText', this.props.language])
       if (typeof topText !== 'undefined' && topText !== '') {
-        topTextElement = <text y={y}>{topText}</text>
+        topTextElement = <text className="explanationTopText" y={y} x="-5">{topText}</text>
       }
     }
     return topTextElement
