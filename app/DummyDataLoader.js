@@ -129,4 +129,4 @@ const DummyDataLoader = fromJS({
   },
 })
 
-module.exports = DummyDataLoader
+export default DummyDataLoader

@@ -11,4 +11,4 @@ class TriangularTabLine extends React.Component {
   }
 }
 
-module.exports = TriangularTabLine
+export default TriangularTabLine

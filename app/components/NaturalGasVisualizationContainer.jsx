@@ -8,7 +8,7 @@ import BarChart from './BarChart'
 import Axis from './Axis'
 import PortMap from './PortMap'
 import DetailSidebar from './DetailSidebar'
-import NaturalGasViewport from '../selectors/viewport/naturalGas'
+import * as NaturalGasViewport from '../selectors/viewport/naturalGas'
 import Constants from '../Constants'
 
 const NaturalGasVisualizationContainer = props => (
@@ -40,7 +40,7 @@ const NaturalGasVisualizationContainer = props => (
   </g>
 )
 
-module.exports = connect((state, props) => ({
+export default connect((state, props) => ({
   importChart: NaturalGasViewport.chartImportPosition(state, props),
   axisPosition: NaturalGasViewport.chartAxisPosition(state, props),
   exportChart: NaturalGasViewport.chartExportPosition(state, props),

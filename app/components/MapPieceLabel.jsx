@@ -44,4 +44,4 @@ const mapStateToProps = (state, props) => ({
   language: state.language,
 })
 
-module.exports = connect(mapStateToProps)(MapPieceLabel)
+export default connect(mapStateToProps)(MapPieceLabel)

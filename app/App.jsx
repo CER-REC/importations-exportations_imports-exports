@@ -14,6 +14,7 @@ import Resized from './actionCreators/ResizeScreenCreator'
 import { LoadData as LoadDataCreator } from './actions/data'
 import { LoadBins as LoadBinsCreator } from './actions/bins'
 import Store from './Store'
+import { DismissComponent as DismissComponentCreator } from './actions/socialBar'
 
 const store = Store()
 
@@ -38,10 +39,15 @@ function resizeScreenHandler() {
   store.dispatch(Resized(w, h))
 }
 
+// Handles collapsing the social bar.
+function windowClickHandler() {
+  store.dispatch(DismissComponentCreator())
+}
+
 DomReady(() => {
   resizeScreenHandler()
   window.addEventListener('resize', resizeScreenHandler)
-
+  window.addEventListener('click', windowClickHandler)
   render(Root)
 })
 
@@ -56,6 +62,6 @@ Request({
 // Webpack Hot Module Replacement API
 if (module.hot) {
   module.hot.accept('./components/Root.jsx', () => {
-    render(require('./components/Root.jsx')) // eslint-disable-line global-require
+    render(require('./components/Root.jsx').default) // eslint-disable-line global-require
   })
 }

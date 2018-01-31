@@ -14,4 +14,4 @@ const ShowExplanationsReducer = (state = defaultState, action) => {
   }
 }
 
-module.exports = ShowExplanationsReducer
+export default ShowExplanationsReducer

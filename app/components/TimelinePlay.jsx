@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 
 import { timelineFilter } from '../actions/visualizationSettings'
-import timelineSelectors from '../selectors/timeline'
+import { timelineYearScaleCalculation, timelineRange } from '../selectors/timeline'
 import { handleInteraction } from '../utilities'
 
 class TimelinePlay extends React.PureComponent {
@@ -44,7 +44,7 @@ class TimelinePlay extends React.PureComponent {
           start: { year, quarter },
           end: { year, quarter },
         })
-      }, 1000)
+      }, 1000),
     })
     this.props.timelineFilter({
       start: { year: yearScale.min, quarter: 1 },
@@ -70,10 +70,10 @@ class TimelinePlay extends React.PureComponent {
   }
 }
 
-module.exports = connect(
+export default connect(
   (state, props) => ({
-    timelineRange: timelineSelectors.timelineRange(state, props),
-    timelineScale: timelineSelectors.timelineYearScaleCalculation(state, props),
+    timelineRange: timelineRange(state, props),
+    timelineScale: timelineYearScaleCalculation(state, props),
   }),
   { timelineFilter },
 )(TimelinePlay)

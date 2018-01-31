@@ -262,6 +262,13 @@ const TranslationTable = fromJS({
     fr: 'hide EXPLANATIONS FR',
   },
 
+  explanations: {
+    importExportTitle: {
+      en: 'Click + to see more options',
+      fr: 'Click + to see more options FR',
+    },
+  },
+
   confidentialityShown: {
     en: 'show CONFIDENTIALITY',
     fr: 'show CONFIDENTIALITY FR',
@@ -298,12 +305,6 @@ const TranslationTable = fromJS({
       fr: 'TODO',
     },
   },
-  explanations: {
-    importExportTitle: {
-      en: 'Click + to see more options',
-      fr: 'Click + to see more options FR',
-    },
-  },
 
   mainSubheading: {
     en: 'This visualization shows the quarterly energy trade data between Canada and the USA for various energy sources.',
@@ -314,6 +315,24 @@ const TranslationTable = fromJS({
     fr: 'réinitialiser',
   },
 
+  socialBarText: {
+    about: {
+      en: 'about',
+      fr: 'TODO',
+    },
+    methodology: {
+      en: 'methodology',
+      fr: 'TODO',
+    },
+    downloadData: {
+      en: 'download data',
+      fr: 'TODO',
+    },
+    downloadImage: {
+      en: 'download image',
+      fr: 'TODO',
+    },
+  },
 
   applicationPath: {
     en: '/import-export-visualization/',
@@ -869,4 +888,4 @@ const TranslationTable = fromJS({
   },
 })
 
-module.exports = TranslationTable
+export default TranslationTable

@@ -1,9 +1,9 @@
 import { createSelector } from 'reselect'
 
-import ViewportSelectors from './index'
+import { visualizationContentPosition } from './index'
 
-const canadaImportMap = createSelector(
-  ViewportSelectors.visualizationContentPosition,
+export const canadaImportMap = createSelector(
+  visualizationContentPosition,
   visContent => ({
     top: visContent.top,
     left: visContent.left,
@@ -12,7 +12,7 @@ const canadaImportMap = createSelector(
   }),
 )
 
-const chartImportPosition = createSelector(
+export const chartImportPosition = createSelector(
   canadaImportMap,
   visContent => ({
     top: visContent.top,
@@ -22,7 +22,7 @@ const chartImportPosition = createSelector(
   }),
 )
 
-const chartAxisPosition = createSelector(
+export const chartAxisPosition = createSelector(
   chartImportPosition,
   importPosition => ({
     top: importPosition.top + importPosition.height,
@@ -32,7 +32,7 @@ const chartAxisPosition = createSelector(
   }),
 )
 
-const chartExportPosition = createSelector(
+export const chartExportPosition = createSelector(
   chartAxisPosition,
   axisPosition => ({
     top: axisPosition.top + axisPosition.height,
@@ -42,7 +42,7 @@ const chartExportPosition = createSelector(
   }),
 )
 
-const usPaddPosition = createSelector(
+export const usPaddPosition = createSelector(
   chartExportPosition,
   chartPosition => ({
     top: chartPosition.top + chartPosition.height,
@@ -51,11 +51,3 @@ const usPaddPosition = createSelector(
     height: 100,
   }),
 )
-
-module.exports = {
-  canadaImportMap,
-  chartImportPosition,
-  chartAxisPosition,
-  chartExportPosition,
-  usPaddPosition,
-}

@@ -59,4 +59,4 @@ class Chart extends React.PureComponent {
   }
 }
 
-module.exports = Chart
+export default Chart

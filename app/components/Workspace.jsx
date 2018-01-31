@@ -6,7 +6,7 @@ import MenuBar from './MenuBar'
 import SocialBar from './SocialBar'
 import ModalSelector from './ModalSelector'
 import VisualizationContainer from './VisualizationContainer'
-import ViewportSelectors from '../selectors/viewport/'
+import { svgSize as svgSizeSelector, detailSidebarPosition as detailSidebarSelector } from '../selectors/viewport/'
 
 import './Workspace.scss'
 
@@ -22,13 +22,13 @@ const Workspace = ({ svgSize, detailSidebarPosition }) => (
       {...svgSize}
       style={{ zIndex: 9999 }}
       viewBox={`0 0 ${svgSize.width} ${svgSize.height}`}
-      preserveAspectRatio = "xMinYMin meet"
+      preserveAspectRatio="xMinYMin meet"
       role="application"
     >
       <MenuBar />
 
       <VisualizationContainer />
-
+      <SocialBar />
     </svg>
     <div
       id="detailSidebar"
@@ -39,12 +39,11 @@ const Workspace = ({ svgSize, detailSidebarPosition }) => (
         width: detailSidebarPosition.width,
       }}
     />
-    <SocialBar />
     <ModalSelector />
   </div>
 )
 
-module.exports = connect((state, props) => ({
-  svgSize: ViewportSelectors.svgSize(state, props),
-  detailSidebarPosition: ViewportSelectors.detailSidebarPosition(state, props),
+export default connect((state, props) => ({
+  svgSize: svgSizeSelector(state, props),
+  detailSidebarPosition: detailSidebarSelector(state, props),
 }))(Workspace)

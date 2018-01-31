@@ -198,4 +198,4 @@ const mapStateToProps = (state, props) => ({
 })
 
 
-module.exports = connect(mapStateToProps)(Legend)
+export default connect(mapStateToProps)(Legend)

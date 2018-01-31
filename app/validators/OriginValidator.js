@@ -2,7 +2,7 @@ import Immutable from 'immutable'
 
 import Constants from '../Constants'
 
-const originNameValidator = (origin) => {
+export const originNameValidator = (origin) => {
   // get country regions
   const countries = Constants.getIn(['dataloader', 'mapping', 'country'])
   const result = {
@@ -30,8 +30,4 @@ const originNameValidator = (origin) => {
     result.error = `Not a valid mapping ${origin}`
   }
   return Immutable.fromJS(result)
-}
-
-module.exports = {
-  originNameValidator,
 }

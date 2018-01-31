@@ -5,4 +5,4 @@ function SetLanguageCreator(language) {
   }
 }
 
-module.exports = SetLanguageCreator
+export default SetLanguageCreator
