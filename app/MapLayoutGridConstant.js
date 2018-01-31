@@ -697,5 +697,126 @@ const MapLayoutGridConstant = fromJS({
       ],
     },
   },
+  naturalGas: {
+    ports: {
+      Aden: {
+        'Port Name': 'Aden', Province: 'AB', Latitude: 48.997778, Longitude: -111.258056, '': '', Description: '', Capacity: '',
+      },
+      Cardston: {
+        'Port Name': 'Cardston', Province: 'AB', Latitude: 49.2025, Longitude: -113.301944, '': '', Description: '', Capacity: '',
+      },
+      Coutts: {
+        'Port Name': 'Coutts', Province: 'AB', Latitude: 49, Longitude: -111.95, '': '', Description: '', Capacity: '',
+      },
+      'Reagan Field': {
+        'Port Name': 'Reagan Field', Province: 'AB', Latitude: 48.975278, Longitude: -112.512778, '': 'US', Description: '', Capacity: '',
+      },
+      Sierra: {
+        'Port Name': 'Sierra', Province: 'AB', Latitude: 49.0023, Longitude: -111.9648, '': '', Description: '', Capacity: '',
+      },
+      Blaine: {
+        'Port Name': 'Blaine', Province: 'BC', Latitude: 49.1044, Longitude: -122.8011, '': '', Description: '', Capacity: '',
+      },
+      Huntingdon: {
+        'Port Name': 'Huntingdon', Province: 'BC', Latitude: 49, Longitude: -122.266667, '': 'US', Description: 'Huntingdon is an export point on the Westcoast system. Westcoast extends from points in the Yukon Territory, the Northwest Territories, Alberta and B.C. to the Canada-U.S. border near Huntingdon, B.C. At the border, Westcoast connects to Williams Northwest Pipeline, which supplies natural gas to the U.S. Pacific Northwest market.', Capacity: 1.7,
+      },
+      Kingsgate: {
+        'Port Name': 'Kingsgate', Province: 'BC', Latitude: 49, Longitude: -116.1833, '': 'US', Description: 'Kingsgate is an export point on the  Foothills BC pipeline. The Foothills BC system transports natural gas from the WCSB to a point on the Canada U.S. border near Kingsgate, BC. At the border, Foothills BC connects to the Gas Transmission Northwest system, which serves markets in the Pacific Northwest and California.', Capacity: 1.6,
+      },
+      Emerson: {
+        'Port Name': 'Emerson', Province: 'MB', Latitude: 49.006944, Longitude: -97.2078, '': '', Description: 'Emerson is an export point on the TransCanada Mainline. At the border point, the Mainline connects with the Great Lakes Gas Transmission and Viking pipelines, suppling markets in the mid-continent, as well as Ontario and Quebec.', Capacity: 2.9,
+      },
+      Sprague: {
+        'Port Name': 'Sprague', Province: 'MB', Latitude: 49.035278, Longitude: -95.639167, '': '', Description: '', Capacity: '',
+      },
+      Brunswick: {
+        'Port Name': 'Brunswick', Province: 'NB', Latitude: 45.166111, Longitude: -67.2425, '': 'US', Description: 'Brunswick is an export point on the Emera Brunswick pipeline. The Brunswick Pipeline was commissioned in July 2009 and transports re-gasified natural gas 145 km from the Canaport LNG terminal near Saint John, NB to the Canada-US border near St. Stephen,', Capacity: 1,
+      },
+      Canaport: {
+        'Port Name': 'Canaport', Province: 'NB', Latitude: 45.2733, Longitude: -66.0633, '': '', Description: '', Capacity: '',
+      },
+      'St Stephen': {
+        'Port Name': 'St Stephen', Province: 'NB', Latitude: 45.2, Longitude: -67.283333, '': '', Description: 'St Stephen is an export point on the Maritimes and Northeast Pipeline, which supplies markets in the Martitimes and New England.', Capacity: 0.55,
+      },
+      Chippawa: {
+        'Port Name': 'Chippawa', Province: 'ON', Latitude: 43.055833, Longitude: -79.046944, '': '', Description: '', Capacity: '',
+      },
+      Cornwall: {
+        'Port Name': 'Cornwall', Province: 'ON', Latitude: 45.0275, Longitude: -74.74, '': '', Description: '', Capacity: '',
+      },
+      Corunna: {
+        'Port Name': 'Corunna', Province: 'ON', Latitude: 42.9745, Longitude: -82.4066, '': '', Description: '', Capacity: '',
+      },
+      Courtright: {
+        'Port Name': 'Courtright', Province: 'ON', Latitude: 42.78333, Longitude: -82.35, '': '', Description: '', Capacity: '',
+      },
+      'Fort Frances': {
+        'Port Name': 'Fort Frances', Province: 'ON', Latitude: '', Longitude: '', '': '', Description: '', Capacity: '',
+      },
+      Iroquois: {
+        'Port Name': 'Iroquois', Province: 'ON', Latitude: 44.91667, Longitude: -75.26667, '': '', Description: 'Iroquois is an export point on the TransCanada Mainline.', Capacity: 1.2,
+      },
+      'Niagara Falls': {
+        'Port Name': 'Niagara Falls', Province: 'ON', Latitude: 43.0896, Longitude: -79.0849, '': '', Description: 'Niagara Falls is an export point on the TransCanada Mainline.', Capacity: 0.7,
+      },
+      'Ojibway (Windsor)': {
+        'Port Name': 'Ojibway (Windsor)', Province: 'ON', Latitude: 42.2659, Longitude: -83.0779, '': '', Description: '', Capacity: '',
+      },
+      'Rainy River': {
+        'Port Name': 'Rainy River', Province: 'ON', Latitude: '', Longitude: '', '': '', Description: '', Capacity: '',
+      },
+      Sarnia: {
+        'Port Name': 'Sarnia', Province: 'ON', Latitude: 42.9745, Longitude: -82.4066, '': '', Description: '', Capacity: '',
+      },
+      'Sarnia/Blue Water': {
+        'Port Name': 'Sarnia/Blue Water', Province: 'ON', Latitude: 42.999444, Longitude: -82.308889, '': '', Description: '', Capacity: '',
+      },
+      'Sault Ste Marie': {
+        'Port Name': 'Sault Ste Marie', Province: 'ON', Latitude: 46.5219, Longitude: -84.3461, '': '', Description: '', Capacity: '',
+      },
+      'St Clair': {
+        'Port Name': 'St Clair', Province: 'ON', Latitude: 42.78333, Longitude: -82.35, '': '', Description: '', Capacity: '',
+      },
+      Armstrong: {
+        'Port Name': 'Armstrong', Province: 'QB', Latitude: 45.8661, Longitude: -70.4332, '': '', Description: '', Capacity: '',
+      },
+      Champlain: {
+        'Port Name': 'Champlain', Province: 'QB', Latitude: 44.9688, Longitude: -73.4498, '': 'US', Description: '', Capacity: '',
+      },
+      'East Hereford': {
+        'Port Name': 'East Hereford', Province: 'QB', Latitude: 45.08333, Longitude: -71.5, '': '', Description: 'East Hereford is an export point on the TransCanada Mainline. At the border, the Mainline connects with the Portland Natura Gas Transmission, which serves markets in New England and the Maritimes.', Capacity: 0.25,
+      },
+      'Highgate Springs': {
+        'Port Name': 'Highgate Springs', Province: 'QB', Latitude: 44.9795, Longitude: -73.1054, '': 'US', Description: '', Capacity: '',
+      },
+      Highwater: {
+        'Port Name': 'Highwater', Province: 'QB', Latitude: '', Longitude: '', '': '', Description: '', Capacity: '',
+      },
+      Napierville: {
+        'Port Name': 'Napierville', Province: 'QB', Latitude: 45.187058, Longitude: -73.401632, '': '', Description: '', Capacity: '',
+      },
+      Philipsburg: {
+        'Port Name': 'Philipsburg', Province: 'QB', Latitude: 45.0333, Longitude: -73.05, '': '', Description: '', Capacity: '',
+      },
+      Elmore: {
+        'Port Name': 'Elmore', Province: 'SK', Latitude: 49, Longitude: -101.633, '': '', Description: 'Elmore is an export point on the Alliance Pipeline. The Alliance pipeline is unique among major Canadian gas pipelines because natural gas liquids may be left in the gas stream. The system draws from 52 receipt points, largely concentrated near the northern end of the system in northeastern B.C. and northwestern Alberta. Alliance transports liquids-rich gas to the Chicago market hub. Extraction of natural gas liquids occurs at the Aux Sable facility located near Chicago', Capacity: 1.7,
+      },
+      Loomis: {
+        'Port Name': 'Loomis', Province: 'SK', Latitude: 49.2, Longitude: -108.7333, '': '', Description: '', Capacity: '',
+      },
+      Monchy: {
+        'Port Name': 'Monchy', Province: 'SK', Latitude: 49.01667, Longitude: -107.833889, '': '', Description: 'Monchy is an export point on the Foothills Saskatchewan pipeline. The Foothills SK system transports natural gas from the WCSB to the Canada U.S. border near Monchy, Saskatchewan. At the border, it connects to the Northern Border pipeline, which serves markets in the U.S. Midwest', Capacity: 2.9,
+      },
+      'North Portal': {
+        'Port Name': 'North Portal', Province: 'SK', Latitude: 49.054, Longitude: -102.668, '': '', Description: '', Capacity: '',
+      },
+      'Port of Estevan': {
+        'Port Name': 'Port of Estevan', Province: 'SK', Latitude: 49.1231, Longitude: -102.9915, '': '', Description: '', Capacity: '',
+      },
+      'Willow Creek': {
+        'Port Name': 'Willow Creek', Province: 'SK', Latitude: '', Longitude: '', '': '', Description: '', Capacity: '' },
+
+    },
+  },
 })
-module.exports = MapLayoutGridConstant
+export default MapLayoutGridConstant
