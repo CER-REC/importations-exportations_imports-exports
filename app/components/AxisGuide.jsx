@@ -42,6 +42,23 @@ class AxisGuide extends React.PureComponent {
     }
   }
 
+  onArrowKey = (e) => {
+    const direction = (e.key === 'ArrowUp' || e.key === 'PageUp') ? -1 : 1
+    const scale = (e.key === 'ArrowUp' || e.key === 'ArrowDown') ? 1 : 10
+
+    const { heightPerUnit } = this.props
+    const flippedInverter = this.props.flipped ? -1 : 1
+    const currentY = this.props.position * heightPerUnit
+    let newY = (currentY - (direction * scale * flippedInverter))
+
+    if (newY > this.props.chartHeight) {
+      newY = this.props.chartHeight
+    } else if (newY < 0) {
+      newY = 0
+    }
+    this.props.updatePosition(Math.round(newY / heightPerUnit))
+  }
+
   adjustOffset(rawOffset) {
     const { heightPerUnit } = this.props
     const flippedInverter = this.props.flipped ? -1 : 1
@@ -67,23 +84,6 @@ class AxisGuide extends React.PureComponent {
 
   dragStop() {
     this.props.updatePosition(this.state.positionDisplay)
-  }
-
-  onArrowKey = (e) => {
-    const direction = (e.key === 'ArrowUp' || e.key === 'PageUp') ? -1 : 1
-    const scale = (e.key === 'ArrowUp' || e.key === 'ArrowDown') ? 1 : 10
-
-    const { heightPerUnit } = this.props
-    const flippedInverter = this.props.flipped ? -1 : 1
-    const currentY = this.props.position * heightPerUnit
-    let newY = (currentY - (direction * scale * flippedInverter))
-
-    if (newY > this.props.chartHeight) {
-      newY = this.props.chartHeight
-    } else if (newY < 0) {
-      newY = 0
-    }
-    this.props.updatePosition(Math.round(newY / heightPerUnit))
   }
 
   render() {

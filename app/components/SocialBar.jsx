@@ -180,7 +180,16 @@ class SocialBar extends React.Component {
     }
     const viewPort = WorkspaceComputations.socialBarY(this.props.viewport) || 0
     return (
-      <svg onClick={this.controlArrowClick} style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }}>
+      <svg
+        onClick={this.controlArrowClick}
+        style={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          width: '100%',
+          height: '100%',
+        }}
+      >
         <rect
           x={rectXPosition}
           y={WorkspaceComputations.socialBarY(this.props.viewport)}

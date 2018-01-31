@@ -6,10 +6,10 @@ import Immutable from 'immutable'
 class USMapContainer extends React.Component {
   render() {
     const detailBreakDownData = Immutable.fromJS({
-      "WA": 9589756,
-      "VA": 465467,
-      "ID": 4678971,
-      "OR": 5548646 
+      WA: 9589756,
+      VA: 465467,
+      ID: 4678971,
+      OR: 5548646,
     })
     return (
       <g transform={`translate(${this.props.left + 150} ${this.props.top})`}> <ElectricityMapLayout
