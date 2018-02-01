@@ -14,13 +14,12 @@ import './MainNavigationMenu.scss'
 
 class MainNavigationMenu extends React.Component {
   explanationDot() {
-    const xPosition = 75
-    return (<g><ExplanationDot
-      key="mainNavDot"
-      xPosition={xPosition}
-      yPosition={92}
-    />
-    <use xlinkHref="#back" x={85} y={92} /> </g>)
+    return (<g transform='translate(43 80)'>
+      <ExplanationDot
+        key="mainNavDot"
+        xPosition={20}
+        yPosition={10}
+    /></g>)
   }
 
   render() {

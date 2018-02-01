@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
 import Constants from '../Constants'
-import ExplanationLine from './ExplanationLine'
 
 const ExplanationSummonedCreator = require('../actionCreators/ExplanationSummonedCreator.js')
 
@@ -46,13 +45,6 @@ class ExplanationDot extends React.Component {
       /></g>)
   }
 
-  drawLine() {
-    console.log(this.props)
-    return <ExplanationLine
-    x={this.props.xCoord}
-    y={this.props.yCoord}/>
-  }
-
   render() {
     if (!this.props.showExplanations) {
       return null
@@ -61,7 +53,7 @@ class ExplanationDot extends React.Component {
       {this.explanationDot()}
       {this.dotAnimation()}
     </g>
-    {this.drawLine()}</g>)
+    </g>)
   }
 }
 

@@ -102,10 +102,10 @@ class TimelineSeek extends React.PureComponent {
     if(this.props.side !== 'start') {
       return null
     }
-    return (<g><ExplanationDot
+    return (<g transform='translate(-9 2)'><ExplanationDot
       key="timeSeekDot"
-      xPosition={12}
-      yPosition={12}
+      xPosition={19}
+      yPosition={11}
     />
     </g>)
   }

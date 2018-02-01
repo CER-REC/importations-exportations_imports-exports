@@ -13,8 +13,8 @@ class ExplanationText extends React.Component {
   mainNavText() {
     return <div style={{
           position: 'absolute',
-          top: 220,
-          left: 140,
+          top: 200,
+          left: 110,
           height: 'auto',
           width: 100,
           background: 'white',
@@ -28,7 +28,7 @@ class ExplanationText extends React.Component {
   playButtonText() {
     return <div style={{
           position: 'absolute',
-          top: 525,
+          top: 505,
           left: 20,
           height: 'auto',
           width: 70,
@@ -43,7 +43,7 @@ class ExplanationText extends React.Component {
   timeSeekText() {
     return <div style={{
           position: 'absolute',
-          top: 515,
+          top: 495,
           left: 230,
           height: 'auto',
           width: 60,
@@ -73,7 +73,7 @@ class ExplanationText extends React.Component {
   newYorkText() {
     return <div style={{
           position: 'absolute',
-          top: 765,
+          top: 755,
           left: 665,
           height: 'auto',
           width: 60,

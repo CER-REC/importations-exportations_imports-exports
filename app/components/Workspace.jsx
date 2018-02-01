@@ -8,7 +8,7 @@ import ModalSelector from './ModalSelector'
 import VisualizationContainer from './VisualizationContainer'
 import ViewportSelectors from '../selectors/viewport/'
 
-const ExplanationText = require('./ExplanationText.jsx')
+const ExplanationPopover = require('./ExplanationPopover.jsx')
 
 import './Workspace.scss'
 
@@ -37,12 +37,11 @@ const Workspace = ({ svgSize, detailSidebarPosition, portalSvgSize }) => (
       <MenuBar />
       <SocialBar />
     </svg>
-
-    <div id="popoverPortal">  
-      <ExplanationText />
-    </div>
     <ModalSelector />
 
+    <div id="popoverPortal">
+      <ExplanationPopover />
+    </div>
   </div>
 )
 

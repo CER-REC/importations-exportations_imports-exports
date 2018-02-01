@@ -51,18 +51,6 @@ class MapPiece extends React.Component {
     return ''
   }
 
-  explanationDot() {
-    const xPosition = '0'
-    return (<g><ExplanationDot
-      key="mainNavDot"
-      xPosition={xPosition}
-      yPosition={12}
-      yCoord={2}
-      xCoord={2}
-    />
-    </g>)
-  }
-
   render() {
 
     let arrowTransform = `translate(${Constants.getIn(['mapPieceArrowStyle', 'x'])}, ${Constants.getIn(['mapPieceArrowStyle', 'y'])})`
@@ -82,7 +70,8 @@ class MapPiece extends React.Component {
 
     let explanationDot = ''
     if (this.props.data.get('name') === "NY") {
-      explanationDot = <ExplanationDot key="newYorkDot" xPosition={18} yPosition={12} />
+      explanationDot = 
+        <g transform="translate(0 5)" id="newYorkDot"><ExplanationDot key="newYorkDot" xPosition={19} yPosition={10} /></g>
     }
 
     let opacity = 1
@@ -115,8 +104,8 @@ class MapPiece extends React.Component {
         {this.drawArrow(this.props.legends, this.props.data, 'imports', this.props.styles, this.props.arrowProps)}
       </g>
       {confidentialIcon}
-      { explanationDot }
-            </g>)
+      { explanationDot }</g>
+    )
   }
 }
 

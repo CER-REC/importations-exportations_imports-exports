@@ -32,12 +32,12 @@ class ImportExportMenu extends React.Component {
   }
 
   explanationDot() {
-    const xPosition = 155
-    return (<ExplanationDot
-      key="mainNavDot"
-      xPosition={xPosition}
-      yPosition={62}
-    />)
+    return (<g transform = 'translate(138 55)'>
+      <ExplanationDot
+        key="mainNavDot"
+        xPosition={18}
+        yPosition={7}
+    /></g>)
   }
 
   showText() {

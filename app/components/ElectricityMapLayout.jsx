@@ -191,8 +191,8 @@ class ElectricityMapLayout extends React.Component {
 
   render() {
     return <g>
-      {this.renderMapPiece()}
       {this.renderDetailSidebar()}
+      {this.renderMapPiece()}
       </g>
   }
 }
