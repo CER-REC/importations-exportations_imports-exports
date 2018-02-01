@@ -16,6 +16,7 @@ class ImageDownloadWindow extends React.Component {
   constructor(props) {
     super(props)
     this.handleClose = this.handleClose.bind(this)
+    this.saveImageClick = this.saveImageClick.bind(this)
   }
 
   handleClose() {
@@ -39,13 +40,16 @@ class ImageDownloadWindow extends React.Component {
 
   imagePreview() {
     return <div
-      className = 'imagePreview'
+      className = 'imagePreview'>
+      <img className="imagePreview"
+        src="http://localhost:3004/screenshot/?pageUrl=%2Fimport-export-visualization%2Fscreenshot%3Fconfig%3DeyJ2aXN1YWxpemF0aW9uU2V0dGluZ3MiOnsiZWxlY3RyaWNpdHnED2Ftb3VudCI6Ik1XLmgiLCJhcnJhbmdlQnkiOiJsb2PFP8QXY3RpdsUzImltcG9ydHNFeMUHIiwic3VidHlwZSI6IsQNxWDENTp7ImPEXHJ5IjpudWxsLCJvcmlnaW5zIjpbXSwiZGVzdGluxWDkAJh9fSwidGltZWxpbmXEO3NjYWxlTGlua2VkIjp0cnVlLCJncm91cGluZyI6InllYXIiLCLlAKvFLnRhcnTECcUZOjE5OTAsInF1YXJ0ZcQPfSwiZW5kyiAyMDE3yyA0fcQBLOwBG0V4cGxh5gCeIjpmYWxzZSznAPnmAPhW7AFfIjrMOyIsImxhbmd1YeQAmyJl5AE%252Bc2hvd8tSc%252BYA0n0%253D&width=1500&height=1700"
       />
+      </div>
   }
 
   saveImageClick() {
-    const screenshotUrl = `${RouteComputations.screenshotOrigin(location)}/${Constants.get('screenshotPath')}/?pageUrl=${RouteComputations.screenshotParameter(document.location)}&width=${horizontalPositions.getIn(['workspace', 'width'])}&height=${Constants.get('screenshotHeight')}`
-    window.open(screenshotUrl) 
+    const screenshotUrl = `${RouteComputations.screenshotOrigin(location)}/${Constants.get('screenshotPath')}/?pageUrl=${RouteComputations.screenshotParameter(document.location)}&width=${Constants.get('screenshotWidth')}&height=${Constants.get('screenshotHeight')}`
+    window.open(screenshotUrl)
   }
 
   saveImageButton() {

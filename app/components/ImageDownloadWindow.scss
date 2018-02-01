@@ -6,7 +6,7 @@
   left: 50%;
   transform: translate(-50%, -50%);
   width:550px;
-  height: 490px;
+  height: 620px;
   background-color: white;
   border: 1px solid rgba(0,0,0,0.15);
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -27,13 +27,14 @@
   left: 50%;
   transform: translate(-50%, -50%);
   width: 430px;
-  height: 330px;
+  height: 488px;
   border: 1px solid #666666;
 }
 
 .saveImage {
+  cursor: pointer;
   margin-left: 25px;
-  margin-top: 380px;
+  margin-top: 510px;
 }
 
 .imageDownloadHeading {
