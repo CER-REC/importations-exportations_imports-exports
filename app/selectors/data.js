@@ -143,6 +143,14 @@ export const aggregateLocationPaddSelector = createSelector(
   },
 )
 
+export const aggregateLocationNaturalGasSelector = createSelector(
+  filterByTimelineSelector,
+  (points) => {
+    console.log(points)
+    return points
+  },
+)
+
 export const sortAggregatedLocationsSelector = createSelector(
   arrangeBy,
   aggregateLocationSelector,
