@@ -1,18 +1,28 @@
-const createSelector = require('reselect').createSelector
+import { createSelector } from 'reselect'
 
-const ViewportSelectors = require('./index')
+import { visualizationContentPosition } from './index'
 
-const chartTransportPosition = createSelector(
-  ViewportSelectors.visualizationContentPosition,
+export const canadaPaddPosition = createSelector(
+  visualizationContentPosition,
   visContent => ({
     top: visContent.top,
     left: visContent.left,
     width: visContent.width,
+    height: 150,
+  }),
+)
+
+export const chartTransportPosition = createSelector(
+  canadaPaddPosition,
+  canadaPadd => ({
+    top: canadaPadd.top + canadaPadd.height,
+    left: canadaPadd.left,
+    width: canadaPadd.width,
     height: 100,
   }),
 )
 
-const chartSubtypePosition = createSelector(
+export const chartSubtypePosition = createSelector(
   chartTransportPosition,
   transportPosition => ({
     top: transportPosition.top + transportPosition.height + 20,
@@ -22,7 +32,7 @@ const chartSubtypePosition = createSelector(
   }),
 )
 
-const chartAxisPosition = createSelector(
+export const chartAxisPosition = createSelector(
   chartSubtypePosition,
   subtypePosition => ({
     top: subtypePosition.top + subtypePosition.height,
@@ -32,7 +42,7 @@ const chartAxisPosition = createSelector(
   }),
 )
 
-const chartExportPosition = createSelector(
+export const chartExportPosition = createSelector(
   chartAxisPosition,
   axisPosition => ({
     top: axisPosition.top + axisPosition.height,
@@ -42,9 +52,12 @@ const chartExportPosition = createSelector(
   }),
 )
 
-module.exports = {
-  chartTransportPosition,
-  chartSubtypePosition,
-  chartAxisPosition,
+export const usPaddPosition = createSelector(
   chartExportPosition,
-}
+  chartPosition => ({
+    top: chartPosition.top + chartPosition.height,
+    left: chartPosition.left,
+    width: chartPosition.width,
+    height: 100,
+  }),
+)

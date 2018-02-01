@@ -1,17 +1,24 @@
-const React = require('react')
-const PropTypes = require('prop-types')
-const Immutable = require('immutable')
-const { connect } = require('react-redux')
+import React from 'react'
+import PropTypes from 'prop-types'
+import Immutable from 'immutable'
+import { connect } from 'react-redux'
 
-const ExplanationPopovers = require('./ExplanationPopovers.jsx')
-const BarChart = require('./BarChart')
-const Axis = require('./Axis')
-const NaturalGasLiquidsViewport = require('../selectors/viewport/naturalGasLiquids')
-const Constants = require('../Constants')
+import ExplanationPopovers from './ExplanationPopovers'
+import BarChart from './BarChart'
+import Axis from './Axis'
+import * as NaturalGasLiquidsViewport from '../selectors/viewport/naturalGasLiquids'
+import Constants from '../Constants'
+import USPadd from './Padds/USPadd'
+import CanadaMapContainer from './CanadaMapContainer'
+import { activityExplanationPosition } from '../selectors/viewport/menus'
+import NaturalGasLiquidsMapPieceActivityExplanation from './NaturalGasLiquidsMapPieceActivityExplanation'
 
 class NaturalGasLiquidsVisualizationContainer extends React.Component {
   render() {
     return (<g>
+      <CanadaMapContainer
+        {...this.props.canadaMap}
+      />
       <BarChart
         {...this.props.importChart}
         valueKey="imports"
@@ -33,12 +40,21 @@ class NaturalGasLiquidsVisualizationContainer extends React.Component {
         xaxis={this.props.xaxis}
         yaxis={this.props.yaxis + this.props.height}
       />
-            </g>)
+      <USPadd
+        {...this.props.usPaddChart}
+      />
+      <NaturalGasLiquidsMapPieceActivityExplanation
+        {...this.props.mapPieceActivityExplanation}
+      />
+    </g>)
   }
 }
 
-module.exports = connect((state, props) => ({
+export default connect((state, props) => ({
+  canadaMap: NaturalGasLiquidsViewport.canadaImportMap(state, props),
   importChart: NaturalGasLiquidsViewport.chartImportPosition(state, props),
   axisPosition: NaturalGasLiquidsViewport.chartAxisPosition(state, props),
   exportChart: NaturalGasLiquidsViewport.chartExportPosition(state, props),
+  usPaddChart: NaturalGasLiquidsViewport.usPaddPosition(state, props),
+  mapPieceActivityExplanation: activityExplanationPosition(state, props),
 }))(NaturalGasLiquidsVisualizationContainer)

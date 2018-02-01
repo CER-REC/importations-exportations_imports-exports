@@ -1,13 +1,13 @@
-const createSelector = require('reselect').createSelector
+import { createSelector } from 'reselect'
 
-const Constants = require('../../Constants.js')
+import Constants from '../../Constants'
 
-const menuWidth = () => Constants.getIn(['visualizationContainer', 'leftMargin'])
+export const menuWidth = () => Constants.getIn(['visualizationContainer', 'leftMargin'])
 const detailSidebarWidth = () =>
   Constants.getIn(['visualizationDetailContainer', 'width'])
 const viewport = state => state.viewport
 
-const positionHelper = (prev, height) => createSelector(
+export const positionHelper = (prev, height) => createSelector(
   prev,
   prevPos => Object.assign({}, prevPos, {
     top: prevPos.top + prevPos.height,
@@ -15,7 +15,7 @@ const positionHelper = (prev, height) => createSelector(
   }),
 )
 
-const svgSize = createSelector(
+export const svgSize = createSelector(
   viewport,
   detailSidebarWidth,
   viewport => ({
@@ -24,7 +24,7 @@ const svgSize = createSelector(
   }),
 )
 
-const visualizationContainerPosition = createSelector(
+export const visualizationContainerPosition = createSelector(
   viewport,
   menuWidth,
   (viewport, menuWidth) => ({
@@ -36,7 +36,7 @@ const visualizationContainerPosition = createSelector(
   }),
 )
 
-const visualizationContentPosition = createSelector(
+export const visualizationContentPosition = createSelector(
   visualizationContainerPosition,
   menuWidth,
   detailSidebarWidth,
@@ -48,7 +48,7 @@ const visualizationContentPosition = createSelector(
   }),
 )
 
-const detailSidebarPosition = createSelector(
+export const detailSidebarPosition = createSelector(
   visualizationContainerPosition,
   menuWidth,
   detailSidebarWidth,
@@ -58,12 +58,3 @@ const detailSidebarPosition = createSelector(
     width,
   }),
 )
-
-module.exports = {
-  positionHelper,
-  svgSize,
-  menuWidth,
-  visualizationContainerPosition,
-  visualizationContentPosition,
-  detailSidebarPosition,
-}

@@ -1,16 +1,16 @@
-const createSelector = require('reselect').createSelector
-const Immutable = require('immutable')
+import { createSelector } from 'reselect'
+import Immutable from 'immutable'
+
+import { sortAggregatedLocationsSelector, arrangeBy, unitSelector } from './data'
+import MapLayoutGridConstant from '../MapLayoutGridConstant'
+import Constants from '../Constants'
+import { visualizationSettings } from './visualizationSettings'
 
 // get import data for the electricity visualization
 // rows from the CSV
 const selectedVisualization = state => state.importExportVisualization
-const { sortAggregatedLocationsSelector, arrangeBy, unitSelector } = require('./data.js')
-const MapLayoutGridConstant = require('../MapLayoutGridConstant.js')
-const Constants = require('../Constants.js')
 
-const { visualizationSettings } = require('./visualizationSettings')
-
-const getSelectionSettings = createSelector(
+export const getSelectionSettings = createSelector(
   visualizationSettings,
   settings => settings.get('selection'),
 )
@@ -35,7 +35,7 @@ const getPadding = createSelector(
   (visualization, country) => MapLayoutGridConstant.getIn([visualization, country, 'sortingRowPadding']),
 )
 
-const getPointsByCountry = createSelector(
+export const getPointsByCountry = createSelector(
   sortAggregatedLocationsSelector,
   getCountry,
   (points, country) => points.filter(point => point.get('country') === country),
@@ -135,7 +135,7 @@ const parseLocationData = createSelector(
 )
 
 
-const getElectricityMapLayout = createSelector(
+export const getElectricityMapLayout = createSelector(
   createSortedLayout,
   parseLocationData,
   arrangeBy,
@@ -150,9 +150,3 @@ const getElectricityMapLayout = createSelector(
     }
   },
 )
-
-module.exports = {
-  getElectricityMapLayout,
-  getSelectionSettings,
-  getPointsByCountry,
-}

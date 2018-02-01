@@ -1,5 +1,4 @@
-
-const React = require('react')
+import React from 'react'
 
 class TriangularTabLine extends React.Component {
   render() {
@@ -12,4 +11,4 @@ class TriangularTabLine extends React.Component {
   }
 }
 
-module.exports = TriangularTabLine
+export default TriangularTabLine

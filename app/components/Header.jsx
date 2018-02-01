@@ -1,16 +1,16 @@
-const React = require('react')
-const ReactRedux = require('react-redux')
-const Immutable = require('immutable')
-const PropTypes = require('prop-types')
+import React from 'react'
+import { connect } from 'react-redux'
+import Immutable from 'immutable'
+import PropTypes from 'prop-types'
 
-const Constants = require('../Constants.js')
-const Tr = require('../TranslationTable.js')
+import Constants from '../Constants'
+import { OpenModal as ShowAboutWindowCreator } from '../actions/modal'
+import { handleInteraction } from '../utilities'
+import TrSelector from '../selectors/translate'
 
-const ShowAboutWindowCreator = require('../actions/modal.js').OpenModal
-
-require('./Header.scss')
-require('../styles/Fonts.scss')
-require('../styles/Colours.scss')
+import './Header.scss'
+import '../styles/Fonts.scss'
+import '../styles/Colours.scss'
 
 class Header extends React.Component {
   static get propTypes() {
@@ -23,17 +23,7 @@ class Header extends React.Component {
 
   constructor(props) {
     super(props)
-    this.aboutThisProjectClick = this.aboutThisProjectClick.bind(this)
-    this.methodologyClick = this.methodologyClick.bind(this)
     this.resetClick = this.resetClick.bind(this)
-  }
-
-  aboutThisProjectClick() { // eslint-disable-line class-methods-use-this
-    this.props.onClick()
-  }
-
-  methodologyClick() { // eslint-disable-line class-methods-use-this
-    // TODO: add methodology click functionality
   }
 
   resetClick() { // eslint-disable-line class-methods-use-this
@@ -41,28 +31,30 @@ class Header extends React.Component {
   }
 
   leftHeading() {
+    const { Tr } = this.props
     return (
       <div className="leftHeader">
         <div className="headingImports">
-          {Tr.getIn(['mainHeading', 'imports', this.props.language])}
+          {Tr(['mainHeading', 'imports'])}
         </div>&nbsp;
         <div className="headingBase" >
-          {Tr.getIn(['mainHeading', 'ampersand', this.props.language])}
+          {Tr(['mainHeading', 'ampersand'])}
         </div>&nbsp;
         <div className="headingExports">
-          {Tr.getIn(['mainHeading', 'exports', this.props.language])}
+          {Tr(['mainHeading', 'exports'])}
         </div>&nbsp;
         <div className="headingBase">
-          {Tr.getIn(['mainHeading', 'base', this.props.language])}
+          {Tr(['mainHeading', 'base'])}
         </div>
         <p className="subheading">
-          {Tr.getIn(['mainSubheading', this.props.language])}
+          {Tr(['mainSubheading'])}
         </p>
       </div>
     )
   }
 
   metaBar() {
+    const { Tr } = this.props
     const transformMetaBarIcons = `translate(${this.props.viewport.get('x') - Constants.getIn(['metaBar', 'iconMargin'])}, 0)`
 
     return (
@@ -80,10 +72,12 @@ class Header extends React.Component {
         <g>
           <text
             className="resetLabel"
-            onClick={this.resetClick}
+            {...handleInteraction(this.resetClick)}
             y={Constants.getIn(['metaBar', 'resetTextY'])}
             x={this.props.viewport.get('x') - Constants.getIn(['metaBar', 'resetTextOffset'])}
-          >{ Tr.getIn(['resetLabel', this.props.language]) }
+            aria-label={Tr(['socialBar', 'resetVisualization'])}
+            role="menuitem"
+          >{Tr('resetLabel')}
           </text>
         </g>
 
@@ -92,27 +86,11 @@ class Header extends React.Component {
             className="metaBarButton"
             height={Constants.getIn(['metaBar', 'iconSize'])}
             width={Constants.getIn(['metaBar', 'iconSize'])}
-            xlinkHref="images/info_about.svg"
-            y={Constants.getIn(['metaBar', 'aboutThisProjectIconMargin'])}
-            onClick={this.aboutThisProjectClick}
-          />
-
-          <image
-            className="metaBarButton"
-            height={Constants.getIn(['metaBar', 'iconSize'])}
-            width={Constants.getIn(['metaBar', 'iconSize'])}
-            xlinkHref="images/info_methodology.svg"
-            y={Constants.getIn(['metaBar', 'methodologyIconMargin'])}
-            onClick={this.methodologyClick}
-          />
-
-          <image
-            className="metaBarButton"
-            height={Constants.getIn(['metaBar', 'iconSize'])}
-            width={Constants.getIn(['metaBar', 'iconSize'])}
             xlinkHref="images/reset.svg"
-            onClick={this.resetClick}
+            {...handleInteraction(this.resetClick)}
             y={Constants.getIn(['metaBar', 'resetIconMargin'])}
+            aria-label={Tr(['socialBar', 'resetVisualization'])}
+            role="menuitem"
           />
         </g>
       </svg>
@@ -134,11 +112,13 @@ class Header extends React.Component {
 }
 
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state, props) => ({
   viewport: state.viewport,
   language: state.language,
   screenshotMode: state.screenshotMode,
+  Tr: TrSelector(state, props),
 })
+
 
 const mapDispatchToProps = dispatch => ({
   onClick() {
@@ -146,4 +126,4 @@ const mapDispatchToProps = dispatch => ({
   },
 })
 
-module.exports = ReactRedux.connect(mapStateToProps, mapDispatchToProps)(Header)
+export default connect(mapStateToProps, mapDispatchToProps)(Header)

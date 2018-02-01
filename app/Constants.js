@@ -1,7 +1,6 @@
-const Immutable = require('immutable')
+import { fromJS } from 'immutable'
 
-const Constants = Immutable.fromJS({
-
+const Constants = fromJS({
   workspace: {
     heightToWidthRatio: 0.66,
     viewportPadding: 250,
@@ -13,13 +12,11 @@ const Constants = Immutable.fromJS({
   metaBar: {
     width: 27,
     height: 70,
-    iconSize: 17,
-    resetTextOffset: 62,
+    iconSize: 20,
+    resetTextOffset: 53,
     iconMargin: 22,
-    aboutThisProjectIconMargin: 5,
-    methodologyIconMargin: 27,
     resetIconMargin: 49,
-    resetTextY: 63,
+    resetTextY: 65,
   },
 
   menuBar: {
@@ -37,8 +34,11 @@ const Constants = Immutable.fromJS({
     amountTextButtonLabelOffset: 109,
     nglMenuYMargin: 158,
     nglSubproductTextY: 223,
-    barWidth: 5,
+    barWidth: 6,
+    verticalPadding: 5,
     barHeight: 16,
+    optionHeight: 15,
+    visualizationPadding: 15,
     menuExpandedPadding: 30,
     expandedMenuTextMargin: 12,
     sortMenuTextOffsetY: 35,
@@ -75,18 +75,26 @@ const Constants = Immutable.fromJS({
   },
 
   socialBar: {
-    topMargin: 177,
-    width: 27,
-    height: 132,
-    bottomMargin: 20,
-    iconSize: 17,
-    emailIconPadding: 5,
-    downloadFileIconPadding: 26,
-    downloadImageIconPadding: 47,
-    twitterIconPadding: 68,
-    facebookIconPadding: 89,
-    linkedInIconPadding: 110,
-    iconMargin: 22,
+    topMargin: 120,
+    controlArrowMargin: 30,
+    controlArrowY: 137,
+    controlArrowHeight: 40,
+    width: 25,
+    height: 125,
+    iconSize: 15,
+    iconMarginY: 26,
+    expandedWidth: 110,
+    expandedIconX: 129,
+    iconMargin: 30,
+    downloadDataIconMargin: 54,
+    downloadImageIconMargin: 78,
+    shareIconMargin: 102,
+    iconX: 105,
+    iconY: 223,
+    twitterMargin: 29,
+    facebookMargin: 51,
+    linkedinMargin: 74,
+    iconTextY: 137,
   },
 
   visualizationContainer: {
@@ -276,6 +284,20 @@ const Constants = Immutable.fromJS({
       value: {
         confidential: 'Confidential',
       },
+      padd: {
+        us: {
+          'PADD I': 'PADD I',
+          'PADD II': 'PADD II',
+          'PADD III': 'PADD III',
+          'PADD IV': 'PADD IV',
+          'PADD V': 'PADD V',
+          'Non-USA': 'Non-USA',
+          Mexico: 'Mexico',
+        },
+        ca: {
+          ca: 'ca',
+        },
+      },
       country: {
         ca: {
           Yukon: 'YT',
@@ -353,4 +375,4 @@ const Constants = Immutable.fromJS({
     },
   },
 })
-module.exports = Constants
+export default Constants

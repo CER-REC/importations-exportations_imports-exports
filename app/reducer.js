@@ -15,6 +15,8 @@ import { reducer as BinsReducer } from './actions/bins'
 import { reducer as ScreenshotModeReducer } from './actions/screenshot'
 import { reducer as visualizationSettings } from './actions/visualizationSettings'
 import { reducer as DataLoadCompleteReducer } from './actions/DataLoadComplete'
+import { reducer as SocialBarReducer } from './actions/socialBar'
+import { reducer as activeMenu } from './actions/activeMenu'
 
 const mergeDeep = (old, merge) => {
   if (old === Object(old) && Array.isArray(old) === false) {
@@ -42,8 +44,10 @@ const nestedReducers = combineReducers({
   bins: BinsReducer,
   dataLoadingComplete: DataLoadCompleteReducer,
   visualizationSettings,
+  expandSocialBar: SocialBarReducer,
   modal: ModalReducer,
   screenshotMode: ScreenshotModeReducer,
+  activeMenu,
 })
 
 export default (initialState = {}, action) => {

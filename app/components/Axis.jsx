@@ -1,23 +1,37 @@
-const React = require('react')
-const PropTypes = require('prop-types')
-const Immutable = require('immutable')
-const { connect } = require('react-redux')
+import React from 'react'
+import PropTypes from 'prop-types'
+import Immutable from 'immutable'
+import { connect } from 'react-redux'
 
-const DetailSidebar = require('./DetailSidebar')
-const ChartOptions = require('./ChartOptions')
-const TimelineSeek = require('./TimelineSeek')
-const TimelinePlay = require('./TimelinePlay')
-const TimelineSelector = require('../selectors/timeline')
-const Constants = require('../Constants')
+import DetailSidebar from './DetailSidebar'
+import ChartOptions from './ChartOptions'
+import TimelineSeek from './TimelineSeek'
+import TimelinePlay from './TimelinePlay'
+import { timelineSeekPositionSelector, timelineData } from '../selectors/timeline'
+import Constants from '../Constants'
 
 class Axis extends React.PureComponent {
-  static get defaultProps() {
-    return {
-      canSeek: true,
-      chartOptions: true,
-      top: 0,
-      left: 0,
-    }
+  static propTypes = {
+    top: PropTypes.number.isRequired,
+    left: PropTypes.number.isRequired,
+    width: PropTypes.number.isRequired,
+    height: PropTypes.number.isRequired,
+    bars: PropTypes.instanceOf(Immutable.Map).isRequired,
+    labels: PropTypes.instanceOf(Immutable.List).isRequired,
+    seekPosition: PropTypes.shape({
+      start: PropTypes.number.isRequired,
+      end: PropTypes.number.isRequired,
+    }).isRequired,
+    barWidth: PropTypes.number.isRequired,
+    canSeek: PropTypes.bool,
+    chartOptions: PropTypes.bool,
+    canChangeScale: PropTypes.bool,
+  }
+
+  static defaultProps = {
+    canSeek: true,
+    chartOptions: true,
+    canChangeScale: true,
   }
 
   seekControls() {
@@ -27,7 +41,7 @@ class Axis extends React.PureComponent {
     return (
       <g>
         <TimelinePlay
-          top={top + height / 2}
+          top={top + (height / 2)}
           left={left - 20}
         />
         <TimelineSeek
@@ -75,10 +89,10 @@ class Axis extends React.PureComponent {
       if (label.get('label') !== '|') {
         return (
           <text
-            className = 'timelineLabel'
+            className="timelineLabel"
             key={key}
             x={left + label.get('offsetX')}
-            y={top + height / 2}
+            y={top + (height / 2)}
             textAnchor="middle"
             alignmentBaseline="middle"
             fontWeight={label.get('fontWeight', 'normal')}
@@ -92,8 +106,8 @@ class Axis extends React.PureComponent {
           key={key}
           x1={left + label.get('offsetX')}
           x2={left + label.get('offsetX')}
-          y1={top + barWidth / 2}
-          y2={top + height - barWidth / 2}
+          y1={top + (barWidth / 2)}
+          y2={(top + height) - (barWidth / 2)}
           strokeWidth={Constants.getIn(['timeline', 'barPadding'])}
           stroke="black"
         />
@@ -104,7 +118,7 @@ class Axis extends React.PureComponent {
     return (
       <g>
         <rect
-          x={left + -barWidth / 2}
+          x={left + (-barWidth / 2)}
           y={top}
           width={seekPosition.start}
           height={rectHeight}
@@ -125,6 +139,6 @@ class Axis extends React.PureComponent {
   }
 }
 
-module.exports = connect((state, props) => Object.assign({
-  seekPosition: TimelineSelector.timelineSeekPositionSelector(state, props),
-}, TimelineSelector.timelineData(state, props)))(Axis)
+export default connect((state, props) => Object.assign({
+  seekPosition: timelineSeekPositionSelector(state, props),
+}, timelineData(state, props)))(Axis)

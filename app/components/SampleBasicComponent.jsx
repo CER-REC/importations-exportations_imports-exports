@@ -1,5 +1,5 @@
-const React = require('react')
-const PropTypes = require('prop-types')
+import React from 'react'
+import PropTypes from 'prop-types'
 
 const SampleBasicComponent = props => (
   <div>
@@ -11,4 +11,4 @@ SampleBasicComponent.propTypes = {
   name: PropTypes.string.isRequired,
 }
 
-module.exports = SampleBasicComponent
+export default SampleBasicComponent

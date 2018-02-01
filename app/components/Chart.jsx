@@ -1,6 +1,6 @@
-const React = require('react')
-const PropTypes = require('prop-types')
-const Immutable = require('immutable')
+import React from 'react'
+import PropTypes from 'prop-types'
+import Immutable from 'immutable'
 
 class Chart extends React.PureComponent {
   static get propTypes() {
@@ -59,4 +59,4 @@ class Chart extends React.PureComponent {
   }
 }
 
-module.exports = Chart
+export default Chart

@@ -1,24 +1,62 @@
-const React = require('react')
-const ReactRedux = require('react-redux')
-const Constants = require('../Constants.js')
+import React from 'react'
+import { connect } from 'react-redux'
+import PropTypes from 'prop-types'
+import dialogPolyfill from 'dialog-polyfill'
+import 'dialog-polyfill/dialog-polyfill.css'
 
-const AboutWindow = require('./AboutWindow')
-const ImageDownloadWindow = require('./ImageDownloadWindow')
+import AboutWindow from './AboutWindow'
+import ImageDownloadWindow from './ImageDownloadWindow'
+import { CloseModal } from '../actions/modal'
+import './ModalSelector.scss'
 
-const ModalSelector = props => { 
-  if(props.modal === 'about') return <AboutWindow />
+class ModalSelector extends React.PureComponent {
+  static propTypes = {
+    modal: PropTypes.string.isRequired,
+    CloseModal: PropTypes.func.isRequired,
+  }
 
-  if(props.modal === 'imageDownload') return <ImageDownloadWindow />
+  constructor(props) {
+    super(props)
+    this.lastFocus = null
+  }
 
-  return null
-}
+  registerDialog = (ref) => {
+    this.dialog = ref
+    if (ref === null) { return }
 
-const mapStateToProps = state => {
-  return {
-    language: state.language,
-    viewport: state.viewport,
-    modal: state.modal,
+    this.lastFocus = document.activeElement
+    dialogPolyfill.registerDialog(ref)
+    ref.showModal()
+  }
+
+  dialogClosed = () => {
+    this.props.CloseModal()
+    if (this.lastFocus) { this.lastFocus.focus() }
+  }
+
+  close = () => { if (this.dialog) { this.dialog.close() } }
+
+  renderContent() {
+    const { modal } = this.props
+    if (modal === 'about') { return <AboutWindow closeModal={this.close} /> }
+    if (modal === 'imageDownload') { return <ImageDownloadWindow closeModal={this.close} /> }
+    return null
+  }
+
+  render() {
+    const content = this.renderContent()
+    if (content === null) { return null }
+
+    return (
+      <dialog onClose={this.dialogClosed} ref={this.registerDialog}>{content}</dialog>
+    )
   }
 }
 
-module.exports = ReactRedux.connect(mapStateToProps)(ModalSelector)
+const mapStateToProps = state => ({
+  language: state.language,
+  viewport: state.viewport,
+  modal: state.modal,
+})
+
+export default connect(mapStateToProps, { CloseModal })(ModalSelector)

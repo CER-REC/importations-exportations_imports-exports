@@ -1,23 +1,23 @@
-const Redux = require('redux')
+import { createStore, compose, applyMiddleware } from 'redux'
 
-const reducer = require('./reducer').default
+import reducer from './reducer'
 
-const TimelineRangeMiddleware = require('./middleware/timelineRange')
-const InitialVisualizationSettingsMiddleware = require('./middleware/initialVisualizationSettings')
-const ActionLogMiddleware = require('./middleware/actionLog')
-const TagVisualizationSettingsMiddleware = require('./middleware/tagVisualizationSettings')
-const { default: SaveStateToRouteMiddleware, updateStateFromURL } = require('./middleware/saveStateToRoute')
-const DataLoaded = require('./middleware/DataLoaded')
+import TimelineRangeMiddleware from './middleware/timelineRange'
+import InitialVisualizationSettingsMiddleware from './middleware/initialVisualizationSettings'
+import ActionLogMiddleware from './middleware/actionLog'
+import TagVisualizationSettingsMiddleware from './middleware/tagVisualizationSettings'
+import SaveStateToRouteMiddleware, { updateStateFromURL } from './middleware/saveStateToRoute'
+import DataLoaded from './middleware/DataLoaded'
 
-module.exports = () => {
+export default () => {
   // Enable Redux Dev Tools if they are installed in the browser
   const composeEnhancers =
     // eslint-disable-next-line no-underscore-dangle
-    window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || Redux.compose
+    window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 
-  const store = Redux.createStore(
+  const store = createStore(
     reducer,
-    composeEnhancers(Redux.applyMiddleware(
+    composeEnhancers(applyMiddleware(
       SaveStateToRouteMiddleware,
       InitialVisualizationSettingsMiddleware,
       TagVisualizationSettingsMiddleware,

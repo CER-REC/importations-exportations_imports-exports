@@ -1,9 +1,8 @@
-const React = require('react')
-const Constants = require('../Constants.js')
+import React from 'react'
 
-const MapPiece = require('./MapPiece.jsx')
-const MapPieceExplanationConstant = require('../MapPieceExplanationConstant.js')
-
+import MapPiece from './MapPiece'
+import MapPieceExplanationConstant from '../MapPieceExplanationConstant'
+import Tr from '../TranslationTable'
 class ElectricityMapPieceActivityExplanation extends React.Component {
   render() {
     return (<g transform={`translate(${this.props.left},${this.props.top})`}>
@@ -14,7 +13,7 @@ class ElectricityMapPieceActivityExplanation extends React.Component {
         styles={MapPieceExplanationConstant.getIn(['electricity', 'ca', 'styles'])}
         arrowProps={MapPieceExplanationConstant.getIn(['electricity', 'ca', 'arrowProps'])}
         mapPieceProps={MapPieceExplanationConstant.getIn(['electricity', 'ca', 'mapPieceProps'])}
-        legend
+        text= {Tr.getIn(['legendMapTiles','electricity', 'ca'])}
       />
       <g transform="translate(0,70)">
         <MapPiece
@@ -24,7 +23,7 @@ class ElectricityMapPieceActivityExplanation extends React.Component {
           styles={MapPieceExplanationConstant.getIn(['electricity', 'us', 'styles'])}
           arrowProps={MapPieceExplanationConstant.getIn(['electricity', 'us', 'arrowProps'])}
           mapPieceProps={MapPieceExplanationConstant.getIn(['electricity', 'us', 'mapPieceProps'])}
-          legend
+          text = {Tr.getIn(['legendMapTiles','electricity', 'us'])}
         />
       </g>
             </g>)
@@ -32,4 +31,4 @@ class ElectricityMapPieceActivityExplanation extends React.Component {
 }
 
 
-module.exports = ElectricityMapPieceActivityExplanation
+export default ElectricityMapPieceActivityExplanation

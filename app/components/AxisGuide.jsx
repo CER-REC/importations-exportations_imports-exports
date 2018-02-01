@@ -1,11 +1,11 @@
-const React = require('react')
-const PropTypes = require('prop-types')
-const { connect } = require('react-redux')
+import React from 'react'
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
 
-const TextBox = require('./TextBox')
-const SVGDrag = require('./SVGDrag/')
-const Constants = require('../Constants')
-const { visualizationSettings } = require('../selectors/visualizationSettings')
+import TextBox from './TextBox'
+import SVGDrag from './SVGDrag/'
+import Constants from '../Constants'
+import { visualizationSettings } from '../selectors/visualizationSettings'
 
 class AxisGuide extends React.PureComponent {
   static get propTypes() {
@@ -40,6 +40,23 @@ class AxisGuide extends React.PureComponent {
     if (props.position !== this.state.positionDisplay) {
       this.setState({ positionDisplay: props.position })
     }
+  }
+
+  onArrowKey = (e) => {
+    const direction = (e.key === 'ArrowUp' || e.key === 'PageUp') ? -1 : 1
+    const scale = (e.key === 'ArrowUp' || e.key === 'ArrowDown') ? 1 : 10
+
+    const { heightPerUnit } = this.props
+    const flippedInverter = this.props.flipped ? -1 : 1
+    const currentY = this.props.position * heightPerUnit
+    let newY = (currentY - (direction * scale * flippedInverter))
+
+    if (newY > this.props.chartHeight) {
+      newY = this.props.chartHeight
+    } else if (newY < 0) {
+      newY = 0
+    }
+    this.props.updatePosition(Math.round(newY / heightPerUnit))
   }
 
   adjustOffset(rawOffset) {
@@ -78,6 +95,8 @@ class AxisGuide extends React.PureComponent {
         invertedY={this.props.flipped}
         adjustOffset={this.adjustOffset}
         dragStop={this.dragStop}
+        onArrowKey={this.onArrowKey}
+        aria-label={text}
       >
         <g transform={`translate(0 ${offset})`}>
           <polyline
@@ -105,6 +124,7 @@ class AxisGuide extends React.PureComponent {
               fill: 'white',
               fontSize: 11,
             }}
+            aria-hidden
             boxStyles={{
               fill: Constants.getIn(['styleGuide', 'colours', 'SandMedium']),
             }}
@@ -119,6 +139,6 @@ class AxisGuide extends React.PureComponent {
   }
 }
 
-module.exports = connect((state, props) => ({
+export default connect((state, props) => ({
   unit: visualizationSettings(state, props).get('amount'),
 }))(AxisGuide)

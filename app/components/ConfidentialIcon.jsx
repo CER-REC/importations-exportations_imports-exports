@@ -1,12 +1,12 @@
-const React = require('react')
-const PropTypes = require('prop-types')
-const Immutable = require('immutable')
+import React from 'react'
+import PropTypes from 'prop-types'
+import Immutable from 'immutable'
 
 const ConfidentialIcon = props => (
   <g transform="translate(30, 0)">
     <path
       fill={props.styles.get('fill')}
-      stoke={props.styles.get('stroke')}
+      stroke={props.styles.get('stroke')}
       d="M7.83.5A7.33,7.33,0,1,1,.5,7.83,7.33,7.33,0,0,1,7.83.5Z"
     />
     <path
@@ -21,4 +21,4 @@ ConfidentialIcon.propTypes = {
   styles: PropTypes.instanceOf(Immutable.Map).isRequired,
 }
 
-module.exports = ConfidentialIcon
+export default ConfidentialIcon

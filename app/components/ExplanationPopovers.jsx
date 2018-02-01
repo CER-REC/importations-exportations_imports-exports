@@ -1,5 +1,5 @@
-const React = require('react')
-const ReactRedux = require('react-redux')
+import React from 'react'
+import { connect } from 'react-redux'
 
 // Sample code for svg popups https://codepen.io/demianpt/pen/zragBN
 class ExplanationPopovers extends React.Component {
@@ -13,4 +13,4 @@ const mapStateToProps = state => ({
   viewport: state.viewport,
 })
 
-module.exports = ReactRedux.connect(mapStateToProps)(ExplanationPopovers)
+export default connect(mapStateToProps)(ExplanationPopovers)

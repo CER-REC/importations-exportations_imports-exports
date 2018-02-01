@@ -5,4 +5,4 @@ function ShowElectricityDataExplanationCreator(isElectricityExplanationVisible) 
   }
 }
 
-module.exports = ShowElectricityDataExplanationCreator
+export default ShowElectricityDataExplanationCreator

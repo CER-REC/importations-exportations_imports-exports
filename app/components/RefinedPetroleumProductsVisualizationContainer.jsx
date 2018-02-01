@@ -1,12 +1,12 @@
-const React = require('react')
-const { connect } = require('react-redux')
+import React from 'react'
+import { connect } from 'react-redux'
 
-const BarChart = require('./BarChart')
-const StackedChart = require('./StackedChart')
-const Axis = require('./Axis')
-const RefinedPetroleumProductsViewport = require('../selectors/viewport/refinedPetroleumProducts')
-const DataSelectors = require('../selectors/data')
-const Constants = require('../Constants')
+import BarChart from './BarChart'
+import StackedChart from './StackedChart'
+import Axis from './Axis'
+import * as RefinedPetroleumProductsViewport from '../selectors/viewport/refinedPetroleumProducts'
+import { arrangeBy } from '../selectors/data'
+import Constants from '../Constants'
 
 class RefinedPetroleumProductsVisualizationContainer extends React.Component {
   renderStackedChart() {
@@ -15,7 +15,7 @@ class RefinedPetroleumProductsVisualizationContainer extends React.Component {
       <g>
         <Axis
           {...positions.axis}
-          barWidth="4"
+          barWidth={4}
         />
         <StackedChart
           {...positions.chart}
@@ -39,7 +39,7 @@ class RefinedPetroleumProductsVisualizationContainer extends React.Component {
       <g key={key}>
         <Axis
           {...positions[key].axis}
-          barWidth="4"
+          barWidth={4}
           canSeek={key === 'Partially Processed Oil'}
           chartOptions={key === 'Partially Processed Oil'}
         />
@@ -62,8 +62,8 @@ class RefinedPetroleumProductsVisualizationContainer extends React.Component {
   }
 }
 
-module.exports = connect((state, props) => ({
+export default connect((state, props) => ({
   stackedChart: RefinedPetroleumProductsViewport.stackedChartPosition(state, props),
   individualCharts: RefinedPetroleumProductsViewport.individualChartsPosition(state, props),
-  arrangeBy: DataSelectors.arrangeBy(state, props),
+  arrangeBy: arrangeBy(state, props),
 }))(RefinedPetroleumProductsVisualizationContainer)

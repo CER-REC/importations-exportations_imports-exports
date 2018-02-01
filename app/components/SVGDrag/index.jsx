@@ -1,7 +1,7 @@
-const React = require('react')
-const PropTypes = require('prop-types')
+import React from 'react'
+import PropTypes from 'prop-types'
 
-require('./SVGDrag.scss')
+import './SVGDrag.scss'
 
 const stopEvent = (e) => {
   e.stopPropagation()
@@ -17,34 +17,32 @@ const getPosition = (e) => {
 }
 
 class SVGDrag extends React.PureComponent {
-  static get propTypes() {
-    return {
-      invertedX: PropTypes.bool,
-      invertedY: PropTypes.bool,
-      dragStop: PropTypes.func,
-      adjustOffset: PropTypes.func,
-      children: PropTypes.node.isRequired,
-    }
+  static propTypes = {
+    invertedX: PropTypes.bool,
+    invertedY: PropTypes.bool,
+    dragStop: PropTypes.func,
+    adjustOffset: PropTypes.func,
+    children: PropTypes.node.isRequired,
+    onArrowKey: PropTypes.func.isRequired,
+    'aria-label': PropTypes.string,
   }
 
-  static get defaultProps() {
-    return {
-      invertedX: false,
-      invertedY: false,
-      dragStop: null,
-      adjustOffset: null,
-    }
+  static defaultProps = {
+    invertedX: false,
+    invertedY: false,
+    dragStop: null,
+    adjustOffset: null,
+    'aria-label': null,
   }
 
   constructor(props) {
     super(props)
 
     // Don't use state, as we're not actually rendering based on it
-    this.isDragging = false
-
     this.state = {
       dragStart: { x: 0, y: 0 },
       offset: { x: 0, y: 0 },
+      isDragging: false,
     }
 
     this.onDragStart = this.onDragStart.bind(this)
@@ -54,10 +52,10 @@ class SVGDrag extends React.PureComponent {
 
   onDragStart(e) {
     stopEvent(e)
-    this.isDragging = true
     this.setState({
       dragStart: getPosition(e),
       offset: { x: 0, y: 0 },
+      isDragging: true,
     })
 
     // Bind events to the window to assist in dragging when the mouse
@@ -70,7 +68,7 @@ class SVGDrag extends React.PureComponent {
 
   onDragMove(e) {
     // Don't handle the mouse moving if we're not dragging
-    if (this.isDragging === false) { return }
+    if (this.state.isDragging === false) { return }
     stopEvent(e)
 
     const position = getPosition(e)
@@ -84,7 +82,6 @@ class SVGDrag extends React.PureComponent {
 
   onDragStop(e) {
     stopEvent(e)
-    this.isDragging = false
 
     window.removeEventListener('mousemove', this.onDragMove)
     window.removeEventListener('mouseup', this.onDragStop)
@@ -101,7 +98,16 @@ class SVGDrag extends React.PureComponent {
 
     this.setState({
       offset: { x: 0, y: 0 },
+      isDragging: false,
     })
+  }
+
+  onKeyDown = (e) => {
+    const arrows = ['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', 'PageUp', 'PageDown']
+    if (arrows.includes(e.key)) {
+      e.preventDefault()
+      this.props.onArrowKey(e)
+    }
   }
 
   adjustOffset(offset) {
@@ -128,6 +134,11 @@ class SVGDrag extends React.PureComponent {
         onTouchEnd={this.onDragStop}
         transform={`translate(${offset.x} ${offset.y})`}
         className="SVGDrag"
+        tabIndex={0}
+        onKeyDown={this.onKeyDown}
+        aria-label={this.props['aria-label']}
+        aria-live={this.state.isDragging ? 'off' : 'assertive'}
+        aria-hidden={this.state.isDragging}
       >
         {this.props.children}
       </g>
@@ -135,4 +146,4 @@ class SVGDrag extends React.PureComponent {
   }
 }
 
-module.exports = SVGDrag
+export default SVGDrag

@@ -1,17 +1,16 @@
-const React = require('react')
-const ReactRedux = require('react-redux')
-const PropTypes = require('prop-types')
-const Immutable = require('immutable')
+import React from 'react'
+import { connect } from 'react-redux'
+import PropTypes from 'prop-types'
+import Immutable from 'immutable'
 
-const LegendArrow = require('./LegendArrow.jsx')
-const Constants = require('../Constants.js')
-const Tr = require('../TranslationTable.js')
-const { humanNumber } = require('../utilities')
-const { binSelector } = require('../selectors/data')
+import LegendArrow from './LegendArrow'
+import Constants from '../Constants'
+import Tr from '../TranslationTable'
+import { humanNumber } from '../utilities'
+import { binSelector } from '../selectors/data'
 
-require('../styles/Fonts.scss')
-
-require('./Legend.scss')
+import '../styles/Fonts.scss'
+import './Legend.scss'
 
 class Legend extends React.Component {
   static get propTypes() {
@@ -199,4 +198,4 @@ const mapStateToProps = (state, props) => ({
 })
 
 
-module.exports = ReactRedux.connect(mapStateToProps)(Legend)
+export default connect(mapStateToProps)(Legend)

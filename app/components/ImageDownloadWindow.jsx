@@ -1,3 +1,4 @@
+import Tr from '../TranslationTable'
 const Immutable = require('immutable')
 
 const React = require('react')
@@ -8,7 +9,6 @@ const CloseModal = require('../actions/modal.js').CloseModal
 const RouteComputations = require('../computations/RouteComputations.js')
 
 const Constants = require('../Constants.js')
-const Tr = require('../TranslationTable.js')
 
 require('./ImageDownloadWindow.scss')
 

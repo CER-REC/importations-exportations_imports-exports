@@ -1,4 +1,4 @@
-const Constants = require('../Constants.js')
+import Constants from '../Constants'
 
 const WorkspaceComputations = {}
 
@@ -39,4 +39,4 @@ WorkspaceComputations.visualizationContainerHeight = viewport =>
 WorkspaceComputations.VisualizationDetailContainerX = viewport =>
   WorkspaceComputations.workspaceWidth(viewport) - Constants.getIn(['visualizationDetailContainer', 'width'])
 
-module.exports = WorkspaceComputations
+export default WorkspaceComputations

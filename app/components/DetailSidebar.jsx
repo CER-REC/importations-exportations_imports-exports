@@ -1,8 +1,8 @@
-const React = require('react')
-const ReactDOM = require('react-dom')
-const PropTypes = require('prop-types')
+import React from 'react'
+import ReactDOM from 'react-dom'
+import PropTypes from 'prop-types'
 
-const Constants = require('../Constants')
+import Constants from '../Constants'
 
 let detailSidebarRoot
 
@@ -55,4 +55,4 @@ DetailSidebar.propTypes = {
   children: PropTypes.node,
 }
 
-module.exports = DetailSidebar
+export default DetailSidebar

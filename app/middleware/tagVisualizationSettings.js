@@ -1,4 +1,4 @@
-const { Types: VisSettingsTypesRaw } = require('../actions/visualizationSettings')
+import { Types as VisSettingsTypesRaw } from '../actions/visualizationSettings'
 
 const VisualizationSettingsTypes = Object.values(VisSettingsTypesRaw)
 
@@ -14,4 +14,4 @@ const tagVisualizationSettings = store => next => (action) => {
   next(action)
 }
 
-module.exports = tagVisualizationSettings
+export default tagVisualizationSettings
