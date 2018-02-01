@@ -1,14 +1,17 @@
+import React from 'react'
 import Tr from '../TranslationTable'
-const Immutable = require('immutable')
 
-const React = require('react')
-const ReactRedux = require('react-redux')
+import { connect } from 'react-redux'
+import Request from 'client-request/promise'
+import PropTypes from 'prop-types'
+
+import RouteComputations from '../computations/RouteComputations'
+
+import Constants from '../Constants'
+
 const ReactDOM = require('react-dom')
 
 const CloseModal = require('../actions/modal.js').CloseModal
-const RouteComputations = require('../computations/RouteComputations.js')
-
-const Constants = require('../Constants.js')
 
 require('./ImageDownloadWindow.scss')
 
@@ -39,10 +42,11 @@ class ImageDownloadWindow extends React.Component {
   }
 
   imagePreview() {
+    const screenshotUrl = `${RouteComputations.screenshotOrigin(location)}/${Constants.get('screenshotPath')}/?pageUrl=${RouteComputations.screenshotParameter(document.location)}&width=${Constants.get('screenshotWidth')}&height=${Constants.get('screenshotHeight')}`
     return <div
       className = 'imagePreview'>
       <img className="imagePreview"
-        src="http://localhost:3004/screenshot/?pageUrl=%2Fimport-export-visualization%2Fscreenshot%3Fconfig%3DeyJ2aXN1YWxpemF0aW9uU2V0dGluZ3MiOnsiZWxlY3RyaWNpdHnED2Ftb3VudCI6Ik1XLmgiLCJhcnJhbmdlQnkiOiJsb2PFP8QXY3RpdsUzImltcG9ydHNFeMUHIiwic3VidHlwZSI6IsQNxWDENTp7ImPEXHJ5IjpudWxsLCJvcmlnaW5zIjpbXSwiZGVzdGluxWDkAJh9fSwidGltZWxpbmXEO3NjYWxlTGlua2VkIjp0cnVlLCJncm91cGluZyI6InllYXIiLCLlAKvFLnRhcnTECcUZOjE5OTAsInF1YXJ0ZcQPfSwiZW5kyiAyMDE3yyA0fcQBLOwBG0V4cGxh5gCeIjpmYWxzZSznAPnmAPhW7AFfIjrMOyIsImxhbmd1YeQAmyJl5AE%252Bc2hvd8tSc%252BYA0n0%253D&width=1500&height=1700"
+        src="http://localhost:3004/screenshot/?pageUrl=%2Fimport-export-visualization%2Fscreenshot%3Fconfig%3DeyJ2aXN1YWxpemF0aW9uU2V0dGluZ3MiOnsibmF0dXJhbEdhc0xpcXVpZMUVYW1vdW50IjoibTMvZCIsImFycmFuZ2VCeSI6ImxvY8VFxBdjdGl2aXTEFmltcG9ydHNFeMUHIiwic3VidHlwZSI6IsQNZWxlY8U1OnsiY8RccnkiOm51bGwsIm9yaWdpbnMiOltdLCJkZXN0aW7FYOQAiX19LCJ0aW1lbGluZcQ7c2NhbGVMaW5rZWQiOnRydWUsImdyb3VwaW5nIjoieWVhciIsIuUAq8UudGFydMQJxRk6MTk4NSwicXVhcnRlxA99LCJlbmTKIDIwMTfLIDR9xAEsIuUAu3JpY2l0eUV4cGxh5gCeIjpmYWxzZSznAPnmAPhW7AFlIjrzAVwsImxhbmd1YeQAoSJl5AFEc2hvd8tYc%252BYA2H0%253D&width=1500&height=1200"
       />
       </div>
   }
@@ -90,4 +94,4 @@ const mapDispatchToProps = dispatch => ({
   },
 })
 
-module.exports = ReactRedux.connect(mapStateToProps, mapDispatchToProps)(ImageDownloadWindow)
+export default connect(mapStateToProps, mapDispatchToProps)(ImageDownloadWindow)

@@ -69,18 +69,18 @@ Request({
 
 // added for screenshot
 
-const routerState = RouteComputations.urlParamsToState(document.location)
+//const routerState = RouteComputations.urlParamsToState(document.location)
 
-store.dispatch(SetFromRouterState({
-  language: routerState.language,
-  visualizationContainer: routerState.visualizationContainer,
-  confidentiality: routerState.confidentiality,
-  explanations: routerState.explanations,
-  detailSidebar: routerState.detailSidebar,
-  header: routerState.header,
-  menuBar: routerState.menuBar,
-  screenshotMode: RouteComputations.screenshotMode(location),
-}))
+// store.dispatch(SetFromRouterState({
+//   language: routerState.language,
+//   visualizationContainer: routerState.visualizationContainer,
+//   confidentiality: routerState.confidentiality,
+//   explanations: routerState.explanations,
+//   detailSidebar: routerState.detailSidebar,
+//   header: routerState.header,
+//   menuBar: routerState.menuBar,
+//   screenshotMode: RouteComputations.screenshotMode(location),
+// }))
 
 // Webpack Hot Module Replacement API
 if (module.hot) {

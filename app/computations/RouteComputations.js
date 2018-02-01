@@ -1,6 +1,9 @@
 import Constants from '../Constants'
 import Tr from '../TranslationTable'
 
+const QueryString = require('query-string')
+const BrowserCookies = require('browser-cookies')
+
 /*
 The following members of the app's state are routable: they are represented in
 the URL bar. When the app loads, its state is initialized from the URL bar, and

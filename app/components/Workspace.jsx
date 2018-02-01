@@ -10,6 +10,7 @@ import { svgSize as svgSizeSelector, detailSidebarPosition as detailSidebarSelec
 
 import './Workspace.scss'
 
+
 const Workspace = ({ svgSize, detailSidebarPosition }) => (
   <div style={{ position: 'relative' }}>
     <div className="Workspace">
@@ -46,4 +47,6 @@ const Workspace = ({ svgSize, detailSidebarPosition }) => (
 export default connect((state, props) => ({
   svgSize: svgSizeSelector(state, props),
   detailSidebarPosition: detailSidebarSelector(state, props),
+  screenshotMode: state.screenshotMode,
 }))(Workspace)
+
