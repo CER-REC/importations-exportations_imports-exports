@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
+import memoize from 'memoize-immutable'
 
 import TextBox from './TextBox'
 import { handleInteraction } from '../utilities'
@@ -11,23 +12,27 @@ import setVisualization from '../actionCreators/SetVisualizationCreator'
 const textOffset = Constants.getIn(['menuBar', 'textLabelOffset'])
   + Constants.getIn(['menuBar', 'expandedMenuTextMargin'])
 
-const SelectedPrefix = ({ y, height }) => (
-  <g>
-    <rect
-      x={-textOffset}
-      y={y}
-      width={textOffset}
-      height={height}
-      fill="#666"
-    />
-    <text x={0} y={0} fill="#999" textAnchor="end" aria-hidden>of&nbsp;</text>
-  </g>
-)
+const SelectedPrefix = memoize((of) => {
+  const UnmemoizedSelectedPrefix = ({ y, height }) => (
+    <g>
+      <rect
+        x={-textOffset}
+        y={y}
+        width={textOffset}
+        height={height}
+        fill="#666"
+      />
+      <text x={0} y={0} fill="#999" textAnchor="end" aria-hidden>{of}&nbsp;</text>
+    </g>
+  )
 
-SelectedPrefix.propTypes = {
-  y: PropTypes.number.isRequired,
-  height: PropTypes.number.isRequired,
-}
+  UnmemoizedSelectedPrefix.propTypes = {
+    y: PropTypes.number.isRequired,
+    height: PropTypes.number.isRequired,
+  }
+
+  return UnmemoizedSelectedPrefix
+})
 
 const VisualizationSelector = (props) => {
   const { Tr } = props
@@ -64,7 +69,7 @@ const VisualizationSelector = (props) => {
                 padding={0}
                 boxStyles={{ fill: '#666' }}
                 textStyles={{ className: 'bold menuOption', style: { fill: '#fff' } }}
-                unsizedContent={SelectedPrefix}
+                unsizedContent={SelectedPrefix(Tr(['menu', 'of']))}
               >
                 {translated}&nbsp;
               </TextBox>

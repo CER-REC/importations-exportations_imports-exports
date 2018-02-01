@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 
 import { timelineFilter } from '../actions/visualizationSettings'
 import { timelineYearScaleCalculation, timelineRange } from '../selectors/timeline'
+import trSelector from '../selectors/translate'
 import { handleInteraction } from '../utilities'
 
 class TimelinePlay extends React.PureComponent {
@@ -53,11 +54,12 @@ class TimelinePlay extends React.PureComponent {
   }
 
   render() {
+    const label = this.props.tr(['timelinePlay', this.state.playInterval ? 'stop' : 'start'])
     return (
       <g
         transform={`translate(${this.props.left} ${this.props.top})`}
         role="link"
-        aria-label={this.state.playInterval ? 'Stop timeline playback' : 'Start timeline playback'}
+        aria-label={label}
         {...handleInteraction(this.onClick)}
       >
         <polyline
@@ -74,6 +76,7 @@ export default connect(
   (state, props) => ({
     timelineRange: timelineRange(state, props),
     timelineScale: timelineYearScaleCalculation(state, props),
+    tr: trSelector(state, props),
   }),
   { timelineFilter },
 )(TimelinePlay)

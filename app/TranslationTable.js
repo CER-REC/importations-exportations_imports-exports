@@ -109,6 +109,10 @@ const TranslationTable = fromJS({
       en: 'Patrick King, Spenser Jones, Rahul Kamal Bhaskar, Ben Cousins, Abhishek Sharma, and Charlie Cheung',
       fr: 'Patrick King, Spenser Jones, Rahul Kamal Bhaskar, Ben Cousins, Abhishek Sharma, and Charlie Cheung',
     },
+    closeWindow: {
+      en: 'Close About Window',
+      fr: 'Close About Window',
+    },
   },
 
   mainMenuBar: {
@@ -161,6 +165,10 @@ const TranslationTable = fromJS({
     and: {
       en: 'and',
       fr: 'and',
+    },
+    of: {
+      en: 'of',
+      fr: 'of',
     },
     activity: {
       options: {
@@ -278,7 +286,7 @@ const TranslationTable = fromJS({
     fr: 'hide CONFIDENTIALITY FR',
   },
 
-  electricityDataTypes: {
+  amounts: {
     CAN$: { en: 'CAN$', fr: 'CAN$' },
     'CAN$/MW.h': { en: 'CAN$/MW.h', fr: 'CAN$/MW.h' },
     'CN$/GJ': { en: 'CN$/GJ', fr: 'CN$/GJ' },
@@ -884,6 +892,60 @@ const TranslationTable = fromJS({
           },
         },
       },
+    },
+  },
+
+  chartOptions: {
+    scaleLinked: {
+      en: 'Chart Scale Linked',
+      fr: 'Chart Scale Linked',
+    },
+    scaleUnlinked: {
+      en: 'Chart Scale Unlinked',
+      fr: 'Chart Scale Unlinked',
+    },
+    timelineGroup: {
+      year: {
+        en: 'by YEAR',
+        fr: 'by YEAR',
+      },
+      quarter: {
+        en: 'by QUARTER',
+        fr: 'by QUARTER',
+      },
+    },
+  },
+
+  detailTotal: {
+    total: {
+      en: 'Total',
+      fr: 'Total',
+    },
+  },
+
+  timelinePlay: {
+    start: {
+      en: 'Start timeline playback',
+      fr: 'Start timeline playback',
+    },
+    stop: {
+      en: 'Stop timeline playback',
+      fr: 'Stop timeline playback',
+    },
+  },
+
+  timelineSeek: {
+    label: {
+      en: '$0 curtain at $1 quarter $2',
+      fr: '$0 curtain at $1 quarter $2',
+    },
+    start: {
+      en: 'Start',
+      fr: 'Start',
+    },
+    end: {
+      en: 'End',
+      fr: 'End',
     },
   },
 })
