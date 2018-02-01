@@ -8,6 +8,7 @@ import BarChart from './BarChart'
 import Axis from './Axis'
 import PortMap from './PortMap'
 import DetailSidebar from './DetailSidebar'
+import NaturalGasMapContainer from './NaturalGasMapContainer'
 import * as NaturalGasViewport from '../selectors/viewport/naturalGas'
 import Constants from '../Constants'
 
@@ -29,6 +30,9 @@ const NaturalGasVisualizationContainer = props => (
       aggregateKey="activity"
       flipped
       colour={Constants.getIn(['styleGuide', 'colours', 'ExportDefault'])}
+    />
+    <NaturalGasMapContainer
+    {...props.mapTiles}
     />
     <ExplanationPopovers
       xaxis={props.xaxis}

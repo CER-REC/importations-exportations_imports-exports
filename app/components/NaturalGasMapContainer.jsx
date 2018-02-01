@@ -1,16 +1,22 @@
 import React from 'react'
+import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
 import { geoConicConformal, geoPath } from 'd3-geo'
 import { feature } from 'topojson-client'
 
 import Constants from '../Constants'
 import MapLayoutGridConstant from '../MapLayoutGridConstant'
+import { aggregateLocationNaturalGasSelector } from '../selectors/data'
 
 class NaturalGasMapContainer extends React.PureComponent {
-  //get data from the selector in form 2 hrs
-  //  AB:{}
-  //  BC:{}
-  //  SK:{}
+
+  render(){
+    //done
+    //get data from the selector in form 2 hrs
+    //  AB:{}
+    //  BC:{}
+    //  SK:{}
+  //TODO
   //pass data to the map pieces 2 hrs
   //  create a maplayout for natural gas
   //check arrange by and update the order 
@@ -24,6 +30,14 @@ class NaturalGasMapContainer extends React.PureComponent {
   //  fetch data and pass it to the map pieces
   //populate map piece
   //  populate arrow position using constant file
+    return null
+  }
 }
 
-export default NaturalGasMapContainer
+const mapStateToprops = (state, props) => {
+  return {
+    selector: aggregateLocationNaturalGasSelector(state,props)
+  }
+}
+
+export default connect(mapStateToprops)(NaturalGasMapContainer)
