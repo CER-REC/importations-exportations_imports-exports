@@ -4,10 +4,9 @@ import { geoConicConformal, geoPath } from 'd3-geo'
 import { feature } from 'topojson-client'
 
 import Constants from '../Constants'
-import MapLayoutGridConstant from '../MapLayoutGridConstant'
 
 /* eslint-disable object-curly-newline */
-const Ports = MapLayoutGridConstant.getIn(['naturalGas', 'ports'], []).filter(v => (v.get('Latitude') && v.get('Longitude'))) // Strip missing coordinates
+const Ports = Constants.getIn(['dataloader', 'mapping', 'ports'], []).filter(v => (v.get('Latitude') && v.get('Longitude'))) // Strip missing coordinates
 /* eslint-enable */
 
 const viewbox = { width: 960.6, height: 931.4 }

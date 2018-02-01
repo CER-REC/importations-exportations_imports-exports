@@ -6,9 +6,25 @@ import { feature } from 'topojson-client'
 
 import Constants from '../Constants'
 import MapLayoutGridConstant from '../MapLayoutGridConstant'
-import { aggregateLocationNaturalGasSelector } from '../selectors/data'
+import { arrangeBy, binSelector, aggregateLocationNaturalGasSelector } from '../selectors/data'
 
 class NaturalGasMapContainer extends React.PureComponent {
+  orderBy(provinceList, arrangeBy){
+    return provinceList.map((points) => {
+      switch (arrangeBy){
+        case 'exports':
+        case 'imports':
+          return points.sort(
+            (a, b) => b.getIn(['activities', arrangeBy], 0) - a.getIn(['activities', arrangeBy], 0)
+          )
+        case 'location':
+        default:
+          return points.sort(
+            (a, b) => a.get('portName').localeCompare(b.get('portName'))
+          )
+      }
+    })
+  }
 
   render(){
     //done
@@ -17,6 +33,7 @@ class NaturalGasMapContainer extends React.PureComponent {
     //  BC:{}
     //  SK:{}
   //TODO
+  const arrangedData = this.orderBy(this.props.selector, this.props.arrangeBy)
   //pass data to the map pieces 2 hrs
   //  create a maplayout for natural gas
   //check arrange by and update the order 
@@ -36,6 +53,8 @@ class NaturalGasMapContainer extends React.PureComponent {
 
 const mapStateToprops = (state, props) => {
   return {
+    arrangeBy: arrangeBy(state, props),
+    bins: binSelector(state, props),
     selector: aggregateLocationNaturalGasSelector(state,props)
   }
 }

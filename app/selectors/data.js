@@ -2,7 +2,7 @@ import { createSelector } from 'reselect'
 import Immutable from 'immutable'
 
 import { visualizationSettings } from './visualizationSettings'
-import MapLayoutGridConstant from '../MapLayoutGridConstant'
+import Constants from '../Constants'
 
 const emptyMap = new Immutable.Map()
 const emptyList = new Immutable.List()
@@ -147,7 +147,7 @@ export const aggregateLocationPaddSelector = createSelector(
 export const aggregateLocationNaturalGasSelector = createSelector(
   filterByTimelineSelector,
   (points) => {
-    const ports = MapLayoutGridConstant.getIn(['naturalGas', 'ports'], Immutable.fromJS({}))
+    const ports = Constants.getIn(['dataloader', 'mapping', 'ports'], Immutable.fromJS({}))
     const result = points.reduce((acc, next) => {
       const port = ports.get(next.get('port'))
       if (typeof port === 'undefined') {
@@ -161,7 +161,9 @@ export const aggregateLocationNaturalGasSelector = createSelector(
         acc[province] = {}
       }
       if (!acc[province][portName]) {
-        acc[province][portName] = {}
+        acc[province][portName] = {
+          portName
+        }
         acc[province][portName].activities = {}
       }
       if (!acc[province][portName].activities[activityName]) {
