@@ -153,7 +153,9 @@ class SocialBar extends React.Component {
   }
 
   downloadImageClick() {
-    this.onClick = this.props.onClick()
+    if (this.props.expandSocialBar) {
+      this.props.imageDownloadClick()
+    }
   }
 
   downloadDataClick() {
@@ -285,7 +287,6 @@ class SocialBar extends React.Component {
 
   menuText() {
     const transformString = `translate(${this.props.viewport.get('x') - Constants.getIn(['socialBar', 'expandedWidth'])} ${this.props.viewport.get('y') + Constants.getIn(['socialBar', 'iconTextY'])})`
-    console.log(transformString)
     if (!this.props.expandSocialBar) {
       return null
     }
@@ -322,11 +323,11 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   onClick() {
-    dispatch(ShowAboutWindowCreator('about')) || dispatch(ShowImageDownloadWindow('imageDownload'))
+    dispatch(ShowAboutWindowCreator('about'))
   },
-  // downloadImageClick() {
-  //   dispatch(ShowImageDownloadWindow('imageDownload'))
-  // },
+  imageDownloadClick() {
+    dispatch(ShowImageDownloadWindow('imageDownload'))
+  },
   controlArrowClick() {
     dispatch(ExpandSocialBar())
   },
