@@ -187,7 +187,7 @@ const Constants = fromJS({
   },
 
   mapPieceTextStyle: {
-    x: 9.58,
+    x: 10.58,
     y: 10,
   },
   mapPieceArrowStyle: {

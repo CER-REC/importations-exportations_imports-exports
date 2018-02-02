@@ -63,6 +63,7 @@ class MapPiece extends React.Component {
         mapPieceHeight={this.props.dimensions.get('height')}
         name={this.props.data.get('name')}
         mapPieceProps={this.props.mapPieceProps}
+        styleClass='mapPieceText'
         text = {this.props.text}
       />
   }

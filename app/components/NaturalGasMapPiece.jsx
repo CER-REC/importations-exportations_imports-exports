@@ -32,6 +32,7 @@ class NaturalGasMapPiece extends MapPiece{
         mapPieceHeight={this.props.dimensions.get('height')}
         name={this.props.data.get('portName')}
         mapPieceProps={this.props.mapPieceProps}
+        styleClass = 'portLabel'
         text = {this.props.text}
       />
   }

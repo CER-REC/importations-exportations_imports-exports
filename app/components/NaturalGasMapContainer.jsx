@@ -99,7 +99,7 @@ class NaturalGasMapContainer extends React.PureComponent {
   } )
 
   return (
-    <g key='NaturalGasMapContainer' transform={`translate(${this.props.left + 50} ${this.props.top + 50})`}>
+    <g key='NaturalGasMapContainer' transform={`translate(${this.props.left + 50} ${this.props.top})`}>
       {layout.toArray()}
     </g>
   )
