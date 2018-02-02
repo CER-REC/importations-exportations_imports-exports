@@ -5,7 +5,10 @@ import Constants from '../Constants'
 
 export const activityOptions = createSelector(
   selectedVisualization,
-  vis => ((vis === 'crudeOil') ? ['exports'] : ['importsExports', 'imports', 'exports']),
+  vis => ((vis === 'crudeOil' || vis === 'refinedPetroleumProducts')
+    ? ['exports']
+    : ['importsExports', 'imports', 'exports']
+  ),
 )
 
 export const arrangeByOptions = () => (['location', 'imports', 'exports'])
