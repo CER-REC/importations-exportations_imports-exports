@@ -712,7 +712,7 @@ const MapLayoutGridConstant = fromJS({
       arrowPosition: 'down',
       arrowSpacing: -12,
       bottomMargin: 5,
-      topMargin: 5,
+      topMargin: 12,
       confidentialStyle: {
         fill: '#999',
         stroke: '#999',

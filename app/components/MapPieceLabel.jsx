@@ -18,7 +18,7 @@ class MapPieceLabel extends React.Component {
           <text className="explanationLabel" y={labelY} x="49" >
             {label}
           </text>
-                        </g>)
+        </g>)
       }
     }
     return labelElement

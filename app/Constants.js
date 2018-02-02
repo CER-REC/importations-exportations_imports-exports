@@ -194,7 +194,10 @@ const Constants = fromJS({
     x: -1,
     y: 5,
   },
-
+  mapPieceArrowStyleCenter: {
+    x: -1,
+    y: 10,
+  },
   aboutWindow: {
     width: 380,
   },
