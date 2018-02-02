@@ -8,8 +8,6 @@ import ModalSelector from './ModalSelector'
 import VisualizationContainer from './VisualizationContainer'
 import ViewportSelectors from '../selectors/viewport/'
 
-const ExplanationPopover = require('./ExplanationPopover.jsx')
-
 import './Workspace.scss'
 
 const Workspace = ({ svgSize, detailSidebarPosition, portalSvgSize }) => (
@@ -40,7 +38,6 @@ const Workspace = ({ svgSize, detailSidebarPosition, portalSvgSize }) => (
     <ModalSelector />
 
     <div id="popoverPortal">
-      <ExplanationPopover />
     </div>
   </div>
 )

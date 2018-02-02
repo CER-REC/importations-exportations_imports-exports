@@ -6,6 +6,8 @@ import Constants from '../Constants'
 
 const ExplanationSummonedCreator = require('../actionCreators/ExplanationSummonedCreator.js')
 
+import PopoverPortal from './PopoverPortal'
+import ExplanationPopover from './ExplanationPopover'
 import './ExplanationDot.scss'
 
 class ExplanationDot extends React.Component {
@@ -14,6 +16,7 @@ class ExplanationDot extends React.Component {
       xPosition: PropTypes.number.isRequired,
       yPosition: PropTypes.number.isRequired,
       showExplanations: PropTypes.bool.isRequired,
+      text: PropTypes.string.isRequired,
     }
   }
 
@@ -53,6 +56,9 @@ class ExplanationDot extends React.Component {
       {this.explanationDot()}
       {this.dotAnimation()}
     </g>
+    <PopoverPortal>
+      <ExplanationPopover text={this.props.text}/>
+    </PopoverPortal>
     </g>)
   }
 }

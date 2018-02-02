@@ -98,18 +98,6 @@ class TimelineSeek extends React.PureComponent {
     this.props.timelineFilter(fromJS(newRange))
   }
 
-  explanationDot() {
-    if(this.props.side !== 'start') {
-      return null
-    }
-    return (<g transform='translate(-9 2)'><ExplanationDot
-      key="timeSeekDot"
-      xPosition={19}
-      yPosition={11}
-    />
-    </g>)
-  }
-
   render() {
     const sideTransform = (this.props.side === 'start')
       ? `translate(${this.props.left} ${this.props.top})`
@@ -129,7 +117,6 @@ class TimelineSeek extends React.PureComponent {
               stroke={Constants.getIn(['styleGuide', 'colours', 'SandExtraDark'])}
               fill="white"
             />
-            { this.explanationDot() }
           </g>
         </SVGDrag>
       </g>

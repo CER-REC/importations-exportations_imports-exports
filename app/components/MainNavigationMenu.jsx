@@ -13,15 +13,6 @@ import SetVisualizationCreator from '../actionCreators/SetVisualizationCreator'
 import './MainNavigationMenu.scss'
 
 class MainNavigationMenu extends React.Component {
-  explanationDot() {
-    return (<g transform='translate(43 80)'>
-      <ExplanationDot
-        key="mainNavDot"
-        xPosition={20}
-        yPosition={10}
-    /></g>)
-  }
-
   render() {
     if(this.props.expandImportExportMenu) {
       return <g><MenuBarOption 
@@ -52,7 +43,7 @@ class MainNavigationMenu extends React.Component {
         language = {this.props.language}
       />
 
-      {this.explanationDot()}
+      
       </g>
     }
   }

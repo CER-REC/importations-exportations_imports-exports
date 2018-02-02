@@ -68,12 +68,6 @@ class MapPiece extends React.Component {
       stroke = 'black'
     }
 
-    let explanationDot = ''
-    if (this.props.data.get('name') === "NY") {
-      explanationDot = 
-        <g transform="translate(0 5)" id="newYorkDot"><ExplanationDot key="newYorkDot" xPosition={19} yPosition={10} /></g>
-    }
-
     let opacity = 1
     if (this.props.isSelected === true && this.props.isMapPieceSelected === false) {
       opacity = 0.10
@@ -104,7 +98,7 @@ class MapPiece extends React.Component {
         {this.drawArrow(this.props.legends, this.props.data, 'imports', this.props.styles, this.props.arrowProps)}
       </g>
       {confidentialIcon}
-      { explanationDot }</g>
+      </g>
     )
   }
 }

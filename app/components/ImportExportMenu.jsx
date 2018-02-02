@@ -37,6 +37,7 @@ class ImportExportMenu extends React.Component {
         key="mainNavDot"
         xPosition={18}
         yPosition={7}
+        text="Hello world"
     /></g>)
   }
 

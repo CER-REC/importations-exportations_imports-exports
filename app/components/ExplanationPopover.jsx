@@ -12,7 +12,7 @@ class ExplanationPopover extends React.Component {
 
   drawLine() {
     return <svg>
-      <g transform ='translate(0 0) scale(0.3)'>
+      <g transform =' scale(0.3)'>
         <path d="M89,67 C87,286 352,236 444,245"  stroke='#ff708a' strokeWidth ='2' fill='transparent'/>
       </g></svg>
     }
@@ -20,8 +20,17 @@ class ExplanationPopover extends React.Component {
   drawText() {
     return <div style={{
           position: 'absolute',
-          top: 175,
-          left: 210,
+          top: 120,
+          left: 120,
+          height: 'auto',
+          width: 80,
+          background: 'white',
+          opacity: '0.9',
+        }} className = 'explanationText'>
+      {this.props.text}
+    </div>
+    /*
+    return <div style={{
           height: 'auto',
           width: 80,
           background: 'white',
@@ -30,15 +39,20 @@ class ExplanationPopover extends React.Component {
       <strong>{Tr.getIn(['explanations','importExportTitle','bolded',this.props.language])}</strong>
       {Tr.getIn(['explanations','importExportTitle','text',this.props.language])}
     </div>
+    */
   }
 
   render() {
     if(!this.props.showExplanations) {
       return null
     }
-    return <div>
+    return <div style={{
+          position: 'absolute',
+          top: 105,
+          left: 120,
+        }}>
       {this.drawText()}
-      <g>{this.drawLine()}</g>
+      <g >{this.drawLine()}</g>
     </div>
   }
 }

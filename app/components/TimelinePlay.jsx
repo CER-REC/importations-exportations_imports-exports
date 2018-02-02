@@ -28,14 +28,7 @@ class TimelinePlay extends React.PureComponent {
     })
   }
 
-  explanationDot() {
-    return <g transform='translate(12 -6) scale(-1 1)'>
-      <ExplanationDot
-        key="timePlayDot"
-        xPosition={19}
-        yPosition={5} />
-      </g>
-  }
+
 
   onClick(e) {
     e.stopPropagation()
@@ -72,7 +65,7 @@ class TimelinePlay extends React.PureComponent {
           fill="white"
           onClick={this.onClick}
         />
-        {this.explanationDot()}
+        
       </g>
     )
   }
