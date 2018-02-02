@@ -55,7 +55,10 @@ export const activityGroupSelector = createSelector(
   unitSelector,
   selectedActivityGroup,
   (points, filterActivityGroup) =>
-    points.filter(point => (point.get('activityGroup') === filterActivityGroup)),
+    points.filter(point => (
+      point.get('activityGroup') === filterActivityGroup ||
+      point.get('activity') === filterActivityGroup
+    )),
 )
 
 const filterByTimelineSelector = createSelector(
