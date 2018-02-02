@@ -1,18 +1,18 @@
 import { createSelector } from 'reselect'
 
-import ViewportSelectors from './index'
+import { visualizationContentPosition } from './index'
 
-const canadaMapPosition = createSelector(
-  ViewportSelectors.visualizationContentPosition,
+export const canadaMapPosition = createSelector(
+  visualizationContentPosition,
   visContent => ({
     top: visContent.top,
     left: visContent.left,
     width: visContent.width,
-    height: 200,
+    height: 120,
   }),
 )
 
-const chartImportPosition = createSelector(
+export const chartImportPosition = createSelector(
   canadaMapPosition,
   prev => ({
     top: prev.top + prev.height,
@@ -22,7 +22,7 @@ const chartImportPosition = createSelector(
   }),
 )
 
-const chartAxisPosition = createSelector(
+export const chartAxisPosition = createSelector(
   chartImportPosition,
   prev => ({
     top: prev.top + prev.height,
@@ -32,7 +32,7 @@ const chartAxisPosition = createSelector(
   }),
 )
 
-const chartExportPosition = createSelector(
+export const chartExportPosition = createSelector(
   chartAxisPosition,
   prev => ({
     top: prev.top + prev.height,
@@ -42,17 +42,17 @@ const chartExportPosition = createSelector(
   }),
 )
 
-const usMapPosition = createSelector(
+export const usMapPosition = createSelector(
   chartExportPosition,
   prev => ({
-    top: prev.top + prev.height,
+    top: prev.top + prev.height + 50,
     left: prev.left,
     width: prev.width,
-    height: 300,
+    height: 200,
   }),
 )
 
-const powerPoolPosition = createSelector(
+export const powerPoolPosition = createSelector(
   usMapPosition,
   prev => ({
     top: prev.top + prev.height,
@@ -62,7 +62,7 @@ const powerPoolPosition = createSelector(
   }),
 )
 
-const mapPieceActivityExplanationPosition = createSelector(
+export const mapPieceActivityExplanationPosition = createSelector(
   usMapPosition,
   prev => ({
     // Currently this is hardcoded value
@@ -73,13 +73,3 @@ const mapPieceActivityExplanationPosition = createSelector(
     height: 50,
   }),
 )
-
-module.exports = {
-  canadaMapPosition,
-  chartImportPosition,
-  chartAxisPosition,
-  chartExportPosition,
-  usMapPosition,
-  powerPoolPosition,
-  mapPieceActivityExplanationPosition,
-}

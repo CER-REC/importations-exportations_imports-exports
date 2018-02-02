@@ -2,7 +2,8 @@ import React from 'react'
 import { connect } from 'react-redux'
 
 import { timelineFilter } from '../actions/visualizationSettings'
-import timelineSelectors from '../selectors/timeline'
+import { timelineYearScaleCalculation, timelineRange } from '../selectors/timeline'
+import { handleInteraction } from '../utilities'
 
 const ExplanationDot = require('./ExplanationDot.jsx')
 
@@ -15,41 +16,38 @@ class TimelinePlay extends React.PureComponent {
   constructor(props) {
     super(props)
     this.onClick = this.onClick.bind(this)
-    this.playInverval = null
+    this.state = { playInverval: null }
   }
 
   resetPlay() {
     const { timelineScale: yearScale } = this.props
-    clearInterval(this.playInterval)
-    this.playInterval = null
+    clearInterval(this.state.playInterval)
+    this.setState({ playInterval: null })
     this.props.timelineFilter({
       start: { year: yearScale.min, quarter: 1 },
       end: { year: yearScale.max, quarter: 4 },
     })
   }
 
-
-
-  onClick(e) {
-    e.stopPropagation()
-    e.preventDefault()
-
-    if (this.playInterval) { return this.resetPlay() }
+  onClick() {
+    if (this.state.playInterval) { return this.resetPlay() }
 
     const { timelineScale: yearScale } = this.props
-    this.playInterval = setInterval(() => {
-      let year = this.props.timelineRange.getIn(['start', 'year'])
-      let quarter = this.props.timelineRange.getIn(['start', 'quarter']) + 1
-      if (quarter > 4) {
-        year += 1
-        quarter = 1
-      }
-      if (year === yearScale.max && quarter === 4) { return this.resetPlay() }
-      this.props.timelineFilter({
-        start: { year, quarter },
-        end: { year, quarter },
-      })
-    }, 1000)
+    this.setState({
+      playInterval: setInterval(() => {
+        let year = this.props.timelineRange.getIn(['start', 'year'])
+        let quarter = this.props.timelineRange.getIn(['start', 'quarter']) + 1
+        if (quarter > 4) {
+          year += 1
+          quarter = 1
+        }
+        if (year === yearScale.max && quarter === 4) { return this.resetPlay() }
+        this.props.timelineFilter({
+          start: { year, quarter },
+          end: { year, quarter },
+        })
+      }, 1000),
+    })
     this.props.timelineFilter({
       start: { year: yearScale.min, quarter: 1 },
       end: { year: yearScale.min, quarter: 1 },
@@ -58,12 +56,16 @@ class TimelinePlay extends React.PureComponent {
 
   render() {
     return (
-      <g transform={`translate(${this.props.left} ${this.props.top})`}>
+      <g
+        transform={`translate(${this.props.left} ${this.props.top})`}
+        role="link"
+        aria-label={this.state.playInterval ? 'Stop timeline playback' : 'Start timeline playback'}
+        {...handleInteraction(this.onClick)}
+      >
         <polyline
           points="0,-10 10,0 0,10 0,-10"
           stroke="#a99372"
           fill="white"
-          onClick={this.onClick}
         />
         
       </g>
@@ -71,10 +73,10 @@ class TimelinePlay extends React.PureComponent {
   }
 }
 
-module.exports = connect(
+export default connect(
   (state, props) => ({
-    timelineRange: timelineSelectors.timelineRange(state, props),
-    timelineScale: timelineSelectors.timelineYearScaleCalculation(state, props),
+    timelineRange: timelineRange(state, props),
+    timelineScale: timelineYearScaleCalculation(state, props),
   }),
   { timelineFilter },
 )(TimelinePlay)

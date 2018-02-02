@@ -33,10 +33,10 @@ class MapPieceLabel extends React.Component {
       yAxis = this.props.mapPieceHeight - this.props.bottomMargin
     }
     return (<g>
-      <text className="mapPieceText" x={xAxis} y={yAxis} >
+      <text className="mapPieceText" x={xAxis} y={yAxis} aria-hidden>
         {name}
       </text>
-      {this.drawLabel(this.props.mapPieceProps, yAxis)}
+      {this.drawLabel(this.props.text, yAxis)}
             </g>)
   }
 }
@@ -44,4 +44,4 @@ const mapStateToProps = (state, props) => ({
   language: state.language,
 })
 
-module.exports = connect(mapStateToProps)(MapPieceLabel)
+export default connect(mapStateToProps)(MapPieceLabel)

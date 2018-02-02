@@ -55,4 +55,4 @@ DetailSidebar.propTypes = {
   children: PropTypes.node,
 }
 
-module.exports = DetailSidebar
+export default DetailSidebar

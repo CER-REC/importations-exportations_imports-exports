@@ -5,12 +5,19 @@ import { connect } from 'react-redux'
 
 import BarChart from './BarChart'
 import Axis from './Axis'
-import NaturalGasLiquidsViewport from '../selectors/viewport/naturalGasLiquids'
+import * as NaturalGasLiquidsViewport from '../selectors/viewport/naturalGasLiquids'
 import Constants from '../Constants'
+import USPadd from './Padds/USPadd'
+import CanadaMapContainer from './CanadaMapContainer'
+import { activityExplanationPosition } from '../selectors/viewport/menus'
+import NaturalGasLiquidsMapPieceActivityExplanation from './NaturalGasLiquidsMapPieceActivityExplanation'
 
 class NaturalGasLiquidsVisualizationContainer extends React.Component {
   render() {
     return (<g>
+      <CanadaMapContainer
+        {...this.props.canadaMap}
+      />
       <BarChart
         {...this.props.importChart}
         valueKey="imports"
@@ -28,12 +35,21 @@ class NaturalGasLiquidsVisualizationContainer extends React.Component {
         flipped
         colour={Constants.getIn(['styleGuide', 'colours', 'ExportDefault'])}
       />
-            </g>)
+      <USPadd
+        {...this.props.usPaddChart}
+      />
+      <NaturalGasLiquidsMapPieceActivityExplanation
+        {...this.props.mapPieceActivityExplanation}
+      />
+    </g>)
   }
 }
 
-module.exports = connect((state, props) => ({
+export default connect((state, props) => ({
+  canadaMap: NaturalGasLiquidsViewport.canadaImportMap(state, props),
   importChart: NaturalGasLiquidsViewport.chartImportPosition(state, props),
   axisPosition: NaturalGasLiquidsViewport.chartAxisPosition(state, props),
   exportChart: NaturalGasLiquidsViewport.chartExportPosition(state, props),
+  usPaddChart: NaturalGasLiquidsViewport.usPaddPosition(state, props),
+  mapPieceActivityExplanation: activityExplanationPosition(state, props),
 }))(NaturalGasLiquidsVisualizationContainer)

@@ -4,6 +4,7 @@
   "description": "visualization of import export data for the NEB",
   "main": "index.js",
   "scripts": {
+    "build:data": "babel-node ./data.js",
     "build:portmap:shp2json": "shp2json -n ./srcData/gpr_000b11a_e.shp -o ./srcData/shp2json.json",
     "build:portmap:geo2topo": "geo2topo -n regions=./srcData/shp2json.json -o ./srcData/geo2topo.json",
     "build:portmap:toposimplify": "toposimplify -n -S 1e-3 -F ./srcData/geo2topo.json -o ./srcData/toposimplify.json",
@@ -30,6 +31,7 @@
     "client-request": "^2.0.0",
     "css-loader": "^0.28.4",
     "d3-geo": "^1.9.1",
+    "dialog-polyfill": "^0.4.9",
     "domready": "^1.0.8",
     "dot-env": "0.0.1",
     "dotenv": "^4.0.0",
@@ -79,7 +81,7 @@
     "mocha-webpack": "^1.0.1",
     "react-test-renderer": "^16.1.1",
     "shapefile": "^0.6.6",
-    "simple-statistics": "^0.9.2",
+    "simple-statistics": "^5.2.1",
     "topojson-server": "^3.0.0",
     "topojson-simplify": "^3.0.2"
   }

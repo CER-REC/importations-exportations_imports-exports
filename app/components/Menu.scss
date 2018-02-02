@@ -1,0 +1,16 @@
+.menuGroup {
+  .bold {
+    font-family: "FiraSansCondensedSemibold", sans-serif;
+    fill: #666;
+    font-size: 13px;
+  }
+
+  font-family: "FiraSansCondensed", sans-serif;
+  fill: #999;
+  font-size: 13px;
+  dominant-baseline: central;
+
+  .menuOption, .bold {
+    text-transform: uppercase;
+  }
+}

@@ -7,5 +7,4 @@ const ElectricityExplanationShownReducer = (state = false, action) => {
   }
 }
 
-
-module.exports = ElectricityExplanationShownReducer
+export default ElectricityExplanationShownReducer

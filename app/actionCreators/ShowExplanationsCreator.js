@@ -5,4 +5,4 @@ function ShowExplanationsCreator() {
   }
 }
 
-module.exports = ShowExplanationsCreator
+export default ShowExplanationsCreator

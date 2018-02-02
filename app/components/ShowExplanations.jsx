@@ -3,10 +3,11 @@ import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
 import Constants from '../Constants'
-import Tr from '../TranslationTable'
+import TrSelector from '../selectors/translate'
 
 import ShowExplanationsCreator from '../actionCreators/ShowExplanationsCreator'
 import WorkspaceComputations from '../computations/WorkspaceComputations'
+import { handleInteraction } from '../utilities'
 
 import '../styles/Fonts.scss'
 
@@ -16,17 +17,8 @@ class ShowExplanations extends React.Component {
     return {
       onClick: PropTypes.func.isRequired,
       showExplanations: PropTypes.bool.isRequired,
-      language: PropTypes.string.isRequired,
+      Tr: PropTypes.func.isRequired,
     }
-  }
-
-  constructor(props) {
-    super(props)
-    this.onClick = this.props.onClick.bind(this)
-  }
-
-  onClick(e) {
-    e.preventDefault()
   }
 
   triangleLine() {
@@ -55,13 +47,14 @@ class ShowExplanations extends React.Component {
   }
 
   showText() {
+    const { Tr } = this.props
     const yaxis = WorkspaceComputations.showExplanationsY()
 
     let textColour = '#999999'
-    let explanationsText = `${Tr.getIn(['explanationShown', this.props.language])}`
+    let explanationsText = Tr('explanationShown')
     if (this.props.showExplanations) {
       textColour = '#ff708a'
-      explanationsText = `${Tr.getIn(['explanationHide', this.props.language])}`
+      explanationsText = Tr('explanationHide')
     }
 
     return (
@@ -78,7 +71,11 @@ class ShowExplanations extends React.Component {
 
   render() {
     return (
-      <g transform="translate(0 150)" onClick={this.onClick}>
+      <g
+        transform="translate(0 80)"
+        role="menuitem"
+        {...handleInteraction(this.props.onClick)}
+      >
         {this.showText()}
         {this.triangleLine()}
       </g>
@@ -86,16 +83,14 @@ class ShowExplanations extends React.Component {
   }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state, props) => ({
   viewport: state.viewport,
-  language: state.language,
   showExplanations: state.showExplanations,
+  Tr: TrSelector(state, props),
 })
 
-const mapDispatchToProps = dispatch => ({
-  onClick: () => {
-    dispatch(ShowExplanationsCreator())
-  },
-})
+const mapDispatchToProps = {
+  onClick: ShowExplanationsCreator,
+}
 
-module.exports = connect(mapStateToProps, mapDispatchToProps)(ShowExplanations)
+export default connect(mapStateToProps, mapDispatchToProps)(ShowExplanations)

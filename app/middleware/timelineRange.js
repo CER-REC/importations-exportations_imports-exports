@@ -24,4 +24,4 @@ const timelineRange = store => next => (action) => {
   }
 }
 
-module.exports = timelineRange
+export default timelineRange

@@ -15,4 +15,4 @@ const ViewportReducer = (state = defaults, action) => {
 }
 
 
-module.exports = ViewportReducer
+export default ViewportReducer

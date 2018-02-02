@@ -15,4 +15,4 @@ const DataLoaded = store => next => (action) => {
   }
 }
 
-module.exports = DataLoaded
+export default DataLoaded

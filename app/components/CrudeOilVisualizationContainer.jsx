@@ -5,12 +5,19 @@ import { connect } from 'react-redux'
 import ProportionChart from './ProportionChart'
 import BarChart from './BarChart'
 import Axis from './Axis'
-import CrudeOilViewport from '../selectors/viewport/crudeOil'
+import * as CrudeOilViewport from '../selectors/viewport/crudeOil'
 import Constants from '../Constants'
 import { positionShape } from '../propTypeShapes'
+import USPadd from './Padds/USPadd'
+import CAPadd from './Padds/CAPadd'
+import {activityExplanationPosition} from '../selectors/viewport/menus'
+import CrudeOilPieceActivityExplanation from './CrudeOilPieceActivityExplanation'
 
 const CrudeOilVisualizationContainer = props => (
   <g>
+    <CAPadd
+      {...props.canadaPaddChart}
+    />
     <ProportionChart
       {...props.transportChart}
       aggregateKey="transport"
@@ -43,6 +50,12 @@ const CrudeOilVisualizationContainer = props => (
       flipped
       colour={Constants.getIn(['styleGuide', 'colours', 'ExportDefault'])}
     />
+    <USPadd
+      {...props.usPaddChart}
+    />
+    <CrudeOilPieceActivityExplanation
+        {...props.mapPieceActivityExplanation}
+      />
   </g>
 )
 
@@ -56,9 +69,12 @@ CrudeOilVisualizationContainer.propTypes = {
   exportChart: PropTypes.shape(positionShape).isRequired,
 }
 
-module.exports = connect((state, props) => ({
+export default connect((state, props) => ({
   transportChart: CrudeOilViewport.chartTransportPosition(state, props),
   subtypeChart: CrudeOilViewport.chartSubtypePosition(state, props),
   axisPosition: CrudeOilViewport.chartAxisPosition(state, props),
   exportChart: CrudeOilViewport.chartExportPosition(state, props),
+  canadaPaddChart: CrudeOilViewport.canadaPaddPosition(state, props),
+  usPaddChart: CrudeOilViewport.usPaddPosition(state, props),
+  mapPieceActivityExplanation: activityExplanationPosition(state, props),
 }))(CrudeOilVisualizationContainer)
