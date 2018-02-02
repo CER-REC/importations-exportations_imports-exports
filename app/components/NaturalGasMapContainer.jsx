@@ -5,7 +5,7 @@ import { geoConicConformal, geoPath } from 'd3-geo'
 import { feature } from 'topojson-client'
 
 import Constants from '../Constants'
-import NaturalGasMapPiece from './MapPiece'
+import NaturalGasMapPiece from './NaturalGasMapPiece'
 import MapLayoutGridConstant from '../MapLayoutGridConstant'
 import { arrangeBy, binSelector, aggregateLocationNaturalGasSelector } from '../selectors/data'
 
