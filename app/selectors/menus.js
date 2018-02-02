@@ -1,6 +1,12 @@
+import { createSelector } from 'reselect'
+
+import { selectedVisualization } from './visualizationSettings'
 import Constants from '../Constants'
 
-export const activityOptions = () => (['imports', 'exports', 'importsExports'])
+export const activityOptions = createSelector(
+  selectedVisualization,
+  vis => ((vis === 'crudeOil') ? ['exports'] : ['importsExports', 'imports', 'exports']),
+)
 
 export const arrangeByOptions = () => (['location', 'imports', 'exports'])
 
