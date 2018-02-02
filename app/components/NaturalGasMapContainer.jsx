@@ -5,8 +5,12 @@ import { geoConicConformal, geoPath } from 'd3-geo'
 import { feature } from 'topojson-client'
 
 import Constants from '../Constants'
+import NaturalGasMapPiece from './MapPiece'
 import MapLayoutGridConstant from '../MapLayoutGridConstant'
 import { arrangeBy, binSelector, aggregateLocationNaturalGasSelector } from '../selectors/data'
+
+const mapPieceTransformStartTop = ( top, dimensions, mapPieceScale) =>  (top * ((mapPieceScale * dimensions.get('height')) + dimensions.get('topPadding')))
+const mapPieceTransformStartLeft = ( left, dimensions, mapPieceScale) => (left * ((mapPieceScale * dimensions.get('width')) + dimensions.get('leftPadding')))
 
 class NaturalGasMapContainer extends React.PureComponent {
   orderBy(provinceList, arrangeBy){
@@ -33,7 +37,72 @@ class NaturalGasMapContainer extends React.PureComponent {
     //  BC:{}
     //  SK:{}
   //TODO
+  const type = this.props.importExportVisualization
   const arrangedData = this.orderBy(this.props.selector, this.props.arrangeBy)
+
+  // fetching nested values
+  const mapLayoutGrid = MapLayoutGridConstant.get(type)
+
+  const dimensions = mapLayoutGrid.get('dimensions')
+  const styles = mapLayoutGrid.get('styles')
+  let layout = mapLayoutGrid.get('layout')
+  const mapPieceScale = mapLayoutGrid.get('mapPieceScale')
+  const rowPadding = 0
+  const columnPadding = 50
+
+  let leftPadding = 0
+  let topPadding = 0
+  layout =  layout.map((value) => {
+    const ports = arrangedData.get(value)
+    const portsCount = ports.count()
+    const maximunRows = portsCount > 7 ? Math.round(portsCount / 2): portsCount
+    
+    let renderingNumber = 1
+    let leftRendered = 0
+    let row = 1
+    let column = 0
+
+    const mapLayout = ports.map( (port,key) => {
+      if(row > maximunRows) {
+        column += 1
+        row = 1
+        topPadding = 0 
+      }
+      //x1 = left
+      //y1 = top
+      const x1 = mapPieceTransformStartLeft(column, dimensions, mapPieceScale) + leftPadding
+      const y1 = mapPieceTransformStartTop(row++, dimensions, mapPieceScale) + topPadding
+
+      topPadding += rowPadding
+      return <NaturalGasMapPiece
+        key={`NaturalGasMapPiece_${port.get('Province')}_${port.get('portName')}`}
+        data={port}
+        dimensions={dimensions}
+        bins={this.props.bins}
+        styles={styles}
+        isMapPieceSelected={false}
+        isSelected={false}
+        x1={x1}
+        y1={y1}
+      />
+    }) 
+    leftPadding += dimensions.get('width') + columnPadding 
+    column += 1
+    topPadding = 0
+    row = 0
+    return (
+      <g key={`NaturalGasMap_${value}`} >
+        <text x={leftPadding - columnPadding - dimensions.get('width')}>{value}</text>
+        {mapLayout.toArray()}
+      </g>
+    )
+  } )
+
+  return (
+    <g key='NaturalGasMapContainer' transform={`translate(${this.props.left + 50} ${this.props.top + 50})`}>
+      {layout.toArray()}
+    </g>
+  )
   //pass data to the map pieces 2 hrs
   //  create a maplayout for natural gas
   //check arrange by and update the order 
@@ -47,12 +116,12 @@ class NaturalGasMapContainer extends React.PureComponent {
   //  fetch data and pass it to the map pieces
   //populate map piece
   //  populate arrow position using constant file
-    return null
   }
 }
 
 const mapStateToprops = (state, props) => {
   return {
+    importExportVisualization: state.importExportVisualization,
     arrangeBy: arrangeBy(state, props),
     bins: binSelector(state, props),
     selector: aggregateLocationNaturalGasSelector(state,props)

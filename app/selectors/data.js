@@ -151,7 +151,7 @@ export const aggregateLocationNaturalGasSelector = createSelector(
     const result = points.reduce((acc, next) => {
       const port = ports.get(next.get('port'))
       if (typeof port === 'undefined') {
-        console.log(`missing data for ${next.get('port')} in the constant list.`)
+        //console.log(`missing data for ${next.get('port')} in the constant list.`)
         return acc
       }
       const province = port.get('Province')
