@@ -32,12 +32,14 @@ class MapPieceLabel extends React.Component {
     if (this.props.labelPosition === 'down') {
       yAxis = this.props.mapPieceHeight - this.props.bottomMargin
     }
-    return (<g>
-      <text className="mapPieceText" x={xAxis} y={yAxis} aria-hidden>
-        {name}
-      </text>
-      {this.drawLabel(this.props.text, yAxis)}
-            </g>)
+    return (
+      <g>
+        <text className="mapPieceText" x={xAxis} y={yAxis} aria-hidden>
+          {name}
+        </text>
+        {this.drawLabel(this.props.text, yAxis)}
+      </g>
+    )
   }
 }
 const mapStateToProps = (state, props) => ({
