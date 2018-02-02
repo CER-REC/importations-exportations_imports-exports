@@ -4,6 +4,7 @@ import Immutable from 'immutable'
 
 import ImportExportArrow from './ImportExportArrow'
 import MapPiece from './MapPiece'
+import MapPieceLabel from './MapPieceLabel'
 
 class NaturalGasMapPiece extends MapPiece{
   drawArrow(legends, data, type, styles, arrowProps) {
@@ -21,6 +22,18 @@ class NaturalGasMapPiece extends MapPiece{
       />)
     }
     return ''
+  }
+
+  renderMapPieceLabel(){
+    return <MapPieceLabel
+        labelPosition={this.props.styles.get('labelPosition')}
+        topMargin={this.props.styles.get('bottomMargin')}
+        bottomMargin={this.props.styles.get('topMargin')}
+        mapPieceHeight={this.props.dimensions.get('height')}
+        name={this.props.data.get('portName')}
+        mapPieceProps={this.props.mapPieceProps}
+        text = {this.props.text}
+      />
   }
 }
 
