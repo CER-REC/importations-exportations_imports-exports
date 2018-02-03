@@ -8,12 +8,15 @@ import Constants from '../Constants'
 import NaturalGasMapPiece from './NaturalGasMapPiece'
 import MapLayoutGridConstant from '../MapLayoutGridConstant'
 import { arrangeBy, binSelector, aggregateLocationNaturalGasSelector } from '../selectors/data'
+import { getSelectionSettings } from '../selectors/naturalGasSelector'
+import { handleInteraction } from '../utilities'
+import { setSelection } from '../actions/visualizationSettings'
 
 const mapPieceTransformStartTop = ( top, dimensions, mapPieceScale) =>  (top * ((mapPieceScale * dimensions.get('height')) + dimensions.get('topPadding')))
 const mapPieceTransformStartLeft = ( left, dimensions, mapPieceScale) => (left * ((mapPieceScale * dimensions.get('width')) + dimensions.get('leftPadding')))
 
 class NaturalGasMapContainer extends React.PureComponent {
-  orderBy(provinceList, arrangeBy){
+  orderBy = (provinceList, arrangeBy) => {
     return provinceList.map((points) => {
       switch (arrangeBy){
         case 'exports':
@@ -30,17 +33,49 @@ class NaturalGasMapContainer extends React.PureComponent {
     })
   }
 
+  onClick = ( portName, provinceName = null) => {
+    //Note here country is province as don't want to chnage state data structure
+    const selection =  this.props.selectionSettings
+    let ports = []
+    let provinces = []
+    if(provinceName !== null){
+      provinces = [provinceName]
+      const provinceExists = selection.get('provinces').indexOf(provinceName)
+      if (provinceExists === -1) {
+        provinces = selection.get('provinces').push(provinceName).toJS()
+      } else {
+        provinces = selection.get('provinces').delete(provinceExists)
+      }
+    } else{
+      const portExists = selection.get('ports').indexOf(portName)
+      if (portExists === -1) {
+        ports = selection.get('ports').push(portName).toJS()
+      } else {
+        ports = selection.get('ports').delete(portExists)
+      }
+    }
+    this.props.onMapPieceClick({
+      provinces,
+      ports,
+    })
+  }
+
+  isMapPieceSelected = (port, province) => {
+    const isPortSelected = this.props.selectionSettings.get('ports').indexOf(port)
+    const isProvinceSelected = this.props.selectionSettings.get('provinces').indexOf(province)
+    if (isPortSelected !== -1 || isProvinceSelected !== -1) { return true }
+    return false
+  }
+
+  isSelected() {
+    const length = this.props.selectionSettings.get('ports').count() + this.props.selectionSettings.get('provinces').count()
+    return (length > 0)
+  }
+
   render(){
-    //done
-    //get data from the selector in form 2 hrs
-    //  AB:{}
-    //  BC:{}
-    //  SK:{}
-  //TODO
   const type = this.props.importExportVisualization
   const arrangedData = this.orderBy(this.props.selector, this.props.arrangeBy)
 
-  // fetching nested values
   const mapLayoutGrid = MapLayoutGridConstant.get(type)
 
   const dimensions = mapLayoutGrid.get('dimensions')
@@ -74,17 +109,19 @@ class NaturalGasMapContainer extends React.PureComponent {
       const y1 = mapPieceTransformStartTop(row++, dimensions, mapPieceScale) + topPadding
 
       topPadding += rowPadding
-      return <NaturalGasMapPiece
-        key={`NaturalGasMapPiece_${port.get('Province')}_${port.get('portName')}`}
-        data={port}
-        dimensions={dimensions}
-        bins={this.props.bins}
-        styles={styles}
-        isMapPieceSelected={false}
-        isSelected={false}
-        x1={x1}
-        y1={y1}
-      />
+      return (<g key={`NaturalGasMapPiece_${port.get('Province')}_${port.get('portName')}`} 
+        {...handleInteraction(this.onClick, port.get('portName'))}>
+          <NaturalGasMapPiece
+            data={port}
+            dimensions={dimensions}
+            bins={this.props.bins}
+            styles={styles}
+            isMapPieceSelected={this.isMapPieceSelected( port.get('portName'), value)}
+            isSelected={this.isSelected()}
+            x1={x1}
+            y1={y1}
+          />
+        </g>)
     }) 
     leftPadding += dimensions.get('width') + columnPadding 
     column += 1
@@ -92,7 +129,8 @@ class NaturalGasMapContainer extends React.PureComponent {
     row = 0
     return (
       <g key={`NaturalGasMap_${value}`} >
-        <text x={leftPadding - columnPadding - dimensions.get('width')}>{value}</text>
+        <text x={leftPadding - columnPadding - dimensions.get('width')} 
+        {...handleInteraction(this.onClick, '', value)}>{value}</text>
         {mapLayout.toArray()}
       </g>
     )
@@ -103,29 +141,18 @@ class NaturalGasMapContainer extends React.PureComponent {
       {layout.toArray()}
     </g>
   )
-  //pass data to the map pieces 2 hrs
-  //  create a maplayout for natural gas
-  //check arrange by and update the order 
-  // rearrange the map pieces alphabatically or by othegr params
-  // get order for the provinces constant file
-  // [BC, AB, SK]
-  //   iterate over the order from the constant file
-  // fetch number of columns and translate position using the add newline after cloumn is filled and if its last then center it to the middle
-  // fetch data from the selector on the basis of key and pass it to the map pieces
-  //create map piece
-  //  fetch data and pass it to the map pieces
-  //populate map piece
-  //  populate arrow position using constant file
   }
 }
+const mapDispatchToProps = { onMapPieceClick: setSelection }
 
 const mapStateToprops = (state, props) => {
   return {
     importExportVisualization: state.importExportVisualization,
     arrangeBy: arrangeBy(state, props),
     bins: binSelector(state, props),
-    selector: aggregateLocationNaturalGasSelector(state,props)
+    selector: aggregateLocationNaturalGasSelector(state,props),
+    selectionSettings: getSelectionSettings(state, props),
   }
 }
 
-export default connect(mapStateToprops)(NaturalGasMapContainer)
+export default connect(mapStateToprops, mapDispatchToProps)(NaturalGasMapContainer)

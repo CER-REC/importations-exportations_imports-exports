@@ -39,6 +39,8 @@ const initialVisualizationSettings = store => next => (action) => {
             country: null,
             origins: [],
             destinations: {},
+            provinces: [],
+            ports: [],
           },
           timeline: {
             scaleLinked: true,

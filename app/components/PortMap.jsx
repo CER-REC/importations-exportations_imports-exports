@@ -1,6 +1,8 @@
 import React from 'react'
+import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
 import { geoConicConformal, geoPath } from 'd3-geo'
+import { getSelectionSettings } from '../selectors/naturalGasSelector'
 import { feature } from 'topojson-client'
 
 import Constants from '../Constants'
@@ -75,24 +77,51 @@ class PortMap extends React.PureComponent {
       .translate([(viewbox.width / 2) - 75, viewbox.height / 2])
       .precision(0.2)
   }
+  isPortSelected = (port, province) => {
+    const isPortSelected = this.props.selectionSettings.get('ports').indexOf(port)
+    const isProvinceSelected = this.props.selectionSettings.get('provinces').indexOf(province)
+    if (isPortSelected !== -1 || isProvinceSelected !== -1) { return true }
+    return false
+  }
 
-  render() {
-    if (!this.state.topoData.bbox) { return null }
-    const projection = geoPath().projection(this.projection())
-    const portDots = Ports.map((port) => {
+  isSelected() {
+    const length = this.props.selectionSettings.get('ports').count() + this.props.selectionSettings.get('provinces').count()
+    return (length > 0)
+  }
+
+  renderDots(ports, projection){
+    if(ports === null){
+      return null
+    }
+    return ports.map((port) => {
+      const portSelected = this.isPortSelected(port.get('Port Name'), port.get('Province'))
       const position = projection.pointRadius(10)({
         type: 'Point',
         coordinates: [port.get('Longitude'), port.get('Latitude')],
       })
+      const fillColor = portSelected? Constants.getIn(['styleGuide', 'colours', 'NeutralMedium']) : Constants.getIn(['styleGuide', 'colours', 'SandMedium'])
       return (
         <path
           key={port.get('Port Name')}
           d={position}
-          fill={Constants.getIn(['styleGuide', 'colours', 'SandMedium'])}
+          fill={fillColor}
         />
       )
     })
-
+  }
+  render() {
+    if (!this.state.topoData.bbox) { return null }
+    const projection = geoPath().projection(this.projection())
+    let nonSelected = null
+    let selected = null
+    if(this.isSelected()){
+      nonSelected = Ports.filter(port => !this.isPortSelected(port.get('Port Name'), port.get('Province')))
+      selected = Ports.filter(port => this.isPortSelected(port.get('Port Name'), port.get('Province')))
+    } else {
+      selected = Ports
+    }
+    const portDotsNonSelected = this.renderDots(nonSelected, projection)
+    const portDotsSelected = this.renderDots(selected, projection)
     return (
       <svg width="100%" height="100%" viewBox={`0 0 ${viewbox.width} ${viewbox.height}`}>
         <g className="regions">
@@ -109,10 +138,17 @@ class PortMap extends React.PureComponent {
             ))
           }
         </g>
-        {portDots.toArray()}
+        {(nonSelected !== null && portDotsNonSelected.count() > 0)?portDotsNonSelected.toArray():null}
+        {portDotsSelected.toArray()}
       </svg>
     )
   }
 }
 
-export default PortMap
+const mapStateToprops = (state, props) => {
+  return {
+    selectionSettings: getSelectionSettings(state, props),
+  }
+}
+
+export default connect(mapStateToprops)(PortMap)
