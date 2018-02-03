@@ -34,7 +34,6 @@ class NaturalGasMapContainer extends React.PureComponent {
   }
 
   onClick = ( portName, provinceName = null) => {
-    //Note here country is province as don't want to chnage state data structure
     const selection =  this.props.selectionSettings
     let ports = []
     let provinces = []
