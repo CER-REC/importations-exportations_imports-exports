@@ -12,7 +12,7 @@ import { getSelectionSettings } from '../selectors/naturalGasSelector'
 import { handleInteraction } from '../utilities'
 import { setSelection } from '../actions/visualizationSettings'
 
-const mapPieceTransformStartTop = ( top, dimensions, mapPieceScale) =>  (top * ((mapPieceScale * dimensions.get('height')) + dimensions.get('topPadding')))
+const mapPieceTransformStartTop = ( top, dimensions, mapPieceScale) =>  top * ((mapPieceScale * dimensions.get('height')) + dimensions.get('topPadding'))
 const mapPieceTransformStartLeft = ( left, dimensions, mapPieceScale) => (left * ((mapPieceScale * dimensions.get('width')) + dimensions.get('leftPadding')))
 
 class NaturalGasMapContainer extends React.PureComponent {
@@ -104,10 +104,10 @@ class NaturalGasMapContainer extends React.PureComponent {
       }
       //x1 = left
       //y1 = top
-      const x1 = mapPieceTransformStartLeft(column, dimensions, mapPieceScale) + leftPadding
-      const y1 = mapPieceTransformStartTop(row++, dimensions, mapPieceScale) + topPadding
-
+      const left = mapPieceTransformStartLeft(column, dimensions, mapPieceScale) + leftPadding
+      const top = mapPieceTransformStartTop(row, dimensions, mapPieceScale) + topPadding
       topPadding += rowPadding
+      row +=1
       return (<g key={`NaturalGasMapPiece_${port.get('Province')}_${port.get('portName')}`} 
         {...handleInteraction(this.onClick, port.get('portName'))}>
           <NaturalGasMapPiece
@@ -117,18 +117,20 @@ class NaturalGasMapContainer extends React.PureComponent {
             styles={styles}
             isMapPieceSelected={this.isMapPieceSelected( port.get('portName'), value)}
             isSelected={this.isSelected()}
-            x1={x1}
-            y1={y1}
+            x1={left}
+            y1={top}
           />
         </g>)
     }) 
+    const provinceTextPosition =  portsCount > 7 ? leftPadding +  dimensions.get('width')*0.7 : leftPadding + dimensions.get('width')*0.20
     leftPadding += dimensions.get('width') + columnPadding 
+    leftPadding = portsCount > 7 ? leftPadding + columnPadding: leftPadding
     column += 1
     topPadding = 0
     row = 0
     return (
       <g key={`NaturalGasMap_${value}`} >
-        <text x={leftPadding - columnPadding - dimensions.get('width')} 
+        <text className="portProvinceLabel" x={ provinceTextPosition } y={dimensions.get('topPadding')} 
         {...handleInteraction(this.onClick, '', value)}>{value}</text>
         {mapLayout.toArray()}
       </g>
