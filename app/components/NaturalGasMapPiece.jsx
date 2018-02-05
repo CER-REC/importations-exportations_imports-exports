@@ -8,20 +8,20 @@ import MapPieceLabel from './MapPieceLabel'
 
 class NaturalGasMapPiece extends MapPiece{
   drawArrow(legends, data, type, styles, arrowProps) {
-    if (data.get(type) !== 0) {
-      let color = this.getArrowColor(type, data.getIn(['activities',type]))
-      if(typeof this.props.arrowProps !== 'undefined' && typeof this.props.arrowProps.get('fill') !== 'undefined'){
-        color = this.props.arrowProps.get('fill') 
-      }
-      return (<ImportExportArrow
-        arrowSpacing={styles.get('arrowSpacing')}
-        type={type}
-        color= {color}
-        arrowProps={arrowProps}
-        text = {this.props.text}
-      />)
+    if (data.get(type) === 0) {
+      return null
     }
-    return ''
+    let color = this.getArrowColor(type, data.getIn(['activities',type]))
+    if(typeof this.props.arrowProps !== 'undefined' && typeof this.props.arrowProps.get('fill') !== 'undefined'){
+      color = this.props.arrowProps.get('fill') 
+    }
+    return (<ImportExportArrow
+      arrowSpacing={styles.get('arrowSpacing')}
+      type={type}
+      color= {color}
+      arrowProps={arrowProps}
+      text = {this.props.text}
+    />)
   }
 
   renderMapPieceLabel(){

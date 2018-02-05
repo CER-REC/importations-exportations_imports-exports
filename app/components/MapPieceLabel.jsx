@@ -74,7 +74,6 @@ class MapPieceLabel extends React.Component {
       <g>
         {this.renderText(name, xAxis, yAxis)}
         {this.drawLabel(this.props.text, yAxis)}
-        }
       </g>
     )
   }

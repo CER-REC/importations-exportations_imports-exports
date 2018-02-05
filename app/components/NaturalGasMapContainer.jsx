@@ -72,76 +72,76 @@ class NaturalGasMapContainer extends React.PureComponent {
   }
 
   render(){
-  const type = this.props.importExportVisualization
-  const arrangedData = this.orderBy(this.props.selector, this.props.arrangeBy)
+    const type = this.props.importExportVisualization
+    const arrangedData = this.orderBy(this.props.selector, this.props.arrangeBy)
 
-  const mapLayoutGrid = MapLayoutGridConstant.get(type)
+    const mapLayoutGrid = MapLayoutGridConstant.get(type)
 
-  const dimensions = mapLayoutGrid.get('dimensions')
-  const styles = mapLayoutGrid.get('styles')
-  let layout = mapLayoutGrid.get('layout')
-  const mapPieceScale = mapLayoutGrid.get('mapPieceScale')
-  const rowPadding = 0
-  const columnPadding = 50
+    const dimensions = mapLayoutGrid.get('dimensions')
+    const styles = mapLayoutGrid.get('styles')
+    let layout = mapLayoutGrid.get('layout')
+    const mapPieceScale = mapLayoutGrid.get('mapPieceScale')
+    const rowPadding = 0
+    const columnPadding = 50
 
-  let leftPadding = 0
-  let topPadding = 0
-  layout =  layout.map((value) => {
-    const ports = arrangedData.get(value)
-    const portsCount = ports.count()
-    const maximunRows = portsCount > 7 ? Math.round(portsCount / 2): portsCount
-    
-    let renderingNumber = 1
-    let leftRendered = 0
-    let row = 1
-    let column = 0
+    let leftPadding = 0
+    let topPadding = 0
+    layout =  layout.map((value) => {
+      const ports = arrangedData.get(value)
+      const portsCount = ports.count()
+      const maximunRows = portsCount > 7 ? Math.ceil(portsCount / 2): portsCount
+      
+      let renderingNumber = 1
+      let leftRendered = 0
+      let row = 1
+      let column = 0
 
-    const mapLayout = ports.map( (port,key) => {
-      if(row > maximunRows) {
-        column += 1
-        row = 1
-        topPadding = 0 
-      }
-      //x1 = left
-      //y1 = top
-      const left = mapPieceTransformStartLeft(column, dimensions, mapPieceScale) + leftPadding
-      const top = mapPieceTransformStartTop(row, dimensions, mapPieceScale) + topPadding
-      topPadding += rowPadding
-      row +=1
-      return (<g key={`NaturalGasMapPiece_${port.get('Province')}_${port.get('portName')}`} 
-        {...handleInteraction(this.onClick, port.get('portName'))}>
-          <NaturalGasMapPiece
-            data={port}
-            dimensions={dimensions}
-            bins={this.props.bins}
-            styles={styles}
-            isMapPieceSelected={this.isMapPieceSelected( port.get('portName'), value)}
-            isSelected={this.isSelected()}
-            x1={left}
-            y1={top}
-          />
-        </g>)
-    }) 
-    const provinceTextPosition =  portsCount > 7 ? leftPadding +  dimensions.get('width')*0.7 : leftPadding + dimensions.get('width')*0.20
-    leftPadding += dimensions.get('width') + columnPadding 
-    leftPadding = portsCount > 7 ? leftPadding + columnPadding: leftPadding
-    column += 1
-    topPadding = 0
-    row = 0
+      const mapLayout = ports.map( (port,key) => {
+        if(row > maximunRows) {
+          column += 1
+          row = 1
+          topPadding = 0 
+        }
+        //x1 = left
+        //y1 = top
+        const left = mapPieceTransformStartLeft(column, dimensions, mapPieceScale) + leftPadding
+        const top = mapPieceTransformStartTop(row, dimensions, mapPieceScale) + topPadding
+        topPadding += rowPadding
+        row +=1
+        return (<g key={`NaturalGasMapPiece_${port.get('Province')}_${port.get('portName')}`} 
+          {...handleInteraction(this.onClick, port.get('portName'))}>
+            <NaturalGasMapPiece
+              data={port}
+              dimensions={dimensions}
+              bins={this.props.bins}
+              styles={styles}
+              isMapPieceSelected={this.isMapPieceSelected( port.get('portName'), value)}
+              isSelected={this.isSelected()}
+              x1={left}
+              y1={top}
+            />
+          </g>)
+      }) 
+      const provinceTextPosition =  portsCount > 7 ? leftPadding +  dimensions.get('width')*0.7 : leftPadding + dimensions.get('width')*0.20
+      leftPadding += dimensions.get('width') + columnPadding 
+      leftPadding = portsCount > 7 ? leftPadding + columnPadding: leftPadding
+      column += 1
+      topPadding = 0
+      row = 0
+      return (
+        <g key={`NaturalGasMap_${value}`} >
+          <text className="portProvinceLabel" x={ provinceTextPosition } y={dimensions.get('topPadding')} 
+          {...handleInteraction(this.onClick, '', value)}>{value}</text>
+          {mapLayout.toArray()}
+        </g>
+      )
+    } )
+
     return (
-      <g key={`NaturalGasMap_${value}`} >
-        <text className="portProvinceLabel" x={ provinceTextPosition } y={dimensions.get('topPadding')} 
-        {...handleInteraction(this.onClick, '', value)}>{value}</text>
-        {mapLayout.toArray()}
+      <g key='NaturalGasMapContainer' transform={`translate(${this.props.left + 50} ${this.props.top})`}>
+        {layout.toArray()}
       </g>
     )
-  } )
-
-  return (
-    <g key='NaturalGasMapContainer' transform={`translate(${this.props.left + 50} ${this.props.top})`}>
-      {layout.toArray()}
-    </g>
-  )
   }
 }
 const mapDispatchToProps = { onMapPieceClick: setSelection }
