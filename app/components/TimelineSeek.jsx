@@ -158,8 +158,10 @@ class TimelineSeek extends React.PureComponent {
         yPosition={10}
         lineX={70}
         lineY={160}
-        textX={150}
-        textY={280}
+        textX={50}
+        textY={40}
+        containerX={this.props.left + this.state.offset}
+        containerY={this.props.top}
         text="Drag to select time frame"
     /></g>)
   }
@@ -181,13 +183,12 @@ class TimelineSeek extends React.PureComponent {
         >
           <g
             transform={`translate(${this.state.offset - 12} 0)`}
-          >
+          > {this.timeSeekExplanation()}
             <polygon
               points="7,0 10,0 10,26 0,26"
               stroke={Constants.getIn(['styleGuide', 'colours', 'SandExtraDark'])}
               fill="white"
             />
-            {this.timeSeekExplanation()}
           </g>
         </SVGDrag>
       </g>

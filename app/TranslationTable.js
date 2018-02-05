@@ -302,53 +302,33 @@ const TranslationTable = fromJS({
 
   explanations: {
     importExportTitle: {
-      bolded: {
-        en: 'Click',
-        fr: 'Click',
-      },
       text: {
-        en: ' + to see more options',
-        fr: ' + to see more options FR',
+        en: 'Click + to see more options',
+        fr: 'Click + to see more options FR',
       },
     },
     electricity: {
-      bolded: {
-        en: 'Electricity',
-        fr: 'Electricity',
-      },
       text: {
-        en: ' is the selected energy product',
-        fr: ' is the selected energy product FR',
+        en: 'Electricity is the selected energy product',
+        fr: 'Electricity is the selected energy product FR',
       },
     },
     timeSeek: {
-      bolded: {
-        en: 'Drag',
-        fr: 'TODO',
-      },
       text: {
-        en: ' to select time frame',
-        fr: ' to select time frame FR',
+        en: 'Drag to select time frame',
+        fr: 'Drag to select time frame FR',
       },
     },
     playButton: {
-      bolded: {
-        en: 'Click',
-        fr: 'Click TODO',
-      },
       text: {
-        en: ' play to see how electricity changes over time',
-        fr: ' play to see how electricity changes over time FR',
+        en: 'Click play to see how electricity changes over time',
+        fr: 'Click play to see how electricity changes over time FR',
       },
     },
     newYork: {
-      bolded: {
-        en: 'New York',
-        fr: 'New York',
-      },
       text: {
-        en: ' has the highest exports into the US as well as the highest imports from the US',
-        fr: ' has the highest exports into the US as well as the highest imports from the US FR',
+        en: 'New York has the highest exports into the US as well as the highest imports from the US',
+        fr: 'New York has the highest exports into the US as well as the highest imports from the US FR',
       },
     },
   },

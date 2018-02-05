@@ -51,30 +51,19 @@ class Menu extends React.PureComponent {
   }
 
   importExportExplanation() {
+    if (this.props.name !== 'activity') { return }
     return (<g>
       <ExplanationDot
         linePath="M80,80 C117,190 223,168 406,171"
-        xPosition={149}
-        yPosition={62}
-        lineX={62}
-        lineY={38}
-        textX={120}
-        textY={125}
+        xPosition={150}
+        yPosition={0}
+        lineX={80}
+        lineY={80}
+        textX={35}
+        textY={35}
+        containerX={this.props.left}
+        containerY={this.props.top}
         text="Click + to see more options"
-    /></g>)
-  }
-
-  electricityExplanation() {
-    return (<g>
-      <ExplanationDot
-        linePath="M110,43 C248,257 312,213 633,213"
-        xPosition={92}
-        yPosition={88}
-        lineX={30}
-        lineY={50}
-        textX={140}
-        textY={165}
-        text="Electricity is the selected energy product"
     /></g>)
   }
 
@@ -156,9 +145,8 @@ class Menu extends React.PureComponent {
       <g transform={`translate(${this.props.left} ${this.props.top})`} className="menuGroup">
         {this.renderTitle()}
         {this.renderOptions()}
+        {this.importExportExplanation()}
       </g>
-      {this.importExportExplanation()}
-      {this.electricityExplanation()}
     </g>
     )
   }

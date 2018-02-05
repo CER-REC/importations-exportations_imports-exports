@@ -4,8 +4,6 @@ import PropTypes from 'prop-types'
 
 import Constants from '../Constants'
 
-const ExplanationSummonedCreator = require('../actionCreators/ExplanationSummonedCreator.js')
-
 import PopoverPortal from './PopoverPortal'
 import ExplanationPopover from './ExplanationPopover'
 import './ExplanationDot.scss'
@@ -20,6 +18,8 @@ class ExplanationDot extends React.Component {
       lineX: PropTypes.number.isRequired,
       lineY: PropTypes.number.isRequired,
       linePath: PropTypes.string.isRequired,
+      textX: PropTypes.number.isRequired,
+      textY: PropTypes.number.isRequired,
     }
   }
 
@@ -36,19 +36,45 @@ class ExplanationDot extends React.Component {
   explanationDot() {
     return (<g id="circle">
       <circle
-      cx={this.props.xPosition}
-      cy={this.props.yPosition}
-      r={Constants.getIn(['explanationDot', 'radiusStart'])}
-      fill="#ff708a"/></g>)
+        cx={this.props.xPosition}
+        cy={this.props.yPosition}
+        r={Constants.getIn(['explanationDot', 'radiusStart'])}
+        fill="#ff708a"
+      />
+      </g>)
   }
 
   dotAnimation() {
-    return (<g id="pulse">
-      <circle
-      r={Constants.getIn(['explanationDot', 'radiusStart'])}
-      cx={this.props.xPosition}
-      cy={this.props.yPosition}
-      /></g>)
+    return (<g><defs>
+      <circle id="back"
+        r={Constants.getIn(['explanationDot', 'radiusStart'])}
+        cx={this.props.xPosition}
+        cy={this.props.yPosition}
+        fill="#ff708a">
+        <animate
+          attributeName='r'
+          from={Constants.getIn(['explanationDot','radiusStart'])}
+          to={Constants.getIn(['explanationDot','radiusEnd'])}
+          dur='1.5s'
+          begin='0'
+          repeatCount='indefinite'
+          fill='freeze'
+          id="circ-anim"
+        />
+        <animate
+          attributeName='opacity'
+          from='0.3'
+          to='0'
+          dur='1.5s'
+          begin='0'
+          repeatCount='indefinite' 
+          fill='freeze'
+          id="circ-anim"
+        />
+        </circle>
+      </defs>
+      {this.explanationDot()}
+    </g>)
   }
 
   render() {
@@ -56,9 +82,8 @@ class ExplanationDot extends React.Component {
       return null
     }
     return (<g><g onClick={this.onClick}>
-      {this.explanationDot()}
       {this.dotAnimation()}
-    </g>
+    </g><use x = {this.props.xPosition + 6} y={this.props.yPosition} xlinkHref="#back"/>
     <PopoverPortal>
       <ExplanationPopover
         text={this.props.text}
@@ -66,7 +91,12 @@ class ExplanationDot extends React.Component {
         lineX={this.props.lineX}
         lineY={this.props.lineY}
         textX={this.props.textX}
-        textY={this.props.textY}/>
+        textY={this.props.textY}
+        containerX={this.props.containerX}
+        containerY={this.props.containerY}
+        xPosition={this.props.xPosition}
+        yPosition={this.props.yPosition}
+      />
     </PopoverPortal>
     </g>)
   }

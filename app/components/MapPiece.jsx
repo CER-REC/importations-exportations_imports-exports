@@ -80,11 +80,11 @@ class MapPiece extends React.Component {
         linePath="M89,67 C107,235 235,211 432,214"
         xPosition={18}
         yPosition={10}
-        lineX={10}
-        lineY={50}
-        textX={400}
-        textY={200}
-        text="New York is the thing"
+        lineX={278}
+        lineY={240}
+        textX={335}
+        textY={387}
+        text="New York has the highest exports into US as well as the highest imports from US"
       />)
     }
 

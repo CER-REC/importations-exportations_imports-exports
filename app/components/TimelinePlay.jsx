@@ -60,10 +60,12 @@ class TimelinePlay extends React.PureComponent {
         linePath="M457,45 C328,266 384,258 22,251"
         xPosition={-6}
         yPosition={0}
-        lineX={1}
-        lineY={150}
+        lineX={0}
+        lineY={4}
         textX={14}
-        textY={290}
+        textY={85}
+        containerX={this.props.left - 140}
+        containerY={this.props.top - 10}
         text="Click play to see how electricity changes over time"
     /></g>)
   }
