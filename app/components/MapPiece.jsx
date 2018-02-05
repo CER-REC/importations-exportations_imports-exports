@@ -8,7 +8,7 @@ import ConfidentialIcon from './ConfidentialIcon'
 import Constants from '../Constants'
 import AnimatedMapPiece from './SVGAnimation/AnimatedMapPiece'
 
-const ExplanationDot = require('./ExplanationDot.jsx')
+import ExplanationDot from './ExplanationDot'
 
 class MapPiece extends React.Component {
   static propTypes = {
@@ -74,6 +74,20 @@ class MapPiece extends React.Component {
       stroke = 'black'
     }
 
+    let newYorkExplanation = ''
+    if (this.props.data.get('name') === 'NY') {
+      newYorkExplanation = (<ExplanationDot
+        linePath="M89,67 C107,235 235,211 432,214"
+        xPosition={18}
+        yPosition={10}
+        lineX={10}
+        lineY={50}
+        textX={400}
+        textY={200}
+        text="New York is the thing"
+      />)
+    }
+
     let opacity = 1
     if (this.props.isSelected === true && this.props.isMapPieceSelected === false) {
       opacity = 0.10
@@ -104,6 +118,7 @@ class MapPiece extends React.Component {
         {this.drawArrow(this.props.legends, this.props.data, 'imports', this.props.styles, this.props.arrowProps)}
       </g>
       {confidentialIcon}
+      {newYorkExplanation}
     )
       <AnimatedMapPiece
         x1={this.props.x1 || 0}

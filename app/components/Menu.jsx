@@ -7,7 +7,11 @@ import { handleInteraction } from '../utilities'
 import { setActiveMenu } from '../actions/activeMenu'
 import TrSelector from '../selectors/translate'
 
+import ExplanationDot from './ExplanationDot'
+
 import './Menu.scss'
+
+const Tr = require('../TranslationTable.js')
 
 class Menu extends React.PureComponent {
   static propTypes = {
@@ -26,6 +30,7 @@ class Menu extends React.PureComponent {
     left: PropTypes.number,
     name: PropTypes.string.isRequired,
     setActiveMenu: PropTypes.func.isRequired,
+    showExplanations: PropTypes.bool.isRequired,
     Tr: PropTypes.func.isRequired,
   }
 
@@ -43,6 +48,34 @@ class Menu extends React.PureComponent {
 
   toggleMenu = () => {
     this.props.setActiveMenu(this.props.expanded ? '' : this.props.name)
+  }
+
+  importExportExplanation() {
+    return (<g>
+      <ExplanationDot
+        linePath="M80,80 C117,190 223,168 406,171"
+        xPosition={149}
+        yPosition={62}
+        lineX={62}
+        lineY={38}
+        textX={120}
+        textY={125}
+        text="Click + to see more options"
+    /></g>)
+  }
+
+  electricityExplanation() {
+    return (<g>
+      <ExplanationDot
+        linePath="M110,43 C248,257 312,213 633,213"
+        xPosition={92}
+        yPosition={88}
+        lineX={30}
+        lineY={50}
+        textX={140}
+        textY={165}
+        text="Electricity is the selected energy product"
+    /></g>)
   }
 
   renderTitle() {
@@ -119,11 +152,14 @@ class Menu extends React.PureComponent {
   }
 
   render() {
-    return (
+    return (<g>
       <g transform={`translate(${this.props.left} ${this.props.top})`} className="menuGroup">
         {this.renderTitle()}
         {this.renderOptions()}
       </g>
+      {this.importExportExplanation()}
+      {this.electricityExplanation()}
+    </g>
     )
   }
 }
@@ -132,6 +168,8 @@ export default connect(
   (state, props) => ({
     expanded: (state.activeMenu === props.name),
     Tr: TrSelector(state, props),
+    language: state.language,
+    showExplanations: state.showExplanations,
   }),
   { setActiveMenu },
 )(Menu)

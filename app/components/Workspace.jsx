@@ -25,9 +25,8 @@ const Workspace = ({ svgSize, detailSidebarPosition, portalSvgSize }) => (
       preserveAspectRatio="xMinYMin meet"
       role="application"
     >
-      <MenuBar />
-
       <VisualizationContainer />
+      <MenuBar />
       <SocialBar />
     </svg>
     <div

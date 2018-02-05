@@ -9,37 +9,42 @@ const PopoverPortal = require('./PopoverPortal.jsx')
 import ExplanationPopoverCreator from '../actions/explanations'
 
 class ExplanationPopover extends React.Component {
+  static get propTypes() {
+    return {
+      showExplanations: PropTypes.bool.isRequired,
+      text: PropTypes.string.isRequired,
+      lineX: PropTypes.number.isRequired,
+      lineY: PropTypes.number.isRequired,
+      linePath: PropTypes.string.isRequired,
+      textX: PropTypes.number.isRequired,
+      textY: PropTypes.number.isRequired,
+    }
+  }
 
   drawLine() {
-    return <svg>
-      <g transform =' scale(0.3)'>
-        <path d="M89,67 C87,286 352,236 444,245"  stroke='#ff708a' strokeWidth ='2' fill='transparent'/>
-      </g></svg>
-    }
+    const transformString = `translate(${this.props.lineX} ${this.props.lineY})`
+    const transformLine = `${this.props.linePath}`
+
+    return (<svg transform={transformString}>
+      <g transform="scale(0.3)">
+        <path d={transformLine} stroke="#ff708a" strokeWidth="1" fill="transparent" />
+      </g>
+    </svg>)
+  }
 
   drawText() {
     return <div style={{
-          position: 'absolute',
-          top: 120,
-          left: 120,
+          position: 'relative',
+          top: this.props.textY,
+          left: this.props.textX,
           height: 'auto',
           width: 80,
           background: 'white',
           opacity: '0.9',
-        }} className = 'explanationText'>
+        }}
+      className="explanationText">
       {this.props.text}
     </div>
-    /*
-    return <div style={{
-          height: 'auto',
-          width: 80,
-          background: 'white',
-          opacity: '0.9',
-        }} className = 'explanationText'>
-      <strong>{Tr.getIn(['explanations','importExportTitle','bolded',this.props.language])}</strong>
-      {Tr.getIn(['explanations','importExportTitle','text',this.props.language])}
-    </div>
-    */
   }
 
   render() {
@@ -48,11 +53,11 @@ class ExplanationPopover extends React.Component {
     }
     return <div style={{
           position: 'absolute',
-          top: 105,
-          left: 120,
+          left: this.props.lineX,
+          top: this.props.lineY,
         }}>
-      {this.drawText()}
-      <g >{this.drawLine()}</g>
+        {this.drawText()}
+      <g>{this.drawLine()}</g>
     </div>
   }
 }

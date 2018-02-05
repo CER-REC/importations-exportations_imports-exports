@@ -7,10 +7,9 @@ import SVGDrag from './SVGDrag/'
 import Constants from '../Constants'
 import { timelineFilter } from '../actions/visualizationSettings'
 import * as TimelineSelector from '../selectors/timeline'
+import ExplanationDot from './ExplanationDot'
 
 const WorkspaceComputations = require('../computations/WorkspaceComputations.js')
-
-const ExplanationDot = require('./ExplanationDot.jsx')
 
 class TimelineSeek extends React.PureComponent {
   static propTypes = {
@@ -148,6 +147,23 @@ class TimelineSeek extends React.PureComponent {
     return newRange
   }
 
+  timeSeekExplanation() {
+    if (this.props.side !== 'start') {
+      return null
+    }
+    return (<g>
+      <ExplanationDot
+        linePath="M79,57 C163,276 228,251 486,247"
+        xPosition={0}
+        yPosition={10}
+        lineX={70}
+        lineY={160}
+        textX={150}
+        textY={280}
+        text="Drag to select time frame"
+    /></g>)
+  }
+
   render() {
     const { side, timelineRange } = this.props
     const sideTransform = (side === 'start')
@@ -171,6 +187,7 @@ class TimelineSeek extends React.PureComponent {
               stroke={Constants.getIn(['styleGuide', 'colours', 'SandExtraDark'])}
               fill="white"
             />
+            {this.timeSeekExplanation()}
           </g>
         </SVGDrag>
       </g>

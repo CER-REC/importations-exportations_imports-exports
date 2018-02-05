@@ -17,6 +17,9 @@ class ExplanationDot extends React.Component {
       yPosition: PropTypes.number.isRequired,
       showExplanations: PropTypes.bool.isRequired,
       text: PropTypes.string.isRequired,
+      lineX: PropTypes.number.isRequired,
+      lineY: PropTypes.number.isRequired,
+      linePath: PropTypes.string.isRequired,
     }
   }
 
@@ -57,7 +60,13 @@ class ExplanationDot extends React.Component {
       {this.dotAnimation()}
     </g>
     <PopoverPortal>
-      <ExplanationPopover text={this.props.text}/>
+      <ExplanationPopover
+        text={this.props.text}
+        linePath={this.props.linePath}
+        lineX={this.props.lineX}
+        lineY={this.props.lineY}
+        textX={this.props.textX}
+        textY={this.props.textY}/>
     </PopoverPortal>
     </g>)
   }
