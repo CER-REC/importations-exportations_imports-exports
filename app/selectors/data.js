@@ -13,6 +13,10 @@ import {
 const emptyMap = new Immutable.Map()
 const emptyList = new Immutable.List()
 
+export const subType = createSelector(
+  visualizationSettings,
+  settings => settings.get('subtype'),
+)
 export const arrangeBy = createSelector(
   visualizationSettings,
   arrangeByOverride,
@@ -115,10 +119,10 @@ export const aggregateLocationSelector = createSelector(
 )
 
 export const aggregateLocationPaddSelector = createSelector(
-  filterByTimelineSelector,
+  filterByTimelineSelector, 
   (points) => {
     const result = points.reduce((acc, next) => {
-      let destination = next.get('destination')
+      let destination = next.get('destinationKey') === ''? next.get('destination'): next.get('destinationKey')
       if (typeof destination === 'undefined') {
         return acc
       }
@@ -131,16 +135,25 @@ export const aggregateLocationPaddSelector = createSelector(
       }
       const activity = next.get('activity')
       const currentVal = acc[destination].value || 0
-      acc[destination].activity = activity
       acc[destination].value = (currentVal + next.get('value'))
-
+      if (!acc[destination].subType) {
+        acc[destination].subType = {
+          propaneButane: {},
+        }
+      }
+      if (!acc[destination].subType[next.get('productSubtype')]) {
+        acc[destination].subType[next.get('productSubtype')] = {}
+      }
+      const activityVal = acc[destination].subType[next.get('productSubtype')][activity] || 0
+      const totalValue = acc[destination].subType.propaneButane[activity] || 0
+      acc[destination].subType[next.get('productSubtype')][activity] = activityVal + next.get('value') || 0
+      acc[destination].subType.propaneButane[activity] = totalValue + next.get('value') || 0
       const totalCount = acc[destination].totalCount || 0
       const confidentialCount = acc[destination].confidentialCount || 0
-      const transport = next.get('transport')
-      acc[destination].transport = acc[destination].transport || {}
-      acc[destination].transport[transport] = acc[destination].transport[transport] + next.get('value') || 0
+      acc[destination].transport = next.get('transport')
       acc[destination].totalCount = (totalCount + 1)
       acc[destination].confidentialCount = (confidentialCount + next.get('confidential'))
+      acc[destination].country = next.get('destinationCountry')
       return acc
     }, {})
     return Immutable.fromJS(result)

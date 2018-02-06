@@ -48,10 +48,10 @@ const getElectricityImportAndExport = createSelector(
   (points, unit, country) => {
     // append missing states or provinces
     const statesOrProvinces = Constants.getIn(['dataloader', 'mapping', 'country', country])
-    if (typeof statesOrProvinces !== 'undefined') {
+    if (typeof statesOrProvinces !== 'undefined' ) {
       let missingstatesOrProvincesMap = {}
       statesOrProvinces.entrySeq().forEach((stateOrProvince) => {
-        if (typeof points.get(stateOrProvince[1]) === 'undefined') {
+        if (typeof points.get(stateOrProvince[1]) === 'undefined' && stateOrProvince[1] !== 'ATL-Q') {
           const originKey = stateOrProvince[1]
           const origin = stateOrProvince[0]
           missingstatesOrProvincesMap[originKey] = {
@@ -124,8 +124,8 @@ const parseLocationData = createSelector(
           imports: data.getIn([originKey, 'imports']) || 0,
           x: statesOrProvinces.get('x'),
           y: statesOrProvinces.get('y'),
-          totalCount: statesOrProvinces.get('totalCount') || 0,
-          confidentialCount: statesOrProvinces.get('confidentialCount') || 0,
+          totalCount: data.getIn([originKey, 'totalCount']) || 0,
+          confidentialCount: data.getIn([originKey, 'confidentialCount']) || 0,
         }
         resultList.push(result)
       })

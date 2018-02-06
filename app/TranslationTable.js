@@ -529,6 +529,10 @@ const TranslationTable = fromJS({
         en: 'Nova Scotia',
         fr: 'Nova Scotia',
       },
+      'ATL-Q': {
+        en: 'Atlantic provinces and Quebec',
+        fr: 'Atlantic provinces and Quebec',
+      },
     },
     us: {
       AL: {
