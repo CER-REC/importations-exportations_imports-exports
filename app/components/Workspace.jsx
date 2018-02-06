@@ -39,6 +39,8 @@ const Workspace = ({ svgSize, detailSidebarPosition }) => (
         width: detailSidebarPosition.width,
       }}
     />
+    <div id="popoverPortal">
+    </div>
     <ModalSelector />
   </div>
 )

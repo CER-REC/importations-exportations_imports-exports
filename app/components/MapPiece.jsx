@@ -17,7 +17,6 @@ class MapPiece extends React.Component {
     dimensions: PropTypes.instanceOf(Immutable.Map).isRequired,
     data: PropTypes.instanceOf(Immutable.Map).isRequired,
     legend: PropTypes.bool,
-    showConfidentality: PropTypes.bool.isRequired,
   }
 
   static defaultProps = {
@@ -67,7 +66,8 @@ class MapPiece extends React.Component {
     let confidentialIcon = ''
     if (typeof this.props.data.get('confidentialCount') !== 'undefined' && this.props.data.get('confidentialCount') !== 0) {
       // TODO: on click show pop over to show confidential values
-      confidentialIcon = <ConfidentialIcon styles={this.props.styles.get('confidentialStyle')} />
+      confidentialIcon = <ConfidentialIcon 
+        styles={this.props.styles.get('confidentialStyle')} />
     }
 
     let stroke = 'none'
