@@ -203,6 +203,14 @@ const TranslationTable = fromJS({
           en: 'MOST EXPORTS',
           fr: 'PLUS D’EXPORTATIONS',
         },
+        stack: {
+          en: 'STACK',
+          fr: 'STACK FR',
+        },
+        split: {
+          en: 'SPLIT',
+          fr: 'SPLIT FR',
+        },
       },
     },
     amount: {
@@ -232,7 +240,7 @@ const TranslationTable = fromJS({
           fr: 'QUANTITÉ (MWh)',
         },
         'thousand m3/d': {
-          en: 'AMOUNT (thousand m³/d)',
+          en: 'AMOUNT (10³m³/d)',
           fr: 'QUANTITÉ (10³m³/j)',
         },
       },

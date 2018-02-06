@@ -56,7 +56,7 @@ class RefinedPetroleumProductsVisualizationContainer extends React.Component {
   }
 
   render() {
-    return (this.props.arrangeBy === 'location')
+    return (this.props.arrangeBy === 'stack')
       ? this.renderStackedChart()
       : this.renderSeparateCharts()
   }
