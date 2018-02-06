@@ -350,9 +350,9 @@ const MapLayoutGridConstant = fromJS({
         bottomMargin: 5,
         topMargin: 5,
         confidentialStyle: {
-          fill: '#999',
+          fill: '#fff',
           stroke: '#999',
-          exclamationFill: '#fff',
+          exclamationFill: '#999',
         },
       },
       layout: [

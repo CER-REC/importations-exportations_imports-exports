@@ -7,11 +7,15 @@ import MapPiece from './MapPiece'
 import MapPieceLabel from './MapPieceLabel'
 
 class NaturalGasLiquidMapPiece extends MapPiece{
-  drawArrow(legends, data, type, styles, arrowProps, props) {
-    if (data.getIn(['subType',props.productSubType,type], 0) === 0) {
+  static propTypes = {
+   ...MapPiece.propTypes,
+   productSubType:PropTypes.string,
+  }
+  drawArrow(legends, data, type, styles, arrowProps) {
+    if (data.getIn(['subType',this.props.productSubType,type], 0) === 0) {
       return null
     }
-    let color = this.getArrowColor(type, data.getIn(['subType',props.productSubType,type]))
+    let color = this.getArrowColor(type, data.getIn(['subType',this.props.productSubType,type]))
     if(typeof this.props.arrowProps !== 'undefined' && typeof this.props.arrowProps.get('fill') !== 'undefined'){
       color = this.props.arrowProps.get('fill') 
     }

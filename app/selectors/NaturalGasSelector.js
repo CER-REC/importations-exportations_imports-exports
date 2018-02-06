@@ -114,7 +114,6 @@ const parseLocationData = createSelector(
     const resultList = []
     if (data.size > 0 && typeof layout !== 'undefined') {
       layout.forEach((statesOrProvinces) => {
-        console.log(statesOrProvinces.get('originKey'))
         const originKey = statesOrProvinces.get('originKey')
         const result = {
           name: originKey,
