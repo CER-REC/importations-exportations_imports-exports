@@ -1,6 +1,7 @@
 import { Types as DataTypes } from '../actions/data'
 import { Types as visualizationSettingsTypes } from '../actions/visualizationSettings'
 import { timelineYearScaleCalculation } from '../selectors/timeline'
+import { activityOptions } from '../selectors/menus'
 
 let initializedFromURL = []
 
@@ -20,11 +21,12 @@ const initialVisualizationSettings = store => next => (action) => {
   data.keySeq().filter(v => !initializedFromURL.includes(v)).forEach((visualization) => {
     const visData = data.get(visualization)
     const amount = visData.keySeq().first()
+    const activityGroup = activityOptions(state, { _overrideVisualization: visualization })[0]
     // TODO: This needs to somehow not use reselect
     const yearScale = timelineYearScaleCalculation(state, {
       _overrideVisualization: visualization,
       _overrideAmount: amount,
-      _overrideActivityGroup: 'importsExports',
+      _overrideActivityGroup: activityGroup,
       _overrideArrangeBy: 'location',
     })
     const initializeAction = {
@@ -33,7 +35,7 @@ const initialVisualizationSettings = store => next => (action) => {
         settings: {
           amount,
           arrangeBy: 'location',
-          activity: 'importsExports',
+          activity: activityGroup,
           subtype: '',
           selection: {
             country: null,

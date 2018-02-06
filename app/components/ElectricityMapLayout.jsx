@@ -8,7 +8,11 @@ import MapLayoutGridConstant from '../MapLayoutGridConstant'
 import Constants from '../Constants'
 import Tr from '../TranslationTable'
 import TrSelector from '../selectors/translate'
-import { visualizationSettings } from '../selectors/visualizationSettings'
+import {
+  visualizationSettings,
+  showImportsSelector,
+  showExportsSelector,
+} from '../selectors/visualizationSettings'
 
 import { setSelection } from '../actions/visualizationSettings'
 import './ElectricityMapLayout.scss'
@@ -171,18 +175,20 @@ class ElectricityMapLayout extends React.Component {
 
   renderDetailBreakdown(data) {
     const detailBreakdownData = Constants.getIn(['detailBreakDown', this.props.country])
-    if (typeof detailBreakdownData !== 'undefined' && detailBreakdownData.get('required', false)) {
-      return (<DetailBreakdown
-        data={data}
-        type={detailBreakdownData.get('type')}
-        trContent={Tr.getIn(['detailBreakDown', this.props.importExportVisualization, detailBreakdownData.get('type')])}
-        veritcalPosition={detailBreakdownData.get('displayPosition')}
-        color={detailBreakdownData.get('color')}
-        height={detailBreakdownData.get('height')}
-        showDefault={detailBreakdownData.get('showDefault', false)}
-      />)
+    if (typeof detailBreakdownData === 'undefined' ||
+        !detailBreakdownData.get('required', false)) {
+      return null
     }
-    return null
+    if (this.props[`${detailBreakdownData.get('type')}Enabled`] === false) { return null }
+    return (<DetailBreakdown
+      data={data}
+      type={detailBreakdownData.get('type')}
+      trContent={Tr.getIn(['detailBreakDown', this.props.importExportVisualization, detailBreakdownData.get('type')])}
+      veritcalPosition={detailBreakdownData.get('displayPosition')}
+      color={detailBreakdownData.get('color')}
+      height={detailBreakdownData.get('height')}
+      showDefault={detailBreakdownData.get('showDefault', false)}
+    />)
   }
 
   renderDetailSidebar() {
@@ -210,6 +216,8 @@ const mapStateToProps = (state, props) => ({
   bins: binSelector(state, props),
   Tr: TrSelector(state, props),
   unit: visualizationSettings(state, props).get('amount'),
+  importsEnabled: showImportsSelector(state, props),
+  exportsEnabled: showExportsSelector(state, props),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(ElectricityMapLayout)
