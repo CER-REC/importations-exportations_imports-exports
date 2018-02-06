@@ -63,7 +63,7 @@ class TimelinePlay extends React.PureComponent {
         lineX={0}
         lineY={4}
         textX={14}
-        textY={85}
+        textY={80}
         containerX={this.props.left - 140}
         containerY={this.props.top - 10}
         text="Click play to see how electricity changes over time"

@@ -161,7 +161,7 @@ class TimelineSeek extends React.PureComponent {
         lineX={120}
         lineY={87}
         textX={35}
-        textY={55}
+        textY={50}
         containerX={this.props.left + this.state.offset}
         containerY={this.props.top}
         text="Drag to select time frame"

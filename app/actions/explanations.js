@@ -1,26 +1,18 @@
 
 
 export const Types = {
-  SHOW_EXPLANATION: 'showExplanation',
-  HIDE_EXPLANATION: 'hideExplanation',
-  DISMISS_COMPONENT: 'dismissComponent1',
+  TOGGLE_EXPLANATION: 'toggleExplanation',
 }
 
 export const ToggleExplanation = () => ({
-  type: Types.SHOW_EXPLANATION,
+  type: Types.TOGGLE_EXPLANATION,
   payload: { },
 })
 
-export const HideExplanation = () => ({
-  type: Types.HIDE_EXPLANATION,
-  payload: { },
-})
-
-const initialState = false
+const initialState = true
 export const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case Types.SHOW_EXPLANATION: return !state
-    case Types.HIDE_EXPLANATION: return initialState
+    case Types.TOGGLE_EXPLANATION: return !state
     default: return state
   }
 }

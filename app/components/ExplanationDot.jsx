@@ -7,12 +7,17 @@ import Constants from '../Constants'
 import PopoverPortal from './PopoverPortal'
 import ExplanationPopover from './ExplanationPopover'
 
+import ToggleExplanation from '../actions/explanations'
+
 import { handleInteraction } from '../utilities'
+
 import './ExplanationDot.scss'
 
 class ExplanationDot extends React.Component {
   static get propTypes() {
     return {
+      onClick: PropTypes.func.isRequired,
+      explanation: PropTypes.bool.isRequired,
       xPosition: PropTypes.number.isRequired,
       yPosition: PropTypes.number.isRequired,
       showExplanations: PropTypes.bool.isRequired,
@@ -27,21 +32,8 @@ class ExplanationDot extends React.Component {
     }
   }
 
-  constructor(props) {
-    super(props)
-    this.state = { explanations: false }
-    this.explanationShowClick = this.explanationShowClick.bind(this)
-    this.explanationHideClick = this.explanationHideClick.bind(this)
-  }
-
-  explanationShowClick(e) {
-    e.stopPropagation()
-    this.setState({ explanations: true })
-  }
-
-  explanationHideClick(e) {
-    e.stopPropagation()
-    this.setState({ explanations: false })
+  explanationDotClick() {
+    this.setState({ toggleExplanation: true })
   }
 
   explanationDot() {
@@ -92,9 +84,11 @@ class ExplanationDot extends React.Component {
     if (!this.props.showExplanations) {
       return null
     }
-    return (<g><g onClick={this.onClick}>
+    return (<g><g role="button"
+        {...handleInteraction(this.props.onClick)}>
       {this.dotAnimation()}
-    </g><use x = {this.props.xPosition + 6} y={this.props.yPosition} xlinkHref="#back"/>
+    </g>
+      <use x={this.props.xPosition + 6} y={this.props.yPosition} xlinkHref="#back"/>
     <PopoverPortal>
       <ExplanationPopover
         text={this.props.text}
@@ -120,4 +114,8 @@ const mapStateToProps = state => ({
   explanation: state.explanation,
 })
 
-export default connect(mapStateToProps)(ExplanationDot)
+const mapDispatchToProps = {
+  onClick: ToggleExplanation,
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ExplanationDot)

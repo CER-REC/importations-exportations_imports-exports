@@ -60,7 +60,7 @@ class Menu extends React.PureComponent {
         lineX={80}
         lineY={80}
         textX={35}
-        textY={35}
+        textY={30}
         containerX={this.props.left}
         containerY={this.props.top}
         text="Click + to see more options"
@@ -82,7 +82,7 @@ class Menu extends React.PureComponent {
         lineX={110}
         lineY={43}
         textX={75}
-        textY={65}
+        textY={55}
         containerX={this.props.left}
         containerY={this.props.top}
         text="Electricity is the selected energy product"
