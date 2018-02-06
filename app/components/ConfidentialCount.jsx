@@ -16,11 +16,6 @@ const ConfidentialCount = (props) => {
 
   return (
     <div>
-      <svg width="20" height="15">
-        <g transform="translate(-30, 0)">
-          <ConfidentialIcon styles={iconStyle} />
-        </g>
-      </svg>
       <span>{props.TR('confidentialCount', props.value.confidential, props.value.total)}</span>
     </div>
   )

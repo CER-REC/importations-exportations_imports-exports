@@ -63,11 +63,40 @@ class MapPiece extends React.Component {
       arrowTransform = `translate(${Constants.getIn(['mapPieceArrowStyle', 'x'])}, ${this.props.dimensions.get('height') - Constants.getIn(['mapPieceArrowStyle', 'y'])})`
     }
 
-    let confidentialIcon = ''
+    // Manitoba on electricity
+    let manitobaConfidentialIcon = ''
     if (typeof this.props.data.get('confidentialCount') !== 'undefined' && this.props.data.get('confidentialCount') !== 0) {
       // TODO: on click show pop over to show confidential values
-      confidentialIcon = <ConfidentialIcon 
-        styles={this.props.styles.get('confidentialStyle')} />
+      manitobaConfidentialIcon = <ConfidentialIcon 
+        styles={this.props.styles.get('confidentialStyle')} 
+        text="14/50 values confidential"
+        containerX={530}
+        containerY={70}
+        lineX={0}
+        lineY={0}
+        textX={70}
+        textY={55}
+        xPosition={0}
+        yPosition={0}
+        />
+    }
+
+    // Powerpool electricity
+    let powerpoolConfidentialIcon = ''
+    if (typeof this.props.data.get('confidentialCount') !== 'undefined' && this.props.data.get('confidentialCount') !== 0) {
+      // TODO: on click show pop over to show confidential values
+      powerpoolConfidentialIcon = <ConfidentialIcon 
+        styles={this.props.styles.get('confidentialStyle')} 
+        text="14/50 values confidential"
+        containerX={665}
+        containerY={665}
+        lineX={0}
+        lineY={0}
+        xPosition={0}
+        yPosition={0}
+        textX={70}
+        textY={55}
+        />
     }
 
     let stroke = 'none'
@@ -103,7 +132,8 @@ class MapPiece extends React.Component {
         {this.drawArrow(this.props.legends, this.props.data, 'exports', this.props.styles, this.props.arrowProps)}
         {this.drawArrow(this.props.legends, this.props.data, 'imports', this.props.styles, this.props.arrowProps)}
       </g>
-      {confidentialIcon}
+      {manitobaConfidentialIcon}
+      {powerpoolConfidentialIcon}
       <AnimatedMapPiece
         x1={this.props.x1 || 0}
         y1={this.props.y1 || 0}

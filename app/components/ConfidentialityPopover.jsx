@@ -1,5 +1,3 @@
-// Explanation Popover
-
 import React from 'react'
 const ReactRedux = require('react-redux')
 import PropTypes from 'prop-types'
@@ -17,7 +15,6 @@ class ConfidentialityPopover extends React.Component {
 
   drawLine() {
     const transformString = `translate(${-this.props.lineX} ${-this.props.lineY})`
-    const transformLine = `${this.props.linePath}`
 
     return (<svg>
       <g transform={`scale(0.3) ${transformString}`}>
@@ -39,22 +36,19 @@ class ConfidentialityPopover extends React.Component {
           background: 'white',
           opacity: '0.9',
         }}
-      className="explanationText">
+      className="confidentialityText">
       {this.props.text}
     </div>
   }
 
   render() {
-    if(!this.props.showExplanations) {
-      return null
-    }
     return <div style={{
           position: 'absolute',
           top: this.props.containerY + this.props.yPosition,
           left: this.props.containerX + this.props.xPosition,
         }}>
         {this.drawText()}
-      <div style={{ position: 'absolute', top: 0, left: 0 }}>{this.drawLine()}</div>
+      <div style={{ position: 'absolute', top: 0, left: 0}}>{this.drawLine()}</div>
     </div>
   }
 }

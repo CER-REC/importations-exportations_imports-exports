@@ -55,8 +55,18 @@ class PaddLayout extends React.Component {
     const style = mapLayoutGrid.get('styles', false)
     if (style && confidentialCount > 0 && country !== 'ca') {
       confidentialIcon = (<g transform="translate(145 143)">
-        <ConfidentialIcon styles={style.get('confidentialStyle')} />
-                          </g>)
+        <ConfidentialIcon 
+          styles={style.get('confidentialStyle')}
+          text="x/50 values confidential"
+          lineX={0}
+          lineY={0}
+          textX={70}
+          textY={55}
+          containerX={730}
+          containerY={780}
+          xPosition={0}
+          yPosition={0}/>
+        </g>)
     }
     return (<g className={fontClassName} transform={`translate(${left + transformTranslate.get('left')} ${top + transformTranslate.get('top')})`}>
       <text transform={`translate(${transformText.get('left')} ${transformText.get('top')})`}>{text}</text>
