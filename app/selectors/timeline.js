@@ -1,31 +1,31 @@
-const { createSelector } = require('reselect')
-const { fromJS } = require('immutable')
+import { createSelector } from 'reselect'
+import { fromJS } from 'immutable'
 
-const { filterByHexSelector } = require('./data')
-const { visualizationContentPosition: visContentSize } = require('./viewport/')
-const { visualizationSettings } = require('./visualizationSettings')
-const Constants = require('../Constants.js')
+import { filterByHexSelector } from './data'
+import { visualizationContentPosition as visContentSize } from './viewport/'
+import { visualizationSettings } from './visualizationSettings'
+import Constants from '../Constants'
 
 const getAggregateKey = (_, props) => props.aggregateKey
-const getValueKey = (_, props) => props.valueKey
+export const getValueKey = (_, props) => props.valueKey
 const getScaleKey = (state, props) => props.scaleKey || getValueKey(state, props)
 
 const mapToValue = (data, key) => data.map(v => v.get(key))
 
-const timelineGrouping = createSelector(
+export const timelineGrouping = createSelector(
   visualizationSettings,
   settings => settings.getIn(['timeline', 'grouping']),
 )
-const timelineRange = createSelector(
+export const timelineRange = createSelector(
   visualizationSettings,
   settings => settings.getIn(['timeline', 'range']),
 )
-const timelineScaleLinked = createSelector(
+export const timelineScaleLinked = createSelector(
   visualizationSettings,
   settings => settings.getIn(['timeline', 'scaleLinked']),
 )
 
-const aggregateQuarter = createSelector(
+export const aggregateQuarter = createSelector(
   filterByHexSelector,
   getAggregateKey,
   (points, aggregateKey) => {
@@ -61,7 +61,7 @@ const aggregateQuarter = createSelector(
   },
 )
 
-const sortTimeline = createSelector(
+export const sortTimeline = createSelector(
   aggregateQuarter,
   timelineGrouping,
   ({ points }, grouping) => points.sort((a, b) => {
@@ -75,7 +75,7 @@ const sortTimeline = createSelector(
   }),
 )
 
-const timelineYearScaleCalculation = createSelector(
+export const timelineYearScaleCalculation = createSelector(
   sortTimeline,
   (points) => {
     const years = mapToValue(points, 'year')
@@ -83,7 +83,7 @@ const timelineYearScaleCalculation = createSelector(
   },
 )
 
-const timelineScaleCalculation = createSelector(
+export const timelineScaleCalculation = createSelector(
   sortTimeline,
   aggregateQuarter,
   timelineYearScaleCalculation,
@@ -124,7 +124,7 @@ const timelineScaleCalculation = createSelector(
   },
 )
 
-const timelinePositionCalculation = createSelector(
+export const timelinePositionCalculation = createSelector(
   sortTimeline,
   timelineScaleCalculation,
   timelineGrouping,
@@ -218,7 +218,7 @@ const timelinePositionCalculation = createSelector(
   },
 )
 
-const timelineData = createSelector(
+export const timelineData = createSelector(
   timelineScaleCalculation,
   timelinePositionCalculation,
   timelineRange,
@@ -226,7 +226,7 @@ const timelineData = createSelector(
     Object.assign({ timelineRange: range }, scale, position),
 )
 
-const timelineSeekPositionSelector = createSelector(
+export const timelineSeekPositionSelector = createSelector(
   timelineData,
   visContentSize,
   ({ bars, timelineRange: range }, size) => {
@@ -244,17 +244,3 @@ const timelineSeekPositionSelector = createSelector(
     }
   },
 )
-
-module.exports = {
-  timelineGrouping,
-  timelineRange,
-  timelineScaleLinked,
-  aggregateQuarter,
-  sortTimeline,
-  timelineYearScaleCalculation,
-  timelineScaleCalculation,
-  timelinePositionCalculation,
-  timelineData,
-  timelineSeekPositionSelector,
-  getValueKey,
-}

@@ -1,9 +1,9 @@
-const React = require('react')
-const ReactRedux = require('react-redux')
-const PropTypes = require('prop-types')
-const Immutable = require('immutable')
+import React from 'react'
+import { connect } from 'react-redux'
+import PropTypes from 'prop-types'
+import Immutable from 'immutable'
 
-require('../styles/Fonts.scss')
+import '../styles/Fonts.scss'
 
 class ImportExportArrow extends React.Component {
   static propTypes = {
@@ -53,14 +53,14 @@ class ImportExportArrow extends React.Component {
     if (arrowProps) {
       const topText = arrowProps.getIn([type, 'topText', this.props.language])
       if (typeof topText !== 'undefined' && topText !== '') {
-        topTextElement = <text y={y}>{topText}</text>
+        topTextElement = <text className="explanationTopText" y={y} x="-5">{topText}</text>
       }
     }
     return topTextElement
   }
 
   drawBottomText(arrowProps, type) {
-    let y = 25
+    let y = 27
     if (type === 'imports') {
       y = 10
     }
@@ -68,7 +68,7 @@ class ImportExportArrow extends React.Component {
     if (arrowProps) {
       const bottomText = arrowProps.getIn([type, 'bottomText', this.props.language])
       if (typeof bottomText !== 'undefined' && bottomText !== '') {
-        bottomTextElement = <text y={y}>{bottomText}</text>
+        bottomTextElement = <text className="explanationBottomText" y={y} x="3">{bottomText}</text>
       }
     }
     return bottomTextElement
@@ -95,13 +95,13 @@ class ImportExportArrow extends React.Component {
           points="30.46 4.09 15.17 11.38 0 4.07 0 3.41 2.75 3.41 2.76 0.01 28.03 0 28.05 3.41 30.47 3.42 30.46 4.09"
           style={{ transition: 'fill 1s ease' }}
         />
-        {this.drawLabel(this.props.arrowProps, this.props.type)}
-        {this.drawTopText(this.props.arrowProps, this.props.type)}
-        {this.drawBottomText(this.props.arrowProps, this.props.type)}
+        {this.drawLabel(this.props.text, this.props.type)}
+        {this.drawTopText(this.props.text, this.props.type)}
+        {this.drawBottomText(this.props.text, this.props.type)}
       </g>
     )
   }
 }
 
 const mapStateToProps = ({ language }) => ({ language })
-module.exports = ReactRedux.connect(mapStateToProps)(ImportExportArrow)
+export default connect(mapStateToProps)(ImportExportArrow)

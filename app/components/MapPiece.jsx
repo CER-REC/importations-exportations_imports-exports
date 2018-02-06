@@ -1,12 +1,12 @@
-const React = require('react')
-const ReactRedux = require('react-redux')
-const PropTypes = require('prop-types')
-const Immutable = require('immutable')
+import React from 'react'
+import PropTypes from 'prop-types'
+import Immutable from 'immutable'
 
-const ImportExportArrow = require('./ImportExportArrow.jsx')
-const MapPieceLabel = require('./MapPieceLabel.jsx')
-const ConfidentialIcon = require('./ConfidentialIcon.jsx')
-const Constants = require('../Constants')
+import ImportExportArrow from './ImportExportArrow'
+import MapPieceLabel from './MapPieceLabel'
+import ConfidentialIcon from './ConfidentialIcon'
+import Constants from '../Constants'
+import AnimatedMapPiece from './SVGAnimation/AnimatedMapPiece'
 
 import { showConfidentality } from '../actions/confidentiality'
 
@@ -43,11 +43,16 @@ class MapPiece extends React.Component {
 
   drawArrow(legends, data, type, styles, arrowProps) {
     if (data.get(type) !== 0) {
+      let color = this.getArrowColor(type, data.get(type))
+      if(typeof this.props.arrowProps !== 'undefined' && typeof this.props.arrowProps.get('fill') !== 'undefined'){
+        color = this.props.arrowProps.get('fill') 
+      }
       return (<ImportExportArrow
         arrowSpacing={styles.get('arrowSpacing')}
         type={type}
-        color={this.getArrowColor(type, data.get(type))}
+        color= {color}
         arrowProps={arrowProps}
+        text = {this.props.text}
       />)
     }
     return ''
@@ -79,7 +84,6 @@ class MapPiece extends React.Component {
       && this.props.mapPieceProps.get('stroke') !== '') {
       stroke = this.props.mapPieceProps.get('stroke')
     }
-
     return (<g fillOpacity={opacity} >
       <polygon
         stroke={stroke}
@@ -93,15 +97,21 @@ class MapPiece extends React.Component {
         mapPieceHeight={this.props.dimensions.get('height')}
         name={this.props.data.get('name')}
         mapPieceProps={this.props.mapPieceProps}
+        text = {this.props.text}
       />
       <g transform={arrowTransform}>
         {this.drawArrow(this.props.legends, this.props.data, 'exports', this.props.styles, this.props.arrowProps)}
         {this.drawArrow(this.props.legends, this.props.data, 'imports', this.props.styles, this.props.arrowProps)}
       </g>
       {confidentialIcon}
+      <AnimatedMapPiece
+        x1={this.props.x1 || 0}
+        y1={this.props.y1 || 0}
+        x2={this.props.x1 || 0}
+        y2={this.props.y1 || 0}
+      />
             </g>)
   }
 }
 
-
-module.exports = MapPiece
+export default MapPiece

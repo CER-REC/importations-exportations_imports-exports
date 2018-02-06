@@ -136,6 +136,35 @@
   fill: $neutral-light;
 }
 
+.aboutHeading {
+  font-family: $fira-sans-condensed;
+  font-size: 16px;
+  color: $neutral-medium-dark;
+  margin-left: 25px;
+  margin-top: 25px;
+}
+
+.aboutSubheading {
+  font-family: $fira-sans-condensed;
+  font-size: 13px;
+  fill: $neutral-medium-dark;
+  margin-left: 25px;
+}
+
+.socialBarText {
+  font-family: $fira-sans-condensed;
+  font-size: 13px;
+  fill: $neutral-medium;
+  margin-left: 25px;
+}
+
+.aboutBodyText {
+  font-family: $fira-sans-condensed;
+  font-size: 11px;
+  color: $neutral-medium;
+  margin-left: 25px;
+}
+
 .detailBreakDown {
   .header{
     &.imports {
@@ -176,4 +205,24 @@
       font-family: $fira-sans-condensed-semibold;
     }
   }
+}
+.paddArrowCanadaFonts{
+  font-family:$fira-sans-condensed;
+  font-size:15px;
+  fill:#666;
+}
+.paddArrowUSFonts{
+  font-family:$fira-sans-condensed;
+  font-size:15px;
+  fill:#666;
+}
+.explanationBottomText{
+  font-family:$fira-sans-condensed;
+  font-size:15px;
+  fill:#666;
+}
+.explanationTopText{
+  font-family:$fira-sans-condensed;
+  font-size:15px;
+  fill:#666;
 }

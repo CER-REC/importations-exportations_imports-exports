@@ -5,4 +5,4 @@ function SetVisualizationCreator(visualization) {
   }
 }
 
-module.exports = SetVisualizationCreator
+export default SetVisualizationCreator

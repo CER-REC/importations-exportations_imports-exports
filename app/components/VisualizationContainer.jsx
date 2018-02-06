@@ -1,16 +1,15 @@
-const React = require('react')
-const ReactRedux = require('react-redux')
+import React from 'react'
+import { connect } from 'react-redux'
 
-const ViewportSelectors = require('../selectors/viewport/')
-const Constants = require('../Constants.js')
-const WorkspaceComputations = require('../computations/WorkspaceComputations.js')
-const ElectricityVisualizationContainer = require('./ElectricityVisualizationContainer.jsx')
-const CrudeOilVisualizationContainer = require('./CrudeOilVisualizationContainer.jsx')
-const NaturalGasVisualizationContainer = require('./NaturalGasVisualizationContainer.jsx')
-const NaturalGasLiquidsVisualizationContainer = require('./NaturalGasLiquidsVisualizationContainer.jsx')
-const RefinedPetroleumProductsVisualizationContainer = require('./RefinedPetroleumProductsVisualizationContainer.jsx')
+import { visualizationContainerPosition, visualizationContentPosition, menuWidth } from '../selectors/viewport/'
+import WorkspaceComputations from '../computations/WorkspaceComputations'
+import ElectricityVisualizationContainer from './ElectricityVisualizationContainer'
+import CrudeOilVisualizationContainer from './CrudeOilVisualizationContainer'
+import NaturalGasVisualizationContainer from './NaturalGasVisualizationContainer'
+import NaturalGasLiquidsVisualizationContainer from './NaturalGasLiquidsVisualizationContainer'
+import RefinedPetroleumProductsVisualizationContainer from './RefinedPetroleumProductsVisualizationContainer'
 
-require('./VisualizationContainer.scss')
+import './VisualizationContainer.scss'
 
 class VisualizationContainer extends React.Component {
   changeVisualization() {
@@ -54,11 +53,11 @@ class VisualizationContainer extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  visualizationPosition: ViewportSelectors.visualizationContainerPosition(state),
-  contentSize: ViewportSelectors.visualizationContentPosition(state),
-  menuWidth: ViewportSelectors.menuWidth(state),
+  visualizationPosition: visualizationContainerPosition(state),
+  contentSize: visualizationContentPosition(state),
+  menuWidth: menuWidth(state),
   importExportVisualization: state.importExportVisualization,
 })
 
 
-module.exports = ReactRedux.connect(mapStateToProps)(VisualizationContainer)
+export default connect(mapStateToProps)(VisualizationContainer)

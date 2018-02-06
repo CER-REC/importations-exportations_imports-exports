@@ -1,6 +1,6 @@
-const Immutable = require('immutable')
+import { fromJS } from 'immutable'
 
-const TranslationTable = Immutable.fromJS({
+const TranslationTable = fromJS({
 
   theLegendValues: {
     importations: {
@@ -10,94 +10,6 @@ const TranslationTable = Immutable.fromJS({
     exportations: {
       en: 'EXP',
       fr: 'EXP',
-    },
-    electricity: {
-      rangeOne: {
-        en: '0 - 4M',
-        fr: '0 - 4M',
-      },
-      rangeTwo: {
-        en: '57M - 140M',
-        fr: '57M - 140M',
-      },
-      rangeThree: {
-        en: '160M - 235M',
-        fr: '160M - 235M',
-      },
-      rangeFour: {
-        en: '279M - 335M',
-        fr: '279M - 335M',
-      },
-      rangeFive: {
-        en: '448M - 449M',
-        fr: '448M - 449M',
-      },
-    },
-    crudeOil: {
-      rangeOne: {
-        en: '0 - 300',
-        fr: '0 - 300',
-      },
-      rangeTwo: {
-        en: '1,500 - 1,600',
-        fr: '1 500 - 1 600',
-      },
-      rangeThree: {
-        en: '2,000 - 2,800',
-        fr: '2 000 - 2 800',
-      },
-      rangeFour: {
-        en: '3,700 - 3,800',
-        fr: '3 700 - 3 800',
-      },
-      rangeFive: {
-        en: '21,100 - 21,200',
-        fr: '21 100 - 21 200',
-      },
-    },
-    naturalGas: {
-      rangeOne: {
-        en: '0 - 1.7M',
-        fr: '0 - 1.7M',
-      },
-      rangeTwo: {
-        en: '2.7M - 4.6M',
-        fr: '2,7M - 4,6M',
-      },
-      rangeThree: {
-        en: '5.7M - 5.8M',
-        fr: '5,7M - 5,8M',
-      },
-      rangeFour: {
-        en: '7.6M - 7.7M',
-        fr: '7,6M - 7,7M',
-      },
-      rangeFive: {
-        en: '11.2M - 12.9M',
-        fr: '11,2M - 12,9M',
-      },
-    },
-    naturalGasLiquids: {
-      rangeOne: {
-        en: '1K - 19K',
-        fr: '1K - 19K',
-      },
-      rangeTwo: {
-        en: '119K - 120K',
-        fr: '119K - 120K',
-      },
-      rangeThree: {
-        en: '339K - 340K',
-        fr: '339K - 340K',
-      },
-      rangeFour: {
-        en: '595K - 596K',
-        fr: '595K - 596K',
-      },
-      rangeFive: {
-        en: '1.53M - 1.54M',
-        fr: '1,53M - 1,54M',
-      },
     },
   },
 
@@ -110,11 +22,93 @@ const TranslationTable = Immutable.fromJS({
       en: 'Methodology',
       fr: 'Méthodologie',
     },
-    resetVisualzation: {
+    resetVisualization: {
       en: 'Reset Visualization',
       fr: 'Réinitialiser visualisation',
     },
+  },
 
+  aboutWindow: {
+    heading: {
+      en: 'ABOUT THIS PROJECT',
+      fr: 'ABOUT THIS PROJECT FR',
+    },
+    p1: {
+      en: 'Paragraph one',
+      fr: 'la french FR',
+    },
+    p2: {
+      en: 'paragraph two',
+      fr: 'la french placeholder FR',
+    },
+    p3: {
+      en: 'paragraph three',
+      fr: 'la french paragraph trois FR',
+    },
+    p4: {
+      en: 'paragraph four',
+      fr: 'oui oui FR',
+    },
+    contributors: {
+      en: 'CONTRIBUTORS',
+      fr: 'CONTRIBUTORS FR',
+    },
+    dataSource: {
+      en: 'DATA SOURCE',
+      fr: 'DATA SOURCE',
+    },
+    dataNamesfromNEB: {
+      en: 'Andrew Benson, Karen Duckworth, Randy Cooke',
+      fr: 'Andrew Benson, Karen Duckworth, Randy Cooke',
+    },
+    nebCoordinators: {
+      en: 'Annette Hester (Concept and Coordination); Katherine Murphy (Project Manager); Faiza Hussain (Administrative support); Stephen Chow (Data Coordination)',
+      fr: 'TODO',
+    },
+    dataVisualization: {
+      en: 'DATA VISUALIZATION',
+      fr: 'DATA VISUALIZATION FR',
+    },
+    leadDesignResearch: {
+      en: 'LEAD DESIGN RESEARCH',
+      fr: 'LEAD DESIGN RESEARCH FR',
+    },
+    leadDesigners: {
+      en: 'Sheelagh Carpendale and Wesley Willett, iLab, University of Calgary',
+      fr: 'TODO',
+    },
+    coordination: {
+      en: 'COORDINATION',
+      fr: 'COORDINATION FR',
+    },
+    coordi: {
+      en: 'Claudia Maurer',
+      fr: 'Claudia Maurer',
+    },
+    design: {
+      en: 'DESIGN',
+      fr: 'DESIGN',
+    },
+    designers: {
+      en: 'Jagoda Walny Nix, Peter Buk, Doris Kosminsky, Lien Quach, and Mieka West',
+      fr: 'TODO',
+    },
+    leadTechnical: {
+      en: 'LEAD TECHNICAL',
+      fr: 'LEAD TECHNICAL FR',
+    },
+    vizworx: {
+      en: 'VizworX',
+      fr: 'VizworX',
+    },
+    technical: {
+      en: 'TECHNICAL',
+      fr: 'TECHNICAL',
+    },
+    technicalTeam: {
+      en: 'Patrick King, Spenser Jones, Rahul Kamal Bhaskar, Ben Cousins, Abhishek Sharma, and Charlie Cheung',
+      fr: 'Patrick King, Spenser Jones, Rahul Kamal Bhaskar, Ben Cousins, Abhishek Sharma, and Charlie Cheung',
+    },
   },
 
   mainMenuBar: {
@@ -134,9 +128,9 @@ const TranslationTable = Immutable.fromJS({
       en: 'Natural Gas Liquids',
       fr: 'Natural Gas Liquids FR',
     },
-    refinedPetroleumProducts:{
-      en:'Refin. Petroleum Prod.',
-      fr:'Refin. Petroleum Prod. FR',
+    refinedPetroleumProducts: {
+      en: 'Refin. Petroleum Prod.',
+      fr: 'Refin. Petroleum Prod. FR',
     },
   },
 
@@ -163,113 +157,125 @@ const TranslationTable = Immutable.fromJS({
     },
   },
 
-  electricityDataTypes:{
-    'CAN$': { 
-      en: 'CAN$', 
-      fr: 'CAN$' 
-    },
-    'CAN$/MW.h': { 
-      en: 'CAN$/MW.h', 
-      fr: 'CAN$/MW.h' 
-    },
-    'CN$/GJ': { 
-      en: 'CN$/GJ', 
-      fr: 'CN$/GJ' 
-    },
-    'm3/d': { 
-      en: '(m³/d)', 
-      fr: '(m³/d)' 
-    },
-    'MW.h': { 
-      en: '(MW.h)', 
-      fr: '(MW.h)' 
-    },
-    'thousand m3/d': { 
-      en: '(thousand m³/d)', 
-      fr: '(thousand m³/d)' 
-    },
-  },
-
-  arrangedBy: {
-    en: 'arranged by',
-    fr: 'TODO',
-  },
-
-  showing: {
-    en: 'showing',
-    fr: 'TODO',
-  },
-
-  amount: {
-    en: 'amount',
-    fr: 'TODO'
-  },
-
-  nglSubproductMenu: {
-    of: {
-      en: 'of',
-      fr: 'TODO',
-    },
-    butane: {
-      en: 'BUTANE',
-      fr: 'TODO',
-    },
+  menu: {
     and: {
       en: 'and',
-      fr: 'TODO',
+      fr: 'and',
     },
-    propane: {
-      en: 'PROPANE',
-      fr: 'PROPANE',
+    activity: {
+      options: {
+        imports: {
+          en: 'Imports',
+          fr: 'Imports',
+        },
+        exports: {
+          en: 'Exports',
+          fr: 'Exports',
+        },
+        importsExports: {
+          en: 'Imports and Exports',
+          fr: 'Imports and Exports',
+        },
+      },
+    },
+    arrangeBy: {
+      prefix: {
+        en: 'arranged by',
+        fr: 'TODO',
+      },
+      options: {
+        location: {
+          en: 'LOCATION',
+          fr: 'LOCATION FR',
+        },
+        imports: {
+          en: 'MOST IMPORTS',
+          fr: 'MOST IMPORTS FR',
+        },
+        exports: {
+          en: 'MOST EXPORTS',
+          fr: 'MOST EXPORTS FR',
+        },
+      },
+    },
+    amount: {
+      prefix: {
+        en: 'showing',
+        fr: 'TODO',
+      },
+      options: {
+        CAN$: {
+          en: 'PRICE (CAN$)',
+          fr: 'CAN$',
+        },
+        'CAN$/MW.h': {
+          en: 'PRICE (CAN$/MW.h)',
+          fr: 'CAN$/MW.h',
+        },
+        'CN$/GJ': {
+          en: 'PRICE (CN$/GJ)',
+          fr: 'CN$/GJ',
+        },
+        'm3/d': {
+          en: 'AMOUNT (m³/d)',
+          fr: 'm³/d',
+        },
+        'MW.h': {
+          en: 'AMOUNT (MW.h)',
+          fr: 'MW.h',
+        },
+        'thousand m3/d': {
+          en: 'AMOUNT (thousand m³/d)',
+          fr: 'thousand m³/d',
+        },
+      },
+    },
+    subtype: {
+      prefix: {
+        en: 'of',
+        fr: 'TODO',
+      },
+      options: {
+        butane: {
+          en: 'BUTANE',
+          fr: 'TODO',
+        },
+        propane: {
+          en: 'PROPANE',
+          fr: 'PROPANE',
+        },
+        '': {
+          en: 'Butane and Propane',
+          fr: 'Butane and Propane',
+        },
+      },
     },
   },
 
-  explanationShown:{
-    en:'show EXPLANATIONS',
-    fr:'show EXPLANATIONS FR'
+  explanationShown: {
+    en: 'show EXPLANATIONS',
+    fr: 'show EXPLANATIONS FR',
   },
 
-  explanationHide:{
-    en:'hide EXPLANATIONS',
-    fr:'hide EXPLANATIONS FR'
+  explanationHide: {
+    en: 'hide EXPLANATIONS',
+    fr: 'hide EXPLANATIONS FR',
+  },
+
+  explanations: {
+    importExportTitle: {
+      en: 'Click + to see more options',
+      fr: 'Click + to see more options FR',
+    },
   },
 
   confidentialityShown: {
-    en:'show CONFIDENTIALITY',
-    fr:'show CONFIDENTIALITY FR'
+    en: 'show CONFIDENTIALITY',
+    fr: 'show CONFIDENTIALITY FR',
   },
   confidentialityHide: {
-    en:'hide CONFIDENTIALITY',
-    fr:'hide CONFIDENTIALITY FR'
-  },
-
-  electricitySortStates: {
-    title: {
-      import: {
-        en: 'Imports',
-        fr: 'Imports',
-      },
-      ampersand: {
-        en: '&',
-        fr: '&',
-      },
-      export: {
-        en: 'Exports',
-        fr: 'Exports',
-      },
-    },
-    location: {
-      en: 'LOCATION',
-      fr: 'LOCATION FR',
-    },
-    imports: {
-      en: 'MOST IMPORTS',
-      fr: 'MOST IMPORTS FR',
-    },
-    exports: {
-      en: 'MOST EXPORTS',
-      fr: 'MOST EXPORTS FR',
-    },
+    en: 'hide CONFIDENTIALITY',
+    fr: 'hide CONFIDENTIALITY FR',
   },
 
   electricityDataTypes: {
@@ -300,22 +306,6 @@ const TranslationTable = Immutable.fromJS({
     },
   },
 
-  explanationShown: {
-    en: 'show EXPLANATIONS',
-    fr: 'show EXPLANATIONS FR',
-  },
-  explanationHide: {
-    en: 'hide EXPLANATIONS',
-    fr: 'TODO',
-  },
-
-  explanations: {
-    importExportTitle: {
-      en: 'Click + to see more options',
-      fr: 'Click + to see more options FR',
-    },
-  },
-
   mainSubheading: {
     en: 'This visualization shows the quarterly energy trade data between Canada and the USA for various energy sources.',
     fr: 'TODO',
@@ -325,6 +315,24 @@ const TranslationTable = Immutable.fromJS({
     fr: 'réinitialiser',
   },
 
+  socialBarText: {
+    about: {
+      en: 'about',
+      fr: 'TODO',
+    },
+    methodology: {
+      en: 'methodology',
+      fr: 'TODO',
+    },
+    downloadData: {
+      en: 'download data',
+      fr: 'TODO',
+    },
+    downloadImage: {
+      en: 'download image',
+      fr: 'TODO',
+    },
+  },
 
   applicationPath: {
     en: '/import-export-visualization/',
@@ -350,6 +358,64 @@ const TranslationTable = Immutable.fromJS({
   },
   detailBreakDown: {
     electricity: {
+      defaultText: {
+        en: 'This visualization shows imports to Canada and exports from Canada between the years $0 and $1. Drag the timeline bar to change. Click a province to view Detail',
+        fr: 'This visualization shows imports to Canada and exports from Canada between the years $0 and $1. Drag the timeline bar to change. Click a province to view Detail',
+      },
+      exports: {
+        header: {
+          type: {
+            en: 'Exports',
+            fr: 'Exports',
+          },
+          action: {
+            en: 'from',
+            fr: 'from',
+          },
+          adjective: {
+            en: 'selected',
+            fr: 'selected',
+          },
+          place: {
+            en: 'Provinces',
+            fr: 'Provinces',
+          },
+        },
+        body: {
+          action: {
+            en: 'to',
+            fr: 'to',
+          },
+        },
+      },
+      imports: {
+        header: {
+          type: {
+            en: 'Imports',
+            fr: 'Imports',
+          },
+          action: {
+            en: 'to',
+            fr: 'to',
+          },
+          adjective: {
+            en: 'selected',
+            fr: 'selected',
+          },
+          place: {
+            en: 'Provinces',
+            fr: 'Provinces',
+          },
+        },
+        body: {
+          action: {
+            en: 'from',
+            fr: 'from',
+          },
+        },
+      },
+    },
+    naturalGasLiquids: {
       defaultText: {
         en: 'This visualization shows imports to Canada and exports from Canada between the years $0 and $1. Drag the timeline bar to change. Click a province to view Detail',
         fr: 'This visualization shows imports to Canada and exports from Canada between the years $0 and $1. Drag the timeline bar to change. Click a province to view Detail',
@@ -681,6 +747,145 @@ const TranslationTable = Immutable.fromJS({
       },
     },
   },
+  Padd: {
+    ca: {
+      ca: {
+        en: 'CANADA',
+        fr: 'CANADA',
+      },
+    },
+    us: {
+      'PADD I': {
+        en: 'PADD I',
+        fr: 'PADD I',
+      },
+      'PADD II': {
+        en: 'PADD II',
+        fr: 'PADD II',
+      },
+      'PADD III': {
+        en: 'PADD III',
+        fr: 'PADD III',
+      },
+      'PADD IV': {
+        en: 'PADD IV',
+        fr: 'PADD IV',
+      },
+      'PADD V': {
+        en: 'PADD V',
+        fr: 'PADD V',
+      },
+      'Non-USA': {
+        en: 'NON-USA',
+        fr: 'NON-USA',
+      },
+      Mexico: {
+        en: 'MEXICO',
+        fr: 'MEXICO',
+      },
+    },
+  },
+  unabbreviated: {
+    mainMenuBar: {
+      refinedPetroleumProducts: {
+        en: 'Refined Petroleum Products',
+        fr: 'Refined Petroleum Products FR',
+      },
+    },
+  },
+
+  mapTileLabel: {
+    en: '$0 imports $1 $3 and exports $2 $3',
+    fr: '$0 imports $1 $3 and exports $2 $3',
+  },
+  legendMapTiles: {
+    electricity: {
+      ca: {
+        imports: {
+          label: {
+            en: 'imports from Canada',
+            fr: 'imports from Canada',
+          },
+        },
+        exports: {
+          label: {
+            en: 'exports into Canada',
+            fr: 'exports into Canada',
+          },
+        },
+        stateOrProvince: {
+          en: 'province',
+          fr: 'province',
+        },
+      },
+      us: {
+        imports: {
+          label: {
+            en: 'imports from USA',
+            fr: 'imports from USA',
+          },
+        },
+        exports: {
+          label: {
+            en: 'exports into USA',
+            fr: 'exports into USA',
+          },
+        },
+        stateOrProvince: {
+          en: 'state',
+          fr: 'state',
+        },
+      },
+    },
+    crudeOil: {
+      exports: {
+        label: {
+          en: 'exports into US PADD',
+          fr: 'exports into US PADD',
+        },
+        bottomText: {
+          en: 'PADD',
+          fr: 'PADD',
+        },
+        topText: {
+          en: 'CANADA',
+          fr: 'CANADA',
+        },
+      },
+    },
+    naturalGasLiquids: {
+      ca: {
+        imports: {
+          label: {
+            en: 'imports from Canada',
+            fr: 'imports from Canada',
+          },
+        },
+        exports: {
+          label: {
+            en: 'exports into Canada',
+            fr: 'exports into Canada',
+          },
+        },
+        stateOrProvince: {
+          en: 'province',
+          fr: 'province',
+        },
+      },
+      us: {
+        exports: {
+          label: {
+            en: 'exports into US PADD',
+            fr: 'exports into US PADD',
+          },
+          bottomText: {
+            en: 'PADD',
+            fr: 'PADD',
+          },
+        },
+      },
+    },
+  },
 })
 
-module.exports = TranslationTable
+export default TranslationTable

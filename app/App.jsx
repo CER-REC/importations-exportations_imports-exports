@@ -1,30 +1,30 @@
-require('babel-polyfill')
+import 'babel-polyfill'
 
-const ReactDOM = require('react-dom')
-const DomReady = require('domready')
-const ReactRedux = require('react-redux')
-const React = require('react')
-const ReactHotLoader = require('react-hot-loader')
-const Request = require('client-request/promise')
+import ReactDOM from 'react-dom'
+import DomReady from 'domready'
+import { Provider } from 'react-redux'
+import React from 'react'
+import { AppContainer } from 'react-hot-loader'
+import Request from 'client-request/promise'
 
-const Constants = require('./Constants.js')
-const RouteComputations = require('./computations/RouteComputations.js')
-const Root = require('./components/Root.jsx')
-const Resized = require('./actionCreators/ResizeScreenCreator.js')
-const LoadDataCreator = require('./actions/data').LoadData
-const LoadBinsCreator = require('./actions/bins').LoadBins
-
-const Store = require('./Store.js')
+import Constants from './Constants'
+import RouteComputations from './computations/RouteComputations'
+import Root from './components/Root'
+import Resized from './actionCreators/ResizeScreenCreator'
+import { LoadData as LoadDataCreator } from './actions/data'
+import { LoadBins as LoadBinsCreator } from './actions/bins'
+import Store from './Store'
+import { DismissComponent as DismissComponentCreator } from './actions/socialBar'
 
 const store = Store()
 
 function render(Component) {
   const app = (
-    <ReactHotLoader.AppContainer>
-      <ReactRedux.Provider store={store}>
+    <AppContainer>
+      <Provider store={store}>
         <Component />
-      </ReactRedux.Provider>
-    </ReactHotLoader.AppContainer>
+      </Provider>
+    </AppContainer>
   )
 
   ReactDOM.render(app, document.getElementById('reactRoot'))
@@ -39,10 +39,15 @@ function resizeScreenHandler() {
   store.dispatch(Resized(w, h))
 }
 
+// Handles collapsing the social bar.
+function windowClickHandler() {
+  store.dispatch(DismissComponentCreator())
+}
+
 DomReady(() => {
   resizeScreenHandler()
   window.addEventListener('resize', resizeScreenHandler)
-
+  window.addEventListener('click', windowClickHandler)
   render(Root)
 })
 
@@ -57,6 +62,6 @@ Request({
 // Webpack Hot Module Replacement API
 if (module.hot) {
   module.hot.accept('./components/Root.jsx', () => {
-    render(require('./components/Root.jsx')) // eslint-disable-line global-require
+    render(require('./components/Root.jsx').default) // eslint-disable-line global-require
   })
 }

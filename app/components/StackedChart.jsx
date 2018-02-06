@@ -1,10 +1,10 @@
-const React = require('react')
-const { connect } = require('react-redux')
+import React from 'react'
+import { connect } from 'react-redux'
 
-const Chart = require('./Chart')
-const AnimatedLine = require('./SVGAnimation/AnimatedLine')
-const Constants = require('../Constants')
-const TimelineSelector = require('../selectors/timeline')
+import Chart from './Chart'
+import AnimatedLine from './SVGAnimation/AnimatedLine'
+import Constants from '../Constants'
+import { timelineGrouping, timelineData } from '../selectors/timeline'
 
 class StackedChart extends Chart {
   static get defaultProps() {
@@ -62,6 +62,6 @@ class StackedChart extends Chart {
   }
 }
 
-module.exports = connect((state, props) => Object.assign({
-  timelineGroup: TimelineSelector.timelineGrouping(state, props),
-}, TimelineSelector.timelineData(state, props)))(StackedChart)
+export default connect((state, props) => Object.assign({
+  timelineGroup: timelineGrouping(state, props),
+}, timelineData(state, props)))(StackedChart)

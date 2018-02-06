@@ -1,7 +1,8 @@
-const Constants = require('../Constants.js')
-const Immutable = require('immutable')
+import Immutable from 'immutable'
 
-const originNameValidator = (origin) => {
+import Constants from '../Constants'
+
+export const originNameValidator = (origin) => {
   // get country regions
   const countries = Constants.getIn(['dataloader', 'mapping', 'country'])
   const result = {
@@ -29,8 +30,4 @@ const originNameValidator = (origin) => {
     result.error = `Not a valid mapping ${origin}`
   }
   return Immutable.fromJS(result)
-}
-
-module.exports = {
-  originNameValidator,
 }

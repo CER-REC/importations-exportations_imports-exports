@@ -9,11 +9,14 @@ import ElectricityExplanationReducer from './reducers/ElectricityExplanationRedu
 import ExpandImportExportMenuReducer from './reducers/ExpandImportExportMenuReducer.js'
 import ExpandElectricitySortMenuReducer from './reducers/ExpandElectricitySortMenuReducer.js'
 import ExpandElectricityAmountMenuReducer from './reducers/ExpandElectricityAmountMenuReducer.js'
+import { reducer as ModalReducer } from './actions/modal'
 import { reducer as DataReducer } from './actions/data'
 import { reducer as BinsReducer } from './actions/bins'
 import { reducer as visualizationSettings } from './actions/visualizationSettings'
 import { reducer as DataLoadCompleteReducer } from './actions/DataLoadComplete'
 import { reducer as ConfidentialityReducer } from './actions/confidentiality'
+import { reducer as SocialBarReducer } from './actions/socialBar'
+import { reducer as activeMenu } from './actions/activeMenu'
 
 const mergeDeep = (old, merge) => {
   if (old === Object(old) && Array.isArray(old) === false) {
@@ -43,6 +46,9 @@ const nestedReducers = combineReducers({
 
   dataLoadingComplete: DataLoadCompleteReducer,
   visualizationSettings,
+  expandSocialBar: SocialBarReducer,
+  modal: ModalReducer,
+  activeMenu,
 })
 
 export default (initialState = {}, action) => {

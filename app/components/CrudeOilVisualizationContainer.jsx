@@ -1,17 +1,24 @@
-const React = require('react')
-const PropTypes = require('prop-types')
-const { connect } = require('react-redux')
+import React from 'react'
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
 
-const ExplanationPopovers = require('./ExplanationPopovers.jsx')
-const ProportionChart = require('./ProportionChart')
-const BarChart = require('./BarChart')
-const Axis = require('./Axis')
-const CrudeOilViewport = require('../selectors/viewport/crudeOil')
-const Constants = require('../Constants')
-const { positionShape } = require('../propTypeShapes')
+import ExplanationPopovers from './ExplanationPopovers'
+import ProportionChart from './ProportionChart'
+import BarChart from './BarChart'
+import Axis from './Axis'
+import * as CrudeOilViewport from '../selectors/viewport/crudeOil'
+import Constants from '../Constants'
+import { positionShape } from '../propTypeShapes'
+import USPadd from './Padds/USPadd'
+import CAPadd from './Padds/CAPadd'
+import {activityExplanationPosition} from '../selectors/viewport/menus'
+import CrudeOilPieceActivityExplanation from './CrudeOilPieceActivityExplanation'
 
 const CrudeOilVisualizationContainer = props => (
   <g>
+    <CAPadd
+      {...props.canadaPaddChart}
+    />
     <ProportionChart
       {...props.transportChart}
       aggregateKey="transport"
@@ -48,6 +55,12 @@ const CrudeOilVisualizationContainer = props => (
       xaxis={props.xaxis}
       yaxis={props.yaxis + props.height}
     />
+    <USPadd
+      {...props.usPaddChart}
+    />
+    <CrudeOilPieceActivityExplanation
+        {...props.mapPieceActivityExplanation}
+      />
   </g>
 )
 
@@ -61,9 +74,12 @@ CrudeOilVisualizationContainer.propTypes = {
   exportChart: PropTypes.shape(positionShape).isRequired,
 }
 
-module.exports = connect((state, props) => ({
+export default connect((state, props) => ({
   transportChart: CrudeOilViewport.chartTransportPosition(state, props),
   subtypeChart: CrudeOilViewport.chartSubtypePosition(state, props),
   axisPosition: CrudeOilViewport.chartAxisPosition(state, props),
   exportChart: CrudeOilViewport.chartExportPosition(state, props),
+  canadaPaddChart: CrudeOilViewport.canadaPaddPosition(state, props),
+  usPaddChart: CrudeOilViewport.usPaddPosition(state, props),
+  mapPieceActivityExplanation: activityExplanationPosition(state, props),
 }))(CrudeOilVisualizationContainer)

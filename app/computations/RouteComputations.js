@@ -1,9 +1,5 @@
-const Immutable = require('immutable')
-const QueryString = require('query-string')
-const BrowserCookies = require('browser-cookies')
-
-const Constants = require('../Constants.js')
-const Tr = require('../TranslationTable.js')
+import Constants from '../Constants'
+import Tr from '../TranslationTable'
 
 /*
 The following members of the app's state are routable: they are represented in
@@ -90,4 +86,4 @@ const RouteComputations = {
 }
 
 
-module.exports = RouteComputations
+export default RouteComputations

@@ -1,4 +1,4 @@
-const Constants = require('../Constants.js')
+import Constants from '../Constants'
 
 const ImportExportVisualizationReducer = (state = 'electricity', action) => {
   switch (action.type) {
@@ -15,4 +15,4 @@ const ImportExportVisualizationReducer = (state = 'electricity', action) => {
 }
 
 
-module.exports = ImportExportVisualizationReducer
+export default ImportExportVisualizationReducer

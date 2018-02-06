@@ -1,11 +1,11 @@
-const React = require('react')
-const PropTypes = require('prop-types')
-const { connect } = require('react-redux')
+import React from 'react'
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
 
-const Chart = require('./Chart')
-const AnimatedLine = require('./SVGAnimation/AnimatedLine')
-const Constants = require('../Constants')
-const TimelineSelector = require('../selectors/timeline')
+import Chart from './Chart'
+import AnimatedLine from './SVGAnimation/AnimatedLine'
+import Constants from '../Constants'
+import { timelineGrouping, timelineData } from '../selectors/timeline'
 
 class ProportionChart extends Chart {
   static get propTypes() {
@@ -68,6 +68,6 @@ class ProportionChart extends Chart {
   }
 }
 
-module.exports = connect((state, props) => Object.assign({
-  timelineGroup: TimelineSelector.timelineGrouping(state, props),
-}, TimelineSelector.timelineData(state, props)))(ProportionChart)
+export default connect((state, props) => Object.assign({
+  timelineGroup: timelineGrouping(state, props),
+}, timelineData(state, props)))(ProportionChart)

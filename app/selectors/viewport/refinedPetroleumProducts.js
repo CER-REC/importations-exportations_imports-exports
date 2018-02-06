@@ -1,8 +1,8 @@
-const { createSelector } = require('reselect')
+import { createSelector } from 'reselect'
 
-const { visualizationContentPosition } = require('./index')
+import { visualizationContentPosition } from './index'
 
-const stackedChartPosition = createSelector(
+export const stackedChartPosition = createSelector(
   visualizationContentPosition,
   startPos => ({
     axis: Object.assign({}, startPos, {
@@ -21,7 +21,7 @@ const basePos = createSelector(
   visContent => Object.assign({}, visContent, { height: -50 }),
 )
 
-const individualChartsPosition = createSelector(
+export const individualChartsPosition = createSelector(
   basePos,
   (startPos) => {
     let lastPos = startPos
@@ -49,8 +49,3 @@ const individualChartsPosition = createSelector(
     return positions
   },
 )
-
-module.exports = {
-  stackedChartPosition,
-  individualChartsPosition,
-}

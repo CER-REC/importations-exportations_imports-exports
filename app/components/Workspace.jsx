@@ -1,21 +1,35 @@
-const React = require('react')
-const { connect } = require('react-redux')
-const Constants = require('../Constants.js')
+import React from 'react'
+import { connect } from 'react-redux'
 
-const Header = require('./Header.jsx')
-const MenuBar = require('./MenuBar.jsx')
-const SocialBar = require('./SocialBar.jsx')
+import Header from './Header'
+import MenuBar from './MenuBar'
+import SocialBar from './SocialBar'
+import ModalSelector from './ModalSelector'
+import VisualizationContainer from './VisualizationContainer'
+import { svgSize as svgSizeSelector, detailSidebarPosition as detailSidebarSelector } from '../selectors/viewport/'
 
-const VisualizationContainer = require('./VisualizationContainer.jsx')
-const ViewportSelectors = require('../selectors/viewport/')
-
-require('./Workspace.scss')
+import './Workspace.scss'
 
 const Workspace = ({ svgSize, detailSidebarPosition }) => (
   <div style={{ position: 'relative' }}>
     <div className="Workspace">
       <Header />
+
     </div>
+    <svg
+      id="workspace"
+      className="Workspace"
+      {...svgSize}
+      style={{ zIndex: 9999 }}
+      viewBox={`0 0 ${svgSize.width} ${svgSize.height}`}
+      preserveAspectRatio="xMinYMin meet"
+      role="application"
+    >
+      <MenuBar />
+
+      <VisualizationContainer />
+      <SocialBar />
+    </svg>
     <div
       id="detailSidebar"
       style={{
@@ -25,22 +39,11 @@ const Workspace = ({ svgSize, detailSidebarPosition }) => (
         width: detailSidebarPosition.width,
       }}
     />
-    <svg
-      id="workspace"
-      className="Workspace"
-      {...svgSize}
-    >
-
-      <VisualizationContainer />
-
-      <MenuBar />
-      <SocialBar />
-    </svg>
-
+    <ModalSelector />
   </div>
 )
 
-module.exports = connect((state, props) => ({
-  svgSize: ViewportSelectors.svgSize(state, props),
-  detailSidebarPosition: ViewportSelectors.detailSidebarPosition(state, props),
+export default connect((state, props) => ({
+  svgSize: svgSizeSelector(state, props),
+  detailSidebarPosition: detailSidebarSelector(state, props),
 }))(Workspace)

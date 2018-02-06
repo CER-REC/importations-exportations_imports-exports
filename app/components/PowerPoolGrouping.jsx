@@ -1,8 +1,8 @@
-const React = require('react')
-const PropTypes = require('prop-types')
-const ReactRedux = require('react-redux')
+import React from 'react'
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
 
-const MapLayoutGridConstant = require('../MapLayoutGridConstant.js')
+import MapLayoutGridConstant from '../MapLayoutGridConstant'
 
 class PowerPoolGrouping extends React.Component {
   render() {
@@ -18,4 +18,4 @@ const mapStateToProps = state => ({
 })
 
 
-module.exports = ReactRedux.connect(mapStateToProps)(PowerPoolGrouping)
+export default connect(mapStateToProps)(PowerPoolGrouping)

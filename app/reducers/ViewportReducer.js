@@ -1,6 +1,4 @@
-const Immutable = require('immutable')
-
-// const Constants = require('../Constants.js')
+import Immutable from 'immutable'
 
 const defaults = Immutable.fromJS({
   x: 0,
@@ -17,4 +15,4 @@ const ViewportReducer = (state = defaults, action) => {
 }
 
 
-module.exports = ViewportReducer
+export default ViewportReducer

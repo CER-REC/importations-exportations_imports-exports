@@ -1,19 +1,19 @@
-const React = require('react')
-const PropTypes = require('prop-types')
-const { connect } = require('react-redux')
+import React from 'react'
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
 
-const CanadaMapContainer = require('./CanadaMapContainer.jsx')
-const USMapContainer = require('./USMapContainer.jsx')
-const PowerPoolContainer = require('./PowerPoolContainer.jsx')
-const PowerPoolGrouping = require('./PowerPoolGrouping.jsx')
-const ExplanationPopovers = require('./ExplanationPopovers.jsx')
-const ElectricityMapPieceActivityExplanation = require('./ElectricityMapPieceActivityExplanation.jsx')
+import CanadaMapContainer from './CanadaMapContainer'
+import USMapContainer from './USMapContainer'
+import PowerPoolContainer from './PowerPoolContainer'
+import PowerPoolGrouping from './PowerPoolGrouping'
+import ExplanationPopovers from './ExplanationPopovers'
+import ElectricityMapPieceActivityExplanation from './ElectricityMapPieceActivityExplanation'
 
-const BarChart = require('./BarChart')
-const Axis = require('./Axis')
-const ElectricityViewport = require('../selectors/viewport/electricity')
-const Constants = require('../Constants')
-const { positionShape } = require('../propTypeShapes')
+import BarChart from './BarChart'
+import Axis from './Axis'
+import * as ElectricityViewport from '../selectors/viewport/electricity'
+import Constants from '../Constants'
+import { positionShape } from '../propTypeShapes'
 
 const ElectricityVisualizationContainer = props => (
   <g>
@@ -69,7 +69,7 @@ ElectricityVisualizationContainer.propTypes = {
   mapPieceActivityExplanation: PropTypes.shape(positionShape).isRequired,
 }
 
-module.exports = connect((state, props) => ({
+export default connect((state, props) => ({
   canadaMap: ElectricityViewport.canadaMapPosition(state, props),
   usMap: ElectricityViewport.usMapPosition(state, props),
   powerPool: ElectricityViewport.powerPoolPosition(state, props),

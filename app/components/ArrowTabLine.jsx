@@ -1,5 +1,5 @@
-const React = require('react')
-const PropTypes = require('prop-types')
+import React from 'react'
+import PropTypes from 'prop-types'
 
 const ArrowTabLine = (props) => {
   const arrow = `M${props.xaxisPadding + 152} ${props.yaxis - 8} L${props.xaxisPadding + 144} ${props.yaxis + 3} L${props.xaxisPadding + 141} ${props.yaxis} Z`
@@ -31,4 +31,4 @@ ArrowTabLine.propTypes = {
   lineWidth: PropTypes.string.isRequired,
 }
 
-module.exports = ArrowTabLine
+export default ArrowTabLine
