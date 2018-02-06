@@ -7,6 +7,7 @@ import MapPieceLabel from './MapPieceLabel'
 import ConfidentialIcon from './ConfidentialIcon'
 import Constants from '../Constants'
 import AnimatedMapPiece from './SVGAnimation/AnimatedMapPiece'
+import MapLayoutGridConstant from '../MapLayoutGridConstant'
 
 import ExplanationDot from './ExplanationDot'
 
@@ -55,6 +56,23 @@ class MapPiece extends React.Component {
       />)
     }
     return ''
+  }
+
+  newYorkExplanation() {
+    if (this.props.data.get('name') !== 'NY') { return null }
+    return (<g>
+      <ExplanationDot
+        linePath="M110,43 C248,257 312,213 633,213"
+        xPosition={18}
+        yPosition={5}
+        lineX={110}
+        lineY={43}
+        textX={60}
+        textY={55}
+        containerX={this.props.x1 * MapLayoutGridConstant.getIn(['electricity', 'us' , 'mapPieceScale'], 1) + 308}
+        containerY={this.props.y1 * MapLayoutGridConstant.getIn(['electricity', 'us' , 'mapPieceScale'], 1) + 470}
+        text="New York has the highest exports into the US as well as the highest imports from the US"
+    /></g>)
   }
 
   render() {
@@ -111,6 +129,7 @@ class MapPiece extends React.Component {
         x2={this.props.x1 || 0}
         y2={this.props.y1 || 0}
       />
+      {this.newYorkExplanation()}
             </g>)
   }
 }

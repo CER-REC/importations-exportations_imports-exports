@@ -20,6 +20,8 @@ class ExplanationDot extends React.Component {
       linePath: PropTypes.string.isRequired,
       textX: PropTypes.number.isRequired,
       textY: PropTypes.number.isRequired,
+      containerX: PropTypes.number.isRequired,
+      containerY: PropTypes.number.isRequired,
     }
   }
 
@@ -63,7 +65,7 @@ class ExplanationDot extends React.Component {
         />
         <animate
           attributeName='opacity'
-          from='0.3'
+          from='0.7'
           to='0'
           dur='1.5s'
           begin='0'
