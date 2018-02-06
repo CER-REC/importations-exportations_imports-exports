@@ -67,6 +67,28 @@ class Menu extends React.PureComponent {
     /></g>)
   }
 
+  electricityExplanation() {
+    let dotY = 28
+    if (this.props.expanded) {
+      dotY = 52
+    }
+
+    if (this.props.name === 'amount' || this.props.name === 'arrangeBy') { return }
+    return (<g>
+      <ExplanationDot
+        linePath="M110,43 C248,257 312,213 633,213"
+        xPosition={120}
+        yPosition={dotY}
+        lineX={110}
+        lineY={43}
+        textX={75}
+        textY={65}
+        containerX={this.props.left}
+        containerY={this.props.top}
+        text="Electricity is the selected energy product"
+    /></g>)
+  }
+
   renderTitle() {
     if (this.props.title === false) { return null }
     const { Tr } = this.props
@@ -146,6 +168,7 @@ class Menu extends React.PureComponent {
         {this.renderTitle()}
         {this.renderOptions()}
         {this.importExportExplanation()}
+        {this.electricityExplanation()}
       </g>
     </g>
     )

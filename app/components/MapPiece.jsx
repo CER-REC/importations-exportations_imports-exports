@@ -74,20 +74,6 @@ class MapPiece extends React.Component {
       stroke = 'black'
     }
 
-    let newYorkExplanation = ''
-    if (this.props.data.get('name') === 'NY') {
-      newYorkExplanation = (<ExplanationDot
-        linePath="M89,67 C107,235 235,211 432,214"
-        xPosition={18}
-        yPosition={10}
-        lineX={278}
-        lineY={240}
-        textX={335}
-        textY={387}
-        text="New York has the highest exports into US as well as the highest imports from US"
-      />)
-    }
-
     let opacity = 1
     if (this.props.isSelected === true && this.props.isMapPieceSelected === false) {
       opacity = 0.10
@@ -118,7 +104,6 @@ class MapPiece extends React.Component {
         {this.drawArrow(this.props.legends, this.props.data, 'imports', this.props.styles, this.props.arrowProps)}
       </g>
       {confidentialIcon}
-      {newYorkExplanation}
     )
       <AnimatedMapPiece
         x1={this.props.x1 || 0}

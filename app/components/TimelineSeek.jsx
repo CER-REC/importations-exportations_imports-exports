@@ -11,6 +11,8 @@ import ExplanationDot from './ExplanationDot'
 
 const WorkspaceComputations = require('../computations/WorkspaceComputations.js')
 
+require('./TimelineSeek.scss')
+
 class TimelineSeek extends React.PureComponent {
   static propTypes = {
     seekPosition: PropTypes.shape({
@@ -156,10 +158,10 @@ class TimelineSeek extends React.PureComponent {
         linePath="M79,57 C163,276 228,251 486,247"
         xPosition={0}
         yPosition={10}
-        lineX={70}
-        lineY={160}
+        lineX={145}
+        lineY={163}
         textX={50}
-        textY={40}
+        textY={35}
         containerX={this.props.left + this.state.offset}
         containerY={this.props.top}
         text="Drag to select time frame"
@@ -183,12 +185,13 @@ class TimelineSeek extends React.PureComponent {
         >
           <g
             transform={`translate(${this.state.offset - 12} 0)`}
-          > {this.timeSeekExplanation()}
+          >
             <polygon
               points="7,0 10,0 10,26 0,26"
               stroke={Constants.getIn(['styleGuide', 'colours', 'SandExtraDark'])}
               fill="white"
             />
+            {this.timeSeekExplanation()}
           </g>
         </SVGDrag>
       </g>

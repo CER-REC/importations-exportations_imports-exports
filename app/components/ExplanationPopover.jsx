@@ -27,7 +27,7 @@ class ExplanationPopover extends React.Component {
 
     return (<svg>
       <g transform={`scale(0.3) ${transformString}`}>
-        <path d={transformLine} stroke="#ff708a" strokeWidth="1" fill="transparent" />
+        <path d={transformLine} stroke="#ff708a" strokeWidth="2" fill="transparent" />
       </g>
     </svg>)
   }
