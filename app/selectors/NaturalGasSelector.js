@@ -55,9 +55,9 @@ const getElectricityImportAndExport = createSelector(
           const originKey = stateOrProvince[1]
           missingstatesOrProvincesMap[originKey] = {
             country,
-            name: originKey,
+            destination: originKey,
             subType: {
-              Butane: { imports: 0, exports: 0 }, Propane: { imports: 0, exports: 0 }, propaneButane: { imports: 0, exports: 0 },
+               Butane: { imports: 0, exports: 0 }, Propane: { imports: 0, exports: 0 }, propaneButane: { imports: 0, exports: 0 },
             },
             totalCount: 0,
             confidentialCount: 0,
@@ -114,14 +114,15 @@ const parseLocationData = createSelector(
     const resultList = []
     if (data.size > 0 && typeof layout !== 'undefined') {
       layout.forEach((statesOrProvinces) => {
+        console.log(statesOrProvinces.get('originKey'))
         const originKey = statesOrProvinces.get('originKey')
         const result = {
           name: originKey,
           subType: data.getIn([originKey, 'subType']) || { Butane: { imports: 0, exports: 0 }, Propane: { imports: 0, exports: 0 }, propaneButane: { imports: 0, exports: 0 } },
           x: statesOrProvinces.get('x'),
           y: statesOrProvinces.get('y'),
-          totalCount: statesOrProvinces.get('totalCount') || 0,
-          confidentialCount: statesOrProvinces.get('confidentialCount') || 0,
+          totalCount: data.getIn([originKey,'totalCount']) || 0,
+          confidentialCount: data.getIn([originKey, 'confidentialCount']) || 0,
         }
         resultList.push(result)
       })

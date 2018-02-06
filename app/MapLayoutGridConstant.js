@@ -357,16 +357,16 @@ const MapLayoutGridConstant = fromJS({
       },
       layout: [
         {
-          name: 'ATL-Q', originKey: 'ATL-Q', x: 0, y: 0,
+          name: 'ATL-Q', originKey: 'ATL-Q', x: 6.5, y: 0,
         },
         {
-          name: 'YT', originKey: 'YT', x: 0, y: 1,
+          name: 'YT', originKey: 'YT', x: 1, y: 1,
         },
         {
-          name: 'NT', originKey: 'NT', x: 1, y: 1,
+          name: 'NT', originKey: 'NT', x: 2, y: 1,
         },
         {
-          name: 'NU', originKey: 'NU', x: 2, y: 1,
+          name: 'NU', originKey: 'NU', x: 3, y: 1,
         },
         {
           name: 'NF', originKey: 'NF', x: 6, y: 1,
