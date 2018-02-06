@@ -1,14 +1,16 @@
 import { createSelector } from 'reselect'
 import Immutable from 'immutable'
 
-import { visualizationSettings } from './visualizationSettings'
+import {
+  visualizationSettings,
+  arrangeByOverride,
+  amountOverride,
+  activityGroupOverride,
+  selectedVisualization,
+} from './visualizationSettings'
 
 const emptyMap = new Immutable.Map()
 const emptyList = new Immutable.List()
-
-const arrangeByOverride = (_, props) => props._overrideArrangeBy
-const amountOverride = (_, props) => props._overrideAmount
-const activityGroupOverride = (_, props) => props._overrideActivityGroup
 
 export const arrangeBy = createSelector(
   visualizationSettings,
@@ -28,8 +30,6 @@ const selectedActivityGroup = createSelector(
   (settings, override) => override || settings.get('activity'),
 )
 
-const selectedVisualization = (state, props) =>
-  props._overrideVisualization || state.importExportVisualization
 const dataSelector = state => state.data
 
 const productSelector = createSelector(
@@ -55,7 +55,10 @@ export const activityGroupSelector = createSelector(
   unitSelector,
   selectedActivityGroup,
   (points, filterActivityGroup) =>
-    points.filter(point => (point.get('activityGroup') === filterActivityGroup)),
+    points.filter(point => (
+      point.get('activityGroup') === filterActivityGroup ||
+      point.get('activity') === filterActivityGroup
+    )),
 )
 
 const filterByTimelineSelector = createSelector(

@@ -9,27 +9,32 @@ import Axis from './Axis'
 import PortMap from './PortMap'
 import DetailSidebar from './DetailSidebar'
 import * as NaturalGasViewport from '../selectors/viewport/naturalGas'
+import { showImportsSelector, showExportsSelector } from '../selectors/visualizationSettings'
 import Constants from '../Constants'
 
 const NaturalGasVisualizationContainer = props => (
   <g>
-    <BarChart
-      {...props.importChart}
-      valueKey="imports"
-      aggregateKey="activity"
-      colour={Constants.getIn(['styleGuide', 'colours', 'ImportDefault'])}
-    />
+    {!props.showImports ? null : (
+      <BarChart
+        {...props.importChart}
+        valueKey="imports"
+        aggregateKey="activity"
+        colour={Constants.getIn(['styleGuide', 'colours', 'ImportDefault'])}
+      />
+    )}
     <Axis
       {...props.axisPosition}
       barWidth={4}
     />
-    <BarChart
-      {...props.exportChart}
-      valueKey="exports"
-      aggregateKey="activity"
-      flipped
-      colour={Constants.getIn(['styleGuide', 'colours', 'ExportDefault'])}
-    />
+    {!props.showExports ? null : (
+      <BarChart
+        {...props.exportChart}
+        valueKey="exports"
+        aggregateKey="activity"
+        flipped
+        colour={Constants.getIn(['styleGuide', 'colours', 'ExportDefault'])}
+      />
+    )}
     <ExplanationPopovers
       xaxis={props.xaxis}
       yaxis={props.yaxis + props.height}
@@ -46,4 +51,6 @@ export default connect((state, props) => ({
   exportChart: NaturalGasViewport.chartExportPosition(state, props),
   mapTiles: NaturalGasViewport.mapTilesPosition(state, props),
   portMap: NaturalGasViewport.portMapPosition(state, props),
+  showImports: showImportsSelector(state, props),
+  showExports: showExportsSelector(state, props),
 }))(NaturalGasVisualizationContainer)

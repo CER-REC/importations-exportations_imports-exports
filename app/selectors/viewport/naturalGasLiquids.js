@@ -15,10 +15,10 @@ export const canadaImportMap = createSelector(
 export const chartImportPosition = createSelector(
   canadaImportMap,
   visContent => ({
-    top: visContent.top,
+    top: visContent.top + visContent.height,
     left: visContent.left,
     width: visContent.width,
-    height: 200,
+    height: 100,
   }),
 )
 
