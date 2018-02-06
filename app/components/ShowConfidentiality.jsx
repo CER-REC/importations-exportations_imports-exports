@@ -57,6 +57,7 @@ class ShowConfidentiality extends React.Component {
 const mapStateToProps = (state, props) => ({
   viewport: state.viewport,
   Tr: TrSelector(state, props),
+  showConfidentiality: state.showConfidentiality,
 })
 
 export default connect(mapStateToProps)(ShowConfidentiality)
