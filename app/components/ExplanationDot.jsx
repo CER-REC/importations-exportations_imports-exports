@@ -6,6 +6,8 @@ import Constants from '../Constants'
 
 import PopoverPortal from './PopoverPortal'
 import ExplanationPopover from './ExplanationPopover'
+
+import { handleInteraction } from '../utilities'
 import './ExplanationDot.scss'
 
 class ExplanationDot extends React.Component {
@@ -27,12 +29,19 @@ class ExplanationDot extends React.Component {
 
   constructor(props) {
     super(props)
-    this.onClick = this.explanationDotClick.bind(this)
+    this.state = { explanations: false }
+    this.explanationShowClick = this.explanationShowClick.bind(this)
+    this.explanationHideClick = this.explanationHideClick.bind(this)
   }
 
-  explanationDotClick(e) {
+  explanationShowClick(e) {
     e.stopPropagation()
-    console.log('explanation dot clicked', this)
+    this.setState({ explanations: true })
+  }
+
+  explanationHideClick(e) {
+    e.stopPropagation()
+    this.setState({ explanations: false })
   }
 
   explanationDot() {
