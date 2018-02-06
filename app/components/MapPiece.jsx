@@ -38,7 +38,7 @@ class MapPiece extends React.Component {
     )
   }
 
-  drawArrow(legends, data, type, styles, arrowProps) {
+  drawArrow(legends, data, type, styles, arrowProps, props='') {
     if (data.get(type) !== 0) {
       let color = this.getArrowColor(type, data.get(type))
       if(typeof this.props.arrowProps !== 'undefined' && typeof this.props.arrowProps.get('fill') !== 'undefined'){
@@ -96,8 +96,8 @@ class MapPiece extends React.Component {
         text = {this.props.text}
       />
       <g transform={arrowTransform}>
-        {this.drawArrow(this.props.legends, this.props.data, 'exports', this.props.styles, this.props.arrowProps)}
-        {this.drawArrow(this.props.legends, this.props.data, 'imports', this.props.styles, this.props.arrowProps)}
+        {this.drawArrow(this.props.legends, this.props.data, 'exports', this.props.styles, this.props.arrowProps, this.props)}
+        {this.drawArrow(this.props.legends, this.props.data, 'imports', this.props.styles, this.props.arrowProps, this.props)}
       </g>
       {confidentialIcon}
       <AnimatedMapPiece

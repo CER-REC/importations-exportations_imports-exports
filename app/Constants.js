@@ -305,6 +305,7 @@ const Constants = fromJS({
           Québec: 'QB',
           'New Brunswick': 'NB',
           'Nova Scotia': 'NS',
+          'Atlantic provinces and Quebec': 'ATL-Q',
         },
         us: {
           Alabama: 'AL',
