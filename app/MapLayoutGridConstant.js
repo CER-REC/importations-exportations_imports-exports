@@ -697,5 +697,37 @@ const MapLayoutGridConstant = fromJS({
       ],
     },
   },
+  naturalGas: {
+    mapPieceScale: 1,
+    sortingRowPadding: 0.5,
+    dimensions: {
+      height: 37.09,
+      width: 38.75,
+      topPadding: 25,
+      leftPadding: 9,
+    },
+    styles: {
+      color: '#ede3cb',
+      labelPosition: 'down',
+      arrowPosition: 'down',
+      arrowSpacing: -12,
+      bottomMargin: 5,
+      topMargin: 15,
+      confidentialStyle: {
+        fill: '#999',
+        stroke: '#999',
+        exclamationFill: '#fff',
+      },
+    },
+    layout: [
+      'BC',
+      'AB',
+      'SK',
+      'MB',
+      'ON',
+      'QB',
+      'NB',
+    ],
+  },
 })
 export default MapLayoutGridConstant

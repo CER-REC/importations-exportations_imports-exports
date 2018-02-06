@@ -1,6 +1,7 @@
 import { createSelector } from 'reselect'
 import Immutable from 'immutable'
 
+import Constants from '../Constants'
 import {
   visualizationSettings,
   arrangeByOverride,
@@ -140,6 +141,44 @@ export const aggregateLocationPaddSelector = createSelector(
       acc[destination].transport[transport] = acc[destination].transport[transport] + next.get('value') || 0
       acc[destination].totalCount = (totalCount + 1)
       acc[destination].confidentialCount = (confidentialCount + next.get('confidential'))
+      return acc
+    }, {})
+    return Immutable.fromJS(result)
+  },
+)
+
+export const aggregateLocationNaturalGasSelector = createSelector(
+  filterByTimelineSelector,
+  (points) => {
+    const ports = Constants.getIn(['dataloader', 'mapping', 'ports'], Immutable.fromJS({}))
+    const result = points.reduce((acc, next) => {
+      const port = ports.get(next.get('port'))
+      if (typeof port === 'undefined') {
+        //console.log(`missing data for ${next.get('port')} in the constant list.`)
+        return acc
+      }
+      const province = port.get('Province')
+      const portName = next.get('port')
+      const activityName = next.get('activity')
+      if (!acc[province]) {
+        acc[province] = {}
+      }
+      if (!acc[province][portName]) {
+        acc[province][portName] = {
+          portName
+        }
+        acc[province][portName].activities = {}
+      }
+      if (!acc[province][portName].activities[activityName]) {
+        acc[province][portName].activities[activityName] = next.get('value')
+      } else {
+        acc[province][portName].activities[activityName] += next.get('value')
+      }
+      const totalCount = acc[province][portName].totalCount || 0
+      const confidentialCount = acc[province][portName].confidentialCount || 0
+      acc[province][portName].unit = next.get('units')
+      acc[province][portName].totalCount = (totalCount + 1)
+      acc[province][portName].confidentialCount = (confidentialCount + next.get('confidential'))
       return acc
     }, {})
     return Immutable.fromJS(result)
