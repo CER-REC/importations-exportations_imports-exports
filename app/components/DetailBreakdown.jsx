@@ -28,7 +28,7 @@ class DetailBreakdown extends React.Component {
           {bodyContent.getIn(['action', props.language])} &nbsp;
           {TR.getIn(['country', 'us', key, props.language], '')}&nbsp;
           {humanNumber(value, props.language)}&nbsp;
-          {TR.getIn(['electricityDataTypes', props.amountUnit, props.language])}&nbsp;
+          {TR.getIn(['amounts', props.amountUnit, props.language])}&nbsp;
           {exportOrImportPercentage}%&nbsp;
           <div className="progress-bar">
             <span style={progressBarStyle} />

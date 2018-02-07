@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 import Constants from '../Constants'
 import { setScaleLinked, setGrouping } from '../actions/visualizationSettings'
 import { timelineScaleLinked, timelineGrouping as timelineGroupingSelector } from '../selectors/timeline'
+import trSelector from '../selectors/translate'
 import { handleInteraction } from '../utilities'
 
 class ChartOptions extends React.PureComponent {
@@ -37,8 +38,8 @@ class ChartOptions extends React.PureComponent {
       ? 'images/link.svg'
       : 'images/link_broken.svg'
     const imageAlt = this.props.scaleLinked
-      ? 'Chart Scale Linked'
-      : 'Chart Scale Unlinked'
+      ? this.props.tr(['chartOptions', 'scaleLinked'])
+      : this.props.tr(['chartOptions', 'scaleUnlinked'])
 
     const interactions = handleInteraction(this.scaleLinkedChanged)
     return (
@@ -58,6 +59,7 @@ class ChartOptions extends React.PureComponent {
   }
 
   render() {
+    const groupLabel = this.props.tr(['chartOptions', 'timelineGroup', this.props.timelineGroup])
     return (
       <div
         style={{
@@ -71,9 +73,9 @@ class ChartOptions extends React.PureComponent {
         <div className="chartOptions" style={{ float: 'right' }}>
           <a
             {...handleInteraction(this.changeTimelineGroup)}
-            aria-label={`by ${this.props.timelineGroup}`}
+            aria-label={groupLabel}
           >
-            by {this.props.timelineGroup.toUpperCase()} +
+            {groupLabel} +
           </a>
           <div className="detailBarArrow" />
         </div>
@@ -87,6 +89,7 @@ export default connect(
   (state, props) => ({
     scaleLinked: timelineScaleLinked(state, props),
     timelineGroup: timelineGroupingSelector(state, props),
+    tr: trSelector(state, props),
   }),
   { setScaleLinked, setGrouping },
 )(ChartOptions)

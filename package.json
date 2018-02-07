@@ -12,7 +12,7 @@
     "build:portmap": "npm run build:portmap:shp2json && npm run build:portmap:geo2topo && npm run build:portmap:toposimplify && npm run build:portmap:topoquantize && cp ./srcData/topoquantize.json ./public/data/topo.json",
     "test": "mocha-webpack --watch --recursive ./test/",
     "webpack": "webpack --config webpack.prod.config.js",
-    "start": "node servers/DevelopmentServer/DevelopmentServer.js",
+    "start": "babel-node servers/DevelopmentServer/DevelopmentServer.js",
     "lint": "eslint --ext .jsx,.js app/**",
     "build": "node ./build.js"
   },
