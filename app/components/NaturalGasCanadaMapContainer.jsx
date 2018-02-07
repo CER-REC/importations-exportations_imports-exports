@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import Immutable from 'immutable'
 
-import ElectricityMapLayout from './ElectricityMapLayout'
+import NaturalGasLiquidMapLayout from './NaturalGasLiquidMapLayout'
 
 const detailBreakDownData = Immutable.fromJS({
   WA: 9589756,
@@ -12,12 +12,12 @@ const detailBreakDownData = Immutable.fromJS({
   OR: 5548646,
 })
 
-const CanadaMapContainer = props => (
+const NaturalGasCanadaMapContainer = props => (
   // Scale is temporary adjustment as it's too small if we use dimensions
   // mentioned in the design document
   // TODO: scale map dynamically when screen size change
   <g transform={`translate(${props.left + 100} ${props.top})`}>
-    <ElectricityMapLayout
+    <NaturalGasLiquidMapLayout
       left={props.left}
       top={props.top}
       detailBreakDownData={detailBreakDownData}
@@ -26,14 +26,14 @@ const CanadaMapContainer = props => (
   </g>
 )
 
-CanadaMapContainer.propTypes = {
+NaturalGasCanadaMapContainer.propTypes = {
   top: PropTypes.number.isRequired,
   left: PropTypes.number.isRequired,
 }
 
-const mapStateToProps = (state, props) => ({
+const mapStateToProps = state => ({
   viewport: state.viewport,
 })
 
 
-export default connect(mapStateToProps)(CanadaMapContainer)
+export default connect(mapStateToProps)(NaturalGasCanadaMapContainer)

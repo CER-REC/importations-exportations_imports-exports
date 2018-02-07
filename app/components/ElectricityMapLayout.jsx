@@ -8,7 +8,11 @@ import MapLayoutGridConstant from '../MapLayoutGridConstant'
 import Constants from '../Constants'
 import Tr from '../TranslationTable'
 import TrSelector from '../selectors/translate'
-import { visualizationSettings } from '../selectors/visualizationSettings'
+import {
+  visualizationSettings,
+  showImportsSelector,
+  showExportsSelector,
+} from '../selectors/visualizationSettings'
 
 import { setSelection } from '../actions/visualizationSettings'
 import './ElectricityMapLayout.scss'
@@ -63,10 +67,21 @@ class ElectricityMapLayout extends React.Component {
       if (typeof dataPoint !== 'undefined') {
         const destinationCountries = dataPoint.get('destinationCountry')
         destinationCountries.forEach((value, key) => {
-          if (key !== '') {
-            destinations[key] = destinations[key] || []
-            destinations[key] = destinations[key].concat(value.toJS())
+          if(!destinations[key]){
+            destinations[key]={}
           }
+          value.forEach((activities, destinationKey) =>{
+            if(!destinations[key][destinationKey]){
+                destinations[key][destinationKey] = {}
+            }
+            activities.forEach((activityData, activityKey) => {
+              if(!destinations[key][destinationKey][activityKey]){
+                  destinations[key][destinationKey][activityKey] = activityData
+              }else{
+                  destinations[key][destinationKey][activityKey] += activityData
+              }
+            })
+          })
         })
       }
     })
@@ -120,7 +135,7 @@ class ElectricityMapLayout extends React.Component {
   isMapPieceSelected(key, country) {
     const isSelected = this.props.selection.get('origins').indexOf(key)
     if (isSelected !== -1) { return true }
-    return this.props.selection.getIn(['destinations', country], new Immutable.List()).includes(key)
+    return this.props.selection.getIn(['destinations', country], new Immutable.List()).has(key)
   }
   isSelected() {
     const length = this.props.selection.get('origins').count() + this.props.selection.get('destinations').count()
@@ -169,25 +184,38 @@ class ElectricityMapLayout extends React.Component {
     })
   }
 
-  renderDetailBreakdown(data) {
+  renderDetailBreakdown() {
     const detailBreakdownData = Constants.getIn(['detailBreakDown', this.props.country])
-    if (typeof detailBreakdownData !== 'undefined' && detailBreakdownData.get('required', false)) {
-      return (<DetailBreakdown
-        data={data}
-        type={detailBreakdownData.get('type')}
-        trContent={Tr.getIn(['detailBreakDown', this.props.importExportVisualization, detailBreakdownData.get('type')])}
-        veritcalPosition={detailBreakdownData.get('displayPosition')}
-        color={detailBreakdownData.get('color')}
-        height={detailBreakdownData.get('height')}
-        showDefault={detailBreakdownData.get('showDefault', false)}
-      />)
+    if (typeof detailBreakdownData === 'undefined' ||
+        !detailBreakdownData.get('required', false)) {
+      return null
     }
-    return null
+    const data = Immutable.fromJS(
+      this.props.selection.get('destinations').reduce((acc, nextValue, country) => {
+          return nextValue.reduce((accumulator, stateOrProvince, key) => {
+            if(!stateOrProvince.get(detailBreakdownData.get('type'))){
+              return acc
+            }
+            acc[key] = stateOrProvince.get(detailBreakdownData.get('type'))
+            return acc
+          },{})
+        },{})
+      ).sort((a,b) => {return b - a})
+    if (this.props[`${detailBreakdownData.get('type')}Enabled`] === false) { return null }
+    return (<DetailBreakdown
+      data={data}
+      type={detailBreakdownData.get('type')}
+      trContent={Tr.getIn(['detailBreakDown', this.props.importExportVisualization, detailBreakdownData.get('type')])}
+      veritcalPosition={detailBreakdownData.get('displayPosition')}
+      color={detailBreakdownData.get('color')}
+      height={detailBreakdownData.get('height')}
+      showDefault={detailBreakdownData.get('showDefault', false)}
+    />)
   }
 
   renderDetailSidebar() {
     return (<DetailSidebar top={this.props.top} height={Constants.getIn(['detailBreakDown', this.props.country, 'height'], 0)}>
-      {this.renderDetailBreakdown(this.props.detailBreakDownData)}
+      {this.renderDetailBreakdown()}
     </DetailSidebar>)
   }
 
@@ -210,6 +238,8 @@ const mapStateToProps = (state, props) => ({
   bins: binSelector(state, props),
   Tr: TrSelector(state, props),
   unit: visualizationSettings(state, props).get('amount'),
+  importsEnabled: showImportsSelector(state, props),
+  exportsEnabled: showExportsSelector(state, props),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(ElectricityMapLayout)
