@@ -31,7 +31,7 @@ CanadaMapContainer.propTypes = {
   left: PropTypes.number.isRequired,
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state, props) => ({
   viewport: state.viewport,
 })
 

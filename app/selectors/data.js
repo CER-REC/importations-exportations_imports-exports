@@ -106,9 +106,15 @@ export const aggregateLocationSelector = createSelector(
       const destinationKey = next.get('destinationKey')
       const destinationCountry = next.get('destinationCountry')
       acc[originKey].destinationCountry = acc[originKey].destinationCountry || {}
-      acc[originKey].destinationCountry[destinationCountry] = acc[originKey].destinationCountry[destinationCountry] || []
-      if ((acc[originKey].destinationCountry[destinationCountry]).indexOf(destinationKey) === -1) {
-        (acc[originKey].destinationCountry[destinationCountry]).push(destinationKey)
+      acc[originKey].destinationCountry[destinationCountry] = acc[originKey].destinationCountry[destinationCountry] || {}
+      if (!(acc[originKey].destinationCountry[destinationCountry])[destinationKey]) {
+        acc[originKey].destinationCountry[destinationCountry][destinationKey] = {}
+        acc[originKey].destinationCountry[destinationCountry][destinationKey][activity] = next.get('value', 0)
+      } else {
+        if (!acc[originKey].destinationCountry[destinationCountry][destinationKey][activity]) {
+          acc[originKey].destinationCountry[destinationCountry][destinationKey][activity] = 0
+        }
+        acc[originKey].destinationCountry[destinationCountry][destinationKey][activity] += next.get('value', 0)
       }
       acc[originKey].totalCount = (totalCount + 1)
       acc[originKey].confidentialCount = (confidentialCount + next.get('confidential'))

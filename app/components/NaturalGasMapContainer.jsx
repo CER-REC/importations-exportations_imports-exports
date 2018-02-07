@@ -8,7 +8,7 @@ import Constants from '../Constants'
 import NaturalGasMapPiece from './NaturalGasMapPiece'
 import MapLayoutGridConstant from '../MapLayoutGridConstant'
 import { arrangeBy, binSelector, aggregateLocationNaturalGasSelector } from '../selectors/data'
-import { getSelectionSettings } from '../selectors/naturalGasSelector'
+import { getSelectionSettings } from '../selectors/NaturalGasSelector'
 import { handleInteraction } from '../utilities'
 import { setSelection } from '../actions/visualizationSettings'
 

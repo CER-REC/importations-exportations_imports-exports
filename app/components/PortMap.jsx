@@ -2,7 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
 import { geoConicConformal, geoPath } from 'd3-geo'
-import { getSelectionSettings } from '../selectors/naturalGasSelector'
+import { getSelectionSettings } from '../selectors/NaturalGasSelector'
 import { feature } from 'topojson-client'
 
 import Constants from '../Constants'

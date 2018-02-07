@@ -22,18 +22,23 @@ class DetailBreakdown extends React.Component {
         width: `${exportOrImportPercentage}%`,
         backgroundColor: props.color,
       }
+      const name = TR.getIn(['country', 'us', key, props.language])
+      || TR.getIn(['country', 'ca', key, props.language])
+      || TR.getIn(['country', 'powerpool', key, props.language]) || ''
       // get state name corresponding to the
       return (
-        <div key={key} className="detailBreakDownText">
+        <tr key={key} className="detailBreakDownText">
+          <td width ="95%">
           {bodyContent.getIn(['action', props.language])} &nbsp;
-          {TR.getIn(['country', 'us', key, props.language], '')}&nbsp;
+          {name}&nbsp;
           {humanNumber(value, props.language)}&nbsp;
           {TR.getIn(['electricityDataTypes', props.amountUnit, props.language])}&nbsp;
           {exportOrImportPercentage}%&nbsp;
-          <div className="progress-bar">
+          </td>
+          <td width ="5%" className="progress-bar">
             <span style={progressBarStyle} />
-          </div>
-        </div>
+          </td>
+        </tr>
       )
     })
     return result.toArray()
@@ -56,9 +61,13 @@ class DetailBreakdown extends React.Component {
     const { props } = this
     if (typeof props.data !== 'undefined' && props.data.count() > 0) {
       return (
-        <div className="detailBreakDown" style={{ height: props.height }}>
+        <div className="detailBreakDown">
           {this.renderDetailBreakdownHeader()}
-          {this.renderDetailBreakdownBody()}
+          <table className ='detailBreakDownContainer'  style={{ height: props.height }}>
+            <tbody>
+              {this.renderDetailBreakdownBody()}
+            </tbody>
+          </table>
         </div>
       )
     } else if (typeof props.timelineYears !== 'undefined' && props.showDefault) {
