@@ -78,6 +78,26 @@ class MapPiece extends React.Component {
       } return null
   }
 
+  powerpoolConfidentialIcon() {
+    if (typeof this.props.data.get('confidentialCount') !== 'undefined' 
+        && this.props.data.get('confidentialCount') !== 0 
+        && this.props.confidentialityMenu) {
+      if (this.props.data.get('name') !== 'MN/ND') { return null }
+      return <ConfidentialIcon 
+        styles={this.props.styles.get('confidentialStyle')} 
+        text="n/50 values confidential"
+        containerX={this.props.x1 * MapLayoutGridConstant.getIn(['electricity', 'us' , 'mapPieceScale'], 1) + 665}
+        containerY={678}
+        lineX={102}
+        lineY={40}
+        textX={40}
+        textY={40}
+        xPosition={0}
+        yPosition={0}
+        />
+      } return null
+  }
+
   render() {
     let arrowTransform = `translate(${Constants.getIn(['mapPieceArrowStyle', 'x'])}, ${Constants.getIn(['mapPieceArrowStyle', 'y'])})`
     if (this.props.styles.get('arrowPosition') === 'down') {
@@ -125,6 +145,7 @@ class MapPiece extends React.Component {
         y2={this.props.y1 || 0}
       />
       {this.manitobaConfidentialIcon()}
+      {this.powerpoolConfidentialIcon()}
             </g>)
   }
 }
