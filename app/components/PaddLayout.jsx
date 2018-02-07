@@ -53,21 +53,21 @@ class PaddLayout extends React.Component {
     const text = this.props.TRSelector(['Padd', country, paddGroupId])
     let confidentialIcon = null
     const style = mapLayoutGrid.get('styles', false)
-    if (style && confidentialCount > 0 && country !== 'ca' && this.props.confidentialityMenu) {
-      confidentialIcon = (<g transform="translate(145 143)">
-        <ConfidentialIcon 
-          styles={style.get('confidentialStyle')}
-          text="x/50 values confidential"
-          lineX={0}
-          lineY={0}
-          textX={70}
-          textY={55}
-          containerX={730}
-          containerY={780}
-          xPosition={0}
-          yPosition={0}/>
-        </g>)
-    }
+    // if (style && confidentialCount > 0 && country !== 'ca' && this.props.confidentialityMenu) {
+    //   confidentialIcon = (<g transform="translate(145 143)">
+    //     <ConfidentialIcon 
+    //       styles={style.get('confidentialStyle')}
+    //       text="x/50 values confidential"
+    //       lineX={0}
+    //       lineY={0}
+    //       textX={70}
+    //       textY={55}
+    //       containerX={730}
+    //       containerY={780}
+    //       xPosition={0}
+    //       yPosition={0}/>
+    //     </g>)
+    // }
     return (<g className={fontClassName} transform={`translate(${left + transformTranslate.get('left')} ${top + transformTranslate.get('top')})`}>
       <text transform={`translate(${transformText.get('left')} ${transformText.get('top')})`}>{text}</text>
       <polygon fill={color} transform="translate(0 140)" points="149.98 18.68 168.81 26.14 187.48 18.66 187.48 17.99 184.09 17.99 184.08 14.51 152.98 14.5 152.95 17.99 149.98 17.99 149.98 18.68" />
@@ -172,6 +172,7 @@ const mapStateToProps = (state, props) => ({
   Padd: PaddSelector(state, props),
   TRSelector: TRSelector(state, props),
   confidentialityMenu: state.confidentialityMenu,
+  selectedEnergy: state.importExportVisualization,
 })
 
 export default connect(mapStateToProps)(PaddLayout)

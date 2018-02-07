@@ -18,6 +18,7 @@ class MapPiece extends React.Component {
     data: PropTypes.instanceOf(Immutable.Map).isRequired,
     legend: PropTypes.bool,
     confidentialityMenu: PropTypes.bool.isRequired,
+    selectedEnergy: PropTypes.string.isRequired,
   }
 
   static defaultProps = {
@@ -61,13 +62,14 @@ class MapPiece extends React.Component {
   manitobaConfidentialIcon() {
     if (typeof this.props.data.get('confidentialCount') !== 'undefined' 
         && this.props.data.get('confidentialCount') !== 0 
-        && this.props.confidentialityMenu) {
+        && this.props.confidentialityMenu
+        && this.props.selectedEnergy === 'electricity') {
       if (this.props.data.get('name') !== 'MB') { return null }
       return <ConfidentialIcon 
         styles={this.props.styles.get('confidentialStyle')} 
         text="14/50 values confidential"
         containerX={this.props.x1 + MapLayoutGridConstant.getIn(['electricity', 'canada' , 'mapPieceScale'], 1) + 308}
-        containerY={82}
+        containerY={this.props.y1 + MapLayoutGridConstant.getIn(['electricity', 'canada' , 'mapPieceScale'], 1) + 80}
         lineX={102}
         lineY={40}
         textX={40}
@@ -75,13 +77,14 @@ class MapPiece extends React.Component {
         xPosition={0}
         yPosition={0}
         />
-      } return null
+    } return null
   }
 
   powerpoolConfidentialIcon() {
     if (typeof this.props.data.get('confidentialCount') !== 'undefined' 
         && this.props.data.get('confidentialCount') !== 0 
-        && this.props.confidentialityMenu) {
+        && this.props.confidentialityMenu
+        && this.props.selectedEnergy === 'electricity') {
       if (this.props.data.get('name') !== 'MN/ND') { return null }
       return <ConfidentialIcon 
         styles={this.props.styles.get('confidentialStyle')} 
@@ -95,8 +98,8 @@ class MapPiece extends React.Component {
         xPosition={0}
         yPosition={0}
         />
-      } return null
-    }
+    } return null
+  }
 
   renderMapPieceLabel() {
     return <MapPieceLabel
@@ -157,6 +160,7 @@ class MapPiece extends React.Component {
 
 const mapStateToProps = (state, props) => ({
   confidentialityMenu: state.confidentialityMenu,
+  selectedEnergy: state.importExportVisualization,
 })
 
 export default connect(mapStateToProps)(MapPiece)
