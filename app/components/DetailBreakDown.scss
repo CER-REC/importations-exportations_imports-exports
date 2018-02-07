@@ -1,11 +1,11 @@
 @import '../styles/Colours';
 
 .detailBreakDown {
-  width:100%;
   .header { 
     padding-bottom: 4px;
   }
   .detailBreakDownContainer{
+    width:100%;
     overflow: auto;
     overflow-x: hidden;
     display:block;

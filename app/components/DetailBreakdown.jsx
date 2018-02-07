@@ -63,8 +63,8 @@ class DetailBreakdown extends React.Component {
       return (
         <div className="detailBreakDown">
           {this.renderDetailBreakdownHeader()}
-          <table>
-            <tbody className ='detailBreakDownContainer'  style={{ height: props.height }}>
+          <table className ='detailBreakDownContainer'  style={{ height: props.height }}>
+            <tbody>
               {this.renderDetailBreakdownBody()}
             </tbody>
           </table>
