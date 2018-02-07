@@ -8,6 +8,7 @@ import MapPieceLabel from './MapPieceLabel'
 import ConfidentialIcon from './ConfidentialIcon'
 import Constants from '../Constants'
 import AnimatedMapPiece from './SVGAnimation/AnimatedMapPiece'
+import MapLayoutGridConstant from '../MapLayoutGridConstant'
 
 class MapPiece extends React.Component {
   static propTypes = {
@@ -66,16 +67,15 @@ class MapPiece extends React.Component {
     // Manitoba on electricity
     let manitobaConfidentialIcon = ''
     if (typeof this.props.data.get('confidentialCount') !== 'undefined' && this.props.data.get('confidentialCount') !== 0 && this.props.confidentialityMenu) {
-      // TODO: on click show pop over to show confidential values
       manitobaConfidentialIcon = <ConfidentialIcon 
         styles={this.props.styles.get('confidentialStyle')} 
         text="14/50 values confidential"
-        containerX={530}
-        containerY={70}
-        lineX={0}
-        lineY={0}
-        textX={70}
-        textY={55}
+        containerX={this.props.x1 * MapLayoutGridConstant.getIn(['electricity', 'canada' , 'mapPieceScale'], 1) + 308}
+        containerY={82}
+        lineX={102}
+        lineY={40}
+        textX={40}
+        textY={40}
         xPosition={0}
         yPosition={0}
         />
@@ -84,12 +84,11 @@ class MapPiece extends React.Component {
     // Powerpool electricity
     let powerpoolConfidentialIcon = ''
     if (typeof this.props.data.get('confidentialCount') !== 'undefined' && this.props.data.get('confidentialCount') !== 0 && this.props.confidentialityMenu) {
-      // TODO: on click show pop over to show confidential values
       powerpoolConfidentialIcon = <ConfidentialIcon 
         styles={this.props.styles.get('confidentialStyle')} 
         text="14/50 values confidential"
-        containerX={665}
-        containerY={665}
+        containerX={this.props.x1 * MapLayoutGridConstant.getIn(['electricity', 'canada' , 'mapPieceScale'], 1) + 638}
+        containerY={this.props.y1 * MapLayoutGridConstant.getIn(['electricity', 'us' , 'mapPieceScale'], 1) + 665}
         lineX={0}
         lineY={0}
         xPosition={0}
