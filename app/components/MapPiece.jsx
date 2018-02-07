@@ -58,19 +58,15 @@ class MapPiece extends React.Component {
     return ''
   }
 
-  render() {
-    let arrowTransform = `translate(${Constants.getIn(['mapPieceArrowStyle', 'x'])}, ${Constants.getIn(['mapPieceArrowStyle', 'y'])})`
-    if (this.props.styles.get('arrowPosition') === 'down') {
-      arrowTransform = `translate(${Constants.getIn(['mapPieceArrowStyle', 'x'])}, ${this.props.dimensions.get('height') - Constants.getIn(['mapPieceArrowStyle', 'y'])})`
-    }
-
-    // Manitoba on electricity
-    let manitobaConfidentialIcon = ''
-    if (typeof this.props.data.get('confidentialCount') !== 'undefined' && this.props.data.get('confidentialCount') !== 0 && this.props.confidentialityMenu) {
-      manitobaConfidentialIcon = <ConfidentialIcon 
+  manitobaConfidentialIcon() {
+    if (typeof this.props.data.get('confidentialCount') !== 'undefined' 
+        && this.props.data.get('confidentialCount') !== 0 
+        && this.props.confidentialityMenu) {
+      if (this.props.data.get('name') !== 'MB') { return null }
+      return <ConfidentialIcon 
         styles={this.props.styles.get('confidentialStyle')} 
         text="14/50 values confidential"
-        containerX={this.props.x1 * MapLayoutGridConstant.getIn(['electricity', 'canada' , 'mapPieceScale'], 1) + 308}
+        containerX={this.props.x1 + MapLayoutGridConstant.getIn(['electricity', 'canada' , 'mapPieceScale'], 1) + 308}
         containerY={82}
         lineX={102}
         lineY={40}
@@ -79,23 +75,13 @@ class MapPiece extends React.Component {
         xPosition={0}
         yPosition={0}
         />
-    }
+      } return null
+  }
 
-    // Powerpool electricity
-    let powerpoolConfidentialIcon = ''
-    if (typeof this.props.data.get('confidentialCount') !== 'undefined' && this.props.data.get('confidentialCount') !== 0 && this.props.confidentialityMenu) {
-      powerpoolConfidentialIcon = <ConfidentialIcon 
-        styles={this.props.styles.get('confidentialStyle')} 
-        text="14/50 values confidential"
-        containerX={this.props.x1 * MapLayoutGridConstant.getIn(['electricity', 'canada' , 'mapPieceScale'], 1) + 638}
-        containerY={this.props.y1 * MapLayoutGridConstant.getIn(['electricity', 'us' , 'mapPieceScale'], 1) + 665}
-        lineX={0}
-        lineY={0}
-        xPosition={0}
-        yPosition={0}
-        textX={70}
-        textY={55}
-        />
+  render() {
+    let arrowTransform = `translate(${Constants.getIn(['mapPieceArrowStyle', 'x'])}, ${Constants.getIn(['mapPieceArrowStyle', 'y'])})`
+    if (this.props.styles.get('arrowPosition') === 'down') {
+      arrowTransform = `translate(${Constants.getIn(['mapPieceArrowStyle', 'x'])}, ${this.props.dimensions.get('height') - Constants.getIn(['mapPieceArrowStyle', 'y'])})`
     }
 
     let stroke = 'none'
@@ -138,8 +124,7 @@ class MapPiece extends React.Component {
         x2={this.props.x1 || 0}
         y2={this.props.y1 || 0}
       />
-      {manitobaConfidentialIcon}
-      {powerpoolConfidentialIcon}
+      {this.manitobaConfidentialIcon()}
             </g>)
   }
 }
