@@ -32,7 +32,7 @@ class DetailBreakdown extends React.Component {
           {bodyContent.getIn(['action', props.language])} &nbsp;
           {name}&nbsp;
           {humanNumber(value, props.language)}&nbsp;
-          {TR.getIn(['electricityDataTypes', props.amountUnit, props.language])}&nbsp;
+          {TR.getIn(['amounts', props.amountUnit, props.language])}&nbsp;
           {exportOrImportPercentage}%&nbsp;
           </td>
           <td width ="5%" className="progress-bar">
