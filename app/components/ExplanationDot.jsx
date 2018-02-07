@@ -16,7 +16,6 @@ import './ExplanationDot.scss'
 class ExplanationDot extends React.Component {
   static get propTypes() {
     return {
-      onClick: PropTypes.func.isRequired,
       explanation: PropTypes.bool.isRequired,
       xPosition: PropTypes.number.isRequired,
       yPosition: PropTypes.number.isRequired,
@@ -49,33 +48,35 @@ class ExplanationDot extends React.Component {
 
   dotAnimation() {
     return (<g><defs>
-      <circle id="back"
+      <circle
+        id="back"
         r={Constants.getIn(['explanationDot', 'radiusStart'])}
         cx={this.props.xPosition}
         cy={this.props.yPosition}
-        fill="#ff708a">
+        fill="#ff708a"
+      >
         <animate
-          attributeName='r'
-          from={Constants.getIn(['explanationDot','radiusStart'])}
-          to={Constants.getIn(['explanationDot','radiusEnd'])}
-          dur='1.5s'
-          begin='0'
-          repeatCount='indefinite'
-          fill='freeze'
+          attributeName="r"
+          from={Constants.getIn(['explanationDot' , 'radiusStart'])}
+          to={Constants.getIn(['explanationDot' , 'radiusEnd'])}
+          dur="1.5s"
+          begin="0"
+          repeatCount="indefinite"
+          fill="freeze"
           id="circ-anim"
         />
         <animate
-          attributeName='opacity'
-          from='0.7'
-          to='0'
-          dur='1.5s'
-          begin='0'
-          repeatCount='indefinite' 
-          fill='freeze'
+          attributeName="opacity"
+          from="0.7"
+          to="0"
+          dur="1.5s"
+          begin="0"
+          repeatCount="indefinite"
+          fill="freeze"
           id="circ-anim"
         />
-        </circle>
-      </defs>
+      </circle>
+    </defs>
       {this.explanationDot()}
     </g>)
   }
@@ -84,7 +85,8 @@ class ExplanationDot extends React.Component {
     if (!this.props.showExplanations) {
       return null
     }
-    return (<g><g role="button"
+    return (<g><g 
+        role="button"
         {...handleInteraction(this.props.onClick)}>
       {this.dotAnimation()}
     </g>
