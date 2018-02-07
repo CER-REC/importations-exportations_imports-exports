@@ -1,12 +1,15 @@
 @import '../styles/Colours';
 
 .detailBreakDown {
-  overflow: auto;
-  overflow-x: hidden;
   .header { 
     padding-bottom: 4px;
   }
-
+  .detailBreakDownContainer{
+    width:100%;
+    overflow: auto;
+    overflow-x: hidden;
+    display:block;
+  }
   .detailBreakDownText {
     padding: 0 0 4px 2px;
     margin-right: 20px;
@@ -20,7 +23,7 @@
   }
     
   .progress-bar > span {
-    height: 15px;
+    height: 12px;
     display: block;
   }
 }

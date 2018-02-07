@@ -259,7 +259,7 @@ const Constants = fromJS({
       type: 'imports',
       displayPosition: 'bottom',
       color: '#ff774c',
-      height: 100,
+      height: 75,
       showDefault: true,
     },
     us: {
@@ -267,7 +267,7 @@ const Constants = fromJS({
       type: 'exports',
       displayPosition: 'top',
       color: '#1c64b2',
-      height: 100,
+      height: 75,
       showDefault: false,
     },
     powerpool: {
