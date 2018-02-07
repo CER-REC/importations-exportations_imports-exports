@@ -3,8 +3,6 @@ import { fromJS } from 'immutable'
 
 import { aggregateQuarter, getValueKey } from './timeline'
 
-// const mapToValue = (data, key) => data.map(v => v.get(key))
-
 export const detailTotal = createSelector(
   aggregateQuarter,
   getValueKey,
@@ -20,3 +18,5 @@ export const confidentialTotal = createSelector(
     total: acc.total + next.getIn(['totalPoints', valueKey], 0),
   }), { confidential: 0, total: 0 }),
 )
+
+

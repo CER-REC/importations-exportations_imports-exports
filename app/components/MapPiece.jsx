@@ -85,7 +85,7 @@ class MapPiece extends React.Component {
     }
     let opacity = 1
     if (this.props.isSelected === true && this.props.isMapPieceSelected === false) {
-      opacity = 0.10
+      opacity = 0.5
     }
 
     if (typeof this.props.mapPieceProps !== 'undefined'
