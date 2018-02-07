@@ -48,12 +48,12 @@ class DetailBreakdown extends React.Component {
     const { props } = this
     const headerContent = props.trContent.get('header')
     return (
-      <thead className={`header ${props.type}`}>
+      <div className={`header ${props.type}`}>
         <span style={{ color: props.color }}>{headerContent.getIn(['type', props.language], '').toUpperCase()}</span> &nbsp;
         {headerContent.getIn(['action', props.language], '')}&nbsp;
         {headerContent.getIn(['adjective', props.language], '')}&nbsp;
         {headerContent.getIn(['place', props.language], '')}&nbsp;
-      </thead>
+      </div>
     )
   }
 
@@ -61,12 +61,14 @@ class DetailBreakdown extends React.Component {
     const { props } = this
     if (typeof props.data !== 'undefined' && props.data.count() > 0) {
       return (
-        <table className="detailBreakDown">
+        <div className="detailBreakDown">
           {this.renderDetailBreakdownHeader()}
-          <tbody className ='detailBreakDownContainer'  style={{ height: props.height }}>
-            {this.renderDetailBreakdownBody()}
-          </tbody>
-        </table>
+          <table>
+            <tbody className ='detailBreakDownContainer'  style={{ height: props.height }}>
+              {this.renderDetailBreakdownBody()}
+            </tbody>
+          </table>
+        </div>
       )
     } else if (typeof props.timelineYears !== 'undefined' && props.showDefault) {
       return (
