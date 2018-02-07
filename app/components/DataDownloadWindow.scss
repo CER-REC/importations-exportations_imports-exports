@@ -2,7 +2,7 @@
   position:absolute;
   width:380px;
   height: auto;
-  top:34.5%;
+  top: 34.5%;
   background-color: white;
   border: 1px solid rgba(0,0,0,0.15);
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -20,7 +20,11 @@
 
 .subtext {
   position: relative;
+  text-align: center;
   width: 65%;
-  margin-top: -30px;
   // probably just with margin auto
+}
+
+.dataDownloadImage {
+  cursor: pointer;
 }

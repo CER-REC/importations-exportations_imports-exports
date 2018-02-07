@@ -38,7 +38,10 @@ class DataDownloadWindow extends React.Component {
   }
 
   shareButton() {
-    return 
+    return <img
+      className="dataDownloadImage"
+      src="images/download_file.svg"
+    />
     // const appRoot = RouteComputations.appRoot(document.location, this.props.language)
     //   const fileName = Tr.getIn(['downloadable', 'csv', this.props.language])
     //   window.open(`${appRoot}data/${fileName}`, 'data:text/csv;charset=utf-8,data/')
@@ -51,6 +54,7 @@ class DataDownloadWindow extends React.Component {
         { this.closeButton() }
         { this.heading() }
         { this.subtext() }
+        { this.shareButton() }
       </div>
     )
   }
