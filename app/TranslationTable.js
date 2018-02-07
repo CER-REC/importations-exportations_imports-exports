@@ -173,15 +173,15 @@ const TranslationTable = fromJS({
       options: {
         imports: {
           en: 'Imports',
-          fr: 'importations',
+          fr: 'Importations',
         },
         exports: {
           en: 'Exports',
-          fr: 'exportations',
+          fr: 'Exportations',
         },
         importsExports: {
           en: 'Imports and Exports',
-          fr: 'importations et exportations',
+          fr: 'Importations et exportations',
         },
       },
     },
@@ -253,7 +253,7 @@ const TranslationTable = fromJS({
         },
         '': {
           en: 'Butane and Propane',
-          fr: 'butane et propane',
+          fr: 'Butane et Propane',
         },
       },
     },
@@ -261,12 +261,12 @@ const TranslationTable = fromJS({
 
   explanationShown: {
     en: 'show EXPLANATIONS',
-    fr: 'Montrer EXPLICATIONS',
+    fr: 'montrer EXPLICATIONS',
   },
 
   explanationHide: {
     en: 'hide EXPLANATIONS',
-    fr: 'Cacher EXPLICATIONS',
+    fr: 'cacher EXPLICATIONS',
   },
 
   explanations: {
@@ -410,7 +410,7 @@ const TranslationTable = fromJS({
           },
           place: {
             en: 'Provinces',
-            fr: 'provinces',
+            fr: 'Provinces',
           },
         },
         body: {
@@ -442,7 +442,7 @@ const TranslationTable = fromJS({
           },
           place: {
             en: 'Provinces',
-            fr: 'provinces',
+            fr: 'Provinces',
           },
         },
         body: {
@@ -468,7 +468,7 @@ const TranslationTable = fromJS({
           },
           place: {
             en: 'Provinces',
-            fr: 'provinces',
+            fr: 'Provinces',
           },
         },
         body: {
@@ -809,36 +809,36 @@ const TranslationTable = fromJS({
       ca: {
         imports: {
           label: {
-            en: 'imports from Canada',
+            en: 'Imports from Canada',
             fr: 'Importations du Canada',
           },
         },
         exports: {
           label: {
-            en: 'exports into Canada',
+            en: 'Exports into Canada',
             fr: 'Exportations au Canada',
           },
         },
         stateOrProvince: {
-          en: 'province',
+          en: 'Province',
           fr: 'Province',
         },
       },
       us: {
         imports: {
           label: {
-            en: 'imports from USA',
+            en: 'Imports from USA',
             fr: 'Importations des États-Unis',
           },
         },
         exports: {
           label: {
-            en: 'exports into USA',
+            en: 'Exports into USA',
             fr: 'Exportations aux États-Unis',
           },
         },
         stateOrProvince: {
-          en: 'state',
+          en: 'State',
           fr: 'État',
         },
       },
@@ -846,7 +846,7 @@ const TranslationTable = fromJS({
     crudeOil: {
       exports: {
         label: {
-          en: 'exports into US PADD',
+          en: 'Exports into US PADD',
           fr: 'Exportations au PADD',
         },
         bottomText: {
@@ -863,25 +863,25 @@ const TranslationTable = fromJS({
       ca: {
         imports: {
           label: {
-            en: 'imports from Canada',
+            en: 'Imports from Canada',
             fr: 'Importations du Canada',
           },
         },
         exports: {
           label: {
-            en: 'exports into Canada',
+            en: 'Exports into Canada',
             fr: 'Exportations au Canada',
           },
         },
         stateOrProvince: {
-          en: 'province',
+          en: 'Province',
           fr: 'Province',
         },
       },
       us: {
         exports: {
           label: {
-            en: 'exports into US PADD',
+            en: 'Exports into US PADD',
             fr: 'Exportations au PADD',
           },
           bottomText: {
