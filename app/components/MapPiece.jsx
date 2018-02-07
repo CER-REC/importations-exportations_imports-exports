@@ -65,7 +65,7 @@ class MapPiece extends React.Component {
 
     // Manitoba on electricity
     let manitobaConfidentialIcon = ''
-    if (typeof this.props.data.get('confidentialCount') !== 'undefined' && this.props.data.get('confidentialCount') !== 0) {
+    if (typeof this.props.data.get('confidentialCount') !== 'undefined' && this.props.data.get('confidentialCount') !== 0 && this.props.confidentialityMenu) {
       // TODO: on click show pop over to show confidential values
       manitobaConfidentialIcon = <ConfidentialIcon 
         styles={this.props.styles.get('confidentialStyle')} 
@@ -83,7 +83,7 @@ class MapPiece extends React.Component {
 
     // Powerpool electricity
     let powerpoolConfidentialIcon = ''
-    if (typeof this.props.data.get('confidentialCount') !== 'undefined' && this.props.data.get('confidentialCount') !== 0) {
+    if (typeof this.props.data.get('confidentialCount') !== 'undefined' && this.props.data.get('confidentialCount') !== 0 && this.props.confidentialityMenu) {
       // TODO: on click show pop over to show confidential values
       powerpoolConfidentialIcon = <ConfidentialIcon 
         styles={this.props.styles.get('confidentialStyle')} 
@@ -114,7 +114,7 @@ class MapPiece extends React.Component {
       stroke = this.props.mapPieceProps.get('stroke')
     }
 
-    if (this.props.confidentialityMenu) { return (<g fillOpacity={opacity} >
+    return (<g fillOpacity={opacity} >
       <polygon
         stroke={stroke}
         fill={this.props.styles.get('color')}
@@ -141,35 +141,6 @@ class MapPiece extends React.Component {
       />
       {manitobaConfidentialIcon}
       {powerpoolConfidentialIcon}
-            </g>)
-      
-    }
-
-    return (<g fillOpacity={opacity} >
-      <polygon
-        stroke={stroke}
-        fill={this.props.styles.get('color')}
-        points="37.09 9.68 18.54 0 0 9.68 0 29.05 18.54 38.73 37.09 29.05 37.09 9.68"
-      />
-      <MapPieceLabel
-        labelPosition={this.props.styles.get('labelPosition')}
-        topMargin={this.props.styles.get('bottomMargin')}
-        bottomMargin={this.props.styles.get('topMargin')}
-        mapPieceHeight={this.props.dimensions.get('height')}
-        name={this.props.data.get('name')}
-        mapPieceProps={this.props.mapPieceProps}
-        text = {this.props.text}
-      />
-      <g transform={arrowTransform}>
-        {this.drawArrow(this.props.legends, this.props.data, 'exports', this.props.styles, this.props.arrowProps)}
-        {this.drawArrow(this.props.legends, this.props.data, 'imports', this.props.styles, this.props.arrowProps)}
-      </g>
-      <AnimatedMapPiece
-        x1={this.props.x1 || 0}
-        y1={this.props.y1 || 0}
-        x2={this.props.x1 || 0}
-        y2={this.props.y1 || 0}
-      />
             </g>)
   }
 }

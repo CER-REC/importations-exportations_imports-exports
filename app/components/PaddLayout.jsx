@@ -53,7 +53,7 @@ class PaddLayout extends React.Component {
     const text = this.props.TRSelector(['Padd', country, paddGroupId])
     let confidentialIcon = null
     const style = mapLayoutGrid.get('styles', false)
-    if (style && confidentialCount > 0 && country !== 'ca') {
+    if (style && confidentialCount > 0 && country !== 'ca' && this.props.confidentialityMenu) {
       confidentialIcon = (<g transform="translate(145 143)">
         <ConfidentialIcon 
           styles={style.get('confidentialStyle')}
