@@ -32,7 +32,7 @@ class ExplanationDot extends React.Component {
   }
 
   explanationDotClick() {
-    this.setState({ toggleExplanation: true })
+    // TODO
   }
 
   explanationDot() {
