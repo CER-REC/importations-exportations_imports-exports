@@ -7,6 +7,7 @@ import SVGDrag from './SVGDrag/'
 import Constants from '../Constants'
 import { timelineFilter } from '../actions/visualizationSettings'
 import * as TimelineSelector from '../selectors/timeline'
+import trSelector from '../selectors/translate'
 
 class TimelineSeek extends React.PureComponent {
   static propTypes = {
@@ -149,7 +150,12 @@ class TimelineSeek extends React.PureComponent {
     const sideTransform = (side === 'start')
       ? `translate(${this.props.left} ${this.props.top})`
       : `scale(-1,1) translate(${-this.props.width - this.props.left} ${this.props.top})`
-    const label = `${side} curtain at ${timelineRange.getIn([side, 'year'])} quarter ${timelineRange.getIn([side, 'quarter'])}`
+    const label = this.props.tr(
+      ['timelineSeek', 'label'],
+      this.props.tr(['timelineSeek', side]),
+      timelineRange.getIn([side, 'year']),
+      timelineRange.getIn([side, 'quarter']),
+    )
     return (
       <g transform={sideTransform}>
         <SVGDrag
@@ -179,6 +185,7 @@ export default connect(
     seekPosition: TimelineSelector.timelineSeekPositionSelector(state, props),
     timelineRange: TimelineSelector.timelineRange(state, props),
     timelineGroup: TimelineSelector.timelineGrouping(state, props),
+    tr: trSelector(state, props),
   }),
   { timelineFilter },
 )(TimelineSeek)

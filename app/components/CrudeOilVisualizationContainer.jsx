@@ -11,7 +11,7 @@ import Constants from '../Constants'
 import { positionShape } from '../propTypeShapes'
 import USPadd from './Padds/USPadd'
 import CAPadd from './Padds/CAPadd'
-import {activityExplanationPosition} from '../selectors/viewport/menus'
+import { activityExplanationPosition } from '../selectors/viewport/menus'
 import CrudeOilPieceActivityExplanation from './CrudeOilPieceActivityExplanation'
 
 const CrudeOilVisualizationContainer = props => (

@@ -1,7 +1,7 @@
 import { createSelector } from 'reselect'
 import Immutable from 'immutable'
 
-import { sortAggregatedLocationsSelector, arrangeBy, unitSelector } from './data'
+import { aggregateLocationPaddSelector, arrangeBy } from './data'
 import MapLayoutGridConstant from '../MapLayoutGridConstant'
 import Constants from '../Constants'
 import { visualizationSettings } from './visualizationSettings'
@@ -36,34 +36,32 @@ const getPadding = createSelector(
 )
 
 export const getPointsByCountry = createSelector(
-  sortAggregatedLocationsSelector,
+  aggregateLocationPaddSelector,
   getCountry,
   (points, country) => points.filter(point => point.get('country') === country),
 )
 
 const getElectricityImportAndExport = createSelector(
   getPointsByCountry,
-  unitSelector,
   getCountry,
-  (points, unit, country) => {
+  (points, country) => {
     // append missing states or provinces
+    // fetch list of the states and province from the 
     const statesOrProvinces = Constants.getIn(['dataloader', 'mapping', 'country', country])
-    if (typeof statesOrProvinces !== 'undefined' ) {
+    if (typeof statesOrProvinces !== 'undefined') {
       let missingstatesOrProvincesMap = {}
       statesOrProvinces.entrySeq().forEach((stateOrProvince) => {
-        if (typeof points.get(stateOrProvince[1]) === 'undefined' && stateOrProvince[1] !== 'ATL-Q') {
+        if (typeof points.get(stateOrProvince[1]) === 'undefined') {
           const originKey = stateOrProvince[1]
-          const origin = stateOrProvince[0]
           missingstatesOrProvincesMap[originKey] = {
-            units: unit,
-            origin,
+            country,
+            destination: originKey,
+            subType: {
+               Butane: { imports: 0, exports: 0 }, Propane: { imports: 0, exports: 0 }, propaneButane: { imports: 0, exports: 0 },
+            },
+            totalCount: 0,
+            confidentialCount: 0,
           }
-          missingstatesOrProvincesMap[originKey].country = country
-          missingstatesOrProvincesMap[originKey].originKey = originKey
-          missingstatesOrProvincesMap[originKey].exports = 0
-          missingstatesOrProvincesMap[originKey].imports = 0
-          missingstatesOrProvincesMap[originKey].totalCount = 0
-          missingstatesOrProvincesMap[originKey].confidentialCount = 0
         }
       })
       missingstatesOrProvincesMap = Immutable.fromJS(missingstatesOrProvincesMap)
@@ -94,9 +92,8 @@ const createSortedLayout = createSelector(
         x += (row * rowPadding)
       }
       sortedArray.push({
-        name: statesOrProvinces.get('originKey'),
-        exports: statesOrProvinces.get('exports') || 0,
-        imports: statesOrProvinces.get('imports') || 0,
+        name: statesOrProvinces.get('destination'),
+        subType: statesOrProvinces.get('subType') || { Butane: { imports: 0, exports: 0 }, Propane: { imports: 0, exports: 0 }, propaneButane: { imports: 0, exports: 0 } },
         totalCount: statesOrProvinces.get('totalCount') || 0,
         confidentialCount: statesOrProvinces.get('confidentialCount') || 0,
         x,
@@ -120,11 +117,10 @@ const parseLocationData = createSelector(
         const originKey = statesOrProvinces.get('originKey')
         const result = {
           name: originKey,
-          exports: data.getIn([originKey, 'exports']) || 0,
-          imports: data.getIn([originKey, 'imports']) || 0,
+          subType: data.getIn([originKey, 'subType']) || { Butane: { imports: 0, exports: 0 }, Propane: { imports: 0, exports: 0 }, propaneButane: { imports: 0, exports: 0 } },
           x: statesOrProvinces.get('x'),
           y: statesOrProvinces.get('y'),
-          totalCount: data.getIn([originKey, 'totalCount']) || 0,
+          totalCount: data.getIn([originKey,'totalCount']) || 0,
           confidentialCount: data.getIn([originKey, 'confidentialCount']) || 0,
         }
         resultList.push(result)

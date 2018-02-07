@@ -1,15 +1,14 @@
 import { fromJS } from 'immutable'
 
 const TranslationTable = fromJS({
-
   theLegendValues: {
     importations: {
       en: 'IMP',
-      fr: 'IMP',
+      fr: 'IMP.',
     },
     exportations: {
       en: 'EXP',
-      fr: 'EXP',
+      fr: 'EXP.',
     },
   },
 
@@ -24,7 +23,7 @@ const TranslationTable = fromJS({
     },
     resetVisualization: {
       en: 'Reset Visualization',
-      fr: 'Réinitialiser visualisation',
+      fr: 'Réinitialisation de la visualisation',
     },
   },
 
@@ -109,136 +108,144 @@ const TranslationTable = fromJS({
       en: 'Patrick King, Spenser Jones, Rahul Kamal Bhaskar, Ben Cousins, Abhishek Sharma, and Charlie Cheung',
       fr: 'Patrick King, Spenser Jones, Rahul Kamal Bhaskar, Ben Cousins, Abhishek Sharma, and Charlie Cheung',
     },
+    closeWindow: {
+      en: 'Close About Window',
+      fr: 'Close About Window',
+    },
   },
 
   mainMenuBar: {
     electricity: {
       en: 'Electricity',
-      fr: 'Electricity FR',
+      fr: 'Électricité',
     },
     crudeOil: {
       en: 'Crude Oil',
-      fr: 'Crude Oil FR',
+      fr: 'Pétrole brut',
     },
     naturalGas: {
       en: 'Natural Gas',
-      fr: 'Natural Gas FR',
+      fr: 'Gaz naturel',
     },
     naturalGasLiquids: {
       en: 'Natural Gas Liquids',
-      fr: 'Natural Gas Liquids FR',
+      fr: 'Liquides de gaz naturel',
     },
     refinedPetroleumProducts: {
       en: 'Refin. Petroleum Prod.',
-      fr: 'Refin. Petroleum Prod. FR',
+      fr: 'Rafinn. Prod. pétroliers',
     },
   },
 
   importExportMenu: {
     imports: {
       en: 'IMPORTS',
-      fr: 'IMPORTS FR',
+      fr: 'IMPORTATIONS',
     },
     and: {
       en: 'and',
-      fr: 'and FR',
+      fr: 'et',
     },
     exports: {
       en: 'EXPORTS',
-      fr: 'EXPORTS FR',
+      fr: 'EXPORTATIONS',
     },
     importsOnly: {
       en: 'IMPORTS only',
-      fr: 'IMPORTS only FR',
+      fr: 'IMPORTATIONS seulement',
     },
     exportsOnly: {
       en: 'EXPORTS only',
-      fr: 'EXPORTS only FR',
+      fr: 'EXPORTATIONS seulement',
     },
   },
 
   menu: {
     and: {
       en: 'and',
-      fr: 'and',
+      fr: 'et',
+    },
+    of: {
+      en: 'of',
+      fr: 'd’',
     },
     activity: {
       options: {
         imports: {
           en: 'Imports',
-          fr: 'Imports',
+          fr: 'Importations',
         },
         exports: {
           en: 'Exports',
-          fr: 'Exports',
+          fr: 'Exportations',
         },
         importsExports: {
           en: 'Imports and Exports',
-          fr: 'Imports and Exports',
+          fr: 'Importations et exportations',
         },
       },
     },
     arrangeBy: {
       prefix: {
         en: 'arranged by',
-        fr: 'TODO',
+        fr: 'selon le',
       },
       options: {
         location: {
           en: 'LOCATION',
-          fr: 'LOCATION FR',
+          fr: 'LIEU',
         },
         imports: {
           en: 'MOST IMPORTS',
-          fr: 'MOST IMPORTS FR',
+          fr: 'PLUS D’IMPORTATIONS',
         },
         exports: {
           en: 'MOST EXPORTS',
-          fr: 'MOST EXPORTS FR',
+          fr: 'PLUS D’EXPORTATIONS',
         },
       },
     },
     amount: {
       prefix: {
         en: 'showing',
-        fr: 'TODO',
+        fr: 'avec',
       },
       options: {
         CAN$: {
           en: 'PRICE (CAN$)',
-          fr: 'CAN$',
+          fr: 'PRIX ($ CAN)',
         },
         'CAN$/MW.h': {
           en: 'PRICE (CAN$/MW.h)',
-          fr: 'CAN$/MW.h',
+          fr: 'PRIX ($ CAN/MWh)',
         },
         'CN$/GJ': {
           en: 'PRICE (CN$/GJ)',
-          fr: 'CN$/GJ',
+          fr: 'PRIX ($ CAN/GJ)',
         },
         'm3/d': {
           en: 'AMOUNT (m³/d)',
-          fr: 'm³/d',
+          fr: 'QUANTITÉ (m³/j)',
         },
         'MW.h': {
           en: 'AMOUNT (MW.h)',
-          fr: 'MW.h',
+          fr: 'QUANTITÉ (MWh)',
         },
         'thousand m3/d': {
           en: 'AMOUNT (thousand m³/d)',
-          fr: 'thousand m³/d',
+          fr: 'QUANTITÉ (10³m³/j)',
         },
       },
     },
     subtype: {
       prefix: {
         en: 'of',
-        fr: 'TODO',
+        fr: 'de',
       },
       options: {
         butane: {
           en: 'BUTANE',
-          fr: 'TODO',
+          fr: 'BUTANE',
         },
         propane: {
           en: 'PROPANE',
@@ -246,7 +253,7 @@ const TranslationTable = fromJS({
         },
         '': {
           en: 'Butane and Propane',
-          fr: 'Butane and Propane',
+          fr: 'Butane et Propane',
         },
       },
     },
@@ -254,89 +261,89 @@ const TranslationTable = fromJS({
 
   explanationShown: {
     en: 'show EXPLANATIONS',
-    fr: 'show EXPLANATIONS FR',
+    fr: 'montrer EXPLICATIONS',
   },
 
   explanationHide: {
     en: 'hide EXPLANATIONS',
-    fr: 'hide EXPLANATIONS FR',
+    fr: 'cacher EXPLICATIONS',
   },
 
   explanations: {
     importExportTitle: {
       en: 'Click + to see more options',
-      fr: 'Click + to see more options FR',
+      fr: 'Cliquez pour plus d’options',
     },
   },
 
   confidentialityShown: {
     en: 'show CONFIDENTIALITY',
-    fr: 'show CONFIDENTIALITY FR',
+    fr: 'Montrer CONFIDENTIALITÉ',
   },
   confidentialityHide: {
     en: 'hide CONFIDENTIALITY',
-    fr: 'hide CONFIDENTIALITY FR',
+    fr: 'Cacher CONFIDENTIALITÉ',
   },
 
-  electricityDataTypes: {
-    CAN$: { en: 'CAN$', fr: 'CAN$' },
-    'CAN$/MW.h': { en: 'CAN$/MW.h', fr: 'CAN$/MW.h' },
-    'CN$/GJ': { en: 'CN$/GJ', fr: 'CN$/GJ' },
-    'm3/d': { en: 'm³/d', fr: 'm³/d' },
-    'MW.h': { en: 'MW.h', fr: 'MW.h' },
-    'thousand m3/d': { en: 'thousand m³/d', fr: 'thousand m³/d' },
+  amounts: {
+    CAN$: { en: 'CAN$', fr: '$ CAN' },
+    'CAN$/MW.h': { en: 'CAN$/MW.h', fr: '$ CAN/MWh' },
+    'CN$/GJ': { en: 'CN$/GJ', fr: '$ CAN/GJ' },
+    'm3/d': { en: 'm³/d', fr: 'm³/j' },
+    'MW.h': { en: 'MW.h', fr: 'MWh' },
+    'thousand m3/d': { en: 'thousand m³/d', fr: '103m³/j' },
   },
 
   mainHeading: {
     imports: {
       en: 'Imports',
-      fr: 'TODO',
+      fr: 'Importations',
     },
     ampersand: {
       en: ' & ',
-      fr: '&',
+      fr: ' & ',
     },
     exports: {
       en: ' Exports ',
-      fr: 'TODO',
+      fr: ' Exportations ',
     },
     base: {
       en: 'of Energy Products to and from Canada',
-      fr: 'TODO',
+      fr: 'de produits énergétiques du Canada',
     },
   },
 
   mainSubheading: {
     en: 'This visualization shows the quarterly energy trade data between Canada and the USA for various energy sources.',
-    fr: 'TODO',
+    fr: 'Cette visualisation illustre les données trimestrielles sur les échanges énergétiques entre le Canada et les États-Unis pour diverses sources d’énergie.',
   },
   resetLabel: {
     en: 'reset',
-    fr: 'réinitialiser',
+    fr: 'Réinitialisation',
   },
 
   socialBarText: {
     about: {
       en: 'about',
-      fr: 'TODO',
+      fr: 'À propos de la',
     },
     methodology: {
       en: 'methodology',
-      fr: 'TODO',
+      fr: 'méthodologie',
     },
     downloadData: {
       en: 'download data',
-      fr: 'TODO',
+      fr: 'Téléchargement de données',
     },
     downloadImage: {
       en: 'download image',
-      fr: 'TODO',
+      fr: 'Téléchargement d’images',
     },
   },
 
   applicationPath: {
     en: '/import-export-visualization/',
-    fr: '/import-export-visualization/',
+    fr: '/visualisation-importations-exportations/',
   },
 
   imageDownload: {
@@ -349,52 +356,51 @@ const TranslationTable = fromJS({
     fr: 'TODO',
   },
 
-
   downloadable: {
     csv: {
       en: 'data.csv',
-      fr: 'TODO FR',
+      fr: 'data.csv',
     },
   },
 
   formatNumberUnit: {
     en: ['', 'K', 'M', 'B'],
-    fr: ['', 'K FR', 'M FR', 'B FR'],
+    fr: ['', 'k', 'M', 'G'],
   },
 
   confidentialCount: {
     en: '$0 of $1 values Confidential',
-    fr: 'FR $0 of $1 values Confidential',
+    fr: '$0 sur $1 valeurs Confidentiel',
   },
   detailBreakDown: {
     electricity: {
       defaultText: {
         en: 'This visualization shows imports to Canada and exports from Canada between the years $0 and $1. Drag the timeline bar to change. Click a province to view Detail',
-        fr: 'This visualization shows imports to Canada and exports from Canada between the years $0 and $1. Drag the timeline bar to change. Click a province to view Detail',
+        fr: 'Cette visualisation illustre les importations et les exportations du Canada de $0 à $1. Faites glisser la ligne du temps pour modifier les années. Cliquez sur une province pour des précisions à ce sujet.',
       },
       exports: {
         header: {
           type: {
             en: 'Exports',
-            fr: 'Exports',
+            fr: 'Exportations',
           },
           action: {
             en: 'from',
-            fr: 'from',
+            fr: 'de',
           },
           adjective: {
             en: 'selected',
-            fr: 'selected',
+            fr: 'ces',
           },
           place: {
             en: 'Provinces',
-            fr: 'Provinces',
+            fr: 'provinces',
           },
         },
         body: {
           action: {
             en: 'to',
-            fr: 'to',
+            fr: 'à',
           },
         },
       },
@@ -402,15 +408,15 @@ const TranslationTable = fromJS({
         header: {
           type: {
             en: 'Imports',
-            fr: 'Imports',
+            fr: 'Importations',
           },
           action: {
             en: 'to',
-            fr: 'to',
+            fr: 'par',
           },
           adjective: {
             en: 'selected',
-            fr: 'selected',
+            fr: 'ces',
           },
           place: {
             en: 'Provinces',
@@ -420,7 +426,7 @@ const TranslationTable = fromJS({
         body: {
           action: {
             en: 'from',
-            fr: 'from',
+            fr: 'de',
           },
         },
       },
@@ -428,21 +434,21 @@ const TranslationTable = fromJS({
     naturalGasLiquids: {
       defaultText: {
         en: 'This visualization shows imports to Canada and exports from Canada between the years $0 and $1. Drag the timeline bar to change. Click a province to view Detail',
-        fr: 'This visualization shows imports to Canada and exports from Canada between the years $0 and $1. Drag the timeline bar to change. Click a province to view Detail',
+        fr: 'Cette visualisation illustre les importations et les exportations du Canada de $0 à $1. Faites glisser la ligne du temps pour modifier les années. Cliquez sur une province pour des précisions à ce sujet.',
       },
       exports: {
         header: {
           type: {
             en: 'Exports',
-            fr: 'Exports',
+            fr: 'Exportations',
           },
           action: {
             en: 'from',
-            fr: 'from',
+            fr: 'de',
           },
           adjective: {
             en: 'selected',
-            fr: 'selected',
+            fr: 'ces',
           },
           place: {
             en: 'Provinces',
@@ -452,7 +458,7 @@ const TranslationTable = fromJS({
         body: {
           action: {
             en: 'to',
-            fr: 'to',
+            fr: 'à',
           },
         },
       },
@@ -460,15 +466,15 @@ const TranslationTable = fromJS({
         header: {
           type: {
             en: 'Imports',
-            fr: 'Imports',
+            fr: 'Importations',
           },
           action: {
             en: 'to',
-            fr: 'to',
+            fr: 'par',
           },
           adjective: {
             en: 'selected',
-            fr: 'selected',
+            fr: 'ces',
           },
           place: {
             en: 'Provinces',
@@ -478,7 +484,7 @@ const TranslationTable = fromJS({
         body: {
           action: {
             en: 'from',
-            fr: 'from',
+            fr: 'de',
           },
         },
       },
@@ -493,7 +499,7 @@ const TranslationTable = fromJS({
       },
       NT: {
         en: 'Northwest Territories',
-        fr: 'Northwest Territories',
+        fr: 'Territoires du Nord-Ouest',
       },
       NU: {
         en: 'Nunavut',
@@ -501,15 +507,15 @@ const TranslationTable = fromJS({
       },
       NF: {
         en: 'Newfoundland and Labrador',
-        fr: 'Newfoundland and Labrador',
+        fr: 'Terre-Neuve-et-Labrador',
       },
       PE: {
         en: 'Prince Edward Island',
-        fr: 'Prince Edward Island',
+        fr: 'Île-du-Prince-Édouard',
       },
       BC: {
         en: 'British Columbia',
-        fr: 'British Columbia',
+        fr: 'Colombie-Britannique',
       },
       AB: {
         en: 'Alberta',
@@ -533,11 +539,15 @@ const TranslationTable = fromJS({
       },
       NB: {
         en: 'New Brunswick',
-        fr: 'New Brunswick',
+        fr: 'Nouveau-Brunswick',
       },
       NS: {
         en: 'Nova Scotia',
-        fr: 'Nova Scotia',
+        fr: 'Nouvelle-Écosse',
+      },
+      'ATL-Q': {
+        en: 'Atlantic provinces and Quebec',
+        fr: 'Atlantic provinces and Quebec',
       },
     },
     us: {
@@ -559,7 +569,7 @@ const TranslationTable = fromJS({
       },
       CA: {
         en: 'California',
-        fr: 'California',
+        fr: 'Californie',
       },
       CO: {
         en: 'Colorado',
@@ -575,15 +585,15 @@ const TranslationTable = fromJS({
       },
       FL: {
         en: 'Florida',
-        fr: 'Florida',
+        fr: 'Floride',
       },
       GA: {
         en: 'Georgia',
-        fr: 'Georgia',
+        fr: 'Georgie',
       },
       HI: {
         en: 'Hawaii',
-        fr: 'Hawaii',
+        fr: 'Hawaï',
       },
       ID: {
         en: 'Idaho',
@@ -611,7 +621,7 @@ const TranslationTable = fromJS({
       },
       LA: {
         en: 'Louisiana',
-        fr: 'Louisiana',
+        fr: 'Louisiane',
       },
       ME: {
         en: 'Maine',
@@ -663,7 +673,7 @@ const TranslationTable = fromJS({
       },
       NM: {
         en: 'New Mexico',
-        fr: 'New Mexico',
+        fr: 'Nouveau-Mexique',
       },
       NY: {
         en: 'New York',
@@ -671,11 +681,11 @@ const TranslationTable = fromJS({
       },
       NC: {
         en: 'North Carolina',
-        fr: 'North Carolina',
+        fr: 'Caroline du Nord',
       },
       ND: {
         en: 'North Dakota',
-        fr: 'North Dakota',
+        fr: 'Dakota du Nord',
       },
       OH: {
         en: 'Ohio',
@@ -691,7 +701,7 @@ const TranslationTable = fromJS({
       },
       PA: {
         en: 'Pennsylvania',
-        fr: 'Pennsylvania',
+        fr: 'Pennsylvanie',
       },
       RI: {
         en: 'Rhode Island',
@@ -699,11 +709,11 @@ const TranslationTable = fromJS({
       },
       SC: {
         en: 'South Carolina',
-        fr: 'South Carolina',
+        fr: 'Caroline du Sud',
       },
       SD: {
         en: 'South Dakota',
-        fr: 'South Dakota',
+        fr: 'Dakota du Sud',
       },
       TN: {
         en: 'Tennessee',
@@ -723,7 +733,7 @@ const TranslationTable = fromJS({
       },
       VA: {
         en: 'Virginia',
-        fr: 'Virginia',
+        fr: 'Virginie',
       },
       WA: {
         en: 'Washington',
@@ -731,7 +741,7 @@ const TranslationTable = fromJS({
       },
       WV: {
         en: 'West Virginia',
-        fr: 'West Virginia',
+        fr: 'Virginie-Occidentale',
       },
       WI: {
         en: 'Wisconsin',
@@ -745,15 +755,15 @@ const TranslationTable = fromJS({
     powerpool: {
       'NE-ISO': {
         en: 'New England-ISO',
-        fr: 'New England-ISO',
+        fr: 'Nouvelle-Angleterre ISO',
       },
       'MN/ND': {
         en: 'Minn / N. Dakota',
-        fr: 'Minn / N. Dakota',
+        fr: 'Minn. / Dakota N.',
       },
       PJMPP: {
         en: 'Pennsylvania Jersey Maryland Power Pool',
-        fr: 'Pennsylvania Jersey Maryland Power Pool',
+        fr: 'Réseau commun Pennsylvanie NJ Maryland',
       },
     },
   },
@@ -787,11 +797,11 @@ const TranslationTable = fromJS({
       },
       'Non-USA': {
         en: 'NON-USA',
-        fr: 'NON-USA',
+        fr: 'HORS É.-U.',
       },
       Mexico: {
         en: 'MEXICO',
-        fr: 'MEXICO',
+        fr: 'MEXIQUE',
       },
     },
   },
@@ -799,59 +809,59 @@ const TranslationTable = fromJS({
     mainMenuBar: {
       refinedPetroleumProducts: {
         en: 'Refined Petroleum Products',
-        fr: 'Refined Petroleum Products FR',
+        fr: 'Produits pétroliers raffinés',
       },
     },
   },
 
   mapTileLabel: {
     en: '$0 imports $1 $3 and exports $2 $3',
-    fr: '$0 imports $1 $3 and exports $2 $3',
+    fr: '$0 imporations $1 $3 et exportations $2 $3',
   },
   legendMapTiles: {
     electricity: {
       ca: {
         imports: {
           label: {
-            en: 'imports from Canada',
-            fr: 'imports from Canada',
+            en: 'Imports from Canada',
+            fr: 'Importations du Canada',
           },
         },
         exports: {
           label: {
-            en: 'exports into Canada',
-            fr: 'exports into Canada',
+            en: 'Exports into Canada',
+            fr: 'Exportations au Canada',
           },
         },
         stateOrProvince: {
-          en: 'province',
-          fr: 'province',
+          en: 'Province',
+          fr: 'Province',
         },
       },
       us: {
         imports: {
           label: {
-            en: 'imports from USA',
-            fr: 'imports from USA',
+            en: 'Imports from USA',
+            fr: 'Importations des États-Unis',
           },
         },
         exports: {
           label: {
-            en: 'exports into USA',
-            fr: 'exports into USA',
+            en: 'Exports into USA',
+            fr: 'Exportations aux États-Unis',
           },
         },
         stateOrProvince: {
-          en: 'state',
-          fr: 'state',
+          en: 'State',
+          fr: 'État',
         },
       },
     },
     crudeOil: {
       exports: {
         label: {
-          en: 'exports into US PADD',
-          fr: 'exports into US PADD',
+          en: 'Exports into US PADD',
+          fr: 'Exportations au PADD',
         },
         bottomText: {
           en: 'PADD',
@@ -867,26 +877,26 @@ const TranslationTable = fromJS({
       ca: {
         imports: {
           label: {
-            en: 'imports from Canada',
-            fr: 'imports from Canada',
+            en: 'Imports from Canada',
+            fr: 'Importations du Canada',
           },
         },
         exports: {
           label: {
-            en: 'exports into Canada',
-            fr: 'exports into Canada',
+            en: 'Exports into Canada',
+            fr: 'Exportations au Canada',
           },
         },
         stateOrProvince: {
-          en: 'province',
-          fr: 'province',
+          en: 'Province',
+          fr: 'Province',
         },
       },
       us: {
         exports: {
           label: {
-            en: 'exports into US PADD',
-            fr: 'exports into US PADD',
+            en: 'Exports into US PADD',
+            fr: 'Exportations au PADD',
           },
           bottomText: {
             en: 'PADD',
@@ -894,6 +904,60 @@ const TranslationTable = fromJS({
           },
         },
       },
+    },
+  },
+
+  chartOptions: {
+    scaleLinked: {
+      en: 'Chart Scale Linked',
+      fr: 'Lien avec l’échelle du graphique',
+    },
+    scaleUnlinked: {
+      en: 'Chart Scale Unlinked',
+      fr: 'Sans lien avec l’échelle du graphique',
+    },
+    timelineGroup: {
+      year: {
+        en: 'by YEAR',
+        fr: 'par ANNÉE',
+      },
+      quarter: {
+        en: 'by QUARTER',
+        fr: 'par TRIMESTRE',
+      },
+    },
+  },
+
+  detailTotal: {
+    total: {
+      en: 'Total',
+      fr: 'Total',
+    },
+  },
+
+  timelinePlay: {
+    start: {
+      en: 'Start timeline playback',
+      fr: 'Début de la ligne de temps',
+    },
+    stop: {
+      en: 'Stop timeline playback',
+      fr: 'Fin de la ligne de temps',
+    },
+  },
+
+  timelineSeek: {
+    label: {
+      en: '$0 curtain at $1 quarter $2',
+      fr: '$0 depuis $1 trimestre $2',
+    },
+    start: {
+      en: 'Start',
+      fr: 'Début',
+    },
+    end: {
+      en: 'End',
+      fr: 'Fin',
     },
   },
 })

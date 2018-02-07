@@ -350,50 +350,53 @@ const MapLayoutGridConstant = fromJS({
         bottomMargin: 5,
         topMargin: 5,
         confidentialStyle: {
-          fill: '#999',
+          fill: '#fff',
           stroke: '#999',
-          exclamationFill: '#fff',
+          exclamationFill: '#999',
         },
       },
       layout: [
         {
-          name: 'YT', originKey: 'YT', x: 0, y: 0,
+          name: 'ATL-Q', originKey: 'ATL-Q', x: 6.5, y: 0,
         },
         {
-          name: 'NT', originKey: 'NT', x: 1, y: 0,
+          name: 'YT', originKey: 'YT', x: 1, y: 1,
         },
         {
-          name: 'NU', originKey: 'NU', x: 2, y: 0,
+          name: 'NT', originKey: 'NT', x: 2, y: 1,
         },
         {
-          name: 'NF', originKey: 'NF', x: 6, y: 0,
+          name: 'NU', originKey: 'NU', x: 3, y: 1,
         },
         {
-          name: 'PE', originKey: 'PE', x: 7, y: 0,
+          name: 'NF', originKey: 'NF', x: 6, y: 1,
         },
         {
-          name: 'BC', originKey: 'BC', x: 0.5, y: 1,
+          name: 'PE', originKey: 'PE', x: 7, y: 1,
         },
         {
-          name: 'AB', originKey: 'AB', x: 1.5, y: 1,
+          name: 'BC', originKey: 'BC', x: 0.5, y: 2,
         },
         {
-          name: 'SK', originKey: 'SK', x: 2.5, y: 1,
+          name: 'AB', originKey: 'AB', x: 1.5, y: 2,
         },
         {
-          name: 'MB', originKey: 'MB', x: 3.5, y: 1,
+          name: 'SK', originKey: 'SK', x: 2.5, y: 2,
         },
         {
-          name: 'ON', originKey: 'ON', x: 4.5, y: 1,
+          name: 'MB', originKey: 'MB', x: 3.5, y: 2,
         },
         {
-          name: 'QB', originKey: 'QB', x: 5.5, y: 1,
+          name: 'ON', originKey: 'ON', x: 4.5, y: 2,
         },
         {
-          name: 'NB', originKey: 'NB', x: 6.5, y: 1,
+          name: 'QB', originKey: 'QB', x: 5.5, y: 2,
         },
         {
-          name: 'NS', originKey: 'NS', x: 7.5, y: 1,
+          name: 'NB', originKey: 'NB', x: 6.5, y: 2,
+        },
+        {
+          name: 'NS', originKey: 'NS', x: 7.5, y: 2,
         },
       ],
     },
@@ -696,6 +699,38 @@ const MapLayoutGridConstant = fromJS({
         },
       ],
     },
+  },
+  naturalGas: {
+    mapPieceScale: 1,
+    sortingRowPadding: 0.5,
+    dimensions: {
+      height: 37.09,
+      width: 38.75,
+      topPadding: 25,
+      leftPadding: 9,
+    },
+    styles: {
+      color: '#ede3cb',
+      labelPosition: 'down',
+      arrowPosition: 'down',
+      arrowSpacing: -12,
+      bottomMargin: 5,
+      topMargin: 15,
+      confidentialStyle: {
+        fill: '#999',
+        stroke: '#999',
+        exclamationFill: '#fff',
+      },
+    },
+    layout: [
+      'BC',
+      'AB',
+      'SK',
+      'MB',
+      'ON',
+      'QB',
+      'NB',
+    ],
   },
 })
 export default MapLayoutGridConstant

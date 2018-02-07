@@ -1,5 +1,5 @@
 const Express = require('express')
-//const Tr = require('../app/TranslationTable.js')
+import Tr from '../app/TranslationTable'
 // Compression = require('compression')
 
 const Server = function(middlewares) {
@@ -14,11 +14,9 @@ const Server = function(middlewares) {
 
   const rootApp = Express()
   
-  // Host the incident visualization app with both French and English endpoints
-  // TODO: add an application path to translation table and use it here
-  // rootApp.use(Tr.getIn(['applicationPath', 'en']), app) 
-  // rootApp.use(Tr.getIn(['applicationPath', 'fr']), app)
-  rootApp.use('/import-export-visualization', app)
+  // Host the visualization app with both French and English endpoints
+  rootApp.use(Tr.getIn(['applicationPath', 'en']), app)
+  rootApp.use(Tr.getIn(['applicationPath', 'fr']), app)
 
   rootApp.use(function(req, res) {
     return res.status(404).send('404: Not Found.')

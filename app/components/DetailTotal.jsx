@@ -11,9 +11,11 @@ import { humanNumber } from '../utilities'
 const DetailTotal = props => (
   <div className={`detailTotal ${props.type}`}>
     <div className="detailText">
-      <span className="totalType">{props.type.toUpperCase()}</span> Total&nbsp;
+      <span className="totalType">
+        {TR.getIn(['importExportMenu', props.type, props.language])}
+      </span> {TR.getIn(['detailTotal', 'total', props.language])}&nbsp;
       {humanNumber(props.value, props.language)}&nbsp;
-      {TR.getIn(['electricityDataTypes', props.amountUnit, props.language])}&nbsp;
+      {TR.getIn(['amounts', props.amountUnit, props.language])}&nbsp;
       ({props.value === 0 ? '0%' : '100%'})
     </div>
   </div>

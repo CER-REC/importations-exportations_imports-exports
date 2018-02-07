@@ -6,6 +6,7 @@ import TextBox from './TextBox'
 import SVGDrag from './SVGDrag/'
 import Constants from '../Constants'
 import { visualizationSettings } from '../selectors/visualizationSettings'
+import trSelector from '../selectors/translate'
 
 class AxisGuide extends React.PureComponent {
   static get propTypes() {
@@ -18,6 +19,7 @@ class AxisGuide extends React.PureComponent {
       unit: PropTypes.string.isRequired,
       updatePosition: PropTypes.func.isRequired,
       position: PropTypes.number.isRequired,
+      tr: PropTypes.func.isRequired,
     }
   }
 
@@ -87,7 +89,7 @@ class AxisGuide extends React.PureComponent {
   }
 
   render() {
-    const text = `${this.state.positionDisplay.toLocaleString()} ${this.props.unit}`
+    const text = `${this.state.positionDisplay.toLocaleString()} ${this.props.tr(['amounts', this.props.unit])}`
     const offset = (this.props.chartHeight + (this.props.barSize / 2))
       - (this.props.position * this.props.heightPerUnit)
     return (
@@ -141,4 +143,5 @@ class AxisGuide extends React.PureComponent {
 
 export default connect((state, props) => ({
   unit: visualizationSettings(state, props).get('amount'),
+  tr: trSelector(state, props),
 }))(AxisGuide)
