@@ -62,6 +62,8 @@ const initialState = fromJS({
     country: null,
     origins: [],
     destinations: {},
+    provinces: [],
+    ports: [],
   },
   timeline: {
     scaleLinked: true,

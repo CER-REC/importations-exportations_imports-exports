@@ -290,7 +290,6 @@ class SocialBar extends React.Component {
 
   menuText() {
     const transformString = `translate(${this.props.viewport.get('x') - Constants.getIn(['socialBar', 'expandedWidth'])} ${this.props.viewport.get('y') + Constants.getIn(['socialBar', 'iconTextY'])})`
-    console.log(transformString)
     if (!this.props.expandSocialBar) {
       return null
     }

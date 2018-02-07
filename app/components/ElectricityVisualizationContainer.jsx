@@ -11,6 +11,7 @@ import ElectricityMapPieceActivityExplanation from './ElectricityMapPieceActivit
 import BarChart from './BarChart'
 import Axis from './Axis'
 import * as ElectricityViewport from '../selectors/viewport/electricity'
+import { showImportsSelector, showExportsSelector } from '../selectors/visualizationSettings'
 import Constants from '../Constants'
 import { positionShape } from '../propTypeShapes'
 
@@ -19,23 +20,27 @@ const ElectricityVisualizationContainer = props => (
     <CanadaMapContainer
       {...props.canadaMap}
     />
-    <BarChart
-      {...props.importChart}
-      valueKey="imports"
-      aggregateKey="activity"
-      colour={Constants.getIn(['styleGuide', 'colours', 'ImportDefault'])}
-    />
-    <BarChart
-      {...props.exportChart}
-      valueKey="exports"
-      aggregateKey="activity"
-      flipped
-      colour={Constants.getIn(['styleGuide', 'colours', 'ExportDefault'])}
-    />
+    {!props.showImports ? null : (
+      <BarChart
+        {...props.importChart}
+        valueKey="imports"
+        aggregateKey="activity"
+        colour={Constants.getIn(['styleGuide', 'colours', 'ImportDefault'])}
+      />
+    )}
     <Axis
       {...props.axisPosition}
       barWidth={4}
     />
+    {!props.showExports ? null : (
+      <BarChart
+        {...props.exportChart}
+        valueKey="exports"
+        aggregateKey="activity"
+        flipped
+        colour={Constants.getIn(['styleGuide', 'colours', 'ExportDefault'])}
+      />
+    )}
     <USMapContainer
       {...props.usMap}
     />
@@ -62,6 +67,8 @@ ElectricityVisualizationContainer.propTypes = {
   axisPosition: PropTypes.shape(positionShape).isRequired,
   exportChart: PropTypes.shape(positionShape).isRequired,
   mapPieceActivityExplanation: PropTypes.shape(positionShape).isRequired,
+  showImports: PropTypes.bool.isRequired,
+  showExports: PropTypes.bool.isRequired,
 }
 
 export default connect((state, props) => ({
@@ -72,4 +79,6 @@ export default connect((state, props) => ({
   importChart: ElectricityViewport.chartImportPosition(state, props),
   axisPosition: ElectricityViewport.chartAxisPosition(state, props),
   exportChart: ElectricityViewport.chartExportPosition(state, props),
+  showImports: showImportsSelector(state, props),
+  showExports: showExportsSelector(state, props),
 }))(ElectricityVisualizationContainer)

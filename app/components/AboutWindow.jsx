@@ -16,7 +16,7 @@ class AboutWindow extends React.Component {
     return (<img
       className="closeButton"
       src="images/about_close.svg"
-      alt="Close About Window"
+      alt={Tr.getIn(['aboutWindow', 'closeWindow', this.props.language])}
       {...handleInteraction(this.props.closeModal)}
     />)
   }

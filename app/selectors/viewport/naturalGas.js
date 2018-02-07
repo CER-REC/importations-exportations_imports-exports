@@ -35,7 +35,7 @@ export const chartExportPosition = createSelector(
 export const mapTilesPosition = createSelector(
   chartExportPosition,
   chartPosition => ({
-    top: chartPosition.top + chartPosition.height,
+    top: chartPosition.top + chartPosition.height + 109,
     left: chartPosition.left,
     width: chartPosition.width,
     height: 400,
