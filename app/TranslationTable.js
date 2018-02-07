@@ -114,6 +114,17 @@ const TranslationTable = fromJS({
     },
   },
 
+  dataDownloadModal: {
+    title: {
+      en: 'DATA DOWNLOAD',
+      fr: 'DATA DOWNLOAD fr',
+    },
+    subtext: {
+      en: 'The data used to create this visualization is open data available for you to download. Click the icon to save the data file to your computer.',
+      fr: 'TODO',
+    },
+  },
+
   mainMenuBar: {
     electricity: {
       en: 'Electricity',
