@@ -131,7 +131,6 @@ class ElectricityMapLayout extends React.Component {
     }
     return null
   }
-
   isMapPieceSelected(key, country) {
     const isSelected = this.props.selection.get('origins').indexOf(key)
     if (isSelected !== -1) { return true }
@@ -141,7 +140,12 @@ class ElectricityMapLayout extends React.Component {
     const length = this.props.selection.get('origins').count() + this.props.selection.get('destinations').count()
     return (length > 0)
   }
-
+  isDestinationMapPiece(key, country){
+    if (this.isSelected()) {
+      return this.props.selection.getIn(['destinations'], new Immutable.List()).has(country)
+    }
+    return false
+  }
   renderMapPiece() {
     // Data from constant file
     const type = this.props.importExportVisualization
@@ -173,6 +177,7 @@ class ElectricityMapLayout extends React.Component {
               bins={this.props.bins}
               styles={styles}
               isMapPieceSelected={this.isMapPieceSelected(position.get('name'), this.props.country)}
+              isDestinationMapPiece={this.isDestinationMapPiece(position.get('name'), this.props.country)}
               isSelected={isSelected}
               x1={mapPieceTransformStartXaxis(position, dimensions, mapPieceScale)}
               y1={mapPieceTransformStartYaxis(position, dimensions, mapPieceScale)}
