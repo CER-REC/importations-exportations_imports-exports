@@ -73,7 +73,7 @@ class Menu extends React.PureComponent {
       dotY = 52
     }
 
-    if (this.props.name === 'amount' || this.props.name === 'arrangeBy') { return }
+    if (this.props.name === 'amount' || this.props.name === 'arrangeBy' || this.props.name === 'subtype') { return }
     return (<g>
       <ExplanationDot
         linePath="M110,43 C248,257 312,213 633,213"
