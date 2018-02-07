@@ -11,7 +11,15 @@ import ConfidentialityPopover from './ConfidentialityPopover'
 class ConfidentialIcon extends React.Component {
   static get propTypes() {
     return {
-      styles: PropTypes.instanceOf(Immutable.Map).isRequired,
+      containerX: PropTypes.number.isRequired,
+      containerY: PropTypes.number.isRequired,
+      xPosition: PropTypes.number.isRequired,
+      yPosition: PropTypes.number.isRequired,
+      text: PropTypes.string.isRequired,
+      lineX: PropTypes.number.isRequired,
+      lineY: PropTypes.number.isRequired,
+      textX: PropTypes.number.isRequired,
+      textY: PropTypes.number.isRequired,
     }
   }
 

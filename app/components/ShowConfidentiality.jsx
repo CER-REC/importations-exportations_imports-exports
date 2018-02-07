@@ -3,11 +3,10 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
 import TrSelector from '../selectors/translate'
+import { ToggleConfidentialityMenu } from '../actions/confidentialityMenu'
 import { handleInteraction } from '../utilities'
 
 import '../styles/Fonts.scss'
-
-const placeholderClick = () => alert('Clicked')
 
 const triangleLine = (
   <svg
@@ -23,11 +22,20 @@ const triangleLine = (
 )
 
 class ShowConfidentiality extends React.Component {
-  static propTypes = {
-    Tr: PropTypes.func.isRequired,
+  static get propTypes() {
+    return {
+      Tr: PropTypes.func.isRequired,
+      onClick: PropTypes.func.isRequired,
+      confidentialityMenu: PropTypes.bool.isRequired,
+    }
   }
 
   showText() {
+    const { Tr } = this.props
+    let confidentialityText = Tr('confidentialityShown')
+    if (this.props.confidentialityMenu) {
+      confidentialityText = Tr('confidentialityHide')
+    }
     return (
       <text
         x={13}
@@ -35,7 +43,7 @@ class ShowConfidentiality extends React.Component {
         className="showHideConfidentiality"
         fill="#999"
       >
-        {this.props.Tr('confidentialityShown')}
+        {confidentialityText}
       </text>
     )
   }
@@ -44,8 +52,8 @@ class ShowConfidentiality extends React.Component {
     return (
       <g
         transform="translate(0 30)"
-        {...handleInteraction(placeholderClick)}
         role="menuitem"
+        {...handleInteraction(this.props.onClick)}
       >
         {this.showText()}
         {triangleLine}
@@ -57,7 +65,11 @@ class ShowConfidentiality extends React.Component {
 const mapStateToProps = (state, props) => ({
   viewport: state.viewport,
   Tr: TrSelector(state, props),
-  showConfidentiality: state.showConfidentiality,
+  confidentialityMenu: state.confidentialityMenu,
 })
 
-export default connect(mapStateToProps)(ShowConfidentiality)
+const mapDispatchToProps = {
+  onClick: ToggleConfidentialityMenu,
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ShowConfidentiality)

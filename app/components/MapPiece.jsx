@@ -1,4 +1,5 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import Immutable from 'immutable'
 
@@ -8,8 +9,6 @@ import ConfidentialIcon from './ConfidentialIcon'
 import Constants from '../Constants'
 import AnimatedMapPiece from './SVGAnimation/AnimatedMapPiece'
 
-import { showConfidentality } from '../actions/confidentiality'
-
 class MapPiece extends React.Component {
   static propTypes = {
     bins: PropTypes.instanceOf(Immutable.List),
@@ -17,6 +16,7 @@ class MapPiece extends React.Component {
     dimensions: PropTypes.instanceOf(Immutable.Map).isRequired,
     data: PropTypes.instanceOf(Immutable.Map).isRequired,
     legend: PropTypes.bool,
+    confidentialityMenu: PropTypes.bool.isRequired,
   }
 
   static defaultProps = {
@@ -113,6 +113,38 @@ class MapPiece extends React.Component {
       && this.props.mapPieceProps.get('stroke') !== '') {
       stroke = this.props.mapPieceProps.get('stroke')
     }
+
+    if (this.props.confidentialityMenu) { return (<g fillOpacity={opacity} >
+      <polygon
+        stroke={stroke}
+        fill={this.props.styles.get('color')}
+        points="37.09 9.68 18.54 0 0 9.68 0 29.05 18.54 38.73 37.09 29.05 37.09 9.68"
+      />
+      <MapPieceLabel
+        labelPosition={this.props.styles.get('labelPosition')}
+        topMargin={this.props.styles.get('bottomMargin')}
+        bottomMargin={this.props.styles.get('topMargin')}
+        mapPieceHeight={this.props.dimensions.get('height')}
+        name={this.props.data.get('name')}
+        mapPieceProps={this.props.mapPieceProps}
+        text = {this.props.text}
+      />
+      <g transform={arrowTransform}>
+        {this.drawArrow(this.props.legends, this.props.data, 'exports', this.props.styles, this.props.arrowProps)}
+        {this.drawArrow(this.props.legends, this.props.data, 'imports', this.props.styles, this.props.arrowProps)}
+      </g>
+      <AnimatedMapPiece
+        x1={this.props.x1 || 0}
+        y1={this.props.y1 || 0}
+        x2={this.props.x1 || 0}
+        y2={this.props.y1 || 0}
+      />
+      {manitobaConfidentialIcon}
+      {powerpoolConfidentialIcon}
+            </g>)
+      
+    }
+
     return (<g fillOpacity={opacity} >
       <polygon
         stroke={stroke}
@@ -132,8 +164,6 @@ class MapPiece extends React.Component {
         {this.drawArrow(this.props.legends, this.props.data, 'exports', this.props.styles, this.props.arrowProps)}
         {this.drawArrow(this.props.legends, this.props.data, 'imports', this.props.styles, this.props.arrowProps)}
       </g>
-      {manitobaConfidentialIcon}
-      {powerpoolConfidentialIcon}
       <AnimatedMapPiece
         x1={this.props.x1 || 0}
         y1={this.props.y1 || 0}
@@ -144,4 +174,8 @@ class MapPiece extends React.Component {
   }
 }
 
-export default MapPiece
+const mapStateToProps = (state, props) => ({
+  confidentialityMenu: state.confidentialityMenu,
+})
+
+export default connect(mapStateToProps)(MapPiece)

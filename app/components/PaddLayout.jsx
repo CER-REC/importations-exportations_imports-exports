@@ -171,6 +171,7 @@ const mapStateToProps = (state, props) => ({
   bins: binSelector(state, props),
   Padd: PaddSelector(state, props),
   TRSelector: TRSelector(state, props),
+  confidentialityMenu: state.confidentialityMenu,
 })
 
 export default connect(mapStateToProps)(PaddLayout)
