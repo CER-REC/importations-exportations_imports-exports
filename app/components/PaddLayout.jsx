@@ -17,8 +17,6 @@ import PaddFive from './Padds/PaddFive'
 import PaddNonUSA from './Padds/PaddNonUSA'
 import ConfidentialIcon from './ConfidentialIcon'
 
-import './ElectricityMapLayout.scss'
-
 import ElectricitySelector from '../selectors/ElectricitySelector'
 import { arrangeBy, binSelector, sortAggregatedLocationsSelector } from '../selectors/data'
 
