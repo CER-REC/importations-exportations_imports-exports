@@ -1,7 +1,7 @@
 import { createSelector } from 'reselect'
 import Immutable from 'immutable'
 
-import { sortAggregatedLocationsSelector, arrangeBy, unitSelector } from './data'
+import { aggregateLocationSelector, arrangeBy, unitSelector } from './data'
 import MapLayoutGridConstant from '../MapLayoutGridConstant'
 import Constants from '../Constants'
 import { visualizationSettings } from './visualizationSettings'
@@ -36,7 +36,7 @@ const getPadding = createSelector(
 )
 
 export const getPointsByCountry = createSelector(
-  sortAggregatedLocationsSelector,
+  aggregateLocationSelector,
   getCountry,
   (points, country) => points.filter(point => point.get('country') === country),
 )

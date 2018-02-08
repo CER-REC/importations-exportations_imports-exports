@@ -18,7 +18,7 @@ import { setSelection } from '../actions/visualizationSettings'
 import './ElectricityMapLayout.scss'
 
 import { getElectricityMapLayout, getSelectionSettings } from '../selectors/ElectricitySelector'
-import { arrangeBy, binSelector, sortAggregatedLocationsSelector } from '../selectors/data'
+import { arrangeBy, binSelector, aggregateLocationSelector } from '../selectors/data'
 import DetailSidebar from './DetailSidebar'
 import DetailBreakdown from './DetailBreakdown'
 import { handleInteraction } from '../utilities'
@@ -232,7 +232,7 @@ const mapStateToProps = (state, props) => ({
   importExportVisualization: state.importExportVisualization,
   layout: getElectricityMapLayout(state, props),
   selection: getSelectionSettings(state, props),
-  dataPoints: sortAggregatedLocationsSelector(state, props),
+  dataPoints: aggregateLocationSelector(state, props),
   arrangeBy: arrangeBy(state, props),
   bins: binSelector(state, props),
   Tr: TrSelector(state, props),
