@@ -83,25 +83,9 @@ class MapPiece extends React.Component {
     if (this.props.isMapPieceSelected === true) {
       stroke = 'black'
     }
-    let arrowsData = Immutable.fromJS({imports:0, exports:0})
-    
-    let isNotDestinationMapPiece = true
-    if (this.props.isSelected === true ) {
-      if(typeof this.props.isDestinationMapPiece !== 'undefined' 
-        && this.props.isDestinationMapPiece ){
-        if(this.props.isMapPieceSelected){
-          arrowsData = this.props.data
-        }
-        isNotDestinationMapPiece = false
-      }else{
-        arrowsData = this.props.data
-      }
-    }else{
-      arrowsData = this.props.data
-    }
 
     let opacity = 1
-    if (this.props.isSelected === true && this.props.isMapPieceSelected === false && isNotDestinationMapPiece) {
+    if (this.props.isSelected === true && this.props.isMapPieceSelected === false && typeof this.props.isOrigin !=='undefined' && this.props.isOrigin) {
       opacity = 0.5
     }
 
@@ -118,8 +102,8 @@ class MapPiece extends React.Component {
       />
       {this.renderMapPieceLabel()}
       <g transform={arrowTransform}>
-        {this.drawArrow(this.props.legends, arrowsData, 'exports', this.props.styles, this.props.arrowProps)}
-        {this.drawArrow(this.props.legends, arrowsData, 'imports', this.props.styles, this.props.arrowProps)}
+        {this.drawArrow(this.props.legends, this.props.data, 'exports', this.props.styles, this.props.arrowProps)}
+        {this.drawArrow(this.props.legends, this.props.data, 'imports', this.props.styles, this.props.arrowProps)}
       </g>
       {confidentialIcon}
       <AnimatedMapPiece
