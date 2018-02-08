@@ -3,13 +3,21 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
 import Tr from '../TranslationTable'
+import RouteComputations from '../computations/RouteComputations'
 import { handleInteraction } from '../utilities'
 import './DataDownloadWindow.scss'
 
 class DataDownloadWindow extends React.Component {
-  static propTypes = {
-    closeModal: PropTypes.func.isRequired,
-    language: PropTypes.string.isRequired,
+  static get propTypes() {
+    return {
+      closeModal: PropTypes.func.isRequired,
+      language: PropTypes.string.isRequired,
+    }
+  }
+
+  constructor(props) {
+    super(props)
+    this.downloadDataClick = this.downloadDataClick.bind(this)
   }
 
   closeButton() {
@@ -37,24 +45,36 @@ class DataDownloadWindow extends React.Component {
     )
   }
 
+  fileNameText() {
+    return (
+      <p className="subtext">
+        NEB 2018-DD-MM data.csv 
+      </p>
+    )
+  }
+
   shareButton() {
     return <img
       className="dataDownloadImage"
       src="images/download_file.svg"
+      onClick={this.downloadDataClick}
     />
-    // const appRoot = RouteComputations.appRoot(document.location, this.props.language)
-    //   const fileName = Tr.getIn(['downloadable', 'csv', this.props.language])
-    //   window.open(`${appRoot}data/${fileName}`, 'data:text/csv;charset=utf-8,data/')
+  }
 
+  downloadDataClick() {
+    const appRoot = RouteComputations.appRoot(document.location, this.props.language)
+    const fileName = Tr.getIn(['downloadable', 'csv', this.props.language])
+    window.open(`${appRoot}data/${fileName}`, 'data:text/csv;charset=utf-8,data/')
   }
 
   render() {
     return (
-      <div id="dataDownloadWindow" className="aboutWindow">
+      <div id="dataDownloadWindow" className="dataDownloadWindow">
         { this.closeButton() }
         { this.heading() }
         { this.subtext() }
         { this.shareButton() }
+        { this.fileNameText() }
       </div>
     )
   }
