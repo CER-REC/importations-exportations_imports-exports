@@ -802,6 +802,10 @@ const TranslationTable = fromJS({
         en: 'Pennsylvania Jersey Maryland Power Pool',
         fr: 'Réseau commun Pennsylvanie NJ Maryland',
       },
+      powerPools: {
+        en: 'Power Pools',
+        fr: 'TODO',
+      },
     },
   },
   Padd: {
