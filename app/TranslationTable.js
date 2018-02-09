@@ -114,6 +114,17 @@ const TranslationTable = fromJS({
     },
   },
 
+  dataDownloadModal: {
+    title: {
+      en: 'DATA DOWNLOAD',
+      fr: 'DATA DOWNLOAD fr',
+    },
+    subtext: {
+      en: 'The data used to create this visualization is open data available for you to download. Click the icon to save the data file to your computer.',
+      fr: 'TODO',
+    },
+  },
+
   mainMenuBar: {
     electricity: {
       en: 'Electricity',
@@ -310,7 +321,7 @@ const TranslationTable = fromJS({
     importExportTitle: {
       text: {
         en: 'Click + to see more options',
-        fr: 'Click + to see more options FR',
+        fr: 'Cliquez pour plus d’options',
       },
     },
     electricity: {
@@ -370,6 +381,16 @@ const TranslationTable = fromJS({
   applicationPath: {
     en: '/import-export-visualization/',
     fr: '/visualisation-importations-exportations/',
+  },
+
+  imageDownload: {
+    en: 'Image Download',
+    fr: 'TODO',
+  },
+
+  saveImage: {
+    en: 'Save Image',
+    fr: 'TODO',
   },
 
   downloadable: {

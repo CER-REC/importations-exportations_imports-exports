@@ -5,6 +5,9 @@ import dialogPolyfill from 'dialog-polyfill'
 import 'dialog-polyfill/dialog-polyfill.css'
 
 import AboutWindow from './AboutWindow'
+import ImageDownloadWindow from './ImageDownloadWindow'
+import DataDownloadWindow from './DataDownloadWindow'
+
 import { CloseModal } from '../actions/modal'
 import './ModalSelector.scss'
 
@@ -38,7 +41,8 @@ class ModalSelector extends React.PureComponent {
   renderContent() {
     const { modal } = this.props
     if (modal === 'about') { return <AboutWindow closeModal={this.close} /> }
-    if (modal === 'imageDownload') { return null }
+    if (modal === 'imageDownload') { return <ImageDownloadWindow closeModal={this.close} /> }
+    if (modal === 'dataDownload') { return <DataDownloadWindow closeModal={this.close} />}
     return null
   }
 

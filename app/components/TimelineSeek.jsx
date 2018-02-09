@@ -14,8 +14,6 @@ import trSelector from '../selectors/translate'
 
 const WorkspaceComputations = require('../computations/WorkspaceComputations.js')
 
-require('./TimelineSeek.scss')
-
 class TimelineSeek extends React.PureComponent {
   static propTypes = {
     seekPosition: PropTypes.shape({

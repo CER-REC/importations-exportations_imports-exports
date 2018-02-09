@@ -3,8 +3,9 @@ import { fromJS } from 'immutable'
 const Constants = fromJS({
   workspace: {
     heightToWidthRatio: 0.66,
-    viewportPadding: 250,
+    viewportPadding: 150,
   },
+
 
   topHeightMargin: 70,
 
@@ -74,9 +75,9 @@ const Constants = fromJS({
   },
 
   socialBar: {
-    topMargin: 120,
+    topMargin: 10,
     controlArrowMargin: 30,
-    controlArrowY: 137,
+    controlArrowY: 17,
     controlArrowHeight: 40,
     width: 25,
     height: 125,
@@ -88,12 +89,12 @@ const Constants = fromJS({
     downloadDataIconMargin: 54,
     downloadImageIconMargin: 78,
     shareIconMargin: 102,
-    iconX: 105,
-    iconY: 223,
+    iconX: 101,
+    iconY: 113,
     twitterMargin: 29,
     facebookMargin: 51,
     linkedinMargin: 74,
-    iconTextY: 137,
+    iconTextY: 27,
   },
 
   visualizationContainer: {
@@ -136,6 +137,10 @@ const Constants = fromJS({
     radiusStart: 3.5,
     radiusEnd: 15.5,
     yOffset: 5,
+  },
+
+  imageDownload: {
+    previewImageWidth: 430,
   },
 
   visualizationTypes: [
@@ -213,6 +218,9 @@ const Constants = fromJS({
 
   appHost: 'https://apps2.neb-one.gc.ca',
   screenshotPath: 'screenshot',
+
+  screenshotWidth: 1500,
+  screenshotHeight: 1200,
 
   styleGuide: {
     colours: {
