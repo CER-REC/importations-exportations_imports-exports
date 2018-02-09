@@ -6,6 +6,8 @@ import { timelineYearScaleCalculation, timelineRange } from '../selectors/timeli
 import trSelector from '../selectors/translate'
 import { handleInteraction } from '../utilities'
 
+import ExplanationDot from './ExplanationDot'
+
 class TimelinePlay extends React.PureComponent {
   static get defaultProps() {
     return {
@@ -53,6 +55,22 @@ class TimelinePlay extends React.PureComponent {
     })
   }
 
+  playButtonExplanation() {
+    return (<g>
+      <ExplanationDot
+        linePath="M457,45 C328,266 384,258 22,251"
+        xPosition={-6}
+        yPosition={0}
+        lineX={0}
+        lineY={4}
+        textX={14}
+        textY={80}
+        containerX={this.props.left - 140}
+        containerY={this.props.top - 10}
+        text="Click play to see how electricity changes over time"
+    /></g>)
+  }
+
   render() {
     const label = this.props.tr(['timelinePlay', this.state.playInterval ? 'stop' : 'start'])
     return (
@@ -67,6 +85,7 @@ class TimelinePlay extends React.PureComponent {
           stroke="#a99372"
           fill="white"
         />
+        {this.playButtonExplanation()}
       </g>
     )
   }

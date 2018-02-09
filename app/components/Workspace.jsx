@@ -6,12 +6,13 @@ import MenuBar from './MenuBar'
 import SocialBar from './SocialBar'
 import ModalSelector from './ModalSelector'
 import VisualizationContainer from './VisualizationContainer'
+import Constants from '../Constants'
 import { svgSize as svgSizeSelector, detailSidebarPosition as detailSidebarSelector } from '../selectors/viewport/'
 
 import './Workspace.scss'
 
 
-const Workspace = ({ svgSize, detailSidebarPosition }) => (
+const Workspace = ({ svgSize, detailSidebarPosition, portalSvgSize }) => (
   <div style={{ position: 'relative' }}>
     <div className="Workspace">
       <Header />
@@ -26,9 +27,8 @@ const Workspace = ({ svgSize, detailSidebarPosition }) => (
       preserveAspectRatio="xMinYMin meet"
       role="application"
     >
-      <MenuBar />
-
       <VisualizationContainer />
+      <MenuBar />
       <SocialBar />
     </svg>
     <div
@@ -41,6 +41,12 @@ const Workspace = ({ svgSize, detailSidebarPosition }) => (
       }}
     />
     <ModalSelector />
+
+    <div id="popoverPortal"
+      style={{ position: 'absolute',
+        top: Constants.get('topHeightMargin')
+    }}>
+    </div>
   </div>
 )
 

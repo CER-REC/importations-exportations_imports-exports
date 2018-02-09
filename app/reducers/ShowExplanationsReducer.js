@@ -10,7 +10,7 @@ const ShowExplanationsReducer = (state = defaultState, action) => {
       //   return defaultState
 
     default:
-      return defaultState
+      return state
   }
 }
 

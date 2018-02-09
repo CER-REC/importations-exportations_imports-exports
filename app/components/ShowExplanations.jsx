@@ -5,7 +5,7 @@ import PropTypes from 'prop-types'
 import Constants from '../Constants'
 import TrSelector from '../selectors/translate'
 
-import ShowExplanationsCreator from '../actionCreators/ShowExplanationsCreator'
+import ToggleExplanation from '../actionCreators/ShowExplanationsCreator'
 import WorkspaceComputations from '../computations/WorkspaceComputations'
 import { handleInteraction } from '../utilities'
 
@@ -90,7 +90,7 @@ const mapStateToProps = (state, props) => ({
 })
 
 const mapDispatchToProps = {
-  onClick: ShowExplanationsCreator,
+  onClick: ToggleExplanation,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ShowExplanations)

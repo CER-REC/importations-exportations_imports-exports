@@ -280,13 +280,6 @@ const TranslationTable = fromJS({
     fr: 'cacher EXPLICATIONS',
   },
 
-  explanations: {
-    importExportTitle: {
-      en: 'Click + to see more options',
-      fr: 'Cliquez pour plus d’options',
-    },
-  },
-
   confidentialityShown: {
     en: 'show CONFIDENTIALITY',
     fr: 'Montrer CONFIDENTIALITÉ',
@@ -321,6 +314,39 @@ const TranslationTable = fromJS({
     base: {
       en: 'of Energy Products to and from Canada',
       fr: 'de produits énergétiques du Canada',
+    },
+  },
+
+  explanations: {
+    importExportTitle: {
+      text: {
+        en: 'Click + to see more options',
+        fr: 'Cliquez pour plus d’options',
+      },
+    },
+    electricity: {
+      text: {
+        en: 'Electricity is the selected energy product',
+        fr: 'Electricity is the selected energy product FR',
+      },
+    },
+    timeSeek: {
+      text: {
+        en: 'Drag to select time frame',
+        fr: 'Drag to select time frame FR',
+      },
+    },
+    playButton: {
+      text: {
+        en: 'Click play to see how electricity changes over time',
+        fr: 'Click play to see how electricity changes over time FR',
+      },
+    },
+    newYork: {
+      text: {
+        en: 'New York has the highest exports into the US as well as the highest imports from the US',
+        fr: 'New York has the highest exports into the US as well as the highest imports from the US FR',
+      },
     },
   },
 

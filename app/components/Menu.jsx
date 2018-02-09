@@ -7,7 +7,11 @@ import { handleInteraction } from '../utilities'
 import { setActiveMenu } from '../actions/activeMenu'
 import TrSelector from '../selectors/translate'
 
+import ExplanationDot from './ExplanationDot'
+
 import './Menu.scss'
+
+const Tr = require('../TranslationTable.js')
 
 class Menu extends React.PureComponent {
   static propTypes = {
@@ -26,6 +30,7 @@ class Menu extends React.PureComponent {
     left: PropTypes.number,
     name: PropTypes.string.isRequired,
     setActiveMenu: PropTypes.func.isRequired,
+    showExplanations: PropTypes.bool.isRequired,
     Tr: PropTypes.func.isRequired,
   }
 
@@ -43,6 +48,45 @@ class Menu extends React.PureComponent {
 
   toggleMenu = () => {
     this.props.setActiveMenu(this.props.expanded ? '' : this.props.name)
+  }
+
+  importExportExplanation() {
+    if (this.props.name !== 'activity') { return }
+    return (<g>
+      <ExplanationDot
+        linePath="M80,80 C117,190 223,168 406,171"
+        xPosition={150}
+        yPosition={0}
+        lineX={80}
+        lineY={80}
+        textX={35}
+        textY={30}
+        containerX={this.props.left}
+        containerY={this.props.top}
+        text="Click + to see more options"
+    /></g>)
+  }
+
+  electricityExplanation() {
+    let dotY = 28
+    if (this.props.expanded) {
+      dotY = 52
+    }
+
+    if (this.props.name === 'amount' || this.props.name === 'arrangeBy' || this.props.name === 'subtype') { return }
+    return (<g>
+      <ExplanationDot
+        linePath="M110,43 C248,257 312,213 633,213"
+        xPosition={120}
+        yPosition={dotY}
+        lineX={110}
+        lineY={43}
+        textX={75}
+        textY={55}
+        containerX={this.props.left}
+        containerY={this.props.top}
+        text="Electricity is the selected energy product"
+    /></g>)
   }
 
   renderTitle() {
@@ -119,11 +163,14 @@ class Menu extends React.PureComponent {
   }
 
   render() {
-    return (
+    return (<g>
       <g transform={`translate(${this.props.left} ${this.props.top})`} className="menuGroup">
         {this.renderTitle()}
         {this.renderOptions()}
+        {this.importExportExplanation()}
+        {this.electricityExplanation()}
       </g>
+    </g>
     )
   }
 }
@@ -132,6 +179,8 @@ export default connect(
   (state, props) => ({
     expanded: (state.activeMenu === props.name),
     Tr: TrSelector(state, props),
+    language: state.language,
+    showExplanations: state.showExplanations,
   }),
   { setActiveMenu },
 )(Menu)

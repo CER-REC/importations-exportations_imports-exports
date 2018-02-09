@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import Immutable from 'immutable'
 import { connect } from 'react-redux'
 
-import ExplanationPopovers from './ExplanationPopovers'
 import BarChart from './BarChart'
 import Axis from './Axis'
 import PortMap from './PortMap'
@@ -38,10 +37,6 @@ const NaturalGasVisualizationContainer = props => (
     )}
     <NaturalGasMapContainer
     {...props.mapTiles}
-    />
-    <ExplanationPopovers
-      xaxis={props.xaxis}
-      yaxis={props.yaxis + props.height}
     />
     <DetailSidebar {...props.portMap} >
       <PortMap {...props.portMap} />

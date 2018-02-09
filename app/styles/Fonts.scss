@@ -136,6 +136,12 @@
   fill: $neutral-light;
 }
 
+.explanationText {
+  font-family: $fira-sans-condensed;
+  font-size: 11px;
+  color: $explanation;
+}
+
 .imageDownloadHeading {
   font-family: $fira-sans-condensed;
   font-size: 22px;
@@ -152,6 +158,7 @@
   font-family: $fira-sans-condensed;
   fill: $neutral-light;
   font-size: 13px;
+
 }
 
 .aboutHeading {
