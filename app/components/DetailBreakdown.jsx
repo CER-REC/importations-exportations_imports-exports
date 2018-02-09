@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
 import './DetailBreakDown.scss'
+import DetailBreakdownRow from './DetailBreakdownRow'
 import { visualizationSettings } from '../selectors/visualizationSettings'
 import TR from '../TranslationTable'
 import { timelineYearScaleCalculation } from '../selectors/timeline'
@@ -14,31 +15,24 @@ class DetailBreakdown extends React.Component {
   renderDetailBreakdownBody() {
     const { props } = this
     const bodyContent = props.trContent.get('body')
-    const total = props.data.reduce((acc, curr) => acc + curr)
+    const total = props.data.reduce((acc, curr) => acc + curr, 0)
     const result = props.data.map((value, key) => {
       const exportOrImportPercentage = ((value / total) * 100).toFixed(2)
 
-      const progressBarStyle = {
-        width: `${exportOrImportPercentage}%`,
-        backgroundColor: props.color,
-      }
+      const progressBarStyle = { backgroundColor: props.color }
       const name = TR.getIn(['country', 'us', key, props.language])
       || TR.getIn(['country', 'ca', key, props.language])
       || TR.getIn(['country', 'powerpool', key, props.language]) || ''
       // get state name corresponding to the
       return (
-        <tr key={key} className="detailBreakDownText">
-          <td width ="95%">
-          {bodyContent.getIn(['action', props.language])} &nbsp;
-          {name}&nbsp;
-          {humanNumber(value, props.language)}&nbsp;
-          {TR.getIn(['amounts', props.amountUnit, props.language])}&nbsp;
-          {exportOrImportPercentage}%&nbsp;
-          </td>
-          <td width ="5%" className="progress-bar">
-            <span style={progressBarStyle} />
-          </td>
-        </tr>
+        <DetailBreakdownRow
+          key={key}
+          label={`${bodyContent.getIn(['action', props.language])} ${name}`}
+          value={value}
+          unit={props.amountUnit}
+          total={total}
+          progressBarStyle={progressBarStyle}
+        />
       )
     })
     return result.toArray()

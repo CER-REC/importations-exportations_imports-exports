@@ -23,7 +23,7 @@ export const arrangeBy = createSelector(
   (settings, override) => override || settings.get('arrangeBy'),
 )
 
-const amount = createSelector(
+export const amount = createSelector(
   visualizationSettings,
   amountOverride,
   (settings, override) => override || settings.get('amount'),
