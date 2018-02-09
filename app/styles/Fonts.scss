@@ -165,6 +165,13 @@
   margin-left: 25px;
 }
 
+.subtext {
+  font-family: $fira-sans-condensed;
+  font-size: 11px;
+  color: $neutral-medium;
+  margin-left: 25px;
+}
+
 .detailBreakDown {
   .header{
     &.imports {
