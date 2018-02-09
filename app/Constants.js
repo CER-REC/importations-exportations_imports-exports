@@ -3,7 +3,7 @@ import { fromJS } from 'immutable'
 const Constants = fromJS({
   workspace: {
     heightToWidthRatio: 0.66,
-    viewportPadding: 150,
+    viewportPadding: 200,
   },
 
 
@@ -75,9 +75,9 @@ const Constants = fromJS({
   },
 
   socialBar: {
-    topMargin: 10,
+    topMargin: 50,
     controlArrowMargin: 30,
-    controlArrowY: 17,
+    controlArrowY: 57,
     controlArrowHeight: 40,
     width: 25,
     height: 125,

@@ -22,7 +22,7 @@ const USPadd = (props) => {
       paddingY={MapLayoutGridConstant.getIn(['PaddLayout', 'us', 'padding', key, 'top'], 0)}
       country="us"
     />))
-    return (<g transform="scale(1.1) translate(60 0)">
+    return (<g transform="scale(1.3) translate(0 -80)">
       {padds.toArray()}
     </g>)
   }

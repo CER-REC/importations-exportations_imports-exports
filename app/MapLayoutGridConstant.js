@@ -478,14 +478,14 @@ const MapLayoutGridConstant = fromJS({
       ],
     },
     us: {
-      mapPieceScale: 0.58,
+      mapPieceScale: 1,
       defaultColumns: 12,
       sortingRowPadding: -0.5,
       dimensions: {
         height: 37.09,
         width: 38.75,
-        yAxisPadding: 8,
-        xAxisPadding: 12,
+        yAxisPadding: -8, //8
+        xAxisPadding: -5, //12
       },
       styles: {
         bottomMargin: 15,

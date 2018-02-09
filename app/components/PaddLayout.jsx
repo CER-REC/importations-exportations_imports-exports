@@ -58,7 +58,7 @@ class PaddLayout extends React.Component {
         <ConfidentialIcon styles={style.get('confidentialStyle')} />
                           </g>)
     }
-    return (<g className={fontClassName} transform={`translate(${left + transformTranslate.get('left')} ${top + transformTranslate.get('top')})`}>
+    return (<g className={fontClassName} transform={`translate(${left + transformTranslate.get('left') + 1.3} ${top + transformTranslate.get('top') - 10})`}>
       <text transform={`translate(${transformText.get('left')} ${transformText.get('top')})`}>{text}</text>
       <polygon fill={color} transform="translate(0 140)" points="149.98 18.68 168.81 26.14 187.48 18.66 187.48 17.99 184.09 17.99 184.08 14.51 152.98 14.5 152.95 17.99 149.98 17.99 149.98 18.68" />
       {confidentialIcon}
