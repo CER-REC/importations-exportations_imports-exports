@@ -16,7 +16,7 @@ import './ElectricityMapLayout.scss'
 import { getElectricityMapLayout, getSelectionSettings } from '../selectors/NaturalGasSelector'
 import { arrangeBy, binSelector, sortAggregatedLocationsSelector, subType } from '../selectors/data'
 import DetailSidebar from './DetailSidebar'
-import DetailBreakdown from './DetailBreakdown'
+import NGLsDetailBreakdown from './NGLsDetailBreakdown'
 import { handleInteraction } from '../utilities'
 
 const mapPieceTransformStartXaxis = (position, dimensions, mapPieceScale) => (position.get('x') * ((mapPieceScale * dimensions.get('width')) + dimensions.get('xAxisPadding')))
@@ -104,7 +104,7 @@ class NaturalGasLiquidMapLayout extends React.Component {
   renderDetailBreakdown(data) {
     const detailBreakdownData = Constants.getIn(['detailBreakDown', this.props.country])
     if (typeof detailBreakdownData !== 'undefined' && detailBreakdownData.get('required', false)) {
-      return (<DetailBreakdown
+      return (<NGLsDetailBreakdown
         data={data}
         type={detailBreakdownData.get('type')}
         trContent={Tr.getIn(['detailBreakDown', this.props.importExportVisualization, detailBreakdownData.get('type')])}
