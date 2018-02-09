@@ -85,11 +85,11 @@ class ExplanationDot extends React.Component {
     if (!this.props.showExplanations) {
       return null
     }
-    return (<g><g 
-        role="button"
-        {...handleInteraction(this.props.onClick)}>
+    return (<g><a 
+      role="menuItem"
+      {...handleInteraction(this.props.onClick)}>
       {this.dotAnimation()}
-    </g>
+    </a>
       <use x={this.props.xPosition + 6} y={this.props.yPosition} xlinkHref="#back"/>
     <PopoverPortal>
       <ExplanationPopover
