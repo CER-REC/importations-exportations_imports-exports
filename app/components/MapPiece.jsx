@@ -15,11 +15,13 @@ class MapPiece extends React.Component {
     dimensions: PropTypes.instanceOf(Immutable.Map).isRequired,
     data: PropTypes.instanceOf(Immutable.Map).isRequired,
     legend: PropTypes.bool,
+    isOrigin: PropTypes.bool,
   }
 
   static defaultProps = {
     bins: new Immutable.List(),
     legend: false,
+    isOrigin: false,
   }
 
   getArrowColor(type, value) {
@@ -85,7 +87,7 @@ class MapPiece extends React.Component {
     }
 
     let opacity = 1
-    if (this.props.isSelected === true && this.props.isMapPieceSelected === false && typeof this.props.isOrigin !=='undefined' && this.props.isOrigin) {
+    if (this.props.isSelected === true && this.props.isMapPieceSelected === false && this.props.isOrigin) {
       opacity = 0.5
     }
 

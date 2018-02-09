@@ -66,7 +66,7 @@ const getElectricityImportAndExport = createSelector(
         if (typeof points.get(stateOrProvince[1]) === 'undefined' && stateOrProvince[1] !== 'ATL-Q') {
           missingstatesOrProvincesMap[stateOrProvince[1]] = initializeDefaultValues(stateOrProvince[1], stateOrProvince[0], country, unit)
         }
-        if (origins.count() > 0 && country !== selection.get('country')) {
+        if (origins.count() > 0 && country !== selection.get('country') && stateOrProvince[1] !== 'ATL-Q') {
           if (typeof destinations === 'undefined' || (typeof destinations !== 'undefined' && !destinations.has(stateOrProvince[1]))) {
             missingstatesOrProvincesMap[stateOrProvince[1]] = initializeDefaultValues(stateOrProvince[1], stateOrProvince[0], country, unit)
           }
