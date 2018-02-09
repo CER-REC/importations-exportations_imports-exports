@@ -1,6 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
+import {fromJS} from 'immutable'
 import { geoConicConformal, geoPath } from 'd3-geo'
 import { feature } from 'topojson-client'
 
@@ -74,7 +75,6 @@ class NaturalGasMapContainer extends React.PureComponent {
   render(){
     const type = this.props.importExportVisualization
     const arrangedData = this.orderBy(this.props.selector, this.props.arrangeBy)
-
     const mapLayoutGrid = MapLayoutGridConstant.get(type)
 
     const dimensions = mapLayoutGrid.get('dimensions')
@@ -87,7 +87,7 @@ class NaturalGasMapContainer extends React.PureComponent {
     let leftPadding = 0
     let topPadding = 0
     layout =  layout.map((value) => {
-      const ports = arrangedData.get(value)
+      const ports = arrangedData.get(value, fromJS({}))
       const portsCount = ports.count()
       const maximunRows = portsCount > 7 ? Math.ceil(portsCount / 2): portsCount
       

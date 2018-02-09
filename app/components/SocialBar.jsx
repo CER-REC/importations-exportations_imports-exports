@@ -15,6 +15,7 @@ import { ExpandSocialBar } from '../actions/socialBar'
 
 import { OpenModal as ShowAboutWindowCreator } from '../actions/modal'
 import { OpenModal as ShowImageDownloadWindow } from '../actions/modal'
+import { OpenModal as ShowDataDownloadWindow } from '../actions/modal'
 
 import './SocialBar.scss'
 
@@ -160,9 +161,7 @@ class SocialBar extends React.Component {
 
   downloadDataClick() {
     if (this.props.expandSocialBar) {
-      const appRoot = RouteComputations.appRoot(document.location, this.props.language)
-      const fileName = Tr.getIn(['downloadable', 'csv', this.props.language])
-      window.open(`${appRoot}data/${fileName}`, 'data:text/csv;charset=utf-8,data/')
+      this.props.dataDownloadClick()
     }
   }
 
@@ -331,6 +330,9 @@ const mapDispatchToProps = dispatch => ({
   controlArrowClick() {
     dispatch(ExpandSocialBar())
   },
+  dataDownloadClick() {
+    dispatch(ShowDataDownloadWindow('dataDownload'))
+ },
 })
 
 
