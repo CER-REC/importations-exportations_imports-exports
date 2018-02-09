@@ -357,6 +357,16 @@ const TranslationTable = fromJS({
     fr: '/visualisation-importations-exportations/',
   },
 
+  imageDownload: {
+    en: 'Image Download',
+    fr: 'TODO',
+  },
+
+  saveImage: {
+    en: 'Save Image',
+    fr: 'TODO',
+  },
+
   downloadable: {
     csv: {
       en: 'data.csv',
