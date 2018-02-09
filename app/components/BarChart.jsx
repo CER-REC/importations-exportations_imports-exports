@@ -65,7 +65,6 @@ class BarChart extends Chart {
           key={`${point.get('year')}-${point.get('quarter')}-${valueKey}`}
           strokeWidth={barSize}
           stroke={colour}
-          strokeLinecap="round"
           opacity={opacity}
           animate={{ y1: '1s' }}
         />

@@ -16,6 +16,7 @@ class RefinedPetroleumProductsVisualizationContainer extends React.Component {
         <Axis
           {...positions.axis}
           barWidth={4}
+          canChangeScale={false}
         />
         <StackedChart
           {...positions.chart}
