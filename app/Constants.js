@@ -19,7 +19,7 @@ const Constants = fromJS({
   },
 
   menuBar: {
-    width: 150,
+    width: 200,
     containerHeight: 300,
     controlArrowSize: 15,
     importExportMenuLabelMargin: 16,
@@ -97,7 +97,6 @@ const Constants = fromJS({
   },
 
   visualizationContainer: {
-    leftMargin: 165,
     widthPadding: 450,
     heightPadding: 300,
   },
