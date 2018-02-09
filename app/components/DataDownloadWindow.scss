@@ -1,0 +1,37 @@
+.dataDownloadWindow {
+  position:fixed;
+  top: 20%;
+  left: 30%;
+  width:560px;
+  height: auto;
+  background-color: white;
+  border: 1px solid rgba(0,0,0,0.15);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.closeButton {
+  float: right;
+  width: 10px;
+  position: absolute;
+  top: 17px;
+  right: 17px;
+  cursor: pointer;
+  width:380px;
+}
+
+.subtext {
+  position: relative;
+  left: 15%;
+  text-align: center;
+  width: 65%;
+  padding-bottom: 20px;
+}
+
+.dataDownloadImage {
+  cursor: pointer;
+  padding-bottom: 20px;
+  margin-left: 40%;
+  width: 150px;
+  height: auto;
+  top: 50%;
+}
