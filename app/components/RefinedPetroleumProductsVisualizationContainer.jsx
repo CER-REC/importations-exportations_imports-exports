@@ -30,13 +30,14 @@ class RefinedPetroleumProductsVisualizationContainer extends React.Component {
 
   renderSeparateCharts() {
     const { individualCharts: positions } = this.props
+    const categoryColours = Constants.getIn(['styleGuide', 'categoryColours'])
     const charts = [
       'Partially Processed Oil',
       'Jet Fuel',
       'Heavy Fuel Oil',
       'Motor Gasoline',
       'Middle Distillate',
-    ].map(key => (
+    ].map((key, i, arr) => (
       <g key={key}>
         <Axis
           {...positions[key].axis}
@@ -49,7 +50,10 @@ class RefinedPetroleumProductsVisualizationContainer extends React.Component {
           valueKey={key}
           aggregateKey="productSubtype"
           flipped
-          colour={Constants.getIn(['styleGuide', 'colours', 'ExportDefault'])}
+          colour={categoryColours.get(
+            i + (categoryColours.count() - arr.length),
+            Constants.getIn(['styleGuide', 'colours', 'ExportDefault']),
+          )}
         />
       </g>
     ))

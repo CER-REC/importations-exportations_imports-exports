@@ -103,7 +103,7 @@ class AxisGuide extends React.PureComponent {
         <g transform={`translate(0 ${offset})`}>
           <polyline
             strokeWidth={1}
-            stroke="#a99372"
+            stroke={Constants.getIn(['styleGuide', 'colours', 'SandExtraDark'])}
             points="-12,0 -7,-10 -2,0 -7,10 -12,0"
             fill="transparent"
           />
@@ -113,14 +113,14 @@ class AxisGuide extends React.PureComponent {
             y1={0}
             y2={0}
             strokeWidth={1}
-            stroke="#a99372"
+            stroke={Constants.getIn(['styleGuide', 'colours', 'SandExtraDark'])}
             strokeDasharray="4, 2"
           />
 
           <TextBox
             textStyles={{
               x: (this.props.width / 2),
-              y: -6,
+              y: -3,
               textAnchor: 'middle',
               alignmentBaseline: 'bottom',
               fill: 'white',
@@ -128,7 +128,7 @@ class AxisGuide extends React.PureComponent {
             }}
             aria-hidden
             boxStyles={{
-              fill: Constants.getIn(['styleGuide', 'colours', 'SandMedium']),
+              fill: Constants.getIn(['styleGuide', 'colours', 'SandExtraDark']),
             }}
             padding={2}
             flipped={this.props.flipped}
