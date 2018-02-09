@@ -11,10 +11,14 @@ import ConfidentialCount from './ConfidentialCount'
 import { timelineGrouping, timelineData } from '../selectors/timeline'
 
 class BarChart extends Chart {
-  static get propTypes() {
-    return Object.assign({}, super.propTypes, {
-      valueKey: PropTypes.string.isRequired,
-    })
+  static propTypes = {
+    ...Chart.propTypes,
+    valueKey: PropTypes.string.isRequired,
+    detailSidebar: PropTypes.bool,
+  }
+
+  static defaultProps = {
+    detailSidebar: true,
   }
 
   constructor(props) {
@@ -98,9 +102,11 @@ class BarChart extends Chart {
           width={this.props.width}
           barSize={barSize}
         />
-        <DetailSidebar top={this.props.top} height={height}>
-          {flipped ? sidebarContent.reverse() : sidebarContent}
-        </DetailSidebar>
+        {!this.props.detailSidebar ? null : (
+          <DetailSidebar top={this.props.top} height={height}>
+            {flipped ? sidebarContent.reverse() : sidebarContent}
+          </DetailSidebar>
+        )}
       </g>
     )
   }

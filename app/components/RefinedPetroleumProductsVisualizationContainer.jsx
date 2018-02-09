@@ -4,6 +4,8 @@ import { connect } from 'react-redux'
 import BarChart from './BarChart'
 import StackedChart from './StackedChart'
 import Axis from './Axis'
+import DetailSidebar from './DetailSidebar'
+import ConfidentialCount from './ConfidentialCount'
 import * as RefinedPetroleumProductsViewport from '../selectors/viewport/refinedPetroleumProducts'
 import { arrangeBy } from '../selectors/data'
 import Constants from '../Constants'
@@ -54,7 +56,17 @@ class RefinedPetroleumProductsVisualizationContainer extends React.Component {
             i + (categoryColours.count() - arr.length),
             Constants.getIn(['styleGuide', 'colours', 'ExportDefault']),
           )}
+          detailSidebar={false}
         />
+        <DetailSidebar
+          {...positions[key].chart}
+        >
+          <ConfidentialCount
+            key="confidential"
+            valueKey={key}
+            aggregateKey="productSubtype"
+          />
+        </DetailSidebar>
       </g>
     ))
     return <g>{charts}</g>
