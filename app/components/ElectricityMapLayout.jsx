@@ -18,7 +18,7 @@ import { setSelection } from '../actions/visualizationSettings'
 import './ElectricityMapLayout.scss'
 
 import { getElectricityMapLayout, getSelectionSettings } from '../selectors/ElectricitySelector'
-import { arrangeBy, binSelector, sortAggregatedLocationsSelector } from '../selectors/data'
+import { arrangeBy, binSelector, aggregateLocationSelector } from '../selectors/data'
 import DetailSidebar from './DetailSidebar'
 import DetailBreakdown from './DetailBreakdown'
 import { handleInteraction } from '../utilities'
@@ -131,7 +131,6 @@ class ElectricityMapLayout extends React.Component {
     }
     return null
   }
-
   isMapPieceSelected(key, country) {
     const isSelected = this.props.selection.get('origins').indexOf(key)
     if (isSelected !== -1) { return true }
@@ -141,7 +140,6 @@ class ElectricityMapLayout extends React.Component {
     const length = this.props.selection.get('origins').count() + this.props.selection.get('destinations').count()
     return (length > 0)
   }
-
   renderMapPiece() {
     // Data from constant file
     const type = this.props.importExportVisualization
@@ -174,6 +172,7 @@ class ElectricityMapLayout extends React.Component {
               styles={styles}
               isMapPieceSelected={this.isMapPieceSelected(position.get('name'), this.props.country)}
               isSelected={isSelected}
+              isOrigin={(this.props.selection.get('country') === this.props.country)}
               x1={mapPieceTransformStartXaxis(position, dimensions, mapPieceScale)}
               y1={mapPieceTransformStartYaxis(position, dimensions, mapPieceScale)}
             />
@@ -233,7 +232,7 @@ const mapStateToProps = (state, props) => ({
   importExportVisualization: state.importExportVisualization,
   layout: getElectricityMapLayout(state, props),
   selection: getSelectionSettings(state, props),
-  dataPoints: sortAggregatedLocationsSelector(state, props),
+  dataPoints: aggregateLocationSelector(state, props),
   arrangeBy: arrangeBy(state, props),
   bins: binSelector(state, props),
   Tr: TrSelector(state, props),
