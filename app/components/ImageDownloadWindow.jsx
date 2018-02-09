@@ -46,7 +46,7 @@ class ImageDownloadWindow extends React.Component {
     return <div
       className = 'imagePreview'>
       <img className="imagePreview"
-        src="http://localhost:3004/screenshot/?pageUrl=%2Fimport-export-visualization%2Fscreenshot%3Fconfig%3DeyJ2aXN1YWxpemF0aW9uU2V0dGluZ3MiOnsibmF0dXJhbEdhc0xpcXVpZMUVYW1vdW50IjoibTMvZCIsImFycmFuZ2VCeSI6ImxvY8VFxBdjdGl2aXTEFmltcG9ydHNFeMUHIiwic3VidHlwZSI6IsQNZWxlY8U1OnsiY8RccnkiOm51bGwsIm9yaWdpbnMiOltdLCJkZXN0aW7FYOQAiX19LCJ0aW1lbGluZcQ7c2NhbGVMaW5rZWQiOnRydWUsImdyb3VwaW5nIjoieWVhciIsIuUAq8UudGFydMQJxRk6MTk4NSwicXVhcnRlxA99LCJlbmTKIDIwMTfLIDR9xAEsIuUAu3JpY2l0eUV4cGxh5gCeIjpmYWxzZSznAPnmAPhW7AFlIjrzAVwsImxhbmd1YeQAoSJl5AFEc2hvd8tYc%252BYA2H0%253D&width=1500&height=1200"
+        src={ screenshotUrl }
       />
       </div>
   }
