@@ -7,6 +7,7 @@ import Axis from './Axis'
 import DetailSidebar from './DetailSidebar'
 import ConfidentialCount from './ConfidentialCount'
 import DetailBreakdownRow from './DetailBreakdownRow'
+import DetailTotal from './DetailTotal'
 import * as RefinedPetroleumProductsViewport from '../selectors/viewport/refinedPetroleumProducts'
 import { arrangeBy, amount } from '../selectors/data'
 import { timelineData } from '../selectors/timeline'
@@ -147,15 +148,28 @@ class RefinedPetroleumProductsVisualizationContainer extends React.Component {
   }
 
   render() {
-    return (this.props.arrangeBy === 'stack')
-      ? this.renderStackedChart()
-      : this.renderSeparateCharts()
+    return (
+      <g>
+        <DetailSidebar {...this.props.sidebarTotal}>
+          <DetailTotal
+            key="total"
+            type="exports"
+            valueKey="total"
+            aggregateKey="productSubtype"
+          />
+        </DetailSidebar>
+        {this.props.arrangeBy === 'stack'
+          ? this.renderStackedChart()
+          : this.renderSeparateCharts()}
+      </g>
+    )
   }
 }
 
 export default connect((state, props) => ({
   stackedChart: RefinedPetroleumProductsViewport.stackedChartPosition(state, props),
   individualCharts: RefinedPetroleumProductsViewport.individualChartsPosition(state, props),
+  sidebarTotal: RefinedPetroleumProductsViewport.sidebarTotalPosition(state, props),
   arrangeBy: arrangeBy(state, props),
   unit: amount(state, props),
   data: timelineData(state, { ...props, aggregateKey: 'productSubtype' }),

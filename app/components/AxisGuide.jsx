@@ -91,7 +91,7 @@ class AxisGuide extends React.PureComponent {
   render() {
     const text = `${this.state.positionDisplay.toLocaleString()} ${this.props.tr(['amounts', this.props.unit])}`
     const offset = (this.props.chartHeight + (this.props.barSize / 2))
-      - (this.props.position * this.props.heightPerUnit)
+      - (this.props.position * this.props.heightPerUnit) - 2
     return (
       <SVGDrag
         invertedY={this.props.flipped}

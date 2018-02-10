@@ -49,3 +49,12 @@ export const individualChartsPosition = createSelector(
     return positions
   },
 )
+
+export const sidebarTotalPosition = createSelector(
+  basePos,
+  startPos => ({
+    ...startPos,
+    top: startPos.top - 29,
+    height: 19,
+  }),
+)
