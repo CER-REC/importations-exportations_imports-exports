@@ -19,6 +19,7 @@ class DetailBreakdown extends React.Component {
           <DetailBreakdownHeader
             trContent= {props.trContent.get('header')}
             color={props.color}
+            type={props.type}
           />
           <table className ='detailBreakDownContainer'  style={{ height: props.height }}>
             <tbody>
@@ -44,8 +45,8 @@ class DetailBreakdown extends React.Component {
 }
 
 DetailBreakdown.defaultProps = {
-    trContent: new Immutable.List(),
-    data: new Immutable.List(),
+    trContent: new Immutable.Map(),
+    data: new Immutable.Map(),
     nameMappings: new Immutable.Map(),
     defaultContent: '',
   }
@@ -54,9 +55,9 @@ DetailBreakdown.propTypes = {
   amountUnit: PropTypes.string.isRequired,
   language: PropTypes.string.isRequired,
   defaultContent: PropTypes.string.isRequired,
-  data: PropTypes.instanceOf(Immutable.Map()).isRequired,
-  trContent: PropTypes.instanceOf(Immutable.Map()).isRequired,
-  nameMappings: PropTypes.instanceOf(Immutable.Map()).isRequired,
+  data: PropTypes.instanceOf(Immutable.Map).isRequired,
+  trContent: PropTypes.instanceOf(Immutable.Map).isRequired,
+  nameMappings: PropTypes.instanceOf(Immutable.Map).isRequired,
 }
 
 export default connect((state, props) => ({

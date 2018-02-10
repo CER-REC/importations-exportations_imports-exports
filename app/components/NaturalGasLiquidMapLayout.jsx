@@ -16,7 +16,7 @@ import './ElectricityMapLayout.scss'
 import { getElectricityMapLayout, getSelectionSettings } from '../selectors/NaturalGasSelector'
 import { arrangeBy, binSelector, sortAggregatedLocationsSelector, subType } from '../selectors/data'
 import DetailSidebar from './DetailSidebar'
-import NGLsDetailBreakdown from './NGLsDetailBreakdown'
+import DetailBreakdown from './DetailBreakdown'
 import { handleInteraction } from '../utilities'
 
 const mapPieceTransformStartXaxis = (position, dimensions, mapPieceScale) => (position.get('x') * ((mapPieceScale * dimensions.get('width')) + dimensions.get('xAxisPadding')))
@@ -102,18 +102,34 @@ class NaturalGasLiquidMapLayout extends React.Component {
 
   renderDetailBreakdown(data) {
     const detailBreakdownData = Constants.getIn(['detailBreakDown', this.props.country])
-    if (typeof detailBreakdownData !== 'undefined' && detailBreakdownData.get('required', false)) {
-      return (<NGLsDetailBreakdown
-        data={data}
-        type={detailBreakdownData.get('type')}
-        trContent={Tr.getIn(['detailBreakDown', this.props.importExportVisualization, detailBreakdownData.get('type')])}
-        veritcalPosition={detailBreakdownData.get('displayPosition')}
-        color={detailBreakdownData.get('color')}
-        height={detailBreakdownData.get('height')}
-        showDefault={detailBreakdownData.get('showDefault', false)}
-      />)
-    }
-    return null
+    
+    if (!detailBreakdownData.get('required', false)) { return null }
+    const subTypeTotal = this.props.layout.reduce((acc, nextValue) => {
+      const subType = nextValue.get('subType')
+      subType.forEach((subTypeVal, subTypeKey) => {
+        if(subTypeKey !== 'propaneButane'){
+          if(!acc[subTypeKey]){
+            acc[subTypeKey] = subTypeVal.get(detailBreakdownData.get('type'))
+          } else {
+            acc[subTypeKey] += subTypeVal.get(detailBreakdownData.get('type'))
+          }
+        }
+      })
+      return acc
+    }, {})
+    const nameMappings = Tr.getIn(['subType'])
+    return (<DetailBreakdown
+      data={Immutable.fromJS(subTypeTotal)}
+      type={detailBreakdownData.get('type')}
+      trContent={Tr.getIn(['detailBreakDown', this.props.importExportVisualization, detailBreakdownData.get('type')])}
+      veritcalPosition={detailBreakdownData.get('displayPosition')}
+      color={detailBreakdownData.get('color')}
+      height={detailBreakdownData.get('height')}
+      showDefault={detailBreakdownData.get('showDefault', false)}
+      nameMappings={nameMappings}
+      defaultContent=''
+    />)
+    
   }
 
   renderDetailSidebar() {

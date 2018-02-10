@@ -12,10 +12,9 @@ class DetailBreakdownBody extends React.Component {
   render() {
     const { props } = this
     const bodyContent = props.trContent
-    const total = props.data.reduce((acc, curr) => acc + curr)
+    const total = props.data.reduce((acc, curr, key) => acc + curr)
     const result = props.data.map((value, key) => {
       const exportOrImportPercentage = ((value / total) * 100).toFixed(2)
-
       const progressBarStyle = {
         width: `${exportOrImportPercentage}%`,
         backgroundColor: props.color,
@@ -45,7 +44,8 @@ DetailBreakdownBody.propTypes = {
   amountUnit: PropTypes.string.isRequired,
   language: PropTypes.string.isRequired,
   color: PropTypes.string.isRequired,
-  nameMappings: PropTypes.instanceOf(Immutable.Map()).isRequired,
+  data: PropTypes.instanceOf(Immutable.Map).isRequired,
+  nameMappings: PropTypes.instanceOf(Immutable.Map).isRequired,
 }
 
 export default connect((state, props) => ({

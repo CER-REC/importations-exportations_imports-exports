@@ -452,8 +452,8 @@ const TranslationTable = fromJS({
             fr: 'ces',
           },
           place: {
-            en: 'Provinces',
-            fr: 'Provinces',
+            en: 'CAN',
+            fr: 'CAN',
           },
         },
         body: {
@@ -474,21 +474,35 @@ const TranslationTable = fromJS({
             fr: 'par',
           },
           adjective: {
-            en: 'selected',
-            fr: 'ces',
+            en: '',
+            fr: '',
           },
           place: {
-            en: 'Provinces',
-            fr: 'Provinces',
+            en: 'CAN',
+            fr: 'CAN',
           },
         },
         body: {
           action: {
-            en: 'from',
-            fr: 'de',
+            en: '',
+            fr: '',
           },
         },
       },
+    },
+  },
+  subType: {
+    Butane: {
+      en: 'BUTANE',
+      fr: 'BUTANE',
+    },
+    Propane: {
+      en: 'PROPANE',
+      fr: 'PROPANE',
+    },
+    propaneButane: {
+      en: 'Butane and Propane',
+      fr: 'Butane et Propane',
     },
   },
 

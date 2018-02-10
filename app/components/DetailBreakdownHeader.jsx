@@ -22,7 +22,7 @@ class DetailBreakdownHeader extends React.Component {
 
 DetailBreakdownHeader.propTypes = {
   color: PropTypes.string.isRequired,
-  trContent: PropTypes.instanceOf(Immutable.Map()).isRequired,
+  trContent: PropTypes.instanceOf(Immutable.Map).isRequired,
   type: PropTypes.oneOf(['imports', 'exports']).isRequired,
   language: PropTypes.string.isRequired,
 }
