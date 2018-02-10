@@ -31,7 +31,6 @@ const powerPoolTransform = (xaxis, yaxis, position, dimensions, mapPieceScale) =
 class NaturalGasLiquidMapLayout extends React.Component {
   static propTypes = {
     selection: PropTypes.instanceOf(Immutable.Map).isRequired,
-    dataPoints: PropTypes.instanceOf(Immutable.Map).isRequired,
     onMapPieceClick: PropTypes.func.isRequired,
     arrangeBy: PropTypes.string.isRequired,
     importExportVisualization: PropTypes.string.isRequired,
@@ -137,7 +136,6 @@ const mapStateToProps = (state, props) => ({
   importExportVisualization: state.importExportVisualization,
   layout: getElectricityMapLayout(state, props),
   selection: getSelectionSettings(state, props),
-  dataPoints: sortAggregatedLocationsSelector(state, props),
   sType: subType(state,props),
   arrangeBy: arrangeBy(state, props),
   bins: binSelector(state, props),

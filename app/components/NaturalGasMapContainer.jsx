@@ -117,6 +117,7 @@ class NaturalGasMapContainer extends React.PureComponent {
               styles={styles}
               isMapPieceSelected={this.isMapPieceSelected( port.get('portName'), value)}
               isSelected={this.isSelected()}
+              isOrigin={true}
               x1={left}
               y1={top}
             />

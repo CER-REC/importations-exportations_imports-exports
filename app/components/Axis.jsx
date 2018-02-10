@@ -134,8 +134,8 @@ class Axis extends React.PureComponent {
           fill={Constants.getIn(['styleGuide', 'colours', 'SandLight'])}
         />
         {elements}
-        {this.props.canSeek ? this.seekControls() : null}
         {this.props.chartOptions ? this.chartOptions() : null}
+        {this.props.canSeek ? this.seekControls() : null}
       </g>
     )
   }

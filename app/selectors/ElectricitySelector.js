@@ -1,7 +1,7 @@
 import { createSelector } from 'reselect'
 import Immutable from 'immutable'
 
-import { sortAggregatedLocationsSelector, arrangeBy, unitSelector } from './data'
+import { aggregateLocationSelector, arrangeBy, unitSelector } from './data'
 import MapLayoutGridConstant from '../MapLayoutGridConstant'
 import Constants from '../Constants'
 import { visualizationSettings } from './visualizationSettings'
@@ -36,34 +36,40 @@ const getPadding = createSelector(
 )
 
 export const getPointsByCountry = createSelector(
-  sortAggregatedLocationsSelector,
+  aggregateLocationSelector,
   getCountry,
   (points, country) => points.filter(point => point.get('country') === country),
 )
-
+const initializeDefaultValues = (originKey, origin, country, unit) => ({
+  units: unit,
+  exports: 0,
+  imports: 0,
+  totalCount: 0,
+  confidentialCount: 0,
+  origin,
+  country,
+  originKey,
+})
 const getElectricityImportAndExport = createSelector(
   getPointsByCountry,
   unitSelector,
   getCountry,
-  (points, unit, country) => {
+  getSelectionSettings,
+  (points, unit, country, selection) => {
     // append missing states or provinces
     const statesOrProvinces = Constants.getIn(['dataloader', 'mapping', 'country', country])
+    const destinations = selection.getIn(['destinations', country])
+    const origins = selection.get('origins')
     if (typeof statesOrProvinces !== 'undefined' ) {
       let missingstatesOrProvincesMap = {}
       statesOrProvinces.entrySeq().forEach((stateOrProvince) => {
         if (typeof points.get(stateOrProvince[1]) === 'undefined' && stateOrProvince[1] !== 'ATL-Q') {
-          const originKey = stateOrProvince[1]
-          const origin = stateOrProvince[0]
-          missingstatesOrProvincesMap[originKey] = {
-            units: unit,
-            origin,
+          missingstatesOrProvincesMap[stateOrProvince[1]] = initializeDefaultValues(stateOrProvince[1], stateOrProvince[0], country, unit)
+        }
+        if (origins.count() > 0 && country !== selection.get('country') && stateOrProvince[1] !== 'ATL-Q') {
+          if (typeof destinations === 'undefined' || (typeof destinations !== 'undefined' && !destinations.has(stateOrProvince[1]))) {
+            missingstatesOrProvincesMap[stateOrProvince[1]] = initializeDefaultValues(stateOrProvince[1], stateOrProvince[0], country, unit)
           }
-          missingstatesOrProvincesMap[originKey].country = country
-          missingstatesOrProvincesMap[originKey].originKey = originKey
-          missingstatesOrProvincesMap[originKey].exports = 0
-          missingstatesOrProvincesMap[originKey].imports = 0
-          missingstatesOrProvincesMap[originKey].totalCount = 0
-          missingstatesOrProvincesMap[originKey].confidentialCount = 0
         }
       })
       missingstatesOrProvincesMap = Immutable.fromJS(missingstatesOrProvincesMap)
@@ -72,16 +78,27 @@ const getElectricityImportAndExport = createSelector(
     return points
   },
 )
-
+const sortData = (points, sortBy) => {
+  switch (sortBy) {
+    case 'imports':
+      return points.sort((a, b) => (b.get('imports', 0) - a.get('imports', 0)))
+    case 'exports':
+      return points.sort((a, b) => (b.get('exports', 0) - a.get('exports', 0)))
+    default:
+      return points
+  }
+}
 const createSortedLayout = createSelector(
   getElectricityImportAndExport,
   getColumns,
   getPadding,
-  (data, columns, rowPadding) => {
+  arrangeBy,
+  (data, columns, rowPadding, sortBy) => {
     let row = 0
     let column = 0
     const sortedArray = []
-    data.forEach((statesOrProvinces) => {
+    const sortedData = sortData(data, sortBy)
+    sortedData.forEach((statesOrProvinces) => {
       if (column >= columns) {
         column = 0
         row += 1

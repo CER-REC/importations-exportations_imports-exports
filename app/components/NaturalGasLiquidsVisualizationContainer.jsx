@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import Immutable from 'immutable'
 import { connect } from 'react-redux'
 
-import ExplanationPopovers from './ExplanationPopovers'
 import BarChart from './BarChart'
 import Axis from './Axis'
 import * as NaturalGasLiquidsViewport from '../selectors/viewport/naturalGasLiquids'
@@ -41,10 +40,6 @@ class NaturalGasLiquidsVisualizationContainer extends React.Component {
           colour={Constants.getIn(['styleGuide', 'colours', 'ExportDefault'])}
         />
       )}
-      <ExplanationPopovers
-        xaxis={this.props.xaxis}
-        yaxis={this.props.yaxis + this.props.height}
-      />
       <USPadd
         {...this.props.usPaddChart}
       />

@@ -114,6 +114,17 @@ const TranslationTable = fromJS({
     },
   },
 
+  dataDownloadModal: {
+    title: {
+      en: 'DATA DOWNLOAD',
+      fr: 'DATA DOWNLOAD fr',
+    },
+    subtext: {
+      en: 'The data used to create this visualization is open data available for you to download. Click the icon to save the data file to your computer.',
+      fr: 'TODO',
+    },
+  },
+
   mainMenuBar: {
     electricity: {
       en: 'Electricity',
@@ -277,13 +288,6 @@ const TranslationTable = fromJS({
     fr: 'cacher EXPLICATIONS',
   },
 
-  explanations: {
-    importExportTitle: {
-      en: 'Click + to see more options',
-      fr: 'Cliquez pour plus d’options',
-    },
-  },
-
   confidentialityShown: {
     en: 'show CONFIDENTIALITY',
     fr: 'Montrer CONFIDENTIALITÉ',
@@ -321,6 +325,39 @@ const TranslationTable = fromJS({
     },
   },
 
+  explanations: {
+    importExportTitle: {
+      text: {
+        en: 'Click + to see more options',
+        fr: 'Cliquez pour plus d’options',
+      },
+    },
+    electricity: {
+      text: {
+        en: 'Electricity is the selected energy product',
+        fr: 'Electricity is the selected energy product FR',
+      },
+    },
+    timeSeek: {
+      text: {
+        en: 'Drag to select time frame',
+        fr: 'Drag to select time frame FR',
+      },
+    },
+    playButton: {
+      text: {
+        en: 'Click play to see how electricity changes over time',
+        fr: 'Click play to see how electricity changes over time FR',
+      },
+    },
+    newYork: {
+      text: {
+        en: 'New York has the highest exports into the US as well as the highest imports from the US',
+        fr: 'New York has the highest exports into the US as well as the highest imports from the US FR',
+      },
+    },
+  },
+
   mainSubheading: {
     en: 'This visualization shows the quarterly energy trade data between Canada and the USA for various energy sources.',
     fr: 'Cette visualisation illustre les données trimestrielles sur les échanges énergétiques entre le Canada et les États-Unis pour diverses sources d’énergie.',
@@ -352,6 +389,16 @@ const TranslationTable = fromJS({
   applicationPath: {
     en: '/import-export-visualization/',
     fr: '/visualisation-importations-exportations/',
+  },
+
+  imageDownload: {
+    en: 'Image Download',
+    fr: 'TODO',
+  },
+
+  saveImage: {
+    en: 'Save Image',
+    fr: 'TODO',
   },
 
   downloadable: {
