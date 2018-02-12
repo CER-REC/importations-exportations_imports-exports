@@ -35,6 +35,11 @@ const selectedActivityGroup = createSelector(
   (settings, override) => override || settings.get('activity'),
 )
 
+const selection = createSelector(
+  visualizationSettings,
+  settings => settings.get('selection'),
+)
+
 const dataSelector = state => state.data
 
 const productSelector = createSelector(
@@ -77,9 +82,10 @@ const filterByTimelineSelector = createSelector(
 export const filterByHexSelector = createSelector(
   activityGroupSelector,
   selectedVisualization,
-  (points, visualizationType) =>{
+  selection,
+  (points, visualizationType, selectedPieces) =>{
     // TODO: Add filtering by selected hexes
-    console.log(visualizationType)
+    console.log(visualizationType, selectedPieces)
     //remove the point if there is any 
     return points
   }
