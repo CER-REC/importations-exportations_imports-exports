@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import Immutable from 'immutable'
 import PropTypes from 'prop-types'
 
-import NaturalGasLiquidMapPiece from './NaturalGasLiquidMapPiece'
+import MapPiece from './MapPiece'
 import MapLayoutGridConstant from '../MapLayoutGridConstant'
 import Constants from '../Constants'
 import Tr from '../TranslationTable'
@@ -82,15 +82,17 @@ class NaturalGasLiquidMapLayout extends React.Component {
             aria-label={this.props.Tr('mapTileLabel', humanName, position.getIn(['subType',productSubType,'imports'],0).toLocaleString(), position.getIn(['subType',productSubType,'exports'], 0).toLocaleString(), this.props.unit)}
             transform={`scale(${mapPieceScale})`}
           >
-            <NaturalGasLiquidMapPiece
+            <MapPiece
               data={position}
+              dataKey={['subType',productSubType]}
               dimensions={dimensions}
               legends={MapLayoutGridConstant.getIn([type, 'legends'])}
               bins={this.props.bins}
               styles={styles}
-              productSubType={productSubType}
               isMapPieceSelected={this.isMapPieceSelected(position.get('name'), this.props.country)}
               isSelected={isSelected}
+              mapPieceKey='name'
+              mapPieceStyleClass = 'mapPieceText'
               x1={mapPieceTransformStartXaxis(position, dimensions, mapPieceScale)}
               y1={mapPieceTransformStartYaxis(position, dimensions, mapPieceScale)}
             />
