@@ -1,73 +1,43 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
+import Immutable from 'immutable'
 
 import './DetailBreakDown.scss'
-import DetailBreakdownRow from './DetailBreakdownRow'
-import { visualizationSettings } from '../selectors/visualizationSettings'
-import TR from '../TranslationTable'
-import { timelineYearScaleCalculation } from '../selectors/timeline'
-import TRSelector from '../selectors/translate'
+
 import { humanNumber } from '../utilities'
+import DetailBreakdownHeader from './DetailBreakdownHeader'
+import DetailBreakdownBody from './DetailBreakdownBody'
+import { visualizationSettings } from '../selectors/visualizationSettings'
 
-// Add language compatibility
 class DetailBreakdown extends React.Component {
-  renderDetailBreakdownBody() {
-    const { props } = this
-    const bodyContent = props.trContent.get('body')
-    const total = props.data.reduce((acc, curr) => acc + curr, 0)
-    const result = props.data.map((value, key) => {
-      const exportOrImportPercentage = ((value / total) * 100).toFixed(2)
-
-      const progressBarStyle = { backgroundColor: props.color }
-      const name = TR.getIn(['country', 'us', key, props.language])
-      || TR.getIn(['country', 'ca', key, props.language])
-      || TR.getIn(['country', 'powerpool', key, props.language]) || ''
-      // get state name corresponding to the
-      return (
-        <DetailBreakdownRow
-          key={key}
-          label={`${bodyContent.getIn(['action', props.language])} ${name}`}
-          value={value}
-          unit={props.amountUnit}
-          total={total}
-          progressBarStyle={progressBarStyle}
-        />
-      )
-    })
-    return result.toArray()
-  }
-
-  renderDetailBreakdownHeader() {
-    const { props } = this
-    const headerContent = props.trContent.get('header')
-    return (
-      <div className={`header ${props.type}`}>
-        <span style={{ color: props.color }}>{headerContent.getIn(['type', props.language], '').toUpperCase()}</span> &nbsp;
-        {headerContent.getIn(['action', props.language], '')}&nbsp;
-        {headerContent.getIn(['adjective', props.language], '')}&nbsp;
-        {headerContent.getIn(['place', props.language], '')}&nbsp;
-      </div>
-    )
-  }
-
   render() {
     const { props } = this
+    //TR.getIn(['detailBreakDown', props.energyType, props.type])
     if (typeof props.data !== 'undefined' && props.data.count() > 0) {
       return (
         <div className="detailBreakDown">
-          {this.renderDetailBreakdownHeader()}
+          <DetailBreakdownHeader
+            trContent= {props.trContent.get('header')}
+            color={props.color}
+            type={props.type}
+          />
           <table className ='detailBreakDownContainer'  style={{ height: props.height }}>
             <tbody>
-              {this.renderDetailBreakdownBody()}
+              <DetailBreakdownBody 
+                trContent= {props.trContent.get('body')}
+                color= {props.color}
+                data= {props.data}
+                nameMappings= {props.nameMappings}
+              />
             </tbody>
           </table>
         </div>
       )
-    } else if (typeof props.timelineYears !== 'undefined' && props.showDefault) {
+    } else {
       return (
         <div>
-          {props.TRSelector(['detailBreakDown', props.importExportVisualization, 'defaultText'], props.timelineYears.min, props.timelineYears.max)}
+          {props.defaultContent}
         </div>
       )
     }
@@ -75,17 +45,23 @@ class DetailBreakdown extends React.Component {
   }
 }
 
+DetailBreakdown.defaultProps = {
+    trContent: new Immutable.Map(),
+    data: new Immutable.Map(),
+    nameMappings: new Immutable.Map(),
+    defaultContent: '',
+  }
 
 DetailBreakdown.propTypes = {
-  type: PropTypes.oneOf(['imports', 'exports']).isRequired,
   amountUnit: PropTypes.string.isRequired,
   language: PropTypes.string.isRequired,
+  defaultContent: PropTypes.string.isRequired,
+  data: PropTypes.instanceOf(Immutable.Map).isRequired,
+  trContent: PropTypes.instanceOf(Immutable.Map).isRequired,
+  nameMappings: PropTypes.instanceOf(Immutable.Map).isRequired,
 }
 
 export default connect((state, props) => ({
-  importExportVisualization: state.importExportVisualization,
   amountUnit: visualizationSettings(state, props).get('amount'),
   language: state.language,
-  TRSelector: TRSelector(state, props),
-  timelineYears: timelineYearScaleCalculation(state, props),
 }))(DetailBreakdown)

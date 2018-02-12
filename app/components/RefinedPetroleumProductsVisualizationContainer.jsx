@@ -99,7 +99,6 @@ class RefinedPetroleumProductsVisualizationContainer extends React.Component {
     const { individualCharts: positions } = this.props
     const categoryColours = Constants.getIn(['styleGuide', 'categoryColours'])
     const breakdown = this.calculateBreakdown()
-    console.log(breakdown)
     const charts = subtypes.map((key, i) => {
       const colour = categoryColours.get(
         i + (categoryColours.count() - subtypes.length),
