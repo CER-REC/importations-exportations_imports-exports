@@ -23,6 +23,10 @@ class TimelinePlay extends React.PureComponent {
     this.state = { playInverval: null }
   }
 
+  componentWillUnmount() {
+    this.resetPlay()
+  }
+
   resetPlay() {
     const { timelineScale: yearScale } = this.props
     clearInterval(this.state.playInterval)
