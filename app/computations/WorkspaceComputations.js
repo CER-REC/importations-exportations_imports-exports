@@ -28,7 +28,7 @@ WorkspaceComputations.showExplanationsY = viewport =>
 WorkspaceComputations.legendY = viewport =>
   WorkspaceComputations.showExplanationsY(viewport) + Constants.getIn(['legend', 'topMargin'])
 
-WorkspaceComputations.socialBarY = viewport => viewport.get('y') + 10
+WorkspaceComputations.socialBarY = viewport => viewport.get('y') + 50
 
 WorkspaceComputations.visualizationContainerWidth = viewport =>
   viewport.get('x') - Constants.getIn(['visualizationContainer', 'widthPadding'])

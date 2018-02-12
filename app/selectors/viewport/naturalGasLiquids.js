@@ -45,7 +45,7 @@ export const chartExportPosition = createSelector(
 export const usPaddPosition = createSelector(
   chartExportPosition,
   chartPosition => ({
-    top: chartPosition.top + chartPosition.height,
+    top: chartPosition.top + chartPosition.height + 60,
     left: chartPosition.left,
     width: chartPosition.width,
     height: 100,

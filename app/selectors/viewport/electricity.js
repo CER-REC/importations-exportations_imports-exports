@@ -46,7 +46,7 @@ export const usMapPosition = createSelector(
   chartExportPosition,
   prev => ({
     top: prev.top + prev.height + 50,
-    left: prev.left,
+    left: prev.left + 60,
     width: prev.width,
     height: 200,
   }),
@@ -55,8 +55,8 @@ export const usMapPosition = createSelector(
 export const powerPoolPosition = createSelector(
   usMapPosition,
   prev => ({
-    top: prev.top + prev.height,
-    left: prev.left + prev.width - 375,
+    top: prev.top + prev.height + 82,
+    left: prev.left + prev.width - 212,
     width: 150,
     height: 50,
   }),
