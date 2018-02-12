@@ -8,6 +8,7 @@ import MapLayoutGridConstant from '../MapLayoutGridConstant'
 import Constants from '../Constants'
 import { PaddSelector } from '../selectors/Padd'
 import TRSelector from '../selectors/translate'
+import Tr from '../TranslationTable'
 
 import PaddOne from './Padds/PaddOne'
 import PaddTwo from './Padds/PaddTwo'
@@ -16,6 +17,8 @@ import PaddFour from './Padds/PaddFour'
 import PaddFive from './Padds/PaddFive'
 import PaddNonUSA from './Padds/PaddNonUSA'
 import ConfidentialIcon from './ConfidentialIcon'
+import DetailSidebar from './DetailSidebar'
+import DetailBreakdown from './DetailBreakdown'
 
 import ElectricitySelector from '../selectors/ElectricitySelector'
 import { arrangeBy, binSelector, sortAggregatedLocationsSelector } from '../selectors/data'
@@ -99,7 +102,7 @@ class PaddLayout extends React.Component {
           paddLayout = (<g key={`${props.arrangeBy}_${currentValue[1].get('destination')}`} transform={`translate(${left} 0)`}>
             {paddLayout}
             { this.getArrow(props.arrangeBy, paddGroup, 0, 0, color, currentValue[1].get('confidentialCount', 0)) }
-                        </g>)
+          </g>)
           acc.push(paddLayout)
           left += paddingBetweenSortedElement
         }
@@ -108,6 +111,47 @@ class PaddLayout extends React.Component {
       return acc
     }, [])
     return layout
+  }
+  renderDetailBreakdown(){
+    switch(this.props.importExportVisualization){
+      case 'naturalGasLiquids':
+        const detailBreakdownData = Constants.getIn(['detailBreakDown', this.props.country])
+        if (!detailBreakdownData.get('required', false)) { return null }
+        const subTypeTotal = this.props.Padd.reduce((acc, nextValue) => {
+          const subType = nextValue.get('subType')
+          subType.forEach((subTypeVal, subTypeKey) => {
+            if(subTypeKey !== 'propaneButane'){
+              if(!acc[subTypeKey]){
+                acc[subTypeKey] = subTypeVal.get(detailBreakdownData.get('type'),0)
+              } else {
+                acc[subTypeKey] += subTypeVal.get(detailBreakdownData.get('type'),0)
+              }
+            }
+          })
+          return acc
+        }, {Butane: 0 , Propane: 0})
+        const nameMappings = Tr.getIn(['subType'])
+        return (<DetailBreakdown
+          data={Immutable.fromJS(subTypeTotal)}
+          type={detailBreakdownData.get('type')}
+          trContent={Tr.getIn(['detailBreakDown', this.props.importExportVisualization, detailBreakdownData.get('type')])}
+          veritcalPosition={detailBreakdownData.get('displayPosition')}
+          color={detailBreakdownData.get('color')}
+          height={detailBreakdownData.get('height')}
+          showDefault={detailBreakdownData.get('showDefault', false)}
+          nameMappings={nameMappings}
+          defaultContent=''
+        />)
+      case 'crudeOil':
+      default:
+        return null
+    }
+  }
+
+  renderDetailSidebar() {
+    return (<DetailSidebar top={this.props.top} height={Constants.getIn(['detailBreakDown', this.props.country, 'height'], 0)}>
+      {this.renderDetailBreakdown()}
+    </DetailSidebar>)
   }
   renderLocation(props) {
     const mapLayoutGrid = MapLayoutGridConstant.getIn(['PaddLayout', props.country])
@@ -138,15 +182,21 @@ class PaddLayout extends React.Component {
       this.props.top,
       color,
       data.get('confidentialCount', 0),
-)}
-            </g>)
+    )}
+  </g>)
   }
   renderPaddMapPiece() {
+    let result = null
     if (this.props.arrangeBy === 'location' || this.props.country === 'ca') {
-      return this.renderLocation(this.props)
+      result = this.renderLocation(this.props)
+    } else{
+      result = this.renderDefault(this.props)
     }
-
-    return this.renderDefault(this.props)
+    return <g>
+      {result}
+      {this.renderDetailSidebar()}
+      }
+    </g>
   }
 
   render() {
@@ -155,6 +205,7 @@ class PaddLayout extends React.Component {
 }
 
 const mapStateToProps = (state, props) => ({
+  importExportVisualization: state.importExportVisualization,
   arrangeBy: arrangeBy(state, props),
   bins: binSelector(state, props),
   Padd: PaddSelector(state, props),
