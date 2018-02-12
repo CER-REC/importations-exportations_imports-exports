@@ -143,6 +143,27 @@ class PaddLayout extends React.Component {
           defaultContent=''
         />)
       case 'crudeOil':
+        if(this.props.country === 'ca'){
+          //need to render detail breakdown using time line
+        }else{
+          const detailBreakdownData = Constants.getIn(['detailBreakDown', this.props.country])
+          if (!detailBreakdownData.get('required', false)) { return null }
+          const paddTotal = this.props.Padd.filter((point,key) => key!== 'ca').map(( value, paddId) => {
+            return value.get('value')
+          })
+          const nameMappings = Tr.getIn(['Padd',this.props.country])
+          return (<DetailBreakdown
+            data={Immutable.fromJS(paddTotal)}
+            type={detailBreakdownData.get('type')}
+            trContent={Tr.getIn(['detailBreakDown', this.props.importExportVisualization, detailBreakdownData.get('type')])}
+            veritcalPosition={detailBreakdownData.get('displayPosition')}
+            color={detailBreakdownData.get('color')}
+            height={detailBreakdownData.get('height')}
+            showDefault={detailBreakdownData.get('showDefault', false)}
+            nameMappings={nameMappings}
+            defaultContent=''
+          />)
+        }
       default:
         return null
     }
