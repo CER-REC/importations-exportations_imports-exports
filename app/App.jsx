@@ -16,6 +16,8 @@ import { LoadBins as LoadBinsCreator } from './actions/bins'
 import Store from './Store'
 import { DismissComponent as DismissComponentCreator } from './actions/socialBar'
 
+const SetFromRouterState = require('./actions/screenshot').SetFromRouterState
+
 const store = Store()
 
 function render(Component) {
@@ -34,9 +36,15 @@ function resizeScreenHandler() {
   // Ensures the width and height of the workspace keep the ratio 900:600
   // TODO: Increase the height of the workspace by emptyCategoryOffsetRatio if
   // the empty categories are visible (i.e. empty categories state is visible).
-  const w = document.getElementById('reactRoot').clientWidth
-  const h = w * Constants.getIn(['workspace', 'heightToWidthRatio'])
+  let w = document.getElementById('reactRoot').clientWidth
+  let h = w * Constants.getIn(['workspace', 'heightToWidthRatio'])
   store.dispatch(Resized(w, h))
+
+  if(store.getState().screenshotMode) {
+    h = Constants.get('screenshotHeight')
+    w = Constants.get('screenshotWidth')
+  }
+  store.dispatch(Resized(w,h))
 }
 
 // Handles collapsing the social bar.
@@ -58,6 +66,21 @@ Request({
   store.dispatch(LoadBinsCreator(data.body.bins))
   store.dispatch(LoadDataCreator(data.body.data))
 })
+
+// added for screenshot
+
+//const routerState = RouteComputations.urlParamsToState(document.location)
+
+// store.dispatch(SetFromRouterState({
+//   language: routerState.language,
+//   visualizationContainer: routerState.visualizationContainer,
+//   confidentiality: routerState.confidentiality,
+//   explanations: routerState.explanations,
+//   detailSidebar: routerState.detailSidebar,
+//   header: routerState.header,
+//   menuBar: routerState.menuBar,
+//   screenshotMode: RouteComputations.screenshotMode(location),
+// }))
 
 // Webpack Hot Module Replacement API
 if (module.hot) {

@@ -3,28 +3,24 @@ import PropTypes from 'prop-types'
 import Immutable from 'immutable'
 
 class Chart extends React.PureComponent {
-  static get propTypes() {
-    return {
-      // Unused prop-types are used by reselect
-      aggregateKey: PropTypes.string.isRequired, // eslint-disable-line react/no-unused-prop-types
-      scaleKey: PropTypes.string, // eslint-disable-line react/no-unused-prop-types
-      top: PropTypes.number.isRequired,
-      left: PropTypes.number.isRequired,
-      width: PropTypes.number.isRequired, // eslint-disable-line react/no-unused-prop-types
-      height: PropTypes.number.isRequired,
-      flipped: PropTypes.bool,
-      color: PropTypes.string, // eslint-disable-line react/no-unused-prop-types
-      timelineRange: PropTypes.instanceOf(Immutable.Map).isRequired,
-      timelineGroup: PropTypes.oneOf(['year', 'quarter']).isRequired,
-    }
+  static propTypes = {
+    // Unused prop-types are used by reselect
+    aggregateKey: PropTypes.string.isRequired, // eslint-disable-line react/no-unused-prop-types
+    scaleKey: PropTypes.string, // eslint-disable-line react/no-unused-prop-types
+    top: PropTypes.number.isRequired,
+    left: PropTypes.number.isRequired,
+    width: PropTypes.number.isRequired, // eslint-disable-line react/no-unused-prop-types
+    height: PropTypes.number.isRequired,
+    flipped: PropTypes.bool,
+    color: PropTypes.string, // eslint-disable-line react/no-unused-prop-types
+    timelineRange: PropTypes.instanceOf(Immutable.Map).isRequired,
+    timelineGroup: PropTypes.oneOf(['year', 'quarter']).isRequired,
   }
 
-  static get defaultProps() {
-    return {
-      flipped: false,
-      color: 'black',
-      scaleKey: '', // The selector will default this to the valueKey if not set
-    }
+  static defaultProps = {
+    flipped: false,
+    color: 'black',
+    scaleKey: '', // The selector will default this to the valueKey if not set
   }
 
   getTransform() {

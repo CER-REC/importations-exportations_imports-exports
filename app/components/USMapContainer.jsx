@@ -12,7 +12,7 @@ class USMapContainer extends React.Component {
       OR: 5548646,
     })
     return (
-      <g transform={`translate(${this.props.left + 150} ${this.props.top})`}> <ElectricityMapLayout
+      <g transform={`translate(${this.props.left} ${this.props.top})`}> <ElectricityMapLayout
         left={this.props.left}
         top={this.props.top}
         country="us"

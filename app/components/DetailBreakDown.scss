@@ -1,15 +1,14 @@
 @import '../styles/Colours';
 
-.detailBreakDown {
-  .header { 
-    padding-bottom: 4px;
-  }
-  .detailBreakDownContainer{
-    width:100%;
-    overflow: auto;
-    overflow-x: hidden;
-    display:block;
-  }
+.detailBreakDown .header { 
+  padding-bottom: 4px;
+}
+
+.detailBreakDownContainer {
+  width:100%;
+  overflow: auto;
+  overflow-x: hidden;
+  display:block;
   .detailBreakDownText {
     padding: 0 0 4px 2px;
     margin-right: 20px;

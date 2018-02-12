@@ -3,3 +3,13 @@
   fill: transparent;
   stroke: fadeOut(#ff708a, 20px); 
 }
+
+/* pulse animation */
+#pulse {
+  animation: pulse 3s ease-in-out infinite;
+}
+
+#pulse:hover {
+  cursor: pointer;
+  animation: none;
+}

@@ -11,7 +11,13 @@ export const activityOptions = createSelector(
   ),
 )
 
-export const arrangeByOptions = () => (['location', 'imports', 'exports'])
+export const arrangeByOptions = createSelector(
+  selectedVisualization,
+  vis => ((vis === 'refinedPetroleumProducts')
+    ? ['stack', 'split']
+    : ['location', 'imports', 'exports']
+  ),
+)
 
 export const amountOptions = state =>
   Constants.getIn(['energyMeasurementTypes', state.importExportVisualization]).toJS()

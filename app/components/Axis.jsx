@@ -41,8 +41,9 @@ class Axis extends React.PureComponent {
     return (
       <g>
         <TimelinePlay
-          top={top + (height / 2)}
+          top={top}
           left={left - 20}
+          height={height}
         />
         <TimelineSeek
           top={top}
@@ -106,34 +107,35 @@ class Axis extends React.PureComponent {
           key={key}
           x1={left + label.get('offsetX')}
           x2={left + label.get('offsetX')}
-          y1={top + (barWidth / 2)}
-          y2={(top + height) - (barWidth / 2)}
+          y1={top}
+          y2={top + height}
           strokeWidth={Constants.getIn(['timeline', 'barPadding'])}
           stroke="black"
         />
       )
     })
-    const endWidth = width - seekPosition.end - (barWidth / 2)
-    const rectHeight = (height - barWidth)
+    const endWidth = (seekPosition.end === data.last().get('offsetX'))
+      ? 0
+      : width - seekPosition.end
     return (
       <g>
         <rect
           x={left + (-barWidth / 2)}
           y={top}
           width={seekPosition.start}
-          height={rectHeight}
+          height={height}
           fill={Constants.getIn(['styleGuide', 'colours', 'SandLight'])}
         />
         <rect
           x={left + seekPosition.end + (barWidth / 2)}
           y={top}
           width={endWidth < 0 ? 0 : endWidth}
-          height={rectHeight}
+          height={height}
           fill={Constants.getIn(['styleGuide', 'colours', 'SandLight'])}
         />
         {elements}
-        {this.props.canSeek ? this.seekControls() : null}
         {this.props.chartOptions ? this.chartOptions() : null}
+        {this.props.canSeek ? this.seekControls() : null}
       </g>
     )
   }

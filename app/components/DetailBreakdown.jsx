@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 import Immutable from 'immutable'
 
 import './DetailBreakDown.scss'
+
 import { humanNumber } from '../utilities'
 import DetailBreakdownHeader from './DetailBreakdownHeader'
 import DetailBreakdownBody from './DetailBreakdownBody'

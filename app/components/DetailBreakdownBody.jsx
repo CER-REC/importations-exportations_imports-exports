@@ -7,6 +7,7 @@ import './DetailBreakDown.scss'
 import { visualizationSettings } from '../selectors/visualizationSettings'
 import TR from '../TranslationTable'
 import { humanNumber } from '../utilities'
+import DetailBreakdownRow from './DetailBreakdownRow'
 
 class DetailBreakdownBody extends React.Component {
   render() {
@@ -21,18 +22,14 @@ class DetailBreakdownBody extends React.Component {
       }
       const name = props.nameMappings.getIn([key, props.language], '')
       return (
-        <tr key={key} className="detailBreakDownText">
-          <td width ="95%">
-          {bodyContent.getIn(['action', props.language], '')} &nbsp;
-          {name}&nbsp;
-          {humanNumber(value, props.language)}&nbsp;
-          {TR.getIn(['amounts', props.amountUnit, props.language], '')}&nbsp;
-          {exportOrImportPercentage}%&nbsp;
-          </td>
-          <td width ="5%" className="progress-bar">
-            <span style={progressBarStyle} />
-          </td>
-        </tr>
+        <DetailBreakdownRow
+          key={key}
+          label={`${bodyContent.getIn(['action', props.language])} ${name}`}
+          value={value}
+          unit={props.amountUnit}
+          total={total}
+          progressBarStyle={progressBarStyle}
+        />
       )
     })
     return result.toArray()

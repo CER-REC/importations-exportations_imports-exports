@@ -12,8 +12,10 @@ import ExpandElectricityAmountMenuReducer from './reducers/ExpandElectricityAmou
 import { reducer as ModalReducer } from './actions/modal'
 import { reducer as DataReducer } from './actions/data'
 import { reducer as BinsReducer } from './actions/bins'
+import { reducer as ScreenshotModeReducer } from './actions/screenshot'
 import { reducer as visualizationSettings } from './actions/visualizationSettings'
 import { reducer as DataLoadCompleteReducer } from './actions/DataLoadComplete'
+import { reducer as ExplanationPopoverReducer } from './actions/explanations'
 import { reducer as SocialBarReducer } from './actions/socialBar'
 import { reducer as activeMenu } from './actions/activeMenu'
 
@@ -45,6 +47,8 @@ const nestedReducers = combineReducers({
   visualizationSettings,
   expandSocialBar: SocialBarReducer,
   modal: ModalReducer,
+  explanation: ExplanationPopoverReducer,
+  screenshotMode: ScreenshotModeReducer,
   activeMenu,
 })
 

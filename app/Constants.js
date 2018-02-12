@@ -3,8 +3,9 @@ import { fromJS } from 'immutable'
 const Constants = fromJS({
   workspace: {
     heightToWidthRatio: 0.66,
-    viewportPadding: 250,
+    viewportPadding: 200,
   },
+
 
   topHeightMargin: 70,
 
@@ -19,7 +20,7 @@ const Constants = fromJS({
   },
 
   menuBar: {
-    width: 150,
+    width: 200,
     containerHeight: 300,
     controlArrowSize: 15,
     importExportMenuLabelMargin: 16,
@@ -74,9 +75,9 @@ const Constants = fromJS({
   },
 
   socialBar: {
-    topMargin: 120,
+    topMargin: 50,
     controlArrowMargin: 30,
-    controlArrowY: 137,
+    controlArrowY: 57,
     controlArrowHeight: 40,
     width: 25,
     height: 125,
@@ -88,16 +89,15 @@ const Constants = fromJS({
     downloadDataIconMargin: 54,
     downloadImageIconMargin: 78,
     shareIconMargin: 102,
-    iconX: 105,
-    iconY: 223,
+    iconX: 101,
+    iconY: 153,
     twitterMargin: 29,
     facebookMargin: 51,
     linkedinMargin: 74,
-    iconTextY: 137,
+    iconTextY: 67,
   },
 
   visualizationContainer: {
-    leftMargin: 165,
     widthPadding: 450,
     heightPadding: 300,
   },
@@ -133,9 +133,13 @@ const Constants = fromJS({
 
   explanationDot: {
     strokeWidth: 1.3,
-    radiusStart: 5.5,
-    radiusEnd: 18.5,
+    radiusStart: 3.5,
+    radiusEnd: 15.5,
     yOffset: 5,
+  },
+
+  imageDownload: {
+    previewImageWidth: 430,
   },
 
   visualizationTypes: [
@@ -187,12 +191,12 @@ const Constants = fromJS({
   },
 
   mapPieceTextStyle: {
-    x: 10.58,
+    x: 10.68,
     y: 10,
   },
   mapPieceArrowStyle: {
-    x: -1,
-    y: 5,
+    x: 0,
+    y: 8,
   },
   mapPieceArrowStyleCenter: {
     x: -1,
@@ -213,6 +217,9 @@ const Constants = fromJS({
 
   appHost: 'https://apps2.neb-one.gc.ca',
   screenshotPath: 'screenshot',
+
+  screenshotWidth: 1500,
+  screenshotHeight: 1200,
 
   styleGuide: {
     colours: {
