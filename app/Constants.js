@@ -103,7 +103,8 @@ const Constants = fromJS({
   },
 
   visualizationDetailContainer: {
-    width: 270,
+    width: 260,
+    leftPadding: 10,
   },
 
   mainNavigationMenu: {

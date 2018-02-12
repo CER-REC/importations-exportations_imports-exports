@@ -68,13 +68,15 @@ class ChartOptions extends React.PureComponent {
 
   render() {
     const groupLabel = this.props.tr(['chartOptions', 'timelineGroup', this.props.timelineGroup])
+    const leftPad = Constants.getIn(['visualizationDetailContainer', 'leftPadding'])
     return (
       <div
         style={{
-          width: '100%',
           height: '100%',
           background: Constants.getIn(['styleGuide', 'colours', 'SandLight']),
           lineHeight: `${this.props.height}px`,
+          marginLeft: `${-leftPad}px`,
+          paddingLeft: `${leftPad}px`,
         }}
       >
         {this.renderScaleToggle()}
