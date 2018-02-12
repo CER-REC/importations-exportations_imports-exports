@@ -24,6 +24,7 @@ class TimelineSeek extends React.PureComponent {
     top: PropTypes.number.isRequired,
     left: PropTypes.number.isRequired,
     width: PropTypes.number.isRequired,
+    height: PropTypes.number.isRequired,
     data: PropTypes.instanceOf(Map).isRequired,
     timelineGroup: PropTypes.oneOf(['year', 'quarter']).isRequired,
     timelineRange: PropTypes.instanceOf(Map).isRequired,
@@ -180,6 +181,8 @@ class TimelineSeek extends React.PureComponent {
       timelineRange.getIn([side, 'year']),
       timelineRange.getIn([side, 'quarter']),
     )
+    const scale = (this.props.height / 14.8) // 14.8 is the height of the SVG
+    const xOffset = 6.69 * scale // 6.69 is the width of the SVG
     return (
       <g transform={sideTransform}>
         <SVGDrag
@@ -190,10 +193,10 @@ class TimelineSeek extends React.PureComponent {
           aria-label={label}
         >
           <g
-            transform={`translate(${this.state.offset - 12} 0)`}
+            transform={`translate(${this.state.offset - xOffset} 0) scale(${scale})`}
           >
             <polygon
-              points="7,0 10,0 10,26 0,26"
+              points="5.29 0.5 6.69 0.5 6.69 14.8 0.69 14.8 5.29 0.5"
               stroke={Constants.getIn(['styleGuide', 'colours', 'SandExtraDark'])}
               fill="white"
             />

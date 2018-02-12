@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
 import { timelineFilter } from '../actions/visualizationSettings'
@@ -9,15 +10,21 @@ import { handleInteraction } from '../utilities'
 import ExplanationDot from './ExplanationDot'
 
 class TimelinePlay extends React.PureComponent {
-  static get defaultProps() {
-    return {
-    }
+  static propTypes = {
+    height: PropTypes.number.isRequired,
+  }
+
+  static defaultProps = {
   }
 
   constructor(props) {
     super(props)
     this.onClick = this.onClick.bind(this)
     this.state = { playInverval: null }
+  }
+
+  componentWillUnmount() {
+    this.resetPlay()
   }
 
   resetPlay() {
@@ -73,6 +80,8 @@ class TimelinePlay extends React.PureComponent {
 
   render() {
     const label = this.props.tr(['timelinePlay', this.state.playInterval ? 'stop' : 'start'])
+    const scale = (this.props.height / 17.37) // 17.37 is the height of the SVG
+    const xOffset = 9.17 * scale // 9.17 is the width of the SVG
     return (
       <g
         transform={`translate(${this.props.left} ${this.props.top})`}
@@ -80,11 +89,13 @@ class TimelinePlay extends React.PureComponent {
         aria-label={label}
         {...handleInteraction(this.onClick)}
       >
-        <polyline
-          points="0,-10 10,0 0,10 0,-10"
-          stroke="#a99372"
-          fill="white"
-        />
+        <g transform={`scale(${scale})`}>
+          <polyline
+            points="0.5 0.87 0.5 17.37 14.8 9.17 0.5 0.87"
+            stroke="#a99372"
+            fill="white"
+          />
+        </g>
         {this.playButtonExplanation()}
       </g>
     )

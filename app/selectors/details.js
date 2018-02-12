@@ -7,7 +7,10 @@ export const detailTotal = createSelector(
   aggregateQuarter,
   getValueKey,
   ({ points }, valueKey) =>
-    points.reduce((acc, next) => acc + next.getIn(['values', valueKey], 0), 0),
+    points.reduce((acc, next) => {
+      if (valueKey === 'total') { return acc + next.get('total') }
+      return acc + next.getIn(['values', valueKey], 0)
+    }, 0),
 )
 
 export const confidentialTotal = createSelector(

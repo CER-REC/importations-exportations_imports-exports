@@ -54,7 +54,10 @@ export const aggregateQuarter = createSelector(
         acc[period].total += next.get('value', 0)
         acc[period].confidential[key] = (acc[period].confidential[key] || 0) +
           (next.get('confidential', false) ? 1 : 0)
+        acc[period].confidential.total = (acc[period].confidential.total || 0) +
+          (next.get('confidential', false) ? 1 : 0)
         acc[period].totalPoints[key] = (acc[period].totalPoints[key] || 0) + 1
+        acc[period].totalPoints.total = (acc[period].totalPoints.total || 0) + 1
         return acc
       }, {})
     return { points: fromJS(result), valueKeys }
