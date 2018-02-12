@@ -187,7 +187,7 @@ const Constants = fromJS({
   timeline: {
     barPadding: 0.5,
     groupPadding: 5,
-    axisHeight: 30,
+    axisHeight: 19,
   },
 
   mapPieceTextStyle: {
