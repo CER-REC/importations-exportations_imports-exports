@@ -76,10 +76,13 @@ const filterByTimelineSelector = createSelector(
 
 export const filterByHexSelector = createSelector(
   activityGroupSelector,
-  points =>
+  selectedVisualization,
+  (points, visualizationType) =>{
     // TODO: Add filtering by selected hexes
-    points,
-
+    console.log(visualizationType)
+    //remove the point if there is any 
+    return points
+  }
 )
 
 export const aggregateLocationSelector = createSelector(

@@ -60,6 +60,7 @@ export const aggregateQuarter = createSelector(
         acc[period].totalPoints.total = (acc[period].totalPoints.total || 0) + 1
         return acc
       }, {})
+      console.log(result)
     return { points: fromJS(result), valueKeys }
   },
 )
