@@ -119,7 +119,7 @@ class NaturalGasMapContainer extends React.PureComponent {
               isSelected={this.isSelected()}
               isOrigin={true}
               x1={left}
-              y1={top - 25}
+              y1={top}
             />
           </g>)
       }) 
@@ -141,7 +141,7 @@ class NaturalGasMapContainer extends React.PureComponent {
     } )
 
     return (
-      <g key='NaturalGasMapContainer' transform={`translate(${this.props.left + 50} ${this.props.top - 70})`}>
+      <g key='NaturalGasMapContainer' transform={`translate(${this.props.left + 50} ${this.props.top})`}>
         {layout.toArray()}
       </g>
     )

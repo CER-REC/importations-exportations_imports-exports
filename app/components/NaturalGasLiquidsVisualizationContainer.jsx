@@ -40,7 +40,7 @@ class NaturalGasLiquidsVisualizationContainer extends React.Component {
           colour={Constants.getIn(['styleGuide', 'colours', 'ExportDefault'])}
         />
       )}
-      <g transform='translate(0 60)'>
+      <g>
         <USPadd
           {...this.props.usPaddChart}
         />

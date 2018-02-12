@@ -428,10 +428,10 @@ const MapLayoutGridConstant = fromJS({
         },
         orderBy: {
           location: {
-            ca: { left: 0, top: -135 },
+            ca: { left: 1.3, top: -140 },
           },
           default: {
-            ca: { left: 0, top: -135 },
+            ca: { left: 1.3, top: -140 },
           },
         },
       },

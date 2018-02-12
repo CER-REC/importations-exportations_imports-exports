@@ -22,7 +22,7 @@ class PowerPoolContainer extends React.Component {
   render() {
     // Scale is temporary adjustment as it's too small if we use dimensions mentioned in the design document
     // TODO: scale map dynamically when screen size change
-    return (<g transform={`translate(${this.props.left + 163} ${this.props.top + 82})`}>
+    return (<g transform={`translate(${this.props.left} ${this.props.top})`}>
       <g transform="translate(35 -15)">
         {this.powerpoolLabel()}
       </g>

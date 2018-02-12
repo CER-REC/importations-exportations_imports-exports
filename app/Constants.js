@@ -90,11 +90,11 @@ const Constants = fromJS({
     downloadImageIconMargin: 78,
     shareIconMargin: 102,
     iconX: 101,
-    iconY: 113,
+    iconY: 153,
     twitterMargin: 29,
     facebookMargin: 51,
     linkedinMargin: 74,
-    iconTextY: 27,
+    iconTextY: 67,
   },
 
   visualizationContainer: {

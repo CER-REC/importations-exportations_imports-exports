@@ -22,11 +22,11 @@ const USPadd = (props) => {
       paddingY={MapLayoutGridConstant.getIn(['PaddLayout', 'us', 'padding', key, 'top'], 0)}
       country="us"
     />))
-    return (<g transform="scale(1.3) translate(0 -80)">
+    return (<g transform="scale(1.3)">
       {padds.toArray()}
     </g>)
   }
-  return (<g transform={`scale(1.25) translate(${props.left - 30} ${props.top})`}>
+  return (<g transform={`scale(1.25) translate(${props.left - 20} ${props.top})`}>
     <PaddLayout
       left={props.left}
       top={props.top}
