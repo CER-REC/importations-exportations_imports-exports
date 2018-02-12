@@ -44,7 +44,8 @@ class MapPiece extends React.Component {
   }
 
   drawArrow(type) {
-    const dataKey = !this.props.dataKey? [type]: this.props.dataKey.slice(0).push(type)
+    let dataKey = !this.props.dataKey? []: this.props.dataKey.slice(0)
+    dataKey.push(type)
     if (this.props.data.getIn(dataKey, 0) === 0) { return null}
 
     let color = this.getArrowColor(type, this.props.data.getIn(dataKey))
