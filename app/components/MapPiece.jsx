@@ -43,9 +43,8 @@ class MapPiece extends React.Component {
     )
   }
 
-  drawArrow(type, dataKey) {
-    dataKey = !this.props.dataKey? []: this.props.dataKey.slice(0)
-    dataKey.push(type)
+  drawArrow(type) {
+    const dataKey = !this.props.dataKey? [type]: this.props.dataKey.slice(0).push(type)
     if (this.props.data.getIn(dataKey, 0) === 0) { return null}
 
     let color = this.getArrowColor(type, this.props.data.getIn(dataKey))
@@ -127,8 +126,8 @@ class MapPiece extends React.Component {
       />
       {this.renderMapPieceLabel()}
       <g transform={arrowTransform}>
-        {this.drawArrow('exports', this.props.dataKey)}
-        {this.drawArrow('imports', this.props.dataKey)}
+        {this.drawArrow('exports')}
+        {this.drawArrow('imports')}
       </g>
       {confidentialIcon}
     )
