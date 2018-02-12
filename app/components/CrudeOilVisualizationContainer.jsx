@@ -51,7 +51,7 @@ const CrudeOilVisualizationContainer = props => (
       colour={Constants.getIn(['styleGuide', 'colours', 'ExportDefault'])}
     />
     <USPadd
-      {...props.usPaddChart}
+      { ...props.usPaddChart}     
     />
     <CrudeOilPieceActivityExplanation
         {...props.mapPieceActivityExplanation}

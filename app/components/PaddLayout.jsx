@@ -17,8 +17,6 @@ import PaddFour from './Padds/PaddFour'
 import PaddFive from './Padds/PaddFive'
 import PaddNonUSA from './Padds/PaddNonUSA'
 import ConfidentialIcon from './ConfidentialIcon'
-import DetailSidebar from './DetailSidebar'
-import DetailBreakdown from './DetailBreakdown'
 
 import ElectricitySelector from '../selectors/ElectricitySelector'
 import { arrangeBy, binSelector, sortAggregatedLocationsSelector } from '../selectors/data'
@@ -112,68 +110,6 @@ class PaddLayout extends React.Component {
     }, [])
     return layout
   }
-  renderDetailBreakdown(){
-    switch(this.props.importExportVisualization){
-      case 'naturalGasLiquids':
-        const detailBreakdownData = Constants.getIn(['detailBreakDown', this.props.country])
-        if (!detailBreakdownData.get('required', false)) { return null }
-        const subTypeTotal = this.props.Padd.reduce((acc, nextValue) => {
-          const subType = nextValue.get('subType')
-          subType.forEach((subTypeVal, subTypeKey) => {
-            if(subTypeKey !== 'propaneButane'){
-              if(!acc[subTypeKey]){
-                acc[subTypeKey] = subTypeVal.get(detailBreakdownData.get('type'),0)
-              } else {
-                acc[subTypeKey] += subTypeVal.get(detailBreakdownData.get('type'),0)
-              }
-            }
-          })
-          return acc
-        }, {Butane: 0 , Propane: 0})
-        const nameMappings = Tr.getIn(['subType'])
-        return (<DetailBreakdown
-          data={Immutable.fromJS(subTypeTotal)}
-          type={detailBreakdownData.get('type')}
-          trContent={Tr.getIn(['detailBreakDown', this.props.importExportVisualization, detailBreakdownData.get('type')])}
-          veritcalPosition={detailBreakdownData.get('displayPosition')}
-          color={detailBreakdownData.get('color')}
-          height={detailBreakdownData.get('height')}
-          showDefault={detailBreakdownData.get('showDefault', false)}
-          nameMappings={nameMappings}
-          defaultContent=''
-        />)
-      case 'crudeOil':
-        if(this.props.country === 'ca'){
-          //need to render detail breakdown using time line
-        }else{
-          const detailBreakdownData = Constants.getIn(['detailBreakDown', this.props.country])
-          if (!detailBreakdownData.get('required', false)) { return null }
-          const paddTotal = this.props.Padd.filter((point,key) => key!== 'ca').map(( value, paddId) => {
-            return value.get('value')
-          })
-          const nameMappings = Tr.getIn(['Padd',this.props.country])
-          return (<DetailBreakdown
-            data={Immutable.fromJS(paddTotal)}
-            type={detailBreakdownData.get('type')}
-            trContent={Tr.getIn(['detailBreakDown', this.props.importExportVisualization, detailBreakdownData.get('type')])}
-            veritcalPosition={detailBreakdownData.get('displayPosition')}
-            color={detailBreakdownData.get('color')}
-            height={detailBreakdownData.get('height')}
-            showDefault={detailBreakdownData.get('showDefault', false)}
-            nameMappings={nameMappings}
-            defaultContent=''
-          />)
-        }
-      default:
-        return null
-    }
-  }
-
-  renderDetailSidebar() {
-    return (<DetailSidebar top={this.props.top} height={Constants.getIn(['detailBreakDown', this.props.country, 'height'], 0)}>
-      {this.renderDetailBreakdown()}
-    </DetailSidebar>)
-  }
   renderLocation(props) {
     const mapLayoutGrid = MapLayoutGridConstant.getIn(['PaddLayout', props.country])
     const dimensions = mapLayoutGrid.get('dimensions')
@@ -207,17 +143,11 @@ class PaddLayout extends React.Component {
   </g>)
   }
   renderPaddMapPiece() {
-    let result = null
     if (this.props.arrangeBy === 'location' || this.props.country === 'ca') {
-      result = this.renderLocation(this.props)
+      return this.renderLocation(this.props)
     } else{
-      result = this.renderDefault(this.props)
+      return this.renderDefault(this.props)
     }
-    return <g>
-      {result}
-      {this.renderDetailSidebar()}
-      }
-    </g>
   }
 
   render() {
@@ -226,7 +156,6 @@ class PaddLayout extends React.Component {
 }
 
 const mapStateToProps = (state, props) => ({
-  importExportVisualization: state.importExportVisualization,
   arrangeBy: arrangeBy(state, props),
   bins: binSelector(state, props),
   Padd: PaddSelector(state, props),
