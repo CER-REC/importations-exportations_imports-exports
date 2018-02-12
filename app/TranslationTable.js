@@ -476,7 +476,7 @@ const TranslationTable = fromJS({
         },
       },
     },
-    naturalGasLiquids: {
+    crudeOil: {
       defaultText: {
         en: 'This visualization shows imports to Canada and exports from Canada between the years $0 and $1. Drag the timeline bar to change. Click a province to view Detail',
         fr: 'Cette visualisation illustre les importations et les exportations du Canada de $0 à $1. Faites glisser la ligne du temps pour modifier les années. Cliquez sur une province pour des précisions à ce sujet.',
@@ -488,16 +488,16 @@ const TranslationTable = fromJS({
             fr: 'Exportations',
           },
           action: {
-            en: 'from',
-            fr: 'de',
+            en: 'to',
+            fr: 'par',
           },
           adjective: {
-            en: 'selected',
-            fr: 'ces',
+            en: '',
+            fr: '',
           },
           place: {
-            en: 'Provinces',
-            fr: 'Provinces',
+            en: 'PADDS',
+            fr: 'PADDS',
           },
         },
         body: {
@@ -533,6 +533,78 @@ const TranslationTable = fromJS({
           },
         },
       },
+    },
+    naturalGasLiquids: {
+      defaultText: {
+        en: 'This visualization shows imports to Canada and exports from Canada between the years $0 and $1. Drag the timeline bar to change. Click a province to view Detail',
+        fr: 'Cette visualisation illustre les importations et les exportations du Canada de $0 à $1. Faites glisser la ligne du temps pour modifier les années. Cliquez sur une province pour des précisions à ce sujet.',
+      },
+      exports: {
+        header: {
+          type: {
+            en: 'Exports',
+            fr: 'Exportations',
+          },
+          action: {
+            en: 'from',
+            fr: 'de',
+          },
+          adjective: {
+            en: 'selected',
+            fr: 'ces',
+          },
+          place: {
+            en: 'CAN',
+            fr: 'CAN',
+          },
+        },
+        body: {
+          action: {
+            en: '',
+            fr: '',
+          },
+        },
+      },
+      imports: {
+        header: {
+          type: {
+            en: 'Imports',
+            fr: 'Importations',
+          },
+          action: {
+            en: 'to',
+            fr: 'par',
+          },
+          adjective: {
+            en: '',
+            fr: '',
+          },
+          place: {
+            en: 'CAN',
+            fr: 'CAN',
+          },
+        },
+        body: {
+          action: {
+            en: '',
+            fr: '',
+          },
+        },
+      },
+    },
+  },
+  subType: {
+    Butane: {
+      en: 'BUTANE',
+      fr: 'BUTANE',
+    },
+    Propane: {
+      en: 'PROPANE',
+      fr: 'PROPANE',
+    },
+    propaneButane: {
+      en: 'Butane and Propane',
+      fr: 'Butane et Propane',
     },
   },
 
