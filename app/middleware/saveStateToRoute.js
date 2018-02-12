@@ -2,6 +2,8 @@ import LZUTF8 from 'lzutf8'
 import createHistory from 'history/createBrowserHistory'
 import QueryString from 'query-string'
 
+import RouteComputations from '../computations/RouteComputations'
+
 import TR from '../TranslationTable'
 
 let unlistenHistory
@@ -14,6 +16,11 @@ export const updateStateFromURL = (search, store) => {
     const { config: configRaw } = QueryString.parse(search)
     if (!configRaw) { return }
     const config = JSON.parse(LZUTF8.decompress(decodeURIComponent(configRaw), { inputEncoding: 'Base64' }))
+
+    // Always determine language from the path in the URL bar, rather than
+    // the language attribute from the config.
+    config.language = RouteComputations.determineLanguage(document.location)
+
     updatingState = true
     store.dispatch({
       type: 'urlRouteChanged',
