@@ -243,7 +243,7 @@ const TranslationTable = fromJS({
           fr: 'QUANTITÉ (MWh)',
         },
         'thousand m3/d': {
-          en: 'AMOUNT (thousand m³/d)',
+          en: 'AMOUNT (1000 m³/d)',
           fr: 'QUANTITÉ (10³m³/j)',
         },
       },
@@ -801,6 +801,10 @@ const TranslationTable = fromJS({
       PJMPP: {
         en: 'Pennsylvania Jersey Maryland Power Pool',
         fr: 'Réseau commun Pennsylvanie NJ Maryland',
+      },
+      powerPools: {
+        en: 'Power Pools',
+        fr: 'TODO',
       },
     },
   },

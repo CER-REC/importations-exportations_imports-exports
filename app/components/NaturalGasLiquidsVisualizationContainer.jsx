@@ -40,9 +40,11 @@ class NaturalGasLiquidsVisualizationContainer extends React.Component {
           colour={Constants.getIn(['styleGuide', 'colours', 'ExportDefault'])}
         />
       )}
-      <USPadd
-        {...this.props.usPaddChart}
-      />
+      <g>
+        <USPadd
+          {...this.props.usPaddChart}
+        />
+      </g>
       <NaturalGasLiquidsMapPieceActivityExplanation
         {...this.props.mapPieceActivityExplanation}
       />

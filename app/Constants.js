@@ -3,7 +3,7 @@ import { fromJS } from 'immutable'
 const Constants = fromJS({
   workspace: {
     heightToWidthRatio: 0.66,
-    viewportPadding: 150,
+    viewportPadding: 200,
   },
 
 
@@ -75,9 +75,9 @@ const Constants = fromJS({
   },
 
   socialBar: {
-    topMargin: 10,
+    topMargin: 50,
     controlArrowMargin: 30,
-    controlArrowY: 17,
+    controlArrowY: 57,
     controlArrowHeight: 40,
     width: 25,
     height: 125,
@@ -90,11 +90,11 @@ const Constants = fromJS({
     downloadImageIconMargin: 78,
     shareIconMargin: 102,
     iconX: 101,
-    iconY: 113,
+    iconY: 153,
     twitterMargin: 29,
     facebookMargin: 51,
     linkedinMargin: 74,
-    iconTextY: 27,
+    iconTextY: 67,
   },
 
   visualizationContainer: {
@@ -192,12 +192,12 @@ const Constants = fromJS({
   },
 
   mapPieceTextStyle: {
-    x: 10.58,
+    x: 10.68,
     y: 10,
   },
   mapPieceArrowStyle: {
-    x: -1,
-    y: 5,
+    x: 0,
+    y: 8,
   },
   mapPieceArrowStyleCenter: {
     x: -1,
