@@ -43,21 +43,22 @@ class MapPiece extends React.Component {
     )
   }
 
-  drawArrow(legends, data, type, styles, arrowProps) {
-    if (data.get(type) !== 0) {
-      let color = this.getArrowColor(type, data.get(type))
-      if(typeof this.props.arrowProps !== 'undefined' && typeof this.props.arrowProps.get('fill') !== 'undefined'){
-        color = this.props.arrowProps.get('fill') 
-      }
-      return (<ImportExportArrow
-        arrowSpacing={styles.get('arrowSpacing')}
-        type={type}
-        color= {color}
-        arrowProps={arrowProps}
-        text = {this.props.text}
-      />)
+  drawArrow(type) {
+    let dataKey = !this.props.dataKey? []: this.props.dataKey.slice(0)
+    dataKey.push(type)
+    if (this.props.data.getIn(dataKey, 0) === 0) { return null}
+
+    let color = this.getArrowColor(type, this.props.data.getIn(dataKey))
+    if(typeof this.props.arrowProps !== 'undefined' && typeof this.props.arrowProps.get('fill') !== 'undefined'){
+      color = this.props.arrowProps.get('fill') 
     }
-    return ''
+    return (<ImportExportArrow
+      arrowSpacing={this.props.styles.get('arrowSpacing')}
+      type={type}
+      color= {color}
+      arrowProps={this.props.arrowProps}
+      text = {this.props.text}
+    />)
   }
 
   newYorkExplanation() {
@@ -83,9 +84,9 @@ class MapPiece extends React.Component {
         topMargin={this.props.styles.get('bottomMargin')}
         bottomMargin={this.props.styles.get('topMargin')}
         mapPieceHeight={this.props.dimensions.get('height')}
-        name={this.props.data.get('name')}
+        name={this.props.data.get(this.props.mapPieceKey, '')}
         mapPieceProps={this.props.mapPieceProps}
-        styleClass='mapPieceText'
+        styleClass={this.props.mapPieceStyleClass}
         text = {this.props.text}
       />
   }
@@ -117,6 +118,7 @@ class MapPiece extends React.Component {
       && this.props.mapPieceProps.get('stroke') !== '') {
       stroke = this.props.mapPieceProps.get('stroke')
     }
+    
     return (<g fillOpacity={opacity} >
       <polygon
         stroke={stroke}
@@ -125,8 +127,8 @@ class MapPiece extends React.Component {
       />
       {this.renderMapPieceLabel()}
       <g transform={arrowTransform}>
-        {this.drawArrow(this.props.legends, this.props.data, 'exports', this.props.styles, this.props.arrowProps)}
-        {this.drawArrow(this.props.legends, this.props.data, 'imports', this.props.styles, this.props.arrowProps)}
+        {this.drawArrow('exports')}
+        {this.drawArrow('imports')}
       </g>
       {confidentialIcon}
     )
@@ -137,7 +139,7 @@ class MapPiece extends React.Component {
         y2={this.props.y1 || 0}
       />
       {this.newYorkExplanation()}
-            </g>)
+  </g>)
   }
 }
 

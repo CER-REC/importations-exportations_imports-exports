@@ -173,6 +173,8 @@ class ElectricityMapLayout extends React.Component {
               styles={styles}
               isMapPieceSelected={this.isMapPieceSelected(position.get('name'), this.props.country)}
               isSelected={isSelected}
+              mapPieceKey='name'
+              mapPieceStyleClass = 'mapPieceText'
               isOrigin={(this.props.selection.get('country') === this.props.country)}
               x1={mapPieceTransformStartXaxis(position, dimensions, mapPieceScale)}
               y1={mapPieceTransformStartYaxis(position, dimensions, mapPieceScale)}

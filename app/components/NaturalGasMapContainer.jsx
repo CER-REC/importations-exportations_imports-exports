@@ -6,7 +6,7 @@ import { geoConicConformal, geoPath } from 'd3-geo'
 import { feature } from 'topojson-client'
 
 import Constants from '../Constants'
-import NaturalGasMapPiece from './NaturalGasMapPiece'
+import MapPiece from './MapPiece'
 import MapLayoutGridConstant from '../MapLayoutGridConstant'
 import { arrangeBy, binSelector, aggregateLocationNaturalGasSelector } from '../selectors/data'
 import { getSelectionSettings } from '../selectors/NaturalGasSelector'
@@ -110,14 +110,17 @@ class NaturalGasMapContainer extends React.PureComponent {
         row +=1
         return (<g key={`NaturalGasMapPiece_${port.get('Province')}_${port.get('portName')}`} 
           {...handleInteraction(this.onClick, port.get('portName'))}>
-            <NaturalGasMapPiece
+            <MapPiece
               data={port}
+              dataKey={['activities']}
               dimensions={dimensions}
               bins={this.props.bins}
               styles={styles}
               isMapPieceSelected={this.isMapPieceSelected( port.get('portName'), value)}
               isSelected={this.isSelected()}
               isOrigin={true}
+              mapPieceKey='portName'
+              mapPieceStyleClass = 'portLabel'
               x1={left}
               y1={top}
             />
