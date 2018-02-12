@@ -20,7 +20,6 @@ const NaturalGasCanadaMapContainer = props => (
     <NaturalGasLiquidMapLayout
       left={props.left}
       top={props.top}
-      detailBreakDownData={detailBreakDownData}
       country="ca"
     />
   </g>

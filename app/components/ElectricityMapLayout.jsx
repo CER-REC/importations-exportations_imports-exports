@@ -22,6 +22,7 @@ import { arrangeBy, binSelector, aggregateLocationSelector } from '../selectors/
 import DetailSidebar from './DetailSidebar'
 import DetailBreakdown from './DetailBreakdown'
 import { handleInteraction } from '../utilities'
+import { timelineYearScaleCalculation } from '../selectors/timeline'
 
 const mapPieceTransformStartXaxis = (position, dimensions, mapPieceScale) => (position.get('x') * ((mapPieceScale * dimensions.get('width')) + dimensions.get('xAxisPadding')))
 const mapPieceTransformStartYaxis = (position, dimensions, mapPieceScale) => (position.get('y') * ((mapPieceScale * dimensions.get('height')) + dimensions.get('yAxisPadding')))
@@ -189,6 +190,8 @@ class ElectricityMapLayout extends React.Component {
         !detailBreakdownData.get('required', false)) {
       return null
     }
+
+    if (this.props[`${detailBreakdownData.get('type')}Enabled`] === false) { return null }
     const data = Immutable.fromJS(
       this.props.selection.get('destinations').reduce((acc, nextValue, country) => {
           return nextValue.reduce((accumulator, stateOrProvince, key) => {
@@ -198,9 +201,13 @@ class ElectricityMapLayout extends React.Component {
             acc[key] = stateOrProvince.get(detailBreakdownData.get('type'))
             return acc
           },{})
-        },{})
-      ).sort((a,b) => {return b - a})
-    if (this.props[`${detailBreakdownData.get('type')}Enabled`] === false) { return null }
+      },{})
+    ).sort((a,b) => {return b - a})
+
+    const countries = Tr.get('country').filter((points, country) => this.props.selection.get('destinations').has(country))
+    const  nameMappings = countries.reduce((acc, nextValue) =>{
+      return acc.concat(nextValue)
+    }, new Immutable.Map())
     return (<DetailBreakdown
       data={data}
       type={detailBreakdownData.get('type')}
@@ -209,6 +216,8 @@ class ElectricityMapLayout extends React.Component {
       color={detailBreakdownData.get('color')}
       height={detailBreakdownData.get('height')}
       showDefault={detailBreakdownData.get('showDefault', false)}
+      nameMappings= {nameMappings}
+      defaultContent={this.props.TrSelector(['detailBreakDown', this.props.importExportVisualization, 'defaultText'], this.props.timelineYears.min, this.props.timelineYears.max)}
     />)
   }
 
@@ -236,9 +245,11 @@ const mapStateToProps = (state, props) => ({
   arrangeBy: arrangeBy(state, props),
   bins: binSelector(state, props),
   Tr: TrSelector(state, props),
+  TrSelector: TrSelector(state, props),
   unit: visualizationSettings(state, props).get('amount'),
   importsEnabled: showImportsSelector(state, props),
   exportsEnabled: showExportsSelector(state, props),
+  timelineYears: timelineYearScaleCalculation(state, props),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(ElectricityMapLayout)
