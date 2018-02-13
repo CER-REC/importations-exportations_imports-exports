@@ -176,6 +176,15 @@ const TranslationTable = fromJS({
       en: 'and',
       fr: 'et',
     },
+
+    /* TODO: We can't translate 'of' this way. It needs to be...
+    d'Électricité
+    de Pétrole brut
+    de Gaz naturel
+    de Liquides de gaz naturel
+    de Prod. pétroliers rafinn.
+    */
+
     of: {
       en: 'of',
       fr: 'd’',
