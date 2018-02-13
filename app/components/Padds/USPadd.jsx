@@ -67,7 +67,7 @@ const renderDetailBreakdown = (props) => {
     total = props.Padd.filter((point,key) => key!== 'ca').map(( value, paddId) => {
       return value.get('value')
     })
-    nameMappings = Tr.getIn(['Padd',props.country])
+    nameMappings = Tr.getIn(['Padd','us'])
   } else {
     return null
   }

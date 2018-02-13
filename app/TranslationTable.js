@@ -490,6 +490,44 @@ const TranslationTable = fromJS({
           en: 'to',
           fr: 'par',
         },
+        header: {
+          type: {
+            en: '',
+            fr: '',
+          },
+          action: {
+            en: 'Mode of Transportation',
+            fr: 'Mode of Transportation',
+          },
+          adjective: {
+            en: '',
+            fr: '',
+          },
+          place: {
+            en: '',
+            fr: '',
+          },
+        },
+      },
+      productSubtype: {
+        header: {
+          type: {
+            en: '',
+            fr: '',
+          },
+          action: {
+            en: 'Type of Crude',
+            fr: 'Type of Crude',
+          },
+          adjective: {
+            en: '',
+            fr: '',
+          },
+          place: {
+            en: '',
+            fr: '',
+          },
+        },
       },
       exports: {
         header: {

@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import Immutable from 'immutable'
 import './DetailBreakDown.scss'
+import '../styles/Fonts.scss'
 
 class DetailBreakdownHeader extends React.Component {
   render() {
@@ -23,7 +24,7 @@ class DetailBreakdownHeader extends React.Component {
 DetailBreakdownHeader.propTypes = {
   color: PropTypes.string.isRequired,
   trContent: PropTypes.instanceOf(Immutable.Map).isRequired,
-  type: PropTypes.oneOf(['imports', 'exports']).isRequired,
+  type: PropTypes.oneOf(['imports', 'exports', 'crudeOilTypeMode']).isRequired,
   language: PropTypes.string.isRequired,
 }
 
