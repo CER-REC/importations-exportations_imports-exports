@@ -35,6 +35,7 @@ class DetailBreakdown extends React.Component {
         </div>
       )
     } else {
+      if(!this.props.showDefault) { return null}
       return (
         <div>
           {props.defaultContent}
@@ -59,6 +60,7 @@ DetailBreakdown.propTypes = {
   data: PropTypes.instanceOf(Immutable.Map).isRequired,
   trContent: PropTypes.instanceOf(Immutable.Map).isRequired,
   nameMappings: PropTypes.instanceOf(Immutable.Map).isRequired,
+  showDefault: PropTypes.string.isRequired,
 }
 
 export default connect((state, props) => ({

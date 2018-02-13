@@ -80,7 +80,7 @@ const selectedPieces = createSelector(
   points => points.reduce((acc, nextValue) => {
     if (Immutable.Map.isMap(nextValue)) {
       nextValue.forEach((value) => {
-        acc = acc.concat(value.keySeq().toArray())
+        acc = acc.concat(value.keySeq().toList())
       })
     } else if (Immutable.List.isList(nextValue)) {
       acc = acc.concat(nextValue)
@@ -93,8 +93,8 @@ const filterByTimeline = (point, range) => {
   if (range.getIn(['start', 'year']) <= point.get('year')
     && point.get('year') <= range.getIn(['end', 'year'])) {
     if (range.getIn(['start', 'year']) === point.get('year')) {
-      return range.getIn(['start', 'quarter']) <= point.get('year')
-    } else if (range.getIn(['start', 'year']) === point.get('quarter')) {
+      return range.getIn(['start', 'quarter']) <= point.get('quarter')
+    } else if (range.getIn(['end', 'year']) === point.get('year')) {
       return point.get('quarter') <= range.getIn(['end', 'quarter'])
     }
     return true
@@ -105,8 +105,8 @@ const filterByHex = (point, selectedMapPieces) => {
   if (selectedMapPieces.count() === 0) {
     return point
   }
-  return selectedMapPieces.indexOf(point.get('originKey')) > -1
-  || selectedMapPieces.indexOf(point.get('port')) > -1
+  return selectedMapPieces.includes(point.get('originKey'))
+  || selectedMapPieces.includes(point.get('port'))
 }
 
 const filterByTimelineSelector = createSelector(
