@@ -117,10 +117,7 @@ const filterByTimelineSelector = createSelector(
 export const filterByHexSelector = createSelector(
   activityGroupSelector,
   selectedPieces,
-  (points, selectedMapPieces) => {
-      console.log(points)
-    return points.filter(point => filterByHex(point, selectedMapPieces))
-  },
+  (points, selectedMapPieces) => points.filter(point => filterByHex(point, selectedMapPieces)),
 )
 
 export const aggregateLocationSelector = createSelector(
