@@ -54,11 +54,11 @@ class PaddLayout extends React.Component {
     const text = this.props.TRSelector(['Padd', country, paddGroupId])
 
     let paddVconfidentialIcon = null
-    let containerX = this.props.left + left - 6
-    let containerY = this.props.top + top - 66
+    let paddVcontainerX = this.props.left + left - 6
+    let paddVcontainerY = this.props.top + top - 66
     if (this.props.arrangeBy === 'imports' || this.props.arrangeBy === 'exports') {
-      containerX = this.props.left + left + 300
-      containerY = this.props.top + top - 166
+      paddVcontainerX = this.props.left + left + 471
+      paddVcontainerY = this.props.top + top + 77
     }
     const style = mapLayoutGrid.get('styles', false)
     if (style && confidentialCount > 0 && country !== 'ca'
@@ -69,8 +69,8 @@ class PaddLayout extends React.Component {
         <ConfidentialIcon
           styles={style.get('confidentialStyle')} 
           text="VALUE VALUE VALUE!"
-          containerX={containerX}
-          containerY={containerY}
+          containerX={paddVcontainerX}
+          containerY={paddVcontainerY}
           lineX={102}
           lineY={40}
           textX={40}
@@ -82,6 +82,12 @@ class PaddLayout extends React.Component {
     }
 
     let paddIIIconfidentialIcon = null
+    let paddIIIcontainerX = this.props.left + left + 183
+    let paddIIIcontainerY = this.props.top + top - 66
+    if (this.props.arrangeBy === 'imports' || this.props.arrangeBy === 'exports') {
+      paddIIIcontainerX = this.props.left + left + 598
+      paddIIIcontainerY = this.props.top + top + 77
+    }
     if (style && confidentialCount > 0 && country !== 'ca'
       && this.props.confidentialityMenu
       && this.props.selectedEnergy === 'crudeOil'
@@ -90,8 +96,8 @@ class PaddLayout extends React.Component {
         <ConfidentialIcon
           styles={style.get('confidentialStyle')} 
           text="hello!"
-          containerX={this.props.left + left + 183}
-          containerY={ this.props.top + top - 66}
+          containerX={paddIIIcontainerX}
+          containerY={paddIIIcontainerY}
           lineX={102}
           lineY={40}
           textX={40}
@@ -103,6 +109,12 @@ class PaddLayout extends React.Component {
     }
 
     let paddIconfidentialIcon = null
+    let paddIcontainerX = this.props.left + left + 343
+    let paddIcontainerY = this.props.top + top - 66
+    if (this.props.arrangeBy === 'imports' || this.props.arrangeBy === 'exports') {
+      paddIcontainerX = this.props.left + left + 348
+      paddIcontainerY = this.props.top + top + 77
+    }
     if (style && confidentialCount > 0 && country !== 'ca'
       && this.props.confidentialityMenu
       && this.props.selectedEnergy === 'crudeOil'
@@ -111,8 +123,8 @@ class PaddLayout extends React.Component {
         <ConfidentialIcon
           styles={style.get('confidentialStyle')} 
           text="hey im padd one"
-          containerX={this.props.left + left + 343}
-          containerY={ this.props.top + top - 66}
+          containerX={paddIcontainerX}
+          containerY={paddIcontainerY}
           lineX={102}
           lineY={40}
           textX={40}
@@ -124,6 +136,12 @@ class PaddLayout extends React.Component {
     }
 
     let paddNonUSAconfidentialIcon = null
+    let paddNonUSAcontainerX = this.props.left + left + 468
+    let paddNonUSAcontainerY = this.props.top + top - 145
+    if (this.props.arrangeBy === 'imports' || this.props.arrangeBy === 'exports') {
+      paddNonUSAcontainerX = this.props.left + left + 718
+      paddNonUSAcontainerY = this.props.top + top + 77
+    }
     if (style && confidentialCount > 0 && country !== 'ca'
       && this.props.confidentialityMenu
       && this.props.selectedEnergy === 'crudeOil'
@@ -132,8 +150,8 @@ class PaddLayout extends React.Component {
         <ConfidentialIcon
           styles={style.get('confidentialStyle')} 
           text="hey im non USA"
-          containerX={this.props.left + left + 468}
-          containerY={ this.props.top + top - 145}
+          containerX={paddNonUSAcontainerX}
+          containerY={paddNonUSAcontainerY}
           lineX={102}
           lineY={40}
           textX={40}
