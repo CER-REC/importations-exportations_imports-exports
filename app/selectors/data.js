@@ -40,6 +40,11 @@ const selection = createSelector(
   settings => settings.get('selection'),
 )
 
+const timelineRange = createSelector(
+  visualizationSettings,
+  settings => settings.getIn(['timeline', 'range']),
+)
+
 const dataSelector = state => state.data
 
 const productSelector = createSelector(
@@ -71,25 +76,48 @@ export const activityGroupSelector = createSelector(
     )),
 )
 
+const filterByTimeline = p => p.get('')
+
 const filterByTimelineSelector = createSelector(
   activityGroupSelector,
-  points =>
-    // TODO: Add filtering by timeline year-domain
-    points,
-
+  timelineRange,
+  (points, range) => points.filter((point) => {
+    if (range.getIn(['start', 'year']) <= point.get('year')
+    && point.get('year') <= range.getIn(['end', 'year'])) {
+      if (range.getIn(['start', 'year']) === point.get('year')) {
+        return range.getIn(['start', 'quarter']) <= point.get('year')
+      } else if (range.getIn(['start', 'year']) === point.get('quarter')) {
+        return point.get('quarter') <= range.getIn(['end', 'quarter'])
+      }
+      return true
+    }
+    return false
+  }),
 )
 
 export const filterByHexSelector = createSelector(
   activityGroupSelector,
-  selectedVisualization,
   selection,
-  (points, visualizationType, selectedPieces) =>{
+  (points, selectedPieces) => {
     // TODO: Add filtering by selected hexes
-    console.log(visualizationType, selectedPieces)
-    //remove the point if there is any 
-    return points
-  }
+    selectedPieces = selectedPieces.reduce((acc, nextValue) => {
+      if (Immutable.Map.isMap(nextValue)) {
+        nextValue.forEach((value) => {
+          acc = acc.concat(value.keySeq().toArray())
+        })
+      } else if (Immutable.List.isList(nextValue)) {
+        acc = acc.concat(nextValue)
+      }
+      return acc
+    }, new Immutable.List())
+    if (selectedPieces.count() === 0) {
+      return points
+    }
+    return points.filter(point => selectedPieces.indexOf(point.get('originKey')) > -1)
+  },
 )
+
+//const filterForSidebar = points => points.filter(v => filterByTimeline(p) && filterByHex(p))
 
 export const aggregateLocationSelector = createSelector(
   filterByTimelineSelector,
