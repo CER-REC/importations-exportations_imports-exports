@@ -30,6 +30,8 @@ class PaddLayout extends React.Component {
     top: PropTypes.number.isRequired,
     left: PropTypes.number.isRequired,
     country: PropTypes.string.isRequired,
+    confidentialityMenu: PropTypes.bool.isRequired,
+    selectedEnergy: PropTypes.string.isRequired,
   }
   getPaddColor(value) {
     if (value === -1) { return '#fff' }
@@ -50,19 +52,108 @@ class PaddLayout extends React.Component {
     const transformTranslate = mapLayoutGrid.getIn(['arrow', 'orderBy', orderBy, paddGroupId])
     const transformText = mapLayoutGrid.getIn(['arrow', 'textTranslate', paddGroupId])
     const text = this.props.TRSelector(['Padd', country, paddGroupId])
-  let confidentialIcon = null
-    const style = mapLayoutGrid.get('styles', false)
-    if (style && confidentialCount > 0 && country !== 'ca') {
-      confidentialIcon = (<g transform="translate(145 143)">
-        <ConfidentialIcon styles={style.get('confidentialStyle')} />
-                          </g>)
+
+    let paddVconfidentialIcon = null
+    let containerX = this.props.left + left - 6
+    let containerY = this.props.top + top - 66
+    if (this.props.arrangeBy === 'imports' || this.props.arrangeBy === 'exports') {
+      containerX = this.props.left + left + 300
+      containerY = this.props.top + top - 166
     }
+    const style = mapLayoutGrid.get('styles', false)
+    if (style && confidentialCount > 0 && country !== 'ca'
+      && this.props.confidentialityMenu
+      && this.props.selectedEnergy === 'crudeOil'
+      && paddGroupId === 'PADD V') {
+      paddVconfidentialIcon = (<g transform="translate(145 143)">
+        <ConfidentialIcon
+          styles={style.get('confidentialStyle')} 
+          text="VALUE VALUE VALUE!"
+          containerX={containerX}
+          containerY={containerY}
+          lineX={102}
+          lineY={40}
+          textX={40}
+          textY={40}
+          xPosition={0}
+          yPosition={0}
+        />
+      </g>)
+    }
+
+    let paddIIIconfidentialIcon = null
+    if (style && confidentialCount > 0 && country !== 'ca'
+      && this.props.confidentialityMenu
+      && this.props.selectedEnergy === 'crudeOil'
+      && paddGroupId === 'PADD III') {
+      paddIIIconfidentialIcon = (<g transform="translate(145 143)">
+        <ConfidentialIcon
+          styles={style.get('confidentialStyle')} 
+          text="hello!"
+          containerX={this.props.left + left + 183}
+          containerY={ this.props.top + top - 66}
+          lineX={102}
+          lineY={40}
+          textX={40}
+          textY={40}
+          xPosition={0}
+          yPosition={0}
+        />
+      </g>)
+    }
+
+    let paddIconfidentialIcon = null
+    if (style && confidentialCount > 0 && country !== 'ca'
+      && this.props.confidentialityMenu
+      && this.props.selectedEnergy === 'crudeOil'
+      && paddGroupId === 'PADD I') {
+      paddIconfidentialIcon = (<g transform="translate(145 143)">
+        <ConfidentialIcon
+          styles={style.get('confidentialStyle')} 
+          text="hey im padd one"
+          containerX={this.props.left + left + 343}
+          containerY={ this.props.top + top - 66}
+          lineX={102}
+          lineY={40}
+          textX={40}
+          textY={40}
+          xPosition={0}
+          yPosition={0}
+        />
+      </g>)
+    }
+
+    let paddNonUSAconfidentialIcon = null
+    if (style && confidentialCount > 0 && country !== 'ca'
+      && this.props.confidentialityMenu
+      && this.props.selectedEnergy === 'crudeOil'
+      && paddGroupId === 'Non-USA') {
+      paddNonUSAconfidentialIcon = (<g transform="translate(145 143)">
+        <ConfidentialIcon
+          styles={style.get('confidentialStyle')} 
+          text="hey im non USA"
+          containerX={this.props.left + left + 468}
+          containerY={ this.props.top + top - 145}
+          lineX={102}
+          lineY={40}
+          textX={40}
+          textY={40}
+          xPosition={0}
+          yPosition={0}
+        />
+      </g>)
+    }
+
     return (<g className={fontClassName} transform={`translate(${left + transformTranslate.get('left')} ${top + transformTranslate.get('top')})`}>
       <text transform={`translate(${transformText.get('left')} ${transformText.get('top')})`}>{text}</text>
       <polygon fill={color} transform="translate(0 140)" points="149.98 18.68 168.81 26.14 187.48 18.66 187.48 17.99 184.09 17.99 184.08 14.51 152.98 14.5 152.95 17.99 149.98 17.99 149.98 18.68" />
-      {confidentialIcon}
+      {paddVconfidentialIcon}
+      {paddIIIconfidentialIcon}
+      {paddIconfidentialIcon}
+      {paddNonUSAconfidentialIcon}
             </g>)
   }
+
   renderDefault(props) {
     const paddData = Array
       .from(props.Padd)
