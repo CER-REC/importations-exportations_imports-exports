@@ -1,6 +1,9 @@
 import { createSelector } from 'reselect'
 
 import { visualizationContentPosition } from './index'
+import Constants from '../../Constants'
+
+const axisHeight = Constants.getIn(['timeline', 'axisHeight'])
 
 export const canadaImportMap = createSelector(
   visualizationContentPosition,
@@ -28,7 +31,7 @@ export const chartAxisPosition = createSelector(
     top: importPosition.top + importPosition.height,
     left: importPosition.left,
     width: importPosition.width,
-    height: 30,
+    height: axisHeight,
   }),
 )
 
