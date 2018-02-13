@@ -89,8 +89,8 @@ class MapPiece extends React.Component {
       return <ConfidentialIcon
         styles={this.props.styles.get('confidentialStyle')}
         text="14/50 values confidential"
-        containerX={this.props.x1 + MapLayoutGridConstant.getIn(['electricity', 'canada' , 'mapPieceScale'], 1) + 308}
-        containerY={this.props.y1 + MapLayoutGridConstant.getIn(['electricity', 'canada' , 'mapPieceScale'], 1) + 80}
+        containerX={this.props.x1 + MapLayoutGridConstant.getIn(['electricity', 'canada' , 'mapPieceScale'], 1) + 369}
+        containerY={this.props.y1 + MapLayoutGridConstant.getIn(['electricity', 'canada' , 'mapPieceScale'], 1) + 83}
         lineX={102}
         lineY={40}
         textX={40}
@@ -110,8 +110,8 @@ class MapPiece extends React.Component {
       return <ConfidentialIcon 
         styles={this.props.styles.get('confidentialStyle')} 
         text="n/50 values confidential"
-        containerX={this.props.x1 * MapLayoutGridConstant.getIn(['electricity', 'us' , 'mapPieceScale'], 1) + 665}
-        containerY={678}
+        containerX={this.props.x1 * MapLayoutGridConstant.getIn(['electricity', 'us' , 'mapPieceScale'], 1) + 757}
+        containerY={768}
         lineX={102}
         lineY={40}
         textX={40}
