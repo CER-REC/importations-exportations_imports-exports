@@ -109,7 +109,7 @@ class MapPiece extends React.Component {
       if (this.props.data.get('name') !== 'AB') { return null }
       return <ConfidentialIcon 
         styles={this.props.styles.get('confidentialStyle')}
-        text="hello i am alberta for natural gas"
+        text="NGL AB"
         containerX={this.props.x1 + MapLayoutGridConstant.getIn(['electricity', 'canada' , 'mapPieceScale'], 1) + 340}
         containerY={this.props.y1 + MapLayoutGridConstant.getIn(['electricity', 'canada' , 'mapPieceScale'], 1) + 82}
         lineX={102}
@@ -122,7 +122,7 @@ class MapPiece extends React.Component {
     } return null
   }
 
-  bcConfidentialIcon() {
+  britishColumbiaConfidentialIcon() {
     if (typeof this.props.data.get('confidentialCount') !== 'undefined'
         && this.props.data.get('confidentialCount') !== 0
         && this.props.confidentialityMenu
@@ -130,7 +130,7 @@ class MapPiece extends React.Component {
       if (this.props.data.get('name') !== 'BC') { return null }
       return <ConfidentialIcon 
         styles={this.props.styles.get('confidentialStyle')}
-        text="hello i am bc for natural gas"
+        text="NGL BC"
         containerX={this.props.x1 + MapLayoutGridConstant.getIn(['electricity', 'canada' , 'mapPieceScale'], 1) + 340}
         containerY={this.props.y1 + MapLayoutGridConstant.getIn(['electricity', 'canada' , 'mapPieceScale'], 1) + 82}
         lineX={102}
@@ -151,7 +151,7 @@ class MapPiece extends React.Component {
       if (this.props.data.get('name') !== 'SK') { return null }
       return <ConfidentialIcon 
         styles={this.props.styles.get('confidentialStyle')}
-        text="i am sask for natural gas"
+        text="NGL SK"
         containerX={this.props.x1 + MapLayoutGridConstant.getIn(['electricity', 'canada' , 'mapPieceScale'], 1) + 340}
         containerY={this.props.y1 + MapLayoutGridConstant.getIn(['electricity', 'canada' , 'mapPieceScale'], 1) + 82}
         lineX={102}
@@ -172,7 +172,7 @@ class MapPiece extends React.Component {
       if (this.props.data.get('name') !== 'MB') { return null }
       return <ConfidentialIcon 
         styles={this.props.styles.get('confidentialStyle')}
-        text="i am MB for natural gas"
+        text="NGL MB"
         containerX={this.props.x1 + MapLayoutGridConstant.getIn(['electricity', 'canada' , 'mapPieceScale'], 1) + 340}
         containerY={this.props.y1 + MapLayoutGridConstant.getIn(['electricity', 'canada' , 'mapPieceScale'], 1) + 82}
         lineX={102}
@@ -193,7 +193,7 @@ class MapPiece extends React.Component {
       if (this.props.data.get('name') !== 'ON') { return null }
       return <ConfidentialIcon 
         styles={this.props.styles.get('confidentialStyle')}
-        text="i am ontario for natural gas"
+        text="NGL ON"
         containerX={this.props.x1 + MapLayoutGridConstant.getIn(['electricity', 'canada' , 'mapPieceScale'], 1) + 340}
         containerY={this.props.y1 + MapLayoutGridConstant.getIn(['electricity', 'canada' , 'mapPieceScale'], 1) + 82}
         lineX={102}
@@ -214,7 +214,7 @@ class MapPiece extends React.Component {
       if (this.props.data.get('name') !== 'NB') { return null }
       return <ConfidentialIcon 
         styles={this.props.styles.get('confidentialStyle')}
-        text="new Bruhhnswick"
+        text="NGL NB"
         containerX={this.props.x1 + MapLayoutGridConstant.getIn(['electricity', 'canada' , 'mapPieceScale'], 1) + 340}
         containerY={this.props.y1 + MapLayoutGridConstant.getIn(['electricity', 'canada' , 'mapPieceScale'], 1) + 82}
         lineX={102}
@@ -235,7 +235,7 @@ class MapPiece extends React.Component {
       if (this.props.data.get('name') !== 'NS') { return null }
       return <ConfidentialIcon 
         styles={this.props.styles.get('confidentialStyle')}
-        text="nova scotia"
+        text="NGL NS"
         containerX={this.props.x1 + MapLayoutGridConstant.getIn(['electricity', 'canada' , 'mapPieceScale'], 1) + 340}
         containerY={this.props.y1 + MapLayoutGridConstant.getIn(['electricity', 'canada' , 'mapPieceScale'], 1) + 82}
         lineX={102}
@@ -328,7 +328,7 @@ class MapPiece extends React.Component {
       {this.powerpoolConfidentialIcon()}
 
       {this.albertaConfidentialIcon()}
-      {this.bcConfidentialIcon()}
+      {this.britishColumbiaConfidentialIcon()}
       {this.saskatchewanConfidentialIcon()}
       {this.manitobaNGLConfidentialIcon()}
       {this.ontarioConfidentialIcon()}

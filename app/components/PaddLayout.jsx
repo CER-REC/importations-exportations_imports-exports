@@ -53,24 +53,24 @@ class PaddLayout extends React.Component {
     const transformText = mapLayoutGrid.getIn(['arrow', 'textTranslate', paddGroupId])
     const text = this.props.TRSelector(['Padd', country, paddGroupId])
 
-    let paddVconfidentialIcon = null
-    let paddVcontainerX = this.props.left + left - 6
-    let paddVcontainerY = this.props.top + top - 66
+    let paddVCrudeOilconfidentialIcon = null
+    let paddVCrudeOilcontainerX = this.props.left + left - 6
+    let paddVCrudeOilcontainerY = this.props.top + top - 66
     if (this.props.arrangeBy === 'imports' || this.props.arrangeBy === 'exports') {
-      paddVcontainerX = this.props.left + left + 471
-      paddVcontainerY = this.props.top + top + 77
+      paddVCrudeOilcontainerX = this.props.left + left + 471
+      paddVCrudeOilcontainerY = this.props.top + top + 77
     }
     const style = mapLayoutGrid.get('styles', false)
     if (style && confidentialCount > 0 && country !== 'ca'
       && this.props.confidentialityMenu
       && this.props.selectedEnergy === 'crudeOil'
       && paddGroupId === 'PADD V') {
-      paddVconfidentialIcon = (<g transform="translate(145 143)">
+      paddVCrudeOilconfidentialIcon = (<g transform="translate(145 143)">
         <ConfidentialIcon
           styles={style.get('confidentialStyle')} 
           text="VALUE VALUE VALUE!"
-          containerX={paddVcontainerX}
-          containerY={paddVcontainerY}
+          containerX={paddVCrudeOilcontainerX}
+          containerY={paddVCrudeOilcontainerY}
           lineX={102}
           lineY={40}
           textX={40}
@@ -81,23 +81,23 @@ class PaddLayout extends React.Component {
       </g>)
     }
 
-    let paddIIIconfidentialIcon = null
-    let paddIIIcontainerX = this.props.left + left + 183
-    let paddIIIcontainerY = this.props.top + top - 66
+    let paddIIICrudeOilconfidentialIcon = null
+    let paddIIICrudeOilcontainerX = this.props.left + left + 183
+    let paddIIICrudeOilcontainerY = this.props.top + top - 66
     if (this.props.arrangeBy === 'imports' || this.props.arrangeBy === 'exports') {
-      paddIIIcontainerX = this.props.left + left + 598
-      paddIIIcontainerY = this.props.top + top + 77
+      paddIIICrudeOilcontainerX = this.props.left + left + 598
+      paddIIICrudeOilcontainerY = this.props.top + top + 77
     }
     if (style && confidentialCount > 0 && country !== 'ca'
       && this.props.confidentialityMenu
       && this.props.selectedEnergy === 'crudeOil'
       && paddGroupId === 'PADD III') {
-      paddIIIconfidentialIcon = (<g transform="translate(145 143)">
+      paddIIICrudeOilconfidentialIcon = (<g transform="translate(145 143)">
         <ConfidentialIcon
           styles={style.get('confidentialStyle')} 
           text="hello!"
-          containerX={paddIIIcontainerX}
-          containerY={paddIIIcontainerY}
+          containerX={paddIIICrudeOilcontainerX}
+          containerY={paddIIICrudeOilcontainerY}
           lineX={102}
           lineY={40}
           textX={40}
@@ -108,23 +108,23 @@ class PaddLayout extends React.Component {
       </g>)
     }
 
-    let paddIconfidentialIcon = null
-    let paddIcontainerX = this.props.left + left + 343
-    let paddIcontainerY = this.props.top + top - 66
+    let paddICrudeOilconfidentialIcon = null
+    let paddICrudeOilcontainerX = this.props.left + left + 343
+    let paddICrudeOilcontainerY = this.props.top + top - 66
     if (this.props.arrangeBy === 'imports' || this.props.arrangeBy === 'exports') {
-      paddIcontainerX = this.props.left + left + 348
-      paddIcontainerY = this.props.top + top + 77
+      paddICrudeOilcontainerX = this.props.left + left + 348
+      paddICrudeOilcontainerY = this.props.top + top + 77
     }
     if (style && confidentialCount > 0 && country !== 'ca'
       && this.props.confidentialityMenu
       && this.props.selectedEnergy === 'crudeOil'
       && paddGroupId === 'PADD I') {
-      paddIconfidentialIcon = (<g transform="translate(145 143)">
+      paddICrudeOilconfidentialIcon = (<g transform="translate(145 143)">
         <ConfidentialIcon
           styles={style.get('confidentialStyle')} 
           text="hey im padd one"
-          containerX={paddIcontainerX}
-          containerY={paddIcontainerY}
+          containerX={paddICrudeOilcontainerX}
+          containerY={paddICrudeOilcontainerY}
           lineX={102}
           lineY={40}
           textX={40}
@@ -135,23 +135,132 @@ class PaddLayout extends React.Component {
       </g>)
     }
 
-    let paddNonUSAconfidentialIcon = null
-    let paddNonUSAcontainerX = this.props.left + left + 468
-    let paddNonUSAcontainerY = this.props.top + top - 145
+    let paddNonUSACrudeOilconfidentialIcon = null
+    let paddNonUSACrudeOilcontainerX = this.props.left + left + 468
+    let paddNonUSACrudeOilcontainerY = this.props.top + top - 145
     if (this.props.arrangeBy === 'imports' || this.props.arrangeBy === 'exports') {
-      paddNonUSAcontainerX = this.props.left + left + 718
-      paddNonUSAcontainerY = this.props.top + top + 77
+      paddNonUSACrudeOilcontainerX = this.props.left + left + 718
+      paddNonUSACrudeOilcontainerY = this.props.top + top + 77
     }
     if (style && confidentialCount > 0 && country !== 'ca'
       && this.props.confidentialityMenu
       && this.props.selectedEnergy === 'crudeOil'
       && paddGroupId === 'Non-USA') {
-      paddNonUSAconfidentialIcon = (<g transform="translate(145 143)">
+      paddNonUSACrudeOilconfidentialIcon = (<g transform="translate(145 143)">
         <ConfidentialIcon
-          styles={style.get('confidentialStyle')} 
+          styles={style.get('confidentialStyle')}
           text="hey im non USA"
-          containerX={paddNonUSAcontainerX}
-          containerY={paddNonUSAcontainerY}
+          containerX={paddNonUSACrudeOilcontainerX}
+          containerY={paddNonUSACrudeOilcontainerY}
+          lineX={102}
+          lineY={40}
+          textX={40}
+          textY={40}
+          xPosition={0}
+          yPosition={0}
+        />
+      </g>)
+    }
+
+
+    let paddIIINGLconfidentialIcon = null
+    let paddIIINGLcontainerX = this.props.left + left + 185
+    let paddIIINGLcontainerY = this.props.top + top - 49
+    if (this.props.arrangeBy === 'imports' || this.props.arrangeBy === 'exports') {
+      paddIIINGLcontainerX = this.props.left + left + 598
+      paddIIINGLcontainerY = this.props.top + top + 69
+    }
+    if (style && confidentialCount > 0 && country !== 'ca'
+      && this.props.confidentialityMenu
+      && this.props.selectedEnergy === 'naturalGasLiquids'
+      && paddGroupId === 'PADD III') {
+      paddIIINGLconfidentialIcon = (<g transform="translate(145 143)">
+        <ConfidentialIcon
+          styles={style.get('confidentialStyle')}
+          text="PADDIII NGL"
+          containerX={paddIIINGLcontainerX}
+          containerY={paddIIINGLcontainerY}
+          lineX={102}
+          lineY={40}
+          textX={40}
+          textY={40}
+          xPosition={0}
+          yPosition={0}
+        />
+      </g>)
+    }
+
+    let paddIVNGLconfidentialIcon = null
+    let paddIVNGLcontainerX = this.props.left + left + 14
+    let paddIVNGLcontainerY = this.props.top + top - 320
+    if (this.props.arrangeBy === 'imports' || this.props.arrangeBy === 'exports') {
+      paddIVNGLcontainerX = this.props.left + left + 473
+      paddIVNGLcontainerY = this.props.top + top + 69
+    }
+    if (style && confidentialCount > 0 && country !== 'ca'
+      && this.props.confidentialityMenu
+      && this.props.selectedEnergy === 'naturalGasLiquids'
+      && paddGroupId === 'PADD IV') {
+      paddIVNGLconfidentialIcon = (<g transform="translate(145 143)">
+        <ConfidentialIcon
+          styles={style.get('confidentialStyle')}
+          text="PADDIV NGL"
+          containerX={paddIVNGLcontainerX}
+          containerY={paddIVNGLcontainerY}
+          lineX={102}
+          lineY={40}
+          textX={40}
+          textY={40}
+          xPosition={0}
+          yPosition={0}
+        />
+      </g>)
+    }
+
+    let paddVNGLconfidentialIcon = null
+    let paddVNGLcontainerX = this.props.left + left
+    let paddVNGLcontainerY = this.props.top + top - 50
+    if (this.props.arrangeBy === 'imports' || this.props.arrangeBy === 'exports') {
+      paddVNGLcontainerX = this.props.left + left + 348
+      paddVNGLcontainerY = this.props.top + top + 69
+    }
+    if (style && confidentialCount > 0 && country !== 'ca'
+      && this.props.confidentialityMenu
+      && this.props.selectedEnergy === 'naturalGasLiquids'
+      && paddGroupId === 'PADD V') {
+      paddVNGLconfidentialIcon = (<g transform="translate(145 143)">
+        <ConfidentialIcon
+          styles={style.get('confidentialStyle')}
+          text="PADDV NGL"
+          containerX={paddVNGLcontainerX}
+          containerY={paddVNGLcontainerY}
+          lineX={102}
+          lineY={40}
+          textX={40}
+          textY={40}
+          xPosition={0}
+          yPosition={0}
+        />
+      </g>)
+    }
+
+    let paddMexicoNGLconfidentialIcon = null
+    let paddMexicoNGLcontainerX = this.props.left + left + 470
+    let paddMexicoNGLcontainerY = this.props.top + top - 125
+    if (this.props.arrangeBy === 'imports' || this.props.arrangeBy === 'exports') {
+      paddMexicoNGLcontainerX = this.props.left + left + 717
+      paddMexicoNGLcontainerY = this.props.top + top + 69
+    }
+    if (style && confidentialCount > 0 && country !== 'ca'
+      && this.props.confidentialityMenu
+      && this.props.selectedEnergy === 'naturalGasLiquids'
+      && paddGroupId === 'Mexico') {
+      paddMexicoNGLconfidentialIcon = (<g transform="translate(145 143)">
+        <ConfidentialIcon
+          styles={style.get('confidentialStyle')}
+          text="PADD Mexico NGL"
+          containerX={paddMexicoNGLcontainerX}
+          containerY={paddMexicoNGLcontainerY}
           lineX={102}
           lineY={40}
           textX={40}
@@ -165,10 +274,15 @@ class PaddLayout extends React.Component {
     return (<g className={fontClassName} transform={`translate(${left + transformTranslate.get('left')} ${top + transformTranslate.get('top')})`}>
       <text transform={`translate(${transformText.get('left')} ${transformText.get('top')})`}>{text}</text>
       <polygon fill={color} transform="translate(0 140)" points="149.98 18.68 168.81 26.14 187.48 18.66 187.48 17.99 184.09 17.99 184.08 14.51 152.98 14.5 152.95 17.99 149.98 17.99 149.98 18.68" />
-      {paddVconfidentialIcon}
-      {paddIIIconfidentialIcon}
-      {paddIconfidentialIcon}
-      {paddNonUSAconfidentialIcon}
+      {paddVCrudeOilconfidentialIcon}
+      {paddIIICrudeOilconfidentialIcon}
+      {paddICrudeOilconfidentialIcon}
+      {paddNonUSACrudeOilconfidentialIcon}
+
+      {paddIIINGLconfidentialIcon}
+      {paddIVNGLconfidentialIcon}
+      {paddVNGLconfidentialIcon}
+      {paddMexicoNGLconfidentialIcon}
             </g>)
   }
 
