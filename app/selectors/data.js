@@ -45,6 +45,11 @@ const timelineRange = createSelector(
   settings => settings.getIn(['timeline', 'range']),
 )
 
+const groupingBy = createSelector(
+  visualizationSettings,
+  settings => settings.getIn(['timeline', 'grouping']),
+)
+
 const dataSelector = state => state.data
 
 const productSelector = createSelector(
@@ -89,12 +94,22 @@ const selectedPieces = createSelector(
   }, new Immutable.List()),
 )
 
-const filterByTimeline = (point, range) => {
-  if (range.getIn(['start', 'year']) <= point.get('year')
-    && point.get('year') <= range.getIn(['end', 'year'])) {
-    if (range.getIn(['start', 'year']) === point.get('year') || range.getIn(['end', 'year']) === point.get('year')) {
-      return range.getIn(['start', 'quarter']) <= point.get('quarter') && point.get('quarter') <= range.getIn(['end', 'quarter'])
-    } 
+const filterByTimeline = (point, range, groupingBy) => {
+  if(groupingBy === 'year'){
+    if (range.getIn(['start', 'year']) <= point.get('year')
+      && point.get('year') <= range.getIn(['end', 'year'])) {
+      if (range.getIn(['start', 'year']) === point.get('year') || range.getIn(['end', 'year']) === point.get('year')) {
+        return range.getIn(['start', 'quarter']) <= point.get('quarter') && point.get('quarter') <= range.getIn(['end', 'quarter'])
+      }
+      return true
+    }
+  } else {
+    if (range.getIn(['start', 'quarter']) === range.getIn(['end', 'quarter'])) {
+      if (range.getIn(['start', 'year']) <= point.get('year') && point.get('year') <= range.getIn(['end', 'year'])) {
+        return true
+      }
+      return false
+    }
     return true
   }
   return false
@@ -110,7 +125,8 @@ const filterByHex = (point, selectedMapPieces) => {
 const filterByTimelineSelector = createSelector(
   activityGroupSelector,
   timelineRange,
-  (points, range) => points.filter(point => filterByTimeline(point, range)),
+  groupingBy,
+  (points, range) => points.filter(point => filterByTimeline(point, range, groupingBy)),
 )
 export const filterByHexSelector = createSelector(
   activityGroupSelector,
