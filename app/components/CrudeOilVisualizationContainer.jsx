@@ -22,6 +22,7 @@ const CrudeOilVisualizationContainer = props => (
       {...props.transportChart}
       aggregateKey="transport"
       scaleKey="total"
+      detailBreakdownKey='transport'
       color={{
         Pipeline: 'red',
         Marine: 'green',
@@ -33,6 +34,7 @@ const CrudeOilVisualizationContainer = props => (
       {...props.subtypeChart}
       aggregateKey="productSubtype"
       scaleKey="total"
+      detailBreakdownKey='type'
       color={{
         Heavy: 'red',
         Light: 'green',
