@@ -29,3 +29,7 @@
 }
 
 :-moz-focusring { outline: 3px solid rgb(77, 144, 254); }
+
+#popoverPortal {
+  pointer-events: none;
+}

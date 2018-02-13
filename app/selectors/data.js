@@ -35,6 +35,21 @@ const selectedActivityGroup = createSelector(
   (settings, override) => override || settings.get('activity'),
 )
 
+const selection = createSelector(
+  visualizationSettings,
+  settings => settings.get('selection'),
+)
+
+const timelineRange = createSelector(
+  visualizationSettings,
+  settings => settings.getIn(['timeline', 'range']),
+)
+
+const groupingBy = createSelector(
+  visualizationSettings,
+  settings => settings.getIn(['timeline', 'grouping']),
+)
+
 const dataSelector = state => state.data
 
 const productSelector = createSelector(
@@ -65,21 +80,55 @@ export const activityGroupSelector = createSelector(
       point.get('activity') === filterActivityGroup
     )),
 )
+const selectedPieces = createSelector(
+  selection,
+  points => points.reduce((acc, nextValue) => {
+    if (Immutable.Map.isMap(nextValue)) {
+      nextValue.forEach((value) => {
+        acc = acc.concat(value.keySeq().toList())
+      })
+    } else if (Immutable.List.isList(nextValue)) {
+      acc = acc.concat(nextValue)
+    }
+    return acc
+  }, new Immutable.List()),
+)
+
+const filterByTimeline = (point, range, groupingBy) => {
+  if(groupingBy === 'year'){
+    if (range.getIn(['start', 'year']) <= point.get('year')
+      && point.get('year') <= range.getIn(['end', 'year'])) {
+      if (range.getIn(['start', 'year']) === point.get('year') || range.getIn(['end', 'year']) === point.get('year')) {
+        return range.getIn(['start', 'quarter']) <= point.get('quarter') && point.get('quarter') <= range.getIn(['end', 'quarter'])
+      }
+      return true
+    }
+  } else {
+    if (range.getIn(['start', 'quarter']) !== range.getIn(['end', 'quarter'])) { return true }
+    return (range.getIn(['start', 'year']) <= point.get('year')
+      && point.get('year') <= range.getIn(['end', 'year'])
+      && range.getIn(['start', 'quarter']) === point.get('quarter')
+      )
+  }
+}
+const filterByHex = (point, selectedMapPieces) => {
+  if (selectedMapPieces.count() === 0) {
+    return point
+  }
+  return selectedMapPieces.includes(point.get('originKey'))
+  || selectedMapPieces.includes(point.get('port'))
+}
 
 const filterByTimelineSelector = createSelector(
   activityGroupSelector,
-  points =>
-    // TODO: Add filtering by timeline year-domain
-    points,
-
+  timelineRange,
+  groupingBy,
+  (points, range) => points.filter(point => filterByTimeline(point, range, groupingBy)),
 )
-
 export const filterByHexSelector = createSelector(
   activityGroupSelector,
-  points =>
-    // TODO: Add filtering by selected hexes
-    points,
-
+  selectedPieces,
+  (points, selectedMapPieces) => points.filter(point => filterByHex(point, selectedMapPieces)),
 )
 
 export const aggregateLocationSelector = createSelector(

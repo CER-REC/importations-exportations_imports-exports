@@ -42,7 +42,7 @@ class Axis extends React.PureComponent {
       <g>
         <TimelinePlay
           top={top}
-          left={left - 20}
+          left={left - 30}
           height={height}
         />
         <TimelineSeek
@@ -114,9 +114,10 @@ class Axis extends React.PureComponent {
         />
       )
     })
-    const endWidth = (seekPosition.end === data.last().get('offsetX'))
+    const endWidth = width - seekPosition.end
+    /*(seekPosition.end === data.last().get('offsetX'))
       ? 0
-      : width - seekPosition.end
+      : width - seekPosition.end*/
     return (
       <g>
         <rect
