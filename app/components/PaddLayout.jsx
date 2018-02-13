@@ -8,6 +8,7 @@ import MapLayoutGridConstant from '../MapLayoutGridConstant'
 import Constants from '../Constants'
 import { PaddSelector } from '../selectors/Padd'
 import TRSelector from '../selectors/translate'
+import Tr from '../TranslationTable'
 
 import PaddOne from './Padds/PaddOne'
 import PaddTwo from './Padds/PaddTwo'
@@ -16,8 +17,6 @@ import PaddFour from './Padds/PaddFour'
 import PaddFive from './Padds/PaddFive'
 import PaddNonUSA from './Padds/PaddNonUSA'
 import ConfidentialIcon from './ConfidentialIcon'
-
-import './ElectricityMapLayout.scss'
 
 import ElectricitySelector from '../selectors/ElectricitySelector'
 import { arrangeBy, binSelector, sortAggregatedLocationsSelector } from '../selectors/data'
@@ -111,7 +110,7 @@ class PaddLayout extends React.Component {
           paddLayout = (<g key={`${props.arrangeBy}_${currentValue[1].get('destination')}`} transform={`translate(${left} 0)`}>
             {paddLayout}
             { this.getArrow(props.arrangeBy, paddGroup, 0, 0, color, currentValue[1].get('confidentialCount', 0)) }
-                        </g>)
+          </g>)
           acc.push(paddLayout)
           left += paddingBetweenSortedElement
         }
@@ -150,15 +149,15 @@ class PaddLayout extends React.Component {
       this.props.top,
       color,
       data.get('confidentialCount', 0),
-)}
-            </g>)
+    )}
+  </g>)
   }
   renderPaddMapPiece() {
     if (this.props.arrangeBy === 'location' || this.props.country === 'ca') {
       return this.renderLocation(this.props)
+    } else{
+      return this.renderDefault(this.props)
     }
-
-    return this.renderDefault(this.props)
   }
 
   render() {

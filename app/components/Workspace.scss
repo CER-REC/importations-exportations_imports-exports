@@ -9,4 +9,6 @@ svg {
   }
 }
 
-#popoverPortal > div > div { z-index: 9999; }
+#popoverPortal > div > div { z-index: 9999;
+cursor: pointer; }
+

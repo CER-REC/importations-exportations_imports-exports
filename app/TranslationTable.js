@@ -114,6 +114,17 @@ const TranslationTable = fromJS({
     },
   },
 
+  dataDownloadModal: {
+    title: {
+      en: 'DATA DOWNLOAD',
+      fr: 'DATA DOWNLOAD fr',
+    },
+    subtext: {
+      en: 'The data used to create this visualization is open data available for you to download. Click the icon to save the data file to your computer.',
+      fr: 'TODO',
+    },
+  },
+
   mainMenuBar: {
     electricity: {
       en: 'Electricity',
@@ -203,6 +214,14 @@ const TranslationTable = fromJS({
           en: 'MOST EXPORTS',
           fr: 'PLUS D’EXPORTATIONS',
         },
+        stack: {
+          en: 'STACK',
+          fr: 'STACK FR',
+        },
+        split: {
+          en: 'SPLIT',
+          fr: 'SPLIT FR',
+        },
       },
     },
     amount: {
@@ -232,7 +251,7 @@ const TranslationTable = fromJS({
           fr: 'QUANTITÉ (MWh)',
         },
         'thousand m3/d': {
-          en: 'AMOUNT (thousand m³/d)',
+          en: 'AMOUNT (10³m³/d)',
           fr: 'QUANTITÉ (10³m³/j)',
         },
       },
@@ -267,13 +286,6 @@ const TranslationTable = fromJS({
   explanationHide: {
     en: 'hide EXPLANATIONS',
     fr: 'cacher EXPLICATIONS',
-  },
-
-  explanations: {
-    importExportTitle: {
-      en: 'Click + to see more options',
-      fr: 'Cliquez pour plus d’options',
-    },
   },
 
   confidentialityShown: {
@@ -313,6 +325,39 @@ const TranslationTable = fromJS({
     },
   },
 
+  explanations: {
+    importExportTitle: {
+      text: {
+        en: 'Click + to see more options',
+        fr: 'Cliquez pour plus d’options',
+      },
+    },
+    electricity: {
+      text: {
+        en: 'Electricity is the selected energy product',
+        fr: 'Electricity is the selected energy product FR',
+      },
+    },
+    timeSeek: {
+      text: {
+        en: 'Drag to select time frame',
+        fr: 'Drag to select time frame FR',
+      },
+    },
+    playButton: {
+      text: {
+        en: 'Click play to see how electricity changes over time',
+        fr: 'Click play to see how electricity changes over time FR',
+      },
+    },
+    newYork: {
+      text: {
+        en: 'New York has the highest exports into the US as well as the highest imports from the US',
+        fr: 'New York has the highest exports into the US as well as the highest imports from the US FR',
+      },
+    },
+  },
+
   mainSubheading: {
     en: 'This visualization shows the quarterly energy trade data between Canada and the USA for various energy sources.',
     fr: 'Cette visualisation illustre les données trimestrielles sur les échanges énergétiques entre le Canada et les États-Unis pour diverses sources d’énergie.',
@@ -344,6 +389,16 @@ const TranslationTable = fromJS({
   applicationPath: {
     en: '/import-export-visualization/',
     fr: '/visualisation-importations-exportations/',
+  },
+
+  imageDownload: {
+    en: 'Image Download',
+    fr: 'TODO',
+  },
+
+  saveImage: {
+    en: 'Save Image',
+    fr: 'TODO',
   },
 
   downloadable: {
@@ -421,7 +476,7 @@ const TranslationTable = fromJS({
         },
       },
     },
-    naturalGasLiquids: {
+    crudeOil: {
       defaultText: {
         en: 'This visualization shows imports to Canada and exports from Canada between the years $0 and $1. Drag the timeline bar to change. Click a province to view Detail',
         fr: 'Cette visualisation illustre les importations et les exportations du Canada de $0 à $1. Faites glisser la ligne du temps pour modifier les années. Cliquez sur une province pour des précisions à ce sujet.',
@@ -433,16 +488,16 @@ const TranslationTable = fromJS({
             fr: 'Exportations',
           },
           action: {
-            en: 'from',
-            fr: 'de',
+            en: 'to',
+            fr: 'par',
           },
           adjective: {
-            en: 'selected',
-            fr: 'ces',
+            en: '',
+            fr: '',
           },
           place: {
-            en: 'Provinces',
-            fr: 'Provinces',
+            en: 'PADDS',
+            fr: 'PADDS',
           },
         },
         body: {
@@ -478,6 +533,78 @@ const TranslationTable = fromJS({
           },
         },
       },
+    },
+    naturalGasLiquids: {
+      defaultText: {
+        en: 'This visualization shows imports to Canada and exports from Canada between the years $0 and $1. Drag the timeline bar to change. Click a province to view Detail',
+        fr: 'Cette visualisation illustre les importations et les exportations du Canada de $0 à $1. Faites glisser la ligne du temps pour modifier les années. Cliquez sur une province pour des précisions à ce sujet.',
+      },
+      exports: {
+        header: {
+          type: {
+            en: 'Exports',
+            fr: 'Exportations',
+          },
+          action: {
+            en: 'from',
+            fr: 'de',
+          },
+          adjective: {
+            en: 'selected',
+            fr: 'ces',
+          },
+          place: {
+            en: 'CAN',
+            fr: 'CAN',
+          },
+        },
+        body: {
+          action: {
+            en: '',
+            fr: '',
+          },
+        },
+      },
+      imports: {
+        header: {
+          type: {
+            en: 'Imports',
+            fr: 'Importations',
+          },
+          action: {
+            en: 'to',
+            fr: 'par',
+          },
+          adjective: {
+            en: '',
+            fr: '',
+          },
+          place: {
+            en: 'CAN',
+            fr: 'CAN',
+          },
+        },
+        body: {
+          action: {
+            en: '',
+            fr: '',
+          },
+        },
+      },
+    },
+  },
+  subType: {
+    Butane: {
+      en: 'BUTANE',
+      fr: 'BUTANE',
+    },
+    Propane: {
+      en: 'PROPANE',
+      fr: 'PROPANE',
+    },
+    propaneButane: {
+      en: 'Butane and Propane',
+      fr: 'Butane et Propane',
     },
   },
 
@@ -754,6 +881,10 @@ const TranslationTable = fromJS({
       PJMPP: {
         en: 'Pennsylvania Jersey Maryland Power Pool',
         fr: 'Réseau commun Pennsylvanie NJ Maryland',
+      },
+      powerPools: {
+        en: 'Power Pools',
+        fr: 'TODO',
       },
     },
   },

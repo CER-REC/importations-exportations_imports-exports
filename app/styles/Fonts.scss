@@ -120,6 +120,12 @@
 .mapPieceText {
   font-family: $fira-sans-condensed;
   font-size: 13px;
+  fill: $neutral-medium;
+}
+
+.powerPoolLabel {
+  font-family: $fira-sans-condensed;
+  font-size: 14px;
   fill: $neutral-light;
 }
 
@@ -134,6 +140,30 @@
   font-family: $fira-sans-condensed;
   font-size: 13px;
   fill: $neutral-light;
+}
+
+.explanationText {
+  font-family: $fira-sans-condensed;
+  font-size: 11px;
+  color: $explanation;
+}
+
+.imageDownloadHeading {
+  font-family: $fira-sans-condensed;
+  font-size: 22px;
+  color: $neutral-medium;
+}
+
+.saveImage {
+  font-family: $fira-sans-condensed;
+  font-size: 18px;
+  color: $neutral-medium;
+}
+
+.bitlyText {
+  font-family: $fira-sans-condensed;
+  fill: $neutral-light;
+  font-size: 13px;
 }
 
 .aboutHeading {
@@ -159,6 +189,13 @@
 }
 
 .aboutBodyText {
+  font-family: $fira-sans-condensed;
+  font-size: 11px;
+  color: $neutral-medium;
+  margin-left: 25px;
+}
+
+.subtext {
   font-family: $fira-sans-condensed;
   font-size: 11px;
   color: $neutral-medium;
@@ -208,23 +245,28 @@
 }
 .paddArrowCanadaFonts{
   font-family:$fira-sans-condensed;
-  font-size:15px;
+  font-size:13px;
   fill:#666;
 }
 .paddArrowUSFonts{
   font-family:$fira-sans-condensed;
-  font-size:15px;
+  font-size:13px;
   fill:#666;
 }
 .explanationBottomText{
   font-family:$fira-sans-condensed;
   font-size:15px;
-  fill:#666;
+  fill:#999;
 }
 .explanationTopText{
   font-family:$fira-sans-condensed;
   font-size:15px;
-  fill:#666;
+  fill:#999;
+}
+.paddMapPieceLabel {
+  font-family:$fira-sans-condensed;
+  font-size:12px;
+  fill:#fff;
 }
 .confidentialityText {
   font-family:$fira-sans-condensed;
@@ -239,5 +281,5 @@
 .portProvinceLabel{
   font-family: $fira-sans-condensed-semibold;
   color: $neutral-medium;
-  font-size:21px;
+  font-size:16px;
 }

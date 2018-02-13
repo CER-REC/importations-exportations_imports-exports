@@ -14,15 +14,17 @@ import { handleInteraction } from '../utilities'
 import { ExpandSocialBar } from '../actions/socialBar'
 
 import { OpenModal as ShowAboutWindowCreator } from '../actions/modal'
+import { OpenModal as ShowImageDownloadWindow } from '../actions/modal'
+import { OpenModal as ShowDataDownloadWindow } from '../actions/modal'
 
 import './SocialBar.scss'
-
 
 class SocialBar extends React.Component {
   static get propTypes() {
     return {
       language: PropTypes.string.isRequired,
       viewport: PropTypes.instanceOf(Immutable.Map).isRequired,
+      screenshotMode: PropTypes.bool.isRequired,
     }
   }
 
@@ -153,21 +155,15 @@ class SocialBar extends React.Component {
 
   downloadImageClick() {
     if (this.props.expandSocialBar) {
-      const TODO = 100
-      const screenshotUrl = `${RouteComputations.screenshotOrigin(document.location)}/${Constants.get('screenshotPath')}/?pageUrl=${RouteComputations.screenshotParameter(document.location)}&width=${TODO}&height=${TODO}`
-
-      window.open(screenshotUrl)
+      this.props.imageDownloadClick()
     }
   }
 
   downloadDataClick() {
     if (this.props.expandSocialBar) {
-      const appRoot = RouteComputations.appRoot(document.location, this.props.language)
-      const fileName = Tr.getIn(['downloadable', 'csv', this.props.language])
-      window.open(`${appRoot}data/${fileName}`, 'data:text/csv;charset=utf-8,data/')
+      this.props.dataDownloadClick()
     }
   }
-
 
   icons() {
     let transformSocialBarIcons = `translate(${this.props.viewport.get('x') - Constants.getIn(['socialBar', 'iconMarginY'])}, 0)`
@@ -304,6 +300,9 @@ class SocialBar extends React.Component {
   }
 
   render() {
+    if(this.props.screenshotMode === true) {
+      return null
+    }
     return (<g>
       {this.controlArrow()}
       {this.icons()}
@@ -317,6 +316,7 @@ class SocialBar extends React.Component {
 const mapStateToProps = state => ({
   viewport: state.viewport,
   language: state.language,
+  screenshotMode: state.screenshotMode,
   expandSocialBar: state.expandSocialBar,
 })
 
@@ -324,9 +324,16 @@ const mapDispatchToProps = dispatch => ({
   onClick() {
     dispatch(ShowAboutWindowCreator('about'))
   },
+  imageDownloadClick() {
+    dispatch(ShowImageDownloadWindow('imageDownload'))
+  },
   controlArrowClick() {
     dispatch(ExpandSocialBar())
   },
+  dataDownloadClick() {
+    dispatch(ShowDataDownloadWindow('dataDownload'))
+ },
 })
+
 
 export default connect(mapStateToProps, mapDispatchToProps)(SocialBar)

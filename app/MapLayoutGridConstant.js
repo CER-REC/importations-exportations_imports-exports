@@ -68,14 +68,14 @@ const MapLayoutGridConstant = fromJS({
       ],
     },
     us: {
-      mapPieceScale: 0.58,
+      mapPieceScale: 1,
       defaultColumns: 12,
       sortingRowPadding: -0.5,
       dimensions: {
         height: 37.09,
         width: 38.75,
-        yAxisPadding: 20.5,
-        xAxisPadding: 25.5,
+        yAxisPadding: 5,
+        xAxisPadding: 9,
       },
       styles: {
         color: '#ede3cb',
@@ -98,7 +98,7 @@ const MapLayoutGridConstant = fromJS({
           name: 'ME', originKey: 'ME', x: 10.5, y: 0,
         },
         {
-          name: 'AK', originKey: 'AK', x: -0.25, y: 1,
+          name: 'AK', originKey: 'AK', x: 0.16, y: 1.9,
         },
         {
           name: 'WA', originKey: 'WA', x: 1, y: 1,
@@ -158,7 +158,7 @@ const MapLayoutGridConstant = fromJS({
           name: 'RI', originKey: 'RI', x: 10.5, y: 2,
         },
         {
-          name: 'HI', originKey: 'HI', x: -0.25, y: 3,
+          name: 'HI', originKey: 'HI', x: 0.18, y: 3.9,
         },
         {
           name: 'OR', originKey: 'OR', x: 1, y: 3,
@@ -244,13 +244,13 @@ const MapLayoutGridConstant = fromJS({
       ],
     },
     powerpool: {
-      mapPieceScale: 0.58,
+      mapPieceScale: 1,
       defaultColumns: 12,
       dimensions: {
         height: 37.09,
         width: 38.75,
-        yAxisPadding: 20.5,
-        xAxisPadding: 25.5,
+        yAxisPadding: 8.528,
+        xAxisPadding: 12.528,
       },
       styles: {
         color: '#ede3cb',
@@ -428,10 +428,10 @@ const MapLayoutGridConstant = fromJS({
         },
         orderBy: {
           location: {
-            ca: { left: 0, top: -135 },
+            ca: { left: 1.3, top: -140 },
           },
           default: {
-            ca: { left: 0, top: -135 },
+            ca: { left: 1.3, top: -140 },
           },
         },
       },
@@ -478,14 +478,14 @@ const MapLayoutGridConstant = fromJS({
       ],
     },
     us: {
-      mapPieceScale: 0.58,
+      mapPieceScale: 1,
       defaultColumns: 12,
       sortingRowPadding: -0.5,
       dimensions: {
         height: 37.09,
         width: 38.75,
-        yAxisPadding: 8,
-        xAxisPadding: 12,
+        yAxisPadding: -8, //8
+        xAxisPadding: -5, //12
       },
       styles: {
         bottomMargin: 15,

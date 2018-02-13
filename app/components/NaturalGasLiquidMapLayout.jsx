@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import Immutable from 'immutable'
 import PropTypes from 'prop-types'
 
-import NaturalGasLiquidMapPiece from './NaturalGasLiquidMapPiece'
+import MapPiece from './MapPiece'
 import MapLayoutGridConstant from '../MapLayoutGridConstant'
 import Constants from '../Constants'
 import Tr from '../TranslationTable'
@@ -31,7 +31,6 @@ const powerPoolTransform = (xaxis, yaxis, position, dimensions, mapPieceScale) =
 class NaturalGasLiquidMapLayout extends React.Component {
   static propTypes = {
     selection: PropTypes.instanceOf(Immutable.Map).isRequired,
-    dataPoints: PropTypes.instanceOf(Immutable.Map).isRequired,
     onMapPieceClick: PropTypes.func.isRequired,
     arrangeBy: PropTypes.string.isRequired,
     importExportVisualization: PropTypes.string.isRequired,
@@ -83,15 +82,17 @@ class NaturalGasLiquidMapLayout extends React.Component {
             aria-label={this.props.Tr('mapTileLabel', humanName, position.getIn(['subType',productSubType,'imports'],0).toLocaleString(), position.getIn(['subType',productSubType,'exports'], 0).toLocaleString(), this.props.unit)}
             transform={`scale(${mapPieceScale})`}
           >
-            <NaturalGasLiquidMapPiece
+            <MapPiece
               data={position}
+              dataKey={['subType',productSubType]}
               dimensions={dimensions}
               legends={MapLayoutGridConstant.getIn([type, 'legends'])}
               bins={this.props.bins}
               styles={styles}
-              productSubType={productSubType}
               isMapPieceSelected={this.isMapPieceSelected(position.get('name'), this.props.country)}
               isSelected={isSelected}
+              mapPieceKey='name'
+              mapPieceStyleClass = 'mapPieceText'
               x1={mapPieceTransformStartXaxis(position, dimensions, mapPieceScale)}
               y1={mapPieceTransformStartYaxis(position, dimensions, mapPieceScale)}
             />
@@ -103,18 +104,34 @@ class NaturalGasLiquidMapLayout extends React.Component {
 
   renderDetailBreakdown(data) {
     const detailBreakdownData = Constants.getIn(['detailBreakDown', this.props.country])
-    if (typeof detailBreakdownData !== 'undefined' && detailBreakdownData.get('required', false)) {
-      return (<DetailBreakdown
-        data={data}
-        type={detailBreakdownData.get('type')}
-        trContent={Tr.getIn(['detailBreakDown', this.props.importExportVisualization, detailBreakdownData.get('type')])}
-        veritcalPosition={detailBreakdownData.get('displayPosition')}
-        color={detailBreakdownData.get('color')}
-        height={detailBreakdownData.get('height')}
-        showDefault={detailBreakdownData.get('showDefault', false)}
-      />)
-    }
-    return null
+    
+    if (!detailBreakdownData.get('required', false)) { return null }
+    const subTypeTotal = this.props.layout.reduce((acc, nextValue) => {
+      const subType = nextValue.get('subType')
+      subType.forEach((subTypeVal, subTypeKey) => {
+        if(subTypeKey !== 'propaneButane'){
+          if(!acc[subTypeKey]){
+            acc[subTypeKey] = subTypeVal.get(detailBreakdownData.get('type'))
+          } else {
+            acc[subTypeKey] += subTypeVal.get(detailBreakdownData.get('type'))
+          }
+        }
+      })
+      return acc
+    }, {})
+    const nameMappings = Tr.getIn(['subType'])
+    return (<DetailBreakdown
+      data={Immutable.fromJS(subTypeTotal)}
+      type={detailBreakdownData.get('type')}
+      trContent={Tr.getIn(['detailBreakDown', this.props.importExportVisualization, detailBreakdownData.get('type')])}
+      veritcalPosition={detailBreakdownData.get('displayPosition')}
+      color={detailBreakdownData.get('color')}
+      height={detailBreakdownData.get('height')}
+      showDefault={detailBreakdownData.get('showDefault', false)}
+      nameMappings={nameMappings}
+      defaultContent=''
+    />)
+    
   }
 
   renderDetailSidebar() {
@@ -137,7 +154,6 @@ const mapStateToProps = (state, props) => ({
   importExportVisualization: state.importExportVisualization,
   layout: getElectricityMapLayout(state, props),
   selection: getSelectionSettings(state, props),
-  dataPoints: sortAggregatedLocationsSelector(state, props),
   sType: subType(state,props),
   arrangeBy: arrangeBy(state, props),
   bins: binSelector(state, props),

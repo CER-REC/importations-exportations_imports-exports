@@ -23,7 +23,7 @@ export const arrangeBy = createSelector(
   (settings, override) => override || settings.get('arrangeBy'),
 )
 
-const amount = createSelector(
+export const amount = createSelector(
   visualizationSettings,
   amountOverride,
   (settings, override) => override || settings.get('amount'),
@@ -201,22 +201,5 @@ export const aggregateLocationNaturalGasSelector = createSelector(
       return acc
     }, {})
     return Immutable.fromJS(result)
-  },
-)
-
-export const sortAggregatedLocationsSelector = createSelector(
-  arrangeBy,
-  aggregateLocationSelector,
-  (sortBy, points) => {
-    switch (sortBy) {
-      case 'imports':
-        return points.sort((a, b) => (b.get('imports', 0) - a.get('imports', 0)))
-      case 'exports':
-        return points.sort((a, b) => (b.get('exports', 0) - a.get('exports', 0)))
-      case location:
-        // TODO Use constants to sort for the map
-      default:
-        return points
-    }
   },
 )

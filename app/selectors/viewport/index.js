@@ -2,7 +2,7 @@ import { createSelector } from 'reselect'
 
 import Constants from '../../Constants'
 
-export const menuWidth = () => Constants.getIn(['visualizationContainer', 'leftMargin'])
+export const menuWidth = () => Constants.getIn(['menuBar', 'width'])
 const detailSidebarWidth = () =>
   Constants.getIn(['visualizationDetailContainer', 'width'])
 const viewport = state => state.viewport

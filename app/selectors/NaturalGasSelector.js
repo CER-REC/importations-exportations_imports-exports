@@ -41,7 +41,7 @@ export const getPointsByCountry = createSelector(
   (points, country) => points.filter(point => point.get('country') === country),
 )
 
-const getElectricityImportAndExport = createSelector(
+const getNaturalGasLiquidsImportAndExport = createSelector(
   getPointsByCountry,
   getCountry,
   (points, country) => {
@@ -72,7 +72,7 @@ const getElectricityImportAndExport = createSelector(
 )
 
 const createSortedLayout = createSelector(
-  getElectricityImportAndExport,
+  getNaturalGasLiquidsImportAndExport,
   getColumns,
   getPadding,
   (data, columns, rowPadding) => {
@@ -108,7 +108,7 @@ const createSortedLayout = createSelector(
 )
 
 const parseLocationData = createSelector(
-  getElectricityImportAndExport,
+  getNaturalGasLiquidsImportAndExport,
   getElectricityMapLayoutConstants,
   (data, layout) => {
     const resultList = []

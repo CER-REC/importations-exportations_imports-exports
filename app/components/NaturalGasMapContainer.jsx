@@ -1,11 +1,12 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
+import {fromJS} from 'immutable'
 import { geoConicConformal, geoPath } from 'd3-geo'
 import { feature } from 'topojson-client'
 
 import Constants from '../Constants'
-import NaturalGasMapPiece from './NaturalGasMapPiece'
+import MapPiece from './MapPiece'
 import MapLayoutGridConstant from '../MapLayoutGridConstant'
 import { arrangeBy, binSelector, aggregateLocationNaturalGasSelector } from '../selectors/data'
 import { getSelectionSettings } from '../selectors/NaturalGasSelector'
@@ -74,7 +75,6 @@ class NaturalGasMapContainer extends React.PureComponent {
   render(){
     const type = this.props.importExportVisualization
     const arrangedData = this.orderBy(this.props.selector, this.props.arrangeBy)
-
     const mapLayoutGrid = MapLayoutGridConstant.get(type)
 
     const dimensions = mapLayoutGrid.get('dimensions')
@@ -87,7 +87,7 @@ class NaturalGasMapContainer extends React.PureComponent {
     let leftPadding = 0
     let topPadding = 0
     layout =  layout.map((value) => {
-      const ports = arrangedData.get(value)
+      const ports = arrangedData.get(value, fromJS({}))
       const portsCount = ports.count()
       const maximunRows = portsCount > 7 ? Math.ceil(portsCount / 2): portsCount
       
@@ -110,13 +110,17 @@ class NaturalGasMapContainer extends React.PureComponent {
         row +=1
         return (<g key={`NaturalGasMapPiece_${port.get('Province')}_${port.get('portName')}`} 
           {...handleInteraction(this.onClick, port.get('portName'))}>
-            <NaturalGasMapPiece
+            <MapPiece
               data={port}
+              dataKey={['activities']}
               dimensions={dimensions}
               bins={this.props.bins}
               styles={styles}
               isMapPieceSelected={this.isMapPieceSelected( port.get('portName'), value)}
               isSelected={this.isSelected()}
+              isOrigin={true}
+              mapPieceKey='portName'
+              mapPieceStyleClass = 'portLabel'
               x1={left}
               y1={top}
             />
@@ -130,6 +134,8 @@ class NaturalGasMapContainer extends React.PureComponent {
       row = 0
       return (
         <g key={`NaturalGasMap_${value}`} >
+          <rect x={ provinceTextPosition - 9} y={dimensions.get('topPadding') - 15}  
+            width="39" height="18" fill="none" stroke="#a99372" strokeWidth="0.75"/>
           <text className="portProvinceLabel" x={ provinceTextPosition } y={dimensions.get('topPadding')} 
           {...handleInteraction(this.onClick, '', value)}>{value}</text>
           {mapLayout.toArray()}

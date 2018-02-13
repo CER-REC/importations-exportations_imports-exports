@@ -5,7 +5,7 @@ const WorkspaceComputations = {}
 // viewport: the viewport state
 WorkspaceComputations.workspaceWidth = viewport => viewport.get('x')
 
-WorkspaceComputations.visualizationHeight = viewport => viewport.get('y') + 500
+WorkspaceComputations.visualizationHeight = viewport => viewport.get('y') + 50
 
 WorkspaceComputations.topHeightMargin = () => Constants.get('topHeightMargin')
 
@@ -28,7 +28,7 @@ WorkspaceComputations.showExplanationsY = viewport =>
 WorkspaceComputations.legendY = viewport =>
   WorkspaceComputations.showExplanationsY(viewport) + Constants.getIn(['legend', 'topMargin'])
 
-WorkspaceComputations.socialBarY = viewport => viewport.get('y') + 120
+WorkspaceComputations.socialBarY = viewport => viewport.get('y') + 50
 
 WorkspaceComputations.visualizationContainerWidth = viewport =>
   viewport.get('x') - Constants.getIn(['visualizationContainer', 'widthPadding'])

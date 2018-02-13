@@ -6,7 +6,7 @@ export const canadaPaddPosition = createSelector(
   visualizationContentPosition,
   visContent => ({
     top: visContent.top,
-    left: visContent.left,
+    left: visContent.left + 1.3,
     width: visContent.width,
     height: 150,
   }),
@@ -55,7 +55,7 @@ export const chartExportPosition = createSelector(
 export const usPaddPosition = createSelector(
   chartExportPosition,
   chartPosition => ({
-    top: chartPosition.top + chartPosition.height,
+    top: chartPosition.top + chartPosition.height - 80,
     left: chartPosition.left,
     width: chartPosition.width,
     height: 100,

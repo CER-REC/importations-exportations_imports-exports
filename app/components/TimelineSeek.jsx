@@ -7,7 +7,12 @@ import SVGDrag from './SVGDrag/'
 import Constants from '../Constants'
 import { timelineFilter } from '../actions/visualizationSettings'
 import * as TimelineSelector from '../selectors/timeline'
+
+import ExplanationDot from './ExplanationDot'
+
 import trSelector from '../selectors/translate'
+
+const WorkspaceComputations = require('../computations/WorkspaceComputations.js')
 
 class TimelineSeek extends React.PureComponent {
   static propTypes = {
@@ -19,6 +24,7 @@ class TimelineSeek extends React.PureComponent {
     top: PropTypes.number.isRequired,
     left: PropTypes.number.isRequired,
     width: PropTypes.number.isRequired,
+    height: PropTypes.number.isRequired,
     data: PropTypes.instanceOf(Map).isRequired,
     timelineGroup: PropTypes.oneOf(['year', 'quarter']).isRequired,
     timelineRange: PropTypes.instanceOf(Map).isRequired,
@@ -145,6 +151,25 @@ class TimelineSeek extends React.PureComponent {
     return newRange
   }
 
+  timeSeekExplanation() {
+    if (this.props.side !== 'start') {
+      return null
+    }
+    return (<g>
+      <ExplanationDot
+        linePath="M79,57 C163,276 228,251 486,247"
+        xPosition={-7}
+        yPosition={14}
+        lineX={120}
+        lineY={87}
+        textX={35}
+        textY={50}
+        containerX={this.props.left + this.state.offset}
+        containerY={this.props.top}
+        text="Drag to select time frame"
+    /></g>)
+  }
+
   render() {
     const { side, timelineRange } = this.props
     const sideTransform = (side === 'start')
@@ -156,6 +181,8 @@ class TimelineSeek extends React.PureComponent {
       timelineRange.getIn([side, 'year']),
       timelineRange.getIn([side, 'quarter']),
     )
+    const scale = (this.props.height / 14.8) // 14.8 is the height of the SVG
+    const xOffset = 6.69 * scale // 6.69 is the width of the SVG
     return (
       <g transform={sideTransform}>
         <SVGDrag
@@ -166,13 +193,14 @@ class TimelineSeek extends React.PureComponent {
           aria-label={label}
         >
           <g
-            transform={`translate(${this.state.offset - 12} 0)`}
+            transform={`translate(${this.state.offset - xOffset} 0) scale(${scale})`}
           >
             <polygon
-              points="7,0 10,0 10,26 0,26"
+              points="5.29 0.5 6.69 0.5 6.69 14.8 0.69 14.8 5.29 0.5"
               stroke={Constants.getIn(['styleGuide', 'colours', 'SandExtraDark'])}
               fill="white"
             />
+            {this.timeSeekExplanation()}
           </g>
         </SVGDrag>
       </g>

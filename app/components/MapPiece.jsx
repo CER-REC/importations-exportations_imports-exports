@@ -9,6 +9,7 @@ import ConfidentialIcon from './ConfidentialIcon'
 import Constants from '../Constants'
 import AnimatedMapPiece from './SVGAnimation/AnimatedMapPiece'
 import MapLayoutGridConstant from '../MapLayoutGridConstant'
+import ExplanationDot from './ExplanationDot'
 
 class MapPiece extends React.Component {
   static propTypes = {
@@ -19,11 +20,13 @@ class MapPiece extends React.Component {
     legend: PropTypes.bool,
     confidentialityMenu: PropTypes.bool.isRequired,
     selectedEnergy: PropTypes.string.isRequired,
+    isOrigin: PropTypes.bool,
   }
 
   static defaultProps = {
     bins: new Immutable.List(),
     legend: false,
+    isOrigin: false,
   }
 
   getArrowColor(type, value) {
@@ -42,21 +45,39 @@ class MapPiece extends React.Component {
     )
   }
 
-  drawArrow(legends, data, type, styles, arrowProps) {
-    if (data.get(type) !== 0) {
-      let color = this.getArrowColor(type, data.get(type))
-      if(typeof this.props.arrowProps !== 'undefined' && typeof this.props.arrowProps.get('fill') !== 'undefined'){
-        color = this.props.arrowProps.get('fill') 
-      }
-      return (<ImportExportArrow
-        arrowSpacing={styles.get('arrowSpacing')}
-        type={type}
-        color= {color}
-        arrowProps={arrowProps}
-        text = {this.props.text}
-      />)
+  drawArrow(type) {
+    let dataKey = !this.props.dataKey? []: this.props.dataKey.slice(0)
+    dataKey.push(type)
+    if (this.props.data.getIn(dataKey, 0) === 0) { return null}
+
+    let color = this.getArrowColor(type, this.props.data.getIn(dataKey))
+    if(typeof this.props.arrowProps !== 'undefined' && typeof this.props.arrowProps.get('fill') !== 'undefined'){
+      color = this.props.arrowProps.get('fill') 
     }
-    return ''
+    return (<ImportExportArrow
+      arrowSpacing={this.props.styles.get('arrowSpacing')}
+      type={type}
+      color= {color}
+      arrowProps={this.props.arrowProps}
+      text = {this.props.text}
+    />)
+  }
+
+  newYorkExplanation() {
+    if (this.props.data.get('name') !== 'NY') { return null }
+    return (<g>
+      <ExplanationDot
+        linePath="M110,43 C248,257 312,213 633,213"
+        xPosition={18}
+        yPosition={5}
+        lineX={110}
+        lineY={43}
+        textX={60}
+        textY={55}
+        containerX={this.props.x1 * MapLayoutGridConstant.getIn(['electricity', 'us' , 'mapPieceScale'], 1) + 223}
+        containerY={this.props.y1 * MapLayoutGridConstant.getIn(['electricity', 'us' , 'mapPieceScale'], 1) + 470}
+        text="New York has the highest exports into the US as well as the highest imports from the US"
+    /></g>)
   }
 
   manitobaConfidentialIcon() {
@@ -65,8 +86,8 @@ class MapPiece extends React.Component {
         && this.props.confidentialityMenu
         && this.props.selectedEnergy === 'electricity') {
       if (this.props.data.get('name') !== 'MB') { return null }
-      return <ConfidentialIcon 
-        styles={this.props.styles.get('confidentialStyle')} 
+      return <ConfidentialIcon
+        styles={this.props.styles.get('confidentialStyle')}
         text="14/50 values confidential"
         containerX={this.props.x1 + MapLayoutGridConstant.getIn(['electricity', 'canada' , 'mapPieceScale'], 1) + 308}
         containerY={this.props.y1 + MapLayoutGridConstant.getIn(['electricity', 'canada' , 'mapPieceScale'], 1) + 80}
@@ -107,25 +128,33 @@ class MapPiece extends React.Component {
         topMargin={this.props.styles.get('bottomMargin')}
         bottomMargin={this.props.styles.get('topMargin')}
         mapPieceHeight={this.props.dimensions.get('height')}
-        name={this.props.data.get('name')}
+        name={this.props.data.get(this.props.mapPieceKey, '')}
         mapPieceProps={this.props.mapPieceProps}
-        styleClass='mapPieceText'
+        styleClass={this.props.mapPieceStyleClass}
         text = {this.props.text}
       />
   }
 
   render() {
-    let arrowTransform = `translate(${Constants.getIn(['mapPieceArrowStyle', 'x'])}, ${Constants.getIn(['mapPieceArrowStyle', 'y'])})`
+
+    let arrowTransform = `translate(${Constants.getIn(['mapPieceArrowStyle', 'x'])}, ${Constants.getIn(['mapPieceArrowStyle', 'y']) + 0.5})`
     if (this.props.styles.get('arrowPosition') === 'down') {
-      arrowTransform = `translate(${Constants.getIn(['mapPieceArrowStyle', 'x'])}, ${this.props.dimensions.get('height') - Constants.getIn(['mapPieceArrowStyle', 'y'])})`
+      arrowTransform = `translate(${Constants.getIn(['mapPieceArrowStyle', 'x'])}, ${this.props.dimensions.get('height') - Constants.getIn(['mapPieceArrowStyle', 'y']) + 4})`
     }
 
     let stroke = 'none'
     if (this.props.isMapPieceSelected === true) {
       stroke = 'black'
     }
+
+     let confidentialIcon = ''
+    if (typeof this.props.data.get('confidentialCount') !== 'undefined' && this.props.data.get('confidentialCount') !== 0) {
+      // TODO: on click show pop over to show confidential values
+      confidentialIcon = <ConfidentialIcon styles={this.props.styles.get('confidentialStyle')} />
+    }
+
     let opacity = 1
-    if (this.props.isSelected === true && this.props.isMapPieceSelected === false) {
+    if (this.props.isSelected === true && this.props.isMapPieceSelected === false && this.props.isOrigin) {
       opacity = 0.5
     }
 
@@ -143,15 +172,18 @@ class MapPiece extends React.Component {
       />
       {this.renderMapPieceLabel()}
       <g transform={arrowTransform}>
-        {this.drawArrow(this.props.legends, this.props.data, 'exports', this.props.styles, this.props.arrowProps)}
-        {this.drawArrow(this.props.legends, this.props.data, 'imports', this.props.styles, this.props.arrowProps)}
+        {this.drawArrow('exports')}
+        {this.drawArrow('imports')}
       </g>
+      {confidentialIcon}
+    )
       <AnimatedMapPiece
         x1={this.props.x1 || 0}
         y1={this.props.y1 || 0}
         x2={this.props.x1 || 0}
         y2={this.props.y1 || 0}
       />
+      {this.newYorkExplanation()}
       {this.manitobaConfidentialIcon()}
       {this.powerpoolConfidentialIcon()}
             </g>)

@@ -48,7 +48,6 @@ class ProportionChart extends Chart {
               key={type}
               strokeWidth={layout.get('barWidth')}
               stroke={lineColor}
-              strokeLinecap="round"
               opacity={opacity}
               animate={{ y1: '1s' }}
             />
