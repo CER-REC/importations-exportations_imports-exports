@@ -144,7 +144,7 @@ const TranslationTable = fromJS({
     },
     refinedPetroleumProducts: {
       en: 'Refin. Petroleum Prod.',
-      fr: 'Rafinn. Prod. pétroliers',
+      fr: 'Prod. pétroliers rafinn.',
     },
   },
 
@@ -381,6 +381,29 @@ const TranslationTable = fromJS({
   applicationPath: {
     en: '/import-export-visualization/',
     fr: '/visualisation-importations-exportations/',
+  },
+
+  visualizationPaths: {
+    electricity: {
+      en: 'electricity',
+      fr: 'électricité',
+    },
+    crudeOil: {
+      en: 'crude-oil',
+      fr: 'pétrole-brut',
+    },
+    naturalGas: {
+      en: 'natural-gas',
+      fr: 'gaz-naturel',
+    },
+    naturalGasLiquids: {
+      en: 'natural-gas-liquids',
+      fr: 'liquides-de-gaz-naturel',
+    },
+    refinedPetroleumProducts: {
+      en: 'refined-petroleum-products',
+      fr: 'produits-pétroliers-raffinés',
+    },
   },
 
   imageDownload: {

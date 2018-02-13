@@ -72,7 +72,12 @@ export default (store) => {
     const compressed = encodeURIComponent(LZUTF8.compress(JSON.stringify(toSave), { outputEncoding: 'Base64' }))
     updatingHistory = true
     const baseURL = TR.getIn(['applicationPath', state.language])
-    history.push(`${baseURL}${state.importExportVisualization}?config=${compressed}`)
+    const visualizationPath = TR.getIn([
+      'visualizationPaths',
+      state.importExportVisualization,
+      state.language,
+    ])
+    history.push(`${baseURL}${visualizationPath}?config=${compressed}`)
     updatingHistory = false
   }
 }
