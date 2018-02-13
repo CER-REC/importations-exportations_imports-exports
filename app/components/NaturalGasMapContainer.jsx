@@ -33,7 +33,15 @@ class NaturalGasMapContainer extends React.PureComponent {
       }
     })
   }
-
+  getAllPortsByProvinceName = (provinces) =>{
+    const portList = Constants.getIn(['dataloader','mapping','ports'])
+    let result = portList.filter(port=> provinces.includes(port.get('Province')))
+    result = result.reduce((acc, nextValue) => {
+      acc.push(nextValue.get('Port Name'))
+      return  acc
+    }, [])
+    return result
+  }
   onClick = ( portName, provinceName = null) => {
     const selection =  this.props.selectionSettings
     let ports = []
@@ -46,10 +54,12 @@ class NaturalGasMapContainer extends React.PureComponent {
       } else {
         provinces = selection.get('provinces').delete(provinceExists)
       }
+      ports = this.getAllPortsByProvinceName(provinces)
     } else{
+      ports = selection.get('provinces').count() > 0 ?[]:selection.get('ports').toJS()
       const portExists = selection.get('ports').indexOf(portName)
       if (portExists === -1) {
-        ports = selection.get('ports').push(portName).toJS()
+        ports.push(portName)
       } else {
         ports = selection.get('ports').delete(portExists)
       }
