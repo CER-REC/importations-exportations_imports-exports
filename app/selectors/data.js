@@ -106,6 +106,7 @@ const filterByHex = (point, selectedMapPieces) => {
     return point
   }
   return selectedMapPieces.indexOf(point.get('originKey')) > -1
+  || selectedMapPieces.indexOf(point.get('port')) > -1
 }
 
 const filterByTimelineSelector = createSelector(
@@ -116,7 +117,10 @@ const filterByTimelineSelector = createSelector(
 export const filterByHexSelector = createSelector(
   activityGroupSelector,
   selectedPieces,
-  (points, selectedMapPieces) => points.filter(point => filterByHex(point, selectedMapPieces)),
+  (points, selectedMapPieces) => {
+      console.log(points)
+    return points.filter(point => filterByHex(point, selectedMapPieces))
+  },
 )
 
 export const aggregateLocationSelector = createSelector(
