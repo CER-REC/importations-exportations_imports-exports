@@ -104,15 +104,12 @@ const filterByTimeline = (point, range, groupingBy) => {
       return true
     }
   } else {
-    if (range.getIn(['start', 'quarter']) === range.getIn(['end', 'quarter'])) {
-      if (range.getIn(['start', 'year']) <= point.get('year') && point.get('year') <= range.getIn(['end', 'year'])) {
-        return true
-      }
-      return false
-    }
-    return true
+    if (range.getIn(['start', 'quarter']) !== range.getIn(['end', 'quarter'])) { return true }
+    return (range.getIn(['start', 'year']) <= point.get('year')
+      && point.get('year') <= range.getIn(['end', 'year'])
+      && range.getIn(['start', 'quarter']) === point.get('quarter')
+      )
   }
-  return false
 }
 const filterByHex = (point, selectedMapPieces) => {
   if (selectedMapPieces.count() === 0) {
