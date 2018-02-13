@@ -74,8 +74,8 @@ class MapPiece extends React.Component {
         lineY={43}
         textX={60}
         textY={55}
-        containerX={this.props.x1 * MapLayoutGridConstant.getIn(['electricity', 'us' , 'mapPieceScale'], 1) + 223}
-        containerY={this.props.y1 * MapLayoutGridConstant.getIn(['electricity', 'us' , 'mapPieceScale'], 1) + 470}
+        containerX={this.props.x1 * MapLayoutGridConstant.getIn(['electricity', 'us' , 'mapPieceScale'], 1) + 260}
+        containerY={this.props.y1 * MapLayoutGridConstant.getIn(['electricity', 'us' , 'mapPieceScale'], 1) + 459}
         text="New York has the highest exports into the US as well as the highest imports from the US"
     /></g>)
   }
@@ -110,8 +110,8 @@ class MapPiece extends React.Component {
       return <ConfidentialIcon 
         styles={this.props.styles.get('confidentialStyle')} 
         text="n/50 values confidential"
-        containerX={this.props.x1 * MapLayoutGridConstant.getIn(['electricity', 'us' , 'mapPieceScale'], 1) + 757}
-        containerY={768}
+        containerX={this.props.x1 * MapLayoutGridConstant.getIn(['electricity', 'us' , 'mapPieceScale'], 1) + 768}
+        containerY={755}
         lineX={102}
         lineY={40}
         textX={40}
