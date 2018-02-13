@@ -60,7 +60,7 @@ DetailBreakdown.propTypes = {
   data: PropTypes.instanceOf(Immutable.Map).isRequired,
   trContent: PropTypes.instanceOf(Immutable.Map).isRequired,
   nameMappings: PropTypes.instanceOf(Immutable.Map).isRequired,
-  showDefault: PropTypes.string.isRequired,
+  showDefault: PropTypes.bool.isRequired,
 }
 
 export default connect((state, props) => ({

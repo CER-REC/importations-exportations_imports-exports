@@ -56,7 +56,7 @@ class NaturalGasMapContainer extends React.PureComponent {
       }
       ports = this.getAllPortsByProvinceName(provinces)
     } else{
-      ports = selection.get('provinces').count() > 0 ?[]:selection.get('ports').toJS()
+      ports = selection.get('provinces').count > 0 ?[]:selection.get('ports').toJS()
       const portExists = selection.get('ports').indexOf(portName)
       if (portExists === -1) {
         ports.push(portName)
