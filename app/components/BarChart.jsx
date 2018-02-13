@@ -8,6 +8,7 @@ import AxisGuide from './AxisGuide'
 import DetailSidebar from './DetailSidebar'
 import DetailTotal from './DetailTotal'
 import ConfidentialCount from './ConfidentialCount'
+import MissingDataCount from './MissingDataCount'
 import { timelineGrouping, timelineData } from '../selectors/timeline'
 
 class BarChart extends Chart {
@@ -76,6 +77,11 @@ class BarChart extends Chart {
     }).toArray()
 
     const sidebarContent = [
+      <MissingDataCount
+        key="missing"
+        valueKey={this.props.valueKey}
+        aggregateKey={this.props.aggregateKey}
+      />,
       <ConfidentialCount
         key="confidential"
         valueKey={this.props.valueKey}

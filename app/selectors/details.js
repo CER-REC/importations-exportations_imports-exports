@@ -2,6 +2,7 @@ import { createSelector } from 'reselect'
 import { fromJS } from 'immutable'
 
 import { aggregateQuarter, getValueKey } from './timeline'
+import { aggregateLocationSelector } from './data'
 
 export const detailTotal = createSelector(
   aggregateQuarter,
@@ -22,4 +23,10 @@ export const confidentialTotal = createSelector(
   }), { confidential: 0, total: 0 }),
 )
 
-
+export const missingDataTotal = createSelector(
+  aggregateLocationSelector,
+  data => data.reduce((acc, next) => ({
+    missing: acc.missing + (next.get('origin') === '(blank)' ? next.get('totalCount', 0) : 0),
+    total: acc.total + next.get('totalCount', 0),
+  }), { missing: 0, total: 0 }),
+)
