@@ -56,45 +56,45 @@ class ProportionChart extends Chart {
     return <DetailSidebar
           {...this.props}
         >
-          <table width="100%" className="detailBreakDownContainer" style={{ padding: '8px 0' }}>
-            <tbody>
-              {Object.keys(breakdown.values).map((key, i) => {
-                const colour = categoryColours.get(
-                  i + (categoryColours.count() - detailBreakdownList.length),
-                  Constants.getIn(['styleGuide', 'colours', 'ExportDefault']),
-                )
-                return (
-                  <DetailBreakdownRow
-                    key={key}
-                    label={
-                      <span>
-                        <div
-                          style={{
-                            display: 'inline-block',
-                            width: '8px',
-                            height: '8px',
-                            marginRight: '4px',
-                            backgroundColor: colour,
-                          }}
-                        />
-                        <strong>{key}</strong>
-                      </span>
-                    }
-                    value={breakdown.values[key]}
-                    unit={this.props.unit}
-                    total={breakdown.total}
-                    progressBarStyle={{ backgroundColor: colour }}
-                  />
-                )
-              })}
-            </tbody>
-          </table>
-          <ConfidentialCount
-            key="confidential"
-            valueKey="total"
-            aggregateKey={detailBreakdownKey}
-          />
-        </DetailSidebar>
+        <table width="100%" className="detailBreakDownContainer" style={{ padding: '8px 0' }}>
+          <tbody>
+            {Object.keys(breakdown.values).map((key, i) => {
+              const colour = categoryColours.get(
+                i + (categoryColours.count() - detailBreakdownList.length),
+                Constants.getIn(['styleGuide', 'colours', 'ExportDefault']),
+              )
+              return (
+                <DetailBreakdownRow
+                  key={key}
+                  label={
+                    <span>
+                      <div
+                        style={{
+                          display: 'inline-block',
+                          width: '8px',
+                          height: '8px',
+                          marginRight: '4px',
+                          backgroundColor: colour,
+                        }}
+                      />
+                      <strong>{key}</strong>
+                    </span>
+                  }
+                  value={breakdown.values[key]}
+                  unit={this.props.unit}
+                  total={breakdown.total}
+                  progressBarStyle={{ backgroundColor: colour }}
+                />
+              )
+            })}
+          </tbody>
+        </table>
+        <ConfidentialCount
+          key="confidential"
+          valueKey="total"
+          aggregateKey={detailBreakdownKey}
+        />
+    </DetailSidebar>
   }
   render() {
     const {
