@@ -75,49 +75,49 @@ export const activityGroupSelector = createSelector(
       point.get('activity') === filterActivityGroup
     )),
 )
+const selectedPieces = createSelector(
+  selection,
+  points => points.reduce((acc, nextValue) => {
+    if (Immutable.Map.isMap(nextValue)) {
+      nextValue.forEach((value) => {
+        acc = acc.concat(value.keySeq().toArray())
+      })
+    } else if (Immutable.List.isList(nextValue)) {
+      acc = acc.concat(nextValue)
+    }
+    return acc
+  }, new Immutable.List()),
+)
 
-const filterByTimeline = p => p.get('')
+const filterByTimeline = (point, range) => {
+  if (range.getIn(['start', 'year']) <= point.get('year')
+    && point.get('year') <= range.getIn(['end', 'year'])) {
+    if (range.getIn(['start', 'year']) === point.get('year')) {
+      return range.getIn(['start', 'quarter']) <= point.get('year')
+    } else if (range.getIn(['start', 'year']) === point.get('quarter')) {
+      return point.get('quarter') <= range.getIn(['end', 'quarter'])
+    }
+    return true
+  }
+  return false
+}
+const filterByHex = (point, selectedMapPieces) => {
+  if (selectedMapPieces.count() === 0) {
+    return point
+  }
+  return selectedMapPieces.indexOf(point.get('originKey')) > -1
+}
 
 const filterByTimelineSelector = createSelector(
   activityGroupSelector,
   timelineRange,
-  (points, range) => points.filter((point) => {
-    if (range.getIn(['start', 'year']) <= point.get('year')
-    && point.get('year') <= range.getIn(['end', 'year'])) {
-      if (range.getIn(['start', 'year']) === point.get('year')) {
-        return range.getIn(['start', 'quarter']) <= point.get('year')
-      } else if (range.getIn(['start', 'year']) === point.get('quarter')) {
-        return point.get('quarter') <= range.getIn(['end', 'quarter'])
-      }
-      return true
-    }
-    return false
-  }),
+  (points, range) => points.filter(point => filterByTimeline(point, range)),
 )
-
 export const filterByHexSelector = createSelector(
   activityGroupSelector,
-  selection,
-  (points, selectedPieces) => {
-    // TODO: Add filtering by selected hexes
-    selectedPieces = selectedPieces.reduce((acc, nextValue) => {
-      if (Immutable.Map.isMap(nextValue)) {
-        nextValue.forEach((value) => {
-          acc = acc.concat(value.keySeq().toArray())
-        })
-      } else if (Immutable.List.isList(nextValue)) {
-        acc = acc.concat(nextValue)
-      }
-      return acc
-    }, new Immutable.List())
-    if (selectedPieces.count() === 0) {
-      return points
-    }
-    return points.filter(point => selectedPieces.indexOf(point.get('originKey')) > -1)
-  },
+  selectedPieces,
+  (points, selectedMapPieces) => points.filter(point => filterByHex(point, selectedMapPieces)),
 )
-
-//const filterForSidebar = points => points.filter(v => filterByTimeline(p) && filterByHex(p))
 
 export const aggregateLocationSelector = createSelector(
   filterByTimelineSelector,
