@@ -10,6 +10,7 @@ import ConfidentialCount from './ConfidentialCount'
 import DetailBreakdownRow from './DetailBreakdownRow'
 import DetailTotal from './DetailTotal'
 import { timelineGrouping, timelineData } from '../selectors/timeline'
+import { amount } from '../selectors/data'
 
 const transportationMode = [
   'Pipeline',
@@ -145,4 +146,5 @@ class ProportionChart extends Chart {
 
 export default connect((state, props) => Object.assign({
   timelineGroup: timelineGrouping(state, props),
+  unit: amount(state, props),
 }, timelineData(state, props)))(ProportionChart)
