@@ -60,9 +60,7 @@ class NaturalGasLiquidMapLayout extends React.Component {
   }
 
   isMapPieceSelected(key, country) {
-    const isSelected = this.props.selection.get('origins').indexOf(key)
-    if (isSelected !== -1) { return true }
-    return false
+    return this.props.selection.get('origins').includes(key)
   }
   isSelected() {
     const length = this.props.selection.get('origins').count()
@@ -108,6 +106,7 @@ class NaturalGasLiquidMapLayout extends React.Component {
               isSelected={isSelected}
               mapPieceKey='name'
               mapPieceStyleClass = 'mapPieceText'
+              isOrigin={(this.props.selection.get('country') === this.props.country)}
               x1={mapPieceTransformStartXaxis(position, dimensions, mapPieceScale)}
               y1={mapPieceTransformStartYaxis(position, dimensions, mapPieceScale)}
             />
