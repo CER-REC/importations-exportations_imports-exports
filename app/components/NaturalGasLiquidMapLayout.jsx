@@ -41,16 +41,31 @@ class NaturalGasLiquidMapLayout extends React.Component {
   }
 
   onClick = (country, originKey) => {
-    return null
+    const { selection } = this.props
+    let origins = []
+    if (selection.get('country') === country) {
+      const originKeyExists = selection.get('origins').indexOf(originKey)
+      if (originKeyExists === -1) {
+        origins = selection.get('origins').push(originKey).toJS()
+      } else {
+        origins = selection.get('origins').delete(originKeyExists)
+      }
+    } else {
+      origins = [originKey]
+    }
+    this.props.onMapPieceClick({
+      country,
+      origins,
+    })
   }
 
   isMapPieceSelected(key, country) {
     const isSelected = this.props.selection.get('origins').indexOf(key)
     if (isSelected !== -1) { return true }
-    return this.props.selection.getIn(['destinations', country], new Immutable.List()).includes(key)
+    return false
   }
   isSelected() {
-    const length = this.props.selection.get('origins').count() + this.props.selection.get('destinations').count()
+    const length = this.props.selection.get('origins').count()
     return (length > 0)
   }
 
