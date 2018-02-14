@@ -81,6 +81,7 @@ class MapPiece extends React.Component {
   }
 
   manitobaConfidentialIcon() {
+    const valueString = `${this.props.data.get('confidentialCount')} / ${this.props.data.get('totalCount')} values confidential`
     if (typeof this.props.data.get('confidentialCount') !== 'undefined'
         && this.props.data.get('confidentialCount') !== 0
         && this.props.confidentialityMenu
@@ -88,7 +89,7 @@ class MapPiece extends React.Component {
       if (this.props.data.get('name') !== 'MB') { return null }
       return <ConfidentialIcon
         styles={this.props.styles.get('confidentialStyle')}
-        text="14/50 values confidential"
+        text={valueString}
         containerX={this.props.x1 + MapLayoutGridConstant.getIn(['electricity', 'canada' , 'mapPieceScale'], 1) + 369}
         containerY={this.props.y1 + MapLayoutGridConstant.getIn(['electricity', 'canada' , 'mapPieceScale'], 1) + 83}
         lineX={102}
@@ -102,6 +103,7 @@ class MapPiece extends React.Component {
   }
 
   albertaConfidentialIcon() {
+    const valueString = `${this.props.data.get('confidentialCount')} / ${this.props.data.get('totalCount')} values confidential`
     if (typeof this.props.data.get('confidentialCount') !== 'undefined'
         && this.props.data.get('confidentialCount') !== 0
         && this.props.confidentialityMenu
@@ -109,7 +111,7 @@ class MapPiece extends React.Component {
       if (this.props.data.get('name') !== 'AB') { return null }
       return <ConfidentialIcon 
         styles={this.props.styles.get('confidentialStyle')}
-        text="NGL AB"
+        text={valueString}
         containerX={this.props.x1 + MapLayoutGridConstant.getIn(['electricity', 'canada' , 'mapPieceScale'], 1) + 340}
         containerY={this.props.y1 + MapLayoutGridConstant.getIn(['electricity', 'canada' , 'mapPieceScale'], 1) + 82}
         lineX={102}
@@ -123,6 +125,7 @@ class MapPiece extends React.Component {
   }
 
   britishColumbiaConfidentialIcon() {
+    const valueString = `${this.props.data.get('confidentialCount')} / ${this.props.data.get('totalCount')} values confidential`
     if (typeof this.props.data.get('confidentialCount') !== 'undefined'
         && this.props.data.get('confidentialCount') !== 0
         && this.props.confidentialityMenu
@@ -130,7 +133,7 @@ class MapPiece extends React.Component {
       if (this.props.data.get('name') !== 'BC') { return null }
       return <ConfidentialIcon 
         styles={this.props.styles.get('confidentialStyle')}
-        text="NGL BC"
+        text={valueString}
         containerX={this.props.x1 + MapLayoutGridConstant.getIn(['electricity', 'canada' , 'mapPieceScale'], 1) + 340}
         containerY={this.props.y1 + MapLayoutGridConstant.getIn(['electricity', 'canada' , 'mapPieceScale'], 1) + 82}
         lineX={102}
@@ -144,6 +147,7 @@ class MapPiece extends React.Component {
   }
 
   saskatchewanConfidentialIcon() {
+    const valueString = `${this.props.data.get('confidentialCount')} / ${this.props.data.get('totalCount')} values confidential`
     if (typeof this.props.data.get('confidentialCount') !== 'undefined'
         && this.props.data.get('confidentialCount') !== 0
         && this.props.confidentialityMenu
@@ -151,7 +155,7 @@ class MapPiece extends React.Component {
       if (this.props.data.get('name') !== 'SK') { return null }
       return <ConfidentialIcon 
         styles={this.props.styles.get('confidentialStyle')}
-        text="NGL SK"
+        text={valueString}
         containerX={this.props.x1 + MapLayoutGridConstant.getIn(['electricity', 'canada' , 'mapPieceScale'], 1) + 340}
         containerY={this.props.y1 + MapLayoutGridConstant.getIn(['electricity', 'canada' , 'mapPieceScale'], 1) + 82}
         lineX={102}
@@ -165,6 +169,7 @@ class MapPiece extends React.Component {
   }
 
   manitobaNGLConfidentialIcon() {
+    const valueString = `${this.props.data.get('confidentialCount')} / ${this.props.data.get('totalCount')} values confidential`
     if (typeof this.props.data.get('confidentialCount') !== 'undefined'
         && this.props.data.get('confidentialCount') !== 0
         && this.props.confidentialityMenu
@@ -172,7 +177,7 @@ class MapPiece extends React.Component {
       if (this.props.data.get('name') !== 'MB') { return null }
       return <ConfidentialIcon 
         styles={this.props.styles.get('confidentialStyle')}
-        text="NGL MB"
+        text={valueString}
         containerX={this.props.x1 + MapLayoutGridConstant.getIn(['electricity', 'canada' , 'mapPieceScale'], 1) + 340}
         containerY={this.props.y1 + MapLayoutGridConstant.getIn(['electricity', 'canada' , 'mapPieceScale'], 1) + 82}
         lineX={102}
@@ -186,6 +191,7 @@ class MapPiece extends React.Component {
   }
 
   ontarioConfidentialIcon() {
+    const valueString = `${this.props.data.get('confidentialCount')} / ${this.props.data.get('totalCount')} values confidential`
     if (typeof this.props.data.get('confidentialCount') !== 'undefined'
         && this.props.data.get('confidentialCount') !== 0
         && this.props.confidentialityMenu
@@ -193,7 +199,7 @@ class MapPiece extends React.Component {
       if (this.props.data.get('name') !== 'ON') { return null }
       return <ConfidentialIcon 
         styles={this.props.styles.get('confidentialStyle')}
-        text="NGL ON"
+        text={valueString}
         containerX={this.props.x1 + MapLayoutGridConstant.getIn(['electricity', 'canada' , 'mapPieceScale'], 1) + 340}
         containerY={this.props.y1 + MapLayoutGridConstant.getIn(['electricity', 'canada' , 'mapPieceScale'], 1) + 82}
         lineX={102}
@@ -207,6 +213,7 @@ class MapPiece extends React.Component {
   }
 
   newBrunswickConfidentialIcon() {
+    const valueString = `${this.props.data.get('confidentialCount')} / ${this.props.data.get('totalCount')} values confidential`
     if (typeof this.props.data.get('confidentialCount') !== 'undefined'
         && this.props.data.get('confidentialCount') !== 0
         && this.props.confidentialityMenu
@@ -214,7 +221,7 @@ class MapPiece extends React.Component {
       if (this.props.data.get('name') !== 'NB') { return null }
       return <ConfidentialIcon 
         styles={this.props.styles.get('confidentialStyle')}
-        text="NGL NB"
+        text={valueString}
         containerX={this.props.x1 + MapLayoutGridConstant.getIn(['electricity', 'canada' , 'mapPieceScale'], 1) + 340}
         containerY={this.props.y1 + MapLayoutGridConstant.getIn(['electricity', 'canada' , 'mapPieceScale'], 1) + 82}
         lineX={102}
@@ -228,6 +235,7 @@ class MapPiece extends React.Component {
   }
 
   novaScotiaConfidentialIcon() {
+    const valueString = `${this.props.data.get('confidentialCount')} / ${this.props.data.get('totalCount')} values confidential`
     if (typeof this.props.data.get('confidentialCount') !== 'undefined'
         && this.props.data.get('confidentialCount') !== 0
         && this.props.confidentialityMenu
@@ -235,7 +243,7 @@ class MapPiece extends React.Component {
       if (this.props.data.get('name') !== 'NS') { return null }
       return <ConfidentialIcon 
         styles={this.props.styles.get('confidentialStyle')}
-        text="NGL NS"
+        text={valueString}
         containerX={this.props.x1 + MapLayoutGridConstant.getIn(['electricity', 'canada' , 'mapPieceScale'], 1) + 340}
         containerY={this.props.y1 + MapLayoutGridConstant.getIn(['electricity', 'canada' , 'mapPieceScale'], 1) + 82}
         lineX={102}
@@ -249,6 +257,7 @@ class MapPiece extends React.Component {
   }
 
   powerpoolConfidentialIcon() {
+    const valueString = `${this.props.data.get('confidentialCount')} / ${this.props.data.get('totalCount')} values confidential`
     if (typeof this.props.data.get('confidentialCount') !== 'undefined'
         && this.props.data.get('confidentialCount') !== 0
         && this.props.confidentialityMenu
@@ -256,7 +265,7 @@ class MapPiece extends React.Component {
       if (this.props.data.get('name') !== 'MN/ND') { return null }
       return <ConfidentialIcon 
         styles={this.props.styles.get('confidentialStyle')}
-        text="n/50 values confidential"
+        text={valueString}
         containerX={this.props.x1 * MapLayoutGridConstant.getIn(['electricity', 'us' , 'mapPieceScale'], 1) + 768}
         containerY={755}
         lineX={102}
