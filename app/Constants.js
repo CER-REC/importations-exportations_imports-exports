@@ -20,7 +20,7 @@ const Constants = fromJS({
   },
 
   menuBar: {
-    width: 150,
+    width: 200,
     containerHeight: 300,
     controlArrowSize: 15,
     importExportMenuLabelMargin: 16,
@@ -98,13 +98,13 @@ const Constants = fromJS({
   },
 
   visualizationContainer: {
-    leftMargin: 165,
     widthPadding: 450,
     heightPadding: 300,
   },
 
   visualizationDetailContainer: {
-    width: 270,
+    width: 260,
+    leftPadding: 10,
   },
 
   mainNavigationMenu: {
@@ -188,7 +188,7 @@ const Constants = fromJS({
   timeline: {
     barPadding: 0.5,
     groupPadding: 5,
-    axisHeight: 30,
+    axisHeight: 19,
   },
 
   mapPieceTextStyle: {

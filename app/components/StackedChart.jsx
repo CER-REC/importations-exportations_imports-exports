@@ -23,6 +23,17 @@ class StackedChart extends Chart {
       colors: categoryColours,
     } = this.props
 
+    const valueTotals = data
+      .reduce((acc, next) => {
+        next.get('values').forEach((value, key) => {
+          acc[key] = (acc[key] || 0) + value
+        })
+        return acc
+      }, {})
+    const valueOrder = Object.entries(valueTotals)
+      .sort(([, a], [, b]) => (a - b)) // Sort ascending
+      .map(([key]) => key)
+
     const elements = data.map((point) => {
       const heightPerUnit = height / (scale.getIn(['y', 'max']) - scale.getIn(['y', 'min']))
       const opacity = this.isTimelinePointFiltered(point) ? 0.5 : 1
@@ -31,6 +42,7 @@ class StackedChart extends Chart {
       const colourOffset = (categoryColours.count() - point.get('values').count())
       const lines = point
         .get('values')
+        .sortBy((v, k) => k, (a, b) => (valueOrder.indexOf(a) - valueOrder.indexOf(b)))
         .map((value, type) => {
           const lineColor = categoryColours.get(stackIndex + colourOffset, color)
           const line = (
@@ -38,17 +50,16 @@ class StackedChart extends Chart {
               x1={point.get('offsetX')}
               x2={point.get('offsetX')}
               y2={height - offsetY}
-              y1={height - (offsetY + value * heightPerUnit)}
+              y1={height - (offsetY + (value * heightPerUnit))}
               key={type}
               strokeWidth={layout.get('barWidth')}
               stroke={lineColor}
-              strokeLinecap="round"
               opacity={opacity}
               animate={{ y1: '1s' }}
             />
           )
           offsetY += (value * heightPerUnit)
-          stackIndex++
+          stackIndex += 1
           return line
         })
         .toArray()

@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
+import './ChartOptions.scss'
 import Constants from '../Constants'
 import { setScaleLinked, setGrouping } from '../actions/visualizationSettings'
 import { timelineScaleLinked, timelineGrouping as timelineGroupingSelector } from '../selectors/timeline'
@@ -42,35 +43,44 @@ class ChartOptions extends React.PureComponent {
       : this.props.tr(['chartOptions', 'scaleUnlinked'])
 
     const interactions = handleInteraction(this.scaleLinkedChanged)
+    const switchHeight = this.props.height - 4
     return (
-      <label htmlFor="scaleLinked" {...interactions}>
-        <div className="switch">
+      <label
+        htmlFor="scaleLinked"
+        className="switchWrapper"
+        {...interactions}
+      >
+        <div className="switch" style={{ width: switchHeight * 2, height: switchHeight }}>
           <input
             type="checkbox"
             id="scaleLinked"
             checked={this.props.scaleLinked}
             onChange={interactions.onClick}
           />
-          <div className="slider round" />
+          <div className="switchBackground round">
+            <div className="slider" />
+          </div>
         </div>
-        <img src={image} height="20" alt={imageAlt} />
+        <img src={image} height={switchHeight} alt={imageAlt} />
       </label>
     )
   }
 
   render() {
     const groupLabel = this.props.tr(['chartOptions', 'timelineGroup', this.props.timelineGroup])
+    const leftPad = Constants.getIn(['visualizationDetailContainer', 'leftPadding'])
     return (
       <div
         style={{
-          width: '100%',
           height: '100%',
           background: Constants.getIn(['styleGuide', 'colours', 'SandLight']),
           lineHeight: `${this.props.height}px`,
+          marginLeft: `${-leftPad}px`,
+          paddingLeft: `${leftPad}px`,
         }}
       >
         {this.renderScaleToggle()}
-        <div className="chartOptions" style={{ float: 'right' }}>
+        <div className="chartOptions">
           <a
             {...handleInteraction(this.changeTimelineGroup)}
             aria-label={groupLabel}

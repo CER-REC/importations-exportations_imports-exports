@@ -35,7 +35,15 @@ class TextBox extends React.PureComponent {
   }
 
   componentDidMount() {
-    this.calculateSize()
+    // The size isn't always accurate right after mount, so check every 100ms
+    let i = 0
+    const mountCheck = () => {
+      if (i === 10) { return }
+      this.calculateSize()
+      setTimeout(mountCheck, 100)
+      i += 1
+    }
+    mountCheck()
   }
 
   componentDidUpdate() {
@@ -61,6 +69,7 @@ class TextBox extends React.PureComponent {
 
   trackTextRef(ref) {
     this.textRef = ref
+    this.calculateSize()
   }
 
   render() {

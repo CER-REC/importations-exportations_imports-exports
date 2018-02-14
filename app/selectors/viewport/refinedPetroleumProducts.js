@@ -1,16 +1,19 @@
 import { createSelector } from 'reselect'
 
 import { visualizationContentPosition } from './index'
+import Constants from '../../Constants'
+
+const axisHeight = Constants.getIn(['timeline', 'axisHeight'])
 
 export const stackedChartPosition = createSelector(
   visualizationContentPosition,
   startPos => ({
     axis: Object.assign({}, startPos, {
       top: startPos.top,
-      height: 30,
+      height: axisHeight,
     }),
     chart: Object.assign({}, startPos, {
-      top: startPos.top + 30,
+      top: startPos.top + axisHeight,
       height: 500,
     }),
   }),
@@ -37,10 +40,10 @@ export const individualChartsPosition = createSelector(
       positions[key] = {
         axis: Object.assign({}, lastPos, {
           top: lastPos.top + lastPos.height + 50,
-          height: 30,
+          height: axisHeight,
         }),
         chart: Object.assign({}, lastPos, {
-          top: lastPos.top + lastPos.height + 50 + 30,
+          top: lastPos.top + lastPos.height + 50 + axisHeight,
           height: 100,
         }),
       }
@@ -48,4 +51,13 @@ export const individualChartsPosition = createSelector(
     })
     return positions
   },
+)
+
+export const sidebarTotalPosition = createSelector(
+  basePos,
+  startPos => ({
+    ...startPos,
+    top: startPos.top - 29,
+    height: 19,
+  }),
 )

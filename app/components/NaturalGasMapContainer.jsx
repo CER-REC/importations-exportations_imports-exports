@@ -6,7 +6,7 @@ import { geoConicConformal, geoPath } from 'd3-geo'
 import { feature } from 'topojson-client'
 
 import Constants from '../Constants'
-import NaturalGasMapPiece from './NaturalGasMapPiece'
+import MapPiece from './MapPiece'
 import MapLayoutGridConstant from '../MapLayoutGridConstant'
 import { arrangeBy, binSelector, aggregateLocationNaturalGasSelector } from '../selectors/data'
 import { getSelectionSettings } from '../selectors/NaturalGasSelector'
@@ -33,7 +33,15 @@ class NaturalGasMapContainer extends React.PureComponent {
       }
     })
   }
-
+  getAllPortsByProvinceName = (provinces) =>{
+    const portList = Constants.getIn(['dataloader','mapping','ports'])
+    let result = portList.filter(port=> provinces.includes(port.get('Province')))
+    result = result.reduce((acc, nextValue) => {
+      acc.push(nextValue.get('Port Name'))
+      return  acc
+    }, [])
+    return result
+  }
   onClick = ( portName, provinceName = null) => {
     const selection =  this.props.selectionSettings
     let ports = []
@@ -46,10 +54,12 @@ class NaturalGasMapContainer extends React.PureComponent {
       } else {
         provinces = selection.get('provinces').delete(provinceExists)
       }
+      ports = this.getAllPortsByProvinceName(provinces)
     } else{
+      ports = selection.get('provinces').count() > 0 ?[]:selection.get('ports').toJS()
       const portExists = selection.get('ports').indexOf(portName)
       if (portExists === -1) {
-        ports = selection.get('ports').push(portName).toJS()
+        ports.push(portName)
       } else {
         ports = selection.get('ports').delete(portExists)
       }
@@ -110,14 +120,17 @@ class NaturalGasMapContainer extends React.PureComponent {
         row +=1
         return (<g key={`NaturalGasMapPiece_${port.get('Province')}_${port.get('portName')}`} 
           {...handleInteraction(this.onClick, port.get('portName'))}>
-            <NaturalGasMapPiece
+            <MapPiece
               data={port}
+              dataKey={['activities']}
               dimensions={dimensions}
               bins={this.props.bins}
               styles={styles}
               isMapPieceSelected={this.isMapPieceSelected( port.get('portName'), value)}
               isSelected={this.isSelected()}
               isOrigin={true}
+              mapPieceKey='portName'
+              mapPieceStyleClass = 'portLabel'
               x1={left}
               y1={top}
             />

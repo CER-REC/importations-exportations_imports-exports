@@ -4,55 +4,6 @@
   cursor: pointer;
 }
 
-/* Based on https://codepen.io/AllThingsSmitty/pen/MmxxOz */
-.switch {
-  display: inline-block;
-  position: relative;
-  height: 20px;
-  width: 40px;
-  & input { display:none; }
-}
-
-.slider {
-  background-color: $SandExtraDark;
-  border: 1px solid $SandMedium;
-  cursor: pointer;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  position: absolute;
-  transition: .4s;
-
-  &:before {
-    background-color: #fff;
-    content: "";
-    position: absolute;
-    transition: .4s;
-    width: 14px;
-    height: 14px;
-    left: 2px;
-    bottom: 2px;
-  }
-
-  &.round {
-    border-radius: 20px;
-    &:before { border-radius: 50%; }
-  }
-
-  input:checked + &:before {
-    transform: translateX(20px);
-  }
-}
-
-.detailBarArrow {
-  height: 24px;
-  width: 5px;
-  margin-top: -20px;
-  margin-left: 60px;
-  background-color: $neutral-medium;
-}
-
 .loader {
   border: 16px solid #f3f3f3;
   border-radius: 50%;
@@ -78,3 +29,7 @@
 }
 
 :-moz-focusring { outline: 3px solid rgb(77, 144, 254); }
+
+#popoverPortal {
+  pointer-events: none;
+}

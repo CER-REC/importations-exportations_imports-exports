@@ -35,6 +35,7 @@ class PaddMapPiece extends React.Component {
         bottomMargin={this.props.styles.get('topMargin')}
         mapPieceHeight={this.props.dimensions.get('height')}
         name={this.props.originKey}
+        styleClass='mapPieceText'
         mapPieceProps={this.props.mapPieceProps}
       />
             </g>)

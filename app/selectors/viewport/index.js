@@ -2,9 +2,8 @@ import { createSelector } from 'reselect'
 
 import Constants from '../../Constants'
 
-export const menuWidth = () => Constants.getIn(['visualizationContainer', 'leftMargin'])
-const detailSidebarWidth = () =>
-  Constants.getIn(['visualizationDetailContainer', 'width'])
+export const menuWidth = () => Constants.getIn(['menuBar', 'width'])
+const detailSidebar = Constants.get('visualizationDetailContainer')
 const viewport = state => state.viewport
 
 export const positionHelper = (prev, height) => createSelector(
@@ -17,7 +16,6 @@ export const positionHelper = (prev, height) => createSelector(
 
 export const svgSize = createSelector(
   viewport,
-  detailSidebarWidth,
   viewport => ({
     width: (viewport.get('x')),
     height: (viewport.get('y') + Constants.getIn(['workspace', 'viewportPadding'])),
@@ -39,11 +37,10 @@ export const visualizationContainerPosition = createSelector(
 export const visualizationContentPosition = createSelector(
   visualizationContainerPosition,
   menuWidth,
-  detailSidebarWidth,
-  ({ top, width, height }, computedMenuWidth, sidebarWidth) => ({
+  ({ top, width, height }, computedMenuWidth) => ({
     top,
     left: computedMenuWidth,
-    width: width - sidebarWidth,
+    width: width - detailSidebar.get('width'),
     height,
   }),
 )
@@ -51,10 +48,10 @@ export const visualizationContentPosition = createSelector(
 export const detailSidebarPosition = createSelector(
   visualizationContainerPosition,
   menuWidth,
-  detailSidebarWidth,
-  ({ width: visualizationWidth, top }, computedMenuWidth, width) => ({
+  ({ width: visualizationWidth, top }, computedMenuWidth) => ({
     top,
-    left: computedMenuWidth + visualizationWidth - width,
-    width,
+    left: (computedMenuWidth + visualizationWidth + detailSidebar.get('leftPadding'))
+      - detailSidebar.get('width'),
+    width: detailSidebar.get('width'),
   }),
 )
