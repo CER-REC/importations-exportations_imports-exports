@@ -13,8 +13,6 @@ class ConfidentialIcon extends React.Component {
     return {
       containerX: PropTypes.number.isRequired,
       containerY: PropTypes.number.isRequired,
-      xPosition: PropTypes.number.isRequired,
-      yPosition: PropTypes.number.isRequired,
       text: PropTypes.string.isRequired,
       lineX: PropTypes.number.isRequired,
       lineY: PropTypes.number.isRequired,
@@ -44,8 +42,6 @@ class ConfidentialIcon extends React.Component {
       <ConfidentialityPopover
         containerX={this.props.containerX}
         containerY={this.props.containerY}
-        xPosition={this.props.xPosition}
-        yPosition={this.props.yPosition}
         text={this.props.text}
         lineX={this.props.lineX}
         lineY={this.props.lineY}

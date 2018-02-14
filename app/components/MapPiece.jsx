@@ -96,8 +96,6 @@ class MapPiece extends React.Component {
         lineY={40}
         textX={40}
         textY={40}
-        xPosition={0}
-        yPosition={0}
         />
     } return null
   }
@@ -118,8 +116,6 @@ class MapPiece extends React.Component {
         lineY={40}
         textX={40}
         textY={40}
-        xPosition={0}
-        yPosition={0}
       />
     } return null
   }
@@ -140,8 +136,6 @@ class MapPiece extends React.Component {
         lineY={40}
         textX={40}
         textY={40}
-        xPosition={0}
-        yPosition={0}
       />
     } return null
   }
@@ -162,8 +156,6 @@ class MapPiece extends React.Component {
         lineY={40}
         textX={40}
         textY={40}
-        xPosition={0}
-        yPosition={0}
       />
     } return null
   }
@@ -184,8 +176,6 @@ class MapPiece extends React.Component {
         lineY={40}
         textX={40}
         textY={40}
-        xPosition={0}
-        yPosition={0}
       />
     } return null
   }
@@ -206,8 +196,6 @@ class MapPiece extends React.Component {
         lineY={40}
         textX={40}
         textY={40}
-        xPosition={0}
-        yPosition={0}
       />
     } return null
   }
@@ -228,8 +216,6 @@ class MapPiece extends React.Component {
         lineY={40}
         textX={40}
         textY={40}
-        xPosition={0}
-        yPosition={0}
       />
     } return null
   }
@@ -250,8 +236,6 @@ class MapPiece extends React.Component {
         lineY={40}
         textX={40}
         textY={40}
-        xPosition={0}
-        yPosition={0}
       />
     } return null
   }
@@ -272,8 +256,6 @@ class MapPiece extends React.Component {
         lineY={40}
         textX={40}
         textY={40}
-        xPosition={0}
-        yPosition={0}
         />
     } return null
   }
