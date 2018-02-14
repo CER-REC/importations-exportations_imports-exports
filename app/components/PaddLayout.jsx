@@ -41,7 +41,7 @@ class PaddLayout extends React.Component {
       Constants.getIn(['styleGuide', 'colours', 'ExportDefault']),
     )
   }
-  getArrow(orderBy, paddGroupId, left, top, color, confidentialCount = 0) {
+  getArrow(orderBy, paddGroupId, left, top, color, confidentialCount = 0, totalCount) {
     if (typeof paddGroupId === 'undefined' && paddGroupId === '') {
       return null
     }
@@ -61,14 +61,15 @@ class PaddLayout extends React.Component {
       paddVCrudeOilcontainerY = this.props.top + top + 77
     }
     const style = mapLayoutGrid.get('styles', false)
+    const paddVCrudeOilString = `${confidentialCount} / ${totalCount} values confidential`
     if (style && confidentialCount > 0 && country !== 'ca'
       && this.props.confidentialityMenu
       && this.props.selectedEnergy === 'crudeOil'
       && paddGroupId === 'PADD V') {
       paddVCrudeOilconfidentialIcon = (<g transform="translate(145 143)">
         <ConfidentialIcon
-          styles={style.get('confidentialStyle')} 
-          text="VALUE VALUE VALUE!"
+          styles={style.get('confidentialStyle')}
+          text={paddVCrudeOilString}
           containerX={paddVCrudeOilcontainerX}
           containerY={paddVCrudeOilcontainerY}
           lineX={102}
@@ -88,6 +89,7 @@ class PaddLayout extends React.Component {
       paddIIICrudeOilcontainerX = this.props.left + left + 598
       paddIIICrudeOilcontainerY = this.props.top + top + 77
     }
+    const paddIIICrudeOilString = `${confidentialCount} / ${totalCount} values confidential`
     if (style && confidentialCount > 0 && country !== 'ca'
       && this.props.confidentialityMenu
       && this.props.selectedEnergy === 'crudeOil'
@@ -95,7 +97,7 @@ class PaddLayout extends React.Component {
       paddIIICrudeOilconfidentialIcon = (<g transform="translate(145 143)">
         <ConfidentialIcon
           styles={style.get('confidentialStyle')} 
-          text="hello!"
+          text={paddIIICrudeOilString}
           containerX={paddIIICrudeOilcontainerX}
           containerY={paddIIICrudeOilcontainerY}
           lineX={102}
@@ -115,6 +117,7 @@ class PaddLayout extends React.Component {
       paddICrudeOilcontainerX = this.props.left + left + 348
       paddICrudeOilcontainerY = this.props.top + top + 77
     }
+    const paddICrudeOilString = `${confidentialCount} / ${totalCount} values confidential`
     if (style && confidentialCount > 0 && country !== 'ca'
       && this.props.confidentialityMenu
       && this.props.selectedEnergy === 'crudeOil'
@@ -122,7 +125,7 @@ class PaddLayout extends React.Component {
       paddICrudeOilconfidentialIcon = (<g transform="translate(145 143)">
         <ConfidentialIcon
           styles={style.get('confidentialStyle')} 
-          text="hey im padd one"
+          text={paddICrudeOilString}
           containerX={paddICrudeOilcontainerX}
           containerY={paddICrudeOilcontainerY}
           lineX={102}
@@ -142,6 +145,7 @@ class PaddLayout extends React.Component {
       paddNonUSACrudeOilcontainerX = this.props.left + left + 718
       paddNonUSACrudeOilcontainerY = this.props.top + top + 77
     }
+    const paddNonUSACrudeOilString = `${confidentialCount} / ${totalCount} values confidential`
     if (style && confidentialCount > 0 && country !== 'ca'
       && this.props.confidentialityMenu
       && this.props.selectedEnergy === 'crudeOil'
@@ -149,7 +153,7 @@ class PaddLayout extends React.Component {
       paddNonUSACrudeOilconfidentialIcon = (<g transform="translate(145 143)">
         <ConfidentialIcon
           styles={style.get('confidentialStyle')}
-          text="hey im non USA"
+          text={paddNonUSACrudeOilString}
           containerX={paddNonUSACrudeOilcontainerX}
           containerY={paddNonUSACrudeOilcontainerY}
           lineX={102}
@@ -170,6 +174,7 @@ class PaddLayout extends React.Component {
       paddIIINGLcontainerX = this.props.left + left + 598
       paddIIINGLcontainerY = this.props.top + top + 69
     }
+    const paddIIINGLString = `${confidentialCount} / ${totalCount} values confidential`
     if (style && confidentialCount > 0 && country !== 'ca'
       && this.props.confidentialityMenu
       && this.props.selectedEnergy === 'naturalGasLiquids'
@@ -177,7 +182,7 @@ class PaddLayout extends React.Component {
       paddIIINGLconfidentialIcon = (<g transform="translate(145 143)">
         <ConfidentialIcon
           styles={style.get('confidentialStyle')}
-          text="PADDIII NGL"
+          text={paddIIINGLString}
           containerX={paddIIINGLcontainerX}
           containerY={paddIIINGLcontainerY}
           lineX={102}
@@ -197,6 +202,7 @@ class PaddLayout extends React.Component {
       paddIVNGLcontainerX = this.props.left + left + 473
       paddIVNGLcontainerY = this.props.top + top + 69
     }
+    const paddIVNGLString = `${confidentialCount} / ${totalCount} values confidential`
     if (style && confidentialCount > 0 && country !== 'ca'
       && this.props.confidentialityMenu
       && this.props.selectedEnergy === 'naturalGasLiquids'
@@ -204,7 +210,7 @@ class PaddLayout extends React.Component {
       paddIVNGLconfidentialIcon = (<g transform="translate(145 143)">
         <ConfidentialIcon
           styles={style.get('confidentialStyle')}
-          text="PADDIV NGL"
+          text={paddIVNGLString}
           containerX={paddIVNGLcontainerX}
           containerY={paddIVNGLcontainerY}
           lineX={102}
@@ -224,6 +230,7 @@ class PaddLayout extends React.Component {
       paddVNGLcontainerX = this.props.left + left + 348
       paddVNGLcontainerY = this.props.top + top + 69
     }
+    const paddVNGLString = `${confidentialCount} / ${totalCount} values confidential`
     if (style && confidentialCount > 0 && country !== 'ca'
       && this.props.confidentialityMenu
       && this.props.selectedEnergy === 'naturalGasLiquids'
@@ -231,7 +238,7 @@ class PaddLayout extends React.Component {
       paddVNGLconfidentialIcon = (<g transform="translate(145 143)">
         <ConfidentialIcon
           styles={style.get('confidentialStyle')}
-          text="PADDV NGL"
+          text={paddVNGLString}
           containerX={paddVNGLcontainerX}
           containerY={paddVNGLcontainerY}
           lineX={102}
@@ -251,6 +258,7 @@ class PaddLayout extends React.Component {
       paddMexicoNGLcontainerX = this.props.left + left + 717
       paddMexicoNGLcontainerY = this.props.top + top + 69
     }
+    const paddMexicoNGLString = `${confidentialCount} / ${totalCount} values confidential`
     if (style && confidentialCount > 0 && country !== 'ca'
       && this.props.confidentialityMenu
       && this.props.selectedEnergy === 'naturalGasLiquids'
@@ -258,7 +266,7 @@ class PaddLayout extends React.Component {
       paddMexicoNGLconfidentialIcon = (<g transform="translate(145 143)">
         <ConfidentialIcon
           styles={style.get('confidentialStyle')}
-          text="PADD Mexico NGL"
+          text={paddMexicoNGLString}
           containerX={paddMexicoNGLcontainerX}
           containerY={paddMexicoNGLcontainerY}
           lineX={102}
@@ -362,6 +370,7 @@ class PaddLayout extends React.Component {
       this.props.top,
       color,
       data.get('confidentialCount', 0),
+      data.get('totalCount', 0),
     )}
   </g>)
   }
