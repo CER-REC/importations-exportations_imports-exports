@@ -481,6 +481,54 @@ const TranslationTable = fromJS({
         en: 'This visualization shows imports to Canada and exports from Canada between the years $0 and $1. Drag the timeline bar to change. Click a province to view Detail',
         fr: 'Cette visualisation illustre les importations et les exportations du Canada de $0 à $1. Faites glisser la ligne du temps pour modifier les années. Cliquez sur une province pour des précisions à ce sujet.',
       },
+      transport: {
+        type: {
+          en: 'Exports',
+          fr: 'Exportations',
+        },
+        action: {
+          en: 'to',
+          fr: 'par',
+        },
+        header: {
+          type: {
+            en: '',
+            fr: '',
+          },
+          action: {
+            en: 'Mode of Transportation',
+            fr: 'Mode of Transportation',
+          },
+          adjective: {
+            en: '',
+            fr: '',
+          },
+          place: {
+            en: '',
+            fr: '',
+          },
+        },
+      },
+      productSubtype: {
+        header: {
+          type: {
+            en: '',
+            fr: '',
+          },
+          action: {
+            en: 'Type of Crude',
+            fr: 'Type of Crude',
+          },
+          adjective: {
+            en: '',
+            fr: '',
+          },
+          place: {
+            en: '',
+            fr: '',
+          },
+        },
+      },
       exports: {
         header: {
           type: {
