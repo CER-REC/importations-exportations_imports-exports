@@ -31,19 +31,27 @@ class ExplanationDot extends React.Component {
     }
   }
 
-  explanationDotClick() {
-    // TODO
-  }
-
   explanationDot() {
     return (<g id="circle">
       <circle
         cx={this.props.xPosition}
         cy={this.props.yPosition}
         r={Constants.getIn(['explanationDot', 'radiusStart'])}
-        fill="#ff708a"
-      />
+        fill="#ff708a"/>
+        {this.sign()}
       </g>)
+  }
+
+  sign() {
+    const sign = '+'
+    return (<g>
+      <text 
+        x={this.props.xPosition - 3}
+        y={this.props.yPosition + 5}
+        className="showHideExplanations"
+        fill="white">
+      {sign}
+      </text></g>)
   }
 
   dotAnimation() {
@@ -61,7 +69,7 @@ class ExplanationDot extends React.Component {
           to={Constants.getIn(['explanationDot' , 'radiusEnd'])}
           dur="1.5s"
           begin="0"
-          repeatCount="indefinite"
+          repeatCount="3"
           fill="freeze"
           id="circ-anim"
         />
@@ -71,7 +79,7 @@ class ExplanationDot extends React.Component {
           to="0"
           dur="1.5s"
           begin="0"
-          repeatCount="indefinite"
+          repeatCount="3"
           fill="freeze"
           id="circ-anim"
         />

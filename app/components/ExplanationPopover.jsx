@@ -35,8 +35,9 @@ class ExplanationPopover extends React.Component {
   drawText() {
     return <div style={{
           position: 'relative',
-          top: this.props.textY,
+          top: this.props.textY - 3,
           left: this.props.textX,
+          padding: 8,
           height: 'auto',
           width: 80,
           background: 'white',

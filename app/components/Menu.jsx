@@ -56,21 +56,21 @@ class Menu extends React.PureComponent {
       <ExplanationDot
         linePath="M80,80 C117,190 223,168 406,171"
         xPosition={150}
-        yPosition={0}
+        yPosition={62}
         lineX={80}
         lineY={80}
         textX={35}
         textY={30}
         containerX={this.props.left}
-        containerY={this.props.top}
+        containerY={this.props.top - 52}
         text="Click + to see more options"
     /></g>)
   }
 
   electricityExplanation() {
-    let dotY = 28
+    let dotY = 80
     if (this.props.expanded) {
-      dotY = 52
+      dotY = 112
     }
 
     if (this.props.name === 'amount' || this.props.name === 'arrangeBy' || this.props.name === 'subtype') { return }
@@ -84,7 +84,7 @@ class Menu extends React.PureComponent {
         textX={75}
         textY={55}
         containerX={this.props.left}
-        containerY={this.props.top}
+        containerY={this.props.top - 52}
         text="Electricity is the selected energy product"
     /></g>)
   }
@@ -167,9 +167,9 @@ class Menu extends React.PureComponent {
       <g transform={`translate(${this.props.left} ${this.props.top})`} className="menuGroup">
         {this.renderTitle()}
         {this.renderOptions()}
+      </g>
         {this.importExportExplanation()}
         {this.electricityExplanation()}
-      </g>
     </g>
     )
   }

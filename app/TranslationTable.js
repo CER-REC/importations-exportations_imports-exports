@@ -279,13 +279,8 @@ const TranslationTable = fromJS({
   },
 
   explanationShown: {
-    en: 'show EXPLANATIONS',
-    fr: 'montrer EXPLICATIONS',
-  },
-
-  explanationHide: {
-    en: 'hide EXPLANATIONS',
-    fr: 'cacher EXPLICATIONS',
+    en: 'EXPLANATIONS',
+    fr: 'EXPLICATIONS',
   },
 
   confidentialityShown: {

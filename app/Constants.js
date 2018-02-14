@@ -134,7 +134,7 @@ const Constants = fromJS({
 
   explanationDot: {
     strokeWidth: 1.3,
-    radiusStart: 3.5,
+    radiusStart: 4.5,
     radiusEnd: 15.5,
     yOffset: 5,
   },
