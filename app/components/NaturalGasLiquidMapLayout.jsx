@@ -60,11 +60,13 @@ class NaturalGasLiquidMapLayout extends React.Component {
   }
 
   isMapPieceSelected(key, country) {
+    if(this.props.country !== this.props.selection.get('country')){return false}
     return this.props.selection.get('origins').includes(key)
   }
   isSelected() {
-    const length = this.props.selection.get('origins').count()
-    return (length > 0)
+    if(this.props.country !== this.props.selection.get('country')){return false}
+    const count = this.props.selection.get('origins').count()
+    return (count > 0)
   }
 
   renderMapPiece() {

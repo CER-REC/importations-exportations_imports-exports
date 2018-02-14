@@ -35,7 +35,7 @@ const selectedActivityGroup = createSelector(
   (settings, override) => override || settings.get('activity'),
 )
 
-const selection = createSelector(
+export const selection = createSelector(
   visualizationSettings,
   settings => settings.get('selection'),
 )
