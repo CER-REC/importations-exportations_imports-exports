@@ -9,7 +9,7 @@ export const canadaImportMap = createSelector(
   visualizationContentPosition,
   visContent => ({
     top: visContent.top,
-    left: visContent.left,
+    left: visContent.left + 100,
     width: visContent.width,
     height: 100,
   }),
@@ -19,7 +19,7 @@ export const chartImportPosition = createSelector(
   canadaImportMap,
   visContent => ({
     top: visContent.top + visContent.height,
-    left: visContent.left,
+    left: visContent.left - 100,
     width: visContent.width,
     height: 100,
   }),

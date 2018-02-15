@@ -124,13 +124,13 @@ class MapPiece extends React.Component {
       confidentialIcon = <ConfidentialIcon
         styles={this.props.styles.get('confidentialStyle')}
         text={valueString}
-        containerX={this.props.x1}
-        containerY={this.props.y1}
+        containerX={this.props.containerX + this.props.x1 + 13}
+        containerY={this.props.containerY + this.props.y1 + 11}
         lineX={102}
         lineY={40}
         textX={40}
         textY={40}
-        xPosition={0}
+        xPosition={30}
         yPosition={0}
         />
     }

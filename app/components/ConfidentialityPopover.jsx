@@ -54,8 +54,8 @@ class ConfidentialityPopover extends React.Component {
     if (!this.props.confidentialityMenu) { return null }
     return <div style={{
           position: 'absolute',
-          top: this.props.containerY + this.props.yPosition,
           left: this.props.containerX + this.props.xPosition,
+          top: this.props.containerY + this.props.yPosition,
         }}>
         {this.drawText()}
       <div style={{ position: 'absolute', top: 0, left: 0}}>{this.drawLine()}</div>

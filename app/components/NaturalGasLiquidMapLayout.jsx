@@ -95,6 +95,8 @@ class NaturalGasLiquidMapLayout extends React.Component {
               mapPieceStyleClass = 'mapPieceText'
               x1={mapPieceTransformStartXaxis(position, dimensions, mapPieceScale)}
               y1={mapPieceTransformStartYaxis(position, dimensions, mapPieceScale)}
+              containerX={this.props.left}
+              containerY={this.props.top}
             />
           </g>
         </g>

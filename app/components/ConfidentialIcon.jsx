@@ -24,7 +24,7 @@ class ConfidentialIcon extends React.Component {
   }
 
   confidentialityIcon() {
-    return <g transform="translate(30, 0)" className="confidentialityIcon">
+    return <g className="confidentialityIcon">
     <path
       fill='#fff'
       stroke='#999'
@@ -38,7 +38,7 @@ class ConfidentialIcon extends React.Component {
   }
 
   render() {
-    return (<g>
+    return (<g transform={`translate(${this.props.xPosition} ${this.props.yPosition})`}>
       {this.confidentialityIcon()}
     <PopoverPortal>
       <ConfidentialityPopover
