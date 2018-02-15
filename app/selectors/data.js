@@ -94,8 +94,8 @@ const selectedPieces = createSelector(
   }, new Immutable.List()),
 )
 
-const filterByTimeline = (point, range, groupingBy) => {
-  if(groupingBy === 'year'){
+const filterByTimeline = (point, range, groupBy) => {
+  if (groupBy === 'year') {
     if (range.getIn(['start', 'year']) <= point.get('year')
       && point.get('year') <= range.getIn(['end', 'year'])) {
       if (range.getIn(['start', 'year']) === point.get('year') || range.getIn(['end', 'year']) === point.get('year')) {
@@ -108,16 +108,17 @@ const filterByTimeline = (point, range, groupingBy) => {
     return (range.getIn(['start', 'year']) <= point.get('year')
       && point.get('year') <= range.getIn(['end', 'year'])
       && range.getIn(['start', 'quarter']) === point.get('quarter')
-      )
+    )
   }
 }
 const filterByHex = (point, selectedMapPieces, visulization) => {
   if (selectedMapPieces.count() === 0) {
     return point
   }
-  if (visulization === 'naturalGasLiquids'){
-    return selectedMapPieces.includes(point.get('originKey')) 
+  if (visulization === 'naturalGasLiquids' || visulization === 'crudeOil') {
+    return selectedMapPieces.includes(point.get('originKey'))
     || selectedMapPieces.includes(point.get('destination'))  
+    || selectedMapPieces.includes(point.get('destinationKey'))
   }
   return selectedMapPieces.includes(point.get('originKey'))
   || selectedMapPieces.includes(point.get('port'))
