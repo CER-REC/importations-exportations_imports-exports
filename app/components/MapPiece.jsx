@@ -80,170 +80,6 @@ class MapPiece extends React.Component {
     /></g>)
   }
 
-  albertaConfidentialIcon() {
-    const valueString = `${this.props.data.get('confidentialCount')} / ${this.props.data.get('totalCount')} values confidential`
-    if (this.props.data.get('name') !== 'AB') { return null }
-    return <ConfidentialIcon 
-        styles={this.props.styles.get('confidentialStyle')}
-        text={valueString}
-        containerX={this.props.x1 + MapLayoutGridConstant.getIn(['electricity', 'canada' , 'mapPieceScale'], 1) + 340}
-        containerY={this.props.y1 + MapLayoutGridConstant.getIn(['electricity', 'canada' , 'mapPieceScale'], 1) + 82}
-        lineX={102}
-        lineY={40}
-        textX={40}
-        textY={40}
-      />
-  }
-
-  britishColumbiaConfidentialIcon() {
-    const valueString = `${this.props.data.get('confidentialCount')} / ${this.props.data.get('totalCount')} values confidential`
-    if (this.props.data.get('name') !== 'BC') { return null }
-    return <ConfidentialIcon 
-        styles={this.props.styles.get('confidentialStyle')}
-        text={valueString}
-        containerX={this.props.x1 + MapLayoutGridConstant.getIn(['electricity', 'canada' , 'mapPieceScale'], 1) + 340}
-        containerY={this.props.y1 + MapLayoutGridConstant.getIn(['electricity', 'canada' , 'mapPieceScale'], 1) + 82}
-        lineX={102}
-        lineY={40}
-        textX={40}
-        textY={40}
-      />
-  }
-
-  saskatchewanConfidentialIcon() {
-    const valueString = `${this.props.data.get('confidentialCount')} / ${this.props.data.get('totalCount')} values confidential`
-    if (this.props.data.get('name') !== 'SK') { return null }
-    return <ConfidentialIcon 
-        styles={this.props.styles.get('confidentialStyle')}
-        text={valueString}
-        containerX={this.props.x1 + MapLayoutGridConstant.getIn(['electricity', 'canada' , 'mapPieceScale'], 1) + 340}
-        containerY={this.props.y1 + MapLayoutGridConstant.getIn(['electricity', 'canada' , 'mapPieceScale'], 1) + 82}
-        lineX={102}
-        lineY={40}
-        textX={40}
-        textY={40}
-      />
-  }
-
-  manitobaNGLConfidentialIcon() {
-    const valueString = `${this.props.data.get('confidentialCount')} / ${this.props.data.get('totalCount')} values confidential`
-    if (this.props.data.get('name') !== 'MB') { return null }
-    return <ConfidentialIcon 
-        styles={this.props.styles.get('confidentialStyle')}
-        text={valueString}
-        containerX={this.props.x1 + MapLayoutGridConstant.getIn(['electricity', 'canada' , 'mapPieceScale'], 1) + 340}
-        containerY={this.props.y1 + MapLayoutGridConstant.getIn(['electricity', 'canada' , 'mapPieceScale'], 1) + 82}
-        lineX={102}
-        lineY={40}
-        textX={40}
-        textY={40}
-      />
-  }
-
-  ontarioConfidentialIcon() {
-    const valueString = `${this.props.data.get('confidentialCount')} / ${this.props.data.get('totalCount')} values confidential`
-    if (this.props.data.get('name') !== 'ON') { return null }
-    return <ConfidentialIcon 
-        styles={this.props.styles.get('confidentialStyle')}
-        text={valueString}
-        containerX={this.props.x1 + MapLayoutGridConstant.getIn(['electricity', 'canada' , 'mapPieceScale'], 1) + 340}
-        containerY={this.props.y1 + MapLayoutGridConstant.getIn(['electricity', 'canada' , 'mapPieceScale'], 1) + 82}
-        lineX={102}
-        lineY={40}
-        textX={40}
-        textY={40}
-      />
-  }
-
-  newBrunswickConfidentialIcon() {
-    const valueString = `${this.props.data.get('confidentialCount')} / ${this.props.data.get('totalCount')} values confidential`
-    if (this.props.data.get('name') !== 'NB') { return null }
-    return <ConfidentialIcon 
-        styles={this.props.styles.get('confidentialStyle')}
-        text={valueString}
-        containerX={this.props.x1 + MapLayoutGridConstant.getIn(['electricity', 'canada' , 'mapPieceScale'], 1) + 340}
-        containerY={this.props.y1 + MapLayoutGridConstant.getIn(['electricity', 'canada' , 'mapPieceScale'], 1) + 82}
-        lineX={102}
-        lineY={40}
-        textX={40}
-        textY={40}
-      />
-  }
-
-  novaScotiaConfidentialIcon() {
-    const valueString = `${this.props.data.get('confidentialCount')} / ${this.props.data.get('totalCount')} values confidential`
-    if (this.props.data.get('name') !== 'NS') { return null }
-    return <ConfidentialIcon 
-        styles={this.props.styles.get('confidentialStyle')}
-        text={valueString}
-        containerX={this.props.x1 + MapLayoutGridConstant.getIn(['electricity', 'canada' , 'mapPieceScale'], 1) + 340}
-        containerY={this.props.y1 + MapLayoutGridConstant.getIn(['electricity', 'canada' , 'mapPieceScale'], 1) + 82}
-        lineX={102}
-        lineY={40}
-        textX={40}
-        textY={40}
-      />
-  }
-
-  manitobaConfidentialIcon() {
-    const valueString = `${this.props.data.get('confidentialCount')} / ${this.props.data.get('totalCount')} values confidential`
-    if (this.props.data.get('name') !== 'MB') { return null }
-    return <ConfidentialIcon
-        styles={this.props.styles.get('confidentialStyle')}
-        text={valueString}
-        containerX={this.props.x1 + MapLayoutGridConstant.getIn(['electricity', 'canada' , 'mapPieceScale'], 1) + 369}
-        containerY={this.props.y1 + MapLayoutGridConstant.getIn(['electricity', 'canada' , 'mapPieceScale'], 1) + 83}
-        lineX={102}
-        lineY={40}
-        textX={40}
-        textY={40}
-        />
-  }
-
-  powerpoolConfidentialIcon() {
-    const valueString = `${this.props.data.get('confidentialCount')} / ${this.props.data.get('totalCount')} values confidential`
-    if (this.props.data.get('name') !== 'MN/ND') { return null }
-    return <ConfidentialIcon 
-        styles={this.props.styles.get('confidentialStyle')}
-        text={valueString}
-        containerX={this.props.x1 * MapLayoutGridConstant.getIn(['electricity', 'us' , 'mapPieceScale'], 1) + 768}
-        containerY={755}
-        lineX={102}
-        lineY={40}
-        textX={40}
-        textY={40}
-        />
-  }
-
-  electricityConfidentialityPopovers() {
-    if (typeof this.props.data.get('confidentialCount') !== 'undefined'
-        && this.props.data.get('confidentialCount') !== 0
-        && this.props.confidentialityMenu
-        && this.props.selectedEnergy === 'electricity') {
-      return (<g>
-        {this.manitobaConfidentialIcon()}
-        {this.powerpoolConfidentialIcon()}
-      </g>)
-    } return null
-  }
-
-  naturalGasLiquidsConfidentialPopovers() {
-    if (typeof this.props.data.get('confidentialCount') !== 'undefined'
-        && this.props.data.get('confidentialCount') !== 0
-        && this.props.confidentialityMenu
-        && this.props.selectedEnergy === 'naturalGasLiquids') {
-      return (<g>
-        {this.albertaConfidentialIcon()}
-        {this.britishColumbiaConfidentialIcon()}
-        {this.saskatchewanConfidentialIcon()}
-        {this.manitobaNGLConfidentialIcon()}
-        {this.ontarioConfidentialIcon()}
-        {this.newBrunswickConfidentialIcon()}
-        {this.novaScotiaConfidentialIcon()}
-        </g>)
-    } return null
-  }
-
   renderMapPieceLabel() {
     return <MapPieceLabel
         labelPosition={this.props.styles.get('labelPosition')}
@@ -280,6 +116,35 @@ class MapPiece extends React.Component {
       stroke = this.props.mapPieceProps.get('stroke')
     }
 
+    let confidentialIcon = null
+    let containerXPosition = this.props.x1 + MapLayoutGridConstant.getIn(['electricity', 'canada' , 'mapPieceScale'], 1) + 340
+    let containerYPosition = this.props.y1 + MapLayoutGridConstant.getIn(['electricity', 'canada' , 'mapPieceScale'], 1) + 82
+    if(this.props.selectedEnergy === 'electricity' && this.props.data.get('name') === 'MB') {
+      containerXPosition += 30
+    }
+    if(this.props.data.get('name') === 'MN/ND') {
+      containerXPosition = this.props.x1 * MapLayoutGridConstant.getIn(['electricity', 'us' , 'mapPieceScale'], 1) + 768
+      containerYPosition = 755
+    }
+
+    const valueString = `${this.props.data.get('confidentialCount')} / ${this.props.data.get('totalCount')} values confidential`
+    if (typeof this.props.data.get('confidentialCount') !== 'undefined'
+        && this.props.data.get('confidentialCount') !== 0
+        && this.props.confidentialityMenu) {
+      confidentialIcon = <ConfidentialIcon
+        styles={this.props.styles.get('confidentialStyle')}
+        text={valueString}
+        containerX={containerXPosition}
+        containerY={containerYPosition}
+        lineX={102}
+        lineY={40}
+        textX={40}
+        textY={40}
+        xPosition={0}
+        yPosition={0}
+        />
+    }
+
     return (<g fillOpacity={opacity} >
       <polygon
         stroke={stroke}
@@ -298,11 +163,9 @@ class MapPiece extends React.Component {
         x2={this.props.x1 || 0}
         y2={this.props.y1 || 0}
       />
+
+      {confidentialIcon}
       {this.newYorkExplanation()}
-
-      {this.electricityConfidentialityPopovers()}
-
-      {this.naturalGasLiquidsConfidentialPopovers()}
             </g>)
   }
 }

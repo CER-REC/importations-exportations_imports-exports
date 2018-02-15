@@ -17,6 +17,8 @@ class ConfidentialityPopover extends React.Component {
       textX: PropTypes.number.isRequired,
       textY: PropTypes.number.isRequired,
       confidentialityMenu: PropTypes.bool.isRequired,
+      xPosition: PropTypes.number.isRequired,
+      yPosition: PropTypes.number.isRequired,
     }
   }
 
@@ -52,8 +54,8 @@ class ConfidentialityPopover extends React.Component {
     if (!this.props.confidentialityMenu) { return null }
     return <div style={{
           position: 'absolute',
-          top: this.props.containerY,
-          left: this.props.containerX,
+          top: this.props.containerY + this.props.yPosition,
+          left: this.props.containerX + this.props.xPosition,
         }}>
         {this.drawText()}
       <div style={{ position: 'absolute', top: 0, left: 0}}>{this.drawLine()}</div>
