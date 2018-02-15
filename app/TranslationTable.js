@@ -289,14 +289,10 @@ const TranslationTable = fromJS({
   },
 
   confidentialityShown: {
-    en: 'show CONFIDENTIALITY',
-    fr: 'Montrer CONFIDENTIALITÉ',
+    en: 'CONFIDENTIALITY',
+    fr: 'CONFIDENTIALITÉ',
   },
-  confidentialityHide: {
-    en: 'hide CONFIDENTIALITY',
-    fr: 'Cacher CONFIDENTIALITÉ',
-  },
-
+  
   amounts: {
     CAN$: { en: 'CAN$', fr: '$ CAN' },
     'CAN$/MW.h': { en: 'CAN$/MW.h', fr: '$ CAN/MWh' },

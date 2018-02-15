@@ -31,7 +31,7 @@ class ShowConfidentiality extends React.Component {
   }
 
   icon() {
-    return <g transform="translate(146 493) scale(0.84)" className="confidentialityIcon">
+    return <g transform="translate(116 493) scale(0.84)" className="confidentialityIcon">
       <path
         fill='#fff'
         stroke='#999'
@@ -46,9 +46,10 @@ class ShowConfidentiality extends React.Component {
 
   showText() {
     const { Tr } = this.props
-    let confidentialityText = Tr('confidentialityShown')
+    let sign = '+'
+    const confidentialityText = Tr('confidentialityShown')
     if (this.props.confidentialityMenu) {
-      confidentialityText = Tr('confidentialityHide')
+      sign = '-'
     }
     return (
       <text
@@ -58,6 +59,9 @@ class ShowConfidentiality extends React.Component {
         fill="#999"
       >
         {confidentialityText}
+        <tspan dx="25">
+          {sign}
+        </tspan>
       </text>
     )
   }
