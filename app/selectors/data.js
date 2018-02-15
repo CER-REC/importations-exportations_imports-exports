@@ -111,9 +111,13 @@ const filterByTimeline = (point, range, groupingBy) => {
       )
   }
 }
-const filterByHex = (point, selectedMapPieces) => {
+const filterByHex = (point, selectedMapPieces, visulization) => {
   if (selectedMapPieces.count() === 0) {
     return point
+  }
+  if (visulization === 'naturalGasLiquids'){
+    return selectedMapPieces.includes(point.get('originKey')) 
+    || selectedMapPieces.includes(point.get('destination'))  
   }
   return selectedMapPieces.includes(point.get('originKey'))
   || selectedMapPieces.includes(point.get('port'))
@@ -123,12 +127,13 @@ const filterByTimelineSelector = createSelector(
   activityGroupSelector,
   timelineRange,
   groupingBy,
-  (points, range) => points.filter(point => filterByTimeline(point, range, groupingBy)),
+  (points, range, groupBy) => points.filter(point => filterByTimeline(point, range, groupBy)),
 )
 export const filterByHexSelector = createSelector(
   activityGroupSelector,
   selectedPieces,
-  (points, selectedMapPieces) => points.filter(point => filterByHex(point, selectedMapPieces)),
+  selectedVisualization,
+  (points, selectedMapPieces, visulization) => points.filter(point => filterByHex(point, selectedMapPieces, visulization)),
 )
 
 export const aggregateLocationSelector = createSelector(
