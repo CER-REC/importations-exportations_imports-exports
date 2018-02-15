@@ -66,12 +66,10 @@ class PaddLayout extends React.Component {
       {confidentialIcon}
             </g>)
   }
-  isPaddPieceSelected(key, props) {
-    if(props.country !== props.selctionState.get('country')){return false}
-    return props.selctionState.get('origins').includes(key)
-  }
   getOpacityOfPadd(props, paddGroup){
-    return this.isPaddPieceSelected(paddGroup, props)? 0.5 : 1
+    if(props.country !== props.selctionState.get('country')){return 1}
+    if(props.selctionState.get('origins').count() === 0){return 1}
+    return props.selctionState.get('origins').includes(paddGroup)? 1 : 0.5
   }
 
   onPaddClick( props, paddGroup ) {
