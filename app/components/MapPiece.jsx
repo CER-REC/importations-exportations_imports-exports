@@ -117,16 +117,6 @@ class MapPiece extends React.Component {
     }
 
     let confidentialIcon = null
-    let containerXPosition = this.props.x1 + MapLayoutGridConstant.getIn(['electricity', 'canada' , 'mapPieceScale'], 1) + 340
-    let containerYPosition = this.props.y1 + MapLayoutGridConstant.getIn(['electricity', 'canada' , 'mapPieceScale'], 1) + 82
-    if(this.props.selectedEnergy === 'electricity' && this.props.data.get('name') === 'MB') {
-      containerXPosition += 30
-    }
-    if(this.props.data.get('name') === 'MN/ND') {
-      containerXPosition = this.props.x1 * MapLayoutGridConstant.getIn(['electricity', 'us' , 'mapPieceScale'], 1) + 768
-      containerYPosition = 755
-    }
-
     const valueString = `${this.props.data.get('confidentialCount')} / ${this.props.data.get('totalCount')} values confidential`
     if (typeof this.props.data.get('confidentialCount') !== 'undefined'
         && this.props.data.get('confidentialCount') !== 0
@@ -134,8 +124,8 @@ class MapPiece extends React.Component {
       confidentialIcon = <ConfidentialIcon
         styles={this.props.styles.get('confidentialStyle')}
         text={valueString}
-        containerX={containerXPosition}
-        containerY={containerYPosition}
+        containerX={this.props.x1}
+        containerY={this.props.y1}
         lineX={102}
         lineY={40}
         textX={40}

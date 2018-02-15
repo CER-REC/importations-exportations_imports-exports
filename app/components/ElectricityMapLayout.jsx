@@ -44,6 +44,8 @@ class ElectricityMapLayout extends React.Component {
     top: PropTypes.number.isRequired,
     left: PropTypes.number.isRequired,
     country: PropTypes.string.isRequired,
+    containerX: PropTypes.number.isRequired,
+    containerY: PropTypes.number.isRequired,
   }
 
   onClick = (country, originKey) => {
@@ -178,6 +180,8 @@ class ElectricityMapLayout extends React.Component {
               isOrigin={(this.props.selection.get('country') === this.props.country)}
               x1={mapPieceTransformStartXaxis(position, dimensions, mapPieceScale)}
               y1={mapPieceTransformStartYaxis(position, dimensions, mapPieceScale)}
+              containerX={this.props.containerX}
+              containerY={this.props.containerY}
             />
           </g>
           {this.getPowerPoolsOutline(position.get('name'), this.props.country, xaxis, yaxis, position, dimensions, mapPieceScale)}
