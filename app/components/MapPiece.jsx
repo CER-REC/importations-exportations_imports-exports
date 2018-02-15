@@ -6,8 +6,7 @@ import ImportExportArrow from './ImportExportArrow'
 import MapPieceLabel from './MapPieceLabel'
 import ConfidentialIcon from './ConfidentialIcon'
 import Constants from '../Constants'
-import AnimatedMapPiece from './SVGAnimation/AnimatedMapPiece'
-import SafeAnimation from './SVGAnimation/SafeAnimation'
+import AnimatedGroup from './SVGAnimation/SafeAnimation'
 import MapLayoutGridConstant from '../MapLayoutGridConstant'
 
 import ExplanationDot from './ExplanationDot'
@@ -121,30 +120,29 @@ class MapPiece extends React.Component {
     }
     
     return (
-      <g fillOpacity={opacity} >
-        <SafeAnimation
-          cssAnimation={{
-            transform: `translate(${this.props.x1}px, ${this.props.y1}px)`,
-            transition: 'all 1s',
-          }}
-          fallbackAttributes={{
-            transform: `translate(${this.props.x1} ${this.props.y1})`,
-          }}
-        >
-          <polygon
-            stroke={stroke}
-            fill={this.props.styles.get('color')}
-            points="37.09 9.68 18.54 0 0 9.68 0 29.05 18.54 38.73 37.09 29.05 37.09 9.68"
-          />
-          {this.renderMapPieceLabel()}
-          <g transform={arrowTransform}>
-            {this.drawArrow('exports')}
-            {this.drawArrow('imports')}
-          </g>
-          {confidentialIcon}
-          {this.newYorkExplanation()}
-        </SafeAnimation>
-      </g>
+      <AnimatedGroup
+        cssAnimation={{
+          transform: `translate(${this.props.x1}px, ${this.props.y1}px)`,
+          transition: 'all 1s',
+        }}
+        fallbackAttributes={{
+          transform: `translate(${this.props.x1} ${this.props.y1})`,
+        }}
+        fillOpacity={opacity}
+      >
+        <polygon
+          stroke={stroke}
+          fill={this.props.styles.get('color')}
+          points="37.09 9.68 18.54 0 0 9.68 0 29.05 18.54 38.73 37.09 29.05 37.09 9.68"
+        />
+        {this.renderMapPieceLabel()}
+        <g transform={arrowTransform}>
+          {this.drawArrow('exports')}
+          {this.drawArrow('imports')}
+        </g>
+        {confidentialIcon}
+        {this.newYorkExplanation()}
+      </AnimatedGroup>
     )
   }
 }
