@@ -111,16 +111,18 @@ const filterByTimeline = (point, range, groupBy) => {
     )
   }
 }
-const filterByHex = (point, selectedMapPieces, visulization) => {
+const filterByHex = (point, selectedMapPieces, visulization, selectionState) => {
   if (selectedMapPieces.count() === 0) {
     return point
   }
   if (visulization === 'naturalGasLiquids' || visulization === 'crudeOil') {
-    return selectedMapPieces.includes(point.get('originKey'))
-    || selectedMapPieces.includes(point.get('destination'))  
-    || selectedMapPieces.includes(point.get('destinationKey'))
+    if (visulization === 'crudeOil' && point.get('destination') === '') {
+      return true
+    }
+    return selectedMapPieces.includes(point.get('destination'))
   }
   return selectedMapPieces.includes(point.get('originKey'))
+  || selectedMapPieces.includes(point.get('origin'))
   || selectedMapPieces.includes(point.get('port'))
 }
 
@@ -134,8 +136,43 @@ export const filterByHexSelector = createSelector(
   activityGroupSelector,
   selectedPieces,
   selectedVisualization,
-  (points, selectedMapPieces, visulization) => points.filter(point => filterByHex(point, selectedMapPieces, visulization)),
+  selection,
+  (points, selectedMapPieces, visulization, selectionState) => points.filter(point => filterByHex(point, selectedMapPieces, visulization, selectionState)),
 )
+
+const mapPieceLocationDataStructure = (acc, next, origin, originKey, originCountryKeyName, destinationKeyName, destinationCountryKeyName) => {
+  // Safe to mutate the acc argument as we created it for only this reduce
+  if (!acc[originKey]) {
+    acc[originKey] = {
+      units: next.get('units'),
+      origin,
+    }
+  }
+  acc[originKey].country = next.get(originCountryKeyName)
+  acc[originKey].originKey = originKey
+  const activity = next.get('activity')
+  const currentVal = acc[originKey][activity] || 0
+  acc[originKey][activity] = (currentVal + next.get('value'))
+
+  const totalCount = acc[originKey].totalCount || 0
+  const confidentialCount = acc[originKey].confidentialCount || 0
+  const destinationKey = next.get(destinationKeyName)
+  const destinationCountry = next.get(destinationCountryKeyName)
+  acc[originKey].destinationCountry = acc[originKey].destinationCountry || {}
+  acc[originKey].destinationCountry[destinationCountry] = acc[originKey].destinationCountry[destinationCountry] || {}
+  if (!(acc[originKey].destinationCountry[destinationCountry])[destinationKey]) {
+    acc[originKey].destinationCountry[destinationCountry][destinationKey] = {}
+    acc[originKey].destinationCountry[destinationCountry][destinationKey][activity] = next.get('value', 0)
+  } else {
+    if (!acc[originKey].destinationCountry[destinationCountry][destinationKey][activity]) {
+      acc[originKey].destinationCountry[destinationCountry][destinationKey][activity] = 0
+    }
+    acc[originKey].destinationCountry[destinationCountry][destinationKey][activity] += next.get('value', 0)
+  }
+  acc[originKey].totalCount = (totalCount + 1)
+  acc[originKey].confidentialCount = (confidentialCount + next.get('confidential'))
+  return acc
+}
 
 export const aggregateLocationSelector = createSelector(
   filterByTimelineSelector,
@@ -143,36 +180,11 @@ export const aggregateLocationSelector = createSelector(
     const result = points.reduce((acc, next) => {
       const origin = next.get('origin') || next.get('port')
       const originKey = next.get('originKey')
-      // Safe to mutate the acc argument as we created it for only this reduce
-      if (!acc[originKey]) {
-        acc[originKey] = {
-          units: next.get('units'),
-          origin,
-        }
-      }
-      acc[originKey].country = next.get('country')
-      acc[originKey].originKey = originKey
-      const activity = next.get('activity')
-      const currentVal = acc[originKey][activity] || 0
-      acc[originKey][activity] = (currentVal + next.get('value'))
+      acc = mapPieceLocationDataStructure(acc, next, origin, originKey, 'country','destinationKey', 'destinationCountry')
 
-      const totalCount = acc[originKey].totalCount || 0
-      const confidentialCount = acc[originKey].confidentialCount || 0
+      const destination = next.get('destination') || next.get('port')
       const destinationKey = next.get('destinationKey')
-      const destinationCountry = next.get('destinationCountry')
-      acc[originKey].destinationCountry = acc[originKey].destinationCountry || {}
-      acc[originKey].destinationCountry[destinationCountry] = acc[originKey].destinationCountry[destinationCountry] || {}
-      if (!(acc[originKey].destinationCountry[destinationCountry])[destinationKey]) {
-        acc[originKey].destinationCountry[destinationCountry][destinationKey] = {}
-        acc[originKey].destinationCountry[destinationCountry][destinationKey][activity] = next.get('value', 0)
-      } else {
-        if (!acc[originKey].destinationCountry[destinationCountry][destinationKey][activity]) {
-          acc[originKey].destinationCountry[destinationCountry][destinationKey][activity] = 0
-        }
-        acc[originKey].destinationCountry[destinationCountry][destinationKey][activity] += next.get('value', 0)
-      }
-      acc[originKey].totalCount = (totalCount + 1)
-      acc[originKey].confidentialCount = (confidentialCount + next.get('confidential'))
+      acc = mapPieceLocationDataStructure(acc, next, destination, destinationKey, 'destinationCountry', 'originKey', 'country')
       return acc
     }, {})
     return Immutable.fromJS(result)

@@ -409,8 +409,8 @@ const MapLayoutGridConstant = fromJS({
       dimensions: {
         height: 37.09,
         width: 38.75,
-        yAxisPadding: -8,
-        xAxisPadding: -5,
+         yAxisPadding: -8.1, //8
+        xAxisPadding: -1.9, //12
       },
       styles: {
         bottomMargin: 15,
@@ -424,14 +424,14 @@ const MapLayoutGridConstant = fromJS({
       arrow: {
         fontClass: 'paddArrowCanadaFonts',
         textTranslate: {
-          ca: { left: 144, top: 150 },
+          ca: { left: 147, top: 150 },
         },
         orderBy: {
           location: {
-            ca: { left: 1.3, top: -140 },
+            ca: { left: 15, top: -140 },
           },
           default: {
-            ca: { left: 1.3, top: -140 },
+            ca: { left: 15, top: -140 },
           },
         },
       },
