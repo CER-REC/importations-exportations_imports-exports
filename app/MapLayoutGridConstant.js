@@ -484,8 +484,8 @@ const MapLayoutGridConstant = fromJS({
       dimensions: {
         height: 37.09,
         width: 38.75,
-        yAxisPadding: -8, //8
-        xAxisPadding: -5, //12
+        yAxisPadding: -8.1, //8
+        xAxisPadding: -1.9, //12
       },
       styles: {
         bottomMargin: 15,
@@ -513,19 +513,19 @@ const MapLayoutGridConstant = fromJS({
           'PADD III': { left: 144, top: 180 },
           'PADD IV': { left: 146, top: 180 },
           'PADD V': { left: 144, top: 180 },
-          'Non-USA': { left: 140, top: 180 },
-          Mexico: { left: 140, top: 180 },
+          'Non-USA': { left: 150, top: 180 },
+          Mexico: { left: 150, top: 180 },
 
         },
         orderBy: {
           location: {
-            'PADD I': { left: 170, top: 50 },
-            'PADD II': { left: 25, top: -160 },
-            'PADD III': { left: 50, top: 50 },
-            'PADD IV': { left: -80, top: -160 },
-            'PADD V': { left: -90, top: 50 },
-            'Non-USA': { left: 281, top: -10 },
-            Mexico: { left: 281, top: -10 },
+            'PADD I': { left: 189, top: 50 },
+            'PADD II': { left: 44, top: -160 },
+            'PADD III': { left: 69, top: 50 },
+            'PADD IV': { left: -61, top: -160 },
+            'PADD V': { left: -71, top: 50 },
+            'Non-USA': { left: 310, top: -10 },
+            Mexico: { left: 310, top: -10 },
 
           },
           default: {
