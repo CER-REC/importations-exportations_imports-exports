@@ -49,20 +49,22 @@ class ExplanationPopover extends React.Component {
       {this.props.text}
       <div>
         <svg>
-          <polyline
-            fill="none"
-            stroke="#ff708a"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="0.75"
-            points="11.38 8.59 15.36 4.48 11.38 0.38"/>
-          <polyline
-            fill="none"
-            stroke="#ff708a"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="0.75"
-            points="4.36 0.38 0.38 4.48 4.36 8.59"/>
+          <g transform={`translate(${this.props.textBoxWidth - 40} 2)`}>
+            <polyline
+              fill="none"
+              stroke="#ff708a"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="0.75"
+              points="11.38 8.59 15.36 4.48 11.38 0.38"/>
+            <polyline
+              fill="none"
+              stroke="#ff708a"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="0.75"
+              points="4.36 0.38 0.38 4.48 4.36 8.59"/>
+          </g>
         </svg>
      </div>
     </div>

@@ -35,6 +35,7 @@ class ExplanationDot extends React.Component {
     const imageSource = 'images/explanations_plus.svg'
     return (<g id="circle">
       <image
+        className="pulse"
         xlinkHref={imageSource}
         x={this.props.xPosition - 5}
         y={this.props.yPosition - 5}
@@ -45,37 +46,15 @@ class ExplanationDot extends React.Component {
   }
 
   dotAnimation() {
-    return (<g><defs>
+    return (<g className="explanationDot">
       <circle
         id="back"
+        className="pulse"
         r={Constants.getIn(['explanationDot', 'radiusStart'])}
         cx={this.props.xPosition}
         cy={this.props.yPosition}
-        fill="#ff708a"
-      >
-        <animate
-          attributeName="r"
-          from={Constants.getIn(['explanationDot' , 'radiusStart'])}
-          to={Constants.getIn(['explanationDot' , 'radiusEnd'])}
-          dur="1.5s"
-          begin="0"
-          repeatCount="3"
-          fill="freeze"
-          id="circ-anim"
-        />
-        <animate
-          attributeName="opacity"
-          from="0.7"
-          to="0"
-          dur="1.5s"
-          begin="0"
-          repeatCount="3"
-          fill="freeze"
-          id="circ-anim"
-        />
-      </circle>
-    </defs>
-      {this.explanationDot()}
+        fill="#ff708a">
+        </circle>
     </g>)
   }
 
@@ -87,8 +66,8 @@ class ExplanationDot extends React.Component {
       role="menuItem"
       {...handleInteraction(this.props.onClick)}>
       {this.dotAnimation()}
+      {this.explanationDot()}
     </a>
-      <use x={this.props.xPosition + 6} y={this.props.yPosition} xlinkHref="#back"/>
     <PopoverPortal>
       <ExplanationPopover
         text={this.props.text}

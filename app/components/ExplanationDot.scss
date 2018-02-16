@@ -4,12 +4,29 @@
   stroke: fadeOut(#ff708a, 20px); 
 }
 
-/* pulse animation */
-#pulse {
-  animation: pulse 3s ease-in-out infinite;
+@keyframes fadeOutDot { 
+  from { 
+    opacity: 1; 
+    r: 4.5; 
+  } to 
+  { opacity: 0; 
+    r: 15.5; 
+  } 
 }
 
-#pulse:hover {
-  cursor: pointer;
-  animation: none;
+@keyframes expandDot { 
+  from { 
+    r: 4.5; 
+  } to 
+  { 
+    r: 15.5;
+  } 
 }
+
+.explanationDot {
+  cursor: pointer;
+  .pulse {
+    animation: 1.5s ease-out 0s 2 normal fadeOutDot;
+  }
+}
+

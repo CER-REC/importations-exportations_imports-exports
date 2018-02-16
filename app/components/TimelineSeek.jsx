@@ -174,7 +174,7 @@ class TimelineSeek extends React.PureComponent {
         lineY={173.94}
         textX={35}
         textY={58}
-        containerX={this.props.left + this.state.offset - 12}
+        containerX={this.props.left + this.state.offset - 7}
         containerY={this.props.top + 2}
         text="Drag to select time frame"
     /></g>)
@@ -210,7 +210,9 @@ class TimelineSeek extends React.PureComponent {
               stroke={Constants.getIn(['styleGuide', 'colours', 'SandExtraDark'])}
               fill="white"
             />
-            {this.timeSeekExplanation()}
+            <g transform="scale(0.8)">
+              {this.timeSeekExplanation()}
+            </g>
           </g>
         </SVGDrag>
       </g>
