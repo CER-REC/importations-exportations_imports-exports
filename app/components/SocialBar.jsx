@@ -103,15 +103,13 @@ class SocialBar extends React.Component {
   }
 
   aboutThisProjectClick() {
-    if (this.props.expandSocialBar) {
-      this.props.onClick()
-    }
+    if (!this.props.expandSocialBar) { return this.props.controlArrowClick() }
+    this.props.onClick()
   }
 
   methodologyClick() { // eslint-disable-line class-methods-use-this
-    if (this.props.expandSocialBar) {
-      // TODO: add methodology click functionality once pdf is given
-    }
+    if (!this.props.expandSocialBar) { return this.props.controlArrowClick() }
+    // TODO: add methodology click functionality once pdf is given
   }
 
   twitterClick() {
@@ -147,15 +145,13 @@ class SocialBar extends React.Component {
   }
 
   downloadImageClick() {
-    if (this.props.expandSocialBar) {
-      this.props.imageDownloadClick()
-    }
+    if (!this.props.expandSocialBar) { return this.props.controlArrowClick() }
+    this.props.imageDownloadClick()
   }
 
   downloadDataClick() {
-    if (this.props.expandSocialBar) {
-      this.props.dataDownloadClick()
-    }
+    if (!this.props.expandSocialBar) { return this.props.controlArrowClick() }
+    this.props.dataDownloadClick()
   }
 
   icons() {
