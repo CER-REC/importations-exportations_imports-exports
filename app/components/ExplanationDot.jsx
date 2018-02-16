@@ -28,8 +28,6 @@ class ExplanationDot extends React.Component {
       textY: PropTypes.number.isRequired,
       containerX: PropTypes.number.isRequired,
       containerY: PropTypes.number.isRequired,
-      scale: PropTypes.number.isRequired,
-      lineStroke: PropTypes.number.isRequired,
     }
   }
 
@@ -95,6 +93,7 @@ class ExplanationDot extends React.Component {
       <ExplanationPopover
         text={this.props.text}
         textBoxWidth={this.props.textBoxWidth}
+        textBoxHeight={this.props.textBoxHeight}
         scale={this.props.scale}
         lineStroke={this.props.lineStroke}
         linePath={this.props.linePath}

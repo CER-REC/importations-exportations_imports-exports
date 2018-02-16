@@ -40,21 +40,31 @@ class ExplanationPopover extends React.Component {
           top: this.props.textY - 3,
           left: this.props.textX,
           padding: 8,
-          height: 'auto',
+          height: this.props.textBoxHeight,
           width: this.props.textBoxWidth,
           background: 'white',
           opacity: '0.9',
         }}
       className="explanationText">
       {this.props.text}
-      <p>
-      <img
-        style={{
-          width: 50,
-          height: 8,
-        }}
-        src="images/explanations_next_previous.svg"
-      /></p>
+      <div>
+        <svg>
+          <polyline
+            fill="none"
+            stroke="#ff708a"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="0.75"
+            points="11.38 8.59 15.36 4.48 11.38 0.38"/>
+          <polyline
+            fill="none"
+            stroke="#ff708a"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="0.75"
+            points="4.36 0.38 0.38 4.48 4.36 8.59"/>
+        </svg>
+     </div>
     </div>
   }
 

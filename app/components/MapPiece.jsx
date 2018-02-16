@@ -67,6 +67,8 @@ class MapPiece extends React.Component {
       <ExplanationDot
         scale="scale(1)"
         lineStroke="1"
+        textBoxWidth={70}
+        textBoxHeight={170}
         linePath="
           M142.16,
           173.94l24.26,
