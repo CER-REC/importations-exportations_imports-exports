@@ -57,6 +57,15 @@ const RouteComputations = {
     return `${location.origin}/import-export-visualization/data/data.json`
   },
 
+  topoEndpoint: () => {
+    if (process.env.NODE_ENV === 'development') {
+      // FIXME: Hardcoded language because the data isn't language specific
+      const root = RouteComputations.appRoot(document.location, 'en')
+      return `${root}data/topo.json`
+    }
+    return `${location.origin}/import-export-visualization/data/topo.json`
+  },
+
   parseUrlLanguage: function (location) {
     if (location.pathname.match(Tr.getIn(['applicationPath' , 'en']))) {
       return 'en'
