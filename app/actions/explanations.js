@@ -1,18 +1,21 @@
+import { List } from 'immutable'
 
+export const Types = ({
+  EXPAND_COLLAPSE_EXPLANATION: 'expandCollapseExplanation',
+})
 
-export const Types = {
-  TOGGLE_EXPLANATION: 'toggleExplanation',
-}
-
-export const ToggleExplanation = dot => ({
-  type: Types.TOGGLE_EXPLANATION,
+export const ExpandCollapseExplanation = dot => ({
+  type: Types.EXPAND_COLLAPSE_EXPLANATION,
   payload: { dot },
 })
 
-const initialState = true
+const initialState = new List(['importExport'])
 export const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case Types.TOGGLE_EXPLANATION: return action.dot
+    case Types.EXPAND_COLLAPSE_EXPLANATION:
+      return state.contains(action.payload.dot)
+        ? state.filter(dot => dot !== action.payload.dot)
+        : state.concat(action.payload.dot)
     default: return state
   }
 }

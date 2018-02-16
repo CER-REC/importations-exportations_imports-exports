@@ -5,19 +5,16 @@ import PropTypes from 'prop-types'
 import Constants from '../Constants'
 import PopoverPortal from './PopoverPortal'
 
-const Tr = require('../TranslationTable.js')
-
-
 class ExplanationPopover extends React.Component {
   static get propTypes() {
     return {
-      showExplanations: PropTypes.bool.isRequired,
       text: PropTypes.string.isRequired,
       lineX: PropTypes.number.isRequired,
       lineY: PropTypes.number.isRequired,
       linePath: PropTypes.string.isRequired,
       textX: PropTypes.number.isRequired,
       textY: PropTypes.number.isRequired,
+      expanded: PropTypes.bool.isRequired,
     }
   }
 
@@ -48,6 +45,7 @@ class ExplanationPopover extends React.Component {
       className="explanationText">
       {this.props.text}
       <div>
+        {/*
         <svg>
           <g transform={`translate(${this.props.textBoxWidth - 40} 2)`}>
             <polyline
@@ -66,14 +64,13 @@ class ExplanationPopover extends React.Component {
               points="4.36 0.38 0.38 4.48 4.36 8.59"/>
           </g>
         </svg>
+        */}
      </div>
     </div>
   }
 
   render() {
-    if(!this.props.showExplanations) {
-      return null
-    }
+    if(!this.props.expanded) { return null }
     return <div style={{
           position: 'absolute',
           top: this.props.containerY + this.props.yPosition,
@@ -85,11 +82,4 @@ class ExplanationPopover extends React.Component {
   }
 }
 
-
-const mapStateToProps = state => ({
-  viewport: state.viewport,
-  language: state.language,
-  showExplanations: state.showExplanations,
-})
-
-export default connect(mapStateToProps)(ExplanationPopover)
+export default ExplanationPopover

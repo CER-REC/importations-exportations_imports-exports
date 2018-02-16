@@ -84,6 +84,7 @@ class MapPiece extends React.Component {
         textY={58}
         containerX={this.props.x1 * MapLayoutGridConstant.getIn(['electricity', 'us' , 'mapPieceScale'], 1) + 263}
         containerY={this.props.y1 * MapLayoutGridConstant.getIn(['electricity', 'us' , 'mapPieceScale'], 1) + 462}
+        name="newYorkElectricity"
         text="New York has the highest exports into the US as well as the highest imports from the US"
     /></g>)
   }

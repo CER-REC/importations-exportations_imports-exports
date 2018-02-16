@@ -47,7 +47,7 @@ const nestedReducers = combineReducers({
   visualizationSettings,
   expandSocialBar: SocialBarReducer,
   modal: ModalReducer,
-  explanation: ExplanationPopoverReducer,
+  openExplanations: ExplanationPopoverReducer,
   screenshotMode: ScreenshotModeReducer,
   activeMenu,
 })

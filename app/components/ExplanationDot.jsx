@@ -7,7 +7,7 @@ import Constants from '../Constants'
 import PopoverPortal from './PopoverPortal'
 import ExplanationPopover from './ExplanationPopover'
 
-import ToggleExplanation from '../actions/explanations'
+import { ExpandCollapseExplanation } from '../actions/explanations'
 
 import { handleInteraction } from '../utilities'
 
@@ -16,7 +16,6 @@ import './ExplanationDot.scss'
 class ExplanationDot extends React.Component {
   static get propTypes() {
     return {
-      explanation: PropTypes.bool.isRequired,
       xPosition: PropTypes.number.isRequired,
       yPosition: PropTypes.number.isRequired,
       showExplanations: PropTypes.bool.isRequired,
@@ -28,6 +27,9 @@ class ExplanationDot extends React.Component {
       textY: PropTypes.number.isRequired,
       containerX: PropTypes.number.isRequired,
       containerY: PropTypes.number.isRequired,
+      name: PropTypes.string.isRequired,
+      expanded: PropTypes.bool.isRequired,
+      onClick: PropTypes.func.isRequired,
     }
   }
 
@@ -63,7 +65,7 @@ class ExplanationDot extends React.Component {
     }
     return (<g><a 
       role="menuItem"
-      {...handleInteraction(this.props.onClick)}>
+      {...handleInteraction(this.props.onClick, this.props.name)}>
       {this.dotAnimation()}
       {this.explanationDot()}
     </a>
@@ -83,21 +85,22 @@ class ExplanationDot extends React.Component {
         containerY={this.props.containerY}
         xPosition={this.props.xPosition}
         yPosition={this.props.yPosition}
+        expanded={this.props.expanded}
       />
     </PopoverPortal>
     </g>)
   }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state, props) => ({
   viewport: state.viewport,
   language: state.language,
   showExplanations: state.showExplanations,
-  explanation: state.explanation,
+  expanded: state.openExplanations.contains(props.name),
 })
 
 const mapDispatchToProps = {
-  onClick: ToggleExplanation,
+  onClick: ExpandCollapseExplanation,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ExplanationDot)

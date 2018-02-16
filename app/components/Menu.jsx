@@ -52,6 +52,7 @@ class Menu extends React.PureComponent {
 
   importExportExplanation() {
     if (this.props.name !== 'activity') { return }
+    
     return (<g>
       <ExplanationDot
         scale="scale(0.4)"
@@ -74,6 +75,7 @@ class Menu extends React.PureComponent {
         containerX={this.props.left}
         containerY={this.props.top - 52}
         text="Click + to see more options"
+        name="importExport"
     /></g>)
   }
 
@@ -82,7 +84,6 @@ class Menu extends React.PureComponent {
     if (this.props.expanded) {
       dotY = 112
     }
-
     if (this.props.name === 'amount' || this.props.name === 'arrangeBy' || this.props.name === 'subtype') { return }
     return (<g>
       <ExplanationDot
@@ -106,6 +107,7 @@ class Menu extends React.PureComponent {
         containerX={this.props.left}
         containerY={this.props.top - 52}
         text="Electricity is the selected energy product"
+        name="electricityMenu"
     /></g>)
   }
 
@@ -201,6 +203,7 @@ export default connect(
     Tr: TrSelector(state, props),
     language: state.language,
     showExplanations: state.showExplanations,
+    expandCollapseExplanation: state.expandCollapseExplanation,
   }),
   { setActiveMenu },
 )(Menu)
