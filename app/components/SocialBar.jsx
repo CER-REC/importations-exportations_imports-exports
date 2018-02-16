@@ -92,14 +92,16 @@ class SocialBar extends React.Component {
     if (this.props.expandSocialBar) {
       return null
     }
-    const transformControlArrow = `translate(${this.props.viewport.get('x') - Constants.getIn(['socialBar', 'controlArrowMargin'])} ${this.props.viewport.get('y') + Constants.getIn(['socialBar', 'controlArrowY'])}) scale(-1,1)`
-    return (<image
-      className="socialBarIcon"
-      height={Constants.getIn(['socialBar', 'controlArrowHeight'])}
-      transform={transformControlArrow}
-      xlinkHref="images/control_arrow.svg"
-      {...handleInteraction(this.props.controlArrowClick)}
-    />)
+    const transformControlArrow = `translate(${this.props.viewport.get('x') - Constants.getIn(['socialBar', 'controlArrowMargin'])} ${this.props.viewport.get('y') + Constants.getIn(['socialBar', 'controlArrowY'])}) scale(-2.5,2.5)`
+    return (
+      <polygon
+        className="socialBarIcon"
+        points="0 0 4.2 8 0 15.7 0 0"
+        fill="#666"
+        transform={transformControlArrow}
+        {...handleInteraction(this.props.controlArrowClick)}
+      />
+    )
   }
 
   aboutThisProjectClick() {
@@ -165,15 +167,8 @@ class SocialBar extends React.Component {
     }
     const viewPort = WorkspaceComputations.socialBarY(this.props.viewport) || 0
     return (
-      <svg
+      <g
         {...handleInteraction(this.props.controlArrowClick)}
-        style={{
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          width: '100%',
-          height: '100%',
-        }}
       >
         <rect
           x={rectXPosition}
@@ -224,7 +219,7 @@ class SocialBar extends React.Component {
             {...handleInteraction(this.props.controlArrowClick)}
           />
         </g>
-      </svg>
+      </g>
     )
   }
 
