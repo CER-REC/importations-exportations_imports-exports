@@ -55,6 +55,7 @@ export default (store) => {
       importExportVisualization: visualization,
       language: state.language,
       showExplanations: state.showExplanations,
+      openExplanations: state.openExplanations,
     }
 
     const changed = Object.keys(toSave).some(key => toSave[key] !== lastSave[key])
