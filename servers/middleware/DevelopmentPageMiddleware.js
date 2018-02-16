@@ -1,3 +1,5 @@
+import Tr from '../../app/TranslationTable'
+
 const Express = require('express')
 const Path = require('path')
 const MustacheExpress = require('mustache-express')
@@ -19,9 +21,24 @@ const DevelopmentPageMiddleware = () => {
     res.render('screenshot')
   })
 
-  // Direct the root to the newer template
-  router.get('/(\\w+)?', (req, res) => {
+
+  router.get('/', (req, res) => {
     res.render('app', { title: 'WET 4.0.20' })
+  })
+
+  // NB: Don't try to use regexes to glob all of the visualization paths
+  // The w+ regex doesn't properly grab some characters used in French
+  Tr.getIn(['visualizationPaths']).forEach((paths) => {
+    router.get(`/${paths.get('en')}`, (req, res) => {
+      res.render('app', { title: 'WET 4.0.20' })
+    })
+    router.get(`/${paths.get('fr')}`, (req, res) => {
+      res.render('app', { title: 'WET 4.0.20' })
+    })
+    // Seems that this is necessary:
+    router.get(`/${encodeURIComponent(paths.get('fr'))}`, (req, res) => {
+      res.render('app', { title: 'WET 4.0.20' })
+    })
   })
 
   app.use(router)

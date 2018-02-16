@@ -1,16 +1,13 @@
-const Express = require('express')
+import Express from 'express'
 import Tr from '../app/TranslationTable'
 import Compression from 'compression'
 
-const Server = function(middlewares) {
-  let i, len, middleware
+// Compression = require('compression')
 
+function Server(middlewares) {
   // Prepare the Express app for the incident visualization
   const app = Express()
-  for (i = 0, len = middlewares.length; i < len; i++) {
-    middleware = middlewares[i]
-    app.use(middleware)
-  }
+  middlewares.forEach(middleware => app.use(middleware))
 
   const rootApp = Express()
 
@@ -20,15 +17,12 @@ const Server = function(middlewares) {
   rootApp.use(Tr.getIn(['applicationPath', 'en']), app)
   rootApp.use(Tr.getIn(['applicationPath', 'fr']), app)
 
-  rootApp.use(function(req, res) {
-    return res.status(404).send('404: Not Found.')
-  })
+  rootApp.use((req, res) => { res.status(404).send('404: Not Found.') })
 
-  rootApp.listen(process.env.PORT || process.env.PORT_NUMBER, function() {
-    console.log(`Ready: ${process.env.HOST}:${process.env.PORT_NUMBER}/import-export-visualization`)
-
-    // console.log(`Ready: ${process.env.HOST}:${process.env.PORT_NUMBER}${Tr.getIn(['applicationPath', 'en'])}`)
-    // console.log(`Ready: ${process.env.HOST}:${process.env.PORT_NUMBER}${Tr.getIn(['applicationPath', 'fr'])}`)
+  rootApp.listen(process.env.PORT || process.env.PORT_NUMBER, () => {
+    /* eslint-disable no-console */
+    console.log(`Ready: ${process.env.HOST}:${process.env.PORT_NUMBER}${Tr.getIn(['applicationPath', 'en'])}`)
+    console.log(`Ready: ${process.env.HOST}:${process.env.PORT_NUMBER}${Tr.getIn(['applicationPath', 'fr'])}`)
     return rootApp.emit('server-online')
   })
   return rootApp

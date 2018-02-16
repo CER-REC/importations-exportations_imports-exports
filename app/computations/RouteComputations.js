@@ -1,7 +1,6 @@
 import Constants from '../Constants'
 import Tr from '../TranslationTable'
 
-const QueryString = require('query-string')
 const BrowserCookies = require('browser-cookies')
 
 /*
@@ -28,7 +27,7 @@ meaning associated with absence.
 
 const RouteComputations = {
 
-  paramsToUrlString: function (params) {
+  paramsToUrlString(params) {
     const urlParts = Object.keys(params).map(key => `${key}=${params[key]}`)
     return `?${urlParts.join('&')}`
   },
@@ -44,6 +43,7 @@ const RouteComputations = {
         return `${root}bitly_url`
       }
       case 'production':
+      default:
         return `${location.origin}/bitlyService/api/bitlyShortlink`
     }
   },
@@ -66,21 +66,12 @@ const RouteComputations = {
     return `${location.origin}/import-export-visualization/data/topo.json`
   },
 
-  parseUrlLanguage: function (location) {
-    if (location.pathname.match(Tr.getIn(['applicationPath' , 'en']))) {
+  determineLanguage(location) {
+    if (location.pathname.match(Tr.getIn(['applicationPath', 'en']))) {
       return 'en'
     }
-    if (location.pathname.match(Tr.getIn(['applicationPath' , 'fr']))) {
+    if (location.pathname.match(Tr.getIn(['applicationPath', 'fr']))) {
       return 'fr'
-    }
-
-    const gc_lang_cookie = BrowserCookies.get('_gc_lang')
-
-    switch (gc_lang_cookie) {
-      case 'E':
-        return 'en'
-      case 'F':
-        return 'fr'   
     }
 
     // Default to English
@@ -109,18 +100,15 @@ const RouteComputations = {
     return encodeURIComponent(`${location.pathname}screenshot${location.search}`)
   },
 
-
   screenshotOrigin(location) {
     switch (process.env.NODE_ENV) {
       case 'development':
         return 'http://localhost:3004'
       case 'production':
+      default:
         return location.origin
     }
   },
-
-
 }
-
 
 export default RouteComputations
