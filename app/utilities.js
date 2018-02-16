@@ -15,10 +15,12 @@ export const handleInteraction = (func, ...boundArgs) => {
   const handle = (e) => {
     if (e.type === 'click') {
       e.preventDefault()
+      e.stopPropagation()
       func(...boundArgs)
     } else if (e.type === 'keypress') {
       if (e.key === 'Enter' || e.key === ' ') {
         e.preventDefault()
+        e.stopPropagation()
         func(...boundArgs)
       }
     }

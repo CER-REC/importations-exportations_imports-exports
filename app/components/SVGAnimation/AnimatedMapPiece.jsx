@@ -1,6 +1,5 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import memoize from 'memoize-immutable'
 
 class AnimatedMapPiece extends React.PureComponent {
   static get propTypes() {
@@ -19,16 +18,16 @@ class AnimatedMapPiece extends React.PureComponent {
     this.x2 = this.props.x2
     this.y2 = this.props.y2
 
-    this.animateRef = ''
+    this.animateRef = null
     this.trackRef = (ref) => { this.animateRef = ref }
   }
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.x1 !== this.props.x1 || nextProps.y1 !== this.props.y1) {
-      this.x1 = this.props.x2,
-      this.y1 = this.props.y2,
-      this.x2 = nextProps.x2,
-      this.y2 = nextProps.y2,
+      this.x1 = this.props.x2
+      this.y1 = this.props.y2
+      this.x2 = nextProps.x2
+      this.y2 = nextProps.y2
       this.animateRef.beginElement()
     }
   }

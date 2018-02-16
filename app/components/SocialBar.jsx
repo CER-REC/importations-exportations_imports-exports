@@ -38,7 +38,6 @@ class SocialBar extends React.Component {
     this.linkedInClick = this.linkedInClick.bind(this)
     this.downloadImageClick = this.downloadImageClick.bind(this)
     this.downloadDataClick = this.downloadDataClick.bind(this)
-    this.controlArrowClick = this.controlArrowClick.bind(this)
   }
 
   makeBitlyPromise() {
@@ -99,14 +98,8 @@ class SocialBar extends React.Component {
       height={Constants.getIn(['socialBar', 'controlArrowHeight'])}
       transform={transformControlArrow}
       xlinkHref="images/control_arrow.svg"
-      onClick={this.controlArrowClick}
+      {...handleInteraction(this.props.controlArrowClick)}
     />)
-  }
-
-  controlArrowClick(e) {
-    this.props.controlArrowClick()
-    e.preventDefault()
-    e.stopPropagation()
   }
 
   aboutThisProjectClick() {
@@ -177,7 +170,7 @@ class SocialBar extends React.Component {
     const viewPort = WorkspaceComputations.socialBarY(this.props.viewport) || 0
     return (
       <svg
-        onClick={this.controlArrowClick}
+        {...handleInteraction(this.props.controlArrowClick)}
         style={{
           position: 'absolute',
           top: 0,
@@ -200,7 +193,7 @@ class SocialBar extends React.Component {
             width={Constants.getIn(['socialBar', 'iconSize'])}
             xlinkHref="images/info_about.svg"
             y={viewPort + Constants.getIn(['menuBar', 'barWidth'], 0)}
-            onClick={this.aboutThisProjectClick}
+            {...handleInteraction(this.aboutThisProjectClick)}
           />
           <image
             className="socialBarIcon"
@@ -208,7 +201,7 @@ class SocialBar extends React.Component {
             width={Constants.getIn(['socialBar', 'iconSize'])}
             xlinkHref="images/info_methodology.svg"
             y={viewPort + Constants.getIn(['socialBar', 'iconMargin'], 0)}
-            onClick={this.methodologyClick}
+            {...handleInteraction(this.methodologyClick)}
           />
           <image
             className="socialBarIcon"
@@ -216,7 +209,7 @@ class SocialBar extends React.Component {
             width={Constants.getIn(['socialBar', 'iconSize'])}
             y={viewPort + Constants.getIn(['socialBar', 'downloadDataIconMargin'], 0)}
             xlinkHref="images/download_file.svg"
-            onClick={this.downloadDataClick}
+            {...handleInteraction(this.downloadDataClick)}
           />
           <image
             className="socialBarIcon"
@@ -224,7 +217,7 @@ class SocialBar extends React.Component {
             width={Constants.getIn(['socialBar', 'iconSize'])}
             y={viewPort + Constants.getIn(['socialBar', 'downloadImageIconMargin'], 0)}
             xlinkHref="images/download_image.svg"
-            onClick={this.downloadImageClick}
+            {...handleInteraction(this.downloadImageClick)}
           />
           <image
             className="socialBarIcon"
@@ -232,7 +225,7 @@ class SocialBar extends React.Component {
             width={Constants.getIn(['socialBar', 'iconSize'])}
             y={viewPort + Constants.getIn(['socialBar', 'shareIconMargin'], 0)}
             xlinkHref="images/share.svg"
-            onClick={this.controlArrowClick}
+            {...handleInteraction(this.props.controlArrowClick)}
           />
         </g>
       </svg>
@@ -252,7 +245,7 @@ class SocialBar extends React.Component {
         y={0}
         x={0}
         xlinkHref="images/sm_email.svg"
-        onClick={this.emailClick}
+        {...handleInteraction(this.emailClick)}
       />
       <image
         className="socialBarIcon"
@@ -261,7 +254,7 @@ class SocialBar extends React.Component {
         y={0}
         xlinkHref="images/sm_twitter.svg"
         x={Constants.getIn(['socialBar', 'twitterMargin'])}
-        onClick={this.twitterClick}
+        {...handleInteraction(this.twitterClick)}
       />
       <image
         className="socialBarIcon"
@@ -270,7 +263,7 @@ class SocialBar extends React.Component {
         y={0}
         xlinkHref="images/sm_facebook.svg"
         x={Constants.getIn(['socialBar', 'facebookMargin'])}
-        onClick={this.facebookClick}
+        {...handleInteraction(this.facebookClick)}
       />
       <image
         className="socialBarIcon"
@@ -279,7 +272,7 @@ class SocialBar extends React.Component {
         y={0}
         xlinkHref="images/sm_linkedin.svg"
         x={Constants.getIn(['socialBar', 'linkedinMargin'])}
-        onClick={this.linkedInClick}
+        {...handleInteraction(this.linkedInClick)}
       />
             </g>)
   }
@@ -291,10 +284,10 @@ class SocialBar extends React.Component {
     }
     return (<g transform={transformString}>
       <text className="socialBarText">
-        <tspan dy="0.1em" onClick={this.aboutThisProjectClick}> {Tr.getIn(['socialBarText', 'about', this.props.language])}</tspan>
-        <tspan dx="-2.6em" dy="1.8em" onClick={this.methodologyClick}> {Tr.getIn(['socialBarText', 'methodology', this.props.language])}</tspan>
-        <tspan dx="-5.6em" dy="1.8em" onClick={this.downloadDataClick}> {Tr.getIn(['socialBarText', 'downloadData', this.props.language])}</tspan>
-        <tspan dx="-6.35em" dy="1.8em" onClick={this.downloadImageClick}> {Tr.getIn(['socialBarText', 'downloadImage', this.props.language])}</tspan>
+        <tspan dy="0.1em" {...handleInteraction(this.aboutThisProjectClick)}> {Tr.getIn(['socialBarText', 'about', this.props.language])}</tspan>
+        <tspan dx="-2.6em" dy="1.8em" {...handleInteraction(this.methodologyClick)}> {Tr.getIn(['socialBarText', 'methodology', this.props.language])}</tspan>
+        <tspan dx="-5.6em" dy="1.8em" {...handleInteraction(this.downloadDataClick)}> {Tr.getIn(['socialBarText', 'downloadData', this.props.language])}</tspan>
+        <tspan dx="-6.35em" dy="1.8em" {...handleInteraction(this.downloadImageClick)}> {Tr.getIn(['socialBarText', 'downloadImage', this.props.language])}</tspan>
       </text>
     </g>)
   }
