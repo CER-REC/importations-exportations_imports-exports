@@ -18,8 +18,11 @@ import PaddFive from './Padds/PaddFive'
 import PaddNonUSA from './Padds/PaddNonUSA'
 import ConfidentialIcon from './ConfidentialIcon'
 
+import { handleInteraction } from '../utilities'
+
 import ElectricitySelector from '../selectors/ElectricitySelector'
-import { arrangeBy, binSelector, sortAggregatedLocationsSelector } from '../selectors/data'
+import { arrangeBy, binSelector, sortAggregatedLocationsSelector, selection } from '../selectors/data'
+import { setSelection } from '../actions/visualizationSettings'
 
 const mapPieceTransformStartTop = (top, position, dimensions, mapPieceScale) => top + (position.get('y') * ((mapPieceScale * dimensions.get('height')) + dimensions.get('yAxisPadding')))
 const mapPieceTransformStartLeft = (left, position, dimensions, mapPieceScale) => left + (position.get('x') * ((mapPieceScale * dimensions.get('width')) + dimensions.get('xAxisPadding')))
@@ -63,6 +66,35 @@ class PaddLayout extends React.Component {
       {confidentialIcon}
             </g>)
   }
+  getOpacityOfPadd(props, paddGroup){
+    if(props.country !== props.selctionState.get('country')){return 1}
+    if(props.selctionState.get('origins').count() === 0){return 1}
+    return props.selctionState.get('origins').includes(paddGroup)? 1 : 0.5
+  }
+
+  onPaddClick( props, paddGroup ) {
+    const { selctionState } = props
+    let origins = []
+    let country = props.country
+    if (selctionState.get('country') === country) {
+      const paddGroupExists = selctionState.get('origins').indexOf(paddGroup)
+      if (paddGroupExists === -1) {
+        origins = selctionState.get('origins').push(paddGroup).toJS()
+      } else {
+        origins = selctionState.get('origins').delete(paddGroupExists)
+        if(origins.count() === 0){
+          country = null
+        }
+      }
+    } else {
+      origins = [paddGroup]
+    }
+
+    props.savePaddState({
+      country,
+      origins,
+    })
+  }
   renderDefault(props) {
     const paddData = Array
       .from(props.Padd)
@@ -97,7 +129,9 @@ class PaddLayout extends React.Component {
             break
         }
         if (paddLayout !== null) {
-          paddLayout = (<g key={`${props.arrangeBy}_${currentValue[1].get('destination')}`} transform={`translate(${left} 0)`}>
+          paddLayout = (<g fillOpacity={this.getOpacityOfPadd(props, paddGroup)}  key={`${props.arrangeBy}_${currentValue[1].get('destination')}`} transform={`translate(${left} 0)`}
+              {...handleInteraction(this.onPaddClick, props, paddGroup)}
+            >
             {paddLayout}
             { this.getArrow(props.arrangeBy, paddGroup, 0, 0, color, currentValue[1].get('confidentialCount', 0)) }
           </g>)
@@ -119,7 +153,9 @@ class PaddLayout extends React.Component {
     const paddGroup = Constants.getIn(['dataloader', 'mapping', 'padd', props.country, props.paddGroup])
     const data = props.Padd.get(paddGroup)
     const color = this.getPaddColor(data.get('value'))
-    return (<g transform={`translate(${props.paddingX} ${props.paddingY})`}>
+    return (<g fillOpacity={this.getOpacityOfPadd(props, paddGroup)} transform={`translate(${props.paddingX} ${props.paddingY})`}
+        {...handleInteraction(this.onPaddClick, props, paddGroup)}
+      >
       {layout.map((position, key) => (
         <PaddMapPiece
           key={`paddLayout_${props.country}_${position.get('name')}`}
@@ -155,11 +191,14 @@ class PaddLayout extends React.Component {
   }
 }
 
+const mapDispatchToProps = { savePaddState: setSelection }
+
 const mapStateToProps = (state, props) => ({
+  selctionState: selection(state, props),
   arrangeBy: arrangeBy(state, props),
   bins: binSelector(state, props),
   Padd: PaddSelector(state, props),
   TRSelector: TRSelector(state, props),
 })
 
-export default connect(mapStateToProps)(PaddLayout)
+export default connect(mapStateToProps, mapDispatchToProps)(PaddLayout)
