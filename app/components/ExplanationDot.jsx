@@ -28,30 +28,22 @@ class ExplanationDot extends React.Component {
       textY: PropTypes.number.isRequired,
       containerX: PropTypes.number.isRequired,
       containerY: PropTypes.number.isRequired,
+      scale: PropTypes.number.isRequired,
+      lineStroke: PropTypes.number.isRequired,
     }
   }
 
   explanationDot() {
+    const imageSource = 'images/explanations_plus.svg'
     return (<g id="circle">
-      <circle
-        cx={this.props.xPosition}
-        cy={this.props.yPosition}
-        r={Constants.getIn(['explanationDot', 'radiusStart'])}
-        fill="#ff708a"/>
-        {this.sign()}
+      <image
+        xlinkHref={imageSource}
+        x={this.props.xPosition - 5}
+        y={this.props.yPosition - 5}
+        height={Constants.getIn(['explanationDot', 'radiusStart']) * 2}
+        width={Constants.getIn(['explanationDot', 'radiusStart']) * 2}
+      />
       </g>)
-  }
-
-  sign() {
-    const sign = '+'
-    return (<g>
-      <text 
-        x={this.props.xPosition - 3}
-        y={this.props.yPosition + 5}
-        className="showHideExplanations"
-        fill="white">
-      {sign}
-      </text></g>)
   }
 
   dotAnimation() {
@@ -102,6 +94,9 @@ class ExplanationDot extends React.Component {
     <PopoverPortal>
       <ExplanationPopover
         text={this.props.text}
+        textBoxWidth={this.props.textBoxWidth}
+        scale={this.props.scale}
+        lineStroke={this.props.lineStroke}
         linePath={this.props.linePath}
         lineX={this.props.lineX}
         lineY={this.props.lineY}

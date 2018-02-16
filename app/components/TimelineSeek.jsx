@@ -157,15 +157,24 @@ class TimelineSeek extends React.PureComponent {
     }
     return (<g>
       <ExplanationDot
-        linePath="M79,57 C163,276 228,251 486,247"
+        scale="scale(1)"
+        lineStroke="1"
+        textBoxWidth={87}
+        linePath="
+          M142.16,
+          173.94l24.26,
+          36.69a40.12,
+          40.12,0,0,0,
+          33.47,
+          18H264.2"
         xPosition={-7}
         yPosition={14}
-        lineX={120}
-        lineY={87}
+        lineX={142.16}
+        lineY={173.94}
         textX={35}
-        textY={50}
-        containerX={this.props.left + this.state.offset}
-        containerY={this.props.top}
+        textY={58}
+        containerX={this.props.left + this.state.offset - 12}
+        containerY={this.props.top + 2}
         text="Drag to select time frame"
     /></g>)
   }

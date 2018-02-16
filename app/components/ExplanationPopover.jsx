@@ -24,10 +24,12 @@ class ExplanationPopover extends React.Component {
   drawLine() {
     const transformString = `translate(${-this.props.lineX} ${-this.props.lineY})`
     const transformLine = `${this.props.linePath}`
+    const scaleLine = `${this.props.scale}`
+    const strokeWidth = `${this.props.lineStroke}`
 
     return (<svg>
-      <g transform={`scale(0.3) ${transformString}`}>
-        <path d={transformLine} stroke="#ff708a" strokeWidth="2" fill="transparent" />
+      <g transform={`${scaleLine} ${transformString}`}>
+        <path d={transformLine} stroke="#ff708a" strokeWidth={strokeWidth} fill="transparent" />
       </g>
     </svg>)
   }
@@ -39,12 +41,20 @@ class ExplanationPopover extends React.Component {
           left: this.props.textX,
           padding: 8,
           height: 'auto',
-          width: 80,
+          width: this.props.textBoxWidth,
           background: 'white',
           opacity: '0.9',
         }}
       className="explanationText">
       {this.props.text}
+      <p>
+      <img
+        style={{
+          width: 50,
+          height: 8,
+        }}
+        src="images/explanations_next_previous.svg"
+      /></p>
     </div>
   }
 

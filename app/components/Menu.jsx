@@ -54,13 +54,22 @@ class Menu extends React.PureComponent {
     if (this.props.name !== 'activity') { return }
     return (<g>
       <ExplanationDot
-        linePath="M80,80 C117,190 223,168 406,171"
+        scale="scale(0.4)"
+        lineStroke="2"
+        textBoxWidth={80}
+        linePath="
+          M142.16,
+          173.94l24.26,
+          36.69a40.12,
+          40.12,0,0,0,
+          33.47,
+          18H378.2"
         xPosition={150}
         yPosition={62}
-        lineX={80}
-        lineY={80}
-        textX={35}
-        textY={30}
+        lineX={142.16}
+        lineY={173.94}
+        textX={15}
+        textY={25}
         containerX={this.props.left}
         containerY={this.props.top - 52}
         text="Click + to see more options"
@@ -76,13 +85,22 @@ class Menu extends React.PureComponent {
     if (this.props.name === 'amount' || this.props.name === 'arrangeBy' || this.props.name === 'subtype') { return }
     return (<g>
       <ExplanationDot
-        linePath="M110,43 C248,257 312,213 633,213"
+        scale="scale(1.4)"
+        lineStroke="0.7"
+        textBoxWidth={120}
+        linePath="
+          M142.16,
+          173.94l24.26,
+          36.69a40.12,
+          40.12,0,0,0,
+          33.47,
+          18H264.2"
         xPosition={120}
         yPosition={dotY}
-        lineX={110}
-        lineY={43}
-        textX={75}
-        textY={55}
+        lineX={142.16}
+        lineY={173.94}
+        textX={50}
+        textY={80}
         containerX={this.props.left}
         containerY={this.props.top - 52}
         text="Electricity is the selected energy product"

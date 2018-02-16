@@ -65,15 +65,23 @@ class MapPiece extends React.Component {
     if (this.props.data.get('name') !== 'NY') { return null }
     return (<g>
       <ExplanationDot
-        linePath="M110,43 C248,257 312,213 633,213"
+        scale="scale(1)"
+        lineStroke="1"
+        linePath="
+          M142.16,
+          173.94l24.26,
+          36.69a40.12,
+          40.12,0,0,0,
+          33.47,
+          18H248.2"
         xPosition={18}
         yPosition={5}
-        lineX={110}
-        lineY={43}
-        textX={60}
-        textY={55}
-        containerX={this.props.x1 * MapLayoutGridConstant.getIn(['electricity', 'us' , 'mapPieceScale'], 1) + 223}
-        containerY={this.props.y1 * MapLayoutGridConstant.getIn(['electricity', 'us' , 'mapPieceScale'], 1) + 470}
+        lineX={142.16}
+        lineY={173.94}
+        textX={40}
+        textY={58}
+        containerX={this.props.x1 * MapLayoutGridConstant.getIn(['electricity', 'us' , 'mapPieceScale'], 1) + 263}
+        containerY={this.props.y1 * MapLayoutGridConstant.getIn(['electricity', 'us' , 'mapPieceScale'], 1) + 462}
         text="New York has the highest exports into the US as well as the highest imports from the US"
     /></g>)
   }
