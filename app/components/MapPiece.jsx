@@ -6,7 +6,7 @@ import ImportExportArrow from './ImportExportArrow'
 import MapPieceLabel from './MapPieceLabel'
 import ConfidentialIcon from './ConfidentialIcon'
 import Constants from '../Constants'
-import AnimatedMapPiece from './SVGAnimation/AnimatedMapPiece'
+import AnimatedGroup from './SVGAnimation/SafeAnimation'
 import MapLayoutGridConstant from '../MapLayoutGridConstant'
 
 import ExplanationDot from './ExplanationDot'
@@ -119,27 +119,31 @@ class MapPiece extends React.Component {
       stroke = this.props.mapPieceProps.get('stroke')
     }
     
-    return (<g fillOpacity={opacity} >
-      <polygon
-        stroke={stroke}
-        fill={this.props.styles.get('color')}
-        points="37.09 9.68 18.54 0 0 9.68 0 29.05 18.54 38.73 37.09 29.05 37.09 9.68"
-      />
-      {this.renderMapPieceLabel()}
-      <g transform={arrowTransform}>
-        {this.drawArrow('exports')}
-        {this.drawArrow('imports')}
-      </g>
-      {confidentialIcon}
+    return (
+      <AnimatedGroup
+        cssAnimation={{
+          transform: `translate(${this.props.x1}px, ${this.props.y1}px)`,
+          transition: 'all 1s',
+        }}
+        fallbackAttributes={{
+          transform: `translate(${this.props.x1} ${this.props.y1})`,
+        }}
+        fillOpacity={opacity}
+      >
+        <polygon
+          stroke={stroke}
+          fill={this.props.styles.get('color')}
+          points="37.09 9.68 18.54 0 0 9.68 0 29.05 18.54 38.73 37.09 29.05 37.09 9.68"
+        />
+        {this.renderMapPieceLabel()}
+        <g transform={arrowTransform}>
+          {this.drawArrow('exports')}
+          {this.drawArrow('imports')}
+        </g>
+        {confidentialIcon}
+        {this.newYorkExplanation()}
+      </AnimatedGroup>
     )
-      <AnimatedMapPiece
-        x1={this.props.x1 || 0}
-        y1={this.props.y1 || 0}
-        x2={this.props.x1 || 0}
-        y2={this.props.y1 || 0}
-      />
-      {this.newYorkExplanation()}
-  </g>)
   }
 }
 

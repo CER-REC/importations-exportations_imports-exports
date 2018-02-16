@@ -155,7 +155,7 @@ class ElectricityMapLayout extends React.Component {
     const xaxis = this.props.left
     const yaxis = this.props.top
     const isSelected = this.isSelected()
-    return layout.map((position) => {
+    return layout.sortBy(v => v.get('name')).map((position) => {
       const humanName = this.props.Tr(['country', this.props.country, position.get('name')])
       return (
         <g key={`mapPieceKey_${this.props.country}_${position.get('name')}`}>
