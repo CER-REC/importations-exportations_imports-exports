@@ -417,6 +417,10 @@ const TranslationTable = fromJS({
     en: '$0 of $1 values Confidential',
     fr: '$0 sur $1 valeurs Confidentiel',
   },
+  missingCount: {
+    en: '$0 of $1 entries missing information',
+    fr: '$0 sur $1 entries missing information',
+  },
   detailBreakDown: {
     electricity: {
       defaultText: {
