@@ -106,10 +106,14 @@ const parsingIssue = {};
   // Cluster the points into visualizations and units
   .then(points => points.reduce((acc, point) => {
     if (!acc[point.product]) { acc[point.product] = {} }
+    if (point.product === 'crudeOil' && point.destination === '') {
+      point.destination = 'ca'
+    }
     // Use an object reference to simplify the next creation
     const outProd = acc[point.product]
     if (!outProd[point.units]) { outProd[point.units] = [] }
     outProd[point.units].push(point)
+    //add destination as well 
     return acc
   }, {}))
   // Calculate bins

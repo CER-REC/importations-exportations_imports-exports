@@ -116,7 +116,7 @@ const filterByHex = (point, selectedMapPieces, visulization, selectionState) => 
     return point
   }
   if (visulization === 'naturalGasLiquids' || visulization === 'crudeOil') {
-    if (visulization === 'crudeOil' && point.get('destination') === '') {
+    if (visulization === 'crudeOil' && point.get('destination') === 'ca') {
       return true
     }
     return selectedMapPieces.includes(point.get('destination'))
