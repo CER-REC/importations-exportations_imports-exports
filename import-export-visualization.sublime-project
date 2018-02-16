@@ -21,6 +21,12 @@
     "rulers":
       [
         80
-      ]
+      ],
+    "file_exclude_patterns":
+    [
+      "import-export-visualization.sublime-workspace"
+    ]
   }
+
+
 }
