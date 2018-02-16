@@ -1,12 +1,12 @@
 import React from 'react'
-const ReactRedux = require('react-redux')
+import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
 import Constants from '../Constants'
-const Tr = require('../TranslationTable.js')
-const PopoverPortal = require('./PopoverPortal.jsx')
+import PopoverPortal from './PopoverPortal'
 
-import ExplanationPopoverCreator from '../actions/explanations'
+const Tr = require('../TranslationTable.js')
+
 
 class ExplanationPopover extends React.Component {
   static get propTypes() {
@@ -92,4 +92,4 @@ const mapStateToProps = state => ({
   showExplanations: state.showExplanations,
 })
 
-module.exports = ReactRedux.connect(mapStateToProps)(ExplanationPopover)
+export default connect(mapStateToProps)(ExplanationPopover)
