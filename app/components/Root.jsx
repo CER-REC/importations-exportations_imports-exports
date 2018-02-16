@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import Immutable from 'immutable'
+import { hot } from 'react-hot-loader'
 
 import Workspace from './Workspace'
 
@@ -27,4 +28,4 @@ const mapStateToProps = state => ({
   dataLoadingComplete: state.dataLoadingComplete,
 })
 
-export default connect(mapStateToProps)(Root)
+export default hot(module)(connect(mapStateToProps)(Root))
