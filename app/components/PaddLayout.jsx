@@ -75,17 +75,21 @@ class PaddLayout extends React.Component {
   onPaddClick( props, paddGroup ) {
     const { selctionState } = props
     let origins = []
-    const country = props.country
+    let country = props.country
     if (selctionState.get('country') === country) {
       const paddGroupExists = selctionState.get('origins').indexOf(paddGroup)
       if (paddGroupExists === -1) {
         origins = selctionState.get('origins').push(paddGroup).toJS()
       } else {
         origins = selctionState.get('origins').delete(paddGroupExists)
+        if(origins.count() === 0){
+          country = null
+        }
       }
     } else {
       origins = [paddGroup]
     }
+
     props.savePaddState({
       country,
       origins,
