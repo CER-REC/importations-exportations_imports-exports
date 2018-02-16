@@ -33,12 +33,14 @@ class ExplanationDot extends React.Component {
 
   explanationDot() {
     const imageSource = 'images/explanations_plus.svg'
-    return (<g id="circle">
+    // 'x' image - 'images/explanations_x.svg'
+    return (<g id="circle"
+      transform={`translate(${this.props.xPosition - 5} ${this.props.yPosition -5})`}>
       <image
         className="pulse"
         xlinkHref={imageSource}
-        x={this.props.xPosition - 5}
-        y={this.props.yPosition - 5}
+        x={0}
+        y={0}
         height={Constants.getIn(['explanationDot', 'radiusStart']) * 2}
         width={Constants.getIn(['explanationDot', 'radiusStart']) * 2}
       />
@@ -46,13 +48,13 @@ class ExplanationDot extends React.Component {
   }
 
   dotAnimation() {
-    return (<g className="explanationDot">
+    return (<g className="explanationDot" transform={`translate(${this.props.xPosition} ${this.props.yPosition})`}>
       <circle
         id="back"
         className="pulse"
         r={Constants.getIn(['explanationDot', 'radiusStart'])}
-        cx={this.props.xPosition}
-        cy={this.props.yPosition}
+        cx={0}
+        cy={0}
         fill="#ff708a">
         </circle>
     </g>)
