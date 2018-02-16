@@ -111,16 +111,13 @@ const filterByTimeline = (point, range, groupBy) => {
     )
   }
 }
-const filterByHex = (point, selectedMapPieces, visulization, selectionState) => {
+const filterByHex = (point, selectedMapPieces, visualization, selectionState) => {
   if (selectedMapPieces.count() === 0) {
     return point
   }
-  if (visulization === 'naturalGasLiquids' || visulization === 'crudeOil') {
-    if (visulization === 'crudeOil') {
-      if (point.get('destination') === 'ca') {
-        return true
-      }
-      if (selectionState.get('country') === 'ca') {
+  if (visualization === 'naturalGasLiquids' || visualization === 'crudeOil') {
+    if (visualization === 'crudeOil') {
+      if (point.get('destination') === 'ca' || selectionState.get('country') === 'ca') {
         return true
       }
     }
@@ -142,7 +139,7 @@ export const filterByHexSelector = createSelector(
   selectedPieces,
   selectedVisualization,
   selection,
-  (points, selectedMapPieces, visulization, selectionState) => points.filter(point => filterByHex(point, selectedMapPieces, visulization, selectionState)),
+  (points, selectedMapPieces, visualization, selectionState) => points.filter(point => filterByHex(point, selectedMapPieces, visualization, selectionState)),
 )
 
 const mapPieceLocationDataStructure = (acc, next, origin, originKey, originCountryKeyName, destinationKeyName, destinationCountryKeyName) => {
