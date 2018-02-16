@@ -1,6 +1,6 @@
 const Express = require('express')
 import Tr from '../app/TranslationTable'
-// Compression = require('compression')
+import Compression from 'compression'
 
 const Server = function(middlewares) {
   let i, len, middleware
@@ -13,6 +13,8 @@ const Server = function(middlewares) {
   }
 
   const rootApp = Express()
+
+  rootApp.use(Compression())
   
   // Host the visualization app with both French and English endpoints
   rootApp.use(Tr.getIn(['applicationPath', 'en']), app)

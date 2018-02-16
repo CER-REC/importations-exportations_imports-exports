@@ -18,8 +18,11 @@ import PaddFive from './Padds/PaddFive'
 import PaddNonUSA from './Padds/PaddNonUSA'
 import ConfidentialIcon from './ConfidentialIcon'
 
+import { handleInteraction } from '../utilities'
+
 import ElectricitySelector from '../selectors/ElectricitySelector'
-import { arrangeBy, binSelector, sortAggregatedLocationsSelector } from '../selectors/data'
+import { arrangeBy, binSelector, sortAggregatedLocationsSelector, selection } from '../selectors/data'
+import { setSelection } from '../actions/visualizationSettings'
 
 const mapPieceTransformStartTop = (top, position, dimensions, mapPieceScale) => top + (position.get('y') * ((mapPieceScale * dimensions.get('height')) + dimensions.get('yAxisPadding')))
 const mapPieceTransformStartLeft = (left, position, dimensions, mapPieceScale) => left + (position.get('x') * ((mapPieceScale * dimensions.get('width')) + dimensions.get('xAxisPadding')))
@@ -54,7 +57,7 @@ class PaddLayout extends React.Component {
     const text = this.props.TRSelector(['Padd', country, paddGroupId])
 
     let paddVCrudeOilconfidentialIcon = null
-    let paddVCrudeOilcontainerX = this.props.left + left - 36
+    let paddVCrudeOilcontainerX = this.props.left + left - 10
     let paddVCrudeOilcontainerY = this.props.top + top - 66
     if (this.props.arrangeBy === 'imports' || this.props.arrangeBy === 'exports') {
       paddVCrudeOilcontainerX = this.props.left + left + 471 - 30
@@ -83,7 +86,7 @@ class PaddLayout extends React.Component {
     }
 
     let paddIIICrudeOilconfidentialIcon = null
-    let paddIIICrudeOilcontainerX = this.props.left + left + 153
+    let paddIIICrudeOilcontainerX = this.props.left + left + 179
     let paddIIICrudeOilcontainerY = this.props.top + top - 66
     if (this.props.arrangeBy === 'imports' || this.props.arrangeBy === 'exports') {
       paddIIICrudeOilcontainerX = this.props.left + left + 598 - 30
@@ -111,7 +114,7 @@ class PaddLayout extends React.Component {
     }
 
     let paddICrudeOilconfidentialIcon = null
-    let paddICrudeOilcontainerX = this.props.left + left + 313
+    let paddICrudeOilcontainerX = this.props.left + left + 339
     let paddICrudeOilcontainerY = this.props.top + top - 66
     if (this.props.arrangeBy === 'imports' || this.props.arrangeBy === 'exports') {
       paddICrudeOilcontainerX = this.props.left + left + 348 - 30
@@ -139,7 +142,7 @@ class PaddLayout extends React.Component {
     }
 
     let paddNonUSACrudeOilconfidentialIcon = null
-    let paddNonUSACrudeOilcontainerX = this.props.left + left + 438
+    let paddNonUSACrudeOilcontainerX = this.props.left + left + 477
     let paddNonUSACrudeOilcontainerY = this.props.top + top - 145
     if (this.props.arrangeBy === 'imports' || this.props.arrangeBy === 'exports') {
       paddNonUSACrudeOilcontainerX = this.props.left + left + 718 - 30
@@ -168,7 +171,7 @@ class PaddLayout extends React.Component {
 
 
     let paddIIINGLconfidentialIcon = null
-    let paddIIINGLcontainerX = this.props.left + left + 156
+    let paddIIINGLcontainerX = this.props.left + left + 182
     let paddIIINGLcontainerY = this.props.top + top - 49
     if (this.props.arrangeBy === 'imports' || this.props.arrangeBy === 'exports') {
       paddIIINGLcontainerX = this.props.left + left + 568
@@ -196,7 +199,7 @@ class PaddLayout extends React.Component {
     }
 
     let paddIVNGLconfidentialIcon = null
-    let paddIVNGLcontainerX = this.props.left + left - 16
+    let paddIVNGLcontainerX = this.props.left + left + 9
     let paddIVNGLcontainerY = this.props.top + top - 320
     if (this.props.arrangeBy === 'imports' || this.props.arrangeBy === 'exports') {
       paddIVNGLcontainerX = this.props.left + left + 443
@@ -224,7 +227,7 @@ class PaddLayout extends React.Component {
     }
 
     let paddVNGLconfidentialIcon = null
-    let paddVNGLcontainerX = this.props.left + left - 30
+    let paddVNGLcontainerX = this.props.left + left - 7
     let paddVNGLcontainerY = this.props.top + top - 50
     if (this.props.arrangeBy === 'imports' || this.props.arrangeBy === 'exports') {
       paddVNGLcontainerX = this.props.left + left + 318
@@ -252,7 +255,7 @@ class PaddLayout extends React.Component {
     }
 
     let paddMexicoNGLconfidentialIcon = null
-    let paddMexicoNGLcontainerX = this.props.left + left + 440
+    let paddMexicoNGLcontainerX = this.props.left + left + 477
     let paddMexicoNGLcontainerY = this.props.top + top - 125
     if (this.props.arrangeBy === 'imports' || this.props.arrangeBy === 'exports') {
       paddMexicoNGLcontainerX = this.props.left + left + 687
@@ -294,6 +297,36 @@ class PaddLayout extends React.Component {
             </g>)
   }
 
+  getOpacityOfPadd(props, paddGroup){
+    if(props.country !== props.selctionState.get('country')){return 1}
+    if(props.selctionState.get('origins').count() === 0){return 1}
+    return props.selctionState.get('origins').includes(paddGroup)? 1 : 0.5
+  }
+
+  onPaddClick( props, paddGroup ) {
+    const { selctionState } = props
+    let origins = []
+    let country = props.country
+    if (selctionState.get('country') === country) {
+      const paddGroupExists = selctionState.get('origins').indexOf(paddGroup)
+      if (paddGroupExists === -1) {
+        origins = selctionState.get('origins').push(paddGroup).toJS()
+      } else {
+        origins = selctionState.get('origins').delete(paddGroupExists)
+        if(origins.count() === 0){
+          country = null
+        }
+      }
+    } else {
+      origins = [paddGroup]
+    }
+
+    props.savePaddState({
+      country,
+      origins,
+    })
+  }
+
   renderDefault(props) {
     const paddData = Array
       .from(props.Padd)
@@ -328,7 +361,9 @@ class PaddLayout extends React.Component {
             break
         }
         if (paddLayout !== null) {
-          paddLayout = (<g key={`${props.arrangeBy}_${currentValue[1].get('destination')}`} transform={`translate(${left} 0)`}>
+          paddLayout = (<g fillOpacity={this.getOpacityOfPadd(props, paddGroup)}  key={`${props.arrangeBy}_${currentValue[1].get('destination')}`} transform={`translate(${left} 0)`}
+              {...handleInteraction(this.onPaddClick, props, paddGroup)}
+            >
             {paddLayout}
             { this.getArrow(props.arrangeBy, paddGroup, 0, 0, color, currentValue[1].get('confidentialCount', 0), currentValue[1].get('totalCount'), 0) }
           </g>)
@@ -350,7 +385,9 @@ class PaddLayout extends React.Component {
     const paddGroup = Constants.getIn(['dataloader', 'mapping', 'padd', props.country, props.paddGroup])
     const data = props.Padd.get(paddGroup)
     const color = this.getPaddColor(data.get('value'))
-    return (<g transform={`translate(${props.paddingX} ${props.paddingY})`}>
+    return (<g fillOpacity={this.getOpacityOfPadd(props, paddGroup)} transform={`translate(${props.paddingX} ${props.paddingY})`}
+        {...handleInteraction(this.onPaddClick, props, paddGroup)}
+      >
       {layout.map((position, key) => (
         <PaddMapPiece
           key={`paddLayout_${props.country}_${position.get('name')}`}
@@ -387,7 +424,10 @@ class PaddLayout extends React.Component {
   }
 }
 
+const mapDispatchToProps = { savePaddState: setSelection }
+
 const mapStateToProps = (state, props) => ({
+  selctionState: selection(state, props),
   arrangeBy: arrangeBy(state, props),
   bins: binSelector(state, props),
   Padd: PaddSelector(state, props),
@@ -396,4 +436,4 @@ const mapStateToProps = (state, props) => ({
   selectedEnergy: state.importExportVisualization,
 })
 
-export default connect(mapStateToProps)(PaddLayout)
+export default connect(mapStateToProps, mapDispatchToProps)(PaddLayout)

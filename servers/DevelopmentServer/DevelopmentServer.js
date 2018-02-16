@@ -3,7 +3,7 @@ const Path = require('path')
 const ApplicationRoot = require('../../ApplicationRoot.js')
 
 require('dotenv').config({
-  path: Path.join(ApplicationRoot, 'servers/DevelopmentServer/.env')
+  path: Path.join(ApplicationRoot, 'servers/DevelopmentServer/.env'),
 })
 
 const PublicFilesMiddleware = require('../middleware/PublicFilesMiddleware.js')
@@ -16,6 +16,6 @@ const Server = require('../Server.js')
 Server([
   PublicFilesMiddleware(),
   WebpackDevMiddleware(),
+  BitlyMiddleware(),
   DevelopmentPageMiddleware(),
-  BitlyMiddleware()
 ])

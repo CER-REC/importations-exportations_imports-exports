@@ -41,17 +41,32 @@ class NaturalGasLiquidMapLayout extends React.Component {
   }
 
   onClick = (country, originKey) => {
-    return null
+    const { selection } = this.props
+    let origins = []
+    if (selection.get('country') === country) {
+      const originKeyExists = selection.get('origins').indexOf(originKey)
+      if (originKeyExists === -1) {
+        origins = selection.get('origins').push(originKey).toJS()
+      } else {
+        origins = selection.get('origins').delete(originKeyExists)
+      }
+    } else {
+      origins = [originKey]
+    }
+    this.props.onMapPieceClick({
+      country,
+      origins,
+    })
   }
 
   isMapPieceSelected(key, country) {
-    const isSelected = this.props.selection.get('origins').indexOf(key)
-    if (isSelected !== -1) { return true }
-    return this.props.selection.getIn(['destinations', country], new Immutable.List()).includes(key)
+    if(this.props.country !== this.props.selection.get('country')){return false}
+    return this.props.selection.get('origins').includes(key)
   }
   isSelected() {
-    const length = this.props.selection.get('origins').count() + this.props.selection.get('destinations').count()
-    return (length > 0)
+    if(this.props.country !== this.props.selection.get('country')){return false}
+    const count = this.props.selection.get('origins').count()
+    return (count > 0)
   }
 
   renderMapPiece() {
@@ -93,6 +108,7 @@ class NaturalGasLiquidMapLayout extends React.Component {
               isSelected={isSelected}
               mapPieceKey='name'
               mapPieceStyleClass = 'mapPieceText'
+              isOrigin={(this.props.selection.get('country') === this.props.country)}
               x1={mapPieceTransformStartXaxis(position, dimensions, mapPieceScale)}
               y1={mapPieceTransformStartYaxis(position, dimensions, mapPieceScale)}
               containerX={this.props.left}
