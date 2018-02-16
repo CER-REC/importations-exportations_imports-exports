@@ -2,32 +2,26 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 class AnimatedMapPiece extends React.PureComponent {
-  static get propTypes() {
-    return {
-      x1: PropTypes.number.isRequired,
-      x2: PropTypes.number.isRequired,
-      y1: PropTypes.number.isRequired,
-      y2: PropTypes.number.isRequired,
-    }
+  static propTypes = {
+    x: PropTypes.number.isRequired,
+    y: PropTypes.number.isRequired,
   }
 
   constructor(props) {
     super(props)
-    this.x1 = this.props.x1
-    this.y1 = this.props.y1
-    this.x2 = this.props.x2
-    this.y2 = this.props.y2
+    this.startX = this.endX = this.props.x
+    this.startY = this.endY = this.props.y
 
     this.animateRef = null
     this.trackRef = (ref) => { this.animateRef = ref }
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.x1 !== this.props.x1 || nextProps.y1 !== this.props.y1) {
-      this.x1 = this.props.x2
-      this.y1 = this.props.y2
-      this.x2 = nextProps.x2
-      this.y2 = nextProps.y2
+    if (nextProps.x !== this.props.x || nextProps.y !== this.props.y) {
+      this.startX = this.props.x
+      this.startY = this.props.y
+      this.endX = nextProps.x
+      this.endY = nextProps.y
       this.animateRef.beginElement()
     }
   }
@@ -38,8 +32,8 @@ class AnimatedMapPiece extends React.PureComponent {
       attributeName="transform"
       attributeType="XML"
       type="translate"
-      from={`${this.x1} ${this.y1}`}
-      to={`${this.x2} ${this.y2}`}
+      from={`${this.startX} ${this.startY}`}
+      to={`${this.endX} ${this.endY}`}
       dur="1s"
       fill="freeze"
     />)

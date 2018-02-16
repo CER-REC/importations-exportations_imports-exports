@@ -10,20 +10,22 @@ class ElectricityMapPieceActivityExplanation extends React.Component {
         data={MapPieceExplanationConstant.getIn(['electricity', 'ca', 'datapoint'])}
         dimensions={MapPieceExplanationConstant.getIn(['electricity', 'ca', 'dimensions'])}
         legends={MapPieceExplanationConstant.getIn(['electricity', 'ca', 'legends'])}
+        legend
         styles={MapPieceExplanationConstant.getIn(['electricity', 'ca', 'styles'])}
         arrowProps={MapPieceExplanationConstant.getIn(['electricity', 'ca', 'arrowProps'])}
         mapPieceProps={MapPieceExplanationConstant.getIn(['electricity', 'ca', 'mapPieceProps'])}
-        text= {Tr.getIn(['legendMapTiles','electricity', 'ca'])}
+        text={Tr.getIn(['legendMapTiles', 'electricity', 'ca'])}
       />
       <g transform="translate(0,70)">
         <MapPiece
           data={MapPieceExplanationConstant.getIn(['electricity', 'us', 'datapoint'])}
           dimensions={MapPieceExplanationConstant.getIn(['electricity', 'us', 'dimensions'])}
           legends={MapPieceExplanationConstant.getIn(['electricity', 'us', 'legends'])}
+          legend
           styles={MapPieceExplanationConstant.getIn(['electricity', 'us', 'styles'])}
           arrowProps={MapPieceExplanationConstant.getIn(['electricity', 'us', 'arrowProps'])}
           mapPieceProps={MapPieceExplanationConstant.getIn(['electricity', 'us', 'mapPieceProps'])}
-          text = {Tr.getIn(['legendMapTiles','electricity', 'us'])}
+          text={Tr.getIn(['legendMapTiles', 'electricity', 'us'])}
         />
       </g>
             </g>)
