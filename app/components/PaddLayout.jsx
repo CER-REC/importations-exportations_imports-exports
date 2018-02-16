@@ -54,10 +54,10 @@ class PaddLayout extends React.Component {
     const text = this.props.TRSelector(['Padd', country, paddGroupId])
 
     let paddVCrudeOilconfidentialIcon = null
-    let paddVCrudeOilcontainerX = this.props.left + left - 6
+    let paddVCrudeOilcontainerX = this.props.left + left - 36
     let paddVCrudeOilcontainerY = this.props.top + top - 66
     if (this.props.arrangeBy === 'imports' || this.props.arrangeBy === 'exports') {
-      paddVCrudeOilcontainerX = this.props.left + left + 471
+      paddVCrudeOilcontainerX = this.props.left + left + 471 - 30
       paddVCrudeOilcontainerY = this.props.top + top + 77
     }
     const style = mapLayoutGrid.get('styles', false)
@@ -76,17 +76,17 @@ class PaddLayout extends React.Component {
           lineY={40}
           textX={40}
           textY={40}
-          xPosition={0}
+          xPosition={30}
           yPosition={0}
         />
       </g>)
     }
 
     let paddIIICrudeOilconfidentialIcon = null
-    let paddIIICrudeOilcontainerX = this.props.left + left + 183
+    let paddIIICrudeOilcontainerX = this.props.left + left + 153
     let paddIIICrudeOilcontainerY = this.props.top + top - 66
     if (this.props.arrangeBy === 'imports' || this.props.arrangeBy === 'exports') {
-      paddIIICrudeOilcontainerX = this.props.left + left + 598
+      paddIIICrudeOilcontainerX = this.props.left + left + 598 - 30
       paddIIICrudeOilcontainerY = this.props.top + top + 77
     }
     const paddIIICrudeOilString = `${confidentialCount} / ${totalCount} values confidential`
@@ -104,17 +104,17 @@ class PaddLayout extends React.Component {
           lineY={40}
           textX={40}
           textY={40}
-          xPosition={0}
+          xPosition={30}
           yPosition={0} 
         />
       </g>)
     }
 
     let paddICrudeOilconfidentialIcon = null
-    let paddICrudeOilcontainerX = this.props.left + left + 343
+    let paddICrudeOilcontainerX = this.props.left + left + 313
     let paddICrudeOilcontainerY = this.props.top + top - 66
     if (this.props.arrangeBy === 'imports' || this.props.arrangeBy === 'exports') {
-      paddICrudeOilcontainerX = this.props.left + left + 348
+      paddICrudeOilcontainerX = this.props.left + left + 348 - 30
       paddICrudeOilcontainerY = this.props.top + top + 77
     }
     const paddICrudeOilString = `${confidentialCount} / ${totalCount} values confidential`
@@ -132,17 +132,17 @@ class PaddLayout extends React.Component {
           lineY={40}
           textX={40}
           textY={40}
-          xPosition={0}
+          xPosition={30}
           yPosition={0}
         />
       </g>)
     }
 
     let paddNonUSACrudeOilconfidentialIcon = null
-    let paddNonUSACrudeOilcontainerX = this.props.left + left + 468
+    let paddNonUSACrudeOilcontainerX = this.props.left + left + 438
     let paddNonUSACrudeOilcontainerY = this.props.top + top - 145
     if (this.props.arrangeBy === 'imports' || this.props.arrangeBy === 'exports') {
-      paddNonUSACrudeOilcontainerX = this.props.left + left + 718
+      paddNonUSACrudeOilcontainerX = this.props.left + left + 718 - 30
       paddNonUSACrudeOilcontainerY = this.props.top + top + 77
     }
     const paddNonUSACrudeOilString = `${confidentialCount} / ${totalCount} values confidential`
@@ -160,7 +160,7 @@ class PaddLayout extends React.Component {
           lineY={40}
           textX={40}
           textY={40}
-          xPosition={0}
+          xPosition={30}
           yPosition={0}
         />
       </g>)
@@ -168,10 +168,10 @@ class PaddLayout extends React.Component {
 
 
     let paddIIINGLconfidentialIcon = null
-    let paddIIINGLcontainerX = this.props.left + left + 185
+    let paddIIINGLcontainerX = this.props.left + left + 156
     let paddIIINGLcontainerY = this.props.top + top - 49
     if (this.props.arrangeBy === 'imports' || this.props.arrangeBy === 'exports') {
-      paddIIINGLcontainerX = this.props.left + left + 598
+      paddIIINGLcontainerX = this.props.left + left + 568
       paddIIINGLcontainerY = this.props.top + top + 69
     }
     const paddIIINGLString = `${confidentialCount} / ${totalCount} values confidential`
@@ -189,17 +189,17 @@ class PaddLayout extends React.Component {
           lineY={40}
           textX={40}
           textY={40}
-          xPosition={0}
+          xPosition={30}
           yPosition={0}
         />
       </g>)
     }
 
     let paddIVNGLconfidentialIcon = null
-    let paddIVNGLcontainerX = this.props.left + left + 14
+    let paddIVNGLcontainerX = this.props.left + left - 16
     let paddIVNGLcontainerY = this.props.top + top - 320
     if (this.props.arrangeBy === 'imports' || this.props.arrangeBy === 'exports') {
-      paddIVNGLcontainerX = this.props.left + left + 473
+      paddIVNGLcontainerX = this.props.left + left + 443
       paddIVNGLcontainerY = this.props.top + top + 69
     }
     const paddIVNGLString = `${confidentialCount} / ${totalCount} values confidential`
@@ -217,17 +217,17 @@ class PaddLayout extends React.Component {
           lineY={40}
           textX={40}
           textY={40}
-          xPosition={0}
+          xPosition={30}
           yPosition={0}
         />
       </g>)
     }
 
     let paddVNGLconfidentialIcon = null
-    let paddVNGLcontainerX = this.props.left + left
+    let paddVNGLcontainerX = this.props.left + left - 30
     let paddVNGLcontainerY = this.props.top + top - 50
     if (this.props.arrangeBy === 'imports' || this.props.arrangeBy === 'exports') {
-      paddVNGLcontainerX = this.props.left + left + 348
+      paddVNGLcontainerX = this.props.left + left + 318
       paddVNGLcontainerY = this.props.top + top + 69
     }
     const paddVNGLString = `${confidentialCount} / ${totalCount} values confidential`
@@ -245,17 +245,17 @@ class PaddLayout extends React.Component {
           lineY={40}
           textX={40}
           textY={40}
-          xPosition={0}
+          xPosition={30}
           yPosition={0}
         />
       </g>)
     }
 
     let paddMexicoNGLconfidentialIcon = null
-    let paddMexicoNGLcontainerX = this.props.left + left + 470
+    let paddMexicoNGLcontainerX = this.props.left + left + 440
     let paddMexicoNGLcontainerY = this.props.top + top - 125
     if (this.props.arrangeBy === 'imports' || this.props.arrangeBy === 'exports') {
-      paddMexicoNGLcontainerX = this.props.left + left + 717
+      paddMexicoNGLcontainerX = this.props.left + left + 687
       paddMexicoNGLcontainerY = this.props.top + top + 69
     }
     const paddMexicoNGLString = `${confidentialCount} / ${totalCount} values confidential`
@@ -273,7 +273,7 @@ class PaddLayout extends React.Component {
           lineY={40}
           textX={40}
           textY={40}
-          xPosition={0}
+          xPosition={30}
           yPosition={0}
         />
       </g>)
