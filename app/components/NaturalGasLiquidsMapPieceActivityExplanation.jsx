@@ -12,18 +12,19 @@ class NaturalGasLiquidsMapPieceActivityExplanation extends React.Component {
         data={MapPieceExplanationConstant.getIn(['naturalGasLiquids', 'ca', 'datapoint'])}
         dimensions={MapPieceExplanationConstant.getIn(['naturalGasLiquids', 'ca', 'dimensions'])}
         legends={MapPieceExplanationConstant.getIn(['naturalGasLiquids', 'ca', 'legends'])}
+        legend
         styles={MapPieceExplanationConstant.getIn(['naturalGasLiquids', 'ca', 'styles'])}
         arrowProps={MapPieceExplanationConstant.getIn(['naturalGasLiquids', 'ca', 'arrowProps'])}
         mapPieceProps={MapPieceExplanationConstant.getIn(['naturalGasLiquids', 'ca', 'mapPieceProps'])}
-        text= {Tr.getIn(['legendMapTiles','electricity', 'ca'])}
+        text={Tr.getIn(['legendMapTiles', 'electricity', 'ca'])}
       />
       <g transform="translate(0,70)">
         <ImportExportArrow
           arrowSpacing={MapPieceExplanationConstant.getIn(['naturalGasLiquids', 'us', 'styles', 'arrowSpacing'])}
-          type='exports'
-          color='#fff'
+          type="exports"
+          color="#fff"
           arrowProps={MapPieceExplanationConstant.getIn(['naturalGasLiquids', 'us', 'arrowProps'])}
-          text= {Tr.getIn(['legendMapTiles','naturalGasLiquids', 'us'])}
+          text={Tr.getIn(['legendMapTiles', 'naturalGasLiquids', 'us'])}
         />
       </g>
     </g>)

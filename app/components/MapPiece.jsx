@@ -8,6 +8,7 @@ import MapPieceLabel from './MapPieceLabel'
 import ConfidentialIcon from './ConfidentialIcon'
 import Constants from '../Constants'
 import AnimatedGroup from './SVGAnimation/SafeAnimation'
+import AnimatedMapPiece from './SVGAnimation/AnimatedMapPiece'
 import MapLayoutGridConstant from '../MapLayoutGridConstant'
 import ExplanationDot from './ExplanationDot'
 
@@ -135,17 +136,8 @@ class MapPiece extends React.Component {
         />
     }
     
-    return (
-      <AnimatedGroup
-        cssAnimation={{
-          transform: `translate(${this.props.x1}px, ${this.props.y1}px)`,
-          transition: 'all 1s',
-        }}
-        fallbackAttributes={{
-          transform: `translate(${this.props.x1} ${this.props.y1})`,
-        }}
-        fillOpacity={opacity}
-      >
+    const mapContent = (
+      <g>
         <polygon
           stroke={stroke}
           fill={this.props.styles.get('color')}
@@ -158,6 +150,24 @@ class MapPiece extends React.Component {
         </g>
         {confidentialIcon}
         {this.newYorkExplanation()}
+      </g>
+    )
+
+    if (this.props.legend) { return mapContent }
+
+    return (
+      <AnimatedGroup
+        cssAnimation={{
+          transform: `translate(${this.props.x1}px, ${this.props.y1}px)`,
+          transition: 'all 1s',
+        }}
+        fallbackAttributes={{
+          transform: `translate(${this.props.x1} ${this.props.y1})`,
+        }}
+        fallbackSMIL={<AnimatedMapPiece x={this.props.x1} y={this.props.y1} />}
+        fillOpacity={opacity}
+      >
+        {mapContent}
       </AnimatedGroup>
     )
 

@@ -6,7 +6,6 @@ const BUILD_DIR = Path.resolve(__dirname, 'public/script')
 module.exports = {
   entry: {
     bundle: [
-      'react-hot-loader/patch',
       'webpack-hot-middleware/client?path=/import-export-visualization/script/__webpack_hmr',
       './app/App.jsx',
     ]
@@ -26,7 +25,7 @@ module.exports = {
           loader: 'babel-loader',
           options: {
             presets: ['env', 'react', 'stage-2'],
-            plugins: ['react-hot-loader/babel'],
+            plugins: [],
           }
         }
       },

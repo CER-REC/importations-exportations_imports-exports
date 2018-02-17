@@ -34,25 +34,38 @@ export const makeSafeAnimation = (WrappedComponent) => {
   const SafeAnimation = (props) => {
     const {
       fallbackAttributes,
+      fallbackSMIL,
       cssAnimation,
       children,
       ...spreadProps
     } = props
-    const animation = Modernizr['svg-transforms']
-      ? { style: { ...(spreadProps.style || {}), ...cssAnimation } }
-      : (fallbackAttributes || cssAnimation) // Fallback is cssAnimations if not defined
-    return <WrappedComponent {...spreadProps} {...animation}>{children}</WrappedComponent>
+    let animation = fallbackAttributes || {}
+    let smilChild = null
+    if (Modernizr['svg-transforms']) {
+      animation = { style: { ...(spreadProps.style || {}), ...cssAnimation } }
+    } else if (Modernizr['svg-smil']) {
+      animation = {}
+      smilChild = fallbackSMIL
+    }
+    return (
+      <WrappedComponent {...spreadProps} {...animation}>
+        {children}
+        {smilChild}
+      </WrappedComponent>
+    )
   }
 
   SafeAnimation.propTypes = {
     children: PropTypes.node,
     cssAnimation: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
     fallbackAttributes: PropTypes.object, // eslint-disable-line react/forbid-prop-types
+    fallbackSMIL: PropTypes.node,
   }
 
   SafeAnimation.defaultProps = {
     children: null,
     fallbackAttributes: null,
+    fallbackSMIL: null,
   }
 
   return SafeAnimation
