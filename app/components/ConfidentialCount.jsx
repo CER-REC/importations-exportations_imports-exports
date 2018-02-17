@@ -16,9 +16,13 @@ const ConfidentialCount = (props) => {
 
   return (
     <div>
-      <svg width="20" height="15">
-        <g transform="translate(-30, 0)">
-          <ConfidentialIcon styles={iconStyle} />
+    <svg width="20" height="15">
+        <g transform="translate(3, 2)">
+          <image
+            width={13}
+            height={13}
+            xlinkHref="images/conf_white.svg"
+          />
         </g>
       </svg>
       <span>{props.TR('confidentialCount', props.value.confidential, props.value.total)}</span>

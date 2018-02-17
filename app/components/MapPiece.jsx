@@ -1,4 +1,5 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import Immutable from 'immutable'
 
@@ -8,7 +9,6 @@ import ConfidentialIcon from './ConfidentialIcon'
 import Constants from '../Constants'
 import AnimatedGroup from './SVGAnimation/SafeAnimation'
 import MapLayoutGridConstant from '../MapLayoutGridConstant'
-
 import ExplanationDot from './ExplanationDot'
 
 class MapPiece extends React.Component {
@@ -18,6 +18,8 @@ class MapPiece extends React.Component {
     dimensions: PropTypes.instanceOf(Immutable.Map).isRequired,
     data: PropTypes.instanceOf(Immutable.Map).isRequired,
     legend: PropTypes.bool,
+    confidentialityMenu: PropTypes.bool.isRequired,
+    selectedEnergy: PropTypes.string.isRequired,
     isOrigin: PropTypes.bool,
   }
 
@@ -72,13 +74,13 @@ class MapPiece extends React.Component {
         lineY={43}
         textX={60}
         textY={55}
-        containerX={this.props.x1 * MapLayoutGridConstant.getIn(['electricity', 'us' , 'mapPieceScale'], 1) + 223}
-        containerY={this.props.y1 * MapLayoutGridConstant.getIn(['electricity', 'us' , 'mapPieceScale'], 1) + 470}
+        containerX={this.props.x1 * MapLayoutGridConstant.getIn(['electricity', 'us' , 'mapPieceScale'], 1) + 260}
+        containerY={this.props.y1 * MapLayoutGridConstant.getIn(['electricity', 'us' , 'mapPieceScale'], 1) + 459}
         text="New York has the highest exports into the US as well as the highest imports from the US"
     /></g>)
   }
 
-  renderMapPieceLabel(){
+  renderMapPieceLabel() {
     return <MapPieceLabel
         labelPosition={this.props.styles.get('labelPosition')}
         topMargin={this.props.styles.get('bottomMargin')}
@@ -97,11 +99,6 @@ class MapPiece extends React.Component {
     if (this.props.styles.get('arrowPosition') === 'down') {
       arrowTransform = `translate(${Constants.getIn(['mapPieceArrowStyle', 'x'])}, ${this.props.dimensions.get('height') - Constants.getIn(['mapPieceArrowStyle', 'y']) + 4})`
     }
-    let confidentialIcon = ''
-    if (typeof this.props.data.get('confidentialCount') !== 'undefined' && this.props.data.get('confidentialCount') !== 0) {
-      // TODO: on click show pop over to show confidential values
-      confidentialIcon = <ConfidentialIcon styles={this.props.styles.get('confidentialStyle')} />
-    }
 
     let stroke = 'none'
     if (this.props.isMapPieceSelected === true) {
@@ -117,6 +114,25 @@ class MapPiece extends React.Component {
       && typeof this.props.mapPieceProps.get('stroke') !== 'undefined'
       && this.props.mapPieceProps.get('stroke') !== '') {
       stroke = this.props.mapPieceProps.get('stroke')
+    }
+
+    let confidentialIcon = null
+    const valueString = `${this.props.data.get('confidentialCount')} / ${this.props.data.get('totalCount')} values confidential`
+    if (typeof this.props.data.get('confidentialCount') !== 'undefined'
+        && this.props.data.get('confidentialCount') !== 0
+        && this.props.confidentialityMenu) {
+      confidentialIcon = <ConfidentialIcon
+        styles={this.props.styles.get('confidentialStyle')}
+        text={valueString}
+        containerX={this.props.containerX + this.props.x1 + 13}
+        containerY={this.props.containerY + this.props.y1 + 11}
+        lineX={102}
+        lineY={40}
+        textX={40}
+        textY={40}
+        xPosition={30}
+        yPosition={0}
+        />
     }
     
     return (
@@ -144,7 +160,13 @@ class MapPiece extends React.Component {
         {this.newYorkExplanation()}
       </AnimatedGroup>
     )
+
   }
 }
 
-export default MapPiece
+const mapStateToProps = (state, props) => ({
+  confidentialityMenu: state.confidentialityMenu,
+  selectedEnergy: state.importExportVisualization,
+})
+
+export default connect(mapStateToProps)(MapPiece)

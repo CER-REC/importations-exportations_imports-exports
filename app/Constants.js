@@ -126,7 +126,7 @@ const Constants = fromJS({
   showExplanations: {
     height: 30,
     topMargin: 80,
-    triangleLineWidth: 150,
+    triangleLineWidth: 160,
     triangleLineYOffset: 3,
     triangleLineY: 7.6,
     labelOffset: 13,
