@@ -7,7 +7,8 @@ export const activityOptions = createSelector(
   selectedVisualization,
   vis => ((vis === 'crudeOil' || vis === 'refinedPetroleumProducts')
     ? ['exports']
-    : ['importsExports', 'imports', 'exports']
+    : ((vis === 'naturalGas') ? ['importsExports', 'imports', 'exports', 'importsForReexport', 'exportsForReimport']
+      : ['importsExports', 'imports', 'exports'])
   ),
 )
 

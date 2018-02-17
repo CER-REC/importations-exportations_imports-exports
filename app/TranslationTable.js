@@ -203,6 +203,14 @@ const TranslationTable = fromJS({
           en: 'Imports and Exports',
           fr: 'Importations et exportations',
         },
+        importsForReexport: {
+          en: 'Temporary Imports',
+          fr: 'Temporary Imports FR',
+        },
+        exportsForReimport: {
+          en: 'Temporary Exports',
+          fr: 'Temporary Exports FR',
+        },
       },
     },
     arrangeBy: {
@@ -301,7 +309,6 @@ const TranslationTable = fromJS({
     en: 'CONFIDENTIALITY',
     fr: 'CONFIDENTIALITÉ',
   },
-  
   amounts: {
     CAN$: { en: 'CAN$', fr: '$ CAN' },
     'CAN$/MW.h': { en: 'CAN$/MW.h', fr: '$ CAN/MWh' },
