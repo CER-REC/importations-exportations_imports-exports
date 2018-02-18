@@ -66,7 +66,7 @@ export const activityExplanationPosition = createSelector(
   prev => ({
     // Currently this is hardcoded value
     // TODO: replace by dynamic value once new navigation bar is merged
-    top: 550,
+    top: 600,
     left: 10,
     width: 150,
     height: 50,

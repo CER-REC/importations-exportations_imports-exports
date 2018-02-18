@@ -61,6 +61,10 @@ class MapPiece extends React.Component {
       color= {color}
       arrowProps={this.props.arrowProps}
       text = {this.props.text}
+      drawLabelLabelY = {this.props.drawLabelLabelY}
+      drawLabelLineY = {this.props.drawLabelLineY}
+      drawLabelLineImportY = {this.props.drawLabelLineImportY}
+      drawLabelLabelImportY = {this.props.drawLabelLabelImportY}
     />)
   }
 

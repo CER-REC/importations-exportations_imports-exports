@@ -7,7 +7,6 @@ import Tr from '../TranslationTable'
 import {visualizationSettings} from '../selectors/visualizationSettings'
 class NaturalGasPieceActivityExplanation extends React.Component {
   render() {
-    console.log()
     let activity = 'importsExports'
     if(['importsForReexport', 'exportsForReimport'].includes(this.props.activityGroup.get('activity'))){
       activity = this.props.activityGroup.get('activity')
@@ -23,6 +22,10 @@ class NaturalGasPieceActivityExplanation extends React.Component {
         text={Tr.getIn(['legendMapTiles', 'naturalGas', activity])}
         x1={0}
         y1={0}
+        mapPieceKey='portName'
+        mapPieceStyleClass = 'mapPieceText'
+        drawLabelLineImportY = {-30}
+        drawLabelLabelImportY = {-30}
       />
     </g>)
   }

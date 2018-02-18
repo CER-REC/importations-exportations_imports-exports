@@ -48,7 +48,7 @@ const MapPieceExplanationConstant = fromJS({
     },
     us: {
       datapoint: {
-        name: 'BC',
+        name: 'WA',
         exports: 10,
         imports: 10,
         totalCount: 0,
@@ -198,7 +198,7 @@ const MapPieceExplanationConstant = fromJS({
   },
   naturalGas: {
     datapoint: {
-      name: 'Aden',
+      portName: 'Aden',
       exports: 10,
       imports: 10,
       totalCount: 0,
@@ -212,7 +212,7 @@ const MapPieceExplanationConstant = fromJS({
     },
     styles: {
       color: 'white',
-      labelPosition: 'up',
+      labelPosition: 'down',
       arrowPosition: 'down',
       arrowSpacing: -12,
       bottomMargin: 5,
