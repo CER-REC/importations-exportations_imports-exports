@@ -194,7 +194,7 @@ export const aggregateLocationSelector = createSelector(
 )
 
 export const aggregateLocationPaddSelector = createSelector(
-  filterByTimelineSelector, 
+  filterByTimelineSelector,
   (points) => {
     const result = points.reduce((acc, next) => {
       let destination = next.get('destinationKey') === ''? next.get('destination'): next.get('destinationKey')
