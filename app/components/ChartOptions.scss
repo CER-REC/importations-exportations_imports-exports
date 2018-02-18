@@ -19,7 +19,8 @@
   & input { display:none; }
 
   input:checked + .switchBackground > .slider {
-    transform: translateX(calc(100% + 2px));
+    left: auto;
+    right: 1px;
   }
 }
 

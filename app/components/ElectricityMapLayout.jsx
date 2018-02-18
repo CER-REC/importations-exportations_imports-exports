@@ -155,7 +155,7 @@ class ElectricityMapLayout extends React.Component {
     const xaxis = this.props.left
     const yaxis = this.props.top
     const isSelected = this.isSelected()
-    return layout.map((position) => {
+    return layout.sortBy(v => v.get('name')).map((position) => {
       const humanName = this.props.Tr(['country', this.props.country, position.get('name')])
       return (
         <g key={`mapPieceKey_${this.props.country}_${position.get('name')}`}>
@@ -178,6 +178,8 @@ class ElectricityMapLayout extends React.Component {
               isOrigin={(this.props.selection.get('country') === this.props.country)}
               x1={mapPieceTransformStartXaxis(position, dimensions, mapPieceScale)}
               y1={mapPieceTransformStartYaxis(position, dimensions, mapPieceScale)}
+              containerX={this.props.left}
+              containerY={this.props.top}
             />
           </g>
           {this.getPowerPoolsOutline(position.get('name'), this.props.country, xaxis, yaxis, position, dimensions, mapPieceScale)}

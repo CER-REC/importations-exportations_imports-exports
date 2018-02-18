@@ -2,6 +2,8 @@ import LZUTF8 from 'lzutf8'
 import createHistory from 'history/createBrowserHistory'
 import QueryString from 'query-string'
 
+import RouteComputations from '../computations/RouteComputations'
+
 import TR from '../TranslationTable'
 
 let unlistenHistory
@@ -14,6 +16,11 @@ export const updateStateFromURL = (search, store) => {
     const { config: configRaw } = QueryString.parse(search)
     if (!configRaw) { return }
     const config = JSON.parse(LZUTF8.decompress(decodeURIComponent(configRaw), { inputEncoding: 'Base64' }))
+
+    // Always determine language from the path in the URL bar, rather than
+    // the language attribute from the config.
+    config.language = RouteComputations.determineLanguage(document.location)
+
     updatingState = true
     store.dispatch({
       type: 'urlRouteChanged',
@@ -66,7 +73,12 @@ export default (store) => {
     const compressed = encodeURIComponent(LZUTF8.compress(JSON.stringify(toSave), { outputEncoding: 'Base64' }))
     updatingHistory = true
     const baseURL = TR.getIn(['applicationPath', state.language])
-    history.push(`${baseURL}${state.importExportVisualization}?config=${compressed}`)
+    const visualizationPath = TR.getIn([
+      'visualizationPaths',
+      state.importExportVisualization,
+      state.language,
+    ])
+    history.push(`${baseURL}${visualizationPath}?config=${compressed}`)
     updatingHistory = false
   }
 }

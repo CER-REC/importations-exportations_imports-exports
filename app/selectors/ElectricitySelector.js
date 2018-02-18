@@ -88,6 +88,7 @@ const sortData = (points, sortBy) => {
       return points
   }
 }
+
 const createSortedLayout = createSelector(
   getElectricityImportAndExport,
   getColumns,

@@ -13,7 +13,7 @@ import DetailBreakdownHeader from './DetailBreakdownHeader'
 import DetailTotal from './DetailTotal'
 import Tr from '../TranslationTable'
 import { timelineGrouping, timelineData } from '../selectors/timeline'
-import { amount } from '../selectors/data'
+import { amount, selection } from '../selectors/data'
 
 const transportType = [
   'Pipeline',
@@ -121,6 +121,7 @@ class ProportionChart extends Chart {
       layout,
       color,
       colors: categoryColours,
+      selectionState,
     } = this.props
 
     const valueTotals = data
@@ -143,7 +144,10 @@ class ProportionChart extends Chart {
         .get('values')
         .sortBy((v, k) => k, (a, b) => (valueOrder.indexOf(a) - valueOrder.indexOf(b)))
         .map((value, type) => {
-          const lineColor = categoryColours.get(stackIndex + colourOffset, color)
+          let lineColor = categoryColours.get(stackIndex + colourOffset, color)
+          if(selectionState.get('country') === 'us'){
+            lineColor='grey'
+          }
           const line = (
             <AnimatedLine
               x1={point.get('offsetX')}
@@ -177,4 +181,5 @@ export default connect((state, props) => Object.assign({
   timelineGroup: timelineGrouping(state, props),
   unit: amount(state, props),
   language: state.language,
+  selectionState: selection(state, props)
 }, timelineData(state, props)))(ProportionChart)

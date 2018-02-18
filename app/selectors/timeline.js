@@ -3,7 +3,7 @@ import { fromJS } from 'immutable'
 
 import { filterByHexSelector } from './data'
 import { visualizationContentPosition as visContentSize } from './viewport/'
-import { visualizationSettings } from './visualizationSettings'
+import { visualizationSettings, selectedVisualization } from './visualizationSettings'
 import Constants from '../Constants'
 
 const getAggregateKey = (_, props) => props.aggregateKey
@@ -28,10 +28,14 @@ export const timelineScaleLinked = createSelector(
 export const aggregateQuarter = createSelector(
   filterByHexSelector,
   getAggregateKey,
-  (points, aggregateKey) => {
+  selectedVisualization,
+  (points, aggregateKey, vizName) => {
     const valueKeys = []
     const result = points
       .reduce((acc, next) => {
+        if (vizName === 'crudeOil' && aggregateKey === 'activity' && next.get('destination') === 'ca') {
+          return acc
+        }
         const period = next.get('period')
         if (!acc[period]) {
           acc[period] = {

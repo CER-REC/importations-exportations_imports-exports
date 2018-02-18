@@ -20,18 +20,6 @@ const SetFromRouterState = require('./actions/screenshot').SetFromRouterState
 
 const store = Store()
 
-function render(Component) {
-  const app = (
-    <AppContainer>
-      <Provider store={store}>
-        <Component />
-      </Provider>
-    </AppContainer>
-  )
-
-  ReactDOM.render(app, document.getElementById('reactRoot'))
-}
-
 function resizeScreenHandler() {
   // Ensures the width and height of the workspace keep the ratio 900:600
   // TODO: Increase the height of the workspace by emptyCategoryOffsetRatio if
@@ -56,7 +44,15 @@ DomReady(() => {
   resizeScreenHandler()
   window.addEventListener('resize', resizeScreenHandler)
   window.addEventListener('click', windowClickHandler)
-  render(Root)
+  const app = (
+    <AppContainer>
+      <Provider store={store}>
+        <Root />
+      </Provider>
+    </AppContainer>
+  )
+
+  ReactDOM.render(app, document.getElementById('reactRoot'))
 })
 
 Request({
@@ -66,25 +62,3 @@ Request({
   store.dispatch(LoadBinsCreator(data.body.bins))
   store.dispatch(LoadDataCreator(data.body.data))
 })
-
-// added for screenshot
-
-//const routerState = RouteComputations.urlParamsToState(document.location)
-
-// store.dispatch(SetFromRouterState({
-//   language: routerState.language,
-//   visualizationContainer: routerState.visualizationContainer,
-//   confidentiality: routerState.confidentiality,
-//   explanations: routerState.explanations,
-//   detailSidebar: routerState.detailSidebar,
-//   header: routerState.header,
-//   menuBar: routerState.menuBar,
-//   screenshotMode: RouteComputations.screenshotMode(location),
-// }))
-
-// Webpack Hot Module Replacement API
-if (module.hot) {
-  module.hot.accept('./components/Root.jsx', () => {
-    render(require('./components/Root.jsx').default) // eslint-disable-line global-require
-  })
-}

@@ -54,7 +54,7 @@ class TimelinePlay extends React.PureComponent {
           start: { year, quarter },
           end: { year, quarter },
         })
-      }, 1000),
+      }, 2000),
     })
     this.props.timelineFilter({
       start: { year: yearScale.min, quarter: 1 },

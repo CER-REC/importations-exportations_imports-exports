@@ -86,28 +86,6 @@ const parsingIssue = {};
     value: parseInt(stripNA(point.value), 10) || 0,
     extrapolated: false,
   })))
-  .then((points) => {
-    console.log('Post normalization:', points.length, 'points')
-    return points
-  })
-  // Extrapolate all of the data points into their inverse activities
-  .then(points => points.reduce((acc, next) => {
-    // Don't duplicate rows that don't have an origin and destination
-    if (!next.origin && !next.destination) { return acc.concat(next) }
-    return acc.concat(next, {
-      ...next,
-      // We want to flip the origin and destination, but not the activity because
-      // the activity is relative to Canada, and not the origin
-      // TODO: We need to confirm this is outputing the correct data
-      origin: next.destination,
-      destination: next.origin,
-      extrapolated: true,
-    })
-  }, []))
-  .then((points) => {
-    console.log('Post extrapolation:', points.length, 'points')
-    return points
-  })
   // Validate points
   .then(points => points.map((point) => {
     // Data Vaildation and parsing
@@ -128,10 +106,14 @@ const parsingIssue = {};
   // Cluster the points into visualizations and units
   .then(points => points.reduce((acc, point) => {
     if (!acc[point.product]) { acc[point.product] = {} }
+    if (point.product === 'crudeOil' && point.destination === '') {
+      point.destination = 'ca'
+    }
     // Use an object reference to simplify the next creation
     const outProd = acc[point.product]
     if (!outProd[point.units]) { outProd[point.units] = [] }
     outProd[point.units].push(point)
+    //add destination as well 
     return acc
   }, {}))
   // Calculate bins
@@ -147,11 +129,20 @@ const parsingIssue = {};
           // Take the values from the object for this unit
           const unitPoints = Object.values(output[visName][unit])
           const regionValues = unitPoints
-            .reduce((acc, next) => ({
-              ...acc,
-              [next.origin || next.port]:
-                (acc[next.origin || next.port] || 0) + next.value,
-            }), {})
+            .reduce((acc, next) => {
+              if (visName === 'crudeOil' || visName === 'naturalGasLiquids') {
+                return {
+                  ...acc,
+                  [next.destination]:
+                    (acc[next.destination] || 0) + next.value,
+                }
+              }
+              return {
+                ...acc,
+                [next.origin || next.port]:
+                  (acc[next.origin || next.port] || 0) + next.value,
+              }
+            }, {})
           const jenksValues = Object.keys(regionValues).map(k => regionValues[k])
           if (jenksValues.length < 5) {
             console.log(visName, jenksValues, unitPoints)

@@ -1,4 +1,5 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import Immutable from 'immutable'
 
@@ -6,9 +7,9 @@ import ImportExportArrow from './ImportExportArrow'
 import MapPieceLabel from './MapPieceLabel'
 import ConfidentialIcon from './ConfidentialIcon'
 import Constants from '../Constants'
+import AnimatedGroup from './SVGAnimation/SafeAnimation'
 import AnimatedMapPiece from './SVGAnimation/AnimatedMapPiece'
 import MapLayoutGridConstant from '../MapLayoutGridConstant'
-
 import ExplanationDot from './ExplanationDot'
 
 class MapPiece extends React.Component {
@@ -18,6 +19,8 @@ class MapPiece extends React.Component {
     dimensions: PropTypes.instanceOf(Immutable.Map).isRequired,
     data: PropTypes.instanceOf(Immutable.Map).isRequired,
     legend: PropTypes.bool,
+    confidentialityMenu: PropTypes.bool.isRequired,
+    selectedEnergy: PropTypes.string.isRequired,
     isOrigin: PropTypes.bool,
   }
 
@@ -89,7 +92,7 @@ class MapPiece extends React.Component {
     /></g>)
   }
 
-  renderMapPieceLabel(){
+  renderMapPieceLabel() {
     return <MapPieceLabel
         labelPosition={this.props.styles.get('labelPosition')}
         topMargin={this.props.styles.get('bottomMargin')}
@@ -108,11 +111,6 @@ class MapPiece extends React.Component {
     if (this.props.styles.get('arrowPosition') === 'down') {
       arrowTransform = `translate(${Constants.getIn(['mapPieceArrowStyle', 'x'])}, ${this.props.dimensions.get('height') - Constants.getIn(['mapPieceArrowStyle', 'y']) + 4})`
     }
-    let confidentialIcon = ''
-    if (typeof this.props.data.get('confidentialCount') !== 'undefined' && this.props.data.get('confidentialCount') !== 0) {
-      // TODO: on click show pop over to show confidential values
-      confidentialIcon = <ConfidentialIcon styles={this.props.styles.get('confidentialStyle')} />
-    }
 
     let stroke = 'none'
     if (this.props.isMapPieceSelected === true) {
@@ -129,29 +127,67 @@ class MapPiece extends React.Component {
       && this.props.mapPieceProps.get('stroke') !== '') {
       stroke = this.props.mapPieceProps.get('stroke')
     }
+
+    let confidentialIcon = null
+    const valueString = `${this.props.data.get('confidentialCount')} / ${this.props.data.get('totalCount')} values confidential`
+    if (typeof this.props.data.get('confidentialCount') !== 'undefined'
+        && this.props.data.get('confidentialCount') !== 0
+        && this.props.confidentialityMenu) {
+      confidentialIcon = <ConfidentialIcon
+        styles={this.props.styles.get('confidentialStyle')}
+        text={valueString}
+        containerX={this.props.containerX + this.props.x1 + 13}
+        containerY={this.props.containerY + this.props.y1 + 11}
+        lineX={102}
+        lineY={40}
+        textX={40}
+        textY={40}
+        xPosition={30}
+        yPosition={0}
+        />
+    }
     
-    return (<g fillOpacity={opacity} >
-      <polygon
-        stroke={stroke}
-        fill={this.props.styles.get('color')}
-        points="37.09 9.68 18.54 0 0 9.68 0 29.05 18.54 38.73 37.09 29.05 37.09 9.68"
-      />
-      {this.renderMapPieceLabel()}
-      <g transform={arrowTransform}>
-        {this.drawArrow('exports')}
-        {this.drawArrow('imports')}
+    const mapContent = (
+      <g>
+        <polygon
+          stroke={stroke}
+          fill={this.props.styles.get('color')}
+          points="37.09 9.68 18.54 0 0 9.68 0 29.05 18.54 38.73 37.09 29.05 37.09 9.68"
+        />
+        {this.renderMapPieceLabel()}
+        <g transform={arrowTransform}>
+          {this.drawArrow('exports')}
+          {this.drawArrow('imports')}
+        </g>
+        {confidentialIcon}
+        {this.newYorkExplanation()}
       </g>
-      {confidentialIcon}
     )
-      <AnimatedMapPiece
-        x1={this.props.x1 || 0}
-        y1={this.props.y1 || 0}
-        x2={this.props.x1 || 0}
-        y2={this.props.y1 || 0}
-      />
-      {this.newYorkExplanation()}
-  </g>)
+
+    if (this.props.legend) { return mapContent }
+
+    return (
+      <AnimatedGroup
+        cssAnimation={{
+          transform: `translate(${this.props.x1}px, ${this.props.y1}px)`,
+          transition: 'all 1s',
+        }}
+        fallbackAttributes={{
+          transform: `translate(${this.props.x1} ${this.props.y1})`,
+        }}
+        fallbackSMIL={<AnimatedMapPiece x={this.props.x1} y={this.props.y1} />}
+        fillOpacity={opacity}
+      >
+        {mapContent}
+      </AnimatedGroup>
+    )
+
   }
 }
 
-export default MapPiece
+const mapStateToProps = (state, props) => ({
+  confidentialityMenu: state.confidentialityMenu,
+  selectedEnergy: state.importExportVisualization,
+})
+
+export default connect(mapStateToProps)(MapPiece)

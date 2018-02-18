@@ -18,6 +18,7 @@ import { reducer as DataLoadCompleteReducer } from './actions/DataLoadComplete'
 import { reducer as ExplanationPopoverReducer } from './actions/explanations'
 import { reducer as SocialBarReducer } from './actions/socialBar'
 import { reducer as activeMenu } from './actions/activeMenu'
+import { reducer as ConfidentialityMenuReducer } from './actions/confidentialityMenu'
 
 const mergeDeep = (old, merge) => {
   if (old === Object(old) && Array.isArray(old) === false) {
@@ -48,6 +49,8 @@ const nestedReducers = combineReducers({
   expandSocialBar: SocialBarReducer,
   modal: ModalReducer,
   openExplanations: ExplanationPopoverReducer,
+  confidentialityMenu: ConfidentialityMenuReducer,
+  explanation: ExplanationPopoverReducer,
   screenshotMode: ScreenshotModeReducer,
   activeMenu,
 })

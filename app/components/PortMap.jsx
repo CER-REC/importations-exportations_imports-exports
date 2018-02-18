@@ -4,8 +4,10 @@ import PropTypes from 'prop-types'
 import { geoConicConformal, geoPath } from 'd3-geo'
 import { getSelectionSettings } from '../selectors/NaturalGasSelector'
 import { feature } from 'topojson-client'
+import Request from 'client-request/promise'
 
 import Constants from '../Constants'
+import RouteComputations from '../computations/RouteComputations'
 
 /* eslint-disable object-curly-newline */
 const Ports = Constants.getIn(['dataloader', 'mapping', 'ports'], []).filter(v => (v.get('Latitude') && v.get('Longitude'))) // Strip missing coordinates
@@ -23,16 +25,13 @@ class PortMap extends React.PureComponent {
   }
 
   componentDidMount() {
-    fetch('data/topo.json').then((response) => {
-      if (response.status !== 200) {
-        console.log(`There was a problem: ${response.status}`)
-        return
-      }
-      response.json().then((topoData) => {
-        this.setState({
-          regions: feature(topoData, topoData.objects.regions).features,
-          topoData,
-        })
+    Request({
+      uri: RouteComputations.topoEndpoint(),
+      json: true,
+    }).then(({ body: topoData }) => {
+      this.setState({
+        regions: feature(topoData, topoData.objects.regions).features,
+        topoData,
       })
     })
   }

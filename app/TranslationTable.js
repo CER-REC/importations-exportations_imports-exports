@@ -144,7 +144,7 @@ const TranslationTable = fromJS({
     },
     refinedPetroleumProducts: {
       en: 'Refin. Petroleum Prod.',
-      fr: 'Rafinn. Prod. pétroliers',
+      fr: 'Prod. pétroliers rafinn.',
     },
   },
 
@@ -176,6 +176,15 @@ const TranslationTable = fromJS({
       en: 'and',
       fr: 'et',
     },
+
+    /* TODO: We can't translate 'of' this way. It needs to be...
+    d'Électricité
+    de Pétrole brut
+    de Gaz naturel
+    de Liquides de gaz naturel
+    de Prod. pétroliers rafinn.
+    */
+
     of: {
       en: 'of',
       fr: 'd’',
@@ -284,14 +293,10 @@ const TranslationTable = fromJS({
   },
 
   confidentialityShown: {
-    en: 'show CONFIDENTIALITY',
-    fr: 'Montrer CONFIDENTIALITÉ',
+    en: 'CONFIDENTIALITY',
+    fr: 'CONFIDENTIALITÉ',
   },
-  confidentialityHide: {
-    en: 'hide CONFIDENTIALITY',
-    fr: 'Cacher CONFIDENTIALITÉ',
-  },
-
+  
   amounts: {
     CAN$: { en: 'CAN$', fr: '$ CAN' },
     'CAN$/MW.h': { en: 'CAN$/MW.h', fr: '$ CAN/MWh' },
@@ -384,6 +389,29 @@ const TranslationTable = fromJS({
   applicationPath: {
     en: '/import-export-visualization/',
     fr: '/visualisation-importations-exportations/',
+  },
+
+  visualizationPaths: {
+    electricity: {
+      en: 'electricity',
+      fr: 'électricité',
+    },
+    crudeOil: {
+      en: 'crude-oil',
+      fr: 'pétrole-brut',
+    },
+    naturalGas: {
+      en: 'natural-gas',
+      fr: 'gaz-naturel',
+    },
+    naturalGasLiquids: {
+      en: 'natural-gas-liquids',
+      fr: 'liquides-de-gaz-naturel',
+    },
+    refinedPetroleumProducts: {
+      en: 'refined-petroleum-products',
+      fr: 'produits-pétroliers-raffinés',
+    },
   },
 
   imageDownload: {

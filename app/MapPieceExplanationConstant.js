@@ -24,9 +24,12 @@ const MapPieceExplanationConstant = fromJS({
         bottomMargin: 5,
         topMargin: 5,
         confidentialStyle: {
-          fill: '#999',
-          stroke: '#999',
-          exclamationFill: '#fff',
+          fill: '#ffffff',
+          stroke: '#999999',
+          exclamationFill: '#999999',
+          fillClick: '#999999',
+          strokeClick: '#999999',
+          exclamationFillClick: '#ffffff',
         },
       },
       legends: [{
