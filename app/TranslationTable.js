@@ -630,8 +630,8 @@ const TranslationTable = fromJS({
             fr: 'de',
           },
           adjective: {
-            en: 'selected',
-            fr: 'ces',
+            en: '',
+            fr: '',
           },
           place: {
             en: 'CAN',
