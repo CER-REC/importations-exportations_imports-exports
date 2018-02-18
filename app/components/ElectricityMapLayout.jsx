@@ -27,12 +27,6 @@ import { timelineYearScaleCalculation } from '../selectors/timeline'
 const mapPieceTransformStartXaxis = (position, dimensions, mapPieceScale) => (position.get('x') * ((mapPieceScale * dimensions.get('width')) + dimensions.get('xAxisPadding')))
 const mapPieceTransformStartYaxis = (position, dimensions, mapPieceScale) => (position.get('y') * ((mapPieceScale * dimensions.get('height')) + dimensions.get('yAxisPadding')))
 
-const powerPoolTransform = (xaxis, yaxis, position, dimensions, mapPieceScale) => {
-  const startXaxis = xaxis + (position.get('x') * ((mapPieceScale * dimensions.get('width')) + dimensions.get('xAxisPadding')))
-  const startYaxis = yaxis + (position.get('y') * ((mapPieceScale * dimensions.get('height')) + dimensions.get('yAxisPadding')))
-  return `translate(${`${startXaxis},${startYaxis}`}) scale(${mapPieceScale})`
-}
-
 class ElectricityMapLayout extends React.Component {
   static propTypes = {
     selection: PropTypes.instanceOf(Immutable.Map).isRequired,
@@ -96,8 +90,10 @@ class ElectricityMapLayout extends React.Component {
   getPowerPoolsOutline(key, country, xaxis, yaxis, position, dimensions, mapPieceScale) {
     if (this.isMapPieceSelected(key, country) && country === 'powerpool' && this.props.arrangeBy === 'location') {
       let result = ''
+      let transform ='0 0'
       switch (key) {
-        case 'NE-ISO':
+        case 'PJMPP':
+          transform ='scale(1.07) translate(-250 -365)'
           result = (<polygon
             className="powerPoolOutline"
             points="121.5,148.5 143.7,139.3 166,148.5 166,175.3 187.7,186.8 210.5,175.3 232.6,186.5 255.7,175.3
@@ -107,13 +103,15 @@ class ElectricityMapLayout extends React.Component {
           />)
           break
         case 'MN/ND':
+          transform ='translate(-479 -384)'
           result = (<polygon
             className="powerPoolOutline"
             points="154.5,149.5 176.8,140.3 198.8,149.5 221,140.3 243.7,149.5 243.7,176.3 221,187.8 198.8,175.8
                     176.8,187.8 154.5,176.4 "
           />)
           break
-        case 'PJMPP':
+        case 'NE-ISO':
+          transform ='scale(1.05) translate(-159 -390)'
           result = (<polygon
             className="powerPoolOutline"
             points="144.3,128.1 167,118.9 189,128.2 211.2,118.9 233.2,128.2 233.2,155.1 255.6,167.5 255.6,194.3
@@ -125,7 +123,7 @@ class ElectricityMapLayout extends React.Component {
           result = ''
       }
       return (
-        <g transform={powerPoolTransform(xaxis, yaxis, position, dimensions, mapPieceScale)} >
+        <g transform={transform} >
           {result}
         </g>
       )
