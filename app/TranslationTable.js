@@ -1113,6 +1113,65 @@ const TranslationTable = fromJS({
         },
       },
     },
+    naturalGas: {
+      importsExports: {
+        imports: {
+          label: {
+            en: 'Imports from Canada',
+            fr: 'Importations du Canada',
+          },
+        },
+        exports: {
+          label: {
+            en: 'Exports into Canada',
+            fr: 'Exportations au Canada',
+          },
+        },
+        stateOrProvince: {
+          en: 'Port',
+          fr: 'Port',
+        },
+      },
+
+      importsForReexport: {
+        imports: {
+          label: {
+            en: 'temporary imports into Canada',
+            fr: 'temporary imports into Canada FR',
+          },
+        },
+        exports: {
+          label: {
+            en: 're-exports (of temporary imports) from Canada',
+            fr: 're-exports (of temporary imports) from Canada FR',
+          },
+        },
+        stateOrProvince: {
+          en: 'Port',
+          fr: 'Port',
+        },
+      },
+
+      exportsForReimport: {
+        imports: {
+          label: {
+            en: 're-exports (of temporary exports) into Canada',
+            fr: 're-exports (of temporary exports) into Canada FR',
+          },
+        },
+        exports: {
+          label: {
+            en: 'temporary exports from Canada',
+            fr: 'temporary exports from Canada FR',
+          },
+        },
+        stateOrProvince: {
+          en: 'Port',
+          fr: 'Port',
+        },
+      },
+
+    },
   },
 
   chartOptions: {

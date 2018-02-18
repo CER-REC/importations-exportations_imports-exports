@@ -196,5 +196,46 @@ const MapPieceExplanationConstant = fromJS({
     },
 
   },
+  naturalGas: {
+    datapoint: {
+      name: 'Aden',
+      exports: 10,
+      imports: 10,
+      totalCount: 0,
+      confidentialCount: 0,
+    },
+    dimensions: {
+      height: 37.09,
+      width: 38.75,
+      topPadding: 25,
+      leftPadding: 9,
+    },
+    styles: {
+      color: 'white',
+      labelPosition: 'up',
+      arrowPosition: 'down',
+      arrowSpacing: -12,
+      bottomMargin: 5,
+      topMargin: 15,
+      confidentialStyle: {
+        fill: '#999',
+        stroke: '#999',
+        exclamationFill: '#fff',
+      },
+    },
+    legends: [{
+      lower: 1,
+      upper: 9999,
+      imports: 'white',
+      exports: 'white',
+    }],
+    arrowProps: {
+      fill: '#fff',
+      stroke: '#999999',
+    },
+    mapPieceProps: {
+      stroke: '#999999',
+    },
+  },
 })
 export default MapPieceExplanationConstant

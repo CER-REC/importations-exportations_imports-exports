@@ -10,7 +10,9 @@ import DetailSidebar from './DetailSidebar'
 import NaturalGasMapContainer from './NaturalGasMapContainer'
 import * as NaturalGasViewport from '../selectors/viewport/naturalGas'
 import { showImportsSelector, showExportsSelector } from '../selectors/visualizationSettings'
+import NaturalGasPieceActivityExplanation from './NaturalGasPieceActivityExplanation'
 import Constants from '../Constants'
+import {activityExplanationPosition} from '../selectors/viewport/menus'
 
 const NaturalGasVisualizationContainer = props => (
   <g>
@@ -41,11 +43,15 @@ const NaturalGasVisualizationContainer = props => (
     <DetailSidebar {...props.portMap} >
       <PortMap {...props.portMap} />
     </DetailSidebar>
+    <NaturalGasPieceActivityExplanation
+      {...props.mapPieceActivityExplanation}
+    />
   </g>
 )
 
 export default connect((state, props) => ({
   importChart: NaturalGasViewport.chartImportPosition(state, props),
+  mapPieceActivityExplanation: activityExplanationPosition(state, props),
   axisPosition: NaturalGasViewport.chartAxisPosition(state, props),
   exportChart: NaturalGasViewport.chartExportPosition(state, props),
   mapTiles: NaturalGasViewport.mapTilesPosition(state, props),
