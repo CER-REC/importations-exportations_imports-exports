@@ -93,7 +93,7 @@ class ElectricityMapLayout extends React.Component {
       let transform ='0 0'
       switch (key) {
         case 'PJMPP':
-          transform ='scale(1.07) translate(-250 -365)'
+          transform ='scale(1.07) translate(-250 -367)'
           result = (<polygon
             className="powerPoolOutline"
             points="121.5,148.5 143.7,139.3 166,148.5 166,175.3 187.7,186.8 210.5,175.3 232.6,186.5 255.7,175.3
