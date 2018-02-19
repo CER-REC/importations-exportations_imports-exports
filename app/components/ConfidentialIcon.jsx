@@ -8,6 +8,10 @@ import Constants from '../Constants'
 import PopoverPortal from './PopoverPortal'
 import ConfidentialityPopover from './ConfidentialityPopover'
 
+import { ExpandCollapseConfidentiality } from '../actions/confidentiality'
+
+import { handleInteraction } from '../utilities'
+
 class ConfidentialIcon extends React.Component {
   static get propTypes() {
     return {
@@ -39,7 +43,11 @@ class ConfidentialIcon extends React.Component {
 
   render() {
     return (<g transform={`translate(${this.props.xPosition} ${this.props.yPosition})`}>
-      {this.confidentialityIcon()}
+      <a
+        role="menuItem"
+        {...handleInteraction(this.props.onClick, this.props.name)}>
+          {this.confidentialityIcon()}
+      </a>
     <PopoverPortal>
       <ConfidentialityPopover
         containerX={this.props.containerX}
@@ -51,15 +59,23 @@ class ConfidentialIcon extends React.Component {
         textY={this.props.textY}
         xPosition={this.props.xPosition}
         yPosition={this.props.yPosition}
+        expanded={this.props.expanded}
       />
     </PopoverPortal>
     </g>)
   }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state, props) => ({
   viewport: state.viewport,
   language: state.language,
+  showConfidentiality: state.showConfidentiality,
+  confidentialityPopover: state.confidentialityPopover,
+  expanded: state.openConfidentiality.contains(props.name),
 })
 
-export default connect(mapStateToProps)(ConfidentialIcon)
+const mapDispatchToProps = {
+  onClick: ExpandCollapseConfidentiality,
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ConfidentialIcon)

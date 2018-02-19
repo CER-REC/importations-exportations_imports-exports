@@ -81,6 +81,7 @@ class PaddLayout extends React.Component {
           textY={40}
           xPosition={30}
           yPosition={0}
+          name="paddVCrudeOilConfidentiality"
         />
       </g>)
     }
@@ -108,7 +109,8 @@ class PaddLayout extends React.Component {
           textX={40}
           textY={40}
           xPosition={30}
-          yPosition={0} 
+          yPosition={0}
+          name="paddIIICrudeOilConfidentiality"
         />
       </g>)
     }
@@ -137,6 +139,7 @@ class PaddLayout extends React.Component {
           textY={40}
           xPosition={30}
           yPosition={0}
+          name="paddICrudeOilConfidentiality"
         />
       </g>)
     }
@@ -165,6 +168,7 @@ class PaddLayout extends React.Component {
           textY={40}
           xPosition={30}
           yPosition={0}
+          name="paddNonUSACrudeOilConfidentiality"
         />
       </g>)
     }
@@ -194,6 +198,7 @@ class PaddLayout extends React.Component {
           textY={40}
           xPosition={30}
           yPosition={0}
+          name="paddIIINGLConfidentiality"
         />
       </g>)
     }
@@ -222,6 +227,7 @@ class PaddLayout extends React.Component {
           textY={40}
           xPosition={30}
           yPosition={0}
+          name="paddIVNGLConfidentiality"
         />
       </g>)
     }
@@ -250,6 +256,7 @@ class PaddLayout extends React.Component {
           textY={40}
           xPosition={30}
           yPosition={0}
+          name="paddVNGLConfidentiality"
         />
       </g>)
     }
@@ -278,6 +285,7 @@ class PaddLayout extends React.Component {
           textY={40}
           xPosition={30}
           yPosition={0}
+          name="paddMexicoConfidentiality"
         />
       </g>)
     }
@@ -434,6 +442,7 @@ const mapStateToProps = (state, props) => ({
   TRSelector: TRSelector(state, props),
   confidentialityMenu: state.confidentialityMenu,
   selectedEnergy: state.importExportVisualization,
+  expandCollapseConfidentiality: state.expandCollapseConfidentiality,
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(PaddLayout)

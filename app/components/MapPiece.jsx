@@ -133,6 +133,7 @@ class MapPiece extends React.Component {
         textY={40}
         xPosition={30}
         yPosition={0}
+        name="mapPieceConfidentiality"
         />
     }
     
@@ -177,6 +178,7 @@ class MapPiece extends React.Component {
 const mapStateToProps = (state, props) => ({
   confidentialityMenu: state.confidentialityMenu,
   selectedEnergy: state.importExportVisualization,
+  expandCollapseConfidentiality: state.expandCollapseConfidentiality,
 })
 
 export default connect(mapStateToProps)(MapPiece)
