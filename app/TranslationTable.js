@@ -355,7 +355,7 @@ const TranslationTable = fromJS({
       fr: 'TODO',
     },
     linkedDataIcon: {
-      en: 'Click here to scale each chart&quot;s y-axis independently. This is useful to zoom in when the bars on one side are much smaller than on the other side.',
+      en: "Click here to scale each chart's y-axis independently. This is useful to zoom in when the bars on one side are much smaller than on the other side.",
       fr: 'TODO',
     },
     newBrunswickArrow: {

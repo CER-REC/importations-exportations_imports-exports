@@ -14,6 +14,8 @@ import { timelineGrouping, timelineData } from '../selectors/timeline'
 import trSelector from '../selectors/translate'
 import tr from '../TranslationTable'
 
+import ExplanationDot from './ExplanationDot'
+
 class BarChart extends Chart {
   static propTypes = {
     ...Chart.propTypes,
@@ -45,6 +47,62 @@ class BarChart extends Chart {
 
   updateAxisGuide(position) {
     this.setState({ axisGuide: position })
+  }
+
+  orangeBarExplanation() {
+    if (this.props.flipped) { return null }
+    return (<g>
+      <ExplanationDot
+        scale="scale(1)"
+        lineStroke="1"
+        textBoxWidth={140}
+        textBoxHeight={80}
+        linePath="
+          M142.16,
+          173.94l24.26,
+          36.69a40.12,
+          40.12,0,0,0,
+          33.47,
+          18H322.2"
+        xPosition={90}
+        yPosition={87}
+        lineX={142.16}
+        lineY={173.94}
+        textX={40}
+        textY={58}
+        containerX={this.props.left}
+        containerY={this.props.top}
+        name="importBarChartExplanation"
+        text={`${this.props.tr(['explanations','barChartImport'])}`}
+    /></g>)
+  }
+
+  blueBarExplanation() {
+    if (!this.props.flipped) { return null }
+    return (<g>
+      <ExplanationDot
+        scale="scale(1) scale(-1 1)"
+        lineStroke="1"
+        textBoxWidth={100}
+        textBoxHeight={60}
+        linePath="
+          M142.16,
+          173.94l24.26,
+          36.69a40.12,
+          40.12,0,0,0,
+          33.47,
+          18H314.2"
+        xPosition={26}
+        yPosition={70}
+        lineX={344.16}
+        lineY={173}
+        textX={40}
+        textY={58}
+        containerX={this.props.left - 203}
+        containerY={this.props.top - 39}
+        name="exportBarChartExplanation"
+        text={`${this.props.tr(['explanations','barChartImport'])}`}
+    /></g>)
   }
 
   render() {
@@ -100,7 +158,9 @@ class BarChart extends Chart {
 
     return (
       <g transform={this.getTransform()}>
-        <g>{elements}</g>
+        <g>{elements}
+        { this.orangeBarExplanation() }
+        { this.blueBarExplanation() }</g>
         <AxisGuide
           flipped={flipped}
           scale={scale.get('y').toJS()}
@@ -110,12 +170,12 @@ class BarChart extends Chart {
           updatePosition={this.updateAxisGuide}
           width={this.props.width}
           barSize={barSize}
-        />
+        /> 
         {!this.props.detailSidebar ? null : (
           <DetailSidebar top={this.props.top} height={height}>
             {flipped ? sidebarContent.reverse() : sidebarContent}
           </DetailSidebar>
-        )}
+        )} 
       </g>
     )
   }
@@ -123,4 +183,5 @@ class BarChart extends Chart {
 
 export default connect((state, props) => Object.assign({
   timelineGroup: timelineGrouping(state, props),
+  tr: trSelector(state, props),
 }, timelineData(state, props)))(BarChart)
