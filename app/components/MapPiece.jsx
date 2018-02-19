@@ -133,7 +133,7 @@ class MapPiece extends React.Component {
         textY={40}
         xPosition={30}
         yPosition={0}
-        name="mapPieceConfidentiality"
+        name={`${this.props.data.get('name')}`}
         />
     }
     
