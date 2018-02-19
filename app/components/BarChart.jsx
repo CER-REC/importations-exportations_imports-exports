@@ -11,6 +11,9 @@ import ConfidentialCount from './ConfidentialCount'
 import MissingDataCount from './MissingDataCount'
 import { timelineGrouping, timelineData } from '../selectors/timeline'
 
+import trSelector from '../selectors/translate'
+import tr from '../TranslationTable'
+
 class BarChart extends Chart {
   static propTypes = {
     ...Chart.propTypes,

@@ -8,6 +8,9 @@ import Constants from '../Constants'
 import { visualizationSettings } from '../selectors/visualizationSettings'
 import trSelector from '../selectors/translate'
 
+import ExplanationDot from './ExplanationDot'
+import tr from '../TranslationTable'
+
 class AxisGuide extends React.PureComponent {
   static get propTypes() {
     return {
@@ -88,6 +91,35 @@ class AxisGuide extends React.PureComponent {
     this.props.updatePosition(this.state.positionDisplay)
   }
 
+  timeLineRangeExplanation() {
+    if (this.props.flipped) { return null }
+    return (<g>
+      <ExplanationDot
+        scale="scale(1)"
+        lineStroke="1"
+        textBoxWidth={150}
+        textBoxHeight={60}
+        linePath="
+          M142.16,
+          173.94l24.26,
+          36.69a40.12,
+          40.12,0,0,0,
+          33.47,
+          18H332.2"
+        xPosition={400}
+        yPosition={0}
+        lineX={142.16}
+        lineY={173}
+        textX={40}
+        textY={58}
+        containerX={200}
+        containerY={(this.props.chartHeight + (this.props.barSize / 2))
+      - (this.props.position * this.props.heightPerUnit) - 2 + 190}
+        name="timeLineRangeDot"
+        text={`${this.props.tr(['explanations','timelineRange'])}`}
+    /></g>)
+  }
+
   render() {
     const text = `${this.state.positionDisplay.toLocaleString()} ${this.props.tr(['amounts', this.props.unit])}`
     const offset = (this.props.chartHeight + (this.props.barSize / 2))
@@ -135,6 +167,7 @@ class AxisGuide extends React.PureComponent {
           >
             {text}
           </TextBox>
+          {this.timeLineRangeExplanation()}
         </g>
       </SVGDrag>
     )
