@@ -326,35 +326,49 @@ const TranslationTable = fromJS({
   },
 
   explanations: {
-    importExportTitle: {
-      text: {
-        en: 'Click + to see more options',
-        fr: 'Cliquez pour plus d’options',
-      },
-    },
-    electricity: {
-      text: {
-        en: 'Electricity is the selected energy product',
-        fr: 'Electricity is the selected energy product FR',
-      },
+    amount: {
+      en: 'MWh denotes a Megawatt hour, a unit of measurement of electricity. 1 MWH is equivalent to _______. CAN$ denotes the total revenue. CAN$/MWh denotes the average price per Megawatt hour.',
+      fr: 'TODO',
     },
     timeSeek: {
-      text: {
-        en: 'Drag to select time frame',
-        fr: 'Drag to select time frame FR',
-      },
+      en: 'Drag these handles to select a different time period.',
+      fr: 'TODO',
     },
     playButton: {
-      text: {
-        en: 'Click play to see how electricity changes over time',
-        fr: 'Click play to see how electricity changes over time FR',
-      },
+      en: 'Press the play button to animate one quarter at a time.',
+      fr: 'TODO',
     },
-    newYork: {
-      text: {
-        en: 'New York has the highest exports into the US as well as the highest imports from the US',
-        fr: 'New York has the highest exports into the US as well as the highest imports from the US FR',
-      },
+    barChartExport: {
+      en: 'Each blue bar shows the total electricity that Canadian provinces exported during a single quarter.',
+      fr: 'TODO',
+    },
+    washingtonArrow: {
+      en: 'The up arrow shows the total electricity that Canadian provinces imported from Washington during the time period selected above.',
+      fr: 'TODO',
+    },
+    barChartImport: {
+      en: 'Each orange bar shows the total electricity that Canadian provinces imported during a single quarter.',
+      fr: 'TODO',
+    },
+    title: {
+      en: 'This data visualization shows Canadian imports and exports of electricity. Click the pink dots to guide you through how to read the data.',
+      fr: 'TODO',
+    },
+    linkedDataIcon: {
+      en: 'Click here to scale each chart&quot;s y-axis independently. This is useful to zoom in when the bars on one side are much smaller than on the other side.',
+      fr: 'TODO',
+    },
+    newBrunswickArrow: {
+      en: 'The down arrow shows the total electricity that New Brunswick exported to U.S. states during the time period selected below.',
+      fr: 'TODO',
+    },
+    timelineRange: {
+      en: 'Drag this line up and down to read the values of the y-axis as different heights.',
+      fr: 'TODO',
+    },
+    vermontArrow: {
+      en: 'The down arrow shows the total electricity that Canadian provinces exported to Vermont during the time period selected above.',
+      fr: 'TODO',
     },
   },
 

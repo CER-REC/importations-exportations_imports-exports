@@ -9,7 +9,7 @@ export const ExpandCollapseExplanation = dot => ({
   payload: { dot },
 })
 
-const initialState = new List(['importExport'])
+const initialState = new List(['amountExplanation'])
 export const reducer = (state = initialState, action) => {
   switch (action.type) {
     case Types.EXPAND_COLLAPSE_EXPLANATION:

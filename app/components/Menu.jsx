@@ -6,12 +6,11 @@ import Constants from '../Constants'
 import { handleInteraction } from '../utilities'
 import { setActiveMenu } from '../actions/activeMenu'
 import TrSelector from '../selectors/translate'
+import Tr from '../TranslationTable'
 
 import ExplanationDot from './ExplanationDot'
 
 import './Menu.scss'
-
-const Tr = require('../TranslationTable.js')
 
 class Menu extends React.PureComponent {
   static propTypes = {
@@ -51,13 +50,12 @@ class Menu extends React.PureComponent {
   }
 
   importExportExplanation() {
-    if (this.props.name !== 'activity') { return }
-    
+    if (this.props.name !== 'amount') { return }
     return (<g>
       <ExplanationDot
         scale="scale(0.4)"
         lineStroke="2"
-        textBoxWidth={80}
+        textBoxWidth={150}
         textBoxHeight={40}
         linePath="
           M142.16,
@@ -66,48 +64,16 @@ class Menu extends React.PureComponent {
           40.12,0,0,0,
           33.47,
           18H378.2"
-        xPosition={150}
-        yPosition={62}
+        xPosition={165}
+        yPosition={178}
         lineX={142.16}
         lineY={173.94}
         textX={15}
         textY={25}
         containerX={this.props.left}
-        containerY={this.props.top - 52}
-        text="Click + to see more options"
-        name="importExport"
-    /></g>)
-  }
-
-  electricityExplanation() {
-    let dotY = 80
-    if (this.props.expanded) {
-      dotY = 112
-    }
-    if (this.props.name === 'amount' || this.props.name === 'arrangeBy' || this.props.name === 'subtype') { return }
-    return (<g>
-      <ExplanationDot
-        scale="scale(1.4)"
-        lineStroke="0.7"
-        textBoxWidth={120}
-        textBoxHeight={60}
-        linePath="
-          M142.16,
-          173.94l24.26,
-          36.69a40.12,
-          40.12,0,0,0,
-          33.47,
-          18H264.2"
-        xPosition={120}
-        yPosition={dotY}
-        lineX={142.16}
-        lineY={173.94}
-        textX={50}
-        textY={80}
-        containerX={this.props.left}
-        containerY={this.props.top - 52}
-        text="Electricity is the selected energy product"
-        name="electricityMenu"
+        containerY={this.props.top - 167}
+        text={`${this.props.Tr(['explanations','amount'])}`}
+        name="amountExplanation"
     /></g>)
   }
 
@@ -191,7 +157,6 @@ class Menu extends React.PureComponent {
         {this.renderOptions()}
       </g>
         {this.importExportExplanation()}
-        {this.electricityExplanation()}
     </g>
     )
   }

@@ -157,9 +157,9 @@ class TimelineSeek extends React.PureComponent {
     }
     return (<g>
       <ExplanationDot
-        scale="scale(1)"
-        lineStroke="1"
-        textBoxWidth={87}
+        scale="scale(1.5) scale(-1 1)"
+        lineStroke="0.6"
+        textBoxWidth={140}
         textBoxHeight={50}
         linePath="
           M142.16,
@@ -167,16 +167,16 @@ class TimelineSeek extends React.PureComponent {
           36.69a40.12,
           40.12,0,0,0,
           33.47,
-          18H264.2"
+          18H250.2"
         xPosition={-7}
         yPosition={14}
-        lineX={142.16}
+        lineX={322.16}
         lineY={173.94}
-        textX={35}
-        textY={58}
-        containerX={this.props.left + this.state.offset - 7}
+        textX={108}
+        textY={82}
+        containerX={this.props.left + this.state.offset - 279}
         containerY={this.props.top + 2}
-        text="Drag to select time frame"
+        text={`${this.props.tr(['explanations','timeSeek'])}`}
         name="timeSeekDot"
     /></g>)
   }
