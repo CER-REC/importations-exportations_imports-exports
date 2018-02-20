@@ -8,6 +8,9 @@ import { OpenModal as ShowAboutWindowCreator } from '../actions/modal'
 import { handleInteraction } from '../utilities'
 import TrSelector from '../selectors/translate'
 
+import ExplanationDot from './ExplanationDot'
+import tr from '../TranslationTable'
+
 import './Header.scss'
 import '../styles/Fonts.scss'
 import '../styles/Colours.scss'
@@ -28,6 +31,33 @@ class Header extends React.Component {
 
   resetClick() { // eslint-disable-line class-methods-use-this
     // TODO: add reset visualization functionality
+  }
+
+  titleExplanation() {
+    return (<g>
+      <ExplanationDot
+        scale="scale(1)"
+        lineStroke="1"
+        textBoxWidth={250}
+        textBoxHeight={60}
+        linePath="
+          M142.16,
+          173.94l24.26,
+          36.69a40.12,
+          40.12,0,0,0,
+          33.47,
+          18H423.2"
+        xPosition={30}
+        yPosition={20}
+        lineX={142.16}
+        lineY={173}
+        textX={40}
+        textY={55}
+        containerX={0}
+        containerY={10}  
+        name="titleExplanation"
+        text={`${this.props.Tr(['explanations','title'])}`}
+    /></g>)
   }
 
   leftHeading() {
@@ -107,6 +137,9 @@ class Header extends React.Component {
     return (<div style={{ height: Constants.get('topHeightMargin') }}>
       {this.leftHeading()}
       {this.metaBar()}
+      <svg>
+      {this.titleExplanation()}
+      </svg>
     </div>)
   }
 }

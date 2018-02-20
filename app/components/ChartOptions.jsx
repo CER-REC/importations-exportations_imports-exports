@@ -9,6 +9,9 @@ import { timelineScaleLinked, timelineGrouping as timelineGroupingSelector } fro
 import trSelector from '../selectors/translate'
 import { handleInteraction } from '../utilities'
 
+import ExplanationDot from './ExplanationDot'
+import tr from '../TranslationTable'
+
 class ChartOptions extends React.PureComponent {
   static get propTypes() {
     return {
@@ -25,6 +28,34 @@ class ChartOptions extends React.PureComponent {
     return {
       canChangeScale: true,
     }
+  }
+
+  linkDataExplanation() {
+    const leftPad = Constants.getIn(['visualizationDetailContainer', 'leftPadding'])
+    return (<g>
+      <ExplanationDot
+        scale="scale(1)"
+        lineStroke="1"
+        textBoxWidth={140}
+        textBoxHeight={80}
+        linePath="
+          M142.16,
+          173.94l24.26,
+          36.69a40.12,
+          40.12,0,0,0,
+          33.47,
+          18H322.2"
+        xPosition={49}
+        yPosition={7}
+        lineX={142.16}
+        lineY={173.94}
+        textX={40}
+        textY={58}
+        containerX={leftPad + 880}
+        containerY={300}
+        name="linkDataIcon"
+        text={`${this.props.tr(['explanations','linkedDataIcon'])}`}
+    /></g>)
   }
 
   scaleLinkedChanged = () => this.props.setScaleLinked(!this.props.scaleLinked)
@@ -59,6 +90,9 @@ class ChartOptions extends React.PureComponent {
           />
           <div className="switchBackground round">
             <div className="slider" />
+            <svg>
+          {this.linkDataExplanation()}
+        </svg>
           </div>
         </div>
         <img src={image} height={switchHeight} alt={imageAlt} />

@@ -12,6 +12,9 @@ import AnimatedMapPiece from './SVGAnimation/AnimatedMapPiece'
 import MapLayoutGridConstant from '../MapLayoutGridConstant'
 import ExplanationDot from './ExplanationDot'
 
+import trSelector from '../selectors/translate'
+import tr from '../TranslationTable'
+
 class MapPiece extends React.Component {
   static propTypes = {
     bins: PropTypes.instanceOf(Immutable.List),
@@ -63,21 +66,89 @@ class MapPiece extends React.Component {
       text = {this.props.text}
     />)
   }
+  newBrunswickExplanation() {
+    if (this.props.selectedEnergy === 'electricity'
+      && this.props.data.get('name') === 'NB' ) {
+      return (<g>
+        <ExplanationDot
+          scale="scale(1)"
+          lineStroke="1"
+          textBoxWidth={140}
+          textBoxHeight={80}
+          linePath="
+            M142.16,
+            173.94l24.26,
+            36.69a40.12,
+            40.12,0,0,0,
+            33.47,
+            18H322.2"
+          xPosition={28}
+          yPosition={30}
+          lineX={142.16}
+          lineY={173.94}
+          textX={40}
+          textY={58}
+          containerX={this.props.x1 * MapLayoutGridConstant.getIn(['electricity', 'us' , 'mapPieceScale'], 1) + 333}
+          containerY={this.props.y1 * MapLayoutGridConstant.getIn(['electricity', 'us' , 'mapPieceScale'], 1) + 72}
+          name="newBrunswickElectricity"
+          text={`${this.props.tr(['explanations','newBrunswickArrow'])}`}
+    /></g>)
+    } return null
+  }
 
-  newYorkExplanation() {
-    if (this.props.data.get('name') !== 'NY') { return null }
+  vermontExplanation() {
+    if (this.props.data.get('name') !== 'VT') { return null }
     return (<g>
       <ExplanationDot
-        linePath="M110,43 C248,257 312,213 633,213"
-        xPosition={18}
-        yPosition={5}
-        lineX={110}
-        lineY={43}
-        textX={60}
+        scale="scale(1)"
+        lineStroke="1"
+        textBoxWidth={130}
+        textBoxHeight={170}
+        linePath="
+          M142.16,
+          173.94l24.26,
+          36.69a40.12,
+          40.12,0,0,0,
+          33.47,
+          18H248.2"
+        xPosition={28}
+        yPosition={20}
+        lineX={142.16}
+        lineY={173.94}
+        textX={40}
+        textY={58}
+        containerX={this.props.x1 * MapLayoutGridConstant.getIn(['electricity', 'us' , 'mapPieceScale'], 1) + 263}
+        containerY={this.props.y1 * MapLayoutGridConstant.getIn(['electricity', 'us' , 'mapPieceScale'], 1) + 462}
+        name="vermontElectricity"
+        text={`${this.props.tr(['explanations','vermontArrow'])}`}
+    /></g>)
+  }
+
+  washingtonExplanation() {
+    if (this.props.data.get('name') !== 'WA') { return null }
+    return (<g>
+      <ExplanationDot
+        scale="scale(1) scale(-1 1)"
+        lineStroke="1"
+        textBoxWidth={120}
+        textBoxHeight={60}
+        linePath="
+          M142.16,
+          173.94l24.26,
+          36.69a40.12,
+          40.12,0,0,0,
+          33.47,
+          18H314.2"
+        xPosition={11}
+        yPosition={-4}
+        lineX={344.16}
+        lineY={173}
+        textX={40}
         textY={55}
-        containerX={this.props.x1 * MapLayoutGridConstant.getIn(['electricity', 'us' , 'mapPieceScale'], 1) + 260}
-        containerY={this.props.y1 * MapLayoutGridConstant.getIn(['electricity', 'us' , 'mapPieceScale'], 1) + 459}
-        text="New York has the highest exports into the US as well as the highest imports from the US"
+        containerX={this.props.x1 * MapLayoutGridConstant.getIn(['electricity', 'us' , 'mapPieceScale'], 1) + 55}
+        containerY={this.props.y1 * MapLayoutGridConstant.getIn(['electricity', 'us' , 'mapPieceScale'], 1) + 461}       
+        name="washingtonElectricity"
+        text={`${this.props.tr(['explanations','washingtonArrow'])}`}
     /></g>)
   }
 
@@ -149,7 +220,9 @@ class MapPiece extends React.Component {
           {this.drawArrow('imports')}
         </g>
         {confidentialIcon}
-        {this.newYorkExplanation()}
+        {this.vermontExplanation()}
+        {this.washingtonExplanation()}
+        {this.newBrunswickExplanation()}
       </g>
     )
 
@@ -177,6 +250,7 @@ class MapPiece extends React.Component {
 const mapStateToProps = (state, props) => ({
   confidentialityMenu: state.confidentialityMenu,
   selectedEnergy: state.importExportVisualization,
+  tr: trSelector(state, props),
 })
 
 export default connect(mapStateToProps)(MapPiece)

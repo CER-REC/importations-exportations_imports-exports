@@ -1,33 +1,32 @@
 import React from 'react'
-const ReactRedux = require('react-redux')
+import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
 import Constants from '../Constants'
-const Tr = require('../TranslationTable.js')
-const PopoverPortal = require('./PopoverPortal.jsx')
-
-import ExplanationPopoverCreator from '../actions/explanations'
+import PopoverPortal from './PopoverPortal'
 
 class ExplanationPopover extends React.Component {
   static get propTypes() {
     return {
-      showExplanations: PropTypes.bool.isRequired,
       text: PropTypes.string.isRequired,
       lineX: PropTypes.number.isRequired,
       lineY: PropTypes.number.isRequired,
       linePath: PropTypes.string.isRequired,
       textX: PropTypes.number.isRequired,
       textY: PropTypes.number.isRequired,
+      expanded: PropTypes.bool.isRequired,
     }
   }
 
   drawLine() {
     const transformString = `translate(${-this.props.lineX} ${-this.props.lineY})`
     const transformLine = `${this.props.linePath}`
+    const scaleLine = `${this.props.scale}`
+    const strokeWidth = `${this.props.lineStroke}`
 
     return (<svg>
-      <g transform={`scale(0.3) ${transformString}`}>
-        <path d={transformLine} stroke="#ff708a" strokeWidth="2" fill="transparent" />
+      <g transform={`${scaleLine} ${transformString}`}>
+        <path d={transformLine} stroke="#ff708a" strokeWidth={strokeWidth} fill="transparent" />
       </g>
     </svg>)
   }
@@ -35,23 +34,43 @@ class ExplanationPopover extends React.Component {
   drawText() {
     return <div style={{
           position: 'relative',
-          top: this.props.textY,
+          top: this.props.textY - 3,
           left: this.props.textX,
-          height: 'auto',
           padding: 8,
-          width: 80,
+          height: this.props.textBoxHeight,
+          width: this.props.textBoxWidth,
           background: 'white',
           opacity: '0.9',
         }}
       className="explanationText">
       {this.props.text}
+      <div>
+        {/*
+        <svg>
+          <g transform={`translate(${this.props.textBoxWidth - 40} 2)`}>
+            <polyline
+              fill="none"
+              stroke="#ff708a"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="0.75"
+              points="11.38 8.59 15.36 4.48 11.38 0.38"/>
+            <polyline
+              fill="none"
+              stroke="#ff708a"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="0.75"
+              points="4.36 0.38 0.38 4.48 4.36 8.59"/>
+          </g>
+        </svg>
+        */}
+     </div>
     </div>
   }
 
   render() {
-    if(!this.props.showExplanations) {
-      return null
-    }
+    if(!this.props.expanded) { return null }
     return <div style={{
           position: 'absolute',
           top: this.props.containerY + this.props.yPosition,
@@ -63,11 +82,4 @@ class ExplanationPopover extends React.Component {
   }
 }
 
-
-const mapStateToProps = state => ({
-  viewport: state.viewport,
-  language: state.language,
-  showExplanations: state.showExplanations,
-})
-
-module.exports = ReactRedux.connect(mapStateToProps)(ExplanationPopover)
+export default ExplanationPopover

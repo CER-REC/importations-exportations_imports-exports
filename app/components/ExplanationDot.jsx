@@ -7,7 +7,7 @@ import Constants from '../Constants'
 import PopoverPortal from './PopoverPortal'
 import ExplanationPopover from './ExplanationPopover'
 
-import ToggleExplanation from '../actions/explanations'
+import { ExpandCollapseExplanation } from '../actions/explanations'
 
 import { handleInteraction } from '../utilities'
 
@@ -16,7 +16,6 @@ import './ExplanationDot.scss'
 class ExplanationDot extends React.Component {
   static get propTypes() {
     return {
-      explanation: PropTypes.bool.isRequired,
       xPosition: PropTypes.number.isRequired,
       yPosition: PropTypes.number.isRequired,
       showExplanations: PropTypes.bool.isRequired,
@@ -28,56 +27,37 @@ class ExplanationDot extends React.Component {
       textY: PropTypes.number.isRequired,
       containerX: PropTypes.number.isRequired,
       containerY: PropTypes.number.isRequired,
+      name: PropTypes.string.isRequired,
+      expanded: PropTypes.bool.isRequired,
+      onClick: PropTypes.func.isRequired,
     }
   }
 
-  explanationDotClick() {
-    // TODO
-  }
-
   explanationDot() {
-    return (<g id="circle">
-      <circle
-        cx={this.props.xPosition}
-        cy={this.props.yPosition}
-        r={Constants.getIn(['explanationDot', 'radiusStart'])}
-        fill="#ff708a"
-      />
-      </g>)
+    return (<g id="circle"
+      transform={`translate(${this.props.xPosition} ${this.props.yPosition})`}>
+      <circle fill="#ff708a" cx={0} cy={0} r={Constants.getIn(['explanationDot', 'radiusStart'])}/>
+      <g transform={this.props.expanded ? ' rotate(45)' : ''}>
+        <g transform="translate(-5 -5)">
+          <line fill="none" stroke="#fff" strokeWidth="0.75" strokeLinecap="round" strokeMiterlimit="10"
+            x1="4.86" y1="1.95" x2="4.86" y2="7.77" />
+          <line fill="none" stroke="#fff" strokeWidth="0.75" strokeLinecap="round" strokeMiterlimit="10"
+            x1="7.77" y1="4.86" x2="1.95" y2="4.86" />
+        </g>
+      </g>
+    </g>)
   }
 
   dotAnimation() {
-    return (<g><defs>
+    return (<g className="explanationDot" transform={`translate(${this.props.xPosition} ${this.props.yPosition})`}>
       <circle
         id="back"
+        className="pulse"
         r={Constants.getIn(['explanationDot', 'radiusStart'])}
-        cx={this.props.xPosition}
-        cy={this.props.yPosition}
-        fill="#ff708a"
-      >
-        <animate
-          attributeName="r"
-          from={Constants.getIn(['explanationDot' , 'radiusStart'])}
-          to={Constants.getIn(['explanationDot' , 'radiusEnd'])}
-          dur="1.5s"
-          begin="0"
-          repeatCount="indefinite"
-          fill="freeze"
-          id="circ-anim"
-        />
-        <animate
-          attributeName="opacity"
-          from="0.7"
-          to="0"
-          dur="1.5s"
-          begin="0"
-          repeatCount="indefinite"
-          fill="freeze"
-          id="circ-anim"
-        />
-      </circle>
-    </defs>
-      {this.explanationDot()}
+        cx={0}
+        cy={0}
+        fill="#ff708a">
+        </circle>
     </g>)
   }
 
@@ -87,13 +67,17 @@ class ExplanationDot extends React.Component {
     }
     return (<g><a 
       role="menuItem"
-      {...handleInteraction(this.props.onClick)}>
+      {...handleInteraction(this.props.onClick, this.props.name)}>
       {this.dotAnimation()}
+      {this.explanationDot()}
     </a>
-      <use x={this.props.xPosition + 6} y={this.props.yPosition} xlinkHref="#back"/>
     <PopoverPortal>
       <ExplanationPopover
         text={this.props.text}
+        textBoxWidth={this.props.textBoxWidth}
+        textBoxHeight={this.props.textBoxHeight}
+        scale={this.props.scale}
+        lineStroke={this.props.lineStroke}
         linePath={this.props.linePath}
         lineX={this.props.lineX}
         lineY={this.props.lineY}
@@ -103,21 +87,22 @@ class ExplanationDot extends React.Component {
         containerY={this.props.containerY}
         xPosition={this.props.xPosition}
         yPosition={this.props.yPosition}
+        expanded={this.props.expanded}
       />
     </PopoverPortal>
     </g>)
   }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state, props) => ({
   viewport: state.viewport,
   language: state.language,
   showExplanations: state.showExplanations,
-  explanation: state.explanation,
+  expanded: state.openExplanations.contains(props.name),
 })
 
 const mapDispatchToProps = {
-  onClick: ToggleExplanation,
+  onClick: ExpandCollapseExplanation,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ExplanationDot)

@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 import { timelineFilter } from '../actions/visualizationSettings'
 import { timelineYearScaleCalculation, timelineRange } from '../selectors/timeline'
 import trSelector from '../selectors/translate'
+import tr from '../TranslationTable'
 import { handleInteraction } from '../utilities'
 
 import ExplanationDot from './ExplanationDot'
@@ -12,6 +13,7 @@ import ExplanationDot from './ExplanationDot'
 class TimelinePlay extends React.PureComponent {
   static propTypes = {
     height: PropTypes.number.isRequired,
+    tr: PropTypes.func.isRequired,
   }
 
   static defaultProps = {
@@ -65,16 +67,27 @@ class TimelinePlay extends React.PureComponent {
   playButtonExplanation() {
     return (<g>
       <ExplanationDot
-        linePath="M457,45 C328,266 384,258 22,251"
+        scale="scale(0.7) scale(-1 1)"
+        lineStroke="1.3"
+        textBoxWidth={120}
+        textBoxHeight={60}
+        linePath="
+          M142.16,
+          173.94l24.26,
+          36.69a40.12,
+          40.12,0,0,0,
+          33.47,
+          18H344.2"
         xPosition={-6}
         yPosition={0}
-        lineX={0}
-        lineY={4}
-        textX={14}
-        textY={80}
-        containerX={this.props.left - 140}
-        containerY={this.props.top - 10}
-        text="Click play to see how electricity changes over time"
+        lineX={344.16}
+        lineY={173}
+        textX={0}
+        textY={38}
+        containerX={this.props.left - 143}
+        containerY={this.props.top + 1}
+        name="timePlayDot"
+        text={`${this.props.tr(['explanations','playButton'])}`}
     /></g>)
   }
 
