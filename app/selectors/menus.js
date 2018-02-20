@@ -9,7 +9,7 @@ export const activityOptions = createSelector(
     if (vis === 'crudeOil' || vis === 'refinedPetroleumProducts') {
       return ['exports']
     } else if (vis === 'naturalGas') {
-      return ['importsExports', 'imports', 'exports', 'importsForReexport', 'exportsForReimport']
+      return ['importsExports', 'importsForReexport', 'exportsForReimport']
     }
     return ['importsExports', 'imports', 'exports']
   },
