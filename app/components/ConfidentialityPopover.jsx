@@ -1,5 +1,5 @@
 import React from 'react'
-const ReactRedux = require('react-redux')
+import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
 import Constants from '../Constants'
@@ -16,9 +16,9 @@ class ConfidentialityPopover extends React.Component {
       lineY: PropTypes.number.isRequired,
       textX: PropTypes.number.isRequired,
       textY: PropTypes.number.isRequired,
-      confidentialityMenu: PropTypes.bool.isRequired,
       xPosition: PropTypes.number.isRequired,
       yPosition: PropTypes.number.isRequired,
+      expanded: PropTypes.bool.isRequired,
     }
   }
 
@@ -51,7 +51,7 @@ class ConfidentialityPopover extends React.Component {
   }
 
   render() {
-    if (!this.props.confidentialityMenu) { return null }
+    if(!this.props.expanded) { return null }
     return <div style={{
           position: 'absolute',
           left: this.props.containerX + this.props.xPosition,
@@ -63,11 +63,4 @@ class ConfidentialityPopover extends React.Component {
   }
 }
 
-
-const mapStateToProps = state => ({
-  viewport: state.viewport,
-  language: state.language,
-  confidentialityMenu: state.confidentialityMenu,
-})
-
-module.exports = ReactRedux.connect(mapStateToProps)(ConfidentialityPopover)
+export default ConfidentialityPopover
