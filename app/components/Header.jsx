@@ -10,6 +10,7 @@ import TrSelector from '../selectors/translate'
 
 import ExplanationDot from './ExplanationDot'
 import tr from '../TranslationTable'
+import {resetVisualization} from '../actions/visualizationSettings'
 
 import './Header.scss'
 import '../styles/Fonts.scss'
@@ -29,8 +30,8 @@ class Header extends React.Component {
     this.resetClick = this.resetClick.bind(this)
   }
 
-  resetClick() { // eslint-disable-line class-methods-use-this
-    // TODO: add reset visualization functionality
+  resetClick() {
+    this.props.onResetClick()
   }
 
   titleExplanation() {
@@ -154,9 +155,8 @@ const mapStateToProps = (state, props) => ({
 
 
 const mapDispatchToProps = dispatch => ({
-  onClick() {
-    dispatch(ShowAboutWindowCreator('about'))
-  },
+  onClick() {dispatch(ShowAboutWindowCreator('about'))},
+  onResetClick(){dispatch(resetVisualization())},
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header)

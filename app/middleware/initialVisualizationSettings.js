@@ -1,5 +1,6 @@
 import { Types as DataTypes } from '../actions/data'
 import { Types as visualizationSettingsTypes } from '../actions/visualizationSettings'
+import { Types as explanationTypes } from '../actions/explanations'
 import { timelineYearScaleCalculation } from '../selectors/timeline'
 import { activityOptions, arrangeByOptions } from '../selectors/menus'
 
@@ -12,10 +13,8 @@ const initialVisualizationSettings = store => next => (action) => {
   if (action.type === 'urlRouteChanged') {
     initializedFromURL = Object.keys(action.payload.visualizationSettings)
   }
-
   // If we aren't loading data, don't change the visualization settings
-  if (action.type !== DataTypes.LOAD_DATA) { return }
-
+  if (action.type !== DataTypes.LOAD_DATA && action.type !== visualizationSettingsTypes.RESET_VISUALIZATION_STATE) { return }
   const state = store.getState()
   const { data } = state
   data.keySeq().filter(v => !initializedFromURL.includes(v)).forEach((visualization) => {
@@ -58,6 +57,11 @@ const initialVisualizationSettings = store => next => (action) => {
       meta: { visualization },
     }
     store.dispatch(initializeAction)
+    if(action.type === visualizationSettingsTypes.RESET_VISUALIZATION_STATE){
+      store.dispatch({
+        type: explanationTypes.RESET_EXPLANATION,
+      })
+    }
   })
 }
 
