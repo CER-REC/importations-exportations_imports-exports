@@ -18,10 +18,10 @@ export const visualizationSettings = createSelector(
 
 export const showImportsSelector = createSelector(
   visualizationSettings,
-  settings => ['imports', 'importsExports'].includes(settings.get('activity')),
+  settings => ['imports', 'importsExports', 'importsForReexport'].includes(settings.get('activity')),
 )
 
 export const showExportsSelector = createSelector(
   visualizationSettings,
-  settings => ['exports', 'importsExports'].includes(settings.get('activity')),
+  settings => ['exports', 'importsExports', 'exportsForReimport'].includes(settings.get('activity')),
 )

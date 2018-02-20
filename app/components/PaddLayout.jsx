@@ -406,32 +406,35 @@ class PaddLayout extends React.Component {
     const layout = mapLayoutGrid.get('layout').filter(point => point.get('paddGroup') === props.paddGroup)
     const paddGroup = Constants.getIn(['dataloader', 'mapping', 'padd', props.country, props.paddGroup])
     const data = props.Padd.get(paddGroup)
+    if(data){
     const color = this.getPaddColor(data.get('value'))
     return (<g fillOpacity={this.getOpacityOfPadd(props, paddGroup)} transform={`translate(${props.paddingX} ${props.paddingY})`}
-        {...handleInteraction(this.onPaddClick, props, paddGroup)}
-      >
-      {layout.map((position, key) => (
-        <PaddMapPiece
-          key={`paddLayout_${props.country}_${position.get('name')}`}
-          originKey={position.get('originKey')}
-          dimensions={dimensions}
-          styles={styles}
-          color={color}
-          left={mapPieceTransformStartLeft(props.left, position, dimensions, mapPieceScale)}
-          top={mapPieceTransformStartTop(props.top, position, dimensions, mapPieceScale)}
-          isLabelRquired={props.arrangeBy === 'location'}
-        />
-    ))}
-      {this.getArrow(
-      this.props.arrangeBy,
-      this.props.paddGroup,
-      this.props.left,
-      this.props.top,
-      color,
-      data.get('confidentialCount', 0),
-      data.get('totalCount', 0),
-    )}
-  </g>)
+      {...handleInteraction(this.onPaddClick, props, paddGroup)}
+        >
+        {layout.map((position, key) => (
+          <PaddMapPiece
+            key={`paddLayout_${props.country}_${position.get('name')}`}
+            originKey={position.get('originKey')}
+            dimensions={dimensions}
+            styles={styles}
+            color={color}
+            left={mapPieceTransformStartLeft(props.left, position, dimensions, mapPieceScale)}
+            top={mapPieceTransformStartTop(props.top, position, dimensions, mapPieceScale)}
+            isLabelRquired={props.arrangeBy === 'location'}
+          />
+      ))}
+        {this.getArrow(
+        this.props.arrangeBy,
+        this.props.paddGroup,
+        this.props.left,
+        this.props.top,
+        color,
+        data.get('confidentialCount', 0),
+        data.get('totalCount', 0),
+      )}
+    </g>)
+    }
+    return null
   }
   renderPaddMapPiece() {
     if (this.props.arrangeBy === 'location' || this.props.country === 'ca') {

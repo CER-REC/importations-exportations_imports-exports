@@ -203,6 +203,14 @@ const TranslationTable = fromJS({
           en: 'Imports and Exports',
           fr: 'Importations et exportations',
         },
+        importsForReexport: {
+          en: 'Temporary Imports',
+          fr: 'Temporary Imports FR',
+        },
+        exportsForReimport: {
+          en: 'Temporary Exports',
+          fr: 'Temporary Exports FR',
+        },
       },
     },
     arrangeBy: {
@@ -296,7 +304,6 @@ const TranslationTable = fromJS({
     en: 'CONFIDENTIALITY',
     fr: 'CONFIDENTIALITÉ',
   },
-  
   amounts: {
     CAN$: { en: 'CAN$', fr: '$ CAN' },
     'CAN$/MW.h': { en: 'CAN$/MW.h', fr: '$ CAN/MWh' },
@@ -1114,6 +1121,65 @@ const TranslationTable = fromJS({
           },
         },
       },
+    },
+    naturalGas: {
+      importsExports: {
+        imports: {
+          label: {
+            en: 'Imports from Canada',
+            fr: 'Importations du Canada',
+          },
+        },
+        exports: {
+          label: {
+            en: 'Exports into Canada',
+            fr: 'Exportations au Canada',
+          },
+        },
+        stateOrProvince: {
+          en: 'Port',
+          fr: 'Port',
+        },
+      },
+
+      importsForReexport: {
+        imports: {
+          label: {
+            en: 'temporary imports into Canada',
+            fr: 'temporary imports into Canada FR',
+          },
+        },
+        exports: {
+          label: {
+            en: 're-exports (of temporary imports) from Canada',
+            fr: 're-exports (of temporary imports) from Canada FR',
+          },
+        },
+        stateOrProvince: {
+          en: 'Port',
+          fr: 'Port',
+        },
+      },
+
+      exportsForReimport: {
+        imports: {
+          label: {
+            en: 're-exports (of temporary exports) into Canada',
+            fr: 're-exports (of temporary exports) into Canada FR',
+          },
+        },
+        exports: {
+          label: {
+            en: 'temporary exports from Canada',
+            fr: 'temporary exports from Canada FR',
+          },
+        },
+        stateOrProvince: {
+          en: 'Port',
+          fr: 'Port',
+        },
+      },
+
     },
   },
 

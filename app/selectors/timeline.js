@@ -49,7 +49,6 @@ export const aggregateQuarter = createSelector(
             totalPoints: {},
           }
         }
-
         const key = next.get(aggregateKey)
         if (!key) { return acc }
 
