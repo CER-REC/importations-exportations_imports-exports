@@ -1,7 +1,6 @@
 import TR from './TranslationTable'
 
 export const humanNumber = (valueRaw, language) => {
-  if(valueRaw === 0) {return '>0 ' }
   if (valueRaw < 1000000) { return valueRaw }
   let value = valueRaw
   let valueScale = 0

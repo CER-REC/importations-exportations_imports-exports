@@ -120,7 +120,7 @@ class Legend extends React.Component {
           <text
             className="theLegendValues"
             y={Constants.getIn(['legend', 'rangeOneY'])}
-          > {bins[0].map(humanNumberLang).join('-')}
+          > {'>' + bins[0].map(humanNumberLang).join('-')}
           </text>
           <text
             className="theLegendValues"
