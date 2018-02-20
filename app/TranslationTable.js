@@ -369,6 +369,10 @@ const TranslationTable = fromJS({
       en: 'The down arrow shows the total electricity that New Brunswick exported to U.S. states during the time period selected below.',
       fr: 'TODO',
     },
+    britishColumbiaArrow: {
+      en: 'The up arrow shows the total electricity that British Columbia import from U.S. states during the time period selected below.',
+      fr: 'TODO',
+    },
     timelineRange: {
       en: 'Drag this line up and down to read the values of the y-axis as different heights.',
       fr: 'TODO',

@@ -4,7 +4,7 @@ const MapPieceExplanationConstant = fromJS({
   electricity: {
     ca: {
       datapoint: {
-        name: 'BC',
+        name: 'AB',
         exports: 10,
         imports: 10,
         totalCount: 0,
@@ -48,7 +48,7 @@ const MapPieceExplanationConstant = fromJS({
     },
     us: {
       datapoint: {
-        name: 'WA',
+        name: 'NY',
         exports: 10,
         imports: 10,
         totalCount: 0,
