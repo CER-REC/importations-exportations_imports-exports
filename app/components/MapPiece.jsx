@@ -156,6 +156,34 @@ class MapPiece extends React.Component {
     /></g>)
   }
 
+  britishColumbiaExplanation() {
+    if (this.props.data.get('name') !== 'BC') { return null }
+    return (<g>
+      <ExplanationDot
+        scale="scale(1 -1) translate(0 -100)"
+        lineStroke="1"
+        textBoxWidth={190}
+        textBoxHeight={40}
+        linePath="
+          M142.16,
+          173.94l24.26,
+          36.69a40.12,
+          40.12,0,0,0,
+          33.47,
+          18H378.2"
+        xPosition={8}
+        yPosition={20}
+        lineX={142.16}
+        lineY={173.94}
+        textX={55}
+        textY={48}
+        containerX={this.props.x1 * MapLayoutGridConstant.getIn(['electricity', 'ca' , 'mapPieceScale'], 1) + 331}
+        containerY={this.props.y1 * MapLayoutGridConstant.getIn(['electricity', 'ca' , 'mapPieceScale'], 1) - 31}       
+        name="britishColumbiaElectricity"
+        text={`${this.props.tr(['explanations','britishColumbiaArrow'])}`}
+    /></g>)
+  }
+
   renderMapPieceLabel() {
     return <MapPieceLabel
         labelPosition={this.props.styles.get('labelPosition')}
@@ -228,6 +256,7 @@ class MapPiece extends React.Component {
         {this.vermontExplanation()}
         {this.washingtonExplanation()}
         {this.newBrunswickExplanation()}
+        {this.britishColumbiaExplanation()}
       </g>
     )
 
