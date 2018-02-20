@@ -120,27 +120,27 @@ class Legend extends React.Component {
           <text
             className="theLegendValues"
             y={Constants.getIn(['legend', 'rangeOneY'])}
-          > {'>' + bins[0].map(humanNumberLang).join('-')}
+          > {'>' + bins[0].map(humanNumberLang).join(' - ')}
           </text>
           <text
             className="theLegendValues"
             y={Constants.getIn(['legend', 'rangeTwoY'])}
-          > {'>' + bins[1].map(humanNumberLang).join('-')}
+          > {'>' + bins[1].map(humanNumberLang).join(' - ')}
           </text>
           <text
             className="theLegendValues"
             y={Constants.getIn(['legend', 'rangeThreeY'])}
-          > {'>' + bins[2].map(humanNumberLang).join('-')}
+          > {'>' + bins[2].map(humanNumberLang).join(' - ')}
           </text>
           <text
             className="theLegendValues"
             y={Constants.getIn(['legend', 'rangeFourY'])}
-          > {'>' + bins[3].map(humanNumberLang).join('-')}
+          > {'>' + bins[3].map(humanNumberLang).join(' - ')}
           </text>
           <text
             className="theLegendValues"
             y={Constants.getIn(['legend', 'rangeFiveY'])}
-          > {'>' + bins[4].map(humanNumberLang).join('-')}
+          > {'>' + bins[4].map(humanNumberLang).join(' - ')}
           </text>
         </g>
       </svg>
