@@ -5,10 +5,14 @@ import Constants from '../Constants'
 
 export const activityOptions = createSelector(
   selectedVisualization,
-  vis => ((vis === 'crudeOil' || vis === 'refinedPetroleumProducts')
-    ? ['exports']
-    : ['importsExports', 'imports', 'exports']
-  ),
+  (vis) => {
+    if (vis === 'crudeOil' || vis === 'refinedPetroleumProducts') {
+      return ['exports']
+    } else if (vis === 'naturalGas') {
+      return ['importsExports', 'importsForReexport', 'exportsForReimport']
+    }
+    return ['importsExports', 'imports', 'exports']
+  },
 )
 
 export const arrangeByOptions = createSelector(

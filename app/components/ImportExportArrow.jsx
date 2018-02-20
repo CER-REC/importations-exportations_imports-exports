@@ -19,11 +19,11 @@ class ImportExportArrow extends React.Component {
   }
 
   drawLabel(arrowProps, type) {
-    let lineY = 8
-    let labelY = 8
+    let lineY = this.props.drawLabelLineY || 8
+    let labelY = this.props.drawLabelLabelY || 8
     if (type === 'imports') {
-      lineY = -8
-      labelY = -8
+      lineY = this.props.drawLabelLineImportY || -8
+      labelY = this.props.drawLabelLabelImportY || -8
     }
     let labelElement = ''
 

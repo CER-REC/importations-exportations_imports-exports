@@ -49,7 +49,7 @@ class ProportionChart extends Chart {
     }, { total: 0, values: {} })
   }
 
-  renderDetailSideBar(data, aggregateKey, categoryColours){
+  renderDetailSideBar(data, aggregateKey, categoryColours, selectionState){
     let aggregateKeyList = []
     let prefix = ''
     let suffix = ''
@@ -65,7 +65,50 @@ class ProportionChart extends Chart {
       suffix =  ` ${Tr.getIn(['mainMenuBar', 'crudeOil', this.props.language])}`
       trContent = Tr.getIn(['detailBreakDown','crudeOil','productSubtype','header'])
     }
-    const breakdown = this.calculateBreakdown(data, aggregateKeyList)
+    let content = ''
+    if(selectionState.get('country') === 'us'){
+      content = Tr.getIn(['detailBreakDown','crudeOil', 'defaultText', this.props.language])  
+    }else{
+      const breakdown = this.calculateBreakdown(data, aggregateKeyList)
+      content = <span><table width="100%" className="detailBreakDownContainer" style={{ padding: '8px 0' }}>
+        <tbody>
+          {Object.keys(breakdown.values).map((key, i) => {
+            const colour = categoryColours.get(
+              i + (categoryColours.count() - aggregateKeyList.length),
+              Constants.getIn(['styleGuide', 'colours', 'ExportDefault']),
+            )
+            return (
+              <DetailBreakdownRow
+                key={key}
+                label={
+                  <span>
+                    <div
+                      style={{
+                        display: 'inline-block',
+                        width: '8px',
+                        height: '8px',
+                        marginRight: '4px',
+                        backgroundColor: colour,
+                      }}
+                    />
+                    {prefix} <strong>{key}</strong>{suffix}
+                  </span>
+                }
+                value={breakdown.values[key]}
+                unit={this.props.unit}
+                total={breakdown.total}
+                progressBarStyle={{ backgroundColor: colour }}
+              />
+            )
+          })}
+        </tbody>
+      </table>
+      <ConfidentialCount
+        key="confidential"
+        valueKey="total"
+        aggregateKey={aggregateKey}
+      /></span>
+    }
     return <DetailSidebar
           {...dimensions}
         >
@@ -74,44 +117,7 @@ class ProportionChart extends Chart {
           color='black'
           type='crudeOilTypeMode'
         />
-        <table width="100%" className="detailBreakDownContainer" style={{ padding: '8px 0' }}>
-          <tbody>
-            {Object.keys(breakdown.values).map((key, i) => {
-              const colour = categoryColours.get(
-                i + (categoryColours.count() - aggregateKeyList.length),
-                Constants.getIn(['styleGuide', 'colours', 'ExportDefault']),
-              )
-              return (
-                <DetailBreakdownRow
-                  key={key}
-                  label={
-                    <span>
-                      <div
-                        style={{
-                          display: 'inline-block',
-                          width: '8px',
-                          height: '8px',
-                          marginRight: '4px',
-                          backgroundColor: colour,
-                        }}
-                      />
-                      {prefix} <strong>{key}</strong>{suffix}
-                    </span>
-                  }
-                  value={breakdown.values[key]}
-                  unit={this.props.unit}
-                  total={breakdown.total}
-                  progressBarStyle={{ backgroundColor: colour }}
-                />
-              )
-            })}
-          </tbody>
-        </table>
-        <ConfidentialCount
-          key="confidential"
-          valueKey="total"
-          aggregateKey={aggregateKey}
-        />
+        {content}
     </DetailSidebar>
   }
   render() {
@@ -171,7 +177,7 @@ class ProportionChart extends Chart {
     return (
       <g transform={this.getTransform()}>
         {elements}
-        {this.renderDetailSideBar(data, this.props.aggregateKey ,categoryColours)}
+        {this.renderDetailSideBar(data, this.props.aggregateKey ,categoryColours, selectionState)}
       </g>
     )
   }

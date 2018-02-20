@@ -304,32 +304,6 @@ const MapLayoutGridConstant = fromJS({
         'WV',
       ],
     },
-    legends: [{
-      lower: 1,
-      upper: 9999,
-      imports: 'grey',
-      exports: 'grey',
-    }, {
-      lower: 10000,
-      upper: 99999,
-      imports: '#ffcc66',
-      exports: '#66ffff',
-    }, {
-      lower: 100000,
-      upper: 999999,
-      imports: '#ff6600',
-      exports: '#3399ff',
-    }, {
-      lower: 1000000,
-      upper: 1999999,
-      imports: '#ff3300',
-      exports: '#3333ff',
-    }, {
-      lower: 2000000,
-      upper: 'NA',
-      imports: '#800000',
-      exports: '#000099',
-    }],
   },
   naturalGasLiquids: {
     ca: {

@@ -203,6 +203,14 @@ const TranslationTable = fromJS({
           en: 'Imports and Exports',
           fr: 'Importations et exportations',
         },
+        importsForReexport: {
+          en: 'Temporary Imports',
+          fr: 'Temporary Imports FR',
+        },
+        exportsForReimport: {
+          en: 'Temporary Exports',
+          fr: 'Temporary Exports FR',
+        },
       },
     },
     arrangeBy: {
@@ -288,20 +296,14 @@ const TranslationTable = fromJS({
   },
 
   explanationShown: {
-    en: 'show EXPLANATIONS',
-    fr: 'montrer EXPLICATIONS',
-  },
-
-  explanationHide: {
-    en: 'hide EXPLANATIONS',
-    fr: 'cacher EXPLICATIONS',
+    en: 'EXPLANATIONS',
+    fr: 'EXPLICATIONS',
   },
 
   confidentialityShown: {
     en: 'CONFIDENTIALITY',
     fr: 'CONFIDENTIALITÉ',
   },
-  
   amounts: {
     CAN$: { en: 'CAN$', fr: '$ CAN' },
     'CAN$/MW.h': { en: 'CAN$/MW.h', fr: '$ CAN/MWh' },
@@ -331,35 +333,49 @@ const TranslationTable = fromJS({
   },
 
   explanations: {
-    importExportTitle: {
-      text: {
-        en: 'Click + to see more options',
-        fr: 'Cliquez pour plus d’options',
-      },
-    },
-    electricity: {
-      text: {
-        en: 'Electricity is the selected energy product',
-        fr: 'Electricity is the selected energy product FR',
-      },
+    amount: {
+      en: 'MWh denotes a Megawatt hour, a unit of measurement of electricity. 1 MWH is equivalent to _______. CAN$ denotes the total revenue. CAN$/MWh denotes the average price per Megawatt hour.',
+      fr: 'TODO',
     },
     timeSeek: {
-      text: {
-        en: 'Drag to select time frame',
-        fr: 'Drag to select time frame FR',
-      },
+      en: 'Drag these handles to select a different time period.',
+      fr: 'TODO',
     },
     playButton: {
-      text: {
-        en: 'Click play to see how electricity changes over time',
-        fr: 'Click play to see how electricity changes over time FR',
-      },
+      en: 'Press the play button to animate one quarter at a time.',
+      fr: 'TODO',
     },
-    newYork: {
-      text: {
-        en: 'New York has the highest exports into the US as well as the highest imports from the US',
-        fr: 'New York has the highest exports into the US as well as the highest imports from the US FR',
-      },
+    barChartExport: {
+      en: 'Each blue bar shows the total electricity that Canadian provinces exported during a single quarter.',
+      fr: 'TODO',
+    },
+    washingtonArrow: {
+      en: 'The up arrow shows the total electricity that Canadian provinces imported from Washington during the time period selected above.',
+      fr: 'TODO',
+    },
+    barChartImport: {
+      en: 'Each orange bar shows the total electricity that Canadian provinces imported during a single quarter.',
+      fr: 'TODO',
+    },
+    title: {
+      en: 'This data visualization shows Canadian imports and exports of electricity. Click the pink dots to guide you through how to read the data.',
+      fr: 'TODO',
+    },
+    linkedDataIcon: {
+      en: "Click here to scale each chart's y-axis independently. This is useful to zoom in when the bars on one side are much smaller than on the other side.",
+      fr: 'TODO',
+    },
+    newBrunswickArrow: {
+      en: 'The down arrow shows the total electricity that New Brunswick exported to U.S. states during the time period selected below.',
+      fr: 'TODO',
+    },
+    timelineRange: {
+      en: 'Drag this line up and down to read the values of the y-axis as different heights.',
+      fr: 'TODO',
+    },
+    vermontArrow: {
+      en: 'The down arrow shows the total electricity that Canadian provinces exported to Vermont during the time period selected above.',
+      fr: 'TODO',
     },
   },
 
@@ -510,8 +526,8 @@ const TranslationTable = fromJS({
     },
     crudeOil: {
       defaultText: {
-        en: 'This visualization shows imports to Canada and exports from Canada between the years $0 and $1. Drag the timeline bar to change. Click a province to view Detail',
-        fr: 'Cette visualisation illustre les importations et les exportations du Canada de $0 à $1. Faites glisser la ligne du temps pour modifier les années. Cliquez sur une province pour des précisions à ce sujet.',
+        en: 'Data not available when map is filtered',
+        fr: 'Data not available when map is filtered',
       },
       transport: {
         type: {
@@ -630,8 +646,8 @@ const TranslationTable = fromJS({
             fr: 'de',
           },
           adjective: {
-            en: 'selected',
-            fr: 'ces',
+            en: '',
+            fr: '',
           },
           place: {
             en: 'CAN',
@@ -1105,6 +1121,65 @@ const TranslationTable = fromJS({
           },
         },
       },
+    },
+    naturalGas: {
+      importsExports: {
+        imports: {
+          label: {
+            en: 'Imports from Canada',
+            fr: 'Importations du Canada',
+          },
+        },
+        exports: {
+          label: {
+            en: 'Exports into Canada',
+            fr: 'Exportations au Canada',
+          },
+        },
+        stateOrProvince: {
+          en: 'Port',
+          fr: 'Port',
+        },
+      },
+
+      importsForReexport: {
+        imports: {
+          label: {
+            en: 'temporary imports into Canada',
+            fr: 'temporary imports into Canada FR',
+          },
+        },
+        exports: {
+          label: {
+            en: 're-exports (of temporary imports) from Canada',
+            fr: 're-exports (of temporary imports) from Canada FR',
+          },
+        },
+        stateOrProvince: {
+          en: 'Port',
+          fr: 'Port',
+        },
+      },
+
+      exportsForReimport: {
+        imports: {
+          label: {
+            en: 're-exports (of temporary exports) into Canada',
+            fr: 're-exports (of temporary exports) into Canada FR',
+          },
+        },
+        exports: {
+          label: {
+            en: 'temporary exports from Canada',
+            fr: 'temporary exports from Canada FR',
+          },
+        },
+        stateOrProvince: {
+          en: 'Port',
+          fr: 'Port',
+        },
+      },
+
     },
   },
 

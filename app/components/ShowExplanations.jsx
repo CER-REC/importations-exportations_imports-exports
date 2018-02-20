@@ -46,15 +46,25 @@ class ShowExplanations extends React.Component {
     )
   }
 
+  dot() {
+    return <circle
+      cx={Constants.getIn(['showExplanations', 'labelOffset']) + 92}
+      cy={WorkspaceComputations.showExplanationsY() - 5}
+      r={Constants.getIn(['explanationDot', 'radiusStart'])}
+      fill="#ff708a"
+    />
+  }
+
   showText() {
     const { Tr } = this.props
     const yaxis = WorkspaceComputations.showExplanationsY()
 
+    let sign='+'
     let textColour = '#999999'
-    let explanationsText = Tr('explanationShown')
+    const explanationsText = Tr('explanationShown')
     if (this.props.showExplanations) {
       textColour = '#ff708a'
-      explanationsText = Tr('explanationHide')
+      sign='-'
     }
 
     return (
@@ -64,7 +74,7 @@ class ShowExplanations extends React.Component {
         className="showHideExplanations"
         fill={textColour}
       >
-        {explanationsText}
+        {explanationsText} <tspan dx="15">{sign}</tspan>
       </text>
     )
   }
@@ -76,6 +86,7 @@ class ShowExplanations extends React.Component {
         role="menuitem"
         {...handleInteraction(this.props.onClick)}
       >
+        {this.dot()}
         {this.showText()}
         {this.triangleLine()}
       </g>
