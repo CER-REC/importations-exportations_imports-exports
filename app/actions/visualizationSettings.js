@@ -3,6 +3,7 @@ import { combineReducers } from 'redux'
 
 export const Types = {
   RESET_VISUALIZATION: 'visualizationSettings.reset',
+  RESET_VISUALIZATION_STATE: 'visualizationSettings.resetState',
   TIMELINE_FILTER: 'visualizationSettings.timelineFilter',
   ARRANGE_BY: 'visualizationSettings.arrangeBy',
   SET_AMOUNT: 'visualizationSettings.setAmount',
@@ -75,6 +76,11 @@ const initialState = fromJS({
   },
 })
 
+export const resetVisualization = () => ({
+  type: Types.RESET_VISUALIZATION_STATE,
+  payload: { settings: initialState },
+})
+
 const subReducer = visualization => (state = initialState, action) => {
   if (!action.meta || visualization !== action.meta.visualization) {
     return state
@@ -96,6 +102,7 @@ const subReducer = visualization => (state = initialState, action) => {
     case Types.SET_SCALE_LINKED:
       return state.setIn(['timeline', 'scaleLinked'], action.payload.scaleLinked)
     case Types.RESET_VISUALIZATION:
+    case Types.RESET_VISUALIZATION_STATE:
       return fromJS(action.payload.settings)
     case Types.SET_SELECTION:
       return state.set('selection', fromJS(action.payload.selection))
