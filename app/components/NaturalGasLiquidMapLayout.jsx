@@ -19,6 +19,8 @@ import DetailSidebar from './DetailSidebar'
 import DetailBreakdown from './DetailBreakdown'
 import { handleInteraction } from '../utilities'
 
+import './NaturalGasLiquidMapLayout.scss'
+
 const mapPieceTransformStartXaxis = (position, dimensions, mapPieceScale) => (position.get('x') * ((mapPieceScale * dimensions.get('width')) + dimensions.get('xAxisPadding')))
 const mapPieceTransformStartYaxis = (position, dimensions, mapPieceScale) => (position.get('y') * ((mapPieceScale * dimensions.get('height')) + dimensions.get('yAxisPadding')))
 
@@ -119,7 +121,13 @@ class NaturalGasLiquidMapLayout extends React.Component {
       )
     })
   }
-
+  renderATLQOutline(){
+    if(this.props.arrangeBy !== 'location'){ return null}
+    return <polygon
+     transform="scale(0.98) translate(276 40)"
+     className="ATLQOutline"
+     points="56.49 0.56 84.57 15.56 114.25 0.56 142.43 15.56 142.43 42.81 169.22 56.74 169.22 85.56 142.43 99.06 114.25 85.56 84.57 99.06 56.49 85.56 25.89 99.06 0.5 85.56 0.5 56.74 26.89 42.81 26.89 15.56 56.49 0.56"/>
+  }
   renderDetailBreakdown(data) {
     const detailBreakdownData = Constants.getIn(['detailBreakDown', this.props.country])
     
@@ -162,6 +170,7 @@ class NaturalGasLiquidMapLayout extends React.Component {
     return (<g>
       {this.renderMapPiece()}
       {this.renderDetailSidebar()}
+      {this.renderATLQOutline()}
     </g>)
   }
 }
