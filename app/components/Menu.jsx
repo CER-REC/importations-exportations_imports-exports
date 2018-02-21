@@ -56,7 +56,7 @@ class Menu extends React.PureComponent {
         scale="scale(1 -1) translate(0 -100)"
         lineStroke="1"
         textBoxWidth={190}
-        textBoxHeight={40}
+        textBoxHeight={140}
         linePath="
           M142.16,
           173.94l24.26,

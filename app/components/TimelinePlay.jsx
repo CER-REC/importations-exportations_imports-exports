@@ -70,7 +70,7 @@ class TimelinePlay extends React.PureComponent {
         scale="scale(0.7) scale(-1 1)"
         lineStroke="1.3"
         textBoxWidth={120}
-        textBoxHeight={60}
+        textBoxHeight={90}
         linePath="
           M142.16,
           173.94l24.26,

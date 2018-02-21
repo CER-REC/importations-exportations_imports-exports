@@ -157,10 +157,10 @@ class TimelineSeek extends React.PureComponent {
     }
     return (<g>
       <ExplanationDot
-        scale="scale(1.5) scale(-1 1)"
+        scale="scale(2) scale(-1 1)"
         lineStroke="0.6"
-        textBoxWidth={140}
-        textBoxHeight={50}
+        textBoxWidth={130}
+        textBoxHeight={80}
         linePath="
           M142.16,
           173.94l24.26,
@@ -170,12 +170,12 @@ class TimelineSeek extends React.PureComponent {
           18H250.2"
         xPosition={-7}
         yPosition={14}
-        lineX={322.16}
+        lineX={222.16}
         lineY={173.94}
-        textX={108}
-        textY={82}
-        containerX={this.props.left + this.state.offset - 279}
-        containerY={this.props.top + 2}
+        textX={-2}
+        textY={112}
+        containerX={this.props.left + this.state.offset - 169}
+        containerY={this.props.top + 5}
         text={`${this.props.tr(['explanations','timeSeek'])}`}
         name="timeSeekDot"
     /></g>)
