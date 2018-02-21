@@ -64,15 +64,3 @@ export const powerPoolPosition = createSelector(
     height: 50,
   }),
 )
-
-export const mapPieceActivityExplanationPosition = createSelector(
-  usMapPosition,
-  prev => ({
-    // Currently this is hardcoded value
-    // TODO: replace by dynamic value once new navigation bar is merged
-    top: 630,
-    left: 10,
-    width: 150,
-    height: 50,
-  }),
-)

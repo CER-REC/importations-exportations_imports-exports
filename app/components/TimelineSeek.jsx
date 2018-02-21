@@ -192,7 +192,7 @@ class TimelineSeek extends React.PureComponent {
       timelineRange.getIn([side, 'quarter']),
     )
     const scale = (this.props.height / 14.8) // 14.8 is the height of the SVG
-    const xOffset = 6.69 * scale // 6.69 is the width of the SVG
+    const xOffset = 6.69 * scale + 2 // 6.69 is the width of the SVG
     return (
       <g transform={sideTransform}>
         <SVGDrag

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
 import './ChartOptions.scss'
+import * as ScaleIcon from './ScaleIcon'
 import Constants from '../Constants'
 import { setScaleLinked, setGrouping } from '../actions/visualizationSettings'
 import { timelineScaleLinked, timelineGrouping as timelineGroupingSelector } from '../selectors/timeline'
@@ -65,15 +66,12 @@ class ChartOptions extends React.PureComponent {
   renderScaleToggle() {
     if (this.props.canChangeScale === false) { return null }
 
-    const image = this.props.scaleLinked
-      ? 'images/link.svg'
-      : 'images/link_broken.svg'
-    const imageAlt = this.props.scaleLinked
-      ? this.props.tr(['chartOptions', 'scaleLinked'])
-      : this.props.tr(['chartOptions', 'scaleUnlinked'])
-
     const interactions = handleInteraction(this.scaleLinkedChanged)
     const switchHeight = this.props.height - 4
+    const imageProps = {
+      fill: Constants.getIn(['styleGuide', 'colours', 'SandExtraDark']),
+      height: switchHeight,
+    }
     return (
       <label
         htmlFor="scaleLinked"
@@ -89,12 +87,15 @@ class ChartOptions extends React.PureComponent {
           />
           <div className="switchBackground round">
             <div className="slider" />
-            <svg>
-          {this.linkDataExplanation()}
-        </svg>
+            <svg>{this.linkDataExplanation()}</svg>
           </div>
         </div>
-        <img src={image} height={switchHeight} alt={imageAlt} />
+        <svg height={switchHeight} width={switchHeight} style={{ margin: '0 4px' }}>
+          {this.props.scaleLinked ? <ScaleIcon.Linked {...imageProps} /> : <ScaleIcon.Broken {...imageProps} />}
+        </svg>
+        <span style={{ verticalAlign: 'text-bottom' }}>
+          ({this.props.tr(['chartOptions', (this.props.scaleLinked ? 'scaleLinked' : 'scaleUnlinked')])})
+        </span>
       </label>
     )
   }

@@ -3,9 +3,11 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
 import TextBox from './TextBox'
+import * as ScaleIcon from './ScaleIcon'
 import SVGDrag from './SVGDrag/'
 import Constants from '../Constants'
 import { visualizationSettings } from '../selectors/visualizationSettings'
+import { timelineScaleLinked } from '../selectors/timeline'
 import trSelector from '../selectors/translate'
 
 import ExplanationDot from './ExplanationDot'
@@ -23,6 +25,7 @@ class AxisGuide extends React.PureComponent {
       updatePosition: PropTypes.func.isRequired,
       position: PropTypes.number.isRequired,
       tr: PropTypes.func.isRequired,
+      scaleLinked: PropTypes.bool.isRequired,
     }
   }
 
@@ -120,6 +123,26 @@ class AxisGuide extends React.PureComponent {
     /></g>)
   }
 
+  getScaleImage = ({ x, width, height }) => {
+    const groupTransform = `translate(${x + width + 2} ${-height - 3})`
+    const imageProps = {
+      fill: 'white',
+      height,
+      transform: 'translate(2 2)',
+    }
+    return (
+      <g
+        fill={Constants.getIn(['styleGuide', 'colours', 'SandExtraDark'])}
+        transform={groupTransform}
+      >
+        <rect x={0} y={0} width={height + 4} height={height + 4} />
+        {this.props.scaleLinked
+          ? <ScaleIcon.Linked {...imageProps} />
+          : <ScaleIcon.Broken {...imageProps} />}
+      </g>
+    )
+  }
+
   render() {
     const text = `${this.state.positionDisplay.toLocaleString()} ${this.props.tr(['amounts', this.props.unit])}`
     const offset = (this.props.chartHeight + (this.props.barSize / 2))
@@ -164,6 +187,7 @@ class AxisGuide extends React.PureComponent {
             }}
             padding={2}
             flipped={this.props.flipped}
+            unsizedContent={this.getScaleImage}
           >
             {text}
           </TextBox>
@@ -177,4 +201,5 @@ class AxisGuide extends React.PureComponent {
 export default connect((state, props) => ({
   unit: visualizationSettings(state, props).get('amount'),
   tr: trSelector(state, props),
+  scaleLinked: timelineScaleLinked(state, props),
 }))(AxisGuide)
