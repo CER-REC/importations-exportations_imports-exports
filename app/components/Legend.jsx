@@ -116,7 +116,8 @@ class Legend extends React.Component {
     const humanNumberLang = v => humanNumber(v, this.props.language)
     return (
       <svg>
-        <g transform={transformString}>
+        <g transform={transformString} 
+          className="legendContainer">
           <text
             className="theLegendValues"
             y={Constants.getIn(['legend', 'rangeOneY'])}

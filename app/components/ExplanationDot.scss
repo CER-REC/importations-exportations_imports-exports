@@ -1,7 +1,6 @@
 
 .back {
   fill: transparent;
-  stroke: fadeOut(#ff708a, 20px); 
 }
 
 @keyframes fadeOutDot { 
@@ -9,7 +8,8 @@
     opacity: 1; 
     transform: scale(1);
   } to 
-  { opacity: 0;  
+  { 
+    opacity: 0;  
     transform: scale(3);
   } 
 }
@@ -23,10 +23,11 @@
   } 
 }
 
-.explanationDot {
-  cursor: pointer;
+//.explanationDot {
+  
   .pulse {
-    animation: 1.5s ease-out 0s 2 normal fadeOutDot;
-  }
+    cursor: pointer;
+    animation: 1.5s ease-in-out 0s 2 normal fadeOutDot;
+ // }
 }
 

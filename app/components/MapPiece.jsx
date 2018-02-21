@@ -241,7 +241,7 @@ class MapPiece extends React.Component {
     }
     
     const mapContent = (
-      <g>
+      <g className="mapPiece">
         <polygon
           stroke={stroke}
           fill={this.props.styles.get('color')}

@@ -5,6 +5,7 @@
   height: 100%;
   margin: 0;
   padding: 0;
+  cursor: pointer;
 
   img {
     vertical-align: inherit;
@@ -27,7 +28,6 @@
 .switchBackground {
   background-color: $SandExtraDark;
   border: 1px solid $SandMedium;
-  cursor: pointer;
   left: 0;
   right: 0;
   top: 0;
