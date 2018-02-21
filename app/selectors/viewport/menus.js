@@ -62,19 +62,6 @@ export const subtypePosition = createSelector(
   menuHeightCalc('subtype'),
 )
 
-export const activityExplanationPosition = createSelector(
-  activityPosition,
-  prev => ({
-    // Currently this is hardcoded value
-    // TODO: replace by dynamic value once new navigation bar is merged
-    top: 600,
-    left: 10,
-    width: 150,
-    height: 50,
-  }
-  ),
-)
-
 export const explanationTogglePosition = createSelector(
   subtypePosition,
   chartAxisPosition,

@@ -12,7 +12,7 @@ import * as NaturalGasViewport from '../selectors/viewport/naturalGas'
 import { showImportsSelector, showExportsSelector } from '../selectors/visualizationSettings'
 import NaturalGasPieceActivityExplanation from './NaturalGasPieceActivityExplanation'
 import Constants from '../Constants'
-import {activityExplanationPosition} from '../selectors/viewport/menus'
+import {legendMapPosition} from '../selectors/viewport/menus'
 
 const NaturalGasVisualizationContainer = props => (
   <g>
@@ -51,7 +51,7 @@ const NaturalGasVisualizationContainer = props => (
 
 export default connect((state, props) => ({
   importChart: NaturalGasViewport.chartImportPosition(state, props),
-  mapPieceActivityExplanation: activityExplanationPosition(state, props),
+  mapPieceActivityExplanation: legendMapPosition(state, props),
   axisPosition: NaturalGasViewport.chartAxisPosition(state, props),
   exportChart: NaturalGasViewport.chartExportPosition(state, props),
   mapTiles: NaturalGasViewport.mapTilesPosition(state, props),

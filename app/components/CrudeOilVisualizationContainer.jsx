@@ -10,7 +10,7 @@ import Constants from '../Constants'
 import { positionShape } from '../propTypeShapes'
 import USPadd from './Padds/USPadd'
 import CAPadd from './Padds/CAPadd'
-import { activityExplanationPosition } from '../selectors/viewport/menus'
+import { legendMapPosition } from '../selectors/viewport/menus'
 import CrudeOilPieceActivityExplanation from './CrudeOilPieceActivityExplanation'
 
 const CrudeOilVisualizationContainer = props => (
@@ -76,5 +76,5 @@ export default connect((state, props) => ({
   exportChart: CrudeOilViewport.chartExportPosition(state, props),
   canadaPaddChart: CrudeOilViewport.canadaPaddPosition(state, props),
   usPaddChart: CrudeOilViewport.usPaddPosition(state, props),
-  mapPieceActivityExplanation: activityExplanationPosition(state, props),
+  mapPieceActivityExplanation: legendMapPosition(state, props),
 }))(CrudeOilVisualizationContainer)
