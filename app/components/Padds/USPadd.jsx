@@ -28,12 +28,11 @@ const USPadd = (props) => {
     return (<g transform={`scale(1.25) translate(-30 0)`}>
       <filter id="paddOutline">
         <feMorphology operator="dilate" in="SourceAlpha" radius="1.5"/>
-        <feColorMatrix in="morphed" result="recolored" type="matrix" values="-1 0 0 1 0, 0 -1 0 1 0, 0 0 -1 1 0, 0 0 0 1 0"/>
+        <feColorMatrix result="recolored" type="matrix" values="-1 0 0 1 0, 0 -1 0 1 0, 0 0 -1 1 0, 0 0 0 1 0"/>
         <feMerge>
           <feMergeNode in="recolored"/>
           <feMergeNode in="SourceGraphic"/>
         </feMerge>
-        <feComposite in="SourceGraphic" />
       </filter>
       {padds.toArray()}
       {renderDetailSidebar(props)}
