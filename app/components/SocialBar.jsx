@@ -160,12 +160,12 @@ class SocialBar extends React.Component {
     const viewPort = WorkspaceComputations.socialBarY(this.props.viewport) || 0
     if (this.props.expandSocialBar) { return }
     return (<image
-          className="socialBarIcon"
-          height={Constants.getIn(['socialBar', 'iconSize'])}
-          width={Constants.getIn(['socialBar', 'iconSize'])}
-          y={viewPort + Constants.getIn(['socialBar', 'shareIconMargin'], 0)}
-          xlinkHref="images/share.svg"
-          {...handleInteraction(this.props.controlArrowClick)}
+      className="socialBarIcon"
+      height={Constants.getIn(['socialBar', 'iconSize'])}
+      width={Constants.getIn(['socialBar', 'iconSize'])}
+      y={viewPort + Constants.getIn(['socialBar', 'shareIconMargin'], 0)}
+      xlinkHref="images/share.svg"
+      {...handleInteraction(this.props.controlArrowClick)}
         />)
   }
 
