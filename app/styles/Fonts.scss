@@ -121,12 +121,14 @@
   font-family: $fira-sans-condensed;
   font-size: 13px;
   fill: $neutral-medium;
+  text-anchor: middle;
 }
 
 .mapPieceWhiteText {
   font-family: $fira-sans-condensed;
   font-size: 13px;
   fill: $neutral-white;
+  text-anchor: middle;
 }
 
 .powerPoolLabel {
@@ -287,6 +289,7 @@
   font-family: $fira-sans-condensed;
   color: $neutral-medium;
   font-size:9px;
+  text-anchor: middle;
 }
 .portProvinceLabel{
   font-family: $fira-sans-condensed-semibold;

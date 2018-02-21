@@ -186,8 +186,10 @@ class MapPiece extends React.Component {
         labelPosition={this.props.styles.get('labelPosition')}
         topMargin={this.props.styles.get('bottomMargin')}
         bottomMargin={this.props.styles.get('topMargin')}
+        mapPieceWidth={this.props.dimensions.get('width')}
         mapPieceHeight={this.props.dimensions.get('height')}
         name={this.props.data.get(this.props.mapPieceKey, '')}
+        mapPieceKey={this.props.mapPieceKey}
         mapPieceProps={this.props.mapPieceProps}
         styleClass={this.props.mapPieceStyleClass}
         text = {this.props.text}
