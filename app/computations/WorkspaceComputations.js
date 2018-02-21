@@ -5,7 +5,7 @@ const WorkspaceComputations = {}
 // viewport: the viewport state
 WorkspaceComputations.workspaceWidth = viewport => viewport.get('x')
 
-WorkspaceComputations.visualizationHeight = viewport => viewport.get('y') + 50
+WorkspaceComputations.visualizationHeight = viewport => viewport.get('y')
 
 WorkspaceComputations.topHeightMargin = () => Constants.get('topHeightMargin')
 
