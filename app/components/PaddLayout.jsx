@@ -354,7 +354,7 @@ class PaddLayout extends React.Component {
       .from(props.Padd)
       .sort((a, b) => b[1].get('value') - a[1].get('value'))
     let left = 0
-    const paddingBetweenSortedElement = 100
+    const paddingBetweenSortedElement = 90
     const layout = paddData.reduce((acc, currentValue) => {
       let paddLayout = null
       if (currentValue[0] !== 'ca') {
