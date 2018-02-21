@@ -31,12 +31,14 @@ class TimelinePlay extends React.PureComponent {
 
   resetPlay() {
     const { timelineScale: yearScale } = this.props
-    clearInterval(this.state.playInterval)
-    this.setState({ playInterval: null })
-    this.props.timelineFilter({
-      start: { year: yearScale.min, quarter: 1 },
-      end: { year: yearScale.max, quarter: 4 },
-    })
+    if (this.state.playInterval) {
+      clearInterval(this.state.playInterval)
+      this.setState({ playInterval: null })
+      this.props.timelineFilter({
+        start: { year: yearScale.min, quarter: 1 },
+        end: { year: yearScale.max, quarter: 4 },
+      })
+    }
   }
 
   onClick() {
