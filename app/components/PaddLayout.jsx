@@ -408,9 +408,10 @@ class PaddLayout extends React.Component {
     const data = props.Padd.get(paddGroup)
     if(data){
     const color = this.getPaddColor(data.get('value'))
-    return (<g fillOpacity={this.getOpacityOfPadd(props, paddGroup)} transform={`translate(${props.paddingX} ${props.paddingY})`}
+    return (<g fillOpacity={this.getOpacityOfPadd(props, paddGroup)}
       {...handleInteraction(this.onPaddClick, props, paddGroup)}
         >
+        <g filter="url(#paddOutline)" >
         {layout.map((position, key) => (
           <PaddMapPiece
             key={`paddLayout_${props.country}_${position.get('name')}`}
@@ -422,7 +423,8 @@ class PaddLayout extends React.Component {
             top={mapPieceTransformStartTop(props.top, position, dimensions, mapPieceScale)}
             isLabelRquired={props.arrangeBy === 'location'}
           />
-      ))}
+        ))}
+        </g>
         {this.getArrow(
         this.props.arrangeBy,
         this.props.paddGroup,
