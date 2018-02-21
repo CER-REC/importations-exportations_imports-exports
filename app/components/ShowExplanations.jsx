@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 
 import Constants from '../Constants'
 import TrSelector from '../selectors/translate'
+import { explanationTogglePosition } from '../selectors/viewport/menus'
 
 import ToggleExplanation from '../actionCreators/ShowExplanationsCreator'
 import WorkspaceComputations from '../computations/WorkspaceComputations'
@@ -22,34 +23,28 @@ class ShowExplanations extends React.Component {
   }
 
   triangleLine() {
-    const yaxis = WorkspaceComputations.showExplanationsY()
     let triangleLineColor = '#666666'
     if (this.props.showExplanations) {
       triangleLineColor = '#ff708a'
     }
     return (
-      <svg
-        x={0}
-        y={yaxis - Constants.getIn(['showExplanations', 'triangleLineYOffset'])}
-      >
-        <g>
-          <polyline fill={triangleLineColor} points="0 8 0 0 9.1 8.1 0 8.1" />
-          <line
-            stroke={triangleLineColor}
-            x1="0.5"
-            y1={Constants.getIn(['showExplanations', 'triangleLineY'])}
-            x2={Constants.getIn(['showExplanations', 'triangleLineWidth'])}
-            y2={Constants.getIn(['showExplanations', 'triangleLineY'])}
-          />
-        </g>
-      </svg>
+      <g transform="translate(0 -3)">
+        <polyline fill={triangleLineColor} points="0 8 0 0 9.1 8.1 0 8.1" />
+        <line
+          stroke={triangleLineColor}
+          x1="0.5"
+          y1={Constants.getIn(['showExplanations', 'triangleLineY'])}
+          x2={Constants.getIn(['showExplanations', 'triangleLineWidth'])}
+          y2={Constants.getIn(['showExplanations', 'triangleLineY'])}
+        />
+      </g>
     )
   }
 
   dot() {
     return <circle
       cx={Constants.getIn(['showExplanations', 'labelOffset']) + 92}
-      cy={WorkspaceComputations.showExplanationsY() - 5}
+      cy={-5}
       r={Constants.getIn(['explanationDot', 'radiusStart'])}
       fill="#ff708a"
     />
@@ -57,7 +52,6 @@ class ShowExplanations extends React.Component {
 
   showText() {
     const { Tr } = this.props
-    const yaxis = WorkspaceComputations.showExplanationsY()
 
     let sign='+'
     let textColour = '#999999'
@@ -70,7 +64,7 @@ class ShowExplanations extends React.Component {
     return (
       <text
         x={Constants.getIn(['showExplanations', 'labelOffset'])}
-        y={yaxis}
+        y={0}
         className="showHideExplanations"
         fill={textColour}
       >
@@ -82,7 +76,7 @@ class ShowExplanations extends React.Component {
   render() {
     return (
       <g
-        transform="translate(0 80)"
+        transform={`translate(${this.props.left} ${this.props.top})`}
         role="menuitem"
         {...handleInteraction(this.props.onClick)}
       >
@@ -95,9 +89,9 @@ class ShowExplanations extends React.Component {
 }
 
 const mapStateToProps = (state, props) => ({
-  viewport: state.viewport,
   showExplanations: state.showExplanations,
   Tr: TrSelector(state, props),
+  ...explanationTogglePosition(state, props),
 })
 
 const mapDispatchToProps = {

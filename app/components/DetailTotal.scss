@@ -5,18 +5,26 @@
 
   .detailText {
     padding-left: 2px;
-    margin-right: 20px;
     background: #fff;
+    width: calc(100% - 40px);
+    display: inline-block;
+  }
+
+  .percentage {
+    color: #fff;
+    display: inline-block;
+    text-align: center;
+    width: 40px;
   }
 
   &.imports {
     padding-top: 2px;
-    background: $import-default;
+    &, .percentage { background: $import-default; }
     .totalType { color: $import-default; }
   }
   &.exports {
     padding-bottom: 2px;
-    background: $export-default;
+    &, .percentage { background: $export-default; }
     .totalType { color: $export-default; }
   }
 }

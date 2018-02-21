@@ -1189,12 +1189,12 @@ const TranslationTable = fromJS({
 
   chartOptions: {
     scaleLinked: {
-      en: 'Chart Scale Linked',
-      fr: 'Lien avec l’échelle du graphique',
+      en: 'y-axis scales equal',
+      fr: 'y-axis scales equal',
     },
     scaleUnlinked: {
-      en: 'Chart Scale Unlinked',
-      fr: 'Sans lien avec l’échelle du graphique',
+      en: 'y-axis scales unequal',
+      fr: 'y-axis scales unequal',
     },
     timelineGroup: {
       year: {

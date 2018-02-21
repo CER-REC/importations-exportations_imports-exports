@@ -1,5 +1,6 @@
 import { createSelector } from 'reselect'
 
+import { chartAxisPosition } from './electricity'
 import { activityOptions, arrangeByOptions, amountOptions, subtypeOptions } from '../menus'
 import Constants from '../../Constants'
 
@@ -72,4 +73,41 @@ export const activityExplanationPosition = createSelector(
     height: 50,
   }
   ),
+)
+
+export const explanationTogglePosition = createSelector(
+  subtypePosition,
+  chartAxisPosition,
+  (prev, chart) => ({
+    ...prev,
+    top: chart.top - 5,
+    height: 20,
+  }),
+)
+
+export const confidentialityTogglePosition = createSelector(
+  explanationTogglePosition,
+  prev => ({
+    ...prev,
+    top: prev.top + prev.height,
+    height: 20,
+  }),
+)
+
+export const legendMapPosition = createSelector(
+  confidentialityTogglePosition,
+  prev => ({
+    ...prev,
+    top: prev.top + prev.height,
+    height: 120,
+  }),
+)
+
+export const legendBinsPosition = createSelector(
+  legendMapPosition,
+  prev => ({
+    ...prev,
+    top: prev.top + prev.height + 20,
+    height: 120,
+  }),
 )

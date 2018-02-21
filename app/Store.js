@@ -2,7 +2,6 @@ import { createStore, compose, applyMiddleware } from 'redux'
 
 import reducer from './reducer'
 
-import TimelineRangeMiddleware from './middleware/timelineRange'
 import InitialVisualizationSettingsMiddleware from './middleware/initialVisualizationSettings'
 import ActionLogMiddleware from './middleware/actionLog'
 import TagVisualizationSettingsMiddleware from './middleware/tagVisualizationSettings'
@@ -21,7 +20,6 @@ export default () => {
       SaveStateToRouteMiddleware,
       InitialVisualizationSettingsMiddleware,
       TagVisualizationSettingsMiddleware,
-      TimelineRangeMiddleware,
       ActionLogMiddleware,
       DataLoaded,
     )),
