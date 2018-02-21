@@ -172,7 +172,11 @@ class BarChart extends Chart {
         /> 
         {!this.props.detailSidebar ? null : (
           <DetailSidebar top={this.props.top} height={height}>
-            {flipped ? sidebarContent.reverse() : sidebarContent}
+            <div className="verticalAlign">
+              <div className="centered">
+                {flipped ? sidebarContent.reverse() : sidebarContent}
+              </div>
+            </div>
           </DetailSidebar>
         )} 
       </g>
