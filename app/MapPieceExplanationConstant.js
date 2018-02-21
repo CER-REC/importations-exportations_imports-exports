@@ -21,7 +21,7 @@ const MapPieceExplanationConstant = fromJS({
         labelPosition: 'up',
         arrowPosition: 'down',
         arrowSpacing: -1,
-        bottomMargin: 5,
+        bottomMargin: 6,
         topMargin: 5,
         confidentialStyle: {
           fill: '#ffffff',
@@ -66,7 +66,7 @@ const MapPieceExplanationConstant = fromJS({
         arrowPosition: 'up',
         arrowSpacing: -1,
         bottomMargin: 5,
-        topMargin: 5,
+        topMargin: 4,
         confidentialStyle: {
           fill: '#999',
           stroke: '#999',
@@ -216,7 +216,7 @@ const MapPieceExplanationConstant = fromJS({
       arrowPosition: 'down',
       arrowSpacing: -12,
       bottomMargin: 5,
-      topMargin: 15,
+      topMargin: 12,
       confidentialStyle: {
         fill: '#999',
         stroke: '#999',

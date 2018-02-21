@@ -8,7 +8,7 @@ import Tr from '../TranslationTable'
 class CrudeOilPieceActivityExplanation extends React.Component {
   render() {
     return (<g transform={`translate(${this.props.left},${this.props.top})`}>
-      <g transform="translate(0,70)">
+      <g transform="translate(10,50)">
         <ImportExportArrow
           arrowSpacing={MapPieceExplanationConstant.getIn(['crudeOil', 'styles', 'arrowSpacing'])}
           type='exports'

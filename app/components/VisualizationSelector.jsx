@@ -18,7 +18,7 @@ const SelectedPrefix = memoize((of) => {
       <rect
         x={-textOffset}
         y={y}
-        width={textOffset}
+        width={textOffset + 1}
         height={height}
         fill="#666"
       />

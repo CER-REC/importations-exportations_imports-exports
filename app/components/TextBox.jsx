@@ -11,6 +11,7 @@ class TextBox extends React.PureComponent {
     children: PropTypes.oneOfType([
       PropTypes.string,
       PropTypes.arrayOf(PropTypes.string),
+      PropTypes.node,
     ]).isRequired,
   }
 

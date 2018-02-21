@@ -2,12 +2,13 @@ import React from 'react'
 import { connect } from 'react-redux'
 
 import Constants from '../Constants'
+import Tr from '../TranslationTable'
 import '../styles/Fonts.scss'
 
 class MapPieceLabel extends React.Component {
   drawLabel(mapPieceProps, yAxis) {
     const lineY = yAxis - 4
-    const labelY = yAxis - 4
+    const labelY = yAxis + 1
     let labelElement = ''
 
     if (typeof mapPieceProps !== 'undefined') {
@@ -25,48 +26,26 @@ class MapPieceLabel extends React.Component {
   }
 
   renderText(name, xAxis, yAxis){
-    switch(name.length){
-      case 1:
-      case 2:
-        return <text className={this.props.styleClass} x={xAxis} y={yAxis} aria-hidden>
-          {name}
+    if (name.includes('\n')) {
+      const splitName = name.split('\n')
+      return (
+        <text className={this.props.styleClass} y={yAxis - 12} aria-hidden>
+          {splitName.map(text => <tspan key={text} x={xAxis} dy="10">{text}</tspan>)}
         </text>
-      case 3:
-      case 4: 
-      case 5:
-        return <text className={this.props.styleClass} x={xAxis - 3} y={yAxis} aria-hidden>
-          {name}
-        </text>
-      case 6:
-        return <text className={this.props.styleClass} x={xAxis - 4} y={yAxis} aria-hidden>
-          {name}
-        </text>
-      case 7:
-        return <text className={this.props.styleClass} x={xAxis - 7} y={yAxis} aria-hidden>
-          {name}
-        </text>
-      case 8:
-      default:
-       return (
-          <g> 
-            <defs>
-              <path id="path1" d="M5,20 H30 M7,30 H30 M10,40 H30 M10,50 H30"></path>
-            </defs>
-            <use xlinkHref="#path1" x={xAxis + 0.25} y={yAxis} />
-            <text className={this.props.styleClass} aria-hidden >
-              <textPath xlinkHref="#path1"> {name}</textPath>
-            </text>
-          </g>
-        )
+      )
     }
-
+    return (
+      <text className={this.props.styleClass} x={xAxis} y={yAxis} aria-hidden>
+        {name}
+      </text>
+    )
   }
 
 
   render() {
     let yAxis = Constants.getIn(['mapPieceTextStyle', 'y']) + this.props.topMargin
-    const xAxis = Constants.getIn(['mapPieceTextStyle', 'x'])
-    const name = this.props.name
+    const xAxis = this.props.mapPieceWidth / 2
+    const name = Tr.getIn(['mapTileLabels', this.props.mapPieceKey, this.props.name, this.props.language], this.props.name)
     if (this.props.labelPosition === 'down') {
       yAxis = this.props.mapPieceHeight - this.props.bottomMargin
     }
