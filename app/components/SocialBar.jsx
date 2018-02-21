@@ -156,6 +156,19 @@ class SocialBar extends React.Component {
     this.props.dataDownloadClick()
   }
 
+  shareIcon() {
+    const viewPort = WorkspaceComputations.socialBarY(this.props.viewport) || 0
+    if (this.props.expandSocialBar) { return }
+    return (<image
+          className="socialBarIcon"
+          height={Constants.getIn(['socialBar', 'iconSize'])}
+          width={Constants.getIn(['socialBar', 'iconSize'])}
+          y={viewPort + Constants.getIn(['socialBar', 'shareIconMargin'], 0)}
+          xlinkHref="images/share.svg"
+          {...handleInteraction(this.props.controlArrowClick)}
+        />)
+  }
+
   icons() {
     let transformSocialBarIcons = `translate(${this.props.viewport.get('x') - Constants.getIn(['socialBar', 'iconMarginY'])}, 0)`
     let rectWidth = `${Constants.getIn(['socialBar', 'width'])}`
@@ -210,14 +223,7 @@ class SocialBar extends React.Component {
             xlinkHref="images/download_image.svg"
             {...handleInteraction(this.downloadImageClick)}
           />
-          <image
-            className="socialBarIcon"
-            height={Constants.getIn(['socialBar', 'iconSize'])}
-            width={Constants.getIn(['socialBar', 'iconSize'])}
-            y={viewPort + Constants.getIn(['socialBar', 'shareIconMargin'], 0)}
-            xlinkHref="images/share.svg"
-            {...handleInteraction(this.props.controlArrowClick)}
-          />
+          {this.shareIcon()}
         </g>
       </g>
     )
