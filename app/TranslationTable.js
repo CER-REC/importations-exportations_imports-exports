@@ -1240,6 +1240,87 @@ const TranslationTable = fromJS({
       fr: 'Fin',
     },
   },
+
+  mapTileLabels: {
+    portName: {
+      Huntingdon: {
+        en: 'Hunting-\ndon',
+        fr: 'Hunting-\ndon',
+      },
+      'Reagan Field': {
+        en: 'Reagan\nField',
+        fr: 'Reagan\nField',
+      },
+      'North Portal': {
+        en: 'North\nPortal',
+        fr: 'North\nPortal',
+      },
+      'Port of Estevan': {
+        en: 'Port of\nEstevan',
+        fr: 'Port of\nEstevan',
+      },
+      'Willow Creek': {
+        en: 'Willow\nCreek',
+        fr: 'Willow\nCreek',
+      },
+      'Fort Frances': {
+        en: 'Fort\nFrances',
+        fr: 'Fort\nFrances',
+      },
+      'Niagara Falls': {
+        en: 'Niagara\nFalls',
+        fr: 'Niagara\nFalls',
+      },
+      'Ojibway (Windsor)': {
+        en: 'Ojibway\nWindsor',
+        fr: 'Ojibway\nWindsor',
+      },
+      'Rainy River': {
+        en: 'Rainy\nRiver',
+        fr: 'Rainy\nRiver',
+      },
+      'Sarnia/Blue Water': {
+        en: 'Sarnia\nBlue Wa..',
+        fr: 'Sarnia\nBlue Wa..',
+      },
+      'Sault Ste Marie': {
+        en: 'Sault Ste\nMarie',
+        fr: 'Sault Ste\nMarie',
+      },
+      'Armstrong': {
+        en: 'Arm-\nstrong',
+        fr: 'Arm-\nstrong',
+      },
+      'Champlain': {
+        en: 'Cham-\nplain',
+        fr: 'Cham-\nplain',
+      },
+      'East Hereford': {
+        en: 'East\nHereford',
+        fr: 'East\nHereford',
+      },
+      'Highgate Springs': {
+        en: 'Highgate\nSprings',
+        fr: 'Highgate\nSprings',
+      },
+      'Napierville': {
+        en: 'Napier-\nville',
+        fr: 'Napier-\nville',
+      },
+      'Philipsburg': {
+        en: 'Philips-\nburg',
+        fr: 'Philips-\nburg',
+      },
+      'Brunswick': {
+        en: 'Bruns-\nwick',
+        fr: 'Bruns-\nwick',
+      },
+      'St Stephen': {
+        en: 'St\nStephen',
+        fr: 'St\nStephen',
+      },
+    },
+  },
 })
 
 export default TranslationTable

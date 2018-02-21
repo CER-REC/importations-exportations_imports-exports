@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
+import TextBox from './TextBox'
 import Constants from '../Constants'
 import { handleInteraction } from '../utilities'
 import { setActiveMenu } from '../actions/activeMenu'
@@ -11,6 +12,16 @@ import Tr from '../TranslationTable'
 import ExplanationDot from './ExplanationDot'
 
 import './Menu.scss'
+
+const TitlePrefixBar = ({ height, y }) => (
+  <rect
+    x={-Constants.getIn(['menuBar', 'textLabelOffset'])}
+    y={y}
+    width={Constants.getIn(['menuBar', 'barWidth'])}
+    height={height}
+    fill="#666"
+  />
+)
 
 class Menu extends React.PureComponent {
   static propTypes = {
@@ -100,21 +111,15 @@ class Menu extends React.PureComponent {
         aria-expanded={this.props.expanded}
         aria-label={title.aria}
         {...handleInteraction(this.toggleMenu)}
+        transform={`translate(${Constants.getIn(['menuBar', 'textLabelOffset'])} ${Constants.getIn(['menuBar', 'barHeight']) / 2})`}
       >
-        <rect
-          x={0}
-          y={0}
-          width={Constants.getIn(['menuBar', 'barWidth'])}
-          height={Constants.getIn(['menuBar', 'barHeight'])}
-          fill="#666"
-        />
-        <text
-          x={Constants.getIn(['menuBar', 'textLabelOffset'])}
-          y={Constants.getIn(['menuBar', 'barHeight']) / 2}
+        <TextBox
+          boxStyles={{ fill: 'none' }}
+          unsizedContent={TitlePrefixBar}
         >
           {title.render}
           {expandIcon}
-        </text>
+        </TextBox>
       </g>
     )
   }
@@ -141,7 +146,7 @@ class Menu extends React.PureComponent {
       + Constants.getIn(['menuBar', 'expandedMenuTextMargin'])
 
     return (
-      <g transform={`translate(${textOffset} 12)`}>
+      <g transform={`translate(${textOffset} 8)`}>
         <text>
           {options}
         </text>

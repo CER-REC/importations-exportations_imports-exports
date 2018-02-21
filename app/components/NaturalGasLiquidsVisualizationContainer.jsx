@@ -9,7 +9,7 @@ import * as NaturalGasLiquidsViewport from '../selectors/viewport/naturalGasLiqu
 import Constants from '../Constants'
 import USPadd from './Padds/USPadd'
 import NaturalGasCanadaMapContainer from './NaturalGasCanadaMapContainer'
-import { activityExplanationPosition } from '../selectors/viewport/menus'
+import { legendMapPosition } from '../selectors/viewport/menus'
 import { showImportsSelector, showExportsSelector } from '../selectors/visualizationSettings'
 import NaturalGasLiquidsMapPieceActivityExplanation from './NaturalGasLiquidsMapPieceActivityExplanation'
 
@@ -58,7 +58,7 @@ export default connect((state, props) => ({
   axisPosition: NaturalGasLiquidsViewport.chartAxisPosition(state, props),
   exportChart: NaturalGasLiquidsViewport.chartExportPosition(state, props),
   usPaddChart: NaturalGasLiquidsViewport.usPaddPosition(state, props),
-  mapPieceActivityExplanation: activityExplanationPosition(state, props),
+  mapPieceActivityExplanation: legendMapPosition(state, props),
   showImports: showImportsSelector(state, props),
   showExports: showExportsSelector(state, props),
 }))(NaturalGasLiquidsVisualizationContainer)

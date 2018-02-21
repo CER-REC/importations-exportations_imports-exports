@@ -34,9 +34,9 @@ export const visSelectorPosition = createSelector(
   activityPosition,
   prev => ({
     ...prev,
-    top: prev.top + prev.height,
+    top: prev.top + prev.height - 2,
     height: (
-      (Constants.getIn(['menuBar', 'visualizationPadding']) * 5)
+      (Constants.getIn(['menuBar', 'visualizationPadding']) * 5) + 5
     ),
   }),
 )
@@ -60,19 +60,6 @@ export const subtypePosition = createSelector(
   activeMenu,
   subtypeOptions,
   menuHeightCalc('subtype'),
-)
-
-export const activityExplanationPosition = createSelector(
-  activityPosition,
-  prev => ({
-    // Currently this is hardcoded value
-    // TODO: replace by dynamic value once new navigation bar is merged
-    top: 600,
-    left: 10,
-    width: 150,
-    height: 50,
-  }
-  ),
 )
 
 export const explanationTogglePosition = createSelector(
