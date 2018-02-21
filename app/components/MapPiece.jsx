@@ -205,7 +205,7 @@ class MapPiece extends React.Component {
     }
 
     let stroke = 'none'
-    if (this.props.isMapPieceSelected === true) {
+    if (this.props.isMapPieceSelected === true && this.props.isOrigin) {
       stroke = 'black'
     }
 
