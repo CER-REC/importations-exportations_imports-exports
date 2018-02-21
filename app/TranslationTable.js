@@ -341,8 +341,16 @@ const TranslationTable = fromJS({
       en: 'Drag these handles to select a different time period.',
       fr: 'TODO',
     },
+    importExport: {
+      en: 'Click the + to explore different options',
+      fr: 'TODO',
+    },
     playButton: {
       en: 'Press the play button to animate one quarter at a time.',
+      fr: 'TODO',
+    },
+    confidentiality: {
+      en: "Some values in this dataset are hidden due to the NEB's confidentiality rules. Click to show which provinces have confidential values.",
       fr: 'TODO',
     },
     barChartExport: {
@@ -353,11 +361,15 @@ const TranslationTable = fromJS({
       en: 'The up arrow shows the total electricity that Canadian provinces imported from Washington during the time period selected above.',
       fr: 'TODO',
     },
+    powerpool: {
+      en: 'Power pool',
+      fr: 'TODO',
+    },
     barChartImport: {
       en: 'Each orange bar shows the total electricity that Canadian provinces imported during a single quarter.',
       fr: 'TODO',
     },
-    title: {
+    reset: {
       en: 'This data visualization shows Canadian imports and exports of electricity. Click the pink dots to guide you through how to read the data.',
       fr: 'TODO',
     },

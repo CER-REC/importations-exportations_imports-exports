@@ -7,6 +7,8 @@ import { confidentialityTogglePosition } from '../selectors/viewport/menus'
 import { ToggleConfidentialityMenu } from '../actions/confidentialityMenu'
 import { handleInteraction } from '../utilities'
 
+import ExplanationDot from './ExplanationDot'
+
 import '../styles/Fonts.scss'
 
 const triangleLine = (
@@ -61,6 +63,32 @@ class ShowConfidentiality extends React.Component {
     )
   }
 
+  confidentialityExplanation() {
+    return (<g>
+      <ExplanationDot
+        scale="scale(0.3)"
+        lineStroke="1.8"
+        textBoxWidth={130}
+        linePath="
+          M142.16,
+          173.94l24.26,
+          36.69a40.12,
+          40.12,0,0,0,
+          33.47,
+          18H515.2"
+        xPosition={155}
+        yPosition={-5}
+        lineX={142.16}
+        lineY={173.94}
+        textX={10}
+        textY={20}
+        containerX={this.props.left + 2}
+        containerY={this.props.top}
+        text={`${this.props.Tr(['explanations','confidentiality'])}`}
+        name="confidentialityExplanation"
+    /></g>)
+  }
+
   render() {
     return (
       <g
@@ -71,6 +99,7 @@ class ShowConfidentiality extends React.Component {
         {this.icon()}
         {this.showText()}
         {triangleLine}
+        {this.confidentialityExplanation()}
       </g>
     )
   }
