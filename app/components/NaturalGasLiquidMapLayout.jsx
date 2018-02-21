@@ -124,7 +124,7 @@ class NaturalGasLiquidMapLayout extends React.Component {
   renderATLQOutline(){
     if(this.props.arrangeBy !== 'location'){ return null}
     return <polygon
-     transform="scale(0.98) translate(276 40)"
+     transform="scale(1.07) translate(293 38)"
      className="ATLQOutline"
      points="56.49 0.56 84.57 15.56 114.25 0.56 142.43 15.56 142.43 42.81 169.22 56.74 169.22 85.56 142.43 99.06 114.25 85.56 84.57 99.06 56.49 85.56 25.89 99.06 0.5 85.56 0.5 56.74 26.89 42.81 26.89 15.56 56.49 0.56"/>
   }
