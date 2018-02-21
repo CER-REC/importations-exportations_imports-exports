@@ -3,9 +3,8 @@ import { fromJS } from 'immutable'
 const Constants = fromJS({
   workspace: {
     heightToWidthRatio: 0.66,
-    viewportPadding: 150,
+    viewportPadding: 100,
   },
-
 
   topHeightMargin: 70,
 
