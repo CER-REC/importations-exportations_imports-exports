@@ -34,9 +34,9 @@ export const visSelectorPosition = createSelector(
   activityPosition,
   prev => ({
     ...prev,
-    top: prev.top + prev.height,
+    top: prev.top + prev.height - 2,
     height: (
-      (Constants.getIn(['menuBar', 'visualizationPadding']) * 5)
+      (Constants.getIn(['menuBar', 'visualizationPadding']) * 5) + 5
     ),
   }),
 )

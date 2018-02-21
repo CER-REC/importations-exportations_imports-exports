@@ -141,7 +141,7 @@ class Menu extends React.PureComponent {
       + Constants.getIn(['menuBar', 'expandedMenuTextMargin'])
 
     return (
-      <g transform={`translate(${textOffset} 12)`}>
+      <g transform={`translate(${textOffset} 8)`}>
         <text>
           {options}
         </text>
