@@ -22,7 +22,7 @@ class TimelinePlay extends React.PureComponent {
   constructor(props) {
     super(props)
     this.onClick = this.onClick.bind(this)
-    this.state = { playInverval: null }
+    this.state = { playInterval: null }
   }
 
   componentWillUnmount() {
@@ -72,7 +72,6 @@ class TimelinePlay extends React.PureComponent {
         scale="scale(0.7) scale(-1 1)"
         lineStroke="1.3"
         textBoxWidth={120}
-        textBoxHeight={60}
         linePath="
           M142.16,
           173.94l24.26,
@@ -104,7 +103,8 @@ class TimelinePlay extends React.PureComponent {
         aria-label={label}
         {...handleInteraction(this.onClick)}
       >
-        <g transform={`scale(${scale})`}>
+        <g transform={`scale(${scale})`}
+          className="playButton">
           <polyline
             points="0.5 0.87 0.5 17.37 14.8 9.17 0.5 0.87"
             stroke="#a99372"

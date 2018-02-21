@@ -37,7 +37,7 @@ class ExplanationPopover extends React.Component {
           top: this.props.textY - 3,
           left: this.props.textX,
           padding: 8,
-          height: this.props.textBoxHeight,
+          height: 'auto',
           width: this.props.textBoxWidth,
           background: 'white',
           opacity: '0.9',

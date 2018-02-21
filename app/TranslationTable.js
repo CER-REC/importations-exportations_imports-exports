@@ -539,8 +539,8 @@ const TranslationTable = fromJS({
           fr: 'Exportations',
         },
         action: {
-          en: 'to',
-          fr: 'par',
+          en: 'by',
+          fr: 'à',
         },
         header: {
           type: {

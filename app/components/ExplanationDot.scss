@@ -1,32 +1,58 @@
 
 .back {
   fill: transparent;
-  stroke: fadeOut(#ff708a, 20px); 
 }
 
 @keyframes fadeOutDot { 
-  from { 
+  0%, 100% { 
     opacity: 1; 
     transform: scale(1);
-  } to 
-  { opacity: 0;  
+  } 10% { 
+    opacity: 0.8;  
+    transform: scale(1.4);
+  } 20% {
+    opacity: 0.6;
+    transform: scale(1.8);
+  } 30% {
+    opacity: 0.4;
+    transform: scale(2.2);
+  } 40% {
+    opacity: 0.2;
+    transform: scale(2.6);
+  } 50% {
+    opacity: 0.15;
     transform: scale(3);
+  } 60% {
+    opacity: 0.2;
+    transform: scale(2.6);
+  } 70% {
+    opacity: 0.4;
+    transform: scale(2.2);
+  } 80% {
+    opacity: 0.6;
+    transform: scale(1.8);
+  } 90% {
+    opacity: 0.8;
+    transform: scale(1.4);
   } 
 }
 
 @keyframes expandDot { 
-  from { 
+  0%, 100% { 
     transform: scale(1);
-  } to 
+  } 25%, 75%
   {
     transform: scale(1.5);
-  } 
+  } 50% {
+    transform: scale(3);
+  }
 }
 
-.explanationDot {
-  cursor: pointer;
+//.explanationDot {
+  
   .pulse {
-    animation: 1.5s ease-out 0s 2 normal fadeOutDot;
-  }
+    cursor: pointer;
+    animation: 2s ease-out 0s 2 normal fadeOutDot;
+ // }
 }
 

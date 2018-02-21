@@ -56,7 +56,6 @@ class BarChart extends Chart {
         scale="scale(1)"
         lineStroke="1"
         textBoxWidth={140}
-        textBoxHeight={80}
         linePath="
           M142.16,
           173.94l24.26,
@@ -81,25 +80,25 @@ class BarChart extends Chart {
     if (!this.props.flipped) { return null }
     return (<g>
       <ExplanationDot
-        scale="scale(1) scale(-1 1)"
-        lineStroke="1"
+        scale="scale(2.7) scale(-1 1)"
+        lineStroke="0.5"
         textBoxWidth={100}
-        textBoxHeight={60}
+        textBoxHeight={150}
         linePath="
           M142.16,
           173.94l24.26,
           36.69a40.12,
           40.12,0,0,0,
           33.47,
-          18H314.2"
+          18H215.2"
         xPosition={26}
         yPosition={70}
-        lineX={344.16}
+        lineX={244.16}
         lineY={173}
-        textX={40}
-        textY={58}
-        containerX={this.props.left - 203}
-        containerY={this.props.top - 39}
+        textX={76}
+        textY={153}
+        containerX={this.props.left - 278}
+        containerY={this.props.top - 40}
         name="exportBarChartExplanation"
         text={`${this.props.tr(['explanations','barChartImport'])}`}
     /></g>)

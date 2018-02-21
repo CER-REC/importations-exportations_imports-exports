@@ -143,7 +143,7 @@ class NaturalGasMapContainer extends React.PureComponent {
       topPadding = 0
       row = 0
       return (
-        <g key={`NaturalGasMap_${value}`} >
+        <g className="paddLayout" key={`NaturalGasMap_${value}`} >
           <rect x={ provinceTextPosition - 9} y={dimensions.get('topPadding') - 15}  
             width="39" height="18" fill="none" stroke="#a99372" strokeWidth="0.75"/>
           <text className="portProvinceLabel" x={ provinceTextPosition } y={dimensions.get('topPadding')} 

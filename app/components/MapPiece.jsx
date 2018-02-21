@@ -78,7 +78,6 @@ class MapPiece extends React.Component {
           scale="scale(1)"
           lineStroke="1"
           textBoxWidth={140}
-          textBoxHeight={80}
           linePath="
             M142.16,
             173.94l24.26,
@@ -107,7 +106,6 @@ class MapPiece extends React.Component {
         scale="scale(1)"
         lineStroke="1"
         textBoxWidth={130}
-        textBoxHeight={170}
         linePath="
           M142.16,
           173.94l24.26,
@@ -135,7 +133,6 @@ class MapPiece extends React.Component {
         scale="scale(1) scale(-1 1)"
         lineStroke="1"
         textBoxWidth={120}
-        textBoxHeight={60}
         linePath="
           M142.16,
           173.94l24.26,
@@ -163,7 +160,7 @@ class MapPiece extends React.Component {
         scale="scale(1 -1) translate(0 -100)"
         lineStroke="1"
         textBoxWidth={190}
-        textBoxHeight={40}
+        textBoxHeight={100}
         linePath="
           M142.16,
           173.94l24.26,
@@ -241,7 +238,7 @@ class MapPiece extends React.Component {
     }
     
     const mapContent = (
-      <g>
+      <g className="mapPiece">
         <polygon
           stroke={stroke}
           fill={this.props.styles.get('color')}

@@ -34,7 +34,7 @@ class ExplanationDot extends React.Component {
   }
 
   explanationDot() {
-    return (<g id="circle"
+    return (<g 
       transform={`translate(${this.props.xPosition} ${this.props.yPosition})`}>
       <circle fill="#ff708a" cx={0} cy={0} r={Constants.getIn(['explanationDot', 'radiusStart'])}/>
       <g transform={this.props.expanded ? ' rotate(45)' : ''}>
@@ -75,7 +75,6 @@ class ExplanationDot extends React.Component {
       <ExplanationPopover
         text={this.props.text}
         textBoxWidth={this.props.textBoxWidth}
-        textBoxHeight={this.props.textBoxHeight}
         scale={this.props.scale}
         lineStroke={this.props.lineStroke}
         linePath={this.props.linePath}

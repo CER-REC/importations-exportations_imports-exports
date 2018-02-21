@@ -386,7 +386,7 @@ class PaddLayout extends React.Component {
             break
         }
         if (paddLayout !== null) {
-          paddLayout = (<g fillOpacity={this.getOpacityOfPadd(props, paddGroup)}  key={`${props.arrangeBy}_${currentValue[1].get('destination')}`} transform={`translate(${left} 0)`}
+          paddLayout = (<g className="paddLayout" fillOpacity={this.getOpacityOfPadd(props, paddGroup)}  key={`${props.arrangeBy}_${currentValue[1].get('destination')}`} transform={`translate(${left} 0)`}
               {...handleInteraction(this.onPaddClick, props, paddGroup)}
             >
             {paddLayout}
@@ -422,7 +422,7 @@ class PaddLayout extends React.Component {
     const data = props.Padd.get(paddGroup)
     if(data){
     const color = this.getPaddColor(data.get('value'))
-    return (<g fillOpacity={this.getOpacityOfPadd(props, paddGroup)}
+    return (<g className="paddLayout" fillOpacity={this.getOpacityOfPadd(props, paddGroup)}
       {...handleInteraction(this.onPaddClick, props, paddGroup)}
         >
         <g filter="url(#paddOutline)" >

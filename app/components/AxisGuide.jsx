@@ -101,7 +101,7 @@ class AxisGuide extends React.PureComponent {
         scale="scale(1)"
         lineStroke="1"
         textBoxWidth={150}
-        textBoxHeight={60}
+        textBoxHeight={100}
         linePath="
           M142.16,
           173.94l24.26,

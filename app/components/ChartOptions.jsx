@@ -38,7 +38,6 @@ class ChartOptions extends React.PureComponent {
         scale="scale(1)"
         lineStroke="1"
         textBoxWidth={140}
-        textBoxHeight={80}
         linePath="
           M142.16,
           173.94l24.26,

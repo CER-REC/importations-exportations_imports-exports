@@ -64,9 +64,9 @@ const Constants = fromJS({
   },
 
   socialBar: {
-    topMargin: 50,
+    topMargin: -90,
     controlArrowMargin: 30,
-    controlArrowY: 57,
+    controlArrowY: -77,
     width: 25,
     height: 125,
     iconSize: 15,
@@ -77,12 +77,12 @@ const Constants = fromJS({
     downloadDataIconMargin: 54,
     downloadImageIconMargin: 78,
     shareIconMargin: 102,
-    iconX: 101,
-    iconY: 153,
-    twitterMargin: 29,
-    facebookMargin: 51,
-    linkedinMargin: 74,
-    iconTextY: 67,
+    iconX: 128,
+    iconY: 14,
+    twitterMargin: 37,
+    facebookMargin: 67,
+    linkedinMargin: 95,
+    iconTextY: -72,
   },
 
   visualizationContainer: {
