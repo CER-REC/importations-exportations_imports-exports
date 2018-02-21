@@ -36,9 +36,12 @@ class PaddLayout extends React.Component {
     confidentialityMenu: PropTypes.bool.isRequired,
     selectedEnergy: PropTypes.string.isRequired,
   }
+  getColorIndex(value){
+    return this.props.bins.findIndex(range => range.get(0) <= value && value < range.get(1))
+  }
   getPaddColor(value) {
     if (value === -1) { return '#fff' }
-    const index = this.props.bins.findIndex(range => range.get(0) <= value && value < range.get(1))
+    const index = this.getColorIndex(value)
     return Constants.getIn(
       ['styleGuide', 'exportColours', index],
       Constants.getIn(['styleGuide', 'colours', 'ExportDefault']),
@@ -398,6 +401,17 @@ class PaddLayout extends React.Component {
     }, [])
     return layout
   }
+  getMapPieceTextColor(value){
+    const index = this.getColorIndex(value)
+    switch(index){
+      case 2:
+      case 3:
+      case 4:
+        return 'mapPieceWhiteText'
+      default: 
+        return 'mapPieceText'
+    }
+  }
   renderLocation(props) {
     const mapLayoutGrid = MapLayoutGridConstant.getIn(['PaddLayout', props.country])
     const dimensions = mapLayoutGrid.get('dimensions')
@@ -421,6 +435,7 @@ class PaddLayout extends React.Component {
             color={color}
             left={mapPieceTransformStartLeft(props.left, position, dimensions, mapPieceScale)}
             top={mapPieceTransformStartTop(props.top, position, dimensions, mapPieceScale)}
+            mapPieceStyleClass={this.getMapPieceTextColor(data.get('value'))}
             isLabelRquired={props.arrangeBy === 'location'}
           />
         ))}
