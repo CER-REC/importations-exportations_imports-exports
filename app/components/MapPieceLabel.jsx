@@ -7,7 +7,7 @@ import '../styles/Fonts.scss'
 class MapPieceLabel extends React.Component {
   drawLabel(mapPieceProps, yAxis) {
     const lineY = yAxis - 4
-    const labelY = yAxis - 4
+    const labelY = yAxis + 1
     let labelElement = ''
 
     if (typeof mapPieceProps !== 'undefined') {
