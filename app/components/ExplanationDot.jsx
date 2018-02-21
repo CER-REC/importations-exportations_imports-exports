@@ -75,7 +75,6 @@ class ExplanationDot extends React.Component {
       <ExplanationPopover
         text={this.props.text}
         textBoxWidth={this.props.textBoxWidth}
-        textBoxHeight={this.props.textBoxHeight}
         scale={this.props.scale}
         lineStroke={this.props.lineStroke}
         linePath={this.props.linePath}

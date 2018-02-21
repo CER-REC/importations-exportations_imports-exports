@@ -307,14 +307,14 @@ const MapLayoutGridConstant = fromJS({
   },
   naturalGasLiquids: {
     ca: {
-      mapPieceScale: 1,
+      mapPieceScale: 1.25,
       defaultColumns: 8,
       sortingRowPadding: 1.5,
       dimensions: {
         height: 37.09,
         width: 38.75,
-        yAxisPadding: 8.528,
-        xAxisPadding: 12.528,
+        yAxisPadding: -9,
+        xAxisPadding: -1.528,
       },
       styles: {
         color: '#ede3cb',

@@ -56,7 +56,6 @@ class BarChart extends Chart {
         scale="scale(1)"
         lineStroke="1"
         textBoxWidth={140}
-        textBoxHeight={120}
         linePath="
           M142.16,
           173.94l24.26,

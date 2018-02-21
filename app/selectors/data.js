@@ -142,6 +142,13 @@ export const filterByHexSelector = createSelector(
   (points, selectedMapPieces, visualization, selectionState) => points.filter(point => filterByHex(point, selectedMapPieces, visualization, selectionState)),
 )
 
+export const detailSidebarFilteredData = createSelector(
+  filterByHexSelector,
+  timelineRange,
+  groupingBy,
+  (points, range, groupBy) => points.filter(point => filterByTimeline(point, range, groupBy)),
+)
+
 const mapPieceLocationDataStructure = (acc, next, origin, originKey, originCountryKeyName, destinationKeyName, destinationCountryKeyName) => {
   // Safe to mutate the acc argument as we created it for only this reduce
   if (!acc[originKey]) {

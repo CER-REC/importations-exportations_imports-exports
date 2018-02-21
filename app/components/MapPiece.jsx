@@ -78,7 +78,6 @@ class MapPiece extends React.Component {
           scale="scale(1)"
           lineStroke="1"
           textBoxWidth={140}
-          textBoxHeight={120}
           linePath="
             M142.16,
             173.94l24.26,
@@ -107,7 +106,6 @@ class MapPiece extends React.Component {
         scale="scale(1)"
         lineStroke="1"
         textBoxWidth={130}
-        textBoxHeight={170}
         linePath="
           M142.16,
           173.94l24.26,
@@ -135,7 +133,6 @@ class MapPiece extends React.Component {
         scale="scale(1) scale(-1 1)"
         lineStroke="1"
         textBoxWidth={120}
-        textBoxHeight={170}
         linePath="
           M142.16,
           173.94l24.26,
@@ -205,7 +202,7 @@ class MapPiece extends React.Component {
     }
 
     let stroke = 'none'
-    if (this.props.isMapPieceSelected === true) {
+    if (this.props.isMapPieceSelected === true && this.props.isOrigin) {
       stroke = 'black'
     }
 

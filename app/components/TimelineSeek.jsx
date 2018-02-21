@@ -160,7 +160,6 @@ class TimelineSeek extends React.PureComponent {
         scale="scale(2) scale(-1 1)"
         lineStroke="0.6"
         textBoxWidth={130}
-        textBoxHeight={80}
         linePath="
           M142.16,
           173.94l24.26,

@@ -1,7 +1,7 @@
 import { createSelector } from 'reselect'
 import { fromJS } from 'immutable'
 
-import { filterByHexSelector } from './data'
+import { filterByHexSelector, detailSidebarFilteredData } from './data'
 import { visualizationContentPosition as visContentSize } from './viewport/'
 import { visualizationSettings, selectedVisualization } from './visualizationSettings'
 import Constants from '../Constants'
@@ -31,38 +31,51 @@ export const aggregateQuarter = createSelector(
   selectedVisualization,
   (points, aggregateKey, vizName) => {
     const valueKeys = []
-    const result = points
-      .reduce((acc, next) => {
-        if (vizName === 'crudeOil' && aggregateKey === 'activity' && next.get('destination') === 'ca') {
-          return acc
-        }
-        const period = next.get('period')
-        if (!acc[period]) {
-          acc[period] = {
-            units: next.get('units'),
-            period,
-            year: next.get('year'),
-            quarter: next.get('quarter'),
-            total: 0,
-            values: {},
-            confidential: {},
-            totalPoints: {},
-          }
-        }
-        const key = next.get(aggregateKey)
-        if (!key) { return acc }
-
-        if (!valueKeys.includes(key)) { valueKeys.push(key) }
-        acc[period].values[key] = (acc[period].values[key] || 0) + next.get('value', 0)
-        acc[period].total += next.get('value', 0)
-        acc[period].confidential[key] = (acc[period].confidential[key] || 0) +
-          (next.get('confidential', false) ? 1 : 0)
-        acc[period].confidential.total = (acc[period].confidential.total || 0) +
-          (next.get('confidential', false) ? 1 : 0)
-        acc[period].totalPoints[key] = (acc[period].totalPoints[key] || 0) + 1
-        acc[period].totalPoints.total = (acc[period].totalPoints.total || 0) + 1
+    const result = aggregateQuarterPoints(points, valueKeys, aggregateKey, vizName)
+    return { points: fromJS(result), valueKeys }
+  },
+)
+const aggregateQuarterPoints = (points, valueKeys, aggregateKey, vizName) => {
+  return points
+    .reduce((acc, next) => {
+      if (vizName === 'crudeOil' && aggregateKey === 'activity' && next.get('destination') === 'ca') {
         return acc
-      }, {})
+      }
+      const period = next.get('period')
+      if (!acc[period]) {
+        acc[period] = {
+          units: next.get('units'),
+          period,
+          year: next.get('year'),
+          quarter: next.get('quarter'),
+          total: 0,
+          values: {},
+          confidential: {},
+          totalPoints: {},
+        }
+      }
+      const key = next.get(aggregateKey)
+      if (!key) { return acc }
+
+      if (!valueKeys.includes(key)) { valueKeys.push(key) }
+      acc[period].values[key] = (acc[period].values[key] || 0) + next.get('value', 0)
+      acc[period].total += next.get('value', 0)
+      acc[period].confidential[key] = (acc[period].confidential[key] || 0) +
+        (next.get('confidential', false) ? 1 : 0)
+      acc[period].confidential.total = (acc[period].confidential.total || 0) +
+        (next.get('confidential', false) ? 1 : 0)
+      acc[period].totalPoints[key] = (acc[period].totalPoints[key] || 0) + 1
+      acc[period].totalPoints.total = (acc[period].totalPoints.total || 0) + 1
+      return acc
+    }, {})
+}
+export const aggregateQuarterFilteredValue = createSelector(
+  detailSidebarFilteredData,
+  getAggregateKey,
+  selectedVisualization,
+  (points, aggregateKey, vizName) => {
+    const valueKeys = []
+    const result = aggregateQuarterPoints(points, valueKeys, aggregateKey, vizName)
     return { points: fromJS(result), valueKeys }
   },
 )
