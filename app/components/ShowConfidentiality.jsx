@@ -3,22 +3,17 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
 import TrSelector from '../selectors/translate'
+import { confidentialityTogglePosition } from '../selectors/viewport/menus'
 import { ToggleConfidentialityMenu } from '../actions/confidentialityMenu'
 import { handleInteraction } from '../utilities'
 
 import '../styles/Fonts.scss'
 
 const triangleLine = (
-  <svg
-    x={0}
-    y={503}
-    width={160}
-  >
-    <g>
-      <polyline fill="black" points="0 8 0 0 9.1 8.1 0 8.1" />
-      <line stroke="black" x1="0.5" y1="7.6" x2="160" y2="7.6" />
-    </g>
-  </svg>
+  <g transform="translate(0 -3)">
+    <polyline fill="black" points="0 8 0 0 9.1 8.1 0 8.1" />
+    <line stroke="black" x1="0.5" y1="7.6" x2="160" y2="7.6" />
+  </g>
 )
 
 class ShowConfidentiality extends React.Component {
@@ -31,7 +26,7 @@ class ShowConfidentiality extends React.Component {
   }
 
   icon() {
-    return <g transform="translate(116 493) scale(0.84)" className="confidentialityIcon">
+    return <g transform="translate(116 -12) scale(0.84)" className="confidentialityIcon">
       <path
         fill='#fff'
         stroke='#999'
@@ -54,7 +49,7 @@ class ShowConfidentiality extends React.Component {
     return (
       <text
         x={13}
-        y={506}
+        y={0}
         className="showHideConfidentiality"
         fill="#999"
       >
@@ -69,7 +64,7 @@ class ShowConfidentiality extends React.Component {
   render() {
     return (
       <g
-        transform="translate(0 30)"
+        transform={`translate(${this.props.left} ${this.props.top})`}
         role="menuitem"
         {...handleInteraction(this.props.onClick)}
       >
@@ -82,9 +77,9 @@ class ShowConfidentiality extends React.Component {
 }
 
 const mapStateToProps = (state, props) => ({
-  viewport: state.viewport,
   Tr: TrSelector(state, props),
   confidentialityMenu: state.confidentialityMenu,
+  ...confidentialityTogglePosition(state, props),
 })
 
 const mapDispatchToProps = {

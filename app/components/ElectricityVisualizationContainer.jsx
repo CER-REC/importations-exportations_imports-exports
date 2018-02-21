@@ -11,6 +11,7 @@ import ElectricityMapPieceActivityExplanation from './ElectricityMapPieceActivit
 import BarChart from './BarChart'
 import Axis from './Axis'
 import * as ElectricityViewport from '../selectors/viewport/electricity'
+import { legendMapPosition } from '../selectors/viewport/menus'
 import { showImportsSelector, showExportsSelector } from '../selectors/visualizationSettings'
 import Constants from '../Constants'
 import { positionShape } from '../propTypeShapes'
@@ -75,7 +76,7 @@ export default connect((state, props) => ({
   canadaMap: ElectricityViewport.canadaMapPosition(state, props),
   usMap: ElectricityViewport.usMapPosition(state, props),
   powerPool: ElectricityViewport.powerPoolPosition(state, props),
-  mapPieceActivityExplanation: ElectricityViewport.mapPieceActivityExplanationPosition(state, props),
+  mapPieceActivityExplanation: legendMapPosition(state, props),
   importChart: ElectricityViewport.chartImportPosition(state, props),
   axisPosition: ElectricityViewport.chartAxisPosition(state, props),
   exportChart: ElectricityViewport.chartExportPosition(state, props),
