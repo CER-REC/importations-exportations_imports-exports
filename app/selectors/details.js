@@ -1,11 +1,11 @@
 import { createSelector } from 'reselect'
 import { fromJS } from 'immutable'
 
-import { aggregateQuarter, getValueKey } from './timeline'
+import { aggregateQuarterFilteredValue, getValueKey } from './timeline'
 import { aggregateLocationSelector } from './data'
 
 export const detailTotal = createSelector(
-  aggregateQuarter,
+  aggregateQuarterFilteredValue,
   getValueKey,
   ({ points }, valueKey) =>
     points.reduce((acc, next) => {
@@ -15,7 +15,7 @@ export const detailTotal = createSelector(
 )
 
 export const confidentialTotal = createSelector(
-  aggregateQuarter,
+  aggregateQuarterFilteredValue,
   getValueKey,
   ({ points }, valueKey) => points.reduce((acc, next) => ({
     confidential: acc.confidential + next.getIn(['confidential', valueKey], 0),

@@ -88,7 +88,7 @@ class ElectricityMapLayout extends React.Component {
   }
 
   getPowerPoolsOutline(key, country, xaxis, yaxis, position, dimensions, mapPieceScale) {
-    if (this.isMapPieceSelected(key, country) && country === 'powerpool' && this.props.arrangeBy === 'location') {
+    if (this.isMapPieceSelected(key, country) && this.props.selection.get('country') === 'powerpool' && this.props.arrangeBy === 'location') {
       let result = ''
       let transform ='0 0'
       switch (key) {
@@ -103,7 +103,7 @@ class ElectricityMapLayout extends React.Component {
           />)
           break
         case 'MN/ND':
-          transform ='translate(-479 -384)'
+          transform ='scale(1.05) translate(-466 -374)'
           result = (<polygon
             className="powerPoolOutline"
             points="154.5,149.5 176.8,140.3 198.8,149.5 221,140.3 243.7,149.5 243.7,176.3 221,187.8 198.8,175.8

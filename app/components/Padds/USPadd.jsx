@@ -25,12 +25,21 @@ const USPadd = (props) => {
       paddingY={MapLayoutGridConstant.getIn(['PaddLayout', 'us', 'padding', key, 'top'], 0)}
       country="us"
     />))
-    return (<g transform="scale(1.3)">
+    return (<g transform={`scale(1.25) translate(-30 0)`}>
+      <filter id="paddOutline">
+        <feMorphology operator="dilate" in="SourceAlpha" radius="1.5"/>
+        <feColorMatrix in="morphed" result="recolored" type="matrix" values="-1 0 0 1 0, 0 -1 0 1 0, 0 0 -1 1 0, 0 0 0 1 0"/>
+        <feMerge>
+          <feMergeNode in="recolored"/>
+          <feMergeNode in="SourceGraphic"/>
+        </feMerge>
+        <feComposite in="SourceGraphic" />
+      </filter>
       {padds.toArray()}
       {renderDetailSidebar(props)}
     </g>)
   }
-  return (<g transform={`scale(1.25) translate(${props.left - 20} ${props.top})`}>
+  return (<g transform={`scale(1.25) translate(${props.left - 30} ${props.top + 50})`}>
     <PaddLayout
       left={props.left}
       top={props.top}
