@@ -85,7 +85,7 @@ export const legendMapPosition = createSelector(
   confidentialityTogglePosition,
   prev => ({
     ...prev,
-    top: prev.top + prev.height,
+    top: prev.top + prev.height + 120,
     height: 120,
   }),
 )

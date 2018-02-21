@@ -34,7 +34,7 @@ class Header extends React.Component {
     this.props.onResetClick()
   }
 
-  titleExplanation() {
+  resetExplanation() {
     return (<g>
       <ExplanationDot
         scale="scale(1)"
@@ -47,18 +47,20 @@ class Header extends React.Component {
           40.12,0,0,0,
           33.47,
           18H423.2"
-        xPosition={30}
-        yPosition={20}
+        xPosition={800}
+        yPosition={57}
         lineX={142.16}
         lineY={173}
         textX={40}
         textY={55}
         containerX={0}
-        containerY={10}  
+        containerY={-70}  
         name="titleExplanation"
-        text={`${this.props.Tr(['explanations','title'])}`}
+        text={`${this.props.Tr(['explanations','reset'])}`}
     /></g>)
   }
+
+  
 
   leftHeading() {
     const { Tr } = this.props
@@ -109,9 +111,11 @@ class Header extends React.Component {
             role="menuitem"
           >{Tr('resetLabel')}
           </text>
+            {this.resetExplanation()}
         </g>
 
         <g transform={transformMetaBarIcons} >
+
           <image
             className="metaBarButton"
             height={Constants.getIn(['metaBar', 'iconSize'])}
@@ -138,7 +142,7 @@ class Header extends React.Component {
       {this.leftHeading()}
       {this.metaBar()}
       <svg>
-      {this.titleExplanation()}
+      
       </svg>
     </div>)
   }

@@ -8,7 +8,7 @@ const axisHeight = Constants.getIn(['timeline', 'axisHeight'])
 export const canadaPaddPosition = createSelector(
   visualizationContentPosition,
   visContent => ({
-    top: visContent.top,
+    top: visContent.top - 30,
     left: visContent.left + 1.3,
     width: visContent.width,
     height: 150,
@@ -18,7 +18,7 @@ export const canadaPaddPosition = createSelector(
 export const chartTransportPosition = createSelector(
   canadaPaddPosition,
   canadaPadd => ({
-    top: canadaPadd.top + canadaPadd.height,
+    top: canadaPadd.top + canadaPadd.height - 20,
     left: canadaPadd.left,
     width: canadaPadd.width,
     height: 100,

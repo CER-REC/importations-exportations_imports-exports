@@ -60,6 +60,33 @@ class Menu extends React.PureComponent {
     this.props.setActiveMenu(this.props.expanded ? '' : this.props.name)
   }
 
+  importExportExplanation() {
+    if (this.props.name !== 'activity') { return }
+    return (<g>
+      <ExplanationDot
+        scale="scale(0.3)"
+        lineStroke="1.8"
+        textBoxWidth={130}
+        linePath="
+          M142.16,
+          173.94l24.26,
+          36.69a40.12,
+          40.12,0,0,0,
+          33.47,
+          18H515.2"
+        xPosition={155}
+        yPosition={61}
+        lineX={142.16}
+        lineY={173.94}
+        textX={10}
+        textY={20}
+        containerX={this.props.left + 2}
+        containerY={this.props.top - 50}
+        text={`${this.props.Tr(['explanations','importExport'])}`}
+        name="importExportExplanation"
+    /></g>)
+  }
+
   amountExplanation() {
     if (this.props.name !== 'amount') { return }
     return (<g>
@@ -161,6 +188,7 @@ class Menu extends React.PureComponent {
         {this.renderOptions()}
       </g>
         {this.amountExplanation()}
+        {this.importExportExplanation()}
     </g>
     )
   }
