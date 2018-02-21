@@ -17,10 +17,14 @@ export const activityOptions = createSelector(
 
 export const arrangeByOptions = createSelector(
   selectedVisualization,
-  vis => ((vis === 'refinedPetroleumProducts')
-    ? ['stack', 'split']
-    : ['location', 'imports', 'exports']
-  ),
+  vis => {
+    if (vis === 'crudeOil') {
+      return ['location', 'exports']
+    } else if (vis === 'refinedPetroleumProducts') {
+      return ['stack', 'split']
+    }
+    return ['location', 'imports', 'exports']
+  }
 )
 
 export const amountOptions = state =>

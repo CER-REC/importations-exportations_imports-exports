@@ -36,9 +36,12 @@ class PaddLayout extends React.Component {
     confidentialityMenu: PropTypes.bool.isRequired,
     selectedEnergy: PropTypes.string.isRequired,
   }
+  getColorIndex(value){
+    return this.props.bins.findIndex(range => range.get(0) <= value && value < range.get(1))
+  }
   getPaddColor(value) {
     if (value === -1) { return '#fff' }
-    const index = this.props.bins.findIndex(range => range.get(0) <= value && value < range.get(1))
+    const index = this.getColorIndex(value)
     return Constants.getIn(
       ['styleGuide', 'exportColours', index],
       Constants.getIn(['styleGuide', 'colours', 'ExportDefault']),
@@ -354,7 +357,7 @@ class PaddLayout extends React.Component {
       .from(props.Padd)
       .sort((a, b) => b[1].get('value') - a[1].get('value'))
     let left = 0
-    const paddingBetweenSortedElement = 100
+    const paddingBetweenSortedElement = 90
     const layout = paddData.reduce((acc, currentValue) => {
       let paddLayout = null
       if (currentValue[0] !== 'ca') {
@@ -398,6 +401,17 @@ class PaddLayout extends React.Component {
     }, [])
     return layout
   }
+  getMapPieceTextColor(value){
+    const index = this.getColorIndex(value)
+    switch(index){
+      case 2:
+      case 3:
+      case 4:
+        return 'mapPieceWhiteText'
+      default: 
+        return 'mapPieceText'
+    }
+  }
   renderLocation(props) {
     const mapLayoutGrid = MapLayoutGridConstant.getIn(['PaddLayout', props.country])
     const dimensions = mapLayoutGrid.get('dimensions')
@@ -408,9 +422,10 @@ class PaddLayout extends React.Component {
     const data = props.Padd.get(paddGroup)
     if(data){
     const color = this.getPaddColor(data.get('value'))
-    return (<g fillOpacity={this.getOpacityOfPadd(props, paddGroup)} transform={`translate(${props.paddingX} ${props.paddingY})`}
+    return (<g fillOpacity={this.getOpacityOfPadd(props, paddGroup)}
       {...handleInteraction(this.onPaddClick, props, paddGroup)}
         >
+        <g filter="url(#paddOutline)" >
         {layout.map((position, key) => (
           <PaddMapPiece
             key={`paddLayout_${props.country}_${position.get('name')}`}
@@ -420,9 +435,11 @@ class PaddLayout extends React.Component {
             color={color}
             left={mapPieceTransformStartLeft(props.left, position, dimensions, mapPieceScale)}
             top={mapPieceTransformStartTop(props.top, position, dimensions, mapPieceScale)}
+            mapPieceStyleClass={this.getMapPieceTextColor(data.get('value'))}
             isLabelRquired={props.arrangeBy === 'location'}
           />
-      ))}
+        ))}
+        </g>
         {this.getArrow(
         this.props.arrangeBy,
         this.props.paddGroup,

@@ -6,7 +6,7 @@ import PaddLayout from '../PaddLayout'
 
 // fetch x axis of the padd using the left detail side bar location
 const CAPadd = props => (
-  <g transform="scale(1.3) translate(53 0)">
+  <g transform="scale(1.25) translate(53 0)">
     <PaddLayout
       left={props.left}
       top={props.top}
