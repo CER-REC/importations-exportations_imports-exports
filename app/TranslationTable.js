@@ -1240,7 +1240,170 @@ const TranslationTable = fromJS({
       fr: 'Fin',
     },
   },
-
+  portMap: {
+    multiple: {
+      en: 'Multiple Selection',
+      fr: 'Multiple Selection',
+    },
+    portName: {
+      Aden: {
+        en: 'Aden',
+        fr: 'Aden',
+      },
+      Cardston: {
+        en: 'Cardston',
+        fr: 'Cardston',
+      },
+      Coutts: {
+        en: 'Coutts',
+        fr: 'Coutts',
+      },
+      'Reagan Field': {
+        en: 'Reagan Field',
+        fr: 'Reagan Field',
+      },
+      Sierra: {
+        en: 'Sierra',
+        fr: 'Sierra',
+      },
+      Blaine: {
+        en: 'Blaine',
+        fr: 'Blaine',
+      },
+      Huntingdon: {
+        en: 'Huntingdon',
+        fr: 'Huntingdon',
+      },
+      Kingsgate: {
+        en: 'Kingsgate',
+        fr: 'Kingsgate',
+      },
+      Emerson: {
+        en: 'Emerson',
+        fr: 'Emerson',
+      },
+      Sprague: {
+        en: 'Sprague',
+        fr: 'Sprague',
+      },
+      Brunswick: {
+        en: 'Brunswick',
+        fr: 'Brunswick',
+      },
+      Canaport: {
+        en: 'Canaport',
+        fr: 'Canaport',
+      },
+      'St Stephen': {
+        en: 'St Stephen',
+        fr: 'St Stephen',
+      },
+      Chippawa: {
+        en: 'Chippawa',
+        fr: 'Chippawa',
+      },
+      Cornwall: {
+        en: 'Cornwall',
+        fr: 'Cornwall',
+      },
+      Corunna: {
+        en: 'Corunna',
+        fr: 'Corunna',
+      },
+      Courtright: {
+        en: 'Courtright',
+        fr: 'Courtright',
+      },
+      'Fort Frances': {
+        en: 'Fort Frances',
+        fr: 'Fort Frances',
+      },
+      Iroquois: {
+        en: 'Iroquois',
+        fr: 'Iroquois',
+      },
+      'Niagara Falls': {
+        en: 'Niagara Falls',
+        fr: 'Niagara Falls',
+      },
+      'Ojibway (Windsor)': {
+        en: 'Ojibway (Windsor)',
+        fr: 'Ojibway (Windsor)',
+      },
+      'Rainy River': {
+        en: 'Rainy River',
+        fr: 'Rainy River',
+      },
+      Sarnia: {
+        en: 'Sarnia',
+        fr: 'Sarnia',
+      },
+      'Sarnia/Blue Water': {
+        en: 'Sarnia/Blue Water',
+        fr: 'Sarnia/Blue Water',
+      },
+      'Sault Ste Marie': {
+        en: 'Sault Ste Marie',
+        fr: 'Sault Ste Marie',
+      },
+      'St Clair': {
+        en: 'St Clair',
+        fr: 'St Clair',
+      },
+      Armstrong: {
+        en: 'Armstrong',
+        fr: 'Armstrong',
+      },
+      Champlain: {
+        en: 'Champlain',
+        fr: 'Champlain',
+      },
+      'East Hereford': {
+        en: 'East Hereford',
+        fr: 'East Hereford',
+      },
+      'Highgate Springs': {
+        en: 'Highgate Springs',
+        fr: 'Highgate Springs',
+      },
+      Highwater: {
+        en: 'Highwater',
+        fr: 'Highwater',
+      },
+      Napierville: {
+        en: 'Napierville',
+        fr: 'Napierville',
+      },
+      Philipsburg: {
+        en: 'Philipsburg',
+        fr: 'Philipsburg',
+      },
+      Elmore: {
+        en: 'Elmore',
+        fr: 'Elmore',
+      },
+      Loomis: {
+        en: 'Loomis',
+        fr: 'Loomis',
+      },
+      Monchy: {
+        en: 'Monchy',
+        fr: 'Monchy',
+      },
+      'North Portal': {
+        en: 'North Portal',
+        fr: 'North Portal',
+      },
+      'Port of Estevan': {
+        en: 'Port of Estevan',
+        fr: 'Port of Estevan',
+      },
+      'Willow Creek': {
+        en: 'Willow Creek',
+        fr: 'Willow Creek',
+      },
+    },
+  },
   mapTileLabels: {
     portName: {
       Huntingdon: {
