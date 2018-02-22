@@ -112,7 +112,7 @@ class MapPiece extends React.Component {
           36.69a40.12,
           40.12,0,0,0,
           33.47,
-          18H248.2"
+          18H295.2"
         xPosition={28}
         yPosition={20}
         lineX={142.16}
@@ -178,6 +178,40 @@ class MapPiece extends React.Component {
         containerY={this.props.y1 * MapLayoutGridConstant.getIn(['electricity', 'ca' , 'mapPieceScale'], 1) - 31}       
         name="britishColumbiaElectricity"
         text={`${this.props.tr(['explanations','britishColumbiaArrow'])}`}
+    /></g>)
+  }
+
+  emersonExplanation() {
+   if (this.props.data.get('portName') !== 'Emerson') { return null }
+    let textString = `${this.props.tr(['explanations','EmersonNaturalGas'])}`
+    if (this.props.activity === 'importsForReexport') {
+      textString = `${this.props.tr(['explanations','EmersonTempImpNaturalGas'])}`
+    }
+    if (this.props.activity === 'exportsForReimport') {
+      textString = `${this.props.tr(['explanations','EmersonTempExpNaturalGas'])}`
+    }
+    return (<g>
+      <ExplanationDot
+        scale="scale(1)"
+        lineStroke="1"
+        textBoxWidth={130}
+        linePath="
+          M142.16,
+          173.94l24.26,
+          36.69a40.12,
+          40.12,0,0,0,
+          33.47,
+          18H312.2"
+        xPosition={-10}
+        yPosition={20}
+        lineX={142.16}
+        lineY={173.94}
+        textX={40}
+        textY={58}
+        containerX={this.props.x1 + 250}
+        containerY={this.props.y1 + 330}
+        name="emersonElectricity"
+        text={textString}
     /></g>)
   }
 
@@ -262,6 +296,7 @@ class MapPiece extends React.Component {
         {this.washingtonExplanation()}
         {this.newBrunswickExplanation()}
         {this.britishColumbiaExplanation()}
+        {this.emersonExplanation()}
       </g>
     )
 
@@ -286,11 +321,13 @@ class MapPiece extends React.Component {
   }
 }
 
-const mapStateToProps = (state, props) => ({
-  confidentialityMenu: state.confidentialityMenu,
-  selectedEnergy: state.importExportVisualization,
-  tr: trSelector(state, props),
-  expandCollapseConfidentiality: state.expandCollapseConfidentiality,
-})
+export default connect(
+  (state, props) => ({
+    confidentialityMenu: state.confidentialityMenu,
+    selectedEnergy: state.importExportVisualization,
+    tr: trSelector(state, props),
+    expandCollapseConfidentiality: state.expandCollapseConfidentiality,
+    activity: state.setActivity,
+  }),
+)(MapPiece)
 
-export default connect(mapStateToProps)(MapPiece)

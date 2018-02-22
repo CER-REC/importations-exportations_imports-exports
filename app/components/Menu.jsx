@@ -61,6 +61,10 @@ class Menu extends React.PureComponent {
   }
 
   importExportExplanation() {
+    let textString = `${this.props.Tr(['explanations','importExport'])}`
+    if (this.props.selectedEnergy === 'naturalGas') {
+      textString = `${this.props.Tr(['explanations','importExportMenuNaturalGas'])}`
+    }
     if (this.props.name !== 'activity' 
       || this.props.selectedEnergy === 'crudeOil'
       || this.props.selectedEnergy === 'refinedPetroleumProducts') { return }
@@ -84,7 +88,7 @@ class Menu extends React.PureComponent {
         textY={20}
         containerX={this.props.left + 2}
         containerY={this.props.top - 50}
-        text={`${this.props.Tr(['explanations','importExport'])}`}
+        text={textString}
         name="importExportExplanation"
     /></g>)
   }

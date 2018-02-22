@@ -50,6 +50,10 @@ class BarChart extends Chart {
   }
 
   orangeBarExplanation() {
+    let textString = `${this.props.tr(['explanations','barChartImport'])}`
+    if (this.props.selectedEnergy === 'naturalGas') {
+      textString = `${this.props.tr(['explanations','orangeBarNaturalGas'])}`
+    }
     if (this.props.flipped) { return null }
     return (<g>
       <ExplanationDot
@@ -72,7 +76,7 @@ class BarChart extends Chart {
         containerX={this.props.left}
         containerY={this.props.top}
         name="importBarChartExplanation"
-        text={`${this.props.tr(['explanations','barChartImport'])}`}
+        text={textString}
     /></g>)
   }
 

@@ -429,15 +429,15 @@ const TranslationTable = fromJS({
       en: 'Orange bars show the total natural gas that Canada imported in a single quarter; blue bars show exports.',
       fr: 'TODO',
     },
-    blaineNaturalGas: {
-      en: 'Up arrows show the total imports of natural gas into Canada at a port during the time selected in the bar chart above. Down arrows so re-exports of temporary imports.',
+    EmersonNaturalGas: {
+      en: 'Up arrows show the total imports of natural gas into Canada at a port during the time selected in the bar chart above. Down arrows show exports.',
       fr: 'TODO',
     },
-    blaineTempImpNaturalGas: {
+    EmersonTempImpNaturalGas: {
       en: 'Up arrows show the total temporary imports of natural gas into Canada at a port during the time selected in the bar chart above. Down arrows show re-exports of temporary exports.',
       fr: 'TODO',
     },
-    blaineTempExpNaturalGas: {
+    EmersonTempExpNaturalGas: {
       en: 'Down arrows show the total temporary exports of natural gas into Canada at a port during the time selected in the bar chart above. Up arrows show re-imports of temporary exports.',
       fr: 'TODO',
     },
