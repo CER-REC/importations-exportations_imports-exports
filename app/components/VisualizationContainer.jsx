@@ -12,12 +12,20 @@ import RefinedPetroleumProductsVisualizationContainer from './RefinedPetroleumPr
 import './VisualizationContainer.scss'
 
 class VisualizationContainer extends React.Component {
+  componentDidMount() {
+    // This is a bizarre workaround for the bizarre Firefox issue of not
+    // rendering SVG filters if they weren't there at the first mount
+    // TODO: Figure out why this magic fixes the bug
+    this.setState({ mountedForFirefoxSVGFilterBug: true })
+  }
+
   changeVisualization() {
     const { width, height } = this.props.visualizationPosition
     const visualizationContainerType = this.props.importExportVisualization
     const xaxis = this.props.menuWidth
     const yaxis = WorkspaceComputations.topHeightMargin()
     let VisComponent = null
+    if (!this.state || this.state.mountedForFirefoxSVGFilterBug !== true) { return null }
     switch (visualizationContainerType) {
       case 'crudeOil':
         VisComponent = CrudeOilVisualizationContainer

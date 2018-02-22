@@ -425,6 +425,14 @@ class PaddLayout extends React.Component {
     return (<g className="paddLayout" fillOpacity={this.getOpacityOfPadd(props, paddGroup)}
       {...handleInteraction(this.onPaddClick, props, paddGroup)}
         >
+        <filter id="paddOutline">
+          <feMorphology operator="dilate" in="SourceAlpha" radius="1.5"/>
+          <feColorMatrix result="recolored" type="matrix" values="-1 0 0 1 0, 0 -1 0 1 0, 0 0 -1 1 0, 0 0 0 1 0"/>
+          <feMerge>
+            <feMergeNode in="recolored"/>
+            <feMergeNode in="SourceGraphic"/>
+          </feMerge>
+        </filter>
         <g filter="url(#paddOutline)" >
         {layout.map((position, key) => (
           <PaddMapPiece
