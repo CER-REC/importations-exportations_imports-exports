@@ -120,7 +120,7 @@ class PortMap extends React.PureComponent {
       if(this.props.selectionSettings.get('ports').count() > 1){
           return Tr.getIn(['portMap','multiple', this.props.language])
       } else {
-        return Tr.getIn(['portMap','portName', this.props.selectionSettings.get('ports').first(), this.props.language])
+        return Tr.getIn(['portMap','portName', this.props.selectionSettings.get('ports').first(), this.props.language], this.props.selectionSettings.get('ports').first())
       }
     }
     return ''
