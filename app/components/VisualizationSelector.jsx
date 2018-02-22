@@ -38,6 +38,7 @@ const VisualizationSelector = (props) => {
   const { Tr } = props
   let yOffset = Constants.getIn(['menuBar', 'visualizationPadding']) / 2
   const options = ['electricity', 'crudeOil', 'naturalGas', 'naturalGasLiquids', 'refinedPetroleumProducts']
+    .sort((a, b) => (b === props.importExportVisualization ? 1 : 0))
     .map((option) => {
       const translated = Tr(['mainMenuBar', option])
       let el = (
