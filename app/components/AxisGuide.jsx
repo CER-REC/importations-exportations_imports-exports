@@ -123,6 +123,10 @@ class AxisGuide extends React.PureComponent {
     /></g>)
   }
 
+  getBackgroundColour = () => this.props.scaleLinked
+    ? Constants.getIn(['styleGuide', 'colours', 'SandExtraDark'])
+    : Constants.getIn(['styleGuide', 'colours', (this.props.flipped ? 'ExportDefault' : 'ImportDefault')])
+
   getScaleImage = ({ x, y, width, height }) => {
     const groupTransform = `translate(${x + width + 1} ${y - 2})`
     const imageProps = {
@@ -132,7 +136,7 @@ class AxisGuide extends React.PureComponent {
     }
     return (
       <g
-        fill={Constants.getIn(['styleGuide', 'colours', 'SandExtraDark'])}
+        fill={this.getBackgroundColour()}
         transform={groupTransform}
       >
         <rect x={0} y={0} width={height + 4} height={height + 4} />
@@ -182,9 +186,7 @@ class AxisGuide extends React.PureComponent {
               fontSize: 11,
             }}
             aria-hidden
-            boxStyles={{
-              fill: Constants.getIn(['styleGuide', 'colours', 'SandExtraDark']),
-            }}
+            boxStyles={{ fill: this.getBackgroundColour() }}
             padding={2}
             flipped={this.props.flipped}
             unsizedContent={this.getScaleImage}
