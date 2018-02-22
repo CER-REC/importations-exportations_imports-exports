@@ -111,8 +111,8 @@ class Menu extends React.PureComponent {
         lineY={173.94}
         textX={45}
         textY={48}
-        containerX={this.props.left + 2}
-        containerY={this.props.top - 276}
+        containerX={2}
+        containerY={-102}
         text={`${this.props.Tr(['explanations','amount'])}`}
         name="amountExplanation"
     /></g>)
