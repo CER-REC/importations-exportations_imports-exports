@@ -424,8 +424,8 @@ const TranslationTable = fromJS({
   },
 
   applicationPath: {
-    en: '/import-export-visualization/',
-    fr: '/visualisation-importations-exportations/',
+    en: '/imports-exports/',
+    fr: '/importations-exportations/',
   },
 
   visualizationPaths: {
