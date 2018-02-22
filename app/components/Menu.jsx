@@ -88,6 +88,10 @@ class Menu extends React.PureComponent {
   }
 
   amountExplanation() {
+    let yPosition = 178
+    if (this.props.expanded && (this.props.setActiveMenu !== 'amount')) {
+      yPosition = 198
+    }
     if (this.props.name !== 'amount') { return }
     return (<g>
       <ExplanationDot
@@ -102,7 +106,7 @@ class Menu extends React.PureComponent {
           33.47,
           18H378.2"
         xPosition={165}
-        yPosition={178}
+        yPosition={yPosition}
         lineX={142.16}
         lineY={173.94}
         textX={45}
