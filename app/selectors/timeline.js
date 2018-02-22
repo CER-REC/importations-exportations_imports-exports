@@ -126,12 +126,15 @@ export const timelineYearScaleCalculation = createSelector(
 )
 
 export const timelineScaleCalculation = createSelector(
-  sortTimeline,
-  aggregateQuarter,
+  activityGroupSelector,
+  getAggregateKey,
+  selectedVisualization,
   timelineYearScaleCalculation,
   getScaleKey,
   timelineScaleLinked,
-  (points, { valueKeys }, yearScale, scaleKey, linked) => {
+  (data, aggregateKey, vizName, yearScale, scaleKey, linked) => {
+    const valueKeys = []
+    const points = fromJS(aggregateQuarterPoints(data, valueKeys, aggregateKey, vizName))
     const values = mapToValue(points, 'values')
 
     let valuesScale = valueKeys.reduce((acc, next) => {
