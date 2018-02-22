@@ -362,7 +362,7 @@ const TranslationTable = fromJS({
       fr: 'TODO',
     },
     powerpool: {
-      en: 'Power pool',
+      en: 'A power pool is a grouping of states that imports and exports electricity as a unit. Individual states may also have additional imports and exports.',
       fr: 'TODO',
     },
     barChartImport: {
