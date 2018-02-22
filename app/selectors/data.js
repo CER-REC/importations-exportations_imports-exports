@@ -80,7 +80,8 @@ export const activityGroupSelector = createSelector(
       point.get('activity') === filterActivityGroup
     )),
 )
-const selectedPieces = createSelector(
+
+export const selectedPieces = createSelector(
   selection,
   points => points.reduce((acc, nextValue) => {
     if (Immutable.Map.isMap(nextValue)) {
@@ -111,7 +112,8 @@ const filterByTimeline = (point, range, groupBy) => {
     )
   }
 }
-const filterByHex = (point, selectedMapPieces, visualization, selectionState) => {
+
+export const filterByHex = (point, selectedMapPieces, visualization, selectionState) => {
   if (selectedMapPieces.count() === 0) {
     return point
   }
