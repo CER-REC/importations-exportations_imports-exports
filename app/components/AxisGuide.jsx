@@ -51,6 +51,7 @@ class AxisGuide extends React.PureComponent {
   }
 
   onArrowKey = (e) => {
+    if (this.props.scale.max === this.props.scale.min) { return }
     const direction = (e.key === 'ArrowUp' || e.key === 'PageUp') ? -1 : 1
     const scale = (e.key === 'ArrowUp' || e.key === 'ArrowDown') ? 1 : 10
 
@@ -68,6 +69,9 @@ class AxisGuide extends React.PureComponent {
   }
 
   adjustOffset(rawOffset) {
+    if (this.props.scale.max === this.props.scale.min) {
+      return { x: 0, y: this.props.scale.min }
+    }
     const { heightPerUnit } = this.props
     const flippedInverter = this.props.flipped ? -1 : 1
     const currentY = this.props.position * heightPerUnit
@@ -149,8 +153,10 @@ class AxisGuide extends React.PureComponent {
 
   render() {
     const text = `${this.state.positionDisplay.toLocaleString()} ${this.props.tr(['amounts', this.props.unit])}`
-    const offset = (this.props.chartHeight + (this.props.barSize / 2))
-      - (this.props.position * this.props.heightPerUnit) - 2
+    const offset = (this.props.position === 0)
+      ? this.props.chartHeight
+      : (this.props.chartHeight + (this.props.barSize / 2))
+        - (this.props.position * this.props.heightPerUnit) - 2
     return (
       <SVGDrag
         invertedY={this.props.flipped}
