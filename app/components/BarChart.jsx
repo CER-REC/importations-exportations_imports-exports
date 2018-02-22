@@ -51,8 +51,14 @@ class BarChart extends Chart {
 
   orangeBarExplanation() {
     let textString = `${this.props.tr(['explanations','barChartImport'])}`
+    let xPosition = 90
     if (this.props.selectedEnergy === 'naturalGas') {
       textString = `${this.props.tr(['explanations','orangeBarNaturalGas'])}`
+      xPosition = 590
+    }
+    if (this.props.selectedEnergy === 'naturalGasLiquids') {
+      textString = `${this.props.tr(['explanations','orangeBarNaturalGasLiquids'])}`
+      xPosition = 590
     }
     if (this.props.flipped) { return null }
     return (<g>
@@ -67,7 +73,7 @@ class BarChart extends Chart {
           40.12,0,0,0,
           33.47,
           18H322.2"
-        xPosition={90}
+        xPosition={xPosition}
         yPosition={87}
         lineX={142.16}
         lineY={173.94}
@@ -102,14 +108,18 @@ class BarChart extends Chart {
         textX={76}
         textY={153}
         containerX={this.props.left - 278}
-        containerY={this.props.top - 40}
+        containerY={this.props.left + 68}
         name="exportBarChartExplanation"
         text={`${this.props.tr(['explanations','barChartExport'])}`}
     /></g>)
   }
 
   crudeBlueBarExplanation() {
-    if (!this.props.flipped || this.props.selectedEnergy !== 'crudeOil') { return null }
+    let textString = `${this.props.tr(['explanations','blueBarCrude'])}`
+    if (this.props.selectedEnergy === 'naturalGasLiquids') {
+      textString = `${this.props.tr(['explanations','blueBarNaturalGasLiquids'])}`
+    }
+    if (!this.props.flipped || (this.props.selectedEnergy !== 'crudeOil' && this.props.selectedEnergy !== 'naturalGasLiquids')) { return null }
     return (<g>
       <ExplanationDot
         scale="scale(1)"
@@ -122,17 +132,17 @@ class BarChart extends Chart {
           36.69a40.12,
           40.12,0,0,0,
           33.47,
-          18H318.2"
+          18H288.2"
         xPosition={632}
         yPosition={0}
         lineX={142.16}
         lineY={173}
-        textX={76}
+        textX={46}
         textY={58}
         containerX={this.props.left + 3 }
         containerY={this.props.top + 100}
         name="exportBarChartExplanation"
-        text={`${this.props.tr(['explanations','blueBarCrude'])}`}
+        text={textString}
     /></g>)
   }
 

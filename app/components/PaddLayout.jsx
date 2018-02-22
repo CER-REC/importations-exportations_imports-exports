@@ -337,11 +337,22 @@ class PaddLayout extends React.Component {
     }
 
     let paddIExplanation = null
-    let paddICrudeOilExplanationcontainerX = this.props.left + left + 235
-    let paddICrudeOilExplanationcontainerY = this.props.top + top - 79
-    if (this.props.arrangeBy === 'exports') {
-      paddICrudeOilExplanationcontainerX = this.props.left + left + 264
-      paddICrudeOilExplanationcontainerY = this.props.top + top + 113
+    let textString = `${this.props.TRSelector(['explanations','paddICrudeOil'])}`
+    let paddIExplanationcontainerX = this.props.left + left + 235
+    let paddIExplanationcontainerY = this.props.top + top - 79
+    if (this.props.selectedEnergy === 'naturalGasLiquids') {
+      textString = `${this.props.TRSelector(['explanations','paddINaturalGasLiquids'])}`
+      paddIExplanationcontainerX = this.props.left + left + 235
+      paddIExplanationcontainerY = this.props.top + top - 24
+    }
+    if (this.props.selectedEnergy === 'naturalGasLiquids' 
+      && (this.props.arrangeBy === 'imports') || this.props.arrangeBy === 'exports') {
+      paddIExplanationcontainerX = this.props.left + left + 152
+      paddIExplanationcontainerY = this.props.top + top + 95
+    }
+    if (this.props.arrangeBy === 'exports' && this.props.selectedEnergy === 'crudeOil') {
+      paddIExplanationcontainerX = this.props.left + left + 264
+      paddIExplanationcontainerY = this.props.top + top + 113
     }
     if (country !== 'ca' && paddGroupId === 'PADD I') {
       paddIExplanation = (<g transform="translate(145 143)">
@@ -362,21 +373,30 @@ class PaddLayout extends React.Component {
           lineX={142.16}
           lineY={173}
           textX={26}
-          textY={38}
-          containerX={paddICrudeOilExplanationcontainerX}
-          containerY={paddICrudeOilExplanationcontainerY}
+          textY={36}
+          containerX={paddIExplanationcontainerX}
+          containerY={paddIExplanationcontainerY}
           name="paddIExplanation"
-          text={`${this.props.TRSelector(['explanations','paddICrudeOil'])}`}
+          text={textString}
         />
       </g>)
     }
 
     let paddVExplanation = null
-    let paddVCrudeOilExplanationcontainerX = this.props.left + left - 90
-    let paddVCrudeOilExplanationcontainerY = this.props.top + top - 79
-    if (this.props.arrangeBy === 'exports') {
-      paddVCrudeOilExplanationcontainerX = this.props.left + left + 380
-      paddVCrudeOilExplanationcontainerY = this.props.top + top + 113
+    let paddVExplanationcontainerX = this.props.left + left - 90
+    let paddVExplanationcontainerY = this.props.top + top - 79
+    if (this.props.selectedEnergy === 'naturalGasLiquids') {
+      paddVExplanationcontainerX = this.props.left + left - 85
+      paddVExplanationcontainerY = this.props.top + top - 29
+    }
+    if (this.props.selectedEnergy === 'naturalGasLiquids'  
+      && (this.props.arrangeBy === 'imports') || this.props.arrangeBy === 'exports') {
+      paddVExplanationcontainerX = this.props.left + left + 265
+      paddVExplanationcontainerY = this.props.top + top + 95
+    }
+    if (this.props.arrangeBy === 'exports' && this.props.selectedEnergy === 'crudeOil') {
+      paddVExplanationcontainerX = this.props.left + left + 380
+      paddVExplanationcontainerY = this.props.top + top + 113
     }
     if (country !== 'ca' && paddGroupId === 'PADD V') {
       paddVExplanation = (<g transform="translate(145 143)">
@@ -398,8 +418,8 @@ class PaddLayout extends React.Component {
           lineY={173}
           textX={26}
           textY={33}
-          containerX={paddVCrudeOilExplanationcontainerX}
-          containerY={paddVCrudeOilExplanationcontainerY}
+          containerX={paddVExplanationcontainerX}
+          containerY={paddVExplanationcontainerY}
           name="paddVExplanation"
           text={`${this.props.TRSelector(['explanations','padd'])}`}
         />
