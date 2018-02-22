@@ -722,6 +722,10 @@ const TranslationTable = fromJS({
 
   country: {
     ca: {
+      '': {
+        en: 'Missing Province',
+        fr: 'Missing Province',
+      },
       YT: {
         en: 'Yukon',
         fr: 'Yukon',
@@ -780,6 +784,10 @@ const TranslationTable = fromJS({
       },
     },
     us: {
+      '': {
+        en: 'Missing State',
+        fr: 'Missing State',
+      },
       AL: {
         en: 'Alabama',
         fr: 'Alabama',

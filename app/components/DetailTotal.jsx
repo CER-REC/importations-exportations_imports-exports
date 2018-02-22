@@ -17,9 +17,7 @@ const DetailTotal = props => (
       {humanNumber(props.value, props.language)}&nbsp;
       {TR.getIn(['amounts', props.amountUnit, props.language])}&nbsp;
     </div>
-    <div className="percentage">
-      ({props.value === 0 ? '0%' : '100%'})
-    </div>
+    <div className="percentage">{props.value === 0 ? '0%' : '100%'}</div>
   </div>
 )
 
