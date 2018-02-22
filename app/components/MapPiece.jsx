@@ -183,13 +183,6 @@ class MapPiece extends React.Component {
 
   emersonExplanation() {
    if (this.props.data.get('portName') !== 'Emerson') { return null }
-    let textString = `${this.props.tr(['explanations','EmersonNaturalGas'])}`
-    if (this.props.activity === 'importsForReexport') {
-      textString = `${this.props.tr(['explanations','EmersonTempImpNaturalGas'])}`
-    }
-    if (this.props.activity === 'exportsForReimport') {
-      textString = `${this.props.tr(['explanations','EmersonTempExpNaturalGas'])}`
-    }
     return (<g>
       <ExplanationDot
         scale="scale(1)"
@@ -211,7 +204,7 @@ class MapPiece extends React.Component {
         containerX={this.props.x1 + 250}
         containerY={this.props.y1 + 330}
         name="emersonElectricity"
-        text={textString}
+        text={`${this.props.tr(['explanations','EmersonNaturalGas'])}`}
     /></g>)
   }
 
@@ -327,7 +320,7 @@ export default connect(
     selectedEnergy: state.importExportVisualization,
     tr: trSelector(state, props),
     expandCollapseConfidentiality: state.expandCollapseConfidentiality,
-    activity: state.setActivity,
+    activity: state.activity,
   }),
 )(MapPiece)
 
