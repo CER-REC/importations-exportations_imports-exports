@@ -5,6 +5,7 @@ import { geoConicConformal, geoPath } from 'd3-geo'
 import { getSelectionSettings } from '../selectors/NaturalGasSelector'
 import { feature } from 'topojson-client'
 import Request from 'client-request/promise'
+import Tr from '../TranslationTable'
 
 import Constants from '../Constants'
 import RouteComputations from '../computations/RouteComputations'
@@ -140,6 +141,22 @@ class PortMap extends React.PureComponent {
       )
     })
   }
+  getPortMapLabel(){
+    if(this.props.selectionSettings.get('provinces').count() > 0){
+      if(this.props.selectionSettings.get('provinces').count() > 1){
+        return Tr.getIn(['portMap','multiple', this.props.language])
+      } else {
+        return Tr.getIn(['country', 'ca', this.props.selectionSettings.get('provinces').first(), this.props.language]) 
+      }
+    }else if(this.props.selectionSettings.get('ports').count() > 0){
+      if(this.props.selectionSettings.get('ports').count() > 1){
+          return Tr.getIn(['portMap','multiple', this.props.language])
+      } else {
+        return Tr.getIn(['portMap','portName', this.props.selectionSettings.get('ports').first(), this.props.language], this.props.selectionSettings.get('ports').first())
+      }
+    }
+    return ''
+  }
   render() {
     if (!this.state.topoData.bbox) { return null }
     const projection = geoPath().projection(this.projection())
@@ -155,6 +172,7 @@ class PortMap extends React.PureComponent {
     const portDotsSelected = this.renderDots(selected, projection)
     return (
       <svg width="100%" height="100%" viewBox={`0 0 ${viewbox.width} ${viewbox.height}`}>
+      <text className="portName">{this.getPortMapLabel()}</text>
         <g className="regions">
           {
             this.state.regions.map((d, i) => (
@@ -167,7 +185,7 @@ class PortMap extends React.PureComponent {
                 strokeWidth="2"
               />
             ))
-          } 
+          }
         </g>
         {this.portMapExplanation()}
         {(nonSelected !== null && portDotsNonSelected.count() > 0)?portDotsNonSelected.toArray():null}
@@ -181,6 +199,7 @@ const mapStateToprops = (state, props) => {
   return {
     tr: trSelector(state, props),
     selectionSettings: getSelectionSettings(state, props),
+    language: state.language,
   }
 }
 

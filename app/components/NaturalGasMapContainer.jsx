@@ -92,10 +92,11 @@ class NaturalGasMapContainer extends React.PureComponent {
     let layout = mapLayoutGrid.get('layout')
     const mapPieceScale = mapLayoutGrid.get('mapPieceScale')
     const rowPadding = 0
-    const columnPadding = 50
+    const columnPadding = 25
 
     let leftPadding = 0
     let topPadding = 0
+    let provinceRendered =0
     layout =  layout.map((value) => {
       const ports = arrangedData.get(value, fromJS({}))
       const portsCount = ports.count()
@@ -105,7 +106,7 @@ class NaturalGasMapContainer extends React.PureComponent {
       let leftRendered = 0
       let row = 1
       let column = 0
-
+      provinceRendered += 1
       const mapLayout = ports.map( (port,key) => {
         if(row > maximunRows) {
           column += 1
@@ -119,7 +120,8 @@ class NaturalGasMapContainer extends React.PureComponent {
         topPadding += rowPadding
         row +=1
         return (<g key={`NaturalGasMapPiece_${port.get('Province')}_${port.get('portName')}`} 
-          {...handleInteraction(this.onClick, port.get('portName'))}>
+          {...handleInteraction(this.onClick, port.get('portName'))}
+          transform={`scale(${mapPieceScale})`}>
             <MapPiece
               data={port}
               dataKey={['activities']}
@@ -136,12 +138,15 @@ class NaturalGasMapContainer extends React.PureComponent {
             />
           </g>)
       }) 
-      const provinceTextPosition =  portsCount > 7 ? leftPadding +  dimensions.get('width')*0.7 : leftPadding + dimensions.get('width')*0.20
+      const provinceTextPosition =  portsCount > 7 ? leftPadding + columnPadding+ dimensions.get('width') * 2 : provinceRendered * 80 - 65 
       leftPadding += dimensions.get('width') + columnPadding 
-      leftPadding = portsCount > 7 ? leftPadding + columnPadding: leftPadding
+      leftPadding = portsCount > 7 ? leftPadding + columnPadding + 25: leftPadding
       column += 1
       topPadding = 0
       row = 0
+      if(portsCount > 7){
+        provinceRendered += 0.75
+      }
       return (
         <g className="paddLayout" key={`NaturalGasMap_${value}`} >
           <rect x={ provinceTextPosition - 9} y={dimensions.get('topPadding') - 15}  

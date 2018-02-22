@@ -156,7 +156,6 @@ class BarChart extends Chart {
       colour,
       layout,
     } = this.props
-    if (data.count() === 0) { return null }
 
     const barSize = layout.get('barWidth')
 
@@ -215,7 +214,11 @@ class BarChart extends Chart {
         /> 
         {!this.props.detailSidebar ? null : (
           <DetailSidebar top={this.props.top} height={height}>
-            {flipped ? sidebarContent.reverse() : sidebarContent}
+            <div className="verticalAlign">
+              <div className="centered">
+                {flipped ? sidebarContent.reverse() : sidebarContent}
+              </div>
+            </div>
           </DetailSidebar>
         )} 
       </g>
