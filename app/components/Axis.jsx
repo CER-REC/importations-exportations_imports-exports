@@ -91,7 +91,6 @@ class Axis extends React.PureComponent {
       height,
       bars: data,
     } = this.props
-    if (data.count() === 0) { return null }
     const elements = labels.map((label) => {
       const key = label.get('key', `label-${label.get('label')}`)
       if (label.get('label') !== '|') {

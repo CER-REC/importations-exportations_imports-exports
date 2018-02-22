@@ -114,7 +114,6 @@ class BarChart extends Chart {
       colour,
       layout,
     } = this.props
-    if (data.count() === 0) { return null }
 
     const barSize = layout.get('barWidth')
 
