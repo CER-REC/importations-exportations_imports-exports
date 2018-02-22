@@ -123,8 +123,8 @@ class AxisGuide extends React.PureComponent {
     /></g>)
   }
 
-  getScaleImage = ({ x, width, height }) => {
-    const groupTransform = `translate(${x + width + 2} ${-height - 3})`
+  getScaleImage = ({ x, y, width, height }) => {
+    const groupTransform = `translate(${x + width + 1} ${y - 2})`
     const imageProps = {
       fill: 'white',
       height,
