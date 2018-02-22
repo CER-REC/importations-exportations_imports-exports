@@ -147,7 +147,7 @@ class NaturalGasLiquidMapLayout extends React.Component {
     }, {})
     const nameMappings = Tr.getIn(['subType'])
     return (<DetailBreakdown
-      data={Immutable.fromJS(subTypeTotal)}
+      data={Immutable.fromJS(subTypeTotal).sort((a, b) => (b - a))}
       type={detailBreakdownData.get('type')}
       trContent={Tr.getIn(['detailBreakDown', this.props.importExportVisualization, detailBreakdownData.get('type')])}
       veritcalPosition={detailBreakdownData.get('displayPosition')}
