@@ -3,15 +3,24 @@ import { connect } from 'react-redux'
 
 import Chart from './Chart'
 import AnimatedLine from './SVGAnimation/AnimatedLine'
+import AxisGuide from './AxisGuide'
 import Constants from '../Constants'
 import { timelineGrouping, timelineData } from '../selectors/timeline'
 
 class StackedChart extends Chart {
-  static get defaultProps() {
-    return Object.assign({}, super.defaultProps, {
-      colors: Constants.getIn(['styleGuide', 'categoryColours']),
-    })
+  static defaultProps = {
+    ...Chart.defaultProps,
+    colors: Constants.getIn(['styleGuide', 'categoryColours']),
   }
+
+  constructor(props) {
+    super(props)
+    this.state = {
+      axisGuide: props.trueScale.get('max'),
+    }
+  }
+
+  updateAxisGuide = position => this.setState({ axisGuide: position })
 
   render() {
     const {
@@ -34,8 +43,8 @@ class StackedChart extends Chart {
       .sort(([, a], [, b]) => (a - b)) // Sort ascending
       .map(([key]) => key)
 
+    const heightPerUnit = height / (scale.getIn(['y', 'max']) - scale.getIn(['y', 'min']))
     const elements = data.map((point) => {
-      const heightPerUnit = height / (scale.getIn(['y', 'max']) - scale.getIn(['y', 'min']))
       const opacity = this.isTimelinePointFiltered(point) ? 0.5 : 1
       let offsetY = 0
       let stackIndex = 0
@@ -68,6 +77,16 @@ class StackedChart extends Chart {
     return (
       <g transform={this.getTransform()}>
         {elements}
+        <AxisGuide
+          flipped
+          scale={scale.get('y').toJS()}
+          position={this.state.axisGuide}
+          chartHeight={height}
+          heightPerUnit={heightPerUnit}
+          updatePosition={this.updateAxisGuide}
+          width={this.props.width}
+          barSize={layout.get('barWidth')}
+        />
       </g>
     )
   }
