@@ -1,20 +1,15 @@
 @import "./Colours.scss";
 
-.SocialBar {
+.SocialBar,
+.playButton,
+.mapPiece,
+.paddLayout,
+[tabindex] {
   cursor: pointer;
 }
 
-.playButton {
-  cursor: pointer;
-}
-
-.mapPiece {
-  cursor: pointer;
-}
-
-.paddLayout {
-  cursor: pointer;
-}
+/* Don't use the pointer cursor for the legend */
+.mapPiece.legend { cursor: inherit; }
 
 .loader {
   border: 16px solid #f3f3f3;
