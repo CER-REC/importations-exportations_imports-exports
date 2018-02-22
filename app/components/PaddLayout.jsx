@@ -18,6 +18,8 @@ import PaddFive from './Padds/PaddFive'
 import PaddNonUSA from './Padds/PaddNonUSA'
 import ConfidentialIcon from './ConfidentialIcon'
 
+import ExplanationDot from './ExplanationDot'
+
 import { handleInteraction } from '../utilities'
 
 import ElectricitySelector from '../selectors/ElectricitySelector'
@@ -305,6 +307,105 @@ class PaddLayout extends React.Component {
       </g>)
     }
 
+    let canadaExplanation = null
+    if (country === 'ca') {
+      canadaExplanation = (<g transform="translate(145 143)">
+        <ExplanationDot
+          scale="scale(1)"
+          lineStroke="1"
+          textBoxWidth={140}
+          textBoxHeight={150}
+          linePath="
+            M142.16,
+            173.94l24.26,
+            36.69a40.12,
+            40.12,0,0,0,
+            33.47,
+            18H328.2"
+          xPosition={50}
+          yPosition={-10}
+          lineX={142.16}
+          lineY={173}
+          textX={46}
+          textY={58}
+          containerX={this.props.left + 330}
+          containerY={this.props.top + 14}
+          name="canadaExplanation"
+          text={`${this.props.TRSelector(['explanations','canadaPaddCrudeOil'])}`}
+        />
+      </g>)
+    }
+
+    let paddIExplanation = null
+    let paddICrudeOilExplanationcontainerX = this.props.left + left + 235
+    let paddICrudeOilExplanationcontainerY = this.props.top + top - 79
+    if (this.props.arrangeBy === 'exports') {
+      paddICrudeOilExplanationcontainerX = this.props.left + left + 264
+      paddICrudeOilExplanationcontainerY = this.props.top + top + 113
+    }
+    if (country !== 'ca' && paddGroupId === 'PADD I') {
+      paddIExplanation = (<g transform="translate(145 143)">
+        <ExplanationDot
+          scale="scale(0.6)"
+          lineStroke="1.4"
+          textBoxWidth={290}
+          textBoxHeight={150}
+          linePath="
+            M142.16,
+            173.94l24.26,
+            36.69a40.12,
+            40.12,0,0,0,
+            33.47,
+            18H828.2"
+          xPosition={20}
+          yPosition={0}
+          lineX={142.16}
+          lineY={173}
+          textX={26}
+          textY={38}
+          containerX={paddICrudeOilExplanationcontainerX}
+          containerY={paddICrudeOilExplanationcontainerY}
+          name="paddIExplanation"
+          text={`${this.props.TRSelector(['explanations','paddICrudeOil'])}`}
+        />
+      </g>)
+    }
+
+    let paddVExplanation = null
+    let paddVCrudeOilExplanationcontainerX = this.props.left + left - 90
+    let paddVCrudeOilExplanationcontainerY = this.props.top + top - 79
+    if (this.props.arrangeBy === 'exports') {
+      paddVCrudeOilExplanationcontainerX = this.props.left + left + 380
+      paddVCrudeOilExplanationcontainerY = this.props.top + top + 113
+    }
+    if (country !== 'ca' && paddGroupId === 'PADD V') {
+      paddVExplanation = (<g transform="translate(145 143)">
+        <ExplanationDot
+          scale="scale(0.6)"
+          lineStroke="1.4"
+          textBoxWidth={277}
+          textBoxHeight={150}
+          linePath="
+            M142.16,
+            173.94l24.26,
+            36.69a40.12,
+            40.12,0,0,0,
+            33.47,
+            18H828.2"
+          xPosition={20}
+          yPosition={0}
+          lineX={142.16}
+          lineY={173}
+          textX={26}
+          textY={33}
+          containerX={paddVCrudeOilExplanationcontainerX}
+          containerY={paddVCrudeOilExplanationcontainerY}
+          name="paddVExplanation"
+          text={`${this.props.TRSelector(['explanations','padd'])}`}
+        />
+      </g>)
+    }
+
     return (<g className={fontClassName} transform={`translate(${left + transformTranslate.get('left')} ${top + transformTranslate.get('top')})`}>
       <text transform={`translate(${transformText.get('left')} ${transformText.get('top')})`}>{text}</text>
       <polygon fill={color} transform="translate(0 140)" points="149.98 18.68 168.81 26.14 187.48 18.66 187.48 17.99 184.09 17.99 184.08 14.51 152.98 14.5 152.95 17.99 149.98 17.99 149.98 18.68" />
@@ -319,6 +420,10 @@ class PaddLayout extends React.Component {
       {paddMexicoNGLconfidentialIcon}
 
       {canadaconfidentialIcon}
+
+      {canadaExplanation}
+      {paddIExplanation}
+      {paddVExplanation}
             </g>)
   }
 

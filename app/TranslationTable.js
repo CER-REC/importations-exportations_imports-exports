@@ -381,16 +381,16 @@ const TranslationTable = fromJS({
       en: 'The colour of this region and its down arrow shows the total amount of crude oil that Canada exported during the time period selected in the bar chart below.',
       fr: 'TODO',
     },
+    paddICrudeOil: {
+      en: 'The colour of this region and its down arrow shows the total crude oil that Canada exported to the PADD I region of the U.S.A. during the time period selected above.',
+      fr: 'TODO',
+    },
     barCrude: {
-      en: 'These bars show the total electricity that Canada exported during a single quarter.',
+      en: 'These bars show the proportions of heavy vs light crude oil exported per quarter.',
       fr: 'TODO',
     },
     blueBarCrude: {
-      en: 'Each blue bar shows the total electricity that Canada exported during a single quarter.',
-      fr: 'TODO',
-    },
-    usPaddCrude: {
-      en: 'The colour of this region and its down arrow shows the total crude oil that Canada exported to the PADD I region of the U.S.A during the time period selected above.',
+      en: 'Each blue bar shows the total crude oil that Canada exported during a single quarter.',
       fr: 'TODO',
     },
     amountCrude: {

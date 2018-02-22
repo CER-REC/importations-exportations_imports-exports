@@ -61,7 +61,9 @@ class Menu extends React.PureComponent {
   }
 
   importExportExplanation() {
-    if (this.props.name !== 'activity') { return }
+    if (this.props.name !== 'activity' 
+      || this.props.selectedEnergy === 'crudeOil'
+      || this.props.selectedEnergy === 'refinedPetroleumProducts') { return }
     return (<g>
       <ExplanationDot
         scale="scale(0.3)"
@@ -88,6 +90,19 @@ class Menu extends React.PureComponent {
   }
 
   amountExplanation() {
+    let textString = `${this.props.Tr(['explanations','amount'])}`
+    if (this.props.selectedEnergy === 'crudeOil') {
+      textString = `${this.props.Tr(['explanations','amountCrude'])}`
+    }
+    if (this.props.selectedEnergy === 'naturalGas') {
+      textString = `${this.props.Tr(['explanations','amountNaturalGas'])}`
+    }
+    if (this.props.selectedEnergy === 'naturalGasLiquids') {
+      textString = `${this.props.Tr(['explanations','amountNaturalGasLiquids'])}`
+    }
+    if (this.props.selectedEnergy === 'refinedPetroleumProducts') {
+      textString = `${this.props.Tr(['explanations','amountRefinedPetroleumProducts'])}`
+    }
     let yPosition = 178
     if (this.props.expanded && (this.props.setActiveMenu !== 'amount')) {
       yPosition = 198
@@ -113,7 +128,7 @@ class Menu extends React.PureComponent {
         textY={48}
         containerX={2}
         containerY={-102}
-        text={`${this.props.Tr(['explanations','amount'])}`}
+        text={textString}
         name="amountExplanation"
     /></g>)
   }
@@ -204,6 +219,7 @@ export default connect(
     Tr: TrSelector(state, props),
     language: state.language,
     showExplanations: state.showExplanations,
+    selectedEnergy: state.importExportVisualization,
     expandCollapseExplanation: state.expandCollapseExplanation,
   }),
   { setActiveMenu },

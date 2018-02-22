@@ -95,7 +95,13 @@ class AxisGuide extends React.PureComponent {
   }
 
   timeLineRangeExplanation() {
-    if (this.props.flipped) { return null }
+    let containerY = this.props.chartHeight + (this.props.barSize / 2)
+      - (this.props.position * this.props.heightPerUnit) - 2 + 190
+    if (this.props.selectedEnergy === 'crudeOil') {
+      containerY = this.props.chartHeight - (this.props.barSize / 2)
+      + (this.props.position * this.props.heightPerUnit) - 2 + 310
+    }
+    if (this.props.flipped && this.props.selectedEnergy !== 'crudeOil') { return null }
     return (<g>
       <ExplanationDot
         scale="scale(1)"
@@ -116,8 +122,7 @@ class AxisGuide extends React.PureComponent {
         textX={40}
         textY={58}
         containerX={200}
-        containerY={(this.props.chartHeight + (this.props.barSize / 2))
-      - (this.props.position * this.props.heightPerUnit) - 2 + 190}
+        containerY={containerY}
         name="timeLineRangeDot"
         text={`${this.props.tr(['explanations','timelineRange'])}`}
     /></g>)
@@ -199,6 +204,7 @@ class AxisGuide extends React.PureComponent {
 }
 
 export default connect((state, props) => ({
+  selectedEnergy: state.importExportVisualization,
   unit: visualizationSettings(state, props).get('amount'),
   tr: trSelector(state, props),
   scaleLinked: timelineScaleLinked(state, props),

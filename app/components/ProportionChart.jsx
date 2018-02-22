@@ -15,6 +15,9 @@ import Tr from '../TranslationTable'
 import { timelineGrouping, timelineData } from '../selectors/timeline'
 import { amount, selection } from '../selectors/data'
 
+import ExplanationDot from './ExplanationDot'
+import TrSelector from '../selectors/translate'
+
 const transportType = [
   'Pipeline',
   'Marine',
@@ -47,6 +50,33 @@ class ProportionChart extends Chart {
       })
       return acc
     }, { total: 0, values: {} })
+  }
+
+  crudeExplanation(data, aggregateKey) {
+    if(aggregateKey === 'transport') { return }
+    return (<g>
+      <ExplanationDot
+        scale="scale(1)"
+        lineStroke="1"
+        textBoxWidth={190}
+        linePath="
+          M142.16,
+          173.94l24.26,
+          36.69a40.12,
+          40.12,0,0,0,
+          33.47,
+          18H378.2"
+        xPosition={615}
+        yPosition={62}
+        lineX={142.16}
+        lineY={173.94}
+        textX={45}
+        textY={58}
+        containerX={206}
+        containerY={292}
+        text={`${this.props.TRSelector(['explanations','barCrude'])}`}
+        name="crudeHeavyLightExplanation"
+    /></g>)
   }
 
   renderDetailSideBar(data, aggregateKey, categoryColours, selectionState){
@@ -178,6 +208,7 @@ class ProportionChart extends Chart {
       <g transform={this.getTransform()}>
         {elements}
         {this.renderDetailSideBar(data, this.props.aggregateKey ,categoryColours, selectionState)}
+        {this.crudeExplanation(data, this.props.aggregateKey)}
       </g>
     )
   }
@@ -185,6 +216,7 @@ class ProportionChart extends Chart {
 
 export default connect((state, props) => Object.assign({
   timelineGroup: timelineGrouping(state, props),
+  TRSelector: TrSelector(state, props),
   unit: amount(state, props),
   language: state.language,
   selectionState: selection(state, props)

@@ -77,7 +77,7 @@ class BarChart extends Chart {
   }
 
   blueBarExplanation() {
-    if (!this.props.flipped) { return null }
+    if (!this.props.flipped || this.props.selectedEnergy !== 'electricity') { return null }
     return (<g>
       <ExplanationDot
         scale="scale(2.7) scale(-1 1)"
@@ -100,7 +100,35 @@ class BarChart extends Chart {
         containerX={this.props.left - 278}
         containerY={this.props.top - 40}
         name="exportBarChartExplanation"
-        text={`${this.props.tr(['explanations','barChartImport'])}`}
+        text={`${this.props.tr(['explanations','barChartExport'])}`}
+    /></g>)
+  }
+
+  crudeBlueBarExplanation() {
+    if (!this.props.flipped || this.props.selectedEnergy !== 'crudeOil') { return null }
+    return (<g>
+      <ExplanationDot
+        scale="scale(1)"
+        lineStroke="1"
+        textBoxWidth={100}
+        textBoxHeight={150}
+        linePath="
+          M142.16,
+          173.94l24.26,
+          36.69a40.12,
+          40.12,0,0,0,
+          33.47,
+          18H318.2"
+        xPosition={632}
+        yPosition={0}
+        lineX={142.16}
+        lineY={173}
+        textX={76}
+        textY={58}
+        containerX={this.props.left + 3 }
+        containerY={this.props.top + 100}
+        name="exportBarChartExplanation"
+        text={`${this.props.tr(['explanations','blueBarCrude'])}`}
     /></g>)
   }
 
@@ -159,7 +187,8 @@ class BarChart extends Chart {
       <g transform={this.getTransform()}>
         <g>{elements}
         { this.orangeBarExplanation() }
-        { this.blueBarExplanation() }</g>
+        { this.blueBarExplanation() }
+        {this.crudeBlueBarExplanation()}</g>
         <AxisGuide
           flipped={flipped}
           scale={scale.get('y').toJS()}
@@ -182,5 +211,6 @@ class BarChart extends Chart {
 
 export default connect((state, props) => Object.assign({
   timelineGroup: timelineGrouping(state, props),
+  selectedEnergy: state.importExportVisualization,
   tr: trSelector(state, props),
 }, timelineData(state, props)))(BarChart)
