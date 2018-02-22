@@ -174,11 +174,11 @@ class PaddLayout extends React.Component {
 
 
     let paddIIINGLconfidentialIcon = null
-    let paddIIINGLcontainerX = this.props.left + left + 182
-    let paddIIINGLcontainerY = this.props.top + top - 49
+    let paddIIINGLcontainerX = this.props.left + left + 100
+    let paddIIINGLcontainerY = this.props.top + top - 10
     if (this.props.arrangeBy === 'imports' || this.props.arrangeBy === 'exports') {
-      paddIIINGLcontainerX = this.props.left + left + 568
-      paddIIINGLcontainerY = this.props.top + top + 69
+      paddIIINGLcontainerX = this.props.left + left + 500
+      paddIIINGLcontainerY = this.props.top + top + 110
     }
     if (style && confidentialCount > 0 && country !== 'ca'
       && this.props.confidentialityMenu
@@ -202,11 +202,11 @@ class PaddLayout extends React.Component {
     }
 
     let paddIVNGLconfidentialIcon = null
-    let paddIVNGLcontainerX = this.props.left + left + 9
-    let paddIVNGLcontainerY = this.props.top + top - 320
+    let paddIVNGLcontainerX = this.props.left + left - 59
+    let paddIVNGLcontainerY = this.props.top + top - 276
     if (this.props.arrangeBy === 'imports' || this.props.arrangeBy === 'exports') {
-      paddIVNGLcontainerX = this.props.left + left + 443
-      paddIVNGLcontainerY = this.props.top + top + 69
+      paddIVNGLcontainerX = this.props.left + left + 390
+      paddIVNGLcontainerY = this.props.top + top + 110
     }
     if (style && confidentialCount > 0 && country !== 'ca'
       && this.props.confidentialityMenu
@@ -230,11 +230,11 @@ class PaddLayout extends React.Component {
     }
 
     let paddVNGLconfidentialIcon = null
-    let paddVNGLcontainerX = this.props.left + left - 7
-    let paddVNGLcontainerY = this.props.top + top - 50
+    let paddVNGLcontainerX = this.props.left + left - 69
+    let paddVNGLcontainerY = this.props.top + top - 16
     if (this.props.arrangeBy === 'imports' || this.props.arrangeBy === 'exports') {
-      paddVNGLcontainerX = this.props.left + left + 318
-      paddVNGLcontainerY = this.props.top + top + 69
+      paddVNGLcontainerX = this.props.left + left + 278
+      paddVNGLcontainerY = this.props.top + top + 110
     }
     if (style && confidentialCount > 0 && country !== 'ca'
       && this.props.confidentialityMenu
@@ -258,11 +258,11 @@ class PaddLayout extends React.Component {
     }
 
     let paddMexicoNGLconfidentialIcon = null
-    let paddMexicoNGLcontainerX = this.props.left + left + 477
-    let paddMexicoNGLcontainerY = this.props.top + top - 125
+    let paddMexicoNGLcontainerX = this.props.left + left + 407
+    let paddMexicoNGLcontainerY = this.props.top + top - 90
     if (this.props.arrangeBy === 'imports' || this.props.arrangeBy === 'exports') {
-      paddMexicoNGLcontainerX = this.props.left + left + 687
-      paddMexicoNGLcontainerY = this.props.top + top + 69
+      paddMexicoNGLcontainerX = this.props.left + left + 610
+      paddMexicoNGLcontainerY = this.props.top + top + 110
     }
     if (style && confidentialCount > 0 && country !== 'ca'
       && this.props.confidentialityMenu
