@@ -40,7 +40,7 @@
   100% { transform: rotate(360deg); }
 }
 
-:-moz-focusring { outline: 3px solid rgb(77, 144, 254); }
+:focus { outline: 2px solid $explanation !important; }
 
 #popoverPortal {
   pointer-events: none;
