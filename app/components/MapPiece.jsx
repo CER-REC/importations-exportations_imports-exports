@@ -221,14 +221,20 @@ class MapPiece extends React.Component {
 
     let confidentialIcon = null
     const valueString = `${this.props.data.get('confidentialCount')} / ${this.props.data.get('totalCount')} values confidential`
+    let containerX = this.props.containerX + this.props.x1 + 13
+    let containerY = this.props.containerY + this.props.y1 + 11
+    if (this.props.selectedEnergy === 'naturalGasLiquids') {
+      containerX = this.props.x1 * MapLayoutGridConstant.getIn(['naturalGasLiquids', 'ca' , 'mapPieceScale'], 1) + 322
+      containerY = this.props.y1 * MapLayoutGridConstant.getIn(['naturalGasLiquids', 'ca' , 'mapPieceScale'], 1) + 85
+    }
     if (typeof this.props.data.get('confidentialCount') !== 'undefined'
         && this.props.data.get('confidentialCount') !== 0
         && this.props.confidentialityMenu) {
       confidentialIcon = <ConfidentialIcon
         styles={this.props.styles.get('confidentialStyle')}
         text={valueString}
-        containerX={this.props.containerX + this.props.x1 + 13}
-        containerY={this.props.containerY + this.props.y1 + 11}
+        containerX={containerX}
+        containerY={containerY}
         lineX={102}
         lineY={40}
         textX={40}
