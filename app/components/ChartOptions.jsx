@@ -57,7 +57,7 @@ class ChartOptions extends React.PureComponent {
         name="linkDataIcon"
         text={`${this.props.tr(['explanations','linkedDataIcon'])}`}
     /></g>)
-  }
+  } 
 
   scaleLinkedChanged = () => this.props.setScaleLinked(!this.props.scaleLinked)
 

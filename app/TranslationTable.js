@@ -394,7 +394,7 @@ const TranslationTable = fromJS({
       fr: 'TODO',
     },
     amountCrude: {
-      en: 'Crude oil is measured in 1000 m3/d (thousand cubic metres per day) which is...',
+      en: 'Crude oil is measured in 1000 m³/d (thousand cubic metres per day) which is...',
       fr: 'TODO',
     },
     padd: {
@@ -450,7 +450,7 @@ const TranslationTable = fromJS({
       fr: 'TODO',
     },
     amountNaturalGas: {
-      en: 'Natural gas is measured in 1000 m3/d, which is...CAN/$GJ is the average price...',
+      en: 'Natural gas is measured in 1000 m³/d, which is...CAN/$GJ is the average price...',
       fr: 'TODO',
     },
     resetNaturalGasLiquids: {
@@ -478,7 +478,7 @@ const TranslationTable = fromJS({
       fr: 'TODO',
     },
     amountNaturalGasLiquids: {
-      en: 'Natural gas liquids are measured in m3/d (thousand cubic metres per day), which are...',
+      en: 'Natural gas liquids are measured in m³/d (thousand cubic metres per day), which are...',
       fr: 'TODO',
     },
     resetRefinedPetroleumProducts: {
@@ -490,7 +490,7 @@ const TranslationTable = fromJS({
       fr: 'TODO',
     },
     amountRefinedPetroleumProducts: {
-      en: 'Refined petroleum product flow is measured in 1000 m3/d (thousand cubic metres per day), which is...',
+      en: 'Refined petroleum product flow is measured in 1000 m³/d (thousand cubic metres per day), which is...',
       fr: 'TODO',
     },
     confidentialValuesRefinedPetroleumProducts: {

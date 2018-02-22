@@ -6,11 +6,69 @@ import AnimatedLine from './SVGAnimation/AnimatedLine'
 import Constants from '../Constants'
 import { timelineGrouping, timelineData } from '../selectors/timeline'
 
+import trSelector from '../selectors/translate'
+import tr from '../TranslationTable'
+
+import ExplanationDot from './ExplanationDot'
+
 class StackedChart extends Chart {
   static get defaultProps() {
     return Object.assign({}, super.defaultProps, {
       colors: Constants.getIn(['styleGuide', 'categoryColours']),
     })
+  }
+
+  refinedPetroleumProductsBar() {
+    return (<g>
+      <ExplanationDot
+        scale="scale(1)"
+        lineStroke="1"
+        textBoxWidth={100}
+        textBoxHeight={150}
+        linePath="
+          M142.16,
+          173.94l24.26,
+          36.69a40.12,
+          40.12,0,0,0,
+          33.47,
+          18H288.2"
+        xPosition={670}
+        yPosition={120}
+        lineX={142.16}
+        lineY={173}
+        textX={46}
+        textY={58}
+        containerX={this.props.left + 3}
+        containerY={this.props.top + 260}
+        name="stackedBarChartExplanation"
+        text={`${this.props.tr(['explanations','barsRefinedPetroleumProducts'])}`}
+    /></g>)
+  }
+
+  confidentialityExplanation() {
+    return (<g>
+      <ExplanationDot
+        scale="scale(1)"
+        lineStroke="1"
+        textBoxWidth={140}
+        linePath="
+          M142.16,
+          173.94l24.26,
+          36.69a40.12,
+          40.12,0,0,0,
+          33.47,
+          18H322.2"
+        xPosition={698}
+        yPosition={370}
+        lineX={142.16}
+        lineY={173.94}
+        textX={40}
+        textY={58}
+        containerX={this.props.left}
+        containerY={this.props.top - 237}
+        name="confidentialityRefinedPetroleumProductsExplanation"
+        text={`${this.props.tr(['explanations','confidentialValuesRefinedPetroleumProducts'])}`}
+    /></g>)
   }
 
   render() {
@@ -68,6 +126,8 @@ class StackedChart extends Chart {
     return (
       <g transform={this.getTransform()}>
         {elements}
+        {this.refinedPetroleumProductsBar()}
+        {this.confidentialityExplanation()}
       </g>
     )
   }
@@ -75,4 +135,5 @@ class StackedChart extends Chart {
 
 export default connect((state, props) => Object.assign({
   timelineGroup: timelineGrouping(state, props),
+  tr: trSelector(state, props),
 }, timelineData(state, props)))(StackedChart)

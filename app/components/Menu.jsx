@@ -137,6 +137,33 @@ class Menu extends React.PureComponent {
     /></g>)
   }
 
+  arrangedByExplanation() {
+    if (this.props.name !== 'arrangedBy' && this.props.selectedEnergy !== 'refinedPetroleumProducts') { return }
+    return (<g>
+      <ExplanationDot
+        scale="scale(1 -1) translate(0 -100)"
+        lineStroke="1"
+        textBoxWidth={190}
+        linePath="
+          M142.16,
+          173.94l24.26,
+          36.69a40.12,
+          40.12,0,0,0,
+          33.47,
+          18H378.2"
+        xPosition={135}
+        yPosition={160}
+        lineX={142.16}
+        lineY={173.94}
+        textX={45}
+        textY={48}
+        containerX={2}
+        containerY={-102}
+        text={`${this.props.Tr(['explanations','arrangeByRefinedPetroleumProducts'])}`}
+        name="arrangedByRefinedPetroleumProductsExplanation"
+    /></g>)
+  }
+
   renderTitle() {
     if (this.props.title === false) { return null }
     const { Tr } = this.props
@@ -212,6 +239,7 @@ class Menu extends React.PureComponent {
       </g>
         {this.amountExplanation()}
         {this.importExportExplanation()}
+        {this.arrangedByExplanation()}
     </g>
     )
   }

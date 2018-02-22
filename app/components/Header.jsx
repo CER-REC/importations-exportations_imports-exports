@@ -65,7 +65,7 @@ class Header extends React.Component {
         lineX={142.16}
         lineY={173}
         textX={40}
-        textY={55}
+        textY={58}
         containerX={0}
         containerY={-70} 
         name="titleExplanation"
