@@ -80,20 +80,17 @@ class ProportionChart extends Chart {
             return (
               <DetailBreakdownRow
                 key={key}
-                label={
-                  <span>
-                    <div
-                      style={{
-                        display: 'inline-block',
-                        width: '8px',
-                        height: '8px',
-                        marginRight: '4px',
-                        backgroundColor: colour,
-                      }}
-                    />
-                    {prefix} <strong>{key}</strong>{suffix}
-                  </span>
-                }
+                colorBox={<div
+                          style={{
+                            display: 'inline-block',
+                            width: '8px',
+                            height: '8px',
+                            marginRight: '4px',
+                            verticalAlign: 'top',
+                            backgroundColor: colour,
+                          }}
+                        />}
+                label={<span>{prefix} <strong>{key}</strong>{suffix}</span>}
                 value={breakdown.values[key]}
                 unit={this.props.unit}
                 total={breakdown.total}

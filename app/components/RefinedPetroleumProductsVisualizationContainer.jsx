@@ -62,9 +62,7 @@ class RefinedPetroleumProductsVisualizationContainer extends React.Component {
                 return (
                   <DetailBreakdownRow
                     key={key}
-                    label={
-                      <span>
-                        <div
+                    colorBox={<div
                           style={{
                             display: 'inline-block',
                             width: '8px',
@@ -72,10 +70,8 @@ class RefinedPetroleumProductsVisualizationContainer extends React.Component {
                             marginRight: '4px',
                             backgroundColor: colour,
                           }}
-                        />
-                        <strong>{key}</strong>
-                      </span>
-                    }
+                        />}
+                    label={<strong>{key}</strong>}
                     value={breakdown.values[key]}
                     unit={this.props.unit}
                     total={breakdown.total}
