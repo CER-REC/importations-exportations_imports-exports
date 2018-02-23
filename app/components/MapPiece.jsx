@@ -304,11 +304,18 @@ class MapPiece extends React.Component {
 
     let confidentialIcon = null
     const valueString = `${this.props.data.get('confidentialCount')} / ${this.props.data.get('totalCount')} values confidential`
-    let containerX = this.props.containerX + this.props.x1 + 13
-    let containerY = this.props.containerY + this.props.y1 + 11
+    let scaleContainerX = this.props.viewport.get('changeWidthRatio')  > 1.2 ? -5: -10
+    let scaleContainerY = this.props.viewport.get('changeHeightRatio')  > 1.2 ? 8: 8
+    let containerX = this.props.containerX + this.props.x1 + scaleContainerX
+    let containerY = this.props.containerY + this.props.y1 + scaleContainerY
     if (this.props.selectedEnergy === 'naturalGasLiquids') {
-      containerX = this.props.x1 * MapLayoutGridConstant.getIn(['naturalGasLiquids', 'ca' , 'mapPieceScale'], 1) + 322
-      containerY = this.props.y1 * MapLayoutGridConstant.getIn(['naturalGasLiquids', 'ca' , 'mapPieceScale'], 1) + 85
+      scaleContainerX = this.props.viewport.get('changeWidthRatio')  > 1.2 ? 240: 205
+      scaleContainerY = this.props.viewport.get('changeHeightRatio')  > 1.2 ? 65: 80
+      containerX = this.props.x1 * MapLayoutGridConstant.getIn(['naturalGasLiquids', 'ca' , 'mapPieceScale'], 1) + scaleContainerX
+      containerY = this.props.y1 * MapLayoutGridConstant.getIn(['naturalGasLiquids', 'ca' , 'mapPieceScale'], 1) + scaleContainerY
+    }
+    if(this.props.country && this.props.country === 'powerpool'){
+      containerX += 13
     }
     if (typeof this.props.data.get('confidentialCount') !== 'undefined'
         && this.props.data.get('confidentialCount') !== 0
@@ -316,8 +323,8 @@ class MapPiece extends React.Component {
       confidentialIcon = <ConfidentialIcon
         styles={this.props.styles.get('confidentialStyle')}
         text={valueString}
-        containerX={containerX}
-        containerY={containerY}
+        containerX={this.props.viewport.get('changeWidthRatio')*containerX}
+        containerY={this.props.viewport.get('changeHeightRatio')*containerY}
         lineX={102}
         lineY={40}
         textX={40}
@@ -379,6 +386,7 @@ export default connect(
     tr: trSelector(state, props),
     expandCollapseConfidentiality: state.expandCollapseConfidentiality,
     activity: state.activity,
+    viewport: state.viewport,
   }),
 )(MapPiece)
 
