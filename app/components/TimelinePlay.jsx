@@ -93,6 +93,27 @@ class TimelinePlay extends React.PureComponent {
     /></g>)
   }
 
+  renderIcon() {
+    if (this.state.playInterval) {
+      // top: 1.185
+      // bottom: 16.185
+      return (
+        <polyline
+          points="1.185 2.185 1.185 15.185 14.185 15.185 14.185 2.185 1.185 2.185"
+          stroke="#a99372"
+          fill="white"
+        />
+      )
+    }
+    return (
+      <polyline
+        points="0.5 0.87 0.5 17.37 14.8 9.17 0.5 0.87"
+        stroke="#a99372"
+        fill="white"
+      />
+    )
+  }
+
   render() {
     const label = this.props.tr(['timelinePlay', this.state.playInterval ? 'stop' : 'start'])
     const scale = (this.props.height / 17.37) // 17.37 is the height of the SVG
@@ -104,13 +125,8 @@ class TimelinePlay extends React.PureComponent {
         aria-label={label}
         {...handleInteraction(this.onClick)}
       >
-        <g transform={`scale(${scale})`}
-          className="playButton">
-          <polyline
-            points="0.5 0.87 0.5 17.37 14.8 9.17 0.5 0.87"
-            stroke="#a99372"
-            fill="white"
-          />
+        <g transform={`scale(${scale})`} className="playButton">
+          {this.renderIcon()}
         </g>
         {this.playButtonExplanation()}
       </g>
