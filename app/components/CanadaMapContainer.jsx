@@ -16,7 +16,7 @@ const CanadaMapContainer = props => (
   // Scale is temporary adjustment as it's too small if we use dimensions
   // mentioned in the design document
   // TODO: scale map dynamically when screen size change
-  <g transform={`translate(${props.left} ${props.top})`}>
+  <g transform={`scale(${props.viewport.get('changeWidthRatio')} ${props.viewport.get('changeHeightRatio')}) translate(${props.left} ${props.top})`}>
     <ElectricityMapLayout
       left={props.left}
       top={props.top}
@@ -24,6 +24,7 @@ const CanadaMapContainer = props => (
       country="ca"
     />
   </g>
+  //transform={}
 )
 
 CanadaMapContainer.propTypes = {

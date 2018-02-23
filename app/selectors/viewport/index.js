@@ -4,7 +4,7 @@ import Constants from '../../Constants'
 
 export const menuWidth = () => Constants.getIn(['menuBar', 'width'])
 const detailSidebar = Constants.get('visualizationDetailContainer')
-const viewport = state => state.viewport
+export const viewport = state => state.viewport
 
 export const positionHelper = (prev, height) => createSelector(
   prev,

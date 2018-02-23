@@ -1,6 +1,6 @@
 import { createSelector } from 'reselect'
 
-import { visualizationContentPosition } from './index'
+import { visualizationContentPosition, viewport } from './index'
 import Constants from '../../Constants'
 
 const axisHeight = Constants.getIn(['timeline', 'axisHeight'])
@@ -17,12 +17,17 @@ export const canadaPaddPosition = createSelector(
 
 export const chartTransportPosition = createSelector(
   canadaPaddPosition,
-  canadaPadd => ({
-    top: canadaPadd.top + canadaPadd.height - 20,
-    left: canadaPadd.left,
-    width: canadaPadd.width,
-    height: 100,
-  }),
+  viewport,
+  (canadaPadd, viewp) => {
+    const top = viewp.get('changeHeightRatio') > 1.2? canadaPadd.top + canadaPadd.height - 30: canadaPadd.top + canadaPadd.height - 70
+    const result = {
+      top,
+      left: canadaPadd.left,
+      width: canadaPadd.width,
+      height: 100,
+    }
+    return result
+  },
 )
 
 export const chartSubtypePosition = createSelector(
@@ -57,10 +62,15 @@ export const chartExportPosition = createSelector(
 
 export const usPaddPosition = createSelector(
   chartExportPosition,
-  chartPosition => ({
-    top: chartPosition.top + chartPosition.height - 80,
-    left: chartPosition.left,
-    width: chartPosition.width,
-    height: 100,
-  }),
+  viewport,
+  (chartPosition, viewp) => {
+    const top = viewp.get('changeHeightRatio') > 1.2 ? (chartPosition.top + chartPosition.height - 80) : (chartPosition.top + chartPosition.height) 
+    const result = {
+      top,
+      left: chartPosition.left,
+      width: chartPosition.width,
+      height: 100,
+    }
+    return result
+  },
 )
