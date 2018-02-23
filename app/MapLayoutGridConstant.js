@@ -399,12 +399,16 @@ const MapLayoutGridConstant = fromJS({
           yPadding: 260,
           xExportPadding: 130,
           yExportPadding: 200,
+          scaleingAdjustmentX: -100,
+          scaleingAdjustmentY: -5,
         },
         naturalGasLiquids: {
           xPadding: 70,
           yPadding: 260,
           xExportPadding: 130,
           yExportPadding: 200,
+          scaleingAdjustmentX: 0,
+          scaleingAdjustmentY: 0,
         },
       },
       arrow: {
@@ -486,12 +490,16 @@ const MapLayoutGridConstant = fromJS({
           yPadding: 260,
           xExportPadding: 130,
           yExportPadding: 200,
+          scaleingAdjustmentX: -5,
+          scaleingAdjustmentY: -40,
         },
         naturalGasLiquids: {
           xPadding: 90,
           yPadding: 250,
           xExportPadding: 130,
           yExportPadding: 200,
+          scaleingAdjustmentX: 20,
+          scaleingAdjustmentY: -55,
         },
       },
       padding: {

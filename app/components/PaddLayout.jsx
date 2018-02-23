@@ -52,8 +52,10 @@ class PaddLayout extends React.Component {
 
   renderConfidentialPopover(leftPadding, paddGroupId, style, confidentialCount, totalCount, left, top, transformTranslate){
     const energyType =  this.props.selectedEnergy
-    let paddContainerX = this.props.viewport.get('changeWidthRatio') *(this.props.left + left + transformTranslate.get('left') - style.getIn([ energyType, 'xPadding'],0))
-    let paddContainerY = this.props.viewport.get('changeHeightRatio') *(this.props.top + top + transformTranslate.get('top') - style.getIn([energyType, 'yPadding'],0))
+    const scaleingAdjustmentX = this.props.viewport.get('changeWidthRatio')  > 1.2 ? 0:style.getIn([ energyType, 'scaleingAdjustmentX'],0)
+    const scaleingAdjustmentY = this.props.viewport.get('changeHeightRatio')  > 1.2 ? 0:style.getIn([ energyType, 'scaleingAdjustmentY'],0)
+    let paddContainerX = this.props.viewport.get('changeWidthRatio') *(this.props.left + left + transformTranslate.get('left') - style.getIn([ energyType, 'xPadding'],0) + scaleingAdjustmentX)
+    let paddContainerY = this.props.viewport.get('changeHeightRatio') *(this.props.top + top + transformTranslate.get('top') - style.getIn([energyType, 'yPadding'],0) + scaleingAdjustmentY)
     if (this.props.arrangeBy !== 'location') {
       paddContainerX = this.props.viewport.get('changeWidthRatio') *(this.props.left + left + transformTranslate.get('left') + style.getIn([energyType, 'xExportPadding'],0) + leftPadding)
       paddContainerY = this.props.viewport.get('changeHeightRatio') *(this.props.top + top + transformTranslate.get('top') + style.getIn([energyType, 'yExportPadding'],0))
@@ -63,8 +65,8 @@ class PaddLayout extends React.Component {
     if(paddGroupId === 'ca'){
       xPosition = 36
       yPosition= 12
-      paddContainerX = this.props.left + left + 140,
-      paddContainerY = this.props.top + top - 20
+      paddContainerX = this.props.left + left + 140 + scaleingAdjustmentX,
+      paddContainerY = this.props.top + top - 20 + scaleingAdjustmentY
     }
     if (style && confidentialCount > 0 
       && this.props.confidentialityMenu) {
