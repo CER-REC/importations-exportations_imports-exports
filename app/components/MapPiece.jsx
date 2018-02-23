@@ -182,7 +182,7 @@ class MapPiece extends React.Component {
   }
 
   emersonExplanation() {
-   if (this.props.data.get('portName') !== 'Emerson') { return null }
+    if (this.props.data.get('portName') !== 'Emerson') { return null }
     return (<g>
       <ExplanationDot
         scale="scale(1)"
@@ -201,8 +201,8 @@ class MapPiece extends React.Component {
         lineY={173.94}
         textX={40}
         textY={58}
-        containerX={this.props.x1 + 250}
-        containerY={this.props.y1 + 330}
+        containerX={this.props.x1 + 297}
+        containerY={this.props.y1 + 345}
         name="emersonElectricity"
         text={`${this.props.tr(['explanations','EmersonNaturalGas'])}`}
     /></g>)
@@ -228,7 +228,7 @@ class MapPiece extends React.Component {
         lineX={142.16}
         lineY={173.94}
         textX={48}
-        textY={48}
+        textY={49}
         containerX={this.props.x1 * MapLayoutGridConstant.getIn(['naturalGasLiquids', 'ca' , 'mapPieceScale'], 1) + 306}
         containerY={this.props.y1 * MapLayoutGridConstant.getIn(['naturalGasLiquids', 'ca' , 'mapPieceScale'], 1) - 28}       
         name="albertaExplanation"

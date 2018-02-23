@@ -68,7 +68,7 @@ class ShowExplanations extends React.Component {
         className="showHideExplanations"
         fill={textColour}
       >
-        {explanationsText} <tspan dx="15">{sign}</tspan>
+        {explanationsText} <tspan dx="17">{sign}</tspan>
       </text>
     )
   }

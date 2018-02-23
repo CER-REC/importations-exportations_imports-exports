@@ -99,7 +99,10 @@ class Header extends React.Component {
   metaBar() {
     const { Tr } = this.props
     const transformMetaBarIcons = `translate(${this.props.viewport.get('x') - Constants.getIn(['metaBar', 'iconMargin'])}, 0)`
-
+    let resetX = `${this.props.viewport.get('x') - Constants.getIn(['metaBar', 'resetTextOffset'])}`
+    if (this.props.language === 'fr') {
+      resetX = `${this.props.viewport.get('x') - Constants.getIn(['metaBar', 'resetTextOffset']) - 55}`
+    }
     return (
       <svg
         className="metaBar"
@@ -117,7 +120,7 @@ class Header extends React.Component {
             className="resetLabel"
             {...handleInteraction(this.resetClick)}
             y={Constants.getIn(['metaBar', 'resetTextY'])}
-            x={this.props.viewport.get('x') - Constants.getIn(['metaBar', 'resetTextOffset'])}
+            x={resetX}
             aria-label={Tr(['socialBar', 'resetVisualization'])}
             role="menuitem"
           >{Tr('resetLabel')}

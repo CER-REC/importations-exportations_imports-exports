@@ -113,7 +113,13 @@ class AxisGuide extends React.PureComponent {
       containerY = this.props.chartHeight + (this.props.barSize / 2)
       - (this.props.position * this.props.heightPerUnit) - 2 + 170
     }
-    if (this.props.flipped && this.props.selectedEnergy !== 'crudeOil') { return null }
+    if (this.props.selectedEnergy === 'refinedPetroleumProducts') {
+      containerY = this.props.chartHeight + (this.props.barSize / 2)
+      + (this.props.position * this.props.heightPerUnit) - 413
+    }
+    if (this.props.flipped
+      && (this.props.selectedEnergy !== 'crudeOil'
+      && this.props.selectedEnergy !== 'refinedPetroleumProducts')) { return null }
     return (<g>
       <ExplanationDot
         scale="scale(1)"
