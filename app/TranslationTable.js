@@ -30,83 +30,95 @@ const TranslationTable = fromJS({
   aboutWindow: {
     heading: {
       en: 'ABOUT THIS PROJECT',
-      fr: 'ABOUT THIS PROJECT FR',
+      fr: 'LE PROJET',
     },
     p1: {
-      en: 'Paragraph one',
-      fr: 'la french FR',
+      en: 'This online tool portrays imports and exports of energy products to and from Canada. It is part of the National Energy Board’s (NEB) Data Visualization Initiative (DVI). The DVI is a three-year initiative to transform how the NEB structures and shares data. The objective is to enable evidence-based decision making and remove barriers to understanding Canada’s energy and pipeline systems through the use of user-friendly interactive visualizations.',
+      fr: 'Cet outil en ligne trace un portrait des importations au Canada et des exportations du Canada des produits énergétiques. Il fait partie de l’initiative de visualisation des données de l’Office national de l’énergie. Échelonnée sur trois ans, cette initiative vise à transformer la manière dont l’Office structure et diffuse ses données. Elle a pour objectif de favoriser un processus décisionnel fondé sur la preuve et de faciliter la compréhension des questions liées aux réseaux énergétiques et pipeliniers du Canada, grâce à des visualisations interactives, faciles à utiliser.',
     },
     p2: {
-      en: 'paragraph two',
-      fr: 'la french placeholder FR',
+      en: 'This visualization show quarterly energy trade data between Canada and the USA since 1985, with the exception of electricity data which is available back to 1990.',
+      fr: 'Cette visualisation présente les données trimestrielles sur le commerce de l’énergie entre le Canada et les États-Unis depuis 1985, à l’exception des données concernant l’électricité, qui ne sont disponibles que depuis 1990.',
     },
     p3: {
-      en: 'paragraph three',
-      fr: 'la french paragraph trois FR',
+      en: 'If you want to use the data for research and undertake your own review, all the data is downloadable and shareable. The chart images are also downloadable, and if you are interested in the source code for the visualizations, it is available on the government’s Open Government portal:',
+      fr: 'Si vous souhaitez utiliser les données pour vos recherches ou pour en faire votre propre analyse, vous pouvez les télécharger et les partager. Il en est de même pour les graphiques. Quant au code source des visualisations, il est accessible sur le portail du « gouvernement ouvert » à l’adresse',
+    },
+    governmentPortalLink: {
+      en: 'open.canada.ca',
+      fr: 'ouvert.canada.ca',
     },
     p4: {
-      en: 'paragraph four',
-      fr: 'oui oui FR',
+      en: 'We hope we are hitting the mark. Your feedback is essential.',
+      fr: 'Nous espérons avoir atteint notre objectif. Votre rétroaction est essentielle.',
+    },
+    p5_1: {
+      en: 'Email us with your comments and ideas:  ',
+      fr: 'Vous pouvez nous la faire parvenir, ainsi que vos suggestions, à l’adresse ',
+    },
+    emailLink: {
+      en: 'energyindesign@neb-one.gc.ca',
+      fr: 'conceptionenergie@neb-one.gc.ca',
+    },
+    p5_2: {
+      en: '. We look forward to hearing from you.',
+      fr: '. Votre opinion compte.',
     },
     contributors: {
       en: 'CONTRIBUTORS',
-      fr: 'CONTRIBUTORS FR',
+      fr: 'LES CONTRIBUTEURS',
     },
     dataSource: {
       en: 'DATA SOURCE',
-      fr: 'DATA SOURCE',
+      fr: 'SOURCE DES DONNÉES',
     },
     dataNamesfromNEB: {
-      en: 'Andrew Benson, Karen Duckworth, Randy Cooke',
-      fr: 'Andrew Benson, Karen Duckworth, Randy Cooke',
-    },
-    nebCoordinators: {
-      en: 'Annette Hester (Concept and Coordination); Katherine Murphy (Project Manager); Faiza Hussain (Administrative support); Stephen Chow (Data Coordination)',
-      fr: 'TODO',
-    },
-    dataVisualization: {
-      en: 'DATA VISUALIZATION',
-      fr: 'DATA VISUALIZATION FR',
-    },
-    leadDesignResearch: {
-      en: 'LEAD DESIGN RESEARCH',
-      fr: 'LEAD DESIGN RESEARCH FR',
-    },
-    leadDesigners: {
-      en: 'Sheelagh Carpendale and Wesley Willett, iLab, University of Calgary',
-      fr: 'TODO',
+      en: 'Paul Mortenson',
+      fr: 'Paul Mortenson',
     },
     coordination: {
       en: 'COORDINATION',
-      fr: 'COORDINATION FR',
+      fr: 'COORDINATION',
     },
-    coordi: {
-      en: 'Claudia Maurer',
-      fr: 'Claudia Maurer',
+    nebCoordinators: {
+      en: 'Annette Hester (Concept and Coordination); Katherine Murphy (Project Manager)',
+      fr: 'Annette Hester (concept et conception et coordination); Katherine Murphy (gestionnaire de projet)',
+    },
+    dataVisualization: {
+      en: 'DATA VISUALIZATION',
+      fr: 'VISUALISATION DES DONNÉES',
+    },
+    leadDesignResearch: {
+      en: 'LEAD DESIGN RESEARCH',
+      fr: 'RECHERCH CONCEPTUELLE SOUS LA DIRECTION',
+    },
+    leadDesigners: {
+      en: 'Sheelagh Carpendale and Wesley Willett, iLab, University of Calgary.',
+      fr: 'Sheelagh Carpendale et Wesley Willett, iLab, Université de Calgary',
     },
     design: {
       en: 'DESIGN',
-      fr: 'DESIGN',
+      fr: 'CONCEPTION',
     },
     designers: {
-      en: 'Jagoda Walny Nix, Peter Buk, Doris Kosminsky, Lien Quach, and Mieka West',
-      fr: 'TODO',
+      en: 'Bon Adriel Aseniero, Peter Buk, Søren Knudsen, Doris Kosminsky, Claudia Maurer, Lien Quach, Jo Vermeulen, Jagoda Walny Nix, and Mieka West.',
+      fr: 'Bon Adriel Aseniero, Peter Buk, Søren Knudsen, Doris Kosminsky, Claudia Maurer, Lien Quach, Jo Vermeulen, Jagoda Walny Nix, et Mieka West.',
     },
     leadTechnical: {
       en: 'LEAD TECHNICAL',
-      fr: 'LEAD TECHNICAL FR',
+      fr: 'CHEF TECHNIQUE',
     },
     vizworx: {
-      en: 'VizworX',
-      fr: 'VizworX',
+      en: 'VizworX Inc.',
+      fr: 'VizworX Inc.',
     },
     technical: {
       en: 'TECHNICAL',
-      fr: 'TECHNICAL',
+      fr: 'PERSONNEL TECHNIQUE',
     },
     technicalTeam: {
-      en: 'Patrick King, Spenser Jones, Rahul Kamal Bhaskar, Ben Cousins, Abhishek Sharma, and Charlie Cheung',
-      fr: 'Patrick King, Spenser Jones, Rahul Kamal Bhaskar, Ben Cousins, Abhishek Sharma, and Charlie Cheung',
+      en: 'Spenser Jones, Charlie Cheung, Rahul Kamal Bhaskar, Patrick King, Andy LePage and Ben Cousins',
+      fr: 'Spenser Jones, Charlie Cheung, Rahul Kamal Bhaskar, Patrick King, Andy LePage et Ben Cousins',
     },
     closeWindow: {
       en: 'Close About Window',
