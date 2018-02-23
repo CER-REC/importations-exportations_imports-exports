@@ -2,9 +2,9 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
-import { timelineFilter } from '../actions/visualizationSettings'
+import { setTimelinePlayback, resetTimelinePlayback } from '../actions/timelinePlayback'
 import { timelineYearScaleCalculation } from '../selectors/timeline'
-import { timelineRange } from '../selectors/data'
+import { timelineRange, timelinePlayback } from '../selectors/data'
 import trSelector from '../selectors/translate'
 import tr from '../TranslationTable'
 import { handleInteraction } from '../utilities'
@@ -35,10 +35,7 @@ class TimelinePlay extends React.PureComponent {
     if (this.state.playInterval) {
       clearInterval(this.state.playInterval)
       this.setState({ playInterval: null })
-      this.props.timelineFilter({
-        start: { year: yearScale.min, quarter: 1 },
-        end: { year: yearScale.max, quarter: 4 },
-      })
+      this.props.resetTimelinePlayback()
     }
   }
 
@@ -48,23 +45,26 @@ class TimelinePlay extends React.PureComponent {
     const { timelineScale: yearScale } = this.props
     this.setState({
       playInterval: setInterval(() => {
-        let year = this.props.timelineRange.getIn(['start', 'year'])
-        let quarter = this.props.timelineRange.getIn(['start', 'quarter']) + 1
+        const { year: playbackYear, quarter: playbackQuarter } = this.props.timelinePlayback.toJS()
+        const { year: endYear, quarter: endQuarter } = this.props.timelineRange.get('end').toJS()
+        if (playbackYear >= endYear && playbackQuarter >= endQuarter) {
+          this.resetPlay()
+          return
+        }
+        let year = playbackYear
+        let quarter = playbackQuarter + 1
         if (quarter > 4) {
           year += 1
           quarter = 1
         }
         if (year === yearScale.max && quarter === 4) { return this.resetPlay() }
-        this.props.timelineFilter({
-          start: { year, quarter },
-          end: { year, quarter },
-        })
+        this.props.setTimelinePlayback(year, quarter)
       }, 2000),
     })
-    this.props.timelineFilter({
-      start: { year: yearScale.min, quarter: 1 },
-      end: { year: yearScale.min, quarter: 1 },
-    })
+    this.props.setTimelinePlayback(
+      this.props.timelineRange.getIn(['start', 'year']),
+      this.props.timelineRange.getIn(['start', 'quarter']),
+    )
   }
 
   playButtonExplanation() {
@@ -138,9 +138,10 @@ class TimelinePlay extends React.PureComponent {
 export default connect(
   (state, props) => ({
     timelineRange: timelineRange(state, props),
+    timelinePlayback: timelinePlayback(state, props),
     selectedEnergy: state.importExportVisualization,
     timelineScale: timelineYearScaleCalculation(state, props),
     tr: trSelector(state, props),
   }),
-  { timelineFilter },
+  { setTimelinePlayback, resetTimelinePlayback },
 )(TimelinePlay)

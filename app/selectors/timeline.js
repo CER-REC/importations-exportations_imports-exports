@@ -6,6 +6,7 @@ import {
   filterByHexSelector,
   detailSidebarFilteredData,
   timelineRange,
+  timelinePlayback,
   groupingBy as timelineGrouping,
 } from './data'
 import { visualizationContentPosition as visContentSize } from './viewport/'
@@ -268,7 +269,8 @@ export const timelineData = createSelector(
   timelineScaleCalculation,
   timelinePositionCalculation,
   timelineRange,
-  (scale, position, range) => ({ timelineRange: range, ...scale, ...position }),
+  timelinePlayback,
+  (scale, position, range, playback) => ({ timelineRange: range, timelinePlayback: playback, ...scale, ...position }),
 )
 
 export const timelineSeekPositionSelector = createSelector(
