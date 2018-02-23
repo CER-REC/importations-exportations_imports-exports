@@ -51,6 +51,7 @@ class AxisGuide extends React.PureComponent {
   }
 
   onArrowKey = (e) => {
+    if (this.props.scale.max === this.props.scale.min) { return }
     const direction = (e.key === 'ArrowUp' || e.key === 'PageUp') ? -1 : 1
     const scale = (e.key === 'ArrowUp' || e.key === 'ArrowDown') ? 1 : 10
 
@@ -68,6 +69,9 @@ class AxisGuide extends React.PureComponent {
   }
 
   adjustOffset(rawOffset) {
+    if (this.props.scale.max === this.props.scale.min) {
+      return { x: 0, y: this.props.scale.min }
+    }
     const { heightPerUnit } = this.props
     const flippedInverter = this.props.flipped ? -1 : 1
     const currentY = this.props.position * heightPerUnit
@@ -136,6 +140,10 @@ class AxisGuide extends React.PureComponent {
     /></g>)
   }
 
+  getBackgroundColour = () => this.props.scaleLinked
+    ? Constants.getIn(['styleGuide', 'colours', 'SandExtraDark'])
+    : Constants.getIn(['styleGuide', 'colours', (this.props.flipped ? 'ExportDefault' : 'ImportDefault')])
+
   getScaleImage = ({ x, y, width, height }) => {
     const groupTransform = `translate(${x + width + 1} ${y - 2})`
     const imageProps = {
@@ -145,7 +153,7 @@ class AxisGuide extends React.PureComponent {
     }
     return (
       <g
-        fill={Constants.getIn(['styleGuide', 'colours', 'SandExtraDark'])}
+        fill={this.getBackgroundColour()}
         transform={groupTransform}
       >
         <rect x={0} y={0} width={height + 4} height={height + 4} />
@@ -158,8 +166,10 @@ class AxisGuide extends React.PureComponent {
 
   render() {
     const text = `${this.state.positionDisplay.toLocaleString()} ${this.props.tr(['amounts', this.props.unit])}`
-    const offset = (this.props.chartHeight + (this.props.barSize / 2))
-      - (this.props.position * this.props.heightPerUnit) - 2
+    const offset = (this.props.position === 0)
+      ? this.props.chartHeight
+      : (this.props.chartHeight + (this.props.barSize / 2))
+        - (this.props.position * this.props.heightPerUnit) - 2
     return (
       <SVGDrag
         invertedY={this.props.flipped}
@@ -195,9 +205,7 @@ class AxisGuide extends React.PureComponent {
               fontSize: 11,
             }}
             aria-hidden
-            boxStyles={{
-              fill: Constants.getIn(['styleGuide', 'colours', 'SandExtraDark']),
-            }}
+            boxStyles={{ fill: this.getBackgroundColour() }}
             padding={2}
             flipped={this.props.flipped}
             unsizedContent={this.getScaleImage}
