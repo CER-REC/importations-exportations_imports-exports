@@ -394,6 +394,18 @@ const MapLayoutGridConstant = fromJS({
           stroke: '#999',
           exclamationFill: '#999',
         },
+        crudeOil: {
+          xPadding: 70,
+          yPadding: 260,
+          xExportPadding: 130,
+          yExportPadding: 200,
+        },
+        naturalGasLiquids: {
+          xPadding: 70,
+          yPadding: 260,
+          xExportPadding: 130,
+          yExportPadding: 200,
+        },
       },
       arrow: {
         fontClass: 'paddArrowCanadaFonts',
@@ -468,6 +480,18 @@ const MapLayoutGridConstant = fromJS({
           fill: '#fff',
           stroke: '#999',
           exclamationFill: '#999',
+        },
+        crudeOil: {
+          xPadding: 70,
+          yPadding: 260,
+          xExportPadding: 130,
+          yExportPadding: 200,
+        },
+        naturalGasLiquids: {
+          xPadding: 90,
+          yPadding: 250,
+          xExportPadding: 130,
+          yExportPadding: 200,
         },
       },
       padding: {
