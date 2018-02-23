@@ -86,7 +86,7 @@ const renderDetailBreakdown = (props) => {
 
 const renderDetailSidebar = (props) => {
   let top = props.top
-  if(props.importExportVisualization === 'crudeOil'){
+  if(props.viewport.get('changeHeightRatio') > 1.2){
     top += 100
   }
   return (<DetailSidebar top={top} height={Constants.getIn(['detailBreakDown', 'us', 'height'], 0)}>

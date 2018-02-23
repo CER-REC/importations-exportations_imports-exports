@@ -487,8 +487,8 @@ const MapLayoutGridConstant = fromJS({
           'PADD III': { left: 144, top: 180 },
           'PADD IV': { left: 146, top: 180 },
           'PADD V': { left: 144, top: 180 },
-          'Non-USA': { left: 150, top: 180 },
-          Mexico: { left: 150, top: 180 },
+          'Non-USA': { left: 145, top: 180 },
+          Mexico: { left: 145, top: 180 },
 
         },
         orderBy: {
@@ -498,8 +498,8 @@ const MapLayoutGridConstant = fromJS({
             'PADD III': { left: 69, top: 50 },
             'PADD IV': { left: -61, top: -160 },
             'PADD V': { left: -71, top: 50 },
-            'Non-USA': { left: 310, top: -10 },
-            Mexico: { left: 310, top: -10 },
+            'Non-USA': { left: 275, top: -10 },
+            Mexico: { left: 275, top: -10 },
 
           },
           default: {
@@ -666,10 +666,10 @@ const MapLayoutGridConstant = fromJS({
           paddGroup: 'PADD I', name: 'FL', originKey: 'FL', x: 7.5, y: 6,
         },
         {
-          paddGroup: 'Non-USA', name: '', originKey: '', x: 12.5, y: 6,
+          paddGroup: 'Non-USA', name: '', originKey: '', x: 11.5, y: 6,
         },
         {
-          paddGroup: 'Mexico', name: '', originKey: '', x: 12.5, y: 6,
+          paddGroup: 'Mexico', name: '', originKey: '', x: 11.5, y: 6,
         },
       ],
     },

@@ -17,12 +17,17 @@ export const canadaPaddPosition = createSelector(
 
 export const chartTransportPosition = createSelector(
   canadaPaddPosition,
-  canadaPadd => ({
-    top: canadaPadd.top + canadaPadd.height - 20,
-    left: canadaPadd.left,
-    width: canadaPadd.width,
-    height: 100,
-  }),
+  viewport,
+  (canadaPadd, viewp) => {
+    const top = viewp.get('changeHeightRatio') > 1.2? canadaPadd.top + canadaPadd.height - 30: canadaPadd.top + canadaPadd.height - 70
+    const result = {
+      top,
+      left: canadaPadd.left,
+      width: canadaPadd.width,
+      height: 100,
+    }
+    return result
+  },
 )
 
 export const chartSubtypePosition = createSelector(
