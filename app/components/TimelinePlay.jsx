@@ -67,6 +67,7 @@ class TimelinePlay extends React.PureComponent {
   }
 
   playButtonExplanation() {
+    if (this.props.selectedEnergy === 'refinedPetroleumProducts') { return }
     return (<g>
       <ExplanationDot
         scale="scale(0.7) scale(-1 1)"
@@ -120,6 +121,7 @@ class TimelinePlay extends React.PureComponent {
 export default connect(
   (state, props) => ({
     timelineRange: timelineRange(state, props),
+    selectedEnergy: state.importExportVisualization,
     timelineScale: timelineYearScaleCalculation(state, props),
     tr: trSelector(state, props),
   }),

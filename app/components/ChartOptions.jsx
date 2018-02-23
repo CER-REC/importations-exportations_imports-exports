@@ -32,6 +32,7 @@ class ChartOptions extends React.PureComponent {
   }
 
   linkDataExplanation() {
+    if (this.props.selectedEnergy !== 'electricity') { return }
     const leftPad = Constants.getIn(['visualizationDetailContainer', 'leftPadding'])
     return (<g>
       <ExplanationDot
@@ -56,7 +57,7 @@ class ChartOptions extends React.PureComponent {
         name="linkDataIcon"
         text={`${this.props.tr(['explanations','linkedDataIcon'])}`}
     /></g>)
-  }
+  } 
 
   scaleLinkedChanged = () => this.props.setScaleLinked(!this.props.scaleLinked)
 
@@ -131,6 +132,7 @@ class ChartOptions extends React.PureComponent {
 
 export default connect(
   (state, props) => ({
+    selectedEnergy: state.importExportVisualization,
     scaleLinked: timelineScaleLinked(state, props),
     timelineGroup: timelineGroupingSelector(state, props),
     tr: trSelector(state, props),

@@ -35,6 +35,19 @@ class Header extends React.Component {
   }
 
   resetExplanation() {
+    let textString = `${this.props.Tr(['explanations','reset'])}`
+    if (this.props.selectedEnergy === 'crudeOil') {
+      textString = `${this.props.Tr(['explanations','resetCrudeOil'])}`
+    }
+    if (this.props.selectedEnergy === 'naturalGas') {
+      textString = `${this.props.Tr(['explanations','resetNaturalGas'])}`
+    }
+    if (this.props.selectedEnergy === 'naturalGasLiquids') {
+      textString = `${this.props.Tr(['explanations','resetNaturalGasLiquids'])}`
+    }
+    if (this.props.selectedEnergy === 'refinedPetroleumProducts') {
+      textString = `${this.props.Tr(['explanations','resetRefinedPetroleumProducts'])}`
+    }
     return (<g>
       <ExplanationDot
         scale="scale(1)"
@@ -52,15 +65,13 @@ class Header extends React.Component {
         lineX={142.16}
         lineY={173}
         textX={40}
-        textY={55}
+        textY={58}
         containerX={0}
-        containerY={-70}  
+        containerY={-70} 
         name="titleExplanation"
-        text={`${this.props.Tr(['explanations','reset'])}`}
+        text={textString}
     /></g>)
   }
-
-  
 
   leftHeading() {
     const { Tr } = this.props
@@ -152,6 +163,7 @@ class Header extends React.Component {
 const mapStateToProps = (state, props) => ({
   viewport: state.viewport,
   language: state.language,
+  selectedEnergy: state.importExportVisualization,
   screenshotMode: state.screenshotMode,
   Tr: TrSelector(state, props),
 })

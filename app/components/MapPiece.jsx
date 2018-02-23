@@ -112,7 +112,7 @@ class MapPiece extends React.Component {
           36.69a40.12,
           40.12,0,0,0,
           33.47,
-          18H248.2"
+          18H295.2"
         xPosition={28}
         yPosition={20}
         lineX={142.16}
@@ -154,7 +154,7 @@ class MapPiece extends React.Component {
   }
 
   britishColumbiaExplanation() {
-    if (this.props.data.get('name') !== 'BC') { return null }
+    if (this.props.data.get('name') !== 'BC' || this.props.selectedEnergy === 'naturalGasLiquids') { return null }
     return (<g>
       <ExplanationDot
         scale="scale(1 -1) translate(0 -100)"
@@ -178,6 +178,89 @@ class MapPiece extends React.Component {
         containerY={this.props.y1 * MapLayoutGridConstant.getIn(['electricity', 'ca' , 'mapPieceScale'], 1) - 31}       
         name="britishColumbiaElectricity"
         text={`${this.props.tr(['explanations','britishColumbiaArrow'])}`}
+    /></g>)
+  }
+
+  emersonExplanation() {
+   if (this.props.data.get('portName') !== 'Emerson') { return null }
+    return (<g>
+      <ExplanationDot
+        scale="scale(1)"
+        lineStroke="1"
+        textBoxWidth={130}
+        linePath="
+          M142.16,
+          173.94l24.26,
+          36.69a40.12,
+          40.12,0,0,0,
+          33.47,
+          18H312.2"
+        xPosition={-10}
+        yPosition={20}
+        lineX={142.16}
+        lineY={173.94}
+        textX={40}
+        textY={58}
+        containerX={this.props.x1 + 250}
+        containerY={this.props.y1 + 330}
+        name="emersonElectricity"
+        text={`${this.props.tr(['explanations','EmersonNaturalGas'])}`}
+    /></g>)
+  }
+
+  albertaExplanation() {
+    if (this.props.data.get('name') !== 'AB' || this.props.selectedEnergy !== 'naturalGasLiquids') { return null }
+    return (<g>
+      <ExplanationDot
+        scale="scale(1 -1) translate(0 -100)"
+        lineStroke="1"
+        textBoxWidth={190}
+        textBoxHeight={100}
+        linePath="
+          M142.16,
+          173.94l24.26,
+          36.69a40.12,
+          40.12,0,0,0,
+          33.47,
+          18H378.2"
+        xPosition={8}
+        yPosition={20}
+        lineX={142.16}
+        lineY={173.94}
+        textX={48}
+        textY={48}
+        containerX={this.props.x1 * MapLayoutGridConstant.getIn(['naturalGasLiquids', 'ca' , 'mapPieceScale'], 1) + 306}
+        containerY={this.props.y1 * MapLayoutGridConstant.getIn(['naturalGasLiquids', 'ca' , 'mapPieceScale'], 1) - 28}       
+        name="albertaExplanation"
+        text={`${this.props.tr(['explanations','albertaArrowNaturalGasLiquids'])}`}
+    /></g>)
+  }
+
+  atlqExplanation() {
+    if (this.props.data.get('name') !== 'ATL-Q' || this.props.selectedEnergy !== 'naturalGasLiquids') { return null }
+    return (<g>
+      <ExplanationDot
+        scale="scale(1 -1) translate(0 -100)"
+        lineStroke="1"
+        textBoxWidth={190}
+        textBoxHeight={100}
+        linePath="
+          M142.16,
+          173.94l24.26,
+          36.69a40.12,
+          40.12,0,0,0,
+          33.47,
+          18H378.2"
+        xPosition={28}
+        yPosition={20}
+        lineX={142.16}
+        lineY={173.94}
+        textX={48}
+        textY={48}
+        containerX={this.props.x1 * MapLayoutGridConstant.getIn(['naturalGasLiquids', 'ca' , 'mapPieceScale'], 1) + 306}
+        containerY={this.props.y1 * MapLayoutGridConstant.getIn(['naturalGasLiquids', 'ca' , 'mapPieceScale'], 1) - 28}       
+        name="atlqExplanation"
+        text={`${this.props.tr(['explanations','atlqNaturalGasLiquids'])}`}
     /></g>)
   }
 
@@ -221,14 +304,20 @@ class MapPiece extends React.Component {
 
     let confidentialIcon = null
     const valueString = `${this.props.data.get('confidentialCount')} / ${this.props.data.get('totalCount')} values confidential`
+    let containerX = this.props.containerX + this.props.x1 + 13
+    let containerY = this.props.containerY + this.props.y1 + 11
+    if (this.props.selectedEnergy === 'naturalGasLiquids') {
+      containerX = this.props.x1 * MapLayoutGridConstant.getIn(['naturalGasLiquids', 'ca' , 'mapPieceScale'], 1) + 322
+      containerY = this.props.y1 * MapLayoutGridConstant.getIn(['naturalGasLiquids', 'ca' , 'mapPieceScale'], 1) + 85
+    }
     if (typeof this.props.data.get('confidentialCount') !== 'undefined'
         && this.props.data.get('confidentialCount') !== 0
         && this.props.confidentialityMenu) {
       confidentialIcon = <ConfidentialIcon
         styles={this.props.styles.get('confidentialStyle')}
         text={valueString}
-        containerX={this.props.containerX + this.props.x1 + 13}
-        containerY={this.props.containerY + this.props.y1 + 11}
+        containerX={containerX}
+        containerY={containerY}
         lineX={102}
         lineY={40}
         textX={40}
@@ -256,6 +345,9 @@ class MapPiece extends React.Component {
         {this.washingtonExplanation()}
         {this.newBrunswickExplanation()}
         {this.britishColumbiaExplanation()}
+        {this.emersonExplanation()}
+        {this.albertaExplanation()}
+        {this.atlqExplanation()}
       </g>
     )
 
@@ -280,11 +372,13 @@ class MapPiece extends React.Component {
   }
 }
 
-const mapStateToProps = (state, props) => ({
-  confidentialityMenu: state.confidentialityMenu,
-  selectedEnergy: state.importExportVisualization,
-  tr: trSelector(state, props),
-  expandCollapseConfidentiality: state.expandCollapseConfidentiality,
-})
+export default connect(
+  (state, props) => ({
+    confidentialityMenu: state.confidentialityMenu,
+    selectedEnergy: state.importExportVisualization,
+    tr: trSelector(state, props),
+    expandCollapseConfidentiality: state.expandCollapseConfidentiality,
+    activity: state.activity,
+  }),
+)(MapPiece)
 
-export default connect(mapStateToProps)(MapPiece)

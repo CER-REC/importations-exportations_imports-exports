@@ -10,6 +10,11 @@ import Tr from '../TranslationTable'
 import Constants from '../Constants'
 import RouteComputations from '../computations/RouteComputations'
 
+import trSelector from '../selectors/translate'
+
+import ExplanationDot from './ExplanationDot'
+import tr from '../TranslationTable'
+
 /* eslint-disable object-curly-newline */
 const Ports = Constants.getIn(['dataloader', 'mapping', 'ports'], []).filter(v => (v.get('Latitude') && v.get('Longitude'))) // Strip missing coordinates
 /* eslint-enable */
@@ -89,6 +94,33 @@ class PortMap extends React.PureComponent {
     return (length > 0)
   }
 
+  portMapExplanation() {
+    return (<g  transform="scale(3.9) translate(-300)">
+      <ExplanationDot
+        scale="scale(0.5)"
+        lineStroke="1.5"
+        textBoxWidth={130}
+        textBoxHeight={100}
+        linePath="
+          M142.16,
+          173.94l24.26,
+          36.69a40.12,
+          40.12,0,0,0,
+          33.47,
+          18H422.2"
+        xPosition={405}
+        yPosition={190}
+        lineX={142.16}
+        lineY={173}
+        textX={20}
+        textY={29}
+        containerX={596}
+        containerY={412}
+        name="portMapDot"
+        text={`${this.props.tr(['explanations','portNaturalGas'])}`}
+    /></g>)
+  }
+
   renderDots(ports, projection){
     if(ports === null){
       return null
@@ -139,31 +171,33 @@ class PortMap extends React.PureComponent {
     const portDotsNonSelected = this.renderDots(nonSelected, projection)
     const portDotsSelected = this.renderDots(selected, projection)
     return (
-        <svg width="100%" height="100%" viewBox={`0 0 ${viewbox.width} ${viewbox.height}`}>
-          <text className="portName">{this.getPortMapLabel()}</text>
-          <g className="regions">
-            {
-              this.state.regions.map((d, i) => (
-                <path
-                  key={`path-${i}`}
-                  d={projection(d)}
-                  className="region"
-                  fill={Constants.getIn(['styleGuide', 'colours', 'SandLight'])}
-                  stroke="#fff"
-                  strokeWidth="2"
-                />
-              ))
-            }
-          </g>
-          {(nonSelected !== null && portDotsNonSelected.count() > 0)?portDotsNonSelected.toArray():null}
-          {portDotsSelected.toArray()}
-        </svg>
+      <svg width="100%" height="100%" viewBox={`0 0 ${viewbox.width} ${viewbox.height}`}>
+      <text className="portName">{this.getPortMapLabel()}</text>
+        <g className="regions">
+          {
+            this.state.regions.map((d, i) => (
+              <path
+                key={`path-${i}`}
+                d={projection(d)}
+                className="region"
+                fill={Constants.getIn(['styleGuide', 'colours', 'SandLight'])}
+                stroke="#fff"
+                strokeWidth="2"
+              />
+            ))
+          }
+        </g>
+        {this.portMapExplanation()}
+        {(nonSelected !== null && portDotsNonSelected.count() > 0)?portDotsNonSelected.toArray():null}
+        {portDotsSelected.toArray()}
+      </svg>
     )
   }
 }
 
 const mapStateToprops = (state, props) => {
   return {
+    tr: trSelector(state, props),
     selectionSettings: getSelectionSettings(state, props),
     language: state.language,
   }
