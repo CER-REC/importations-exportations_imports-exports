@@ -6,9 +6,9 @@ import ImportExportVisualizationReducer from './reducers/ImportExportVisualizati
 import LanguageReducer from './reducers/LanguageReducer'
 import ShowExplanationsReducer from './reducers/ShowExplanationsReducer'
 import ElectricityExplanationReducer from './reducers/ElectricityExplanationReducer'
-import ExpandImportExportMenuReducer from './reducers/ExpandImportExportMenuReducer.js'
-import ExpandElectricitySortMenuReducer from './reducers/ExpandElectricitySortMenuReducer.js'
-import ExpandElectricityAmountMenuReducer from './reducers/ExpandElectricityAmountMenuReducer.js'
+import ExpandImportExportMenuReducer from './reducers/ExpandImportExportMenuReducer'
+import ExpandElectricitySortMenuReducer from './reducers/ExpandElectricitySortMenuReducer'
+import ExpandElectricityAmountMenuReducer from './reducers/ExpandElectricityAmountMenuReducer'
 import { reducer as ModalReducer } from './actions/modal'
 import { reducer as DataReducer } from './actions/data'
 import { reducer as BinsReducer } from './actions/bins'
@@ -20,6 +20,7 @@ import { reducer as SocialBarReducer } from './actions/socialBar'
 import { reducer as activeMenu } from './actions/activeMenu'
 import { reducer as ConfidentialityMenuReducer } from './actions/confidentialityMenu'
 import { reducer as ConfidentialityPopoverReducer } from './actions/confidentiality'
+import { reducer as timelinePlayback } from './actions/timelinePlayback'
 
 const mergeDeep = (old, merge) => {
   if (old === Object(old) && Array.isArray(old) === false) {
@@ -55,6 +56,7 @@ const nestedReducers = combineReducers({
   openConfidentiality: ConfidentialityPopoverReducer,
   screenshotMode: ScreenshotModeReducer,
   activeMenu,
+  timelinePlayback,
 })
 
 export default (initialState = {}, action) => {

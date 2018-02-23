@@ -12,8 +12,8 @@ import DetailBreakdownRow from './DetailBreakdownRow'
 import DetailBreakdownHeader from './DetailBreakdownHeader'
 import DetailTotal from './DetailTotal'
 import Tr from '../TranslationTable'
-import { timelineGrouping, timelineData } from '../selectors/timeline'
-import { amount, selection } from '../selectors/data'
+import { timelineData } from '../selectors/timeline'
+import { amount, selection, groupingBy as timelineGrouping } from '../selectors/data'
 
 import ExplanationDot from './ExplanationDot'
 import TrSelector from '../selectors/translate'
@@ -116,7 +116,7 @@ class ProportionChart extends Chart {
                             width: '8px',
                             height: '8px',
                             marginRight: '4px',
-                            verticalAlign: 'top',
+                            verticalAlign: 'middle',
                             backgroundColor: colour,
                           }}
                         />}

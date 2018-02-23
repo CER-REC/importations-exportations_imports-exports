@@ -1,14 +1,15 @@
 import TR from './TranslationTable'
 
-export const humanNumber = (valueRaw, language) => {
-  if (valueRaw < 1000000) { return valueRaw }
+const numLocale = (v, decimals = 2) => v.toLocaleString(undefined, { maximumFractionDigits: decimals })
+export const humanNumber = (valueRaw, language, maxCharacters = 4) => {
+  if (numLocale(valueRaw).length <= maxCharacters) { return numLocale(valueRaw) }
   let value = valueRaw
   let valueScale = 0
-  while (value >= 1000) {
+  while (numLocale(value, 0).length > maxCharacters && value >= 1000) {
     value /= 1000
     valueScale += 1
   }
-  return `${value.toLocaleString()}${TR.getIn(['formatNumberUnit', language, valueScale])}`
+  return `${numLocale(value)}${TR.getIn(['formatNumberUnit', language, valueScale])}`
 }
 
 export const handleInteraction = (func, ...boundArgs) => {
