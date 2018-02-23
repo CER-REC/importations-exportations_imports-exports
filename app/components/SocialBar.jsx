@@ -179,7 +179,6 @@ class SocialBar extends React.Component {
       transformSocialBarIcons = `translate(${this.props.viewport.get('x') - Constants.getIn(['socialBar', 'expandedIconX'])}, 0)`
     }
     if (this.props.expandSocialBar && this.props.language === 'fr') {
-      console.log('asd')
       rectWidth = `${Constants.getIn(['socialBar', 'width']) + Constants.getIn(['socialBar', 'expandedWidthFr'])}`
       rectXPosition = `${this.props.viewport.get('x') - Constants.getIn(['socialBar', 'width']) - Constants.getIn(['socialBar', 'expandedWidthFr'])}`
       transformSocialBarIcons = `translate(${this.props.viewport.get('x') - Constants.getIn(['socialBar', 'expandedIconXFr'])}, 0)`
@@ -236,9 +235,18 @@ class SocialBar extends React.Component {
   }
 
   expandedMenu() {
-    const iconTransformString = `translate(${this.props.viewport.get('x') - Constants.getIn(['socialBar', 'iconX'])} ${this.props.viewport.get('y') + Constants.getIn(['socialBar', 'iconY'])})`
+    let iconTransformString = `translate(${this.props.viewport.get('x') - Constants.getIn(['socialBar', 'iconX'])} ${this.props.viewport.get('y') + Constants.getIn(['socialBar', 'iconY'])})`
+    let twitterX = Constants.getIn(['socialBar', 'twitterMargin'])
+    let facebookX = Constants.getIn(['socialBar', 'facebookMargin'])
+    let linkedinX = Constants.getIn(['socialBar', 'linkedinMargin'])
     if (!this.props.expandSocialBar) {
       return null
+    }
+    if (this.props.language === 'fr') {
+      iconTransformString = `translate(${this.props.viewport.get('x') - Constants.getIn(['socialBar', 'iconX']) - 61} ${this.props.viewport.get('y') + Constants.getIn(['socialBar', 'iconY'])})`
+      twitterX = Constants.getIn(['socialBar', 'twitterMargin']) + 14
+      facebookX = Constants.getIn(['socialBar', 'facebookMargin']) + 34
+      linkedinX = Constants.getIn(['socialBar', 'linkedinMargin']) + 58
     }
     return (<g transform={iconTransformString}>
       <image
@@ -256,7 +264,7 @@ class SocialBar extends React.Component {
         width={Constants.getIn(['socialBar', 'iconSize'])}
         y={0}
         xlinkHref="images/sm_twitter.svg"
-        x={Constants.getIn(['socialBar', 'twitterMargin'])}
+        x={twitterX}
         {...handleInteraction(this.twitterClick)}
       />
       <image
@@ -265,7 +273,7 @@ class SocialBar extends React.Component {
         width={Constants.getIn(['socialBar', 'iconSize'])}
         y={0}
         xlinkHref="images/sm_facebook.svg"
-        x={Constants.getIn(['socialBar', 'facebookMargin'])}
+        x={facebookX}
         {...handleInteraction(this.facebookClick)}
       />
       <image
@@ -274,7 +282,7 @@ class SocialBar extends React.Component {
         width={Constants.getIn(['socialBar', 'iconSize'])}
         y={0}
         xlinkHref="images/sm_linkedin.svg"
-        x={Constants.getIn(['socialBar', 'linkedinMargin'])}
+        x={linkedinX}
         {...handleInteraction(this.linkedInClick)}
       />
             </g>)

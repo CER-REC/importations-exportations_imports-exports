@@ -73,7 +73,7 @@ const Constants = fromJS({
     expandedWidth: 110,
     expandedWidthFr: 172,
     expandedIconX: 129,
-    expandedIconXFr: 192,
+    expandedIconXFr: 190,
     iconMargin: 30,
     downloadDataIconMargin: 54,
     downloadImageIconMargin: 78,
