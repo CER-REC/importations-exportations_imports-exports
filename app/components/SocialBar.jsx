@@ -173,10 +173,16 @@ class SocialBar extends React.Component {
     let transformSocialBarIcons = `translate(${this.props.viewport.get('x') - Constants.getIn(['socialBar', 'iconMarginY'])}, 0)`
     let rectWidth = `${Constants.getIn(['socialBar', 'width'])}`
     let rectXPosition = `${this.props.viewport.get('x') - Constants.getIn(['socialBar', 'width']) - Constants.getIn(['menuBar', 'barWidth'])}`
-    if (this.props.expandSocialBar) {
+    if (this.props.expandSocialBar && this.props.language === 'en') {
       rectWidth = `${Constants.getIn(['socialBar', 'width']) + Constants.getIn(['socialBar', 'expandedWidth'])}`
       rectXPosition = `${this.props.viewport.get('x') - Constants.getIn(['socialBar', 'width']) - Constants.getIn(['socialBar', 'expandedWidth'])}`
       transformSocialBarIcons = `translate(${this.props.viewport.get('x') - Constants.getIn(['socialBar', 'expandedIconX'])}, 0)`
+    }
+    if (this.props.expandSocialBar && this.props.language === 'fr') {
+      console.log('asd')
+      rectWidth = `${Constants.getIn(['socialBar', 'width']) + Constants.getIn(['socialBar', 'expandedWidthFr'])}`
+      rectXPosition = `${this.props.viewport.get('x') - Constants.getIn(['socialBar', 'width']) - Constants.getIn(['socialBar', 'expandedWidthFr'])}`
+      transformSocialBarIcons = `translate(${this.props.viewport.get('x') - Constants.getIn(['socialBar', 'expandedIconXFr'])}, 0)`
     }
     const viewPort = WorkspaceComputations.socialBarY(this.props.viewport) || 0
     return (
@@ -279,12 +285,22 @@ class SocialBar extends React.Component {
     if (!this.props.expandSocialBar) {
       return null
     }
+    let aboutTextX = '0.0em'
+    let methodologyTextX = '-2.6em'
+    let downloadDataTextX = '-5.6em'
+    let downloadImageTextX = '-6.35em'
+    if (this.props.language === 'fr') {
+      aboutTextX = '-4.5em'
+      methodologyTextX = '-6.1em'
+      downloadDataTextX = '-5.9em'
+      downloadImageTextX = '-11.6em'
+    }
     return (<g transform={transformString}>
       <text className="socialBarText">
-        <tspan dy="0.1em" {...handleInteraction(this.aboutThisProjectClick)}> {Tr.getIn(['socialBarText', 'about', this.props.language])}</tspan>
-        <tspan dx="-2.6em" dy="1.8em" {...handleInteraction(this.methodologyClick)}> {Tr.getIn(['socialBarText', 'methodology', this.props.language])}</tspan>
-        <tspan dx="-5.6em" dy="1.8em" {...handleInteraction(this.downloadDataClick)}> {Tr.getIn(['socialBarText', 'downloadData', this.props.language])}</tspan>
-        <tspan dx="-6.35em" dy="1.8em" {...handleInteraction(this.downloadImageClick)}> {Tr.getIn(['socialBarText', 'downloadImage', this.props.language])}</tspan>
+        <tspan dx={aboutTextX} dy="0.1em" {...handleInteraction(this.aboutThisProjectClick)}> {Tr.getIn(['socialBarText', 'about', this.props.language])}</tspan>
+        <tspan dx={methodologyTextX} dy="1.8em" {...handleInteraction(this.methodologyClick)}> {Tr.getIn(['socialBarText', 'methodology', this.props.language])}</tspan>
+        <tspan dx={downloadDataTextX} dy="1.8em" {...handleInteraction(this.downloadDataClick)}> {Tr.getIn(['socialBarText', 'downloadData', this.props.language])}</tspan>
+        <tspan dx={downloadImageTextX} dy="1.8em" {...handleInteraction(this.downloadImageClick)}> {Tr.getIn(['socialBarText', 'downloadImage', this.props.language])}</tspan>
       </text>
     </g>)
   }
@@ -322,7 +338,7 @@ const mapDispatchToProps = dispatch => ({
   },
   dataDownloadClick() {
     dispatch(ShowDataDownloadWindow('dataDownload'))
- },
+  },
 })
 
 
