@@ -675,13 +675,13 @@ const MapLayoutGridConstant = fromJS({
     },
   },
   naturalGas: {
-    mapPieceScale: 1.25,
+    mapPieceScale: 0.8,
     sortingRowPadding: 0.5,
     dimensions: {
       height: 37.09,
       width: 38.75,
-      topPadding: 7,
-      leftPadding: 1,
+      topPadding: 25,
+      leftPadding: 15,
     },
     styles: {
       color: '#ede3cb',
