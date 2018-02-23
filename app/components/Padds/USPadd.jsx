@@ -25,12 +25,12 @@ const USPadd = (props) => {
       paddingY={MapLayoutGridConstant.getIn(['PaddLayout', 'us', 'padding', key, 'top'], 0)}
       country="us"
     />))
-    return (<g transform={`scale(1.25) translate(-30 0)`}>
+    return (<g transform={`scale(${props.viewport.get('changeWidthRatio')} ${props.viewport.get('changeHeightRatio')}) translate(-30 0)`}>
       {padds.toArray()}
       {renderDetailSidebar(props)}
     </g>)
   }
-  return (<g transform={`scale(1.25) translate(${props.left - 30} ${props.top + 50})`}>
+  return (<g transform={`scale(${props.viewport.get('changeWidthRatio')} ${props.viewport.get('changeHeightRatio')})  translate(${props.left - 30} ${props.top + 50})`}>
     <PaddLayout
       left={props.left}
       top={props.top}
@@ -98,6 +98,7 @@ const mapStateToProps = (state, props) => ({
   importExportVisualization: state.importExportVisualization,
   arrangeBy: arrangeBy(state, props),
   Padd: PaddSelector(state, props),
+  viewport: state.viewport,
 })
 
 module.exports = connect(mapStateToProps)(USPadd)

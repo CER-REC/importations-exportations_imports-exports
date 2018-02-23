@@ -1,12 +1,12 @@
 import React from 'react'
-import ReactRedux from 'react-redux'
+import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
 import PaddLayout from '../PaddLayout'
 
 // fetch x axis of the padd using the left detail side bar location
 const CAPadd = props => (
-  <g transform="scale(1.25) translate(53 0)">
+  <g transform={`scale(${props.viewport.get('changeWidthRatio')} ${props.viewport.get('changeHeightRatio')}) translate(53 0)`}>
     <PaddLayout
       left={props.left}
       top={props.top}
@@ -20,5 +20,10 @@ const CAPadd = props => (
   </g>
 )
 
+const mapStateToProps = state => ({
+  viewport: state.viewport,
 
-module.exports = CAPadd
+})
+
+
+export default connect(mapStateToProps)(CAPadd)

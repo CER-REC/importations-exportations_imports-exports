@@ -159,7 +159,7 @@ class NaturalGasMapContainer extends React.PureComponent {
     } )
 
     return (
-      <g key='NaturalGasMapContainer' transform={`translate(${this.props.left + 50} ${this.props.top})`}>
+      <g key='NaturalGasMapContainer' transform={`scale(${this.props.viewport.get('changeWidthRatio')} ${this.props.viewport.get('changeHeightRatio')}) translate(${this.props.left + 50} ${this.props.top})`}>
         {layout.toArray()}
       </g>
     )
@@ -174,6 +174,7 @@ const mapStateToprops = (state, props) => {
     bins: binSelector(state, props),
     selector: aggregateLocationNaturalGasSelector(state,props),
     selectionSettings: getSelectionSettings(state, props),
+    viewport: state.viewport,
   }
 }
 

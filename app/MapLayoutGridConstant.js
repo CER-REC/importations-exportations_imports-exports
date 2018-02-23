@@ -3,7 +3,7 @@ import { fromJS } from 'immutable'
 const MapLayoutGridConstant = fromJS({
   electricity: {
     ca: {
-      mapPieceScale: 1,
+      mapPieceScale: 0.9,
       defaultColumns: 8,
       sortingRowPadding: 1.5,
       dimensions: {
@@ -68,7 +68,7 @@ const MapLayoutGridConstant = fromJS({
       ],
     },
     us: {
-      mapPieceScale: 1,
+      mapPieceScale: 0.9,
       defaultColumns: 12,
       sortingRowPadding: -0.5,
       dimensions: {
@@ -244,7 +244,7 @@ const MapLayoutGridConstant = fromJS({
       ],
     },
     powerpool: {
-      mapPieceScale: 1,
+      mapPieceScale: 0.9,
       defaultColumns: 12,
       dimensions: {
         height: 37.09,
@@ -307,14 +307,14 @@ const MapLayoutGridConstant = fromJS({
   },
   naturalGasLiquids: {
     ca: {
-      mapPieceScale: 1.25,
+      mapPieceScale: 1,
       defaultColumns: 8,
       sortingRowPadding: 1.5,
       dimensions: {
         height: 37.09,
         width: 38.75,
-        yAxisPadding: -9,
-        xAxisPadding: -1.528,
+        yAxisPadding: 1,
+        xAxisPadding: 10,
       },
       styles: {
         color: '#ede3cb',
