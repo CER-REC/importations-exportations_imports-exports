@@ -334,7 +334,7 @@ const TranslationTable = fromJS({
 
   explanations: {
     amount: {
-      en: 'MWh denotes a Megawatt hour, a unit of measurement of electricity. 1 MWH is equivalent to _______. CAN$ denotes the total revenue. CAN$/MWh denotes the average price per Megawatt hour.',
+      en: 'Electricity is measured in MWh (Megawatt hour). The typical Ontario household uses a little les than 10 MWh per year. CAN$ denotes the total revenue. CAN$/MWh denotes the average price per Megawatt hour.',
       fr: 'TODO',
     },
     timeSeek: {
@@ -350,7 +350,7 @@ const TranslationTable = fromJS({
       fr: 'TODO',
     },
     confidentiality: {
-      en: "Some values in this dataset are hidden due to the NEB's confidentiality rules. Click to show which provinces have confidential values.",
+      en: 'Electricity data is available publically with the origins, destinations, volumes, and prices aggregated monthly by permit number. An exception is that there are no prices provided for Manitoba Hydro contract-specific permits due to a legal requirement and the NEB’s confidentiality rules.',
       fr: 'TODO',
     },
     barChartExport: {
@@ -394,11 +394,11 @@ const TranslationTable = fromJS({
       fr: 'TODO',
     },
     amountCrude: {
-      en: 'Crude oil is measured in 1000 m³/d (thousand cubic metres per day) which is...',
+      en: 'Crude oil is measured in 1000 m³/d (thousand cubic metres per day), which is 6290 barrels per day.',
       fr: 'TODO',
     },
     padd: {
-      en: 'PADD stands for Petroleum Administration for Defense District.',
+      en: 'PADD stands for Petroleum Administration for Defense District. The US is divided into 5 districts which are commonly used for analysis of regional supply and demand dynamics.',
       fr: 'TODO',
     },
     linkedDataIcon: {
@@ -446,11 +446,11 @@ const TranslationTable = fromJS({
       fr: 'TODO',
     },
     importExportMenuNaturalGas: {
-      en: 'Imports and exports are products that have entered or left Canada permanently for consumption, refinement, or production.(???) Temporary imports are imports made for the purpose of transport through Canada and re-export back to the U.S.A. at a later date. Temporary exports are exports made for the purpose of transport through the U.S.A., and re-import back into Canada.',
+      en: 'Imports and exports are products that have entered or left Canada for consumption or refinement. Temporary imports are products that have been transported through Canada but will be returning back to the United States. This is often due to pipelines that travel into and out of Canada. Temporary exports are products that are transported from Canada to the United States but return to Canada.',
       fr: 'TODO',
     },
     amountNaturalGas: {
-      en: 'Natural gas is measured in 1000 m³/d, which is...CAN/$GJ is the average price...',
+      en: 'Natural gas is measured in 1000 m³/d, which is 35,314 cubic feet. CAN/$GJ is the average price per gigajoule of natural gas. The average Albertan household uses approximately 120 GJs of natural gas per year.',
       fr: 'TODO',
     },
     resetNaturalGasLiquids: {
@@ -462,7 +462,7 @@ const TranslationTable = fromJS({
       fr: 'TODO',
     },
     atlqNaturalGasLiquids: {
-      en: 'The Atlantic provinces and Quebec are grouped due to confidentiality rules that prevent reporting of data when less than X ____ are operating in a region.',
+      en: 'The Atlantic provinces and Quebec are grouped due to confidentiality rules that prevent reporting of data when minimal companies are reporting in a region. Learn more about our confidentiality rules in our methodology.',
       fr: 'TODO',
     },
     orangeBarNaturalGasLiquids: {
@@ -478,7 +478,7 @@ const TranslationTable = fromJS({
       fr: 'TODO',
     },
     amountNaturalGasLiquids: {
-      en: 'Natural gas liquids are measured in m³/d (thousand cubic metres per day), which are...',
+      en: 'Natural gas liquids production is measured in 1000 m³/d (thousand cubic metres per day), which equals 6290 barrels per day.',
       fr: 'TODO',
     },
     resetRefinedPetroleumProducts: {
@@ -490,11 +490,11 @@ const TranslationTable = fromJS({
       fr: 'TODO',
     },
     amountRefinedPetroleumProducts: {
-      en: 'Refined petroleum product flow is measured in 1000 m³/d (thousand cubic metres per day), which is...',
+      en: 'Refined petroleum product flow is measured in 1000 m³/d (thousand cubic metres per day), which is 6290 barrels per day.',
       fr: 'TODO',
     },
     confidentialValuesRefinedPetroleumProducts: {
-      en: 'Many of these values are protected due to confidentiality rules that prevent reporting of data when fewer than X refineries contribute to the data for a particular time period (??).',
+      en: 'With only 13 refineries in Canada the data for RPPs is often deemed confidential as individual companies may become identifiable which could have a negative financial impact. Learn more in our methodology.',
       fr: 'TODO',
     },
     barsRefinedPetroleumProducts: {
