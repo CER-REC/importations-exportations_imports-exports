@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 
 import { setTimelinePlayback, resetTimelinePlayback } from '../actions/timelinePlayback'
 import { timelineYearScaleCalculation } from '../selectors/timeline'
-import { timelineRange, timelinePlayback } from '../selectors/data'
+import { timelineRange, timelinePlayback, groupingBy as timelineGrouping } from '../selectors/data'
 import trSelector from '../selectors/translate'
 import tr from '../TranslationTable'
 import { handleInteraction } from '../utilities'
@@ -52,10 +52,19 @@ class TimelinePlay extends React.PureComponent {
           return
         }
         let year = playbackYear
-        let quarter = playbackQuarter + 1
-        if (quarter > 4) {
+        let quarter = playbackQuarter
+        if (this.props.timelineGrouping === 'quarter') {
           year += 1
-          quarter = 1
+          if (year > endYear) {
+            year = this.props.timelineRange.getIn(['start', 'year'])
+            quarter += 1
+          }
+        } else {
+          quarter += 1
+          if (quarter > 4) {
+            year += 1
+            quarter = 1
+          }
         }
         if (year === yearScale.max && quarter === 4) { return this.resetPlay() }
         this.props.setTimelinePlayback(year, quarter)
@@ -139,6 +148,7 @@ export default connect(
   (state, props) => ({
     timelineRange: timelineRange(state, props),
     timelinePlayback: timelinePlayback(state, props),
+    timelineGrouping: timelineGrouping(state, props),
     selectedEnergy: state.importExportVisualization,
     timelineScale: timelineYearScaleCalculation(state, props),
     tr: trSelector(state, props),
