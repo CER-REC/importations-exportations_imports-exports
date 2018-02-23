@@ -61,7 +61,13 @@ class Menu extends React.PureComponent {
   }
 
   importExportExplanation() {
-    if (this.props.name !== 'activity') { return }
+    let textString = `${this.props.Tr(['explanations','importExport'])}`
+    if (this.props.selectedEnergy === 'naturalGas') {
+      textString = `${this.props.Tr(['explanations','importExportMenuNaturalGas'])}`
+    }
+    if (this.props.name !== 'activity' 
+      || this.props.selectedEnergy === 'crudeOil'
+      || this.props.selectedEnergy === 'refinedPetroleumProducts') { return }
     return (<g>
       <ExplanationDot
         scale="scale(0.3)"
@@ -82,12 +88,29 @@ class Menu extends React.PureComponent {
         textY={20}
         containerX={this.props.left + 2}
         containerY={this.props.top - 50}
-        text={`${this.props.Tr(['explanations','importExport'])}`}
+        text={textString}
         name="importExportExplanation"
     /></g>)
   }
 
   amountExplanation() {
+    let textString = `${this.props.Tr(['explanations','amount'])}`
+    if (this.props.selectedEnergy === 'crudeOil') {
+      textString = `${this.props.Tr(['explanations','amountCrude'])}`
+    }
+    if (this.props.selectedEnergy === 'naturalGas') {
+      textString = `${this.props.Tr(['explanations','amountNaturalGas'])}`
+    }
+    if (this.props.selectedEnergy === 'naturalGasLiquids') {
+      textString = `${this.props.Tr(['explanations','amountNaturalGasLiquids'])}`
+    }
+    if (this.props.selectedEnergy === 'refinedPetroleumProducts') {
+      textString = `${this.props.Tr(['explanations','amountRefinedPetroleumProducts'])}`
+    }
+    let yPosition = 178
+    if (this.props.expanded && (this.props.setActiveMenu !== 'amount')) {
+      yPosition = 198
+    }
     if (this.props.name !== 'amount') { return }
     return (<g>
       <ExplanationDot
@@ -102,15 +125,42 @@ class Menu extends React.PureComponent {
           33.47,
           18H378.2"
         xPosition={165}
-        yPosition={178}
+        yPosition={yPosition}
         lineX={142.16}
         lineY={173.94}
         textX={45}
         textY={48}
-        containerX={this.props.left + 2}
-        containerY={this.props.top - 276}
-        text={`${this.props.Tr(['explanations','amount'])}`}
+        containerX={2}
+        containerY={-102}
+        text={textString}
         name="amountExplanation"
+    /></g>)
+  }
+
+  arrangedByExplanation() {
+    if (this.props.name !== 'arrangedBy' && this.props.selectedEnergy !== 'refinedPetroleumProducts') { return }
+    return (<g>
+      <ExplanationDot
+        scale="scale(1 -1) translate(0 -100)"
+        lineStroke="1"
+        textBoxWidth={190}
+        linePath="
+          M142.16,
+          173.94l24.26,
+          36.69a40.12,
+          40.12,0,0,0,
+          33.47,
+          18H378.2"
+        xPosition={135}
+        yPosition={160}
+        lineX={142.16}
+        lineY={173.94}
+        textX={45}
+        textY={48}
+        containerX={2}
+        containerY={-102}
+        text={`${this.props.Tr(['explanations','arrangeByRefinedPetroleumProducts'])}`}
+        name="arrangedByRefinedPetroleumProductsExplanation"
     /></g>)
   }
 
@@ -189,6 +239,7 @@ class Menu extends React.PureComponent {
       </g>
         {this.amountExplanation()}
         {this.importExportExplanation()}
+        {this.arrangedByExplanation()}
     </g>
     )
   }
@@ -200,6 +251,7 @@ export default connect(
     Tr: TrSelector(state, props),
     language: state.language,
     showExplanations: state.showExplanations,
+    selectedEnergy: state.importExportVisualization,
     expandCollapseExplanation: state.expandCollapseExplanation,
   }),
   { setActiveMenu },

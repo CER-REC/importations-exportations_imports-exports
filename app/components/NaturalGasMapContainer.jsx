@@ -159,7 +159,7 @@ class NaturalGasMapContainer extends React.PureComponent {
     } )
 
     return (
-      <g key='NaturalGasMapContainer' transform={`scale(${this.props.viewport.get('changeWidthRatio')} ${this.props.viewport.get('changeHeightRatio')}) translate(${this.props.left + 50} ${this.props.top - 30})`}>
+      <g key='NaturalGasMapContainer' transform={`scale(${this.props.viewport.get('changeWidthRatio')} ${this.props.viewport.get('changeHeightRatio')}) translate(${this.props.left} ${this.props.top})`}>
         {layout.toArray()}
       </g>
     )

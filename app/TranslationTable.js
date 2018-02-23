@@ -362,7 +362,7 @@ const TranslationTable = fromJS({
       fr: 'TODO',
     },
     powerpool: {
-      en: 'Power pool',
+      en: 'A power pool is a grouping of states that imports and exports electricity as a unit. Individual states may also have additional imports and exports.',
       fr: 'TODO',
     },
     barChartImport: {
@@ -371,6 +371,34 @@ const TranslationTable = fromJS({
     },
     reset: {
       en: 'This data visualization shows Canadian imports and exports of electricity. Click the pink dots to guide you through how to read the data.',
+      fr: 'TODO',
+    },
+    resetCrudeOil: {
+      en: "This data visualization shows Canada's quarterly exports of crude oil. Click the pink dots to guide you through how to read the data.",
+      fr: 'TODO',
+    },
+    canadaPaddCrudeOil: {
+      en: 'The colour of this region and its down arrow shows the total amount of crude oil that Canada exported during the time period selected in the bar chart below.',
+      fr: 'TODO',
+    },
+    paddICrudeOil: {
+      en: 'The colour of this region and its down arrow shows the total crude oil that Canada exported to the PADD I region of the U.S.A. during the time period selected above.',
+      fr: 'TODO',
+    },
+    barCrude: {
+      en: 'These bars show the proportions of heavy vs light crude oil exported per quarter.',
+      fr: 'TODO',
+    },
+    blueBarCrude: {
+      en: 'Each blue bar shows the total crude oil that Canada exported during a single quarter.',
+      fr: 'TODO',
+    },
+    amountCrude: {
+      en: 'Crude oil is measured in 1000 m³/d (thousand cubic metres per day) which is...',
+      fr: 'TODO',
+    },
+    padd: {
+      en: 'PADD stands for Petroleum Administration for Defense District.',
       fr: 'TODO',
     },
     linkedDataIcon: {
@@ -391,6 +419,86 @@ const TranslationTable = fromJS({
     },
     vermontArrow: {
       en: 'The down arrow shows the total electricity that Canadian provinces exported to Vermont during the time period selected above.',
+      fr: 'TODO',
+    },
+    resetNaturalGas: {
+      en: 'This data visualization shows imports and exports of natural gas at ports along the Canada-USA border. Click the pink dots to guide you through how to read the data.',
+      fr: 'TODO',
+    },
+    orangeBarNaturalGas: {
+      en: 'Orange bars show the total natural gas that Canada imported in a single quarter; blue bars show exports.',
+      fr: 'TODO',
+    },
+    EmersonNaturalGas: {
+      en: 'Up arrows show the total imports of natural gas into Canada at a port during the time selected in the bar chart above. Down arrows show exports.',
+      fr: 'TODO',
+    },
+    EmersonTempImpNaturalGas: {
+      en: 'Up arrows show the total temporary imports of natural gas into Canada at a port during the time selected in the bar chart above. Down arrows show re-exports of temporary exports.',
+      fr: 'TODO',
+    },
+    EmersonTempExpNaturalGas: {
+      en: 'Down arrows show the total temporary exports of natural gas into Canada at a port during the time selected in the bar chart above. Up arrows show re-imports of temporary exports.',
+      fr: 'TODO',
+    },
+    portNaturalGas: {
+      en: 'Select ports to see their location on the map.',
+      fr: 'TODO',
+    },
+    importExportMenuNaturalGas: {
+      en: 'Imports and exports are products that have entered or left Canada permanently for consumption, refinement, or production.(???) Temporary imports are imports made for the purpose of transport through Canada and re-export back to the U.S.A. at a later date. Temporary exports are exports made for the purpose of transport through the U.S.A., and re-import back into Canada.',
+      fr: 'TODO',
+    },
+    amountNaturalGas: {
+      en: 'Natural gas is measured in 1000 m³/d, which is...CAN/$GJ is the average price...',
+      fr: 'TODO',
+    },
+    resetNaturalGasLiquids: {
+      en: 'This data visualization shows imports of Natural Gas Liquids (NGLs) from the USA into Canadian provinces (top) and exports of NGLs from Canada into regions of the USA called PADDs (bottom). Click the pink dots to guide you through how to read the data.',
+      fr: 'TODO',
+    },
+    albertaArrowNaturalGasLiquids: {
+      en: 'The up arrow shows the total NGLs that Alberta imported from the USA during the time period selected in the bar chart below.',
+      fr: 'TODO',
+    },
+    atlqNaturalGasLiquids: {
+      en: 'The Atlantic provinces and Quebec are grouped due to confidentiality rules that prevent reporting of data when less than X ____ are operating in a region.',
+      fr: 'TODO',
+    },
+    orangeBarNaturalGasLiquids: {
+      en: 'Each orange bar shows the total amount of natural gas liquids that Canada imported during a single quarter.',
+      fr: 'TODO',
+    },
+    blueBarNaturalGasLiquids: {
+      en: 'Each blue bar shows the total amount of natural gas liquids that Canada exported during a single quarter.',
+      fr: 'TODO',
+    },
+    paddINaturalGasLiquids: {
+      en: "The colour of this region and its arrow shows the total amount of natural gas liquids that Canada exported to the USA's PADD I region during the time period selected in the bar chart above.",
+      fr: 'TODO',
+    },
+    amountNaturalGasLiquids: {
+      en: 'Natural gas liquids are measured in m³/d (thousand cubic metres per day), which are...',
+      fr: 'TODO',
+    },
+    resetRefinedPetroleumProducts: {
+      en: 'This data visualization shows Canada’s quarterly exports of refined petroleum products (RPPs). Click the pink dots to guide you through how to read the data.',
+      fr: 'TODO',
+    },
+    arrangeByRefinedPetroleumProducts: {
+      en: 'Switch between seeing the different types of refined petroleum products stacked in one bar chart or as individual bar charts.',
+      fr: 'TODO',
+    },
+    amountRefinedPetroleumProducts: {
+      en: 'Refined petroleum product flow is measured in 1000 m³/d (thousand cubic metres per day), which is...',
+      fr: 'TODO',
+    },
+    confidentialValuesRefinedPetroleumProducts: {
+      en: 'Many of these values are protected due to confidentiality rules that prevent reporting of data when fewer than X refineries contribute to the data for a particular time period (??).',
+      fr: 'TODO',
+    },
+    barsRefinedPetroleumProducts: {
+      en: 'Bars are pointed downwards because they represent exports from Canada.',
       fr: 'TODO',
     },
   },
@@ -424,8 +532,8 @@ const TranslationTable = fromJS({
   },
 
   applicationPath: {
-    en: '/import-export-visualization/',
-    fr: '/visualisation-importations-exportations/',
+    en: '/imports-exports/',
+    fr: '/importations-exportations/',
   },
 
   visualizationPaths: {
@@ -722,6 +830,10 @@ const TranslationTable = fromJS({
 
   country: {
     ca: {
+      '': {
+        en: 'Missing Province',
+        fr: 'Missing Province',
+      },
       YT: {
         en: 'Yukon',
         fr: 'Yukon',
@@ -780,6 +892,10 @@ const TranslationTable = fromJS({
       },
     },
     us: {
+      '': {
+        en: 'Missing State',
+        fr: 'Missing State',
+      },
       AL: {
         en: 'Alabama',
         fr: 'Alabama',

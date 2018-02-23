@@ -24,14 +24,26 @@ class Axis extends React.PureComponent {
     }).isRequired,
     barWidth: PropTypes.number.isRequired,
     canSeek: PropTypes.bool,
+    canPlay: PropTypes.bool,
     chartOptions: PropTypes.bool,
     canChangeScale: PropTypes.bool,
   }
 
   static defaultProps = {
     canSeek: true,
+    canPlay: true,
     chartOptions: true,
     canChangeScale: true,
+  }
+
+  playbackButton() {
+    return (
+      <TimelinePlay
+        top={this.props.top}
+        left={this.props.left - 30}
+        height={this.props.height}
+      />
+    )
   }
 
   seekControls() {
@@ -40,11 +52,6 @@ class Axis extends React.PureComponent {
     } = this.props
     return (
       <g>
-        <TimelinePlay
-          top={top}
-          left={left - 30}
-          height={height}
-        />
         <TimelineSeek
           top={top}
           left={left}
@@ -84,7 +91,6 @@ class Axis extends React.PureComponent {
       height,
       bars: data,
     } = this.props
-    if (data.count() === 0) { return null }
     const elements = labels.map((label) => {
       const key = label.get('key', `label-${label.get('label')}`)
       if (label.get('label') !== '|') {
@@ -137,6 +143,7 @@ class Axis extends React.PureComponent {
         {elements}
         {this.props.chartOptions ? this.chartOptions() : null}
         {this.props.canSeek ? this.seekControls() : null}
+        {this.props.canPlay ? this.playbackButton() : null}
       </g>
     )
   }

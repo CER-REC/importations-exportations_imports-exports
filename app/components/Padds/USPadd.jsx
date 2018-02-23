@@ -72,7 +72,7 @@ const renderDetailBreakdown = (props) => {
     return null
   }
   return (<DetailBreakdown
-      data={Immutable.fromJS(total)}
+      data={Immutable.fromJS(total).sort((a, b) => (b - a))}
       type={detailBreakdownData.get('type')}
       trContent={Tr.getIn(['detailBreakDown', props.importExportVisualization, detailBreakdownData.get('type')])}
       veritcalPosition={detailBreakdownData.get('displayPosition')}

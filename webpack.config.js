@@ -6,13 +6,13 @@ const BUILD_DIR = Path.resolve(__dirname, 'public/script')
 module.exports = {
   entry: {
     bundle: [
-      'webpack-hot-middleware/client?path=/import-export-visualization/script/__webpack_hmr',
+      'webpack-hot-middleware/client?path=/imports-exports/script/__webpack_hmr',
       './app/App.jsx',
     ]
   },
   output: {
     path: BUILD_DIR,
-    publicPath: '/import-export-visualization/script/',
+    publicPath: '/imports-exports/script/',
     filename: '[name].js',
   },
   devtool: 'cheap-module-eval-source-map',

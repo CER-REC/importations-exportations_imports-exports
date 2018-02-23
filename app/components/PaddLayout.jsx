@@ -18,6 +18,8 @@ import PaddFive from './Padds/PaddFive'
 import PaddNonUSA from './Padds/PaddNonUSA'
 import ConfidentialIcon from './ConfidentialIcon'
 
+import ExplanationDot from './ExplanationDot'
+
 import { handleInteraction } from '../utilities'
 
 import ElectricitySelector from '../selectors/ElectricitySelector'
@@ -174,11 +176,11 @@ class PaddLayout extends React.Component {
 
 
     let paddIIINGLconfidentialIcon = null
-    let paddIIINGLcontainerX = this.props.left + left + 182
-    let paddIIINGLcontainerY = this.props.top + top - 49
+    let paddIIINGLcontainerX = this.props.left + left + 100
+    let paddIIINGLcontainerY = this.props.top + top - 10
     if (this.props.arrangeBy === 'imports' || this.props.arrangeBy === 'exports') {
-      paddIIINGLcontainerX = this.props.left + left + 568
-      paddIIINGLcontainerY = this.props.top + top + 69
+      paddIIINGLcontainerX = this.props.left + left + 500
+      paddIIINGLcontainerY = this.props.top + top + 110
     }
     if (style && confidentialCount > 0 && country !== 'ca'
       && this.props.confidentialityMenu
@@ -202,11 +204,11 @@ class PaddLayout extends React.Component {
     }
 
     let paddIVNGLconfidentialIcon = null
-    let paddIVNGLcontainerX = this.props.left + left + 9
-    let paddIVNGLcontainerY = this.props.top + top - 320
+    let paddIVNGLcontainerX = this.props.left + left - 59
+    let paddIVNGLcontainerY = this.props.top + top - 276
     if (this.props.arrangeBy === 'imports' || this.props.arrangeBy === 'exports') {
-      paddIVNGLcontainerX = this.props.left + left + 443
-      paddIVNGLcontainerY = this.props.top + top + 69
+      paddIVNGLcontainerX = this.props.left + left + 390
+      paddIVNGLcontainerY = this.props.top + top + 110
     }
     if (style && confidentialCount > 0 && country !== 'ca'
       && this.props.confidentialityMenu
@@ -230,11 +232,11 @@ class PaddLayout extends React.Component {
     }
 
     let paddVNGLconfidentialIcon = null
-    let paddVNGLcontainerX = this.props.left + left - 7
-    let paddVNGLcontainerY = this.props.top + top - 50
+    let paddVNGLcontainerX = this.props.left + left - 69
+    let paddVNGLcontainerY = this.props.top + top - 16
     if (this.props.arrangeBy === 'imports' || this.props.arrangeBy === 'exports') {
-      paddVNGLcontainerX = this.props.left + left + 318
-      paddVNGLcontainerY = this.props.top + top + 69
+      paddVNGLcontainerX = this.props.left + left + 278
+      paddVNGLcontainerY = this.props.top + top + 110
     }
     if (style && confidentialCount > 0 && country !== 'ca'
       && this.props.confidentialityMenu
@@ -258,11 +260,11 @@ class PaddLayout extends React.Component {
     }
 
     let paddMexicoNGLconfidentialIcon = null
-    let paddMexicoNGLcontainerX = this.props.left + left + 477
-    let paddMexicoNGLcontainerY = this.props.top + top - 125
+    let paddMexicoNGLcontainerX = this.props.left + left + 407
+    let paddMexicoNGLcontainerY = this.props.top + top - 90
     if (this.props.arrangeBy === 'imports' || this.props.arrangeBy === 'exports') {
-      paddMexicoNGLcontainerX = this.props.left + left + 687
-      paddMexicoNGLcontainerY = this.props.top + top + 69
+      paddMexicoNGLcontainerX = this.props.left + left + 610
+      paddMexicoNGLcontainerY = this.props.top + top + 110
     }
     if (style && confidentialCount > 0 && country !== 'ca'
       && this.props.confidentialityMenu
@@ -305,6 +307,125 @@ class PaddLayout extends React.Component {
       </g>)
     }
 
+    let canadaExplanation = null
+    if (country === 'ca') {
+      canadaExplanation = (<g transform="translate(145 143)">
+        <ExplanationDot
+          scale="scale(1)"
+          lineStroke="1"
+          textBoxWidth={140}
+          textBoxHeight={150}
+          linePath="
+            M142.16,
+            173.94l24.26,
+            36.69a40.12,
+            40.12,0,0,0,
+            33.47,
+            18H328.2"
+          xPosition={50}
+          yPosition={-10}
+          lineX={142.16}
+          lineY={173}
+          textX={46}
+          textY={58}
+          containerX={this.props.left + 330}
+          containerY={this.props.top + 14}
+          name="canadaExplanation"
+          text={`${this.props.TRSelector(['explanations','canadaPaddCrudeOil'])}`}
+        />
+      </g>)
+    }
+
+    let paddIExplanation = null
+    let textString = `${this.props.TRSelector(['explanations','paddICrudeOil'])}`
+    let paddIExplanationcontainerX = this.props.left + left + 235
+    let paddIExplanationcontainerY = this.props.top + top - 79
+    if (this.props.selectedEnergy === 'naturalGasLiquids') {
+      textString = `${this.props.TRSelector(['explanations','paddINaturalGasLiquids'])}`
+      paddIExplanationcontainerX = this.props.left + left + 235
+      paddIExplanationcontainerY = this.props.top + top - 24
+    }
+    if (this.props.selectedEnergy === 'naturalGasLiquids' 
+      && (this.props.arrangeBy === 'imports') || this.props.arrangeBy === 'exports') {
+      paddIExplanationcontainerX = this.props.left + left + 152
+      paddIExplanationcontainerY = this.props.top + top + 95
+    }
+    if (this.props.arrangeBy === 'exports' && this.props.selectedEnergy === 'crudeOil') {
+      paddIExplanationcontainerX = this.props.left + left + 264
+      paddIExplanationcontainerY = this.props.top + top + 113
+    }
+    if (country !== 'ca' && paddGroupId === 'PADD I') {
+      paddIExplanation = (<g transform="translate(145 143)">
+        <ExplanationDot
+          scale="scale(0.6)"
+          lineStroke="1.4"
+          textBoxWidth={290}
+          textBoxHeight={150}
+          linePath="
+            M142.16,
+            173.94l24.26,
+            36.69a40.12,
+            40.12,0,0,0,
+            33.47,
+            18H828.2"
+          xPosition={20}
+          yPosition={0}
+          lineX={142.16}
+          lineY={173}
+          textX={26}
+          textY={36}
+          containerX={paddIExplanationcontainerX}
+          containerY={paddIExplanationcontainerY}
+          name="paddIExplanation"
+          text={textString}
+        />
+      </g>)
+    }
+
+    let paddVExplanation = null
+    let paddVExplanationcontainerX = this.props.left + left - 90
+    let paddVExplanationcontainerY = this.props.top + top - 79
+    if (this.props.selectedEnergy === 'naturalGasLiquids') {
+      paddVExplanationcontainerX = this.props.left + left - 85
+      paddVExplanationcontainerY = this.props.top + top - 29
+    }
+    if (this.props.selectedEnergy === 'naturalGasLiquids'  
+      && (this.props.arrangeBy === 'imports') || this.props.arrangeBy === 'exports') {
+      paddVExplanationcontainerX = this.props.left + left + 265
+      paddVExplanationcontainerY = this.props.top + top + 95
+    }
+    if (this.props.arrangeBy === 'exports' && this.props.selectedEnergy === 'crudeOil') {
+      paddVExplanationcontainerX = this.props.left + left + 380
+      paddVExplanationcontainerY = this.props.top + top + 113
+    }
+    if (country !== 'ca' && paddGroupId === 'PADD V') {
+      paddVExplanation = (<g transform="translate(145 143)">
+        <ExplanationDot
+          scale="scale(0.6)"
+          lineStroke="1.4"
+          textBoxWidth={277}
+          textBoxHeight={150}
+          linePath="
+            M142.16,
+            173.94l24.26,
+            36.69a40.12,
+            40.12,0,0,0,
+            33.47,
+            18H828.2"
+          xPosition={20}
+          yPosition={0}
+          lineX={142.16}
+          lineY={173}
+          textX={26}
+          textY={33}
+          containerX={paddVExplanationcontainerX}
+          containerY={paddVExplanationcontainerY}
+          name="paddVExplanation"
+          text={`${this.props.TRSelector(['explanations','padd'])}`}
+        />
+      </g>)
+    }
+
     return (<g className={fontClassName} transform={`translate(${left + transformTranslate.get('left')} ${top + transformTranslate.get('top')})`}>
       <text transform={`translate(${transformText.get('left')} ${transformText.get('top')})`}>{text}</text>
       <polygon fill={color} transform="translate(0 140)" points="149.98 18.68 168.81 26.14 187.48 18.66 187.48 17.99 184.09 17.99 184.08 14.51 152.98 14.5 152.95 17.99 149.98 17.99 149.98 18.68" />
@@ -319,6 +440,10 @@ class PaddLayout extends React.Component {
       {paddMexicoNGLconfidentialIcon}
 
       {canadaconfidentialIcon}
+
+      {canadaExplanation}
+      {paddIExplanation}
+      {paddVExplanation}
             </g>)
   }
 

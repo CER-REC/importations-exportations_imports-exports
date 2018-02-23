@@ -1,20 +1,15 @@
 @import "./Colours.scss";
 
-.SocialBar {
+.SocialBar,
+.playButton,
+.mapPiece,
+.paddLayout,
+[tabindex] {
   cursor: pointer;
 }
 
-.playButton {
-  cursor: pointer;
-}
-
-.mapPiece {
-  cursor: pointer;
-}
-
-.paddLayout {
-  cursor: pointer;
-}
+/* Don't use the pointer cursor for the legend */
+.mapPiece.legend { cursor: inherit; }
 
 .loader {
   border: 16px solid #f3f3f3;
@@ -40,8 +35,26 @@
   100% { transform: rotate(360deg); }
 }
 
-:-moz-focusring { outline: 3px solid rgb(77, 144, 254); }
+:focus { outline: 2px solid $explanation !important; }
 
 #popoverPortal {
   pointer-events: none;
+}
+
+.verticalAlign {
+  height: 100%;
+
+  &:before {
+    content: '';
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+    margin-right: -0.25em;
+  }
+
+  > .centered {
+    display: inline-block;
+    vertical-align: middle;
+    width: 100%;
+  }
 }

@@ -222,6 +222,7 @@ class TimelineSeek extends React.PureComponent {
 
 export default connect(
   (state, props) => ({
+    selectedEnergy: state.importExportVisualization,
     seekPosition: TimelineSelector.timelineSeekPositionSelector(state, props),
     timelineRange: TimelineSelector.timelineRange(state, props),
     timelineGroup: TimelineSelector.timelineGrouping(state, props),
