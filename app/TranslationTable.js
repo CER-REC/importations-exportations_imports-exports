@@ -422,7 +422,7 @@ const TranslationTable = fromJS({
       fr: "La flèche vers le bas indique l'électricité totale que le Nouveau-Brunswick a exportée vers les États-Unis au cours de la période sélectionnée dans le diagramme à barres ci-dessous.",
     },
     britishColumbiaArrow: {
-      en: 'The up arrow shows the total electricity that British Columbia import from U.S. states during the time period selected below.',
+      en: 'The up arrow shows the total electricity that British Columbia imported from U.S. states during the time period selected below.',
       fr: "La flèche vers le haut indique l'électricité totale importée par la Colombie-Britannique en provenance des États-Unis pendant la période sélectionnée dans le diagramme à barres ci-dessous.",
     },
     timelineRange: {
