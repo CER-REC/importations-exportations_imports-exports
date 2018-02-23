@@ -1,7 +1,13 @@
 import { createSelector } from 'reselect'
 import { fromJS } from 'immutable'
 
-import { activityGroupSelector, filterByHexSelector, detailSidebarFilteredData } from './data'
+import {
+  activityGroupSelector,
+  filterByHexSelector,
+  detailSidebarFilteredData,
+  timelineRange,
+  groupingBy as timelineGrouping,
+} from './data'
 import { visualizationContentPosition as visContentSize } from './viewport/'
 import { visualizationSettings, selectedVisualization } from './visualizationSettings'
 import Constants from '../Constants'
@@ -12,14 +18,6 @@ const getScaleKey = (state, props) => props.scaleKey || getValueKey(state, props
 
 const mapToValue = (data, key) => data.map(v => v.get(key))
 
-export const timelineGrouping = createSelector(
-  visualizationSettings,
-  settings => settings.getIn(['timeline', 'grouping']),
-)
-export const timelineRange = createSelector(
-  visualizationSettings,
-  settings => settings.getIn(['timeline', 'range']),
-)
 export const timelineScaleLinked = createSelector(
   visualizationSettings,
   settings => settings.getIn(['timeline', 'scaleLinked']),
@@ -270,8 +268,7 @@ export const timelineData = createSelector(
   timelineScaleCalculation,
   timelinePositionCalculation,
   timelineRange,
-  (scale, position, range) =>
-    Object.assign({ timelineRange: range }, scale, position),
+  (scale, position, range) => ({ timelineRange: range, ...scale, ...position }),
 )
 
 export const timelineSeekPositionSelector = createSelector(

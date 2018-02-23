@@ -40,12 +40,12 @@ export const selection = createSelector(
   settings => settings.get('selection'),
 )
 
-const timelineRange = createSelector(
+export const timelineRange = createSelector(
   visualizationSettings,
   settings => settings.getIn(['timeline', 'range']),
 )
 
-const groupingBy = createSelector(
+export const groupingBy = createSelector(
   visualizationSettings,
   settings => settings.getIn(['timeline', 'grouping']),
 )
