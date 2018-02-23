@@ -12,7 +12,7 @@ export const canadaMapPosition = createSelector(
     top: visContent.top,
     left: visContent.left + viewp.get('changeWidthRatio')*50,
     width: visContent.width,
-    height: 120,
+    height: 140,
   }),
 )
 
@@ -24,7 +24,7 @@ export const chartImportPosition = createSelector(
       top: prev.top + prev.height,
       left: prev.left - viewp.get('changeWidthRatio')*50,
       width: prev.width,
-      height: viewp.get('changeHeightRatio')*100,
+      height: 100,
     }
     return result
   },
@@ -38,7 +38,7 @@ export const chartAxisPosition = createSelector(
       top: prev.top + prev.height,
       left: prev.left,
       width: prev.width,
-      height: viewp.get('changeHeightRatio')*axisHeight,
+      height: axisHeight,
     }
     return result
   },
@@ -52,7 +52,7 @@ export const chartExportPosition = createSelector(
       top: prev.top + prev.height,
       left: prev.left,
       width: prev.width,
-      height: viewp.get('changeHeightRatio')*100,
+      height: 100,
     }
     return result
   },
@@ -62,7 +62,7 @@ export const usMapPosition = createSelector(
   chartExportPosition,
   viewport,
   (prev, viewp) => {
-    const top = viewp.get('changeHeightRatio') > 1.2 ? (prev.top + prev.height - 50) : (prev.top + prev.height) 
+    const top = viewp.get('changeHeightRatio') > 1.2 ? (prev.top + prev.height - 60) : (prev.top + prev.height) 
     const result = {
       top,
       left: prev.left - viewp.get('changeWidthRatio')*30,
