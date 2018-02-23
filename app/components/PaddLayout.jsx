@@ -589,7 +589,7 @@ class PaddLayout extends React.Component {
   renderPaddMapPiece() {
     if (this.props.arrangeBy === 'location' || this.props.country === 'ca') {
       return this.renderLocation(this.props)
-    } else{
+    } else {
       return this.renderDefault(this.props)
     }
   }

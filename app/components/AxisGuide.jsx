@@ -10,6 +10,8 @@ import { visualizationSettings } from '../selectors/visualizationSettings'
 import { timelineScaleLinked } from '../selectors/timeline'
 import trSelector from '../selectors/translate'
 
+import { arrangeBy } from '../selectors/data'
+
 import ExplanationDot from './ExplanationDot'
 import tr from '../TranslationTable'
 
@@ -117,6 +119,8 @@ class AxisGuide extends React.PureComponent {
       containerY = this.props.chartHeight + (this.props.barSize / 2)
       + (this.props.position * this.props.heightPerUnit) - 413
     }
+    if (this.props.selectedEnergy === 'refinedPetroleumProducts'
+      && this.props.arrangeBy === 'split') { return null }
     if (this.props.flipped
       && (this.props.selectedEnergy !== 'crudeOil'
       && this.props.selectedEnergy !== 'refinedPetroleumProducts')) { return null }
@@ -227,6 +231,7 @@ class AxisGuide extends React.PureComponent {
 
 export default connect((state, props) => ({
   selectedEnergy: state.importExportVisualization,
+  arrangeBy: arrangeBy(state, props),
   unit: visualizationSettings(state, props).get('amount'),
   tr: trSelector(state, props),
   scaleLinked: timelineScaleLinked(state, props),
