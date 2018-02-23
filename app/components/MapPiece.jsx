@@ -239,7 +239,7 @@ class MapPiece extends React.Component {
         yPosition={20}
         lineX={142.16}
         lineY={173.94}
-        textX={48}
+        textX={48}x
         textY={48}
         containerX={this.props.viewport.get('changeWidthRatio')*(this.props.x1 * MapLayoutGridConstant.getIn(['electricity', 'us' , 'mapPieceScale'], 1) + scaleContainerX)}
         containerY={this.props.viewport.get('changeHeightRatio')*(this.props.y1 * MapLayoutGridConstant.getIn(['electricity', 'us' , 'mapPieceScale'], 1)  + scaleContainerY)}      

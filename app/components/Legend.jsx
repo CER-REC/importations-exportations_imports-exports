@@ -88,13 +88,14 @@ class Legend extends React.Component {
       <g>
         <g transform={transformString}>
           {bins.map((value, i) => (
-            <text
-              className="theLegendValues"
-              y={(i * 20) + 20}
-              key={value[0]}
-            >
-              {`>${value.map(humanNumberLang).join(' - ')}`}
-            </text>
+            <g key={`bin-${i}`}>
+              <text className="theLegendValues" y={(i * 20) + 20}>
+                {`>${humanNumberLang(value[0])}`}
+              </text>
+              <text className="theLegendValues" y={(i * 20) + 20} x="30">
+                {`- ${humanNumberLang(value[1])}`}
+              </text>
+            </g>
           ))}
         </g>
       </g>

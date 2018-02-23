@@ -70,6 +70,7 @@ class RefinedPetroleumProductsVisualizationContainer extends React.Component {
                             height: '8px',
                             marginRight: '4px',
                             backgroundColor: colour,
+                            verticalAlign: 'middle',
                           }}
                         />}
                     label={<strong>{key}</strong>}

@@ -82,7 +82,7 @@ class NaturalGasMapContainer extends React.PureComponent {
     return (length > 0)
   }
 
-  render(){
+  render(province){
     const type = this.props.importExportVisualization
     const arrangedData = this.orderBy(this.props.selector, this.props.arrangeBy)
     const mapLayoutGrid = MapLayoutGridConstant.get(type)

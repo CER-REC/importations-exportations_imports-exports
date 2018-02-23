@@ -223,7 +223,7 @@ class PaddLayout extends React.Component {
     if (country !== 'ca' && paddGroupId === 'PADD V') {
       paddVExplanation = (<g transform="translate(145 143)">
         <ExplanationDot
-          scale="scale(0.6)"
+          scale="scale(0.4)"
           lineStroke="1.4"
           textBoxWidth={277}
           textBoxHeight={150}
@@ -238,8 +238,8 @@ class PaddLayout extends React.Component {
           yPosition={0}
           lineX={142.16}
           lineY={173}
-          textX={26}
-          textY={33}
+          textX={23}
+          textY={25}
           containerX={paddVExplanationcontainerX}
           containerY={paddVExplanationcontainerY}
           name="paddVExplanation"

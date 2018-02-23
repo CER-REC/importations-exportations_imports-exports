@@ -173,10 +173,15 @@ class SocialBar extends React.Component {
     let transformSocialBarIcons = `translate(${this.props.viewport.get('x') - Constants.getIn(['socialBar', 'iconMarginY'])}, 0)`
     let rectWidth = `${Constants.getIn(['socialBar', 'width'])}`
     let rectXPosition = `${this.props.viewport.get('x') - Constants.getIn(['socialBar', 'width']) - Constants.getIn(['menuBar', 'barWidth'])}`
-    if (this.props.expandSocialBar) {
+    if (this.props.expandSocialBar && this.props.language === 'en') {
       rectWidth = `${Constants.getIn(['socialBar', 'width']) + Constants.getIn(['socialBar', 'expandedWidth'])}`
       rectXPosition = `${this.props.viewport.get('x') - Constants.getIn(['socialBar', 'width']) - Constants.getIn(['socialBar', 'expandedWidth'])}`
       transformSocialBarIcons = `translate(${this.props.viewport.get('x') - Constants.getIn(['socialBar', 'expandedIconX'])}, 0)`
+    }
+    if (this.props.expandSocialBar && this.props.language === 'fr') {
+      rectWidth = `${Constants.getIn(['socialBar', 'width']) + Constants.getIn(['socialBar', 'expandedWidthFr'])}`
+      rectXPosition = `${this.props.viewport.get('x') - Constants.getIn(['socialBar', 'width']) - Constants.getIn(['socialBar', 'expandedWidthFr'])}`
+      transformSocialBarIcons = `translate(${this.props.viewport.get('x') - Constants.getIn(['socialBar', 'expandedIconXFr'])}, 0)`
     }
     const viewPort = WorkspaceComputations.socialBarY(this.props.viewport) || 0
     return (
@@ -230,9 +235,18 @@ class SocialBar extends React.Component {
   }
 
   expandedMenu() {
-    const iconTransformString = `translate(${this.props.viewport.get('x') - Constants.getIn(['socialBar', 'iconX'])} ${this.props.viewport.get('y') + Constants.getIn(['socialBar', 'iconY'])})`
+    let iconTransformString = `translate(${this.props.viewport.get('x') - Constants.getIn(['socialBar', 'iconX'])} ${this.props.viewport.get('y') + Constants.getIn(['socialBar', 'iconY'])})`
+    let twitterX = Constants.getIn(['socialBar', 'twitterMargin'])
+    let facebookX = Constants.getIn(['socialBar', 'facebookMargin'])
+    let linkedinX = Constants.getIn(['socialBar', 'linkedinMargin'])
     if (!this.props.expandSocialBar) {
       return null
+    }
+    if (this.props.language === 'fr') {
+      iconTransformString = `translate(${this.props.viewport.get('x') - Constants.getIn(['socialBar', 'iconX']) - 61} ${this.props.viewport.get('y') + Constants.getIn(['socialBar', 'iconY'])})`
+      twitterX = Constants.getIn(['socialBar', 'twitterMargin']) + 14
+      facebookX = Constants.getIn(['socialBar', 'facebookMargin']) + 34
+      linkedinX = Constants.getIn(['socialBar', 'linkedinMargin']) + 58
     }
     return (<g transform={iconTransformString}>
       <image
@@ -250,7 +264,7 @@ class SocialBar extends React.Component {
         width={Constants.getIn(['socialBar', 'iconSize'])}
         y={0}
         xlinkHref="images/sm_twitter.svg"
-        x={Constants.getIn(['socialBar', 'twitterMargin'])}
+        x={twitterX}
         {...handleInteraction(this.twitterClick)}
       />
       <image
@@ -259,7 +273,7 @@ class SocialBar extends React.Component {
         width={Constants.getIn(['socialBar', 'iconSize'])}
         y={0}
         xlinkHref="images/sm_facebook.svg"
-        x={Constants.getIn(['socialBar', 'facebookMargin'])}
+        x={facebookX}
         {...handleInteraction(this.facebookClick)}
       />
       <image
@@ -268,7 +282,7 @@ class SocialBar extends React.Component {
         width={Constants.getIn(['socialBar', 'iconSize'])}
         y={0}
         xlinkHref="images/sm_linkedin.svg"
-        x={Constants.getIn(['socialBar', 'linkedinMargin'])}
+        x={linkedinX}
         {...handleInteraction(this.linkedInClick)}
       />
             </g>)
@@ -279,12 +293,22 @@ class SocialBar extends React.Component {
     if (!this.props.expandSocialBar) {
       return null
     }
+    let aboutTextX = '0.0em'
+    let methodologyTextX = '-2.6em'
+    let downloadDataTextX = '-5.6em'
+    let downloadImageTextX = '-6.35em'
+    if (this.props.language === 'fr') {
+      aboutTextX = '-4.5em'
+      methodologyTextX = '-6.1em'
+      downloadDataTextX = '-5.9em'
+      downloadImageTextX = '-11.6em'
+    }
     return (<g transform={transformString}>
       <text className="socialBarText">
-        <tspan dy="0.1em" {...handleInteraction(this.aboutThisProjectClick)}> {Tr.getIn(['socialBarText', 'about', this.props.language])}</tspan>
-        <tspan dx="-2.6em" dy="1.8em" {...handleInteraction(this.methodologyClick)}> {Tr.getIn(['socialBarText', 'methodology', this.props.language])}</tspan>
-        <tspan dx="-5.6em" dy="1.8em" {...handleInteraction(this.downloadDataClick)}> {Tr.getIn(['socialBarText', 'downloadData', this.props.language])}</tspan>
-        <tspan dx="-6.35em" dy="1.8em" {...handleInteraction(this.downloadImageClick)}> {Tr.getIn(['socialBarText', 'downloadImage', this.props.language])}</tspan>
+        <tspan dx={aboutTextX} dy="0.1em" {...handleInteraction(this.aboutThisProjectClick)}> {Tr.getIn(['socialBarText', 'about', this.props.language])}</tspan>
+        <tspan dx={methodologyTextX} dy="1.8em" {...handleInteraction(this.methodologyClick)}> {Tr.getIn(['socialBarText', 'methodology', this.props.language])}</tspan>
+        <tspan dx={downloadDataTextX} dy="1.8em" {...handleInteraction(this.downloadDataClick)}> {Tr.getIn(['socialBarText', 'downloadData', this.props.language])}</tspan>
+        <tspan dx={downloadImageTextX} dy="1.8em" {...handleInteraction(this.downloadImageClick)}> {Tr.getIn(['socialBarText', 'downloadImage', this.props.language])}</tspan>
       </text>
     </g>)
   }
@@ -326,7 +350,7 @@ const mapDispatchToProps = dispatch => ({
   },
   dataDownloadClick() {
     dispatch(ShowDataDownloadWindow('dataDownload'))
- },
+  },
 })
 
 

@@ -13,6 +13,8 @@ import {
 const emptyMap = new Immutable.Map()
 const emptyList = new Immutable.List()
 
+export const timelinePlayback = state => state.timelinePlayback
+
 export const subType = createSelector(
   visualizationSettings,
   settings => settings.get('subtype'),
@@ -40,12 +42,18 @@ export const selection = createSelector(
   settings => settings.get('selection'),
 )
 
-const timelineRange = createSelector(
+export const timelineRange = createSelector(
   visualizationSettings,
   settings => settings.getIn(['timeline', 'range']),
 )
 
-const groupingBy = createSelector(
+export const timelineFilterRange = createSelector(
+  timelineRange,
+  timelinePlayback,
+  (range, playback) => (playback ? Immutable.fromJS({ start: playback, end: playback }) : range),
+)
+
+export const groupingBy = createSelector(
   visualizationSettings,
   settings => settings.getIn(['timeline', 'grouping']),
 )
@@ -132,7 +140,7 @@ export const filterByHex = (point, selectedMapPieces, visualization, selectionSt
 
 const filterByTimelineSelector = createSelector(
   activityGroupSelector,
-  timelineRange,
+  timelineFilterRange,
   groupingBy,
   (points, range, groupBy) => points.filter(point => filterByTimeline(point, range, groupBy)),
 )
@@ -146,7 +154,7 @@ export const filterByHexSelector = createSelector(
 
 export const detailSidebarFilteredData = createSelector(
   filterByHexSelector,
-  timelineRange,
+  timelineFilterRange,
   groupingBy,
   (points, range, groupBy) => points.filter(point => filterByTimeline(point, range, groupBy)),
 )

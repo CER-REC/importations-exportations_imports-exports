@@ -6,6 +6,7 @@ import { Map, fromJS } from 'immutable'
 import SVGDrag from './SVGDrag/'
 import Constants from '../Constants'
 import { timelineFilter } from '../actions/visualizationSettings'
+import { timelineRange, groupingBy as timelineGrouping } from '../selectors/data'
 import * as TimelineSelector from '../selectors/timeline'
 
 import ExplanationDot from './ExplanationDot'
@@ -224,8 +225,8 @@ export default connect(
   (state, props) => ({
     selectedEnergy: state.importExportVisualization,
     seekPosition: TimelineSelector.timelineSeekPositionSelector(state, props),
-    timelineRange: TimelineSelector.timelineRange(state, props),
-    timelineGroup: TimelineSelector.timelineGrouping(state, props),
+    timelineRange: timelineRange(state, props),
+    timelineGroup: timelineGrouping(state, props),
     tr: trSelector(state, props),
   }),
   { timelineFilter },

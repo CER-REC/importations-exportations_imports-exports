@@ -33,12 +33,12 @@ class PowerPoolContainer extends React.Component {
           36.69a40.12,
           40.12,0,0,0,
           33.47,
-          18H515.2"
+          18H535.2"
         xPosition={78}
         yPosition={-12}
         lineX={142.16}
         lineY={173.94}
-        textX={40}
+        textX={10}
         textY={17}
         containerX={this.props.left + 32}
         containerY={this.props.top - 15}
