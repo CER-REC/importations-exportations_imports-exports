@@ -225,7 +225,8 @@ class ElectricityMapLayout extends React.Component {
   }
 
   renderDetailSidebar() {
-    return (<DetailSidebar top={this.props.top} height={Constants.getIn(['detailBreakDown', this.props.country, 'height'], 0)}>
+    const top = this.props.viewport.get('changeHeightRatio') > 1.2 ? 40 : 0 
+    return (<DetailSidebar top={this.props.top +top} height={Constants.getIn(['detailBreakDown', this.props.country, 'height'], 0)}>
       {this.renderDetailBreakdown()}
     </DetailSidebar>)
   }
@@ -253,6 +254,7 @@ const mapStateToProps = (state, props) => ({
   importsEnabled: showImportsSelector(state, props),
   exportsEnabled: showExportsSelector(state, props),
   timelineYears: timelineYearScaleCalculation(state, props),
+  viewport: state.viewport,
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(ElectricityMapLayout)
