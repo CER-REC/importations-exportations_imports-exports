@@ -14,7 +14,7 @@ import '../styles/Fonts.scss'
 const triangleLine = (
   <g transform="translate(0 -3)">
     <polyline fill="black" points="0 8 0 0 9.1 8.1 0 8.1" />
-    <line stroke="black" x1="0.5" y1="7.6" x2="160" y2="7.6" />
+    <line stroke="black" x1="0.5" y1="7.6" x2="180" y2="7.6" />
   </g>
 )
 

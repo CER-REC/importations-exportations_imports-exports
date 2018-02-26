@@ -131,7 +131,7 @@ export const filterByHex = (point, selectedMapPieces, visualization, selectionSt
         return true
       }
     }
-    return selectedMapPieces.includes(point.get('destination'))
+    return selectedMapPieces.includes(point.get('destination')) || selectedMapPieces.includes(point.get('destinationKey'))
   }
   return selectedMapPieces.includes(point.get('originKey'))
   || selectedMapPieces.includes(point.get('origin'))

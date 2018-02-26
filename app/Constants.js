@@ -19,7 +19,7 @@ const Constants = fromJS({
   },
 
   menuBar: {
-    width: 200,
+    width: 220,
     containerHeight: 300,
     importExportMenuLabelMargin: 16,
     importExportTextLabelYOffset: 12,
@@ -92,7 +92,7 @@ const Constants = fromJS({
   },
 
   visualizationDetailContainer: {
-    width: 260,
+    width: 250,
     leftPadding: 10,
   },
 
@@ -115,7 +115,7 @@ const Constants = fromJS({
   showExplanations: {
     height: 30,
     topMargin: 80,
-    triangleLineWidth: 160,
+    triangleLineWidth: 180,
     triangleLineYOffset: 3,
     triangleLineY: 7.6,
     labelOffset: 13,

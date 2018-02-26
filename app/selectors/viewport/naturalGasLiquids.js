@@ -24,9 +24,10 @@ export const chartImportPosition = createSelector(
   canadaImportMap,
   viewport,
   (visContent, viewp) => {
-    const left = viewp.get('changeWidthRatio') > 1.2 ? (visContent.left - 80) : (visContent.left) 
+    const left = viewp.get('changeWidthRatio') > 1.2 ? (visContent.left - 80) : (visContent.left)
+    const top = viewp.get('changeHeightRatio') > 1.2 ? (visContent.top + visContent.height +20) : (visContent.top + visContent.height)
     const result = {
-      top: visContent.top + visContent.height,
+      top,
       left,
       width: visContent.width,
       height: 100,
