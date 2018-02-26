@@ -27,6 +27,6 @@ export const handleInteraction = (func, ...boundArgs) => {
     }
   }
   return {
-    onClick: handle, onKeyPress: handle, onKeyDown: handle, tabIndex: 0,
+    onClick: handle, onKeyPress: handle, onKeyDown: handle, tabIndex: 0, focusable: 'true',
   }
 }
