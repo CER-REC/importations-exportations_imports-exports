@@ -28,7 +28,7 @@ class ShowConfidentiality extends React.Component {
   }
 
   icon() {
-    return <g transform="translate(116 -12) scale(0.84)" className="confidentialityIcon">
+    return <g transform="translate(11 -12) scale(0.84)" className="confidentialityIcon">
       <path
         fill='#fff'
         stroke='#999'
@@ -50,13 +50,13 @@ class ShowConfidentiality extends React.Component {
     }
     return (
       <text
-        x={13}
+        x={27}
         y={0}
         className="showHideConfidentiality"
         fill="#999"
       >
         {confidentialityText}
-        <tspan dx="25">
+        <tspan dx="8">
           {sign}
         </tspan>
       </text>
