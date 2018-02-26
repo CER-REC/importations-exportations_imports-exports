@@ -339,10 +339,10 @@ class MapPiece extends React.Component {
         text={valueString}
         containerX={this.props.viewport.get('changeWidthRatio')*containerX}
         containerY={this.props.viewport.get('changeHeightRatio')*containerY}
-        lineX={102}
-        lineY={40}
-        textX={40}
-        textY={40}
+        lineX={142.16}
+        lineY={173}
+        textX={15}
+        textY={24}
         xPosition={30}
         yPosition={0}
         name={`${this.props.data.get('name')}`}

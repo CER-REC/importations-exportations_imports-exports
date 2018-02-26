@@ -76,7 +76,7 @@ class ShowConfidentiality extends React.Component {
           40.12,0,0,0,
           33.47,
           18H615.2"
-        xPosition={155}
+        xPosition={150}
         yPosition={-5}
         lineX={142.16}
         lineY={173.94}

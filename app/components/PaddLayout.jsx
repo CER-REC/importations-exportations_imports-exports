@@ -76,10 +76,10 @@ class PaddLayout extends React.Component {
           text={`${confidentialCount} / ${totalCount} values confidential`}
           containerX={paddContainerX}
           containerY={paddContainerY}
-          lineX={102}
-          lineY={40}
-          textX={40}
-          textY={40}
+          lineX={142.16}
+          lineY={173}
+          textX={20}
+          textY={25}
           xPosition={xPosition}
           yPosition={yPosition}
           name={`${paddGroupId}${this.props.selectedEnergy}Confidentiality`}
