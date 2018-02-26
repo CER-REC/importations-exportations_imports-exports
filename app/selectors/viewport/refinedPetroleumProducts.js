@@ -57,8 +57,7 @@ export const individualChartsPosition = createSelector(
 
 export const sidebarTotalPosition = createSelector(
   basePos,
-  viewport,
-  (startPos, viewp) => ({
+  startPos => ({
     ...startPos,
     top: startPos.top - 60,
     height: 19,
