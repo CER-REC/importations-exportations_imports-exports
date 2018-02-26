@@ -226,7 +226,7 @@ class ElectricityMapLayout extends React.Component {
 
   renderDetailSidebar() {
     const top = this.props.viewport.get('changeHeightRatio') > 1.2 ? 40 : 0 
-    return (<DetailSidebar top={this.props.top +top} height={Constants.getIn(['detailBreakDown', this.props.country, 'height'], 0)}>
+    return (<DetailSidebar top={this.props.top + top} height={Constants.getIn(['detailBreakDown', this.props.country, 'height'], 0)}>
       {this.renderDetailBreakdown()}
     </DetailSidebar>)
   }
