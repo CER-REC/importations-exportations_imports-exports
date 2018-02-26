@@ -100,7 +100,7 @@ class ProportionChart extends Chart {
       content = Tr.getIn(['detailBreakDown','crudeOil', 'defaultText', this.props.language])  
     }else{
       const breakdown = this.calculateBreakdown(data, aggregateKeyList)
-      content = <span><table width="100%" className="detailBreakDownContainer" style={{ padding: '8px 0' }}>
+      content = <span><table width="100%" className="detailBreakDownContainer" style={{ padding: '8px 0', height:'90px', overflowY:'auto' }}>
         <tbody>
           {Object.keys(breakdown.values).map((key, i) => {
             const colour = categoryColours.get(
