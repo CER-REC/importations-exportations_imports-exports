@@ -294,7 +294,13 @@
 .portProvinceLabel{
   font-family: $fira-sans-condensed-semibold;
   fill: $neutral-dark;
-  font-size:16px;
+  font-size:13px;
+}
+
+.portSelectedProvinceLabel{
+  font-family: $fira-sans-condensed-semibold;
+  fill: $neutral-white;
+  font-size:13px;
 }
 
 .portName{
