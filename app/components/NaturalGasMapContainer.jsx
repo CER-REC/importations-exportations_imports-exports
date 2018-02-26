@@ -147,11 +147,14 @@ class NaturalGasMapContainer extends React.PureComponent {
       if(portsCount > 7){
         provinceRendered += 0.75
       }
+      const isProvinceSelected = this.props.selectionSettings.get('provinces').indexOf(value)
+      const provinceClass = isProvinceSelected !== -1 ? 'provinceSelected': 'provinceDeselected'
+      const provinceTextColor = isProvinceSelected !== -1 ? 'portSelectedProvinceLabel' : 'portProvinceLabel'
       return (
         <g className="paddLayout" key={`NaturalGasMap_${value}`} >
-          <rect x={ provinceTextPosition - 9} y={dimensions.get('topPadding') - 15}  
+          <rect className = {provinceClass} x={ provinceTextPosition - 9} y={dimensions.get('topPadding') - 15}  
             width="29" height="15" fill="none" stroke="#a99372" strokeWidth="0.75"/>
-          <text className="portProvinceLabel" x={ provinceTextPosition -2} y={dimensions.get('topPadding') - 3} 
+          <text className={provinceTextColor} x={ provinceTextPosition -3} y={dimensions.get('topPadding') - 3} 
           {...handleInteraction(this.onClick, '', value)}>{value}</text>
           {mapLayout.toArray()}
         </g>
