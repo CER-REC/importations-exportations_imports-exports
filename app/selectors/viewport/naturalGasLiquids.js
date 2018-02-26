@@ -1,28 +1,38 @@
 import { createSelector } from 'reselect'
 
-import { visualizationContentPosition } from './index'
+import { visualizationContentPosition, viewport } from './index'
 import Constants from '../../Constants'
 
 const axisHeight = Constants.getIn(['timeline', 'axisHeight'])
 
 export const canadaImportMap = createSelector(
   visualizationContentPosition,
-  visContent => ({
-    top: visContent.top,
-    left: visContent.left + 100,
-    width: visContent.width,
-    height: 100,
-  }),
+  viewport,
+  (visContent, viewp) => {
+    const left = viewp.get('changeWidthRatio') > 1.2 ? (visContent.left + 80) : (visContent.left) 
+    const result = {
+      top: visContent.top,
+      left,
+      width: visContent.width,
+      height: 150,
+    }
+    return result
+  },
 )
 
 export const chartImportPosition = createSelector(
   canadaImportMap,
-  visContent => ({
-    top: visContent.top + visContent.height,
-    left: visContent.left - 100,
-    width: visContent.width,
-    height: 100,
-  }),
+  viewport,
+  (visContent, viewp) => {
+    const left = viewp.get('changeWidthRatio') > 1.2 ? (visContent.left - 80) : (visContent.left) 
+    const result = {
+      top: visContent.top + visContent.height,
+      left,
+      width: visContent.width,
+      height: 100,
+    }
+    return result
+  },
 )
 
 export const chartAxisPosition = createSelector(
@@ -47,10 +57,16 @@ export const chartExportPosition = createSelector(
 
 export const usPaddPosition = createSelector(
   chartExportPosition,
-  chartPosition => ({
-    top: chartPosition.top + chartPosition.height - 30,
-    left: chartPosition.left,
-    width: chartPosition.width,
-    height: 100,
-  }),
+  viewport,
+  (chartPosition, viewp) => {
+    const top = viewp.get('changeHeightRatio') > 1.2 ? (chartPosition.top + chartPosition.height - 40) : (chartPosition.top + chartPosition.height + 20) 
+    const left = viewp.get('changeWidthRatio') > 1.2 ? (chartPosition.left + 20) : (chartPosition.left) 
+    const result = {
+      top,
+      left,
+      width: chartPosition.width,
+      height: 100,
+    }
+    return result
+  },
 )

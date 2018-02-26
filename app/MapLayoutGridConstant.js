@@ -3,7 +3,7 @@ import { fromJS } from 'immutable'
 const MapLayoutGridConstant = fromJS({
   electricity: {
     ca: {
-      mapPieceScale: 1,
+      mapPieceScale: 0.9,
       defaultColumns: 8,
       sortingRowPadding: 1.5,
       dimensions: {
@@ -68,7 +68,7 @@ const MapLayoutGridConstant = fromJS({
       ],
     },
     us: {
-      mapPieceScale: 1,
+      mapPieceScale: 0.9,
       defaultColumns: 12,
       sortingRowPadding: -0.5,
       dimensions: {
@@ -244,7 +244,7 @@ const MapLayoutGridConstant = fromJS({
       ],
     },
     powerpool: {
-      mapPieceScale: 1,
+      mapPieceScale: 0.9,
       defaultColumns: 12,
       dimensions: {
         height: 37.09,
@@ -307,14 +307,14 @@ const MapLayoutGridConstant = fromJS({
   },
   naturalGasLiquids: {
     ca: {
-      mapPieceScale: 1.25,
+      mapPieceScale: 1,
       defaultColumns: 8,
       sortingRowPadding: 1.5,
       dimensions: {
         height: 37.09,
         width: 38.75,
-        yAxisPadding: -9,
-        xAxisPadding: -1.528,
+        yAxisPadding: 1,
+        xAxisPadding: 10,
       },
       styles: {
         color: '#ede3cb',
@@ -394,6 +394,22 @@ const MapLayoutGridConstant = fromJS({
           stroke: '#999',
           exclamationFill: '#999',
         },
+        crudeOil: {
+          xPadding: 70,
+          yPadding: 260,
+          xExportPadding: 130,
+          yExportPadding: 200,
+          scaleingAdjustmentX: -100,
+          scaleingAdjustmentY: -5,
+        },
+        naturalGasLiquids: {
+          xPadding: 70,
+          yPadding: 260,
+          xExportPadding: 130,
+          yExportPadding: 200,
+          scaleingAdjustmentX: 0,
+          scaleingAdjustmentY: 0,
+        },
       },
       arrow: {
         fontClass: 'paddArrowCanadaFonts',
@@ -469,6 +485,22 @@ const MapLayoutGridConstant = fromJS({
           stroke: '#999',
           exclamationFill: '#999',
         },
+        crudeOil: {
+          xPadding: 70,
+          yPadding: 260,
+          xExportPadding: 130,
+          yExportPadding: 200,
+          scaleingAdjustmentX: -5,
+          scaleingAdjustmentY: -40,
+        },
+        naturalGasLiquids: {
+          xPadding: 90,
+          yPadding: 250,
+          xExportPadding: 130,
+          yExportPadding: 200,
+          scaleingAdjustmentX: 20,
+          scaleingAdjustmentY: -55,
+        },
       },
       padding: {
         'PADD I': { left: 16, top: 0.25 },
@@ -487,8 +519,8 @@ const MapLayoutGridConstant = fromJS({
           'PADD III': { left: 144, top: 180 },
           'PADD IV': { left: 146, top: 180 },
           'PADD V': { left: 144, top: 180 },
-          'Non-USA': { left: 150, top: 180 },
-          Mexico: { left: 150, top: 180 },
+          'Non-USA': { left: 145, top: 180 },
+          Mexico: { left: 145, top: 180 },
 
         },
         orderBy: {
@@ -498,8 +530,8 @@ const MapLayoutGridConstant = fromJS({
             'PADD III': { left: 69, top: 50 },
             'PADD IV': { left: -61, top: -160 },
             'PADD V': { left: -71, top: 50 },
-            'Non-USA': { left: 310, top: -10 },
-            Mexico: { left: 310, top: -10 },
+            'Non-USA': { left: 275, top: -10 },
+            Mexico: { left: 275, top: -10 },
 
           },
           default: {
@@ -666,22 +698,22 @@ const MapLayoutGridConstant = fromJS({
           paddGroup: 'PADD I', name: 'FL', originKey: 'FL', x: 7.5, y: 6,
         },
         {
-          paddGroup: 'Non-USA', name: '', originKey: '', x: 12.5, y: 6,
+          paddGroup: 'Non-USA', name: '', originKey: '', x: 11.5, y: 6,
         },
         {
-          paddGroup: 'Mexico', name: '', originKey: '', x: 12.5, y: 6,
+          paddGroup: 'Mexico', name: '', originKey: '', x: 11.5, y: 6,
         },
       ],
     },
   },
   naturalGas: {
-    mapPieceScale: 1.25,
+    mapPieceScale: 0.8,
     sortingRowPadding: 0.5,
     dimensions: {
       height: 37.09,
       width: 38.75,
-      topPadding: 7,
-      leftPadding: 1,
+      topPadding: 25,
+      leftPadding: 15,
     },
     styles: {
       color: '#ede3cb',

@@ -317,7 +317,11 @@ class SocialBar extends React.Component {
     if(this.props.screenshotMode === true) {
       return null
     }
-    return (<g>
+    let translate = '0 0'
+    if(this.props.viewport.get('changeHeightRatio') < 1.2){
+      translate = '0 35'
+    }
+    return (<g transform={`translate(${translate})`}>
       {this.controlArrow()}
       {this.icons()}
       {this.greyBar()}

@@ -92,7 +92,7 @@ class NaturalGasMapContainer extends React.PureComponent {
     let layout = mapLayoutGrid.get('layout')
     const mapPieceScale = mapLayoutGrid.get('mapPieceScale')
     const rowPadding = 0
-    const columnPadding = 25
+    const columnPadding = 30
 
     let leftPadding = 0
     let topPadding = 0
@@ -138,9 +138,9 @@ class NaturalGasMapContainer extends React.PureComponent {
             />
           </g>)
       }) 
-      const provinceTextPosition =  portsCount > 7 ? leftPadding + columnPadding+ dimensions.get('width') * 2 : provinceRendered * 80 - 65 
+      const provinceTextPosition =  portsCount > 7 ? leftPadding + columnPadding+ dimensions.get('width') - 95 : provinceRendered * 55 - 45 
       leftPadding += dimensions.get('width') + columnPadding 
-      leftPadding = portsCount > 7 ? leftPadding + columnPadding + 25: leftPadding
+      leftPadding = portsCount > 7 ? leftPadding + columnPadding + 20: leftPadding
       column += 1
       topPadding = 0
       row = 0
@@ -150,8 +150,8 @@ class NaturalGasMapContainer extends React.PureComponent {
       return (
         <g className="paddLayout" key={`NaturalGasMap_${value}`} >
           <rect x={ provinceTextPosition - 9} y={dimensions.get('topPadding') - 15}  
-            width="39" height="18" fill="none" stroke="#a99372" strokeWidth="0.75"/>
-          <text className="portProvinceLabel" x={ provinceTextPosition } y={dimensions.get('topPadding')} 
+            width="29" height="15" fill="none" stroke="#a99372" strokeWidth="0.75"/>
+          <text className="portProvinceLabel" x={ provinceTextPosition -2} y={dimensions.get('topPadding') - 3} 
           {...handleInteraction(this.onClick, '', value)}>{value}</text>
           {mapLayout.toArray()}
         </g>
@@ -159,7 +159,7 @@ class NaturalGasMapContainer extends React.PureComponent {
     } )
 
     return (
-      <g key='NaturalGasMapContainer' transform={`translate(${this.props.left + 50} ${this.props.top})`}>
+      <g key='NaturalGasMapContainer' transform={`scale(${this.props.viewport.get('changeWidthRatio')} ${this.props.viewport.get('changeHeightRatio')}) translate(${this.props.left} ${this.props.top})`}>
         {layout.toArray()}
       </g>
     )
@@ -174,6 +174,7 @@ const mapStateToprops = (state, props) => {
     bins: binSelector(state, props),
     selector: aggregateLocationNaturalGasSelector(state,props),
     selectionSettings: getSelectionSettings(state, props),
+    viewport: state.viewport,
   }
 }
 

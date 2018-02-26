@@ -5,18 +5,11 @@ import Immutable from 'immutable'
 
 class USMapContainer extends React.Component {
   render() {
-    const detailBreakDownData = Immutable.fromJS({
-      WA: 9589756,
-      VA: 465467,
-      ID: 4678971,
-      OR: 5548646,
-    })
     return (
-      <g transform={`translate(${this.props.left} ${this.props.top})`}> <ElectricityMapLayout
+      <g transform={`scale(${this.props.viewport.get('changeWidthRatio')} ${this.props.viewport.get('changeHeightRatio')}) translate(${this.props.left} ${this.props.top})`}> <ElectricityMapLayout
         left={this.props.left}
         top={this.props.top}
         country="us"
-        detailBreakDownData={detailBreakDownData}
       />
       </g>)
   }

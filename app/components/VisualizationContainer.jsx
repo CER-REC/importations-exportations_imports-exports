@@ -56,11 +56,12 @@ class VisualizationContainer extends React.Component {
   render() {
     return (<g>
       {this.changeVisualization()}
-            </g>)
+    </g>)
   }
 }
 
 const mapStateToProps = state => ({
+  viewport: state.viewport,
   visualizationPosition: visualizationContainerPosition(state),
   contentSize: visualizationContentPosition(state),
   menuWidth: menuWidth(state),
