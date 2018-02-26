@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 126.4 8.1">
+  <defs>
+    <style>.cls-1{fill:gray;}.cls-2{fill:none;stroke:gray;stroke-miterlimit:10;}</style>
+  </defs>
+  <title>triangle_line</title>
+  <g id="Layer_2" data-name="Layer 2">
+    <g id="Layer_1-2" data-name="Layer 1">
+      <polyline class="cls-1" points="0 8 0 0 9.1 8.1 0 8.1"/>
+      <line class="cls-2" x1="0.5" y1="7.6" x2="126.4" y2="7.6"/>
+    </g></g>
+  </svg>

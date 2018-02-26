@@ -1,0 +1,66 @@
+@import "../styles/Colours.scss";
+
+/* Based on https://codepen.io/AllThingsSmitty/pen/MmxxOz */
+.switchWrapper {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  cursor: pointer;
+
+  img {
+    vertical-align: inherit;
+    margin-left: 5px;
+  }
+}
+
+.switch {
+  display: inline-block;
+  position: relative;
+  margin-top: 2px;
+  & input { display:none; }
+
+  input:checked + .switchBackground > .slider {
+    left: auto;
+    right: 1px;
+  }
+}
+
+.switchBackground {
+  background-color: $SandExtraDark;
+  border: 1px solid $SandMedium;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  position: absolute;
+  transition: .4s;
+
+  .slider {
+    background-color: #fff;
+    content: "";
+    position: absolute;
+    transition: .4s;
+    width: calc(50% - 2px);
+    height: calc(100% - 2px);
+    left: 1px;
+    bottom: 1px;
+  }
+
+  &.round {
+    border-radius: 100px;
+    .slider { border-radius: 50%; }
+  }
+}
+
+.chartOptions {
+  float: right;
+  height: 100%;
+}
+
+.detailBarArrow {
+  height: 100%;
+  width: 5px;
+  margin-left: 10px;
+  float: right;
+  background-color: $neutral-medium;
+}

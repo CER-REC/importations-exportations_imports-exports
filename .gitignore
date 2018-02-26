@@ -1,0 +1,13 @@
+node_modules/
+public/script/bundle.js
+npm-debug.log
+.DS_Store
+*.~lock*
+LAST_MODIFIED
+VERSION
+import-export-visualization.sublime-workspace
+app/App.sublime-workspace
+srcData/geo2topo.json
+srcData/shp2json.json
+srcData/topoquantize.json
+srcData/toposimplify.json
