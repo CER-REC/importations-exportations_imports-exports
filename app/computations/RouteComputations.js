@@ -13,8 +13,6 @@ These items are represented as URL parameters:
  selected energy
 
 Language is also represented, but is inferred from the application path.
-  en: /import-export-visualization
-  fr: /TODO
 See applicationPath in TranslationTable.js
 
 pathnames are subject to change depending on the final name given by NEB
@@ -54,7 +52,7 @@ const RouteComputations = {
       const root = RouteComputations.appRoot(document.location, 'en')
       return `${root}data/data.json`
     }
-    return `${location.origin}/import-export-visualization/data/data.json`
+    return `${location.origin}/imports-exports/data/data.json`
   },
 
   topoEndpoint: () => {
@@ -63,7 +61,7 @@ const RouteComputations = {
       const root = RouteComputations.appRoot(document.location, 'en')
       return `${root}data/topo.json`
     }
-    return `${location.origin}/import-export-visualization/data/topo.json`
+    return `${location.origin}/imports-exports/data/topo.json`
   },
 
   determineLanguage(location) {
