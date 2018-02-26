@@ -317,7 +317,7 @@ class SocialBar extends React.Component {
       return null
     }
     let translate = '0 0'
-    if(this.props.viewport.get('changeHeightRatio') < 1.2){
+    if(this.props.viewport.get('changeHeightRatio') < 1.2) {
       translate = '0 35'
     }
     return (<g transform={`translate(${translate})`}>

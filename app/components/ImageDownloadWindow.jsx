@@ -41,6 +41,13 @@ class ImageDownloadWindow extends React.Component {
       </p>
   }
 
+  nebImage() {
+    return <img
+      className = "nebLogo"
+      src="images/logosmall.jpg"
+    />
+  }
+
   imagePreview() {
     const screenshotUrl = `${RouteComputations.screenshotOrigin(location)}/${Constants.get('screenshotPath')}/?pageUrl=${RouteComputations.screenshotParameter(document.location)}&width=${Constants.get('screenshotWidth')}&height=${Constants.get('screenshotHeight')}`
     return <div
@@ -72,14 +79,15 @@ class ImageDownloadWindow extends React.Component {
   }
 
   render() {
-   return <div 
-    className='imageDownloadWindow'>
-    {this.imagePreview()}
-    {this.closeButton()}
-    {this.heading()}
-    {this.bitlyText()}
-    {this.saveImageButton()}
-   </div>
+    return <div 
+      className='imageDownloadWindow'>
+      {this.imagePreview()}
+      {this.closeButton()}
+      {this.heading()}
+      {this.bitlyText()}
+      {this.saveImageButton()}
+      {this.nebImage()}
+    </div>
   }
 }
 

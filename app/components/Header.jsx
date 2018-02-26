@@ -154,9 +154,6 @@ class Header extends React.Component {
     return (<div style={{ height: Constants.get('topHeightMargin') }}>
       {this.leftHeading()}
       {this.metaBar()}
-      <svg>
-      
-      </svg>
     </div>)
   }
 }
