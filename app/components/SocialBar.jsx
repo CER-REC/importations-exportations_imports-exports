@@ -24,7 +24,6 @@ class SocialBar extends React.Component {
     return {
       language: PropTypes.string.isRequired,
       viewport: PropTypes.instanceOf(Immutable.Map).isRequired,
-      screenshotMode: PropTypes.bool.isRequired,
     }
   }
 
@@ -314,7 +313,7 @@ class SocialBar extends React.Component {
   }
 
   render() {
-    if(this.props.screenshotMode === true) {
+    if (this.props.screenshot) {
       return null
     }
     let translate = '0 0'
@@ -334,7 +333,7 @@ class SocialBar extends React.Component {
 const mapStateToProps = state => ({
   viewport: state.viewport,
   language: state.language,
-  screenshotMode: state.screenshotMode,
+  screenshot: state.screenshot,
   expandSocialBar: state.expandSocialBar,
 })
 

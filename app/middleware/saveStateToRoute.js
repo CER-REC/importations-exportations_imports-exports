@@ -63,6 +63,8 @@ export default (store) => {
       language: state.language,
       showExplanations: state.showExplanations,
       openExplanations: state.openExplanations,
+      confidentialityMenu: state.confidentialityMenu,
+      openConfidentiality: state.openConfidentiality,
     }
 
     const changed = Object.keys(toSave).some(key => toSave[key] !== lastSave[key])
