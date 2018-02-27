@@ -11,7 +11,7 @@ class NaturalGasPieceActivityExplanation extends React.Component {
     if(['importsForReexport', 'exportsForReimport'].includes(this.props.activityGroup.get('activity'))){
       activity = this.props.activityGroup.get('activity')
     }
-    return (<g transform={`translate(${this.props.left},${this.props.top + 30})`}>
+    return (<g transform={`translate(${this.props.left + 1},${this.props.top + 30})`}>
       <MapPiece
         data={MapPieceExplanationConstant.getIn(['naturalGas', 'datapoint'])}
         dimensions={MapPieceExplanationConstant.getIn(['naturalGas', 'dimensions'])}

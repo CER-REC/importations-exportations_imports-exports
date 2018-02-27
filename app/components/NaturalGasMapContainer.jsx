@@ -111,12 +111,15 @@ class NaturalGasMapContainer extends React.PureComponent {
         if(row > maximunRows) {
           column += 1
           row = 1
-          topPadding = 0 
+          topPadding = 0
         }
         //x1 = left
         //y1 = top
-        const left = mapPieceTransformStartLeft(column, dimensions, mapPieceScale) + leftPadding
+        let left = mapPieceTransformStartLeft(column, dimensions, mapPieceScale) + leftPadding
         const top = mapPieceTransformStartTop(row, dimensions, mapPieceScale) + topPadding
+        if (column === 0 && row === maximunRows && portsCount > 7) {
+          left += 24
+        }
         topPadding += rowPadding
         row +=1
         return (<g key={`NaturalGasMapPiece_${port.get('Province')}_${port.get('portName')}`} 
@@ -137,10 +140,14 @@ class NaturalGasMapContainer extends React.PureComponent {
               y1={top}
             />
           </g>)
-      }) 
-      const provinceTextPosition =  portsCount > 7 ? leftPadding + columnPadding+ dimensions.get('width') - 95 : provinceRendered * 55 - 45 
-      leftPadding += dimensions.get('width') + columnPadding 
-      leftPadding = portsCount > 7 ? leftPadding + columnPadding + 20: leftPadding
+      })
+      const provinceTextPosition = portsCount > 7
+        ? (leftPadding + columnPadding + (dimensions.get('width') * mapPieceScale)) - 58
+        : (provinceRendered * 58) - 45
+      leftPadding += (dimensions.get('width') * mapPieceScale) + columnPadding
+      leftPadding = portsCount > 7
+        ? leftPadding + columnPadding + 20
+        : leftPadding
       column += 1
       topPadding = 0
       row = 0
@@ -152,9 +159,9 @@ class NaturalGasMapContainer extends React.PureComponent {
       const provinceTextColor = isProvinceSelected !== -1 ? 'portSelectedProvinceLabel' : 'portProvinceLabel'
       return (
         <g className="paddLayout" key={`NaturalGasMap_${value}`} >
-          <rect className = {provinceClass} x={ provinceTextPosition - 9} y={dimensions.get('topPadding') - 15}  
+          <rect className = {provinceClass} x={ provinceTextPosition - 9} y={dimensions.get('topPadding')}
             width="29" height="15" fill="none" stroke="#a99372" strokeWidth="0.75"/>
-          <text className={provinceTextColor} x={ provinceTextPosition -3} y={dimensions.get('topPadding') - 3} 
+          <text className={provinceTextColor} x={ provinceTextPosition -3} y={dimensions.get('topPadding') + 13}
           {...handleInteraction(this.onClick, '', value)}>{value}</text>
           {mapLayout.toArray()}
         </g>
