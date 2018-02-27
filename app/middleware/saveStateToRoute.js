@@ -65,7 +65,6 @@ export default (store) => {
       openExplanations: state.openExplanations,
       confidentialityMenu: state.confidentialityMenu,
       openConfidentiality: state.openConfidentiality,
-      screenshot: state.screenshot,
     }
 
     const changed = Object.keys(toSave).some(key => toSave[key] !== lastSave[key])
