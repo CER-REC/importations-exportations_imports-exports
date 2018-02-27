@@ -407,7 +407,7 @@ const TranslationTable = fromJS({
     },
     amountCrude: {
       en: 'Crude oil is measured in 1000 m³/d (thousand cubic metres per day), which is 6290 barrels per day.',
-      fr: 'La quantité de pétrole brut est indiquée en milliers de m3/j (milliers de mètres cubes par jour), ce qui correspond à 6 290 barils par jour.  ',
+      fr: 'La quantité de pétrole brut est indiquée en milliers de m³/j (milliers de mètres cubes par jour), ce qui correspond à 6 290 barils par jour.  ',
     },
     padd: {
       en: 'PADD stands for Petroleum Administration for Defense District. The US is divided into 5 districts which are commonly used for analysis of regional supply and demand dynamics.',
@@ -439,7 +439,7 @@ const TranslationTable = fromJS({
     },
     orangeBarNaturalGas: {
       en: 'Orange bars show the total natural gas that Canada imported in a single quarter; blue bars show exports.',
-      fr: "Les barres orange montrent la quantité totale de gaz naturel importée par le Canada au cours d’un trimestre. Les barres bleues montrent les exportations.",
+      fr: 'Les barres orange montrent la quantité totale de gaz naturel importée par le Canada au cours d’un trimestre. Les barres bleues montrent les exportations.',
     },
     EmersonNaturalGas: {
       en: 'Up arrows show the total imports of natural gas into Canada at a port during the time selected in the bar chart above. Down arrows show exports.',
@@ -463,55 +463,55 @@ const TranslationTable = fromJS({
     },
     amountNaturalGas: {
       en: 'Natural gas is measured in 1000 m³/d, which is 35,314 cubic feet. $CAN/GJ is the average price per gigajoule of natural gas. The average Albertan household uses approximately 120 GJs of natural gas per year.',
-      fr: 'La quantité de gaz naturel est indiquée en millier de m3/j, ce qui correspond à 35 314 pieds cubes par jour. $ CA/GJ indique le prix moyen du gaz naturel par gigajoule. Le ménage albertain moyen consomme environ 120 GJ de gaz naturel par année. (lien dans la colonne K)',
+      fr: 'La quantité de gaz naturel est indiquée en millier de m³/j, ce qui correspond à 35 314 pieds cubes par jour. $ CA/GJ indique le prix moyen du gaz naturel par gigajoule. Le ménage albertain moyen consomme environ 120 GJ de gaz naturel par année. (lien dans la colonne K)',
     },
     resetNaturalGasLiquids: {
       en: 'This data visualization shows imports of Natural Gas Liquids (NGLs) from the USA into Canadian provinces (top) and exports of NGLs from Canada into regions of the USA called PADDs (bottom). Click the pink dots to guide you through how to read the data.',
-      fr: 'Cette visualisation des données montre les importations de liquides de gaz naturel (LGN) des États-Unis vers les provinces canadiennes (en haut) et les exportations de LGN du Canada vers des régions des États-Unis appelées PADD (en bas). Cliquez sur les points roses pour vous guider dans la lecture des données.',
+      fr: 'Les données interactives montrent les importations de liquides de gaz naturel (« LGN ») en provenance des États-Unis et à destination des provinces canadiennes (haut) et les exportations de LGN du Canada à destination de régions PADD des États-Unis (bas). Cliquez sur les points roses pour obtenir de l’aide pour lire les données.',
     },
     albertaArrowNaturalGasLiquids: {
       en: 'The up arrow shows the total NGLs that Alberta imported from the USA during the time period selected in the bar chart below.',
-      fr: "La flèche vers le haut indique le total des LGN importés des États-Unis par l'Alberta pendant la période sélectionnée dans le diagramme à barres ci-dessous.",
+      fr: 'La flèche orientée vers le haut montre la quantité totale de LGN importée des États-Unis par l’Alberta pendant la période sélectionnée dans le diagramme à barres ci-après.',
     },
     atlqNaturalGasLiquids: {
       en: 'The Atlantic provinces and Quebec are grouped due to confidentiality rules that prevent reporting of data when minimal companies are reporting in a region. Learn more about our confidentiality rules in our methodology.',
-      fr: "Les provinces de l'Atlantique et le Québec sont regroupés en raison de règles de confidentialité qui empêchent le signalement des données lorsque très peu d'entreprises déclarent dans une région. Vous pouvez trouver plus d'informations sur nos règles de confidentialité dans notre méthodologie.",
+      fr: 'Les provinces de l’Atlantique et du Québec sont regroupées en raison de règles de confidentialité qui interdisent la publication de données relatives à une région ne comptant que peu de sociétés. La méthode fait état des règles de confidentialité.',
     },
     orangeBarNaturalGasLiquids: {
       en: 'Each orange bar shows the total amount of natural gas liquids that Canada imported during a single quarter.',
-      fr: "Chaque barre orange indique la quantité totale de liquides de gaz naturel importés par le Canada au cours d'un seul trimestre.",
+      fr: 'Chaque barre orange montre la quantité totale de liquides de gaz naturel importée par le Canada au cours d’un trimestre.',
     },
     blueBarNaturalGasLiquids: {
       en: 'Each blue bar shows the total amount of natural gas liquids that Canada exported during a single quarter.',
-      fr: "Chaque barre bleue indique la quantité totale de liquides de gaz naturel que le Canada a exportée au cours d'un seul trimestre.",
+      fr: 'Chaque barre bleue montre la quantité totale de liquides de gaz naturel exportée par le Canada au cours d’un trimestre.',
     },
     paddINaturalGasLiquids: {
       en: "The colour of this region and its arrow shows the total amount of natural gas liquids that Canada exported to the USA's PADD I region during the time period selected in the bar chart above.",
-      fr: 'La couleur de cette région et sa flèche indiquent la quantité totale de liquides de gaz naturel que le Canada a exportée vers la région PADD I des États-Unis au cours de la période sélectionnée dans le graphique à barres ci-dessus.',
+      fr: 'La couleur de la région et de la flèche correspondante indique la quantité totale de liquides de gaz naturel exportée par le Canada vers la région PADD I des États-Unis pendant la période sélectionnée dans le diagramme à barres ci-dessus.',
     },
     amountNaturalGasLiquids: {
       en: 'Natural gas liquids production is measured in 1000 m³/d (thousand cubic metres per day), which equals 6290 barrels per day.',
-      fr: 'La production de liquides de gaz naturel est mesurée en 1000 m³/j (milliers de mètres cubes par jour), ce qui équivaut à 6290 barils par jour.',
+      fr: 'La production de liquides de gaz naturel est indiquée en milliers de m³/j (milliers de mètres cubes par jour), ce qui correspond à 6 290 barils par jour.',
     },
     resetRefinedPetroleumProducts: {
       en: 'This data visualization shows Canada’s quarterly exports of refined petroleum products (RPPs). Click the pink dots to guide you through how to read the data.',
-      fr: 'Cette visualisation des données montre les exportations trimestrielles de produits pétroliers raffinés (RPA) du Canada. Cliquez sur les points roses pour vous guider dans la lecture des données.',
+      fr: 'Les données interactives montrent les exportations de produits pétroliers raffinés (« PPR ») du Canada par trimestre. Cliquez sur les points roses pour obtenir de l’aide pour lire les données.',
     },
     arrangeByRefinedPetroleumProducts: {
       en: 'Switch between seeing the different types of refined petroleum products stacked in one bar chart or as individual bar charts.',
-      fr: 'Alterner la présentation des différents types de produits pétroliers raffinés empilés entre présentation dans un diagramme à barres ou sous forme de graphiques à barres individuels.',
+      fr: 'Passez d’un type de produit pétrolier raffiné à l’autre dans une barre de diagramme ou dans un diagramme à barres séparé.',
     },
     amountRefinedPetroleumProducts: {
       en: 'Refined petroleum product flow is measured in 1000 m³/d (thousand cubic metres per day), which is 6290 barrels per day.',
-      fr: 'Les écoulement de produits pétroliers raffinés sont mesuré à 1 000 m³/j (milliers de mètres cubes par jour), soit 6290 barils par jour.',
+      fr: 'La quantité de produits pétroliers raffinés est indiquée en milliers de m3/j (milliers de mètres cubes par jour), ce qui correspond à 6 290 barils par jour.',
     },
     confidentialValuesRefinedPetroleumProducts: {
       en: 'With only 13 refineries in Canada the data for RPPs is often deemed confidential as individual companies may become identifiable which could have a negative financial impact. Learn more in our methodology.',
-      fr: "Avec seulement 13 raffineries au Canada, les données sur les RPA sont souvent considérées comme confidentielles, car les entreprises individuelles peuvent devenir identifiables, ce qui pourrait avoir un impact financier négatif. Vous pouvez trouver plus d'informations sur nos règles de confidentialité dans notre méthodologie.",
+      fr: 'Parce que le Canada ne compte que 13 raffineries, les données relatives aux produits pétroliers raffinés sont souvent confidentielles afin qu’il ne soit pas possible d’identifier une société en particulier, ce qui pourrait avoir une incidence financière négative sur elle.  La méthode contient de plus amples renseignements.',
     },
     barsRefinedPetroleumProducts: {
       en: 'Bars are pointed downwards because they represent exports from Canada.',
-      fr: "Les barres sont pointées vers le bas parce qu'elles représentent les exportations du Canada.",
+      fr: 'Les barres sont orientées vers le bas parce qu’elles représentent les exportations du Canada.',
     },
   },
 
