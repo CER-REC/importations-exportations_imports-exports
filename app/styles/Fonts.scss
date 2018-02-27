@@ -237,6 +237,8 @@
   font-size: 11px;
   color: $neutral-light;
 
+  .switchWrapper { font-weight: normal; }
+
   .chartOptions a {
     font-family: $fira-sans-condensed-medium;
     color: $neutral-medium;
