@@ -491,9 +491,9 @@ const Constants = fromJS({
       menuBar: 10,
       visualization: {
         caMap: 50,
-        timeline: 100,
-        usMap: 150,
-        powerpoolMap: 180,
+        timeline: 70,
+        usMap: 100,
+        powerpool: 180,
         caPadd: 50,
         usPadd: 150,
         naturalGasMap: 150,

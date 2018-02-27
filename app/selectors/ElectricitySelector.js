@@ -132,15 +132,16 @@ const createSortedLayout = createSelector(
 )
 
 const getTabIndexStart = (country) =>{
-  let tabIndex = 50
+  let tabIndex = 0
   switch (country) {
     case 'ca':
+      tabIndex = Constants.getIn(['tabIndex', 'start', 'visualization', 'caMap'])
       break
     case 'us':
-      tabIndex = 110
+      tabIndex = Constants.getIn(['tabIndex', 'start', 'visualization', 'usMap'])
       break
     default:
-      tabIndex = 180
+      tabIndex = Constants.getIn(['tabIndex', 'start', 'visualization', 'powerpool'])
   }
   return tabIndex
 }
