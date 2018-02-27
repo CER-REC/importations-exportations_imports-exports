@@ -94,11 +94,13 @@ const createSortedLayout = createSelector(
   getColumns,
   getPadding,
   arrangeBy,
-  (data, columns, rowPadding, sortBy) => {
+  getCountry,
+  (data, columns, rowPadding, sortBy, country) => {
     let row = 0
     let column = 0
     const sortedArray = []
     const sortedData = sortData(data, sortBy)
+    let tabIndex = getTabIndexStart(country)
     sortedData.forEach((statesOrProvinces) => {
       if (column >= columns) {
         column = 0
@@ -119,8 +121,9 @@ const createSortedLayout = createSelector(
         confidentialCount: statesOrProvinces.get('confidentialCount') || 0,
         x,
         y: row,
+        tabIndex,
       })
-
+      tabIndex += 1
       // Column value is updated for the next iteration
       column += 1
     })
@@ -128,22 +131,26 @@ const createSortedLayout = createSelector(
   },
 )
 
+const getTabIndexStart = (country) =>{
+  let tabIndex = 50
+  switch (country) {
+    case 'ca':
+      break
+    case 'us':
+      tabIndex = 110
+      break
+    default:
+      tabIndex = 180
+  }
+  return tabIndex
+}
 const parseLocationData = createSelector(
   getElectricityImportAndExport,
   getElectricityMapLayoutConstants,
   getCountry,
   (data, layout, country) => {
-    let tabIndex = 1
-    switch (country) {
-      case 'ca':
-        break
-      case 'us':
-        tabIndex = 100
-        break
-      default:
-        tabIndex = 180
-    }
     const resultList = []
+    let tabIndex = getTabIndexStart(country)
     if (data.size > 0 && typeof layout !== 'undefined') {
       layout.forEach((statesOrProvinces) => {
         const originKey = statesOrProvinces.get('originKey')
