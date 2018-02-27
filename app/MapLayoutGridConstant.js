@@ -383,7 +383,7 @@ const MapLayoutGridConstant = fromJS({
       dimensions: {
         height: 37.09,
         width: 38.75,
-         yAxisPadding: -8.1, //8
+        yAxisPadding: -8.1, //8
         xAxisPadding: -1.9, //12
       },
       styles: {
@@ -490,7 +490,7 @@ const MapLayoutGridConstant = fromJS({
           yPadding: 260,
           xExportPadding: 130,
           yExportPadding: 200,
-          scaleingAdjustmentX: -5,
+          scaleingAdjustmentX: -15,
           scaleingAdjustmentY: -40,
         },
         naturalGasLiquids: {
