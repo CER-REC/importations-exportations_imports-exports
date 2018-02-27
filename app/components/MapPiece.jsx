@@ -323,7 +323,7 @@ class MapPiece extends React.Component {
     let containerX = this.props.containerX + this.props.x1 + scaleContainerX
     let containerY = this.props.containerY + this.props.y1 + scaleContainerY
     if (this.props.selectedEnergy === 'naturalGasLiquids') {
-      scaleContainerX = this.props.viewport.get('changeWidthRatio')  > 1.2 ? 240: 205
+      scaleContainerX = this.props.viewport.get('changeWidthRatio')  > 1.2 ? 255: 205
       scaleContainerY = this.props.viewport.get('changeHeightRatio')  > 1.2 ? 65: 80
       containerX = this.props.x1 * MapLayoutGridConstant.getIn(['naturalGasLiquids', 'ca' , 'mapPieceScale'], 1) + scaleContainerX
       containerY = this.props.y1 * MapLayoutGridConstant.getIn(['naturalGasLiquids', 'ca' , 'mapPieceScale'], 1) + scaleContainerY

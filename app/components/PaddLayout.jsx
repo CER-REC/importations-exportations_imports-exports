@@ -50,10 +50,10 @@ class PaddLayout extends React.Component {
     )
   }
 
-  renderConfidentialPopover(leftPadding, paddGroupId, style, confidentialCount, totalCount, left, top, transformTranslate){
-    const energyType =  this.props.selectedEnergy
-    const scaleingAdjustmentX = this.props.viewport.get('changeWidthRatio')  > 1.2 ? 0:style.getIn([ energyType, 'scaleingAdjustmentX'],0)
-    const scaleingAdjustmentY = this.props.viewport.get('changeHeightRatio')  > 1.2 ? 0:style.getIn([ energyType, 'scaleingAdjustmentY'],0)
+  renderConfidentialPopover(leftPadding, paddGroupId, style, confidentialCount, totalCount, left, top, transformTranslate) {
+    const energyType = this.props.selectedEnergy
+    const scaleingAdjustmentX = this.props.viewport.get('changeWidthRatio')  > 1.2 ? -17:style.getIn([ energyType, 'scaleingAdjustmentX'], 0)
+    let scaleingAdjustmentY = this.props.viewport.get('changeHeightRatio')  > 1.2 ? -12:style.getIn([ energyType, 'scaleingAdjustmentY'], 0)
     let paddContainerX = this.props.viewport.get('changeWidthRatio') *(this.props.left + left + transformTranslate.get('left') - style.getIn([ energyType, 'xPadding'],0) + scaleingAdjustmentX)
     let paddContainerY = this.props.viewport.get('changeHeightRatio') *(this.props.top + top + transformTranslate.get('top') - style.getIn([energyType, 'yPadding'],0) + scaleingAdjustmentY)
     if (this.props.arrangeBy !== 'location') {
@@ -62,24 +62,24 @@ class PaddLayout extends React.Component {
     }
     let xPosition = 30
     let yPosition = 0
-    if(paddGroupId === 'ca'){
+    if(paddGroupId === 'ca') {
       xPosition = 36
-      yPosition= 12
-      paddContainerX = this.props.left + left + 140 + scaleingAdjustmentX,
-      paddContainerY = this.props.top + top - 20 + scaleingAdjustmentY
+      yPosition = 13
+      paddContainerX = this.props.left + left + 135 + scaleingAdjustmentX
+      paddContainerY = this.props.top + top - 10 + scaleingAdjustmentY
     }
-    if (style && confidentialCount > 0 
+    if (style && confidentialCount > 0
       && this.props.confidentialityMenu) {
       return (<g transform="translate(145 143)">
         <ConfidentialIcon
-          styles={style.get('confidentialStyle')} 
+          styles={style.get('confidentialStyle')}
           text={`${confidentialCount} / ${totalCount} values confidential`}
           containerX={paddContainerX}
           containerY={paddContainerY}
           lineX={142.16}
           lineY={173}
-          textX={20}
-          textY={25}
+          textX={18}
+          textY={23}
           xPosition={xPosition}
           yPosition={yPosition}
           name={`${paddGroupId}${this.props.selectedEnergy}Confidentiality`}
@@ -88,7 +88,7 @@ class PaddLayout extends React.Component {
     }
     return null
   }
-  getArrow(orderBy, paddGroupId, left, top, color, confidentialCount = 0, totalCount, leftPadding=0) {
+  getArrow(orderBy, paddGroupId, left, top, color, confidentialCount = 0, totalCount, leftPadding = 0) {
     if (typeof paddGroupId === 'undefined' && paddGroupId === '') {
       return null
     }
