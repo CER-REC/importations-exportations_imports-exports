@@ -30,3 +30,9 @@ export const handleInteraction = (func, ...boundArgs) => {
     onClick: handle, onKeyPress: handle, onKeyDown: handle, tabIndex: 0, focusable: 'true',
   }
 }
+
+export const handleInteractionWithTabIndex = (tabIndex, func, ...boundArgs) => {
+  const event = handleInteraction(func, ...boundArgs)
+  event.tabIndex = tabIndex
+  return event
+}

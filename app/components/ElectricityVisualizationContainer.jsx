@@ -27,11 +27,13 @@ const ElectricityVisualizationContainer = props => (
         valueKey="imports"
         aggregateKey="activity"
         colour={Constants.getIn(['styleGuide', 'colours', 'ImportDefault'])}
+        tabIndex={100}
       />
     )}
     <Axis
       {...props.axisPosition}
       barWidth={4}
+      tabIndex={100}
     />
     {!props.showExports ? null : (
       <BarChart
@@ -40,6 +42,7 @@ const ElectricityVisualizationContainer = props => (
         aggregateKey="activity"
         flipped
         colour={Constants.getIn(['styleGuide', 'colours', 'ExportDefault'])}
+        tabIndex={100}
       />
     )}
     <USMapContainer

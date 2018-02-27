@@ -21,7 +21,7 @@ import { getElectricityMapLayout, getSelectionSettings } from '../selectors/Elec
 import { arrangeBy, binSelector, aggregateLocationSelector } from '../selectors/data'
 import DetailSidebar from './DetailSidebar'
 import DetailBreakdown from './DetailBreakdown'
-import { handleInteraction } from '../utilities'
+import { handleInteractionWithTabIndex } from '../utilities'
 import { timelineYearScaleCalculation } from '../selectors/timeline'
 
 const mapPieceTransformStartXaxis = (position, dimensions, mapPieceScale) => (position.get('x') * ((mapPieceScale * dimensions.get('width')) + dimensions.get('xAxisPadding')))
@@ -159,7 +159,7 @@ class ElectricityMapLayout extends React.Component {
         <g key={`mapPieceKey_${this.props.country}_${position.get('name')}`}>
           <g
             className="mappiece"
-            {...handleInteraction(this.onClick, this.props.country, position.get('name'))}
+            {...handleInteractionWithTabIndex(position.get('tabIndex'), this.onClick, this.props.country, position.get('name'))}
             aria-label={this.props.Tr('mapTileLabel', humanName, position.get('imports').toLocaleString(), position.get('exports').toLocaleString(), this.props.unit)}
             transform={`scale(${mapPieceScale})`}
           >

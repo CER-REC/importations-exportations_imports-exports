@@ -182,7 +182,7 @@ class TimelineSeek extends React.PureComponent {
   }
 
   render() {
-    const { side, timelineRange } = this.props
+    const { side, timelineRange, tabIndex } = this.props
     const sideTransform = (side === 'start')
       ? `translate(${this.props.left} ${this.props.top})`
       : `scale(-1,1) translate(${-this.props.width - this.props.left} ${this.props.top})`
@@ -202,6 +202,7 @@ class TimelineSeek extends React.PureComponent {
           invertedX={side !== 'start'}
           onArrowKey={this.onArrowKey}
           aria-label={label}
+          tabIndex={tabIndex||0}
         >
           <g
             transform={`translate(${this.state.offset - xOffset} 0) scale(${scale})`}

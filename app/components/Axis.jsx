@@ -42,13 +42,14 @@ class Axis extends React.PureComponent {
         top={this.props.top}
         left={this.props.left - 30}
         height={this.props.height}
+        tabIndex={this.props.tabIndex || 0}
       />
     )
   }
 
   seekControls() {
     const {
-      top, left, width, height, bars: data,
+      top, left, width, height, bars: data,tabIndex,
     } = this.props
     return (
       <g>
@@ -58,6 +59,7 @@ class Axis extends React.PureComponent {
           width={width}
           height={height}
           data={data}
+          tabIndex={tabIndex}
         />
         <TimelineSeek
           top={top}
@@ -66,6 +68,7 @@ class Axis extends React.PureComponent {
           height={height}
           data={data}
           side="end"
+          tabIndex={tabIndex}
         />
       </g>
     )

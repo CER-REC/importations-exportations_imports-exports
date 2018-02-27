@@ -131,7 +131,18 @@ const createSortedLayout = createSelector(
 const parseLocationData = createSelector(
   getElectricityImportAndExport,
   getElectricityMapLayoutConstants,
-  (data, layout) => {
+  getCountry,
+  (data, layout, country) => {
+    let tabIndex = 1
+    switch (country) {
+      case 'ca':
+        break
+      case 'us':
+        tabIndex = 100
+        break
+      default:
+        tabIndex = 180
+    }
     const resultList = []
     if (data.size > 0 && typeof layout !== 'undefined') {
       layout.forEach((statesOrProvinces) => {
@@ -144,7 +155,9 @@ const parseLocationData = createSelector(
           y: statesOrProvinces.get('y'),
           totalCount: data.getIn([originKey, 'totalCount']) || 0,
           confidentialCount: data.getIn([originKey, 'confidentialCount']) || 0,
+          tabIndex,
         }
+        tabIndex += 1
         resultList.push(result)
       })
     }
