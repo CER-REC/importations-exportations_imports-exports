@@ -347,43 +347,43 @@ const TranslationTable = fromJS({
   explanations: {
     amount: {
       en: 'Electricity is measured in MWh (Megawatt hour). The typical Ontario household uses a little less than 10 MWh per year. CAN$ denotes the total revenue. CAN$/MWh denotes the average price per Megawatt hour.',
-      fr: "L'électricité est mesurée en MWh (mégawattheure). Le ménage typique de l'Ontario utilise un peu moins de 10 MWh par année. CAN$ indique le total des revenus. Le CAN$/MWh indique le prix moyen par mégawatt-heure.",
+      fr: 'La quantité d’électricité est indiquée en MWh (mégawattheures). Un ménage ontarien type utilise moins de 10 MWh d’électricité par année. $ CA désigne le total des revenus. $ CA/MWh désigne le prix moyen par mégawattheure.',
     },
     timeSeek: {
       en: 'Drag these handles to select a different time period.',
-      fr: 'Faites glisser ces poignées pour sélectionner une période différente.',
+      fr: 'Faites glisser les poignées pour sélectionner une autre période.',
     },
     importExport: {
       en: 'Click the + to explore different options',
-      fr: "Cliquez sur le + pour explorer d'options différentes.",
+      fr: 'Cliquez sur « + » pour d’autres options d’exploration.',
     },
     playButton: {
       en: 'Press the play button to animate one quarter at a time.',
-      fr: 'Appuyez sur le bouton de lecture pour animer un trimestre à la fois.',
+      fr: 'Cliquez sur Lecture pour animer un trimestre à la fois.',
     },
     confidentiality: {
       en: 'Electricity data is available publically with the origins, destinations, volumes, and prices aggregated monthly by permit number. An exception is that there are no prices provided for Manitoba Hydro contract-specific permits due to a legal requirement and the NEB’s confidentiality rules.',
-      fr: "Les données sur l'électricité sont disponibles publiquement avec les origines, les destinations, les volumes et les prix agrégés mensuellement par numéro de permis. Une exception est qu'il n'y a pas de prix pour les permis spécifiques à Manitoba Hydro en raison d'une exigence légale et des règles de confidentialité de l'ONÉ.",
+      fr: 'Les données sur l’électricité sont accessibles au public. Elles précisent les points d’origine et de destination, la quantité et le prix, de manière agrégée mensuellement, par numéro de permis. Il y a une exception à cette règle : aucune valeur n’est indiquée pour les permis propres à un contrat en particulier de Manitoba Hydro en raison d’une obligation juridique et des règles de l’Office en matière de confidentialité.',
     },
     barChartExport: {
       en: 'Each blue bar shows the total electricity that Canadian provinces exported during a single quarter.',
-      fr: "Chaque barre bleue indique l'électricité totale que les provinces canadiennes ont exportée au cours d'un seul trimestre.",
+      fr: 'Chaque barre bleue montre la quantité totale d’électricité que les provinces canadiennes ont exportée au cours d’un trimestre.',
     },
     washingtonArrow: {
       en: 'The up arrow shows the total electricity that Canadian provinces imported from Washington during the time period selected above.',
-      fr: "La flèche vers le haut indique l'électricité totale que les provinces canadiennes ont importée de Washington au cours de la période sélectionnée dans le graphique à barres ci-dessus.",
+      fr: 'La flèche orientée vers le haut montre la quantité totale d’électricité importée de l’État de Washington par les provinces canadiennes pendant la période sélectionnée dans le diagramme à barres ci-dessus.',
     },
     powerpool: {
       en: 'A power pool is a grouping of states that imports and exports electricity as a unit. Individual states may also have additional imports and exports.',
-      fr: "Un pool d'énergie est un regroupement d'États qui importe et exporte de l'électricité en tant qu'unité. Les États individuels peuvent également avoir des importations et des exportations supplémentaires.",
+      fr: 'Un réseau commun est un regroupement d’États américains qui importe et exporte de l’électricité conjointement. Chacun des États du regroupement peut également importer et exporter de l’électricité individuellement.',
     },
     barChartImport: {
       en: 'Each orange bar shows the total electricity that Canadian provinces imported during a single quarter.',
-      fr: "Chaque barre orange indique l'électricité totale importée par les provinces canadiennes au cours d'un seul trimestre.",
+      fr: 'Chaque barre orange montre la quantité totale d’électricité que les provinces canadiennes ont importée au cours d’un trimestre.',
     },
     reset: {
       en: 'This data visualization shows Canadian imports and exports of electricity. Click the pink dots to guide you through how to read the data.',
-      fr: "Cette visualisation des données montre les importations et les exportations canadiennes d'électricité. Cliquez sur les points roses pour vous guider dans la lecture des données.",
+      fr: 'Les données interactives montrent les importations et les exportations canadiennes d’électricité. Cliquez sur les points roses pour obtenir de l’aide pour lire les données.',
     },
     resetCrudeOil: {
       en: "This data visualization shows Canada's quarterly exports of crude oil. Click the pink dots to guide you through how to read the data.",
@@ -415,23 +415,23 @@ const TranslationTable = fromJS({
     },
     linkedDataIcon: {
       en: "Click here to scale each chart's y-axis independently. This is useful to zoom in when the bars on one side are much smaller than on the other side.",
-      fr: "Cliquez ici pour mettre à l'échelle l'axe 'y' de chaque graphique indépendamment. Ceci est utile pour agrandir lorsque les barres d'un côté sont beaucoup plus petites que de l'autre côté.",
+      fr: "Cliquez ici pour établir l’échelle de l’axe des ordonnées de chacun des diagrammes. Cette fonction est utile pour grossir l’image lorsque les barres sont beaucoup plus courtes d’un côté que de l’autre.",
     },
     newBrunswickArrow: {
       en: 'The down arrow shows the total electricity that New Brunswick exported to U.S. states during the time period selected below.',
-      fr: "La flèche vers le bas indique l'électricité totale que le Nouveau-Brunswick a exportée vers les États-Unis au cours de la période sélectionnée dans le diagramme à barres ci-dessous.",
+      fr: 'La flèche orientée vers le bas montre la quantité totale d’électricité que le Nouveau-Brunswick a exportée vers des États américains pendant la période sélectionnée dans le diagramme à barres ci-après.',
     },
     britishColumbiaArrow: {
       en: 'The up arrow shows the total electricity that British Columbia imported from U.S. states during the time period selected below.',
-      fr: "La flèche vers le haut indique l'électricité totale importée par la Colombie-Britannique en provenance des États-Unis pendant la période sélectionnée dans le diagramme à barres ci-dessous.",
+      fr: 'La flèche orientée vers le haut montre la quantité totale d’électricité importée des États américains par la Colombie-Britannique pendant la période sélectionnée dans le diagramme à barres ci-après.',
     },
     timelineRange: {
       en: 'Drag this line up and down to read the values of the y-axis as different heights.',
-      fr: "Faites glisser cette ligne en haut ou en bas pour lire la valeur de l'axe 'y' aux hauteurs différentes.",
+      fr: "Faites glisser la ligne vers le haut ou vers le bas pour voir les différentes valeurs de l’axe des ordonnées.",
     },
     vermontArrow: {
       en: 'The down arrow shows the total electricity that Canadian provinces exported to Vermont during the time period selected above.',
-      fr: "La flèche vers le bas indique l'électricité totale que les provinces canadiennes ont exportée au Vermont au cours de la période sélectionnée dans le graphique à barres ci-dessus.",
+      fr: 'La flèche orientée vers le bas montre la quantité totale d’électricité que les provinces canadiennes ont exportée vers le Vermont pendant la période sélectionnée dans le diagramme à barres ci-dessus.',
     },
     resetNaturalGas: {
       en: 'This data visualization shows imports and exports of natural gas at ports along the Canada-USA border. Click the pink dots to guide you through how to read the data.',
