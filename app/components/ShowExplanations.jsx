@@ -43,7 +43,7 @@ class ShowExplanations extends React.Component {
 
   dot() {
     return <circle
-      cx={Constants.getIn(['showExplanations', 'labelOffset']) + 92}
+      cx={Constants.getIn(['showExplanations', 'labelOffset']) + 4}
       cy={-5}
       r={Constants.getIn(['explanationDot', 'radiusStart'])}
       fill="#ff708a"
@@ -63,12 +63,12 @@ class ShowExplanations extends React.Component {
 
     return (
       <text
-        x={Constants.getIn(['showExplanations', 'labelOffset'])}
+        x={Constants.getIn(['showExplanations', 'labelOffset']) + 14}
         y={0}
         className="showHideExplanations"
         fill={textColour}
       >
-        {explanationsText} <tspan dx="17">{sign}</tspan>
+        {explanationsText} <tspan dx="6">{sign}</tspan>
       </text>
     )
   }

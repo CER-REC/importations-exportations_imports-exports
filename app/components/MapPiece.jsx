@@ -323,7 +323,7 @@ class MapPiece extends React.Component {
     let containerX = this.props.containerX + this.props.x1 + scaleContainerX
     let containerY = this.props.containerY + this.props.y1 + scaleContainerY
     if (this.props.selectedEnergy === 'naturalGasLiquids') {
-      scaleContainerX = this.props.viewport.get('changeWidthRatio')  > 1.2 ? 240: 205
+      scaleContainerX = this.props.viewport.get('changeWidthRatio')  > 1.2 ? 255: 205
       scaleContainerY = this.props.viewport.get('changeHeightRatio')  > 1.2 ? 65: 80
       containerX = this.props.x1 * MapLayoutGridConstant.getIn(['naturalGasLiquids', 'ca' , 'mapPieceScale'], 1) + scaleContainerX
       containerY = this.props.y1 * MapLayoutGridConstant.getIn(['naturalGasLiquids', 'ca' , 'mapPieceScale'], 1) + scaleContainerY
@@ -339,10 +339,10 @@ class MapPiece extends React.Component {
         text={valueString}
         containerX={this.props.viewport.get('changeWidthRatio')*containerX}
         containerY={this.props.viewport.get('changeHeightRatio')*containerY}
-        lineX={102}
-        lineY={40}
-        textX={20}
-        textY={38}
+        lineX={142.16}
+        lineY={173}
+        textX={15}
+        textY={24}
         xPosition={30}
         yPosition={0}
         name={`${this.props.data.get('name')}`}

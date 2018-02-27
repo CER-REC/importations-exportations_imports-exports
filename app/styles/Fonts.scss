@@ -33,6 +33,10 @@
       url("fonts/FiraSansCondensed-SemiBold.ttf") format("truetype");
 }
 
+#reactRoot {
+  font-family: $fira-sans-condensed;
+  color: $neutral-medium;
+}
 
 .headingBase {
   font-family: $fira-sans-condensed-semibold;
@@ -237,6 +241,8 @@
   font-size: 11px;
   color: $neutral-light;
 
+  .switchWrapper { font-weight: normal; }
+
   .chartOptions a {
     font-family: $fira-sans-condensed-medium;
     color: $neutral-medium;
@@ -282,7 +288,7 @@
 }
 .confidentialityText {
   font-family:$fira-sans-condensed;
-  font-size: 11px;
+  font-size: 9.5px;
   color: #999;
 }
 .portLabel{

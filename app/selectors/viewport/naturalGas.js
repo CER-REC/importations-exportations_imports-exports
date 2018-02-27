@@ -2,7 +2,6 @@ import { createSelector } from 'reselect'
 
 import { visualizationContentPosition, viewport } from './index'
 import Constants from '../../Constants'
-
 const axisHeight = Constants.getIn(['timeline', 'axisHeight'])
 
 export const chartImportPosition = createSelector(
@@ -39,8 +38,10 @@ export const mapTilesPosition = createSelector(
   chartExportPosition,
   viewport,
   (chartPosition, viewp) => {
-    const top = viewp.get('changeHeightRatio') > 1.2? chartPosition.top + chartPosition.height - 30:chartPosition.top + chartPosition.height + 39
-    const left = viewp.get('changeWidthRatio') > 1.2? chartPosition.left + 20:chartPosition.left
+    const top = viewp.get('changeHeightRatio') > 1.2
+      ? chartPosition.top + chartPosition.height - 30
+      : chartPosition.top + chartPosition.height - 10
+    const left = viewp.get('changeWidthRatio') > 1.2 ? chartPosition.left - 20:chartPosition.left
     const result = {
       top,
       left,

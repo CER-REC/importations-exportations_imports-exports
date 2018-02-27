@@ -50,9 +50,9 @@ class MenuBar extends React.Component {
       : {
         render: (
           <tspan>
-            <tspan className="bold">{Tr(['menu', 'activity', 'options', 'imports'])}</tspan>
+            <tspan className="bold uppercase">{Tr(['menu', 'activity', 'options', 'imports'])}</tspan>
             &nbsp;{Tr(['menu', 'and'])}&nbsp;
-            <tspan className="bold">{Tr(['menu', 'activity', 'options', 'exports'])}</tspan>
+            <tspan className="bold uppercase">{Tr(['menu', 'activity', 'options', 'exports'])}</tspan>
           </tspan>
         ),
         aria: [
@@ -82,9 +82,9 @@ class MenuBar extends React.Component {
         render: (
           <tspan>
             {Tr(['menu', 'subtype', 'prefix'])}&nbsp;
-            <tspan className="bold">{Tr(['menu', 'subtype', 'options', 'butane'])}</tspan>
+            <tspan className="bold uppercase">{Tr(['menu', 'subtype', 'options', 'butane'])}</tspan>
             &nbsp;{Tr(['menu', 'and'])}&nbsp;
-            <tspan className="bold">{Tr(['menu', 'subtype', 'options', 'propane'])}</tspan>
+            <tspan className="bold uppercase">{Tr(['menu', 'subtype', 'options', 'propane'])}</tspan>
           </tspan>
         ),
         aria: [
