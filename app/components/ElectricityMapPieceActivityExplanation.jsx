@@ -5,7 +5,7 @@ import MapPieceExplanationConstant from '../MapPieceExplanationConstant'
 import Tr from '../TranslationTable'
 class ElectricityMapPieceActivityExplanation extends React.Component {
   render() {
-    return (<g transform={`translate(${this.props.left},${this.props.top})`}>
+    return (<g transform={`translate(${this.props.left + 1},${this.props.top})`}>
       <MapPiece
         data={MapPieceExplanationConstant.getIn(['electricity', 'ca', 'datapoint'])}
         dimensions={MapPieceExplanationConstant.getIn(['electricity', 'ca', 'dimensions'])}
