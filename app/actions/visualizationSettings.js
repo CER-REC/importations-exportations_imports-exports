@@ -78,7 +78,7 @@ const initialState = fromJS({
 
 export const resetVisualization = () => ({
   type: Types.RESET_VISUALIZATION_STATE,
-  payload: { settings: initialState },
+  payload: {},
 })
 
 const subReducer = visualization => (state = initialState, action) => {
@@ -102,7 +102,6 @@ const subReducer = visualization => (state = initialState, action) => {
     case Types.SET_SCALE_LINKED:
       return state.setIn(['timeline', 'scaleLinked'], action.payload.scaleLinked)
     case Types.RESET_VISUALIZATION:
-    case Types.RESET_VISUALIZATION_STATE:
       return fromJS(action.payload.settings)
     case Types.SET_SELECTION:
       return state.set('selection', fromJS(action.payload.selection))

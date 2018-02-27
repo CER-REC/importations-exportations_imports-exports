@@ -35,7 +35,8 @@
   100% { transform: rotate(360deg); }
 }
 
-:focus { outline: 2px solid $explanation !important; }
+:focus { outline: 2px solid $explanation; }
+#workspace { outline: none; }
 
 #popoverPortal {
   pointer-events: none;

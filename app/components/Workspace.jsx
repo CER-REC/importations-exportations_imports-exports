@@ -27,6 +27,8 @@ const Workspace = ({ svgSize, detailSidebarPosition, portalSvgSize }) => (
       viewBox={`0 0 ${svgSize.width} ${svgSize.height}`}
       preserveAspectRatio="xMinYMin meet"
       role="application"
+      focusable="true"
+      tabIndex="0"
     >
       <VisualizationContainer />
       <MenuBar />

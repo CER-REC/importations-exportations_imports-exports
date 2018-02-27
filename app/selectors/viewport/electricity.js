@@ -8,12 +8,15 @@ const axisHeight = Constants.getIn(['timeline', 'axisHeight'])
 export const canadaMapPosition = createSelector(
   visualizationContentPosition,
   viewport,
-  (visContent, viewp)  => ({
-    top: visContent.top,
-    left: visContent.left + viewp.get('changeWidthRatio')*50,
-    width: visContent.width,
-    height: 140,
-  }),
+  (visContent, viewp)  => {
+    const height = viewp.get('changeHeightRatio') > 1.2 ? 140 : 105
+    return {
+      top: visContent.top,
+      left: visContent.left + viewp.get('changeWidthRatio')*50,
+      width: visContent.width,
+      height,
+    }
+  },
 )
 
 export const chartImportPosition = createSelector(
