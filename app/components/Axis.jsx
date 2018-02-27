@@ -145,8 +145,8 @@ class Axis extends React.PureComponent {
         />
         {elements}
         {this.props.chartOptions ? this.chartOptions() : null}
-        {this.props.canSeek ? this.seekControls() : null}
         {this.props.canPlay ? this.playbackButton() : null}
+        {this.props.canSeek ? this.seekControls() : null}
       </g>
     )
   }
