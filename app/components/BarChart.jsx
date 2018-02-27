@@ -33,8 +33,6 @@ class BarChart extends Chart {
     this.state = {
       axisGuide: props.trueScale.get('max'),
     }
-
-    this.updateAxisGuide = this.updateAxisGuide.bind(this)
   }
 
   componentWillReceiveProps(props) {
@@ -46,7 +44,7 @@ class BarChart extends Chart {
     }
   }
 
-  updateAxisGuide(position) {
+  updateAxisGuide = (position) => {
     this.setState({ axisGuide: position })
   }
 
@@ -161,14 +159,15 @@ class BarChart extends Chart {
     const barSize = layout.get('barWidth')
 
     const heightPerUnit = height / (scale.getIn(['y', 'max']) - scale.getIn(['y', 'min']))
+    const negativeValOffset = scale.getIn(['y', 'min']) * heightPerUnit
     const elements = data.map((point) => {
       const opacity = this.isTimelinePointFiltered(point) ? 0.5 : 1
       return (
         <AnimatedLine
           x1={point.get('offsetX')}
           x2={point.get('offsetX')}
-          y2={height}
-          y1={height - (point.getIn(['values', valueKey], 0) * heightPerUnit)}
+          y2={height + negativeValOffset}
+          y1={(height + negativeValOffset) - (point.getIn(['values', valueKey], 0) * heightPerUnit)}
           key={`${point.get('year')}-${point.get('quarter')}-${valueKey}`}
           strokeWidth={barSize}
           stroke={colour}
@@ -199,10 +198,12 @@ class BarChart extends Chart {
 
     return (
       <g transform={this.getTransform()}>
-        <g>{elements}
-        { this.orangeBarExplanation() }
-        { this.blueBarExplanation() }
-        {this.crudeBlueBarExplanation()}</g>
+        <g>
+          {elements}
+          {this.orangeBarExplanation()}
+          {this.blueBarExplanation()}
+          {this.crudeBlueBarExplanation()}
+        </g>
         <AxisGuide
           flipped={flipped}
           scale={scale.get('y').toJS()}
@@ -212,7 +213,7 @@ class BarChart extends Chart {
           updatePosition={this.updateAxisGuide}
           width={this.props.width}
           barSize={barSize}
-        /> 
+        />
         {!this.props.detailSidebar ? null : (
           <DetailSidebar top={this.props.top} height={height}>
             <div className="verticalAlign">
@@ -221,7 +222,7 @@ class BarChart extends Chart {
               </div>
             </div>
           </DetailSidebar>
-        )} 
+        )}
       </g>
     )
   }

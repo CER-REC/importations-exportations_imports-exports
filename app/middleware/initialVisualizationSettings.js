@@ -12,6 +12,8 @@ const initialVisualizationSettings = store => next => (action) => {
 
   if (action.type === 'urlRouteChanged') {
     initializedFromURL = Object.keys(action.payload.visualizationSettings)
+  } else if (action.type === visualizationSettingsTypes.RESET_VISUALIZATION_STATE) {
+    initializedFromURL = []
   }
   // If we aren't loading data, don't change the visualization settings
   if (action.type !== DataTypes.LOAD_DATA && action.type !== visualizationSettingsTypes.RESET_VISUALIZATION_STATE) { return }
