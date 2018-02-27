@@ -10,7 +10,7 @@ import MapPiece from './MapPiece'
 import MapLayoutGridConstant from '../MapLayoutGridConstant'
 import { arrangeBy, binSelector, aggregateLocationNaturalGasSelector } from '../selectors/data'
 import { getSelectionSettings } from '../selectors/NaturalGasSelector'
-import { handleInteraction } from '../utilities'
+import { handleInteractionWithTabIndex } from '../utilities'
 import { setSelection } from '../actions/visualizationSettings'
 
 const mapPieceTransformStartTop = ( top, dimensions, mapPieceScale) =>  top * ((mapPieceScale * dimensions.get('height')) + dimensions.get('topPadding'))
@@ -86,7 +86,7 @@ class NaturalGasMapContainer extends React.PureComponent {
     const type = this.props.importExportVisualization
     const arrangedData = this.orderBy(this.props.selector, this.props.arrangeBy)
     const mapLayoutGrid = MapLayoutGridConstant.get(type)
-
+    const tabIndex = Constants.getIn(['tabIndex', 'start', 'visualization', 'naturalGasMap'])
     const dimensions = mapLayoutGrid.get('dimensions')
     const styles = mapLayoutGrid.get('styles')
     let layout = mapLayoutGrid.get('layout')
@@ -120,7 +120,7 @@ class NaturalGasMapContainer extends React.PureComponent {
         topPadding += rowPadding
         row +=1
         return (<g key={`NaturalGasMapPiece_${port.get('Province')}_${port.get('portName')}`} 
-          {...handleInteraction(this.onClick, port.get('portName'))}
+          {...handleInteractionWithTabIndex(tabIndex, this.onClick, port.get('portName'))}
           transform={`scale(${mapPieceScale})`}>
             <MapPiece
               data={port}
@@ -155,7 +155,7 @@ class NaturalGasMapContainer extends React.PureComponent {
           <rect className = {provinceClass} x={ provinceTextPosition - 9} y={dimensions.get('topPadding') - 15}  
             width="29" height="15" fill="none" stroke="#a99372" strokeWidth="0.75"/>
           <text className={provinceTextColor} x={ provinceTextPosition -3} y={dimensions.get('topPadding') - 3} 
-          {...handleInteraction(this.onClick, '', value)}>{value}</text>
+          {...handleInteractionWithTabIndex(tabIndex, this.onClick, '', value)}>{value}</text>
           {mapLayout.toArray()}
         </g>
       )

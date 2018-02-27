@@ -486,5 +486,21 @@ const Constants = fromJS({
       },
     },
   },
+  tabIndex: {
+    start: {
+      menuBar: 10,
+      visualization: {
+        caMap: 50,
+        timeline: 100,
+        usMap: 150,
+        powerpoolMap: 180,
+        caPadd: 50,
+        usPadd: 150,
+        naturalGasMap: 150,
+      },
+      detailSidebar: 200,
+      socialBar: 200,
+    },
+  },
 })
 export default Constants

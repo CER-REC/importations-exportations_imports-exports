@@ -20,7 +20,7 @@ import ConfidentialIcon from './ConfidentialIcon'
 
 import ExplanationDot from './ExplanationDot'
 
-import { handleInteraction } from '../utilities'
+import { handleInteractionWithTabIndex } from '../utilities'
 
 import ElectricitySelector from '../selectors/ElectricitySelector'
 import { arrangeBy, binSelector, sortAggregatedLocationsSelector, selection } from '../selectors/data'
@@ -263,7 +263,12 @@ class PaddLayout extends React.Component {
     if(props.selctionState.get('origins').count() === 0){return 1}
     return props.selctionState.get('origins').includes(paddGroup)? 1 : 0.5
   }
-
+  getTabIndex(country){
+    if(country === 'ca'){
+      return Constants.getIn(['tabIndex', 'start', 'visualization', 'caPadd'])
+    }
+    return Constants.getIn(['tabIndex', 'start', 'visualization', 'usPadd'])
+  }
   onPaddClick( props, paddGroup ) {
     const { selctionState } = props
     let origins = []
@@ -323,7 +328,7 @@ class PaddLayout extends React.Component {
         }
         if (paddLayout !== null) {
           paddLayout = (<g className="paddLayout" fillOpacity={this.getOpacityOfPadd(props, paddGroup)}  key={`${props.arrangeBy}_${currentValue[1].get('destination')}`} transform={`translate(${left} 0)`}
-              {...handleInteraction(this.onPaddClick, props, paddGroup)}
+              {...handleInteractionWithTabIndex(this.getTabIndex(props.country), this.onPaddClick, props, paddGroup)}
             >
             {paddLayout}
             { this.getArrow(
@@ -368,7 +373,7 @@ class PaddLayout extends React.Component {
     if(data){
     const color = this.getPaddColor(data.get('value'))
     return (<g className="paddLayout" fillOpacity={this.getOpacityOfPadd(props, paddGroup)}
-      {...handleInteraction(this.onPaddClick, props, paddGroup)}
+      {...handleInteractionWithTabIndex(this.getTabIndex(props.country) , this.onPaddClick, props, paddGroup)}
         >
         <filter id="paddOutline">
           <feMorphology operator="dilate" in="SourceAlpha" radius="1.5"/>

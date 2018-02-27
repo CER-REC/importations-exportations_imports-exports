@@ -2,10 +2,11 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
+import Constants from '../Constants'
 import TrSelector from '../selectors/translate'
 import { confidentialityTogglePosition } from '../selectors/viewport/menus'
 import { ToggleConfidentialityMenu } from '../actions/confidentialityMenu'
-import { handleInteraction } from '../utilities'
+import { handleInteractionWithTabIndex } from '../utilities'
 
 import ExplanationDot from './ExplanationDot'
 
@@ -90,11 +91,12 @@ class ShowConfidentiality extends React.Component {
   }
 
   render() {
+    const tabIndex = Constants.getIn(['tabIndex','start', 'menuBar'])
     return (
       <g
         transform={`translate(${this.props.left} ${this.props.top})`}
         role="menuitem"
-        {...handleInteraction(this.props.onClick)}
+        {...handleInteractionWithTabIndex(tabIndex, this.props.onClick)}
       >
         {this.icon()}
         {this.showText()}
@@ -107,6 +109,7 @@ class ShowConfidentiality extends React.Component {
 
 const mapStateToProps = (state, props) => ({
   Tr: TrSelector(state, props),
+  energyType: state.importExportVisualization,
   confidentialityMenu: state.confidentialityMenu,
   ...confidentialityTogglePosition(state, props),
 })

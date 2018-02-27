@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 
 import TextBox from './TextBox'
 import Constants from '../Constants'
-import { handleInteraction } from '../utilities'
+import { handleInteractionWithTabIndex } from '../utilities'
 import { setActiveMenu } from '../actions/activeMenu'
 import TrSelector from '../selectors/translate'
 import Tr from '../TranslationTable'
@@ -167,6 +167,7 @@ class Menu extends React.PureComponent {
   renderTitle() {
     if (this.props.title === false) { return null }
     const { Tr } = this.props
+    const tabIndex = this.getTabIndex()
     const title = {
       render: (this.props.title && this.props.title.render) || (
         <tspan>
@@ -187,7 +188,7 @@ class Menu extends React.PureComponent {
         role="menu"
         aria-expanded={this.props.expanded}
         aria-label={title.aria}
-        {...handleInteraction(this.toggleMenu)}
+        {...handleInteractionWithTabIndex(tabIndex, this.toggleMenu)}
         transform={`translate(${Constants.getIn(['menuBar', 'textLabelOffset'])} ${Constants.getIn(['menuBar', 'barHeight']) / 2})`}
       >
         <TextBox
@@ -200,10 +201,13 @@ class Menu extends React.PureComponent {
       </g>
     )
   }
-
+  getTabIndex(){
+    return Constants.getIn(['tabIndex','start', 'menuBar'])
+  }
   renderOptions() {
     if (!this.props.expanded) { return null }
     const { Tr } = this.props
+    const tabIndex = this.getTabIndex()
     const options = this.props.options
       .filter(v => (v !== this.props.selected))
       .map(option => (
@@ -212,7 +216,7 @@ class Menu extends React.PureComponent {
           dy={Constants.getIn(['menuBar', 'optionHeight'])}
           className="menuOption"
           key={option}
-          {...handleInteraction(this.onChange, option)}
+          {...handleInteractionWithTabIndex(tabIndex, this.onChange, option)}
           role="menuitem"
         >
           <tspan className="optionText">{Tr(['menu', this.props.name, 'options', option])}</tspan>
@@ -251,7 +255,6 @@ export default connect(
     Tr: TrSelector(state, props),
     language: state.language,
     showExplanations: state.showExplanations,
-    selectedEnergy: state.importExportVisualization,
     expandCollapseExplanation: state.expandCollapseExplanation,
   }),
   { setActiveMenu },

@@ -75,10 +75,10 @@ class Axis extends React.PureComponent {
   }
 
   chartOptions() {
-    const { top, height } = this.props
+    const { top, height, tabIndex } = this.props
     return (
       <DetailSidebar top={top} height={height}>
-        <ChartOptions height={height} canChangeScale={this.props.canChangeScale} />
+        <ChartOptions height={height} canChangeScale={this.props.canChangeScale} tabIndex={tabIndex} />
       </DetailSidebar>
     )
   }
