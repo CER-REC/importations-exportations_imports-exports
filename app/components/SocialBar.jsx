@@ -312,12 +312,19 @@ class SocialBar extends React.Component {
     </g>)
   }
 
+  nebLogo() {
+    return (<image
+      className="nebLogo"
+      xlinkHref="images/logolarge.jpg"
+    />)
+  }
+
   render() {
     if (this.props.screenshot) {
       return null
     }
     let translate = '0 0'
-    if(this.props.viewport.get('changeHeightRatio') < 1.2) {
+    if (this.props.viewport.get('changeHeightRatio') < 1.2) {
       translate = '0 35'
     }
     return (<g transform={`translate(${translate})`}>
@@ -326,6 +333,9 @@ class SocialBar extends React.Component {
       {this.greyBar()}
       {this.expandedMenu()}
       {this.menuText()}
+      <g transform='translate(0 300)'>
+        {this.nebLogo()}
+      </g>
     </g>)
   }
 }
