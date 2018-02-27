@@ -387,35 +387,35 @@ const TranslationTable = fromJS({
     },
     resetCrudeOil: {
       en: "This data visualization shows Canada's quarterly exports of crude oil. Click the pink dots to guide you through how to read the data.",
-      fr: 'Cette visualisation des données montre les exportations trimestrielles de pétrole brut du Canada. Cliquez sur les points roses pour vous guider dans la lecture des données.',
+      fr: 'Les données interactives montrent les exportations de pétrole brut du Canada par trimestre. Cliquez sur les points roses pour obtenir de l’aide pour lire les données.',
     },
     canadaPaddCrudeOil: {
       en: 'The colour of this region and its down arrow shows the total amount of crude oil that Canada exported during the time period selected in the bar chart below.',
-      fr: 'La couleur de cette région et sa flèche vers le bas indiquent la quantité totale de pétrole brut que le Canada a exportée au cours de la période sélectionnée dans le graphique à barres ci-dessous.',
+      fr: 'La couleur de la région et de la flèche orientée vers le bas correspondante indique le volume total de pétrole brut exporté par le Canada pendant la période sélectionnée dans le diagramme à barres ci-après.',
     },
     paddICrudeOil: {
       en: 'The colour of this region and its down arrow shows the total crude oil that Canada exported to the PADD I region of the U.S.A. during the time period selected above.',
-      fr: 'La couleur de cette région et sa flèche vers le bas indiquent le pétrole brut total que le Canada a exporté vers la région PADD I des États-Unis pendant la période de temps choisie ci-dessus.',
+      fr: 'La couleur de la région et de la flèche orientée vers le bas correspondante indique le volume total de pétrole brut exporté vers la région PADD I des États-Unis pendant la période sélectionnée plus haut.',
     },
     barCrude: {
       en: 'These bars show the proportions of heavy vs light crude oil exported per quarter.',
-      fr: 'Ces barres montrent les proportions de pétrole brut lourd et léger exporté par trimestre.',
+      fr: 'Les barres montrent les exportations de pétrole brut lourd par rapport à celles de pétrole brut léger, par trimestre.',
     },
     blueBarCrude: {
       en: 'Each blue bar shows the total crude oil that Canada exported during a single quarter.',
-      fr: "Chaque barre bleue indique le pétrole brut totale que le Canada a exportée au cours d'un seul trimestre.",
+      fr: 'Chaque barre bleue montre la quantité totale de pétrole brut exportée par le Canada au cours d’un trimestre.',
     },
     amountCrude: {
       en: 'Crude oil is measured in 1000 m³/d (thousand cubic metres per day), which is 6290 barrels per day.',
-      fr: 'Le pétrole brut est mesuré en 1000 m3³/j (milliers de mètres cubes par jour), soit 6290 barils par jour.',
+      fr: 'La quantité de pétrole brut est indiquée en milliers de m3/j (milliers de mètres cubes par jour), ce qui correspond à 6 290 barils par jour.  ',
     },
     padd: {
       en: 'PADD stands for Petroleum Administration for Defense District. The US is divided into 5 districts which are commonly used for analysis of regional supply and demand dynamics.',
-      fr: "PADD est l'abréviation de Petroleum Administration for Defence District. Les États-Unis sont divisés en 5 districts qui sont utilisés souvent pour l'analyse des dynamiques de l'offre et la demande régionale.",
+      fr: 'PADD signifie Petroleum Administration for Defense District. Les États-Unis sont divisés en cinq districts PADD aux fins d’analyse de la dynamique de l’offre et de la demande régionales.',
     },
     linkedDataIcon: {
       en: "Click here to scale each chart's y-axis independently. This is useful to zoom in when the bars on one side are much smaller than on the other side.",
-      fr: "Cliquez ici pour établir l’échelle de l’axe des ordonnées de chacun des diagrammes. Cette fonction est utile pour grossir l’image lorsque les barres sont beaucoup plus courtes d’un côté que de l’autre.",
+      fr: 'Cliquez ici pour établir l’échelle de l’axe des ordonnées de chacun des diagrammes. Cette fonction est utile pour grossir l’image lorsque les barres sont beaucoup plus courtes d’un côté que de l’autre.',
     },
     newBrunswickArrow: {
       en: 'The down arrow shows the total electricity that New Brunswick exported to U.S. states during the time period selected below.',
@@ -427,7 +427,7 @@ const TranslationTable = fromJS({
     },
     timelineRange: {
       en: 'Drag this line up and down to read the values of the y-axis as different heights.',
-      fr: "Faites glisser la ligne vers le haut ou vers le bas pour voir les différentes valeurs de l’axe des ordonnées.",
+      fr: 'Faites glisser la ligne vers le haut ou vers le bas pour voir les différentes valeurs de l’axe des ordonnées.',
     },
     vermontArrow: {
       en: 'The down arrow shows the total electricity that Canadian provinces exported to Vermont during the time period selected above.',
@@ -435,35 +435,35 @@ const TranslationTable = fromJS({
     },
     resetNaturalGas: {
       en: 'This data visualization shows imports and exports of natural gas at ports along the Canada-USA border. Click the pink dots to guide you through how to read the data.',
-      fr: 'Cette visualisation des données montre les importations et les exportations de gaz naturel dans les ports situés le long de la frontière canado-américaine. Cliquez sur les points roses pour vous guider dans la lecture des données.',
+      fr: 'Les données interactives montrent les importations et les exportations de gaz naturel en provenance et à destination de ports situés le long de la frontière canado-américaine. Cliquez sur les points roses pour obtenir de l’aide pour lire les données.',
     },
     orangeBarNaturalGas: {
       en: 'Orange bars show the total natural gas that Canada imported in a single quarter; blue bars show exports.',
-      fr: "Les barres orange indiquent le total du gaz naturel importé par le Canada au cours d'un seul trimestre; les barres bleues montrent les exportations.",
+      fr: "Les barres orange montrent la quantité totale de gaz naturel importée par le Canada au cours d’un trimestre. Les barres bleues montrent les exportations.",
     },
     EmersonNaturalGas: {
       en: 'Up arrows show the total imports of natural gas into Canada at a port during the time selected in the bar chart above. Down arrows show exports.',
-      fr: 'Les flèches vers le haut indiquent les importations totales de gaz naturel au Canada dans un port pendant la période sélectionnée dans le graphique à barres ci-dessus. Les flèches vers le bas indiquent les exportations.',
+      fr: 'Les flèches orientées vers le haut montrent la quantité totale de gaz naturel importé par le Canada via un port pendant la période sélectionnée dans le diagramme à barres ci-dessus. Les flèches orientées vers le bas montrent les exportations.',
     },
     EmersonTempImpNaturalGas: {
       en: 'Up arrows show the total temporary imports of natural gas into Canada at a port during the time selected in the bar chart above. Down arrows show re-exports of temporary exports.',
-      fr: "Les flèches vers le haut indiquent les importations temporaires totales de gaz naturel au Canada dans un port pendant la période sélectionnée dans le graphique à barres ci-dessus. Les flèches vers le bas indiquent les réexportations d'importations temporaires.",
+      fr: 'Les flèches orientées vers le haut montrent la quantité totale de gaz naturel importé temporairement par le Canada via un port pendant la période sélectionnée dans le diagramme à barres ci-dessus. Les flèches orientées vers le bas montrent les exportations de gaz naturel importé temporairement.',
     },
     EmersonTempExpNaturalGas: {
       en: 'Down arrows show the total temporary exports of natural gas into Canada at a port during the time selected in the bar chart above. Up arrows show re-imports of temporary exports.',
-      fr: "Les flèches vers le bas indiquent les exportations temporaires totales de gaz naturel au Canada dans un port pendant la période sélectionnée dans le graphique à barres ci-dessus. Les flèches vers le haut affichent les réimportations d'exportations temporaires.",
+      fr: 'Les flèches orientées vers le bas montrent la quantité totale de gaz naturel exporté temporairement vers le Canada via un port pendant la période sélectionnée dans le diagramme à barres ci-dessus. Les flèches orientées vers le haut montrent les importations de gaz naturel exporté temporairement.',
     },
     portNaturalGas: {
       en: 'Select ports to see their location on the map.',
-      fr: 'Sélectionnez les ports pour voir leur emplacement sur la carte.',
+      fr: 'Sélectionnez un port pour voir son emplacement sur la carte.',
     },
     importExportMenuNaturalGas: {
       en: 'Imports and exports are products that have entered or left Canada for consumption or refinement. Temporary imports are products that have been transported through Canada but will be returning back to the United States. This is often due to pipelines that travel into and out of Canada. Temporary exports are products that are transported from Canada to the United States but return to Canada.',
-      fr: 'Les importations et les exportations sont des produits qui sont entrés ou sortis du Canada pour être consommés ou affinés. Les importations temporaires sont des produits qui ont été transportés à travers le Canada mais qui retourneront aux États-Unis. Cela est souvent dû aux pipelines qui entrent et sortent du Canada. Les exportations temporaires sont des produits qui sont transportés du Canada vers les États-Unis, mais qui retournent au Canada',
+      fr: 'Font partie des importations et des exportations les produits qui sont entrés au Canada ou qui en sont sortis à des fins de consommation ou de raffinage. Font partie des importations temporaires les produits américains destinés aux États-Unis mais ayant transité par le Canada du fait de la configuration de l’infrastructure pipelinière. Font partie des exportations temporaires les produits canadiens destinés au Canada mais ayant transité par les États-Unis.',
     },
     amountNaturalGas: {
       en: 'Natural gas is measured in 1000 m³/d, which is 35,314 cubic feet. $CAN/GJ is the average price per gigajoule of natural gas. The average Albertan household uses approximately 120 GJs of natural gas per year.',
-      fr: 'Le gaz naturel est mesuré en 1000 m³/j, soit 35 314 pieds cubes. CAN$/GJ est le prix moyen par gigajoule de gaz naturel. Le ménage albertain moyen utilise environ 120 GJ de gaz naturel par année.',
+      fr: 'La quantité de gaz naturel est indiquée en millier de m3/j, ce qui correspond à 35 314 pieds cubes par jour. $ CA/GJ indique le prix moyen du gaz naturel par gigajoule. Le ménage albertain moyen consomme environ 120 GJ de gaz naturel par année. (lien dans la colonne K)',
     },
     resetNaturalGasLiquids: {
       en: 'This data visualization shows imports of Natural Gas Liquids (NGLs) from the USA into Canadian provinces (top) and exports of NGLs from Canada into regions of the USA called PADDs (bottom). Click the pink dots to guide you through how to read the data.',
