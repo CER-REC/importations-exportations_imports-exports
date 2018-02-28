@@ -154,6 +154,7 @@ class BarChart extends Chart {
       valueKey,
       colour,
       layout,
+      tabIndex,
     } = this.props
 
     const barSize = layout.get('barWidth')
@@ -213,6 +214,7 @@ class BarChart extends Chart {
           updatePosition={this.updateAxisGuide}
           width={this.props.width}
           barSize={barSize}
+          tabIndex={tabIndex||0}
         />
         {!this.props.detailSidebar ? null : (
           <DetailSidebar top={this.props.top} height={height}>

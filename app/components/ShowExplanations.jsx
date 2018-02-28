@@ -8,7 +8,7 @@ import { explanationTogglePosition } from '../selectors/viewport/menus'
 
 import ToggleExplanation from '../actionCreators/ShowExplanationsCreator'
 import WorkspaceComputations from '../computations/WorkspaceComputations'
-import { handleInteraction } from '../utilities'
+import { handleInteractionWithTabIndex } from '../utilities'
 
 import '../styles/Fonts.scss'
 
@@ -74,11 +74,12 @@ class ShowExplanations extends React.Component {
   }
 
   render() {
+    const tabIndex = Constants.getIn(['tabIndex','start', 'menuBar'])
     return (
       <g
         transform={`translate(${this.props.left} ${this.props.top})`}
         role="menuitem"
-        {...handleInteraction(this.props.onClick)}
+        {...handleInteractionWithTabIndex(tabIndex, this.props.onClick)}
       >
         {this.dot()}
         {this.showText()}

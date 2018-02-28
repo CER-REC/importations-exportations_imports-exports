@@ -187,6 +187,7 @@ class AxisGuide extends React.PureComponent {
         dragStop={this.dragStop}
         onArrowKey={this.onArrowKey}
         aria-label={text}
+        tabIndex={this.props.tabIndex || 0}
       >
         <g transform={`translate(0 ${offset})`}>
           <polyline

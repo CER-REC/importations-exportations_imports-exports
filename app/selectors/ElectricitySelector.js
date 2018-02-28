@@ -94,11 +94,13 @@ const createSortedLayout = createSelector(
   getColumns,
   getPadding,
   arrangeBy,
-  (data, columns, rowPadding, sortBy) => {
+  getCountry,
+  (data, columns, rowPadding, sortBy, country) => {
     let row = 0
     let column = 0
     const sortedArray = []
     const sortedData = sortData(data, sortBy)
+    let tabIndex = getTabIndexStart(country)
     sortedData.forEach((statesOrProvinces) => {
       if (column >= columns) {
         column = 0
@@ -119,8 +121,9 @@ const createSortedLayout = createSelector(
         confidentialCount: statesOrProvinces.get('confidentialCount') || 0,
         x,
         y: row,
+        tabIndex,
       })
-
+      tabIndex += 1
       // Column value is updated for the next iteration
       column += 1
     })
@@ -128,11 +131,27 @@ const createSortedLayout = createSelector(
   },
 )
 
+const getTabIndexStart = (country) =>{
+  let tabIndex = 0
+  switch (country) {
+    case 'ca':
+      tabIndex = Constants.getIn(['tabIndex', 'start', 'visualization', 'caMap'])
+      break
+    case 'us':
+      tabIndex = Constants.getIn(['tabIndex', 'start', 'visualization', 'usMap'])
+      break
+    default:
+      tabIndex = Constants.getIn(['tabIndex', 'start', 'visualization', 'powerpool'])
+  }
+  return tabIndex
+}
 const parseLocationData = createSelector(
   getElectricityImportAndExport,
   getElectricityMapLayoutConstants,
-  (data, layout) => {
+  getCountry,
+  (data, layout, country) => {
     const resultList = []
+    let tabIndex = getTabIndexStart(country)
     if (data.size > 0 && typeof layout !== 'undefined') {
       layout.forEach((statesOrProvinces) => {
         const originKey = statesOrProvinces.get('originKey')
@@ -144,7 +163,9 @@ const parseLocationData = createSelector(
           y: statesOrProvinces.get('y'),
           totalCount: data.getIn([originKey, 'totalCount']) || 0,
           confidentialCount: data.getIn([originKey, 'confidentialCount']) || 0,
+          tabIndex,
         }
+        tabIndex += 1
         resultList.push(result)
       })
     }
