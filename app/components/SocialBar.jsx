@@ -13,6 +13,8 @@ import { handleInteraction } from '../utilities'
 
 import { ExpandSocialBar } from '../actions/socialBar'
 
+import { ScreenshotMode } from '../actions/screenshot'
+
 import { OpenModal as ShowAboutWindowCreator } from '../actions/modal'
 import { OpenModal as ShowImageDownloadWindow } from '../actions/modal'
 import { OpenModal as ShowDataDownloadWindow } from '../actions/modal'
@@ -24,6 +26,7 @@ class SocialBar extends React.Component {
     return {
       language: PropTypes.string.isRequired,
       viewport: PropTypes.instanceOf(Immutable.Map).isRequired,
+      screenshot: PropTypes.bool.isRequired,
     }
   }
 
@@ -148,6 +151,7 @@ class SocialBar extends React.Component {
   downloadImageClick() {
     if (!this.props.expandSocialBar) { return this.props.controlArrowClick() }
     this.props.imageDownloadClick()
+    this.props.activateScreenshotMode()
   }
 
   downloadDataClick() {
@@ -314,18 +318,22 @@ class SocialBar extends React.Component {
 
   nebLogo() {
     return (<image
-      className="nebLogo"
+      width={300}
       xlinkHref="images/logolarge.jpg"
     />)
   }
 
   render() {
-    if (this.props.screenshot) {
-      return null
-    }
     let translate = '0 0'
     if (this.props.viewport.get('changeHeightRatio') < 1.2) {
       translate = '0 35'
+    }
+    if (this.props.screenshot) {
+      return (<g transform={`translate(${translate})`}>
+        <g transform = {`translate(${this.props.viewport.get('x') - 300} ${this.props.viewport.get('y') - 150})`}>
+          {this.nebLogo()}
+        </g>
+      </g>)
     }
     return (<g transform={`translate(${translate})`}>
       {this.controlArrow()}
@@ -333,9 +341,6 @@ class SocialBar extends React.Component {
       {this.greyBar()}
       {this.expandedMenu()}
       {this.menuText()}
-      <g transform='translate(0 300)'>
-        {this.nebLogo()}
-      </g>
     </g>)
   }
 }
@@ -359,6 +364,9 @@ const mapDispatchToProps = dispatch => ({
   },
   dataDownloadClick() {
     dispatch(ShowDataDownloadWindow('dataDownload'))
+  },
+  activateScreenshotMode() {
+    dispatch(ScreenshotMode())
   },
 })
 
