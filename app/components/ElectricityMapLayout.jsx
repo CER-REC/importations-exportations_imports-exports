@@ -198,15 +198,14 @@ class ElectricityMapLayout extends React.Component {
     const data = Immutable.fromJS(
       this.props.selection.get('destinations').reduce((acc, nextValue, country) => {
           return nextValue.reduce((accumulator, stateOrProvince, key) => {
-            if(!stateOrProvince.get(detailBreakdownData.get('type'))){
+            if(!this.props.dataPoints.getIn([key, detailBreakdownData.get('type')])){
               return acc
             }
-            acc[key] = stateOrProvince.get(detailBreakdownData.get('type'))
+            acc[key] = this.props.dataPoints.getIn([key, detailBreakdownData.get('type')])
             return acc
           },{})
       },{})
     ).sort((a,b) => {return b - a})
-
     const countries = Tr.get('country').filter((points, country) => this.props.selection.get('destinations').has(country))
     const  nameMappings = countries.reduce((acc, nextValue) =>{
       return acc.concat(nextValue)
