@@ -96,6 +96,7 @@ const createSortedLayout = createSelector(
         subType: statesOrProvinces.get('subType') || { Butane: { imports: 0, exports: 0 }, Propane: { imports: 0, exports: 0 }, propaneButane: { imports: 0, exports: 0 } },
         totalCount: statesOrProvinces.get('totalCount') || 0,
         confidentialCount: statesOrProvinces.get('confidentialCount') || 0,
+        showLabel: statesOrProvinces.get('showLabel', false),
         x,
         y: row,
       })
@@ -120,6 +121,7 @@ const parseLocationData = createSelector(
           subType: data.getIn([originKey, 'subType']) || { Butane: { imports: 0, exports: 0 }, Propane: { imports: 0, exports: 0 }, propaneButane: { imports: 0, exports: 0 } },
           x: statesOrProvinces.get('x'),
           y: statesOrProvinces.get('y'),
+          showLabel: statesOrProvinces.get('showLabel', false),
           totalCount: data.getIn([originKey,'totalCount']) || 0,
           confidentialCount: data.getIn([originKey, 'confidentialCount']) || 0,
         }
