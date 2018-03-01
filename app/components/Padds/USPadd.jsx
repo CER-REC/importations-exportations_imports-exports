@@ -3,7 +3,7 @@ import Immutable from 'immutable'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import PaddLayout from '../PaddLayout'
-import { PaddSelector } from '../../selectors/Padd'
+import { PaddSelector, getSelectionSettings } from '../../selectors/Padd'
 import Constants from '../../Constants'
 import MapLayoutGridConstant from '../../MapLayoutGridConstant'
 import DetailSidebar from '../DetailSidebar'
@@ -49,6 +49,7 @@ const renderDetailBreakdown = (props) => {
   let nameMappings={}
   if(props.importExportVisualization === 'naturalGasLiquids'){
     total = props.Padd.reduce((acc, nextValue) => {
+      if(props.selection.get('origins').count() > 0 && !props.selection.get('origins').includes(nextValue.get('destination'))) { return acc}
       const subType = nextValue.get('subType')
       subType.forEach((subTypeVal, subTypeKey) => {
         if(subTypeKey !== 'propaneButane'){
@@ -65,7 +66,12 @@ const renderDetailBreakdown = (props) => {
   } else if(props.importExportVisualization === 'crudeOil'){
     if (!detailBreakdownData.get('required', false)) { return null }
     total = props.Padd.filter((point,key) => key!== 'ca').map(( value, paddId) => {
-      return value.get('value')
+      if(props.selection.get('origins').count() > 0 && !props.selection.get('origins').includes('ca')){
+        return props.selection.get('origins').includes(paddId) ? value.get('value'): 0
+      }else{
+        return value.get('value')
+      }
+      
     })
     nameMappings = Tr.getIn(['Padd','us'])
   } else {
@@ -99,6 +105,7 @@ const mapStateToProps = (state, props) => ({
   arrangeBy: arrangeBy(state, props),
   Padd: PaddSelector(state, props),
   viewport: state.viewport,
+  selection: getSelectionSettings(state, props),
 })
 
 module.exports = connect(mapStateToProps)(USPadd)

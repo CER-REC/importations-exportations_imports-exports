@@ -133,7 +133,9 @@ class NaturalGasLiquidMapLayout extends React.Component {
     const detailBreakdownData = Constants.getIn(['detailBreakDown', this.props.country])
     
     if (!detailBreakdownData.get('required', false)) { return null }
+   
     const subTypeTotal = this.props.layout.reduce((acc, nextValue) => {
+      if(this.props.selection.get('origins').count() > 0 && !this.props.selection.get('origins').includes(nextValue.get('name'))) { return acc}
       const subType = nextValue.get('subType')
       subType.forEach((subTypeVal, subTypeKey) => {
         if(subTypeKey !== 'propaneButane'){
