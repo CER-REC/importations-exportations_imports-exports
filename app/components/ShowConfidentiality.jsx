@@ -86,7 +86,7 @@ class ShowConfidentiality extends React.Component {
         textY={20}
         containerX={this.props.left + 2}
         containerY={this.props.top}
-        text={`${this.props.Tr(['explanations','confidentiality'])}`}
+        text={`${this.props.Tr(['explanations', 'confidentiality'])}`}
         name="confidentialityExplanation"
     /></g>)
   }

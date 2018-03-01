@@ -10,7 +10,7 @@ import TrSelector from '../selectors/translate'
 
 import ExplanationDot from './ExplanationDot'
 import tr from '../TranslationTable'
-import {resetVisualization} from '../actions/visualizationSettings'
+import { resetVisualization } from '../actions/visualizationSettings'
 
 import './Header.scss'
 import '../styles/Fonts.scss'
@@ -21,7 +21,6 @@ class Header extends React.Component {
     return {
       language: PropTypes.string.isRequired,
       viewport: PropTypes.instanceOf(Immutable.Map).isRequired,
-      screenshotMode: PropTypes.bool.isRequired,
     }
   }
 
@@ -148,7 +147,7 @@ class Header extends React.Component {
 
 
   render() {
-    if(this.props.screenshotMode === true) {
+    if (this.props.screenshot) {
       return (<div style={{ height: Constants.get('topHeightMargin') }}>
         {this.leftHeading()}
       </div>)
@@ -156,9 +155,6 @@ class Header extends React.Component {
     return (<div style={{ height: Constants.get('topHeightMargin') }}>
       {this.leftHeading()}
       {this.metaBar()}
-      <svg>
-      
-      </svg>
     </div>)
   }
 }
@@ -168,7 +164,7 @@ const mapStateToProps = (state, props) => ({
   viewport: state.viewport,
   language: state.language,
   selectedEnergy: state.importExportVisualization,
-  screenshotMode: state.screenshotMode,
+  screenshot: state.screenshot,
   Tr: TrSelector(state, props),
 })
 

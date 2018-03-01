@@ -12,7 +12,7 @@ import ExpandElectricityAmountMenuReducer from './reducers/ExpandElectricityAmou
 import { reducer as ModalReducer } from './actions/modal'
 import { reducer as DataReducer } from './actions/data'
 import { reducer as BinsReducer } from './actions/bins'
-import { reducer as ScreenshotModeReducer } from './actions/screenshot'
+import { reducer as ScreenshotReducer } from './actions/screenshot'
 import { reducer as visualizationSettings } from './actions/visualizationSettings'
 import { reducer as DataLoadCompleteReducer } from './actions/DataLoadComplete'
 import { reducer as ExplanationPopoverReducer } from './actions/explanations'
@@ -54,7 +54,7 @@ const nestedReducers = combineReducers({
   confidentialityMenu: ConfidentialityMenuReducer,
   explanation: ExplanationPopoverReducer,
   openConfidentiality: ConfidentialityPopoverReducer,
-  screenshotMode: ScreenshotModeReducer,
+  screenshot: ScreenshotReducer,
   activeMenu,
   timelinePlayback,
 })
