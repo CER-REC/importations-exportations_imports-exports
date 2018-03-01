@@ -316,7 +316,7 @@ const TranslationTable = fromJS({
           fr: 'PRIX ($ CAN)',
         },
         'CAN$/MW.h': {
-          en: 'PRICE (CAN$/MW.H)',
+          en: 'PRICE (CAN$/MW.h)',
           fr: 'PRIX ($ CAN/MWh)',
         },
         'CN$/GJ': {
@@ -328,7 +328,7 @@ const TranslationTable = fromJS({
           fr: 'QUANTITÉ (m³/j)',
         },
         'MW.h': {
-          en: 'AMOUNT (MW.H)',
+          en: 'AMOUNT (MW.h)',
           fr: 'QUANTITÉ (MWh)',
         },
         'thousand m3/d': {
@@ -374,7 +374,7 @@ const TranslationTable = fromJS({
     'CN$/GJ': { en: 'CN$/GJ', fr: '$ CAN/GJ' },
     'm3/d': { en: 'm³/d', fr: 'm³/j' },
     'MW.h': { en: 'MW.h', fr: 'MWh' },
-    'thousand m3/d': { en: 'thousand m³/d', fr: '1000 m³/j' },
+    'thousand m3/d': { en: '10³m³/d', fr: '10³m³/j' },
   },
 
   mainHeading: {
@@ -458,7 +458,7 @@ const TranslationTable = fromJS({
       fr: 'Chaque barre bleue montre la quantité totale de pétrole brut exportée par le Canada au cours d’un trimestre.',
     },
     amountCrude: {
-      en: 'Crude oil is measured in 1000 m³/d (thousand cubic metres per day), which is 6290 barrels per day.',
+      en: 'Crude oil is measured in 10³ m³/d (thousand cubic metres per day), which is 6290 barrels per day.',
       fr: 'La quantité de pétrole brut est indiquée en milliers de m³/j (milliers de mètres cubes par jour), ce qui correspond à 6 290 barils par jour.  ',
     },
     padd: {
@@ -514,7 +514,7 @@ const TranslationTable = fromJS({
       fr: 'Font partie des importations et des exportations les produits qui sont entrés au Canada ou qui en sont sortis à des fins de consommation ou de raffinage. Font partie des importations temporaires les produits américains destinés aux États-Unis mais ayant transité par le Canada du fait de la configuration de l’infrastructure pipelinière. Font partie des exportations temporaires les produits canadiens destinés au Canada mais ayant transité par les États-Unis.',
     },
     amountNaturalGas: {
-      en: 'Natural gas is measured in 1000 m³/d, which is 35,314 cubic feet. $CAN/GJ is the average price per gigajoule of natural gas. The average Albertan household uses approximately 120 GJs of natural gas per year.',
+      en: 'Natural gas is measured in 10³ m³/d, which is 35,314 cubic feet. $CAN/GJ is the average price per gigajoule of natural gas. The average Albertan household uses approximately 120 GJs of natural gas per year.',
       fr: 'La quantité de gaz naturel est indiquée en millier de m³/j, ce qui correspond à 35 314 pieds cubes par jour. $ CA/GJ indique le prix moyen du gaz naturel par gigajoule. Le ménage albertain moyen consomme environ 120 GJ de gaz naturel par année. (lien dans la colonne K)',
     },
     resetNaturalGasLiquids: {
@@ -542,7 +542,7 @@ const TranslationTable = fromJS({
       fr: 'La couleur de la région et de la flèche correspondante indique la quantité totale de liquides de gaz naturel exportée par le Canada vers la région PADD I des États-Unis pendant la période sélectionnée dans le diagramme à barres ci-dessus.',
     },
     amountNaturalGasLiquids: {
-      en: 'Natural gas liquids production is measured in 1000 m³/d (thousand cubic metres per day), which equals 6290 barrels per day.',
+      en: 'Natural gas liquids production is measured in 10³ m³/d (thousand cubic metres per day), which equals 6290 barrels per day.',
       fr: 'La production de liquides de gaz naturel est indiquée en milliers de m³/j (milliers de mètres cubes par jour), ce qui correspond à 6 290 barils par jour.',
     },
     resetRefinedPetroleumProducts: {
@@ -554,7 +554,7 @@ const TranslationTable = fromJS({
       fr: 'Passez d’un type de produit pétrolier raffiné à l’autre dans une barre de diagramme ou dans un diagramme à barres séparées.',
     },
     amountRefinedPetroleumProducts: {
-      en: 'Refined petroleum product flow is measured in 1000 m³/d (thousand cubic metres per day), which is 6290 barrels per day.',
+      en: 'Refined petroleum product flow is measured in 10³ m³/d (thousand cubic metres per day), which is 6290 barrels per day.',
       fr: 'La quantité de produits pétroliers raffinés est indiquée en milliers de m³/j (milliers de mètres cubes par jour), ce qui correspond à 6 290 barils par jour.',
     },
     confidentialValuesRefinedPetroleumProducts: {
