@@ -7,7 +7,7 @@ import { timelineYearScaleCalculation } from '../selectors/timeline'
 import { timelineRange, timelinePlayback, groupingBy as timelineGrouping } from '../selectors/data'
 import trSelector from '../selectors/translate'
 import tr from '../TranslationTable'
-import { handleInteraction } from '../utilities'
+import { handleInteractionWithTabIndex } from '../utilities'
 
 import ExplanationDot from './ExplanationDot'
 
@@ -133,7 +133,7 @@ class TimelinePlay extends React.PureComponent {
         transform={`translate(${this.props.left} ${this.props.top})`}
         role="link"
         aria-label={label}
-        {...handleInteraction(this.onClick)}
+        {...handleInteractionWithTabIndex(this.props.tabIndex||0, this.onClick)}
       >
         <g transform={`scale(${scale})`} className="playButton">
           {this.renderIcon()}

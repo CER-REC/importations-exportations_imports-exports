@@ -8,7 +8,7 @@ import { explanationTogglePosition } from '../selectors/viewport/menus'
 
 import ToggleExplanation from '../actionCreators/ShowExplanationsCreator'
 import WorkspaceComputations from '../computations/WorkspaceComputations'
-import { handleInteraction } from '../utilities'
+import { handleInteractionWithTabIndex } from '../utilities'
 
 import '../styles/Fonts.scss'
 
@@ -43,7 +43,7 @@ class ShowExplanations extends React.Component {
 
   dot() {
     return <circle
-      cx={Constants.getIn(['showExplanations', 'labelOffset']) + 92}
+      cx={Constants.getIn(['showExplanations', 'labelOffset']) + 4}
       cy={-5}
       r={Constants.getIn(['explanationDot', 'radiusStart'])}
       fill="#ff708a"
@@ -63,22 +63,23 @@ class ShowExplanations extends React.Component {
 
     return (
       <text
-        x={Constants.getIn(['showExplanations', 'labelOffset'])}
+        x={Constants.getIn(['showExplanations', 'labelOffset']) + 14}
         y={0}
         className="showHideExplanations"
         fill={textColour}
       >
-        {explanationsText} <tspan dx="17">{sign}</tspan>
+        {explanationsText} <tspan dx="6">{sign}</tspan>
       </text>
     )
   }
 
   render() {
+    const tabIndex = Constants.getIn(['tabIndex','start', 'menuBar'])
     return (
       <g
         transform={`translate(${this.props.left} ${this.props.top})`}
         role="menuitem"
-        {...handleInteraction(this.props.onClick)}
+        {...handleInteractionWithTabIndex(tabIndex, this.props.onClick)}
       >
         {this.dot()}
         {this.showText()}

@@ -147,6 +147,7 @@ class StackedChart extends Chart {
           updatePosition={this.updateAxisGuide}
           width={this.props.width}
           barSize={layout.get('barWidth')}
+          tabIndex={Constants.getIn(['tabIndex', 'start', 'visualization', 'timeline'])}
         />
       </g>
     )

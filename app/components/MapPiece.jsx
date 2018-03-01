@@ -73,7 +73,7 @@ class MapPiece extends React.Component {
   newBrunswickExplanation() {
     if (this.props.selectedEnergy === 'electricity'
       && this.props.data.get('name') === 'NB' ) {
-      const scaleContainerX = this.props.viewport.get('changeWidthRatio')  > 1.2 ? 265: 250
+      const scaleContainerX = this.props.viewport.get('changeWidthRatio')  > 1.2 ? 290: 270
       const scaleContainerY = this.props.viewport.get('changeHeightRatio')  > 1.2 ? 75: 70
       return (<g>
         <ExplanationDot
@@ -103,8 +103,8 @@ class MapPiece extends React.Component {
 
   vermontExplanation() {
     if (this.props.data.get('name') !== 'VT') { return null }
-    const scaleContainerX = this.props.viewport.get('changeWidthRatio')  > 1.2 ? 165: 170
-    const scaleContainerY = this.props.viewport.get('changeHeightRatio')  > 1.2 ? 370: 430
+    const scaleContainerX = this.props.viewport.get('changeWidthRatio')  > 1.2 ? 185: 190
+    const scaleContainerY = this.props.viewport.get('changeHeightRatio')  > 1.2 ? 370: 405
     return (<g>
       <ExplanationDot
         scale="scale(1)"
@@ -132,8 +132,8 @@ class MapPiece extends React.Component {
 
   washingtonExplanation() {
     if (this.props.data.get('name') !== 'WA') { return null }
-    const scaleContainerX = this.props.viewport.get('changeWidthRatio')  > 1.2 ? 2: -25
-    const scaleContainerY = this.props.viewport.get('changeHeightRatio')  > 1.2 ? 370: 430
+    const scaleContainerX = this.props.viewport.get('changeWidthRatio')  > 1.2 ? 20: -5
+    const scaleContainerY = this.props.viewport.get('changeHeightRatio')  > 1.2 ? 370: 410
     return (<g>
       <ExplanationDot
         scale="scale(1) scale(-1 1)"
@@ -161,7 +161,7 @@ class MapPiece extends React.Component {
 
   britishColumbiaExplanation() {
     if (this.props.data.get('name') !== 'BC' || this.props.selectedEnergy === 'naturalGasLiquids') { return null }
-    const scaleContainerX = this.props.viewport.get('changeWidthRatio')  > 1.2 ? 265: 260
+    const scaleContainerX = this.props.viewport.get('changeWidthRatio')  > 1.2 ? 285: 270
     const scaleContainerY = this.props.viewport.get('changeHeightRatio')  > 1.2 ? -10: -30
     return (<g>
       <ExplanationDot
@@ -323,7 +323,7 @@ class MapPiece extends React.Component {
     let containerX = this.props.containerX + this.props.x1 + scaleContainerX
     let containerY = this.props.containerY + this.props.y1 + scaleContainerY
     if (this.props.selectedEnergy === 'naturalGasLiquids') {
-      scaleContainerX = this.props.viewport.get('changeWidthRatio')  > 1.2 ? 240: 205
+      scaleContainerX = this.props.viewport.get('changeWidthRatio')  > 1.2 ? 255: 205
       scaleContainerY = this.props.viewport.get('changeHeightRatio')  > 1.2 ? 65: 80
       containerX = this.props.x1 * MapLayoutGridConstant.getIn(['naturalGasLiquids', 'ca' , 'mapPieceScale'], 1) + scaleContainerX
       containerY = this.props.y1 * MapLayoutGridConstant.getIn(['naturalGasLiquids', 'ca' , 'mapPieceScale'], 1) + scaleContainerY
@@ -339,10 +339,10 @@ class MapPiece extends React.Component {
         text={valueString}
         containerX={this.props.viewport.get('changeWidthRatio')*containerX}
         containerY={this.props.viewport.get('changeHeightRatio')*containerY}
-        lineX={102}
-        lineY={40}
-        textX={40}
-        textY={40}
+        lineX={142.16}
+        lineY={173}
+        textX={15}
+        textY={24}
         xPosition={30}
         yPosition={0}
         name={`${this.props.data.get('name')}`}

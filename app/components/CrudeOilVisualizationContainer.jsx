@@ -42,6 +42,7 @@ const CrudeOilVisualizationContainer = props => (
       {...props.axisPosition}
       barWidth={4}
       canChangeScale={false}
+      tabIndex={Constants.getIn(['tabIndex', 'start', 'visualization', 'timeline'])}
     />
     <BarChart
       {...props.exportChart}
@@ -49,6 +50,7 @@ const CrudeOilVisualizationContainer = props => (
       aggregateKey="activity"
       flipped
       colour={Constants.getIn(['styleGuide', 'colours', 'ExportDefault'])}
+      tabIndex={Constants.getIn(['tabIndex', 'start', 'visualization', 'timeline'])}
     />
     <USPadd
       { ...props.usPaddChart}     

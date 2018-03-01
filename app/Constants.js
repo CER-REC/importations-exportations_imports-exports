@@ -19,7 +19,7 @@ const Constants = fromJS({
   },
 
   menuBar: {
-    width: 200,
+    width: 220,
     containerHeight: 300,
     importExportMenuLabelMargin: 16,
     importExportTextLabelYOffset: 12,
@@ -92,7 +92,7 @@ const Constants = fromJS({
   },
 
   visualizationDetailContainer: {
-    width: 260,
+    width: 250,
     leftPadding: 10,
   },
 
@@ -115,7 +115,7 @@ const Constants = fromJS({
   showExplanations: {
     height: 30,
     topMargin: 80,
-    triangleLineWidth: 160,
+    triangleLineWidth: 180,
     triangleLineYOffset: 3,
     triangleLineY: 7.6,
     labelOffset: 13,
@@ -484,6 +484,22 @@ const Constants = fromJS({
           'Port Name': 'Willow Creek', Province: 'SK', Latitude: '', Longitude: '', '': '', Description: '', Capacity: '',
         },
       },
+    },
+  },
+  tabIndex: {
+    start: {
+      menuBar: 10,
+      visualization: {
+        caMap: 50,
+        timeline: 70,
+        usMap: 100,
+        powerpool: 180,
+        caPadd: 50,
+        usPadd: 150,
+        naturalGasMap: 150,
+      },
+      detailSidebar: 200,
+      socialBar: 200,
     },
   },
 })

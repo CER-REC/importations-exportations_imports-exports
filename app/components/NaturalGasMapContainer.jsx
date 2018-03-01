@@ -10,7 +10,7 @@ import MapPiece from './MapPiece'
 import MapLayoutGridConstant from '../MapLayoutGridConstant'
 import { arrangeBy, binSelector, aggregateLocationNaturalGasSelector } from '../selectors/data'
 import { getSelectionSettings } from '../selectors/NaturalGasSelector'
-import { handleInteraction } from '../utilities'
+import { handleInteractionWithTabIndex } from '../utilities'
 import { setSelection } from '../actions/visualizationSettings'
 
 const mapPieceTransformStartTop = ( top, dimensions, mapPieceScale) =>  top * ((mapPieceScale * dimensions.get('height')) + dimensions.get('topPadding'))
@@ -86,7 +86,7 @@ class NaturalGasMapContainer extends React.PureComponent {
     const type = this.props.importExportVisualization
     const arrangedData = this.orderBy(this.props.selector, this.props.arrangeBy)
     const mapLayoutGrid = MapLayoutGridConstant.get(type)
-
+    const tabIndex = Constants.getIn(['tabIndex', 'start', 'visualization', 'naturalGasMap'])
     const dimensions = mapLayoutGrid.get('dimensions')
     const styles = mapLayoutGrid.get('styles')
     let layout = mapLayoutGrid.get('layout')
@@ -111,16 +111,19 @@ class NaturalGasMapContainer extends React.PureComponent {
         if(row > maximunRows) {
           column += 1
           row = 1
-          topPadding = 0 
+          topPadding = 0
         }
         //x1 = left
         //y1 = top
-        const left = mapPieceTransformStartLeft(column, dimensions, mapPieceScale) + leftPadding
+        let left = mapPieceTransformStartLeft(column, dimensions, mapPieceScale) + leftPadding
         const top = mapPieceTransformStartTop(row, dimensions, mapPieceScale) + topPadding
+        if (column === 0 && row === maximunRows && portsCount > 7 && portsCount%2 !== 0) {
+          left += 24
+        }
         topPadding += rowPadding
         row +=1
         return (<g key={`NaturalGasMapPiece_${port.get('Province')}_${port.get('portName')}`} 
-          {...handleInteraction(this.onClick, port.get('portName'))}
+          {...handleInteractionWithTabIndex(tabIndex, this.onClick, port.get('portName'))}
           transform={`scale(${mapPieceScale})`}>
             <MapPiece
               data={port}
@@ -137,22 +140,29 @@ class NaturalGasMapContainer extends React.PureComponent {
               y1={top}
             />
           </g>)
-      }) 
-      const provinceTextPosition =  portsCount > 7 ? leftPadding + columnPadding+ dimensions.get('width') - 95 : provinceRendered * 55 - 45 
-      leftPadding += dimensions.get('width') + columnPadding 
-      leftPadding = portsCount > 7 ? leftPadding + columnPadding + 20: leftPadding
+      })
+      const provinceTextPosition = portsCount > 7
+        ? (leftPadding + columnPadding + (dimensions.get('width') * mapPieceScale)) - 58
+        : (provinceRendered * 58) - 45
+      leftPadding += (dimensions.get('width') * mapPieceScale) + columnPadding
+      leftPadding = portsCount > 7
+        ? leftPadding + columnPadding + 20
+        : leftPadding
       column += 1
       topPadding = 0
       row = 0
       if(portsCount > 7){
         provinceRendered += 0.75
       }
+      const isProvinceSelected = this.props.selectionSettings.get('provinces').indexOf(value)
+      const provinceClass = isProvinceSelected !== -1 ? 'provinceSelected': 'provinceDeselected'
+      const provinceTextColor = isProvinceSelected !== -1 ? 'portSelectedProvinceLabel' : 'portProvinceLabel'
       return (
         <g className="paddLayout" key={`NaturalGasMap_${value}`} >
-          <rect x={ provinceTextPosition - 9} y={dimensions.get('topPadding') - 15}  
+          <rect className = {provinceClass} x={ provinceTextPosition - 9} y={dimensions.get('topPadding')}
             width="29" height="15" fill="none" stroke="#a99372" strokeWidth="0.75"/>
-          <text className="portProvinceLabel" x={ provinceTextPosition -2} y={dimensions.get('topPadding') - 3} 
-          {...handleInteraction(this.onClick, '', value)}>{value}</text>
+          <text className={provinceTextColor} x={ provinceTextPosition -3} y={dimensions.get('topPadding') + 13} 
+          {...handleInteractionWithTabIndex(tabIndex, this.onClick, '', value)}>{value}</text>
           {mapLayout.toArray()}
         </g>
       )

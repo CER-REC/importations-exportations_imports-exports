@@ -17,7 +17,7 @@ import { getElectricityMapLayout, getSelectionSettings } from '../selectors/Natu
 import { arrangeBy, binSelector, sortAggregatedLocationsSelector, subType } from '../selectors/data'
 import DetailSidebar from './DetailSidebar'
 import DetailBreakdown from './DetailBreakdown'
-import { handleInteraction } from '../utilities'
+import { handleInteractionWithTabIndex } from '../utilities'
 
 import './NaturalGasLiquidMapLayout.scss'
 
@@ -86,6 +86,7 @@ class NaturalGasLiquidMapLayout extends React.Component {
     const xaxis = this.props.left
     const yaxis = this.props.top
     const isSelected = this.isSelected()
+    const tabIndex = Constants.getIn(['tabIndex', 'start', 'visualization', 'caMap'])
     return layout.map((position) => {
       const humanName = this.props.Tr(['country', this.props.country, position.get('name')])
       if(typeof humanName === 'undefined'){
@@ -95,7 +96,7 @@ class NaturalGasLiquidMapLayout extends React.Component {
         <g key={`mapPieceKey_${this.props.country}_${position.get('name')}`}>
           <g
             className="mappiece"
-            {...handleInteraction(this.onClick, this.props.country, position.get('name'))}
+            {...handleInteractionWithTabIndex(tabIndex, this.onClick, this.props.country, position.get('name'))}
             aria-label={this.props.Tr('mapTileLabel', humanName, position.getIn(['subType',productSubType,'imports'],0).toLocaleString(), position.getIn(['subType',productSubType,'exports'], 0).toLocaleString(), this.props.unit)}
             transform={`scale(${mapPieceScale})`}
           >

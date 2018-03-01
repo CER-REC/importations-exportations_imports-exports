@@ -20,7 +20,7 @@ import ConfidentialIcon from './ConfidentialIcon'
 
 import ExplanationDot from './ExplanationDot'
 
-import { handleInteraction } from '../utilities'
+import { handleInteractionWithTabIndex } from '../utilities'
 
 import ElectricitySelector from '../selectors/ElectricitySelector'
 import { arrangeBy, binSelector, sortAggregatedLocationsSelector, selection } from '../selectors/data'
@@ -50,10 +50,10 @@ class PaddLayout extends React.Component {
     )
   }
 
-  renderConfidentialPopover(leftPadding, paddGroupId, style, confidentialCount, totalCount, left, top, transformTranslate){
-    const energyType =  this.props.selectedEnergy
-    const scaleingAdjustmentX = this.props.viewport.get('changeWidthRatio')  > 1.2 ? 0:style.getIn([ energyType, 'scaleingAdjustmentX'],0)
-    const scaleingAdjustmentY = this.props.viewport.get('changeHeightRatio')  > 1.2 ? 0:style.getIn([ energyType, 'scaleingAdjustmentY'],0)
+  renderConfidentialPopover(leftPadding, paddGroupId, style, confidentialCount, totalCount, left, top, transformTranslate) {
+    const energyType = this.props.selectedEnergy
+    const scaleingAdjustmentX = this.props.viewport.get('changeWidthRatio')  > 1.2 ? -17:style.getIn([ energyType, 'scaleingAdjustmentX'], 0)
+    let scaleingAdjustmentY = this.props.viewport.get('changeHeightRatio')  > 1.2 ? -12:style.getIn([ energyType, 'scaleingAdjustmentY'], 0)
     let paddContainerX = this.props.viewport.get('changeWidthRatio') *(this.props.left + left + transformTranslate.get('left') - style.getIn([ energyType, 'xPadding'],0) + scaleingAdjustmentX)
     let paddContainerY = this.props.viewport.get('changeHeightRatio') *(this.props.top + top + transformTranslate.get('top') - style.getIn([energyType, 'yPadding'],0) + scaleingAdjustmentY)
     if (this.props.arrangeBy !== 'location') {
@@ -62,24 +62,24 @@ class PaddLayout extends React.Component {
     }
     let xPosition = 30
     let yPosition = 0
-    if(paddGroupId === 'ca'){
+    if(paddGroupId === 'ca') {
       xPosition = 36
-      yPosition= 12
-      paddContainerX = this.props.left + left + 140 + scaleingAdjustmentX,
-      paddContainerY = this.props.top + top - 20 + scaleingAdjustmentY
+      yPosition = 13
+      paddContainerX = this.props.left + left + 135 + scaleingAdjustmentX
+      paddContainerY = this.props.top + top - 10 + scaleingAdjustmentY
     }
-    if (style && confidentialCount > 0 
+    if (style && confidentialCount > 0
       && this.props.confidentialityMenu) {
       return (<g transform="translate(145 143)">
         <ConfidentialIcon
-          styles={style.get('confidentialStyle')} 
+          styles={style.get('confidentialStyle')}
           text={`${confidentialCount} / ${totalCount} values confidential`}
           containerX={paddContainerX}
           containerY={paddContainerY}
-          lineX={102}
-          lineY={40}
-          textX={40}
-          textY={40}
+          lineX={142.16}
+          lineY={173}
+          textX={18}
+          textY={23}
           xPosition={xPosition}
           yPosition={yPosition}
           name={`${paddGroupId}${this.props.selectedEnergy}Confidentiality`}
@@ -88,7 +88,7 @@ class PaddLayout extends React.Component {
     }
     return null
   }
-  getArrow(orderBy, paddGroupId, left, top, color, confidentialCount = 0, totalCount, leftPadding=0) {
+  getArrow(orderBy, paddGroupId, left, top, color, confidentialCount = 0, totalCount, leftPadding = 0) {
     if (typeof paddGroupId === 'undefined' && paddGroupId === '') {
       return null
     }
@@ -144,14 +144,14 @@ class PaddLayout extends React.Component {
 
     let paddIExplanation = null
     let textString = `${this.props.TRSelector(['explanations','paddICrudeOil'])}`
-    scaleContainerX = this.props.viewport.get('changeWidthRatio')  > 1.2 ? 110: 100
+    scaleContainerX = this.props.viewport.get('changeWidthRatio')  > 1.2 ? 90: 100
     scaleContainerY = this.props.viewport.get('changeHeightRatio')  > 1.2 ? 225: 270
     let paddIExplanationcontainerX = this.props.viewport.get('changeWidthRatio')*(this.props.left + left + scaleContainerX)
     let paddIExplanationcontainerY = this.props.viewport.get('changeHeightRatio')*(this.props.top + top - scaleContainerY)
     if (this.props.selectedEnergy === 'naturalGasLiquids') {
       textString = `${this.props.TRSelector(['explanations','paddINaturalGasLiquids'])}`
-      scaleContainerX = this.props.viewport.get('changeWidthRatio')  > 1.2 ? 90: 70
-      scaleContainerY = this.props.viewport.get('changeHeightRatio')  > 1.2 ? 205: 210
+      scaleContainerX = this.props.viewport.get('changeWidthRatio')  > 1.2 ? 70: 70
+      scaleContainerY = this.props.viewport.get('changeHeightRatio')  > 1.2 ? 225: 210
       paddIExplanationcontainerX = this.props.viewport.get('changeWidthRatio')*(this.props.left + left + scaleContainerX)
       paddIExplanationcontainerY = this.props.viewport.get('changeHeightRatio')*(this.props.top + top - scaleContainerY)
     }
@@ -197,17 +197,17 @@ class PaddLayout extends React.Component {
     }
 
     let paddVExplanation = null
-    scaleContainerX = this.props.viewport.get('changeWidthRatio')  > 1.2 ? 110: 100
+    scaleContainerX = this.props.viewport.get('changeWidthRatio')  > 1.2 ? -170: 100
     scaleContainerY = this.props.viewport.get('changeHeightRatio')  > 1.2 ? 225: 270
     let paddVExplanationcontainerX = this.props.viewport.get('changeWidthRatio')*(this.props.left + left + scaleContainerX)
     let paddVExplanationcontainerY = this.props.viewport.get('changeHeightRatio')*(this.props.top + top - scaleContainerY)
     if (this.props.selectedEnergy === 'naturalGasLiquids') {
-      scaleContainerX = this.props.viewport.get('changeWidthRatio')  > 1.2 ? -170: -155
-      scaleContainerY = this.props.viewport.get('changeHeightRatio')  > 1.2 ? 205: 265
+      scaleContainerX = this.props.viewport.get('changeWidthRatio')  > 1.2 ? -190: -155
+      scaleContainerY = this.props.viewport.get('changeHeightRatio')  > 1.2 ? 225: 265
       paddVExplanationcontainerX = this.props.viewport.get('changeWidthRatio')*(this.props.left + left + scaleContainerX)
       paddVExplanationcontainerY = this.props.viewport.get('changeHeightRatio')*(this.props.top + top - scaleContainerY)
     }
-    if (this.props.selectedEnergy === 'naturalGasLiquids'  
+    if (this.props.selectedEnergy === 'naturalGasLiquids' 
       && (this.props.arrangeBy === 'imports') || this.props.arrangeBy === 'exports') {
       scaleContainerX = this.props.viewport.get('changeWidthRatio')  > 1.2 ? 148: 145
       scaleContainerY = this.props.viewport.get('changeHeightRatio')  > 1.2 ? 0: 0
@@ -263,7 +263,12 @@ class PaddLayout extends React.Component {
     if(props.selctionState.get('origins').count() === 0){return 1}
     return props.selctionState.get('origins').includes(paddGroup)? 1 : 0.5
   }
-
+  getTabIndex(country){
+    if(country === 'ca'){
+      return Constants.getIn(['tabIndex', 'start', 'visualization', 'caPadd'])
+    }
+    return Constants.getIn(['tabIndex', 'start', 'visualization', 'usPadd'])
+  }
   onPaddClick( props, paddGroup ) {
     const { selctionState } = props
     let origins = []
@@ -323,7 +328,7 @@ class PaddLayout extends React.Component {
         }
         if (paddLayout !== null) {
           paddLayout = (<g className="paddLayout" fillOpacity={this.getOpacityOfPadd(props, paddGroup)}  key={`${props.arrangeBy}_${currentValue[1].get('destination')}`} transform={`translate(${left} 0)`}
-              {...handleInteraction(this.onPaddClick, props, paddGroup)}
+              {...handleInteractionWithTabIndex(this.getTabIndex(props.country), this.onPaddClick, props, paddGroup)}
             >
             {paddLayout}
             { this.getArrow(
@@ -368,7 +373,7 @@ class PaddLayout extends React.Component {
     if(data){
     const color = this.getPaddColor(data.get('value'))
     return (<g className="paddLayout" fillOpacity={this.getOpacityOfPadd(props, paddGroup)}
-      {...handleInteraction(this.onPaddClick, props, paddGroup)}
+      {...handleInteractionWithTabIndex(this.getTabIndex(props.country) , this.onPaddClick, props, paddGroup)}
         >
         <filter id="paddOutline">
           <feMorphology operator="dilate" in="SourceAlpha" radius="1.5"/>
@@ -409,7 +414,7 @@ class PaddLayout extends React.Component {
   renderPaddMapPiece() {
     if (this.props.arrangeBy === 'location' || this.props.country === 'ca') {
       return this.renderLocation(this.props)
-    } else{
+    } else {
       return this.renderDefault(this.props)
     }
   }

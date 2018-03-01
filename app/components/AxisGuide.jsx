@@ -10,6 +10,8 @@ import { visualizationSettings } from '../selectors/visualizationSettings'
 import { timelineScaleLinked } from '../selectors/timeline'
 import trSelector from '../selectors/translate'
 
+import { arrangeBy } from '../selectors/data'
+
 import ExplanationDot from './ExplanationDot'
 import tr from '../TranslationTable'
 
@@ -74,7 +76,7 @@ class AxisGuide extends React.PureComponent {
     }
     const { heightPerUnit } = this.props
     const flippedInverter = this.props.flipped ? -1 : 1
-    const currentY = this.props.position * heightPerUnit
+    const currentY = (this.props.position - this.props.scale.min) * heightPerUnit
     let newY = (currentY - (rawOffset.y * flippedInverter))
 
     const offset = { x: 0, y: rawOffset.y }
@@ -88,7 +90,7 @@ class AxisGuide extends React.PureComponent {
     }
 
     this.setState({
-      positionDisplay: Math.round(newY / heightPerUnit),
+      positionDisplay: Math.round(newY / heightPerUnit) + this.props.scale.min,
     })
 
     return offset
@@ -100,10 +102,10 @@ class AxisGuide extends React.PureComponent {
 
   timeLineRangeExplanation() {
     let containerY = this.props.chartHeight + (this.props.barSize / 2)
-      - (this.props.position * this.props.heightPerUnit) - 2 + 190
+      - (this.props.position * this.props.heightPerUnit) - 2 + 210
     if (this.props.selectedEnergy === 'crudeOil') {
       containerY = this.props.chartHeight - (this.props.barSize / 2)
-      + (this.props.position * this.props.heightPerUnit) - 2 + 310
+      + (this.props.position * this.props.heightPerUnit) - 2 + 305
     }
     if (this.props.selectedEnergy === 'naturalGas') {
       containerY = this.props.chartHeight + (this.props.barSize / 2)
@@ -111,12 +113,14 @@ class AxisGuide extends React.PureComponent {
     }
     if (this.props.selectedEnergy === 'naturalGasLiquids') {
       containerY = this.props.chartHeight + (this.props.barSize / 2)
-      - (this.props.position * this.props.heightPerUnit) - 2 + 170
+      - (this.props.position * this.props.heightPerUnit) - 2 + 240
     }
     if (this.props.selectedEnergy === 'refinedPetroleumProducts') {
       containerY = this.props.chartHeight + (this.props.barSize / 2)
       + (this.props.position * this.props.heightPerUnit) - 413
     }
+    if (this.props.selectedEnergy === 'refinedPetroleumProducts'
+      && this.props.arrangeBy === 'split') { return null }
     if (this.props.flipped
       && (this.props.selectedEnergy !== 'crudeOil'
       && this.props.selectedEnergy !== 'refinedPetroleumProducts')) { return null }
@@ -139,7 +143,7 @@ class AxisGuide extends React.PureComponent {
         lineY={173}
         textX={40}
         textY={58}
-        containerX={200}
+        containerX={220}
         containerY={containerY}
         name="timeLineRangeDot"
         text={`${this.props.tr(['explanations','timelineRange'])}`}
@@ -172,10 +176,10 @@ class AxisGuide extends React.PureComponent {
 
   render() {
     const text = `${this.state.positionDisplay.toLocaleString()} ${this.props.tr(['amounts', this.props.unit])}`
-    const offset = (this.props.position === 0)
+    const offset = (this.props.position === this.props.scale.min)
       ? this.props.chartHeight
       : (this.props.chartHeight + (this.props.barSize / 2))
-        - (this.props.position * this.props.heightPerUnit) - 2
+        - ((this.props.position - this.props.scale.min) * this.props.heightPerUnit) - 2
     return (
       <SVGDrag
         invertedY={this.props.flipped}
@@ -183,6 +187,7 @@ class AxisGuide extends React.PureComponent {
         dragStop={this.dragStop}
         onArrowKey={this.onArrowKey}
         aria-label={text}
+        tabIndex={this.props.tabIndex || 0}
       >
         <g transform={`translate(0 ${offset})`}>
           <polyline
@@ -227,6 +232,7 @@ class AxisGuide extends React.PureComponent {
 
 export default connect((state, props) => ({
   selectedEnergy: state.importExportVisualization,
+  arrangeBy: arrangeBy(state, props),
   unit: visualizationSettings(state, props).get('amount'),
   tr: trSelector(state, props),
   scaleLinked: timelineScaleLinked(state, props),

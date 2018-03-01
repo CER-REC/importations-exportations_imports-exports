@@ -25,11 +25,13 @@ class NaturalGasLiquidsVisualizationContainer extends React.Component {
           valueKey="imports"
           aggregateKey="activity"
           colour={Constants.getIn(['styleGuide', 'colours', 'ImportDefault'])}
+          tabIndex={Constants.getIn(['tabIndex', 'start', 'visualization', 'timeline'])}
         />
       )}
       <Axis
         {...this.props.axisPosition}
         barWidth={4}
+        tabIndex={Constants.getIn(['tabIndex', 'start', 'visualization', 'timeline'])}
       />
       {!this.props.showExports ? null : (
         <BarChart
@@ -38,6 +40,7 @@ class NaturalGasLiquidsVisualizationContainer extends React.Component {
           aggregateKey="activity"
           flipped
           colour={Constants.getIn(['styleGuide', 'colours', 'ExportDefault'])}
+          tabIndex={Constants.getIn(['tabIndex', 'start', 'visualization', 'timeline'])}
         />
       )}
       <g>

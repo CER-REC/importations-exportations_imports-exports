@@ -21,7 +21,7 @@ import { getElectricityMapLayout, getSelectionSettings } from '../selectors/Elec
 import { arrangeBy, binSelector, aggregateLocationSelector } from '../selectors/data'
 import DetailSidebar from './DetailSidebar'
 import DetailBreakdown from './DetailBreakdown'
-import { handleInteraction } from '../utilities'
+import { handleInteractionWithTabIndex } from '../utilities'
 import { timelineYearScaleCalculation } from '../selectors/timeline'
 
 const mapPieceTransformStartXaxis = (position, dimensions, mapPieceScale) => (position.get('x') * ((mapPieceScale * dimensions.get('width')) + dimensions.get('xAxisPadding')))
@@ -93,7 +93,7 @@ class ElectricityMapLayout extends React.Component {
       let transform ='0 0'
       switch (key) {
         case 'PJMPP':
-          transform ='scale(1.07) translate(-250 -367)'
+          transform = (this.props.viewport.get('changeWidthRatio')) > 1.2 ?'scale(1 1.02) translate(-248 -352)': 'scale(0.99 1.02) translate(-245 -343)'
           result = (<polygon
             className="powerPoolOutline"
             points="121.5,148.5 143.7,139.3 166,148.5 166,175.3 187.7,186.8 210.5,175.3 232.6,186.5 255.7,175.3
@@ -103,7 +103,7 @@ class ElectricityMapLayout extends React.Component {
           />)
           break
         case 'MN/ND':
-          transform ='scale(1.05) translate(-466 -374)'
+          transform = (this.props.viewport.get('changeWidthRatio')) > 1.2 ?'scale(1 1.01) translate(-457 -354)': 'scale(1 1.01) translate(-453 -345)'
           result = (<polygon
             className="powerPoolOutline"
             points="154.5,149.5 176.8,140.3 198.8,149.5 221,140.3 243.7,149.5 243.7,176.3 221,187.8 198.8,175.8
@@ -111,7 +111,7 @@ class ElectricityMapLayout extends React.Component {
           />)
           break
         case 'NE-ISO':
-          transform ='scale(1.05) translate(-159 -390)'
+          transform = (this.props.viewport.get('changeWidthRatio')) > 1.2 ?'scale(1) translate(-162 -374)': 'translate(-158 -364)'
           result = (<polygon
             className="powerPoolOutline"
             points="144.3,128.1 167,118.9 189,128.2 211.2,118.9 233.2,128.2 233.2,155.1 255.6,167.5 255.6,194.3
@@ -159,7 +159,7 @@ class ElectricityMapLayout extends React.Component {
         <g key={`mapPieceKey_${this.props.country}_${position.get('name')}`}>
           <g
             className="mappiece"
-            {...handleInteraction(this.onClick, this.props.country, position.get('name'))}
+            {...handleInteractionWithTabIndex(position.get('tabIndex'), this.onClick, this.props.country, position.get('name'))}
             aria-label={this.props.Tr('mapTileLabel', humanName, position.get('imports').toLocaleString(), position.get('exports').toLocaleString(), this.props.unit)}
             transform={`scale(${mapPieceScale})`}
           >
@@ -180,8 +180,8 @@ class ElectricityMapLayout extends React.Component {
               containerY={this.props.top}
               country={this.props.country}
             />
+            {this.getPowerPoolsOutline(position.get('name'), this.props.country, xaxis, yaxis, position, dimensions, mapPieceScale)}
           </g>
-          {this.getPowerPoolsOutline(position.get('name'), this.props.country, xaxis, yaxis, position, dimensions, mapPieceScale)}
         </g>
       )
     })
@@ -198,15 +198,14 @@ class ElectricityMapLayout extends React.Component {
     const data = Immutable.fromJS(
       this.props.selection.get('destinations').reduce((acc, nextValue, country) => {
           return nextValue.reduce((accumulator, stateOrProvince, key) => {
-            if(!stateOrProvince.get(detailBreakdownData.get('type'))){
+            if(!this.props.dataPoints.getIn([key, detailBreakdownData.get('type')])){
               return acc
             }
-            acc[key] = stateOrProvince.get(detailBreakdownData.get('type'))
+            acc[key] = this.props.dataPoints.getIn([key, detailBreakdownData.get('type')])
             return acc
           },{})
       },{})
     ).sort((a,b) => {return b - a})
-
     const countries = Tr.get('country').filter((points, country) => this.props.selection.get('destinations').has(country))
     const  nameMappings = countries.reduce((acc, nextValue) =>{
       return acc.concat(nextValue)
@@ -225,7 +224,8 @@ class ElectricityMapLayout extends React.Component {
   }
 
   renderDetailSidebar() {
-    return (<DetailSidebar top={this.props.top} height={Constants.getIn(['detailBreakDown', this.props.country, 'height'], 0)}>
+    const top = this.props.viewport.get('changeHeightRatio') > 1.2 ? 40 : 0 
+    return (<DetailSidebar top={this.props.top + top} height={Constants.getIn(['detailBreakDown', this.props.country, 'height'], 0)}>
       {this.renderDetailBreakdown()}
     </DetailSidebar>)
   }
@@ -253,6 +253,7 @@ const mapStateToProps = (state, props) => ({
   importsEnabled: showImportsSelector(state, props),
   exportsEnabled: showExportsSelector(state, props),
   timelineYears: timelineYearScaleCalculation(state, props),
+  viewport: state.viewport,
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(ElectricityMapLayout)

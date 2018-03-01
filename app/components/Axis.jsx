@@ -42,13 +42,14 @@ class Axis extends React.PureComponent {
         top={this.props.top}
         left={this.props.left - 30}
         height={this.props.height}
+        tabIndex={this.props.tabIndex || 0}
       />
     )
   }
 
   seekControls() {
     const {
-      top, left, width, height, bars: data,
+      top, left, width, height, bars: data,tabIndex,
     } = this.props
     return (
       <g>
@@ -58,6 +59,7 @@ class Axis extends React.PureComponent {
           width={width}
           height={height}
           data={data}
+          tabIndex={tabIndex}
         />
         <TimelineSeek
           top={top}
@@ -66,16 +68,17 @@ class Axis extends React.PureComponent {
           height={height}
           data={data}
           side="end"
+          tabIndex={tabIndex}
         />
       </g>
     )
   }
 
   chartOptions() {
-    const { top, height } = this.props
+    const { top, height, tabIndex } = this.props
     return (
       <DetailSidebar top={top} height={height}>
-        <ChartOptions height={height} canChangeScale={this.props.canChangeScale} />
+        <ChartOptions height={height} canChangeScale={this.props.canChangeScale} tabIndex={tabIndex} />
       </DetailSidebar>
     )
   }
@@ -142,8 +145,8 @@ class Axis extends React.PureComponent {
         />
         {elements}
         {this.props.chartOptions ? this.chartOptions() : null}
-        {this.props.canSeek ? this.seekControls() : null}
         {this.props.canPlay ? this.playbackButton() : null}
+        {this.props.canSeek ? this.seekControls() : null}
       </g>
     )
   }

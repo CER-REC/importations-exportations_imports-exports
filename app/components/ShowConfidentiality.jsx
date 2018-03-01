@@ -2,10 +2,11 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
+import Constants from '../Constants'
 import TrSelector from '../selectors/translate'
 import { confidentialityTogglePosition } from '../selectors/viewport/menus'
 import { ToggleConfidentialityMenu } from '../actions/confidentialityMenu'
-import { handleInteraction } from '../utilities'
+import { handleInteractionWithTabIndex } from '../utilities'
 
 import ExplanationDot from './ExplanationDot'
 
@@ -14,7 +15,7 @@ import '../styles/Fonts.scss'
 const triangleLine = (
   <g transform="translate(0 -3)">
     <polyline fill="black" points="0 8 0 0 9.1 8.1 0 8.1" />
-    <line stroke="black" x1="0.5" y1="7.6" x2="160" y2="7.6" />
+    <line stroke="black" x1="0.5" y1="7.6" x2="180" y2="7.6" />
   </g>
 )
 
@@ -28,7 +29,7 @@ class ShowConfidentiality extends React.Component {
   }
 
   icon() {
-    return <g transform="translate(116 -12) scale(0.84)" className="confidentialityIcon">
+    return <g transform="translate(11 -12) scale(0.84)" className="confidentialityIcon">
       <path
         fill='#fff'
         stroke='#999'
@@ -50,13 +51,13 @@ class ShowConfidentiality extends React.Component {
     }
     return (
       <text
-        x={13}
+        x={27}
         y={0}
         className="showHideConfidentiality"
         fill="#999"
       >
         {confidentialityText}
-        <tspan dx="25">
+        <tspan dx="8">
           {sign}
         </tspan>
       </text>
@@ -76,7 +77,7 @@ class ShowConfidentiality extends React.Component {
           40.12,0,0,0,
           33.47,
           18H615.2"
-        xPosition={155}
+        xPosition={150}
         yPosition={-5}
         lineX={142.16}
         lineY={173.94}
@@ -90,11 +91,12 @@ class ShowConfidentiality extends React.Component {
   }
 
   render() {
+    const tabIndex = Constants.getIn(['tabIndex','start', 'menuBar'])
     return (
       <g
         transform={`translate(${this.props.left} ${this.props.top})`}
         role="menuitem"
-        {...handleInteraction(this.props.onClick)}
+        {...handleInteractionWithTabIndex(tabIndex, this.props.onClick)}
       >
         {this.icon()}
         {this.showText()}
@@ -107,6 +109,7 @@ class ShowConfidentiality extends React.Component {
 
 const mapStateToProps = (state, props) => ({
   Tr: TrSelector(state, props),
+  energyType: state.importExportVisualization,
   confidentialityMenu: state.confidentialityMenu,
   ...confidentialityTogglePosition(state, props),
 })

@@ -7,7 +7,7 @@ import Tr from '../TranslationTable'
 
 class NaturalGasLiquidsMapPieceActivityExplanation extends React.Component {
   render() {
-    return (<g transform={`translate(${this.props.left},${this.props.top})`}>
+    return (<g transform={`translate(${this.props.left + 1},${this.props.top})`}>
       <MapPiece
         data={MapPieceExplanationConstant.getIn(['naturalGasLiquids', 'ca', 'datapoint'])}
         dimensions={MapPieceExplanationConstant.getIn(['naturalGasLiquids', 'ca', 'dimensions'])}
