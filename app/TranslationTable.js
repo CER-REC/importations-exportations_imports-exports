@@ -264,7 +264,7 @@ const TranslationTable = fromJS({
           fr: 'PRIX ($ CAN)',
         },
         'CAN$/MW.h': {
-          en: 'PRICE (CAN$/MW.h)',
+          en: 'PRICE (CAN$/MW.H)',
           fr: 'PRIX ($ CAN/MWh)',
         },
         'CN$/GJ': {
@@ -276,7 +276,7 @@ const TranslationTable = fromJS({
           fr: 'QUANTITÉ (m³/j)',
         },
         'MW.h': {
-          en: 'AMOUNT (MW.h)',
+          en: 'AMOUNT (MW.H)',
           fr: 'QUANTITÉ (MWh)',
         },
         'thousand m3/d': {
@@ -768,7 +768,7 @@ const TranslationTable = fromJS({
     },
     naturalGasLiquids: {
       defaultText: {
-        en: 'This visualization shows imports to Canada and exports from Canada between the years $0 and $1. Drag the timeline bar to change. Click a province to view Detail',
+        en: 'This visualization shows imports to Canada and exports from Canada between the years $0 and $1. Drag the timeline bar to change. Click a province to view detail',
         fr: 'Cette visualisation illustre les importations et les exportations du Canada de $0 à $1. Faites glisser la ligne du temps pour modifier les années. Cliquez sur une province pour des précisions à ce sujet.',
       },
       exports: {
