@@ -55,8 +55,8 @@ class ChartOptions extends React.PureComponent {
         lineY={173.94}
         textX={40}
         textY={58}
-        containerX={leftPad + 880}
-        containerY={300}
+        containerX={leftPad + 890}
+        containerY={318}
         name="linkDataIcon"
         text={`${this.props.tr(['explanations','linkedDataIcon'])}`}
     /></g>)
