@@ -900,7 +900,7 @@ const TranslationTable = fromJS({
       },
       'ATL-Q': {
         en: 'Atlantic Provinces\nand Quebec',
-        fr: 'Provinces atlantiques et le Québec',
+        fr: 'Provinces atlantiques\n et le Québec',
       },
     },
     us: {
