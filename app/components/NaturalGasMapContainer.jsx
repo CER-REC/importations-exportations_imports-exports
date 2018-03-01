@@ -117,7 +117,7 @@ class NaturalGasMapContainer extends React.PureComponent {
         //y1 = top
         let left = mapPieceTransformStartLeft(column, dimensions, mapPieceScale) + leftPadding
         const top = mapPieceTransformStartTop(row, dimensions, mapPieceScale) + topPadding
-        if (column === 0 && row === maximunRows && portsCount > 7) {
+        if (column === 0 && row === maximunRows && portsCount > 7 && portsCount%2 !== 0) {
           left += 24
         }
         topPadding += rowPadding
