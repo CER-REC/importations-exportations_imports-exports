@@ -102,10 +102,10 @@ class AxisGuide extends React.PureComponent {
 
   timeLineRangeExplanation() {
     let containerY = this.props.chartHeight + (this.props.barSize / 2)
-      - (this.props.position * this.props.heightPerUnit) - 2 + 190
+      - (this.props.position * this.props.heightPerUnit) - 2 + 210
     if (this.props.selectedEnergy === 'crudeOil') {
       containerY = this.props.chartHeight - (this.props.barSize / 2)
-      + (this.props.position * this.props.heightPerUnit) - 2 + 310
+      + (this.props.position * this.props.heightPerUnit) - 2 + 305
     }
     if (this.props.selectedEnergy === 'naturalGas') {
       containerY = this.props.chartHeight + (this.props.barSize / 2)
@@ -113,7 +113,7 @@ class AxisGuide extends React.PureComponent {
     }
     if (this.props.selectedEnergy === 'naturalGasLiquids') {
       containerY = this.props.chartHeight + (this.props.barSize / 2)
-      - (this.props.position * this.props.heightPerUnit) - 2 + 170
+      - (this.props.position * this.props.heightPerUnit) - 2 + 240
     }
     if (this.props.selectedEnergy === 'refinedPetroleumProducts') {
       containerY = this.props.chartHeight + (this.props.barSize / 2)
@@ -143,7 +143,7 @@ class AxisGuide extends React.PureComponent {
         lineY={173}
         textX={40}
         textY={58}
-        containerX={200}
+        containerX={220}
         containerY={containerY}
         name="timeLineRangeDot"
         text={`${this.props.tr(['explanations','timelineRange'])}`}
