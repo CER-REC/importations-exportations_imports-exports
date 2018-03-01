@@ -18,6 +18,17 @@ class ImportExportArrow extends React.Component {
     arrowProps: null,
   }
 
+  breakLine(className, text, x, y){
+    if (text.includes('\n')) {
+      const splitName = text.split('\n')
+      return (
+        <text className={className} y={y - 17} aria-hidden>
+          {splitName.map(text => <tspan key={text} x={x} dy="13">{text}</tspan>)}
+        </text>
+      )
+    }
+    return <text className={className} y={y} x={x}>{text}</text>
+  }
   drawLabel(arrowProps, type) {
     let lineY = this.props.drawLabelLineY || 8
     let labelY = this.props.drawLabelLabelY || 12
@@ -33,9 +44,7 @@ class ImportExportArrow extends React.Component {
         labelElement = (
           <g>
             <line x1="18.5" y1={lineY} x2="45" y2={lineY} strokeWidth="1" stroke="#999999" />
-            <text className="explanationLabel" y={labelY} x="50" >
-              {label}
-            </text>
+            {this.breakLine('explanationLabel', label, 50, labelY)}
           </g>
         )
       }
@@ -53,7 +62,7 @@ class ImportExportArrow extends React.Component {
     if (arrowProps) {
       const topText = arrowProps.getIn([type, 'topText', this.props.language])
       if (typeof topText !== 'undefined' && topText !== '') {
-        topTextElement = <text className="explanationTopText" y={y} x="-5">{topText}</text>
+        topTextElement = this.breakLine('explanationTopText', topText, -5, y)
       }
     }
     return topTextElement
@@ -68,7 +77,7 @@ class ImportExportArrow extends React.Component {
     if (arrowProps) {
       const bottomText = arrowProps.getIn([type, 'bottomText', this.props.language])
       if (typeof bottomText !== 'undefined' && bottomText !== '') {
-        bottomTextElement = <text className="explanationBottomText" y={y} x="3">{bottomText}</text>
+        bottomTextElement = this.breakLine('explanationBottomText', bottomText, 3, y)
       }
     }
     return bottomTextElement

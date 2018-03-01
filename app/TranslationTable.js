@@ -1290,13 +1290,13 @@ const TranslationTable = fromJS({
         imports: {
           label: {
             en: 'temporary imports into Canada',
-            fr: 'importations temporaires du Canada',
+            fr: 'importations temporaires\ndu Canada',
           },
         },
         exports: {
           label: {
-            en: 're-exports (of temporary imports) from Canada',
-            fr: "ré-exportations (d'importations temporaires) au Canada",
+            en: 're-exports (of temporary imports)\nfrom Canada',
+            fr: "ré-exportations (d'importations\ntemporaires) au Canada",
           },
         },
         stateOrProvince: {
@@ -1308,14 +1308,14 @@ const TranslationTable = fromJS({
       exportsForReimport: {
         imports: {
           label: {
-            en: 're-imports (of temporary exports) into Canada',
-            fr: "ré-importations (d'exportations temporaires) au Canada",
+            en: 're-imports (of temporary exports)\ninto Canada',
+            fr: "ré-importations (d'exportations\ntemporaires) au Canada",
           },
         },
         exports: {
           label: {
             en: 'temporary exports from Canada',
-            fr: 'exportations temporaires du Canada',
+            fr: 'exportations temporaires\ndu Canada',
           },
         },
         stateOrProvince: {
