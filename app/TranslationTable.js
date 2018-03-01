@@ -320,9 +320,9 @@ const TranslationTable = fromJS({
     CAN$: { en: 'CAN$', fr: '$ CAN' },
     'CAN$/MW.h': { en: 'CAN$/MW.h', fr: '$ CAN/MWh' },
     'CN$/GJ': { en: 'CN$/GJ', fr: '$ CAN/GJ' },
-    'm³/d': { en: 'm³/d', fr: 'm³/j' },
+    'm3/d': { en: 'm³/d', fr: 'm³/j' },
     'MW.h': { en: 'MW.h', fr: 'MWh' },
-    'thousand m³/d': { en: 'thousand m³/d', fr: '1000 m³/j' },
+    'thousand m3/d': { en: 'thousand m³/d', fr: '1000 m³/j' },
   },
 
   mainHeading: {
