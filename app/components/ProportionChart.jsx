@@ -72,8 +72,8 @@ class ProportionChart extends Chart {
         lineY={173.94}
         textX={45}
         textY={58}
-        containerX={206}
-        containerY={292}
+        containerX={222}
+        containerY={282}
         text={`${this.props.TRSelector(['explanations','barCrude'])}`}
         name="crudeHeavyLightExplanation"
     /></g>)

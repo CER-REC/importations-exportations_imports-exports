@@ -220,7 +220,7 @@ class MapPiece extends React.Component {
 
   albertaExplanation() {
     if (this.props.data.get('name') !== 'AB' || this.props.selectedEnergy !== 'naturalGasLiquids') { return null }
-    const scaleContainerX = this.props.viewport.get('changeWidthRatio')  > 1.2 ? 220: 190
+    const scaleContainerX = this.props.viewport.get('changeWidthRatio')  > 1.2 ? 242: 190
     const scaleContainerY = this.props.viewport.get('changeHeightRatio')  > 1.2 ? -20: -30
     return (<g>
       <ExplanationDot
@@ -239,7 +239,7 @@ class MapPiece extends React.Component {
         yPosition={20}
         lineX={142.16}
         lineY={173.94}
-        textX={48}x
+        textX={48}
         textY={48}
         containerX={this.props.viewport.get('changeWidthRatio')*(this.props.x1 * MapLayoutGridConstant.getIn(['electricity', 'us' , 'mapPieceScale'], 1) + scaleContainerX)}
         containerY={this.props.viewport.get('changeHeightRatio')*(this.props.y1 * MapLayoutGridConstant.getIn(['electricity', 'us' , 'mapPieceScale'], 1)  + scaleContainerY)}      

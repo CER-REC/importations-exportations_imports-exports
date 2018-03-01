@@ -114,8 +114,8 @@ class PortMap extends React.PureComponent {
         lineY={173}
         textX={20}
         textY={29}
-        containerX={596}
-        containerY={412}
+        containerX={597}
+        containerY={343}
         name="portMapDot"
         text={`${this.props.tr(['explanations','portNaturalGas'])}`}
     /></g>)
