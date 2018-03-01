@@ -90,7 +90,7 @@ class ImageDownloadWindow extends React.Component {
     })
     return <p
       className="bitlyText">
-      Visit this interaction visualization: 
+      { Tr.getIn(['bitlyShare', this.props.language])}
     </p>
   }
 

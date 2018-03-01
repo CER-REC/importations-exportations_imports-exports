@@ -58,6 +58,7 @@ export default (store) => {
       visualizationSettings: {
         [visualization]: state.visualizationSettings[visualization],
       },
+      screenshot: state.screenshot,
       electricityExplanation: state.electricityExplanation,
       importExportVisualization: visualization,
       language: state.language,
@@ -65,7 +66,6 @@ export default (store) => {
       openExplanations: state.openExplanations,
       confidentialityMenu: state.confidentialityMenu,
       openConfidentiality: state.openConfidentiality,
-      screenshot: state.screenshot,
     }
 
     const changed = Object.keys(toSave).some(key => toSave[key] !== lastSave[key])

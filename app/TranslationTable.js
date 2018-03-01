@@ -633,6 +633,11 @@ const TranslationTable = fromJS({
     fr: 'Télécharger l’image',
   },
 
+  bitlyShare: {
+    en: 'Visit this interaction visualization:',
+    fr: 'TODO',
+  },
+
   downloadable: {
     csv: {
       en: 'data.csv',
