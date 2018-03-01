@@ -120,6 +120,58 @@ const TranslationTable = fromJS({
       en: 'Spenser Jones, Charlie Cheung, Rahul Kamal Bhaskar, Patrick King, Andy LePage and Ben Cousins',
       fr: 'Spenser Jones, Charlie Cheung, Rahul Kamal Bhaskar, Patrick King, Andy LePage et Ben Cousins',
     },
+    attributions: {
+      en: 'ATTRIBUTIONS',
+      fr: 'TODO',
+    },
+    brokenLinkIcon: {
+      en: 'BROKEN LINK ICON',
+      fr: 'TODO',
+    },
+    linkIcon: {
+      en: 'LINK ICON',
+      fr: 'TODO',
+    },
+    map: {
+      en: 'MAP',
+      fr: 'CARTE',
+    },
+    brokenLinkIcon_1: {
+      en: 'Broken Link icon: Created by ',
+      fr: 'TODO',
+    },
+    brokenLinkIcon_2: {
+      en: 'icongeek',
+      fr: 'icongeek',
+    },
+    fromThe: {
+      en: ' from the',
+      fr: 'TODO',
+    },
+    nounProject: {
+      en: ' Noun Project.',
+      fr: ' Noun Project.',
+    },
+    linkIcon_1: {
+      en: 'Link icon: Created by  ',
+      fr: 'TODO',
+    },
+    linkIcon_2: {
+      en: 'IconDots',
+      fr: 'IconDots',
+    },
+    map_1: {
+      en: 'Map showing provinces and territories reporting 2009 swine flu (H1N1) cases in Canada by Fonadier ',
+      fr: 'Carte produite par Fonadier illustrant les provinces et territoires selon les signalements de cas de grippe A (H1N1), tirée de',
+    },
+    map_2: {
+      en: 'Wikimedia Commons',
+      fr: 'Wikimedia Commons',
+    },
+    map_3: {
+      en: ' (Re-coloured and rotated from original.)',
+      fr: ' (L’original a été recoloré et pivoté.)',
+    },
     closeWindow: {
       en: 'Close About Window',
       fr: 'Close About Window',
@@ -579,6 +631,11 @@ const TranslationTable = fromJS({
   saveImage: {
     en: 'Save Image',
     fr: 'Télécharger l’image',
+  },
+
+  bitlyShare: {
+    en: 'Visit this interaction visualization:',
+    fr: 'TODO',
   },
 
   downloadable: {

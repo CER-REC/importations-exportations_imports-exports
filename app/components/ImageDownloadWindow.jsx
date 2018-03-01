@@ -26,17 +26,37 @@ class ImageDownloadWindow extends React.Component {
     this.props.closeWindowClick()
   }
 
+  makeBitlyPromise() {
+    const bitlyEndpoint = RouteComputations.bitlyEndpoint(document.location, this.props.language)
+    const shortenUrl = RouteComputations.bitlyParameter(document.location, this.props.language)
+
+    const options = {
+      uri: `${bitlyEndpoint}?shortenUrl=${shortenUrl}`,
+      json: true,
+    }
+
+    return Request(options)
+      .then((response) => {
+        if (response.body.status_code !== 200) {
+          // throw new Error(response.body.status_txt)
+          return Constants.get('appHost')
+        }
+        return response.body.data.url
+      })
+      .catch(() => Constants.get('appHost'))
+  }
+
   closeButton() {
-    return <img 
-      className = 'closeButton'
-      src='images/hide_(close).svg'
-      onClick = {this.handleClose}
+    return <img
+      className="closeButton"
+      src="images/hide_(close).svg"
+      onClick={this.handleClose}
     />
   }
 
   heading() {
     return <p
-      className='imageDownloadHeading'>
+      className="imageDownloadHeading">
       { Tr.getIn(['imageDownload', this.props.language]).toUpperCase() }
       </p>
   }
@@ -44,7 +64,7 @@ class ImageDownloadWindow extends React.Component {
   imagePreview() {
     const screenshotUrl = `${RouteComputations.screenshotOrigin(location)}/${Constants.get('screenshotPath')}/?pageUrl=${RouteComputations.screenshotParameter(document.location)}&width=${Constants.get('screenshotWidth')}&height=${Constants.get('screenshotHeight')}`
     return <div
-      className = 'imagePreview'>
+      className="imagePreview">
       <img className="imagePreview"
         src={ screenshotUrl }
       />
@@ -58,28 +78,31 @@ class ImageDownloadWindow extends React.Component {
 
   saveImageButton() {
     return <p
-      className='saveImage'
-      onClick = {this.saveImageClick}>
+      className="saveImage"
+      onClick={this.saveImageClick}>
       { Tr.getIn(['saveImage', this.props.language]).toUpperCase() }
     </p>
   }
 
   bitlyText() {
+    this.makeBitlyPromise().then((url) => {
+      const vizUrl = `https://apps2.neb-one.gc.ca/${url}`
+    })
     return <p
-      className = 'bitlyText'>
-      placeholder for bitly link
+      className="bitlyText">
+      { Tr.getIn(['bitlyShare', this.props.language])}
     </p>
   }
 
   render() {
-   return <div 
-    className='imageDownloadWindow'>
-    {this.imagePreview()}
-    {this.closeButton()}
-    {this.heading()}
-    {this.bitlyText()}
-    {this.saveImageButton()}
-   </div>
+    return <div
+      className="imageDownloadWindow">
+      {this.imagePreview()}
+      {this.closeButton()}
+      {this.heading()}
+      {this.bitlyText()}
+      {this.saveImageButton()}
+    </div>
   }
 }
 

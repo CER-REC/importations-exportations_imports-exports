@@ -1,27 +1,24 @@
 
 export const Types = {
-  SET_FROM_ROUTER_STATE: 'SetFromRouterState',
+  SCREENSHOT_MODE: 'ScreenshotMode',
 }
 
-export const SetFromRouterState = options => ({
-  type: Types.SET_FROM_ROUTER_STATE,
-  payload: { 
-    options: language,
-    options: visualizationContainer,
-    options: confidentiality,
-    options: explanations,
-    options: detailSidebar,
-    options: header,
-    options: menuBar,
-    options: screenshotMode,
-  },
+export const ScreenshotMode = () => ({
+  type: Types.SCREENSHOT_MODE,
+  payload: { },
 })
 
+export const DismissComponent = () => ({
+  type: Types.DISMISS_COMPONENT,
+  payload: { },
+})
 
-// When true: we should render in screenshot mode
-export const reducer = (state = false, action) => {
+// don't display when in screenshot mode
+const initialState = false
+export const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case Types.SET_FROM_ROUTER_STATE: return action.payload.screenshotMode
-    default: return state
+    case Types.SCREENSHOT_MODE: return true
+    case Types.DISMISS_COMPONENT: return false
+    default: return initialState
   }
 }

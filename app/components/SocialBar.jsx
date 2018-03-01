@@ -13,6 +13,8 @@ import { handleInteractionWithTabIndex } from '../utilities'
 
 import { ExpandSocialBar } from '../actions/socialBar'
 
+import { ScreenshotMode } from '../actions/screenshot'
+
 import { OpenModal as ShowAboutWindowCreator } from '../actions/modal'
 import { OpenModal as ShowImageDownloadWindow } from '../actions/modal'
 import { OpenModal as ShowDataDownloadWindow } from '../actions/modal'
@@ -24,13 +26,15 @@ class SocialBar extends React.Component {
     return {
       language: PropTypes.string.isRequired,
       viewport: PropTypes.instanceOf(Immutable.Map).isRequired,
-      screenshotMode: PropTypes.bool.isRequired,
-      tabIndex: PropTypes.number,
+      screenshot: PropTypes.bool.isRequired,
+
     }
   }
+  
   static get defaultProps() {
     return {
       tabIndex: Constants.getIn(['tabIndex', 'start', 'socialBar']),
+
     }
   }
   constructor(props) {
@@ -154,6 +158,7 @@ class SocialBar extends React.Component {
   downloadImageClick() {
     if (!this.props.expandSocialBar) { return this.props.controlArrowClick() }
     this.props.imageDownloadClick()
+    this.props.activateScreenshotMode()
   }
 
   downloadDataClick() {
@@ -318,13 +323,24 @@ class SocialBar extends React.Component {
     </g>)
   }
 
+  nebLogo() {
+    return (<image
+      width={300}
+      xlinkHref="images/logolarge.jpg"
+    />)
+  }
+
   render() {
-    if(this.props.screenshotMode === true) {
-      return null
-    }
     let translate = '0 0'
-    if(this.props.viewport.get('changeHeightRatio') < 1.2){
+    if (this.props.viewport.get('changeHeightRatio') < 1.2) {
       translate = '0 35'
+    }
+    if (this.props.screenshot) {
+      return (<g transform={`translate(${translate})`}>
+        <g transform = {`translate(${this.props.viewport.get('x') - 300} ${this.props.viewport.get('y') - 150})`}>
+          {this.nebLogo()}
+        </g>
+      </g>)
     }
     return (<g transform={`translate(${translate})`}>
       {this.controlArrow()}
@@ -339,7 +355,7 @@ class SocialBar extends React.Component {
 const mapStateToProps = state => ({
   viewport: state.viewport,
   language: state.language,
-  screenshotMode: state.screenshotMode,
+  screenshot: state.screenshot,
   expandSocialBar: state.expandSocialBar,
 })
 
@@ -355,6 +371,9 @@ const mapDispatchToProps = dispatch => ({
   },
   dataDownloadClick() {
     dispatch(ShowDataDownloadWindow('dataDownload'))
+  },
+  activateScreenshotMode() {
+    dispatch(ScreenshotMode())
   },
 })
 

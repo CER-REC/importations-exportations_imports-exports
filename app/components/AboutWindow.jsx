@@ -166,6 +166,80 @@ class AboutWindow extends React.Component {
     )
   }
 
+  attributions() {
+    return (
+      <div className="attributionsSection">
+        <p className="aboutHeading">
+          <span>
+            { Tr.getIn(['aboutWindow', 'attributions', this.props.language])}
+          </span>
+        </p>
+        <p className="aboutSubheading">
+          <span>
+            { Tr.getIn(['aboutWindow', 'brokenLinkIcon', this.props.language])}
+          </span>
+        </p>
+        <p className="aboutBodyText">
+          <span>
+            { Tr.getIn(['aboutWindow', 'brokenLinkIcon_1', this.props.language])}
+          </span>
+          <a href="https://thenounproject.com/icongeek/">
+            <span>
+              { Tr.getIn(['aboutWindow', 'brokenLinkIcon_2', this.props.language])}
+            </span>
+          </a>
+          <span>
+            { Tr.getIn(['aboutWindow', 'fromThe', this.props.language])}
+          </span>
+          <a href="https://thenounproject.com/term/broken/1399557/">
+            <span>
+              { Tr.getIn(['aboutWindow', 'nounProject', this.props.language])}
+            </span>
+          </a>
+        </p>
+        <p className="aboutSubheading">
+          <span>
+            { Tr.getIn(['aboutWindow', 'linkIcon', this.props.language])}
+          </span>
+        </p>
+        <p className="aboutBodyText">
+          <span>
+            { Tr.getIn(['aboutWindow', 'linkIcon_1', this.props.language])}
+          </span>
+          <span>
+            { Tr.getIn(['aboutWindow', 'linkIcon_2', this.props.language])}
+          </span>
+          <span>
+            { Tr.getIn(['aboutWindow', 'fromThe', this.props.language])}
+          </span>
+          <a href="https://thenounproject.com/term/broken/1399557/">
+            <span>
+              { Tr.getIn(['aboutWindow', 'nounProject', this.props.language])}
+            </span>
+          </a>
+        </p>    
+        <p className="aboutSubheading">
+          <span>
+            { Tr.getIn(['aboutWindow', 'map', this.props.language])}
+          </span>
+        </p>
+        <p className="aboutBodyText">
+          <span>
+            { Tr.getIn(['aboutWindow', 'map_1', this.props.language])}
+          </span>
+          <a href="https://commons.wikimedia.org/wiki/File:H1N1_Canada_map.svg">
+            <span>
+              { Tr.getIn(['aboutWindow', 'map_2', this.props.language])}
+            </span>
+          </a>
+          <span>
+            { Tr.getIn(['aboutWindow', 'map_3', this.props.language])}
+          </span>
+        </p>
+      </div>
+    )
+  }
+
   render() {
     return (
       <div id="aboutWindow" className="aboutWindow">
@@ -174,6 +248,7 @@ class AboutWindow extends React.Component {
         { this.intro() }
         { this.contributors() }
         { this.dataVisualization() }
+        { this.attributions() }
       </div>
     )
   }
