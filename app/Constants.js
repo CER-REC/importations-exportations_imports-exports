@@ -418,7 +418,7 @@ const Constants = fromJS({
           'Port Name': 'Courtright', Province: 'ON', Latitude: 42.78333, Longitude: -82.35, '': '', Description: '', Capacity: '',
         },
         'Fort Frances': {
-          'Port Name': 'Fort Frances', Province: 'ON', Latitude: '', Longitude: '', '': '', Description: '', Capacity: '',
+          'Port Name': 'Fort Frances', Province: 'ON', Latitude: 48.60995, Longitude: -93.39553, '': '', Description: '', Capacity: '',
         },
         Iroquois: {
           'Port Name': 'Iroquois', Province: 'ON', Latitude: 44.91667, Longitude: -75.26667, '': '', Description: 'Iroquois is an export point on the TransCanada Mainline.', Capacity: 1.2,
@@ -430,7 +430,7 @@ const Constants = fromJS({
           'Port Name': 'Ojibway (Windsor)', Province: 'ON', Latitude: 42.2659, Longitude: -83.0779, '': '', Description: '', Capacity: '',
         },
         'Rainy River': {
-          'Port Name': 'Rainy River', Province: 'ON', Latitude: '', Longitude: '', '': '', Description: '', Capacity: '',
+          'Port Name': 'Rainy River', Province: 'ON', Latitude: 48.8403, Longitude: -94.6845, '': '', Description: '', Capacity: '',
         },
         Sarnia: {
           'Port Name': 'Sarnia', Province: 'ON', Latitude: 42.9745, Longitude: -82.4066, '': '', Description: '', Capacity: '',
@@ -457,7 +457,7 @@ const Constants = fromJS({
           'Port Name': 'Highgate Springs', Province: 'QB', Latitude: 44.9795, Longitude: -73.1054, '': 'US', Description: '', Capacity: '',
         },
         Highwater: {
-          'Port Name': 'Highwater', Province: 'QB', Latitude: '', Longitude: '', '': '', Description: '', Capacity: '',
+          'Port Name': 'Highwater', Province: 'QB', Latitude: 45.02537, Longitude: -72.42930, '': '', Description: '', Capacity: '',
         },
         Napierville: {
           'Port Name': 'Napierville', Province: 'QB', Latitude: 45.187058, Longitude: -73.401632, '': '', Description: '', Capacity: '',
@@ -481,7 +481,7 @@ const Constants = fromJS({
           'Port Name': 'Port of Estevan', Province: 'SK', Latitude: 49.1231, Longitude: -102.9915, '': '', Description: '', Capacity: '',
         },
         'Willow Creek': {
-          'Port Name': 'Willow Creek', Province: 'SK', Latitude: '', Longitude: '', '': '', Description: '', Capacity: '',
+          'Port Name': 'Willow Creek', Province: 'SK', Latitude: 49.00086, Longitude: -109.73312, '': '', Description: '', Capacity: '',
         },
       },
     },
