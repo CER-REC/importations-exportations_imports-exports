@@ -209,13 +209,14 @@ class Menu extends React.PureComponent {
     if (!this.props.expanded) { return null }
     const { Tr } = this.props
     const tabIndex = this.getTabIndex()
+    const styleClass = this.props.name !== 'amount'?'menuOption':''
     const options = this.props.options
       .filter(v => (v !== this.props.selected))
       .map(option => (
         <tspan
           x={0}
           dy={Constants.getIn(['menuBar', 'optionHeight'])}
-          className="menuOption"
+          className={styleClass}
           key={option}
           {...handleInteractionWithTabIndex(tabIndex, this.onChange, option)}
           role="menuitem"
