@@ -129,11 +129,11 @@ const TranslationTable = fromJS({
   dataDownloadModal: {
     title: {
       en: 'DATA DOWNLOAD',
-      fr: 'DATA DOWNLOAD fr',
+      fr: 'TÉLÉCHARGEMENT DE DONNÉES',
     },
     subtext: {
       en: 'The data used to create this visualization is open data available for you to download. Click the icon to save the data file to your computer.',
-      fr: 'TODO',
+      fr: "Les données pour cette visualisation sont disponibles au public. Cliquer l'icône pour les télécharger sur le vote appareil.",
     },
   },
 
@@ -217,11 +217,11 @@ const TranslationTable = fromJS({
         },
         importsForReexport: {
           en: 'Temporary Imports',
-          fr: 'Temporary Imports FR',
+          fr: 'Importations temporaires',
         },
         exportsForReimport: {
           en: 'Temporary Exports',
-          fr: 'Temporary Exports FR',
+          fr: 'Exportations temporaires',
         },
       },
     },
@@ -245,11 +245,11 @@ const TranslationTable = fromJS({
         },
         stack: {
           en: 'STACK',
-          fr: 'STACK FR',
+          fr: 'GRAPHIQUE UNIE',
         },
         split: {
           en: 'SPLIT',
-          fr: 'SPLIT FR',
+          fr: 'GRAPHIQUES SÉPARÉES',
         },
       },
     },
@@ -322,7 +322,7 @@ const TranslationTable = fromJS({
     'CN$/GJ': { en: 'CN$/GJ', fr: '$ CAN/GJ' },
     'm3/d': { en: 'm³/d', fr: 'm³/j' },
     'MW.h': { en: 'MW.h', fr: 'MWh' },
-    'thousand m3/d': { en: 'thousand m³/d', fr: '103m³/j' },
+    'thousand m3/d': { en: 'thousand m³/d', fr: '1000 m³/j' },
   },
 
   mainHeading: {
@@ -375,7 +375,7 @@ const TranslationTable = fromJS({
     },
     powerpool: {
       en: 'A power pool is a grouping of states that imports and exports electricity as a unit. Individual states may also have additional imports and exports.',
-      fr: 'Un réseau commun est un regroupement d’États américains qui importe et exporte de l’électricité conjointement. Chacun des États du regroupement peut également importer et exporter de l’électricité individuellement.',
+      fr: 'Un réseau commun est un regroupement d’états américains qui importe et exporte de l’électricité conjointement. Chacun des états du regroupement peut également importer et exporter de l’électricité individuellement.',
     },
     barChartImport: {
       en: 'Each orange bar shows the total electricity that Canadian provinces imported during a single quarter.',
@@ -439,7 +439,7 @@ const TranslationTable = fromJS({
     },
     orangeBarNaturalGas: {
       en: 'Orange bars show the total natural gas that Canada imported in a single quarter; blue bars show exports.',
-      fr: 'Les barres orange montrent la quantité totale de gaz naturel importée par le Canada au cours d’un trimestre. Les barres bleues montrent les exportations.',
+      fr: 'Les barres oranges montrent la quantité totale de gaz naturel importée par le Canada au cours d’un trimestre. Les barres bleues montrent les exportations.',
     },
     EmersonNaturalGas: {
       en: 'Up arrows show the total imports of natural gas into Canada at a port during the time selected in the bar chart above. Down arrows show exports.',
@@ -499,11 +499,11 @@ const TranslationTable = fromJS({
     },
     arrangeByRefinedPetroleumProducts: {
       en: 'Switch between seeing the different types of refined petroleum products stacked in one bar chart or as individual bar charts.',
-      fr: 'Passez d’un type de produit pétrolier raffiné à l’autre dans une barre de diagramme ou dans un diagramme à barres séparé.',
+      fr: 'Passez d’un type de produit pétrolier raffiné à l’autre dans une barre de diagramme ou dans un diagramme à barres séparées.',
     },
     amountRefinedPetroleumProducts: {
       en: 'Refined petroleum product flow is measured in 1000 m³/d (thousand cubic metres per day), which is 6290 barrels per day.',
-      fr: 'La quantité de produits pétroliers raffinés est indiquée en milliers de m3/j (milliers de mètres cubes par jour), ce qui correspond à 6 290 barils par jour.',
+      fr: 'La quantité de produits pétroliers raffinés est indiquée en milliers de m³/j (milliers de mètres cubes par jour), ce qui correspond à 6 290 barils par jour.',
     },
     confidentialValuesRefinedPetroleumProducts: {
       en: 'With only 13 refineries in Canada the data for RPPs is often deemed confidential as individual companies may become identifiable which could have a negative financial impact. Learn more in our methodology.',
@@ -573,12 +573,12 @@ const TranslationTable = fromJS({
 
   imageDownload: {
     en: 'Image Download',
-    fr: 'TODO',
+    fr: 'Téléchargement d’image',
   },
 
   saveImage: {
     en: 'Save Image',
-    fr: 'TODO',
+    fr: 'Télécharger l’image',
   },
 
   downloadable: {
@@ -595,11 +595,11 @@ const TranslationTable = fromJS({
 
   confidentialCount: {
     en: '$0 of $1 values Confidential',
-    fr: '$0 sur $1 valeurs Confidentiel',
+    fr: '$0 sur $1 valeurs confidentiel',
   },
   missingCount: {
     en: '$0 of $1 entries missing information',
-    fr: '$0 sur $1 entries missing information',
+    fr: '$0 sur $1 entrées manquant des données',
   },
   detailBreakDown: {
     electricity: {
@@ -663,7 +663,7 @@ const TranslationTable = fromJS({
     crudeOil: {
       defaultText: {
         en: 'Data not available when map is filtered',
-        fr: 'Data not available when map is filtered',
+        fr: 'Ces données ne sont pas disponibles quand un filtre est actif',
       },
       transport: {
         type: {
@@ -681,7 +681,7 @@ const TranslationTable = fromJS({
           },
           action: {
             en: 'Mode of Transportation',
-            fr: 'Mode of Transportation',
+            fr: 'Mode de transport',
           },
           adjective: {
             en: '',
@@ -701,7 +701,7 @@ const TranslationTable = fromJS({
           },
           action: {
             en: 'Type of Crude',
-            fr: 'Type of Crude',
+            fr: 'Type de pétrole brut',
           },
           adjective: {
             en: '',
@@ -755,7 +755,7 @@ const TranslationTable = fromJS({
           },
           place: {
             en: 'Provinces',
-            fr: 'Provinces',
+            fr: 'provinces',
           },
         },
         body: {
@@ -836,7 +836,7 @@ const TranslationTable = fromJS({
     },
     propaneButane: {
       en: 'Butane and Propane',
-      fr: 'Butane et Propane',
+      fr: 'Butane et propane',
     },
   },
 
@@ -844,7 +844,7 @@ const TranslationTable = fromJS({
     ca: {
       '': {
         en: 'Missing Province',
-        fr: 'Missing Province',
+        fr: 'Province non disponible',
       },
       YT: {
         en: 'Yukon',
@@ -900,13 +900,13 @@ const TranslationTable = fromJS({
       },
       'ATL-Q': {
         en: 'Atlantic provinces and Quebec',
-        fr: 'Atlantic provinces and Quebec',
+        fr: 'Provinces atlantiques et le Québec',
       },
     },
     us: {
       '': {
         en: 'Missing State',
-        fr: 'Missing State',
+        fr: 'État non disponible',
       },
       AL: {
         en: 'Alabama',
@@ -1124,7 +1124,7 @@ const TranslationTable = fromJS({
       },
       powerPools: {
         en: 'Power Pools',
-        fr: "Pool D'énergie",
+        fr: "Réseau d'électricité",
       },
     },
   },
@@ -1290,13 +1290,13 @@ const TranslationTable = fromJS({
         imports: {
           label: {
             en: 'temporary imports into Canada',
-            fr: 'temporary imports into Canada FR',
+            fr: 'importations temporaires du Canada',
           },
         },
         exports: {
           label: {
             en: 're-exports (of temporary imports) from Canada',
-            fr: 're-exports (of temporary imports) from Canada FR',
+            fr: "ré-exportations (d'importations temporaires) au Canada",
           },
         },
         stateOrProvince: {
@@ -1308,14 +1308,14 @@ const TranslationTable = fromJS({
       exportsForReimport: {
         imports: {
           label: {
-            en: 're-exports (of temporary exports) into Canada',
-            fr: 're-exports (of temporary exports) into Canada FR',
+            en: 're-imports (of temporary exports) into Canada',
+            fr: "ré-importations (d'exportations temporaires) au Canada",
           },
         },
         exports: {
           label: {
             en: 'temporary exports from Canada',
-            fr: 'temporary exports from Canada FR',
+            fr: 'exportations temporaires du Canada',
           },
         },
         stateOrProvince: {
@@ -1330,11 +1330,11 @@ const TranslationTable = fromJS({
   chartOptions: {
     scaleLinked: {
       en: 'y-axis scales equal',
-      fr: 'y-axis scales equal',
+      fr: 'axes « y » liés',
     },
     scaleUnlinked: {
       en: 'y-axis scales unequal',
-      fr: 'y-axis scales unequal',
+      fr: 'axes « y » indépendants',
     },
     timelineGroup: {
       year: {
@@ -1383,7 +1383,7 @@ const TranslationTable = fromJS({
   portMap: {
     multiple: {
       en: 'Multiple Selection',
-      fr: 'Multiple Selection',
+      fr: 'TODO',
     },
     portName: {
       Aden: {
