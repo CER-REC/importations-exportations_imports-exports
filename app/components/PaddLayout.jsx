@@ -144,14 +144,14 @@ class PaddLayout extends React.Component {
 
     let paddIExplanation = null
     let textString = `${this.props.TRSelector(['explanations','paddICrudeOil'])}`
-    scaleContainerX = this.props.viewport.get('changeWidthRatio')  > 1.2 ? 110: 100
+    scaleContainerX = this.props.viewport.get('changeWidthRatio')  > 1.2 ? 90: 100
     scaleContainerY = this.props.viewport.get('changeHeightRatio')  > 1.2 ? 225: 270
     let paddIExplanationcontainerX = this.props.viewport.get('changeWidthRatio')*(this.props.left + left + scaleContainerX)
     let paddIExplanationcontainerY = this.props.viewport.get('changeHeightRatio')*(this.props.top + top - scaleContainerY)
     if (this.props.selectedEnergy === 'naturalGasLiquids') {
       textString = `${this.props.TRSelector(['explanations','paddINaturalGasLiquids'])}`
-      scaleContainerX = this.props.viewport.get('changeWidthRatio')  > 1.2 ? 90: 70
-      scaleContainerY = this.props.viewport.get('changeHeightRatio')  > 1.2 ? 205: 210
+      scaleContainerX = this.props.viewport.get('changeWidthRatio')  > 1.2 ? 70: 70
+      scaleContainerY = this.props.viewport.get('changeHeightRatio')  > 1.2 ? 225: 210
       paddIExplanationcontainerX = this.props.viewport.get('changeWidthRatio')*(this.props.left + left + scaleContainerX)
       paddIExplanationcontainerY = this.props.viewport.get('changeHeightRatio')*(this.props.top + top - scaleContainerY)
     }
@@ -197,17 +197,17 @@ class PaddLayout extends React.Component {
     }
 
     let paddVExplanation = null
-    scaleContainerX = this.props.viewport.get('changeWidthRatio')  > 1.2 ? 110: 100
+    scaleContainerX = this.props.viewport.get('changeWidthRatio')  > 1.2 ? -170: 100
     scaleContainerY = this.props.viewport.get('changeHeightRatio')  > 1.2 ? 225: 270
     let paddVExplanationcontainerX = this.props.viewport.get('changeWidthRatio')*(this.props.left + left + scaleContainerX)
     let paddVExplanationcontainerY = this.props.viewport.get('changeHeightRatio')*(this.props.top + top - scaleContainerY)
     if (this.props.selectedEnergy === 'naturalGasLiquids') {
-      scaleContainerX = this.props.viewport.get('changeWidthRatio')  > 1.2 ? -170: -155
-      scaleContainerY = this.props.viewport.get('changeHeightRatio')  > 1.2 ? 205: 265
+      scaleContainerX = this.props.viewport.get('changeWidthRatio')  > 1.2 ? -190: -155
+      scaleContainerY = this.props.viewport.get('changeHeightRatio')  > 1.2 ? 225: 265
       paddVExplanationcontainerX = this.props.viewport.get('changeWidthRatio')*(this.props.left + left + scaleContainerX)
       paddVExplanationcontainerY = this.props.viewport.get('changeHeightRatio')*(this.props.top + top - scaleContainerY)
     }
-    if (this.props.selectedEnergy === 'naturalGasLiquids'  
+    if (this.props.selectedEnergy === 'naturalGasLiquids' 
       && (this.props.arrangeBy === 'imports') || this.props.arrangeBy === 'exports') {
       scaleContainerX = this.props.viewport.get('changeWidthRatio')  > 1.2 ? 148: 145
       scaleContainerY = this.props.viewport.get('changeHeightRatio')  > 1.2 ? 0: 0
