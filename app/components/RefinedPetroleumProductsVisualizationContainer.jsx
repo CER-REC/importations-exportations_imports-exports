@@ -109,6 +109,7 @@ class RefinedPetroleumProductsVisualizationContainer extends React.Component {
             {...positions[key].axis}
             barWidth={4}
             canSeek={key === 'Partially Processed Oil'}
+            canPlay={key === 'Partially Processed Oil'}
             chartOptions={key === 'Partially Processed Oil'}
             tabIndex={Constants.getIn(['tabIndex', 'start', 'visualization', 'timeline'])}
           />
