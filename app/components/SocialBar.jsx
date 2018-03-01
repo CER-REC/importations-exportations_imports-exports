@@ -9,7 +9,7 @@ import RouteComputations from '../computations/RouteComputations'
 import Constants from '../Constants'
 import Tr from '../TranslationTable'
 import WorkspaceComputations from '../computations/WorkspaceComputations'
-import { handleInteraction } from '../utilities'
+import { handleInteractionWithTabIndex } from '../utilities'
 
 import { ExpandSocialBar } from '../actions/socialBar'
 
@@ -27,9 +27,16 @@ class SocialBar extends React.Component {
       language: PropTypes.string.isRequired,
       viewport: PropTypes.instanceOf(Immutable.Map).isRequired,
       screenshot: PropTypes.bool.isRequired,
+
     }
   }
+  
+  static get defaultProps() {
+    return {
+      tabIndex: Constants.getIn(['tabIndex', 'start', 'socialBar']),
 
+    }
+  }
   constructor(props) {
     super(props)
     this.aboutThisProjectClick = this.aboutThisProjectClick.bind(this)
@@ -101,7 +108,7 @@ class SocialBar extends React.Component {
         points="0 0 4.2 8 0 15.7 0 0"
         fill="#666"
         transform={transformControlArrow}
-        {...handleInteraction(this.props.controlArrowClick)}
+        {...handleInteractionWithTabIndex(this.props.tabIndex, this.props.controlArrowClick)}
       />
     )
   }
@@ -168,7 +175,7 @@ class SocialBar extends React.Component {
       width={Constants.getIn(['socialBar', 'iconSize'])}
       y={viewPort + Constants.getIn(['socialBar', 'shareIconMargin'], 0)}
       xlinkHref="images/share.svg"
-      {...handleInteraction(this.props.controlArrowClick)}
+      {...handleInteractionWithTabIndex(this.props.tabIndex, this.props.controlArrowClick)}
         />)
   }
 
@@ -189,7 +196,7 @@ class SocialBar extends React.Component {
     const viewPort = WorkspaceComputations.socialBarY(this.props.viewport) || 0
     return (
       <g
-        {...handleInteraction(this.props.controlArrowClick)}
+        {...handleInteractionWithTabIndex(this.props.tabIndex, this.props.controlArrowClick)}
       >
         <rect
           x={rectXPosition}
@@ -205,7 +212,7 @@ class SocialBar extends React.Component {
             width={Constants.getIn(['socialBar', 'iconSize'])}
             xlinkHref="images/info_about.svg"
             y={viewPort + Constants.getIn(['menuBar', 'barWidth'], 0)}
-            {...handleInteraction(this.aboutThisProjectClick)}
+            {...handleInteractionWithTabIndex(this.props.tabIndex, this.aboutThisProjectClick)}
           />
           <image
             className="socialBarIcon"
@@ -213,7 +220,7 @@ class SocialBar extends React.Component {
             width={Constants.getIn(['socialBar', 'iconSize'])}
             xlinkHref="images/info_methodology.svg"
             y={viewPort + Constants.getIn(['socialBar', 'iconMargin'], 0)}
-            {...handleInteraction(this.methodologyClick)}
+            {...handleInteractionWithTabIndex(this.props.tabIndex, this.methodologyClick)}
           />
           <image
             className="socialBarIcon"
@@ -221,7 +228,7 @@ class SocialBar extends React.Component {
             width={Constants.getIn(['socialBar', 'iconSize'])}
             y={viewPort + Constants.getIn(['socialBar', 'downloadDataIconMargin'], 0)}
             xlinkHref="images/download_file.svg"
-            {...handleInteraction(this.downloadDataClick)}
+            {...handleInteractionWithTabIndex(this.props.tabIndex, this.downloadDataClick)}
           />
           <image
             className="socialBarIcon"
@@ -229,7 +236,7 @@ class SocialBar extends React.Component {
             width={Constants.getIn(['socialBar', 'iconSize'])}
             y={viewPort + Constants.getIn(['socialBar', 'downloadImageIconMargin'], 0)}
             xlinkHref="images/download_image.svg"
-            {...handleInteraction(this.downloadImageClick)}
+            {...handleInteractionWithTabIndex(this.props.tabIndex, this.downloadImageClick)}
           />
           {this.shareIcon()}
         </g>
@@ -259,7 +266,7 @@ class SocialBar extends React.Component {
         y={0}
         x={0}
         xlinkHref="images/sm_email.svg"
-        {...handleInteraction(this.emailClick)}
+        {...handleInteractionWithTabIndex(this.props.tabIndex, this.emailClick)}
       />
       <image
         className="socialBarIcon"
@@ -268,7 +275,7 @@ class SocialBar extends React.Component {
         y={0}
         xlinkHref="images/sm_twitter.svg"
         x={twitterX}
-        {...handleInteraction(this.twitterClick)}
+        {...handleInteractionWithTabIndex(this.props.tabIndex, this.twitterClick)}
       />
       <image
         className="socialBarIcon"
@@ -277,7 +284,7 @@ class SocialBar extends React.Component {
         y={0}
         xlinkHref="images/sm_facebook.svg"
         x={facebookX}
-        {...handleInteraction(this.facebookClick)}
+        {...handleInteractionWithTabIndex(this.props.tabIndex, this.facebookClick)}
       />
       <image
         className="socialBarIcon"
@@ -286,7 +293,7 @@ class SocialBar extends React.Component {
         y={0}
         xlinkHref="images/sm_linkedin.svg"
         x={linkedinX}
-        {...handleInteraction(this.linkedInClick)}
+        {...handleInteractionWithTabIndex(this.props.tabIndex, this.linkedInClick)}
       />
             </g>)
   }
@@ -308,10 +315,10 @@ class SocialBar extends React.Component {
     }
     return (<g transform={transformString}>
       <text className="socialBarText">
-        <tspan dx={aboutTextX} dy="0.1em" {...handleInteraction(this.aboutThisProjectClick)}> {Tr.getIn(['socialBarText', 'about', this.props.language])}</tspan>
-        <tspan dx={methodologyTextX} dy="1.8em" {...handleInteraction(this.methodologyClick)}> {Tr.getIn(['socialBarText', 'methodology', this.props.language])}</tspan>
-        <tspan dx={downloadDataTextX} dy="1.8em" {...handleInteraction(this.downloadDataClick)}> {Tr.getIn(['socialBarText', 'downloadData', this.props.language])}</tspan>
-        <tspan dx={downloadImageTextX} dy="1.8em" {...handleInteraction(this.downloadImageClick)}> {Tr.getIn(['socialBarText', 'downloadImage', this.props.language])}</tspan>
+        <tspan dx={aboutTextX} dy="0.1em" {...handleInteractionWithTabIndex(this.props.tabIndex, this.aboutThisProjectClick)}> {Tr.getIn(['socialBarText', 'about', this.props.language])}</tspan>
+        <tspan dx={methodologyTextX} dy="1.8em" {...handleInteractionWithTabIndex(this.props.tabIndex, this.methodologyClick)}> {Tr.getIn(['socialBarText', 'methodology', this.props.language])}</tspan>
+        <tspan dx={downloadDataTextX} dy="1.8em" {...handleInteractionWithTabIndex(this.props.tabIndex, this.downloadDataClick)}> {Tr.getIn(['socialBarText', 'downloadData', this.props.language])}</tspan>
+        <tspan dx={downloadImageTextX} dy="1.8em" {...handleInteractionWithTabIndex(this.props.tabIndex, this.downloadImageClick)}> {Tr.getIn(['socialBarText', 'downloadImage', this.props.language])}</tspan>
       </text>
     </g>)
   }

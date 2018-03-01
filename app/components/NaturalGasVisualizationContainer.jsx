@@ -22,11 +22,13 @@ const NaturalGasVisualizationContainer = props => (
         valueKey="imports"
         aggregateKey="activity"
         colour={Constants.getIn(['styleGuide', 'colours', 'ImportDefault'])}
+        tabIndex={Constants.getIn(['tabIndex', 'start', 'visualization', 'timeline'])}
       />
     )}
     <Axis
       {...props.axisPosition}
       barWidth={4}
+      tabIndex={Constants.getIn(['tabIndex', 'start', 'visualization', 'timeline'])}    
     />
     {!props.showExports ? null : (
       <BarChart
@@ -35,6 +37,7 @@ const NaturalGasVisualizationContainer = props => (
         aggregateKey="activity"
         flipped
         colour={Constants.getIn(['styleGuide', 'colours', 'ExportDefault'])}
+        tabIndex={Constants.getIn(['tabIndex', 'start', 'visualization', 'timeline'])}
       />
     )}
     <NaturalGasMapContainer

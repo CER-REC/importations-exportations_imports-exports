@@ -22,8 +22,8 @@ class PowerPoolContainer extends React.Component {
   }
 
   powerpoolExplanation() {
-    const scaleContainerX = this.props.viewport.get('changeWidthRatio')  > 1.2 ? 40: -35
-    const scaleContainerY = this.props.viewport.get('changeHeightRatio')  > 1.2 ? 0: 60
+    const scaleContainerX = this.props.viewport.get('changeWidthRatio')  > 1.2 ? 30: -10
+    const scaleContainerY = this.props.viewport.get('changeHeightRatio')  > 1.2 ? 5: 30
     return (<g>
       <ExplanationDot
         scale="scale(0.3)"

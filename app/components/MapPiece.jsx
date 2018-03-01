@@ -73,7 +73,7 @@ class MapPiece extends React.Component {
   newBrunswickExplanation() {
     if (this.props.selectedEnergy === 'electricity'
       && this.props.data.get('name') === 'NB' ) {
-      const scaleContainerX = this.props.viewport.get('changeWidthRatio')  > 1.2 ? 265: 250
+      const scaleContainerX = this.props.viewport.get('changeWidthRatio')  > 1.2 ? 290: 270
       const scaleContainerY = this.props.viewport.get('changeHeightRatio')  > 1.2 ? 75: 70
       return (<g>
         <ExplanationDot
@@ -103,8 +103,8 @@ class MapPiece extends React.Component {
 
   vermontExplanation() {
     if (this.props.data.get('name') !== 'VT') { return null }
-    const scaleContainerX = this.props.viewport.get('changeWidthRatio')  > 1.2 ? 165: 170
-    const scaleContainerY = this.props.viewport.get('changeHeightRatio')  > 1.2 ? 370: 430
+    const scaleContainerX = this.props.viewport.get('changeWidthRatio')  > 1.2 ? 185: 190
+    const scaleContainerY = this.props.viewport.get('changeHeightRatio')  > 1.2 ? 370: 405
     return (<g>
       <ExplanationDot
         scale="scale(1)"
@@ -132,8 +132,8 @@ class MapPiece extends React.Component {
 
   washingtonExplanation() {
     if (this.props.data.get('name') !== 'WA') { return null }
-    const scaleContainerX = this.props.viewport.get('changeWidthRatio')  > 1.2 ? 2: -25
-    const scaleContainerY = this.props.viewport.get('changeHeightRatio')  > 1.2 ? 370: 430
+    const scaleContainerX = this.props.viewport.get('changeWidthRatio')  > 1.2 ? 20: -5
+    const scaleContainerY = this.props.viewport.get('changeHeightRatio')  > 1.2 ? 370: 410
     return (<g>
       <ExplanationDot
         scale="scale(1) scale(-1 1)"
@@ -161,7 +161,7 @@ class MapPiece extends React.Component {
 
   britishColumbiaExplanation() {
     if (this.props.data.get('name') !== 'BC' || this.props.selectedEnergy === 'naturalGasLiquids') { return null }
-    const scaleContainerX = this.props.viewport.get('changeWidthRatio')  > 1.2 ? 265: 260
+    const scaleContainerX = this.props.viewport.get('changeWidthRatio')  > 1.2 ? 285: 270
     const scaleContainerY = this.props.viewport.get('changeHeightRatio')  > 1.2 ? -10: -30
     return (<g>
       <ExplanationDot

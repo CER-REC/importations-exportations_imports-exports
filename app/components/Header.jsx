@@ -5,7 +5,7 @@ import PropTypes from 'prop-types'
 
 import Constants from '../Constants'
 import { OpenModal as ShowAboutWindowCreator } from '../actions/modal'
-import { handleInteraction } from '../utilities'
+import { handleInteractionWithTabIndex } from '../utilities'
 import TrSelector from '../selectors/translate'
 
 import ExplanationDot from './ExplanationDot'
@@ -97,6 +97,7 @@ class Header extends React.Component {
 
   metaBar() {
     const { Tr } = this.props
+    const tabIndex = Constants.getIn(['tabIndex','start', 'menuBar'])
     const transformMetaBarIcons = `translate(${this.props.viewport.get('x') - Constants.getIn(['metaBar', 'iconMargin'])}, 0)`
     let resetX = `${this.props.viewport.get('x') - Constants.getIn(['metaBar', 'resetTextOffset'])}`
     if (this.props.language === 'fr') {
@@ -117,7 +118,7 @@ class Header extends React.Component {
         <g>
           <text
             className="resetLabel"
-            {...handleInteraction(this.resetClick)}
+            {...handleInteractionWithTabIndex(tabIndex, this.resetClick)}
             y={Constants.getIn(['metaBar', 'resetTextY'])}
             x={resetX}
             aria-label={Tr(['socialBar', 'resetVisualization'])}
@@ -134,7 +135,7 @@ class Header extends React.Component {
             height={Constants.getIn(['metaBar', 'iconSize'])}
             width={Constants.getIn(['metaBar', 'iconSize'])}
             xlinkHref="images/reset.svg"
-            {...handleInteraction(this.resetClick)}
+            {...handleInteractionWithTabIndex(tabIndex, this.resetClick)}
             y={Constants.getIn(['metaBar', 'resetIconMargin'])}
             aria-label={Tr(['socialBar', 'resetVisualization'])}
             role="menuitem"

@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import memoize from 'memoize-immutable'
 
 import TextBox from './TextBox'
-import { handleInteraction } from '../utilities'
+import { handleInteractionWithTabIndex } from '../utilities'
 import Constants from '../Constants'
 import TrSelector from '../selectors/translate'
 import setVisualization from '../actionCreators/SetVisualizationCreator'
@@ -35,8 +35,9 @@ const SelectedPrefix = memoize((of) => {
 })
 
 const VisualizationSelector = (props) => {
-  const { Tr } = props
+  const { Tr, importExportVisualization } = props
   let yOffset = Constants.getIn(['menuBar', 'visualizationPadding']) / 2
+  const tabIndex = Constants.getIn(['tabIndex','start', 'menuBar'])
   const options = ['electricity', 'crudeOil', 'naturalGas', 'naturalGasLiquids', 'refinedPetroleumProducts']
     .sort((a, b) => (b === props.importExportVisualization ? 1 : 0))
     .map((option) => {
@@ -47,7 +48,7 @@ const VisualizationSelector = (props) => {
           x={textOffset}
           y={yOffset}
           className="menuOption"
-          {...handleInteraction(props.setVisualization, option)}
+          {...handleInteractionWithTabIndex(tabIndex, props.setVisualization, option)}
           role="menuitem"
           aria-label={Tr(['unabbreviated', 'mainMenuBar', option])}
         >
@@ -62,7 +63,7 @@ const VisualizationSelector = (props) => {
             transform={`translate(0 ${yOffset})`}
             aria-current
             role="menuitem"
-            tabIndex="0"
+            tabIndex={tabIndex}
             aria-label={Tr(['unabbreviated', 'mainMenuBar', option])}
           >
             <g transform={`translate(${textOffset} 0)`}>

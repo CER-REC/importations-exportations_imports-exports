@@ -43,6 +43,7 @@ class RefinedPetroleumProductsVisualizationContainer extends React.Component {
           barWidth={4}
           canChangeScale={false}
           canPlay={false}
+          tabIndex={Constants.getIn(['tabIndex', 'start', 'visualization', 'timeline'])}
         />
         <StackedChart
           {...positions.chart}
@@ -108,7 +109,9 @@ class RefinedPetroleumProductsVisualizationContainer extends React.Component {
             {...positions[key].axis}
             barWidth={4}
             canSeek={key === 'Partially Processed Oil'}
+            canPlay={key === 'Partially Processed Oil'}
             chartOptions={key === 'Partially Processed Oil'}
+            tabIndex={Constants.getIn(['tabIndex', 'start', 'visualization', 'timeline'])}
           />
           <BarChart
             {...positions[key].chart}
@@ -117,6 +120,7 @@ class RefinedPetroleumProductsVisualizationContainer extends React.Component {
             flipped
             colour={colour}
             detailSidebar={false}
+            tabIndex={Constants.getIn(['tabIndex', 'start', 'visualization', 'timeline'])}
           />
           <DetailSidebar
             {...positions[key].chart}

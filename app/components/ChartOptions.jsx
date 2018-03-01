@@ -9,7 +9,7 @@ import { setScaleLinked, setGrouping } from '../actions/visualizationSettings'
 import { timelineScaleLinked } from '../selectors/timeline'
 import { groupingBy as timelineGroupingSelector } from '../selectors/data'
 import trSelector from '../selectors/translate'
-import { handleInteraction } from '../utilities'
+import { handleInteractionWithTabIndex } from '../utilities'
 
 import ExplanationDot from './ExplanationDot'
 import tr from '../TranslationTable'
@@ -23,12 +23,14 @@ class ChartOptions extends React.PureComponent {
       scaleLinked: PropTypes.bool.isRequired,
       timelineGroup: PropTypes.string.isRequired,
       height: PropTypes.number.isRequired,
+      tabIndex: PropTypes.number,
     }
   }
 
   static get defaultProps() {
     return {
       canChangeScale: true,
+      tabIndex:0,
     }
   }
 
@@ -68,7 +70,7 @@ class ChartOptions extends React.PureComponent {
   renderScaleToggle() {
     if (this.props.canChangeScale === false) { return null }
 
-    const interactions = handleInteraction(this.scaleLinkedChanged)
+    const interactions = handleInteractionWithTabIndex(this.props.tabIndex, this.scaleLinkedChanged)
     const switchHeight = this.props.height - 4
     const imageProps = {
       fill: Constants.getIn(['styleGuide', 'colours', 'SandExtraDark']),
@@ -118,7 +120,7 @@ class ChartOptions extends React.PureComponent {
         {this.renderScaleToggle()}
         <div className="chartOptions">
           <a
-            {...handleInteraction(this.changeTimelineGroup)}
+            {...handleInteractionWithTabIndex(this.props.tabIndex, this.changeTimelineGroup)}
             aria-label={groupLabel}
           >
             {groupLabel} +
