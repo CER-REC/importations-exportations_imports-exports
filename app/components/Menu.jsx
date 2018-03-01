@@ -256,6 +256,7 @@ export default connect(
     Tr: TrSelector(state, props),
     language: state.language,
     showExplanations: state.showExplanations,
+    selectedEnergy: state.importExportVisualization,
     expandCollapseExplanation: state.expandCollapseExplanation,
   }),
   { setActiveMenu },
