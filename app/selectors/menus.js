@@ -30,4 +30,4 @@ export const arrangeByOptions = createSelector(
 export const amountOptions = state =>
   Constants.getIn(['energyMeasurementTypes', state.importExportVisualization]).toJS()
 
-export const subtypeOptions = () => (['', 'butane', 'propane'])
+export const subtypeOptions = () => (['', 'Butane', 'Propane'])

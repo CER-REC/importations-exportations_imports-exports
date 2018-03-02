@@ -138,16 +138,26 @@ class NaturalGasLiquidMapLayout extends React.Component {
       if(this.props.selection.get('origins').count() > 0 && !this.props.selection.get('origins').includes(nextValue.get('name'))) { return acc}
       const subType = nextValue.get('subType')
       subType.forEach((subTypeVal, subTypeKey) => {
-        if(subTypeKey !== 'propaneButane'){
-          if(!acc[subTypeKey]){
-            acc[subTypeKey] = subTypeVal.get(detailBreakdownData.get('type'))
-          } else {
-            acc[subTypeKey] += subTypeVal.get(detailBreakdownData.get('type'))
+       if(this.props.sType !== '' && this.props.sType !== 'propaneButane' ){
+          if(subTypeKey !== 'propaneButane' && subTypeKey === this.props.sType){
+            if(!acc[subTypeKey]){
+              acc[subTypeKey] = subTypeVal.get(detailBreakdownData.get('type'),0)
+            } else {
+              acc[subTypeKey] += subTypeVal.get(detailBreakdownData.get('type'),0)
+            }
+          }  
+        } else {
+          if(subTypeKey !== 'propaneButane'){
+            if(!acc[subTypeKey]){
+              acc[subTypeKey] = subTypeVal.get(detailBreakdownData.get('type'),0)
+            } else {
+              acc[subTypeKey] += subTypeVal.get(detailBreakdownData.get('type'),0)
+            }
           }
         }
       })
       return acc
-    }, {})
+    }, {Butane: 0 , Propane: 0})
     const nameMappings = Tr.getIn(['subType'])
     return (<DetailBreakdown
       data={Immutable.fromJS(subTypeTotal).sort((a, b) => (b - a))}

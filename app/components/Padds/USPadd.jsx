@@ -3,7 +3,7 @@ import Immutable from 'immutable'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import PaddLayout from '../PaddLayout'
-import { PaddSelector, getSelectionSettings } from '../../selectors/Padd'
+import { PaddSelector, getSelectionSettings, getSubtype } from '../../selectors/Padd'
 import Constants from '../../Constants'
 import MapLayoutGridConstant from '../../MapLayoutGridConstant'
 import DetailSidebar from '../DetailSidebar'
@@ -49,16 +49,28 @@ const renderDetailBreakdown = (props) => {
   let nameMappings={}
   if(props.importExportVisualization === 'naturalGasLiquids'){
     total = props.Padd.reduce((acc, nextValue) => {
-      if(props.selection.get('origins').count() > 0 && !props.selection.get('origins').includes(nextValue.get('destination'))) { return acc}
+      if(props.selection.get('origins').count() > 0 
+        && !props.selection.get('origins').includes(nextValue.get('destination'))) { return acc}
       const subType = nextValue.get('subType')
       subType.forEach((subTypeVal, subTypeKey) => {
-        if(subTypeKey !== 'propaneButane'){
-          if(!acc[subTypeKey]){
-            acc[subTypeKey] = subTypeVal.get(detailBreakdownData.get('type'),0)
-          } else {
-            acc[subTypeKey] += subTypeVal.get(detailBreakdownData.get('type'),0)
+        if(props.subType !== '' && props.subType !== 'propaneButane' ){
+          if(subTypeKey !== 'propaneButane' && subTypeKey === props.subType){
+            if(!acc[subTypeKey]){
+              acc[subTypeKey] = subTypeVal.get(detailBreakdownData.get('type'),0)
+            } else {
+              acc[subTypeKey] += subTypeVal.get(detailBreakdownData.get('type'),0)
+            }
+          }  
+        } else {
+          if(subTypeKey !== 'propaneButane'){
+            if(!acc[subTypeKey]){
+              acc[subTypeKey] = subTypeVal.get(detailBreakdownData.get('type'),0)
+            } else {
+              acc[subTypeKey] += subTypeVal.get(detailBreakdownData.get('type'),0)
+            }
           }
         }
+        
       })
       return acc
     }, {Butane: 0 , Propane: 0})
@@ -103,6 +115,7 @@ const renderDetailSidebar = (props) => {
 const mapStateToProps = (state, props) => ({
   importExportVisualization: state.importExportVisualization,
   arrangeBy: arrangeBy(state, props),
+  subType: getSubtype(state, props),
   Padd: PaddSelector(state, props),
   viewport: state.viewport,
   selection: getSelectionSettings(state, props),

@@ -8,6 +8,11 @@ export const getSelectionSettings = createSelector(
   settings => settings.get('selection'),
 )
 
+export const getSubtype = createSelector(
+  visualizationSettings,
+  settings => settings.get('subtype'),
+)
+
 export const PaddSelector = createSelector(
   aggregateLocationPaddSelector,
   points => points,
