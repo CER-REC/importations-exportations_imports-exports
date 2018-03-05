@@ -36,10 +36,10 @@ const MapLayoutGridConstant = fromJS({
           name: 'NU', originKey: 'NU', x: 2, y: 0,
         },
         {
-          name: 'NF', originKey: 'NF', x: 6, y: 0,
+          name: 'PE', originKey: 'PE', x: 6, y: 0,
         },
         {
-          name: 'PE', originKey: 'PE', x: 7, y: 0,
+          name: 'NF', originKey: 'NF', x: 7, y: 0,
         },
         {
           name: 'BC', originKey: 'BC', x: 0.5, y: 1,
@@ -343,10 +343,10 @@ const MapLayoutGridConstant = fromJS({
           name: 'NU', originKey: 'NU', x: 3, y: 1, showLabel: false,
         },
         {
-          name: 'NF', originKey: 'NF', x: 6, y: 1, showLabel: false,
+          name: 'PE', originKey: 'PE', x: 6, y: 1, showLabel: false,
         },
         {
-          name: 'PE', originKey: 'PE', x: 7, y: 1, showLabel: false,
+          name: 'NF', originKey: 'NF', x: 7, y: 1, showLabel: false,
         },
         {
           name: 'BC', originKey: 'BC', x: 0.5, y: 2, showLabel: false,
@@ -436,10 +436,10 @@ const MapLayoutGridConstant = fromJS({
           paddGroup: 'ca', name: 'NU', originKey: 'NU', x: 3, y: 0,
         },
         {
-          paddGroup: 'ca', name: 'NF', originKey: 'NF', x: 6, y: 0,
+          paddGroup: 'ca', name: 'PE', originKey: 'PE', x: 6, y: 0,
         },
         {
-          paddGroup: 'ca', name: 'PE', originKey: 'PE', x: 7, y: 0,
+          paddGroup: 'ca', name: 'NF', originKey: 'NF', x: 7, y: 0,
         },
         {
           paddGroup: 'ca', name: 'BC', originKey: 'BC', x: 0.5, y: 1,
