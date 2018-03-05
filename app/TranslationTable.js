@@ -478,7 +478,7 @@ const TranslationTable = fromJS({
       fr: 'La flèche orientée vers le haut montre la quantité totale d’électricité importée des États américains par la Colombie-Britannique pendant la période sélectionnée dans le diagramme à barres ci-après.',
     },
     timelineRange: {
-      en: 'Drag this line up and down to read the values of the y-axis as different heights.',
+      en: 'Drag this line up and down to read the values of the y-axis at different heights.',
       fr: 'Faites glisser la ligne vers le haut ou vers le bas pour voir les différentes valeurs de l’axe des ordonnées.',
     },
     vermontArrow: {
