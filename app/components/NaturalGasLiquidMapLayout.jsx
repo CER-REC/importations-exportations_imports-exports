@@ -92,6 +92,7 @@ class NaturalGasLiquidMapLayout extends React.Component {
       if(typeof humanName === 'undefined'){
         return null
       }
+
       return (
         <g key={`mapPieceKey_${this.props.country}_${position.get('name')}`}>
           <g
@@ -116,6 +117,7 @@ class NaturalGasLiquidMapLayout extends React.Component {
               y1={mapPieceTransformStartYaxis(position, dimensions, mapPieceScale)}
               containerX={this.props.left}
               containerY={this.props.top}
+              leftLabelText = {position.get('showLabel')?Tr.getIn(['country', this.props.country, position.get('name'), this.props.language]):''}
             />
           </g>
         </g>
@@ -125,7 +127,7 @@ class NaturalGasLiquidMapLayout extends React.Component {
   renderATLQOutline(){
     if(this.props.arrangeBy !== 'location'){ return null}
     return <polygon
-     transform="scale(0.88 0.94) translate(296 31)"
+     transform="scale(0.86 0.92) translate(305.5 33)"
      className="ATLQOutline"
      points="56.49 0.56 84.57 15.56 114.25 0.56 142.43 15.56 142.43 42.81 169.22 56.74 169.22 85.56 142.43 99.06 114.25 85.56 84.57 99.06 56.49 85.56 25.89 99.06 0.5 85.56 0.5 56.74 26.89 42.81 26.89 15.56 56.49 0.56"/>
   }
@@ -194,6 +196,7 @@ const mapDispatchToProps = { onMapPieceClick: setSelection }
 
 const mapStateToProps = (state, props) => ({
   viewport: state.viewport,
+  language: state.language,
   importExportVisualization: state.importExportVisualization,
   layout: getElectricityMapLayout(state, props),
   selection: getSelectionSettings(state, props),

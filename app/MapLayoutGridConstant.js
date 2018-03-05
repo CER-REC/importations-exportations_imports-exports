@@ -331,46 +331,46 @@ const MapLayoutGridConstant = fromJS({
       },
       layout: [
         {
-          name: 'ATL-Q', originKey: 'ATL-Q', x: 6.5, y: 0,
+          name: 'ATL-Q', originKey: 'ATL-Q', x: 6.5, y: -0.50, showLabel: true,
         },
         {
-          name: 'YT', originKey: 'YT', x: 1, y: 1,
+          name: 'YT', originKey: 'YT', x: 1, y: 1, showLabel: false,
         },
         {
-          name: 'NT', originKey: 'NT', x: 2, y: 1,
+          name: 'NT', originKey: 'NT', x: 2, y: 1, showLabel: false,
         },
         {
-          name: 'NU', originKey: 'NU', x: 3, y: 1,
+          name: 'NU', originKey: 'NU', x: 3, y: 1, showLabel: false,
         },
         {
-          name: 'NF', originKey: 'NF', x: 6, y: 1,
+          name: 'NF', originKey: 'NF', x: 6, y: 1, showLabel: false,
         },
         {
-          name: 'PE', originKey: 'PE', x: 7, y: 1,
+          name: 'PE', originKey: 'PE', x: 7, y: 1, showLabel: false,
         },
         {
-          name: 'BC', originKey: 'BC', x: 0.5, y: 2,
+          name: 'BC', originKey: 'BC', x: 0.5, y: 2, showLabel: false,
         },
         {
-          name: 'AB', originKey: 'AB', x: 1.5, y: 2,
+          name: 'AB', originKey: 'AB', x: 1.5, y: 2, showLabel: false,
         },
         {
-          name: 'SK', originKey: 'SK', x: 2.5, y: 2,
+          name: 'SK', originKey: 'SK', x: 2.5, y: 2, showLabel: false,
         },
         {
-          name: 'MB', originKey: 'MB', x: 3.5, y: 2,
+          name: 'MB', originKey: 'MB', x: 3.5, y: 2, showLabel: false,
         },
         {
-          name: 'ON', originKey: 'ON', x: 4.5, y: 2,
+          name: 'ON', originKey: 'ON', x: 4.5, y: 2, showLabel: false,
         },
         {
-          name: 'QB', originKey: 'QB', x: 5.5, y: 2,
+          name: 'QB', originKey: 'QB', x: 5.5, y: 2, showLabel: false,
         },
         {
-          name: 'NB', originKey: 'NB', x: 6.5, y: 2,
+          name: 'NB', originKey: 'NB', x: 6.5, y: 2, showLabel: false,
         },
         {
-          name: 'NS', originKey: 'NS', x: 7.5, y: 2,
+          name: 'NS', originKey: 'NS', x: 7.5, y: 2, showLabel: false,
         },
       ],
     },

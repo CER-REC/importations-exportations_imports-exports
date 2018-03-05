@@ -70,6 +70,22 @@ class MapPiece extends React.Component {
       drawLabelLabelImportY = {this.props.drawLabelLabelImportY}
     />)
   }
+
+  breakLine(className, text, x, y){
+    if (text.includes('\n')) {
+      const splitName = text.split('\n')
+      return (
+        <text className={className} y={y - 17} aria-hidden>
+          {splitName.map(text => <tspan key={text} x={x} textAnchor="end" dy="13">{text}</tspan>)}
+        </text>
+      )
+    }
+    return <text className={className} y={y} x={x}>{text}</text>
+  }
+  drawLeftLabel(text){
+    if(!text || text === ''){return null}
+    return this.breakLine('mapPieceDescription', text, -5, 20)
+  }
   newBrunswickExplanation() {
     if (this.props.selectedEnergy === 'electricity'
       && this.props.data.get('name') === 'NB' ) {
@@ -357,6 +373,7 @@ class MapPiece extends React.Component {
           points="37.09 9.68 18.54 0 0 9.68 0 29.05 18.54 38.73 37.09 29.05 37.09 9.68"
         />
         {this.renderMapPieceLabel()}
+        {this.drawLeftLabel(this.props.leftLabelText)}
         <g transform={arrowTransform}>
           {this.drawArrow('exports')}
           {this.drawArrow('imports')}
