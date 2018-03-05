@@ -414,8 +414,8 @@ const TranslationTable = fromJS({
       fr: 'Cliquez sur Lecture pour animer un trimestre à la fois.',
     },
     confidentiality: {
-      en: 'Electricity data is available publically with the origins, destinations, volumes, and prices aggregated monthly by permit number. An exception is that there are no prices provided for Manitoba Hydro contract-specific permits due to a legal requirement and the NEB’s confidentiality rules.',
-      fr: 'Les données sur l’électricité sont accessibles au public. Elles précisent les points d’origine et de destination, la quantité et le prix, de manière agrégée mensuellement, par numéro de permis. Il y a une exception à cette règle : aucune valeur n’est indiquée pour les permis propres à un contrat en particulier de Manitoba Hydro en raison d’une obligation juridique et des règles de l’Office en matière de confidentialité.',
+      en: 'Some values have been excluded from this visualization because of data confidentiality rules. Click to see where these values occur or find out more in the methodology.',
+      fr: 'Certaines valeurs ont été exclues de cette visualisation en raison de règles de confidentialité. Cliquez ici pour voir où ces valeurs apparaissent ou pour obtenir plus d’information sur la méthodologie.',
     },
     barChartExport: {
       en: 'Each blue bar shows the total electricity that Canadian provinces exported during a single quarter.',

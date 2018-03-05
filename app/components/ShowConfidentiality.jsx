@@ -65,7 +65,6 @@ class ShowConfidentiality extends React.Component {
   }
 
   confidentialityExplanation() {
-    if (this.props.energyType !== 'electricity') { return }
     return (<g>
       <ExplanationDot
         scale="scale(0.3)"

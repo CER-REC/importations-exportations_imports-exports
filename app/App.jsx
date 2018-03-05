@@ -16,8 +16,6 @@ import { LoadBins as LoadBinsCreator } from './actions/bins'
 import Store from './Store'
 import { DismissComponent as DismissComponentCreator } from './actions/socialBar'
 
-const SetFromRouterState = require('./actions/screenshot').SetFromRouterState
-
 const store = Store()
 
 function resizeScreenHandler() {
