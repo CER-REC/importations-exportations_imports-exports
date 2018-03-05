@@ -91,7 +91,7 @@ class TimelinePlay extends React.PureComponent {
           33.47,
           18H344.2"
         xPosition={-6}
-        yPosition={0}
+        yPosition={9}
         lineX={344.16}
         lineY={173}
         textX={0}

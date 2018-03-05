@@ -65,6 +65,10 @@ class ShowConfidentiality extends React.Component {
   }
 
   confidentialityExplanation() {
+    let textString = `${this.props.Tr(['explanations', 'confidentiality'])}`
+    if (this.props.energyType === 'electricity') {
+      textString = `${this.props.Tr(['explanations', 'electricityConfidentiality'])}`
+    }
     return (<g>
       <ExplanationDot
         scale="scale(0.3)"
@@ -85,7 +89,7 @@ class ShowConfidentiality extends React.Component {
         textY={20}
         containerX={this.props.left + 2}
         containerY={this.props.top}
-        text={`${this.props.Tr(['explanations', 'confidentiality'])}`}
+        text={textString}
         name="confidentialityExplanation"
     /></g>)
   }
