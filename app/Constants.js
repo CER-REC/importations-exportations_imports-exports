@@ -264,7 +264,7 @@ const Constants = fromJS({
       type: 'exports',
       displayPosition: 'top',
       color: '#1c64b2',
-      height: 75,
+      height: 140,
       showDefault: false,
     },
     powerpool: {
