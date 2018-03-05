@@ -82,15 +82,15 @@ class MenuBar extends React.Component {
         render: (
           <tspan>
             {Tr(['menu', 'subtype', 'prefix'])}&nbsp;
-            <tspan className="bold uppercase">{Tr(['menu', 'subtype', 'options', 'butane'])}</tspan>
+            <tspan className="bold uppercase">{Tr(['menu', 'subtype', 'options', 'Butane'])}</tspan>
             &nbsp;{Tr(['menu', 'and'])}&nbsp;
-            <tspan className="bold uppercase">{Tr(['menu', 'subtype', 'options', 'propane'])}</tspan>
+            <tspan className="bold uppercase">{Tr(['menu', 'subtype', 'options', 'Propane'])}</tspan>
           </tspan>
         ),
         aria: [
-          Tr(['menu', 'subtype', 'options', 'butane']),
+          Tr(['menu', 'subtype', 'options', 'Butane']),
           Tr(['menu', 'and']),
-          Tr(['menu', 'subtype', 'options', 'propane']),
+          Tr(['menu', 'subtype', 'options', 'Propane']),
         ].join(' '),
       }
     return (
