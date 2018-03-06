@@ -44,14 +44,17 @@ export const getPointsByCountry = createSelector(
 const getNaturalGasLiquidsImportAndExport = createSelector(
   getPointsByCountry,
   getCountry,
-  (points, country) => {
+  getSelectionSettings,
+  selectedVisualization,
+  (points, country, selection, selectedEnergy) => {
     // append missing states or provinces
     // fetch list of the states and province from the 
     const statesOrProvinces = Constants.getIn(['dataloader', 'mapping', 'country', country])
     if (typeof statesOrProvinces !== 'undefined') {
       let missingstatesOrProvincesMap = {}
       statesOrProvinces.entrySeq().forEach((stateOrProvince) => {
-        if (typeof points.get(stateOrProvince[1]) === 'undefined') {
+        if (typeof points.get(stateOrProvince[1]) === 'undefined' 
+          || (selection.get('country') === 'us' && selectedEnergy === 'naturalGasLiquids')) {
           const originKey = stateOrProvince[1]
           missingstatesOrProvincesMap[originKey] = {
             country,

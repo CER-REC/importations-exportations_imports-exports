@@ -13,12 +13,12 @@ const DetailBreakdownRow = props => (
       {props.label}&nbsp;
       {humanNumber(props.value, props.language)}&nbsp;
       {Tr.getIn(['amounts', props.unit, props.language])}&nbsp;
-      {((props.value / props.total) * 100).toFixed(2)}%&nbsp;
+      {((props.total === 0) ? 0.0 : (props.value / props.total) * 100).toFixed(2)}%&nbsp;
     </td>
     <td width="40px">
       <div className="progress-bar">
         <span
-          style={{ ...props.progressBarStyle, width: `${(props.value / props.total) * 100}%` }}
+          style={{ ...props.progressBarStyle, width: `${((props.total === 0) ? 0.0 : (props.value / props.total) * 100)}%` }}
         />
       </div>
     </td>

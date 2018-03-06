@@ -43,11 +43,12 @@ const USPadd = (props) => {
 }
 
 const renderDetailBreakdown = (props) => {
+  if(props.selection.get('origins').count() > 0 && props.selection.get('country') === 'ca' && props.selectedEnergy === 'naturalGasLiquids'){ return null}
   const detailBreakdownData = Constants.getIn(['detailBreakDown', 'us'])
   if (!detailBreakdownData.get('required', false)) { return null }
   let total ={}
   let nameMappings={}
-  if(props.importExportVisualization === 'naturalGasLiquids'){
+  if(props.selectedEnergy === 'naturalGasLiquids'){
     total = props.Padd.reduce((acc, nextValue) => {
       if(props.selection.get('origins').count() > 0 
         && !props.selection.get('origins').includes(nextValue.get('destination'))) { return acc}
@@ -73,9 +74,9 @@ const renderDetailBreakdown = (props) => {
         
       })
       return acc
-    }, {Butane: 0 , Propane: 0})
+    }, {})
     nameMappings = Tr.getIn(['subType'])
-  } else if(props.importExportVisualization === 'crudeOil'){
+  } else if(props.selectedEnergy === 'crudeOil'){
     if (!detailBreakdownData.get('required', false)) { return null }
     total = props.Padd.filter((point,key) => key!== 'ca').map(( value, paddId) => {
       if(props.selection.get('origins').count() > 0 && !props.selection.get('origins').includes('ca')){
@@ -92,7 +93,7 @@ const renderDetailBreakdown = (props) => {
   return (<DetailBreakdown
       data={Immutable.fromJS(total).sort((a, b) => (b - a))}
       type={detailBreakdownData.get('type')}
-      trContent={Tr.getIn(['detailBreakDown', props.importExportVisualization, detailBreakdownData.get('type')])}
+      trContent={Tr.getIn(['detailBreakDown', props.selectedEnergy, detailBreakdownData.get('type')])}
       veritcalPosition={detailBreakdownData.get('displayPosition')}
       color={detailBreakdownData.get('color')}
       height={detailBreakdownData.get('height')}
@@ -113,7 +114,7 @@ const renderDetailSidebar = (props) => {
 }
 
 const mapStateToProps = (state, props) => ({
-  importExportVisualization: state.importExportVisualization,
+  selectedEnergy: state.importExportVisualization,
   arrangeBy: arrangeBy(state, props),
   subType: getSubtype(state, props),
   Padd: PaddSelector(state, props),
