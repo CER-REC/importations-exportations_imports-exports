@@ -122,7 +122,7 @@ const TranslationTable = fromJS({
     },
     attributions: {
       en: 'ATTRIBUTIONS',
-      fr: 'TODO',
+      fr: 'LICENCES DE TIERS',
     },
     brokenLinkIcon: {
       en: 'BROKEN LINK ICON',
@@ -368,6 +368,12 @@ const TranslationTable = fromJS({
     en: 'CONFIDENTIALITY',
     fr: 'CONFIDENTIALITÉ',
   },
+
+  valuesConfidential: {
+    en: 'values confidential',
+    fr: 'valeurs confidentiel',
+  },
+
   amounts: {
     CAN$: { en: 'CAN$', fr: '$ CAN' },
     'CAN$/MW.h': { en: 'CAN$/MW.h', fr: '$ CAN/MWh' },
@@ -418,20 +424,20 @@ const TranslationTable = fromJS({
       fr: 'Les données sur l’électricité sont accessibles au public. Elles précisent les points d’origine et de destination, la quantité et le prix, de manière agrégée mensuellement, par numéro de permis. Il y a une exception à cette règle : aucune valeur n’est indiquée pour les permis propres à un contrat en particulier de Manitoba Hydro en raison d’une obligation juridique et des règles de l’Office en matière de confidentialité.',
     },
     barChartExport: {
-      en: 'Each blue bar shows the total electricity that Canadian provinces exported during a single quarter.',
-      fr: 'Chaque barre bleue montre la quantité totale d’électricité que les provinces canadiennes ont exportée au cours d’un trimestre.',
+      en: 'Each blue bar shows the total electricity that Canadian regions exported during a single quarter.',
+      fr: 'Chaque barre bleue montre la quantité totale d’électricité que les régions canadiennes ont exportée au cours d’un trimestre.',
     },
     washingtonArrow: {
-      en: 'The up arrow shows the total electricity that Canadian provinces imported from Washington during the time period selected above.',
-      fr: 'La flèche orientée vers le haut montre la quantité totale d’électricité importée de l’État de Washington par les provinces canadiennes pendant la période sélectionnée dans le diagramme à barres ci-dessus.',
+      en: 'The up arrow shows the total electricity that Canadian regions imported from Washington during the time period selected above.',
+      fr: 'La flèche orientée vers le haut montre la quantité totale d’électricité importée de l’État de Washington par les régions canadiennes pendant la période sélectionnée dans le diagramme à barres ci-dessus.',
     },
     powerpool: {
       en: 'A power pool is a grouping of states that imports and exports electricity as a unit. Individual states may also have additional imports and exports.',
       fr: 'Un réseau commun est un regroupement d’états américains qui importe et exporte de l’électricité conjointement. Chacun des états du regroupement peut également importer et exporter de l’électricité individuellement.',
     },
     barChartImport: {
-      en: 'Each orange bar shows the total electricity that Canadian provinces imported during a single quarter.',
-      fr: 'Chaque barre orange montre la quantité totale d’électricité que les provinces canadiennes ont importée au cours d’un trimestre.',
+      en: 'Each orange bar shows the total electricity that Canadian regions imported during a single quarter.',
+      fr: 'Chaque barre orange montre la quantité totale d’électricité que les régions canadiennes ont importée au cours d’un trimestre.',
     },
     reset: {
       en: 'This data visualization shows Canadian imports and exports of electricity. Click the pink dots to guide you through how to read the data.',
@@ -482,8 +488,8 @@ const TranslationTable = fromJS({
       fr: 'Faites glisser la ligne vers le haut ou vers le bas pour voir les différentes valeurs de l’axe des ordonnées.',
     },
     vermontArrow: {
-      en: 'The down arrow shows the total electricity that Canadian provinces exported to Vermont during the time period selected above.',
-      fr: 'La flèche orientée vers le bas montre la quantité totale d’électricité que les provinces canadiennes ont exportée vers le Vermont pendant la période sélectionnée dans le diagramme à barres ci-dessus.',
+      en: 'The down arrow shows the total electricity that Canadian regions exported to Vermont during the time period selected above.',
+      fr: 'La flèche orientée vers le bas montre la quantité totale d’électricité que les régions canadiennes ont exportée vers le Vermont pendant la période sélectionnée dans le diagramme à barres ci-dessus.',
     },
     resetNaturalGas: {
       en: 'This data visualization shows imports and exports of natural gas at ports along the Canada-USA border. Click the pink dots to guide you through how to read the data.',
@@ -518,16 +524,16 @@ const TranslationTable = fromJS({
       fr: 'La quantité de gaz naturel est indiquée en millier de m³/j, ce qui correspond à 35 314 pieds cubes par jour. $ CA/GJ indique le prix moyen du gaz naturel par gigajoule. Le ménage albertain moyen consomme environ 120 GJ de gaz naturel par année. (lien dans la colonne K)',
     },
     resetNaturalGasLiquids: {
-      en: 'This data visualization shows imports of Natural Gas Liquids (NGLs) from the USA into Canadian provinces (top) and exports of NGLs from Canada into regions of the USA called PADDs (bottom). Click the pink dots to guide you through how to read the data.',
-      fr: 'Les données interactives montrent les importations de liquides de gaz naturel (« LGN ») en provenance des États-Unis et à destination des provinces canadiennes (haut) et les exportations de LGN du Canada à destination de régions PADD des États-Unis (bas). Cliquez sur les points roses pour obtenir de l’aide pour lire les données.',
+      en: 'This data visualization shows imports of Natural Gas Liquids (NGLs) from the USA into Canadian regions (top) and exports of NGLs from Canada into regions of the USA called PADDs (bottom). Click the pink dots to guide you through how to read the data.',
+      fr: 'Les données interactives montrent les importations de liquides de gaz naturel (« LGN ») en provenance des États-Unis et à destination des régions canadiennes (haut) et les exportations de LGN du Canada à destination de régions PADD des États-Unis (bas). Cliquez sur les points roses pour obtenir de l’aide pour lire les données.',
     },
     albertaArrowNaturalGasLiquids: {
       en: 'The up arrow shows the total NGLs that Alberta imported from the USA during the time period selected in the bar chart below.',
       fr: 'La flèche orientée vers le haut montre la quantité totale de LGN importée des États-Unis par l’Alberta pendant la période sélectionnée dans le diagramme à barres ci-après.',
     },
     atlqNaturalGasLiquids: {
-      en: 'The Atlantic provinces and Quebec are grouped due to confidentiality rules that prevent reporting of data when minimal companies are reporting in a region. Learn more about our confidentiality rules in our methodology.',
-      fr: 'Les provinces de l’Atlantique et du Québec sont regroupées en raison de règles de confidentialité qui interdisent la publication de données relatives à une région ne comptant que peu de sociétés. La méthode fait état des règles de confidentialité.',
+      en: 'The Atlantic regions and Quebec are grouped due to confidentiality rules that prevent reporting of data when minimal companies are reporting in a region. Learn more about our confidentiality rules in our methodology.',
+      fr: 'Les régions de l’Atlantique et du Québec sont regroupées en raison de règles de confidentialité qui interdisent la publication de données relatives à une région ne comptant que peu de sociétés. La méthode fait état des règles de confidentialité.',
     },
     orangeBarNaturalGasLiquids: {
       en: 'Each orange bar shows the total amount of natural gas liquids that Canada imported during a single quarter.',
@@ -679,8 +685,8 @@ const TranslationTable = fromJS({
             fr: 'ces',
           },
           place: {
-            en: 'Provinces',
-            fr: 'provinces',
+            en: 'Regions',
+            fr: 'Régions',
           },
         },
         body: {
@@ -705,8 +711,8 @@ const TranslationTable = fromJS({
             fr: 'ces',
           },
           place: {
-            en: 'Provinces',
-            fr: 'Provinces',
+            en: 'Regions',
+            fr: 'Régions',
           },
         },
         body: {
@@ -811,8 +817,8 @@ const TranslationTable = fromJS({
             fr: 'ces',
           },
           place: {
-            en: 'Provinces',
-            fr: 'provinces',
+            en: 'Regions',
+            fr: 'Régions',
           },
         },
         body: {
@@ -825,8 +831,8 @@ const TranslationTable = fromJS({
     },
     naturalGasLiquids: {
       defaultText: {
-        en: 'This visualization shows imports to Canada and exports from Canada between the years $0 and $1. Drag the timeline bar to change. Click a province to view detail',
-        fr: 'Cette visualisation illustre les importations et les exportations du Canada de $0 à $1. Faites glisser la ligne du temps pour modifier les années. Cliquez sur une province pour des précisions à ce sujet.',
+        en: 'This visualization shows imports to Canada and exports from Canada between the years $0 and $1. Drag the timeline bar to change. Click a region to view detail',
+        fr: 'Cette visualisation illustre les importations et les exportations du Canada de $0 à $1. Faites glisser la ligne du temps pour modifier les années. Cliquez sur une région pour des précisions à ce sujet.',
       },
       exports: {
         header: {
@@ -900,8 +906,8 @@ const TranslationTable = fromJS({
   country: {
     ca: {
       '': {
-        en: 'Missing Province',
-        fr: 'Province non disponible',
+        en: 'Missing Region',
+        fr: 'Région non disponible',
       },
       YT: {
         en: 'Yukon',
@@ -956,8 +962,8 @@ const TranslationTable = fromJS({
         fr: 'Nouvelle-Écosse',
       },
       'ATL-Q': {
-        en: 'Atlantic Provinces\nand Quebec',
-        fr: 'Provinces atlantiques\n et le Québec',
+        en: 'Atlantic Regions\nand Quebec',
+        fr: 'Régions atlantiques\n et le Québec',
       },
     },
     us: {
@@ -1252,8 +1258,8 @@ const TranslationTable = fromJS({
           },
         },
         stateOrProvince: {
-          en: 'province',
-          fr: 'province',
+          en: 'region',
+          fr: 'région',
         },
       },
       us: {
@@ -1306,8 +1312,8 @@ const TranslationTable = fromJS({
           },
         },
         stateOrProvince: {
-          en: 'province',
-          fr: 'province',
+          en: 'region',
+          fr: 'région',
         },
       },
       us: {
