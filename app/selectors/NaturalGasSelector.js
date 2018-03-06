@@ -1,7 +1,7 @@
 import { createSelector } from 'reselect'
 import Immutable from 'immutable'
 
-import { aggregateLocationPaddSelector, arrangeBy } from './data'
+import { aggregateLocationPaddSelector, arrangeBy, subType } from './data'
 import MapLayoutGridConstant from '../MapLayoutGridConstant'
 import Constants from '../Constants'
 import { visualizationSettings } from './visualizationSettings'
@@ -74,15 +74,23 @@ const getNaturalGasLiquidsImportAndExport = createSelector(
   },
 )
 
+const sortData = (points, sortBy, subType='propaneButane') => {
+  console.log(points)
+  return points.sort((a, b) => (b.getIn(['subType', subType, 'imports'], 0) - a.getIn(['subType', subType, 'imports'], 0)))
+}
+
 const createSortedLayout = createSelector(
   getNaturalGasLiquidsImportAndExport,
   getColumns,
   getPadding,
-  (data, columns, rowPadding) => {
+  arrangeBy,
+  subType,
+  (data, columns, rowPadding, sortBy, stype) => {
     let row = 0
     let column = 0
     const sortedArray = []
-    data.forEach((statesOrProvinces) => {
+    const sortedData = sortData(data, sortBy, stype)
+    sortedData.forEach((statesOrProvinces) => {
       if (column >= columns) {
         column = 0
         row += 1
@@ -142,8 +150,7 @@ export const getNaturalGasLiquidMapLayout = createSelector(
   arrangeBy,
   (sortedPoints, locationPoints, sortBy) => {
     switch (sortBy) {
-      case 'exports':
-      case 'imports':
+      case 'amount':
         return sortedPoints
       case 'location':
       default:

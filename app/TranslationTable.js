@@ -295,6 +295,10 @@ const TranslationTable = fromJS({
           en: 'MOST EXPORTS',
           fr: 'PLUS D’EXPORTATIONS',
         },
+        amount:{
+          en: 'AMOUNT',
+          fr: 'QUANTITÉ',
+        },
         stack: {
           en: 'STACK',
           fr: 'GRAPHIQUE UNIE',
