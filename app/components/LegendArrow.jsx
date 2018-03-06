@@ -12,6 +12,7 @@ const LegendArrow = props => (
       height={Constants.getIn(['legend', 'iconHeight'])}
       width={Constants.getIn(['legend', 'iconHWidth'])}
     >
+    <g transform={props.exportArrow}>
       <polygon
         transform={props.transformArrow}
         fill={props.colour}
@@ -19,6 +20,7 @@ const LegendArrow = props => (
           8.97 27.71 8.97 27.71 12.38 2.44 12.38 2.42
           8.97 0 8.97 0 8.3"
       />
+      </g>
     </svg>
   </g>
 )
@@ -28,6 +30,7 @@ LegendArrow.propTypes = {
   yPosition: PropTypes.number,
   transformArrow: PropTypes.string,
   colour: PropTypes.string.isRequired,
+  exportArrow: PropTypes.string.isRequired,
 }
 
 LegendArrow.defaultProps = {

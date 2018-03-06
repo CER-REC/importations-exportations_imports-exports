@@ -54,7 +54,7 @@ class Legend extends React.Component {
   }
 
   exportColumn() {
-    const transformExportColumn = `translate(${Constants.getIn(['legend', 'exportColumn'])} 100) rotate(180, 15, 5.5)`
+    const transformExportColumn = `translate(${Constants.getIn(['legend', 'exportColumn'])} 0)`
     return (
       <g
         className="exportColumn"
@@ -69,6 +69,7 @@ class Legend extends React.Component {
         <g transform={transformExportColumn}>
           {Constants.getIn(['styleGuide', 'exportColours']).map((color, i) => (
             <LegendArrow
+              exportArrow="rotate(180, 15, 5.5)"
               key={`import-${color}`}
               yPosition={(i * 20) + 10}
               colour={color}
