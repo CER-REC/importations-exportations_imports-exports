@@ -4,7 +4,7 @@ import { fromJS } from 'immutable'
 import {
   activityGroupSelector,
   filterByHexSelector,
-  detailSidebarFilteredData,
+  filterByTimelineAndHexData,
   timelineRange,
   timelinePlayback,
   groupingBy as timelineGrouping,
@@ -69,7 +69,7 @@ const aggregateQuarterPoints = (points, valueKeys, aggregateKey, vizName) => {
     }, {})
 }
 export const aggregateQuarterFilteredValue = createSelector(
-  detailSidebarFilteredData,
+  filterByTimelineAndHexData,
   getAggregateKey,
   selectedVisualization,
   (points, aggregateKey, vizName) => {

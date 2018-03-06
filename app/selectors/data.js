@@ -152,7 +152,7 @@ export const filterByHexSelector = createSelector(
   (points, selectedMapPieces, visualization, selectionState) => points.filter(point => filterByHex(point, selectedMapPieces, visualization, selectionState)),
 )
 
-export const detailSidebarFilteredData = createSelector(
+export const filterByTimelineAndHexData = createSelector(
   filterByHexSelector,
   timelineFilterRange,
   groupingBy,
