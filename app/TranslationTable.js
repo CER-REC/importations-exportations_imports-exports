@@ -122,7 +122,7 @@ const TranslationTable = fromJS({
     },
     attributions: {
       en: 'ATTRIBUTIONS',
-      fr: 'TODO',
+      fr: 'LICENCES DE TIERS',
     },
     brokenLinkIcon: {
       en: 'BROKEN LINK ICON',
@@ -368,6 +368,12 @@ const TranslationTable = fromJS({
     en: 'CONFIDENTIALITY',
     fr: 'CONFIDENTIALITÉ',
   },
+
+  valuesConfidential: {
+    en: 'values confidential',
+    fr: 'valeurs confidentiel',
+  },
+
   amounts: {
     CAN$: { en: 'CAN$', fr: '$ CAN' },
     'CAN$/MW.h': { en: 'CAN$/MW.h', fr: '$ CAN/MWh' },
