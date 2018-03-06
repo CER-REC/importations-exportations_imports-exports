@@ -54,8 +54,7 @@ class Legend extends React.Component {
   }
 
   exportColumn() {
-    const transformExportColumn = `translate(${Constants.getIn(['legend', 'exportColumn'])} 0)`
-    const rotateArrow = 'rotate(180, 15, 5.5)'
+    const transformExportColumn = `translate(${Constants.getIn(['legend', 'exportColumn'])} 100) rotate(180, 15, 5.5)`
     return (
       <g
         className="exportColumn"
