@@ -5,6 +5,7 @@ import MapPiece from './MapPiece'
 import MapPieceExplanationConstant from '../MapPieceExplanationConstant'
 import Tr from '../TranslationTable'
 import {visualizationSettings} from '../selectors/visualizationSettings'
+
 class NaturalGasPieceActivityExplanation extends React.Component {
   render() {
     let activity = 'importsExports'
@@ -33,7 +34,7 @@ class NaturalGasPieceActivityExplanation extends React.Component {
 
 const mapStateToprops = (state, props) => {
   return {
-    activityGroup: visualizationSettings(state, props)
+    activityGroup: visualizationSettings(state, props),
   }
 }
 

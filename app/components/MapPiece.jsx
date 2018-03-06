@@ -12,6 +12,7 @@ import AnimatedMapPiece from './SVGAnimation/AnimatedMapPiece'
 import MapLayoutGridConstant from '../MapLayoutGridConstant'
 import ExplanationDot from './ExplanationDot'
 import { arrangeBy } from '../selectors/data'
+import { visualizationSettings } from '../selectors/visualizationSettings'
 
 import trSelector from '../selectors/translate'
 import tr from '../TranslationTable'
@@ -208,9 +209,16 @@ class MapPiece extends React.Component {
   }
 
   emersonExplanation() {
-   if (this.props.data.get('portName') !== 'Emerson') { return null }
-    const scaleContainerX = this.props.viewport.get('changeWidthRatio')  > 1.2 ? 180: 160
-    const scaleContainerY = this.props.viewport.get('changeHeightRatio')  > 1.2 ? 250: 310
+    let textString = `${this.props.tr(['explanations', 'EmersonNaturalGas'])}`
+    if (['importsForReexport'].includes(this.props.activityGroup.get('activity'))) {
+      textString = `${this.props.tr(['explanations', 'EmersonTempImpNaturalGas'])}`
+    }
+    if (['exportsForReimport'].includes(this.props.activityGroup.get('activity'))) {
+      textString = `${this.props.tr(['explanations', 'EmersonTempExpNaturalGas'])}`
+    }
+    if (this.props.data.get('portName') !== 'Emerson') { return null }
+    const scaleContainerX = this.props.viewport.get('changeWidthRatio') > 1.2 ? 180 : 160
+    const scaleContainerY = this.props.viewport.get('changeHeightRatio') > 1.2 ? 250 : 310
     return (<g>
       <ExplanationDot
         scale="scale(1)"
@@ -229,10 +237,10 @@ class MapPiece extends React.Component {
         lineY={173.94}
         textX={40}
         textY={58}
-        containerX={this.props.viewport.get('changeWidthRatio')*(this.props.x1  + scaleContainerX)}
-        containerY={this.props.viewport.get('changeHeightRatio')*(this.props.y1   + scaleContainerY)}
+        containerX={this.props.viewport.get('changeWidthRatio') * (this.props.x1 + scaleContainerX)}
+        containerY={this.props.viewport.get('changeHeightRatio') * (this.props.y1 + scaleContainerY)}
         name="emersonElectricity"
-        text={`${this.props.tr(['explanations','EmersonNaturalGas'])}`}
+        text={textString}
     /></g>)
   }
 
@@ -424,6 +432,7 @@ export default connect(
     activity: state.activity,
     viewport: state.viewport,
     arrangeBy: arrangeBy(state, props),
+    activityGroup: visualizationSettings(state, props)
   }),
 )(MapPiece)
 
