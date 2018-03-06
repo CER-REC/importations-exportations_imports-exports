@@ -37,6 +37,7 @@ LegendArrow.defaultProps = {
   xPosition: 0,
   yPosition: 0,
   transformArrow: '',
+  exportArrow: '',
 }
 
 const mapStateToProps = ({ viewport }) => ({ viewport })
