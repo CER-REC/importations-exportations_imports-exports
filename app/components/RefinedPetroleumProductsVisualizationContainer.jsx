@@ -9,7 +9,7 @@ import ConfidentialCount from './ConfidentialCount'
 import DetailBreakdownRow from './DetailBreakdownRow'
 import DetailTotal from './DetailTotal'
 import * as RefinedPetroleumProductsViewport from '../selectors/viewport/refinedPetroleumProducts'
-import { arrangeBy, amount } from '../selectors/data'
+import { arrangeBy, amount, filterByTimelineAndHexData } from '../selectors/data'
 import { timelineData } from '../selectors/timeline'
 import Constants from '../Constants'
 
@@ -22,14 +22,19 @@ const subtypes = [
 ]
 
 class RefinedPetroleumProductsVisualizationContainer extends React.Component {
-  calculateBreakdown() {
-    return this.props.data.bars.reduce((acc, next) => {
-      acc.total += next.get('total')
-      subtypes.forEach(type => {
-        acc.values[type] = (acc.values[type] || 0) + next.getIn(['values', type], 0)
-      })
+   calculateBreakdown() {
+    const data = this.props.filteredData.reduce((acc, next) => {
+      acc.total += next.get('value')
+      const type = next.get('productSubtype')
+      acc.values[type] = (acc.values[type] || 0) + next.get('value', 0)
       return acc
     }, { total: 0, values: {} })
+    //rearrange values though I don't like this but have to do this
+    let resultMap = {}
+    subtypes.forEach(value => {
+      resultMap[value] = data.values[value]
+    })
+    return { total: data.total, values: resultMap }
   }
 
   renderStackedChart() {
@@ -174,4 +179,5 @@ export default connect((state, props) => ({
   arrangeBy: arrangeBy(state, props),
   unit: amount(state, props),
   data: timelineData(state, { ...props, aggregateKey: 'productSubtype' }),
+  filteredData: filterByTimelineAndHexData(state, props),
 }))(RefinedPetroleumProductsVisualizationContainer)
