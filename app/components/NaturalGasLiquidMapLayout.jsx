@@ -13,7 +13,7 @@ import { visualizationSettings } from '../selectors/visualizationSettings'
 import { setSelection } from '../actions/visualizationSettings'
 import './ElectricityMapLayout.scss'
 
-import { getElectricityMapLayout, getSelectionSettings } from '../selectors/NaturalGasSelector'
+import { getNaturalGasLiquidMapLayout, getSelectionSettings } from '../selectors/NaturalGasSelector'
 import { arrangeBy, binSelector, sortAggregatedLocationsSelector, subType } from '../selectors/data'
 import DetailSidebar from './DetailSidebar'
 import DetailBreakdown from './DetailBreakdown'
@@ -198,7 +198,7 @@ const mapStateToProps = (state, props) => ({
   viewport: state.viewport,
   language: state.language,
   importExportVisualization: state.importExportVisualization,
-  layout: getElectricityMapLayout(state, props),
+  layout: getNaturalGasLiquidMapLayout(state, props),
   selection: getSelectionSettings(state, props),
   sType: subType(state,props),
   arrangeBy: arrangeBy(state, props),

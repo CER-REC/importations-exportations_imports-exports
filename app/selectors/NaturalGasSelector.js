@@ -133,7 +133,7 @@ const parseLocationData = createSelector(
 )
 
 
-export const getElectricityMapLayout = createSelector(
+export const getNaturalGasLiquidMapLayout = createSelector(
   createSortedLayout,
   parseLocationData,
   arrangeBy,
