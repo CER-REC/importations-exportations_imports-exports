@@ -23,22 +23,17 @@ const subtypes = [
 
 class RefinedPetroleumProductsVisualizationContainer extends React.Component {
    calculateBreakdown() {
-    const data = this.props.filteredData.reduce((acc, next) => {
-      acc.total += next.get('value')
+    return this.props.filteredData.reduce((acc, next) => {
       const type = next.get('productSubtype')
+      if(!subtypes.includes(type)){return acc}
+      acc.total += next.get('value',0)
       acc.values[type] = (acc.values[type] || 0) + next.get('value', 0)
       return acc
     }, { total: 0, values: {} })
-    //rearrange values though I don't like this but have to do this
-    let resultMap = {}
-    subtypes.forEach(value => {
-      resultMap[value] = data.values[value]
-    })
-    return { total: data.total, values: resultMap }
   }
 
   renderStackedChart() {
-    const { stackedChart: positions } = this.props
+    const { stackedChart: positions, selectedEnergy } = this.props
     const categoryColours = Constants.getIn(['styleGuide', 'categoryColours'])
     const breakdown = this.calculateBreakdown()
     return (
@@ -62,10 +57,7 @@ class RefinedPetroleumProductsVisualizationContainer extends React.Component {
           <table width="100%" className="detailBreakDownContainer" style={{ padding: '8px 0' }}>
             <tbody>
               {Object.keys(breakdown.values).map((key, i) => {
-                const colour = categoryColours.get(
-                  i + (categoryColours.count() - subtypes.length),
-                  Constants.getIn(['styleGuide', 'colours', 'ExportDefault']),
-                )
+                const colour = categoryColours.getIn([selectedEnergy, key], Constants.getIn(['styleGuide', 'colours', 'ExportDefault']))
                 return (
                   <DetailBreakdownRow
                     key={key}
@@ -100,14 +92,11 @@ class RefinedPetroleumProductsVisualizationContainer extends React.Component {
   }
 
   renderSeparateCharts() {
-    const { individualCharts: positions } = this.props
+    const { individualCharts: positions , selectedEnergy} = this.props
     const categoryColours = Constants.getIn(['styleGuide', 'categoryColours'])
     const breakdown = this.calculateBreakdown()
     const charts = subtypes.map((key, i) => {
-      const colour = categoryColours.get(
-        i + (categoryColours.count() - subtypes.length),
-        Constants.getIn(['styleGuide', 'colours', 'ExportDefault']),
-      )
+      const colour = categoryColours.getIn([selectedEnergy, key], Constants.getIn(['styleGuide', 'colours', 'ExportDefault']))
       return (
         <g key={key}>
           <Axis
@@ -173,6 +162,7 @@ class RefinedPetroleumProductsVisualizationContainer extends React.Component {
 }
 
 export default connect((state, props) => ({
+  selectedEnergy: state.importExportVisualization,
   stackedChart: RefinedPetroleumProductsViewport.stackedChartPosition(state, props),
   individualCharts: RefinedPetroleumProductsViewport.individualChartsPosition(state, props),
   sidebarTotal: RefinedPetroleumProductsViewport.sidebarTotalPosition(state, props),

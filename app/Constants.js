@@ -242,13 +242,27 @@ const Constants = fromJS({
       'rgb(28, 100, 178)',
       'rgb(8, 69, 148)',
     ],
-    categoryColours: [
-      'rgb(139, 192, 155)',
-      'rgb(87, 187, 149)',
-      'rgb(50, 155, 157)',
-      'rgb(39, 135, 144)',
-      'rgb(30, 97, 114)',
-    ],
+    categoryColours: {
+      refinedPetroleumProducts:{
+       'Partially Processed Oil': 'rgb(139, 192, 155)',
+       'Jet Fuel' :'rgb(87, 187, 149)',
+       'Heavy Fuel Oil' :'rgb(50, 155, 157)',
+       'Motor Gasoline' :'rgb(39, 135, 144)',
+       'Middle Distillate' :'rgb(30, 97, 114)',
+      },
+      crudeOil:{
+        transport: {
+          Pipeline : 'rgb(39, 135, 144)',
+          Marine : 'rgb(30, 97, 114)' ,
+          Railroad : 'rgb(39, 135, 144)',
+          Truck : 'rgb(50, 155, 157)',
+        },
+        productSubtype: {
+          Heavy : 'rgb(39, 135, 144)',
+          Light: 'rgb(30, 97, 114)',
+        },
+      },
+    },
   },
   detailBreakDown: {
     ca: {
