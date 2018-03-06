@@ -53,13 +53,13 @@ const Constants = fromJS({
     topMargin: 200,
     iconHeight: 11.09,
     iconWidth: 29.69,
-    crudeOilLegendPosition: -36.49,
+    crudeOilLegendPosition: -40.49,
     textValuePosition: 84.48,
-    exportColumn: 47.99,
-    importColumn: 11.5,
+    exportColumn: 40.99,
+    importColumn: 0,
     headingY: 770,
-    importHeadingX: 15.045,
-    exportHeadingX: 52.5,
+    importHeadingX: 4.045,
+    exportHeadingX: 45.5,
   },
 
   socialBar: {
