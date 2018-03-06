@@ -97,7 +97,7 @@ class PortMap extends React.PureComponent {
   portMapExplanation() {
     const scaleContainerX = this.props.viewport.get('changeWidthRatio') > 1.2 ? 490 : 270
     const scaleContainerY = this.props.viewport.get('changeHeightRatio') > 1.2 ? 72 : 70
-    return (<g  transform="scale(3.9) translate(-300)">
+    return (<g transform="scale(3.9) translate(-300)">
       <ExplanationDot
         scale="scale(0.5)"
         lineStroke="1.5"

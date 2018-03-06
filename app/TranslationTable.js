@@ -398,8 +398,8 @@ const TranslationTable = fromJS({
 
   explanations: {
     amount: {
-      en: 'Electricity is measured in MWh (Megawatt hour). The typical Ontario household uses a little less than 10 MWh per year. CAN$ denotes the total revenue. CAN$/MWh denotes the average price per Megawatt hour.',
-      fr: 'La quantité d’électricité est indiquée en MWh (mégawattheures). Un ménage ontarien type utilise moins de 10 MWh d’électricité par année. $ CA désigne le total des revenus. $ CA/MWh désigne le prix moyen par mégawattheure.',
+      en: 'Electricity is measured in MWh (Megawatt hour). The typical Ontario household uses a little less than 10 MWh per year. CAN$ denotes the total revenue. CAN$/MWh denotes the weighted average price per Megawatt hour.',
+      fr: 'La quantité d’électricité est indiquée en MWh (mégawattheures). Un ménage ontarien type utilise moins de 10 MWh d’électricité par année. $ CA désigne le total des revenus. $ CA/MWh désigne le prix moyen pondéré par mégawattheure.',
     },
     timeSeek: {
       en: 'Drag these handles to select a different time period.',
@@ -518,8 +518,8 @@ const TranslationTable = fromJS({
       fr: 'Font partie des importations et des exportations les produits qui sont entrés au Canada ou qui en sont sortis à des fins de consommation ou de raffinage. Font partie des importations temporaires les produits américains destinés aux États-Unis mais ayant transité par le Canada du fait de la configuration de l’infrastructure pipelinière. Font partie des exportations temporaires les produits canadiens destinés au Canada mais ayant transité par les États-Unis.',
     },
     amountNaturalGas: {
-      en: 'Natural gas is measured in 10³ m³/d, which is 35,314 cubic feet. $CAN/GJ is the average price per gigajoule of natural gas. The average Albertan household uses approximately 120 GJs of natural gas per year.',
-      fr: 'La quantité de gaz naturel est indiquée en millier de m³/j, ce qui correspond à 35 314 pieds cubes par jour. $ CA/GJ indique le prix moyen du gaz naturel par gigajoule. Le ménage albertain moyen consomme environ 120 GJ de gaz naturel par année. (lien dans la colonne K)',
+      en: 'Natural gas is measured in 10³ m³/d, which is 35,314 cubic feet. $CAN/GJ is the weighted average price per gigajoule of natural gas. The average Albertan household uses approximately 120 GJs of natural gas per year.',
+      fr: 'La quantité de gaz naturel est indiquée en millier de m³/j, ce qui correspond à 35 314 pieds cubes par jour. $ CA/GJ indique le prix moyen pondéré du gaz naturel par gigajoule. Le ménage albertain moyen consomme environ 120 GJ de gaz naturel par année. (lien dans la colonne K)',
     },
     resetNaturalGasLiquids: {
       en: 'This data visualization shows imports of Natural Gas Liquids (NGLs) from the USA into Canadian provinces (top) and exports of NGLs from Canada into regions of the USA called PADDs (bottom). Click the pink dots to guide you through how to read the data.',
