@@ -333,7 +333,7 @@ class MapPiece extends React.Component {
     }
 
     let confidentialIcon = null
-    const valueString = `${this.props.data.get('confidentialCount')} / ${this.props.data.get('totalCount')} values confidential`
+    const valueString = `${this.props.data.get('confidentialCount')} / ${this.props.data.get('totalCount')} ${this.props.tr('valuesConfidential')}`
     let scaleContainerX = this.props.viewport.get('changeWidthRatio')  > 1.2 ? -5: -10
     let scaleContainerY = this.props.viewport.get('changeHeightRatio')  > 1.2 ? 8: 8
     let containerX = this.props.containerX + this.props.x1 + scaleContainerX
