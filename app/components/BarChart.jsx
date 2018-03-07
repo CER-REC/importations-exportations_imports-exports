@@ -80,7 +80,7 @@ class BarChart extends Chart {
         textY={58}
         containerX={this.props.left}
         containerY={this.props.top}
-        name="importBarChartExplanation"
+        name={`${this.props.selectedEnergy}` + 'importBarChartExplanation'}
         text={textString}
     /></g>)
   }
@@ -108,7 +108,7 @@ class BarChart extends Chart {
         textY={153}
         containerX={this.props.left - 278}
         containerY={this.props.left + 68}
-        name="exportBarChartExplanation"
+        name={`${this.props.selectedEnergy}` + 'exportBarChartExplanation'}
         text={`${this.props.tr(['explanations','barChartExport'])}`}
     /></g>)
   }
@@ -144,7 +144,7 @@ class BarChart extends Chart {
         textY={58}
         containerX={this.props.left + 3 }
         containerY={containerY}
-        name="exportBarChartExplanation"
+        name={`${this.props.selectedEnergy}` + 'exportBarChartExplanation'}
         text={textString}
     /></g>)
   }

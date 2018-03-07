@@ -98,7 +98,7 @@ class TimelinePlay extends React.PureComponent {
         textY={38}
         containerX={this.props.left - 143}
         containerY={this.props.top + 1}
-        name="timePlayDot"
+        name={`${this.props.selectedEnergy}` + 'timePlayDot'}
         text={`${this.props.tr(['explanations','playButton'])}`}
     /></g>)
   }
