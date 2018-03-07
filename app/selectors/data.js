@@ -133,6 +133,13 @@ export const filterByHex = (point, selectedMapPieces, visualization, selectionSt
     }
     return selectedMapPieces.includes(point.get('destination')) || selectedMapPieces.includes(point.get('destinationKey'))
   }
+  if(visualization === 'electricity'){
+    const origins = selectionState.get('origins')
+    return origins.includes(point.get('destination')) 
+    || origins.includes(point.get('destinationKey'))
+    || origins.includes(point.get('originKey'))
+    || origins.includes(point.get('origin'))
+  }
   return selectedMapPieces.includes(point.get('originKey'))
   || selectedMapPieces.includes(point.get('origin'))
   || selectedMapPieces.includes(point.get('port'))
@@ -195,6 +202,23 @@ const mapPieceLocationDataStructure = (acc, next, origin, originKey, originCount
 
 export const aggregateLocationSelector = createSelector(
   filterByTimelineSelector,
+  (points) => {
+    const result = points.reduce((acc, next) => {
+      const origin = next.get('origin') || next.get('port')
+      const originKey = next.get('originKey')
+      acc = mapPieceLocationDataStructure(acc, next, origin, originKey, 'country','destinationKey', 'destinationCountry')
+
+      const destination = next.get('destination') || next.get('port')
+      const destinationKey = next.get('destinationKey')
+      acc = mapPieceLocationDataStructure(acc, next, destination, destinationKey, 'destinationCountry', 'originKey', 'country')
+      return acc
+    }, {})
+    return Immutable.fromJS(result)
+  },
+)
+
+export const aggregateFilterLocationSelector = createSelector(
+  filterByTimelineAndHexData,
   (points) => {
     const result = points.reduce((acc, next) => {
       const origin = next.get('origin') || next.get('port')
