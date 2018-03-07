@@ -74,8 +74,8 @@ const getNaturalGasLiquidsImportAndExport = createSelector(
   },
 )
 
-const sortData = (points, sortBy, subType='propaneButane') => {
-  console.log(points)
+const sortData = (points, sortBy, subType='') => {
+  subType = subType === ''? 'propaneButane': subType
   return points.sort((a, b) => (b.getIn(['subType', subType, 'imports'], 0) - a.getIn(['subType', subType, 'imports'], 0)))
 }
 
