@@ -13,7 +13,7 @@ import { visualizationSettings } from '../selectors/visualizationSettings'
 import { setSelection } from '../actions/visualizationSettings'
 import './ElectricityMapLayout.scss'
 
-import { getElectricityMapLayout, getSelectionSettings } from '../selectors/NaturalGasSelector'
+import { getNaturalGasLiquidMapLayout, getSelectionSettings } from '../selectors/NaturalGasSelector'
 import { arrangeBy, binSelector, sortAggregatedLocationsSelector, subType } from '../selectors/data'
 import DetailSidebar from './DetailSidebar'
 import DetailBreakdown from './DetailBreakdown'
@@ -23,12 +23,6 @@ import './NaturalGasLiquidMapLayout.scss'
 
 const mapPieceTransformStartXaxis = (position, dimensions, mapPieceScale) => (position.get('x') * ((mapPieceScale * dimensions.get('width')) + dimensions.get('xAxisPadding')))
 const mapPieceTransformStartYaxis = (position, dimensions, mapPieceScale) => (position.get('y') * ((mapPieceScale * dimensions.get('height')) + dimensions.get('yAxisPadding')))
-
-const powerPoolTransform = (xaxis, yaxis, position, dimensions, mapPieceScale) => {
-  const startXaxis = xaxis + (position.get('x') * ((mapPieceScale * dimensions.get('width')) + dimensions.get('xAxisPadding')))
-  const startYaxis = yaxis + (position.get('y') * ((mapPieceScale * dimensions.get('height')) + dimensions.get('yAxisPadding')))
-  return `translate(${`${startXaxis},${startYaxis}`}) scale(${mapPieceScale})`
-}
 
 class NaturalGasLiquidMapLayout extends React.Component {
   static propTypes = {
@@ -159,7 +153,7 @@ class NaturalGasLiquidMapLayout extends React.Component {
         }
       })
       return acc
-    }, {Butane: 0 , Propane: 0})
+    }, {})
     const nameMappings = Tr.getIn(['subType'])
     return (<DetailBreakdown
       data={Immutable.fromJS(subTypeTotal).sort((a, b) => (b - a))}
@@ -176,6 +170,7 @@ class NaturalGasLiquidMapLayout extends React.Component {
   }
 
   renderDetailSidebar() {
+    if(this.props.selection.get('country') === 'us' && this.props.importExportVisualization === 'naturalGasLiquids'){ return null}
     return (<DetailSidebar top={this.props.top} height={Constants.getIn(['detailBreakDown', this.props.country, 'height'], 0)}>
       {this.renderDetailBreakdown(this.props.detailBreakDownData)}
     </DetailSidebar>)
@@ -198,7 +193,7 @@ const mapStateToProps = (state, props) => ({
   viewport: state.viewport,
   language: state.language,
   importExportVisualization: state.importExportVisualization,
-  layout: getElectricityMapLayout(state, props),
+  layout: getNaturalGasLiquidMapLayout(state, props),
   selection: getSelectionSettings(state, props),
   sType: subType(state,props),
   arrangeBy: arrangeBy(state, props),

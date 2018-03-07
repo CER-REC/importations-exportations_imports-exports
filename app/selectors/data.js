@@ -152,7 +152,7 @@ export const filterByHexSelector = createSelector(
   (points, selectedMapPieces, visualization, selectionState) => points.filter(point => filterByHex(point, selectedMapPieces, visualization, selectionState)),
 )
 
-export const detailSidebarFilteredData = createSelector(
+export const filterByTimelineAndHexData = createSelector(
   filterByHexSelector,
   timelineFilterRange,
   groupingBy,
@@ -256,7 +256,8 @@ export const aggregateLocationNaturalGasSelector = createSelector(
   filterByTimelineSelector,
   (points) => {
     const ports = Constants.getIn(['dataloader', 'mapping', 'ports'], Immutable.fromJS({}))
-    const result = points.reduce((acc, next) => {
+    let missingPorts = Constants.getIn(['dataloader', 'mapping', 'ports'], Immutable.fromJS({}))
+    let portData = points.reduce((acc, next) => {
       const port = ports.get(next.get('port'))
       if (typeof port === 'undefined') {
         //console.log(`missing data for ${next.get('port')} in the constant list.`)
@@ -268,6 +269,7 @@ export const aggregateLocationNaturalGasSelector = createSelector(
       if (!acc[province]) {
         acc[province] = {}
       }
+      missingPorts = missingPorts.delete(portName)
       if (!acc[province][portName]) {
         acc[province][portName] = {
           portName
@@ -286,6 +288,18 @@ export const aggregateLocationNaturalGasSelector = createSelector(
       acc[province][portName].confidentialCount = (confidentialCount + next.get('confidential'))
       return acc
     }, {})
-    return Immutable.fromJS(result)
+    //create ports with the empty data and push it
+    missingPorts.forEach((port, portName) => {
+      const province = port.get('Province')
+      if (!portData[province]) {
+        portData[province] = {}
+      }
+      if (!portData[province][portName]) {
+        portData[province][portName] = {
+          portName
+        }
+      }
+    })
+    return Immutable.fromJS(portData)
   },
 )

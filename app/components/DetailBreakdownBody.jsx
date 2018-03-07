@@ -15,7 +15,7 @@ class DetailBreakdownBody extends React.Component {
     const bodyContent = props.trContent
     const total = props.data.reduce((acc, curr, key) => acc + curr)
     const result = props.data.map((value, key) => {
-      const exportOrImportPercentage = ((value / total) * 100).toFixed(2)
+      const exportOrImportPercentage = ((total === 0) ? 0 : (value / total) * 100).toFixed(2)
       const progressBarStyle = {
         width: `${exportOrImportPercentage}%`,
         backgroundColor: props.color,
