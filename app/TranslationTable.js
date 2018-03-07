@@ -649,7 +649,7 @@ const TranslationTable = fromJS({
   },
 
   bitlyShare: {
-    en: 'Visit this interaction visualization:',
+    en: 'Visit this interactive visualization:',
     fr: 'TODO',
   },
 
