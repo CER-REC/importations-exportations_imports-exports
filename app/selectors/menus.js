@@ -22,6 +22,8 @@ export const arrangeByOptions = createSelector(
       return ['location', 'exports']
     } else if (vis === 'refinedPetroleumProducts') {
       return ['stack', 'split']
+    } else if(vis === 'naturalGasLiquids'){
+      return ['location', 'amount']
     }
     return ['location', 'imports', 'exports']
   }

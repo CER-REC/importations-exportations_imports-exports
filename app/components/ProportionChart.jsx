@@ -13,21 +13,22 @@ import DetailBreakdownHeader from './DetailBreakdownHeader'
 import DetailTotal from './DetailTotal'
 import Tr from '../TranslationTable'
 import { timelineData } from '../selectors/timeline'
-import { amount, selection, groupingBy as timelineGrouping } from '../selectors/data'
+import { amount, selection, groupingBy as timelineGrouping, filterByTimelineAndHexData } from '../selectors/data'
 
 import ExplanationDot from './ExplanationDot'
 import TrSelector from '../selectors/translate'
 
-const transportType = [
+const dataFilter = [
   'Pipeline',
   'Marine',
   'Railroad',
   'Truck',
+  'Heavy',
+  'Light',
 ]
 
 const productSubType = [
-  'Heavy',
-  'Light',
+  
 ]
 
 class ProportionChart extends Chart {
@@ -42,12 +43,12 @@ class ProportionChart extends Chart {
       colors: Constants.getIn(['styleGuide', 'categoryColours']),
     })
   }
-  calculateBreakdown(data, aggregateKeyList) {
-    return data.reduce((acc, next) => {
-      acc.total += next.get('total')
-      aggregateKeyList.forEach(type => {
-        acc.values[type] = (acc.values[type] || 0) + next.getIn(['values', type], 0)
-      })
+  calculateBreakdown() {
+    return this.props.filteredData.reduce((acc, next) => {
+      const type = next.get(this.props.aggregateKey)
+      if(!dataFilter.includes(type)){return acc}
+      acc.total += next.get('value')
+      acc.values[type] = (acc.values[type] || 0) + next.get('value', 0)
       return acc
     }, { total: 0, values: {} })
   }
@@ -79,19 +80,17 @@ class ProportionChart extends Chart {
     /></g>)
   }
 
-  renderDetailSideBar(data, aggregateKey, categoryColours, selectionState){
+  renderDetailSideBar(data, aggregateKey, categoryColours, selectionState, selectedEnergy){
     let aggregateKeyList = []
     let prefix = ''
     let suffix = ''
     let trContent = new Immutable.Map()
     let dimensions = {...this.props}
     if(aggregateKey === 'transport'){
-      aggregateKeyList = transportType
       dimensions.top -= 20
       prefix = `${Tr.getIn(['detailBreakDown', 'crudeOil', 'transport', 'type', this.props.language])} ${Tr.getIn(['detailBreakDown', 'crudeOil', 'transport', 'action', this.props.language])}` 
       trContent = Tr.getIn(['detailBreakDown','crudeOil','transport','header'])
     } else if(aggregateKey === 'productSubtype'){
-      aggregateKeyList = productSubType
       suffix =  ` ${Tr.getIn(['mainMenuBar', 'crudeOil', this.props.language])}`
       trContent = Tr.getIn(['detailBreakDown','crudeOil','productSubtype','header'])
     }
@@ -99,14 +98,11 @@ class ProportionChart extends Chart {
     if(selectionState.get('country') === 'us'){
       content = Tr.getIn(['detailBreakDown','crudeOil', 'defaultText', this.props.language])  
     }else{
-      const breakdown = this.calculateBreakdown(data, aggregateKeyList)
+      const breakdown = this.calculateBreakdown()
       content = <span><table width="100%" className="detailBreakDownContainer" style={{ padding: '8px 0', height:'90px', overflowY:'auto' }}>
         <tbody>
           {Object.keys(breakdown.values).map((key, i) => {
-            const colour = categoryColours.get(
-              i + (categoryColours.count() - aggregateKeyList.length),
-              Constants.getIn(['styleGuide', 'colours', 'ExportDefault']),
-            )
+            const colour = categoryColours.getIn([selectedEnergy,aggregateKey, key], Constants.getIn(['styleGuide', 'colours', 'ExportDefault']))
             return (
               <DetailBreakdownRow
                 key={key}
@@ -155,6 +151,8 @@ class ProportionChart extends Chart {
       color,
       colors: categoryColours,
       selectionState,
+      selectedEnergy,
+      aggregateKey,
     } = this.props
 
     const valueTotals = data
@@ -172,12 +170,11 @@ class ProportionChart extends Chart {
       const opacity = this.isTimelinePointFiltered(point) ? 0.5 : 1
       let offsetY = 0
       let stackIndex = 0
-      const colourOffset = (categoryColours.count() - point.get('values').count())
       const lines = point
         .get('values')
         .sortBy((v, k) => k, (a, b) => (valueOrder.indexOf(a) - valueOrder.indexOf(b)))
         .map((value, type) => {
-          let lineColor = categoryColours.get(stackIndex + colourOffset, color)
+          let lineColor = categoryColours.getIn([selectedEnergy, aggregateKey, type], Constants.getIn(['styleGuide', 'colours', 'ExportDefault']))
           if(selectionState.get('country') === 'us'){
             lineColor='grey'
           }
@@ -204,7 +201,7 @@ class ProportionChart extends Chart {
     return (
       <g transform={this.getTransform()}>
         {elements}
-        {this.renderDetailSideBar(data, this.props.aggregateKey ,categoryColours, selectionState)}
+        {this.renderDetailSideBar(data, this.props.aggregateKey ,categoryColours, selectionState, this.props.selectedEnergy)}
         {this.crudeExplanation(data, this.props.aggregateKey)}
       </g>
     )
@@ -216,5 +213,7 @@ export default connect((state, props) => Object.assign({
   TRSelector: TrSelector(state, props),
   unit: amount(state, props),
   language: state.language,
-  selectionState: selection(state, props)
+  selectionState: selection(state, props),
+  filteredData: filterByTimelineAndHexData(state, props),
+  selectedEnergy: state.importExportVisualization,
 }, timelineData(state, props)))(ProportionChart)

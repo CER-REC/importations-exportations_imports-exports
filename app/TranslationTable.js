@@ -295,6 +295,10 @@ const TranslationTable = fromJS({
           en: 'MOST EXPORTS',
           fr: 'PLUS D’EXPORTATIONS',
         },
+        amount:{
+          en: 'AMOUNT',
+          fr: 'QUANTITÉ',
+        },
         stack: {
           en: 'STACK',
           fr: 'GRAPHIQUE UNIE',
@@ -925,7 +929,7 @@ const TranslationTable = fromJS({
         en: 'Nunavut',
         fr: 'Nunavut',
       },
-      NF: {
+      NL: {
         en: 'Newfoundland and Labrador',
         fr: 'Terre-Neuve-et-Labrador',
       },
@@ -953,7 +957,7 @@ const TranslationTable = fromJS({
         en: 'Ontario',
         fr: 'Ontario',
       },
-      QB: {
+      QC: {
         en: 'Québec',
         fr: 'Québec',
       },
@@ -1356,13 +1360,13 @@ const TranslationTable = fromJS({
       importsForReexport: {
         imports: {
           label: {
-            en: 'temporary imports into Canada',
+            en: 'temporary imports into\nCanada',
             fr: 'importations temporaires\ndu Canada',
           },
         },
         exports: {
           label: {
-            en: 're-exports (of temporary imports)\nfrom Canada',
+            en: 're-exports (of temporary\nimports) from Canada',
             fr: "ré-exportations (d'importations\ntemporaires) au Canada",
           },
         },
@@ -1375,13 +1379,13 @@ const TranslationTable = fromJS({
       exportsForReimport: {
         imports: {
           label: {
-            en: 're-imports (of temporary exports)\ninto Canada',
+            en: 're-imports (of temporary\nexports) into Canada',
             fr: "ré-importations (d'exportations\ntemporaires) au Canada",
           },
         },
         exports: {
           label: {
-            en: 'temporary exports from Canada',
+            en: 'temporary exports from\nCanada',
             fr: 'exportations temporaires\ndu Canada',
           },
         },

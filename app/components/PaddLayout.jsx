@@ -304,7 +304,8 @@ class PaddLayout extends React.Component {
       if (currentValue[0] !== 'ca') {
         const paddGroup = currentValue[1].get('destination')
         const text = props.TRSelector(['Padd', props.country, paddGroup])
-        const color = this.getPaddColor(currentValue[1].get('value'))
+        const paddValue = (props.selctionState.get('origins').count() > 0 && props.selctionState.get('country') === 'ca' && props.selectedEnergy === 'naturalGasLiquids')? 0: currentValue[1].get('value')
+        const color = this.getPaddColor(paddValue)
         switch (paddGroup) {
           case 'PADD I':
             paddLayout = <PaddOne color={color} />
@@ -371,7 +372,8 @@ class PaddLayout extends React.Component {
     const paddGroup = Constants.getIn(['dataloader', 'mapping', 'padd', props.country, props.paddGroup])
     const data = props.Padd.get(paddGroup)
     if(data){
-    const color = this.getPaddColor(data.get('value'))
+    const paddValue = (props.selctionState.get('origins').count() > 0 && props.selctionState.get('country') === 'ca' && props.selectedEnergy === 'naturalGasLiquids')? 0: data.get('value')
+    const color = this.getPaddColor(paddValue)
     return (<g className="paddLayout" fillOpacity={this.getOpacityOfPadd(props, paddGroup)}
       {...handleInteractionWithTabIndex(this.getTabIndex(props.country) , this.onPaddClick, props, paddGroup)}
         >
@@ -393,7 +395,7 @@ class PaddLayout extends React.Component {
             color={color}
             left={mapPieceTransformStartLeft(props.left, position, dimensions, mapPieceScale)}
             top={mapPieceTransformStartTop(props.top, position, dimensions, mapPieceScale)}
-            mapPieceStyleClass={this.getMapPieceTextColor(data.get('value'))}
+            mapPieceStyleClass={this.getMapPieceTextColor(paddValue)}
             isLabelRquired={props.arrangeBy === 'location'}
           />
         ))}
