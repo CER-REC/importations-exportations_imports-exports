@@ -79,8 +79,23 @@ export const binSelector = createSelector(
   (vis, unit, bins) => bins.getIn([vis, unit], emptyList),
 )
 
-export const activityGroupSelector = createSelector(
+export const subTypeSelector = createSelector(
+  selectedVisualization,
   unitSelector,
+  subType,
+  (viz, points, filterSubType) =>{
+    if(viz !==  'naturalGasLiquids' 
+      || ( viz ===  'naturalGasLiquids' 
+            && (['propaneButane','' ].includes(filterSubType)))) { return points }
+    return points.filter(point => {
+      if(point.get('product') !== 'naturalGasLiquids'){return false}
+      return point.get('productSubtype') === filterSubType
+    })
+  },
+) 
+
+export const activityGroupSelector = createSelector(
+  subTypeSelector,
   selectedActivityGroup,
   (points, filterActivityGroup) =>
     points.filter(point => (
