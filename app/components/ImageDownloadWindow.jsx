@@ -62,18 +62,15 @@ class ImageDownloadWindow extends React.Component {
   }
 
   imagePreview() {
-    const screenshotUrl = `${RouteComputations.screenshotOrigin(location)}/${Constants.get('screenshotPath')}/?pageUrl=${RouteComputations.screenshotParameter(document.location)}&width=${Constants.get('screenshotWidth')}&height=${Constants.get('screenshotHeight')}`
-    return <div
-      className="imagePreview">
-      <img className="imagePreview"
-        src={ screenshotUrl }
-      />
+    return (
+      <div className="imagePreview">
+        <img className="imagePreview" src={RouteComputations.screenshotURL()} />
       </div>
+    )
   }
 
   saveImageClick() {
-    const screenshotUrl = `${RouteComputations.screenshotOrigin(location)}/${Constants.get('screenshotPath')}/?pageUrl=${RouteComputations.screenshotParameter(document.location)}&width=${Constants.get('screenshotWidth')}&height=${Constants.get('screenshotHeight')}`
-    window.open(screenshotUrl)
+    window.open(RouteComputations.screenshotURL())
   }
 
   saveImageButton() {

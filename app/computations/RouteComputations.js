@@ -52,7 +52,7 @@ const RouteComputations = {
       const root = RouteComputations.appRoot(document.location, 'en')
       return `${root}data/data.json`
     }
-    return `${location.origin}/imports-exports/data/data.json`
+    return `${document.location.origin}/imports-exports/data/data.json`
   },
 
   topoEndpoint: () => {
@@ -61,7 +61,7 @@ const RouteComputations = {
       const root = RouteComputations.appRoot(document.location, 'en')
       return `${root}data/topo.json`
     }
-    return `${location.origin}/imports-exports/data/topo.json`
+    return `${document.location.origin}/imports-exports/data/topo.json`
   },
 
   determineLanguage(location) {
@@ -88,20 +88,18 @@ const RouteComputations = {
     return `${location.origin}${Tr.getIn(['applicationPath', language])}`
   },
 
-  // Based on the current URL, construct a URL to the screenshottable version
-  // of the visualization, and also encode it for use as a URL parameter itself.
-  // The server will make the request of localhost, we only need to construct
-  // the remainder of the path
-  // NB: Location.pathname includes the leading slash in the url, e.g.:
-  // In 'foo.com/bar', pathname is '/bar'
-  screenshotParameter(location) {
-    return encodeURIComponent(`${location.pathname}screenshot${location.search}`)
+  screenshotURL() {
+    let path = `${RouteComputations.screenshotOrigin(document.location)}/${Constants.get('screenshotPath')}`
+    path += `?pageUrl=${encodeURIComponent(`${document.location.pathname}screenshot${document.location.search}`)}`
+    path += `&width=${Constants.get('screenshotWidth')}&height=${Constants.get('screenshotHeight')}`
+    path += `&host=${document.location.host}`
+    return path
   },
 
   screenshotOrigin(location) {
     switch (process.env.NODE_ENV) {
       case 'development':
-        return 'http://localhost:3004'
+        return 'http://localhost:3002'
       case 'production':
       default:
         return location.origin
