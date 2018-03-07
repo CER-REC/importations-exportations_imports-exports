@@ -251,8 +251,11 @@ export const aggregateFilterLocationSelector = createSelector(
 
 export const aggregateLocationPaddSelector = createSelector(
   filterByTimelineSelector,
-  (points) => {
-    const result = points.reduce((acc, next) => {
+  selectedVisualization,
+  (points, viz) => {
+    let missingpPadds = Constants.getIn(['dataloader', 'mapping', 'padd', 'us'], Immutable.fromJS({}))
+    missingpPadds = missingpPadds.merge(Constants.getIn(['dataloader', 'mapping', 'padd', 'ca'], Immutable.fromJS({})))
+    let paddData = points.reduce((acc, next) => {
       let destination = next.get('destinationKey') === ''? next.get('destination'): next.get('destinationKey')
       if (typeof destination === 'undefined') {
         return acc
@@ -264,6 +267,7 @@ export const aggregateLocationPaddSelector = createSelector(
           destination,
         }
       }
+      missingpPadds = missingpPadds.delete(destination)
       const activity = next.get('activity')
       const currentVal = acc[destination].value || 0
       acc[destination].value = (currentVal + next.get('value'))
@@ -287,7 +291,15 @@ export const aggregateLocationPaddSelector = createSelector(
       acc[destination].country = next.get('destinationCountry')
       return acc
     }, {})
-    return Immutable.fromJS(result)
+    missingpPadds.forEach((data, paddName) => {
+      if(viz === 'naturalGasLiquids' && paddName === 'Non-USA'){
+        return
+      }else if(viz === 'crudeOil' && paddName === 'Mexico'){
+        return
+      }
+      paddData[paddName] = {}
+    })
+    return Immutable.fromJS(paddData)
   },
 )
 

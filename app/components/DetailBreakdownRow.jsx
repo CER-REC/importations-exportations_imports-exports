@@ -25,6 +25,10 @@ const DetailBreakdownRow = props => (
   </tr>
 )
 
+DetailBreakdownRow.defaultProps = {
+    value: 0,
+  }
+
 DetailBreakdownRow.propTypes = {
   label: PropTypes.node.isRequired,
   value: PropTypes.number.isRequired,
