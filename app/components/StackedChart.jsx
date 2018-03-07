@@ -89,6 +89,7 @@ class StackedChart extends Chart {
       scale,
       color,
       colors: categoryColours,
+      selectedEnergy,
     } = this.props
 
     const valueTotals = data
@@ -107,12 +108,11 @@ class StackedChart extends Chart {
       const opacity = this.isTimelinePointFiltered(point) ? 0.5 : 1
       let offsetY = 0
       let stackIndex = 0
-      const colourOffset = (categoryColours.count() - point.get('values').count())
       const lines = point
         .get('values')
         .sortBy((v, k) => k, (a, b) => (valueOrder.indexOf(a) - valueOrder.indexOf(b)))
         .map((value, type) => {
-          const lineColor = categoryColours.get(stackIndex + colourOffset, color)
+          const lineColor = categoryColours.getIn([selectedEnergy, type], Constants.getIn(['styleGuide', 'colours', 'ExportDefault']))
           const line = (
             <AnimatedLine
               x1={point.get('offsetX')}
@@ -155,6 +155,7 @@ class StackedChart extends Chart {
 }
 
 export default connect((state, props) => Object.assign({
+  selectedEnergy: state.importExportVisualization,
   timelineGroup: timelineGrouping(state, props),
   tr: trSelector(state, props),
 }, timelineData(state, props)))(StackedChart)

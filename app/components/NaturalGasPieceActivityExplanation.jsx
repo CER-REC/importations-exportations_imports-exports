@@ -24,8 +24,8 @@ class NaturalGasPieceActivityExplanation extends React.Component {
         y1={0}
         mapPieceKey='portName'
         mapPieceStyleClass = 'mapPieceText'
-        drawLabelLineImportY = {-30}
-        drawLabelLabelImportY = {-30}
+        drawLabelLineImportY = {-32}
+        drawLabelLabelImportY = {-28}
       />
     </g>)
   }

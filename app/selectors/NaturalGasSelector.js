@@ -1,7 +1,7 @@
 import { createSelector } from 'reselect'
 import Immutable from 'immutable'
 
-import { aggregateLocationPaddSelector, arrangeBy } from './data'
+import { aggregateLocationPaddSelector, arrangeBy, subType } from './data'
 import MapLayoutGridConstant from '../MapLayoutGridConstant'
 import Constants from '../Constants'
 import { visualizationSettings } from './visualizationSettings'
@@ -44,14 +44,17 @@ export const getPointsByCountry = createSelector(
 const getNaturalGasLiquidsImportAndExport = createSelector(
   getPointsByCountry,
   getCountry,
-  (points, country) => {
+  getSelectionSettings,
+  selectedVisualization,
+  (points, country, selection, selectedEnergy) => {
     // append missing states or provinces
     // fetch list of the states and province from the 
     const statesOrProvinces = Constants.getIn(['dataloader', 'mapping', 'country', country])
     if (typeof statesOrProvinces !== 'undefined') {
       let missingstatesOrProvincesMap = {}
       statesOrProvinces.entrySeq().forEach((stateOrProvince) => {
-        if (typeof points.get(stateOrProvince[1]) === 'undefined') {
+        if (typeof points.get(stateOrProvince[1]) === 'undefined' 
+          || (selection.get('country') === 'us' && selectedEnergy === 'naturalGasLiquids')) {
           const originKey = stateOrProvince[1]
           missingstatesOrProvincesMap[originKey] = {
             country,
@@ -71,15 +74,23 @@ const getNaturalGasLiquidsImportAndExport = createSelector(
   },
 )
 
+const sortData = (points, sortBy, subType='') => {
+  subType = subType === ''? 'propaneButane': subType
+  return points.sort((a, b) => (b.getIn(['subType', subType, 'imports'], 0) - a.getIn(['subType', subType, 'imports'], 0)))
+}
+
 const createSortedLayout = createSelector(
   getNaturalGasLiquidsImportAndExport,
   getColumns,
   getPadding,
-  (data, columns, rowPadding) => {
+  arrangeBy,
+  subType,
+  (data, columns, rowPadding, sortBy, stype) => {
     let row = 0
     let column = 0
     const sortedArray = []
-    data.forEach((statesOrProvinces) => {
+    const sortedData = sortData(data, sortBy, stype)
+    sortedData.forEach((statesOrProvinces) => {
       if (column >= columns) {
         column = 0
         row += 1
@@ -133,14 +144,13 @@ const parseLocationData = createSelector(
 )
 
 
-export const getElectricityMapLayout = createSelector(
+export const getNaturalGasLiquidMapLayout = createSelector(
   createSortedLayout,
   parseLocationData,
   arrangeBy,
   (sortedPoints, locationPoints, sortBy) => {
     switch (sortBy) {
-      case 'exports':
-      case 'imports':
+      case 'amount':
         return sortedPoints
       case 'location':
       default:

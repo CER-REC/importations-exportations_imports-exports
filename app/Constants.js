@@ -242,13 +242,27 @@ const Constants = fromJS({
       'rgb(28, 100, 178)',
       'rgb(8, 69, 148)',
     ],
-    categoryColours: [
-      'rgb(139, 192, 155)',
-      'rgb(87, 187, 149)',
-      'rgb(50, 155, 157)',
-      'rgb(39, 135, 144)',
-      'rgb(30, 97, 114)',
-    ],
+    categoryColours: {
+      refinedPetroleumProducts:{
+       'Partially Processed Oil': 'rgb(139, 192, 155)',
+       'Jet Fuel' :'rgb(87, 187, 149)',
+       'Heavy Fuel Oil' :'rgb(50, 155, 157)',
+       'Motor Gasoline' :'rgb(39, 135, 144)',
+       'Middle Distillate' :'rgb(30, 97, 114)',
+      },
+      crudeOil:{
+        transport: {
+          Pipeline : 'rgb(39, 135, 144)',
+          Marine : 'rgb(30, 97, 114)' ,
+          Railroad : 'rgb(39, 135, 144)',
+          Truck : 'rgb(50, 155, 157)',
+        },
+        productSubtype: {
+          Heavy : 'rgb(39, 135, 144)',
+          Light: 'rgb(30, 97, 114)',
+        },
+      },
+    },
   },
   detailBreakDown: {
     ca: {
@@ -264,7 +278,7 @@ const Constants = fromJS({
       type: 'exports',
       displayPosition: 'top',
       color: '#1c64b2',
-      height: 75,
+      height: 140,
       showDefault: false,
     },
     powerpool: {
@@ -295,14 +309,14 @@ const Constants = fromJS({
           Yukon: 'YT',
           'Northwest Territories': 'NT',
           Nunavut: 'NU',
-          'Newfoundland and Labrador': 'NF',
+          'Newfoundland and Labrador': 'NL',
           'Prince Edward Island': 'PE',
           'British Columbia': 'BC',
           Alberta: 'AB',
           Saskatchewan: 'SK',
           Manitoba: 'MB',
           Ontario: 'ON',
-          Québec: 'QB',
+          Québec: 'QC',
           'New Brunswick': 'NB',
           'Nova Scotia': 'NS',
           'Atlantic provinces and Quebec': 'ATL-Q',
@@ -445,25 +459,25 @@ const Constants = fromJS({
           'Port Name': 'St Clair', Province: 'ON', Latitude: 42.78333, Longitude: -82.35, '': '', Description: '', Capacity: '',
         },
         Armstrong: {
-          'Port Name': 'Armstrong', Province: 'QB', Latitude: 45.8661, Longitude: -70.4332, '': '', Description: '', Capacity: '',
+          'Port Name': 'Armstrong', Province: 'QC', Latitude: 45.8661, Longitude: -70.4332, '': '', Description: '', Capacity: '',
         },
         Champlain: {
-          'Port Name': 'Champlain', Province: 'QB', Latitude: 44.9688, Longitude: -73.4498, '': 'US', Description: '', Capacity: '',
+          'Port Name': 'Champlain', Province: 'QC', Latitude: 44.9688, Longitude: -73.4498, '': 'US', Description: '', Capacity: '',
         },
         'East Hereford': {
-          'Port Name': 'East Hereford', Province: 'QB', Latitude: 45.08333, Longitude: -71.5, '': '', Description: 'East Hereford is an export point on the TransCanada Mainline. At the border, the Mainline connects with the Portland Natura Gas Transmission, which serves markets in New England and the Maritimes.', Capacity: 0.25,
+          'Port Name': 'East Hereford', Province: 'QC', Latitude: 45.08333, Longitude: -71.5, '': '', Description: 'East Hereford is an export point on the TransCanada Mainline. At the border, the Mainline connects with the Portland Natura Gas Transmission, which serves markets in New England and the Maritimes.', Capacity: 0.25,
         },
         'Highgate Springs': {
-          'Port Name': 'Highgate Springs', Province: 'QB', Latitude: 44.9795, Longitude: -73.1054, '': 'US', Description: '', Capacity: '',
+          'Port Name': 'Highgate Springs', Province: 'QC', Latitude: 44.9795, Longitude: -73.1054, '': 'US', Description: '', Capacity: '',
         },
         Highwater: {
-          'Port Name': 'Highwater', Province: 'QB', Latitude: 45.02537, Longitude: -72.42930, '': '', Description: '', Capacity: '',
+          'Port Name': 'Highwater', Province: 'QC', Latitude: 45.02537, Longitude: -72.42930, '': '', Description: '', Capacity: '',
         },
         Napierville: {
-          'Port Name': 'Napierville', Province: 'QB', Latitude: 45.187058, Longitude: -73.401632, '': '', Description: '', Capacity: '',
+          'Port Name': 'Napierville', Province: 'QC', Latitude: 45.187058, Longitude: -73.401632, '': '', Description: '', Capacity: '',
         },
         Philipsburg: {
-          'Port Name': 'Philipsburg', Province: 'QB', Latitude: 45.0333, Longitude: -73.05, '': '', Description: '', Capacity: '',
+          'Port Name': 'Philipsburg', Province: 'QC', Latitude: 45.0333, Longitude: -73.05, '': '', Description: '', Capacity: '',
         },
         Elmore: {
           'Port Name': 'Elmore', Province: 'SK', Latitude: 49, Longitude: -101.633, '': '', Description: 'Elmore is an export point on the Alliance Pipeline. The Alliance pipeline is unique among major Canadian gas pipelines because natural gas liquids may be left in the gas stream. The system draws from 52 receipt points, largely concentrated near the northern end of the system in northeastern B.C. and northwestern Alberta. Alliance transports liquids-rich gas to the Chicago market hub. Extraction of natural gas liquids occurs at the Aux Sable facility located near Chicago', Capacity: 1.7,
