@@ -56,8 +56,8 @@ class RefinedPetroleumProductsVisualizationContainer extends React.Component {
         >
           <table width="100%" className="detailBreakDownContainer" style={{ padding: '8px 0' }}>
             <tbody>
-              {Object.keys(breakdown.values).map((key, i) => {
-                const colour = categoryColours.getIn([selectedEnergy, key], Constants.getIn(['styleGuide', 'colours', 'ExportDefault']))
+              {Object.entries(breakdown.values).sort((x, y) => y[1] - x[1]).map((key, i) => {
+                const colour = categoryColours.getIn([selectedEnergy, key[0]], Constants.getIn(['styleGuide', 'colours', 'ExportDefault']))
                 return (
                   <DetailBreakdownRow
                     key={key}
@@ -71,8 +71,8 @@ class RefinedPetroleumProductsVisualizationContainer extends React.Component {
                             verticalAlign: 'middle',
                           }}
                         />}
-                    label={<strong>{key}</strong>}
-                    value={breakdown.values[key]}
+                    label={<strong>{key[0]}</strong>}
+                    value={key[1]}
                     unit={this.props.unit}
                     total={breakdown.total}
                     progressBarStyle={{ backgroundColor: colour }}

@@ -101,8 +101,8 @@ class ProportionChart extends Chart {
       const breakdown = this.calculateBreakdown()
       content = <span><table width="100%" className="detailBreakDownContainer" style={{ padding: '8px 0', height:'90px', overflowY:'auto' }}>
         <tbody>
-          {Object.keys(breakdown.values).map((key, i) => {
-            const colour = categoryColours.getIn([selectedEnergy,aggregateKey, key], Constants.getIn(['styleGuide', 'colours', 'ExportDefault']))
+          {Object.entries(breakdown.values).sort((x, y) => y[1] - x[1]).map((key, i) => {
+            const colour = categoryColours.getIn([selectedEnergy,aggregateKey, key[0]], Constants.getIn(['styleGuide', 'colours', 'ExportDefault']))
             return (
               <DetailBreakdownRow
                 key={key}
@@ -116,8 +116,8 @@ class ProportionChart extends Chart {
                             backgroundColor: colour,
                           }}
                         />}
-                label={<span>{prefix} <strong>{key}</strong>{suffix}</span>}
-                value={breakdown.values[key]}
+                label={<span>{prefix} <strong>{key[0]}</strong>{suffix}</span>}
+                value={key[1]}
                 unit={this.props.unit}
                 total={breakdown.total}
                 progressBarStyle={{ backgroundColor: colour }}
