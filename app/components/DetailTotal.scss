@@ -1,4 +1,4 @@
-@import '../styles/Colours';
+ @import '../styles/Colours';
 
 .detailTotal {
   .totalType { font-weight: bold; }
@@ -19,12 +19,20 @@
 
   &.imports {
     padding-top: 2px;
-    &, .percentage { background: $import-default; }
+    &, .percentage { 
+          height: 12px; 
+          line-height: 1; 
+          background: $import-default; 
+        }
     .totalType { color: $import-default; }
   }
   &.exports {
-    padding-bottom: 2px;
-    &, .percentage { background: $export-default; }
+    padding-bottom: 14px;
+    &, .percentage { 
+          height: 13px; 
+          line-height: 1;
+          background: $export-default; 
+        }
     .totalType { color: $export-default; }
   }
 }
