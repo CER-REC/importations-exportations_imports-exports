@@ -71,36 +71,26 @@ class ChartOptions extends React.PureComponent {
     if (this.props.canChangeScale === false) { return null }
 
     const interactions = handleInteractionWithTabIndex(this.props.tabIndex, this.scaleLinkedChanged)
-    const switchHeight = this.props.height - 4
+    const switchHeight = this.props.height
     const imageProps = {
       fill: Constants.getIn(['styleGuide', 'colours', 'SandExtraDark']),
       height: switchHeight,
+      onChange: interactions.onClick,
     }
     return (
-      <label
-        htmlFor="scaleLinked"
-        className="switchWrapper"
+      <div
+        className="chartScaleLinked"
         {...interactions}
       >
-        <div className="switch" style={{ width: switchHeight * 2, height: switchHeight }}>
-          <input
-            type="checkbox"
-            id="scaleLinked"
-            checked={this.props.scaleLinked}
-            onChange={interactions.onClick}
-          />
-          <div className="switchBackground round">
-            <div className="slider" />
-            <svg>{this.linkDataExplanation()}</svg>
-          </div>
-        </div>
-        <svg height={switchHeight} width={switchHeight} style={{ margin: '0 4px' }}>
-          {this.props.scaleLinked ? <ScaleIcon.Linked {...imageProps} /> : <ScaleIcon.Broken {...imageProps} />}
+        <svg height={switchHeight} width={switchHeight}>
+          {this.props.scaleLinked
+            ? <ScaleIcon.ToggleLinked {...imageProps} />
+            : <ScaleIcon.ToggleUnlinked {...imageProps} />}
         </svg>
-        <span style={{ verticalAlign: 'text-bottom' }}>
+        <div>
           ({this.props.tr(['chartOptions', (this.props.scaleLinked ? 'scaleLinked' : 'scaleUnlinked')])})
-        </span>
-      </label>
+        </div>
+      </div>
     )
   }
 
