@@ -35,17 +35,22 @@ class Header extends React.Component {
 
   resetExplanation() {
     let textString = `${this.props.Tr(['explanations','reset'])}`
+    let dotName = 'electricityTitleExplanation'
     if (this.props.selectedEnergy === 'crudeOil') {
       textString = `${this.props.Tr(['explanations','resetCrudeOil'])}`
+      dotName = 'crudeOilTitleExplanation'
     }
     if (this.props.selectedEnergy === 'naturalGas') {
       textString = `${this.props.Tr(['explanations','resetNaturalGas'])}`
+      dotName = 'naturalGasTitleExplanation'
     }
     if (this.props.selectedEnergy === 'naturalGasLiquids') {
       textString = `${this.props.Tr(['explanations','resetNaturalGasLiquids'])}`
+      dotName = 'naturalGasLiquidsTitleExplanation'
     }
     if (this.props.selectedEnergy === 'refinedPetroleumProducts') {
       textString = `${this.props.Tr(['explanations','resetRefinedPetroleumProducts'])}`
+      dotName = 'refinedPetroleumProductsTitleExplanation'
     }
     return (<g>
       <ExplanationDot
@@ -66,8 +71,8 @@ class Header extends React.Component {
         textX={40}
         textY={58}
         containerX={0}
-        containerY={-70} 
-        name="titleExplanation"
+        containerY={-70}
+        name={dotName}
         text={textString}
     /></g>)
   }

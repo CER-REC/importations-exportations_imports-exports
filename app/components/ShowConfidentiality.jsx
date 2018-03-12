@@ -65,12 +65,15 @@ class ShowConfidentiality extends React.Component {
   }
 
   confidentialityExplanation() {
-    if (this.props.energyType !== 'electricity') { return }
+    let textString = `${this.props.Tr(['explanations', 'confidentiality'])}`
+    if (this.props.energyType === 'electricity') {
+      textString = `${this.props.Tr(['explanations', 'electricityConfidentiality'])}`
+    }
     return (<g>
       <ExplanationDot
-        scale="scale(0.3)"
-        lineStroke="1.8"
-        textBoxWidth={130}
+        scale="scale(1.8 -1.8) translate(0 -90)"
+        lineStroke="0.5"
+        textBoxWidth={220}
         linePath="
           M142.16,
           173.94l24.26,
@@ -82,12 +85,12 @@ class ShowConfidentiality extends React.Component {
         yPosition={-5}
         lineX={142.16}
         lineY={173.94}
-        textX={10}
-        textY={20}
-        containerX={this.props.left + 2}
-        containerY={this.props.top}
-        text={`${this.props.Tr(['explanations', 'confidentiality'])}`}
-        name="confidentialityExplanation"
+        textX={80}
+        textY={66}
+        containerX={this.props.left - 5}
+        containerY={this.props.top - 152}
+        text={textString}
+        name={`${this.props.energyType} confidentialityExplanation`}
     /></g>)
   }
 

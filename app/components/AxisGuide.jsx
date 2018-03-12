@@ -145,7 +145,7 @@ class AxisGuide extends React.PureComponent {
         textY={58}
         containerX={220}
         containerY={containerY}
-        name="timeLineRangeDot"
+        name={`${this.props.selectedEnergy} timeLineRangeDot`}
         text={`${this.props.tr(['explanations','timelineRange'])}`}
     /></g>)
   }

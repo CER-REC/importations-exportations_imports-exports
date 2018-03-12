@@ -80,7 +80,7 @@ class BarChart extends Chart {
         textY={58}
         containerX={this.props.left}
         containerY={this.props.top}
-        name="importBarChartExplanation"
+        name={`${this.props.selectedEnergy} importBarChartExplanation`}
         text={textString}
     /></g>)
   }
@@ -108,15 +108,19 @@ class BarChart extends Chart {
         textY={153}
         containerX={this.props.left - 278}
         containerY={this.props.left + 68}
-        name="exportBarChartExplanation"
+        name={`${this.props.selectedEnergy} exportBarChartExplanation`}
         text={`${this.props.tr(['explanations','barChartExport'])}`}
     /></g>)
   }
 
   crudeBlueBarExplanation() {
+    let yPosition = 0
     let textString = `${this.props.tr(['explanations','blueBarCrude'])}`
+    let containerY = this.props.top + 100
     if (this.props.selectedEnergy === 'naturalGasLiquids') {
       textString = `${this.props.tr(['explanations','blueBarNaturalGasLiquids'])}`
+      yPosition = 35
+      containerY = this.props.top + 32
     }
     if (!this.props.flipped || (this.props.selectedEnergy !== 'crudeOil' && this.props.selectedEnergy !== 'naturalGasLiquids')) { return null }
     return (<g>
@@ -133,14 +137,14 @@ class BarChart extends Chart {
           33.47,
           18H288.2"
         xPosition={632}
-        yPosition={0}
+        yPosition={yPosition}
         lineX={142.16}
         lineY={173}
         textX={46}
         textY={58}
         containerX={this.props.left + 3 }
-        containerY={this.props.top + 100}
-        name="exportBarChartExplanation"
+        containerY={containerY}
+        name={`${this.props.selectedEnergy} exportBarChartExplanation`}
         text={textString}
     /></g>)
   }

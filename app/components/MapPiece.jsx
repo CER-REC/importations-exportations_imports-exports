@@ -11,6 +11,8 @@ import AnimatedGroup from './SVGAnimation/SafeAnimation'
 import AnimatedMapPiece from './SVGAnimation/AnimatedMapPiece'
 import MapLayoutGridConstant from '../MapLayoutGridConstant'
 import ExplanationDot from './ExplanationDot'
+import { arrangeBy } from '../selectors/data'
+import { visualizationSettings } from '../selectors/visualizationSettings'
 
 import trSelector from '../selectors/translate'
 import tr from '../TranslationTable'
@@ -25,6 +27,7 @@ class MapPiece extends React.Component {
     confidentialityMenu: PropTypes.bool.isRequired,
     selectedEnergy: PropTypes.string.isRequired,
     isOrigin: PropTypes.bool,
+    arrangeBy: PropTypes.string.isRequired,
   }
 
   static defaultProps = {
@@ -206,9 +209,16 @@ class MapPiece extends React.Component {
   }
 
   emersonExplanation() {
-   if (this.props.data.get('portName') !== 'Emerson') { return null }
-    const scaleContainerX = this.props.viewport.get('changeWidthRatio')  > 1.2 ? 180: 160
-    const scaleContainerY = this.props.viewport.get('changeHeightRatio')  > 1.2 ? 250: 310
+    let textString = `${this.props.tr(['explanations', 'EmersonNaturalGas'])}`
+    if (['importsForReexport'].includes(this.props.activityGroup.get('activity'))) {
+      textString = `${this.props.tr(['explanations', 'EmersonTempImpNaturalGas'])}`
+    }
+    if (['exportsForReimport'].includes(this.props.activityGroup.get('activity'))) {
+      textString = `${this.props.tr(['explanations', 'EmersonTempExpNaturalGas'])}`
+    }
+    if (this.props.data.get('portName') !== 'Emerson') { return null }
+    const scaleContainerX = this.props.viewport.get('changeWidthRatio') > 1.2 ? 180 : 160
+    const scaleContainerY = this.props.viewport.get('changeHeightRatio') > 1.2 ? 250 : 310
     return (<g>
       <ExplanationDot
         scale="scale(1)"
@@ -227,17 +237,20 @@ class MapPiece extends React.Component {
         lineY={173.94}
         textX={40}
         textY={58}
-        containerX={this.props.viewport.get('changeWidthRatio')*(this.props.x1  + scaleContainerX)}
-        containerY={this.props.viewport.get('changeHeightRatio')*(this.props.y1   + scaleContainerY)}
+        containerX={this.props.viewport.get('changeWidthRatio') * (this.props.x1 + scaleContainerX)}
+        containerY={this.props.viewport.get('changeHeightRatio') * (this.props.y1 + scaleContainerY)}
         name="emersonElectricity"
-        text={`${this.props.tr(['explanations','EmersonNaturalGas'])}`}
+        text={textString}
     /></g>)
   }
 
   albertaExplanation() {
     if (this.props.data.get('name') !== 'AB' || this.props.selectedEnergy !== 'naturalGasLiquids') { return null }
-    const scaleContainerX = this.props.viewport.get('changeWidthRatio')  > 1.2 ? 242: 190
-    const scaleContainerY = this.props.viewport.get('changeHeightRatio')  > 1.2 ? -20: -30
+    let scaleContainerX = this.props.viewport.get('changeWidthRatio')  > 1.2 ? 241: 190
+    const scaleContainerY = this.props.viewport.get('changeHeightRatio')  > 1.2 ? -16: -30
+    if (this.props.arrangeBy === 'location') {
+      scaleContainerX = this.props.viewport.get('changeWidthRatio')  > 1.2 ? 247: 190
+    }
     return (<g>
       <ExplanationDot
         scale="scale(1 -1) translate(0 -100)"
@@ -258,7 +271,7 @@ class MapPiece extends React.Component {
         textX={48}
         textY={48}
         containerX={this.props.viewport.get('changeWidthRatio')*(this.props.x1 * MapLayoutGridConstant.getIn(['electricity', 'us' , 'mapPieceScale'], 1) + scaleContainerX)}
-        containerY={this.props.viewport.get('changeHeightRatio')*(this.props.y1 * MapLayoutGridConstant.getIn(['electricity', 'us' , 'mapPieceScale'], 1)  + scaleContainerY)}      
+        containerY={this.props.viewport.get('changeHeightRatio')*(this.props.y1 * MapLayoutGridConstant.getIn(['electricity', 'us' , 'mapPieceScale'], 1)  + scaleContainerY)}     
         name="albertaExplanation"
         text={`${this.props.tr(['explanations','albertaArrowNaturalGasLiquids'])}`}
     /></g>)
@@ -266,8 +279,8 @@ class MapPiece extends React.Component {
 
   atlqExplanation() {
     if (this.props.data.get('name') !== 'ATL-Q' || this.props.selectedEnergy !== 'naturalGasLiquids') { return null }
-    const scaleContainerX = this.props.viewport.get('changeWidthRatio')  > 1.2 ? 260: 225
-    const scaleContainerY = this.props.viewport.get('changeHeightRatio')  > 1.2 ? -15: -20
+    const scaleContainerX = this.props.viewport.get('changeWidthRatio')  > 1.2 ? 276: 225
+    const scaleContainerY = this.props.viewport.get('changeHeightRatio')  > 1.2 ? -20: -20
     return (<g>
       <ExplanationDot
         scale="scale(1 -1) translate(0 -100)"
@@ -418,6 +431,8 @@ export default connect(
     expandCollapseConfidentiality: state.expandCollapseConfidentiality,
     activity: state.activity,
     viewport: state.viewport,
+    arrangeBy: arrangeBy(state, props),
+    activityGroup: visualizationSettings(state, props)
   }),
 )(MapPiece)
 

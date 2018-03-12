@@ -95,7 +95,9 @@ class PortMap extends React.PureComponent {
   }
 
   portMapExplanation() {
-    return (<g  transform="scale(3.9) translate(-300)">
+    const scaleContainerX = this.props.viewport.get('changeWidthRatio') > 1.2 ? 490 : 270
+    const scaleContainerY = this.props.viewport.get('changeHeightRatio') > 1.2 ? 72 : 70
+    return (<g transform="scale(3.9) translate(-300)">
       <ExplanationDot
         scale="scale(0.5)"
         lineStroke="1.5"
@@ -114,8 +116,8 @@ class PortMap extends React.PureComponent {
         lineY={173}
         textX={20}
         textY={29}
-        containerX={597}
-        containerY={343}
+        containerX={this.props.left + scaleContainerX - 87}
+        containerY={this.props.top + scaleContainerY + 13} 
         name="portMapDot"
         text={`${this.props.tr(['explanations','portNaturalGas'])}`}
     /></g>)
@@ -197,6 +199,7 @@ class PortMap extends React.PureComponent {
 
 const mapStateToprops = (state, props) => {
   return {
+    viewport: state.viewport,
     tr: trSelector(state, props),
     selectionSettings: getSelectionSettings(state, props),
     language: state.language,
