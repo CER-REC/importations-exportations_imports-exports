@@ -27,6 +27,11 @@ const TranslationTable = fromJS({
     },
   },
 
+  methodologyLinks: {
+    en: 'data/Export-Import-Data-Methodology-EN.pdf',
+    fr: 'data/Export-Import-Data-Methodology-FR.pdf',
+  },
+
   aboutWindow: {
     heading: {
       en: 'ABOUT THIS PROJECT',
@@ -644,7 +649,7 @@ const TranslationTable = fromJS({
   },
 
   bitlyShare: {
-    en: 'Visit this interaction visualization:',
+    en: 'Visit this interactive visualization:',
     fr: 'TODO',
   },
 

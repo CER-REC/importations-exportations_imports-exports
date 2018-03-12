@@ -118,9 +118,10 @@ class SocialBar extends React.Component {
     this.props.onClick()
   }
 
-  methodologyClick() { // eslint-disable-line class-methods-use-this
+  methodologyClick() { 
     if (!this.props.expandSocialBar) { return this.props.controlArrowClick() }
-    // TODO: add methodology click functionality once pdf is given
+    const appRoot = RouteComputations.appRoot(document.location, this.props.language)
+    window.open(`${appRoot}${Tr.getIn(['methodologyLinks', this.props.language])}`)
   }
 
   twitterClick() {
