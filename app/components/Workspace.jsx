@@ -61,6 +61,6 @@ const Workspace = ({ svgSize, detailSidebarPosition, portalSvgSize }) => (
 export default connect((state, props) => ({
   svgSize: svgSizeSelector(state, props),
   detailSidebarPosition: detailSidebarSelector(state, props),
-  screenshotMode: state.screenshotMode,
+  screenshot: state.screenshot,
 }))(Workspace)
 

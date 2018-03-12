@@ -70,7 +70,7 @@ class ImageDownloadWindow extends React.Component {
   }
 
   saveImageClick() {
-    window.open(RouteComputations.screenshotURL())
+    window.open(RouteComputations.screenshotURL(), 'targetWindow', 'width=650,height=650')
   }
 
   saveImageButton() {
