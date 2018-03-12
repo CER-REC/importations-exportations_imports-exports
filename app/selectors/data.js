@@ -79,8 +79,23 @@ export const binSelector = createSelector(
   (vis, unit, bins) => bins.getIn([vis, unit], emptyList),
 )
 
-export const activityGroupSelector = createSelector(
+export const subTypeSelector = createSelector(
+  selectedVisualization,
   unitSelector,
+  subType,
+  (viz, points, filterSubType) =>{
+    if(viz !==  'naturalGasLiquids' 
+      || ( viz ===  'naturalGasLiquids' 
+            && (['propaneButane','' ].includes(filterSubType)))) { return points }
+    return points.filter(point => {
+      if(point.get('product') !== 'naturalGasLiquids'){return false}
+      return point.get('productSubtype') === filterSubType
+    })
+  },
+) 
+
+export const activityGroupSelector = createSelector(
+  subTypeSelector,
   selectedActivityGroup,
   (points, filterActivityGroup) =>
     points.filter(point => (
@@ -132,6 +147,13 @@ export const filterByHex = (point, selectedMapPieces, visualization, selectionSt
       }
     }
     return selectedMapPieces.includes(point.get('destination')) || selectedMapPieces.includes(point.get('destinationKey'))
+  }
+  if(visualization === 'electricity'){
+    const origins = selectionState.get('origins')
+    return origins.includes(point.get('destination')) 
+    || origins.includes(point.get('destinationKey'))
+    || origins.includes(point.get('originKey'))
+    || origins.includes(point.get('origin'))
   }
   return selectedMapPieces.includes(point.get('originKey'))
   || selectedMapPieces.includes(point.get('origin'))
@@ -210,10 +232,30 @@ export const aggregateLocationSelector = createSelector(
   },
 )
 
-export const aggregateLocationPaddSelector = createSelector(
-  filterByTimelineSelector,
+export const aggregateFilterLocationSelector = createSelector(
+  filterByTimelineAndHexData,
   (points) => {
     const result = points.reduce((acc, next) => {
+      const origin = next.get('origin') || next.get('port')
+      const originKey = next.get('originKey')
+      acc = mapPieceLocationDataStructure(acc, next, origin, originKey, 'country','destinationKey', 'destinationCountry')
+
+      const destination = next.get('destination') || next.get('port')
+      const destinationKey = next.get('destinationKey')
+      acc = mapPieceLocationDataStructure(acc, next, destination, destinationKey, 'destinationCountry', 'originKey', 'country')
+      return acc
+    }, {})
+    return Immutable.fromJS(result)
+  },
+)
+
+export const aggregateLocationPaddSelector = createSelector(
+  filterByTimelineSelector,
+  selectedVisualization,
+  (points, viz) => {
+    let missingpPadds = Constants.getIn(['dataloader', 'mapping', 'padd', 'us'], Immutable.fromJS({}))
+    missingpPadds = missingpPadds.merge(Constants.getIn(['dataloader', 'mapping', 'padd', 'ca'], Immutable.fromJS({})))
+    let paddData = points.reduce((acc, next) => {
       let destination = next.get('destinationKey') === ''? next.get('destination'): next.get('destinationKey')
       if (typeof destination === 'undefined') {
         return acc
@@ -225,6 +267,7 @@ export const aggregateLocationPaddSelector = createSelector(
           destination,
         }
       }
+      missingpPadds = missingpPadds.delete(destination)
       const activity = next.get('activity')
       const currentVal = acc[destination].value || 0
       acc[destination].value = (currentVal + next.get('value'))
@@ -248,7 +291,15 @@ export const aggregateLocationPaddSelector = createSelector(
       acc[destination].country = next.get('destinationCountry')
       return acc
     }, {})
-    return Immutable.fromJS(result)
+    missingpPadds.forEach((data, paddName) => {
+      if(viz === 'naturalGasLiquids' && paddName === 'Non-USA'){
+        return
+      }else if(viz === 'crudeOil' && paddName === 'Mexico'){
+        return
+      }
+      paddData[paddName] = {}
+    })
+    return Immutable.fromJS(paddData)
   },
 )
 

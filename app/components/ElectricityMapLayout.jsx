@@ -18,7 +18,7 @@ import { setSelection } from '../actions/visualizationSettings'
 import './ElectricityMapLayout.scss'
 
 import { getElectricityMapLayout, getSelectionSettings } from '../selectors/ElectricitySelector'
-import { arrangeBy, binSelector, aggregateLocationSelector } from '../selectors/data'
+import { arrangeBy, binSelector, aggregateLocationSelector, aggregateFilterLocationSelector } from '../selectors/data'
 import DetailSidebar from './DetailSidebar'
 import DetailBreakdown from './DetailBreakdown'
 import { handleInteractionWithTabIndex } from '../utilities'
@@ -198,10 +198,10 @@ class ElectricityMapLayout extends React.Component {
     const data = Immutable.fromJS(
       this.props.selection.get('destinations').reduce((acc, nextValue, country) => {
           return nextValue.reduce((accumulator, stateOrProvince, key) => {
-            if(!this.props.dataPoints.getIn([key, detailBreakdownData.get('type')])){
+            if(!this.props.filteredDataPoints.getIn([key, detailBreakdownData.get('type')])){
               return acc
             }
-            acc[key] = this.props.dataPoints.getIn([key, detailBreakdownData.get('type')])
+            acc[key] = this.props.filteredDataPoints.getIn([key, detailBreakdownData.get('type')])
             return acc
           },{})
       },{})
@@ -245,6 +245,7 @@ const mapStateToProps = (state, props) => ({
   layout: getElectricityMapLayout(state, props),
   selection: getSelectionSettings(state, props),
   dataPoints: aggregateLocationSelector(state, props),
+  filteredDataPoints: aggregateFilterLocationSelector(state,props),
   arrangeBy: arrangeBy(state, props),
   bins: binSelector(state, props),
   Tr: TrSelector(state, props),

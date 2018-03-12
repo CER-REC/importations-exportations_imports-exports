@@ -53,6 +53,7 @@ const renderDetailBreakdown = (props) => {
       if(props.selection.get('origins').count() > 0 
         && !props.selection.get('origins').includes(nextValue.get('destination'))) { return acc}
       const subType = nextValue.get('subType')
+      if(!subType) {return acc}
       subType.forEach((subTypeVal, subTypeKey) => {
         if(props.subType !== '' && props.subType !== 'propaneButane' ){
           if(subTypeKey !== 'propaneButane' && subTypeKey === props.subType){

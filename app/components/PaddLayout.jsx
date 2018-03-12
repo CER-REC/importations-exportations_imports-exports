@@ -42,7 +42,7 @@ class PaddLayout extends React.Component {
     return this.props.bins.findIndex(range => range.get(0) <= value && value < range.get(1))
   }
   getPaddColor(value) {
-    if (value === -1) { return '#fff' }
+    if (!value || value === -1) { value = 0 }
     const index = this.getColorIndex(value)
     return Constants.getIn(
       ['styleGuide', 'exportColours', index],
