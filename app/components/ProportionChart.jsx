@@ -112,7 +112,6 @@ class ProportionChart extends Chart {
                             width: '8px',
                             height: '8px',
                             marginRight: '4px',
-                            verticalAlign: 'middle',
                             backgroundColor: colour,
                           }}
                         />}

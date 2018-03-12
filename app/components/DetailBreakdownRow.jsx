@@ -8,7 +8,7 @@ import { humanNumber } from '../utilities'
 
 const DetailBreakdownRow = props => (
   <tr className="detailBreakDownText">
-    <td width={props.colorBox?'14px':'0px'}>{props.colorBox}</td>
+    <td width={props.colorBox?'14px':'0px'} style={{verticalAlign: 'baseline'}}>{props.colorBox}</td>
     <td width="210px">
       {props.label}&nbsp;
       {humanNumber(props.value, props.language)}&nbsp;
