@@ -190,7 +190,7 @@ class PaddLayout extends React.Component {
           textY={36}
           containerX={paddIExplanationcontainerX}
           containerY={paddIExplanationcontainerY}
-          name="paddIExplanation"
+          name={`${this.props.selectedEnergy} paddIExplanation`}
           text={textString}
         />
       </g>)
@@ -242,7 +242,7 @@ class PaddLayout extends React.Component {
           textY={25}
           containerX={paddVExplanationcontainerX}
           containerY={paddVExplanationcontainerY}
-          name="paddVExplanation"
+          name={`${this.props.selectedEnergy} paddVExplanation`}
           text={`${this.props.TRSelector(['explanations','padd'])}`}
         />
       </g>)

@@ -90,7 +90,7 @@ class Menu extends React.PureComponent {
         containerX={this.props.left + 2}
         containerY={this.props.top - 50}
         text={textString}
-        name={`${this.props.selectedEnergy}` + 'importExportExplanation'}
+        name={`${this.props.selectedEnergy} importExportExplanation`}
     /></g>)
   }
 
@@ -134,7 +134,7 @@ class Menu extends React.PureComponent {
         containerX={2}
         containerY={-102}
         text={textString}
-        name={`${this.props.selectedEnergy}` + 'amountExplanation'}
+        name={`${this.props.selectedEnergy} amountExplanation`}
     /></g>)
   }
 

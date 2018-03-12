@@ -90,7 +90,7 @@ class ShowConfidentiality extends React.Component {
         containerX={this.props.left - 5}
         containerY={this.props.top - 152}
         text={textString}
-        name={`${this.props.energyType}` + 'confidentialityExplanation'}
+        name={`${this.props.energyType} confidentialityExplanation`}
     /></g>)
   }
 

@@ -177,7 +177,7 @@ class TimelineSeek extends React.PureComponent {
         containerX={this.props.left + this.state.offset - 169}
         containerY={this.props.top + 5}
         text={`${this.props.tr(['explanations','timeSeek'])}`}
-        name={`${this.props.selectedEnergy}` + 'timeSeekDot'}
+        name={`${this.props.selectedEnergy} timeSeekDot`}
     /></g>)
   }
 
