@@ -8,14 +8,14 @@ import { humanNumber } from '../utilities'
 
 const DetailBreakdownRow = props => (
   <tr className="detailBreakDownText">
-    <td width={props.colorBox?'14px':'0px'}>{props.colorBox}</td>
-    <td width="210px">
+    <td width={props.colorBox?'14px':'0px'} style={{verticalAlign: 'baseline'}}>{props.colorBox}</td>
+    <td width="200px">
       {props.label}&nbsp;
-      {humanNumber(props.value, props.language)}&nbsp;
-      {Tr.getIn(['amounts', props.unit, props.language])}&nbsp;
-      {((props.total === 0) ? 0.0 : (props.value / props.total) * 100).toFixed(2)}%&nbsp;
+      <span style={{display: 'inline-block' }}>{humanNumber(props.value, props.language)}</span>&nbsp;
+      <span style={{display: 'inline-block' }}>{Tr.getIn(['amounts', props.unit, props.language])}</span>&nbsp;
+      <span style={{display: 'inline-block' }}>{((props.total === 0) ? 0.0 : (props.value / props.total) * 100).toFixed(2)}%</span>&nbsp;
     </td>
-    <td width="40px">
+    <td width="40px" style={{ display: 'inline-block' }}>
       <div className="progress-bar">
         <span
           style={{ ...props.progressBarStyle, width: `${((props.total === 0) ? 0.0 : (props.value / props.total) * 100)}%` }}

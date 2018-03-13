@@ -68,10 +68,9 @@ class RefinedPetroleumProductsVisualizationContainer extends React.Component {
                             height: '8px',
                             marginRight: '4px',
                             backgroundColor: colour,
-                            verticalAlign: 'middle',
                           }}
                         />}
-                    label={<strong>{key[0]}</strong>}
+                    label={<strong style={{display: 'inline-block' }}>{key[0]}</strong>}
                     value={key[1]}
                     unit={this.props.unit}
                     total={breakdown.total}
