@@ -85,16 +85,28 @@ const RouteComputations = {
   // http://localhost:3001/pipeline-incidents/
   // https://apps2.neb-one.gc.ca/incidents-pipeliniers/
   appRoot(location, language) {
+    console.log(`${location.origin}${Tr.getIn(['applicationPath', language])}`)
     return `${location.origin}${Tr.getIn(['applicationPath', language])}`
   },
 
+  screenshotParameter: function (location) {
+    return encodeURIComponent(`${location.search}`)
+    // ${location.pathname}
+  },
+
   screenshotURL() {
-    let path = `${RouteComputations.screenshotOrigin(document.location)}/${Constants.get('screenshotPath')}`
-    path += `?pageUrl=${encodeURIComponent(`${document.location.pathname}screenshot${document.location.search}`)}`
+    let path = `${RouteComputations.appRoot(document.location, document.language)}/${Constants.get('screenshotPath')}/`
+    path += `?pageUrl=${RouteComputations.screenshotParameter(document.location)}`
     path += `&width=${Constants.get('screenshotWidth')}&height=${Constants.get('screenshotHeight')}`
     path += `&host=${document.location.host}`
+    console.log(path)
     return path
   },
+
+  // let path = `${RouteComputations.screenshotOrigin(document.location)}/${Constants.get('screenshotPath')}/`
+  // path += `?pageUrl=${RouteComputations.screenshotParameter(document.location)}`
+  // path += `&width=${Constants.get('screenshotWidth')}&height=${Constants.get('screenshotHeight')}`
+  // path += `&host=${document.location.host}`
 
   screenshotOrigin(location) {
     switch (process.env.NODE_ENV) {
