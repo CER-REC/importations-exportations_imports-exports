@@ -103,19 +103,75 @@ const parsingIssue = {};
       destinationKey: destinationRegion.get('originKey') || '',
     }
   }))
-  // Cluster the points into visualizations and units
+  // Cluster the points into visualizations, units, and period
   .then(points => points.reduce((acc, point) => {
     if (!acc[point.product]) { acc[point.product] = {} }
+    // Use an object reference to simplify the next creation
+    const outProd = acc[point.product]
+    if (!outProd[point.units]) { outProd[point.units] = {} }
+    const outUnit = outProd[point.units]
+    if (!outUnit[point.period]) { outUnit[point.period] = [] }
+
+    // Fix destinations for crude oil when not destined for a PADD
     if (point.product === 'crudeOil' && point.destination === '') {
       point.destination = 'ca'
     }
-    // Use an object reference to simplify the next creation
-    const outProd = acc[point.product]
-    if (!outProd[point.units]) { outProd[point.units] = [] }
-    outProd[point.units].push(point)
-    //add destination as well 
+
+    outUnit[point.period].push(point)
     return acc
   }, {}))
+  // Add the matching quantity for the $/measurement units
+  .then((visualizations) => {
+    const addQuantity = (viz, averageUnit, baseUnit, matchFunc) => {
+      const avgData = visualizations[viz][averageUnit]
+      const baseData = visualizations[viz][baseUnit]
+
+      Object.values(avgData).forEach((period) => {
+        period.forEach((point) => {
+          const matchingPoints = baseData[point.period].filter(matchFunc(point))
+          if (matchingPoints.length !== 1) {
+            const validationLabel = `Can't calculate averages for ${viz} - ${averageUnit} and ${baseUnit}:`
+            if (!parsingIssue[validationLabel]) { parsingIssue[validationLabel] = [] }
+            parsingIssue[validationLabel].push({
+              origin: point.origin,
+              destination: point.destination,
+              port: point.port,
+              activity: point.activity,
+              period: point.period,
+              matchingPoints: matchingPoints.length,
+              points: matchingPoints,
+            })
+          } else {
+            point.quantityForAverage = matchingPoints[0].value
+          }
+        })
+      })
+    }
+
+    addQuantity(
+      'electricity',
+      'CAN$/MW.h',
+      'MW.h',
+      point => match => (match.origin === point.origin && match.destination === point.destination),
+    )
+    addQuantity(
+      'naturalGas',
+      'CN$/GJ',
+      'thousand m3/d',
+      point => match => (match.port === point.port && match.originalActivity === point.originalActivity),
+    )
+
+    return visualizations
+  })
+  // Remove the periods from the visualizations, now that we're done preparing for averages
+  .then((visualizations) => {
+    Object.keys(visualizations).forEach((vizName) => {
+      Object.keys(visualizations[vizName]).forEach((unit) => {
+        visualizations[vizName][unit] = [].concat(...Object.values(visualizations[vizName][unit]))
+      })
+    })
+    return visualizations
+  })
   // Calculate bins
   .then((output) => {
     // Loop over the visualizations
