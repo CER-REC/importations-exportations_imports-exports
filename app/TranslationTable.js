@@ -129,41 +129,9 @@ const TranslationTable = fromJS({
       en: 'ATTRIBUTIONS',
       fr: 'LICENCES DE TIERS',
     },
-    brokenLinkIcon: {
-      en: 'BROKEN LINK ICON',
-      fr: 'TODO',
-    },
-    linkIcon: {
-      en: 'LINK ICON',
-      fr: 'TODO',
-    },
     map: {
       en: 'MAP',
       fr: 'CARTE',
-    },
-    brokenLinkIcon_1: {
-      en: 'Broken Link icon: Created by ',
-      fr: 'TODO',
-    },
-    brokenLinkIcon_2: {
-      en: 'icongeek',
-      fr: 'icongeek',
-    },
-    fromThe: {
-      en: ' from the',
-      fr: 'TODO',
-    },
-    nounProject: {
-      en: ' Noun Project.',
-      fr: ' Noun Project.',
-    },
-    linkIcon_1: {
-      en: 'Link icon: Created by  ',
-      fr: 'TODO',
-    },
-    linkIcon_2: {
-      en: 'IconDots',
-      fr: 'IconDots',
     },
     map_1: {
       en: 'Map showing provinces and territories reporting 2009 swine flu (H1N1) cases in Canada by Fonadier ',
@@ -1458,8 +1426,8 @@ const TranslationTable = fromJS({
   },
   portMap: {
     multiple: {
-      en: 'Multiple Selection',
-      fr: 'TODO',
+      en: 'Multiple Selections',
+      fr: 'Sélections Multiples',
     },
     portName: {
       Aden: {
