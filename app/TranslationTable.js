@@ -377,6 +377,14 @@ const TranslationTable = fromJS({
       en: 'Truck',
       fr: 'Un Camion',
     },
+    Heavy: {
+      en: 'Heavy and Medium',
+      fr: 'Lourd et Moyen',
+    },
+    Light: {
+      en: 'Light',
+      fr: 'Léger',
+    },
     'Middle Distillate': {
       en: 'Middle Distillate',
       fr: 'Distillat Moyen',
