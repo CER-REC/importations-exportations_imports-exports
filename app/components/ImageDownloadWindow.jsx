@@ -64,7 +64,7 @@ class ImageDownloadWindow extends React.Component {
   imagePreview() {
     return (
       <div className="imagePreview">
-        <img className="imagePreview" src={RouteComputations.screenshotURL()} />
+        <img className="imagePreview" src={RouteComputations.screenshotURL(this.props.location, this.props.language)} />
       </div>
     )
   }
@@ -82,12 +82,11 @@ class ImageDownloadWindow extends React.Component {
   }
 
   bitlyText() {
-    this.makeBitlyPromise().then((url) => {
-      const vizUrl = `https://apps2.neb-one.gc.ca/${url}`
-    })
     return <p
       className="bitlyText">
-      { Tr.getIn(['bitlyShare', this.props.language])}
+      <span>{ Tr.getIn(['bitlyShare', this.props.language])}</span>&nbsp;
+      <span>{RouteComputations.bitlyEndpoint(this.props.location, this.props.language)}
+      </span>
     </p>
   }
 
