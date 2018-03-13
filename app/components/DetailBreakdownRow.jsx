@@ -26,15 +26,15 @@ const DetailBreakdownRow = props => (
 )
 
 DetailBreakdownRow.defaultProps = {
-    value: 0,
-  }
+  value: 0,
+}
 
 DetailBreakdownRow.propTypes = {
   label: PropTypes.node.isRequired,
   value: PropTypes.number.isRequired,
   total: PropTypes.number.isRequired,
   unit: PropTypes.string.isRequired,
-  progressBarStyle: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
+  progressBarStyle: PropTypes.object.isRequired,
   language: PropTypes.string.isRequired,
 }
 

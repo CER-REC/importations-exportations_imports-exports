@@ -360,6 +360,45 @@ const TranslationTable = fromJS({
     'thousand m3/d': { en: '10³m³/d', fr: '10³m³/j' },
   },
 
+  label: {
+    Pipeline: {
+      en: 'Pipeline',
+      fr: 'Pipeline',
+    },
+    Marine: {
+      en: 'Marine',
+      fr: 'Marin',
+    },
+    Railroad: {
+      en: 'Railroad',
+      fr: 'Chemin de fer',
+    },
+    Truck: {
+      en: 'Truck',
+      fr: 'Un Camion',
+    },
+    'Middle Distillate': {
+      en: 'Middle Distillate',
+      fr: 'Distillat Moyen',
+    },
+    'Motor Gasoline': {
+      en: 'Motor Gasoline',
+      fr: 'Essence de moteur',
+    },
+    'Heavy Fuel Oil': {
+      en: 'Heavy Fuel',
+      fr: 'Carburant lourd',
+    },
+    'Jet Fuel': {
+      en: 'Jet Fuel',
+      fr: 'Carburéacteur',
+    },
+    'Partially Processed Oil': {
+      en: 'Partially Processed Oil',
+      fr: 'Huile Partiellement Processée',
+    },
+  },
+
   mainHeading: {
     imports: {
       en: 'Imports',

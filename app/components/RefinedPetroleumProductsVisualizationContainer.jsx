@@ -12,6 +12,8 @@ import * as RefinedPetroleumProductsViewport from '../selectors/viewport/refined
 import { arrangeBy, amount, filterByTimelineAndHexData } from '../selectors/data'
 import { timelineData } from '../selectors/timeline'
 import Constants from '../Constants'
+import Tr from '../TranslationTable'
+import TrSelector from '../selectors/translate'
 
 const subtypes = [
   'Partially Processed Oil',
@@ -70,7 +72,7 @@ class RefinedPetroleumProductsVisualizationContainer extends React.Component {
                             backgroundColor: colour,
                           }}
                         />}
-                    label={<strong style={{display: 'inline-block' }}>{key[0]}</strong>}
+                    label={<strong style={{display: 'inline-block' }}>{Tr.getIn(['label', key[0], this.props.language])}</strong>}
                     value={key[1]}
                     unit={this.props.unit}
                     total={breakdown.total}
@@ -166,6 +168,8 @@ export default connect((state, props) => ({
   individualCharts: RefinedPetroleumProductsViewport.individualChartsPosition(state, props),
   sidebarTotal: RefinedPetroleumProductsViewport.sidebarTotalPosition(state, props),
   arrangeBy: arrangeBy(state, props),
+  TRSelector: TrSelector(state, props),
+  language: state.language,
   unit: amount(state, props),
   data: timelineData(state, { ...props, aggregateKey: 'productSubtype' }),
   filteredData: filterByTimelineAndHexData(state, props),
