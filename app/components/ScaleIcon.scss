@@ -1,0 +1,30 @@
+.ScaleIconToggleLinked {
+  * {
+    stroke: #aa9472;
+    stroke-miterlimit: 10;
+    fill: none;
+    stroke-linecap: round;
+    stroke-width: 0.75px;
+  }
+
+  circle {
+    fill: #fff;
+    stroke-width: 1px;
+  }
+}
+
+.ScaleIconToggleUnlinked {
+  * {
+    stroke-miterlimit: 10;
+    fill: none; 
+    stroke: #fff;
+    stroke-linecap: round; 
+    stroke-width: 0.75px;
+  }
+
+  .b {
+    fill: #ff774c;
+    stroke: #aa9472;
+  }
+  .b + .b { fill: #1c64b2; }
+}

@@ -173,51 +173,7 @@ class AboutWindow extends React.Component {
           <span>
             { Tr.getIn(['aboutWindow', 'attributions', this.props.language])}
           </span>
-        </p>
-        <p className="aboutSubheading">
-          <span>
-            { Tr.getIn(['aboutWindow', 'brokenLinkIcon', this.props.language])}
-          </span>
-        </p>
-        <p className="aboutBodyText">
-          <span>
-            { Tr.getIn(['aboutWindow', 'brokenLinkIcon_1', this.props.language])}
-          </span>
-          <a href="https://thenounproject.com/icongeek/">
-            <span>
-              { Tr.getIn(['aboutWindow', 'brokenLinkIcon_2', this.props.language])}
-            </span>
-          </a>
-          <span>
-            { Tr.getIn(['aboutWindow', 'fromThe', this.props.language])}
-          </span>
-          <a href="https://thenounproject.com/term/broken/1399557/">
-            <span>
-              { Tr.getIn(['aboutWindow', 'nounProject', this.props.language])}
-            </span>
-          </a>
-        </p>
-        <p className="aboutSubheading">
-          <span>
-            { Tr.getIn(['aboutWindow', 'linkIcon', this.props.language])}
-          </span>
-        </p>
-        <p className="aboutBodyText">
-          <span>
-            { Tr.getIn(['aboutWindow', 'linkIcon_1', this.props.language])}
-          </span>
-          <span>
-            { Tr.getIn(['aboutWindow', 'linkIcon_2', this.props.language])}
-          </span>
-          <span>
-            { Tr.getIn(['aboutWindow', 'fromThe', this.props.language])}
-          </span>
-          <a href="https://thenounproject.com/term/broken/1399557/">
-            <span>
-              { Tr.getIn(['aboutWindow', 'nounProject', this.props.language])}
-            </span>
-          </a>
-        </p>    
+        </p>  
         <p className="aboutSubheading">
           <span>
             { Tr.getIn(['aboutWindow', 'map', this.props.language])}

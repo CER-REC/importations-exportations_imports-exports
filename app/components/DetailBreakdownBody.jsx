@@ -20,11 +20,11 @@ class DetailBreakdownBody extends React.Component {
         width: `${exportOrImportPercentage}%`,
         backgroundColor: props.color,
       }
-      const name = props.nameMappings.getIn([key, props.language], '')
+      const name = props.nameMappings.getIn([key, this.props.language], '')
       return (
         <DetailBreakdownRow
           key={key}
-          label={`${bodyContent.getIn(['action', props.language])} ${name}`}
+          label={`${bodyContent.getIn(['action', this.props.language])} ${name}`}
           value={value}
           unit={props.amountUnit}
           total={total}

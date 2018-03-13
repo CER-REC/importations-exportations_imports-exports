@@ -286,8 +286,8 @@ export const timelineSeekPositionSelector = createSelector(
       point.get('quarter') <= range.getIn(['end', 'quarter'])
     ))
     return {
-      start: start && start.get('offsetX') || 0,
-      end: end && end.get('offsetX') || size.width,
+      start: (typeof start !== 'undefined' ? start.get('offsetX') : 0),
+      end: (typeof end !== 'undefined' ? end.get('offsetX') : size.width),
     }
   },
 )
