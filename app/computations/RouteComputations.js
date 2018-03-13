@@ -83,28 +83,23 @@ const RouteComputations = {
   // A string for the root of the application, a suitable place for making rest
   // requests or building other URLs. E.g.:
   // http://localhost:3003/imports-exports/
-  // https://apps2.neb-one.gc.ca/incidents-pipeliniers/
+  // https://apps2.neb-one.gc.ca/importations-exportations/
   appRoot(location, language) {
     return `${location.origin}${Tr.getIn(['applicationPath', language])}`
   },
 
-  screenshotParameter: function (location) {
-    return encodeURIComponent(`${location.search}`)
+  screenshotParameter: function (location, language) {
+    return encodeURIComponent(`${RouteComputations.appRoot(document.location, language)}${Constants.get('screenshotPath')}${location.search}`)
   },
 
   screenshotURL(location, language) {
-    let path = `${RouteComputations.appRoot(document.location, language)}${Constants.get('screenshotPath')}/`
-    path += `?pageUrl=${RouteComputations.screenshotParameter(document.location)}`
+    let path = `${RouteComputations.screenshotOrigin(document.location)}/${Constants.get('screenshotPath')}/`
+    path += `?pageUrl=${RouteComputations.screenshotParameter(document.location, language)}`
     path += `&width=${Constants.get('screenshotWidth')}&height=${Constants.get('screenshotHeight')}`
     path += `&host=${document.location.host}`
     console.log(path)
     return path
   },
-
-  // let path = `${RouteComputations.screenshotOrigin(document.location)}/${Constants.get('screenshotPath')}/`
-  // path += `?pageUrl=${RouteComputations.screenshotParameter(document.location)}`
-  // path += `&width=${Constants.get('screenshotWidth')}&height=${Constants.get('screenshotHeight')}`
-  // path += `&host=${document.location.host}`
 
   screenshotOrigin(location) {
     switch (process.env.NODE_ENV) {

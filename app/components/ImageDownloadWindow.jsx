@@ -26,26 +26,6 @@ class ImageDownloadWindow extends React.Component {
     this.props.closeWindowClick()
   }
 
-  makeBitlyPromise() {
-    const bitlyEndpoint = RouteComputations.bitlyEndpoint(document.location, this.props.language)
-    const shortenUrl = RouteComputations.bitlyParameter(document.location, this.props.language)
-
-    const options = {
-      uri: `${bitlyEndpoint}?shortenUrl=${shortenUrl}`,
-      json: true,
-    }
-
-    return Request(options)
-      .then((response) => {
-        if (response.body.status_code !== 200) {
-          // throw new Error(response.body.status_txt)
-          return Constants.get('appHost')
-        }
-        return response.body.data.url
-      })
-      .catch(() => Constants.get('appHost'))
-  }
-
   closeButton() {
     return <img
       className="closeButton"
@@ -70,7 +50,7 @@ class ImageDownloadWindow extends React.Component {
   }
 
   saveImageClick() {
-    window.open(RouteComputations.screenshotURL(), 'targetWindow', 'width=650,height=650')
+    window.open(RouteComputations.screenshotURL(this.props.location, this.props.language), 'targetWindow', 'width=650,height=650')
   }
 
   saveImageButton() {
@@ -84,9 +64,8 @@ class ImageDownloadWindow extends React.Component {
   bitlyText() {
     return <p
       className="bitlyText">
-      <span>{ Tr.getIn(['bitlyShare', this.props.language])}</span>&nbsp;
-      <span>{RouteComputations.bitlyEndpoint(this.props.location, this.props.language)}
-      </span>
+      { Tr.getIn(['bitlyShare', this.props.language])}&nbsp;
+      {RouteComputations.bitlyEndpoint(this.props.location, this.props.language)}
     </p>
   }
 
