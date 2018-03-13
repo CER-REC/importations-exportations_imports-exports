@@ -115,7 +115,7 @@ class ProportionChart extends Chart {
                             backgroundColor: colour,
                           }}
                         />}
-                label={<span>{prefix} <strong>{key[0]}</strong>{suffix}</span>}
+                label={<span>{prefix} <strong style={{display: 'inline-block' }}>{key[0]}</strong>{suffix}</span>}
                 value={key[1]}
                 unit={this.props.unit}
                 total={breakdown.total}
