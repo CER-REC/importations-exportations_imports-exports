@@ -289,8 +289,8 @@ const TranslationTable = fromJS({
       },
       options: {
         CAN$: {
-          en: 'PRICE (CAN$)',
-          fr: 'PRIX ($ CAN)',
+          en: 'REVENUE (CAN$)',
+          fr: 'REVENU ($ CAN)',
         },
         'CAN$/MW.h': {
           en: 'PRICE (CAN$/MW.h)',
@@ -363,11 +363,11 @@ const TranslationTable = fromJS({
   label: {
     Pipeline: {
       en: 'Pipeline',
-      fr: 'Pipeline',
+      fr: 'Gazoduc',
     },
     Marine: {
       en: 'Marine',
-      fr: 'Marin',
+      fr: 'Voie Maritime',
     },
     Railroad: {
       en: 'Railroad',
@@ -375,7 +375,7 @@ const TranslationTable = fromJS({
     },
     Truck: {
       en: 'Truck',
-      fr: 'Un Camion',
+      fr: 'Camion',
     },
     Heavy: {
       en: 'Heavy and Medium',
@@ -669,7 +669,7 @@ const TranslationTable = fromJS({
 
   bitlyShare: {
     en: 'Visit this interactive visualization:',
-    fr: 'Visitez cette visualisation interactive',
+    fr: 'Visitez cette visualisation interactif:',
   },
 
   downloadable: {
@@ -763,7 +763,7 @@ const TranslationTable = fromJS({
         },
         action: {
           en: 'by',
-          fr: 'à',
+          fr: 'par',
         },
         header: {
           type: {
