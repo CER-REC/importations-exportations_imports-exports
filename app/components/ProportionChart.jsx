@@ -80,7 +80,7 @@ class ProportionChart extends Chart {
     /></g>)
   }
 
-  renderDetailSideBar(data, aggregateKey, categoryColours, selectionState, selectedEnergy, language){
+  renderDetailSideBar(data, aggregateKey, categoryColours, selectionState, selectedEnergy){
     let aggregateKeyList = []
     let prefix = ''
     let suffix = ''
