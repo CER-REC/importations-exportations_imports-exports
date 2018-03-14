@@ -80,7 +80,7 @@ class ProportionChart extends Chart {
     /></g>)
   }
 
-  renderDetailSideBar(data, aggregateKey, categoryColours, selectionState, selectedEnergy){
+  renderDetailSideBar(data, aggregateKey, categoryColours, selectionState, selectedEnergy, language){
     let aggregateKeyList = []
     let prefix = ''
     let suffix = ''
@@ -103,6 +103,10 @@ class ProportionChart extends Chart {
         <tbody>
           {Object.entries(breakdown.values).sort((x, y) => y[1] - x[1]).map((key, i) => {
             const colour = categoryColours.getIn([selectedEnergy,aggregateKey, key[0]], Constants.getIn(['styleGuide', 'colours', 'ExportDefault']))
+            let label = <span>{prefix} <strong style={{display: 'inline-block' }}>{Tr.getIn(['label', key[0], this.props.language])}</strong>{suffix}</span>
+                if (this.props.language === 'fr' && aggregateKey !== 'transport') {
+                  label = <span>{suffix} <strong style={{display: 'inline-block' }}>{Tr.getIn(['label', key[0], this.props.language])}</strong>  </span>
+                }
             return (
               <DetailBreakdownRow
                 key={key}
@@ -115,7 +119,7 @@ class ProportionChart extends Chart {
                             backgroundColor: colour,
                           }}
                         />}
-                label={<span>{prefix} <strong style={{display: 'inline-block' }}>{Tr.getIn(['label', key[0], this.props.language])}</strong>{suffix}</span>}
+                label={label}
                 value={key[1]}
                 unit={this.props.unit}
                 total={breakdown.total}
