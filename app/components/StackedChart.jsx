@@ -69,13 +69,13 @@ class StackedChart extends Chart {
           33.47,
           18H322.2"
         xPosition={698}
-        yPosition={370}
+        yPosition={350}
         lineX={142.16}
         lineY={173.94}
         textX={40}
         textY={58}
         containerX={this.props.left}
-        containerY={this.props.top - 237}
+        containerY={this.props.top - 203}
         name="confidentialityRefinedPetroleumProductsExplanation"
         text={`${this.props.tr(['explanations','confidentialValuesRefinedPetroleumProducts'])}`}
     /></g>)
