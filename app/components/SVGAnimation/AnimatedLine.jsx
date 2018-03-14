@@ -1,14 +1,7 @@
-/* global Modernizr */
 import React from 'react'
 import PropTypes from 'prop-types'
 import memoize from 'memoize-immutable'
-import DomReady from 'domready'
-
-DomReady(() => {
-  Modernizr.addTest('svg-smil', () =>
-    !!document.createElementNS &&
-      /SVGAnimate/.test(({}).toString.call(document.createElementNS('http://www.w3.org/2000/svg', 'animate'))))
-})
+import Modernizr from 'modernizr'
 
 class AnimatedLine extends React.PureComponent {
   static get propTypes() {
@@ -41,7 +34,7 @@ class AnimatedLine extends React.PureComponent {
 
   render() {
     const { animate, ...spreadProps } = this.props
-    if (Modernizr['svg-smil'] !== true) { return <line {...spreadProps} /> }
+    if (Modernizr.smil !== true) { return <line {...spreadProps} /> }
     const animateElements = Object.entries(animate)
       .map(([key, val]) => (
         <animate
