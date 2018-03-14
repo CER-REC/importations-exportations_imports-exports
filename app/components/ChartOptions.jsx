@@ -109,12 +109,15 @@ class ChartOptions extends React.PureComponent {
       >
         {this.renderScaleToggle()}
         <div className="chartOptions">
-          <a
-            {...handleInteractionWithTabIndex(this.props.tabIndex, this.changeTimelineGroup)}
-            aria-label={groupLabel}
-          >
-            {groupLabel} +
-          </a>
+          {/* Using a div to fix an IE11 bug with the detail bar arrow wrapping */}
+          <div className="detailGroupToggle">
+            <a
+              {...handleInteractionWithTabIndex(this.props.tabIndex, this.changeTimelineGroup)}
+              aria-label={groupLabel}
+            >
+              {groupLabel} +
+            </a>
+          </div>
           <div className="detailBarArrow" />
         </div>
         <div style={{ clear: 'both' }} />
