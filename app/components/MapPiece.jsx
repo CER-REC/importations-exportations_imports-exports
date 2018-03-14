@@ -374,7 +374,7 @@ class MapPiece extends React.Component {
         textY={24}
         xPosition={30}
         yPosition={0}
-        name={`${this.props.data.get('name')}`}
+        name={`${this.props.selectedEnergy}${this.props.data.get('name')}`}
         />
     }
     
