@@ -1,8 +1,8 @@
 import { createSelector } from 'reselect'
 import { fromJS } from 'immutable'
 
-import { aggregateQuarterFilteredValue, getValueKey } from './timeline'
-import { aggregateLocationSelector, selectedPieces, selection, filterByHex } from './data'
+import { aggregateQuarterFilteredValue } from './timeline'
+import { filterByTimelineAndHexData, getAggregateKey, getValueKey, activityGroupSelector, aggregateLocationSelector, selectedPieces, selection, filterByHex } from './data'
 import { selectedVisualization } from './visualizationSettings'
 
 export const detailTotal = createSelector(
@@ -25,14 +25,17 @@ export const confidentialTotal = createSelector(
 )
 
 export const missingDataTotal = createSelector(
-  aggregateLocationSelector,
-  selectedPieces,
-  selectedVisualization,
-  selection,
-  (data, selectedMapPieces, visualization, selectionState) => data
-    .filter(p => filterByHex(p, selectedMapPieces, visualization, selectionState))
-    .reduce((acc, next) => ({
-      missing: acc.missing + (next.get('origin') === '(blank)' ? next.get('totalCount', 0) : 0),
-      total: acc.total + next.get('totalCount', 0),
-    }), { missing: 0, total: 0 }),
+  filterByTimelineAndHexData,
+  getAggregateKey,
+  getValueKey,
+  (data, aggregateKey, valueKey) => {
+    const filteredData = data.filter(p => p.get(aggregateKey) === valueKey)
+    return {
+      missing: filteredData.filter(p => (
+        p.get('destination') === '(blank)' ||
+        p.get('quantityForAverage', undefined) === 0
+      )).count(),
+      total: filteredData.count(),
+    }
+  },
 )

@@ -141,6 +141,9 @@ const parsingIssue = {};
               matchingPoints: matchingPoints.length,
               points: matchingPoints,
             })
+            // 0 will be used to indicate these are missing values
+            // https://trello.com/c/rLeWzKXJ/75-price-views-should-show-averages-not-totals#comment-5aa997af6f16e46bb2c971a6
+            point.quantityForAverage = 0
           } else {
             point.quantityForAverage = matchingPoints[0].value
           }

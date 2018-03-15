@@ -13,6 +13,9 @@ import {
 const emptyMap = new Immutable.Map()
 const emptyList = new Immutable.List()
 
+export const getAggregateKey = (_, props) => props.aggregateKey
+export const getValueKey = (_, props) => props.valueKey
+
 export const timelinePlayback = state => state.timelinePlayback
 
 export const subType = createSelector(

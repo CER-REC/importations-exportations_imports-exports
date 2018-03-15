@@ -2,6 +2,8 @@ import { createSelector } from 'reselect'
 import { fromJS } from 'immutable'
 
 import {
+  getAggregateKey,
+  getValueKey,
   activityGroupSelector,
   filterByHexSelector,
   filterByTimelineAndHexData,
@@ -13,8 +15,6 @@ import { visualizationContentPosition as visContentSize } from './viewport/'
 import { visualizationSettings, selectedVisualization } from './visualizationSettings'
 import Constants from '../Constants'
 
-const getAggregateKey = (_, props) => props.aggregateKey
-export const getValueKey = (_, props) => props.valueKey
 const getScaleKey = (state, props) => props.scaleKey || getValueKey(state, props)
 
 const mapToValue = (data, key) => data.map(v => v.get(key))
