@@ -3,13 +3,14 @@
 .chartScaleLinked {
   float: left;
   height: 100%;
-
+  margin-top: -156px;
   > svg { margin: 0 4px 0 0; }
   > div { float: right; }
 }
 
 .chartOptions {
   float: right;
+  margin-top: -155px;
   height: 100%;
 }
 
