@@ -122,30 +122,76 @@ const parsingIssue = {};
   }, {}))
   // Add the matching quantity for the $/measurement units
   .then((visualizations) => {
-    const addQuantity = (viz, averageUnit, baseUnit, matchFunc) => {
-      const avgData = visualizations[viz][averageUnit]
-      const baseData = visualizations[viz][baseUnit]
+    const addValidationIssue = (label, issue) => {
+      if (!parsingIssue[label]) { parsingIssue[label] = [] }
+      parsingIssue[label].push(issue)
+    }
 
-      Object.values(avgData).forEach((period) => {
+    const addQuantity = (viz, priceUnit, amountUnit, revenueUnit, matchFuncFactory) => {
+      const priceData = visualizations[viz][priceUnit]
+      const amountData = visualizations[viz][amountUnit]
+      const revenueData = visualizations[viz][revenueUnit] || {}
+
+      Object.values(priceData).forEach((period) => {
         period.forEach((point) => {
-          const matchingPoints = baseData[point.period].filter(matchFunc(point))
-          if (matchingPoints.length !== 1) {
-            const validationLabel = `Can't calculate averages for ${viz} - ${averageUnit} and ${baseUnit}:`
-            if (!parsingIssue[validationLabel]) { parsingIssue[validationLabel] = [] }
-            parsingIssue[validationLabel].push({
+          const matchFunc = matchFuncFactory(point)
+          const matchingAmountPoints = amountData[point.period].filter(matchFunc)
+          const matchingRevenuePoints = (revenueData[point.period] || []).filter(matchFunc)
+          if (matchingAmountPoints.length !== 1) {
+            const validationLabel = `Can't calculate averages for ${viz} - ${priceUnit} and ${amountUnit}:`
+            addValidationIssue(validationLabel, {
               origin: point.origin,
               destination: point.destination,
               port: point.port,
               activity: point.activity,
               period: point.period,
-              matchingPoints: matchingPoints.length,
-              points: matchingPoints,
+              matchingAmountPoints: matchingAmountPoints.length,
             })
             // 0 will be used to indicate these are missing values
             // https://trello.com/c/rLeWzKXJ/75-price-views-should-show-averages-not-totals#comment-5aa997af6f16e46bb2c971a6
             point.quantityForAverage = 0
+            point.revenueForAverage = 0
           } else {
-            point.quantityForAverage = matchingPoints[0].value
+            point.quantityForAverage = matchingAmountPoints[0].value
+            const revenue = point.value * point.quantityForAverage
+            if (matchingRevenuePoints.length === 1) {
+              if (revenue !== matchingRevenuePoints[0].value) {
+                const validationLabel = `Computed revenue doesn't match csv revenue for ${viz} - ${priceUnit} and ${amountUnit}:`
+                addValidationIssue(validationLabel, {
+                  origin: point.origin,
+                  destination: point.destination,
+                  port: point.port,
+                  activity: point.activity,
+                  period: point.period,
+                  computedRevenue: revenue,
+                  csvRevenue: matchingRevenuePoints[0].value,
+                })
+              }
+              point.revenueForAverage = matchingRevenuePoints[0].value
+            } else if (matchingRevenuePoints.length > 1) {
+              const validationLabel = `Too many matches for csv revenue for ${viz} - ${priceUnit} and ${amountUnit}:`
+              addValidationIssue(validationLabel, {
+                origin: point.origin,
+                destination: point.destination,
+                port: point.port,
+                activity: point.activity,
+                period: point.period,
+                computedRevenue: revenue,
+                csvRevenueMatches: matchingRevenuePoints.length,
+              })
+            } else {
+              const validationLabel = `No matches for csv revenue for ${viz} - ${priceUnit} and ${amountUnit}:`
+              addValidationIssue(validationLabel, {
+                origin: point.origin,
+                destination: point.destination,
+                port: point.port,
+                activity: point.activity,
+                period: point.period,
+                computedRevenue: revenue,
+                csvRevenueMatches: matchingRevenuePoints.length,
+              })
+              point.revenueForAverage = revenue
+            }
           }
         })
       })
@@ -155,12 +201,14 @@ const parsingIssue = {};
       'electricity',
       'CAN$/MW.h',
       'MW.h',
+      'CAN$',
       point => match => (match.origin === point.origin && match.destination === point.destination),
     )
     addQuantity(
       'naturalGas',
       'CN$/GJ',
       'thousand m3/d',
+      false,
       point => match => (match.port === point.port && match.originalActivity === point.originalActivity),
     )
 

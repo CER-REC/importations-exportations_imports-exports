@@ -6,13 +6,31 @@ import { filterByTimelineAndHexData, getAggregateKey, getValueKey, activityGroup
 import { selectedVisualization } from './visualizationSettings'
 
 export const detailTotal = createSelector(
-  aggregateQuarterFilteredValue,
+  filterByTimelineAndHexData,
+  getAggregateKey,
   getValueKey,
-  ({ points }, valueKey) =>
-    points.reduce((acc, next) => {
-      if (valueKey === 'total') { return acc + next.get('total') }
-      return acc + next.getIn(['values', valueKey], 0)
-    }, 0),
+  (data, aggregateKey, valueKey) => {
+    const filteredData = valueKey === 'total'
+      ? data
+      : data.filter(p => (
+        p.get(aggregateKey) === valueKey &&
+        p.get('productSubtype', '') === '' &&
+        p.get('transport', '') === ''
+      ))
+
+    if (filteredData.count() > 0 && filteredData.first().has('quantityForAverage')) {
+      const sumForAvg = filteredData.reduce((acc, next) => {
+        acc.revenue += next.get('revenueForAverage', 0)
+        acc.amount += next.get('quantityForAverage', 0)
+        return acc
+      }, { revenue: 0, amount: 0 })
+      // Prevent divide by zero
+      if (sumForAvg.amount === 0) { return 0 }
+      return sumForAvg.revenue / sumForAvg.amount
+    }
+
+    return filteredData.reduce((acc, next) => (acc + next.get('value', 0)), 0)
+  },
 )
 
 export const confidentialTotal = createSelector(
