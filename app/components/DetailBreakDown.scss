@@ -16,10 +16,11 @@
   }
   .progress-bar {
     background-color: $sand-medium;
-    width: 40px;
+    width: 38px;
     position: relative;
     float: right;
     margin-top: -2px;
+    right: -7px;
   }
     
   .progress-bar > span {
