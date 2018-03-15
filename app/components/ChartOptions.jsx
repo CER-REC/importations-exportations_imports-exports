@@ -49,8 +49,8 @@ class ChartOptions extends React.PureComponent {
           40.12,0,0,0,
           33.47,
           18H322.2"
-        xPosition={49}
-        yPosition={7}
+        xPosition={21}
+        yPosition={17}
         lineX={142.16}
         lineY={173.94}
         textX={40}
@@ -106,7 +106,10 @@ class ChartOptions extends React.PureComponent {
           marginLeft: `${-leftPad}px`,
           paddingLeft: `${leftPad}px`,
         }}
-      >
+      >        
+        <svg>
+          {this.linkDataExplanation()}
+        </svg>
         {this.renderScaleToggle()}
         <div className="chartOptions">
           {/* Using a div to fix an IE11 bug with the detail bar arrow wrapping */}
@@ -119,7 +122,7 @@ class ChartOptions extends React.PureComponent {
             </a>
           </div>
           <div className="detailBarArrow" />
-        </div>
+        </div>                          
         <div style={{ clear: 'both' }} />
       </div>
     )
