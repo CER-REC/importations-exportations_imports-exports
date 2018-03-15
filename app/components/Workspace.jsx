@@ -23,7 +23,7 @@ const Workspace = ({ svgSize, detailSidebarPosition, portalSvgSize }) => (
       id="workspace"
       className="Workspace"
       {...svgSize}
-      style={{ zIndex: 9999 }}
+      style={{ zIndex: 10 }}
       viewBox={`0 0 ${svgSize.width} ${svgSize.height}`}
       preserveAspectRatio="xMinYMin meet"
       role="application"
