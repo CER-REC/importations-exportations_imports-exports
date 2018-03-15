@@ -10,7 +10,6 @@ import DetailSidebar from './DetailSidebar'
 import ConfidentialCount from './ConfidentialCount'
 import DetailBreakdownRow from './DetailBreakdownRow'
 import DetailBreakdownHeader from './DetailBreakdownHeader'
-import DetailTotal from './DetailTotal'
 import Tr from '../TranslationTable'
 import { timelineData } from '../selectors/timeline'
 import { amount, selection, groupingBy as timelineGrouping, filterByTimelineAndHexData } from '../selectors/data'
@@ -27,9 +26,7 @@ const dataFilter = [
   'Light',
 ]
 
-const productSubType = [
-  
-]
+const productSubType = []
 
 class ProportionChart extends Chart {
   static get propTypes() {
@@ -46,7 +43,7 @@ class ProportionChart extends Chart {
   calculateBreakdown() {
     return this.props.filteredData.reduce((acc, next) => {
       const type = next.get(this.props.aggregateKey)
-      if(!dataFilter.includes(type)){return acc}
+      if (!dataFilter.includes(type)) { return acc }
       acc.total += next.get('value')
       acc.values[type] = (acc.values[type] || 0) + next.get('value', 0)
       return acc
@@ -54,7 +51,7 @@ class ProportionChart extends Chart {
   }
 
   crudeExplanation(data, aggregateKey) {
-    if(aggregateKey === 'transport') { return }
+    if (aggregateKey === 'transport') { return }
     return (<g>
       <ExplanationDot
         scale="scale(1)"
@@ -75,38 +72,39 @@ class ProportionChart extends Chart {
         textY={58}
         containerX={222}
         containerY={282}
-        text={`${this.props.TRSelector(['explanations','barCrude'])}`}
+        text={`${this.props.TRSelector(['explanations', 'barCrude'])}`}
         name="crudeHeavyLightExplanation"
-    /></g>)
+      />
+    </g>)
   }
 
   renderDetailSideBar(data, aggregateKey, categoryColours, selectionState, selectedEnergy){
-    let aggregateKeyList = []
+    const aggregateKeyList = []
     let prefix = ''
     let suffix = ''
     let trContent = new Immutable.Map()
-    let dimensions = {...this.props}
-    if(aggregateKey === 'transport'){
+    const dimensions = { ...this.props }
+    if (aggregateKey === 'transport') {
       dimensions.top -= 20
-      prefix = `${Tr.getIn(['detailBreakDown', 'crudeOil', 'transport', 'type', this.props.language])} ${Tr.getIn(['detailBreakDown', 'crudeOil', 'transport', 'action', this.props.language])}` 
-      trContent = Tr.getIn(['detailBreakDown','crudeOil','transport','header'])
-    } else if(aggregateKey === 'productSubtype'){
-      suffix =  ` ${Tr.getIn(['mainMenuBar', 'crudeOil', this.props.language])}`
-      trContent = Tr.getIn(['detailBreakDown','crudeOil','productSubtype','header'])
+      prefix = `${Tr.getIn(['detailBreakDown', 'crudeOil', 'transport', 'type', this.props.language])} ${Tr.getIn(['detailBreakDown', 'crudeOil', 'transport', 'action', this.props.language])}`
+      trContent = Tr.getIn(['detailBreakDown', 'crudeOil', 'transport', 'header'])
+    } else if (aggregateKey === 'productSubtype') {
+      suffix = `${Tr.getIn(['mainMenuBar', 'crudeOil', this.props.language])}`
+      trContent = Tr.getIn(['detailBreakDown', 'crudeOil', 'productSubtype', 'header'])
     }
     let content = ''
-    if(selectionState.get('country') === 'us'){
-      content = Tr.getIn(['detailBreakDown','crudeOil', 'defaultText', this.props.language])  
-    }else{
+    if (selectionState.get('country') === 'us') {
+      content = Tr.getIn(['detailBreakDown', 'crudeOil', 'defaultText', this.props.language])
+    } else {
       const breakdown = this.calculateBreakdown()
-      content = <span><table width="100%" className="detailBreakDownContainer" style={{ padding: '8px 0', height:'90px', overflowY:'auto' }}>
+      content = <span><table width="100%" className="detailBreakDownContainer" style={{ padding: '8px 0', height: '90px', overflowY: 'auto' }}>
         <tbody>
           {Object.entries(breakdown.values).sort((x, y) => y[1] - x[1]).map((key, i) => {
             const colour = categoryColours.getIn([selectedEnergy,aggregateKey, key[0]], Constants.getIn(['styleGuide', 'colours', 'ExportDefault']))
-            let label = <span>{prefix} <strong style={{display: 'inline-block' }}>{Tr.getIn(['label', key[0], this.props.language])}</strong>{suffix}</span>
-                if (this.props.language === 'fr' && aggregateKey !== 'transport') {
-                  label = <span>{suffix} <strong style={{display: 'inline-block' }}>{Tr.getIn(['label', key[0], this.props.language])}</strong>  </span>
-                }
+            let label = <span>{prefix} <strong style={{ display: 'inline-block' }}>{Tr.getIn(['label', key[0], this.props.language])}</strong>{suffix}</span>
+            if (this.props.language === 'fr' && aggregateKey !== 'transport') {
+              label = <span>{suffix} <strong style={{ display: 'inline-block' }}>{Tr.getIn(['label', key[0], this.props.language])}</strong>  </span>
+            }
             return (
               <DetailBreakdownRow
                 key={key}
@@ -118,7 +116,7 @@ class ProportionChart extends Chart {
                             marginRight: '4px',
                             backgroundColor: colour,
                           }}
-                        />}
+                />}
                 label={label}
                 value={key[1]}
                 unit={this.props.unit}
@@ -139,11 +137,11 @@ class ProportionChart extends Chart {
           {...dimensions}
         >
        <DetailBreakdownHeader
-          trContent= {trContent}
-          color='black'
-          type='crudeOilTypeMode'
+          trContent={trContent}
+          color="black"
+          type="crudeOilTypeMode"
         />
-        {content}
+          {content}
     </DetailSidebar>
   }
   render() {
@@ -178,8 +176,8 @@ class ProportionChart extends Chart {
         .sortBy((v, k) => k, (a, b) => (valueOrder.indexOf(a) - valueOrder.indexOf(b)))
         .map((value, type) => {
           let lineColor = categoryColours.getIn([selectedEnergy, aggregateKey, type], Constants.getIn(['styleGuide', 'colours', 'ExportDefault']))
-          if(selectionState.get('country') === 'us'){
-            lineColor='grey'
+          if (selectionState.get('country') === 'us') {
+            lineColor = 'grey'
           }
           const line = (
             <AnimatedLine
