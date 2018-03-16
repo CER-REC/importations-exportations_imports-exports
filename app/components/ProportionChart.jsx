@@ -101,9 +101,9 @@ class ProportionChart extends Chart {
         <tbody>
           {Object.entries(breakdown.values).sort((x, y) => y[1] - x[1]).map((key, i) => {
             const colour = categoryColours.getIn([selectedEnergy,aggregateKey, key[0]], Constants.getIn(['styleGuide', 'colours', 'ExportDefault']))
-            let label = <span>{prefix} <strong style={{ display: 'inline-block' }}>{Tr.getIn(['label', key[0], this.props.language])}</strong>{suffix}</span>
+            let label = <span>{prefix} <strong style={{ display: 'inline-block' }}>{Tr.getIn(['label', key[0], this.props.language])}</strong> {suffix}</span>
             if (this.props.language === 'fr' && aggregateKey !== 'transport') {
-              label = <span>{suffix} <strong style={{ display: 'inline-block' }}>{Tr.getIn(['label', key[0], this.props.language])}</strong>  </span>
+              label = <span>{suffix} <strong style={{ display: 'inline-block' }}>{Tr.getIn(['label', key[0], this.props.language])}</strong></span>
             }
             return (
               <DetailBreakdownRow
