@@ -204,15 +204,19 @@ const mapPieceLocationDataStructure = (acc, next, origin, originKey, originCount
   const destinationCountry = next.get(destinationCountryKeyName)
   acc[originKey].destinationCountry = acc[originKey].destinationCountry || {}
   acc[originKey].destinationCountry[destinationCountry] = acc[originKey].destinationCountry[destinationCountry] || {}
-  if (!(acc[originKey].destinationCountry[destinationCountry])[destinationKey]) {
-    acc[originKey].destinationCountry[destinationCountry][destinationKey] = {}
-    acc[originKey].destinationCountry[destinationCountry][destinationKey][activity] = next.get('value', 0)
-  } else {
-    if (!acc[originKey].destinationCountry[destinationCountry][destinationKey][activity]) {
-      acc[originKey].destinationCountry[destinationCountry][destinationKey][activity] = 0
-    }
-    acc[originKey].destinationCountry[destinationCountry][destinationKey][activity] += next.get('value', 0)
+  const destCountryObj = acc[originKey].destinationCountry[destinationCountry]
+  if (!destCountryObj[destinationKey]) { destCountryObj[destinationKey] = {} }
+  if (!destCountryObj[destinationKey][activity]) { destCountryObj[destinationKey][activity] = 0 }
+
+  destCountryObj[destinationKey][activity] += next.get('value', 0)
+  if (next.has('quantityForAverage')) {
+    if (!acc[originKey].sumForAvg) { acc[originKey].sumForAvg = {} }
+    const { sumForAvg } = acc[originKey]
+    if (!sumForAvg[activity]) { sumForAvg[activity] = { revenue: 0, amount: 0 } }
+    sumForAvg[activity].revenue += next.get('revenueForAverage', 0)
+    sumForAvg[activity].amount += next.get('quantityForAverage', 0)
   }
+
   acc[originKey].totalCount = (totalCount + 1)
   acc[originKey].confidentialCount = (confidentialCount + next.get('confidential'))
   return acc
@@ -221,7 +225,7 @@ const mapPieceLocationDataStructure = (acc, next, origin, originKey, originCount
 export const aggregateLocationSelector = createSelector(
   filterByTimelineSelector,
   (points) => {
-    const result = points.reduce((acc, next) => {
+    const result = Immutable.fromJS(points.reduce((acc, next) => {
       const origin = next.get('origin') || next.get('port')
       const originKey = next.get('originKey')
       acc = mapPieceLocationDataStructure(acc, next, origin, originKey, 'country','destinationKey', 'destinationCountry')
@@ -230,15 +234,15 @@ export const aggregateLocationSelector = createSelector(
       const destinationKey = next.get('destinationKey')
       acc = mapPieceLocationDataStructure(acc, next, destination, destinationKey, 'destinationCountry', 'originKey', 'country')
       return acc
-    }, {})
-    return Immutable.fromJS(result)
+    }, {}))
+    return result
   },
 )
 
 export const aggregateFilterLocationSelector = createSelector(
   filterByTimelineAndHexData,
   (points) => {
-    const result = points.reduce((acc, next) => {
+    const result = Immutable.fromJS(points.reduce((acc, next) => {
       const origin = next.get('origin') || next.get('port')
       const originKey = next.get('originKey')
       acc = mapPieceLocationDataStructure(acc, next, origin, originKey, 'country','destinationKey', 'destinationCountry')
@@ -247,8 +251,17 @@ export const aggregateFilterLocationSelector = createSelector(
       const destinationKey = next.get('destinationKey')
       acc = mapPieceLocationDataStructure(acc, next, destination, destinationKey, 'destinationCountry', 'originKey', 'country')
       return acc
-    }, {})
-    return Immutable.fromJS(result)
+    }, {}))
+
+    if (result.count() > 0 && result.first().has('sumForAvg')) {
+      return result.map(region => region.update('sumForAvg', val => val.map((activity) => {
+        // Prevent divide by zero
+        if (activity.get('amount', 0) === 0) { return 0 }
+        return activity.get('revenue', 0) / activity.get('amount')
+      })))
+    }
+
+    return result
   },
 )
 

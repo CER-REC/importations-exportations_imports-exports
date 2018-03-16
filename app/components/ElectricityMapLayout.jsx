@@ -31,6 +31,7 @@ class ElectricityMapLayout extends React.Component {
   static propTypes = {
     selection: PropTypes.instanceOf(Immutable.Map).isRequired,
     dataPoints: PropTypes.instanceOf(Immutable.Map).isRequired,
+    filteredDataPoints: PropTypes.instanceOf(Immutable.Map).isRequired,
     onMapPieceClick: PropTypes.func.isRequired,
     arrangeBy: PropTypes.string.isRequired,
     importExportVisualization: PropTypes.string.isRequired,
@@ -194,22 +195,25 @@ class ElectricityMapLayout extends React.Component {
       return null
     }
 
-    if (this.props[`${detailBreakdownData.get('type')}Enabled`] === false) { return null }
-    const data = Immutable.fromJS(
-      this.props.selection.get('destinations').reduce((acc, nextValue, country) => {
-          return nextValue.reduce((accumulator, stateOrProvince, key) => {
-            if(!this.props.filteredDataPoints.getIn([key, detailBreakdownData.get('type')])){
-              return acc
-            }
-            acc[key] = this.props.filteredDataPoints.getIn([key, detailBreakdownData.get('type')])
-            return acc
-          },{})
-      },{})
-    ).sort((a,b) => {return b - a})
+    const activity = detailBreakdownData.get('type')
+
+    if (this.props[`${activity}Enabled`] === false) { return null }
+    const data = Immutable.fromJS(this.props.selection.get('destinations')
+      .reduce((acc, nextValue) => {
+        return nextValue.reduce((accumulator, stateOrProvince, key) => {
+          const regionData = this.props.filteredDataPoints.get(key)
+          if (!regionData || !regionData.get(activity)) { return acc }
+          if (regionData.has('sumForAvg')) {
+            acc[key] = regionData.getIn(['sumForAvg', activity])
+          } else {
+            acc[key] = regionData.get(activity)
+          }
+          return acc
+        }, {})
+      }, {}))
+      .sort((a, b) => (b - a))
     const countries = Tr.get('country').filter((points, country) => this.props.selection.get('destinations').has(country))
-    const  nameMappings = countries.reduce((acc, nextValue) =>{
-      return acc.concat(nextValue)
-    }, new Immutable.Map())
+    const nameMappings = countries.reduce((acc, nextValue) => acc.concat(nextValue), new Immutable.Map())
     return (<DetailBreakdown
       data={data}
       type={detailBreakdownData.get('type')}
