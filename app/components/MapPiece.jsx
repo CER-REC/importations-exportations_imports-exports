@@ -347,13 +347,16 @@ class MapPiece extends React.Component {
 
     let confidentialIcon = null
     const valueString = `${this.props.data.get('confidentialCount')} / ${this.props.data.get('totalCount')} ${this.props.tr('valuesConfidential')}`
-    let scaleContainerX = this.props.viewport.get('changeWidthRatio')  > 1.2 ? -5: -10
-    let scaleContainerY = this.props.viewport.get('changeHeightRatio')  > 1.2 ? 8: 8
+    let scaleContainerX = this.props.viewport.get('changeWidthRatio') > 1.2 ? -7: -13
+    let scaleContainerY = this.props.viewport.get('changeHeightRatio') > 1.2 ? 8: 8
+    if (this.props.selectedEnergy === 'electricity' && this.props.arrangeBy === 'imports') {
+      scaleContainerX = this.props.viewport.get('changeWidthRatio') > 1.2 ? 10: 10
+    }
     let containerX = this.props.containerX + this.props.x1 + scaleContainerX
     let containerY = this.props.containerY + this.props.y1 + scaleContainerY
     if (this.props.selectedEnergy === 'naturalGasLiquids') {
-      scaleContainerX = this.props.viewport.get('changeWidthRatio')  > 1.2 ? 255: 205
-      scaleContainerY = this.props.viewport.get('changeHeightRatio')  > 1.2 ? 65: 80
+      scaleContainerX = this.props.viewport.get('changeWidthRatio') > 1.2 ? 255: 225
+      scaleContainerY = this.props.viewport.get('changeHeightRatio') > 1.2 ? 65: 80
       containerX = this.props.x1 * MapLayoutGridConstant.getIn(['naturalGasLiquids', 'ca' , 'mapPieceScale'], 1) + scaleContainerX
       containerY = this.props.y1 * MapLayoutGridConstant.getIn(['naturalGasLiquids', 'ca' , 'mapPieceScale'], 1) + scaleContainerY
     }
