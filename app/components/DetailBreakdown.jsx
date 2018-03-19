@@ -34,24 +34,16 @@ class DetailBreakdown extends React.Component {
           </table>
         </div>
       )
-    } else {
-      if(!this.props.showDefault) { return null}
-      return (
-        <div>
-          {props.defaultContent}
-        </div>
-      )
-    }
-    return null
+    } return null
   }
 }
 
 DetailBreakdown.defaultProps = {
-    trContent: new Immutable.Map(),
-    data: new Immutable.Map(),
-    nameMappings: new Immutable.Map(),
-    defaultContent: '',
-  }
+  trContent: new Immutable.Map(),
+  data: new Immutable.Map(),
+  nameMappings: new Immutable.Map(),
+  defaultContent: '',
+}
 
 DetailBreakdown.propTypes = {
   amountUnit: PropTypes.string.isRequired,
@@ -60,7 +52,6 @@ DetailBreakdown.propTypes = {
   data: PropTypes.instanceOf(Immutable.Map).isRequired,
   trContent: PropTypes.instanceOf(Immutable.Map).isRequired,
   nameMappings: PropTypes.instanceOf(Immutable.Map).isRequired,
-  showDefault: PropTypes.bool.isRequired,
 }
 
 export default connect((state, props) => ({
