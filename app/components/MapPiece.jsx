@@ -371,6 +371,13 @@ class MapPiece extends React.Component {
         text={valueString}
         containerX={this.props.viewport.get('changeWidthRatio')*containerX}
         containerY={this.props.viewport.get('changeHeightRatio')*containerY}
+        linePath="
+          M142.16,
+          173.94l24.26,
+          36.69a40.12,
+          40.12,0,0,0,
+          33.47,
+          18H378.2"
         lineX={142.16}
         lineY={173}
         textX={15}
