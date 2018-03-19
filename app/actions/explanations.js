@@ -1,4 +1,5 @@
 import { List } from 'immutable'
+import { Types as visualizationSettings } from './visualizationSettings'
 
 export const Types = ({
   EXPAND_COLLAPSE_EXPLANATION: 'expandCollapseExplanation',

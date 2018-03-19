@@ -1,3 +1,4 @@
+import { Types as visualizationSettings } from './visualizationSettings'
 
 export const Types = {
   TOGGLE_CONFIDENTIALITY_MENU: 'toggleConfidentialityMenu',
