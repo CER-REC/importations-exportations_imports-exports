@@ -1,49 +1,32 @@
 
 .imageDownloadWindow {
-  position:absolute;
-  top: 40%;
-  left: 50%;
-  transform: translate(-50%, -50%);
   width:550px;
-  height: 620px;
-  background-color: white;
-  border: 1px solid rgba(0,0,0,0.15);
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  height: auto;
 }
 
-.closeButton {
-  float: right;
-  width: 10px;
-  position: absolute;
-  top: 17px;
-  right: 17px;
-  cursor: pointer;
+.imageDownloadHeading {
+  position: relative;
+  margin-left: 25px;
+  top:30px;
 }
 
 .imagePreview {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  margin-top: 40px;
+  margin-left: 28px;
   width: 430px;
-  height: 388px;
-  border: 1px solid #666666;
+  height: auto;
 }
 
 .saveImage {
+  position: relative;
   cursor: pointer;
   margin-left: 25px;
-  margin-top: 510px;
-}
-
-.imageDownloadHeading {
-  margin-left: 25px;
-  margin-top: 25px;
+  margin-top: 410px;
 }
 
 .bitlyText {
   position: absolute;
-  top: 75%;
-  left: 12%;
-  width: 70%;
+  margin-top: 340px;
+  margin-left: 63px;
 }
