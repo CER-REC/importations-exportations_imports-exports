@@ -144,7 +144,7 @@ class PaddLayout extends React.Component {
 
     let paddIExplanation = null
     let textString = `${this.props.TRSelector(['explanations','paddICrudeOil'])}`
-    scaleContainerX = this.props.viewport.get('changeWidthRatio')  > 1.2 ? 90: 100
+    scaleContainerX = this.props.viewport.get('changeWidthRatio')  > 1.2 ? 90: 87
     scaleContainerY = this.props.viewport.get('changeHeightRatio')  > 1.2 ? 225: 270
     let paddIExplanationcontainerX = this.props.viewport.get('changeWidthRatio')*(this.props.left + left + scaleContainerX)
     let paddIExplanationcontainerY = this.props.viewport.get('changeHeightRatio')*(this.props.top + top - scaleContainerY)
@@ -197,7 +197,7 @@ class PaddLayout extends React.Component {
     }
 
     let paddVExplanation = null
-    scaleContainerX = this.props.viewport.get('changeWidthRatio')  > 1.2 ? -170: 100
+    scaleContainerX = this.props.viewport.get('changeWidthRatio')  > 1.2 ? -170: -180
     scaleContainerY = this.props.viewport.get('changeHeightRatio')  > 1.2 ? 225: 270
     let paddVExplanationcontainerX = this.props.viewport.get('changeWidthRatio')*(this.props.left + left + scaleContainerX)
     let paddVExplanationcontainerY = this.props.viewport.get('changeHeightRatio')*(this.props.top + top - scaleContainerY)
@@ -215,8 +215,8 @@ class PaddLayout extends React.Component {
       paddVExplanationcontainerY = this.props.viewport.get('changeHeightRatio')*(this.props.top + top - scaleContainerY)
     }
     if (this.props.arrangeBy === 'exports' && this.props.selectedEnergy === 'crudeOil') {
-      scaleContainerX = this.props.viewport.get('changeWidthRatio')  > 1.2 ? 230: 225
-      scaleContainerY = this.props.viewport.get('changeHeightRatio')  > 1.2 ? 0:0
+      scaleContainerX = this.props.viewport.get('changeWidthRatio') > 1.2 ? 230: 225
+      scaleContainerY = this.props.viewport.get('changeHeightRatio') > 1.2 ? 0:0
       paddVExplanationcontainerX = this.props.viewport.get('changeWidthRatio')*(this.props.left + left + scaleContainerX)
       paddVExplanationcontainerY = this.props.viewport.get('changeHeightRatio')*(this.props.top + top - scaleContainerY)
     }
