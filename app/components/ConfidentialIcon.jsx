@@ -53,7 +53,6 @@ class ConfidentialIcon extends React.Component {
       </a>
     <PopoverPortal>
       <ConfidentialityPopover
-        scale={this.props.scale}
         containerX={this.props.containerX}
         containerY={this.props.containerY}
         text={this.props.text}
