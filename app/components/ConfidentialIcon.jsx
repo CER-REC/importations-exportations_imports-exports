@@ -27,7 +27,6 @@ class ConfidentialIcon extends React.Component {
       xPosition: PropTypes.number.isRequired,
       yPosition: PropTypes.number.isRequired,
       expanded: PropTypes.bool.isRequired,
-      linePath: PropTypes.string.isRequired,
     }
   }
 
@@ -54,6 +53,7 @@ class ConfidentialIcon extends React.Component {
       </a>
     <PopoverPortal>
       <ConfidentialityPopover
+        scale={this.props.scale}
         containerX={this.props.containerX}
         containerY={this.props.containerY}
         text={this.props.text}
@@ -64,7 +64,6 @@ class ConfidentialIcon extends React.Component {
         xPosition={this.props.xPosition}
         yPosition={this.props.yPosition}
         expanded={this.props.expanded}
-        linePath={this.props.linePath}
       />
     </PopoverPortal>
     </g>)

@@ -368,6 +368,7 @@ class MapPiece extends React.Component {
         && this.props.confidentialityMenu) {
       confidentialIcon = <ConfidentialIcon
         styles={this.props.styles.get('confidentialStyle')}
+        scale=''
         text={valueString}
         containerX={this.props.viewport.get('changeWidthRatio')*containerX}
         containerY={this.props.viewport.get('changeHeightRatio')*containerY}
