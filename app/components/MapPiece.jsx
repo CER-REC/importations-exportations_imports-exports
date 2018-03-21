@@ -279,8 +279,12 @@ class MapPiece extends React.Component {
 
   atlqExplanation() {
     if (this.props.data.get('name') !== 'ATL-Q' || this.props.selectedEnergy !== 'naturalGasLiquids') { return null }
-    const scaleContainerX = this.props.viewport.get('changeWidthRatio')  > 1.2 ? 276: 225
-    const scaleContainerY = this.props.viewport.get('changeHeightRatio')  > 1.2 ? -20: -20
+    let scaleContainerX = this.props.viewport.get('changeWidthRatio')  > 1.2 ? 277: 248
+    let scaleContainerY = this.props.viewport.get('changeHeightRatio')  > 1.2 ? -20: -33
+    if (this.props.arrangeBy === 'amount') {
+      scaleContainerX = this.props.viewport.get('changeWidthRatio')  > 1.2 ? 248: 215
+      scaleContainerY = this.props.viewport.get('changeHeightRatio')  > 1.2 ? -20: -30
+    }
     return (<g>
       <ExplanationDot
         scale="scale(1 -1) translate(0 -100)"
