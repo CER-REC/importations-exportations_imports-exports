@@ -145,6 +145,7 @@ const getTabIndexStart = (country) =>{
   }
   return tabIndex
 }
+
 const parseLocationData = createSelector(
   getElectricityImportAndExport,
   getElectricityMapLayoutConstants,

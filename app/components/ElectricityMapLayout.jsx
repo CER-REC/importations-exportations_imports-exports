@@ -214,6 +214,7 @@ class ElectricityMapLayout extends React.Component {
       .sort((a, b) => (b - a))
     const countries = Tr.get('country').filter((points, country) => this.props.selection.get('destinations').has(country))
     const nameMappings = countries.reduce((acc, nextValue) => acc.concat(nextValue), new Immutable.Map())
+
     return (<DetailBreakdown
       data={data}
       type={detailBreakdownData.get('type')}
