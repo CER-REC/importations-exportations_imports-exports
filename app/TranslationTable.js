@@ -424,6 +424,26 @@ const TranslationTable = fromJS({
       en: 'of Energy Products to and from Canada',
       fr: 'de produits énergétiques du Canada',
     },
+    statsCanada: {
+      en: 'StatsCanada.',
+      fr: 'StatsCanada.,',
+    },
+    refinedPetroleumProducts: {
+      en: 'Refined Petroleum Products',
+      fr: 'Produits Pétroliers Raffinés',
+    },
+    crudeOil: {
+      en: 'Crude Oil',
+      fr: 'Pétrole Brut',
+    },
+    base_1: {
+      en: 'Import data for',
+      fr: 'TODO',
+    },
+    base_2: {
+      en: 'is available from',
+      fr: 'TODO',
+    },
   },
 
   explanations: {

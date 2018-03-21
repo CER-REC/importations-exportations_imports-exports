@@ -100,6 +100,28 @@ class Header extends React.Component {
     )
   }
 
+  importsLink() {
+    const { Tr } = this.props
+    const energyType = this.props.selectedEnergy
+    let energyTypeText = Tr(['mainHeading', 'crudeOil'])
+    if (energyType !== 'crudeOil' && energyType !== 'refinedPetroleumProducts') { return }
+    if (energyType === 'refinedPetroleumProducts') {
+      energyTypeText = Tr(['mainHeading', 'refinedPetroleumProducts'])
+    }
+    return (
+      <div className="importsLink">
+          <div className="importsSubheading">
+            {Tr(['mainHeading', 'base_1'])}&nbsp;
+            <div className="importsSubheadingEnergy">
+              { energyTypeText }&nbsp;
+            </div>
+            {Tr(['mainHeading', 'base_2'])}&nbsp;
+            <a href="/">{Tr(['mainHeading', 'statsCanada'])}</a>
+          </div>
+      </div>
+    )
+  }
+
   metaBar() {
     const { Tr } = this.props
     const tabIndex = Constants.getIn(['tabIndex','start', 'menuBar'])
@@ -155,11 +177,13 @@ class Header extends React.Component {
     if (this.props.screenshot) {
       return (<div style={{ height: Constants.get('topHeightMargin') }}>
         {this.leftHeading()}
+        {this.importsLink()}
       </div>)
     }
     return (<div style={{ height: Constants.get('topHeightMargin') }}>
       {this.leftHeading()}
       {this.metaBar()}
+      {this.importsLink()}
     </div>)
   }
 }
