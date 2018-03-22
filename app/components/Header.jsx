@@ -110,9 +110,9 @@ class Header extends React.Component {
     if (energyType === 'crudeOil') {
       return (
         <div className="crudeOilStats">
-          <a href={Tr(['mainHeading', 'crudeOilStats_01'])}>{Tr(['mainHeading', 'crudeOilStats_01'])}</a>&nbsp;
+          <a href={Tr(['mainHeading', 'crudeOilStatsLink_01'])}>{Tr(['mainHeading', 'crudeOilStats_01'])}</a>&nbsp;
           {Tr(['mainHeading', 'and'])}&nbsp;
-          <a href={Tr(['mainHeading', 'crudeOilStats_03'])}>{Tr(['mainHeading', 'crudeOilStats_03'])}</a>&nbsp;
+          <a href={Tr(['mainHeading', 'crudeOilStatsLink_03'])}>{Tr(['mainHeading', 'crudeOilStats_03'])}</a>&nbsp;
           {Tr(['mainHeading', 'closingBracket'])}
         </div>
       )
