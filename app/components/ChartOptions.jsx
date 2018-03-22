@@ -10,6 +10,7 @@ import { timelineScaleLinked } from '../selectors/timeline'
 import { groupingBy as timelineGroupingSelector } from '../selectors/data'
 import trSelector from '../selectors/translate'
 import { handleInteractionWithTabIndex } from '../utilities'
+import {visualizationSettings} from '../selectors/visualizationSettings'
 
 import ExplanationDot from './ExplanationDot'
 import tr from '../TranslationTable'
@@ -35,7 +36,7 @@ class ChartOptions extends React.PureComponent {
   }
 
   linkDataExplanation() {
-    if (this.props.selectedEnergy !== 'electricity') { return }
+    if (this.props.selectedEnergy !== 'electricity' || this.props.activityGroup.get('activity') !== 'importsExports') { return }
     const leftPad = Constants.getIn(['visualizationDetailContainer', 'leftPadding'])
     return (<g>
       <ExplanationDot
@@ -68,7 +69,7 @@ class ChartOptions extends React.PureComponent {
     this.props.setGrouping(this.props.timelineGroup === 'year' ? 'quarter' : 'year')
 
   renderScaleToggle() {
-    if (this.props.canChangeScale === false) { return null }
+    if (this.props.canChangeScale === false || this.props.activityGroup.get('activity') !== 'importsExports') { return null }
 
     const interactions = handleInteractionWithTabIndex(this.props.tabIndex, this.scaleLinkedChanged)
     const switchHeight = this.props.height
@@ -133,6 +134,7 @@ export default connect(
   (state, props) => ({
     selectedEnergy: state.importExportVisualization,
     scaleLinked: timelineScaleLinked(state, props),
+    activityGroup: visualizationSettings(state, props),
     timelineGroup: timelineGroupingSelector(state, props),
     tr: trSelector(state, props),
   }),
