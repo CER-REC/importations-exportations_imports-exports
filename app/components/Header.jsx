@@ -104,6 +104,29 @@ class Header extends React.Component {
     )
   }
 
+  statsCanadaLink() {
+    const { Tr } = this.props
+    const energyType = this.props.selectedEnergy
+    if (energyType === 'crudeOil') {
+      return (
+        <div className="crudeOilStats">
+          <a href={Tr(['mainHeading', 'crudeOilStats_01'])}>{Tr(['mainHeading', 'crudeOilStats_01'])}</a>&nbsp;
+          {Tr(['mainHeading', 'and'])}&nbsp;
+          <a href={Tr(['mainHeading', 'crudeOilStats_03'])}>{Tr(['mainHeading', 'crudeOilStats_03'])}</a>&nbsp;
+          {Tr(['mainHeading', 'closingBracket'])}
+        </div>
+      )
+    }
+    if (energyType === 'refinedPetroleumProducts') {
+      return (
+        <div className="refinedPetroleumProductsStats">
+          <a href={Tr(['mainHeading', 'refinedPetroleumProductsLink_04'])}>{Tr(['mainHeading', 'refinedPetroleumProductsStats_04'])}</a>&nbsp;
+          {Tr(['mainHeading', 'closingBracket'])}
+        </div>
+      )
+    }
+  }
+
   importsLink() {
     const { Tr } = this.props
     const energyType = this.props.selectedEnergy
@@ -119,8 +142,7 @@ class Header extends React.Component {
             <div className="importsSubheadingEnergy">
               { energyTypeText }&nbsp;
             </div>
-            {Tr(['mainHeading', 'base_2'])}&nbsp;
-            <a href="/">{Tr(['mainHeading', 'statsCanada'])}</a>
+            {Tr(['mainHeading', 'base_2'])}&nbsp; {this.statsCanadaLink()} 
           </div>
       </div>
     )
