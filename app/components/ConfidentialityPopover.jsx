@@ -27,13 +27,7 @@ class ConfidentialityPopover extends React.Component {
 
     return (<svg>
       <g transform={`scale(0.4) ${transformString}`}>
-        <path d="
-          M142.16,
-          173.94l24.26,
-          36.69a40.12,
-          40.12,0,0,0,
-          33.47,
-          18H340.2" 
+        <path d="M142.16, 173.94l24.26, 36.69a40.12, 40.12,0,0,0, 33.47, 18H378.2"
           stroke="#999"
           strokeWidth="1.8"
           fill="transparent" />
