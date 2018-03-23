@@ -83,7 +83,7 @@
 
 .theLegendValues {
   font-family: $fira-sans-condensed;
-  font-size: 10px;
+  font-size: 12px;
   fill: $neutral-medium;
   text-align: left;
 }
@@ -98,17 +98,6 @@
   font-size: 14px;
 }
 
-.selectableDropdown {
-  font-family: $fira-sans-condensed-semibold;
-  fill: $neutral-medium;
-  font-size: 13px; 
-}
-
-.visSelect {
-  font-family: $fira-sans-condensed-semibold;
-  font-size: 13px; 
-  fill: white;
-}
 
 .visSelectOfText {
   font-family: $fira-sans-condensed;
@@ -217,17 +206,20 @@
 .detailBreakDown {
   .header{
     &.imports {
-      font-size: 12PX;
+      font-size: 14PX;
       font-family: $fira-sans-condensed-semibold;
+      color: $neutral-medium;
     }
     &.exports {
-      font-size: 12PX;
+      font-size: 14PX;
       font-family: $fira-sans-condensed-semibold;
+      color: $neutral-medium;
     }
   }
   .detailBreakDownText {
-    font-size: 11PX;
+    font-size: 13PX;
     font-family: $fira-sans-condensed;
+    color: $neutral-medium;
   }
   
 }
@@ -238,7 +230,7 @@
 
 #detailSidebar {
   font-family: $fira-sans-condensed;
-  font-size: 11px;
+  font-size: 13px;
   color: $neutral-light;
 
   .switchWrapper { font-weight: normal; }
@@ -253,7 +245,7 @@
 
   .detailTotal {
     font-family: $fira-sans-condensed;
-    font-size: 12px;
+    font-size: 13px;
     color: $neutral-dark;
 
     .totalType {
@@ -274,7 +266,7 @@
 .mapPieceDescription{
   font-family:$fira-sans-condensed;
   font-size:13px;
-  fill: $neutral-light;
+  fill: $neutral-medium;
 }
 .explanationBottomText{
   font-family:$fira-sans-condensed;
