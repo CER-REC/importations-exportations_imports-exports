@@ -37,7 +37,7 @@ const RouteComputations = {
   bitlyEndpoint(location, language) {
     switch (process.env.NODE_ENV) {
       case 'development': {
-        const root = RouteComputations.appRoot(location, language)
+        const root = RouteComputations.appRoot(document.location, language)
         return `${root}bitly_url`
       }
       case 'production':
@@ -82,17 +82,22 @@ const RouteComputations = {
 
   // A string for the root of the application, a suitable place for making rest
   // requests or building other URLs. E.g.:
-  // http://localhost:3001/pipeline-incidents/
-  // https://apps2.neb-one.gc.ca/incidents-pipeliniers/
+  // http://localhost:3003/imports-exports/
+  // https://apps2.neb-one.gc.ca/importations-exportations/
   appRoot(location, language) {
     return `${location.origin}${Tr.getIn(['applicationPath', language])}`
   },
 
-  screenshotURL() {
-    let path = `${RouteComputations.screenshotOrigin(document.location)}/${Constants.get('screenshotPath')}`
-    path += `?pageUrl=${encodeURIComponent(`${document.location.pathname}screenshot${document.location.search}`)}`
+  screenshotParameter: function (location, language) {
+    return encodeURIComponent(`${RouteComputations.appRoot(document.location, language)}${Constants.get('screenshotPath')}${location.search}`)
+  },
+
+  screenshotURL(location, language) {
+    let path = `${RouteComputations.screenshotOrigin(document.location)}/${Constants.get('screenshotPath')}/`
+    path += `?pageUrl=${RouteComputations.screenshotParameter(document.location, language)}`
     path += `&width=${Constants.get('screenshotWidth')}&height=${Constants.get('screenshotHeight')}`
     path += `&host=${document.location.host}`
+    console.log(path)
     return path
   },
 

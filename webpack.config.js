@@ -8,7 +8,7 @@ module.exports = {
     bundle: [
       'webpack-hot-middleware/client?path=/imports-exports/script/__webpack_hmr',
       './app/App.jsx',
-    ]
+    ],
   },
   output: {
     path: BUILD_DIR,
@@ -26,29 +26,33 @@ module.exports = {
           options: {
             presets: ['env', 'react', 'stage-2'],
             plugins: [],
-          }
-        }
+          },
+        },
       },
 
       {
         test: /\.s?css$/,
-        use: [{
-          loader: 'style-loader' // creates style nodes from JS strings
-        }, {
-          loader: 'css-loader', // translates CSS into CommonJS
-          options: {
-            url: false
-          }
-        }, {
-          loader: 'sass-loader' // compiles Sass to CSS
-        }]
-      }
+        use: [
+          { loader: 'style-loader' }, // creates style nodes from JS strings
+          {
+            loader: 'css-loader', // translates CSS into CommonJS
+            options: { url: false },
+          },
+          { loader: 'sass-loader'}, // compiles Sass to CSS
+        ],
+      },
 
+      {
+        test: /\.modernizrrc.js$/,
+        use: ['modernizr-loader'],
+      },
     ]
-  
   },
   resolve: {
-    extensions: ['.js', '.jsx', '.json']
+    extensions: ['.js', '.jsx', '.json'],
+    alias: {
+      modernizr$: Path.resolve(__dirname, '.modernizrrc.js'),
+    },
   },
 
   // NB: Plugins object is *replaced* in production!

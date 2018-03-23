@@ -331,6 +331,16 @@ class SocialBar extends React.Component {
     />)
   }
 
+  bitlyLink() {
+    return (<text className="bitlyText">
+      { Tr.getIn(['bitlyShare', this.props.language])}&nbsp;
+      <tspan dx="-13.9em" dy="1.4em">
+        {RouteComputations.bitlyEndpoint(this.props.location, this.props.language)}
+      </tspan>
+    </text>
+    )
+  }
+
   render() {
     let translate = '0 0'
     if (this.props.viewport.get('changeHeightRatio') < 1.2) {
@@ -340,6 +350,9 @@ class SocialBar extends React.Component {
       return (<g transform={`translate(${translate})`}>
         <g transform = {`translate(${this.props.viewport.get('x') - 300} ${this.props.viewport.get('y') - 150})`}>
           {this.nebLogo()}
+        </g>
+        <g transform = {`translate(0 ${this.props.viewport.get('y')})`}>
+          {this.bitlyLink()}
         </g>
       </g>)
     }
