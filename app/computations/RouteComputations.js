@@ -30,26 +30,26 @@ const RouteComputations = {
     return `?${urlParts.join('&')}`
   },
 
-  bitlyParameter(location, language) {
-    return `${Constants.get('appHost')}${Tr.getIn(['applicationPath', language])}${encodeURIComponent(location.search)}`
+  bitlyParameter(language) {
+    return `${Constants.get('appHost')}${Tr.getIn(['applicationPath', language])}${encodeURIComponent(document.location.search)}`
   },
 
-  bitlyEndpoint(location, language) {
+  bitlyEndpoint(language) {
     switch (process.env.NODE_ENV) {
       case 'development': {
-        const root = RouteComputations.appRoot(document.location, language)
+        const root = RouteComputations.appRoot(language)
         return `${root}bitly_url`
       }
       case 'production':
       default:
-        return `${location.origin}/bitlyService/api/bitlyShortlink`
+        return `${document.location.origin}/bitlyService/api/bitlyShortlink`
     }
   },
 
   dataEndpoint: () => {
     if (process.env.NODE_ENV === 'development') {
       // FIXME: Hardcoded language because the data isn't language specific
-      const root = RouteComputations.appRoot(document.location, 'en')
+      const root = RouteComputations.appRoot('en')
       return `${root}data/data.json`
     }
     return `${document.location.origin}/imports-exports/data/data.json`
@@ -58,17 +58,17 @@ const RouteComputations = {
   topoEndpoint: () => {
     if (process.env.NODE_ENV === 'development') {
       // FIXME: Hardcoded language because the data isn't language specific
-      const root = RouteComputations.appRoot(document.location, 'en')
+      const root = RouteComputations.appRoot('en')
       return `${root}data/topo.json`
     }
     return `${document.location.origin}/imports-exports/data/topo.json`
   },
 
-  determineLanguage(location) {
-    if (location.pathname.match(Tr.getIn(['applicationPath', 'en']))) {
+  determineLanguage() {
+    if (document.location.pathname.match(Tr.getIn(['applicationPath', 'en']))) {
       return 'en'
     }
-    if (location.pathname.match(Tr.getIn(['applicationPath', 'fr']))) {
+    if (document.location.pathname.match(Tr.getIn(['applicationPath', 'fr']))) {
       return 'fr'
     }
 
@@ -76,38 +76,38 @@ const RouteComputations = {
     return 'en'
   },
 
-  screenshotMode(location) {
-    return !!location.pathname.match(`/${Constants.get('screenshotPath')}$`)
+  screenshotMode() {
+    return !!document.location.pathname.match(`/${Constants.get('screenshotPath')}$`)
   },
 
   // A string for the root of the application, a suitable place for making rest
   // requests or building other URLs. E.g.:
   // http://localhost:3003/imports-exports/
   // https://apps2.neb-one.gc.ca/importations-exportations/
-  appRoot(location, language) {
-    return `${location.origin}${Tr.getIn(['applicationPath', language])}`
+  appRoot(language) {
+    return `${document.location.origin}${Tr.getIn(['applicationPath', language])}`
   },
 
-  screenshotParameter: function (location, language) {
-    return encodeURIComponent(`${RouteComputations.appRoot(document.location, language)}${Constants.get('screenshotPath')}${location.search}`)
+  screenshotParameter: function (language) {
+    return encodeURIComponent(`${RouteComputations.appRoot(language)}${Constants.get('screenshotPath')}${document.location.search}`)
   },
 
-  screenshotURL(location, language) {
-    let path = `${RouteComputations.screenshotOrigin(document.location)}/${Constants.get('screenshotPath')}/`
-    path += `?pageUrl=${RouteComputations.screenshotParameter(document.location, language)}`
+  screenshotURL(language) {
+    let path = `${RouteComputations.screenshotOrigin()}/${Constants.get('screenshotPath')}/`
+    path += `?pageUrl=${RouteComputations.screenshotParameter(language)}`
     path += `&width=${Constants.get('screenshotWidth')}&height=${Constants.get('screenshotHeight')}`
     path += `&host=${document.location.host}`
     console.log(path)
     return path
   },
 
-  screenshotOrigin(location) {
+  screenshotOrigin() {
     switch (process.env.NODE_ENV) {
       case 'development':
         return 'http://localhost:3002'
       case 'production':
       default:
-        return location.origin
+        return document.location.origin
     }
   },
 }

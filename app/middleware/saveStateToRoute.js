@@ -19,7 +19,7 @@ export const updateStateFromURL = (search, store) => {
 
     // Always determine language from the path in the URL bar, rather than
     // the language attribute from the config.
-    config.language = RouteComputations.determineLanguage(document.location)
+    config.language = RouteComputations.determineLanguage()
 
     updatingState = true
     store.dispatch({

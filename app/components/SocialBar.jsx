@@ -50,8 +50,8 @@ class SocialBar extends React.Component {
   }
 
   makeBitlyPromise() {
-    const bitlyEndpoint = RouteComputations.bitlyEndpoint(document.location, this.props.language)
-    const shortenUrl = RouteComputations.bitlyParameter(document.location, this.props.language)
+    const bitlyEndpoint = RouteComputations.bitlyEndpoint(this.props.language)
+    const shortenUrl = RouteComputations.bitlyParameter(this.props.language)
 
     const options = {
       uri: `${bitlyEndpoint}?shortenUrl=${shortenUrl}`,
@@ -120,7 +120,7 @@ class SocialBar extends React.Component {
 
   methodologyClick() { 
     if (!this.props.expandSocialBar) { return this.props.controlArrowClick() }
-    const appRoot = RouteComputations.appRoot(document.location, this.props.language)
+    const appRoot = RouteComputations.appRoot(this.props.language)
     window.open(`${appRoot}${Tr.getIn(['methodologyLinks', this.props.language])}`)
   }
 
@@ -335,7 +335,7 @@ class SocialBar extends React.Component {
     return (<text className="bitlyText">
       { Tr.getIn(['bitlyShare', this.props.language])}&nbsp;
       <tspan dx="-13.9em" dy="1.4em">
-        {RouteComputations.bitlyEndpoint(this.props.location, this.props.language)}
+        {RouteComputations.bitlyEndpoint(this.props.language)}
       </tspan>
     </text>
     )
