@@ -80,16 +80,20 @@ const RouteComputations = {
     return !!document.location.pathname.match(`/${Constants.get('screenshotPath')}$`)
   },
 
+  applicationPath(language) {
+    return Tr.getIn(['applicationPath', language])
+  },
+
   // A string for the root of the application, a suitable place for making rest
   // requests or building other URLs. E.g.:
   // http://localhost:3003/imports-exports/
   // https://apps2.neb-one.gc.ca/importations-exportations/
   appRoot(language) {
-    return `${document.location.origin}${Tr.getIn(['applicationPath', language])}`
+    return `${document.location.origin}${RouteComputations.applicationPath(language)}`
   },
 
   screenshotParameter: function (language) {
-    return encodeURIComponent(`${RouteComputations.appRoot(language)}${Constants.get('screenshotPath')}${document.location.search}`)
+    return encodeURIComponent(`${RouteComputations.applicationPath(language)}${Constants.get('screenshotPath')}${document.location.search}`)
   },
 
   screenshotURL(language) {
