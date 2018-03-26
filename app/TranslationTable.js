@@ -426,7 +426,15 @@ const TranslationTable = fromJS({
     },
     base_1: {
       en: 'Import data for',
-      fr: 'TODO',
+      fr: 'Importation de données sur',
+    },
+    base_1_5_crude: {
+      en: '',
+      fr: 'le',
+    },
+    base_1_5_refinedPetroleumProducts: {
+      en: '',
+      fr: 'les',
     },
     refinedPetroleumProducts: {
       en: 'Refined Petroleum Products',
@@ -438,15 +446,23 @@ const TranslationTable = fromJS({
     },
     base_2: {
       en: 'is available from Statistics Canada (CANSIM Tables',
-      fr: 'TODO',
+      fr: 'de Statistique Canada (',
+    },
+    base_2_5_crude: {
+      en: '',
+      fr: 'tableaux',
+    },
+    base_2_5_refinedPetroleumProducts: {
+      en: '',
+      fr: 'tableau',
     },
     crudeOilStats_01: {
-      en: '126-000',
-      fr: '126-000',
+      en: '126-0001',
+      fr: '126-0001',
     },
     crudeOilStats_03: {
-      en: '126-003',
-      fr: '126-003',
+      en: '126-0003',
+      fr: '126-0003',
     },
     refinedPetroleumProductsStats_04: {
       en: '134-0004',
@@ -467,6 +483,10 @@ const TranslationTable = fromJS({
     and: {
       en: 'and',
       fr: 'et',
+    },
+    deCansim: {
+      en: '',
+      fr: 'de CANSIM',
     },
     closingBracket: {
       en: ')',
