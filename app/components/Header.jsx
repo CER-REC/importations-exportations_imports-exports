@@ -79,12 +79,16 @@ class Header extends React.Component {
 
   leftHeading() {
     const { Tr } = this.props
+    const energyType = this.props.selectedEnergy
+    let color = (energyType === 'crudeOil' || energyType === 'refinedPetroleumProducts')
+      ? '#DCDCDC'
+      : ' '
     return (
       <div className="leftHeader">
-        <div className="headingImports">
+        <div className="headingImports" style={{ color: color }}>
           {Tr(['mainHeading', 'imports'])}
         </div>&nbsp;
-        <div className="headingBase" >
+        <div className="headingBase" style={{ color: color }}>
           {Tr(['mainHeading', 'ampersand'])}
         </div>&nbsp;
         <div className="headingExports">
@@ -98,6 +102,66 @@ class Header extends React.Component {
         </p>
       </div>
     )
+  }
+
+  crudeOilImportsLink() {
+    const { Tr } = this.props
+    const language = this.props.language
+    const energyType = this.props.selectedEnergy
+    if (energyType !== 'crudeOil') { return }
+    if (language === 'fr') {
+      return (<div className="importsLink">
+        <div className="importsSubheading">
+          {Tr(['mainHeading', 'base_1'])} {Tr(['mainHeading', 'base_1_5_crude'])}
+          <div className="importsSubheadingEnergy">{ Tr(['mainHeading', 'crudeOil']) }</div>
+          {Tr(['mainHeading', 'base_2'])}{Tr(['mainHeading', 'base_2_5_crude'])}
+          <a href={Tr(['mainHeading', 'crudeOilStatsLink_01'])}>{Tr(['mainHeading', 'crudeOilStats_01'])}</a>
+          {Tr(['mainHeading', 'and'])}
+          <a href={Tr(['mainHeading', 'crudeOilStatsLink_03'])}>{Tr(['mainHeading', 'crudeOilStats_03'])}</a>
+          {Tr(['mainHeading', 'deCansim'])}{Tr(['mainHeading', 'closingBracket'])}
+        </div>
+      </div>)
+    }
+    return (<div className="importsLink">
+      <div className="importsSubheading">
+        {Tr(['mainHeading', 'base_1'])}
+        <div className="importsSubheadingEnergy">{ Tr(['mainHeading', 'crudeOil']) }</div>
+        {Tr(['mainHeading', 'base_2'])} {Tr(['mainHeading', 'base_2_5_crude'])}
+        <a href={Tr(['mainHeading', 'crudeOilStatsLink_01'])}>{Tr(['mainHeading', 'crudeOilStats_01'])}</a>
+        {Tr(['mainHeading', 'and'])}
+        <a href={Tr(['mainHeading', 'crudeOilStatsLink_03'])}>{Tr(['mainHeading', 'crudeOilStats_03'])}</a>
+        {Tr(['mainHeading', 'closingBracket'])}
+      </div>
+    </div>)
+  }
+
+  refinedPetroleumProductsImportsLink() {
+    const { Tr } = this.props
+    const language = this.props.language
+    const energyType = this.props.selectedEnergy
+    if (energyType !== 'refinedPetroleumProducts') { return }
+    if (language === 'fr') {
+      return (<div className="importsLink">
+        <div className="importsSubheading">
+          {Tr(['mainHeading', 'base_1'])} {Tr(['mainHeading', 'base_1_5_refinedPetroleumProducts'])}
+          <div className="importsSubheadingEnergy">{ Tr(['mainHeading', 'refinedPetroleumProducts']) }</div>
+          {Tr(['mainHeading', 'base_2'])}{Tr(['mainHeading', 'base_2_5_refinedPetroleumProducts'])}
+          <a href={Tr(['mainHeading', 'refinedPetroleumProductsLink_04'])}>{Tr(['mainHeading', 'refinedPetroleumProductsStats_04'])}</a>
+          {Tr(['mainHeading', 'deCansim'])}{Tr(['mainHeading', 'closingBracket'])}
+        </div>
+      </div>)
+    }
+      return (<div className="importsLink">
+          <div className="importsSubheading">
+            {Tr(['mainHeading', 'base_1'])}
+            <div className="importsSubheadingEnergy">
+              { Tr(['mainHeading', 'refinedPetroleumProducts']) }
+            </div>
+            {Tr(['mainHeading', 'base_2'])}{Tr(['mainHeading', 'base_2_5_refinedPetroleumProducts'])}     
+          <a href={Tr(['mainHeading', 'refinedPetroleumProductsLink_04'])}>{Tr(['mainHeading', 'refinedPetroleumProductsStats_04'])}</a>
+            {Tr(['mainHeading', 'closingBracket'])}
+        </div>
+      </div>)
   }
 
   metaBar() {
@@ -155,11 +219,15 @@ class Header extends React.Component {
     if (this.props.screenshot) {
       return (<div style={{ height: Constants.get('topHeightMargin') }}>
         {this.leftHeading()}
+        {this.crudeOilImportsLink()}
+        {this.refinedPetroleumProductsImportsLink()}
       </div>)
     }
     return (<div style={{ height: Constants.get('topHeightMargin') }}>
       {this.leftHeading()}
       {this.metaBar()}
+      {this.crudeOilImportsLink()}
+      {this.refinedPetroleumProductsImportsLink()}
     </div>)
   }
 }
