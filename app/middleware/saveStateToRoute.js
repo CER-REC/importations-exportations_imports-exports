@@ -58,7 +58,6 @@ export default (store) => {
       visualizationSettings: {
         [visualization]: state.visualizationSettings[visualization],
       },
-      screenshot: state.screenshot,
       electricityExplanation: state.electricityExplanation,
       importExportVisualization: visualization,
       language: state.language,

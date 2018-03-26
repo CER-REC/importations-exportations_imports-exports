@@ -13,11 +13,7 @@ import { handleInteractionWithTabIndex } from '../utilities'
 
 import { ExpandSocialBar } from '../actions/socialBar'
 
-import { ScreenshotMode } from '../actions/screenshot'
-
-import { OpenModal as ShowAboutWindowCreator } from '../actions/modal'
-import { OpenModal as ShowImageDownloadWindow } from '../actions/modal'
-import { OpenModal as ShowDataDownloadWindow } from '../actions/modal'
+import { OpenModal } from '../actions/modal'
 
 import './SocialBar.scss'
 
@@ -159,7 +155,6 @@ class SocialBar extends React.Component {
   downloadImageClick() {
     if (!this.props.expandSocialBar) { return this.props.controlArrowClick() }
     this.props.imageDownloadClick()
-    this.props.activateScreenshotMode()
   }
 
   downloadDataClick() {
@@ -375,19 +370,16 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   onClick() {
-    dispatch(ShowAboutWindowCreator('about'))
+    dispatch(OpenModal('about'))
   },
   imageDownloadClick() {
-    dispatch(ShowImageDownloadWindow('imageDownload'))
+    dispatch(OpenModal('imageDownload'))
   },
   controlArrowClick() {
     dispatch(ExpandSocialBar())
   },
   dataDownloadClick() {
-    dispatch(ShowDataDownloadWindow('dataDownload'))
-  },
-  activateScreenshotMode() {
-    dispatch(ScreenshotMode())
+    dispatch(OpenModal('dataDownload'))
   },
 })
 

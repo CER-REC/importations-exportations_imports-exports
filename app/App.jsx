@@ -15,8 +15,11 @@ import { LoadData as LoadDataCreator } from './actions/data'
 import { LoadBins as LoadBinsCreator } from './actions/bins'
 import Store from './Store'
 import { DismissComponent as DismissComponentCreator } from './actions/socialBar'
+import { ScreenshotMode } from './actions/screenshot'
 
 const store = Store()
+
+if (RouteComputations.screenshotMode()) { store.dispatch(ScreenshotMode()) }
 
 function resizeScreenHandler() {
   // Ensures the width and height of the workspace keep the ratio 900:600
@@ -24,18 +27,17 @@ function resizeScreenHandler() {
   // the empty categories are visible (i.e. empty categories state is visible).
   let w = document.getElementById('reactRoot').clientWidth
   let h = w * Constants.getIn(['workspace', 'heightToWidthRatio'])
-  //Calcualte height ratio
-  let changeWidthRatio = w/900
-  let changeHeightRatio = h/600
-  store.dispatch(Resized(w, h, changeWidthRatio, changeHeightRatio))
 
-  if(store.getState().screenshotMode) {
+  if (store.getState().screenshot) {
     h = Constants.get('screenshotHeight')
     w = Constants.get('screenshotWidth')
-    changeWidthRatio = w/900
-    changeHeightRatio = h/600
   }
-  store.dispatch(Resized(w,h, changeWidthRatio, changeHeightRatio))
+
+  // Calculate height ratio
+  const changeWidthRatio = w / 900
+  const changeHeightRatio = h / 600
+
+  store.dispatch(Resized(w, h, changeWidthRatio, changeHeightRatio))
 }
 
 // Handles collapsing the social bar.
