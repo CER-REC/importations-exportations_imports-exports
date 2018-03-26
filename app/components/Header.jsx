@@ -112,24 +112,24 @@ class Header extends React.Component {
     if (language === 'fr') {
       return (<div className="importsLink">
         <div className="importsSubheading">
-          {Tr(['mainHeading', 'base_1'])} {Tr(['mainHeading', 'base_1_5_crude'])}&nbsp;
-          <div className="importsSubheadingEnergy">{ Tr(['mainHeading', 'crudeOil']) }&nbsp;</div>
-          {Tr(['mainHeading', 'base_2'])} {Tr(['mainHeading', 'base_2_5_crude'])}&nbsp;
-          <a href={Tr(['mainHeading', 'crudeOilStatsLink_01'])}>{Tr(['mainHeading', 'crudeOilStats_01'])}</a>&nbsp;
-          {Tr(['mainHeading', 'and'])}&nbsp;
-          <a href={Tr(['mainHeading', 'crudeOilStatsLink_03'])}>{Tr(['mainHeading', 'crudeOilStats_03'])}</a>&nbsp;
-          {Tr(['mainHeading', 'deCansim'])}&nbsp;{Tr(['mainHeading', 'closingBracket'])}
+          {Tr(['mainHeading', 'base_1'])} {Tr(['mainHeading', 'base_1_5_crude'])}
+          <div className="importsSubheadingEnergy">{ Tr(['mainHeading', 'crudeOil']) }</div>
+          {Tr(['mainHeading', 'base_2'])}{Tr(['mainHeading', 'base_2_5_crude'])}
+          <a href={Tr(['mainHeading', 'crudeOilStatsLink_01'])}>{Tr(['mainHeading', 'crudeOilStats_01'])}</a>
+          {Tr(['mainHeading', 'and'])}
+          <a href={Tr(['mainHeading', 'crudeOilStatsLink_03'])}>{Tr(['mainHeading', 'crudeOilStats_03'])}</a>
+          {Tr(['mainHeading', 'deCansim'])}{Tr(['mainHeading', 'closingBracket'])}
         </div>
       </div>)
     }
     return (<div className="importsLink">
       <div className="importsSubheading">
-        {Tr(['mainHeading', 'base_1'])}&nbsp;
-        <div className="importsSubheadingEnergy">{ Tr(['mainHeading', 'crudeOil']) }&nbsp;</div>
-        {Tr(['mainHeading', 'base_2'])}&nbsp;
-        <a href={Tr(['mainHeading', 'crudeOilStatsLink_01'])}>{Tr(['mainHeading', 'crudeOilStats_01'])}</a>&nbsp;
-        {Tr(['mainHeading', 'and'])}&nbsp;
-        <a href={Tr(['mainHeading', 'crudeOilStatsLink_03'])}>{Tr(['mainHeading', 'crudeOilStats_03'])}</a>&nbsp;
+        {Tr(['mainHeading', 'base_1'])}
+        <div className="importsSubheadingEnergy">{ Tr(['mainHeading', 'crudeOil']) }</div>
+        {Tr(['mainHeading', 'base_2'])} {Tr(['mainHeading', 'base_2_5_crude'])}
+        <a href={Tr(['mainHeading', 'crudeOilStatsLink_01'])}>{Tr(['mainHeading', 'crudeOilStats_01'])}</a>
+        {Tr(['mainHeading', 'and'])}
+        <a href={Tr(['mainHeading', 'crudeOilStatsLink_03'])}>{Tr(['mainHeading', 'crudeOilStats_03'])}</a>
         {Tr(['mainHeading', 'closingBracket'])}
       </div>
     </div>)
@@ -143,22 +143,22 @@ class Header extends React.Component {
     if (language === 'fr') {
       return (<div className="importsLink">
         <div className="importsSubheading">
-          {Tr(['mainHeading', 'base_1'])} {Tr(['mainHeading', 'base_1_5_refinedPetroleumProducts'])}&nbsp;
-          <div className="importsSubheadingEnergy">{ Tr(['mainHeading', 'refinedPetroleumProducts']) }&nbsp;</div>
-          {Tr(['mainHeading', 'base_2'])} {Tr(['mainHeading', 'base_2_5_refinedPetroleumProducts'])}&nbsp;
-          <a href={Tr(['mainHeading', 'refinedPetroleumProductsLink_04'])}>{Tr(['mainHeading', 'refinedPetroleumProductsStats_04'])}</a>&nbsp;
-          {Tr(['mainHeading', 'deCansim'])}&nbsp;{Tr(['mainHeading', 'closingBracket'])}
+          {Tr(['mainHeading', 'base_1'])} {Tr(['mainHeading', 'base_1_5_refinedPetroleumProducts'])}
+          <div className="importsSubheadingEnergy">{ Tr(['mainHeading', 'refinedPetroleumProducts']) }</div>
+          {Tr(['mainHeading', 'base_2'])}{Tr(['mainHeading', 'base_2_5_refinedPetroleumProducts'])}
+          <a href={Tr(['mainHeading', 'refinedPetroleumProductsLink_04'])}>{Tr(['mainHeading', 'refinedPetroleumProductsStats_04'])}</a>
+          {Tr(['mainHeading', 'deCansim'])}{Tr(['mainHeading', 'closingBracket'])}
         </div>
       </div>)
     }
       return (<div className="importsLink">
           <div className="importsSubheading">
-            {Tr(['mainHeading', 'base_1'])}&nbsp;
+            {Tr(['mainHeading', 'base_1'])}
             <div className="importsSubheadingEnergy">
-              { Tr(['mainHeading', 'refinedPetroleumProducts']) }&nbsp;
+              { Tr(['mainHeading', 'refinedPetroleumProducts']) }
             </div>
-            {Tr(['mainHeading', 'base_2'])}&nbsp;        
-          <a href={Tr(['mainHeading', 'refinedPetroleumProductsLink_04'])}>{Tr(['mainHeading', 'refinedPetroleumProductsStats_04'])}</a>&nbsp;
+            {Tr(['mainHeading', 'base_2'])}{Tr(['mainHeading', 'base_2_5_refinedPetroleumProducts'])}     
+          <a href={Tr(['mainHeading', 'refinedPetroleumProductsLink_04'])}>{Tr(['mainHeading', 'refinedPetroleumProductsStats_04'])}</a>
             {Tr(['mainHeading', 'closingBracket'])}
         </div>
       </div>)

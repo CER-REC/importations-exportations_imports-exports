@@ -425,16 +425,16 @@ const TranslationTable = fromJS({
       fr: 'de produits énergétiques du Canada',
     },
     base_1: {
-      en: 'Import data for',
+      en: 'Import data for ',
       fr: 'Importation de données sur',
     },
     base_1_5_crude: {
       en: '',
-      fr: 'le',
+      fr: 'le ',
     },
     base_1_5_refinedPetroleumProducts: {
       en: '',
-      fr: 'les',
+      fr: 'les ',
     },
     refinedPetroleumProducts: {
       en: 'Refined Petroleum Products',
@@ -445,16 +445,16 @@ const TranslationTable = fromJS({
       fr: 'Pétrole Brut',
     },
     base_2: {
-      en: 'is available from Statistics Canada (CANSIM Tables',
-      fr: 'de Statistique Canada (',
+      en: ' is available from Statistics Canada (CANSIM ',
+      fr: ' de Statistique Canada (',
     },
     base_2_5_crude: {
-      en: '',
-      fr: 'tableaux',
+      en: 'tables ',
+      fr: 'tableaux ',
     },
     base_2_5_refinedPetroleumProducts: {
-      en: '',
-      fr: 'tableau',
+      en: 'table ',
+      fr: 'tableau ',
     },
     crudeOilStats_01: {
       en: '126-0001',
@@ -481,12 +481,12 @@ const TranslationTable = fromJS({
       fr: 'http://www5.statcan.gc.ca/cansim/a26?lang=fra&id=1340004&retrLang=fra',
     },
     and: {
-      en: 'and',
-      fr: 'et',
+      en: ' and ',
+      fr: ' et ',
     },
     deCansim: {
       en: '',
-      fr: 'de CANSIM',
+      fr: ' de CANSIM',
     },
     closingBracket: {
       en: ')',
