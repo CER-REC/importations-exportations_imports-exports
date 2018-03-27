@@ -26,12 +26,12 @@ function resizeScreenHandler() {
   // TODO: Increase the height of the workspace by emptyCategoryOffsetRatio if
   // the empty categories are visible (i.e. empty categories state is visible).
   let w = document.getElementById('reactRoot').clientWidth
-  let h = w * Constants.getIn(['workspace', 'heightToWidthRatio'])
 
-  if (store.getState().screenshot) {
-    h = Constants.get('screenshotHeight')
-    w = Constants.get('screenshotWidth')
-  }
+  // Only set the screenshot width, since the height is proportional.
+  // We will use the height when we send the request to the screenshot server
+  if (store.getState().screenshot) { w = Constants.get('screenshotWidth') }
+
+  const h = w * Constants.getIn(['workspace', 'heightToWidthRatio'])
 
   // Calculate height ratio
   const changeWidthRatio = w / 900

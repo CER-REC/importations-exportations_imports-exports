@@ -209,7 +209,7 @@ const Constants = fromJS({
   screenshotPath: 'screenshot',
 
   screenshotWidth: 1138,
-  screenshotHeight: 928.08,
+  screenshotHeight: 930,
 
   styleGuide: {
     colours: {
