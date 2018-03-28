@@ -93,7 +93,8 @@ const RouteComputations = {
   },
 
   screenshotParameter: function (language) {
-    return encodeURIComponent(`${RouteComputations.applicationPath(language)}${Constants.get('screenshotPath')}${document.location.search}`)
+    // The double-encode of the search is correct
+    return encodeURIComponent(`${RouteComputations.applicationPath(language)}${Constants.get('screenshotPath')}${encodeURIComponent(document.location.search)}`)
   },
 
   screenshotURL(language) {

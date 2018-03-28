@@ -61,21 +61,12 @@ class ImageDownloadWindow extends React.Component {
     </p>
   }
 
-  bitlyText() {
-    return <p
-      className="bitlyText">
-      { Tr.getIn(['bitlyShare', this.props.language])}&nbsp;
-      {RouteComputations.bitlyEndpoint(this.props.language)}
-    </p>
-  }
-
   render() {
     return <div
       className="imageDownloadWindow">
       {this.imagePreview()}
       {this.closeButton()}
       {this.heading()}
-      {this.bitlyText()}
       {this.saveImageButton()}
     </div>
   }
