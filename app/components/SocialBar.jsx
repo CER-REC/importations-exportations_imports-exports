@@ -343,10 +343,10 @@ class SocialBar extends React.Component {
     }
     if (this.props.screenshot) {
       return (<g transform={`translate(${translate})`}>
-        <g transform = {`translate(${this.props.viewport.get('x') - 300} ${this.props.viewport.get('y') - 150})`}>
+        <g transform = {`translate(0  ${this.props.viewport.get('y')})`}>
           {this.nebLogo()}
         </g>
-        <g transform = {`translate(0 ${this.props.viewport.get('y')})`}>
+        <g transform = {`translate(${this.props.viewport.get('x')} ${this.props.viewport.get('y') + 50})`}>
           {this.bitlyLink()}
         </g>
       </g>)
