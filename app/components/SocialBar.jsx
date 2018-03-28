@@ -43,6 +43,7 @@ class SocialBar extends React.Component {
     this.linkedInClick = this.linkedInClick.bind(this)
     this.downloadImageClick = this.downloadImageClick.bind(this)
     this.downloadDataClick = this.downloadDataClick.bind(this)
+    this.state = { screenshotURL: Constants.get('appHost') }
   }
 
   makeBitlyPromise() {
@@ -81,6 +82,14 @@ class SocialBar extends React.Component {
         return response.body.data.url
       })
       .catch(() => Constants.get('appHost'))
+  }
+
+  componentDidMount() {
+    if (this.props.screenshot) {
+      this.makeBitlyPromise().then((url) => {
+        this.setState({ screenshotURL: url });
+      })
+    }
   }
 
   greyBar() {
@@ -330,8 +339,7 @@ class SocialBar extends React.Component {
     return (<text className="bitlyText">
       { Tr.getIn(['bitlyShare', this.props.language])}&nbsp;
       <tspan dx="-13.9em" dy="1.4em">
-        http://bit.ly/2GzpmlI
-        {/*RouteComputations.bitlyEndpoint(this.props.language)*/}
+        {this.state.screenshotURL}
       </tspan>
     </text>
     )

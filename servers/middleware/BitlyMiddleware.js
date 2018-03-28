@@ -7,7 +7,7 @@ function handler(request, res) {
     status_code: 200,
     status_txt: 'OK',
     data: {
-      url: 'https://apps2.neb-one.gc.ca/imports-exports',
+      url: 'https://bit.ly/2E2w5zr',
       hash: 'asdfdsfkl',
       global_hash: 'asdcxb',
       long_url: 'https://apps2.neb-one.gc.ca/imports-exports',
