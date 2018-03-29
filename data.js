@@ -86,6 +86,11 @@ const parsingIssue = {};
     value: parseInt(stripNA(point.value), 10) || 0,
     extrapolated: false,
   })))
+  // Strip RPP/Crude imports, since they aren't used in the visualization right now
+  .then(points => points.filter((point) => (
+    point.activity !== 'imports' ||
+    (point.product !== 'refinedPetroleumProducts' && point.product !== 'crudeOil')
+  )))
   // Validate points
   .then(points => points.map((point) => {
     // Data Vaildation and parsing
