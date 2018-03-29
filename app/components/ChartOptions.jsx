@@ -121,7 +121,7 @@ class ChartOptions extends React.PureComponent {
           </div>
           <div className="detailBarArrow" />
         </div>                          
-        <svg style={{ zIndex: 99 }}>{this.linkDataExplanation()}</svg>
+        <svg>{this.linkDataExplanation()}</svg>
       </div>
     )
   }
