@@ -16,7 +16,7 @@ const DetailBreakdownRow = props => (
       <span style={{display: 'inline-block' }}>{((props.total === 0) ? 0.0 : (props.value / props.total) * 100).toFixed(2)}%</span>&nbsp;
     </td>
     <td width="40px" style={{ display: 'inline-block' }}>
-      <div className="progress-bar">
+      <div className="percentage-bar">
         <span
           style={{ ...props.progressBarStyle, width: `${((props.total === 0) ? 0.0 : (props.value / props.total) * 100)}%` }}
         />
