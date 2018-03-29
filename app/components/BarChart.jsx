@@ -89,8 +89,8 @@ class BarChart extends Chart {
     if (!this.props.flipped || this.props.selectedEnergy !== 'electricity') { return null }
     return (<g>
       <ExplanationDot
-        scale="scale(2.7) scale(-1 1)"
-        lineStroke="0.5"
+        scale="scale(2.7) scale(-1 1) translate(-2 -3)"
+        lineStroke="0.4"
         textBoxWidth={100}
         textBoxHeight={150}
         linePath="
@@ -105,7 +105,7 @@ class BarChart extends Chart {
         lineX={244.16}
         lineY={173}
         textX={76}
-        textY={153}
+        textY={146}
         containerX={this.props.left - 278}
         containerY={this.props.left + 68}
         name={`${this.props.selectedEnergy} exportBarChartExplanation`}
@@ -167,12 +167,15 @@ class BarChart extends Chart {
     const negativeValOffset = scale.getIn(['y', 'min']) * heightPerUnit
     const elements = data.map((point) => {
       const opacity = this.isTimelinePointFiltered(point) ? 0.5 : 1
+      // Minimum 1px bar height
+      let barHeight = (point.getIn(['values', valueKey], 0) * heightPerUnit)
+      if (point.getIn(['values', valueKey], 0) > 0) { barHeight = Math.max(barHeight, 1); }
       return (
         <AnimatedLine
           x1={point.get('offsetX')}
           x2={point.get('offsetX')}
           y2={height + negativeValOffset}
-          y1={(height + negativeValOffset) - (point.getIn(['values', valueKey], 0) * heightPerUnit)}
+          y1={(height + negativeValOffset) - barHeight}
           key={`${point.get('year')}-${point.get('quarter')}-${valueKey}`}
           strokeWidth={barSize}
           stroke={colour}

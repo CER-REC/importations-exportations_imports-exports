@@ -13,11 +13,7 @@ import { handleInteractionWithTabIndex } from '../utilities'
 
 import { ExpandSocialBar } from '../actions/socialBar'
 
-import { ScreenshotMode } from '../actions/screenshot'
-
-import { OpenModal as ShowAboutWindowCreator } from '../actions/modal'
-import { OpenModal as ShowImageDownloadWindow } from '../actions/modal'
-import { OpenModal as ShowDataDownloadWindow } from '../actions/modal'
+import { OpenModal } from '../actions/modal'
 
 import './SocialBar.scss'
 
@@ -47,11 +43,12 @@ class SocialBar extends React.Component {
     this.linkedInClick = this.linkedInClick.bind(this)
     this.downloadImageClick = this.downloadImageClick.bind(this)
     this.downloadDataClick = this.downloadDataClick.bind(this)
+    this.state = { screenshotURL: Constants.get('appHost') }
   }
 
   makeBitlyPromise() {
-    const bitlyEndpoint = RouteComputations.bitlyEndpoint(document.location, this.props.language)
-    const shortenUrl = RouteComputations.bitlyParameter(document.location, this.props.language)
+    const bitlyEndpoint = RouteComputations.bitlyEndpoint(this.props.language)
+    const shortenUrl = RouteComputations.bitlyParameter(this.props.language)
 
     const options = {
       uri: `${bitlyEndpoint}?shortenUrl=${shortenUrl}`,
@@ -87,6 +84,14 @@ class SocialBar extends React.Component {
       .catch(() => Constants.get('appHost'))
   }
 
+  componentDidMount() {
+    if (this.props.screenshot) {
+      this.makeBitlyPromise().then((url) => {
+        this.setState({ screenshotURL: url });
+      })
+    }
+  }
+
   greyBar() {
     return (<rect
       x={this.props.viewport.get('x') - Constants.getIn(['menuBar', 'barWidth'])}
@@ -120,7 +125,7 @@ class SocialBar extends React.Component {
 
   methodologyClick() { 
     if (!this.props.expandSocialBar) { return this.props.controlArrowClick() }
-    const appRoot = RouteComputations.appRoot(document.location, this.props.language)
+    const appRoot = RouteComputations.appRoot(this.props.language)
     window.open(`${appRoot}${Tr.getIn(['methodologyLinks', this.props.language])}`)
   }
 
@@ -159,7 +164,6 @@ class SocialBar extends React.Component {
   downloadImageClick() {
     if (!this.props.expandSocialBar) { return this.props.controlArrowClick() }
     this.props.imageDownloadClick()
-    this.props.activateScreenshotMode()
   }
 
   downloadDataClick() {
@@ -331,6 +335,16 @@ class SocialBar extends React.Component {
     />)
   }
 
+  bitlyLink() {
+    return (<text className="bitlyText">
+      { Tr.getIn(['bitlyShare', this.props.language])}&nbsp;
+      <tspan dx="-13.9em" dy="1.4em">
+        {this.state.screenshotURL}
+      </tspan>
+    </text>
+    )
+  }
+
   render() {
     let translate = '0 0'
     if (this.props.viewport.get('changeHeightRatio') < 1.2) {
@@ -338,8 +352,11 @@ class SocialBar extends React.Component {
     }
     if (this.props.screenshot) {
       return (<g transform={`translate(${translate})`}>
-        <g transform = {`translate(${this.props.viewport.get('x') - 300} ${this.props.viewport.get('y') - 150})`}>
+        <g transform = {`translate(0  ${this.props.viewport.get('y')})`}>
           {this.nebLogo()}
+        </g>
+        <g transform = {`translate(${this.props.viewport.get('x') - 75} ${this.props.viewport.get('y') + 50})`}>
+          {this.bitlyLink()}
         </g>
       </g>)
     }
@@ -362,19 +379,16 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   onClick() {
-    dispatch(ShowAboutWindowCreator('about'))
+    dispatch(OpenModal('about'))
   },
   imageDownloadClick() {
-    dispatch(ShowImageDownloadWindow('imageDownload'))
+    dispatch(OpenModal('imageDownload'))
   },
   controlArrowClick() {
     dispatch(ExpandSocialBar())
   },
   dataDownloadClick() {
-    dispatch(ShowDataDownloadWindow('dataDownload'))
-  },
-  activateScreenshotMode() {
-    dispatch(ScreenshotMode())
+    dispatch(OpenModal('dataDownload'))
   },
 })
 

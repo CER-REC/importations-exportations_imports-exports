@@ -1,15 +1,22 @@
 @import "../styles/Colours.scss";
 
-.chartScaleLinked {
-  float: left;
+.chartOptionsWrapper {
   height: 100%;
+  > * {
+    position: absolute;
+    top: 0;
+  }
+}
 
+.chartScaleLinked {
+  left: 0;
+  height: 100%;
   > svg { margin: 0 4px 0 0; }
   > div { float: right; }
 }
 
 .chartOptions {
-  float: right;
+  right: 0;
   height: 100%;
 }
 
