@@ -57,7 +57,7 @@ class ChartOptions extends React.PureComponent {
         textX={40}
         textY={58}
         containerX={leftPad + 890}
-        containerY={318}
+        containerY={314}
         name="linkDataIcon"
         text={`${this.props.tr(['explanations','linkedDataIcon'])}`}
     /></g>)
@@ -101,16 +101,13 @@ class ChartOptions extends React.PureComponent {
     return (
       <div
         style={{
-          height: '100%',
           background: Constants.getIn(['styleGuide', 'colours', 'SandLight']),
           lineHeight: `${this.props.height}px`,
           marginLeft: `${-leftPad}px`,
           paddingLeft: `${leftPad}px`,
         }}
+        className="chartOptionsWrapper"
       >        
-        <svg>
-          {this.linkDataExplanation()}
-        </svg>
         {this.renderScaleToggle()}
         <div className="chartOptions">
           {/* Using a div to fix an IE11 bug with the detail bar arrow wrapping */}
@@ -124,7 +121,7 @@ class ChartOptions extends React.PureComponent {
           </div>
           <div className="detailBarArrow" />
         </div>                          
-        <div style={{ clear: 'both' }} />
+        <svg>{this.linkDataExplanation()}</svg>
       </div>
     )
   }

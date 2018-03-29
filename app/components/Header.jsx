@@ -52,29 +52,36 @@ class Header extends React.Component {
       textString = `${this.props.Tr(['explanations','resetRefinedPetroleumProducts'])}`
       dotName = 'refinedPetroleumProductsTitleExplanation'
     }
-    return (<g>
-      <ExplanationDot
-        scale="scale(1)"
-        lineStroke="1"
-        textBoxWidth={250}
-        linePath="
-          M142.16,
-          173.94l24.26,
-          36.69a40.12,
-          40.12,0,0,0,
-          33.47,
-          18H423.2"
-        xPosition={800}
-        yPosition={57}
-        lineX={142.16}
-        lineY={173}
-        textX={40}
-        textY={58}
-        containerX={0}
-        containerY={-70}
-        name={dotName}
-        text={textString}
-    /></g>)
+    return (
+      <svg
+        width={this.props.viewport.get('x')}
+        height={Constants.get('topHeightMargin')}
+        style={{ position: 'absolute', top: 0, left: 0 }}
+      >
+        <ExplanationDot
+          scale="scale(1)"
+          lineStroke="1"
+          textBoxWidth={250}
+          linePath="
+            M142.16,
+            173.94l24.26,
+            36.69a40.12,
+            40.12,0,0,0,
+            33.47,
+            18H423.2"
+          xPosition={800}
+          yPosition={57}
+          lineX={142.16}
+          lineY={173}
+          textX={40}
+          textY={58}
+          containerX={0}
+          containerY={-70}
+          name={dotName}
+          text={textString}
+        />
+      </svg>
+    )
   }
 
   leftHeading() {
@@ -194,7 +201,6 @@ class Header extends React.Component {
             role="menuitem"
           >{Tr('resetLabel')}
           </text>
-            {this.resetExplanation()}
         </g>
 
         <g transform={transformMetaBarIcons} >
@@ -216,19 +222,15 @@ class Header extends React.Component {
 
 
   render() {
-    if (this.props.screenshot) {
-      return (<div style={{ height: Constants.get('topHeightMargin') }}>
+    return (
+      <div style={{ height: Constants.get('topHeightMargin') }}>
         {this.leftHeading()}
+        {this.props.screenshot ? null : this.metaBar()}
+        {this.resetExplanation()}
         {this.crudeOilImportsLink()}
         {this.refinedPetroleumProductsImportsLink()}
-      </div>)
-    }
-    return (<div style={{ height: Constants.get('topHeightMargin') }}>
-      {this.leftHeading()}
-      {this.metaBar()}
-      {this.crudeOilImportsLink()}
-      {this.refinedPetroleumProductsImportsLink()}
-    </div>)
+      </div>
+    )
   }
 }
 

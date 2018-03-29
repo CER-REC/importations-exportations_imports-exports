@@ -44,13 +44,13 @@ class ImageDownloadWindow extends React.Component {
   imagePreview() {
     return (
       <div className="imagePreview">
-        <img className="imagePreview" src={RouteComputations.screenshotURL(this.props.location, this.props.language)} />
+        <img className="imagePreview" src={RouteComputations.screenshotURL(this.props.language)} />
       </div>
     )
   }
 
   saveImageClick() {
-    window.open(RouteComputations.screenshotURL(this.props.location, this.props.language), 'targetWindow', 'width=650,height=650')
+    window.open(RouteComputations.screenshotURL(this.props.language), 'targetWindow', 'width=650,height=650')
   }
 
   saveImageButton() {
@@ -61,21 +61,12 @@ class ImageDownloadWindow extends React.Component {
     </p>
   }
 
-  bitlyText() {
-    return <p
-      className="bitlyText">
-      { Tr.getIn(['bitlyShare', this.props.language])}&nbsp;
-      {RouteComputations.bitlyEndpoint(this.props.location, this.props.language)}
-    </p>
-  }
-
   render() {
     return <div
       className="imageDownloadWindow">
       {this.imagePreview()}
       {this.closeButton()}
       {this.heading()}
-      {this.bitlyText()}
       {this.saveImageButton()}
     </div>
   }
