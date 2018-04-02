@@ -1,4 +1,3 @@
-
 export const Types = {
   SCREENSHOT_MODE: 'ScreenshotMode',
 }
@@ -8,17 +7,10 @@ export const ScreenshotMode = () => ({
   payload: { },
 })
 
-export const DismissComponent = () => ({
-  type: Types.DISMISS_COMPONENT,
-  payload: { },
-})
-
 // don't display when in screenshot mode
-const initialState = false
-export const reducer = (state = initialState, action) => {
+export const reducer = (state = false, action) => {
   switch (action.type) {
     case Types.SCREENSHOT_MODE: return true
-    case Types.DISMISS_COMPONENT: return false
-    default: return initialState
+    default: return state
   }
 }

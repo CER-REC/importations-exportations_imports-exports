@@ -167,12 +167,15 @@ class BarChart extends Chart {
     const negativeValOffset = scale.getIn(['y', 'min']) * heightPerUnit
     const elements = data.map((point) => {
       const opacity = this.isTimelinePointFiltered(point) ? 0.5 : 1
+      // Minimum 1px bar height
+      let barHeight = (point.getIn(['values', valueKey], 0) * heightPerUnit)
+      if (point.getIn(['values', valueKey], 0) > 0) { barHeight = Math.max(barHeight, 1); }
       return (
         <AnimatedLine
           x1={point.get('offsetX')}
           x2={point.get('offsetX')}
           y2={height + negativeValOffset}
-          y1={(height + negativeValOffset) - (point.getIn(['values', valueKey], 0) * heightPerUnit)}
+          y1={(height + negativeValOffset) - barHeight}
           key={`${point.get('year')}-${point.get('quarter')}-${valueKey}`}
           strokeWidth={barSize}
           stroke={colour}

@@ -424,6 +424,74 @@ const TranslationTable = fromJS({
       en: 'of Energy Products to and from Canada',
       fr: 'de produits énergétiques du Canada',
     },
+    base_1: {
+      en: 'Import data for ',
+      fr: 'Importation de données sur',
+    },
+    base_1_5_crude: {
+      en: '',
+      fr: 'le ',
+    },
+    base_1_5_refinedPetroleumProducts: {
+      en: '',
+      fr: 'les ',
+    },
+    refinedPetroleumProducts: {
+      en: 'Refined Petroleum Products',
+      fr: 'Produits Pétroliers Raffinés',
+    },
+    crudeOil: {
+      en: 'Crude Oil',
+      fr: 'Pétrole Brut',
+    },
+    base_2: {
+      en: ' is available from Statistics Canada (CANSIM ',
+      fr: ' de Statistique Canada (',
+    },
+    base_2_5_crude: {
+      en: 'tables ',
+      fr: 'tableaux ',
+    },
+    base_2_5_refinedPetroleumProducts: {
+      en: 'table ',
+      fr: 'tableau ',
+    },
+    crudeOilStats_01: {
+      en: '126-0001',
+      fr: '126-0001',
+    },
+    crudeOilStats_03: {
+      en: '126-0003',
+      fr: '126-0003',
+    },
+    refinedPetroleumProductsStats_04: {
+      en: '134-0004',
+      fr: '134-0004',
+    },
+    crudeOilStatsLink_01: {
+      en: 'http://www5.statcan.gc.ca/cansim/a26?lang=eng&id=1260001',
+      fr: 'http://www5.statcan.gc.ca/cansim/a26?lang=fra&id=1260001&retrLang=fra',
+    },
+    crudeOilStatsLink_03: {
+      en: 'http://www5.statcan.gc.ca/cansim/a26?lang=eng&id=1260003',
+      fr: 'http://www5.statcan.gc.ca/cansim/a26?lang=fra&id=1260003&retrLang=fra',
+    },
+    refinedPetroleumProductsLink_04: {
+      en: 'http://www5.statcan.gc.ca/cansim/a26?lang=eng&id=1340004',
+      fr: 'http://www5.statcan.gc.ca/cansim/a26?lang=fra&id=1340004&retrLang=fra',
+    },
+    and: {
+      en: ' and ',
+      fr: ' et ',
+    },
+    deCansim: {
+      en: '',
+      fr: ' de CANSIM',
+    },
+    closingBracket: {
+      en: ')',
+      fr: ')',
+    },
   },
 
   explanations: {

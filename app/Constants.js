@@ -208,8 +208,8 @@ const Constants = fromJS({
   appHost: 'https://apps2.neb-one.gc.ca',
   screenshotPath: 'screenshot',
 
-  screenshotWidth: 1500,
-  screenshotHeight: 1200,
+  screenshotWidth: 1138,
+  screenshotHeight: 930,
 
   styleGuide: {
     colours: {

@@ -10,6 +10,7 @@ import { timelineScaleLinked } from '../selectors/timeline'
 import { groupingBy as timelineGroupingSelector } from '../selectors/data'
 import trSelector from '../selectors/translate'
 import { handleInteractionWithTabIndex } from '../utilities'
+import {visualizationSettings} from '../selectors/visualizationSettings'
 
 import ExplanationDot from './ExplanationDot'
 import tr from '../TranslationTable'
@@ -35,7 +36,7 @@ class ChartOptions extends React.PureComponent {
   }
 
   linkDataExplanation() {
-    if (this.props.selectedEnergy !== 'electricity') { return }
+    if (this.props.selectedEnergy !== 'electricity' || this.props.activityGroup.get('activity') !== 'importsExports') { return }
     const leftPad = Constants.getIn(['visualizationDetailContainer', 'leftPadding'])
     return (<g>
       <ExplanationDot
@@ -56,7 +57,7 @@ class ChartOptions extends React.PureComponent {
         textX={40}
         textY={58}
         containerX={leftPad + 890}
-        containerY={318}
+        containerY={314}
         name="linkDataIcon"
         text={`${this.props.tr(['explanations','linkedDataIcon'])}`}
     /></g>)
@@ -68,7 +69,7 @@ class ChartOptions extends React.PureComponent {
     this.props.setGrouping(this.props.timelineGroup === 'year' ? 'quarter' : 'year')
 
   renderScaleToggle() {
-    if (this.props.canChangeScale === false) { return null }
+    if (this.props.canChangeScale === false || this.props.activityGroup.get('activity') !== 'importsExports') { return null }
 
     const interactions = handleInteractionWithTabIndex(this.props.tabIndex, this.scaleLinkedChanged)
     const switchHeight = this.props.height
@@ -100,16 +101,13 @@ class ChartOptions extends React.PureComponent {
     return (
       <div
         style={{
-          height: '100%',
           background: Constants.getIn(['styleGuide', 'colours', 'SandLight']),
           lineHeight: `${this.props.height}px`,
           marginLeft: `${-leftPad}px`,
           paddingLeft: `${leftPad}px`,
         }}
+        className="chartOptionsWrapper"
       >        
-        <svg>
-          {this.linkDataExplanation()}
-        </svg>
         {this.renderScaleToggle()}
         <div className="chartOptions">
           {/* Using a div to fix an IE11 bug with the detail bar arrow wrapping */}
@@ -123,7 +121,7 @@ class ChartOptions extends React.PureComponent {
           </div>
           <div className="detailBarArrow" />
         </div>                          
-        <div style={{ clear: 'both' }} />
+        <svg>{this.linkDataExplanation()}</svg>
       </div>
     )
   }
@@ -133,6 +131,7 @@ export default connect(
   (state, props) => ({
     selectedEnergy: state.importExportVisualization,
     scaleLinked: timelineScaleLinked(state, props),
+    activityGroup: visualizationSettings(state, props),
     timelineGroup: timelineGroupingSelector(state, props),
     tr: trSelector(state, props),
   }),
