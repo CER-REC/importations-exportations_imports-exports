@@ -183,24 +183,28 @@ class BarChart extends Chart {
 
     const heightPerUnit = height / (scale.getIn(['y', 'max']) - scale.getIn(['y', 'min']))
     const largestNegative = data.map(p => p.getIn(['values', valueKey], 0)).min()
-    // TODO: The else case may be larger than 30px
-      /*
-    const negativeValOffset = (largestNegative < scale.getIn(['y', 'min']))
-      ? -30 // Maximum 30px for negative values
-      : scale.getIn(['y', 'min']) * heightPerUnit
-      */
-    const negativeValOffset = -30
-    const negativeMaxHeight = (largestNegative * heightPerUnit < -30)
+    const negativeValOffset = (largestNegative < 0)
+      ? Math.max((largestNegative * heightPerUnit), -30)
+      : 0
+    const negativeMaxHeight = (negativeValOffset === -30)
       ? 0
       : (largestNegative * heightPerUnit)
 
     const elements = data.map((point) => {
       const opacity = this.isTimelinePointFiltered(point) ? 0.5 : 1
       const value = point.getIn(['values', valueKey], 0)
+
       // Minimum 1px bar height
-      let barHeight = (value * heightPerUnit)
-      if (value > 0) { barHeight = Math.max(barHeight, 1) }
-      if (value > scale.getIn(['y', 'max']) || value < scale.getIn(['y', 'min'])) {
+      let barHeight = (value < 0)
+        ? Math.min(value * heightPerUnit, -1)
+        : Math.max(value * heightPerUnit, 1)
+      if (value === 0) { barHeight = 0 }
+
+      if (
+        value > scale.getIn(['y', 'max']) ||
+        // Exceeds the minimum scale, but doesn't exceed the allotted height
+        (value < scale.getIn(['y', 'min']) && negativeMaxHeight === 0 && negativeValOffset === -30)
+      ) {
         barHeight = (value < 0)
           ? Math.max(negativeMaxHeight, value * heightPerUnit)
           : scale.getIn(['y', 'max']) * heightPerUnit
