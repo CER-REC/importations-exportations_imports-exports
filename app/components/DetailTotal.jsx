@@ -13,7 +13,10 @@ const DetailTotal = props => (
     <div className="detailText">
       <span className="totalType">
         {TR.getIn(['importExportMenu', props.type, props.language])}
-      </span> {TR.getIn(['detailTotal', 'total', props.language])}&nbsp;
+      </span>&nbsp;
+      {(props.amountUnit === 'CAN$/MW.h' || props.amountUnit === 'CN$/GJ')
+        ? TR.getIn(['detailTotal', 'average', props.language])
+        : TR.getIn(['detailTotal', 'total', props.language])}&nbsp;
       {humanNumber(props.value, props.language)}&nbsp;
       {TR.getIn(['amounts', props.amountUnit, props.language])}&nbsp;
     </div>

@@ -4,7 +4,6 @@
   .totalType { font-weight: bold; }
 
   .detailText {
-    padding-left: 12px;
     background: #fff;
     width: calc(100% - 40px);
     display: inline-block;
@@ -27,7 +26,7 @@
     .totalType { color: $import-default; }
   }
   &.exports {
-    padding-bottom: 14px;
+    padding-bottom: 15px;
     &, .percentage { 
           height: 12px; 
           line-height: 1;
