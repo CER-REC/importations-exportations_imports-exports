@@ -12,6 +12,7 @@ import MissingDataCount from './MissingDataCount'
 import { timelineData } from '../selectors/timeline'
 import { groupingBy as timelineGrouping } from '../selectors/data'
 import { visualizationSettings } from '../selectors/visualizationSettings'
+import { toggleOutlier } from '../actions/chartOutliers'
 
 import trSelector from '../selectors/translate'
 
@@ -175,14 +176,10 @@ class BarChart extends Chart {
       colour,
       layout,
       tabIndex,
+      expandedOutliers,
     } = this.props
 
     const barSize = layout.get('barWidth')
-
-    const expandedOverflows = {
-      imports: { positive: '2001Q1', negative: '2002Q3' },
-      exports: { positive: '1995Q1', negative: '2002Q1' },
-    }
 
     const heightPerUnit = height / (scale.getIn(['y', 'max']) - scale.getIn(['y', 'min']))
     const largestNegative = data.map(p => p.getIn(['values', valueKey], 0)).min()
@@ -211,8 +208,8 @@ class BarChart extends Chart {
         const barDirection = (value < 0 ? -1 : 1)
         let overflowBarHeight = 17 * barDirection
         if (
-          expandedOverflows[valueKey] &&
-          expandedOverflows[valueKey][value < 0 ? 'negative' : 'positive'] === point.get('period')
+          expandedOutliers.has(valueKey) &&
+          expandedOutliers.getIn([valueKey, value < 0 ? 'negative' : 'positive']) === point.get('period')
         ) {
           overflowBarHeight = 30 * barDirection
           let textOffset = ((height + negativeValOffset) - barHeight - overflowBarHeight)
@@ -233,7 +230,7 @@ class BarChart extends Chart {
           <g key={`${point.get('year')}-${point.get('quarter')}-${valueKey}`}>
             {this.renderLine(point, negativeValOffset, barHeight, colour, opacity)}
             <g
-              onClick={() => alert('Clicked ' + point.get('year') + point.get('quarter'))}
+              onClick={() => this.props.toggleOutlier(valueKey, (value >= 0), point.get('period'))}
             >
               <line
                 x1={point.get('offsetX')}
@@ -309,9 +306,13 @@ class BarChart extends Chart {
   }
 }
 
-export default connect((state, props) => Object.assign({
-  timelineGroup: timelineGrouping(state, props),
-  selectedEnergy: state.importExportVisualization,
-  unit: visualizationSettings(state, props).get('amount'),
-  tr: trSelector(state, props),
-}, timelineData(state, props)))(BarChart)
+export default connect(
+  (state, props) => Object.assign({
+    timelineGroup: timelineGrouping(state, props),
+    selectedEnergy: state.importExportVisualization,
+    unit: visualizationSettings(state, props).get('amount'),
+    tr: trSelector(state, props),
+    expandedOutliers: state.chartOutliers,
+  }, timelineData(state, props)),
+  { toggleOutlier },
+)(BarChart)
