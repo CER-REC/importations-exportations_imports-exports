@@ -9,6 +9,7 @@ import DetailSidebar from './DetailSidebar'
 import DetailTotal from './DetailTotal'
 import ConfidentialCount from './ConfidentialCount'
 import MissingDataCount from './MissingDataCount'
+import TextBox from './TextBox'
 import { timelineData } from '../selectors/timeline'
 import { groupingBy as timelineGrouping } from '../selectors/data'
 import { visualizationSettings } from '../selectors/visualizationSettings'
@@ -234,11 +235,14 @@ class BarChart extends Chart {
           else if (flipped && value < 0) textOffset -= 11
           overflowText = (
             <g transform={`translate(${point.get('offsetX') + (barSize / 2) + 1} ${textOffset})`}>
-              <g transform={flipped ? 'scale(1 -1)' : ''}>
-                <text className="chartOutlierText">
+              <g transform={flipped ? 'scale(1 -1)' : ''} className="chartOutlierText">
+                <TextBox
+                  padding={0}
+                  boxStyles={{ fill: '#fff' }}
+                >
                   {value.toLocaleString()}&nbsp;
                   {this.props.tr(['amounts', this.props.unit])}
-                </text>
+                </TextBox>
               </g>
             </g>
           )
@@ -298,17 +302,19 @@ class BarChart extends Chart {
           {this.blueBarExplanation()}
           {this.crudeBlueBarExplanation()}
         </g>
-        <AxisGuide
-          flipped={flipped}
-          scale={scale.get('y').toJS()}
-          position={this.state.axisGuide}
-          chartHeight={height}
-          heightPerUnit={heightPerUnit}
-          updatePosition={this.updateAxisGuide}
-          width={this.props.width}
-          barSize={barSize}
-          tabIndex={tabIndex||0}
-        />
+        <g transform={`translate(0 ${negativeValOffset})`}>
+          <AxisGuide
+            flipped={flipped}
+            scale={scale.get('y').toJS()}
+            position={this.state.axisGuide}
+            chartHeight={height}
+            heightPerUnit={heightPerUnit}
+            updatePosition={this.updateAxisGuide}
+            width={this.props.width}
+            barSize={barSize}
+            tabIndex={tabIndex||0}
+          />
+        </g>
         {!this.props.detailSidebar ? null : (
           <DetailSidebar top={this.props.top} height={height}>
             <div className="verticalAlign">
