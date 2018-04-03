@@ -35,16 +35,12 @@ export const aggregateQuarter = createSelector(
   },
 )
 const aggregateQuarterPoints = (points, valueKeys, aggregateKey, vizName) => {
-      console.log(points.toJS())
   const result = fromJS(points
     .reduce((acc, next) => {
       if (vizName === 'crudeOil' && aggregateKey === 'activity' && next.get('destination') === 'ca') {
         return acc
       }
       const period = next.get('period')
-      if (period === '1999Q1') {
-        console.log('1999Q1', next.toJS())
-      }
       if (!acc[period]) {
         acc[period] = {
           units: next.get('units'),
@@ -93,7 +89,6 @@ const aggregateQuarterPoints = (points, valueKeys, aggregateKey, vizName) => {
 
     if (result.count() === 0 || result.first().has('sumForAvg') === false) { return result }
 
-    console.log('before', result.toJS())
     const test = result.map(period => {
       let totalAmount = 0
       let totalRevenue = 0
@@ -106,7 +101,6 @@ const aggregateQuarterPoints = (points, valueKeys, aggregateKey, vizName) => {
         }))
         .set('total', (totalAmount === 0) ? 0 : (totalRevenue / totalAmount))
     })
-    console.log('after', test.toJS())
     return test
     // if sfA exists and map over to calculate weighted average
     // replace each quarters value with that value
@@ -189,7 +183,6 @@ export const timelineScaleCalculation = createSelector(
         },
       })
     }, fromJS({}))
-    console.log(valuesScale.toJS())
 
     if (scaleKey === 'total') {
       const totals = points.map(p => p.get('total'))

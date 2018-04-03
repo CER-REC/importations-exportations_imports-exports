@@ -11,9 +11,9 @@ import ConfidentialCount from './ConfidentialCount'
 import MissingDataCount from './MissingDataCount'
 import { timelineData } from '../selectors/timeline'
 import { groupingBy as timelineGrouping } from '../selectors/data'
+import { visualizationSettings } from '../selectors/visualizationSettings'
 
 import trSelector from '../selectors/translate'
-import tr from '../TranslationTable'
 
 import ExplanationDot from './ExplanationDot'
 
@@ -149,6 +149,22 @@ class BarChart extends Chart {
     /></g>)
   }
 
+  renderLine(point, negativeValOffset, barHeight, colour, opacity) {
+    return (
+      <AnimatedLine
+        x1={point.get('offsetX')}
+        x2={point.get('offsetX')}
+        y2={this.props.height + negativeValOffset}
+        y1={(this.props.height + negativeValOffset) - barHeight}
+        key={`${point.get('year')}-${point.get('quarter')}-${this.props.valueKey}`}
+        strokeWidth={this.props.layout.get('barWidth')}
+        stroke={colour}
+        opacity={opacity}
+        animate={{ y1: '1s' }}
+      />
+    )
+  }
+
   render() {
     const {
       bars: data,
@@ -163,26 +179,82 @@ class BarChart extends Chart {
 
     const barSize = layout.get('barWidth')
 
+    const expandedOverflows = {
+      imports: { positive: '2001Q1', negative: '2002Q3' },
+      exports: { positive: '1995Q1', negative: '2002Q1' },
+    }
+
     const heightPerUnit = height / (scale.getIn(['y', 'max']) - scale.getIn(['y', 'min']))
-    const negativeValOffset = scale.getIn(['y', 'min']) * heightPerUnit
+    const largestNegative = data.map(p => p.getIn(['values', valueKey], 0)).min()
+    // TODO: The else case may be larger than 30px
+      /*
+    const negativeValOffset = (largestNegative < scale.getIn(['y', 'min']))
+      ? -30 // Maximum 30px for negative values
+      : scale.getIn(['y', 'min']) * heightPerUnit
+      */
+    const negativeValOffset = -30
+    const negativeMaxHeight = (largestNegative * heightPerUnit < -30)
+      ? 0
+      : (largestNegative * heightPerUnit)
+
     const elements = data.map((point) => {
       const opacity = this.isTimelinePointFiltered(point) ? 0.5 : 1
+      const value = point.getIn(['values', valueKey], 0)
       // Minimum 1px bar height
-      let barHeight = (point.getIn(['values', valueKey], 0) * heightPerUnit)
-      if (point.getIn(['values', valueKey], 0) > 0) { barHeight = Math.max(barHeight, 1); }
-      return (
-        <AnimatedLine
-          x1={point.get('offsetX')}
-          x2={point.get('offsetX')}
-          y2={height + negativeValOffset}
-          y1={(height + negativeValOffset) - barHeight}
-          key={`${point.get('year')}-${point.get('quarter')}-${valueKey}`}
-          strokeWidth={barSize}
-          stroke={colour}
-          opacity={opacity}
-          animate={{ y1: '1s' }}
-        />
-      )
+      let barHeight = (value * heightPerUnit)
+      if (value > 0) { barHeight = Math.max(barHeight, 1) }
+      if (value > scale.getIn(['y', 'max']) || value < scale.getIn(['y', 'min'])) {
+        barHeight = (value < 0)
+          ? Math.max(negativeMaxHeight, value * heightPerUnit)
+          : scale.getIn(['y', 'max']) * heightPerUnit
+        let overflowText = null
+        const barDirection = (value < 0 ? -1 : 1)
+        let overflowBarHeight = 17 * barDirection
+        if (
+          expandedOverflows[valueKey] &&
+          expandedOverflows[valueKey][value < 0 ? 'negative' : 'positive'] === point.get('period')
+        ) {
+          overflowBarHeight = 30 * barDirection
+          let textOffset = ((height + negativeValOffset) - barHeight - overflowBarHeight)
+          if (!flipped && value > 0) textOffset += 11
+          else if (flipped && value < 0) textOffset -= 11
+          overflowText = (
+            <g transform={`translate(${point.get('offsetX') + (barSize / 2) + 1} ${textOffset})`}>
+              <g transform={flipped ? 'scale(1 -1)' : ''}>
+                <text>
+                  {value.toLocaleString()}&nbsp;
+                  {this.props.tr(['amounts', this.props.unit])}
+                </text>
+              </g>
+            </g>
+          )
+        }
+        return (
+          <g key={`${point.get('year')}-${point.get('quarter')}-${valueKey}`}>
+            {this.renderLine(point, negativeValOffset, barHeight, colour, opacity)}
+            <g
+              onClick={() => alert('Clicked ' + point.get('year') + point.get('quarter'))}
+            >
+              <line
+                x1={point.get('offsetX')}
+                x2={point.get('offsetX')}
+                y2={(height + negativeValOffset) - barHeight}
+                y1={(height + negativeValOffset) - barHeight - overflowBarHeight}
+                strokeWidth={barSize}
+                stroke={colour}
+                opacity={opacity}
+              />
+              <g transform={`translate(${point.get('offsetX') - (barSize / 2)} ${(height + negativeValOffset + (value < 0 ? 10 : 0)) - barHeight})`}>
+                <g transform={flipped ? 'scale(1 -1) translate(0 10)' : ''}>
+                  <polygon points="0,0 0,-5 5,-10 5,-5 0,0" fill="white" />
+                </g>
+              </g>
+              {overflowText}
+            </g>
+          </g>
+        )
+      }
+      return this.renderLine(point, negativeValOffset, barHeight, colour, opacity)
     }).toArray()
 
     const sidebarContent = [
@@ -240,5 +312,6 @@ class BarChart extends Chart {
 export default connect((state, props) => Object.assign({
   timelineGroup: timelineGrouping(state, props),
   selectedEnergy: state.importExportVisualization,
+  unit: visualizationSettings(state, props).get('amount'),
   tr: trSelector(state, props),
 }, timelineData(state, props)))(BarChart)
