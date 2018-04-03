@@ -50,14 +50,15 @@ class BarChart extends Chart {
   }
 
   orangeBarExplanation() {
-    let textString = `${this.props.tr(['explanations','barChartImport'])}`
+    const [negativeValOffset] = this.calculateNegativePosition()
+    let textString = `${this.props.tr(['explanations', 'barChartImport'])}`
     let xPosition = 90
     if (this.props.selectedEnergy === 'naturalGas') {
-      textString = `${this.props.tr(['explanations','orangeBarNaturalGas'])}`
+      textString = `${this.props.tr(['explanations', 'orangeBarNaturalGas'])}`
       xPosition = 590
     }
     if (this.props.selectedEnergy === 'naturalGasLiquids') {
-      textString = `${this.props.tr(['explanations','orangeBarNaturalGasLiquids'])}`
+      textString = `${this.props.tr(['explanations', 'orangeBarNaturalGasLiquids'])}`
       xPosition = 590
     }
     if (this.props.flipped) { return null }
@@ -74,7 +75,7 @@ class BarChart extends Chart {
           33.47,
           18H322.2"
         xPosition={xPosition}
-        yPosition={87}
+        yPosition={87 + negativeValOffset}
         lineX={142.16}
         lineY={173.94}
         textX={40}
@@ -88,6 +89,7 @@ class BarChart extends Chart {
 
   blueBarExplanation() {
     if (!this.props.flipped || this.props.selectedEnergy !== 'electricity') { return null }
+    const [negativeValOffset] = this.calculateNegativePosition()
     return (<g>
       <ExplanationDot
         scale="scale(2.7) scale(-1 1) translate(-2 -3)"
@@ -102,24 +104,25 @@ class BarChart extends Chart {
           33.47,
           18H215.2"
         xPosition={26}
-        yPosition={70}
+        yPosition={70 + negativeValOffset}
         lineX={244.16}
-        lineY={173}
+        lineY={173 + negativeValOffset}
         textX={76}
         textY={146}
         containerX={this.props.left - 278}
         containerY={this.props.left + 68}
         name={`${this.props.selectedEnergy} exportBarChartExplanation`}
-        text={`${this.props.tr(['explanations','barChartExport'])}`}
+        text={`${this.props.tr(['explanations', 'barChartExport'])}`}
     /></g>)
   }
 
   crudeBlueBarExplanation() {
+    const [negativeValOffset] = this.calculateNegativePosition()
     let yPosition = 0
-    let textString = `${this.props.tr(['explanations','blueBarCrude'])}`
+    let textString = `${this.props.tr(['explanations', 'blueBarCrude'])}`
     let containerY = this.props.top + 100
     if (this.props.selectedEnergy === 'naturalGasLiquids') {
-      textString = `${this.props.tr(['explanations','blueBarNaturalGasLiquids'])}`
+      textString = `${this.props.tr(['explanations', 'blueBarNaturalGasLiquids'])}`
       yPosition = 35
       containerY = this.props.top + 32
     }
@@ -138,7 +141,7 @@ class BarChart extends Chart {
           33.47,
           18H288.2"
         xPosition={632}
-        yPosition={yPosition}
+        yPosition={yPosition + negativeValOffset}
         lineX={142.16}
         lineY={173}
         textX={46}
@@ -166,6 +169,22 @@ class BarChart extends Chart {
     )
   }
 
+  calculateHeightPerUnit() {
+    return this.props.height / (this.props.scale.getIn(['y', 'max']) - this.props.scale.getIn(['y', 'min']))
+  }
+
+  calculateNegativePosition() {
+    const heightPerUnit = this.calculateHeightPerUnit()
+    const largestNegative = this.props.bars.map(p => p.getIn(['values', this.props.valueKey], 0)).min()
+    const negativeValOffset = (largestNegative < 0)
+      ? Math.max((largestNegative * heightPerUnit), -30)
+      : 0
+    const negativeMaxHeight = (negativeValOffset === -30)
+      ? 0
+      : (largestNegative * heightPerUnit)
+    return [negativeValOffset, negativeMaxHeight]
+  }
+
   render() {
     const {
       bars: data,
@@ -181,14 +200,8 @@ class BarChart extends Chart {
 
     const barSize = layout.get('barWidth')
 
-    const heightPerUnit = height / (scale.getIn(['y', 'max']) - scale.getIn(['y', 'min']))
-    const largestNegative = data.map(p => p.getIn(['values', valueKey], 0)).min()
-    const negativeValOffset = (largestNegative < 0)
-      ? Math.max((largestNegative * heightPerUnit), -30)
-      : 0
-    const negativeMaxHeight = (negativeValOffset === -30)
-      ? 0
-      : (largestNegative * heightPerUnit)
+    const heightPerUnit = this.calculateHeightPerUnit()
+    const [negativeValOffset, negativeMaxHeight] = this.calculateNegativePosition()
 
     const elements = data.map((point) => {
       const opacity = this.isTimelinePointFiltered(point) ? 0.5 : 1
@@ -222,7 +235,7 @@ class BarChart extends Chart {
           overflowText = (
             <g transform={`translate(${point.get('offsetX') + (barSize / 2) + 1} ${textOffset})`}>
               <g transform={flipped ? 'scale(1 -1)' : ''}>
-                <text>
+                <text className="chartOutlierText">
                   {value.toLocaleString()}&nbsp;
                   {this.props.tr(['amounts', this.props.unit])}
                 </text>
