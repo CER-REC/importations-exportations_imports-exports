@@ -244,11 +244,11 @@ const Constants = fromJS({
     ],
     categoryColours: {
       refinedPetroleumProducts:{
-       'Partially Processed Oil': 'rgb(139, 192, 155)',
-       'Jet Fuel' :'rgb(87, 187, 149)',
-       'Heavy Fuel Oil' :'rgb(50, 155, 157)',
-       'Motor Gasoline' :'rgb(39, 135, 144)',
-       'Middle Distillate' :'rgb(30, 97, 114)',
+       'Partially Processed Oil': 'rgb(119, 246, 190)',
+       'Jet Fuel' :'rgb(0, 202, 116)',
+       'Heavy Fuel Oil' :'rgb(44, 167, 167)',
+       'Motor Gasoline' :'rgb(33, 110, 123)',
+       'Middle Distillate' :'rgb(47, 72, 98)',
       },
       crudeOil:{
         transport: {
