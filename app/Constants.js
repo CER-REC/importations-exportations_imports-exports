@@ -252,14 +252,14 @@ const Constants = fromJS({
       },
       crudeOil:{
         transport: {
-          Marine : 'rgb(39, 135, 144)',
-          Pipeline : 'rgb(30, 97, 114)' ,
-          Railroad : 'rgb(50, 155, 157)',
-          Truck : 'rgb(87, 187, 149)',
+          Marine : 'rgb(152, 166, 219)',
+          Pipeline : 'rgb(47, 72, 98)' ,
+          Railroad : 'rgb(211, 195, 207)',
+          Truck : 'rgb(76, 71, 186)',
         },
         productSubtype: {
-          Heavy : 'rgb(39, 135, 144)',
-          Light: 'rgb(30, 97, 114)',
+          Heavy : 'rgb(34, 111, 124)',
+          Light: 'rgb(45, 168, 168)',
         },
       },
     },
