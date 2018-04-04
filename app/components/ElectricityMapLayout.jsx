@@ -197,12 +197,20 @@ class ElectricityMapLayout extends React.Component {
 
     const activity = detailBreakdownData.get('type')
 
+    let total = 0
     if (this.props[`${activity}Enabled`] === false) { return null }
     const data = Immutable.fromJS(this.props.selection.get('destinations')
       .reduce((acc, nextValue) => {
         return nextValue.reduce((accumulator, stateOrProvince, key) => {
           const regionData = this.props.filteredDataPoints.get(key)
-          if (!regionData || !regionData.get(activity)) { return acc }
+          if (!regionData) { return acc }
+          // If averages are enabled, calculate the largest value out of all regions
+          if (regionData.get('sumForAvg') && total !== false) {
+            total = Math.max(total, Math.abs(regionData.getIn(['sumForAvg', detailBreakdownData.get('type')], 0)))
+          } else {
+            total = false
+          }
+          if (!regionData.get(activity)) { return acc }
           if (regionData.has('sumForAvg')) {
             acc[key] = regionData.getIn(['sumForAvg', activity])
           } else {
@@ -212,6 +220,7 @@ class ElectricityMapLayout extends React.Component {
         }, {})
       }, {}))
       .sort((a, b) => (b - a))
+
     const countries = Tr.get('country').filter((points, country) => this.props.selection.get('destinations').has(country))
     const nameMappings = countries.reduce((acc, nextValue) => acc.concat(nextValue), new Immutable.Map())
 
@@ -223,8 +232,9 @@ class ElectricityMapLayout extends React.Component {
       color={detailBreakdownData.get('color')}
       height={detailBreakdownData.get('height')}
       showDefault={detailBreakdownData.get('showDefault', false)}
-      nameMappings= {nameMappings}
+      nameMappings={nameMappings}
       defaultContent={this.props.TrSelector(['detailBreakDown', this.props.importExportVisualization, 'defaultText'], this.props.timelineYears.min, this.props.timelineYears.max)}
+      total={total}
     />)
   }
 
