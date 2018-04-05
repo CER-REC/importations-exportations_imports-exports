@@ -2,13 +2,14 @@
 
 .detailBreakDown .header { 
   padding-bottom: 4px;
+  display: inline-block;
 }
 
 .detailBreakDownContainer {
   width:100%;
   overflow: auto;
   overflow-x: hidden;
-  display:block;
+  display:inline-block;
   .detailBreakDownText {
     padding: 0 0 4px 2px;
     margin-right: 20px;

@@ -103,7 +103,7 @@ class ProportionChart extends Chart {
             const colour = categoryColours.getIn([selectedEnergy,aggregateKey, key[0]], Constants.getIn(['styleGuide', 'colours', 'ExportDefault']))
             let label = <span> <strong style={{ display: 'inline-block' }} className="detailBolded">{Tr.getIn(['label', key[0], this.props.language])}</strong> </span>
             if (this.props.language === 'fr' && aggregateKey !== 'transport') {
-              label = <span>{suffix} <strong style={{ display: 'inline-block' }} className="detailBolded">{Tr.getIn(['label', key[0], this.props.language])}</strong></span>
+              label = <span><strong style={{ display: 'inline-block' }} className="detailBolded">{Tr.getIn(['label', key[0], this.props.language])}</strong> </span>
             }
             return (
               <DetailBreakdownRow
@@ -137,12 +137,13 @@ class ProportionChart extends Chart {
     }
     return <DetailSidebar
           {...dimensions}
-        >
+        > 
+        <div className="crudeTriangle" />
        <DetailBreakdownHeader
           trContent={trContent}
           color="black"
           type="crudeOilTypeMode"
-        />
+        />   
           {content}
     </DetailSidebar>
   }

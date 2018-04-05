@@ -258,6 +258,7 @@
   font-size: 14px;
   color: #666;
   font-family: $fira-sans-condensed-semibold;
+  margin-top: -20px;
 }
 
 #detailSidebar {
@@ -279,7 +280,7 @@
     font-family: $fira-sans-condensed;
     font-size: 13px;
     color: $neutral-dark;
-
+    
     .totalType {
       font-family: $fira-sans-condensed-semibold;
     }

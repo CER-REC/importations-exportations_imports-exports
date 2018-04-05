@@ -5,7 +5,7 @@ import Immutable from 'immutable'
 import './DetailBreakDown.scss'
 import '../styles/Fonts.scss'
 
-class DetailBreakdownHeader extends React.Component {
+class DetailBreakdownHeader extends React.Component { 
   render() {
     const { props } = this
     const headerContent = props.trContent
