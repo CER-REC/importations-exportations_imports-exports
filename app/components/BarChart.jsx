@@ -154,13 +154,13 @@ class BarChart extends Chart {
     /></g>)
   }
 
-  renderLine(point, negativeValOffset, barHeight, colour, opacity) {
+  renderLine(point, negativeValOffset, barHeight, colour, opacity, overflowBarHeight = 0) {
     return (
       <AnimatedLine
         x1={point.get('offsetX')}
         x2={point.get('offsetX')}
         y2={this.props.height + negativeValOffset}
-        y1={(this.props.height + negativeValOffset) - barHeight}
+        y1={(this.props.height + negativeValOffset) - barHeight - overflowBarHeight}
         key={`${point.get('year')}-${point.get('quarter')}-${this.props.valueKey}`}
         strokeWidth={this.props.layout.get('barWidth')}
         stroke={colour}
@@ -214,6 +214,9 @@ class BarChart extends Chart {
         : Math.max(value * heightPerUnit, 1)
       if (value === 0) { barHeight = 0 }
 
+      let overflow = null
+      let overflowBarHeight = 0
+      let overflowClick = null
       if (
         value > scale.getIn(['y', 'max']) ||
         // Exceeds the minimum scale, but doesn't exceed the allotted height
@@ -224,7 +227,7 @@ class BarChart extends Chart {
           : scale.getIn(['y', 'max']) * heightPerUnit
         let overflowText = null
         const barDirection = (value < 0 ? -1 : 1)
-        let overflowBarHeight = 17 * barDirection
+        overflowBarHeight = 17 * barDirection
         if (
           expandedOutliers.has(valueKey) &&
           expandedOutliers.getIn([valueKey, value < 0 ? 'negative' : 'positive']) === point.get('period')
@@ -247,32 +250,24 @@ class BarChart extends Chart {
             </g>
           )
         }
-        return (
-          <g key={`${point.get('year')}-${point.get('quarter')}-${valueKey}`}>
-            {this.renderLine(point, negativeValOffset, barHeight, colour, opacity)}
-            <g
-              onClick={() => this.props.toggleOutlier(valueKey, (value >= 0), point.get('period'))}
-            >
-              <line
-                x1={point.get('offsetX')}
-                x2={point.get('offsetX')}
-                y2={(height + negativeValOffset) - barHeight}
-                y1={(height + negativeValOffset) - barHeight - overflowBarHeight}
-                strokeWidth={barSize}
-                stroke={colour}
-                opacity={opacity}
-              />
-              <g transform={`translate(${point.get('offsetX') - (barSize / 2)} ${(height + negativeValOffset + (value < 0 ? 10 : 0)) - barHeight})`}>
-                <g transform={flipped ? 'scale(1 -1) translate(0 10)' : ''}>
-                  <polygon points="0,0 0,-5 5,-10 5,-5 0,0" fill="white" />
-                </g>
+        overflowClick = () => this.props.toggleOutlier(valueKey, (value >= 0), point.get('period'))
+        overflow = (
+          <g>
+            <g transform={`translate(${point.get('offsetX') - (barSize / 2)} ${(height + negativeValOffset + (value < 0 ? 10 : 0)) - barHeight})`}>
+              <g transform={flipped ? 'scale(1 -1) translate(0 10)' : ''}>
+                <polygon points="0,0 0,-5 5,-10 5,-5 0,0" fill="white" />
               </g>
-              {overflowText}
             </g>
+            {overflowText}
           </g>
         )
       }
-      return this.renderLine(point, negativeValOffset, barHeight, colour, opacity)
+      return (
+        <g key={`${point.get('year')}-${point.get('quarter')}-${valueKey}`} onClick={overflowClick}>
+          {this.renderLine(point, negativeValOffset, barHeight, colour, opacity, overflowBarHeight)}
+          {overflow}
+        </g>
+      )
     }).toArray()
 
     const sidebarContent = [
