@@ -51,7 +51,7 @@ class BarChart extends Chart {
   }
 
   orangeBarExplanation() {
-    const [negativeValOffset] = this.calculateNegativePosition()
+    const negativeValOffset = this.calculateNegativePosition()
     let textString = `${this.props.tr(['explanations', 'barChartImport'])}`
     let xPosition = 90
     if (this.props.selectedEnergy === 'naturalGas') {
@@ -90,7 +90,7 @@ class BarChart extends Chart {
 
   blueBarExplanation() {
     if (!this.props.flipped || this.props.selectedEnergy !== 'electricity') { return null }
-    const [negativeValOffset] = this.calculateNegativePosition()
+    const negativeValOffset = this.calculateNegativePosition()
     return (<g>
       <ExplanationDot
         scale="scale(2.7) scale(-1 1) translate(-2 -3)"
@@ -118,7 +118,7 @@ class BarChart extends Chart {
   }
 
   crudeBlueBarExplanation() {
-    const [negativeValOffset] = this.calculateNegativePosition()
+    const negativeValOffset = this.calculateNegativePosition()
     let yPosition = 0
     let textString = `${this.props.tr(['explanations', 'blueBarCrude'])}`
     let containerY = this.props.top + 100
@@ -175,15 +175,8 @@ class BarChart extends Chart {
   }
 
   calculateNegativePosition() {
-    const heightPerUnit = this.calculateHeightPerUnit()
     const largestNegative = this.props.bars.map(p => p.getIn(['values', this.props.valueKey], 0)).min()
-    const negativeValOffset = (largestNegative < 0)
-      ? Math.max((largestNegative * heightPerUnit), -30)
-      : 0
-    const negativeMaxHeight = (negativeValOffset === -30)
-      ? 0
-      : (largestNegative * heightPerUnit)
-    return [negativeValOffset, negativeMaxHeight]
+    return (largestNegative < 0) ? -30 : 0
   }
 
   render() {
@@ -202,7 +195,7 @@ class BarChart extends Chart {
     const barSize = layout.get('barWidth')
 
     const heightPerUnit = this.calculateHeightPerUnit()
-    const [negativeValOffset, negativeMaxHeight] = this.calculateNegativePosition()
+    const negativeValOffset = this.calculateNegativePosition()
 
     const elements = data.map((point) => {
       const opacity = this.isTimelinePointFiltered(point) ? 0.5 : 1
@@ -217,14 +210,8 @@ class BarChart extends Chart {
       let overflow = null
       let overflowBarHeight = 0
       let overflowClick = null
-      if (
-        value > scale.getIn(['y', 'max']) ||
-        // Exceeds the minimum scale, but doesn't exceed the allotted height
-        (value < scale.getIn(['y', 'min']) && negativeMaxHeight === 0 && negativeValOffset === -30)
-      ) {
-        barHeight = (value < 0)
-          ? Math.max(negativeMaxHeight, value * heightPerUnit)
-          : scale.getIn(['y', 'max']) * heightPerUnit
+      if (value > scale.getIn(['y', 'max']) || value < scale.getIn(['y', 'min'])) {
+        barHeight = (value < 0) ? 0 : scale.getIn(['y', 'max']) * heightPerUnit
         let overflowText = null
         const barDirection = (value < 0 ? -1 : 1)
         overflowBarHeight = 17 * barDirection
