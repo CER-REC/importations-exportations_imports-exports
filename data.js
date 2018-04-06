@@ -240,8 +240,24 @@ const parsingIssue = {};
         Object.keys(output[visName]).forEach((unit) => {
           // Take the values from the object for this unit
           const unitPoints = Object.values(output[visName][unit])
+          const averageData = {}
           const regionValues = unitPoints
             .reduce((acc, next) => {
+              if (next.quantityForAverage) {
+                if (!averageData[next.destination]) {
+                  averageData[next.destination] = { quantity: 0, revenue: 0 }
+                }
+                const averageDest = averageData[next.destination]
+                averageDest.quantity += next.quantityForAverage
+                averageDest.revenue += next.revenueForAverage
+
+                return {
+                  ...acc,
+                  [next.destination]: (averageDest.quantity === 0)
+                    ? 0
+                    : Math.round(averageDest.revenue / averageDest.quantity),
+                }
+              }
               if (visName === 'crudeOil' || visName === 'naturalGasLiquids') {
                 return {
                   ...acc,
@@ -270,13 +286,22 @@ const parsingIssue = {};
               const maxMidpoint = ((nextMin - max) / 2) + max
               return acc.concat(maxMidpoint)
             }, [])
-            .map((max, i, arr) => ([
-              (i === 0) ? 0 : humanNumber(arr[i - 1]),
-              humanNumber(max),
-            ]))
+            .map((max, i, arr) => (
+              (unit === 'CAN$/MW.h' || unit === 'CN$/GJ')
+                ? [(i === 0) ? 0 : arr[i - 1], max]
+                : [(i === 0) ? 0 : humanNumber(arr[i - 1]), humanNumber(max)]
+            ))
         })
+
         return accBins
       }, {})
+
+    // Units with weighted averages should be uncapped on both ends
+    valueBins.electricity['CAN$/MW.h'][0][0] = Number.MIN_SAFE_INTEGER
+    valueBins.electricity['CAN$/MW.h'][4][1] = Number.MAX_SAFE_INTEGER
+    valueBins.naturalGas['CN$/GJ'][0][0] = Number.MIN_SAFE_INTEGER
+    valueBins.naturalGas['CN$/GJ'][4][1] = Number.MAX_SAFE_INTEGER
+
     return { data: output, bins: valueBins }
   })
   // Output validation and write the file
