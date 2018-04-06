@@ -343,16 +343,29 @@ export const aggregateLocationNaturalGasSelector = createSelector(
         }
         acc[province][portName].activities = {}
       }
-      if (!acc[province][portName].activities[activityName]) {
-        acc[province][portName].activities[activityName] = next.get('value')
+      const accPort = acc[province][portName]
+
+      if (!accPort.activities[activityName]) {
+        accPort.activities[activityName] = next.get('value')
       } else {
-        acc[province][portName].activities[activityName] += next.get('value')
+        accPort.activities[activityName] += next.get('value')
       }
-      const totalCount = acc[province][portName].totalCount || 0
-      const confidentialCount = acc[province][portName].confidentialCount || 0
-      acc[province][portName].unit = next.get('units')
-      acc[province][portName].totalCount = (totalCount + 1)
-      acc[province][portName].confidentialCount = (confidentialCount + next.get('confidential'))
+
+      if (next.has('quantityForAverage')) {
+        if (!accPort.sumForAvg) { accPort.sumForAvg = {} }
+        const { sumForAvg } = accPort
+        if (!sumForAvg[activityName]) { sumForAvg[activityName] = { revenue: 0, amount: 0 } }
+        sumForAvg[activityName].revenue += next.get('revenueForAverage', 0)
+        sumForAvg[activityName].amount += next.get('quantityForAverage', 0)
+        accPort.activities[activityName] = (sumForAvg[activityName].amount === 0)
+          ? 0
+          : sumForAvg[activityName].revenue / sumForAvg[activityName].amount
+      }
+      const totalCount = accPort.totalCount || 0
+      const confidentialCount = accPort.confidentialCount || 0
+      accPort.unit = next.get('units')
+      accPort.totalCount = (totalCount + 1)
+      accPort.confidentialCount = (confidentialCount + next.get('confidential'))
       return acc
     }, {})
     //create ports with the empty data and push it

@@ -166,6 +166,16 @@ const parseLocationData = createSelector(
           confidentialCount: data.getIn([originKey, 'confidentialCount']) || 0,
           tabIndex,
         }
+        if (data.getIn([originKey, 'sumForAvg'], false) !== false) {
+          const imports = data.getIn([originKey, 'sumForAvg', 'imports'], new Immutable.Map())
+          result.imports = imports.get('amount', 0) === 0
+            ? 0
+            : imports.get('revenue') / imports.get('amount')
+          const exports = data.getIn([originKey, 'sumForAvg', 'exports'], new Immutable.Map())
+          result.exports = exports.get('amount', 0) === 0
+            ? 0
+            : exports.get('revenue') / exports.get('amount')
+        }
         tabIndex += 1
         resultList.push(result)
       })
