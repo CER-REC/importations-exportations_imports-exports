@@ -12,6 +12,7 @@ import setVisualization from '../actionCreators/SetVisualizationCreator'
 const textOffset = Constants.getIn(['menuBar', 'textLabelOffset'])
   + Constants.getIn(['menuBar', 'expandedMenuTextMargin'])
 
+// for French 
 const SelectedPrefix = memoize((of) => {
   const UnmemoizedSelectedPrefix = ({ y, height }) => (
     <g>
@@ -36,24 +37,30 @@ const SelectedPrefix = memoize((of) => {
 
 const VisualizationSelector = (props) => {
   const { Tr, importExportVisualization } = props
-  let yOffset = Constants.getIn(['menuBar', 'visualizationPadding']) / 2
+  let yOffset = Constants.getIn(['menuBar', 'visualizationPadding']) 
   const tabIndex = Constants.getIn(['tabIndex','start', 'menuBar'])
   const options = ['electricity', 'crudeOil', 'naturalGas', 'naturalGasLiquids', 'refinedPetroleumProducts']
-    .sort((a, b) => (b === props.importExportVisualization ? 1 : 0))
     .map((option) => {
       const translated = Tr(['mainMenuBar', option])
       let el = (
-        <text
+        <g
           key={option}
+          transform={`translate(0 ${yOffset})`}
           x={textOffset}
-          y={yOffset}
           className="menuOption"
           {...handleInteractionWithTabIndex(tabIndex, props.setVisualization, option)}
           role="menuitem"
           aria-label={Tr(['unabbreviated', 'mainMenuBar', option])}
-        >
-          {translated}
-        </text>
+        > 
+          <g transform="translate(3 0)">
+            <TextBox
+                padding={1}
+                boxStyles={{ fill: 'white', stroke: '#b3b3b3' }}
+            >
+              &nbsp;{translated}&nbsp;  
+            </TextBox> 
+          </g>
+        </g>
       )
 
       if (option === props.importExportVisualization) {
@@ -66,25 +73,26 @@ const VisualizationSelector = (props) => {
             tabIndex={tabIndex}
             aria-label={Tr(['unabbreviated', 'mainMenuBar', option])}
           >
-            <g transform={`translate(${textOffset} 0)`}>
+            <g transform={`translate(3 0)`}>
               <TextBox
-                padding={0}
+                padding={1}
                 boxStyles={{ fill: '#666' }}
                 textStyles={{ className: 'bold menuOption', style: { fill: '#fff' } }}
-                unsizedContent={SelectedPrefix(Tr(['menu', 'of']))}
+                // leave this here for French
+                //unsizedContent={SelectedPrefix(Tr(['menu', 'of']))}
               >
-                {translated}&nbsp;
+                &nbsp;{translated}&nbsp;
               </TextBox>
             </g>
           </g>
         )
       }
 
-      yOffset += Constants.getIn(['menuBar', 'visualizationPadding'])
+      yOffset += Constants.getIn(['menuBar', 'visualizationPadding']) + 8
       return el
     })
   return (
-    <g transform={`translate(${props.left} ${props.top})`} className="menuGroup">
+    <g transform={`translate(${props.left} ${props.top - 5})`} className="menuGroup">
       {options}
     </g>
   )

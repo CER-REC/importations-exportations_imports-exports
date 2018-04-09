@@ -20,7 +20,6 @@ class TextBox extends React.PureComponent {
     boxStyles: {},
     flipped: false,
     padding: 2,
-    unsizedContent: null,
   }
 
   constructor(props) {

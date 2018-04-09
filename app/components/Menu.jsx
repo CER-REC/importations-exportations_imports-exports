@@ -13,16 +13,6 @@ import ExplanationDot from './ExplanationDot'
 
 import './Menu.scss'
 
-const TitlePrefixBar = ({ height, y }) => (
-  <rect
-    x={-Constants.getIn(['menuBar', 'textLabelOffset'])}
-    y={y}
-    width={Constants.getIn(['menuBar', 'barWidth'])}
-    height={height}
-    fill="#666"
-  />
-)
-
 class Menu extends React.PureComponent {
   static propTypes = {
     title: PropTypes.oneOfType([
@@ -62,7 +52,7 @@ class Menu extends React.PureComponent {
 
   importExportExplanation() {
     let textString = `${this.props.Tr(['explanations','importExport'])}`
-    const xPosition = (this.props.language === 'en') ? 163 : 220
+    const xPosition = (this.props.language === 'en') ? 173 : 220
     if (this.props.selectedEnergy === 'naturalGas') {
       textString = `${this.props.Tr(['explanations','importExportMenuNaturalGas'])}`
     }
@@ -108,9 +98,9 @@ class Menu extends React.PureComponent {
     if (this.props.selectedEnergy === 'refinedPetroleumProducts') {
       textString = `${this.props.Tr(['explanations','amountRefinedPetroleumProducts'])}`
     }
-    let yPosition = 178
+    let yPosition = 212
     if (this.props.expanded && (this.props.setActiveMenu !== 'amount')) {
-      yPosition = 198
+      yPosition = 228
     }
     if (this.props.name !== 'amount') { return }
     return (<g>
@@ -154,7 +144,7 @@ class Menu extends React.PureComponent {
           33.47,
           18H378.2"
         xPosition={xPosition}
-        yPosition={160}
+        yPosition={190}
         lineX={142.16}
         lineY={173.94}
         textX={45}
@@ -168,6 +158,10 @@ class Menu extends React.PureComponent {
 
   renderTitle() {
     if (this.props.title === false) { return null }
+    let suffix = 'of'
+    if (this.props.language !== 'en' || this.props.name !== 'activity' 
+      || this.props.selectedEnergy === 'crudeOil'
+      || this.props.selectedEnergy === 'refinedPetroleumProducts') { suffix = '' }
     const { Tr } = this.props
     const tabIndex = this.getTabIndex()
     const title = {
@@ -195,9 +189,8 @@ class Menu extends React.PureComponent {
       >
         <TextBox
           boxStyles={{ fill: 'none' }}
-          unsizedContent={TitlePrefixBar}
         >
-          {title.render}
+          {title.render} {suffix}
           {expandIcon}
         </TextBox>
       </g>
@@ -240,7 +233,7 @@ class Menu extends React.PureComponent {
 
   render() {
     return (<g>
-      <g transform={`translate(${this.props.left} ${this.props.top})`} className="menuGroup">
+      <g transform={`translate(${this.props.left - 10} ${this.props.top})`} className="menuGroup">
         {this.renderTitle()}
         {this.renderOptions()}
       </g>
