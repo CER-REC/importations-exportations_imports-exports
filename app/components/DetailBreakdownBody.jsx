@@ -24,8 +24,8 @@ class DetailBreakdownBody extends React.Component {
       return (
         <DetailBreakdownRow
           key={key}
-          labelPrefix={`${bodyContent.getIn(['action', this.props.language])} `}
-          label={`${name}`}
+          labelPrefix={bodyContent.getIn(['action', this.props.language])}
+          label={name}
           value={value}
           unit={props.amountUnit}
           total={total}

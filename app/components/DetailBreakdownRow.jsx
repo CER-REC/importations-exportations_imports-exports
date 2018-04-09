@@ -11,8 +11,8 @@ const DetailBreakdownRow = props => (
     <td width={props.colorBox?'14px':'0px'} style={{verticalAlign: 'baseline'}}>{props.colorBox}</td>
     <td width="200px">
       {props.labelPrefix}
-      <span className="detailBolded">{props.label}</span>{props.labelSuffix}&nbsp;
-      <span style={{display: 'inline-block' }} >{humanNumber(props.value, props.language)}</span>&nbsp;
+      <span className="detailBolded"> {props.label}</span>{props.labelSuffix}&nbsp;
+      <span style={{display: 'inline-block' }}>{humanNumber(props.value, props.language)}</span>&nbsp;
       <span style={{display: 'inline-block' }}>{Tr.getIn(['amounts', props.unit, props.language])}</span>&nbsp;
       <span style={{display: 'inline-block' }}>{((props.total === 0) ? 0.0 : (props.value / props.total) * 100).toFixed(2)}%</span>&nbsp;
     </td>
