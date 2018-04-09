@@ -168,7 +168,7 @@ class Menu extends React.PureComponent {
       render: (this.props.title && this.props.title.render) || (
         <tspan>
           {Tr(['menu', this.props.name, 'prefix']) || ''}&nbsp;
-          <tspan className="bold">{Tr(['menu', this.props.name, 'options', this.props.selected])}</tspan>
+          <tspan className="bold uppercase">{Tr(['menu', this.props.name, 'options', this.props.selected])}</tspan>
         </tspan>
       ),
       aria: (this.props.title && this.props.title.aria) || [
@@ -177,7 +177,7 @@ class Menu extends React.PureComponent {
       ].join(' '),
     }
     const expandIcon = (this.props.options.length > 1)
-      ? <tspan className="bold" aria-hidden> {this.props.expanded ? '-' : '+'}</tspan>
+      ? <tspan className="bold uppercase" aria-hidden> {this.props.expanded ? '-' : '+'}</tspan>
       : null
     return (
       <g

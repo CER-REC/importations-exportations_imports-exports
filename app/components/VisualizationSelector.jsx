@@ -52,10 +52,15 @@ const VisualizationSelector = (props) => {
           role="menuitem"
           aria-label={Tr(['unabbreviated', 'mainMenuBar', option])}
         > 
-          <g transform="translate(3 0)">
+          <filter id="controlAreaOutline" x="0" y="0">
+            <feOffset result="offOut" in="SourceAlpha" dx="-10" dy="-12" />
+            <feGaussianBlur result="blurOut" in="offOut" stdDeviation="10" />
+            <feBlend in="SourceGraphic" in2="blurOut" mode="normal" />
+          </filter>
+          <g transform="translate(4 0)" filter="url(#controlAreaOutline)">
             <TextBox
-                padding={1}
-                boxStyles={{ fill: 'white', stroke: '#b3b3b3' }}
+              padding={1}
+              boxStyles={{ fill: 'white', stroke: '#b3b3b3'}}
             >
               &nbsp;{translated}&nbsp;  
             </TextBox> 
@@ -92,7 +97,7 @@ const VisualizationSelector = (props) => {
       return el
     })
   return (
-    <g transform={`translate(${props.left} ${props.top - 5})`} className="menuGroup">
+    <g transform={`translate(${props.left} ${props.top - 5})`} className="menuGroup" >
       {options}
     </g>
   )
