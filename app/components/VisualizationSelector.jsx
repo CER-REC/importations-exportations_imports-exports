@@ -56,6 +56,10 @@ const VisualizationSelector = (props) => {
             <feOffset result="offOut" in="SourceAlpha" dx="-20" dy="-12" />
             <feGaussianBlur result="blurOut" in="offOut" stdDeviation="10" />
             <feBlend in="SourceGraphic" in2="blurOut" mode="normal" />
+            <feMerge>
+              <feMergeNode/>
+              <feMergeNode in="SourceGraphic"/>
+            </feMerge>
           </filter>
         </defs>
           <g transform="translate(3 0)" filter="url(#controlAreaOutline)">
@@ -63,7 +67,7 @@ const VisualizationSelector = (props) => {
               padding={1}
               boxStyles={{ fill: 'white', stroke: '#b3b3b3'}}
             >
-              &nbsp;{translated}&nbsp;  
+              &nbsp;{translated}&nbsp;
             </TextBox> 
           </g>
         </g>
@@ -80,7 +84,7 @@ const VisualizationSelector = (props) => {
         el = (
           <g
             key={option}
-            transform={`translate(0 ${yOffset})`}
+            transform={`translate(3 ${yOffset})`}
             aria-current
             role="menuitem"
             tabIndex={tabIndex}
