@@ -20,6 +20,7 @@ class TextBox extends React.PureComponent {
     boxStyles: {},
     flipped: false,
     padding: 2,
+    unsizedContent: null,
   }
 
   constructor(props) {
@@ -100,5 +101,5 @@ class TextBox extends React.PureComponent {
 }
 
 
-export default (TextBox)
+export default TextBox
 
