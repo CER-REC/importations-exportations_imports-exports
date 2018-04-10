@@ -106,6 +106,7 @@ class MenuBar extends React.Component {
   }
 
   render() {
+    
     return (
       <g className="MenuBar">
         {this.renderActivityMenu()}

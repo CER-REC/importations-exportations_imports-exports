@@ -159,9 +159,7 @@ class Menu extends React.PureComponent {
   renderTitle() {
     if (this.props.title === false) { return null }
     let suffix = 'of'
-    if (this.props.language !== 'en' || this.props.name !== 'activity' 
-      || this.props.selectedEnergy === 'crudeOil'
-      || this.props.selectedEnergy === 'refinedPetroleumProducts') { suffix = '' }
+    if (this.props.language !== 'en' || this.props.name !== 'activity') { suffix = '' }
     const { Tr } = this.props
     const tabIndex = this.getTabIndex()
     const title = {

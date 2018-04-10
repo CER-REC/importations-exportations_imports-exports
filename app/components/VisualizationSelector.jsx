@@ -12,18 +12,17 @@ import setVisualization from '../actionCreators/SetVisualizationCreator'
 const textOffset = Constants.getIn(['menuBar', 'textLabelOffset'])
   + Constants.getIn(['menuBar', 'expandedMenuTextMargin'])
 
-// for French 
 const SelectedPrefix = memoize((of) => {
   const UnmemoizedSelectedPrefix = ({ y, height }) => (
     <g>
       <rect
         x={-textOffset}
-        y={y}
+        y={y - 1}
         width={textOffset + 1}
-        height={height}
+        height={height + 2}
         fill="#666"
       />
-      <text x={0} y={0} fill="#999" textAnchor="end" aria-hidden>{of}&nbsp;</text>
+      <text x={3} y={0} fill="#999" textAnchor="end" aria-hidden>{of}&nbsp;</text>
     </g>
   )
 
@@ -53,11 +52,11 @@ const VisualizationSelector = (props) => {
           aria-label={Tr(['unabbreviated', 'mainMenuBar', option])}
         > 
           <filter id="controlAreaOutline" x="0" y="0">
-            <feOffset result="offOut" in="SourceAlpha" dx="-10" dy="-12" />
+            <feOffset result="offOut" in="SourceAlpha" dx="-20" dy="-12" />
             <feGaussianBlur result="blurOut" in="offOut" stdDeviation="10" />
             <feBlend in="SourceGraphic" in2="blurOut" mode="normal" />
           </filter>
-          <g transform="translate(4 0)" filter="url(#controlAreaOutline)">
+          <g transform="translate(2 0)" filter="url(#controlAreaOutline)">
             <TextBox
               padding={1}
               boxStyles={{ fill: 'white', stroke: '#b3b3b3'}}
@@ -67,6 +66,13 @@ const VisualizationSelector = (props) => {
           </g>
         </g>
       )
+
+      let prefix = null
+      let transformString = ''
+      if (props.language === 'fr') { 
+        prefix = SelectedPrefix(Tr(['menu', 'of']))
+        transformString = 'translate(18 0)'
+      }
 
       if (option === props.importExportVisualization) {
         el = (
@@ -78,15 +84,14 @@ const VisualizationSelector = (props) => {
             tabIndex={tabIndex}
             aria-label={Tr(['unabbreviated', 'mainMenuBar', option])}
           >
-            <g transform={`translate(3 0)`}>
+            <g transform={transformString}>
               <TextBox
                 padding={1}
                 boxStyles={{ fill: '#666' }}
                 textStyles={{ className: 'bold menuOption', style: { fill: '#fff' } }}
-                // leave this here for French
-                //unsizedContent={SelectedPrefix(Tr(['menu', 'of']))}
+                unsizedContent={prefix}
               >
-                &nbsp;{translated}&nbsp;
+              &nbsp;{translated}&nbsp;
               </TextBox>
             </g>
           </g>
@@ -117,5 +122,6 @@ VisualizationSelector.defaultProps = {
 
 export default connect((state, props) => ({
   importExportVisualization: state.importExportVisualization,
+  language: state.language,
   Tr: TrSelector(state, props),
 }), { setVisualization })(VisualizationSelector)
