@@ -162,20 +162,21 @@ class Menu extends React.PureComponent {
     if (this.props.language !== 'en' || this.props.name !== 'activity') { suffix = '' }
     const { Tr } = this.props
     const tabIndex = this.getTabIndex()
+    const prefix = Tr(['menu', this.props.name, 'prefix'])
     const title = {
       render: (this.props.title && this.props.title.render) || (
         <tspan>
-          {Tr(['menu', this.props.name, 'prefix']) || ''}&nbsp;
-          <tspan className="bold uppercase">{Tr(['menu', this.props.name, 'options', this.props.selected])}</tspan>
+          {prefix ? `${prefix} ` : ''}
+          <tspan className="bold">{Tr(['menu', this.props.name, 'options', this.props.selected])}</tspan>
         </tspan>
       ),
       aria: (this.props.title && this.props.title.aria) || [
-        Tr(['menu', this.props.name, 'prefix']) || '',
+        prefix || '',
         Tr(['menu', this.props.name, 'options', this.props.selected]),
       ].join(' '),
     }
     const expandIcon = (this.props.options.length > 1)
-      ? <tspan className="bold uppercase" aria-hidden> {this.props.expanded ? '-' : '+'}</tspan>
+      ? <tspan className="bold" aria-hidden> {this.props.expanded ? '-' : '+'}</tspan>
       : null
     return (
       <g

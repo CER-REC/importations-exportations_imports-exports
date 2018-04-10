@@ -229,24 +229,24 @@ const TranslationTable = fromJS({
     activity: {
       options: {
         imports: {
-          en: 'Imports',
-          fr: 'Importations',
+          en: 'IMPORTS',
+          fr: 'IMPORTATIONS',
         },
         exports: {
-          en: 'Exports',
-          fr: 'Exportations',
+          en: 'EXPORTS',
+          fr: 'EXPORTATIONS',
         },
         importsExports: {
           en: 'Imports and Exports',
           fr: 'Importations et exportations',
         },
         importsForReexport: {
-          en: 'Temporary Imports',
-          fr: 'Importations temporaires',
+          en: 'TEMPORARY IMPORTS',
+          fr: 'IMPORTATIONS TEMPORAIRES',
         },
         exportsForReimport: {
-          en: 'Temporary Exports',
-          fr: 'Exportations temporaires',
+          en: 'TEMPORARY EXPORTS',
+          fr: 'EXPORTATIONS TEMPORAIRES',
         },
       },
     },

@@ -51,12 +51,14 @@ const VisualizationSelector = (props) => {
           role="menuitem"
           aria-label={Tr(['unabbreviated', 'mainMenuBar', option])}
         > 
+        <defs>
           <filter id="controlAreaOutline" x="0" y="0">
             <feOffset result="offOut" in="SourceAlpha" dx="-20" dy="-12" />
             <feGaussianBlur result="blurOut" in="offOut" stdDeviation="10" />
             <feBlend in="SourceGraphic" in2="blurOut" mode="normal" />
           </filter>
-          <g transform="translate(2 0)" filter="url(#controlAreaOutline)">
+        </defs>
+          <g transform="translate(3 0)" filter="url(#controlAreaOutline)">
             <TextBox
               padding={1}
               boxStyles={{ fill: 'white', stroke: '#b3b3b3'}}
