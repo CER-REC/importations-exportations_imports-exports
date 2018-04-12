@@ -748,7 +748,7 @@ const TranslationTable = fromJS({
   },
 
   formatNumberUnit: {
-    en: ['', 'K', 'M', 'B'],
+    en: ['', 'k', 'M', 'B'],
     fr: ['', 'k', 'M', 'G'],
   },
 
