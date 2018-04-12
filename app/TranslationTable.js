@@ -289,8 +289,8 @@ const TranslationTable = fromJS({
       },
       options: {
         CAN$: {
-          en: 'REVENUE (CAN$)',
-          fr: 'REVENU ($ CAN)',
+          en: 'VALUE (CAN$)',
+          fr: 'VALEUR ($ CAN)',
         },
         'CAN$/MW.h': {
           en: 'PRICE (CAN$/MW.h)',
