@@ -158,7 +158,6 @@ class PortMap extends React.PureComponent {
       }
     }
     return Tr.getIn(['portMap', 'default', this.props.language]) 
-    //''
   }
   render() {
     if (!this.state.topoData.bbox) { return null }
