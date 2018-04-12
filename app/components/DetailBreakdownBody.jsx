@@ -13,11 +13,6 @@ const DetailBreakdownBody = (props) => {
     ? props.data.reduce((acc, curr) => acc + curr)
     : props.total
   const result = props.data.map((value, key) => {
-    const exportOrImportPercentage = ((total === 0) ? 0 : (value / total) * 100).toFixed(2)
-    const progressBarStyle = {
-      width: `${exportOrImportPercentage}%`,
-      backgroundColor: props.color,
-    }
     const name = props.nameMappings.getIn([key, props.language], '')
     return (
       <DetailBreakdownRow
@@ -26,7 +21,6 @@ const DetailBreakdownBody = (props) => {
         value={value}
         unit={props.amountUnit}
         total={total}
-        progressBarStyle={progressBarStyle}
       />
     )
   })

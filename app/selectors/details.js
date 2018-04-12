@@ -12,24 +12,7 @@ export const electricityDetailBreakdownValues = createSelector(
   getSelection,
   aggregateFilterLocationSelector,
   (selection, filteredDataPoints) => {
-    /*
-     * Electricity
-     *   selection.destinations
-     *   filteredDataPoints
-     * NGL - Canada
-     *   layout
-     *   selection.origins
-     *   subtype
-     * NGL - US
-     *   Padd
-     *   selection.origins
-     *   subtype
-     * Crude Oil
-     *   Padd
-     *   selection.origins
-     */
     const data = {}
-    let total = 0
 
     const valueTypes = ['imports', 'exports']
     selection.get('destinations').forEach((nextValue) => {
@@ -133,12 +116,11 @@ export const detailBreakdownValues = (state, props) => {
   }
 }
 
-export const detailTotal = createSelector(
+export const detailTotalValue = createSelector(
   filterByTimelineAndHexData,
   getAggregateKey,
   getValueKey,
-  detailBreakdownValues,
-  (data, aggregateKey, valueKey, breakdownValues) => {
+  (data, aggregateKey, valueKey) => {
     const filteredData = valueKey === 'total'
       ? data
       : data.filter(p => (
@@ -153,26 +135,50 @@ export const detailTotal = createSelector(
         acc.amount += next.get('quantityForAverage', 0)
         return acc
       }, { revenue: 0, amount: 0 })
-      const largestBreakdown = (breakdownValues.get(valueKey, fromJS({})).count() > 0)
-        ? breakdownValues.get(valueKey).max()
-        : 0
-      // Prevent divide by zero
-      if (sumForAvg.amount === 0) { return { value: 0, average: true, percentage: '0%' } }
+      if (sumForAvg.amount === 0) { return { value: 0, average: true } }
       const value = sumForAvg.revenue / sumForAvg.amount
-      return {
-        value,
-        average: true,
-        percentage: (largestBreakdown !== 0)
-          ? `${(value / largestBreakdown) * 100}%`
-          : '100%',
-      }
+      return { value, average: true }
     }
 
     const value = filteredData.reduce((acc, next) => (acc + next.get('value', 0)), 0)
+    return { value, average: false }
+  },
+)
+
+export const detailLargestValue = createSelector(
+  detailBreakdownValues,
+  detailTotalValue,
+  getValueKey,
+  (breakdown, total, valueKey) => Math.max(
+    breakdown.get(valueKey, fromJS({})).map(Math.abs).max() || 0,
+    Math.abs(total.value),
+  ),
+)
+
+export const detailTotal = createSelector(
+  filterByTimelineAndHexData,
+  getAggregateKey,
+  getValueKey,
+  detailBreakdownValues,
+  detailTotalValue,
+  (data, aggregateKey, valueKey, breakdownValues, totalValue) => {
+    console.log('in total', totalValue.value, totalValue.average)
+    if (totalValue.average === false) {
+      return {
+        ...totalValue,
+        percentage: (totalValue.value === 0) ? 0 : 100,
+      }
+    }
+
+    const largestBreakdown = (breakdownValues.get(valueKey, fromJS({})).count() > 0)
+      ? breakdownValues.get(valueKey).map(Math.abs).max()
+      : 0
+    const largestValue = Math.max(Math.abs(totalValue.value), largestBreakdown)
     return {
-      value,
-      average: false,
-      percentage: (value === 0) ? '0%' : '100%',
+      ...totalValue,
+      percentage: (largestValue !== 0)
+        ? ((totalValue.value / largestValue) * 100)
+        : 100,
     }
   },
 )

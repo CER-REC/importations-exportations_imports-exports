@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
 import './DetailTotal.scss'
+import PercentageBar from './PercentageBar'
 import { visualizationSettings } from '../selectors/visualizationSettings'
 import { detailTotal } from '../selectors/details'
 import TR from '../TranslationTable'
@@ -17,17 +18,11 @@ const DetailTotal = props => (
       {humanNumber(props.value, props.language)}&nbsp;
       {TR.getIn(['amounts', props.amountUnit, props.language])}&nbsp;
     </div>
-    {props.percentage === '100%' || props.percentage === '0%'
-      ? <div className="percentage">{props.percentage}</div>
+    {props.average === false && (Math.abs(props.percentage) === 100 || props.percentage === 0)
+      ? <div className="percentage">{Math.abs(props.percentage)}%</div>
       : (
         <div className="detailBreakDownContainer">
-          <div className="percentage-bar">
-            <span
-              style={{
-                width: props.percentage,
-              }}
-            />
-          </div>
+          <PercentageBar width={props.percentage} />
         </div>
       )
     }
@@ -40,7 +35,7 @@ DetailTotal.propTypes = {
   language: PropTypes.string.isRequired,
   value: PropTypes.number.isRequired,
   average: PropTypes.bool.isRequired,
-  percentage: PropTypes.string.isRequired,
+  percentage: PropTypes.number.isRequired,
 }
 
 export default connect((state, props) => ({
