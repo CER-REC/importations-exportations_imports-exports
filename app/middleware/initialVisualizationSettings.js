@@ -1,7 +1,6 @@
 import { Types as DataTypes } from '../actions/data'
 import { Types as visualizationSettingsTypes } from '../actions/visualizationSettings'
 import { Types as explanationTypes } from '../actions/explanations'
-import { Types as confidentialityTypes } from '../actions/confidentiality'
 import { timelineYearScaleCalculation } from '../selectors/timeline'
 import { activityOptions, arrangeByOptions } from '../selectors/menus'
 
@@ -63,7 +62,6 @@ const initialVisualizationSettings = store => next => (action) => {
     if(action.type === visualizationSettingsTypes.RESET_VISUALIZATION){
       store.dispatch({
         type: explanationTypes.RESET_EXPLANATION,
-        type: confidentialityTypes.RESET_CONFIDENTIALITY,
       })
     }
   })
