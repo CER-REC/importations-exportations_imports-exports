@@ -536,12 +536,24 @@ const TranslationTable = fromJS({
       fr: 'Chaque barre orange montre la quantité totale d’électricité que les régions canadiennes ont importée au cours d’un trimestre.',
     },
     reset: {
-      en: 'This data visualization shows Canadian imports and exports of electricity. Click the pink dots to guide you through how to read the data.',
+      en: 'This visualization shows electricity imports to Canada and exports from Canada between the years 1990 and 2017. Drag the timeline bar to change. Click a region to view details.',
       fr: 'Les données interactives montrent les importations et les exportations canadiennes d’électricité. Cliquez sur les points roses pour obtenir de l’aide pour lire les données.',
     },
     resetCrudeOil: {
       en: "This data visualization shows Canada's quarterly exports of crude oil. Click the pink dots to guide you through how to read the data.",
       fr: 'Les données interactives montrent les exportations de pétrole brut du Canada par trimestre. Cliquez sur les points roses pour obtenir de l’aide pour lire les données.',
+    },
+    resetNaturalGas: {
+      en: 'This data visualization shows imports and exports of natural gas at ports along the Canada-USA border. Click the pink dots to guide you through how to read the data.',
+      fr: 'Les données interactives montrent les importations et les exportations de gaz naturel en provenance et à destination de ports situés le long de la frontière canado-américaine. Cliquez sur les points roses pour obtenir de l’aide pour lire les données.',
+    },
+    resetNaturalGasLiquids: {
+      en: 'This data visualization shows imports of Natural Gas Liquids (NGLs) from the USA into Canadian regions (top) and exports of NGLs from Canada into regions of the USA called PADDs (bottom). Click the pink dots to guide you through how to read the data.',
+      fr: 'Les données interactives montrent les importations de liquides de gaz naturel (« LGN ») en provenance des États-Unis et à destination des régions canadiennes (haut) et les exportations de LGN du Canada à destination de régions PADD des États-Unis (bas). Cliquez sur les points roses pour obtenir de l’aide pour lire les données.',
+    },
+    resetRefinedPetroleumProducts: {
+      en: 'This data visualization shows Canada’s quarterly exports of refined petroleum products (RPPs). Click the pink dots to guide you through how to read the data.',
+      fr: 'Les données interactives montrent les exportations de produits pétroliers raffinés (« PPR ») du Canada par trimestre. Cliquez sur les points roses pour obtenir de l’aide pour lire les données.',
     },
     canadaPaddCrudeOil: {
       en: 'The colour of this region and its down arrow shows the total amount of crude oil that Canada exported during the time period selected in the bar chart below.',
@@ -587,10 +599,6 @@ const TranslationTable = fromJS({
       en: 'The down arrow shows the total electricity that Canadian regions exported to Vermont during the time period selected above.',
       fr: 'La flèche orientée vers le bas montre la quantité totale d’électricité que les régions canadiennes ont exportée vers le Vermont pendant la période sélectionnée dans le diagramme à barres ci-dessus.',
     },
-    resetNaturalGas: {
-      en: 'This data visualization shows imports and exports of natural gas at ports along the Canada-USA border. Click the pink dots to guide you through how to read the data.',
-      fr: 'Les données interactives montrent les importations et les exportations de gaz naturel en provenance et à destination de ports situés le long de la frontière canado-américaine. Cliquez sur les points roses pour obtenir de l’aide pour lire les données.',
-    },
     orangeBarNaturalGas: {
       en: 'Orange bars show the total natural gas that Canada imported in a single quarter; blue bars show exports.',
       fr: 'Les barres oranges montrent la quantité totale de gaz naturel importée par le Canada au cours d’un trimestre. Les barres bleues montrent les exportations.',
@@ -619,10 +627,6 @@ const TranslationTable = fromJS({
       en: 'Natural gas is measured in 10³ m³/d, which is 35,314 cubic feet. $CAN/GJ is the weighted average price per gigajoule of natural gas. The average Albertan household uses approximately 120 GJs of natural gas per year.',
       fr: 'La quantité de gaz naturel est indiquée en millier de m³/j, ce qui correspond à 35 314 pieds cubes par jour. $ CA/GJ indique le prix moyen pondéré du gaz naturel par gigajoule. Le ménage albertain moyen consomme environ 120 GJ de gaz naturel par année. (lien dans la colonne K)',
     },
-    resetNaturalGasLiquids: {
-      en: 'This data visualization shows imports of Natural Gas Liquids (NGLs) from the USA into Canadian regions (top) and exports of NGLs from Canada into regions of the USA called PADDs (bottom). Click the pink dots to guide you through how to read the data.',
-      fr: 'Les données interactives montrent les importations de liquides de gaz naturel (« LGN ») en provenance des États-Unis et à destination des régions canadiennes (haut) et les exportations de LGN du Canada à destination de régions PADD des États-Unis (bas). Cliquez sur les points roses pour obtenir de l’aide pour lire les données.',
-    },
     albertaArrowNaturalGasLiquids: {
       en: 'The up arrow shows the total NGLs that Alberta imported from the USA during the time period selected in the bar chart below.',
       fr: 'La flèche orientée vers le haut montre la quantité totale de LGN importée des États-Unis par l’Alberta pendant la période sélectionnée dans le diagramme à barres ci-après.',
@@ -646,10 +650,6 @@ const TranslationTable = fromJS({
     amountNaturalGasLiquids: {
       en: 'Natural gas liquids production is measured in 10³ m³/d (thousand cubic metres per day), which equals 6290 barrels per day.',
       fr: 'La production de liquides de gaz naturel est indiquée en milliers de m³/j (milliers de mètres cubes par jour), ce qui correspond à 6 290 barils par jour.',
-    },
-    resetRefinedPetroleumProducts: {
-      en: 'This data visualization shows Canada’s quarterly exports of refined petroleum products (RPPs). Click the pink dots to guide you through how to read the data.',
-      fr: 'Les données interactives montrent les exportations de produits pétroliers raffinés (« PPR ») du Canada par trimestre. Cliquez sur les points roses pour obtenir de l’aide pour lire les données.',
     },
     arrangeByRefinedPetroleumProducts: {
       en: 'Switch between seeing the different types of refined petroleum products stacked in one bar chart or as individual bar charts.',
