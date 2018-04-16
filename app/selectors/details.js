@@ -162,14 +162,6 @@ export const detailTotal = createSelector(
   detailBreakdownValues,
   detailTotalValue,
   (data, aggregateKey, valueKey, breakdownValues, totalValue) => {
-    console.log('in total', totalValue.value, totalValue.average)
-    if (totalValue.average === false) {
-      return {
-        ...totalValue,
-        percentage: (totalValue.value === 0) ? 0 : 100,
-      }
-    }
-
     const largestBreakdown = (breakdownValues.get(valueKey, fromJS({})).count() > 0)
       ? breakdownValues.get(valueKey).map(Math.abs).max()
       : 0
