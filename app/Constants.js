@@ -208,8 +208,8 @@ const Constants = fromJS({
   appHost: 'https://apps2.neb-one.gc.ca',
   screenshotPath: 'screenshot',
 
-  screenshotWidth: 1500,
-  screenshotHeight: 1200,
+  screenshotWidth: 1138,
+  screenshotHeight: 930,
 
   styleGuide: {
     colours: {
@@ -244,22 +244,22 @@ const Constants = fromJS({
     ],
     categoryColours: {
       refinedPetroleumProducts:{
-       'Partially Processed Oil': 'rgb(139, 192, 155)',
-       'Jet Fuel' :'rgb(87, 187, 149)',
-       'Heavy Fuel Oil' :'rgb(50, 155, 157)',
-       'Motor Gasoline' :'rgb(39, 135, 144)',
-       'Middle Distillate' :'rgb(30, 97, 114)',
+       'Partially Processed Oil': 'rgb(119, 246, 190)',
+       'Jet Fuel' :'rgb(0, 202, 116)',
+       'Heavy Fuel Oil' :'rgb(44, 167, 167)',
+       'Motor Gasoline' :'rgb(33, 110, 123)',
+       'Middle Distillate' :'rgb(47, 72, 98)',
       },
       crudeOil:{
         transport: {
-          Marine : 'rgb(39, 135, 144)',
-          Pipeline : 'rgb(30, 97, 114)' ,
-          Railroad : 'rgb(50, 155, 157)',
-          Truck : 'rgb(87, 187, 149)',
+          Marine : 'rgb(152, 166, 219)',
+          Pipeline : 'rgb(47, 72, 98)' ,
+          Railroad : 'rgb(211, 195, 207)',
+          Truck : 'rgb(76, 71, 186)',
         },
         productSubtype: {
-          Heavy : 'rgb(39, 135, 144)',
-          Light: 'rgb(30, 97, 114)',
+          Heavy : 'rgb(34, 111, 124)',
+          Light: 'rgb(45, 168, 168)',
         },
       },
     },

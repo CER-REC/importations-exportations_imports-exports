@@ -59,3 +59,24 @@
     width: 100%;
   }
 }
+
+/* Match what is in the WET template */
+*, :after, :before {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+body { line-height: 1.4375; }
+table { border-collapse: collapse; border-spacing: 0; }
+td, th { padding: 0; }
+
+.crudeTriangle {
+  display: inline-block;
+  width: 0;
+  height: 0;
+  margin-left: -6px;
+  margin-top: 20px;
+  border-style: solid;
+  border-width: 6px 6px 6px 0;
+  border-color: transparent #666 transparent transparent;
+}

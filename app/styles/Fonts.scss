@@ -69,6 +69,31 @@
   padding: 0;
 }
 
+.importsSubheading {
+  font-family: $fira-sans-condensed;
+  font-size: 12px;
+  color: $import-default;
+  margin: 0.0 0 0 3.75em;
+  padding: 0;
+  display: inline-block;
+}
+
+.importsSubheading a {
+  font-family: $fira-sans-condensed;
+  font-size: 12px;
+  color: $import-default;
+  padding: 0;
+  display: inline-block;
+}
+
+.importsSubheadingEnergy {
+  font-family: $fira-sans-condensed-semibold;
+  font-size: 12px;
+  color: $import-default;
+  padding: 0;
+  display: inline-block;
+}
+
 .resetLabel {
   font-family: $fira-sans-condensed;
   font-size: 13px;
@@ -83,7 +108,7 @@
 
 .theLegendValues {
   font-family: $fira-sans-condensed;
-  font-size: 10px;
+  font-size: 12px;
   fill: $neutral-medium;
   text-align: left;
 }
@@ -98,17 +123,6 @@
   font-size: 14px;
 }
 
-.selectableDropdown {
-  font-family: $fira-sans-condensed-semibold;
-  fill: $neutral-medium;
-  font-size: 13px; 
-}
-
-.visSelect {
-  font-family: $fira-sans-condensed-semibold;
-  font-size: 13px; 
-  fill: white;
-}
 
 .visSelectOfText {
   font-family: $fira-sans-condensed;
@@ -217,28 +231,39 @@
 .detailBreakDown {
   .header{
     &.imports {
-      font-size: 12PX;
+      font-size: 14px;
       font-family: $fira-sans-condensed-semibold;
+      color: $neutral-medium;
     }
     &.exports {
-      font-size: 12PX;
+      font-size: 14px;
       font-family: $fira-sans-condensed-semibold;
+      color: $neutral-medium;
     }
   }
   .detailBreakDownText {
-    font-size: 11PX;
+    font-size: 13px;
     font-family: $fira-sans-condensed;
+    color: $neutral-medium;
   }
-  
+
 }
+
+.detailBolded {
+    font-family: $fira-sans-condensed-semibold;
+    font-size: 13px;
+  }
+
 .crudeOilTypeMode {
-  font-size: 12PX;
+  font-size: 14px;
+  color: #666;
   font-family: $fira-sans-condensed-semibold;
+  margin-top: -20px;
 }
 
 #detailSidebar {
   font-family: $fira-sans-condensed;
-  font-size: 11px;
+  font-size: 13px;
   color: $neutral-light;
 
   .switchWrapper { font-weight: normal; }
@@ -253,9 +278,9 @@
 
   .detailTotal {
     font-family: $fira-sans-condensed;
-    font-size: 12px;
+    font-size: 13px;
     color: $neutral-dark;
-
+    
     .totalType {
       font-family: $fira-sans-condensed-semibold;
     }
@@ -274,7 +299,7 @@
 .mapPieceDescription{
   font-family:$fira-sans-condensed;
   font-size:13px;
-  fill: $neutral-light;
+  fill: $neutral-medium;
 }
 .explanationBottomText{
   font-family:$fira-sans-condensed;

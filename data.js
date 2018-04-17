@@ -51,7 +51,7 @@ const printingValidationError = (errorArray, region, point, type) => {
 }
 
 const humanNumber = (v) => {
-  const digits = v.toString().length - 3
+  const digits = Math.ceil(v).toString().length - 3
   if (digits < 0) { return 0 }
 
   const scale = parseInt(`1${new Array(digits).fill(0).join('')}`, 10)
@@ -86,6 +86,11 @@ const parsingIssue = {};
     value: parseInt(stripNA(point.value), 10) || 0,
     extrapolated: false,
   })))
+  // Strip RPP/Crude imports, since they aren't used in the visualization right now
+  .then(points => points.filter((point) => (
+    point.activity !== 'imports' ||
+    (point.product !== 'refinedPetroleumProducts' && point.product !== 'crudeOil')
+  )))
   // Validate points
   .then(points => points.map((point) => {
     // Data Vaildation and parsing

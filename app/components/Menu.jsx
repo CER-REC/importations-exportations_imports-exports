@@ -62,7 +62,7 @@ class Menu extends React.PureComponent {
 
   importExportExplanation() {
     let textString = `${this.props.Tr(['explanations','importExport'])}`
-    const xPosition = (this.props.language === 'en') ? 155 : 208
+    const xPosition = (this.props.language === 'en') ? 163 : 220
     if (this.props.selectedEnergy === 'naturalGas') {
       textString = `${this.props.Tr(['explanations','importExportMenuNaturalGas'])}`
     }
@@ -125,7 +125,7 @@ class Menu extends React.PureComponent {
           40.12,0,0,0,
           33.47,
           18H378.2"
-        xPosition={165}
+        xPosition={182}
         yPosition={yPosition}
         lineX={142.16}
         lineY={173.94}
@@ -139,6 +139,7 @@ class Menu extends React.PureComponent {
   }
 
   arrangedByExplanation() {
+    const xPosition = (this.props.language === 'en') ? 140 : 177
     if (this.props.name !== 'arrangedBy' && this.props.selectedEnergy !== 'refinedPetroleumProducts') { return }
     return (<g>
       <ExplanationDot
@@ -152,7 +153,7 @@ class Menu extends React.PureComponent {
           40.12,0,0,0,
           33.47,
           18H378.2"
-        xPosition={135}
+        xPosition={xPosition}
         yPosition={160}
         lineX={142.16}
         lineY={173.94}

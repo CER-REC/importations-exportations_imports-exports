@@ -52,7 +52,6 @@ const nestedReducers = combineReducers({
   modal: ModalReducer,
   openExplanations: ExplanationPopoverReducer,
   confidentialityMenu: ConfidentialityMenuReducer,
-  explanation: ExplanationPopoverReducer,
   openConfidentiality: ConfidentialityPopoverReducer,
   screenshot: ScreenshotReducer,
   activeMenu,

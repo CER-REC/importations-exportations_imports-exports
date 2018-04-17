@@ -101,9 +101,9 @@ class ProportionChart extends Chart {
         <tbody>
           {Object.entries(breakdown.values).sort((x, y) => y[1] - x[1]).map((key, i) => {
             const colour = categoryColours.getIn([selectedEnergy,aggregateKey, key[0]], Constants.getIn(['styleGuide', 'colours', 'ExportDefault']))
-            let label = <span>{prefix} <strong style={{ display: 'inline-block' }}>{Tr.getIn(['label', key[0], this.props.language])}</strong> {suffix}</span>
+            let label = <span> <strong style={{ display: 'inline-block' }} className="detailBolded">{Tr.getIn(['label', key[0], this.props.language])}</strong> </span>
             if (this.props.language === 'fr' && aggregateKey !== 'transport') {
-              label = <span>{suffix} <strong style={{ display: 'inline-block' }}>{Tr.getIn(['label', key[0], this.props.language])}</strong></span>
+              label = <span><strong style={{ display: 'inline-block' }} className="detailBolded">{Tr.getIn(['label', key[0], this.props.language])}</strong> </span>
             }
             return (
               <DetailBreakdownRow
@@ -117,7 +117,9 @@ class ProportionChart extends Chart {
                             backgroundColor: colour,
                           }}
                 />}
+                labelPrefix={prefix}
                 label={label}
+                labelSuffix={suffix}
                 value={key[1]}
                 unit={this.props.unit}
                 total={breakdown.total}
@@ -135,12 +137,13 @@ class ProportionChart extends Chart {
     }
     return <DetailSidebar
           {...dimensions}
-        >
+        > 
+        <div className="crudeTriangle" />
        <DetailBreakdownHeader
           trContent={trContent}
           color="black"
           type="crudeOilTypeMode"
-        />
+        />   
           {content}
     </DetailSidebar>
   }

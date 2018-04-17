@@ -1,14 +1,14 @@
-/* global Modernizr */
 import React from 'react'
 import PropTypes from 'prop-types'
 import DomReady from 'domready'
+import Modernizr from 'modernizr'
 
 DomReady(() => {
   Modernizr.addTest('svg-transforms', () => {
     const vendorPrefixesCss = ['-moz-', '-ms-', '-webkit-', '']
 
     // reduce vendor prefix array to create a cssText string.
-    const styleRules = vendorPrefixesCss.reduce((prev, curr) => `${prev} ${curr} transform: translateX(10px);`, '')
+    const styleRules = vendorPrefixesCss.reduce((prev, curr) => `${prev} ${curr}transform: translateX(10px);`, '')
 
     const body = document.querySelector('body')
     const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg')
@@ -43,7 +43,7 @@ export const makeSafeAnimation = (WrappedComponent) => {
     let smilChild = null
     if (Modernizr['svg-transforms']) {
       animation = { style: { ...(spreadProps.style || {}), ...cssAnimation } }
-    } else if (Modernizr['svg-smil']) {
+    } else if (Modernizr.smil) {
       animation = {}
       smilChild = fallbackSMIL
     }
