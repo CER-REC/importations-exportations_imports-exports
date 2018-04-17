@@ -85,10 +85,16 @@ class MapPiece extends React.Component {
     }
     return <text className={className} y={y} x={x}>{text}</text>
   }
+
   drawLeftLabel(text){
-    if(!text || text === ''){return null}
-    return this.breakLine('mapPieceDescription', text, -5, 20)
+    if(!text || text === '') { return null }
+      return this.breakLine('mapPieceDescription', text, -5, 20)
+    if (this.props.arrangeBy === 'amount') {
+      console.log('hello')
+      return null
+    }
   }
+
   newBrunswickExplanation() {
     if (this.props.selectedEnergy === 'electricity'
       && this.props.data.get('name') === 'NB' ) {
