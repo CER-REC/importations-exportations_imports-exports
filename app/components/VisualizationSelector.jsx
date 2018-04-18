@@ -41,6 +41,11 @@ const VisualizationSelector = (props) => {
   const options = ['electricity', 'crudeOil', 'naturalGas', 'naturalGasLiquids', 'refinedPetroleumProducts']
     .map((option) => {
       const translated = Tr(['mainMenuBar', option])
+      const textWithBox = (
+        <TextBox padding={1} boxStyles={{ fill: 'white', stroke: '#b3b3b3'}}>
+          &nbsp;{translated}&nbsp;
+        </TextBox>
+      )
       let el = (
         <g
           key={option}
@@ -50,32 +55,29 @@ const VisualizationSelector = (props) => {
           {...handleInteractionWithTabIndex(tabIndex, props.setVisualization, option)}
           role="menuitem"
           aria-label={Tr(['unabbreviated', 'mainMenuBar', option])}
-        > 
-        <defs>
-          <filter id="controlAreaOutline" x="0" y="0">
-            <feOffset result="offOut" in="SourceAlpha" dx="-20" dy="-12" />
-            <feGaussianBlur result="blurOut" in="offOut" stdDeviation="10" />
-            <feBlend in="SourceGraphic" in2="blurOut" mode="normal" />
-            <feMerge>
-              <feMergeNode/>
-              <feMergeNode in="SourceGraphic"/>
-            </feMerge>
-          </filter>
-        </defs>
-          <g transform="translate(3 0)" filter="url(#controlAreaOutline)">
-            <TextBox
-              padding={1}
-              boxStyles={{ fill: 'white', stroke: '#b3b3b3'}}
-            >
-              &nbsp;{translated}&nbsp;
-            </TextBox> 
+        >
+          <defs>
+            <filter id="controlAreaOutline" x="0" y="0">
+              <feOffset result="offOut" in="SourceAlpha" dx="-20" dy="-12" />
+              <feGaussianBlur result="blurOut" in="offOut" stdDeviation="10" />
+              <feBlend in="SourceGraphic" in2="blurOut" mode="normal" />
+              <feMerge>
+                <feMergeNode />
+                <feMergeNode in="SourceGraphic" />
+              </feMerge>
+            </filter>
+          </defs>
+          <g transform="translate(3 0)">
+            {/* Render with and without filter to fix Firefox blur bug */}
+            <g filter="url(#controlAreaOutline)">{textWithBox}</g>
+            {textWithBox}
           </g>
         </g>
       )
 
       let prefix = null
       let transformString = ''
-      if (props.language === 'fr') { 
+      if (props.language === 'fr') {
         prefix = SelectedPrefix(Tr(['menu', 'of']))
         transformString = 'translate(18 0)'
       }
