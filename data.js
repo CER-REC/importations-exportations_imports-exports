@@ -51,7 +51,7 @@ const printingValidationError = (errorArray, region, point, type) => {
 }
 
 const humanNumber = (v) => {
-  const digits = v.toString().length - 3
+  const digits = Math.ceil(v).toString().length - 3
   if (digits < 0) { return 0 }
 
   const scale = parseInt(`1${new Array(digits).fill(0).join('')}`, 10)
