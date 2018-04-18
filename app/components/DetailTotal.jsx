@@ -18,14 +18,9 @@ const DetailTotal = props => (
       {humanNumber(props.value, props.language)}&nbsp;
       {TR.getIn(['amounts', props.amountUnit, props.language])}&nbsp;
     </div>
-    {props.average === false && (Math.abs(props.percentage) === 100 || props.percentage === 0)
-      ? <div className="percentage">{Math.abs(props.percentage)}%</div>
-      : (
-        <div className="detailBreakDownContainer">
-          <PercentageBar width={props.percentage} />
-        </div>
-      )
-    }
+    <div className="detailBreakDownContainer">
+      <PercentageBar width={props.percentage} />
+    </div>
   </div>
 )
 
