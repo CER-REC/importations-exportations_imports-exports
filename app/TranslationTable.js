@@ -1512,6 +1512,10 @@ const TranslationTable = fromJS({
       en: 'Total',
       fr: 'Total',
     },
+    average: {
+      en: 'AVG',
+      fr: 'MOY.',
+    },
   },
 
   timelinePlay: {

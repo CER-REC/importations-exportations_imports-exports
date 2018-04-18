@@ -48,7 +48,7 @@ const renderDetailBreakdown = (props) => {
   if (!detailBreakdownData.get('required', false)) { return null }
   let total ={}
   let nameMappings={}
-  if(props.selectedEnergy === 'naturalGasLiquids'){
+  if (props.selectedEnergy === 'naturalGasLiquids') {
     total = props.Padd.reduce((acc, nextValue) => {
       if(props.selection.get('origins').count() > 0 
         && !props.selection.get('origins').includes(nextValue.get('destination'))) { return acc}
@@ -92,6 +92,8 @@ const renderDetailBreakdown = (props) => {
     return null
   }
   return (<DetailBreakdown
+      country="us"
+      subtype={props.subType}
       data={Immutable.fromJS(total).sort((a, b) => (b - a))}
       type={detailBreakdownData.get('type')}
       trContent={Tr.getIn(['detailBreakDown', props.selectedEnergy, detailBreakdownData.get('type')])}
