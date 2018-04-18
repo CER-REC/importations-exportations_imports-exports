@@ -17,12 +17,12 @@ const SelectedPrefix = memoize((of) => {
     <g>
       <rect
         x={-textOffset}
-        y={y}
+        y={y - 1}
         width={textOffset + 1}
-        height={height}
+        height={height + 2}
         fill="#666"
       />
-      <text x={0} y={0} fill="#999" textAnchor="end" aria-hidden>{of}&nbsp;</text>
+      <text x={3} y={0} fill="#999" textAnchor="end" aria-hidden>{of}&nbsp;</text>
     </g>
   )
 
@@ -36,55 +36,81 @@ const SelectedPrefix = memoize((of) => {
 
 const VisualizationSelector = (props) => {
   const { Tr, importExportVisualization } = props
-  let yOffset = Constants.getIn(['menuBar', 'visualizationPadding']) / 2
+  let yOffset = Constants.getIn(['menuBar', 'visualizationPadding']) 
   const tabIndex = Constants.getIn(['tabIndex','start', 'menuBar'])
   const options = ['electricity', 'crudeOil', 'naturalGas', 'naturalGasLiquids', 'refinedPetroleumProducts']
-    .sort((a, b) => (b === props.importExportVisualization ? 1 : 0))
     .map((option) => {
       const translated = Tr(['mainMenuBar', option])
+      const textWithBox = (
+        <TextBox padding={1} boxStyles={{ fill: 'white', stroke: '#b3b3b3'}}>
+          &nbsp;{translated}&nbsp;
+        </TextBox>
+      )
       let el = (
-        <text
+        <g
           key={option}
+          transform={`translate(0 ${yOffset})`}
           x={textOffset}
-          y={yOffset}
           className="menuOption"
           {...handleInteractionWithTabIndex(tabIndex, props.setVisualization, option)}
           role="menuitem"
           aria-label={Tr(['unabbreviated', 'mainMenuBar', option])}
         >
-          {translated}
-        </text>
+          <defs>
+            <filter id="controlAreaOutline" x="0" y="0">
+              <feOffset result="offOut" in="SourceAlpha" dx="-20" dy="-12" />
+              <feGaussianBlur result="blurOut" in="offOut" stdDeviation="10" />
+              <feBlend in="SourceGraphic" in2="blurOut" mode="normal" />
+              <feMerge>
+                <feMergeNode />
+                <feMergeNode in="SourceGraphic" />
+              </feMerge>
+            </filter>
+          </defs>
+          <g transform="translate(3 0)">
+            {/* Render with and without filter to fix Firefox blur bug */}
+            <g filter="url(#controlAreaOutline)">{textWithBox}</g>
+            {textWithBox}
+          </g>
+        </g>
       )
+
+      let prefix = null
+      let transformString = ''
+      if (props.language === 'fr') {
+        prefix = SelectedPrefix(Tr(['menu', 'of']))
+        transformString = 'translate(18 0)'
+      }
 
       if (option === props.importExportVisualization) {
         el = (
           <g
             key={option}
-            transform={`translate(0 ${yOffset})`}
+            transform={`translate(3 ${yOffset})`}
             aria-current
             role="menuitem"
             tabIndex={tabIndex}
             aria-label={Tr(['unabbreviated', 'mainMenuBar', option])}
           >
-            <g transform={`translate(${textOffset} 0)`}>
+            <g transform={transformString}>
               <TextBox
-                padding={0}
+                padding={1}
                 boxStyles={{ fill: '#666' }}
                 textStyles={{ className: 'bold menuOption', style: { fill: '#fff' } }}
-                unsizedContent={SelectedPrefix(Tr(['menu', 'of']))}
+                unsizedContent={prefix}
               >
-                {translated}&nbsp;
+              &nbsp;{translated}&nbsp;
               </TextBox>
             </g>
           </g>
         )
       }
 
-      yOffset += Constants.getIn(['menuBar', 'visualizationPadding'])
+      yOffset += Constants.getIn(['menuBar', 'visualizationPadding']) + 8
       return el
     })
   return (
-    <g transform={`translate(${props.left} ${props.top})`} className="menuGroup">
+    <g transform={`translate(${props.left} ${props.top - 5})`} className="menuGroup" >
       {options}
     </g>
   )
@@ -104,5 +130,6 @@ VisualizationSelector.defaultProps = {
 
 export default connect((state, props) => ({
   importExportVisualization: state.importExportVisualization,
+  language: state.language,
   Tr: TrSelector(state, props),
 }), { setVisualization })(VisualizationSelector)
