@@ -59,7 +59,7 @@ const initialVisualizationSettings = store => next => (action) => {
       meta: { visualization },
     }
     store.dispatch(initializeAction)
-    if(action.type === visualizationSettingsTypes.RESET_VISUALIZATION_STATE){
+    if(action.type === visualizationSettingsTypes.RESET_VISUALIZATION){
       store.dispatch({
         type: explanationTypes.RESET_EXPLANATION,
       })
