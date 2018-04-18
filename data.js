@@ -51,7 +51,7 @@ const printingValidationError = (errorArray, region, point, type) => {
 }
 
 const humanNumber = (v) => {
-  const digits = v.toString().length - 3
+  const digits = Math.ceil(v).toString().length - 3
   if (digits < 0) { return 0 }
 
   const scale = parseInt(`1${new Array(digits).fill(0).join('')}`, 10)
@@ -132,16 +132,14 @@ const parsingIssue = {};
       parsingIssue[label].push(issue)
     }
 
-    const addQuantity = (viz, priceUnit, amountUnit, revenueUnit, matchFuncFactory) => {
+    const addQuantity = (viz, priceUnit, amountUnit, matchFuncFactory) => {
       const priceData = visualizations[viz][priceUnit]
       const amountData = visualizations[viz][amountUnit]
-      const revenueData = visualizations[viz][revenueUnit] || {}
 
       Object.values(priceData).forEach((period) => {
         period.forEach((point) => {
           const matchFunc = matchFuncFactory(point)
           const matchingAmountPoints = amountData[point.period].filter(matchFunc)
-          const matchingRevenuePoints = (revenueData[point.period] || []).filter(matchFunc)
           if (matchingAmountPoints.length !== 1) {
             const validationLabel = `Can't calculate averages for ${viz} - ${priceUnit} and ${amountUnit}:`
             addValidationIssue(validationLabel, {
@@ -158,45 +156,7 @@ const parsingIssue = {};
             point.revenueForAverage = 0
           } else {
             point.quantityForAverage = matchingAmountPoints[0].value
-            const revenue = point.value * point.quantityForAverage
-            if (matchingRevenuePoints.length === 1) {
-              if (revenue !== matchingRevenuePoints[0].value) {
-                const validationLabel = `Computed revenue doesn't match csv revenue for ${viz} - ${priceUnit} and ${amountUnit}:`
-                addValidationIssue(validationLabel, {
-                  origin: point.origin,
-                  destination: point.destination,
-                  port: point.port,
-                  activity: point.activity,
-                  period: point.period,
-                  computedRevenue: revenue,
-                  csvRevenue: matchingRevenuePoints[0].value,
-                })
-              }
-              point.revenueForAverage = matchingRevenuePoints[0].value
-            } else if (matchingRevenuePoints.length > 1) {
-              const validationLabel = `Too many matches for csv revenue for ${viz} - ${priceUnit} and ${amountUnit}:`
-              addValidationIssue(validationLabel, {
-                origin: point.origin,
-                destination: point.destination,
-                port: point.port,
-                activity: point.activity,
-                period: point.period,
-                computedRevenue: revenue,
-                csvRevenueMatches: matchingRevenuePoints.length,
-              })
-            } else {
-              const validationLabel = `No matches for csv revenue for ${viz} - ${priceUnit} and ${amountUnit}:`
-              addValidationIssue(validationLabel, {
-                origin: point.origin,
-                destination: point.destination,
-                port: point.port,
-                activity: point.activity,
-                period: point.period,
-                computedRevenue: revenue,
-                csvRevenueMatches: matchingRevenuePoints.length,
-              })
-              point.revenueForAverage = revenue
-            }
+            point.revenueForAverage = point.value * point.quantityForAverage
           }
         })
       })
@@ -206,14 +166,12 @@ const parsingIssue = {};
       'electricity',
       'CAN$/MW.h',
       'MW.h',
-      'CAN$',
       point => match => (match.origin === point.origin && match.destination === point.destination),
     )
     addQuantity(
       'naturalGas',
       'CN$/GJ',
       'thousand m3/d',
-      false,
       point => match => (match.port === point.port && match.originalActivity === point.originalActivity),
     )
 

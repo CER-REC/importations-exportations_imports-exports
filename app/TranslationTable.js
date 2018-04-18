@@ -229,24 +229,24 @@ const TranslationTable = fromJS({
     activity: {
       options: {
         imports: {
-          en: 'Imports',
-          fr: 'Importations',
+          en: 'IMPORTS',
+          fr: 'IMPORTATIONS',
         },
         exports: {
-          en: 'Exports',
-          fr: 'Exportations',
+          en: 'EXPORTS',
+          fr: 'EXPORTATIONS',
         },
         importsExports: {
           en: 'Imports and Exports',
           fr: 'Importations et exportations',
         },
         importsForReexport: {
-          en: 'Temporary Imports',
-          fr: 'Importations temporaires',
+          en: 'TEMPORARY IMPORTS',
+          fr: 'IMPORTATIONS TEMPORAIRES',
         },
         exportsForReimport: {
-          en: 'Temporary Exports',
-          fr: 'Exportations temporaires',
+          en: 'TEMPORARY EXPORTS',
+          fr: 'EXPORTATIONS TEMPORAIRES',
         },
       },
     },
@@ -289,8 +289,8 @@ const TranslationTable = fromJS({
       },
       options: {
         CAN$: {
-          en: 'REVENUE (CAN$)',
-          fr: 'REVENU ($ CAN)',
+          en: 'VALUE (CAN$)',
+          fr: 'VALEUR ($ CAN)',
         },
         'CAN$/MW.h': {
           en: 'PRICE (CAN$/MW.h)',
@@ -748,7 +748,7 @@ const TranslationTable = fromJS({
   },
 
   formatNumberUnit: {
-    en: ['', 'K', 'M', 'B'],
+    en: ['', 'k', 'M', 'B'],
     fr: ['', 'k', 'M', 'G'],
   },
 
@@ -1547,6 +1547,10 @@ const TranslationTable = fromJS({
     multiple: {
       en: 'Multiple Selections',
       fr: 'Sélections Multiples',
+    },
+    default: {
+      en: 'Port Locations',
+      fr: 'Emplacements de Port',
     },
     portName: {
       Aden: {

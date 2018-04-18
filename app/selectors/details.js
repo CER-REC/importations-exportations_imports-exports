@@ -120,12 +120,14 @@ export const detailTotalValue = createSelector(
   filterByTimelineAndHexData,
   getAggregateKey,
   getValueKey,
-  (data, aggregateKey, valueKey) => {
+  detailBreakdownValues,
+  selectedVisualization,
+  (data, aggregateKey, valueKey, breakdownValues, vis) => {
     const filteredData = valueKey === 'total'
       ? data
       : data.filter(p => (
         p.get(aggregateKey) === valueKey &&
-        p.get('productSubtype', '') === '' &&
+        (vis === 'naturalGasLiquids' || p.get('productSubtype', '') === '') &&
         p.get('transport', '') === ''
       ))
 

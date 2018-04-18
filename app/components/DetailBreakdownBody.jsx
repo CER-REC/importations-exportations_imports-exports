@@ -17,7 +17,8 @@ const DetailBreakdownBody = (props) => {
     return (
       <DetailBreakdownRow
         key={key}
-        label={`${bodyContent.getIn(['action', props.language])} ${name}`}
+        labelPrefix={bodyContent.getIn(['action', props.language])}
+        label={name}
         value={value}
         unit={props.amountUnit}
         total={total}

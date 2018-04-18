@@ -11,7 +11,8 @@ const DetailBreakdownRow = props => (
   <tr className="detailBreakDownText">
     <td width={props.colorBox ? '14px' : '0px'} style={{ verticalAlign: 'baseline' }}>{props.colorBox}</td>
     <td width="100%">{/* Extra long so that it fills all available space */}
-      {props.label}&nbsp;
+      {props.labelPrefix}
+      <span className="detailBolded"> {props.label}</span>{props.labelSuffix}&nbsp;
       <span style={{ display: 'inline-block' }}>{humanNumber(props.value, props.language)}</span>&nbsp;
       <span style={{ display: 'inline-block' }}>{Tr.getIn(['amounts', props.unit, props.language])}</span>&nbsp;
       <span style={{ display: 'inline-block' }}>{((props.total === 0) ? 0.0 : Math.abs(props.value / props.total) * 100).toFixed(2)}%</span>&nbsp;
@@ -26,15 +27,19 @@ const DetailBreakdownRow = props => (
 
 DetailBreakdownRow.propTypes = {
   label: PropTypes.node.isRequired,
+  labelPrefix: PropTypes.node,
+  labelSuffix: PropTypes.node,
   value: PropTypes.number.isRequired,
   total: PropTypes.number.isRequired,
   unit: PropTypes.string.isRequired,
   language: PropTypes.string.isRequired,
-  colorBox: PropTypes.bool,
+  colorBox: PropTypes.node,
 }
 
 DetailBreakdownRow.defaultProps = {
   colorBox: false,
+  labelPrefix: null,
+  labelSuffix: null,
 }
 
 export default connect(({ language }) => ({ language }))(DetailBreakdownRow)
