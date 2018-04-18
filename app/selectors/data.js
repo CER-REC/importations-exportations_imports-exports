@@ -218,12 +218,12 @@ const mapPieceLocationDataStructure = (acc, next, origin, originKey, originCount
   if (!destCountryObj[destinationKey][activity]) { destCountryObj[destinationKey][activity] = 0 }
 
   destCountryObj[destinationKey][activity] += next.get('value', 0)
-  if (next.has('quantityForAverage')) {
+  if (next.has('forAverageDivisor')) {
     if (!acc[originKey].sumForAvg) { acc[originKey].sumForAvg = {} }
     const { sumForAvg } = acc[originKey]
-    if (!sumForAvg[activity]) { sumForAvg[activity] = { revenue: 0, amount: 0 } }
-    sumForAvg[activity].revenue += next.get('revenueForAverage', 0)
-    sumForAvg[activity].amount += next.get('quantityForAverage', 0)
+    if (!sumForAvg[activity]) { sumForAvg[activity] = { value: 0, divisor: 0 } }
+    sumForAvg[activity].value += next.get('forAverageValue', 0)
+    sumForAvg[activity].divisor += next.get('forAverageDivisor', 0)
   }
 
   acc[originKey].totalCount = (totalCount + 1)
@@ -265,8 +265,8 @@ export const aggregateFilterLocationSelector = createSelector(
     if (result.count() > 0 && result.first().has('sumForAvg')) {
       return result.map(region => region.update('sumForAvg', val => val.map((activity) => {
         // Prevent divide by zero
-        if (activity.get('amount', 0) === 0) { return 0 }
-        return activity.get('revenue', 0) / activity.get('amount')
+        if (activity.get('divisor', 0) === 0) { return 0 }
+        return activity.get('value', 0) / activity.get('divisor')
       })))
     }
 
@@ -360,15 +360,15 @@ export const aggregateLocationNaturalGasSelector = createSelector(
         accPort.activities[activityName] += next.get('value')
       }
 
-      if (next.has('quantityForAverage')) {
+      if (next.has('forAverageDivisor')) {
         if (!accPort.sumForAvg) { accPort.sumForAvg = {} }
         const { sumForAvg } = accPort
-        if (!sumForAvg[activityName]) { sumForAvg[activityName] = { revenue: 0, amount: 0 } }
-        sumForAvg[activityName].revenue += next.get('revenueForAverage', 0)
-        sumForAvg[activityName].amount += next.get('quantityForAverage', 0)
-        accPort.activities[activityName] = (sumForAvg[activityName].amount === 0)
+        if (!sumForAvg[activityName]) { sumForAvg[activityName] = { value: 0, divisor: 0 } }
+        sumForAvg[activityName].value += next.get('forAverageValue', 0)
+        sumForAvg[activityName].divisor += next.get('forAverageDivisor', 0)
+        accPort.activities[activityName] = (sumForAvg[activityName].divisor === 0)
           ? 0
-          : sumForAvg[activityName].revenue / sumForAvg[activityName].amount
+          : sumForAvg[activityName].value / sumForAvg[activityName].divisor
       }
       const totalCount = accPort.totalCount || 0
       const confidentialCount = accPort.confidentialCount || 0

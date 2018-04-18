@@ -152,11 +152,11 @@ const parsingIssue = {};
             })
             // 0 will be used to indicate these are missing values
             // https://trello.com/c/rLeWzKXJ/75-price-views-should-show-averages-not-totals#comment-5aa997af6f16e46bb2c971a6
-            point.quantityForAverage = 0
-            point.revenueForAverage = 0
+            point.forAverageDivisor = 0
+            point.forAverageValue = 0
           } else {
-            point.quantityForAverage = matchingAmountPoints[0].value
-            point.revenueForAverage = point.value * point.quantityForAverage
+            point.forAverageDivisor = matchingAmountPoints[0].value
+            point.forAverageValue = point.value * point.forAverageDivisor
           }
         })
       })
@@ -201,19 +201,19 @@ const parsingIssue = {};
           const averageData = {}
           const regionValues = unitPoints
             .reduce((acc, next) => {
-              if (next.quantityForAverage) {
+              if (next.forAverageDivisor) {
                 if (!averageData[next.destination]) {
-                  averageData[next.destination] = { quantity: 0, revenue: 0 }
+                  averageData[next.destination] = { value: 0, divisor: 0 }
                 }
                 const averageDest = averageData[next.destination]
-                averageDest.quantity += next.quantityForAverage
-                averageDest.revenue += next.revenueForAverage
+                averageDest.value += next.forAverageValue
+                averageDest.divisor += next.forAverageDivisor
 
                 return {
                   ...acc,
                   [next.destination]: (averageDest.quantity === 0)
                     ? 0
-                    : Math.round(averageDest.revenue / averageDest.quantity),
+                    : Math.round(averageDest.value / averageDest.divisor),
                 }
               }
               if (visName === 'crudeOil' || visName === 'naturalGasLiquids') {

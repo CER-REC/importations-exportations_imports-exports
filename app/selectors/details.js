@@ -131,14 +131,14 @@ export const detailTotalValue = createSelector(
         p.get('transport', '') === ''
       ))
 
-    if (filteredData.count() > 0 && filteredData.first().has('quantityForAverage')) {
+    if (filteredData.count() > 0 && filteredData.first().has('forAverageDivisor')) {
       const sumForAvg = filteredData.reduce((acc, next) => {
-        acc.revenue += next.get('revenueForAverage', 0)
-        acc.amount += next.get('quantityForAverage', 0)
+        acc.value += next.get('forAverageValue', 0)
+        acc.divisor += next.get('forAverageDivisor', 0)
         return acc
-      }, { revenue: 0, amount: 0 })
-      if (sumForAvg.amount === 0) { return { value: 0, average: true } }
-      const value = sumForAvg.revenue / sumForAvg.amount
+      }, { value: 0, divisor: 0 })
+      if (sumForAvg.divisor === 0) { return { value: 0, average: true } }
+      const value = sumForAvg.value / sumForAvg.divisor
       return { value, average: true }
     }
 
@@ -195,7 +195,7 @@ export const missingDataTotal = createSelector(
     return {
       missing: filteredData.filter(p => (
         p.get('destination') === '(blank)' ||
-        p.get('quantityForAverage', undefined) === 0
+        p.get('forAverageDivisor', undefined) === 0
       )).count(),
       total: filteredData.count(),
     }

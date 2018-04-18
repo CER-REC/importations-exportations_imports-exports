@@ -168,13 +168,13 @@ const parseLocationData = createSelector(
         }
         if (data.getIn([originKey, 'sumForAvg'], false) !== false) {
           const imports = data.getIn([originKey, 'sumForAvg', 'imports'], new Immutable.Map())
-          result.imports = imports.get('amount', 0) === 0
+          result.imports = imports.get('divisor', 0) === 0
             ? 0
-            : imports.get('revenue') / imports.get('amount')
+            : imports.get('value') / imports.get('divisor')
           const exports = data.getIn([originKey, 'sumForAvg', 'exports'], new Immutable.Map())
-          result.exports = exports.get('amount', 0) === 0
+          result.exports = exports.get('divisor', 0) === 0
             ? 0
-            : exports.get('revenue') / exports.get('amount')
+            : exports.get('value') / exports.get('divisor')
         }
         tabIndex += 1
         resultList.push(result)
