@@ -19,6 +19,7 @@ const DetailBreakdownRow = props => (
     </td>
     <td width="40px" style={{ display: 'inline-block' }}>
       <PercentageBar
+        style={props.progressBarStyle}
         width={((props.total === 0) ? 0.0 : (props.value / props.total) * 100)}
       />
     </td>
@@ -34,12 +35,14 @@ DetailBreakdownRow.propTypes = {
   unit: PropTypes.string.isRequired,
   language: PropTypes.string.isRequired,
   colorBox: PropTypes.node,
+  progressBarStyle: PropTypes.object, // eslint-disable-line react/forbid-prop-types
 }
 
 DetailBreakdownRow.defaultProps = {
   colorBox: false,
   labelPrefix: null,
   labelSuffix: null,
+  progressBarStyle: {},
 }
 
 export default connect(({ language }) => ({ language }))(DetailBreakdownRow)
