@@ -138,12 +138,13 @@ export const detailTotal = createSelector(
   getAggregateKey,
   getValueKey,
   detailBreakdownValues,
-  (data, aggregateKey, valueKey, breakdownValues) => {
+  selectedVisualization,
+  (data, aggregateKey, valueKey, breakdownValues, vis) => {
     const filteredData = valueKey === 'total'
       ? data
       : data.filter(p => (
         p.get(aggregateKey) === valueKey &&
-        p.get('productSubtype', '') === '' &&
+        (vis === 'naturalGasLiquids' || p.get('productSubtype', '') === '') &&
         p.get('transport', '') === ''
       ))
 
