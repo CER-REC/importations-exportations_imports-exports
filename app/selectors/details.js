@@ -1,18 +1,181 @@
 import { createSelector } from 'reselect'
 import { fromJS } from 'immutable'
 
-import { aggregateQuarterFilteredValue, getValueKey } from './timeline'
-import { aggregateLocationSelector, selectedPieces, selection, filterByHex } from './data'
+import { aggregateQuarterFilteredValue } from './timeline'
+import { filterByTimelineAndHexData, getAggregateKey, getValueKey, activityGroupSelector, aggregateFilterLocationSelector, selectedPieces, selection as getSelection, filterByHex } from './data'
 import { selectedVisualization } from './visualizationSettings'
+import { PaddSelector } from './Padd'
+import { getNaturalGasLiquidMapLayout } from './NaturalGasSelector'
+import Constants from '../Constants'
+
+export const electricityDetailBreakdownValues = createSelector(
+  getSelection,
+  aggregateFilterLocationSelector,
+  (selection, filteredDataPoints) => {
+    /*
+     * Electricity
+     *   selection.destinations
+     *   filteredDataPoints
+     * NGL - Canada
+     *   layout
+     *   selection.origins
+     *   subtype
+     * NGL - US
+     *   Padd
+     *   selection.origins
+     *   subtype
+     * Crude Oil
+     *   Padd
+     *   selection.origins
+     */
+    const data = {}
+    let total = 0
+
+    const valueTypes = ['imports', 'exports']
+    selection.get('destinations').forEach((nextValue) => {
+      nextValue.forEach((stateOrProvince, key) => {
+        valueTypes.forEach((activity) => {
+          const regionData = filteredDataPoints.get(key)
+          if (!regionData) { return }
+          if (!regionData.get(activity)) { return }
+
+          if (!data[activity]) { data[activity] = {} }
+          data[activity][key] = regionData.has('sumForAvg')
+            ? regionData.getIn(['sumForAvg', activity])
+            : regionData.get(activity)
+        })
+      })
+    })
+
+    return fromJS(data).map(v => v.sort((a, b) => (b - a)))
+  },
+)
+
+// This is only used in the US PADD map for Crude Oil. The subtype/transport
+// skip the main DetailBreakdown
+export const crudeOilDetailBreakdownValues = createSelector(
+  getSelection,
+  aggregateFilterLocationSelector,
+  PaddSelector,
+  (selection, filteredDataPoints, padd) => {
+    const data = padd.filter((_, key) => key !== 'ca').map((value, paddId) => {
+      if (selection.get('origins').count() > 0 && !selection.get('origins').includes('ca')) {
+        return selection.get('origins').includes(paddId) ? value.get('value') : 0
+      }
+      return value.get('value')
+    })
+
+    return fromJS(data).sort((a, b) => (b - a))
+  },
+)
+
+export const naturalGasLiquidsDetailBreakdownValues = createSelector(
+  getSelection,
+  (_, props) => props.type,
+  (_, props) => props.subtype,
+  (_, props) => props.country,
+  PaddSelector,
+  getNaturalGasLiquidMapLayout,
+  (selection, activity, subtype, country, padd, layout) => {
+    /*
+     * NGL - Canada
+     *   layout
+     *   selection.origins
+     *   subtype
+     * NGL - US
+     *   Padd
+     *   selection.origins
+     *   subtype
+     */
+    const detailBreakdownData = Constants.getIn(['detailBreakDown', country])
+    const data = {}
+
+    if (activity === 'imports') {
+      const origins = selection.get('origins')
+      layout.forEach((nextValue) => {
+        if (origins.count() > 0 && !origins.includes(nextValue.get('name'))) { return }
+        nextValue.get('subType').forEach((subTypeVal, subTypeKey) => {
+          if (subtype !== '' && subtype !== 'propaneButane') {
+            if (subTypeKey !== 'propaneButane' && subTypeKey === subtype) {
+              data[subTypeKey] = (data[subTypeKey] || 0) + subTypeVal.get(detailBreakdownData.get('type'), 0)
+            }
+          } else if (subTypeKey !== 'propaneButane') {
+            data[subTypeKey] = (data[subTypeKey] || 0) + subTypeVal.get(detailBreakdownData.get('type'), 0)
+          }
+        })
+      })
+    } else {
+      const origins = selection.get('origins')
+      padd.filter(v => v.has('subType')).forEach((nextValue) => {
+        if (origins.count() > 0 && !origins.includes(nextValue.get('destination'))) { return }
+        nextValue.get('subType').forEach((subTypeVal, subTypeKey) => {
+          if (subtype !== '' && subtype !== 'propaneButane') {
+            if (subTypeKey !== 'propaneButane' && subTypeKey === subtype) {
+              data[subTypeKey] = (data[subTypeKey] || 0) + subTypeVal.get(detailBreakdownData.get('type'), 0)
+            }
+          } else if (subTypeKey !== 'propaneButane') {
+            data[subTypeKey] = (data[subTypeKey] || 0) + subTypeVal.get(detailBreakdownData.get('type'), 0)
+          }
+        })
+      })
+    }
+
+    return fromJS(data).sort((a, b) => (b - a))
+  },
+)
+
+export const detailBreakdownValues = (state, props) => {
+  switch (selectedVisualization(state, props)) {
+    case 'electricity': return electricityDetailBreakdownValues(state, props)
+    case 'crudeOil': return crudeOilDetailBreakdownValues(state, props)
+    case 'naturalGasLiquids': return naturalGasLiquidsDetailBreakdownValues(state, props)
+    default: return fromJS({})
+  }
+}
 
 export const detailTotal = createSelector(
-  aggregateQuarterFilteredValue,
+  filterByTimelineAndHexData,
+  getAggregateKey,
   getValueKey,
-  ({ points }, valueKey) =>
-    points.reduce((acc, next) => {
-      if (valueKey === 'total') { return acc + next.get('total') }
-      return acc + next.getIn(['values', valueKey], 0)
-    }, 0),
+  detailBreakdownValues,
+  selectedVisualization,
+  (data, aggregateKey, valueKey, breakdownValues, vis) => {
+    const filteredData = valueKey === 'total'
+      ? data
+      : data.filter(p => (
+        p.get(aggregateKey) === valueKey &&
+        (vis === 'naturalGasLiquids' || p.get('productSubtype', '') === '') &&
+        p.get('transport', '') === ''
+      ))
+
+    if (filteredData.count() > 0 && filteredData.first().has('quantityForAverage')) {
+      const sumForAvg = filteredData.reduce((acc, next) => {
+        acc.revenue += next.get('revenueForAverage', 0)
+        acc.amount += next.get('quantityForAverage', 0)
+        return acc
+      }, { revenue: 0, amount: 0 })
+      const largestBreakdown = (breakdownValues.get(valueKey, fromJS({})).count() > 0)
+        ? breakdownValues.get(valueKey).max()
+        : 0
+      // Prevent divide by zero
+      if (sumForAvg.amount === 0) { return { value: 0, average: true, percentage: '0%' } }
+      const value = sumForAvg.revenue / sumForAvg.amount
+      return {
+        value,
+        average: true,
+        percentage: (largestBreakdown !== 0)
+          ? `${(value / largestBreakdown) * 100}%`
+          : '100%',
+      }
+    }
+
+    const value = filteredData.reduce((acc, next) => (acc + next.get('value', 0)), 0)
+    return {
+      value,
+      average: false,
+      percentage: (value === 0) ? '0%' : '100%',
+    }
+  },
 )
 
 export const confidentialTotal = createSelector(
@@ -25,14 +188,17 @@ export const confidentialTotal = createSelector(
 )
 
 export const missingDataTotal = createSelector(
-  aggregateLocationSelector,
-  selectedPieces,
-  selectedVisualization,
-  selection,
-  (data, selectedMapPieces, visualization, selectionState) => data
-    .filter(p => filterByHex(p, selectedMapPieces, visualization, selectionState))
-    .reduce((acc, next) => ({
-      missing: acc.missing + (next.get('origin') === '(blank)' ? next.get('totalCount', 0) : 0),
-      total: acc.total + next.get('totalCount', 0),
-    }), { missing: 0, total: 0 }),
+  filterByTimelineAndHexData,
+  getAggregateKey,
+  getValueKey,
+  (data, aggregateKey, valueKey) => {
+    const filteredData = data.filter(p => p.get(aggregateKey) === valueKey)
+    return {
+      missing: filteredData.filter(p => (
+        p.get('destination') === '(blank)' ||
+        p.get('quantityForAverage', undefined) === 0
+      )).count(),
+      total: filteredData.count(),
+    }
+  },
 )

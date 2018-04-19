@@ -113,17 +113,35 @@ class Legend extends React.Component {
     const humanNumberLang = v => humanNumber(v, this.props.language)
     return (
         <g transform={transformString}>
-          {bins.map((value, i) => (
-            <g key={`bin-${i}`}>
-              <text className="theLegendValues" y={(i * 20) + 20}>
-                {`>${humanNumberLang(value[0])}`}
-              </text>
-              <text className="theLegendValues" y={(i * 20) + 20} x="38">
-                {`- ${humanNumberLang(value[1])}`}
-              </text>
-            </g>
-          ))} <g transform="translate(0 0)">
-          <text className="theLegendValues">{zeroText}</text>
+          {bins.map((value, i) => {
+            if (value[0] === Number.MIN_SAFE_INTEGER) {
+              return (
+                <text className="theLegendValues" y={(i * 20) + 20} x="34" key={`bin-${i}`}>
+                  &lt;={humanNumberLang(value[1])}
+                </text>
+              )
+            }
+            if (value[1] === Number.MAX_SAFE_INTEGER) {
+              return (
+                <text className="theLegendValues" y={(i * 20) + 20} key={`bin-${i}`}>
+                  &gt;{humanNumberLang(value[0])}
+                </text>
+              )
+            }
+
+            return (
+              <g key={`bin-${i}`}>
+                <text className="theLegendValues" y={(i * 20) + 20}>
+                  {`>${humanNumberLang(value[0])}`}
+                </text>
+                <text className="theLegendValues" y={(i * 20) + 20} x="38">
+                  {`- ${humanNumberLang(value[1])}`}
+                </text>
+              </g>
+            )
+          })}
+          <g transform="translate(0 0)">
+            <text className="theLegendValues">{zeroText}</text>
           </g>
         </g>
     )

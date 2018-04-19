@@ -9,6 +9,7 @@ import { humanNumber } from '../utilities'
 import DetailBreakdownHeader from './DetailBreakdownHeader'
 import DetailBreakdownBody from './DetailBreakdownBody'
 import { visualizationSettings } from '../selectors/visualizationSettings'
+import { detailBreakdownValues } from '../selectors/details'
 
 class DetailBreakdown extends React.Component {
   render() {
@@ -29,6 +30,7 @@ class DetailBreakdown extends React.Component {
                 color= {props.color}
                 data= {props.data}
                 nameMappings= {props.nameMappings}
+                total={props.total}
               />
             </tbody>
           </table>
@@ -43,6 +45,7 @@ DetailBreakdown.defaultProps = {
   data: new Immutable.Map(),
   nameMappings: new Immutable.Map(),
   defaultContent: '',
+  total: false,
 }
 
 DetailBreakdown.propTypes = {
@@ -52,6 +55,11 @@ DetailBreakdown.propTypes = {
   data: PropTypes.instanceOf(Immutable.Map).isRequired,
   trContent: PropTypes.instanceOf(Immutable.Map).isRequired,
   nameMappings: PropTypes.instanceOf(Immutable.Map).isRequired,
+  showDefault: PropTypes.bool.isRequired,
+  total: PropTypes.oneOfType([
+    PropTypes.bool,
+    PropTypes.number,
+  ]),
 }
 
 export default connect((state, props) => ({

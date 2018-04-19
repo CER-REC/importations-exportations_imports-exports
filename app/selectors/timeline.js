@@ -2,6 +2,8 @@ import { createSelector } from 'reselect'
 import { fromJS } from 'immutable'
 
 import {
+  getAggregateKey,
+  getValueKey,
   activityGroupSelector,
   filterByHexSelector,
   filterByTimelineAndHexData,
@@ -13,8 +15,6 @@ import { visualizationContentPosition as visContentSize } from './viewport/'
 import { visualizationSettings, selectedVisualization } from './visualizationSettings'
 import Constants from '../Constants'
 
-const getAggregateKey = (_, props) => props.aggregateKey
-export const getValueKey = (_, props) => props.valueKey
 const getScaleKey = (state, props) => props.scaleKey || getValueKey(state, props)
 
 const mapToValue = (data, key) => data.map(v => v.get(key))
@@ -35,7 +35,7 @@ export const aggregateQuarter = createSelector(
   },
 )
 const aggregateQuarterPoints = (points, valueKeys, aggregateKey, vizName) => {
-  return points
+  const result = fromJS(points
     .reduce((acc, next) => {
       if (vizName === 'crudeOil' && aggregateKey === 'activity' && next.get('destination') === 'ca') {
         return acc
@@ -57,6 +57,19 @@ const aggregateQuarterPoints = (points, valueKeys, aggregateKey, vizName) => {
       if (!key) { return acc }
 
       if (!valueKeys.includes(key)) { valueKeys.push(key) }
+      if (next.has('quantityForAverage')) {
+        if (!acc[period].sumForAvg) { acc[period].sumForAvg = {} }
+        if (!acc[period].sumForAvg[key]) {
+          acc[period].sumForAvg[key] = { amount: 0, revenue: 0 }
+        }
+
+        acc[period].sumForAvg[key].amount += next.get('quantityForAverage', 0)
+        acc[period].sumForAvg[key].revenue += next.get('revenueForAverage', 0)
+      }
+      // if next has quantity for average --- 
+      // true - acc period has sumForAverage key object ---
+      // make sure if sfA exists also has key - either import or exports
+      // adding actual values based on data point
       acc[period].values[key] = (acc[period].values[key] || 0) + next.get('value', 0)
       acc[period].total += next.get('value', 0)
       acc[period].confidential[key] = (acc[period].confidential[key] || 0) +
@@ -65,8 +78,33 @@ const aggregateQuarterPoints = (points, valueKeys, aggregateKey, vizName) => {
         (next.get('confidential', false) ? 1 : 0)
       acc[period].totalPoints[key] = (acc[period].totalPoints[key] || 0) + 1
       acc[period].totalPoints.total = (acc[period].totalPoints.total || 0) + 1
+
+      // data mapping to calculate weightedAverage
+      // if (valuesKeys.has('sumForAvg')) {
+
+      // }
+
       return acc
-    }, {})
+    }, {}))
+
+    if (result.count() === 0 || result.first().has('sumForAvg') === false) { return result }
+
+    const test = result.map(period => {
+      let totalAmount = 0
+      let totalRevenue = 0
+      return period
+        .set('values', period.get('sumForAvg').map(value => {
+          totalAmount += value.get('amount', 0)
+          totalRevenue += value.get('revenue', 0)
+          if (value.get('amount', 0) === 0) { return 0 }
+          return value.get('revenue', 0) / value.get('amount', 0)
+        }))
+        .set('total', (totalAmount === 0) ? 0 : (totalRevenue / totalAmount))
+    })
+    return test
+    // if sfA exists and map over to calculate weighted average
+    // replace each quarters value with that value
+    // replace acc[period].total with the combined values
 }
 export const aggregateQuarterFilteredValue = createSelector(
   filterByTimelineAndHexData,

@@ -36,7 +36,7 @@ export const visSelectorPosition = createSelector(
     ...prev,
     top: prev.top + prev.height - 2,
     height: (
-      (Constants.getIn(['menuBar', 'visualizationPadding']) * 5) + 5
+      (Constants.getIn(['menuBar', 'visualizationPadding']) * 5) + 42
     ),
   }),
 )

@@ -8,11 +8,12 @@ const axisHeight = Constants.getIn(['timeline', 'axisHeight'])
 export const canadaMapPosition = createSelector(
   visualizationContentPosition,
   viewport,
-  (visContent, viewp)  => {
+  (visContent, viewp) => {
     const height = viewp.get('changeHeightRatio') > 1.2 ? 140 : 105
     return {
-      top: visContent.top,
-      left: visContent.left + viewp.get('changeWidthRatio')*50,
+      // Move up by 30px to give barchart space for negative values and outliers
+      top: visContent.top - 30,
+      left: visContent.left + (viewp.get('changeWidthRatio') * 50),
       width: visContent.width,
       height,
     }
@@ -22,10 +23,11 @@ export const canadaMapPosition = createSelector(
 export const chartImportPosition = createSelector(
   canadaMapPosition,
   viewport,
-  (prev, viewp)  => {
+  (prev, viewp) => {
     const result = {
-      top: prev.top + prev.height,
-      left: prev.left - viewp.get('changeWidthRatio')*50,
+      // Move down by 30px to give barchart space for negative values and outliers
+      top: prev.top + prev.height + 30,
+      left: prev.left - (viewp.get('changeWidthRatio') * 50),
       width: prev.width,
       height: 100,
     }
@@ -67,7 +69,8 @@ export const usMapPosition = createSelector(
   (prev, viewp) => {
     const top = viewp.get('changeHeightRatio') > 1.2 ? (prev.top + prev.height - 60) : (prev.top + prev.height + 10 ) 
     const result = {
-      top,
+      // Move down by 35px to give barchart space for negative values and outliers
+      top: top + 35,
       left: prev.left - viewp.get('changeWidthRatio')*30,
       width: prev.width,
       height: viewp.get('changeHeightRatio')*220,

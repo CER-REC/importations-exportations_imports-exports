@@ -4,7 +4,6 @@
   .totalType { font-weight: bold; }
 
   .detailText {
-    padding-left: 12px;
     background: #fff;
     width: calc(100% - 40px);
     display: inline-block;
@@ -19,7 +18,7 @@
 
   &.imports {
     padding-top: 2px;
-    &, .percentage { 
+    &, .percentage, .percentage-bar > span {
           height: 12px; 
           line-height: 1; 
           background: $import-default; 
@@ -27,12 +26,28 @@
     .totalType { color: $import-default; }
   }
   &.exports {
-    padding-bottom: 14px;
-    &, .percentage { 
+    padding-bottom: 15px;
+    &, .percentage, .percentage-bar > span { 
           height: 12px; 
           line-height: 1;
           background: $export-default; 
         }
     .totalType { color: $export-default; }
   }
+
+  .detailBreakDownContainer {
+    width: 40px;
+    display: inline-block;
+    height: 13px;
+    overflow: visible;
+    vertical-align: top;
+    background: #fff;
+
+    .percentage-bar {
+      width: 40px;
+      right: auto;
+      margin-top: auto;
+    }
+  }
+	&.exports .detailBreakDownContainer .percentage-bar { margin-top: 1px; }
 }

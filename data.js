@@ -108,19 +108,84 @@ const parsingIssue = {};
       destinationKey: destinationRegion.get('originKey') || '',
     }
   }))
-  // Cluster the points into visualizations and units
+  // Cluster the points into visualizations, units, and period
   .then(points => points.reduce((acc, point) => {
     if (!acc[point.product]) { acc[point.product] = {} }
+    // Use an object reference to simplify the next creation
+    const outProd = acc[point.product]
+    if (!outProd[point.units]) { outProd[point.units] = {} }
+    const outUnit = outProd[point.units]
+    if (!outUnit[point.period]) { outUnit[point.period] = [] }
+
+    // Fix destinations for crude oil when not destined for a PADD
     if (point.product === 'crudeOil' && point.destination === '') {
       point.destination = 'ca'
     }
-    // Use an object reference to simplify the next creation
-    const outProd = acc[point.product]
-    if (!outProd[point.units]) { outProd[point.units] = [] }
-    outProd[point.units].push(point)
-    //add destination as well 
+
+    outUnit[point.period].push(point)
     return acc
   }, {}))
+  // Add the matching quantity for the $/measurement units
+  .then((visualizations) => {
+    const addValidationIssue = (label, issue) => {
+      if (!parsingIssue[label]) { parsingIssue[label] = [] }
+      parsingIssue[label].push(issue)
+    }
+
+    const addQuantity = (viz, priceUnit, amountUnit, matchFuncFactory) => {
+      const priceData = visualizations[viz][priceUnit]
+      const amountData = visualizations[viz][amountUnit]
+
+      Object.values(priceData).forEach((period) => {
+        period.forEach((point) => {
+          const matchFunc = matchFuncFactory(point)
+          const matchingAmountPoints = amountData[point.period].filter(matchFunc)
+          if (matchingAmountPoints.length !== 1) {
+            const validationLabel = `Can't calculate averages for ${viz} - ${priceUnit} and ${amountUnit}:`
+            addValidationIssue(validationLabel, {
+              origin: point.origin,
+              destination: point.destination,
+              port: point.port,
+              activity: point.activity,
+              period: point.period,
+              matchingAmountPoints: matchingAmountPoints.length,
+            })
+            // 0 will be used to indicate these are missing values
+            // https://trello.com/c/rLeWzKXJ/75-price-views-should-show-averages-not-totals#comment-5aa997af6f16e46bb2c971a6
+            point.quantityForAverage = 0
+            point.revenueForAverage = 0
+          } else {
+            point.quantityForAverage = matchingAmountPoints[0].value
+            point.revenueForAverage = point.value * point.quantityForAverage
+          }
+        })
+      })
+    }
+
+    addQuantity(
+      'electricity',
+      'CAN$/MW.h',
+      'MW.h',
+      point => match => (match.origin === point.origin && match.destination === point.destination),
+    )
+    addQuantity(
+      'naturalGas',
+      'CN$/GJ',
+      'thousand m3/d',
+      point => match => (match.port === point.port && match.originalActivity === point.originalActivity),
+    )
+
+    return visualizations
+  })
+  // Remove the periods from the visualizations, now that we're done preparing for averages
+  .then((visualizations) => {
+    Object.keys(visualizations).forEach((vizName) => {
+      Object.keys(visualizations[vizName]).forEach((unit) => {
+        visualizations[vizName][unit] = [].concat(...Object.values(visualizations[vizName][unit]))
+      })
+    })
+    return visualizations
+  })
   // Calculate bins
   .then((output) => {
     // Loop over the visualizations
@@ -133,8 +198,24 @@ const parsingIssue = {};
         Object.keys(output[visName]).forEach((unit) => {
           // Take the values from the object for this unit
           const unitPoints = Object.values(output[visName][unit])
+          const averageData = {}
           const regionValues = unitPoints
             .reduce((acc, next) => {
+              if (next.quantityForAverage) {
+                if (!averageData[next.destination]) {
+                  averageData[next.destination] = { quantity: 0, revenue: 0 }
+                }
+                const averageDest = averageData[next.destination]
+                averageDest.quantity += next.quantityForAverage
+                averageDest.revenue += next.revenueForAverage
+
+                return {
+                  ...acc,
+                  [next.destination]: (averageDest.quantity === 0)
+                    ? 0
+                    : Math.round(averageDest.revenue / averageDest.quantity),
+                }
+              }
               if (visName === 'crudeOil' || visName === 'naturalGasLiquids') {
                 return {
                   ...acc,
@@ -163,13 +244,22 @@ const parsingIssue = {};
               const maxMidpoint = ((nextMin - max) / 2) + max
               return acc.concat(maxMidpoint)
             }, [])
-            .map((max, i, arr) => ([
-              (i === 0) ? 0 : humanNumber(arr[i - 1]),
-              humanNumber(max),
-            ]))
+            .map((max, i, arr) => (
+              (unit === 'CAN$/MW.h' || unit === 'CN$/GJ')
+                ? [(i === 0) ? 0 : arr[i - 1], max]
+                : [(i === 0) ? 0 : humanNumber(arr[i - 1]), humanNumber(max)]
+            ))
         })
+
         return accBins
       }, {})
+
+    // Units with weighted averages should be uncapped on both ends
+    valueBins.electricity['CAN$/MW.h'][0][0] = Number.MIN_SAFE_INTEGER
+    valueBins.electricity['CAN$/MW.h'][4][1] = Number.MAX_SAFE_INTEGER
+    valueBins.naturalGas['CN$/GJ'][0][0] = Number.MIN_SAFE_INTEGER
+    valueBins.naturalGas['CN$/GJ'][4][1] = Number.MAX_SAFE_INTEGER
+
     return { data: output, bins: valueBins }
   })
   // Output validation and write the file

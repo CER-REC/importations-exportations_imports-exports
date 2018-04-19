@@ -13,11 +13,24 @@ const DetailTotal = props => (
     <div className="detailText">
       <span className="totalType">
         {TR.getIn(['importExportMenu', props.type, props.language])}
-      </span> {TR.getIn(['detailTotal', 'total', props.language])}&nbsp;
+      </span> {TR.getIn(['detailTotal', (props.average ? 'average' : 'total'), props.language])}&nbsp;
       {humanNumber(props.value, props.language)}&nbsp;
       {TR.getIn(['amounts', props.amountUnit, props.language])}&nbsp;
     </div>
-    <div className="percentage">{props.value === 0 ? '0%' : '100%'}</div>
+    {props.percentage === '100%' || props.percentage === '0%'
+      ? <div className="percentage">{props.percentage}</div>
+      : (
+        <div className="detailBreakDownContainer">
+          <div className="percentage-bar">
+            <span
+              style={{
+                width: props.percentage,
+              }}
+            />
+          </div>
+        </div>
+      )
+    }
   </div>
 )
 
@@ -26,10 +39,12 @@ DetailTotal.propTypes = {
   amountUnit: PropTypes.string.isRequired,
   language: PropTypes.string.isRequired,
   value: PropTypes.number.isRequired,
+  average: PropTypes.bool.isRequired,
+  percentage: PropTypes.string.isRequired,
 }
 
 export default connect((state, props) => ({
   amountUnit: visualizationSettings(state, props).get('amount'),
   language: state.language,
-  value: detailTotal(state, props),
+  ...detailTotal(state, props),
 }))(DetailTotal)
