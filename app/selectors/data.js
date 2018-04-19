@@ -172,7 +172,7 @@ export const filterByHex = (point, selectedMapPieces, visualization, selectionSt
   || selectedMapPieces.includes(point.get('port'))
 }
 
-const filterByTimelineSelector = createSelector(
+export const filterByTimelineSelector = createSelector(
   activityGroupSelector,
   timelineFilterRange,
   groupingBy,

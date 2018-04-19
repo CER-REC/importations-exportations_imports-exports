@@ -2,7 +2,14 @@ import { createSelector } from 'reselect'
 import { fromJS } from 'immutable'
 
 import { aggregateQuarterFilteredValue } from './timeline'
-import { filterByTimelineAndHexData, getAggregateKey, getValueKey, activityGroupSelector, aggregateFilterLocationSelector, selectedPieces, selection as getSelection, filterByHex } from './data'
+import {
+  filterByTimelineSelector,
+  filterByTimelineAndHexData,
+  getAggregateKey,
+  getValueKey,
+  aggregateFilterLocationSelector,
+  selection as getSelection,
+} from './data'
 import { selectedVisualization } from './visualizationSettings'
 import { PaddSelector } from './Padd'
 import { getNaturalGasLiquidMapLayout } from './NaturalGasSelector'
@@ -107,11 +114,35 @@ export const naturalGasLiquidsDetailBreakdownValues = createSelector(
   },
 )
 
+export const refinedPetroleumProductsDetailBreakdownValues = createSelector(
+  filterByTimelineSelector,
+  (points) => {
+    const values = points
+      .reduce((acc, next) => {
+        const type = next.get('productSubtype')
+        if (!acc[type]) { acc[type] = { value: 0, divisor: 0 } }
+        acc[type] = {
+          value: acc[type].value + next.get('value', 0),
+          divisor: acc[type].divisor + 1,
+        }
+        return acc
+      }, {})
+    const averageValues = Object.entries(values)
+      .reduce((acc, [key, { value, divisor }]) => ({
+        ...acc,
+        [key]: (divisor === 0 ? 0 : value / divisor),
+      }), {})
+
+    return fromJS(averageValues).sort((a, b) => (b - a))
+  },
+)
+
 export const detailBreakdownValues = (state, props) => {
   switch (selectedVisualization(state, props)) {
     case 'electricity': return electricityDetailBreakdownValues(state, props)
     case 'crudeOil': return crudeOilDetailBreakdownValues(state, props)
     case 'naturalGasLiquids': return naturalGasLiquidsDetailBreakdownValues(state, props)
+    case 'refinedPetroleumProducts': return refinedPetroleumProductsDetailBreakdownValues(state, props)
     default: return fromJS({})
   }
 }

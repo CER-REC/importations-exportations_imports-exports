@@ -6,10 +6,12 @@ import StackedChart from './StackedChart'
 import Axis from './Axis'
 import DetailSidebar from './DetailSidebar'
 import ConfidentialCount from './ConfidentialCount'
+import DetailBreakdown from './DetailBreakdown'
 import DetailBreakdownRow from './DetailBreakdownRow'
 import DetailTotal from './DetailTotal'
 import * as RefinedPetroleumProductsViewport from '../selectors/viewport/refinedPetroleumProducts'
 import { arrangeBy, amount, filterByTimelineAndHexData } from '../selectors/data'
+import { refinedPetroleumProductsDetailBreakdownValues } from '../selectors/details'
 import { timelineData } from '../selectors/timeline'
 import Constants from '../Constants'
 import Tr from '../TranslationTable'
@@ -25,25 +27,9 @@ const subtypes = [
 
 class RefinedPetroleumProductsVisualizationContainer extends React.Component {
   calculateBreakdown() {
-    const values = this.props.filteredData
-      .reduce((acc, next) => {
-        const type = next.get('productSubtype')
-        if(!subtypes.includes(type)) { return acc }
-        if (!acc[type]) { acc[type] = { value: 0, divisor: 0 } }
-        acc[type] = {
-          value: acc[type].value + next.get('value', 0),
-          divisor: acc[type].divisor + 1,
-        }
-        return acc
-      }, {})
-    const averageValues = Object.entries(values)
-      .reduce((acc, [key, { value, divisor }]) => ({
-        ...acc,
-        [key]: (divisor === 0 ? 0 : value / divisor),
-      }), {})
     return {
-      values: averageValues,
-      total: Math.max(...Object.values(averageValues)),
+      values: this.props.detailBreakdownValues.toJS(),
+      total: this.props.detailBreakdownValues.max(),
     }
   }
 
@@ -69,6 +55,10 @@ class RefinedPetroleumProductsVisualizationContainer extends React.Component {
         <DetailSidebar
           {...positions.chart}
         >
+          <DetailBreakdown
+            aggregateKey="productSubtype"
+            showDefault
+          />
           <table width="100%" className="detailBreakDownContainer" style={{ padding: '8px 0' }}>
             <tbody>
               {Object.entries(breakdown.values).sort((x, y) => y[1] - x[1]).map((key, i) => {
@@ -186,4 +176,5 @@ export default connect((state, props) => ({
   unit: amount(state, props),
   data: timelineData(state, { ...props, aggregateKey: 'productSubtype' }),
   filteredData: filterByTimelineAndHexData(state, props),
+  detailBreakdownValues: refinedPetroleumProductsDetailBreakdownValues(state, props),
 }))(RefinedPetroleumProductsVisualizationContainer)
