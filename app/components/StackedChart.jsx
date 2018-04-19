@@ -118,7 +118,10 @@ class StackedChart extends Chart {
         .get('values')
         .sortBy((v, k) => k, (a, b) => (valueOrder.indexOf(a) - valueOrder.indexOf(b)))
         .map((value, type) => {
-          const lineColor = categoryColours.getIn([selectedEnergy, type], Constants.getIn(['styleGuide', 'colours', 'ExportDefault']))
+          const colorPath = this.props.aggregateKey
+            ? [selectedEnergy, this.props.aggregateKey, type]
+            : [selectedEnergy, type]
+          const lineColor = categoryColours.getIn(colorPath, Constants.getIn(['styleGuide', 'colours', 'ExportDefault']))
           const line = (
             <AnimatedLine
               x1={point.get('offsetX')}
@@ -145,7 +148,7 @@ class StackedChart extends Chart {
         {this.refinedPetroleumProductsBar()}
         {this.confidentialityExplanation()}
         <AxisGuide
-          flipped
+          flipped={this.props.flipped}
           scale={scale.get('y').toJS()}
           position={this.state.axisGuide}
           chartHeight={height}

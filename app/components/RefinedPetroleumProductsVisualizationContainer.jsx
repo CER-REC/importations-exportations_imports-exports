@@ -72,7 +72,7 @@ class RefinedPetroleumProductsVisualizationContainer extends React.Component {
           <table width="100%" className="detailBreakDownContainer" style={{ padding: '8px 0' }}>
             <tbody>
               {Object.entries(breakdown.values).sort((x, y) => y[1] - x[1]).map((key, i) => {
-                const colour = categoryColours.getIn([selectedEnergy, key[0]], Constants.getIn(['styleGuide', 'colours', 'ExportDefault']))
+                const colour = categoryColours.getIn([selectedEnergy, 'productSubtype', key[0]], Constants.getIn(['styleGuide', 'colours', 'ExportDefault']))
                 return (
                   <DetailBreakdownRow
                     key={key}
@@ -110,7 +110,7 @@ class RefinedPetroleumProductsVisualizationContainer extends React.Component {
     const categoryColours = Constants.getIn(['styleGuide', 'categoryColours'])
     const breakdown = this.calculateBreakdown()
     const charts = subtypes.map((key, i) => {
-      const colour = categoryColours.getIn([selectedEnergy, key], Constants.getIn(['styleGuide', 'colours', 'ExportDefault']))
+      const colour = categoryColours.getIn([selectedEnergy, 'productSubtype', key], Constants.getIn(['styleGuide', 'colours', 'ExportDefault']))
       return (
         <g key={key}>
           <Axis

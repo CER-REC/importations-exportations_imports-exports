@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
 import ProportionChart from './ProportionChart'
+import StackedChart from './StackedChart'
 import BarChart from './BarChart'
 import Axis from './Axis'
 import * as CrudeOilViewport from '../selectors/viewport/crudeOil'
@@ -18,25 +19,15 @@ const CrudeOilVisualizationContainer = props => (
     <CAPadd
       {...props.canadaPaddChart}
     />
-    <ProportionChart
+    <StackedChart
       {...props.transportChart}
       aggregateKey="transport"
       scaleKey="total"
-      color={{
-        Pipeline: 'red',
-        Marine: 'green',
-        Railroad: 'blue',
-        Truck: 'yellow',
-      }}
     />
-    <ProportionChart
+    <StackedChart
       {...props.subtypeChart}
       aggregateKey="productSubtype"
       scaleKey="total"
-      color={{
-        Heavy: 'red',
-        Light: 'green',
-      }}
     />
     <Axis
       {...props.axisPosition}
