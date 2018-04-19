@@ -528,8 +528,8 @@ const TranslationTable = fromJS({
       fr: 'La flèche orientée vers le haut montre la quantité totale d’électricité importée de l’État de Washington par les régions canadiennes pendant la période sélectionnée dans le diagramme à barres ci-dessus.',
     },
     powerpool: {
-      en: 'A power pool is a grouping of states that imports and exports electricity as a unit. Individual states may also have additional imports and exports.',
-      fr: 'Un réseau commun est un regroupement d’états américains qui importe et exporte de l’électricité conjointement. Chacun des états du regroupement peut également importer et exporter de l’électricité individuellement.',
+      en: 'A power pool is a grouping of states that imports and exports electricity as a unit. Individual states may also have additional imports and exports. MN/ND: Minnesota/North Dakota NE-ISO: New England Independent System Operator PJM: Pennsylvania, Jersey, Maryland (PJM has since expanded to include all or parts of Delaware, Illinois, Indiana, Kentucky, Maryland, Michigan, New Jersey, North Carolina, Ohio, Pennsylvania, Tennessee, Virginia, West Virginia and the District of Columbia)',
+      fr: 'Un réseau commun est un regroupement d’états américains qui importe et exporte de l’électricité conjointement. Chacun des états du regroupement peut également importer et exporter de l’électricité individuellement. MN/ND : Minnesota/Dakota du Nord NE-ISO : New England Independent System Operator PJM : Pennsylvanie, New Jersey et Maryland (comprend désormais certaines parties du Delaware, de l’Illinois, de l’Indiana, du Kentucky, du Maryland, du Michigan, du New Jersey, de la Caroline du Nord, de l’Ohio, de la Pennsylvanie, du Tennessee, de la Virginie, de la Virginie-Occidentale et du District of Columbia)',
     },
     barChartImport: {
       en: 'Each orange bar shows the total electricity that Canadian regions imported during a single quarter.',
@@ -660,8 +660,8 @@ const TranslationTable = fromJS({
       fr: 'La quantité de produits pétroliers raffinés est indiquée en milliers de m³/j (milliers de mètres cubes par jour), ce qui correspond à 6 290 barils par jour.',
     },
     confidentialValuesRefinedPetroleumProducts: {
-      en: 'With only 13 refineries in Canada the data for RPPs is often deemed confidential as individual companies may become identifiable which could have a negative financial impact. Learn more in our methodology.',
-      fr: 'Parce que le Canada ne compte que 13 raffineries, les données relatives aux produits pétroliers raffinés sont souvent confidentielles afin qu’il ne soit pas possible d’identifier une société en particulier, ce qui pourrait avoir une incidence financière négative sur elle.  La méthode contient de plus amples renseignements.',
+      en: 'With relatively few refineries in Canada the data for RPPs is often deemed confidential as individual companies may become identifiable which could have a negative financial impact. Learn more in our methodology.',
+      fr: 'Le Canada comptant assez peu de raffineries, les données relatives aux produits pétroliers raffinés sont souvent confidentielles afin qu’il ne soit pas possible d’identifier une société en particulier, ce qui pourrait avoir une incidence financière négative sur elle. La méthode contient de plus amples renseignements.',
     },
     barsRefinedPetroleumProducts: {
       en: 'Bars are pointed downwards because they represent exports from Canada.',
