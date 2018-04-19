@@ -84,7 +84,7 @@ const aggregateQuarterPoints = (points, valueKeys, aggregateKey, vizName) => {
 
   if (result.count() === 0 || result.first().has('sumForAvg') === false) { return result }
 
-  const test = result.map((period) => {
+  return result.map((period) => {
     let totalValue = 0
     let totalDivisor = 0
     return period
@@ -94,12 +94,10 @@ const aggregateQuarterPoints = (points, valueKeys, aggregateKey, vizName) => {
         if (value.get('divisor', 0) === 0) { return 0 }
         return value.get('value', 0) / value.get('divisor', 0)
       }))
-      .set('total', (totalDivisor === 0) ? 0 : (totalValue / totalDivisor))
+      // TODO: This used to be an average named `total`, and I don't know why
+      // .set('total', (totalDivisor === 0) ? 0 : (totalValue / totalDivisor))
+      .set('total', totalValue)
   })
-  return test
-  // if sfA exists and map over to calculate weighted average
-  // replace each quarters value with that value
-  // replace acc[period].total with the combined values
 }
 export const aggregateQuarterFilteredValue = createSelector(
   filterByTimelineAndHexData,

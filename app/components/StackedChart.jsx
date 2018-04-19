@@ -104,7 +104,13 @@ class StackedChart extends Chart {
       .map(([key]) => key)
 
     const heightPerUnit = height / (scale.getIn(['y', 'max']) - scale.getIn(['y', 'min']))
-    const elements = data.map((point) => {
+    const averagedPoints = (data.first().has('sumForAvg') === false)
+      ? data
+      : data.map(point => point.set('values', point.get('sumForAvg').map((v) => {
+        if (v.get('divisor', 0) === 0) { return 0 }
+        return v.get('value') / v.get('divisor')
+      })))
+    const elements = averagedPoints.map((point) => {
       const opacity = this.isTimelinePointFiltered(point) ? 0.5 : 1
       let offsetY = 0
       let stackIndex = 0

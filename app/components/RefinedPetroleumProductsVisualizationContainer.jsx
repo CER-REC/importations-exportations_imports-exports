@@ -24,14 +24,27 @@ const subtypes = [
 ]
 
 class RefinedPetroleumProductsVisualizationContainer extends React.Component {
-   calculateBreakdown() {
-    return this.props.filteredData.reduce((acc, next) => {
-      const type = next.get('productSubtype')
-      if(!subtypes.includes(type)){return acc}
-      acc.total += next.get('value',0)
-      acc.values[type] = (acc.values[type] || 0) + next.get('value', 0)
-      return acc
-    }, { total: 0, values: {} })
+  calculateBreakdown() {
+    const values = this.props.filteredData
+      .reduce((acc, next) => {
+        const type = next.get('productSubtype')
+        if(!subtypes.includes(type)) { return acc }
+        if (!acc[type]) { acc[type] = { value: 0, divisor: 0 } }
+        acc[type] = {
+          value: acc[type].value + next.get('value', 0),
+          divisor: acc[type].divisor + 1,
+        }
+        return acc
+      }, {})
+    const averageValues = Object.entries(values)
+      .reduce((acc, [key, { value, divisor }]) => ({
+        ...acc,
+        [key]: (divisor === 0 ? 0 : value / divisor),
+      }), {})
+    return {
+      values: averageValues,
+      total: Math.max(...Object.values(averageValues)),
+    }
   }
 
   renderStackedChart() {

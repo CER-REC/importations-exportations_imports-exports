@@ -108,6 +108,14 @@ const parsingIssue = {};
       destinationKey: destinationRegion.get('originKey') || '',
     }
   }))
+  // Add forAverageValue and forAverageDivisor to rate units
+  .then(points => points.map((point) => {
+    if (point.units === 'thousand m3/d' || point.units === 'm3/d') {
+      point.forAverageValue = point.value
+      point.forAverageDivisor = 1
+    }
+    return point
+  }))
   // Cluster the points into visualizations, units, and period
   .then(points => points.reduce((acc, point) => {
     if (!acc[point.product]) { acc[point.product] = {} }
@@ -202,16 +210,17 @@ const parsingIssue = {};
           const regionValues = unitPoints
             .reduce((acc, next) => {
               if (next.forAverageDivisor) {
-                if (!averageData[next.destination]) {
-                  averageData[next.destination] = { value: 0, divisor: 0 }
+                const destination = next.destination || next.origin || next.port
+                if (!averageData[destination]) {
+                  averageData[destination] = { value: 0, divisor: 0 }
                 }
-                const averageDest = averageData[next.destination]
+                const averageDest = averageData[destination]
                 averageDest.value += next.forAverageValue
                 averageDest.divisor += next.forAverageDivisor
 
                 return {
                   ...acc,
-                  [next.destination]: (averageDest.quantity === 0)
+                  [destination]: (averageDest.quantity === 0)
                     ? 0
                     : Math.round(averageDest.value / averageDest.divisor),
                 }
@@ -231,7 +240,7 @@ const parsingIssue = {};
             }, {})
           const jenksValues = Object.keys(regionValues).map(k => regionValues[k])
           if (jenksValues.length < 5) {
-            console.log(visName, jenksValues, unitPoints)
+            console.log(visName, jenksValues, regionValues)
           }
           accBins[visName][unit] = ss.ckmeans(jenksValues, 5)
             .map(v => ([
