@@ -61,12 +61,33 @@ export const crudeOilDetailBreakdownValues = createSelector(
 
 export const naturalGasLiquidsDetailBreakdownValues = createSelector(
   getSelection,
-  (_, props) => props.type,
+  filterByTimelineAndHexData,
+  (selection, filteredDataPoints) => {
+    const data = {}
+    filteredDataPoints.forEach((point) => {
+      const activity = point.get('activity')
+      const subtype = point.get('productSubtype')
+      if (!data[activity]) { data[activity] = {} }
+      if (!data[activity][subtype]) { data[activity][subtype] = { value: 0, divisor: 0 } }
+      data[activity][subtype].value += point.get('forAverageValue', 0)
+      data[activity][subtype].divisor += point.get('forAverageDivisor', 0)
+    })
+    return fromJS(data).map(activity => activity.map((v) => {
+      if (v.get('divisor', 0) === 0) { return 0 }
+      return v.get('value') / v.get('divisor')
+    }))
+  },
+)
+/*
+export const naturalGasLiquidsDetailBreakdownValues = createSelector(
+  getSelection,
   (_, props) => props.subtype,
   (_, props) => props.country,
   PaddSelector,
   getNaturalGasLiquidMapLayout,
-  (selection, activity, subtype, country, padd, layout) => {
+  (_, props) => props,
+  (selection, subtype, country, padd, layout, props) => {
+*/
     /*
      * NGL - Canada
      *   layout
@@ -77,42 +98,38 @@ export const naturalGasLiquidsDetailBreakdownValues = createSelector(
      *   selection.origins
      *   subtype
      */
+/*
     const detailBreakdownData = Constants.getIn(['detailBreakDown', country])
-    const data = {}
+    const data = { imports: {}, exports: {} }
+    const origins = selection.get('origins')
 
-    if (activity === 'imports') {
-      const origins = selection.get('origins')
-      layout.forEach((nextValue) => {
-        if (origins.count() > 0 && !origins.includes(nextValue.get('name'))) { return }
-        nextValue.get('subType').forEach((subTypeVal, subTypeKey) => {
-          if (subtype !== '' && subtype !== 'propaneButane') {
-            if (subTypeKey !== 'propaneButane' && subTypeKey === subtype) {
-              data[subTypeKey] = (data[subTypeKey] || 0) + subTypeVal.get(detailBreakdownData.get('type'), 0)
-            }
-          } else if (subTypeKey !== 'propaneButane') {
-            data[subTypeKey] = (data[subTypeKey] || 0) + subTypeVal.get(detailBreakdownData.get('type'), 0)
-          }
+    layout.forEach((nextValue) => {
+      if (origins.count() > 0 && !origins.includes(nextValue.get('name'))) { return }
+      nextValue.get('subType').forEach((subTypeVal, subTypeKey) => {
+        if (subtype && subtype !== subTypeKey) { return }
+        subTypeVal.forEach((val, activity) => {
+          data[activity][subTypeKey] = (data[activity][subTypeKey] || 0) + val
         })
       })
-    } else {
-      const origins = selection.get('origins')
+    })
+
+    if (detailBreakdownData) {
+      // TODO: Why do we need this if-statement
       padd.filter(v => v.has('subType')).forEach((nextValue) => {
         if (origins.count() > 0 && !origins.includes(nextValue.get('destination'))) { return }
         nextValue.get('subType').forEach((subTypeVal, subTypeKey) => {
-          if (subtype !== '' && subtype !== 'propaneButane') {
-            if (subTypeKey !== 'propaneButane' && subTypeKey === subtype) {
-              data[subTypeKey] = (data[subTypeKey] || 0) + subTypeVal.get(detailBreakdownData.get('type'), 0)
-            }
-          } else if (subTypeKey !== 'propaneButane') {
-            data[subTypeKey] = (data[subTypeKey] || 0) + subTypeVal.get(detailBreakdownData.get('type'), 0)
-          }
+          if (subtype && subtype !== subTypeKey) { return }
+          subTypeVal.forEach((val, activity) => {
+            data[activity][subTypeKey] = (data[activity][subTypeKey] || 0) + val
+          })
         })
       })
     }
 
-    return fromJS(data).sort((a, b) => (b - a))
+    return fromJS(data).map(activity => activity.sort((a, b) => (b - a)))
   },
 )
+*/
 
 export const refinedPetroleumProductsDetailBreakdownValues = createSelector(
   filterByTimelineSelector,
@@ -189,12 +206,10 @@ export const detailLargestValue = createSelector(
 )
 
 export const detailTotal = createSelector(
-  filterByTimelineAndHexData,
-  getAggregateKey,
   getValueKey,
   detailBreakdownValues,
   detailTotalValue,
-  (data, aggregateKey, valueKey, breakdownValues, totalValue) => {
+  (valueKey, breakdownValues, totalValue) => {
     const largestBreakdown = (breakdownValues.get(valueKey, fromJS({})).count() > 0)
       ? breakdownValues.get(valueKey).map(Math.abs).max()
       : 0
