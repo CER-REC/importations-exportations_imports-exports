@@ -111,7 +111,7 @@ class PortMap extends React.PureComponent {
           33.47,
           18H422.2"
         xPosition={405}
-        yPosition={190}
+        yPosition={170}
         lineX={142.16}
         lineY={173}
         textX={20}
@@ -134,12 +134,13 @@ class PortMap extends React.PureComponent {
         coordinates: [port.get('Longitude'), port.get('Latitude')],
       })
       const fillColor = portSelected? Constants.getIn(['styleGuide', 'colours', 'NeutralMedium']) : Constants.getIn(['styleGuide', 'colours', 'SandMedium'])
-      return (
+      return (<g transform="translate(0 -80)">
         <path
           key={port.get('Port Name')}
           d={position}
           fill={fillColor}
         />
+        </g>
       )
     })
   }
@@ -175,7 +176,7 @@ class PortMap extends React.PureComponent {
     return (
       <svg width="100%" height="100%" viewBox={`0 0 ${viewbox.width} ${viewbox.height}`}>
       <text className="portName">{this.getPortMapLabel()}</text>
-        <g className="regions">
+        <g className="regions" transform="translate(0 -80)">
           {
             this.state.regions.map((d, i) => (
               <path

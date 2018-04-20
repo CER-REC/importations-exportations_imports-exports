@@ -1549,8 +1549,8 @@ const TranslationTable = fromJS({
       fr: 'Sélections Multiples',
     },
     default: {
-      en: 'Port Locations',
-      fr: 'Emplacements de Port',
+      en: 'Import & Export Points',
+      fr: "Points d'importation & d'exportation",
     },
     portName: {
       Aden: {
