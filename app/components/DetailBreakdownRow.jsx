@@ -9,7 +9,19 @@ import { humanNumber } from '../utilities'
 
 const DetailBreakdownRow = props => (
   <tr className="detailBreakDownText">
-    <td width={props.colorBox ? '14px' : '0px'} style={{ verticalAlign: 'baseline' }}>{props.colorBox}</td>
+    <td width={props.colorBox ? '14px' : '0px'} style={{ verticalAlign: 'baseline' }}>
+      {!props.colorBox ? null : (
+        <div
+          style={{
+            display: 'inline-block',
+            width: '8px',
+            height: '8px',
+            marginRight: '4px',
+            backgroundColor: props.color,
+          }}
+        />
+      )}
+    </td>
     <td width="100%">{/* Extra long so that it fills all available space */}
       {props.labelPrefix}
       <span className="detailBolded"> {props.label}</span>{props.labelSuffix}&nbsp;
@@ -19,7 +31,7 @@ const DetailBreakdownRow = props => (
     </td>
     <td width="40px" style={{ display: 'inline-block' }}>
       <PercentageBar
-        style={props.progressBarStyle}
+        style={{ backgroundColor: props.color, ...props.progressBarStyle }}
         width={((props.total === 0) ? 0.0 : (props.value / props.total) * 100)}
       />
     </td>
@@ -34,7 +46,8 @@ DetailBreakdownRow.propTypes = {
   total: PropTypes.number.isRequired,
   unit: PropTypes.string.isRequired,
   language: PropTypes.string.isRequired,
-  colorBox: PropTypes.node,
+  colorBox: PropTypes.bool,
+  color: PropTypes.string,
   progressBarStyle: PropTypes.object, // eslint-disable-line react/forbid-prop-types
 }
 

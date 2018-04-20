@@ -57,14 +57,14 @@ const aggregateQuarterPoints = (points, valueKeys, aggregateKey, vizName) => {
       if (!key) { return acc }
 
       if (!valueKeys.includes(key)) { valueKeys.push(key) }
-      if (next.has('quantityForAverage')) {
+      if (next.has('forAverageDivisor')) {
         if (!acc[period].sumForAvg) { acc[period].sumForAvg = {} }
         if (!acc[period].sumForAvg[key]) {
-          acc[period].sumForAvg[key] = { amount: 0, revenue: 0 }
+          acc[period].sumForAvg[key] = { value: 0, divisor: 0 }
         }
 
-        acc[period].sumForAvg[key].amount += next.get('quantityForAverage', 0)
-        acc[period].sumForAvg[key].revenue += next.get('revenueForAverage', 0)
+        acc[period].sumForAvg[key].value += next.get('forAverageValue', 0)
+        acc[period].sumForAvg[key].divisor += next.get('forAverageDivisor', 0)
       }
       // if next has quantity for average --- 
       // true - acc period has sumForAverage key object ---
@@ -79,32 +79,25 @@ const aggregateQuarterPoints = (points, valueKeys, aggregateKey, vizName) => {
       acc[period].totalPoints[key] = (acc[period].totalPoints[key] || 0) + 1
       acc[period].totalPoints.total = (acc[period].totalPoints.total || 0) + 1
 
-      // data mapping to calculate weightedAverage
-      // if (valuesKeys.has('sumForAvg')) {
-
-      // }
-
       return acc
     }, {}))
 
-    if (result.count() === 0 || result.first().has('sumForAvg') === false) { return result }
+  if (result.count() === 0 || result.first().has('sumForAvg') === false) { return result }
 
-    const test = result.map(period => {
-      let totalAmount = 0
-      let totalRevenue = 0
-      return period
-        .set('values', period.get('sumForAvg').map(value => {
-          totalAmount += value.get('amount', 0)
-          totalRevenue += value.get('revenue', 0)
-          if (value.get('amount', 0) === 0) { return 0 }
-          return value.get('revenue', 0) / value.get('amount', 0)
-        }))
-        .set('total', (totalAmount === 0) ? 0 : (totalRevenue / totalAmount))
-    })
-    return test
-    // if sfA exists and map over to calculate weighted average
-    // replace each quarters value with that value
-    // replace acc[period].total with the combined values
+  return result.map((period) => {
+    let totalValue = 0
+    let totalDivisor = 0
+    return period
+      .set('values', period.get('sumForAvg').map((value) => {
+        totalValue += value.get('value', 0)
+        totalDivisor += value.get('divisor', 0)
+        if (value.get('divisor', 0) === 0) { return 0 }
+        return value.get('value', 0) / value.get('divisor', 0)
+      }))
+      // TODO: This used to be an average named `total`, and I don't know why
+      // .set('total', (totalDivisor === 0) ? 0 : (totalValue / totalDivisor))
+      .set('total', totalValue)
+  })
 }
 export const aggregateQuarterFilteredValue = createSelector(
   filterByTimelineAndHexData,

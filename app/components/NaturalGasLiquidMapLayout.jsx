@@ -125,40 +125,15 @@ class NaturalGasLiquidMapLayout extends React.Component {
      className="ATLQOutline"
      points="56.49 0.56 84.57 15.56 114.25 0.56 142.43 15.56 142.43 42.81 169.22 56.74 169.22 85.56 142.43 99.06 114.25 85.56 84.57 99.06 56.49 85.56 25.89 99.06 0.5 85.56 0.5 56.74 26.89 42.81 26.89 15.56 56.49 0.56"/>
   }
-  renderDetailBreakdown(data) {
+  renderDetailBreakdown() {
     const detailBreakdownData = Constants.getIn(['detailBreakDown', this.props.country])
-    
+
     if (!detailBreakdownData.get('required', false)) { return null }
-   
-    const subTypeTotal = this.props.layout.reduce((acc, nextValue) => {
-      if(this.props.selection.get('origins').count() > 0 && !this.props.selection.get('origins').includes(nextValue.get('name'))) { return acc}
-      const subType = nextValue.get('subType')
-      subType.forEach((subTypeVal, subTypeKey) => {
-       if(this.props.sType !== '' && this.props.sType !== 'propaneButane' ){
-          if(subTypeKey !== 'propaneButane' && subTypeKey === this.props.sType){
-            if(!acc[subTypeKey]){
-              acc[subTypeKey] = subTypeVal.get(detailBreakdownData.get('type'),0)
-            } else {
-              acc[subTypeKey] += subTypeVal.get(detailBreakdownData.get('type'),0)
-            }
-          }  
-        } else {
-          if(subTypeKey !== 'propaneButane'){
-            if(!acc[subTypeKey]){
-              acc[subTypeKey] = subTypeVal.get(detailBreakdownData.get('type'),0)
-            } else {
-              acc[subTypeKey] += subTypeVal.get(detailBreakdownData.get('type'),0)
-            }
-          }
-        }
-      })
-      return acc
-    }, {})
+
     const nameMappings = Tr.getIn(['subType'])
     return (<DetailBreakdown
-      country={this.props.country}
+      aggregatekey="subType"
       subtype={this.props.sType}
-      data={Immutable.fromJS(subTypeTotal).sort((a, b) => (b - a))}
       type={detailBreakdownData.get('type')}
       trContent={Tr.getIn(['detailBreakDown', this.props.importExportVisualization, detailBreakdownData.get('type')])}
       veritcalPosition={detailBreakdownData.get('displayPosition')}
@@ -166,15 +141,14 @@ class NaturalGasLiquidMapLayout extends React.Component {
       height={detailBreakdownData.get('height')}
       showDefault={detailBreakdownData.get('showDefault', false)}
       nameMappings={nameMappings}
-      defaultContent=''
+      defaultContent=""
     />)
-    
   }
 
   renderDetailSidebar() {
     if(this.props.selection.get('country') === 'us' && this.props.importExportVisualization === 'naturalGasLiquids'){ return null}
     return (<DetailSidebar top={this.props.top} height={Constants.getIn(['detailBreakDown', this.props.country, 'height'], 0)}>
-      {this.renderDetailBreakdown(this.props.detailBreakDownData)}
+      {this.renderDetailBreakdown()}
     </DetailSidebar>)
   }
 
@@ -197,7 +171,7 @@ const mapStateToProps = (state, props) => ({
   importExportVisualization: state.importExportVisualization,
   layout: getNaturalGasLiquidMapLayout(state, props),
   selection: getSelectionSettings(state, props),
-  sType: subType(state,props),
+  sType: subType(state, props),
   arrangeBy: arrangeBy(state, props),
   bins: binSelector(state, props),
   Tr: TrSelector(state, props),

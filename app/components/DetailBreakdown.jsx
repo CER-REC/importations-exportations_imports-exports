@@ -18,19 +18,23 @@ class DetailBreakdown extends React.Component {
     if (typeof props.data !== 'undefined' && props.data.count() > 0) {
       return (
         <div className={`detailBreakDown ${this.props.type}`}>
-          <DetailBreakdownHeader
-            trContent= {props.trContent.get('header')}
-            color={props.color}
-            type={props.type}
-          />
-          <table className ='detailBreakDownContainer'  style={{ height: props.height }}>
+          {!this.props.showHeader ? null : (
+            <DetailBreakdownHeader
+              trContent={props.trContent.get('header')}
+              color={props.color}
+              type={props.type}
+            />
+          )}
+          <table className="detailBreakDownContainer" style={{ height: props.height }}>
             <tbody>
-              <DetailBreakdownBody 
-                trContent= {props.trContent.get('body')}
-                color= {props.color}
-                data= {props.data}
-                nameMappings= {props.nameMappings}
+              <DetailBreakdownBody
+                trContent={props.trContent.get('body')}
+                color={props.color}
+                colors={props.colors}
+                data={props.data}
+                nameMappings={props.nameMappings}
                 total={props.total}
+                colorBox={props.colorBox}
               />
             </tbody>
           </table>
@@ -46,6 +50,8 @@ DetailBreakdown.defaultProps = {
   nameMappings: new Immutable.Map(),
   defaultContent: '',
   total: false,
+  showHeader: true,
+  colorBox: false,
 }
 
 DetailBreakdown.propTypes = {
@@ -60,6 +66,10 @@ DetailBreakdown.propTypes = {
     PropTypes.bool,
     PropTypes.number,
   ]),
+  showHeader: PropTypes.bool,
+  colorBox: PropTypes.bool,
+  color: PropTypes.string,
+  colors: PropTypes.instanceOf(Immutable.Map),
 }
 
 export default connect((state, props) => ({
