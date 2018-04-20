@@ -44,18 +44,30 @@ export const electricityDetailBreakdownValues = createSelector(
 // This is only used in the US PADD map for Crude Oil. The subtype/transport
 // skip the main DetailBreakdown
 export const crudeOilDetailBreakdownValues = createSelector(
-  getSelection,
-  aggregateFilterLocationSelector,
-  PaddSelector,
-  (selection, filteredDataPoints, padd) => {
-    const data = padd.filter((_, key) => key !== 'ca').map((value, paddId) => {
-      if (selection.get('origins').count() > 0 && !selection.get('origins').includes('ca')) {
-        return selection.get('origins').includes(paddId) ? value.get('value') : 0
-      }
-      return value.get('value')
-    })
+  filterByTimelineAndHexData,
+  getAggregateKey,
+  (filteredDataPoints, aggregateKey) => {
+    const data = {}
+    filteredDataPoints
+      .filter(p => p.get(aggregateKey, '') !== '')
+      .forEach((point) => {
+        // If it is for activity, switch to destination for the details
+        const key = point.get(aggregateKey)
+        if (!data[key]) { data[key] = { value: 0, divisor: 0 } }
+        data[key].value += point.get('forAverageValue')
+        data[key].divisor += point.get('forAverageDivisor')
+      })
 
-    return fromJS(data).sort((a, b) => (b - a))
+    const averageValues = fromJS(data)
+      .map((v) => {
+        if (v.get('divisor', 0) === 0) { return 0 }
+        return v.get('value') / v.get('divisor')
+      })
+
+
+    return fromJS({
+      exports: averageValues.sort((a, b) => (b - a)),
+    })
   },
 )
 
@@ -150,7 +162,9 @@ export const refinedPetroleumProductsDetailBreakdownValues = createSelector(
         [key]: (divisor === 0 ? 0 : value / divisor),
       }), {})
 
-    return fromJS(averageValues).sort((a, b) => (b - a))
+    return fromJS({
+      exports: fromJS(averageValues).sort((a, b) => (b - a)),
+    })
   },
 )
 

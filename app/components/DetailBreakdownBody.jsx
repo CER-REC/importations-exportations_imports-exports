@@ -22,6 +22,8 @@ const DetailBreakdownBody = (props) => {
         value={value}
         unit={props.amountUnit}
         total={total}
+        colorBox={props.colorBox}
+        color={props.color || (props.colors && props.colors.get(key))}
       />
     )
   })
@@ -32,17 +34,20 @@ const DetailBreakdownBody = (props) => {
 DetailBreakdownBody.propTypes = {
   amountUnit: PropTypes.string.isRequired,
   language: PropTypes.string.isRequired,
-  color: PropTypes.string.isRequired,
+  color: PropTypes.string,
+  colors: PropTypes.instanceOf(Immutable.Map),
   data: PropTypes.instanceOf(Immutable.Map).isRequired,
   nameMappings: PropTypes.instanceOf(Immutable.Map).isRequired,
   total: PropTypes.oneOfType([
     PropTypes.bool,
     PropTypes.number,
   ]),
+  colorBox: PropTypes.bool,
 }
 
 DetailBreakdownBody.defaultProps = {
   total: false,
+  colorBox: false,
 }
 
 export default connect((state, props) => ({

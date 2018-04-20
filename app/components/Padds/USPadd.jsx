@@ -92,6 +92,8 @@ const renderDetailBreakdown = (props) => {
     return null
   }
   return (<DetailBreakdown
+      aggregateKey="destination"
+      valueKey="exports"
       country="us"
       subtype={props.subType}
       data={Immutable.fromJS(total).sort((a, b) => (b - a))}

@@ -1,5 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { fromJS } from 'immutable'
 
 import BarChart from './BarChart'
 import StackedChart from './StackedChart'
@@ -29,7 +30,7 @@ class RefinedPetroleumProductsVisualizationContainer extends React.Component {
   calculateBreakdown() {
     return {
       values: this.props.detailBreakdownValues.toJS(),
-      total: this.props.detailBreakdownValues.max(),
+      total: this.props.detailBreakdownValues.get('exports').max(),
     }
   }
 
@@ -57,34 +58,15 @@ class RefinedPetroleumProductsVisualizationContainer extends React.Component {
         >
           <DetailBreakdown
             aggregateKey="productSubtype"
+            type="exports"
+            valueKey="total"
             showDefault
+            showHeader={false}
+            colors={categoryColours.getIn([selectedEnergy, 'productSubtype'])}
+            colorBox
+            trContent={fromJS({ body: {} }) /* Dummy content to make it render */}
+            nameMappings={Tr.get('label')}
           />
-          <table width="100%" className="detailBreakDownContainer" style={{ padding: '8px 0' }}>
-            <tbody>
-              {Object.entries(breakdown.values).sort((x, y) => y[1] - x[1]).map((key, i) => {
-                const colour = categoryColours.getIn([selectedEnergy, 'productSubtype', key[0]], Constants.getIn(['styleGuide', 'colours', 'ExportDefault']))
-                return (
-                  <DetailBreakdownRow
-                    key={key}
-                    colorBox={<div
-                          style={{
-                            display: 'inline-block',
-                            width: '8px',
-                            height: '8px',
-                            marginRight: '4px',
-                            backgroundColor: colour,
-                          }}
-                        />}
-                    label={<strong style={{display: 'inline-block' }}>{Tr.getIn(['label', key[0], this.props.language])}</strong>}
-                    value={key[1]}
-                    unit={this.props.unit}
-                    total={breakdown.total}
-                    progressBarStyle={{ backgroundColor: colour }}
-                  />
-                )
-              })}
-            </tbody>
-          </table>
           <ConfidentialCount
             key="confidential"
             valueKey="total"
@@ -96,7 +78,7 @@ class RefinedPetroleumProductsVisualizationContainer extends React.Component {
   }
 
   renderSeparateCharts() {
-    const { individualCharts: positions , selectedEnergy} = this.props
+    const { individualCharts: positions, selectedEnergy } = this.props
     const categoryColours = Constants.getIn(['styleGuide', 'categoryColours'])
     const breakdown = this.calculateBreakdown()
     const charts = subtypes.map((key, i) => {
@@ -127,7 +109,7 @@ class RefinedPetroleumProductsVisualizationContainer extends React.Component {
               <tbody>
                 <DetailBreakdownRow
                   label={<strong>{key}</strong>}
-                  value={breakdown.values[key]}
+                  value={breakdown.values.exports[key]}
                   unit={this.props.unit}
                   total={breakdown.total}
                   progressBarStyle={{ backgroundColor: colour }}
