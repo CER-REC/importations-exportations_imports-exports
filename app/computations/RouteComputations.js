@@ -102,7 +102,6 @@ const RouteComputations = {
     path += `?pageUrl=${RouteComputations.screenshotParameter(language)}`
     path += `&width=${Constants.get('screenshotWidth')}&height=${Constants.get('screenshotHeight')}`
     path += `&host=${document.location.host}`
-    console.log(path)
     return path
   },
 
