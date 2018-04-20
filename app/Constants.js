@@ -500,7 +500,7 @@ const Constants = fromJS({
         CNG: {
           'Port Name': 'CNG', Province: 'CAD', Latitude: 0, Longitude: 0, '': '', Description: '', Capacity: '',
         },
-        LNG: {
+        'LNG Other': {
           'Port Name': 'LNG Other', Province: 'CAD', Latitude: 0, Longitude: 0, '': '', Description: '', Capacity: '',
         },
       },

@@ -125,7 +125,7 @@ class NaturalGasMapContainer extends React.PureComponent {
 
         let styles = mapLayoutGrid.get('styles')
         let textClass = 'portLabel'
-        if(port.get('portName') === 'CNG' || port.get('portName') === 'LNG') {
+        if(port.get('portName') === 'CNG' || port.get('portName') === 'LNG Other') {
           styles = mapLayoutGrid.get('stylesVariant')
           textClass = 'portLabelWhite'
         } 

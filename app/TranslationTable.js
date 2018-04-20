@@ -1721,7 +1721,7 @@ const TranslationTable = fromJS({
         en: 'CNG',
         fr: 'GNC',
       },
-      LNG: {
+      'LNG Other': {
         en: 'LNG Other',
         fr: 'GNL Autre',
       },
@@ -1809,7 +1809,7 @@ const TranslationTable = fromJS({
         en: 'CNG',
         fr: 'GNC',
       },
-      'LNG': {
+      'LNG Other': {
         en: 'LNG\nOther',
         fr: 'GNL\nAutre',
       },
