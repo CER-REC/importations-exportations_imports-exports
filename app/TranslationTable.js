@@ -667,6 +667,14 @@ const TranslationTable = fromJS({
       en: 'Bars are pointed downwards because they represent exports from Canada.',
       fr: 'Les barres sont orientées vers le bas parce qu’elles représentent les exportations du Canada.',
     },
+    cng: {
+      en: 'CNG stands for compressed natural gas. The locations where CNG has crossed the border included in the “Other CNG” category are North Portal and St. Stephen.',
+      fr: 'GNC signifie « gaz naturel comprimé ». Les points d’importation du GNC compris dans la catégorie « Autres GNC » sont North Portal et St. Stephen.',
+    },
+    lng: {
+      en: 'Liquefied natural gas (LNG) is natural gas that had been cooled to -162 Celsius to reach its liquid state. In changing from a gas to a liquid, the volume shrinks by a factor of 600. This allows the volume to be transported by ship and tanker truck. Canada imports offshore LNG into one terminal, Canaport, in New Brunswick. This imported LNG is eventually warmed to resume its gaseous state and is then transported by pipeline as regular natural gas.',
+      fr: 'Le gaz naturel liquéfié (« GNL ») est un gaz naturel qui a été refroidi jusqu’à sa liquéfaction, à -162 degrés Celsius. Pendant son changement d’état de gaz à liquide, son volume diminue par un facteur de 600, ce qui permet le transport du produit par bateau et camion. Les importations de GNL du Canada arrivent au seul terminal méthanier au pays, Canaport, au Nouveau-Brunswick. Le GNL est ensuite réchauffé jusqu’à ce qu’il retrouve son état gazeux et est ensuite transporté par pipeline, comme du gaz naturel régulier.',
+    },
   },
 
   mainSubheading: {
@@ -1549,8 +1557,8 @@ const TranslationTable = fromJS({
       fr: 'Sélections Multiples',
     },
     default: {
-      en: 'Port Locations',
-      fr: 'Emplacements de Port',
+      en: 'Import & Export Points',
+      fr: "Points d'importation & d'exportation",
     },
     portName: {
       Aden: {
@@ -1709,6 +1717,14 @@ const TranslationTable = fromJS({
         en: 'Willow Creek',
         fr: 'Willow Creek',
       },
+      CNG: {
+        en: 'CNG',
+        fr: 'GNC',
+      },
+      'LNG Other': {
+        en: 'LNG Other',
+        fr: 'GNL Autre',
+      },
     },
   },
   mapTileLabels: {
@@ -1788,6 +1804,14 @@ const TranslationTable = fromJS({
       'St Stephen': {
         en: 'St\nStephen',
         fr: 'St\nStephen',
+      },
+      'CNG': {
+        en: 'CNG',
+        fr: 'GNC',
+      },
+      'LNG Other': {
+        en: 'LNG\nOther',
+        fr: 'GNL\nAutre',
       },
     },
   },
