@@ -9,7 +9,7 @@ import { humanNumber } from '../utilities'
 import DetailBreakdownHeader from './DetailBreakdownHeader'
 import DetailBreakdownBody from './DetailBreakdownBody'
 import { visualizationSettings } from '../selectors/visualizationSettings'
-import { detailBreakdownValues } from '../selectors/details'
+import { detailBreakdownValues, detailLargestValue } from '../selectors/details'
 
 class DetailBreakdown extends React.Component {
   render() {
@@ -17,7 +17,7 @@ class DetailBreakdown extends React.Component {
     //TR.getIn(['detailBreakDown', props.energyType, props.type])
     if (typeof props.data !== 'undefined' && props.data.count() > 0) {
       return (
-        <div className="detailBreakDown">
+        <div className={`detailBreakDown ${this.props.type}`}>
           <DetailBreakdownHeader
             trContent= {props.trContent.get('header')}
             color={props.color}
@@ -65,4 +65,6 @@ DetailBreakdown.propTypes = {
 export default connect((state, props) => ({
   amountUnit: visualizationSettings(state, props).get('amount'),
   language: state.language,
+  data: detailBreakdownValues(state, props).get(props.type),
+  total: detailLargestValue(state, props),
 }))(DetailBreakdown)

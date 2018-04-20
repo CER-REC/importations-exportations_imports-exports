@@ -225,7 +225,8 @@ class ElectricityMapLayout extends React.Component {
     const nameMappings = countries.reduce((acc, nextValue) => acc.concat(nextValue), new Immutable.Map())
 
     return (<DetailBreakdown
-      data={data}
+      aggregateKey="activity"
+      valueKey={detailBreakdownData.get('type')}
       type={detailBreakdownData.get('type')}
       trContent={Tr.getIn(['detailBreakDown', this.props.importExportVisualization, detailBreakdownData.get('type')])}
       veritcalPosition={detailBreakdownData.get('displayPosition')}
