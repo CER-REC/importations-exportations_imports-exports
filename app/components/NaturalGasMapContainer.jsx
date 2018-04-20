@@ -89,7 +89,6 @@ class NaturalGasMapContainer extends React.PureComponent {
     const tabIndex = Constants.getIn(['tabIndex', 'start', 'visualization', 'naturalGasMap'])
     const dimensions = mapLayoutGrid.get('dimensions')
     
-
     let layout = mapLayoutGrid.get('layout')
     const mapPieceScale = mapLayoutGrid.get('mapPieceScale')
     const rowPadding = 0
