@@ -123,20 +123,29 @@ export const selectedPieces = createSelector(
 
 const filterByTimeline = (point, range, groupBy) => {
   if (groupBy === 'year') {
-    if (range.getIn(['start', 'year']) <= point.get('year')
-      && point.get('year') <= range.getIn(['end', 'year'])) {
-      if (range.getIn(['start', 'year']) === point.get('year') || range.getIn(['end', 'year']) === point.get('year')) {
-        return range.getIn(['start', 'quarter']) <= point.get('quarter') && point.get('quarter') <= range.getIn(['end', 'quarter'])
-      }
-      return true
+    if (point.get('year') < range.getIn(['start', 'year'])) { return false }
+    if (point.get('year') > range.getIn(['end', 'year'])) { return false }
+    // Point is between start and end years
+
+    if (point.get('year') === range.getIn(['start', 'year']) &&
+        point.get('quarter') < range.getIn(['start', 'quarter'])) {
+      // Start year, but before start quarter
+      return false
     }
-  } else {
-    if (range.getIn(['start', 'quarter']) !== range.getIn(['end', 'quarter'])) { return true }
-    return (range.getIn(['start', 'year']) <= point.get('year')
-      && point.get('year') <= range.getIn(['end', 'year'])
-      && range.getIn(['start', 'quarter']) === point.get('quarter')
-    )
+    if (point.get('year') === range.getIn(['end', 'year']) &&
+        point.get('quarter') > range.getIn(['end', 'quarter'])) {
+      // End year, but after end quarter
+      return false
+    }
+    return true
   }
+
+  // Group by quarter
+  if (range.getIn(['start', 'quarter']) !== range.getIn(['end', 'quarter'])) { return true }
+  return (range.getIn(['start', 'year']) <= point.get('year')
+    && point.get('year') <= range.getIn(['end', 'year'])
+    && range.getIn(['start', 'quarter']) === point.get('quarter')
+  )
 }
 
 export const filterByHex = (point, selectedMapPieces, visualization, selectionState) => {

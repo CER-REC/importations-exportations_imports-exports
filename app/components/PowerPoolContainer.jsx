@@ -22,26 +22,26 @@ class PowerPoolContainer extends React.Component {
   }
 
   powerpoolExplanation() {
-    const scaleContainerX = this.props.viewport.get('changeWidthRatio')  > 1.2 ? 30: -10
-    const scaleContainerY = this.props.viewport.get('changeHeightRatio')  > 1.2 ? 5: 30
+    const scaleContainerX = this.props.viewport.get('changeWidthRatio')  > 1.2 ? -7: -42
+    const scaleContainerY = this.props.viewport.get('changeHeightRatio')  > 1.2 ? -40: -30
     return (<g>
       <ExplanationDot
-        scale="scale(0.3)"
-        lineStroke="1.8"
-        textBoxWidth={130}
+        scale="scale(1 -1) translate(0 -100)"
+        lineStroke="1"
+        textBoxWidth={200}
         linePath="
           M142.16,
           173.94l24.26,
           36.69a40.12,
           40.12,0,0,0,
           33.47,
-          18H535.2"
-        xPosition={78}
+          18H388.2"
+        xPosition={80}
         yPosition={-12}
         lineX={142.16}
         lineY={173.94}
-        textX={10}
-        textY={17}
+        textX={45}
+        textY={48}
         containerX={this.props.viewport.get('changeWidthRatio')*(this.props.top + scaleContainerX)}
         containerY={this.props.viewport.get('changeHeightRatio')*(this.props.left   + scaleContainerY)}
         text={`${Tr.getIn(['explanations','powerpool', this.props.language])}`}
