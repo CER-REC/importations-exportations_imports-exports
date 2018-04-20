@@ -134,9 +134,8 @@ class PortMap extends React.PureComponent {
         coordinates: [port.get('Longitude'), port.get('Latitude')],
       })
       const fillColor = portSelected? Constants.getIn(['styleGuide', 'colours', 'NeutralMedium']) : Constants.getIn(['styleGuide', 'colours', 'SandMedium'])
-      return (<g transform="translate(0 -80)">
+      return (<g transform="translate(0 -80)" key={port.get('Port Name')}>
         <path
-          key={port.get('Port Name')}
           d={position}
           fill={fillColor}
         />
