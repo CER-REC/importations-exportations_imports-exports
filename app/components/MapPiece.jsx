@@ -246,25 +246,25 @@ class MapPiece extends React.Component {
 
   cngExplanation() {
     if (this.props.data.get('portName') !== 'CNG') { return null }
-    const scaleContainerX = this.props.viewport.get('changeWidthRatio') > 1.2 ? -20 : -33
+    const scaleContainerX = this.props.viewport.get('changeWidthRatio') > 1.2 ? -40 : -53
     const scaleContainerY = this.props.viewport.get('changeHeightRatio') > 1.2 ? 255 : 270
     return (<g>
       <ExplanationDot
-        scale="scale(0.7) scale(-1 1) translate(-100 0)"
+        scale="scale(0.7) scale(-1 1) translate(-135 0)"
         lineStroke="1.3"
-        textBoxWidth={190}
+        textBoxWidth={210}
         linePath="
           M142.16,
           173.94l24.26,
           36.69a40.12,
           40.12,0,0,0,
           33.47,
-          18H504.2"
+          18H514.2"
         xPosition={-10}
         yPosition={20}
         lineX={344.16}
         lineY={173}
-        textX={-5}
+        textX={0}
         textY={38}
         containerX={this.props.viewport.get('changeWidthRatio') * (this.props.x1 + scaleContainerX)}
         containerY={this.props.viewport.get('changeHeightRatio') * (this.props.y1 + scaleContainerY)}
@@ -275,11 +275,11 @@ class MapPiece extends React.Component {
 
   lngExplanation() {
     if (this.props.data.get('portName') !== 'LNG') { return null }
-    const scaleContainerX = this.props.viewport.get('changeWidthRatio') > 1.2 ? -20 : -35
-    const scaleContainerY = this.props.viewport.get('changeHeightRatio') > 1.2 ? 250 : 268
+    const scaleContainerX = this.props.viewport.get('changeWidthRatio') > 1.2 ? -83 : -35
+    const scaleContainerY = this.props.viewport.get('changeHeightRatio') > 1.2 ? 239 : 268
     return (<g>
       <ExplanationDot
-        scale="scale(0.7) scale(-1 1) translate(-100 0)"
+        scale="scale(0.8) scale(-1.2 1) translate(-100 20)"
         lineStroke="1.3"
         textBoxWidth={190}
         linePath="
@@ -288,13 +288,13 @@ class MapPiece extends React.Component {
           36.69a40.12,
           40.12,0,0,0,
           33.47,
-          18H504.2"
+          18H384.2"
         xPosition={-10}
         yPosition={20}
         lineX={344.16}
         lineY={173}
-        textX={-5}
-        textY={41}
+        textX={58}
+        textY={62}
         containerX={this.props.viewport.get('changeWidthRatio') * (this.props.x1 + scaleContainerX)}
         containerY={this.props.viewport.get('changeHeightRatio') * (this.props.y1 + scaleContainerY)}
         name="lngExplanation"
