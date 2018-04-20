@@ -89,10 +89,6 @@ class MapPiece extends React.Component {
   drawLeftLabel(text){
     if(!text || text === '') { return null }
       return this.breakLine('mapPieceDescription', text, -5, 20)
-    if (this.props.arrangeBy === 'amount') {
-      console.log('hello')
-      return null
-    }
   }
 
   newBrunswickExplanation() {

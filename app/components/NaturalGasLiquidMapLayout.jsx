@@ -81,11 +81,17 @@ class NaturalGasLiquidMapLayout extends React.Component {
     const yaxis = this.props.top
     const isSelected = this.isSelected()
     const tabIndex = Constants.getIn(['tabIndex', 'start', 'visualization', 'caMap'])
+
     return layout.map((position) => {
       const humanName = this.props.Tr(['country', this.props.country, position.get('name')])
       if(typeof humanName === 'undefined'){
         return null
       }
+
+      let label = ''
+      if (position.get('showLabel') === true) { label = Tr.getIn(['country', this.props.country, position.get('name'), this.props.language]) }
+
+      console.log(position.get('showLabel'))
 
       return (
         <g key={`mapPieceKey_${this.props.country}_${position.get('name')}`}>
@@ -111,7 +117,7 @@ class NaturalGasLiquidMapLayout extends React.Component {
               y1={mapPieceTransformStartYaxis(position, dimensions, mapPieceScale)}
               containerX={this.props.left}
               containerY={this.props.top}
-              leftLabelText = {position.get('showLabel')?Tr.getIn(['country', this.props.country, position.get('name'), this.props.language]):''}
+              leftLabelText = {label}
             />
           </g>
         </g>
