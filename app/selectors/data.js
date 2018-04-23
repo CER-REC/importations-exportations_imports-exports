@@ -363,19 +363,17 @@ export const aggregateLocationPaddSelector = createSelector(
             return v.get('value') / v.get('divisor')
           }))))
     }
-    // TODO: This needs to update value as well
-    //console.log('Processed', paddData.toJS());
 
     return paddData
   },
 )
 
 export const aggregateLocationPaddData = createSelector(
-  // TODO: this results in the padds being filtered when they are selected too
-  filterByTimelineAndHexData,
+  filterByTimelineSelector,
   selectedVisualization,
   getAggregateKey,
-  (points, viz, aggregateKey) => {
+  selection,
+  (points, viz, aggregateKey, selected) => {
     const paddConstant = Constants.getIn(['dataloader', 'mapping', 'padd', 'us'])
       .filter(v => (
         (viz === 'crudeOil' && v !== 'Mexico') ||
@@ -390,6 +388,16 @@ export const aggregateLocationPaddData = createSelector(
 
     const paddData = points
       .filter(point => point.get('destinationCountry') !== 'ca')
+      // Filter out any points that aren't related to the selected hexes in the opposite country
+      .filter((point) => {
+        if (!selected.get('country') || selected.get('origins').count() === 0) { return true }
+        if (point.get('destinationCountry') === selected.get('country')) { return true }
+        if (point.get('destination') === selected.get('country')) { return true }
+        if (selected.get('origins').includes(point.get('origin'))) { return true }
+        if (selected.get('origins').includes(point.get('destination'))) { return true }
+        if (point.get('destination') === selected.get('country')) { return true }
+        return false
+      })
       .filter((point) => {
         if (aggregateKey) { return point.get(aggregateKey, '') !== '' }
         return point.get('productSubtype', '') === '' && point.get('transport', '') === ''
