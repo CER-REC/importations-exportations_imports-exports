@@ -21,6 +21,7 @@ const DetailBreakdownBody = (props) => {
           key={key}
           labelPrefix={bodyContent.getIn(['action', props.language])}
           label={name}
+          labelSuffix={bodyContent.getIn(['suffix', props.language])}
           value={value}
           unit={props.amountUnit}
           total={total}
