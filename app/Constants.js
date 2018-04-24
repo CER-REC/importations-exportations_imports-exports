@@ -374,13 +374,6 @@ const Constants = fromJS({
           'West Virginia': 'WV',
           Wisconsin: 'WI',
           Wyoming: 'WY',
-          'PADD I': 'PADD I',
-          'PADD II': 'PADD II',
-          'PADD III': 'PADD III',
-          'PADD IV': 'PADD IV',
-          'PADD V': 'PADD V',
-          'Non-USA': 'Non-USA',
-          Mexico: 'Mexico',
         },
         powerpool: {
           'New England-ISO': 'NE-ISO',
