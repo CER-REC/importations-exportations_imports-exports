@@ -254,10 +254,10 @@ const Constants = fromJS({
       },
       crudeOil: {
         transport: {
-          Marine: 'rgb(152, 166, 219)',
+          Marine: 'rgb(184, 184, 244)',
           Pipeline: 'rgb(47, 72, 98)',
-          Railroad: 'rgb(211, 195, 207)',
-          Truck: 'rgb(76, 71, 186)',
+          Railroad: 'rgb(191, 12, 178)',
+          Truck: 'rgb(52, 153, 244)',
         },
         productSubtype: {
           Heavy: 'rgb(34, 111, 124)',
@@ -374,6 +374,13 @@ const Constants = fromJS({
           'West Virginia': 'WV',
           Wisconsin: 'WI',
           Wyoming: 'WY',
+          'PADD I': 'PADD I',
+          'PADD II': 'PADD II',
+          'PADD III': 'PADD III',
+          'PADD IV': 'PADD IV',
+          'PADD V': 'PADD V',
+          'Non-USA': 'Non-USA',
+          Mexico: 'Mexico',
         },
         powerpool: {
           'New England-ISO': 'NE-ISO',

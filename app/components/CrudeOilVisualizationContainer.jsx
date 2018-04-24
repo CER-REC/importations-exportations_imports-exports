@@ -8,6 +8,7 @@ import BarChart from './BarChart'
 import Axis from './Axis'
 import DetailSidebar from './DetailSidebar'
 import DetailBreakdown from './DetailBreakdown'
+import DetailBreakdownHeader from './DetailBreakdownHeader'
 import * as CrudeOilViewport from '../selectors/viewport/crudeOil'
 import Constants from '../Constants'
 import { positionShape } from '../propTypeShapes'
@@ -31,6 +32,12 @@ const CrudeOilVisualizationContainer = props => (
     <DetailSidebar
       {...props.transportChart}
     >
+      <div className="crudeTriangle" />
+      <DetailBreakdownHeader
+        trContent={Tr.getIn(['detailBreakDown', 'crudeOil', 'transport', 'header'])}
+        color="black"
+        type="crudeOilTypeMode"
+      />
       <DetailBreakdown
         aggregateKey="transport"
         type="exports"
@@ -51,6 +58,12 @@ const CrudeOilVisualizationContainer = props => (
     <DetailSidebar
       {...props.subtypeChart}
     >
+      <div className="crudeTriangle" />
+      <DetailBreakdownHeader
+        trContent={Tr.getIn(['detailBreakDown', 'crudeOil', 'productSubtype', 'header'])}
+        color="black"
+        type="crudeOilTypeMode"
+      />
       <DetailBreakdown
         aggregateKey="productSubtype"
         type="exports"

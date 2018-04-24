@@ -12,21 +12,23 @@ const DetailBreakdownBody = (props) => {
   const total = props.total === false
     ? props.data.reduce((acc, curr) => acc + curr)
     : props.total
-  const result = props.data.map((value, key) => {
-    const name = props.nameMappings.getIn([key, props.language], '')
-    return (
-      <DetailBreakdownRow
-        key={key}
-        labelPrefix={bodyContent.getIn(['action', props.language])}
-        label={name}
-        value={value}
-        unit={props.amountUnit}
-        total={total}
-        colorBox={props.colorBox}
-        color={props.color || (props.colors && props.colors.get(key))}
-      />
-    )
-  })
+  const result = props.data
+    .sort((a, b) => (b - a))
+    .map((value, key) => {
+      const name = props.nameMappings.getIn([key, props.language], '')
+      return (
+        <DetailBreakdownRow
+          key={key}
+          labelPrefix={bodyContent.getIn(['action', props.language])}
+          label={name}
+          value={value}
+          unit={props.amountUnit}
+          total={total}
+          colorBox={props.colorBox}
+          color={props.color || (props.colors && props.colors.get(key))}
+        />
+      )
+    })
   return result.toArray()
 }
 

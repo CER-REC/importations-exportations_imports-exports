@@ -45,6 +45,7 @@ class NaturalGasLiquidsVisualizationContainer extends React.Component {
       )}
       <g>
         <USPadd
+          aggregateKey="productSubtype"
           {...this.props.usPaddChart}
         />
       </g>

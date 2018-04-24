@@ -86,19 +86,34 @@ export const subTypeSelector = createSelector(
   selectedVisualization,
   unitSelector,
   subType,
-  (viz, points, filterSubType) =>{
-    if(viz !==  'naturalGasLiquids' 
-      || ( viz ===  'naturalGasLiquids' 
-            && (['propaneButane','' ].includes(filterSubType)))) { return points }
-    return points.filter(point => {
-      if(point.get('product') !== 'naturalGasLiquids'){return false}
+  (viz, points, filterSubType) => {
+    if (viz !== 'naturalGasLiquids' ||
+      (viz === 'naturalGasLiquids' && ['propaneButane', ''].includes(filterSubType))
+    ) { return points }
+    return points.filter((point) => {
+      if (point.get('product') !== 'naturalGasLiquids') { return false }
       return point.get('productSubtype') === filterSubType
     })
   },
-) 
+)
+
+export const filterCrudeDataGroups = createSelector(
+  selectedVisualization,
+  subTypeSelector,
+  getAggregateKey,
+  (viz, points, aggregateKey) => {
+    if (viz !== 'crudeOil') { return points }
+    if (aggregateKey === 'destination') {
+      return points.filter(point => (
+        point.get('transport', '') === '' && point.get('productSubtype', '') === ''
+      ))
+    }
+    return points
+  },
+)
 
 export const activityGroupSelector = createSelector(
-  subTypeSelector,
+  filterCrudeDataGroups,
   selectedActivityGroup,
   (points, filterActivityGroup) =>
     points.filter(point => (
@@ -348,10 +363,72 @@ export const aggregateLocationPaddSelector = createSelector(
             return v.get('value') / v.get('divisor')
           }))))
     }
-    // TODO: This needs to update value as well
-    //console.log('Processed', paddData.toJS());
 
     return paddData
+  },
+)
+
+export const aggregateLocationPaddData = createSelector(
+  filterByTimelineSelector,
+  selectedVisualization,
+  getAggregateKey,
+  selection,
+  (points, viz, aggregateKey, selected) => {
+    const paddConstant = Constants.getIn(['dataloader', 'mapping', 'padd', 'us'])
+      .filter(v => (
+        (viz === 'crudeOil' && v !== 'Mexico') ||
+        (viz === 'naturalGasLiquids' && v !== 'Non-USA')
+      ))
+    const initialPadds = paddConstant.map((_, key) => ({
+      destination: key,
+      value: { value: 0, divisor: 0 },
+      totalCount: 0,
+      confidentialCount: 0,
+    })).toJS()
+
+    const paddData = points
+      .filter(point => point.get('destinationCountry') !== 'ca')
+      // Filter out any points that aren't related to the selected hexes in the opposite country
+      .filter((point) => {
+        if (!selected.get('country') || selected.get('origins').count() === 0) { return true }
+        if (point.get('destinationCountry') === selected.get('country')) { return true }
+        if (point.get('destination') === selected.get('country')) { return true }
+        if (selected.get('origins').includes(point.get('origin'))) { return true }
+        if (selected.get('origins').includes(point.get('destination'))) { return true }
+        if (point.get('destination') === selected.get('country')) { return true }
+        return false
+      })
+      .filter((point) => {
+        if (aggregateKey) { return point.get(aggregateKey, '') !== '' }
+        return point.get('productSubtype', '') === '' && point.get('transport', '') === ''
+      })
+      .reduce((acc, next) => {
+        const destination = next.get('destination')
+        // If the destination isn't defined, skip this row
+        if (!destination) { return acc }
+
+        if (!acc[destination]) {
+          acc[destination] = {
+            destination,
+            value: { value: 0, divisor: 0 },
+            totalCount: 0,
+            confidentialCount: 0,
+          }
+        }
+
+        acc[destination].totalCount += 1
+        acc[destination].confidentialCount += next.get('confidential', 0)
+        acc[destination].value.value += next.get('value', 0)
+        acc[destination].value.divisor += 1
+
+        return acc
+      }, initialPadds)
+
+    return Immutable.fromJS(paddData)
+      .map(destination => destination.update('value', (v) => {
+        if (v.get('divisor', 0) === 0) { return 0 }
+        return v.get('value') / v.get('divisor')
+      }))
   },
 )
 
