@@ -97,15 +97,15 @@ class NaturalGasLiquidMapLayout extends React.Component {
           >
             <MapPiece
               data={position}
-              dataKey={['subType',productSubType]}
+              dataKey={['values']}
               dimensions={dimensions}
               legends={MapLayoutGridConstant.getIn([type, 'legends'])}
               bins={this.props.bins}
               styles={styles}
               isMapPieceSelected={this.isMapPieceSelected(position.get('name'), this.props.country)}
               isSelected={isSelected}
-              mapPieceKey='name'
-              mapPieceStyleClass = 'mapPieceText'
+              mapPieceKey="name"
+              mapPieceStyleClass="mapPieceText"
               isOrigin={(this.props.selection.get('country') === this.props.country)}
               x1={mapPieceTransformStartXaxis(position, dimensions, mapPieceScale)}
               y1={mapPieceTransformStartYaxis(position, dimensions, mapPieceScale)}
