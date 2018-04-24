@@ -859,6 +859,12 @@ const TranslationTable = fromJS({
             fr: '',
           },
         },
+        body: {
+          action: {
+            en: 'Export by',
+            fr: 'Exportations par',
+          },
+        },
       },
       productSubtype: {
         header: {
@@ -877,6 +883,12 @@ const TranslationTable = fromJS({
           place: {
             en: '',
             fr: '',
+          },
+        },
+        body: {
+          suffix: {
+            en: ' Crude Oil',
+            fr: ' Pétrole brut',
           },
         },
       },

@@ -38,17 +38,19 @@ const CrudeOilVisualizationContainer = props => (
         color="black"
         type="crudeOilTypeMode"
       />
-      <DetailBreakdown
-        aggregateKey="transport"
-        type="exports"
-        valueKey="total"
-        showDefault
-        showHeader={false}
-        colors={categoryColours.getIn(['crudeOil', 'transport'])}
-        colorBox
-        trContent={fromJS({ body: {} }) /* Dummy content to make it render */}
-        nameMappings={Tr.get('label')}
-      />
+      <div style={{ height: 'calc(100% - 20px)', overflow: 'auto' }}>
+        <DetailBreakdown
+          aggregateKey="transport"
+          type="exports"
+          valueKey="total"
+          showDefault
+          showHeader={false}
+          colors={categoryColours.getIn(['crudeOil', 'transport'])}
+          colorBox
+          trContent={Tr.getIn(['detailBreakDown', 'crudeOil', 'transport'])}
+          nameMappings={Tr.get('label')}
+        />
+      </div>
     </DetailSidebar>
     <StackedChart
       {...props.subtypeChart}
@@ -64,17 +66,19 @@ const CrudeOilVisualizationContainer = props => (
         color="black"
         type="crudeOilTypeMode"
       />
-      <DetailBreakdown
-        aggregateKey="productSubtype"
-        type="exports"
-        valueKey="total"
-        showDefault
-        showHeader={false}
-        colors={categoryColours.getIn(['crudeOil', 'productSubtype'])}
-        colorBox
-        trContent={fromJS({ body: {} }) /* Dummy content to make it render */}
-        nameMappings={Tr.get('label')}
-      />
+      <div style={{ height: 'calc(100% - 20px)', overflow: 'auto' }}>
+        <DetailBreakdown
+          aggregateKey="productSubtype"
+          type="exports"
+          valueKey="total"
+          showDefault
+          showHeader={false}
+          colors={categoryColours.getIn(['crudeOil', 'productSubtype'])}
+          colorBox
+          trContent={Tr.getIn(['detailBreakDown', 'crudeOil', 'productSubtype'])}
+          nameMappings={Tr.get('label')}
+        />
+      </div>
     </DetailSidebar>
     <Axis
       {...props.axisPosition}
