@@ -52,7 +52,7 @@ const printingValidationError = (errorArray, region, point, type) => {
 
 const humanNumber = (v) => {
   const digits = Math.ceil(v).toString().length - 3
-  if (digits < 0) { return 0 }
+  if (digits < 0) { return v }
 
   const scale = parseInt(`1${new Array(digits).fill(0).join('')}`, 10)
   return Math.ceil(v / scale) * scale
@@ -108,6 +108,14 @@ const parsingIssue = {};
       destinationKey: destinationRegion.get('originKey') || '',
     }
   }))
+  // Add forAverageValue and forAverageDivisor to rate units
+  .then(points => points.map((point) => {
+    if (point.units === 'thousand m3/d' || point.units === 'm3/d') {
+      point.forAverageValue = point.value
+      point.forAverageDivisor = 1
+    }
+    return point
+  }))
   // Cluster the points into visualizations, units, and period
   .then(points => points.reduce((acc, point) => {
     if (!acc[point.product]) { acc[point.product] = {} }
@@ -152,11 +160,11 @@ const parsingIssue = {};
             })
             // 0 will be used to indicate these are missing values
             // https://trello.com/c/rLeWzKXJ/75-price-views-should-show-averages-not-totals#comment-5aa997af6f16e46bb2c971a6
-            point.quantityForAverage = 0
-            point.revenueForAverage = 0
+            point.forAverageDivisor = 0
+            point.forAverageValue = 0
           } else {
-            point.quantityForAverage = matchingAmountPoints[0].value
-            point.revenueForAverage = point.value * point.quantityForAverage
+            point.forAverageDivisor = matchingAmountPoints[0].value
+            point.forAverageValue = point.value * point.forAverageDivisor
           }
         })
       })
@@ -201,19 +209,20 @@ const parsingIssue = {};
           const averageData = {}
           const regionValues = unitPoints
             .reduce((acc, next) => {
-              if (next.quantityForAverage) {
-                if (!averageData[next.destination]) {
-                  averageData[next.destination] = { quantity: 0, revenue: 0 }
+              if (next.forAverageDivisor) {
+                const destination = next.destination || next.origin || next.port
+                if (!averageData[destination]) {
+                  averageData[destination] = { value: 0, divisor: 0 }
                 }
-                const averageDest = averageData[next.destination]
-                averageDest.quantity += next.quantityForAverage
-                averageDest.revenue += next.revenueForAverage
+                const averageDest = averageData[destination]
+                averageDest.value += next.forAverageValue
+                averageDest.divisor += next.forAverageDivisor
 
                 return {
                   ...acc,
-                  [next.destination]: (averageDest.quantity === 0)
+                  [destination]: (averageDest.quantity === 0)
                     ? 0
-                    : Math.round(averageDest.revenue / averageDest.quantity),
+                    : Math.round(averageDest.value / averageDest.divisor),
                 }
               }
               if (visName === 'crudeOil' || visName === 'naturalGasLiquids') {
@@ -231,7 +240,7 @@ const parsingIssue = {};
             }, {})
           const jenksValues = Object.keys(regionValues).map(k => regionValues[k])
           if (jenksValues.length < 5) {
-            console.log(visName, jenksValues, unitPoints)
+            console.log(visName, jenksValues, regionValues)
           }
           accBins[visName][unit] = ss.ckmeans(jenksValues, 5)
             .map(v => ([

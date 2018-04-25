@@ -1,0 +1,31 @@
+@import '../styles/Colours';
+
+.percentage-bar {
+  background-color: $sand-medium;
+  width: 38px;
+  position: relative;
+  float: right;
+  margin-top: -2px;
+
+  > span {
+    height: 12px;
+    display: block;
+
+    &.negative {
+      float: right;
+    }
+  }
+}
+
+.imports .percentage-bar > span {
+  background: $import-default;
+  &.negative {
+    background: repeating-linear-gradient(45deg, transparent, transparent 2px, $import-default 2px, $import-default 4px);
+  }
+}
+.exports .percentage-bar > span {
+  background: $export-default;
+  &.negative {
+    background: repeating-linear-gradient(45deg, transparent, transparent 2px, $export-default 2px, $export-default 4px);
+  }
+}

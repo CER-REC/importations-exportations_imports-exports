@@ -86,19 +86,34 @@ export const subTypeSelector = createSelector(
   selectedVisualization,
   unitSelector,
   subType,
-  (viz, points, filterSubType) =>{
-    if(viz !==  'naturalGasLiquids' 
-      || ( viz ===  'naturalGasLiquids' 
-            && (['propaneButane','' ].includes(filterSubType)))) { return points }
-    return points.filter(point => {
-      if(point.get('product') !== 'naturalGasLiquids'){return false}
+  (viz, points, filterSubType) => {
+    if (viz !== 'naturalGasLiquids' ||
+      (viz === 'naturalGasLiquids' && ['propaneButane', ''].includes(filterSubType))
+    ) { return points }
+    return points.filter((point) => {
+      if (point.get('product') !== 'naturalGasLiquids') { return false }
       return point.get('productSubtype') === filterSubType
     })
   },
-) 
+)
+
+export const filterCrudeDataGroups = createSelector(
+  selectedVisualization,
+  subTypeSelector,
+  getAggregateKey,
+  (viz, points, aggregateKey) => {
+    if (viz !== 'crudeOil') { return points }
+    if (aggregateKey === 'destination') {
+      return points.filter(point => (
+        point.get('transport', '') === '' && point.get('productSubtype', '') === ''
+      ))
+    }
+    return points
+  },
+)
 
 export const activityGroupSelector = createSelector(
-  subTypeSelector,
+  filterCrudeDataGroups,
   selectedActivityGroup,
   (points, filterActivityGroup) =>
     points.filter(point => (
@@ -123,20 +138,29 @@ export const selectedPieces = createSelector(
 
 const filterByTimeline = (point, range, groupBy) => {
   if (groupBy === 'year') {
-    if (range.getIn(['start', 'year']) <= point.get('year')
-      && point.get('year') <= range.getIn(['end', 'year'])) {
-      if (range.getIn(['start', 'year']) === point.get('year') || range.getIn(['end', 'year']) === point.get('year')) {
-        return range.getIn(['start', 'quarter']) <= point.get('quarter') && point.get('quarter') <= range.getIn(['end', 'quarter'])
-      }
-      return true
+    if (point.get('year') < range.getIn(['start', 'year'])) { return false }
+    if (point.get('year') > range.getIn(['end', 'year'])) { return false }
+    // Point is between start and end years
+
+    if (point.get('year') === range.getIn(['start', 'year']) &&
+        point.get('quarter') < range.getIn(['start', 'quarter'])) {
+      // Start year, but before start quarter
+      return false
     }
-  } else {
-    if (range.getIn(['start', 'quarter']) !== range.getIn(['end', 'quarter'])) { return true }
-    return (range.getIn(['start', 'year']) <= point.get('year')
-      && point.get('year') <= range.getIn(['end', 'year'])
-      && range.getIn(['start', 'quarter']) === point.get('quarter')
-    )
+    if (point.get('year') === range.getIn(['end', 'year']) &&
+        point.get('quarter') > range.getIn(['end', 'quarter'])) {
+      // End year, but after end quarter
+      return false
+    }
+    return true
   }
+
+  // Group by quarter
+  if (range.getIn(['start', 'quarter']) !== range.getIn(['end', 'quarter'])) { return true }
+  return (range.getIn(['start', 'year']) <= point.get('year')
+    && point.get('year') <= range.getIn(['end', 'year'])
+    && range.getIn(['start', 'quarter']) === point.get('quarter')
+  )
 }
 
 export const filterByHex = (point, selectedMapPieces, visualization, selectionState) => {
@@ -163,7 +187,7 @@ export const filterByHex = (point, selectedMapPieces, visualization, selectionSt
   || selectedMapPieces.includes(point.get('port'))
 }
 
-const filterByTimelineSelector = createSelector(
+export const filterByTimelineSelector = createSelector(
   activityGroupSelector,
   timelineFilterRange,
   groupingBy,
@@ -209,12 +233,12 @@ const mapPieceLocationDataStructure = (acc, next, origin, originKey, originCount
   if (!destCountryObj[destinationKey][activity]) { destCountryObj[destinationKey][activity] = 0 }
 
   destCountryObj[destinationKey][activity] += next.get('value', 0)
-  if (next.has('quantityForAverage')) {
+  if (next.has('forAverageDivisor')) {
     if (!acc[originKey].sumForAvg) { acc[originKey].sumForAvg = {} }
     const { sumForAvg } = acc[originKey]
-    if (!sumForAvg[activity]) { sumForAvg[activity] = { revenue: 0, amount: 0 } }
-    sumForAvg[activity].revenue += next.get('revenueForAverage', 0)
-    sumForAvg[activity].amount += next.get('quantityForAverage', 0)
+    if (!sumForAvg[activity]) { sumForAvg[activity] = { value: 0, divisor: 0 } }
+    sumForAvg[activity].value += next.get('forAverageValue', 0)
+    sumForAvg[activity].divisor += next.get('forAverageDivisor', 0)
   }
 
   acc[originKey].totalCount = (totalCount + 1)
@@ -256,8 +280,8 @@ export const aggregateFilterLocationSelector = createSelector(
     if (result.count() > 0 && result.first().has('sumForAvg')) {
       return result.map(region => region.update('sumForAvg', val => val.map((activity) => {
         // Prevent divide by zero
-        if (activity.get('amount', 0) === 0) { return 0 }
-        return activity.get('revenue', 0) / activity.get('amount')
+        if (activity.get('divisor', 0) === 0) { return 0 }
+        return activity.get('value', 0) / activity.get('divisor')
       })))
     }
 
@@ -272,6 +296,7 @@ export const aggregateLocationPaddSelector = createSelector(
     let missingpPadds = Constants.getIn(['dataloader', 'mapping', 'padd', 'us'], Immutable.fromJS({}))
     missingpPadds = missingpPadds.merge(Constants.getIn(['dataloader', 'mapping', 'padd', 'ca'], Immutable.fromJS({})))
     let paddData = points.reduce((acc, next) => {
+      const subtype = next.get('productSubtype')
       let destination = next.get('destinationKey') === ''? next.get('destination'): next.get('destinationKey')
       if (typeof destination === 'undefined') {
         return acc
@@ -292,13 +317,24 @@ export const aggregateLocationPaddSelector = createSelector(
           propaneButane: {},
         }
       }
-      if (!acc[destination].subType[next.get('productSubtype')]) {
-        acc[destination].subType[next.get('productSubtype')] = {}
+      if (!acc[destination].subType[subtype]) {
+        acc[destination].subType[subtype] = {}
       }
-      const activityVal = acc[destination].subType[next.get('productSubtype')][activity] || 0
+      const activityVal = acc[destination].subType[subtype][activity] || 0
       const totalValue = acc[destination].subType.propaneButane[activity] || 0
-      acc[destination].subType[next.get('productSubtype')][activity] = activityVal + next.get('value') || 0
+
+      acc[destination].subType[subtype][activity] = activityVal + next.get('value') || 0
       acc[destination].subType.propaneButane[activity] = totalValue + next.get('value') || 0
+
+      if (next.has('forAverageDivisor')) {
+        if (!acc[destination].sumForAvg) { acc[destination].sumForAvg = {} }
+        if (!acc[destination].sumForAvg[subtype]) { acc[destination].sumForAvg[subtype] = {} }
+        const sumForAvg = acc[destination].sumForAvg[subtype]
+        if (!sumForAvg[activity]) { sumForAvg[activity] = { value: 0, divisor: 0 } }
+        sumForAvg[activity].value += next.get('forAverageValue', 0)
+        sumForAvg[activity].divisor += next.get('forAverageDivisor', 0)
+      }
+
       const totalCount = acc[destination].totalCount || 0
       const confidentialCount = acc[destination].confidentialCount || 0
       acc[destination].transport = next.get('transport')
@@ -307,6 +343,7 @@ export const aggregateLocationPaddSelector = createSelector(
       acc[destination].country = next.get('destinationCountry')
       return acc
     }, {})
+
     missingpPadds.forEach((data, paddName) => {
       if(viz === 'naturalGasLiquids' && paddName === 'Non-USA'){
         return
@@ -315,7 +352,83 @@ export const aggregateLocationPaddSelector = createSelector(
       }
       paddData[paddName] = {}
     })
+
+    paddData = Immutable.fromJS(paddData)
+
+    if (paddData.first().has('sumForAvg')) {
+      paddData = paddData.map(destination => destination
+        .set('subType', destination.get('sumForAvg', Immutable.fromJS({}))
+          .map(sumActivity => sumActivity.map((v) => {
+            if (v.get('divisor', 0) === 0) { return 0 }
+            return v.get('value') / v.get('divisor')
+          }))))
+    }
+
+    return paddData
+  },
+)
+
+export const aggregateLocationPaddData = createSelector(
+  filterByTimelineSelector,
+  selectedVisualization,
+  getAggregateKey,
+  selection,
+  (points, viz, aggregateKey, selected) => {
+    const paddConstant = Constants.getIn(['dataloader', 'mapping', 'padd', 'us'])
+      .filter(v => (
+        (viz === 'crudeOil' && v !== 'Mexico') ||
+        (viz === 'naturalGasLiquids' && v !== 'Non-USA')
+      ))
+    const initialPadds = paddConstant.map((_, key) => ({
+      destination: key,
+      value: { value: 0, divisor: 0 },
+      totalCount: 0,
+      confidentialCount: 0,
+    })).toJS()
+
+    const paddData = points
+      .filter(point => point.get('destinationCountry') !== 'ca')
+      // Filter out any points that aren't related to the selected hexes in the opposite country
+      .filter((point) => {
+        if (!selected.get('country') || selected.get('origins').count() === 0) { return true }
+        if (point.get('destinationCountry') === selected.get('country')) { return true }
+        if (point.get('destination') === selected.get('country')) { return true }
+        if (selected.get('origins').includes(point.get('origin'))) { return true }
+        if (selected.get('origins').includes(point.get('destination'))) { return true }
+        if (point.get('destination') === selected.get('country')) { return true }
+        return false
+      })
+      .filter((point) => {
+        if (aggregateKey) { return point.get(aggregateKey, '') !== '' }
+        return point.get('productSubtype', '') === '' && point.get('transport', '') === ''
+      })
+      .reduce((acc, next) => {
+        const destination = next.get('destination')
+        // If the destination isn't defined, skip this row
+        if (!destination) { return acc }
+
+        if (!acc[destination]) {
+          acc[destination] = {
+            destination,
+            value: { value: 0, divisor: 0 },
+            totalCount: 0,
+            confidentialCount: 0,
+          }
+        }
+
+        acc[destination].totalCount += 1
+        acc[destination].confidentialCount += next.get('confidential', 0)
+        acc[destination].value.value += next.get('value', 0)
+        acc[destination].value.divisor += 1
+
+        return acc
+      }, initialPadds)
+
     return Immutable.fromJS(paddData)
+      .map(destination => destination.update('value', (v) => {
+        if (v.get('divisor', 0) === 0) { return 0 }
+        return v.get('value') / v.get('divisor')
+      }))
   },
 )
 
@@ -351,15 +464,15 @@ export const aggregateLocationNaturalGasSelector = createSelector(
         accPort.activities[activityName] += next.get('value')
       }
 
-      if (next.has('quantityForAverage')) {
+      if (next.has('forAverageDivisor')) {
         if (!accPort.sumForAvg) { accPort.sumForAvg = {} }
         const { sumForAvg } = accPort
-        if (!sumForAvg[activityName]) { sumForAvg[activityName] = { revenue: 0, amount: 0 } }
-        sumForAvg[activityName].revenue += next.get('revenueForAverage', 0)
-        sumForAvg[activityName].amount += next.get('quantityForAverage', 0)
-        accPort.activities[activityName] = (sumForAvg[activityName].amount === 0)
+        if (!sumForAvg[activityName]) { sumForAvg[activityName] = { value: 0, divisor: 0 } }
+        sumForAvg[activityName].value += next.get('forAverageValue', 0)
+        sumForAvg[activityName].divisor += next.get('forAverageDivisor', 0)
+        accPort.activities[activityName] = (sumForAvg[activityName].divisor === 0)
           ? 0
-          : sumForAvg[activityName].revenue / sumForAvg[activityName].amount
+          : sumForAvg[activityName].value / sumForAvg[activityName].divisor
       }
       const totalCount = accPort.totalCount || 0
       const confidentialCount = accPort.confidentialCount || 0

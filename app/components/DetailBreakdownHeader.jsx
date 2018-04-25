@@ -11,7 +11,7 @@ class DetailBreakdownHeader extends React.Component {
     const headerContent = props.trContent
     return (
       <div className={`header ${props.type}`}>
-        <span style={{ color: props.color }}>{headerContent.getIn(['type', props.language], '').toUpperCase()}</span> &nbsp;
+        <span style={{ color: props.color }}>{headerContent.getIn(['type', props.language], '').toUpperCase()}</span>&nbsp;
         {headerContent.getIn(['action', props.language], '')}&nbsp;
         {headerContent.getIn(['adjective', props.language], '')}&nbsp;
         {headerContent.getIn(['place', props.language], '')}&nbsp;

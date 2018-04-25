@@ -528,8 +528,8 @@ const TranslationTable = fromJS({
       fr: 'La flèche orientée vers le haut montre la quantité totale d’électricité importée de l’État de Washington par les régions canadiennes pendant la période sélectionnée dans le diagramme à barres ci-dessus.',
     },
     powerpool: {
-      en: 'A power pool is a grouping of states that imports and exports electricity as a unit. Individual states may also have additional imports and exports.',
-      fr: 'Un réseau commun est un regroupement d’états américains qui importe et exporte de l’électricité conjointement. Chacun des états du regroupement peut également importer et exporter de l’électricité individuellement.',
+      en: 'A power pool is a grouping of states that imports and exports electricity as a unit. Individual states may also have additional imports and exports. MN/ND: Minnesota/North Dakota NE-ISO: New England Independent System Operator PJM: Pennsylvania, Jersey, Maryland (PJM has since expanded to include all or parts of Delaware, Illinois, Indiana, Kentucky, Maryland, Michigan, New Jersey, North Carolina, Ohio, Pennsylvania, Tennessee, Virginia, West Virginia and the District of Columbia)',
+      fr: 'Un réseau commun est un regroupement d’états américains qui importe et exporte de l’électricité conjointement. Chacun des états du regroupement peut également importer et exporter de l’électricité individuellement. MN/ND : Minnesota/Dakota du Nord NE-ISO : New England Independent System Operator PJM : Pennsylvanie, New Jersey et Maryland (comprend désormais certaines parties du Delaware, de l’Illinois, de l’Indiana, du Kentucky, du Maryland, du Michigan, du New Jersey, de la Caroline du Nord, de l’Ohio, de la Pennsylvanie, du Tennessee, de la Virginie, de la Virginie-Occidentale et du District of Columbia)',
     },
     barChartImport: {
       en: 'Each orange bar shows the total electricity that Canadian regions imported during a single quarter.',
@@ -660,12 +660,20 @@ const TranslationTable = fromJS({
       fr: 'La quantité de produits pétroliers raffinés est indiquée en milliers de m³/j (milliers de mètres cubes par jour), ce qui correspond à 6 290 barils par jour.',
     },
     confidentialValuesRefinedPetroleumProducts: {
-      en: 'With only 13 refineries in Canada the data for RPPs is often deemed confidential as individual companies may become identifiable which could have a negative financial impact. Learn more in our methodology.',
-      fr: 'Parce que le Canada ne compte que 13 raffineries, les données relatives aux produits pétroliers raffinés sont souvent confidentielles afin qu’il ne soit pas possible d’identifier une société en particulier, ce qui pourrait avoir une incidence financière négative sur elle.  La méthode contient de plus amples renseignements.',
+      en: 'With relatively few refineries in Canada the data for RPPs is often deemed confidential as individual companies may become identifiable which could have a negative financial impact. Learn more in our methodology.',
+      fr: 'Le Canada comptant assez peu de raffineries, les données relatives aux produits pétroliers raffinés sont souvent confidentielles afin qu’il ne soit pas possible d’identifier une société en particulier, ce qui pourrait avoir une incidence financière négative sur elle. La méthode contient de plus amples renseignements.',
     },
     barsRefinedPetroleumProducts: {
       en: 'Bars are pointed downwards because they represent exports from Canada.',
       fr: 'Les barres sont orientées vers le bas parce qu’elles représentent les exportations du Canada.',
+    },
+    cng: {
+      en: 'CNG stands for compressed natural gas. The locations where CNG has crossed the border included in the “Other CNG” category are North Portal and St. Stephen.',
+      fr: 'GNC signifie « gaz naturel comprimé ». Les points d’importation du GNC compris dans la catégorie « Autres GNC » sont North Portal et St. Stephen.',
+    },
+    lng: {
+      en: 'Liquefied natural gas (LNG) is natural gas that had been cooled to -162 Celsius to reach its liquid state. In changing from a gas to a liquid, the volume shrinks by a factor of 600. This allows the volume to be transported by ship and tanker truck. Canada imports offshore LNG into one terminal, Canaport, in New Brunswick. This imported LNG is eventually warmed to resume its gaseous state and is then transported by pipeline as regular natural gas.',
+      fr: 'Le gaz naturel liquéfié (« GNL ») est un gaz naturel qui a été refroidi jusqu’à sa liquéfaction, à -162 degrés Celsius. Pendant son changement d’état de gaz à liquide, son volume diminue par un facteur de 600, ce qui permet le transport du produit par bateau et camion. Les importations de GNL du Canada arrivent au seul terminal méthanier au pays, Canaport, au Nouveau-Brunswick. Le GNL est ensuite réchauffé jusqu’à ce qu’il retrouve son état gazeux et est ensuite transporté par pipeline, comme du gaz naturel régulier.',
     },
   },
 
@@ -851,6 +859,12 @@ const TranslationTable = fromJS({
             fr: '',
           },
         },
+        body: {
+          action: {
+            en: 'Export by',
+            fr: 'Exportations par',
+          },
+        },
       },
       productSubtype: {
         header: {
@@ -869,6 +883,12 @@ const TranslationTable = fromJS({
           place: {
             en: '',
             fr: '',
+          },
+        },
+        body: {
+          suffix: {
+            en: ' Crude Oil',
+            fr: ' Pétrole brut',
           },
         },
       },
@@ -1549,8 +1569,8 @@ const TranslationTable = fromJS({
       fr: 'Sélections Multiples',
     },
     default: {
-      en: 'Port Locations',
-      fr: 'Emplacements de Port',
+      en: 'Import & Export Points',
+      fr: "Points d'importation & d'exportation",
     },
     portName: {
       Aden: {
@@ -1709,6 +1729,14 @@ const TranslationTable = fromJS({
         en: 'Willow Creek',
         fr: 'Willow Creek',
       },
+      CNG: {
+        en: 'CNG',
+        fr: 'GNC',
+      },
+      'LNG Other': {
+        en: 'LNG Other',
+        fr: 'GNL Autre',
+      },
     },
   },
   mapTileLabels: {
@@ -1788,6 +1816,14 @@ const TranslationTable = fromJS({
       'St Stephen': {
         en: 'St\nStephen',
         fr: 'St\nStephen',
+      },
+      'CNG': {
+        en: 'CNG',
+        fr: 'GNC',
+      },
+      'LNG Other': {
+        en: 'LNG\nOther',
+        fr: 'GNL\nAutre',
       },
     },
   },

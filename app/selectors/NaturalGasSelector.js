@@ -1,10 +1,12 @@
 import { createSelector } from 'reselect'
-import Immutable from 'immutable'
+import { fromJS } from 'immutable'
 
-import { aggregateLocationPaddSelector, arrangeBy, subType } from './data'
+import { aggregateFilterLocationSelector, arrangeBy, subType } from './data'
 import MapLayoutGridConstant from '../MapLayoutGridConstant'
 import Constants from '../Constants'
 import { visualizationSettings } from './visualizationSettings'
+
+const emptyMap = fromJS({})
 
 // get import data for the electricity visualization
 // rows from the CSV
@@ -36,48 +38,18 @@ const getPadding = createSelector(
 )
 
 export const getPointsByCountry = createSelector(
-  aggregateLocationPaddSelector,
+  aggregateFilterLocationSelector,
   getCountry,
   (points, country) => points.filter(point => point.get('country') === country),
 )
 
 const getNaturalGasLiquidsImportAndExport = createSelector(
   getPointsByCountry,
-  getCountry,
-  getSelectionSettings,
-  selectedVisualization,
-  (points, country, selection, selectedEnergy) => {
-    // append missing states or provinces
-    // fetch list of the states and province from the 
-    const statesOrProvinces = Constants.getIn(['dataloader', 'mapping', 'country', country])
-    if (typeof statesOrProvinces !== 'undefined') {
-      let missingstatesOrProvincesMap = {}
-      statesOrProvinces.entrySeq().forEach((stateOrProvince) => {
-        if (typeof points.get(stateOrProvince[1]) === 'undefined' 
-          || (selection.get('country') === 'us' && selectedEnergy === 'naturalGasLiquids')) {
-          const originKey = stateOrProvince[1]
-          missingstatesOrProvincesMap[originKey] = {
-            country,
-            destination: originKey,
-            subType: {
-               Butane: { imports: 0, exports: 0 }, Propane: { imports: 0, exports: 0 }, propaneButane: { imports: 0, exports: 0 },
-            },
-            totalCount: 0,
-            confidentialCount: 0,
-          }
-        }
-      })
-      missingstatesOrProvincesMap = Immutable.fromJS(missingstatesOrProvincesMap)
-      return points.merge(missingstatesOrProvincesMap)
-    }
-    return points
-  },
+  (points) => points.map(region => region.set('values', region.get('sumForAvg'))),
 )
 
-const sortData = (points, sortBy, subType='') => {
-  subType = subType === ''? 'propaneButane': subType
-  return points.sort((a, b) => (b.getIn(['subType', subType, 'imports'], 0) - a.getIn(['subType', subType, 'imports'], 0)))
-}
+const sortData = points => points
+  .sort((a, b) => (b.getIn(['values', 'imports'], 0) - a.getIn(['values', 'imports'], 0)))
 
 const createSortedLayout = createSelector(
   getNaturalGasLiquidsImportAndExport,
@@ -89,8 +61,12 @@ const createSortedLayout = createSelector(
     let row = 0
     let column = 0
     const sortedArray = []
-    const sortedData = sortData(data, sortBy, stype)
-    sortedData.forEach((statesOrProvinces) => {
+    const sortedData = sortData(data)
+    const orderedRegionNames = sortedData.keySeq()
+      .concat(Constants.getIn(['dataloader', 'mapping', 'country', 'ca'])
+        .filter(k => !sortedData.has(k)))
+    orderedRegionNames.forEach((name) => {
+      const statesOrProvinces = sortedData.get(name, emptyMap)
       if (column >= columns) {
         column = 0
         row += 1
@@ -103,8 +79,8 @@ const createSortedLayout = createSelector(
         x += (row * rowPadding)
       }
       sortedArray.push({
-        name: statesOrProvinces.get('destination'),
-        subType: statesOrProvinces.get('subType') || { Butane: { imports: 0, exports: 0 }, Propane: { imports: 0, exports: 0 }, propaneButane: { imports: 0, exports: 0 } },
+        name,
+        values: statesOrProvinces.get('values', emptyMap).toJS(),
         totalCount: statesOrProvinces.get('totalCount') || 0,
         confidentialCount: statesOrProvinces.get('confidentialCount') || 0,
         showLabel: statesOrProvinces.get('showLabel', false),
@@ -115,7 +91,7 @@ const createSortedLayout = createSelector(
       // Column value is updated for the next iteration
       column += 1
     })
-    return Immutable.fromJS(sortedArray)
+    return fromJS(sortedArray)
   },
 )
 
@@ -124,22 +100,22 @@ const parseLocationData = createSelector(
   getElectricityMapLayoutConstants,
   (data, layout) => {
     const resultList = []
-    if (data.size > 0 && typeof layout !== 'undefined') {
+    if (typeof layout !== 'undefined') {
       layout.forEach((statesOrProvinces) => {
         const originKey = statesOrProvinces.get('originKey')
         const result = {
           name: originKey,
-          subType: data.getIn([originKey, 'subType']) || { Butane: { imports: 0, exports: 0 }, Propane: { imports: 0, exports: 0 }, propaneButane: { imports: 0, exports: 0 } },
+          values: data.getIn([originKey, 'values'], emptyMap).toJS(),
           x: statesOrProvinces.get('x'),
           y: statesOrProvinces.get('y'),
           showLabel: statesOrProvinces.get('showLabel', false),
-          totalCount: data.getIn([originKey,'totalCount']) || 0,
+          totalCount: data.getIn([originKey, 'totalCount']) || 0,
           confidentialCount: data.getIn([originKey, 'confidentialCount']) || 0,
         }
         resultList.push(result)
       })
     }
-    return Immutable.fromJS(resultList)
+    return fromJS(resultList)
   },
 )
 
