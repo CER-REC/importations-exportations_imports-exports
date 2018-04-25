@@ -58,7 +58,25 @@ const getElectricityImportAndExport = createSelector(
         region.get('origin'),
         region.get('country'),
         region.get('unit'),
-      )))),
+      ))))
+    .map((r) => {
+      if (!r.has('sumForAvg')) { return r }
+
+      let imports = r.getIn(['sumForAvg', 'imports'], 0)
+      if (Immutable.Map.isMap(imports)) {
+        imports = imports.get('divisor', 0) === 0
+          ? 0
+          : imports.get('value') / imports.get('divisor')
+      }
+      let exports = r.getIn(['sumForAvg', 'exports'], 0)
+      if (Immutable.Map.isMap(exports)) {
+        exports = exports.get('divisor', 0) === 0
+          ? 0
+          : exports.get('value') / exports.get('divisor')
+      }
+
+      return r.merge({ imports, exports })
+    }),
 )
 
 const sortData = (points, sortBy) => {
@@ -150,14 +168,18 @@ const parseLocationData = createSelector(
           tabIndex,
         }
         if (data.getIn([originKey, 'sumForAvg'], false) !== false) {
-          const imports = data.getIn([originKey, 'sumForAvg', 'imports'], new Immutable.Map())
-          result.imports = imports.get('divisor', 0) === 0
-            ? 0
-            : imports.get('value') / imports.get('divisor')
-          const exports = data.getIn([originKey, 'sumForAvg', 'exports'], new Immutable.Map())
-          result.exports = exports.get('divisor', 0) === 0
-            ? 0
-            : exports.get('value') / exports.get('divisor')
+          result.imports = data.getIn([originKey, 'sumForAvg', 'imports'], 0)
+          if (Immutable.Map.isMap(result.imports)) {
+            result.imports = result.imports.get('divisor', 0) === 0
+              ? 0
+              : result.imports.get('value') / result.imports.get('divisor')
+          }
+          result.exports = data.getIn([originKey, 'sumForAvg', 'exports'], 0)
+          if (Immutable.Map.isMap(result.exports)) {
+            result.exports = result.exports.get('divisor', 0) === 0
+              ? 0
+              : result.exports.get('value') / result.exports.get('divisor')
+          }
         }
         tabIndex += 1
         resultList.push(result)
