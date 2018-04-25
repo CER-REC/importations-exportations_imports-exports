@@ -26,8 +26,7 @@ class Legend extends React.Component {
     const transformImportColumn = `translate(${Constants.getIn(['legend', 'importColumn'])} 0)`
     let zeroArrow = ''
     let yPosition = 10
-    if (this.props.importExportVisualization === 'crudeOil'
-      || this.props.importExportVisualization === 'naturalGasLiquids') {
+    if (this.props.importExportVisualization !== 'electricity') {
       yPosition = 33
       zeroArrow = <LegendArrow
           colour="#ede3cb"
@@ -67,8 +66,7 @@ class Legend extends React.Component {
     const transformExportColumn = `translate(${Constants.getIn(['legend', 'exportColumn'])} 0)`
     let zeroArrow = ''
     let yPosition = 10
-    if (this.props.importExportVisualization === 'crudeOil'
-      || this.props.importExportVisualization === 'naturalGasLiquids') {
+    if (this.props.importExportVisualization !== 'electricity') {
       yPosition = 33
       zeroArrow = <LegendArrow
           exportArrow="rotate(180, 15, 5.5)"
@@ -105,8 +103,7 @@ class Legend extends React.Component {
     const bins = this.props.bins.toJS()
     let transformString = `translate(${Constants.getIn(['legend', 'textValuePosition'])} 0)`
     let zeroText = ''
-    if (this.props.importExportVisualization === 'crudeOil'
-      || this.props.importExportVisualization === 'naturalGasLiquids') {
+    if (this.props.importExportVisualization !== 'electricity') {
       zeroText = '0'
       transformString = `translate(${Constants.getIn(['legend', 'textValuePosition'])} 21)`
     }
