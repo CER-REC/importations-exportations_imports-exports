@@ -15,7 +15,9 @@ const Root = ({ dataLoadingComplete, viewport }) => {
     height: viewport.get('y'),
     width: viewport.get('x'),
   }
-  return <div style={loaderStyle}><div className="loader" /></div>
+  return <div style={loaderStyle}>
+    <div className="loader" />
+    </div>
 }
 
 Root.propTypes = {
