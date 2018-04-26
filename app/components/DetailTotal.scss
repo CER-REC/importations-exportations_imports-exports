@@ -5,8 +5,9 @@
 
   .detailText {
     background: #fff;
-    width: calc(100% - 40px);
     display: inline-block;
+    width: 100%;
+    &.with-percentage { width: calc(100% - 40px); }
   }
 
   .percentage {
