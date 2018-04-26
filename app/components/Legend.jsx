@@ -51,13 +51,13 @@ class Legend extends React.Component {
             {Constants.getIn(['styleGuide', 'importColours']).map((color, i) => (
               <LegendArrow
                 key={`import-${color}`}
-                yPosition={(i * 20) + yPosition}
+                yPosition={(i * 20) + 33}
                 colour={color}
               />
             )).toArray()}
           </g>
         </g>
-        <g transform="translate(0 13)">{zeroArrow}</g>
+        <g transform="translate(0 13)"><LegendArrow colour="#ede3cb"/></g>
       </g>
     )
   }
@@ -89,12 +89,12 @@ class Legend extends React.Component {
             <LegendArrow
               exportArrow="rotate(180, 15, 5.5)"
               key={`import-${color}`}
-              yPosition={(i * 20) + yPosition}
+              yPosition={(i * 20) + 33}
               colour={color}
             />
           )).toArray()}
         </g>
-        <g transform="translate(41 13)">{zeroArrow}</g>
+        <g transform="translate(41 13) rotate(180, 15, 5.5)"><LegendArrow colour="#ede3cb"/></g>
       </g>
     )
   }
@@ -137,9 +137,7 @@ class Legend extends React.Component {
               </g>
             )
           })}
-          <g transform="translate(0 0)">
-            <text className="theLegendValues">{zeroText}</text>
-          </g>
+          <text className="theLegendValues">0</text>
         </g>
     )
   }
