@@ -266,7 +266,7 @@ const parsingIssue = {};
     // Units with weighted averages should be uncapped on both ends
     valueBins.electricity['CAN$/MW.h'][0][0] = Number.MIN_SAFE_INTEGER
     valueBins.electricity['CAN$/MW.h'][4][1] = Number.MAX_SAFE_INTEGER
-    valueBins.naturalGas['CN$/GJ'][0][0] = Number.MIN_SAFE_INTEGER
+    //valueBins.naturalGas['CN$/GJ'][0][0] = Number.MIN_SAFE_INTEGER
     valueBins.naturalGas['CN$/GJ'][4][1] = Number.MAX_SAFE_INTEGER
 
     return { data: output, bins: valueBins }
