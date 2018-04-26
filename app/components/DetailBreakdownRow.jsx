@@ -7,6 +7,8 @@ import PercentageBar from './PercentageBar'
 import Tr from '../TranslationTable'
 import { humanNumber } from '../utilities'
 
+const unitsWithoutPercentage = ['CAN$/MW.h', 'CN$/GJ']
+
 const DetailBreakdownRow = props => (
   <tr className="detailBreakDownText">
     <td width={props.colorBox ? '14px' : '0px'} style={{ verticalAlign: 'baseline' }}>
@@ -27,14 +29,26 @@ const DetailBreakdownRow = props => (
       <span className="detailBolded"> {props.label}</span>{props.labelSuffix}&nbsp;
       <span style={{ display: 'inline-block' }}>{humanNumber(props.value, props.language)}</span>&nbsp;
       <span style={{ display: 'inline-block' }}>{Tr.getIn(['amounts', props.unit, props.language])}</span>&nbsp;
-      <span style={{ display: 'inline-block' }}>{((props.total === 0) ? 0.0 : Math.abs(props.value / props.total) * 100).toFixed(2)}%</span>&nbsp;
+      {unitsWithoutPercentage.includes(props.unit)
+        ? null
+        : (
+          <span style={{ display: 'inline-block' }}>
+            {((props.total === 0) ? 0.0 : Math.abs(props.value / props.total) * 100).toFixed(2)}%
+          </span>
+        )
+      }
     </td>
-    <td width="40px" style={{ display: 'inline-block' }}>
-      <PercentageBar
-        style={{ backgroundColor: props.color, ...props.progressBarStyle }}
-        width={((props.total === 0) ? 0.0 : (props.value / props.total) * 100)}
-      />
-    </td>
+    {unitsWithoutPercentage.includes(props.unit)
+      ? null
+      : (
+        <td width="40px" style={{ display: 'inline-block' }}>
+          <PercentageBar
+            style={{ backgroundColor: props.color, ...props.progressBarStyle }}
+            width={((props.total === 0) ? 0.0 : (props.value / props.total) * 100)}
+          />
+        </td>
+      )
+    }
   </tr>
 )
 
