@@ -327,24 +327,27 @@
   font-size:9px;
   text-anchor: middle;
 }
+.portLabelWhite{
+  font-family: $fira-sans-condensed;
+  fill: #fff;
+  font-size:9px;
+  text-anchor: middle;
+}
 .portProvinceLabel{
   font-family: $fira-sans-condensed-semibold;
   fill: $neutral-dark;
   font-size:13px;
 }
-
 .portSelectedProvinceLabel{
   font-family: $fira-sans-condensed-semibold;
   fill: $neutral-white;
   font-size:13px;
 }
-
 .portName{
   font-family: $fira-sans-condensed-semibold;
   fill: $neutral-medium;
   font-size: 60px;
 }
-
 .provinceSelected{
   fill: $sand-dark;
 }

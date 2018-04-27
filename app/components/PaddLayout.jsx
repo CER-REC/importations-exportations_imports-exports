@@ -7,6 +7,7 @@ import PaddMapPiece from './PaddMapPiece'
 import MapLayoutGridConstant from '../MapLayoutGridConstant'
 import Constants from '../Constants'
 import { PaddSelector } from '../selectors/Padd'
+import { aggregateLocationPaddData } from '../selectors/data'
 import TRSelector from '../selectors/translate'
 import Tr from '../TranslationTable'
 
@@ -270,9 +271,12 @@ class PaddLayout extends React.Component {
   }
   onPaddClick( props, paddGroup ) {
     const { selctionState } = props
+    let { country } = props
     let origins = []
-    let country = props.country
-    if (selctionState.get('country') === country) {
+    if (country === 'ca') {
+      origins = []
+      country = null
+    } else if (selctionState.get('country') === country) {
       const paddGroupExists = selctionState.get('origins').indexOf(paddGroup)
       if (paddGroupExists === -1) {
         origins = selctionState.get('origins').push(paddGroup).toJS()
@@ -293,17 +297,13 @@ class PaddLayout extends React.Component {
   }
 
   renderDefault(props) {
-    const paddData = Array
-      .from(props.Padd)
-      .sort((a, b) => b[1].get('value') - a[1].get('value'))
     let left = 0
     const paddingBetweenSortedElement = 80
-    const layout = paddData.reduce((acc, currentValue) => {
-      let paddLayout = null
-      if (currentValue[0] !== 'ca') {
-        const paddGroup = currentValue[1].get('destination')
-        const text = props.TRSelector(['Padd', props.country, paddGroup])
-        const paddValue = (props.selctionState.get('origins').count() > 0 && props.selctionState.get('country') === 'ca' && props.selectedEnergy === 'naturalGasLiquids')? 0: currentValue[1].get('value')
+    const layout = props.paddData
+      .sort((a, b) => b.get('value', 0) - a.get('value', 0))
+      .reduce((acc, paddDetails, paddGroup) => {
+        let paddLayout = null
+        const paddValue = paddDetails.get('value')
         const color = this.getPaddColor(paddValue)
         switch (paddGroup) {
           case 'PADD I':
@@ -326,29 +326,34 @@ class PaddLayout extends React.Component {
             paddLayout = <PaddNonUSA color={color} />
             break
         }
-        if (paddLayout !== null) {
-          paddLayout = (<g className="paddLayout" fillOpacity={this.getOpacityOfPadd(props, paddGroup)}  key={`${props.arrangeBy}_${currentValue[1].get('destination')}`} transform={`translate(${left} 0)`}
-              {...handleInteractionWithTabIndex(this.getTabIndex(props.country), this.onPaddClick, props, paddGroup)}
-            >
-            {paddLayout}
-            { this.getArrow(
-                props.arrangeBy, 
-                paddGroup, 
-                0, 
-                0, 
-                color, 
-                currentValue[1].get('confidentialCount', 0), 
-                currentValue[1].get('totalCount'), 
-                left
-              ) }
-          </g>)
-          acc.push(paddLayout)
-          left += paddingBetweenSortedElement
-        }
-      }
+        if (paddLayout === null) { return acc }
 
-      return acc
-    }, [])
+        paddLayout = (
+          <g
+            className="paddLayout"
+            fillOpacity={this.getOpacityOfPadd(props, paddGroup)}
+            key={`${props.arrangeBy}_${paddGroup}`}
+            transform={`translate(${left} 0)`}
+            {...handleInteractionWithTabIndex(this.getTabIndex(props.country), this.onPaddClick, props, paddGroup)}
+          >
+            {paddLayout}
+            {this.getArrow(
+              props.arrangeBy,
+              paddGroup,
+              0,
+              0,
+              color,
+              paddDetails.get('confidentialCount', 0),
+              paddDetails.get('totalCount', 0),
+              left,
+            )}
+          </g>
+        )
+        acc.push(paddLayout)
+        left += paddingBetweenSortedElement
+
+        return acc
+      }, [])
     return layout
   }
   getMapPieceTextColor(value){
@@ -370,8 +375,13 @@ class PaddLayout extends React.Component {
     const layout = mapLayoutGrid.get('layout').filter(point => point.get('paddGroup') === props.paddGroup)
     const paddGroup = Constants.getIn(['dataloader', 'mapping', 'padd', props.country, props.paddGroup])
     const data = props.Padd.get(paddGroup)
-    if(data){
-    const paddValue = (props.selctionState.get('origins').count() > 0 && props.selctionState.get('country') === 'ca' && props.selectedEnergy === 'naturalGasLiquids')? 0: data.get('value')
+    if (!data) { return null }
+    const paddValue = props.paddGroup !== 'ca'
+      ? props.paddData.getIn([props.paddGroup, 'value'])
+      : (
+        props.paddData.reduce((acc, next) => acc + next.get('value'), 0) /
+        Constants.getIn(['dataloader', 'mapping', 'padd', 'us']).count()
+      )
     const color = this.getPaddColor(paddValue)
     return (<g className="paddLayout" fillOpacity={this.getOpacityOfPadd(props, paddGroup)}
       {...handleInteractionWithTabIndex(this.getTabIndex(props.country) , this.onPaddClick, props, paddGroup)}
@@ -409,8 +419,6 @@ class PaddLayout extends React.Component {
         data.get('totalCount', 0),
       )}
     </g>)
-    }
-    return null
   }
   renderPaddMapPiece() {
     if (this.props.arrangeBy === 'location' || this.props.country === 'ca') {
@@ -437,6 +445,7 @@ const mapStateToProps = (state, props) => ({
   confidentialityMenu: state.confidentialityMenu,
   selectedEnergy: state.importExportVisualization,
   expandCollapseConfidentiality: state.expandCollapseConfidentiality,
+  paddData: aggregateLocationPaddData(state, props),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(PaddLayout)

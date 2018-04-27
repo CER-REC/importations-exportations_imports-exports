@@ -95,7 +95,7 @@ class MapPiece extends React.Component {
     if (this.props.selectedEnergy === 'electricity'
       && this.props.data.get('name') === 'NB' ) {
       const scaleContainerX = this.props.viewport.get('changeWidthRatio')  > 1.2 ? 290: 270
-      const scaleContainerY = this.props.viewport.get('changeHeightRatio')  > 1.2 ? 75: 70
+      const scaleContainerY = this.props.viewport.get('changeHeightRatio')  > 1.2 ? 45: 40
       return (<g>
         <ExplanationDot
           scale="scale(1)"
@@ -125,7 +125,7 @@ class MapPiece extends React.Component {
   vermontExplanation() {
     if (this.props.data.get('name') !== 'VT') { return null }
     const scaleContainerX = this.props.viewport.get('changeWidthRatio')  > 1.2 ? 185: 190
-    const scaleContainerY = this.props.viewport.get('changeHeightRatio')  > 1.2 ? 370: 405
+    const scaleContainerY = this.props.viewport.get('changeHeightRatio')  > 1.2 ? 410: 435
     return (<g>
       <ExplanationDot
         scale="scale(1)"
@@ -153,8 +153,8 @@ class MapPiece extends React.Component {
 
   washingtonExplanation() {
     if (this.props.data.get('name') !== 'WA') { return null }
-    const scaleContainerX = this.props.viewport.get('changeWidthRatio')  > 1.2 ? 20: -5
-    const scaleContainerY = this.props.viewport.get('changeHeightRatio')  > 1.2 ? 370: 410
+    const scaleContainerX = this.props.viewport.get('changeWidthRatio')  > 1.2 ? 28: -5
+    const scaleContainerY = this.props.viewport.get('changeHeightRatio')  > 1.2 ? 400: 440
     return (<g>
       <ExplanationDot
         scale="scale(1) scale(-1 1)"
@@ -183,7 +183,7 @@ class MapPiece extends React.Component {
   britishColumbiaExplanation() {
     if (this.props.data.get('name') !== 'BC' || this.props.selectedEnergy === 'naturalGasLiquids') { return null }
     const scaleContainerX = this.props.viewport.get('changeWidthRatio')  > 1.2 ? 285: 270
-    const scaleContainerY = this.props.viewport.get('changeHeightRatio')  > 1.2 ? -10: -30
+    const scaleContainerY = this.props.viewport.get('changeHeightRatio')  > 1.2 ? -40: -60
     return (<g>
       <ExplanationDot
         scale="scale(1 -1) translate(0 -100)"
@@ -241,8 +241,66 @@ class MapPiece extends React.Component {
         textY={58}
         containerX={this.props.viewport.get('changeWidthRatio') * (this.props.x1 + scaleContainerX)}
         containerY={this.props.viewport.get('changeHeightRatio') * (this.props.y1 + scaleContainerY)}
-        name="emersonElectricity"
+        name="emersonExplanation"
         text={textString}
+    /></g>)
+  }
+
+  cngExplanation() {
+    if (this.props.data.get('portName') !== 'CNG') { return null }
+    const scaleContainerX = this.props.viewport.get('changeWidthRatio') > 1.2 ? -40 : -53
+    const scaleContainerY = this.props.viewport.get('changeHeightRatio') > 1.2 ? 255 : 270
+    return (<g>
+      <ExplanationDot
+        scale="scale(0.7) scale(-1 1) translate(-135 0)"
+        lineStroke="1.3"
+        textBoxWidth={210}
+        linePath="
+          M142.16,
+          173.94l24.26,
+          36.69a40.12,
+          40.12,0,0,0,
+          33.47,
+          18H514.2"
+        xPosition={-10}
+        yPosition={20}
+        lineX={344.16}
+        lineY={173}
+        textX={0}
+        textY={38}
+        containerX={this.props.viewport.get('changeWidthRatio') * (this.props.x1 + scaleContainerX)}
+        containerY={this.props.viewport.get('changeHeightRatio') * (this.props.y1 + scaleContainerY)}
+        name="cngExplanation"
+        text={`${this.props.tr(['explanations','cng'])}`}
+    /></g>)
+  }
+
+  lngExplanation() {
+    if (this.props.data.get('portName') !== 'LNG Other') { return null }
+    const scaleContainerX = this.props.viewport.get('changeWidthRatio') > 1.2 ? -83 : -35
+    const scaleContainerY = this.props.viewport.get('changeHeightRatio') > 1.2 ? 239 : 268
+    return (<g>
+      <ExplanationDot
+        scale="scale(0.8) scale(-1.2 1) translate(-100 20)"
+        lineStroke="1.3"
+        textBoxWidth={190}
+        linePath="
+          M142.16,
+          173.94l24.26,
+          36.69a40.12,
+          40.12,0,0,0,
+          33.47,
+          18H384.2"
+        xPosition={-10}
+        yPosition={20}
+        lineX={344.16}
+        lineY={173}
+        textX={58}
+        textY={62}
+        containerX={this.props.viewport.get('changeWidthRatio') * (this.props.x1 + scaleContainerX)}
+        containerY={this.props.viewport.get('changeHeightRatio') * (this.props.y1 + scaleContainerY)}
+        name="lngExplanation"
+        text={`${this.props.tr(['explanations','lng'])}`}
     /></g>)
   }
 
@@ -415,6 +473,8 @@ class MapPiece extends React.Component {
         {this.emersonExplanation()}
         {this.albertaExplanation()}
         {this.atlqExplanation()}
+        {this.cngExplanation()}
+        {this.lngExplanation()}
       </g>
     )
 

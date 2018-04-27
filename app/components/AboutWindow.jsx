@@ -198,7 +198,7 @@ class AboutWindow extends React.Component {
 
   render() {
     return (
-      <div id="aboutWindow" className="aboutWindow">
+      <div>
         { this.closeButton() }
         { this.heading() }
         { this.intro() }

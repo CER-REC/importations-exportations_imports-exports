@@ -728,6 +728,19 @@ const MapLayoutGridConstant = fromJS({
         exclamationFill: '#fff',
       },
     },
+    stylesVariant: {
+      color: '#b6a57e',
+      labelPosition: 'down',
+      arrowPosition: 'down',
+      arrowSpacing: -12,
+      bottomMargin: 5,
+      topMargin: 15,
+      confidentialStyle: {
+        fill: '#999',
+        stroke: '#999',
+        exclamationFill: '#fff',
+      },
+    },
     layout: [
       'BC',
       'AB',
@@ -736,6 +749,7 @@ const MapLayoutGridConstant = fromJS({
       'ON',
       'QC',
       'NB',
+      'CAD',
     ],
   },
 })

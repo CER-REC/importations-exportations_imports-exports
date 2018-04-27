@@ -88,7 +88,7 @@ class NaturalGasMapContainer extends React.PureComponent {
     const mapLayoutGrid = MapLayoutGridConstant.get(type)
     const tabIndex = Constants.getIn(['tabIndex', 'start', 'visualization', 'naturalGasMap'])
     const dimensions = mapLayoutGrid.get('dimensions')
-    const styles = mapLayoutGrid.get('styles')
+    
     let layout = mapLayoutGrid.get('layout')
     const mapPieceScale = mapLayoutGrid.get('mapPieceScale')
     const rowPadding = 0
@@ -101,7 +101,7 @@ class NaturalGasMapContainer extends React.PureComponent {
       const ports = arrangedData.get(value, fromJS({}))
       const portsCount = ports.count()
       const maximunRows = portsCount > 7 ? Math.ceil(portsCount / 2): portsCount
-      
+
       let renderingNumber = 1
       let leftRendered = 0
       let row = 1
@@ -122,6 +122,14 @@ class NaturalGasMapContainer extends React.PureComponent {
         }
         topPadding += rowPadding
         row +=1
+
+        let styles = mapLayoutGrid.get('styles')
+        let textClass = 'portLabel'
+        if(port.get('portName') === 'CNG' || port.get('portName') === 'LNG Other') {
+          styles = mapLayoutGrid.get('stylesVariant')
+          textClass = 'portLabelWhite'
+        } 
+
         return (<g key={`NaturalGasMapPiece_${port.get('Province')}_${port.get('portName')}`} 
           {...handleInteractionWithTabIndex(tabIndex, this.onClick, port.get('portName'))}
           transform={`scale(${mapPieceScale})`}>
@@ -135,7 +143,7 @@ class NaturalGasMapContainer extends React.PureComponent {
               isSelected={this.isSelected()}
               isOrigin={true}
               mapPieceKey='portName'
-              mapPieceStyleClass = 'portLabel'
+              mapPieceStyleClass = {textClass}
               x1={left}
               y1={top}
             />
@@ -157,10 +165,11 @@ class NaturalGasMapContainer extends React.PureComponent {
       const isProvinceSelected = this.props.selectionSettings.get('provinces').indexOf(value)
       const provinceClass = isProvinceSelected !== -1 ? 'provinceSelected': 'provinceDeselected'
       const provinceTextColor = isProvinceSelected !== -1 ? 'portSelectedProvinceLabel' : 'portProvinceLabel'
+
       return (
         <g className="paddLayout" key={`NaturalGasMap_${value}`} >
           <rect className = {provinceClass} x={ provinceTextPosition - 9} y={dimensions.get('topPadding')}
-            width="29" height="15" fill="none" stroke="#a99372" strokeWidth="0.75"/>
+            width='32' height="15" fill="none" stroke="#a99372" strokeWidth="0.75"/>
           <text className={provinceTextColor} x={ provinceTextPosition -3} y={dimensions.get('topPadding') + 13} 
           {...handleInteractionWithTabIndex(tabIndex, this.onClick, '', value)}>{value}</text>
           {mapLayout.toArray()}

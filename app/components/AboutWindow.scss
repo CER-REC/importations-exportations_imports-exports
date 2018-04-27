@@ -1,22 +1,22 @@
-.aboutWindow {
+dialog.about {
   width:570px;
   height: auto;
-}
 
-.intro {
-  position: relative;
-  width: 90%;
-}
+  .intro {
+    position: relative;
+    width: 90%;
+  }
 
-.aboutBodyText {
-  margin-top: -15px;
-  width: 90%;
-}
+  .aboutBodyText {
+    margin-top: -15px;
+    width: 90%;
+  }
 
-.contributorsSection {
-  margin-top: -10px;
-}
+  .contributorsSection {
+    margin-top: -10px;
+  }
 
-.attributionsSection {
-  margin-top: -10px;
+  .attributionsSection {
+    margin-top: -10px;
+  }
 }

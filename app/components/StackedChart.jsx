@@ -29,6 +29,7 @@ class StackedChart extends Chart {
   updateAxisGuide = position => this.setState({ axisGuide: position })
 
   refinedPetroleumProductsBar() {
+    if (this.props.selectedEnergy !== 'refinedPetroleumProducts') { return null}
     return (<g>
       <ExplanationDot
         scale="scale(1)"
@@ -56,6 +57,7 @@ class StackedChart extends Chart {
   }
 
   confidentialityExplanation() {
+    if (this.props.selectedEnergy !== 'refinedPetroleumProducts') { return null}
     return (<g>
       <ExplanationDot
         scale="scale(1)"
@@ -104,7 +106,13 @@ class StackedChart extends Chart {
       .map(([key]) => key)
 
     const heightPerUnit = height / (scale.getIn(['y', 'max']) - scale.getIn(['y', 'min']))
-    const elements = data.map((point) => {
+    const averagedPoints = (data.first().has('sumForAvg') === false)
+      ? data
+      : data.map(point => point.set('values', point.get('sumForAvg').map((v) => {
+        if (v.get('divisor', 0) === 0) { return 0 }
+        return v.get('value') / v.get('divisor')
+      })))
+    const elements = averagedPoints.map((point) => {
       const opacity = this.isTimelinePointFiltered(point) ? 0.5 : 1
       let offsetY = 0
       let stackIndex = 0
@@ -112,7 +120,10 @@ class StackedChart extends Chart {
         .get('values')
         .sortBy((v, k) => k, (a, b) => (valueOrder.indexOf(a) - valueOrder.indexOf(b)))
         .map((value, type) => {
-          const lineColor = categoryColours.getIn([selectedEnergy, type], Constants.getIn(['styleGuide', 'colours', 'ExportDefault']))
+          const colorPath = this.props.aggregateKey
+            ? [selectedEnergy, this.props.aggregateKey, type]
+            : [selectedEnergy, type]
+          const lineColor = categoryColours.getIn(colorPath, Constants.getIn(['styleGuide', 'colours', 'ExportDefault']))
           const line = (
             <AnimatedLine
               x1={point.get('offsetX')}
@@ -139,7 +150,7 @@ class StackedChart extends Chart {
         {this.refinedPetroleumProductsBar()}
         {this.confidentialityExplanation()}
         <AxisGuide
-          flipped
+          flipped={this.props.flipped}
           scale={scale.get('y').toJS()}
           position={this.state.axisGuide}
           chartHeight={height}
