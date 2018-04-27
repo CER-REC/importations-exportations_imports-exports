@@ -51,13 +51,13 @@ class Legend extends React.Component {
             {Constants.getIn(['styleGuide', 'importColours']).map((color, i) => (
               <LegendArrow
                 key={`import-${color}`}
-                yPosition={(i * 20) + 33}
+                yPosition={(i * 20) + yPosition}
                 colour={color}
               />
             )).toArray()}
           </g>
         </g>
-        <g transform="translate(0 13)"><LegendArrow colour="#ede3cb"/></g>
+        <g transform="translate(0 13)">{zeroArrow}</g>
       </g>
     )
   }
@@ -89,12 +89,12 @@ class Legend extends React.Component {
             <LegendArrow
               exportArrow="rotate(180, 15, 5.5)"
               key={`import-${color}`}
-              yPosition={(i * 20) + 33}
+              yPosition={(i * 20) + yPosition}
               colour={color}
             />
           )).toArray()}
         </g>
-        <g transform="translate(41 13) rotate(180, 15, 5.5)"><LegendArrow colour="#ede3cb"/></g>
+        <g transform="translate(41 13)">{zeroArrow}</g>
       </g>
     )
   }
@@ -111,12 +111,18 @@ class Legend extends React.Component {
     return (
         <g transform={transformString}>
           {bins.map((value, i) => {
-            if (value[0] === Number.MIN_SAFE_INTEGER) {
+            if (value[0] === Number.MIN_SAFE_INTEGER && this.props.importExportVisualization === 'electricity') {
               return (
                 <text className="theLegendValues" y={(i * 20) + 20} x="34" key={`bin-${i}`}>
                   &lt;={humanNumberLang(value[1])}
                 </text>
               )
+            if (value[0] === Number.MIN_SAFE_INTEGER && this.props.importExportVisualization === 'naturalGas') {
+                return (<text className="theLegendValues" y={(i * 20) + 20} x="34" key={`bin-${i}`}>
+                  ={(i * 20) + 20} x="34" key={`bin-${i}`}>
+                  {humanNumberLang(value[1])}
+                </text>)
+              }
             }
             if (value[1] === Number.MAX_SAFE_INTEGER) {
               return (
@@ -137,7 +143,7 @@ class Legend extends React.Component {
               </g>
             )
           })}
-          <text className="theLegendValues">0</text>
+          <text className="theLegendValues">{zeroText}</text>
         </g>
     )
   }
