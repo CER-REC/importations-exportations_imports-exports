@@ -20,19 +20,73 @@
   top: 50%;
   left: 50%;
   position: relative;
-  -webkit-animation: spin 2s linear infinite; /* Safari */
-  animation: spin 2s linear infinite;
+  -webkit-animation: spin 2.4s 0s infinite both ease-out;
+  animation: spin 2.4s 0s infinite both ease-out;
+}
+
+/* Thanks to Ana at https://stackoverflow.com/questions/12813573/position-icons-into-circle for this trick */
+.circle-elements div:nth-child(1) {
+    animation-delay: 0s;
+    transform:  translate(3em);
+}
+
+.circle-elements div:nth-child(2) {
+    animation-delay: .3s;
+    transform: rotate(45deg) translate(3em) rotate(-45deg);
+}
+
+.circle-elements div:nth-child(3) {
+    animation-delay: .6s;
+    transform: rotate(90deg) translate(3em) rotate(-90deg); 
+}
+
+.circle-elements div:nth-child(4) {
+    animation-delay: .9s;
+    transform: rotate(135deg) translate(3em) rotate(-135deg);
+}
+
+.circle-elements div:nth-child(5) {
+    animation-delay: 1.2s;
+    transform: translate(-3em);
+}
+
+.circle-elements div:nth-child(6) {
+    animation-delay: 1.5s;
+    transform: rotate(225deg) translate(3em) rotate(-225deg);
+}
+
+.circle-elements div:nth-child(7) {
+    animation-delay: 1.8s;
+    transform: rotate(270deg) translate(3em) rotate(-270deg);
+}
+
+.circle-elements div:nth-child(8) {
+    animation-delay: 2.1s;
+    transform: rotate(315deg) translate(3em) rotate(-315deg);
+}
+
+.circle {
+  -webkit-animation: spin 2.4s 0s infinite both ease-out;
+  animation: spin 2.4s 0s infinite both ease-out;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  border-radius: 50%;
+  width: .9em; height: .9em;
+  display: block;
+  position: absolute;
 }
 
 /* Safari */
-@-webkit-keyframes spin {
-  0% { -webkit-transform: rotate(0deg); }
-  100% { -webkit-transform: rotate(360deg); }
+@-webkit-keyframes spin{
+  0%,
+  100% { -webkit-opacity: 0.1; }
+  30% { -webkit-opacity: 1; }
 }
 
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0%,
+  100% { opacity: 0.1; }
+  30% { opacity: 1; }
 }
 
 :focus, a:focus, a:active { outline: 2px solid $explanation; }
