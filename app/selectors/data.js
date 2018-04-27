@@ -175,12 +175,12 @@ export const filterByHex = (point, selectedMapPieces, visualization, selectionSt
     }
     return selectedMapPieces.includes(point.get('destination')) || selectedMapPieces.includes(point.get('destinationKey'))
   }
-  if(visualization === 'electricity'){
+  if (visualization === 'electricity') {
     const origins = selectionState.get('origins')
-    return origins.includes(point.get('destination')) 
-    || origins.includes(point.get('destinationKey'))
-    || origins.includes(point.get('originKey'))
-    || origins.includes(point.get('origin'))
+    return origins.includes(point.get('destination'))
+      || origins.includes(point.get('destinationKey'))
+      || origins.includes(point.get('originKey'))
+      || origins.includes(point.get('origin'))
   }
   return selectedMapPieces.includes(point.get('originKey'))
   || selectedMapPieces.includes(point.get('origin'))
@@ -198,7 +198,8 @@ export const filterByHexSelector = createSelector(
   selectedPieces,
   selectedVisualization,
   selection,
-  (points, selectedMapPieces, visualization, selectionState) => points.filter(point => filterByHex(point, selectedMapPieces, visualization, selectionState)),
+  (points, selectedMapPieces, visualization, selectionState) => points
+    .filter(point => filterByHex(point, selectedMapPieces, visualization, selectionState)),
 )
 
 export const filterByTimelineAndHexData = createSelector(

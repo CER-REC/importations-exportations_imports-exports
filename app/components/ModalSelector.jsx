@@ -42,7 +42,7 @@ class ModalSelector extends React.PureComponent {
     const { modal } = this.props
     if (modal === 'about') { return <AboutWindow closeModal={this.close} /> }
     if (modal === 'imageDownload') { return <ImageDownloadWindow closeModal={this.close} /> }
-    if (modal === 'dataDownload') { return <DataDownloadWindow closeModal={this.close} />}
+    if (modal === 'dataDownload') { return <DataDownloadWindow closeModal={this.close} /> }
     return null
   }
 
@@ -51,7 +51,13 @@ class ModalSelector extends React.PureComponent {
     if (content === null) { return null }
 
     return (
-      <dialog onClose={this.dialogClosed} ref={this.registerDialog}>{content}</dialog>
+      <dialog
+        onClose={this.dialogClosed}
+        ref={this.registerDialog}
+        className={this.props.modal}
+      >
+        {content}
+      </dialog>
     )
   }
 }

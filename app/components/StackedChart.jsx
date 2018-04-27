@@ -29,6 +29,7 @@ class StackedChart extends Chart {
   updateAxisGuide = position => this.setState({ axisGuide: position })
 
   refinedPetroleumProductsBar() {
+    if (this.props.selectedEnergy !== 'refinedPetroleumProducts') { return null}
     return (<g>
       <ExplanationDot
         scale="scale(1)"
@@ -56,6 +57,7 @@ class StackedChart extends Chart {
   }
 
   confidentialityExplanation() {
+    if (this.props.selectedEnergy !== 'refinedPetroleumProducts') { return null}
     return (<g>
       <ExplanationDot
         scale="scale(1)"
