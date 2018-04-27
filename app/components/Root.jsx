@@ -11,7 +11,7 @@ import TrSelector from '../selectors/translate'
 import '../styles/Common.scss'
 
 const Root = ({ dataLoadingComplete, viewport }) => {
-  //if (dataLoadingComplete) { return <div><Workspace /></div> }
+  if (dataLoadingComplete) { return <div><Workspace /></div> }
 
   const loaderStyle = {
     height: viewport.get('y'),
@@ -19,13 +19,24 @@ const Root = ({ dataLoadingComplete, viewport }) => {
   }
 
   return <div style={loaderStyle}>
-    <div className="loader" />
+    
       <p className="loadingVisualization">loading visualization</p>
         <span className="loadingImports">Imports
           <span className="loadingAnd"> and </span>
           <span className="loadingExports">Exports</span>
         </span>
         <p className="loadingVisualizationTwo">of Energy Products to and from Canada</p>
+
+        <div className="circle-elements">
+            <div className="circle export deg315"/>
+            <div className="circle export deg0"/>
+            <div className="circle export deg45"/>
+            <div className="circle export deg90"/>
+            <div className="circle import deg135"/>
+            <div className="circle import deg180"/>
+            <div className="circle import deg225"/>
+            <div className="circle import deg270"/>
+        </div>
     </div>
 }
 

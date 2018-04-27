@@ -11,71 +11,6 @@
 /* Don't use the pointer cursor for the legend */
 .mapPiece.legend { cursor: inherit; }
 
-.loader {
-  border: 16px solid #f3f3f3;
-  border-radius: 50%;
-  border-top: 16px solid #3498db;
-  width: 120px;
-  height: 120px;
-  top: 50%;
-  left: 50%;
-  position: relative;
-  -webkit-animation: spin 2.4s 0s infinite both ease-out;
-  animation: spin 2.4s 0s infinite both ease-out;
-}
-
-/* Thanks to Ana at https://stackoverflow.com/questions/12813573/position-icons-into-circle for this trick */
-.circle-elements div:nth-child(1) {
-    animation-delay: 0s;
-    transform:  translate(3em);
-}
-
-.circle-elements div:nth-child(2) {
-    animation-delay: .3s;
-    transform: rotate(45deg) translate(3em) rotate(-45deg);
-}
-
-.circle-elements div:nth-child(3) {
-    animation-delay: .6s;
-    transform: rotate(90deg) translate(3em) rotate(-90deg); 
-}
-
-.circle-elements div:nth-child(4) {
-    animation-delay: .9s;
-    transform: rotate(135deg) translate(3em) rotate(-135deg);
-}
-
-.circle-elements div:nth-child(5) {
-    animation-delay: 1.2s;
-    transform: translate(-3em);
-}
-
-.circle-elements div:nth-child(6) {
-    animation-delay: 1.5s;
-    transform: rotate(225deg) translate(3em) rotate(-225deg);
-}
-
-.circle-elements div:nth-child(7) {
-    animation-delay: 1.8s;
-    transform: rotate(270deg) translate(3em) rotate(-270deg);
-}
-
-.circle-elements div:nth-child(8) {
-    animation-delay: 2.1s;
-    transform: rotate(315deg) translate(3em) rotate(-315deg);
-}
-
-.circle {
-  -webkit-animation: spin 2.4s 0s infinite both ease-out;
-  animation: spin 2.4s 0s infinite both ease-out;
-  -webkit-border-radius: 50%;
-  -moz-border-radius: 50%;
-  border-radius: 50%;
-  width: .9em; height: .9em;
-  display: block;
-  position: absolute;
-}
-
 /* Safari */
 @-webkit-keyframes spin{
   0%,
@@ -88,6 +23,74 @@
   100% { opacity: 0.1; }
   30% { opacity: 1; }
 }
+
+.circle-elements div {
+  -webkit-animation: spin 2.4s 0s infinite both ease-out;
+  animation: spin 2.4s 0s infinite both ease-out;
+  margin: 0;
+  padding: 0;
+}
+
+.circle-elements div:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.circle-elements div:nth-child(2) {
+  animation-delay: .3s;
+}
+
+.circle-elements div:nth-child(3) {
+  animation-delay: .6s;
+}
+
+.circle-elements div:nth-child(4) {
+  animation-delay: .9s;
+}
+
+.circle-elements div:nth-child(5) {
+  animation-delay: 1.2s;
+}
+
+.circle-elements div:nth-child(6) {
+  animation-delay: 1.5s;
+}
+
+.circle-elements div:nth-child(7) {
+  animation-delay: 1.8s;
+}
+
+.circle-elements div:nth-child(8) {
+  animation-delay: 2.1s;
+}
+
+.import {
+  background-color: rgb(255, 119, 76);
+}
+
+.export {
+  background-color: rgb(28, 100, 178);
+}    
+
+.circle {
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  border-radius: 50%;
+  width: .9em; height: .9em;
+  display: block;
+  position: absolute;
+  top: calc(50% - .45em); 
+  left: calc(50% - .45em);
+}
+
+/* Thanks to Ana at https://stackoverflow.com/questions/12813573/position-icons-into-circle for this trick */
+.deg0 { transform:  translate(3em); }
+.deg45 { transform: rotate(45deg) translate(3em) rotate(-45deg); }
+.deg90 { transform: rotate(90deg) translate(3em) rotate(-90deg); }
+.deg135 { transform: rotate(135deg) translate(3em) rotate(-135deg); }
+.deg180 { transform: translate(-3em); }
+.deg225{ transform: rotate(225deg) translate(3em) rotate(-225deg); }
+.deg270{ transform: rotate(270deg) translate(3em) rotate(-270deg); }
+.deg315{ transform: rotate(315deg) translate(3em) rotate(-315deg); }
 
 :focus, a:focus, a:active { outline: 2px solid $explanation; }
 #workspace { outline: none; }
