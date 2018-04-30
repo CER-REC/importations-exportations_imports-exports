@@ -30,7 +30,7 @@ const TranslationTable = fromJS({
   loader: {
     titleText: {
       en:'loading visualisation',
-      fr: 'visualisation de chargement',
+      fr: 'visualisation en chargement',
     },
     imports: {
       en: 'Imports',
@@ -46,7 +46,7 @@ const TranslationTable = fromJS({
     },
     titleText_2: {
       en: 'of Energy Products to and from Canada',
-      fr: 'à destination et en provenance du Canada',
+      fr: 'des produits énergétiques à destination et en provenance du Canada',
     },
   },
 
