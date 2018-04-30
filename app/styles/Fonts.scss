@@ -360,21 +360,16 @@
   fill: #666;
 }
 .loadingVisualization {
-  margin-top:18%;
   font-family: $fira-sans-condensed;
   font-size: 15px;
   color: rgb(102,102,102);
   text-align: center;
-  padding-bottom: 20px;
 }
 .loadingImports {
-  position: absolute;
   font-family: $fira-sans-condensed;
   text-align: center;
   font-size: 25px;
   color: rgb(255, 119, 76);
-  left: 50%;
-  transform: translate(-50%, -50%);
 }
 .loadingAnd {
   font-family: $fira-sans-condensed;
@@ -386,10 +381,9 @@
   color: rgb(28, 100, 178);
 }
 .loadingVisualizationTwo {
-  position: abolute;
   font-family: $fira-sans-condensed;
   font-size: 16px;
   text-align: center;
   color: rgb(77,77,77);
-  margin-top: 30px;
+  margin-top: 2%;
 }

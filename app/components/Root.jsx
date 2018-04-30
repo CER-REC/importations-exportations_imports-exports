@@ -20,15 +20,20 @@ const Root = ({ dataLoadingComplete, viewport, language}) => {
 
   return <div style={loaderStyle}>
     
+      <div className="containerOne">    
       <p className="loadingVisualization">{Tr.getIn(['loader', 'titleText', language])}</p>
+
+      <div className="titleContainer">
         <span className="loadingImports">{Tr.getIn(['loader', 'imports', language])}
           <span className="loadingAnd"> {Tr.getIn(['loader', 'and', language])} </span>
           <span className="loadingExports">{Tr.getIn(['loader', 'exports', language])}</span>
         </span>
-        <p className="loadingVisualizationTwo">{Tr.getIn(['loader', 'titleText_2', language])}
-        </p>
+      </div>
 
-        <div className="circle-elements">
+          <p className="loadingVisualizationTwo">{Tr.getIn(['loader', 'titleText_2', language])}</p>
+      </div>
+
+        <div className="circle-elements containerTwo">
             <div className="circle export"/>
             <div className="circle export"/>
             <div className="circle export"/>
@@ -39,6 +44,7 @@ const Root = ({ dataLoadingComplete, viewport, language}) => {
             <div className="circle export"/>
         </div>
     </div>
+
 }
 
 Root.propTypes = {
