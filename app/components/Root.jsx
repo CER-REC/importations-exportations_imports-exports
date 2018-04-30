@@ -10,7 +10,7 @@ import Tr from '../TranslationTable'
 import TrSelector from '../selectors/translate'
 import '../styles/Common.scss'
 
-const Root = ({ dataLoadingComplete, viewport }) => {
+const Root = ({ dataLoadingComplete, viewport, language}) => {
   if (dataLoadingComplete) { return <div><Workspace /></div> }
 
   const loaderStyle = {
@@ -20,22 +20,23 @@ const Root = ({ dataLoadingComplete, viewport }) => {
 
   return <div style={loaderStyle}>
     
-      <p className="loadingVisualization">loading visualization</p>
-        <span className="loadingImports">Imports
-          <span className="loadingAnd"> and </span>
-          <span className="loadingExports">Exports</span>
+      <p className="loadingVisualization">{Tr.getIn(['loader', 'titleText', language])}</p>
+        <span className="loadingImports">{Tr.getIn(['loader', 'imports', language])}
+          <span className="loadingAnd"> {Tr.getIn(['loader', 'and', language])} </span>
+          <span className="loadingExports">{Tr.getIn(['loader', 'exports', language])}</span>
         </span>
-        <p className="loadingVisualizationTwo">of Energy Products to and from Canada</p>
+        <p className="loadingVisualizationTwo">{Tr.getIn(['loader', 'titleText_2', language])}
+        </p>
 
         <div className="circle-elements">
-            <div className="circle export deg315"/>
-            <div className="circle export deg0"/>
-            <div className="circle export deg45"/>
-            <div className="circle export deg90"/>
-            <div className="circle import deg135"/>
-            <div className="circle import deg180"/>
-            <div className="circle import deg225"/>
-            <div className="circle import deg270"/>
+            <div className="circle export"/>
+            <div className="circle export"/>
+            <div className="circle export"/>
+            <div className="circle import"/>
+            <div className="circle import"/>
+            <div className="circle import"/>
+            <div className="circle import"/>
+            <div className="circle export"/>
         </div>
     </div>
 }
@@ -49,7 +50,6 @@ Root.propTypes = {
 const mapStateToProps = (state, props) => ({
   viewport: state.viewport,
   dataLoadingComplete: state.dataLoadingComplete,
-  Tr: TrSelector(state, props),
   language: state.language,
 })
 

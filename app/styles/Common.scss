@@ -32,34 +32,42 @@
 }
 
 .circle-elements div:nth-child(1) {
+  transform: translate(3em); animation-delay: 0s;
   animation-delay: 0s;
 }
 
 .circle-elements div:nth-child(2) {
+  transform: rotate(45deg) translate(3em) rotate(-45deg);
   animation-delay: .3s;
 }
 
 .circle-elements div:nth-child(3) {
+  transform: rotate(90deg) translate(3em) rotate(-90deg);
   animation-delay: .6s;
 }
 
 .circle-elements div:nth-child(4) {
+  transform: rotate(135deg) translate(3em) rotate(-135deg);
   animation-delay: .9s;
 }
 
 .circle-elements div:nth-child(5) {
+  transform: translate(-3em);
   animation-delay: 1.2s;
 }
 
 .circle-elements div:nth-child(6) {
+  transform: rotate(225deg) translate(3em) rotate(-225deg);
   animation-delay: 1.5s;
 }
 
 .circle-elements div:nth-child(7) {
+  transform: rotate(270deg) translate(3em) rotate(-270deg);
   animation-delay: 1.8s;
 }
 
 .circle-elements div:nth-child(8) {
+  transform: rotate(315deg) translate(3em) rotate(-315deg);
   animation-delay: 2.1s;
 }
 
@@ -81,16 +89,6 @@
   top: calc(50% - .45em); 
   left: calc(50% - .45em);
 }
-
-/* Thanks to Ana at https://stackoverflow.com/questions/12813573/position-icons-into-circle for this trick */
-.deg0 { transform:  translate(3em); }
-.deg45 { transform: rotate(45deg) translate(3em) rotate(-45deg); }
-.deg90 { transform: rotate(90deg) translate(3em) rotate(-90deg); }
-.deg135 { transform: rotate(135deg) translate(3em) rotate(-135deg); }
-.deg180 { transform: translate(-3em); }
-.deg225{ transform: rotate(225deg) translate(3em) rotate(-225deg); }
-.deg270{ transform: rotate(270deg) translate(3em) rotate(-270deg); }
-.deg315{ transform: rotate(315deg) translate(3em) rotate(-315deg); }
 
 :focus, a:focus, a:active { outline: 2px solid $explanation; }
 #workspace { outline: none; }
