@@ -11,7 +11,7 @@ import TrSelector from '../selectors/translate'
 import '../styles/Common.scss'
 
 const Root = ({ dataLoadingComplete, viewport, language}) => {
-  if (dataLoadingComplete) { return <div><Workspace /></div> }
+  //if (dataLoadingComplete) { return <div><Workspace /></div> }
 
   const loaderStyle = {
     height: viewport.get('y'),
