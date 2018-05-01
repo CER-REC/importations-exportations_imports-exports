@@ -75,6 +75,8 @@ DetailBreakdown.propTypes = {
 export default connect((state, props) => ({
   amountUnit: visualizationSettings(state, props).get('amount'),
   language: state.language,
+  selectedEnergy: state.importExportVisualization,
+  viewport: state.viewport,
   data: detailBreakdownValues(state, props).get(props.type),
   total: detailLargestValue(state, props),
 }))(DetailBreakdown)

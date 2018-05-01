@@ -7,13 +7,17 @@ import './DetailBreakDown.scss'
 import PercentageBar from './PercentageBar'
 import Tr from '../TranslationTable'
 import { humanNumber } from '../utilities'
+
 import ConfidentialIcon from './ConfidentialIcon'
 import MapLayoutGridConstant from '../MapLayoutGridConstant'
+import { arrangeBy } from '../selectors/data'
+import { visualizationSettings } from '../selectors/visualizationSettings'
 
+import './DetailBreakDown.scss'
 
 const unitsWithoutPercentage = ['CAN$/MW.h', 'CN$/GJ']
 
-const DetailBreakdownRow = props => (
+const DetailBreakdownRow = (props) => (
 
   <tr className="detailBreakDownText">
     <td width={props.colorBox ? '14px' : '0px'} style={{ verticalAlign: 'baseline' }}>
@@ -55,7 +59,34 @@ const DetailBreakdownRow = props => (
         </td>
       )
     }
-  </tr>
+  
+  <td className="confidentialIcon">
+    <svg>
+      <g transform="translate(0 0) scale(0.8)">
+        <ConfidentialIcon
+          scale="scale(-4 0.76) translate(-200 0)"
+          text={'x / n values confidential'}
+          containerX={830}
+          containerY={94}
+          linePath="
+            M142.16,
+            173.94l24.26,
+            36.69a40.12,
+            40.12,0,0,0,
+            33.47,
+            18H388.2"
+          lineX={142.16}
+          lineY={173.94}
+          textX={2}
+          textY={16}
+          xPosition={0}
+          yPosition={0}
+          name={`${props.importExportVisualization}`}
+        /></g>
+    </svg>
+  </td>
+  
+</tr>
 )
 
 DetailBreakdownRow.propTypes = {
@@ -78,4 +109,4 @@ DetailBreakdownRow.defaultProps = {
   progressBarStyle: {},
 }
 
-export default connect(({ language, confidentialityMenu }) => ({ language, confidentialityMenu }))(DetailBreakdownRow)
+export default connect(({ language, confidentialityMenu, importExportVisualization }) => ({ language, confidentialityMenu, importExportVisualization }))(DetailBreakdownRow)
