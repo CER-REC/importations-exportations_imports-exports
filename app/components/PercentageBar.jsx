@@ -3,6 +3,11 @@ import PropTypes from 'prop-types'
 
 import './PercentageBar.scss'
 
+import { PaddSelector } from '../selectors/Padd'
+import { aggregateLocationPaddData } from '../selectors/data'
+import { arrangeBy, binSelector, sortAggregatedLocationsSelector, selection } from '../selectors/data'
+import { setSelection } from '../actions/visualizationSettings'
+
 const PercentageBar = (props) => {
   let { width } = props
   let negative = false

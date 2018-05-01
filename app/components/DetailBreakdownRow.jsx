@@ -1,15 +1,20 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
+import Immutable from 'immutable'
 
 import './DetailBreakDown.scss'
 import PercentageBar from './PercentageBar'
 import Tr from '../TranslationTable'
 import { humanNumber } from '../utilities'
+import ConfidentialIcon from './ConfidentialIcon'
+import MapLayoutGridConstant from '../MapLayoutGridConstant'
+
 
 const unitsWithoutPercentage = ['CAN$/MW.h', 'CN$/GJ']
 
 const DetailBreakdownRow = props => (
+
   <tr className="detailBreakDownText">
     <td width={props.colorBox ? '14px' : '0px'} style={{ verticalAlign: 'baseline' }}>
       {!props.colorBox ? null : (
@@ -38,6 +43,7 @@ const DetailBreakdownRow = props => (
         )
       }
     </td>
+
     {unitsWithoutPercentage.includes(props.unit)
       ? null
       : (
@@ -72,4 +78,4 @@ DetailBreakdownRow.defaultProps = {
   progressBarStyle: {},
 }
 
-export default connect(({ language }) => ({ language }))(DetailBreakdownRow)
+export default connect(({ language, confidentialityMenu }) => ({ language, confidentialityMenu }))(DetailBreakdownRow)
