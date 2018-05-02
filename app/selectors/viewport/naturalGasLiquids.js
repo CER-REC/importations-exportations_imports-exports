@@ -20,21 +20,19 @@ export const canadaImportMap = createSelector(
     if (atlq && atlq.get('y') === 0 && arrangeBy === 'amount') {
       top = visContent.top + 50
     }
+    // console.log(atlq.get('y')) 
+    // is it repeating twice because does it for imports and exports
 
     const result = {
       top,
       left,
       width: visContent.width,
       height: 150,
+      atlq,
     }
     return result
   },
 )
-      // the viewport logic should be in the canadaImportMap selector
-      // the label logic should be in MapPiece
-      // if row index is 0 then move label to the top
-      //    also move canadaMap down---
-      // if row index is 1 then move label to the bottom
 
 export const chartImportPosition = createSelector(
   canadaImportMap,

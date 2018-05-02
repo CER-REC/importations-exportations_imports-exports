@@ -13,6 +13,7 @@ import MapLayoutGridConstant from '../MapLayoutGridConstant'
 import ExplanationDot from './ExplanationDot'
 import { arrangeBy } from '../selectors/data'
 import { visualizationSettings } from '../selectors/visualizationSettings'
+import { canadaImportMap } from '../selectors/viewport/naturalGasLiquids'
 
 import trSelector from '../selectors/translate'
 import tr from '../TranslationTable'
@@ -52,21 +53,35 @@ class MapPiece extends React.Component {
     )
   }
 
-  breakLine(className, text, x, y){
+  breakLine(className, text, x, y) {
+    let anchor = "end"
+    if (this.props.arrangeBy === 'amount') {
+      anchor = "middle"
+    }
+    // textAnchor = middle
     if (text.includes('\n')) {
       const splitName = text.split('\n')
       return (
         <text className={className} y={y - 17} aria-hidden>
-          {splitName.map(text => <tspan key={text} x={x} textAnchor="end" dy="13">{text}</tspan>)}
+          {splitName.map(text => <tspan key={text} x={x} textAnchor={anchor} dy="13">{text}</tspan>)}
         </text>
       )
     }
     return <text className={className} y={y} x={x}>{text}</text>
   }
 
-  drawLeftLabel(text){
+  drawLeftLabel(text) {
+    // const labelPosition = this.props.atlqLabel
+    // console.log(labelPosition)
+    console.log(this.props.arrangeBy)
+    let xPosition = -15
+    let yPosition = 20
+    if (this.props.arrangeBy === 'amount') {
+      xPosition = 20
+      yPosition = -20
+    }
     if(!text || text === '') { return null }
-      return this.breakLine('mapPieceDescription', text, -5, 20)
+      return this.breakLine('mapPieceDescription', text, xPosition, yPosition)
   }
 
   drawArrow(type) {
@@ -508,7 +523,8 @@ export default connect(
     activity: state.activity,
     viewport: state.viewport,
     arrangeBy: arrangeBy(state, props),
-    activityGroup: visualizationSettings(state, props)
+    activityGroup: visualizationSettings(state, props),
+    atlqLabel: state.canadaImportMap,
   }),
 )(MapPiece)
 
