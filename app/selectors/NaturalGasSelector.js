@@ -62,11 +62,13 @@ const createSortedLayout = createSelector(
     let column = 0
     const sortedArray = []
     const sortedData = sortData(data)
+    console.log('e')
     const orderedRegionNames = sortedData.keySeq()
       .concat(Constants.getIn(['dataloader', 'mapping', 'country', 'ca'])
         .filter(k => !sortedData.has(k)))
     orderedRegionNames.forEach((name) => {
       const statesOrProvinces = sortedData.get(name, emptyMap)
+
       if (column >= columns) {
         column = 0
         row += 1
@@ -78,16 +80,18 @@ const createSortedLayout = createSelector(
       if (row !== 0) {
         x += (row * rowPadding)
       }
+    console.log('easd')
       sortedArray.push({
         name,
         values: statesOrProvinces.get('values', emptyMap).toJS(),
         totalCount: statesOrProvinces.get('totalCount') || 0,
         confidentialCount: statesOrProvinces.get('confidentialCount') || 0,
-        showLabel: statesOrProvinces.get('showLabel', false),
+        showLabel: statesOrProvinces.get('showLabel', true),
         x,
         y: row,
       })
-
+console.log(row, name)
+console.log(statesOrProvinces.get('showLabel'))
       // Column value is updated for the next iteration
       column += 1
     })

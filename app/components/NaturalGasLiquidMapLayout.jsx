@@ -87,11 +87,8 @@ class NaturalGasLiquidMapLayout extends React.Component {
       if(typeof humanName === 'undefined'){
         return null
       }
-
-      let label = ''
-      if (position.get('showLabel') === true) { label = Tr.getIn(['country', this.props.country, position.get('name'), this.props.language]) }
-
-      console.log(position.get('showLabel'))
+// if atlq sitch left label with true
+      console.log(position.get('name'))
 
       return (
         <g key={`mapPieceKey_${this.props.country}_${position.get('name')}`}>
@@ -117,7 +114,7 @@ class NaturalGasLiquidMapLayout extends React.Component {
               y1={mapPieceTransformStartYaxis(position, dimensions, mapPieceScale)}
               containerX={this.props.left}
               containerY={this.props.top}
-              leftLabelText = {label}
+              leftLabelText = {position.get('showLabel')?Tr.getIn(['country', this.props.country, position.get('name'), this.props.language]):''}
             />
           </g>
         </g>
