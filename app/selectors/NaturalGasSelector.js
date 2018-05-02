@@ -94,7 +94,6 @@ export const createSortedLayout = createSelector(
         x,
         y: row,
       })
-      console.log(sortedArray)
       // Column value is updated for the next iteration
       column += 1
     })

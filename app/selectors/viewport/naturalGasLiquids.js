@@ -3,16 +3,26 @@ import { createSelector } from 'reselect'
 import { visualizationContentPosition, viewport } from './index'
 import Constants from '../../Constants'
 import { createSortedLayout } from '../NaturalGasSelector'
+import { arrangeBy } from '../data'
 
 const axisHeight = Constants.getIn(['timeline', 'axisHeight'])
 
 export const canadaImportMap = createSelector(
   visualizationContentPosition,
   viewport,
-  (visContent, viewp) => {
-    const left = viewp.get('changeWidthRatio') > 1.2 ? (visContent.left + 80) : (visContent.left) 
+  createSortedLayout,
+  arrangeBy,
+  (visContent, viewp, sortedLayout, arrangeBy) => {
+    const left = viewp.get('changeWidthRatio') > 1.2 ? (visContent.left + 80) : (visContent.left)
+    const atlq = sortedLayout.find(region => region.get('name') === 'ATL-Q')
+
+    let top = visContent.top   
+    if (atlq && atlq.get('y') === 0 && arrangeBy === 'amount') {
+      top = visContent.top + 50
+    }
+
     const result = {
-      top: visContent.top,
+      top,
       left,
       width: visContent.width,
       height: 150,
@@ -20,9 +30,10 @@ export const canadaImportMap = createSelector(
     return result
   },
 )
-
+      // the viewport logic should be in the canadaImportMap selector
+      // the label logic should be in MapPiece
       // if row index is 0 then move label to the top
-      //    also move canadaMap down
+      //    also move canadaMap down---
       // if row index is 1 then move label to the bottom
 
 export const chartImportPosition = createSelector(

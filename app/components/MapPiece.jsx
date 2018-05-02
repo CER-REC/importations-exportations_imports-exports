@@ -52,6 +52,23 @@ class MapPiece extends React.Component {
     )
   }
 
+  breakLine(className, text, x, y){
+    if (text.includes('\n')) {
+      const splitName = text.split('\n')
+      return (
+        <text className={className} y={y - 17} aria-hidden>
+          {splitName.map(text => <tspan key={text} x={x} textAnchor="end" dy="13">{text}</tspan>)}
+        </text>
+      )
+    }
+    return <text className={className} y={y} x={x}>{text}</text>
+  }
+
+  drawLeftLabel(text){
+    if(!text || text === '') { return null }
+      return this.breakLine('mapPieceDescription', text, -5, 20)
+  }
+
   drawArrow(type) {
     let dataKey = !this.props.dataKey? []: this.props.dataKey.slice(0)
     dataKey.push(type)
@@ -72,23 +89,6 @@ class MapPiece extends React.Component {
       drawLabelLineImportY = {this.props.drawLabelLineImportY}
       drawLabelLabelImportY = {this.props.drawLabelLabelImportY}
     />)
-  }
-
-  breakLine(className, text, x, y){
-    if (text.includes('\n')) {
-      const splitName = text.split('\n')
-      return (
-        <text className={className} y={y - 17} aria-hidden>
-          {splitName.map(text => <tspan key={text} x={x} textAnchor="end" dy="13">{text}</tspan>)}
-        </text>
-      )
-    }
-    return <text className={className} y={y} x={x}>{text}</text>
-  }
-
-  drawLeftLabel(text){
-    if(!text || text === '') { return null }
-      return this.breakLine('mapPieceDescription', text, -5, 20)
   }
 
   newBrunswickExplanation() {
