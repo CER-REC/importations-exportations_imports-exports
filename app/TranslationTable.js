@@ -1616,10 +1616,6 @@ const TranslationTable = fromJS({
         en: 'Sierra',
         fr: 'Sierra',
       },
-      Blaine: {
-        en: 'Blaine',
-        fr: 'Blaine',
-      },
       Huntingdon: {
         en: 'Huntingdon',
         fr: 'Huntingdon',
@@ -1700,21 +1696,9 @@ const TranslationTable = fromJS({
         en: 'St Clair',
         fr: 'St Clair',
       },
-      Armstrong: {
-        en: 'Armstrong',
-        fr: 'Armstrong',
-      },
-      Champlain: {
-        en: 'Champlain',
-        fr: 'Champlain',
-      },
       'East Hereford': {
         en: 'East Hereford',
         fr: 'East Hereford',
-      },
-      'Highgate Springs': {
-        en: 'Highgate Springs',
-        fr: 'Highgate Springs',
       },
       Highwater: {
         en: 'Highwater',
@@ -1744,10 +1728,6 @@ const TranslationTable = fromJS({
         en: 'North Portal',
         fr: 'North Portal',
       },
-      'Port of Estevan': {
-        en: 'Port of Estevan',
-        fr: 'Port of Estevan',
-      },
       'Willow Creek': {
         en: 'Willow Creek',
         fr: 'Willow Creek',
@@ -1776,10 +1756,10 @@ const TranslationTable = fromJS({
         en: 'North\nPortal',
         fr: 'North\nPortal',
       },
-      'Port of Estevan': {
-        en: 'Port of\nEstevan',
-        fr: 'Port of\nEstevan',
-      },
+      // 'Port of Estevan': {
+      //   en: 'Port of\nEstevan',
+      //   fr: 'Port of\nEstevan',
+      // },
       'Willow Creek': {
         en: 'Willow\nCreek',
         fr: 'Willow\nCreek',
@@ -1808,14 +1788,14 @@ const TranslationTable = fromJS({
         en: 'Sault Ste\nMarie',
         fr: 'Sault Ste\nMarie',
       },
-      'Armstrong': {
-        en: 'Arm-\nstrong',
-        fr: 'Arm-\nstrong',
-      },
-      'Champlain': {
-        en: 'Cham-\nplain',
-        fr: 'Cham-\nplain',
-      },
+      // 'Armstrong': {
+      //   en: 'Arm-\nstrong',
+      //   fr: 'Arm-\nstrong',
+      // },
+      // 'Champlain': {
+      //   en: 'Cham-\nplain',
+      //   fr: 'Cham-\nplain',
+      // },
       'East Hereford': {
         en: 'East\nHereford',
         fr: 'East\nHereford',

@@ -114,7 +114,7 @@ class Legend extends React.Component {
             if (value[0] === Number.MIN_SAFE_INTEGER && this.props.importExportVisualization === 'electricity') {
               return (
                 <text className="theLegendValues" y={(i * 20) + 20} x="34" key={`bin-${i}`}>
-                  &lt;={humanNumberLang(value[1])}
+                  &le;{humanNumberLang(value[1])}
                 </text>
               )
             }
