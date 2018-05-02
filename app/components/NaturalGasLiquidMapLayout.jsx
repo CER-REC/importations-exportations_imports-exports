@@ -87,8 +87,6 @@ class NaturalGasLiquidMapLayout extends React.Component {
       if(typeof humanName === 'undefined'){
         return null
       }
-// if atlq sitch left label with true
-      console.log(position.get('name'))
 
       return (
         <g key={`mapPieceKey_${this.props.country}_${position.get('name')}`}>

@@ -51,7 +51,7 @@ const getNaturalGasLiquidsImportAndExport = createSelector(
 const sortData = points => points
   .sort((a, b) => (b.getIn(['values', 'imports'], 0) - a.getIn(['values', 'imports'], 0)))
 
-const createSortedLayout = createSelector(
+export const createSortedLayout = createSelector(
   getNaturalGasLiquidsImportAndExport,
   getColumns,
   getPadding,
@@ -62,7 +62,6 @@ const createSortedLayout = createSelector(
     let column = 0
     const sortedArray = []
     const sortedData = sortData(data)
-    console.log('e')
     const orderedRegionNames = sortedData.keySeq()
       .concat(Constants.getIn(['dataloader', 'mapping', 'country', 'ca'])
         .filter(k => !sortedData.has(k)))
@@ -80,18 +79,22 @@ const createSortedLayout = createSelector(
       if (row !== 0) {
         x += (row * rowPadding)
       }
-    console.log('easd')
+
+      let label = statesOrProvinces.get('showLabel', false)
+      if (name === 'ATL-Q') {
+        label = statesOrProvinces.get('showLabel', true)
+      }
+
       sortedArray.push({
         name,
         values: statesOrProvinces.get('values', emptyMap).toJS(),
         totalCount: statesOrProvinces.get('totalCount') || 0,
         confidentialCount: statesOrProvinces.get('confidentialCount') || 0,
-        showLabel: statesOrProvinces.get('showLabel', true),
+        showLabel: label,
         x,
         y: row,
       })
-console.log(row, name)
-console.log(statesOrProvinces.get('showLabel'))
+      console.log(sortedArray)
       // Column value is updated for the next iteration
       column += 1
     })

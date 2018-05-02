@@ -2,6 +2,7 @@ import { createSelector } from 'reselect'
 
 import { visualizationContentPosition, viewport } from './index'
 import Constants from '../../Constants'
+import { createSortedLayout } from '../NaturalGasSelector'
 
 const axisHeight = Constants.getIn(['timeline', 'axisHeight'])
 
@@ -19,6 +20,10 @@ export const canadaImportMap = createSelector(
     return result
   },
 )
+
+      // if row index is 0 then move label to the top
+      //    also move canadaMap down
+      // if row index is 1 then move label to the bottom
 
 export const chartImportPosition = createSelector(
   canadaImportMap,
