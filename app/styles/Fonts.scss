@@ -354,9 +354,36 @@
 .provinceDeselected{
   fill: $neutral-white;
 }
-
 .chartOutlierText {
   font-size: 13px;
   font-family: "FiraSansCondensed", sans-serif;
   fill: #666;
+}
+.loadingVisualization {
+  font-family: $fira-sans-condensed;
+  font-size: 15px;
+  color: rgb(102,102,102);
+  text-align: center;
+}
+.loadingImports {
+  font-family: $fira-sans-condensed;
+  text-align: center;
+  font-size: 25px;
+  color: rgb(255, 119, 76);
+}
+.loadingAnd {
+  font-family: $fira-sans-condensed;
+  color: rgb(77,77,77);
+}
+.loadingExports {
+  font-family: $fira-sans-condensed;
+  font-size: 25px;
+  color: rgb(28, 100, 178);
+}
+.loadingVisualizationTwo {
+  font-family: $fira-sans-condensed;
+  font-size: 16px;
+  text-align: center;
+  color: rgb(77,77,77);
+  margin-top: 2%;
 }

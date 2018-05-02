@@ -27,6 +27,29 @@ const TranslationTable = fromJS({
     },
   },
 
+  loader: {
+    titleText: {
+      en:'loading visualisation',
+      fr: 'visualisation en chargement',
+    },
+    imports: {
+      en: 'Imports',
+      fr: 'Importations',
+    },
+    and: {
+      en: 'and',
+      fr: 'et',
+    },
+    exports: {
+      en: 'Exports',
+      fr: 'Exportations',
+    },
+    titleText_2: {
+      en: 'of Energy Products to and from Canada',
+      fr: 'des produits énergétiques à destination et en provenance du Canada',
+    },
+  },
+
   methodologyLinks: {
     en: 'data/Export-Import-Data-Methodology-EN.pdf',
     fr: 'data/Export-Import-Data-Methodology-FR.pdf',
