@@ -13,7 +13,7 @@ import MapLayoutGridConstant from '../MapLayoutGridConstant'
 import ExplanationDot from './ExplanationDot'
 import { arrangeBy } from '../selectors/data'
 import { visualizationSettings } from '../selectors/visualizationSettings'
-import { canadaImportMap } from '../selectors/viewport/naturalGasLiquids'
+import { getNaturalGasLiquidMapLayout } from '../selectors/naturalGasSelector'
 
 import trSelector from '../selectors/translate'
 import tr from '../TranslationTable'
@@ -58,7 +58,6 @@ class MapPiece extends React.Component {
     if (this.props.arrangeBy === 'amount') {
       anchor = "middle"
     }
-    // textAnchor = middle
     if (text.includes('\n')) {
       const splitName = text.split('\n')
       return (
@@ -73,7 +72,6 @@ class MapPiece extends React.Component {
   drawLeftLabel(text) {
     // const labelPosition = this.props.atlqLabel
     // console.log(labelPosition)
-    console.log(this.props.arrangeBy)
     let xPosition = -15
     let yPosition = 20
     if (this.props.arrangeBy === 'amount') {
@@ -524,7 +522,7 @@ export default connect(
     viewport: state.viewport,
     arrangeBy: arrangeBy(state, props),
     activityGroup: visualizationSettings(state, props),
-    atlqLabel: state.canadaImportMap,
+    atlqLabel: state.getNaturalGasLiquidMapLayout,
   }),
 )(MapPiece)
 

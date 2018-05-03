@@ -94,6 +94,7 @@ export const createSortedLayout = createSelector(
         x,
         y: row,
       })
+      
       // Column value is updated for the next iteration
       column += 1
     })
@@ -125,7 +126,6 @@ const parseLocationData = createSelector(
   },
 )
 
-
 export const getNaturalGasLiquidMapLayout = createSelector(
   createSortedLayout,
   parseLocationData,
@@ -133,6 +133,7 @@ export const getNaturalGasLiquidMapLayout = createSelector(
   (sortedPoints, locationPoints, sortBy) => {
     switch (sortBy) {
       case 'amount':
+       //console.log(sortedPoints)
         return sortedPoints
       case 'location':
       default:
