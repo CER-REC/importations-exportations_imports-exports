@@ -32,6 +32,22 @@ class ExplanationPopover extends React.Component {
   }
 
   drawText() {
+    const text = this.props.text
+    if (text.includes('\n')) {
+      let splitText = text.split('\n')
+      splitText = splitText.map(text => <span key={text}>{text}<br/></span>)
+      return <div style={{
+        position: 'relative',
+        top: this.props.textY - 3,
+        left: this.props.textX,
+        padding: 8,
+        height: 'auto',
+        width: this.props.textBoxWidth,
+        background: 'white',
+        opacity: '0.9',
+      }}
+        className="explanationText">{splitText}</div>
+    }
     return <div style={{
           position: 'relative',
           top: this.props.textY - 3,
@@ -43,8 +59,7 @@ class ExplanationPopover extends React.Component {
           opacity: '0.9',
         }}
       className="explanationText">
-      {this.props.text}
-      <div>
+      {text}
         {/*
         <svg>
           <g transform={`translate(${this.props.textBoxWidth - 40} 2)`}>
@@ -65,7 +80,6 @@ class ExplanationPopover extends React.Component {
           </g>
         </svg>
         */}
-     </div>
     </div>
   }
 
