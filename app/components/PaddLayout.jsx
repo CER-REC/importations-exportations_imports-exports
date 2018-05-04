@@ -328,10 +328,12 @@ class PaddLayout extends React.Component {
         }
         if (paddLayout === null) { return acc }
 
+        const fillOpacity = this.getOpacityOfPadd(props, paddGroup)
         paddLayout = (
           <g
             className="paddLayout"
-            fillOpacity={this.getOpacityOfPadd(props, paddGroup)}
+            fillOpacity={fillOpacity}
+            strokeOpacity={fillOpacity === 1 ? 1 : 0}
             key={`${props.arrangeBy}_${paddGroup}`}
             transform={`translate(${left} 0)`}
             {...handleInteractionWithTabIndex(this.getTabIndex(props.country), this.onPaddClick, props, paddGroup)}
@@ -383,9 +385,14 @@ class PaddLayout extends React.Component {
         Constants.getIn(['dataloader', 'mapping', 'padd', 'us']).count()
       )
     const color = this.getPaddColor(paddValue)
-    return (<g className="paddLayout" fillOpacity={this.getOpacityOfPadd(props, paddGroup)}
-      {...handleInteractionWithTabIndex(this.getTabIndex(props.country) , this.onPaddClick, props, paddGroup)}
-        >
+    const fillOpacity = this.getOpacityOfPadd(props, paddGroup)
+    return (
+      <g
+        className="paddLayout"
+        fillOpacity={fillOpacity}
+        strokeOpacity={fillOpacity === 1 ? 1 : 0}
+        {...handleInteractionWithTabIndex(this.getTabIndex(props.country) , this.onPaddClick, props, paddGroup)}
+      >
         <filter id="paddOutline">
           <feMorphology operator="dilate" in="SourceAlpha" radius="1.5"/>
           <feColorMatrix result="recolored" type="matrix" values="-1 0 0 1 0, 0 -1 0 1 0, 0 0 -1 1 0, 0 0 0 1 0"/>

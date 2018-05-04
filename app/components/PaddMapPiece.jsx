@@ -22,6 +22,8 @@ class PaddMapPiece extends React.Component {
     return (<g transform={`translate(${this.props.left} ${this.props.top} )`} >
       <polygon
         fill={this.props.color}
+        stroke={this.props.color}
+        strokeWidth="1.1"
         points="37.09 9.68 18.54 0 0 9.68 0 29.05 18.54 38.73 37.09 29.05 37.09 9.68"
       />
       <MapPieceLabel
