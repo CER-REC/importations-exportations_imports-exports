@@ -2,7 +2,6 @@ import { createSelector } from 'reselect'
 
 import { visualizationContentPosition, viewport } from './index'
 import Constants from '../../Constants'
-import { createSortedLayout, getNaturalGasLiquidMapLayout } from '../NaturalGasSelector'
 import { arrangeBy } from '../data'
 import { visualizationSettings } from '../visualizationSettings'
 
@@ -11,21 +10,27 @@ const axisHeight = Constants.getIn(['timeline', 'axisHeight'])
 export const canadaImportMap = createSelector(
   visualizationContentPosition,
   viewport,
-  createSortedLayout,
   arrangeBy,
-  (visContent, viewp, sortedLayout, arrangeBy) => {
-    const left = viewp.get('changeWidthRatio') > 1.2 ? (visContent.left + 80) : (visContent.left)
-
+  visualizationSettings,
+  (visContent, viewp, arrange, activity) => {
+    const left = viewp.get('changeWidthRatio') > 1.2 ? (visContent.left + 80) : (visContent.left) 
+    
     let top = visContent.top
-    if (arrangeBy === 'amount') {
+    if (arrange === 'amount') {
       top = visContent.top + 50
     }
 
+    let height = 150
+    if (arrange === 'amount' && ['exports'].includes(activity.get('activity'))) {
+      height = 50
+    }
+
     const result = {
+      top: visContent.top,
       top,
       left,
       width: visContent.width,
-      height: 150,
+      height,
     }
     return result
   },
@@ -49,21 +54,12 @@ export const chartImportPosition = createSelector(
 
 export const chartAxisPosition = createSelector(
   chartImportPosition,
-  arrangeBy,
-  visualizationSettings,
-  (importPosition, arrangeBy, activity) => {
-    let top = importPosition.top + importPosition.height
-    if (arrangeBy === 'amount' && ['exports'].includes(activity.get('activity'))) {
-      top = importPosition.top + importPosition.height - 70
-    }
-    const result = {
-      top,
-      left: importPosition.left,
-      width: importPosition.width,
-      height: axisHeight,
-    }
-    return result
-  },
+  importPosition => ({
+    top: importPosition.top + importPosition.height,
+    left: importPosition.left,
+    width: importPosition.width,
+    height: axisHeight,
+  }),
 )
 
 export const chartExportPosition = createSelector(
@@ -81,12 +77,14 @@ export const usPaddPosition = createSelector(
   viewport,
   arrangeBy,
   visualizationSettings,
-  (chartPosition, viewp, arrangeBy, activity) => {
+  (chartPosition, viewp, arrange, activity) => {
     let top = viewp.get('changeHeightRatio') > 1.2 ? (chartPosition.top + chartPosition.height - 40) : (chartPosition.top + chartPosition.height + 20) 
-    const left = viewp.get('changeWidthRatio') > 1.2 ? (chartPosition.left + 20) : (chartPosition.left) 
-    if (arrangeBy === 'amount' && ['imports'].includes(activity.get('activity'))) {
-      top = viewp.get('changeHeightRatio') > 1.2 ? (chartPosition.top + chartPosition.height - 150) : (chartPosition.top + chartPosition.height - 70)
+    const left = viewp.get('changeWidthRatio') > 1.2 ? (chartPosition.left + 20) : (chartPosition.left)
+
+    if (arrange === 'amount' && ['imports'].includes(activity.get('activity'))) {
+      top = viewp.get('changeHeightRatio') > 1.2 ? (chartPosition.top + chartPosition.height - 140) : (chartPosition.top + chartPosition.height - 60) 
     }
+
     const result = {
       top,
       left,
