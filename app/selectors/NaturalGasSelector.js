@@ -51,7 +51,7 @@ const getNaturalGasLiquidsImportAndExport = createSelector(
 const sortData = points => points
   .sort((a, b) => (b.getIn(['values', 'imports'], 0) - a.getIn(['values', 'imports'], 0)))
 
-const createSortedLayout = createSelector(
+export const createSortedLayout = createSelector(
   getNaturalGasLiquidsImportAndExport,
   getColumns,
   getPadding,
@@ -67,6 +67,7 @@ const createSortedLayout = createSelector(
         .filter(k => !sortedData.has(k)))
     orderedRegionNames.forEach((name) => {
       const statesOrProvinces = sortedData.get(name, emptyMap)
+
       if (column >= columns) {
         column = 0
         row += 1
@@ -78,16 +79,22 @@ const createSortedLayout = createSelector(
       if (row !== 0) {
         x += (row * rowPadding)
       }
+
+      let label = statesOrProvinces.get('showLabel', false)
+      if (name === 'ATL-Q') {
+        label = statesOrProvinces.get('showLabel', true)
+      }
+
       sortedArray.push({
         name,
         values: statesOrProvinces.get('values', emptyMap).toJS(),
         totalCount: statesOrProvinces.get('totalCount') || 0,
         confidentialCount: statesOrProvinces.get('confidentialCount') || 0,
-        showLabel: statesOrProvinces.get('showLabel', false),
+        showLabel: label,
         x,
         y: row,
       })
-
+      
       // Column value is updated for the next iteration
       column += 1
     })
@@ -118,7 +125,6 @@ const parseLocationData = createSelector(
     return fromJS(resultList)
   },
 )
-
 
 export const getNaturalGasLiquidMapLayout = createSelector(
   createSortedLayout,
