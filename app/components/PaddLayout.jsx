@@ -316,7 +316,7 @@ class PaddLayout extends React.Component {
             paddLayout = <PaddThree color={color} />
             break
           case 'PADD IV':
-            paddLayout = <PaddFour color={color} />
+            paddLayout = <g transform="translate(10 0)"><PaddFour color={color} /></g>
             break
           case 'PADD V':
             paddLayout = <PaddFive color={color} />
@@ -361,6 +361,7 @@ class PaddLayout extends React.Component {
   getMapPieceTextColor(value){
     const index = this.getColorIndex(value)
     switch(index){
+      case -1:
       case 2:
       case 3:
       case 4:
