@@ -13,7 +13,6 @@ import MapLayoutGridConstant from '../MapLayoutGridConstant'
 import ExplanationDot from './ExplanationDot'
 import { arrangeBy } from '../selectors/data'
 import { visualizationSettings } from '../selectors/visualizationSettings'
-import { getNaturalGasLiquidMapLayout } from '../selectors/naturalGasSelector'
 
 import trSelector from '../selectors/translate'
 import tr from '../TranslationTable'
@@ -70,18 +69,17 @@ class MapPiece extends React.Component {
   }
 
   drawLeftLabel(text) {
-    // const labelPosition = this.props.atlqLabel.get(sortedPoints.count())
-    // console.log(labelPosition)
-    // const atlq = layout.find(region => region.get('name') === 'ATL-Q')
-    // const atlqIndex = layout.indexOf(atlq)
-    // console.log(atlqIndex)
-    const { atlqLabel } = this.props
-    console.log( atlqLabel)
+    const atlq = this.props.data.get('name') === 'ATL-Q'
+    const rowIndex = this.props.data.get('y')
     let xPosition = -15
     let yPosition = 20
-    if (this.props.arrangeBy === 'amount') {
+    if (atlq && this.props.arrangeBy === 'amount' && (rowIndex === 0)) {
       xPosition = 20
       yPosition = -20
+    }
+    if (atlq && this.props.arrangeBy === 'amount' && (rowIndex === 1)) {
+      xPosition = 20
+      yPosition = 60
     }
     if(!text || text === '') { return null }
       return this.breakLine('mapPieceDescription', text, xPosition, yPosition)
@@ -527,7 +525,6 @@ export default connect(
     viewport: state.viewport,
     arrangeBy: arrangeBy(state, props),
     activityGroup: visualizationSettings(state, props),
-    atlqLabel: state.getNaturalGasLiquidMapLayout,
   }),
 )(MapPiece)
 
