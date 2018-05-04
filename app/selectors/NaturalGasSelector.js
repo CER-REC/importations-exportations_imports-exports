@@ -133,7 +133,6 @@ export const getNaturalGasLiquidMapLayout = createSelector(
   (sortedPoints, locationPoints, sortBy) => {
     switch (sortBy) {
       case 'amount':
-       //console.log(sortedPoints)
         return sortedPoints
       case 'location':
       default:

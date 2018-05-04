@@ -15,9 +15,6 @@ export const canadaImportMap = createSelector(
   arrangeBy,
   (visContent, viewp, sortedLayout, arrangeBy) => {
     const left = viewp.get('changeWidthRatio') > 1.2 ? (visContent.left + 80) : (visContent.left)
-    // const atlq = sortedLayout.find(region => region.get('name') === 'ATL-Q')
-
-    // const atlqIndex = sortedLayout.indexOf(region => region.get('name' === 'ATL-Q'))
 
     let top = visContent.top
     if (arrangeBy === 'amount') {
@@ -57,7 +54,7 @@ export const chartAxisPosition = createSelector(
   (importPosition, arrangeBy, activity) => {
     let top = importPosition.top + importPosition.height
     if (arrangeBy === 'amount' && ['exports'].includes(activity.get('activity'))) {
-      top = importPosition.top + importPosition.height - 90
+      top = importPosition.top + importPosition.height - 70
     }
     const result = {
       top,

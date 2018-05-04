@@ -70,8 +70,13 @@ class MapPiece extends React.Component {
   }
 
   drawLeftLabel(text) {
-    // const labelPosition = this.props.atlqLabel
+    // const labelPosition = this.props.atlqLabel.get(sortedPoints.count())
     // console.log(labelPosition)
+    // const atlq = layout.find(region => region.get('name') === 'ATL-Q')
+    // const atlqIndex = layout.indexOf(atlq)
+    // console.log(atlqIndex)
+    const { atlqLabel } = this.props
+    console.log( atlqLabel)
     let xPosition = -15
     let yPosition = 20
     if (this.props.arrangeBy === 'amount') {

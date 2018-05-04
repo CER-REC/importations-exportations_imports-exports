@@ -65,6 +65,14 @@ class NaturalGasLiquidMapLayout extends React.Component {
     return (count > 0)
   }
 
+  getAtlqIndex() {
+    const { layout } = this.props
+    const atlq = layout.find(region => region.get('name') === 'ATL-Q')
+    const atlqIndex = layout.indexOf(atlq)
+    console.log(atlqIndex)
+    return atlqIndex
+  }
+
   renderMapPiece() {
     const productSubType = this.props.sType === ''?'propaneButane':this.props.sType
     // Data from constant file
