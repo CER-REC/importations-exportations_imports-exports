@@ -1756,10 +1756,6 @@ const TranslationTable = fromJS({
         en: 'North\nPortal',
         fr: 'North\nPortal',
       },
-      // 'Port of Estevan': {
-      //   en: 'Port of\nEstevan',
-      //   fr: 'Port of\nEstevan',
-      // },
       'Willow Creek': {
         en: 'Willow\nCreek',
         fr: 'Willow\nCreek',
@@ -1788,21 +1784,9 @@ const TranslationTable = fromJS({
         en: 'Sault Ste\nMarie',
         fr: 'Sault Ste\nMarie',
       },
-      // 'Armstrong': {
-      //   en: 'Arm-\nstrong',
-      //   fr: 'Arm-\nstrong',
-      // },
-      // 'Champlain': {
-      //   en: 'Cham-\nplain',
-      //   fr: 'Cham-\nplain',
-      // },
       'East Hereford': {
         en: 'East\nHereford',
         fr: 'East\nHereford',
-      },
-      'Highgate Springs': {
-        en: 'Highgate\nSprings',
-        fr: 'Highgate\nSprings',
       },
       'Napierville': {
         en: 'Napier-\nville',
