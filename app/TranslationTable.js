@@ -551,7 +551,7 @@ const TranslationTable = fromJS({
       fr: 'La flèche orientée vers le haut montre la quantité totale d’électricité importée de l’État de Washington par les régions canadiennes pendant la période sélectionnée dans le diagramme à barres ci-dessus.',
     },
     powerpool: {
-      en: 'A power pool is a grouping of states that imports and exports electricity as a unit. Individual states may also have additional imports and exports. MN/ND: Minnesota/North Dakota NE-ISO: New England Independent System Operator PJM: Pennsylvania, Jersey, Maryland (PJM has since expanded to include all or parts of Delaware, Illinois, Indiana, Kentucky, Maryland, Michigan, New Jersey, North Carolina, Ohio, Pennsylvania, Tennessee, Virginia, West Virginia and the District of Columbia)',
+      en: 'A power pool is a grouping of states that imports and exports electricity as a unit. Individual states may also have additional imports and exports. \nMN/ND: Minnesota/North Dakota \nNE-ISO: New England Independent System Operator \nPJM: Pennsylvania, Jersey, Maryland (PJM has since expanded to include all or parts of Delaware, Illinois, Indiana, Kentucky, Maryland, Michigan, New Jersey, North Carolina, Ohio, Pennsylvania, Tennessee, Virginia, West Virginia and the District of Columbia)',
       fr: 'Un réseau commun est un regroupement d’états américains qui importe et exporte de l’électricité conjointement. Chacun des états du regroupement peut également importer et exporter de l’électricité individuellement. MN/ND : Minnesota/Dakota du Nord NE-ISO : New England Independent System Operator PJM : Pennsylvanie, New Jersey et Maryland (comprend désormais certaines parties du Delaware, de l’Illinois, de l’Indiana, du Kentucky, du Maryland, du Michigan, du New Jersey, de la Caroline du Nord, de l’Ohio, de la Pennsylvanie, du Tennessee, de la Virginie, de la Virginie-Occidentale et du District of Columbia)',
     },
     barChartImport: {
@@ -691,11 +691,11 @@ const TranslationTable = fromJS({
       fr: 'Les barres sont orientées vers le bas parce qu’elles représentent les exportations du Canada.',
     },
     cng: {
-      en: 'CNG stands for compressed natural gas. The locations where CNG has crossed the border included in the “Other CNG” category are North Portal and St. Stephen.',
+      en: 'The locations where CNG has crossed the border included in the “Other CNG” category include: North Portal and St. Stephen',
       fr: 'GNC signifie « gaz naturel comprimé ». Les points d’importation du GNC compris dans la catégorie « Autres GNC » sont North Portal et St. Stephen.',
     },
     lng: {
-      en: 'Liquefied natural gas (LNG) is natural gas that had been cooled to -162 Celsius to reach its liquid state. In changing from a gas to a liquid, the volume shrinks by a factor of 600. This allows the volume to be transported by ship and tanker truck. Canada imports offshore LNG into one terminal, Canaport, in New Brunswick. This imported LNG is eventually warmed to resume its gaseous state and is then transported by pipeline as regular natural gas.',
+      en: 'LNG stands for liquefied natural gas which is natural gas that had been cooled to -162 Celsius in order to reach its liquid state. In changing from a gas to a liquid, the volume shrinks by a factor of 600 which allows the volume to be transported across oceans by ship and overland by tanker truck. Canada imports offshore LNG into a single terminal in New Brunswick called Canaport. This imported LNG is eventually warmed to resume its gaseous state and is then transported by pipeline as regular natural gas.',
       fr: 'Le gaz naturel liquéfié (« GNL ») est un gaz naturel qui a été refroidi jusqu’à sa liquéfaction, à -162 degrés Celsius. Pendant son changement d’état de gaz à liquide, son volume diminue par un facteur de 600, ce qui permet le transport du produit par bateau et camion. Les importations de GNL du Canada arrivent au seul terminal méthanier au pays, Canaport, au Nouveau-Brunswick. Le GNL est ensuite réchauffé jusqu’à ce qu’il retrouve son état gazeux et est ensuite transporté par pipeline, comme du gaz naturel régulier.',
     },
   },
