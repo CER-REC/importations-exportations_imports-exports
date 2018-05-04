@@ -26,6 +26,9 @@ class MapPieceLabel extends React.Component {
   }
 
   renderText(name, xAxis, yAxis){
+    if (this.props.name === 'PJMPP') {
+      name = 'PJM'
+    }
     if (name.includes('\n')) {
       const splitName = name.split('\n')
       return (

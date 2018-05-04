@@ -378,7 +378,7 @@ const Constants = fromJS({
         powerpool: {
           'New England-ISO': 'NE-ISO',
           'Minn / N. Dakota': 'MN/ND',
-          'Pennsylvania Jersey Maryland Power Pool': 'PJMPP',
+          'Pennsylvania Jersey Maryland Power Pool': 'PJM',
         },
       },
       ports: {

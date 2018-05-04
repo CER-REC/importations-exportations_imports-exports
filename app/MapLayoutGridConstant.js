@@ -273,7 +273,7 @@ const MapLayoutGridConstant = fromJS({
           name: 'NE-ISO', originKey: 'NE-ISO', x: 1, y: 0,
         },
         {
-          name: 'PJM PP', originKey: 'PJMPP', x: 2, y: 0,
+          name: 'PJMPP', originKey: 'PJMPP', x: 2, y: 0,
         },
       ],
     },
