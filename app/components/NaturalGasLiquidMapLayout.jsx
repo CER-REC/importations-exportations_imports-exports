@@ -81,6 +81,7 @@ class NaturalGasLiquidMapLayout extends React.Component {
     const yaxis = this.props.top
     const isSelected = this.isSelected()
     const tabIndex = Constants.getIn(['tabIndex', 'start', 'visualization', 'caMap'])
+
     return layout.map((position) => {
       const humanName = this.props.Tr(['country', this.props.country, position.get('name')])
       if(typeof humanName === 'undefined'){

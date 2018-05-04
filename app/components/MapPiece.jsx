@@ -52,6 +52,39 @@ class MapPiece extends React.Component {
     )
   }
 
+  breakLine(className, text, x, y) {
+    let anchor = "end"
+    if (this.props.arrangeBy === 'amount') {
+      anchor = "middle"
+    }
+    if (text.includes('\n')) {
+      const splitName = text.split('\n')
+      return (
+        <text className={className} y={y - 17} aria-hidden>
+          {splitName.map(text => <tspan key={text} x={x} textAnchor={anchor} dy="13">{text}</tspan>)}
+        </text>
+      )
+    }
+    return <text className={className} y={y} x={x}>{text}</text>
+  }
+
+  drawLeftLabel(text) {
+    const atlq = this.props.data.get('name') === 'ATL-Q'
+    const rowIndex = this.props.data.get('y')
+    let xPosition = -15
+    let yPosition = 20
+    if (atlq && this.props.arrangeBy === 'amount' && (rowIndex === 0)) {
+      xPosition = 20
+      yPosition = -20
+    }
+    if (atlq && this.props.arrangeBy === 'amount' && (rowIndex === 1)) {
+      xPosition = 20
+      yPosition = 60
+    }
+    if(!text || text === '') { return null }
+      return this.breakLine('mapPieceDescription', text, xPosition, yPosition)
+  }
+
   drawArrow(type) {
     let dataKey = !this.props.dataKey? []: this.props.dataKey.slice(0)
     dataKey.push(type)
@@ -74,21 +107,6 @@ class MapPiece extends React.Component {
     />)
   }
 
-  breakLine(className, text, x, y){
-    if (text.includes('\n')) {
-      const splitName = text.split('\n')
-      return (
-        <text className={className} y={y - 17} aria-hidden>
-          {splitName.map(text => <tspan key={text} x={x} textAnchor="end" dy="13">{text}</tspan>)}
-        </text>
-      )
-    }
-    return <text className={className} y={y} x={x}>{text}</text>
-  }
-  drawLeftLabel(text){
-    if(!text || text === ''){return null}
-    return this.breakLine('mapPieceDescription', text, -5, 20)
-  }
   newBrunswickExplanation() {
     if (this.props.selectedEnergy === 'electricity'
       && this.props.data.get('name') === 'NB' ) {
@@ -112,8 +130,8 @@ class MapPiece extends React.Component {
           lineY={173.94}
           textX={40}
           textY={58}
-        containerX={this.props.viewport.get('changeWidthRatio')*(this.props.x1 * MapLayoutGridConstant.getIn(['electricity', 'us' , 'mapPieceScale'], 1) + scaleContainerX)}
-        containerY={this.props.viewport.get('changeHeightRatio')*(this.props.y1 * MapLayoutGridConstant.getIn(['electricity', 'us' , 'mapPieceScale'], 1)  + scaleContainerY)}
+          containerX={this.props.viewport.get('changeWidthRatio')*(this.props.x1 * MapLayoutGridConstant.getIn(['electricity', 'us' , 'mapPieceScale'], 1) + scaleContainerX)}
+          containerY={this.props.viewport.get('changeHeightRatio')*(this.props.y1 * MapLayoutGridConstant.getIn(['electricity', 'us' , 'mapPieceScale'], 1)  + scaleContainerY)}
           name="newBrunswickElectricity"
           text={`${this.props.tr(['explanations','newBrunswickArrow'])}`}
     /></g>)
@@ -337,8 +355,12 @@ class MapPiece extends React.Component {
 
   atlqExplanation() {
     if (this.props.data.get('name') !== 'ATL-Q' || this.props.selectedEnergy !== 'naturalGasLiquids') { return null }
-    const scaleContainerX = this.props.viewport.get('changeWidthRatio')  > 1.2 ? 276: 225
-    const scaleContainerY = this.props.viewport.get('changeHeightRatio')  > 1.2 ? -20: -20
+    let scaleContainerX = this.props.viewport.get('changeWidthRatio')  > 1.2 ? 277: 248
+    let scaleContainerY = this.props.viewport.get('changeHeightRatio')  > 1.2 ? -20: -33
+    if (this.props.arrangeBy === 'amount') {
+      scaleContainerX = this.props.viewport.get('changeWidthRatio')  > 1.2 ? 248: 215
+      scaleContainerY = this.props.viewport.get('changeHeightRatio')  > 1.2 ? -20: -30
+    }
     return (<g>
       <ExplanationDot
         scale="scale(1 -1) translate(0 -100)"
@@ -502,7 +524,7 @@ export default connect(
     activity: state.activity,
     viewport: state.viewport,
     arrangeBy: arrangeBy(state, props),
-    activityGroup: visualizationSettings(state, props)
+    activityGroup: visualizationSettings(state, props),
   }),
 )(MapPiece)
 
