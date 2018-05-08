@@ -397,9 +397,6 @@ const Constants = fromJS({
         Sierra: {
           'Port Name': 'Sierra', Province: 'AB', Latitude: 49.0023, Longitude: -111.9648, '': '', Description: '', Capacity: '',
         },
-        Blaine: {
-          'Port Name': 'Blaine', Province: 'BC', Latitude: 49.1044, Longitude: -122.8011, '': '', Description: '', Capacity: '',
-        },
         Huntingdon: {
           'Port Name': 'Huntingdon', Province: 'BC', Latitude: 49, Longitude: -122.266667, '': 'US', Description: 'Huntingdon is an export point on the Westcoast system. Westcoast extends from points in the Yukon Territory, the Northwest Territories, Alberta and B.C. to the Canada-U.S. border near Huntingdon, B.C. At the border, Westcoast connects to Williams Northwest Pipeline, which supplies natural gas to the U.S. Pacific Northwest market.', Capacity: 1.7,
         },
@@ -460,17 +457,8 @@ const Constants = fromJS({
         'St Clair': {
           'Port Name': 'St Clair', Province: 'ON', Latitude: 42.78333, Longitude: -82.35, '': '', Description: '', Capacity: '',
         },
-        Armstrong: {
-          'Port Name': 'Armstrong', Province: 'QC', Latitude: 45.8661, Longitude: -70.4332, '': '', Description: '', Capacity: '',
-        },
-        Champlain: {
-          'Port Name': 'Champlain', Province: 'QC', Latitude: 44.9688, Longitude: -73.4498, '': 'US', Description: '', Capacity: '',
-        },
         'East Hereford': {
           'Port Name': 'East Hereford', Province: 'QC', Latitude: 45.08333, Longitude: -71.5, '': '', Description: 'East Hereford is an export point on the TransCanada Mainline. At the border, the Mainline connects with the Portland Natura Gas Transmission, which serves markets in New England and the Maritimes.', Capacity: 0.25,
-        },
-        'Highgate Springs': {
-          'Port Name': 'Highgate Springs', Province: 'QC', Latitude: 44.9795, Longitude: -73.1054, '': 'US', Description: '', Capacity: '',
         },
         Highwater: {
           'Port Name': 'Highwater', Province: 'QC', Latitude: 45.02537, Longitude: -72.42930, '': '', Description: '', Capacity: '',
@@ -492,9 +480,6 @@ const Constants = fromJS({
         },
         'North Portal': {
           'Port Name': 'North Portal', Province: 'SK', Latitude: 49.054, Longitude: -102.668, '': '', Description: '', Capacity: '',
-        },
-        'Port of Estevan': {
-          'Port Name': 'Port of Estevan', Province: 'SK', Latitude: 49.1231, Longitude: -102.9915, '': '', Description: '', Capacity: '',
         },
         'Willow Creek': {
           'Port Name': 'Willow Creek', Province: 'SK', Latitude: 49.00086, Longitude: -109.73312, '': '', Description: '', Capacity: '',
