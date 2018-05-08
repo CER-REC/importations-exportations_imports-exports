@@ -245,11 +245,11 @@ const Constants = fromJS({
     categoryColours: {
       refinedPetroleumProducts: {
         productSubtype: {
-          'Partially Processed Oil': 'rgb(119, 246, 190)',
-          'Jet Fuel': 'rgb(0, 202, 116)',
-          'Heavy Fuel Oil': 'rgb(44, 167, 167)',
-          'Motor Gasoline': 'rgb(33, 110, 123)',
-          'Middle Distillate': 'rgb(47, 72, 98)',
+          'Partially Processed Oil': 'rgb(202, 253, 113)',
+          'Jet Fuel': 'rgb(60, 246, 178)',
+          'Heavy Fuel Oil': 'rgb(3, 201, 201)',
+          'Motor Gasoline': 'rgb(34, 111, 124)',
+          'Middle Distillate': 'rgb(25, 60, 97)',
         },
       },
       crudeOil: {
@@ -378,7 +378,7 @@ const Constants = fromJS({
         powerpool: {
           'New England-ISO': 'NE-ISO',
           'Minn / N. Dakota': 'MN/ND',
-          'Pennsylvania Jersey Maryland Power Pool': 'PJMPP',
+          'Pennsylvania Jersey Maryland Power Pool': 'PJM',
         },
       },
       ports: {

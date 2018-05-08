@@ -42,7 +42,7 @@ const VisualizationSelector = (props) => {
     .map((option) => {
       const translated = Tr(['mainMenuBar', option])
       const textWithBox = (
-        <TextBox padding={1} boxStyles={{ fill: 'white', stroke: '#b3b3b3'}}>
+        <TextBox padding={1} boxStyles={{ fill: 'white', stroke: '#b3b3b3', strokeWidth: 0.5}}>
           &nbsp;{translated}&nbsp;
         </TextBox>
       )
