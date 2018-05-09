@@ -50,6 +50,7 @@
     "nsp": "^2.7.0",
     "prop-types": "^15.6.0",
     "query-string": "^5.0.0",
+    "re-reselect": "^2.0.0",
     "react": "^16.1.1",
     "react-dom": "^16.1.1",
     "react-hot-loader": "^4.0.0-beta.22",

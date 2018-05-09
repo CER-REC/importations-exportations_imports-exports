@@ -1,6 +1,6 @@
-import { createSelector } from 'reselect'
 import Immutable from 'immutable'
 
+import { createSelector } from './selectHelper'
 import Constants from '../Constants'
 import {
   visualizationSettings,
@@ -34,7 +34,7 @@ export const amount = createSelector(
   (settings, override) => override || settings.get('amount'),
 )
 
-const selectedActivityGroup = createSelector(
+export const selectedActivityGroup = createSelector(
   visualizationSettings,
   activityGroupOverride,
   (settings, override) => override || settings.get('activity'),
@@ -82,3 +82,16 @@ export const binSelector = createSelector(
   (vis, unit, bins) => bins.getIn([vis, unit], emptyList),
 )
 
+export const selectedPieces = createSelector(
+  selection,
+  points => points.reduce((acc, nextValue) => {
+    if (Immutable.Map.isMap(nextValue)) {
+      nextValue.forEach((value) => {
+        acc = acc.concat(value.keySeq().toList())
+      })
+    } else if (Immutable.List.isList(nextValue)) {
+      acc = acc.concat(nextValue)
+    }
+    return acc
+  }, new Immutable.List()),
+)

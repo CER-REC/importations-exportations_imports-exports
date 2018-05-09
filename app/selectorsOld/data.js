@@ -124,6 +124,8 @@ export const activityGroupSelector = createSelector(
     )),
 )
 
+/*
+ * Moved to new data
 export const selectedPieces = createSelector(
   selection,
   points => points.reduce((acc, nextValue) => {
@@ -137,6 +139,7 @@ export const selectedPieces = createSelector(
     return acc
   }, new Immutable.List()),
 )
+*/
 
 const filterByTimeline = (point, range, groupBy) => {
   if (groupBy === 'year') {

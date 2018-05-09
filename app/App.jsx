@@ -18,6 +18,7 @@ import Store from './Store'
 import { DismissComponent as DismissComponentCreator } from './actions/socialBar'
 import { ScreenshotMode } from './actions/screenshot'
 import * as DataSelectors from './selectors/data'
+import * as CoreSelectors from './selectors/core'
 
 const store = Store()
 
@@ -73,3 +74,4 @@ Request({
 // Set up reselect tools
 ReselectTools.getStateWith(() => store.getState())
 ReselectTools.registerSelectors(DataSelectors)
+ReselectTools.registerSelectors(CoreSelectors)
