@@ -1,6 +1,8 @@
 import { createSelector } from 'reselect'
 
-import { chartAxisPosition } from './electricity'
+// TODO: Temporary
+//import { chartAxisPosition } from './electricity'
+const chartAxisPosition = () => ({ top: 0 })
 import { activityOptions, arrangeByOptions, amountOptions, subtypeOptions } from '../menus'
 import Constants from '../../Constants'
 
