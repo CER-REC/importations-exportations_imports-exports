@@ -113,8 +113,10 @@ const parsingIssue = {};
       ...point,
       country: originRegion.get('country') || '',
       originKey: originRegion.get('originKey') || '',
+      originContinent: originRegion.get('continent') || '',
       destinationCountry: destinationRegion.get('country') || '',
       destinationKey: destinationRegion.get('originKey') || '',
+      destinationContinent: destinationRegion.get('continent') || '',
     }
   }))
   // Add forAverageValue and forAverageDivisor to rate units
