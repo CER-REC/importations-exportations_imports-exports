@@ -32,7 +32,8 @@ const activityMap = {
 
 const productMap = {
   Electricity: 'electricity',
-  'Crude Oil': 'crudeOil',
+  'Crude Oil Imports': 'crudeOilImports',
+  'Crude Oil Exports': 'crudeOilExports',
   Gas: 'naturalGas',
   NGLs: 'naturalGasLiquids',
   RPPs: 'refinedPetroleumProducts',
@@ -68,28 +69,36 @@ const parsingIssue = {};
   },
 ))))
   // Map over the data and normalize it
-  .then(data => data.map(point => ({
-    period: stripNA(point.period),
-    year: parseInt(point.period.substr(0, 4), 10),
-    quarter: parseInt(point.period.substr(5, 1), 10),
-    product: productMap[point.product],
-    productSubtype: stripNA(point.productSubtype),
-    transport: stripNA(point.transport),
-    origin: stripNA(point.origin),
-    destination: stripNA(point.destination),
-    port: stripNA(point.port),
-    activityGroup: stripNA(activityGroupMap[point.activity]),
-    activity: stripNA(activityMap[point.activity]),
-    originalActivity: stripNA(point.activity),
-    units: stripNA(point.units),
-    confidential: (point.value.toLowerCase() === 'confidential'),
-    value: parseInt(stripNA(point.value), 10) || 0,
-    extrapolated: false,
-  })))
+  .then(data => data.map((point) => {
+    let product = ''
+    if (point.product === 'Crude Oil') {
+      const productName = `${point.product} ${point.activity}`
+      product = productMap[productName]
+    } else {
+      product = productMap[point.product]
+    }
+    return {
+      period: stripNA(point.period),
+      year: parseInt(point.period.substr(0, 4), 10),
+      quarter: parseInt(point.period.substr(5, 1), 10),
+      product,
+      productSubtype: stripNA(point.productSubtype),
+      transport: stripNA(point.transport),
+      origin: stripNA(point.origin),
+      destination: stripNA(point.destination),
+      port: stripNA(point.port),
+      activityGroup: stripNA(activityGroupMap[point.activity]),
+      activity: stripNA(activityMap[point.activity]),
+      originalActivity: stripNA(point.activity),
+      units: stripNA(point.units),
+      confidential: (point.value.toLowerCase() === 'confidential'),
+      value: parseInt(stripNA(point.value), 10) || 0,
+      extrapolated: false,
+    }
+  }))
   // Strip RPP/Crude imports, since they aren't used in the visualization right now
   .then(points => points.filter((point) => (
-    point.activity !== 'imports' ||
-    (point.product !== 'refinedPetroleumProducts' && point.product !== 'crudeOil')
+    point.activity !== 'imports' || point.product !== 'refinedPetroleumProducts'
   )))
   // Validate points
   .then(points => points.map((point) => {
@@ -104,8 +113,10 @@ const parsingIssue = {};
       ...point,
       country: originRegion.get('country') || '',
       originKey: originRegion.get('originKey') || '',
+      originContinent: originRegion.get('continent') || '',
       destinationCountry: destinationRegion.get('country') || '',
       destinationKey: destinationRegion.get('originKey') || '',
+      destinationContinent: destinationRegion.get('continent') || '',
     }
   }))
   // Add forAverageValue and forAverageDivisor to rate units
