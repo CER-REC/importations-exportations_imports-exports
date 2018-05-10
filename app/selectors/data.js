@@ -22,6 +22,7 @@ export const subType = createSelector(
   visualizationSettings,
   settings => settings.get('subtype'),
 )
+// TODO These should be in visualizationSettings with the overrides
 export const arrangeBy = createSelector(
   visualizationSettings,
   arrangeByOverride,
