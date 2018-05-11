@@ -132,13 +132,31 @@ export const detailBreakdownSelector = createSelector(
 export const barChartValues = createSelector(
   getVisualizationData,
   getActivityFilterPredicate,
-
+  (_, props = {}) => props.groupBy,
+  (_, props = {}) => props.valueKey,
+  (_, props = {}) => props.valueAverage || false,
+  (records, activityfilter, groupBy, valueKey, averageMode) => {
+    const filteredRecords = records.filter(p => p.get(valueKey, '') !== '')
+    let data
+    if (averageMode === 'weighted') {
+      data = calculateValueWeighted(filteredRecords, groupBy, valueKey)
+    } else {
+      data = calculateValueSum(filteredRecords, groupBy, valueKey)
+    }
+    return fromJS(data)
+  },
 )
 
-// export const importChart = createSelector(barChartValues) => ({})
+export const barChartTotal = createSelector(
+  barChartValues,
+  (_, props = {}) => props.showGroup,
+  (data, showGroup) => data.get('values')
+    .get(showGroup, fromJS({}))
+    .reduce((acc, next) => acc + next, 0),
+)
 
-// export const exportChart = createSelector(barChartValues) => ({})
-
-// export const stackedChart = createSelector() => ({barChartValues})
-
-// export const barChartSelector = createSelector() => ({barChartValues, importChart, exportChart, stackedChart})
+export const barChartSelector = createSelector(
+  barChartValues,
+  barChartTotal,
+  (result, total) => result.merge({ total }),
+)
