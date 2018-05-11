@@ -39,7 +39,7 @@ class RefinedPetroleumProductsVisualizationContainer extends React.Component {
   }
 
   renderStackedChart() {
-    const { stackedChart: positions, selectedEnergy } = this.props
+    const { stackedChart: positions } = this.props
     const categoryColours = Constants.getIn(['styleGuide', 'categoryColours'])
     return (
       <g>
@@ -63,9 +63,10 @@ class RefinedPetroleumProductsVisualizationContainer extends React.Component {
             {...positions.chart}
             groupBy="activity"
             valueKey="productSubtype"
+            valueAverage
             showGroup="exports"
             showHeader={false}
-            colors={categoryColours.getIn([selectedEnergy, 'productSubtype'])}
+            colors={categoryColours.getIn(['refinedPetroleumProducts', 'productSubtype'])}
             colorBox
             trContent={fromJS({ body: {} }) /* Dummy content to make it render */}
             nameMappings={Tr.get('label')}
@@ -159,7 +160,6 @@ class RefinedPetroleumProductsVisualizationContainer extends React.Component {
 }
 
 export default connect((state, props) => ({
-  // selectedEnergy: state.importExportVisualization,
   stackedChart: RefinedPetroleumProductsViewport.stackedChartPosition(state, props),
   individualCharts: RefinedPetroleumProductsViewport.individualChartsPosition(state, props),
   /*
@@ -180,5 +180,6 @@ export default connect((state, props) => ({
     groupBy: 'activity',
     valueKey: 'productSubtype',
     showGroup: 'exports',
+    valueAverage: true,
   }),
 }))(RefinedPetroleumProductsVisualizationContainer)
