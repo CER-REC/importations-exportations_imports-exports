@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import Immutable from 'immutable'
 import { connect } from 'react-redux'
 
+/*
 import BarChart from './BarChart'
 import Axis from './Axis'
 import PortMap from './PortMap'
@@ -13,9 +14,11 @@ import { showImportsSelector, showExportsSelector } from '../selectors/visualiza
 import NaturalGasPieceActivityExplanation from './NaturalGasPieceActivityExplanation'
 import Constants from '../Constants'
 import {legendMapPosition} from '../selectors/viewport/menus'
+*/
 
 const NaturalGasVisualizationContainer = props => (
   <g>
+    {/*
     {!props.showImports ? null : (
       <BarChart
         {...props.importChart}
@@ -49,10 +52,12 @@ const NaturalGasVisualizationContainer = props => (
     <NaturalGasPieceActivityExplanation
       {...props.mapPieceActivityExplanation}
     />
+    */}
   </g>
 )
 
 export default connect((state, props) => ({
+  /*
   importChart: NaturalGasViewport.chartImportPosition(state, props),
   mapPieceActivityExplanation: legendMapPosition(state, props),
   axisPosition: NaturalGasViewport.chartAxisPosition(state, props),
@@ -61,4 +66,5 @@ export default connect((state, props) => ({
   portMap: NaturalGasViewport.portMapPosition(state, props),
   showImports: showImportsSelector(state, props),
   showExports: showExportsSelector(state, props),
+  */
 }))(NaturalGasVisualizationContainer)
