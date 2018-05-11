@@ -38,7 +38,7 @@ const VisualizationSelector = (props) => {
   const { Tr, importExportVisualization } = props
   let yOffset = Constants.getIn(['menuBar', 'visualizationPadding']) 
   const tabIndex = Constants.getIn(['tabIndex','start', 'menuBar'])
-  const options = ['electricity', 'crudeOil', 'naturalGas', 'naturalGasLiquids', 'refinedPetroleumProducts']
+  const options = ['electricity', 'crudeOilImports', 'crudeOilExports', 'naturalGas', 'naturalGasLiquids', 'refinedPetroleumProducts']
     .map((option) => {
       const translated = Tr(['mainMenuBar', option])
       const textWithBox = (
