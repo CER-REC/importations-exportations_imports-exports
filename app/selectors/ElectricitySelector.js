@@ -2,8 +2,14 @@ import Immutable, { fromJS } from 'immutable'
 
 import { createSelector } from './selectHelper'
 import { arrangeBy } from './data'
-import { getVisualizationData } from './core'
+import {
+  getVisualizationData,
+  filterByTimeline,
+  filterByTimelineAndMap,
+  getActivityFilterPredicate,
+} from './core'
 import { calculateValueSum } from './renderData'
+import { visualizationSettings } from './visualizationSettings'
 import MapLayoutGridConstant from '../MapLayoutGridConstant'
 import Constants from '../Constants'
 
@@ -48,8 +54,21 @@ const getTabIndexStart = (country) => {
   return tabIndex
 }
 
+export const getCountryData = createSelector(
+  getCountry,
+  visualizationSettings,
+  filterByTimeline,
+  filterByTimelineAndMap,
+  getActivityFilterPredicate,
+  (country, settings, timeline, timelineAndMap, activityFilter) =>
+    (country === settings.getIn(['selection', 'country'])
+      ? timeline
+      : timelineAndMap
+    ).filter(activityFilter),
+)
+
 export const createSortedLayout = createSelector(
-  getVisualizationData,
+  getCountryData,
   getColumns,
   getPadding,
   arrangeBy,
@@ -99,7 +118,7 @@ export const createSortedLayout = createSelector(
 )
 
 export const parseLocationData = createSelector(
-  getVisualizationData,
+  getCountryData,
   getElectricityMapLayoutConstants,
   getCountry,
   (records, layout, country) => {

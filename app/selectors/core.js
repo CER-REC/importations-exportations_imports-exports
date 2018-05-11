@@ -87,8 +87,8 @@ export const filterByTimelineAndMap = createSelector(
   getVisualizationData,
   getTimelineFilterPredicate,
   getMapFilterPredicate,
-  (data, timelinePredicate, mapPredicate) =>
-    record => (timelinePredicate(record) && mapPredicate(record)),
+  (data, timelinePredicate, mapPredicate) => data.filter(record =>
+    (timelinePredicate(record) && mapPredicate(record))),
 )
 
 export const getActivityFilterPredicate = createSelector(

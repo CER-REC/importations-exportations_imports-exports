@@ -55,48 +55,18 @@ class ElectricityMapLayout extends React.Component {
 
   onClick = (country, originKey) => {
     const { selection } = this.props
-    let origins = []
+    let origins = [originKey]
     if (selection.get('country') === country) {
       const originKeyExists = selection.get('origins').indexOf(originKey)
       if (originKeyExists === -1) {
-        origins = selection.get('origins').push(originKey).toJS()
+        origins = selection.get('origins').concat(originKey)
       } else {
         origins = selection.get('origins').delete(originKeyExists)
       }
-    } else {
-      origins = [originKey]
     }
-
-
-    // find all highlighted pieces destination
-    const destinations = {}
-    origins.forEach((destination) => {
-      const dataPoint = this.props.dataPoints.get(destination)
-      if (typeof dataPoint !== 'undefined') {
-        const destinationCountries = dataPoint.get('destinationCountry')
-        destinationCountries.forEach((value, key) => {
-          if(!destinations[key]){
-            destinations[key]={}
-          }
-          value.forEach((activities, destinationKey) =>{
-            if(!destinations[key][destinationKey]){
-                destinations[key][destinationKey] = {}
-            }
-            activities.forEach((activityData, activityKey) => {
-              if(!destinations[key][destinationKey][activityKey]){
-                  destinations[key][destinationKey][activityKey] = activityData
-              }else{
-                  destinations[key][destinationKey][activityKey] += activityData
-              }
-            })
-          })
-        })
-      }
-    })
     this.props.onMapPieceClick({
       country,
       origins,
-      destinations,
     })
   }
 
@@ -149,7 +119,7 @@ class ElectricityMapLayout extends React.Component {
     return this.props.selection.getIn(['destinations', country], new Immutable.List()).has(key)
   }
   isSelected() {
-    const length = this.props.selection.get('origins').count() + this.props.selection.get('destinations').count()
+    const length = this.props.selection.get('origins').count()
     return (length > 0)
   }
   renderMapPiece() {
@@ -172,7 +142,6 @@ class ElectricityMapLayout extends React.Component {
       .map((position, key) => {
         const humanName = this.props.Tr(['country', this.props.country, key])
         const value = layout.getIn(['values', key], emptyMap)
-        console.log(key, humanName, value.toJS())
         return (
           <g key={`mapPieceKey_${this.props.country}_${key}`}>
             <g

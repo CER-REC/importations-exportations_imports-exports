@@ -1,7 +1,7 @@
 import { fromJS } from 'immutable'
 
 import { createSelector } from './selectHelper'
-import { getVisualizationData, getActivityFilterPredicate } from './core'
+import { filterByTimelineAndMap, getActivityFilterPredicate } from './core'
 
 export const calculateValueSum = (data, groupByRaw, valueKey) => {
   const groupByAll = [].concat(groupByRaw)
@@ -102,13 +102,14 @@ export const calculateValueWeighted = (data, groupByRaw, valueKey) => {
 }
 
 export const detailBreakdownValues = createSelector(
-  getVisualizationData,
+  filterByTimelineAndMap,
   getActivityFilterPredicate,
   (_, props = {}) => props.groupBy,
   (_, props = {}) => props.valueKey,
   (_, props = {}) => props.valueAverage || false,
-  (records, activityfilter, groupBy, valueKey, averageMode) => {
-    const filteredRecords = records.filter(p => p.get(valueKey, '') !== '')
+  (records, activityFilter, groupBy, valueKey, averageMode) => {
+    const filteredRecords = records
+      .filter(p => (p.get(valueKey, '') !== '' && activityFilter(p)))
     let data
     if (averageMode === 'weighted') {
       data = calculateValueWeighted(filteredRecords, groupBy, valueKey)
