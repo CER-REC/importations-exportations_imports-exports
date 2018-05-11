@@ -1037,12 +1037,12 @@ const TranslationTable = fromJS({
   },
   subType: {
     Butane: {
-      en: 'BUTANE',
-      fr: 'BUTANE',
+      en: 'Butane',
+      fr: 'Butane',
     },
     Propane: {
-      en: 'PROPANE',
-      fr: 'PROPANE',
+      en: 'Propane',
+      fr: 'Propane',
     },
     propaneButane: {
       en: 'Butane and Propane',
