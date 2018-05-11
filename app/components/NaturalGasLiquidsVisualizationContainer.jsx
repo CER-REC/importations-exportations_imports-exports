@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import Immutable from 'immutable'
 import { connect } from 'react-redux'
 
+/*
 import BarChart from './BarChart'
 import Axis from './Axis'
 import * as NaturalGasLiquidsViewport from '../selectors/viewport/naturalGasLiquids'
@@ -12,10 +13,12 @@ import NaturalGasCanadaMapContainer from './NaturalGasCanadaMapContainer'
 import { legendMapPosition } from '../selectors/viewport/menus'
 import { showImportsSelector, showExportsSelector } from '../selectors/visualizationSettings'
 import NaturalGasLiquidsMapPieceActivityExplanation from './NaturalGasLiquidsMapPieceActivityExplanation'
+*/
 
 class NaturalGasLiquidsVisualizationContainer extends React.Component {
   render() {
     return (<g>
+      {/*
       <NaturalGasCanadaMapContainer
         {...this.props.canadaMap}
       />
@@ -52,11 +55,13 @@ class NaturalGasLiquidsVisualizationContainer extends React.Component {
       <NaturalGasLiquidsMapPieceActivityExplanation
         {...this.props.mapPieceActivityExplanation}
       />
+      */}
     </g>)
   }
 }
 
 export default connect((state, props) => ({
+  /*
   canadaMap: NaturalGasLiquidsViewport.canadaImportMap(state, props),
   importChart: NaturalGasLiquidsViewport.chartImportPosition(state, props),
   axisPosition: NaturalGasLiquidsViewport.chartAxisPosition(state, props),
@@ -65,4 +70,5 @@ export default connect((state, props) => ({
   mapPieceActivityExplanation: legendMapPosition(state, props),
   showImports: showImportsSelector(state, props),
   showExports: showExportsSelector(state, props),
+  */
 }))(NaturalGasLiquidsVisualizationContainer)

@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { fromJS } from 'immutable'
 
+/*
 import BarChart from './BarChart'
 import StackedChart from './StackedChart'
 import Axis from './Axis'
@@ -17,6 +18,7 @@ import { timelineData } from '../selectors/timeline'
 import Constants from '../Constants'
 import Tr from '../TranslationTable'
 import TrSelector from '../selectors/translate'
+*/
 
 const subtypes = [
   'Partially Processed Oil',
@@ -131,6 +133,7 @@ class RefinedPetroleumProductsVisualizationContainer extends React.Component {
   render() {
     return (
       <g>
+        {/*
         <DetailSidebar {...this.props.sidebarTotal}>
           <DetailTotal
             key="total"
@@ -142,12 +145,14 @@ class RefinedPetroleumProductsVisualizationContainer extends React.Component {
         {this.props.arrangeBy === 'stack'
           ? this.renderStackedChart()
           : this.renderSeparateCharts()}
+        */}
       </g>
     )
   }
 }
 
 export default connect((state, props) => ({
+  /*
   selectedEnergy: state.importExportVisualization,
   stackedChart: RefinedPetroleumProductsViewport.stackedChartPosition(state, props),
   individualCharts: RefinedPetroleumProductsViewport.individualChartsPosition(state, props),
@@ -159,4 +164,5 @@ export default connect((state, props) => ({
   data: timelineData(state, { ...props, aggregateKey: 'productSubtype' }),
   filteredData: filterByTimelineAndHexData(state, props),
   detailBreakdownValues: refinedPetroleumProductsDetailBreakdownValues(state, props),
+  */
 }))(RefinedPetroleumProductsVisualizationContainer)

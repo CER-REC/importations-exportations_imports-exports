@@ -6,11 +6,9 @@ import WorkspaceComputations from '../computations/WorkspaceComputations'
 // TODO: Temporary while reworking selectors
 import ElectricityVisualizationContainer from './ElectricityVisualizationContainer'
 import CrudeOilExportsVisualizationContainer from './CrudeOilExportsVisualizationContainer'
-/*
 import NaturalGasVisualizationContainer from './NaturalGasVisualizationContainer'
 import NaturalGasLiquidsVisualizationContainer from './NaturalGasLiquidsVisualizationContainer'
 import RefinedPetroleumProductsVisualizationContainer from './RefinedPetroleumProductsVisualizationContainer'
-*/
 
 import './VisualizationContainer.scss'
 
@@ -23,13 +21,6 @@ class VisualizationContainer extends React.Component {
   }
 
   changeVisualization() {
-    // TODO: Temporary while reworking selectors
-    const enabledVisualizations = [
-      'electricity',
-      'crudeOilExports',
-    ]
-    if (!enabledVisualizations.includes(this.props.importExportVisualization)) { return null }
-
     const { width, height } = this.props.visualizationPosition
     const visualizationContainerType = this.props.importExportVisualization
     const xaxis = this.props.menuWidth
