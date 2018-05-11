@@ -134,7 +134,8 @@ const Constants = fromJS({
 
   visualizationTypes: [
     'electricity',
-    'crudeOil',
+    'crudeOilImports',
+    'crudeOilExports',
     'naturalGas',
     'naturalGasLiquids',
     'refinedPetroleumProducts',
@@ -199,7 +200,8 @@ const Constants = fromJS({
 
   energyMeasurementTypes: {
     electricity: ['MW.h', 'CAN$', 'CAN$/MW.h'],
-    crudeOil: ['thousand m3/d'],
+    crudeOilImports: ['thousand m3/d'],
+    crudeOilExports: ['thousand m3/d'],
     naturalGas: ['thousand m3/d', 'CN$/GJ'],
     naturalGasLiquids: ['m3/d'],
     refinedPetroleumProducts: ['thousand m3/d'],
@@ -252,7 +254,7 @@ const Constants = fromJS({
           'Middle Distillate': 'rgb(25, 60, 97)',
         },
       },
-      crudeOil: {
+      crudeOilExports: {
         transport: {
           Marine: 'rgb(184, 184, 244)',
           Pipeline: 'rgb(47, 72, 98)',

@@ -100,9 +100,17 @@ export const detailBreakdownValues = createSelector(
   getActivityFilterPredicate,
   (_, props = {}) => props.groupBy,
   (_, props = {}) => props.valueKey,
-  (records, activityfilter, groupBy, valueKey) => {
+  (_, props = {}) => props.valueAverage || false,
+  (records, activityfilter, groupBy, valueKey, averageMode) => {
     const filteredRecords = records.filter(p => p.get(valueKey, '') !== '')
-    const data = calculateValueSum(filteredRecords, groupBy, valueKey)
+    let data
+    if (averageMode === 'weighted') {
+      data = calculateValueWeighted(filteredRecords, groupBy, valueKey)
+    } else if (averageMode === true) {
+      data = calculateValueAverage(filteredRecords, groupBy, valueKey)
+    } else {
+      data = calculateValueSum(filteredRecords, groupBy, valueKey)
+    }
     return fromJS(data)
   },
 )

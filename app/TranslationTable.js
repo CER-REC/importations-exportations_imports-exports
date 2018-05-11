@@ -190,9 +190,13 @@ const TranslationTable = fromJS({
       en: 'Electricity',
       fr: 'Électricité',
     },
-    crudeOil: {
-      en: 'Crude Oil',
-      fr: 'Pétrole brut',
+    crudeOilImports: {
+      en: 'Crude Oil Imports',
+      fr: 'Pétrole brut TODO',
+    },
+    crudeOilExports: {
+      en: 'Crude Oil Exports',
+      fr: 'Pétrole brut TODO',
     },
     naturalGas: {
       en: 'Natural Gas',
@@ -738,9 +742,13 @@ const TranslationTable = fromJS({
       en: 'electricity',
       fr: 'électricité',
     },
-    crudeOil: {
-      en: 'crude-oil',
-      fr: 'pétrole-brut',
+    crudeOilImports: {
+      en: 'crude-oil-imports',
+      fr: 'pétrole-brut-imports',
+    },
+    crudeOilExports: {
+      en: 'crude-oil-exports',
+      fr: 'pétrole-brut-exports',
     },
     naturalGas: {
       en: 'natural-gas',
@@ -850,7 +858,7 @@ const TranslationTable = fromJS({
         },
       },
     },
-    crudeOil: {
+    crudeOilExports: {
       defaultText: {
         en: 'Data not available when map is filtered',
         fr: 'Ces données ne sont pas disponibles quand un filtre est actif',
@@ -1420,7 +1428,7 @@ const TranslationTable = fromJS({
         },
       },
     },
-    crudeOil: {
+    crudeOilExports: {
       exports: {
         label: {
           en: 'exports into US PADD',
