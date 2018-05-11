@@ -170,14 +170,14 @@ class BarChart extends Chart {
     )
   }
 
-  calculateHeightPerUnit() {
-    return this.props.height / (this.props.scale.getIn(['y', 'max']) - this.props.scale.getIn(['y', 'min']))
-  }
+  // calculateHeightPerUnit() {
+  //   return this.props.height / (this.props.scale.getIn(['y', 'max']) - this.props.scale.getIn(['y', 'min']))
+  // }
 
-  calculateNegativePosition() {
-    const largestNegative = this.props.bars.map(p => p.getIn(['values', this.props.valueKey], 0)).min()
-    return (largestNegative < 0) ? -30 : 0
-  }
+  // calculateNegativePosition() {
+  //   const largestNegative = this.props.bars.map(p => p.getIn(['values', this.props.valueKey], 0)).min()
+  //   return (largestNegative < 0) ? -30 : 0
+  // }
 
   render() {
     console.log(this.props.timelineSelector.toJS())
@@ -195,13 +195,16 @@ class BarChart extends Chart {
     } = this.props
     console.log(this.props.timelineSelector.toJS())
     const dataValue = this.props.timelineSelector.get('values')
-    const barSize = layout.get('barWidth')
+    //const barSize = layout.get('barWidth')
+    const barSize = 4
 
-    const heightPerUnit = this.calculateHeightPerUnit()
-    const negativeValOffset = this.calculateNegativePosition()
+    // const heightPerUnit = this.calculateHeightPerUnit()
+    const heightPerUnit = 1
+    // const negativeValOffset = this.calculateNegativePosition()
 
     const elements = dataValue.map((point) => {
-      const opacity = this.isTimelinePointFiltered(point) ? 0.5 : 1
+      // const opacity = this.isTimelinePointFiltered(point) ? 0.5 : 1
+      const opacity = 1
       const value = point.getIn(['values', activityValueKey], 0)
 
       // Minimum 1px bar height
@@ -213,45 +216,45 @@ class BarChart extends Chart {
       let overflow = null
       let overflowBarHeight = 0
       let overflowClick = null
-      if (value > scale.getIn(['y', 'max']) || value < scale.getIn(['y', 'min'])) {
-        barHeight = (value < 0) ? 0 : scale.getIn(['y', 'max']) * heightPerUnit
-        let overflowText = null
-        const barDirection = (value < 0 ? -1 : 1)
-        overflowBarHeight = 17 * barDirection
-        if (
-          expandedOutliers.has(valueKey) &&
-          expandedOutliers.getIn([valueKey, value < 0 ? 'negative' : 'positive']) === point.get('period')
-        ) {
-          overflowBarHeight = 30 * barDirection
-          let textOffset = ((height + negativeValOffset) - barHeight - overflowBarHeight)
-          if (!flipped && value > 0) textOffset += 11
-          else if (flipped && value < 0) textOffset -= 11
-          overflowText = (
-            <g transform={`translate(${point.get('offsetX') + (barSize / 2) + 1} ${textOffset})`}>
-              <g transform={flipped ? 'scale(1 -1)' : ''} className="chartOutlierText">
-                <TextBox
-                  padding={0}
-                  boxStyles={{ fill: '#fff' }}
-                >
-                  {value.toLocaleString()}&nbsp;
-                  {this.props.tr(['amounts', this.props.unit])}
-                </TextBox>
-              </g>
-            </g>
-          )
-        }
-        overflowClick = () => this.props.toggleOutlier(valueKey, (value >= 0), point.get('period'))
-        overflow = (
-          <g>
-            <g transform={`translate(${point.get('offsetX') - (barSize / 2)} ${(height + negativeValOffset + (value < 0 ? 10 : 0)) - barHeight})`}>
-              <g transform={flipped ? 'scale(1 -1) translate(0 10)' : ''}>
-                <polygon points="0,0 0,-5 5,-10 5,-5 0,0" fill="white" />
-              </g>
-            </g>
-            {overflowText}
-          </g>
-        )
-      }
+      // if (value > scale.getIn(['y', 'max']) || value < scale.getIn(['y', 'min'])) {
+      //   barHeight = (value < 0) ? 0 : scale.getIn(['y', 'max']) * heightPerUnit
+      //   let overflowText = null
+      //   const barDirection = (value < 0 ? -1 : 1)
+      //   overflowBarHeight = 17 * barDirection
+      //   if (
+      //     expandedOutliers.has(valueKey) &&
+      //     expandedOutliers.getIn([valueKey, value < 0 ? 'negative' : 'positive']) === point.get('period')
+      //   ) {
+      //     overflowBarHeight = 30 * barDirection
+      //     let textOffset = ((height + negativeValOffset) - barHeight - overflowBarHeight)
+      //     if (!flipped && value > 0) textOffset += 11
+      //     else if (flipped && value < 0) textOffset -= 11
+      //     overflowText = (
+      //       <g transform={`translate(${point.get('offsetX') + (barSize / 2) + 1} ${textOffset})`}>
+      //         <g transform={flipped ? 'scale(1 -1)' : ''} className="chartOutlierText">
+      //           <TextBox
+      //             padding={0}
+      //             boxStyles={{ fill: '#fff' }}
+      //           >
+      //             {value.toLocaleString()}&nbsp;
+      //             {this.props.tr(['amounts', this.props.unit])}
+      //           </TextBox>
+      //         </g>
+      //       </g>
+      //     )
+      //   }
+      //   overflowClick = () => this.props.toggleOutlier(valueKey, (value >= 0), point.get('period'))
+      //   overflow = (
+      //     <g>
+      //       <g transform={`translate(${point.get('offsetX') - (barSize / 2)} ${(height + negativeValOffset + (value < 0 ? 10 : 0)) - barHeight})`}>
+      //         <g transform={flipped ? 'scale(1 -1) translate(0 10)' : ''}>
+      //           <polygon points="0,0 0,-5 5,-10 5,-5 0,0" fill="white" />
+      //         </g>
+      //       </g>
+      //       {overflowText}
+      //     </g>
+      //   )
+      // }
       return (
         <g key={`${point.get('year')}-${point.get('quarter')}-${valueKey}`} onClick={overflowClick}>
           {this.renderLine(point, negativeValOffset, barHeight, colour, opacity, overflowBarHeight)}
@@ -287,6 +290,7 @@ class BarChart extends Chart {
           {this.blueBarExplanation()}
           {this.crudeBlueBarExplanation()}
         </g>
+        {/*
         <g transform={`translate(0 ${negativeValOffset})`}>
           <AxisGuide
             flipped={flipped}
@@ -300,7 +304,7 @@ class BarChart extends Chart {
             tabIndex={tabIndex||0}
           />
         </g>
-
+*/}
       </g>
     )
   }
