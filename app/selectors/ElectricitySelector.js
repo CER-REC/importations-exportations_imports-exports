@@ -29,14 +29,8 @@ const getPadding = createSelector(
 )
 
 const sortData = (points, sortBy) => {
-  switch (sortBy) {
-    case 'imports':
-      return points.sort((a, b) => (b.get('imports', 0) - a.get('imports', 0)))
-    case 'exports':
-      return points.sort((a, b) => (b.get('exports', 0) - a.get('exports', 0)))
-    default:
-      return points
-  }
+  if (sortBy !== 'imports' && sortBy !== 'exports') { return points }
+  return points.sort((a, b) => (b.get(sortBy, 0) - a.get(sortBy, 0)))
 }
 
 const getTabIndexStart = (country) => {
@@ -54,27 +48,33 @@ const getTabIndexStart = (country) => {
   return tabIndex
 }
 
-const getElectricityImportAndExport = createSelector(
-  getVisualizationData,
-  (data) => {
-    console.log(data)
-    return []
-  },
-)
-
 export const createSortedLayout = createSelector(
-  getElectricityImportAndExport,
+  getVisualizationData,
   getColumns,
   getPadding,
   arrangeBy,
   getCountry,
-  (pointsRaw, columns, rowPadding, sortBy, country) => {
-    const points = sortData(pointsRaw.filter(p => p.get('country') === country), sortBy)
+  getElectricityMapLayoutConstants,
+  (records, columns, rowPadding, sortBy, country, layout) => {
+    // TODO: This should calculate averages in some cases
+    const data = calculateValueSum(
+      records,
+      ['originKey', 'destinationKey'],
+      'activity',
+    )
+
+    const valuesToSort = {}
+    layout.forEach((v) => {
+      valuesToSort[v.get('name')] = data.values[v.get('name')] || {}
+    })
+    const orderedValues = sortData(fromJS(valuesToSort), sortBy)
+
     let row = 0
     let column = 0
-    const sortedArray = []
     let tabIndex = getTabIndexStart(country)
-    points.forEach((statesOrProvinces) => {
+    const tabIndexes = {}
+    const tilePositions = {}
+    orderedValues.forEach((value, region) => {
       if (column >= columns) {
         column = 0
         row += 1
@@ -86,21 +86,15 @@ export const createSortedLayout = createSelector(
       if (row !== 0) {
         x += (row * rowPadding)
       }
-      sortedArray.push({
-        name: statesOrProvinces.get('originKey'),
-        exports: statesOrProvinces.get('exports') || 0,
-        imports: statesOrProvinces.get('imports') || 0,
-        totalCount: statesOrProvinces.get('totalCount') || 0,
-        confidentialCount: statesOrProvinces.get('confidentialCount') || 0,
-        x,
-        y: row,
-        tabIndex,
-      })
-      tabIndex += 1
+
+      tabIndexes[region] = tabIndex
+      tilePositions[region] = { x, y: row }
+
       // Column value is updated for the next iteration
       column += 1
+      tabIndex += 1
     })
-    return Immutable.fromJS(sortedArray)
+    return fromJS({ ...data, tabIndexes, tilePositions })
   },
 )
 
@@ -109,52 +103,22 @@ export const parseLocationData = createSelector(
   getElectricityMapLayoutConstants,
   getCountry,
   (records, layout, country) => {
-    const resultList = []
-    if (records.count() === 0 || typeof layout === 'undefined') { return resultList }
-
-    const data = calculateValueSum(records, 'originKey', 'activity')
+    // TODO: This should calculate averages in some cases
+    const data = calculateValueSum(records, ['originKey', 'destinationKey'], 'activity')
 
     let tabIndex = getTabIndexStart(country)
-    console.log(layout.toJS())
     const tabIndexes = {}
     const tilePositions = {}
-    layout.forEach((region) => {
-      const originKey = region.get('originKey')
-      tabIndexes[originKey] = tabIndex
-      tabIndex += 1
 
-      tilePositions[originKey] = { x: region.get('x'), y: region.get('y') }
-      /*
-      const originKey = region.get('originKey')
-      const result = {
-        name: originKey,
-        exports: data.getIn([originKey, 'exports']) || 0,
-        imports: data.getIn([originKey, 'imports']) || 0,
-        x: region.get('x'),
-        y: region.get('y'),
-        totalCount: data.getIn([originKey, 'totalCount']) || 0,
-        confidentialCount: data.getIn([originKey, 'confidentialCount']) || 0,
-        tabIndex,
-      }
-      if (data.getIn([originKey, 'sumForAvg'], false) !== false) {
-        result.imports = data.getIn([originKey, 'sumForAvg', 'imports'], 0)
-        if (Immutable.Map.isMap(result.imports)) {
-          result.imports = result.imports.get('divisor', 0) === 0
-            ? 0
-            : result.imports.get('value') / result.imports.get('divisor')
-        }
-        result.exports = data.getIn([originKey, 'sumForAvg', 'exports'], 0)
-        if (Immutable.Map.isMap(result.exports)) {
-          result.exports = result.exports.get('divisor', 0) === 0
-            ? 0
-            : result.exports.get('value') / result.exports.get('divisor')
-        }
-      }
-      tabIndex += 1
-      resultList.push(result)
-      */
-    })
-    console.log('result', { ...data, tabIndexes, tilePositions })
+    if (records.count() !== 0 && typeof layout !== 'undefined') {
+      layout.forEach((region) => {
+        const originKey = region.get('originKey')
+        tabIndexes[originKey] = tabIndex
+        tabIndex += 1
+
+        tilePositions[originKey] = { x: region.get('x'), y: region.get('y') }
+      })
+    }
     return fromJS({ ...data, tabIndexes, tilePositions })
   },
 )
@@ -168,7 +132,6 @@ export const getElectricityMapLayout = createSelector(
       case 'exports':
       case 'imports':
         return sortedPoints
-      case 'location':
       default:
         return locationPoints
     }
