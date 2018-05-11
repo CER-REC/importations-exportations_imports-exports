@@ -128,3 +128,17 @@ export const detailBreakdownSelector = createSelector(
   detailBreakdownTotal,
   (result, total) => result.merge({ total }),
 )
+
+export const barChartValues = createSelector(
+  getVisualizationData,
+  getActivityFilterPredicate,
+
+)
+
+// export const importChart = createSelector(barChartValues) => ({})
+
+// export const exportChart = createSelector(barChartValues) => ({})
+
+// export const stackedChart = createSelector() => ({barChartValues})
+
+// export const barChartSelector = createSelector() => ({barChartValues, importChart, exportChart, stackedChart})
