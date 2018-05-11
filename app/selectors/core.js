@@ -93,8 +93,12 @@ export const filterByTimelineAndMap = createSelector(
 
 export const getActivityFilterPredicate = createSelector(
   selectedActivityGroup,
-  activityGroup => point => (
-    point.get('activityGroup') === activityGroup ||
-    point.get('activity') === activityGroup
-  ),
+  (_, props = {}) => props.filterActivity,
+  (activityGroup, filterActivity) => (point) => {
+    if (filterActivity && point.get('activity') !== filterActivity) { return false }
+    return (
+      point.get('activityGroup') === activityGroup ||
+      point.get('activity') === activityGroup
+    )
+  },
 )

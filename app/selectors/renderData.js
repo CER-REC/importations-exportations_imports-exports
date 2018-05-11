@@ -1,4 +1,7 @@
+import { fromJS } from 'immutable'
+
 import { createSelector } from './selectHelper'
+import { getVisualizationData, getActivityFilterPredicate } from './core'
 
 export const calculateValueSum = (data, groupBy, valueKey) => {
   const result = data.reduce((acc, next) => {
@@ -24,7 +27,12 @@ export const calculateValueSum = (data, groupBy, valueKey) => {
     }
 
     return acc
-  }, { values: {}, totalPoints: {}, confidential: {}, missing: {} })
+  }, {
+    values: {},
+    totalPoints: {},
+    confidential: {},
+    missing: {},
+  })
   return result
 }
 
@@ -68,7 +76,12 @@ export const calculateValueWeighted = (data, groupBy, valueKey) => {
     }
 
     return acc
-  }, { values: {}, totalPoints: {}, confidential: {}, missing: {} })
+  }, {
+    values: {},
+    totalPoints: {},
+    confidential: {},
+    missing: {},
+  })
 
   Object.keys(result.values).forEach((groupKey) => {
     Object.keys(result.values[groupKey]).forEach((vk) => {
@@ -81,3 +94,29 @@ export const calculateValueWeighted = (data, groupBy, valueKey) => {
 
   return result
 }
+
+export const detailBreakdownValues = createSelector(
+  getVisualizationData,
+  getActivityFilterPredicate,
+  (_, props = {}) => props.groupBy,
+  (_, props = {}) => props.valueKey,
+  (records, activityfilter, groupBy, valueKey) => {
+    const filteredRecords = records.filter(p => p.get(valueKey, '') !== '')
+    const data = calculateValueSum(filteredRecords, groupBy, valueKey)
+    return fromJS(data)
+  },
+)
+
+export const detailBreakdownTotal = createSelector(
+  detailBreakdownValues,
+  (_, props = {}) => props.showGroup,
+  (data, showGroup) => data.get('values')
+    .get(showGroup, fromJS({}))
+    .reduce((acc, next) => acc + next, 0),
+)
+
+export const detailBreakdownSelector = createSelector(
+  detailBreakdownValues,
+  detailBreakdownTotal,
+  (result, total) => result.merge({ total }),
+)

@@ -3,9 +3,9 @@ import { connect } from 'react-redux'
 
 import { visualizationContainerPosition, visualizationContentPosition, menuWidth } from '../selectors/viewport/'
 import WorkspaceComputations from '../computations/WorkspaceComputations'
-/*
 // TODO: Temporary while reworking selectors
 import ElectricityVisualizationContainer from './ElectricityVisualizationContainer'
+/*
 import CrudeOilVisualizationContainer from './CrudeOilVisualizationContainer'
 import NaturalGasVisualizationContainer from './NaturalGasVisualizationContainer'
 import NaturalGasLiquidsVisualizationContainer from './NaturalGasLiquidsVisualizationContainer'
@@ -24,9 +24,8 @@ class VisualizationContainer extends React.Component {
 
   changeVisualization() {
     // TODO: Temporary while reworking selectors
-    return null;
+    if (this.props.importExportVisualization !== 'electricity') { return null }
 
-    /*
     const { width, height } = this.props.visualizationPosition
     const visualizationContainerType = this.props.importExportVisualization
     const xaxis = this.props.menuWidth
@@ -59,7 +58,6 @@ class VisualizationContainer extends React.Component {
         contentSize={this.props.contentSize}
       />
     )
-    */
   }
   render() {
     return (<g>
