@@ -15,19 +15,20 @@ import { arrangeBy } from '../selectors/data'
 import { visualizationSettings } from '../selectors/visualizationSettings'
 
 import trSelector from '../selectors/translate'
-import tr from '../TranslationTable'
+// import tr from '../TranslationTable'
 
 class MapPiece extends React.Component {
   static propTypes = {
     bins: PropTypes.instanceOf(Immutable.List),
     styles: PropTypes.instanceOf(Immutable.Map).isRequired,
     dimensions: PropTypes.instanceOf(Immutable.Map).isRequired,
-    data: PropTypes.instanceOf(Immutable.Map).isRequired,
+    // data: PropTypes.instanceOf(Immutable.Map).isRequired,
     legend: PropTypes.bool,
     confidentialityMenu: PropTypes.bool.isRequired,
     selectedEnergy: PropTypes.string.isRequired,
     isOrigin: PropTypes.bool,
     arrangeBy: PropTypes.string.isRequired,
+    activity: PropTypes.string.isRequired,
   }
 
   static defaultProps = {
@@ -69,8 +70,8 @@ class MapPiece extends React.Component {
   }
 
   drawLeftLabel(text) {
-    const atlq = this.props.data.get('name') === 'ATL-Q'
-    const rowIndex = this.props.data.get('y')
+    const atlq = this.props.name === 'ATL-Q'
+    const rowIndex = this.props.tilePosition.get('y')
     let xPosition = -15
     let yPosition = 20
     if (atlq && this.props.arrangeBy === 'amount' && (rowIndex === 0)) {
@@ -81,35 +82,43 @@ class MapPiece extends React.Component {
       xPosition = 20
       yPosition = 60
     }
-    if(!text || text === '') { return null }
-      return this.breakLine('mapPieceDescription', text, xPosition, yPosition)
+    if (!text || text === '') { return null }
+    return this.breakLine('mapPieceDescription', text, xPosition, yPosition)
   }
 
   drawArrow(type) {
+    /*
     let dataKey = !this.props.dataKey? []: this.props.dataKey.slice(0)
     dataKey.push(type)
     if (this.props.data.getIn(dataKey, 0) === 0) { return null}
+    */
+    const value = this.props.value.get(type, 0)
+    if (value === 0) { return null }
 
-    let color = this.getArrowColor(type, this.props.data.getIn(dataKey))
-    if(typeof this.props.arrowProps !== 'undefined' && typeof this.props.arrowProps.get('fill') !== 'undefined'){
-      color = this.props.arrowProps.get('fill') 
+    let color = this.getArrowColor(type, value)
+    if (typeof this.props.arrowProps !== 'undefined' &&
+        typeof this.props.arrowProps.get('fill') !== 'undefined') {
+      color = this.props.arrowProps.get('fill')
     }
-    return (<ImportExportArrow
-      arrowSpacing={this.props.styles.get('arrowSpacing')}
-      type={type}
-      color= {color}
-      arrowProps={this.props.arrowProps}
-      text = {this.props.text}
-      drawLabelLabelY = {this.props.drawLabelLabelY}
-      drawLabelLineY = {this.props.drawLabelLineY}
-      drawLabelLineImportY = {this.props.drawLabelLineImportY}
-      drawLabelLabelImportY = {this.props.drawLabelLabelImportY}
-    />)
+
+    return (
+      <ImportExportArrow
+        arrowSpacing={this.props.styles.get('arrowSpacing')}
+        type={type}
+        color={color}
+        arrowProps={this.props.arrowProps}
+        text={this.props.text}
+        drawLabelLabelY={this.props.drawLabelLabelY}
+        drawLabelLineY={this.props.drawLabelLineY}
+        drawLabelLineImportY={this.props.drawLabelLineImportY}
+        drawLabelLabelImportY={this.props.drawLabelLabelImportY}
+      />
+    )
   }
 
   newBrunswickExplanation() {
     if (this.props.selectedEnergy === 'electricity'
-      && this.props.data.get('name') === 'NB' ) {
+      && this.props.name === 'NB' ) {
       const scaleContainerX = this.props.viewport.get('changeWidthRatio')  > 1.2 ? 290: 270
       const scaleContainerY = this.props.viewport.get('changeHeightRatio')  > 1.2 ? 45: 40
       return (<g>
@@ -139,7 +148,7 @@ class MapPiece extends React.Component {
   }
 
   vermontExplanation() {
-    if (this.props.data.get('name') !== 'VT') { return null }
+    if (this.props.name !== 'VT') { return null }
     const scaleContainerX = this.props.viewport.get('changeWidthRatio')  > 1.2 ? 185: 190
     const scaleContainerY = this.props.viewport.get('changeHeightRatio')  > 1.2 ? 410: 435
     return (<g>
@@ -168,7 +177,7 @@ class MapPiece extends React.Component {
   }
 
   washingtonExplanation() {
-    if (this.props.data.get('name') !== 'WA') { return null }
+    if (this.props.name !== 'WA') { return null }
     const scaleContainerX = this.props.viewport.get('changeWidthRatio')  > 1.2 ? 28: -5
     const scaleContainerY = this.props.viewport.get('changeHeightRatio')  > 1.2 ? 400: 440
     return (<g>
@@ -197,7 +206,7 @@ class MapPiece extends React.Component {
   }
 
   britishColumbiaExplanation() {
-    if (this.props.data.get('name') !== 'BC' || this.props.selectedEnergy === 'naturalGasLiquids') { return null }
+    if (this.props.name !== 'BC' || this.props.selectedEnergy === 'naturalGasLiquids') { return null }
     const scaleContainerX = this.props.viewport.get('changeWidthRatio')  > 1.2 ? 285: 270
     const scaleContainerY = this.props.viewport.get('changeHeightRatio')  > 1.2 ? -40: -60
     return (<g>
@@ -227,14 +236,14 @@ class MapPiece extends React.Component {
   }
 
   emersonExplanation() {
+    if (this.props.name !== 'Emerson') { return null }
     let textString = `${this.props.tr(['explanations', 'EmersonNaturalGas'])}`
-    if (['importsForReexport'].includes(this.props.activityGroup.get('activity'))) {
+    if (['importsForReexport'].includes(this.props.activity)) {
       textString = `${this.props.tr(['explanations', 'EmersonTempImpNaturalGas'])}`
     }
-    if (['exportsForReimport'].includes(this.props.activityGroup.get('activity'))) {
+    if (['exportsForReimport'].includes(this.props.activity)) {
       textString = `${this.props.tr(['explanations', 'EmersonTempExpNaturalGas'])}`
     }
-    if (this.props.data.get('portName') !== 'Emerson') { return null }
     const scaleContainerX = this.props.viewport.get('changeWidthRatio') > 1.2 ? 180 : 160
     const scaleContainerY = this.props.viewport.get('changeHeightRatio') > 1.2 ? 250 : 310
     return (<g>
@@ -263,7 +272,7 @@ class MapPiece extends React.Component {
   }
 
   cngExplanation() {
-    if (this.props.data.get('portName') !== 'CNG') { return null }
+    if (this.props.name !== 'CNG') { return null }
     const scaleContainerX = this.props.viewport.get('changeWidthRatio') > 1.2 ? -40 : -53
     const scaleContainerY = this.props.viewport.get('changeHeightRatio') > 1.2 ? 255 : 270
     return (<g>
@@ -292,7 +301,7 @@ class MapPiece extends React.Component {
   }
 
   lngExplanation() {
-    if (this.props.data.get('portName') !== 'LNG Other') { return null }
+    if (this.props.name !== 'LNG Other') { return null }
     const scaleContainerX = this.props.viewport.get('changeWidthRatio') > 1.2 ? -83 : -35
     const scaleContainerY = this.props.viewport.get('changeHeightRatio') > 1.2 ? 239 : 268
     return (<g>
@@ -321,7 +330,7 @@ class MapPiece extends React.Component {
   }
 
   albertaExplanation() {
-    if (this.props.data.get('name') !== 'AB' || this.props.selectedEnergy !== 'naturalGasLiquids') { return null }
+    if (this.props.name !== 'AB' || this.props.selectedEnergy !== 'naturalGasLiquids') { return null }
     let scaleContainerX = this.props.viewport.get('changeWidthRatio')  > 1.2 ? 241: 190
     const scaleContainerY = this.props.viewport.get('changeHeightRatio')  > 1.2 ? -16: -30
     if (this.props.arrangeBy === 'location') {
@@ -354,7 +363,7 @@ class MapPiece extends React.Component {
   }
 
   atlqExplanation() {
-    if (this.props.data.get('name') !== 'ATL-Q' || this.props.selectedEnergy !== 'naturalGasLiquids') { return null }
+    if (this.props.name !== 'ATL-Q' || this.props.selectedEnergy !== 'naturalGasLiquids') { return null }
     let scaleContainerX = this.props.viewport.get('changeWidthRatio')  > 1.2 ? 277: 248
     let scaleContainerY = this.props.viewport.get('changeHeightRatio')  > 1.2 ? -20: -33
     if (this.props.arrangeBy === 'amount') {
@@ -394,8 +403,7 @@ class MapPiece extends React.Component {
         bottomMargin={this.props.styles.get('topMargin')}
         mapPieceWidth={this.props.dimensions.get('width')}
         mapPieceHeight={this.props.dimensions.get('height')}
-        name={this.props.data.get(this.props.mapPieceKey, '')}
-        mapPieceKey={this.props.mapPieceKey}
+        name={this.props.name}
         mapPieceProps={this.props.mapPieceProps}
         styleClass={this.props.mapPieceStyleClass}
         text = {this.props.text}
@@ -403,7 +411,6 @@ class MapPiece extends React.Component {
   }
 
   render() {
-
     let arrowTransform = `translate(${Constants.getIn(['mapPieceArrowStyle', 'x'])}, ${Constants.getIn(['mapPieceArrowStyle', 'y']) + 0.5})`
     if (this.props.styles.get('arrowPosition') === 'down') {
       arrowTransform = `translate(${Constants.getIn(['mapPieceArrowStyle', 'x'])}, ${this.props.dimensions.get('height') - Constants.getIn(['mapPieceArrowStyle', 'y']) + 4})`
@@ -425,8 +432,6 @@ class MapPiece extends React.Component {
       stroke = this.props.mapPieceProps.get('stroke')
     }
 
-    let confidentialIcon = null
-    const valueString = `${this.props.data.get('confidentialCount')} / ${this.props.data.get('totalCount')} ${this.props.tr('valuesConfidential')}`
     let scaleContainerX = this.props.viewport.get('changeWidthRatio') > 1.2 ? -7: -13
     let scaleContainerY = this.props.viewport.get('changeHeightRatio') > 1.2 ? 8: 8
     if (this.props.selectedEnergy === 'electricity' && this.props.arrangeBy === 'imports') {
@@ -440,34 +445,39 @@ class MapPiece extends React.Component {
       containerX = this.props.x1 * MapLayoutGridConstant.getIn(['naturalGasLiquids', 'ca' , 'mapPieceScale'], 1) + scaleContainerX
       containerY = this.props.y1 * MapLayoutGridConstant.getIn(['naturalGasLiquids', 'ca' , 'mapPieceScale'], 1) + scaleContainerY
     }
-    if(this.props.country && this.props.country === 'powerpool'){
+    if (this.props.country && this.props.country === 'powerpool') {
       containerX += 13
     }
-    if (typeof this.props.data.get('confidentialCount') !== 'undefined'
-        && this.props.data.get('confidentialCount') !== 0
-        && this.props.confidentialityMenu) {
-      confidentialIcon = <ConfidentialIcon
-        styles={this.props.styles.get('confidentialStyle')}
-        text={valueString}
-        containerX={this.props.viewport.get('changeWidthRatio')*containerX}
-        containerY={this.props.viewport.get('changeHeightRatio')*containerY}
-        linePath="
-          M142.16,
-          173.94l24.26,
-          36.69a40.12,
-          40.12,0,0,0,
-          33.47,
-          18H378.2"
-        lineX={142.16}
-        lineY={173}
-        textX={15}
-        textY={24}
-        xPosition={30}
-        yPosition={0}
-        name={`${this.props.selectedEnergy}${this.props.data.get('name')}`}
+
+    const confidentialCount = this.props.confidential.reduce((acc, next) => acc + next, 0)
+    let confidentialIcon = null
+    if (confidentialCount !== 0 && this.props.confidentialityMenu) {
+      const totalPoints = this.props.totalPoints.reduce((acc, next) => acc + next, 0)
+      const valueString = `${confidentialCount} / ${totalPoints} ${this.props.tr('valuesConfidential')}`
+      confidentialIcon = (
+        <ConfidentialIcon
+          styles={this.props.styles.get('confidentialStyle')}
+          text={valueString}
+          containerX={this.props.viewport.get('changeWidthRatio') * containerX}
+          containerY={this.props.viewport.get('changeHeightRatio') * containerY}
+          linePath="
+            M142.16,
+            173.94l24.26,
+            36.69a40.12,
+            40.12,0,0,0,
+            33.47,
+            18H378.2"
+          lineX={142.16}
+          lineY={173}
+          textX={15}
+          textY={24}
+          xPosition={30}
+          yPosition={0}
+          name={`${this.props.selectedEnergy}${this.props.name}`}
         />
+      )
     }
-    
+
     const mapContent = (
       <g className={`mapPiece ${this.props.legend ? 'legend' : ''}`}>
         <polygon
@@ -511,20 +521,15 @@ class MapPiece extends React.Component {
         {mapContent}
       </AnimatedGroup>
     )
-
   }
 }
 
-export default connect(
-  (state, props) => ({
-    confidentialityMenu: state.confidentialityMenu,
-    selectedEnergy: state.importExportVisualization,
-    tr: trSelector(state, props),
-    expandCollapseConfidentiality: state.expandCollapseConfidentiality,
-    activity: state.activity,
-    viewport: state.viewport,
-    arrangeBy: arrangeBy(state, props),
-    activityGroup: visualizationSettings(state, props),
-  }),
-)(MapPiece)
+export default connect((state, props) => ({
+  confidentialityMenu: state.confidentialityMenu,
+  selectedEnergy: state.importExportVisualization,
+  tr: trSelector(state, props),
+  viewport: state.viewport,
+  arrangeBy: arrangeBy(state, props),
+  activity: visualizationSettings(state, props).get('activity'),
+}))(MapPiece)
 
