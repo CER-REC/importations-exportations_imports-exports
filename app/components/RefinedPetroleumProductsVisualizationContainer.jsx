@@ -84,7 +84,6 @@ class RefinedPetroleumProductsVisualizationContainer extends React.Component {
   }
 
   renderSeparateCharts() {
-    console.log(this.props.detailBreakdown.toJS())
     const { individualCharts: positions, detailBreakdown } = this.props
     const categoryColours = Constants.getIn(['styleGuide', 'categoryColours'])
     const charts = subtypes.map((key, i) => {
