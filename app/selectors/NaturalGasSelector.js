@@ -8,7 +8,7 @@ import {
   filterByTimelineAndMap,
   getActivityFilterPredicate,
 } from './core'
-import { calculateValueSum, getCountry, getFullyFilteredData } from './renderData'
+import { calculateValueSum, getCountry, getCountryData } from './renderData'
 import { visualizationSettings } from './visualizationSettings'
 import MapLayoutGridConstant from '../MapLayoutGridConstant'
 import Constants from '../Constants'
@@ -54,7 +54,7 @@ const getTabIndexStart = (country) => {
 }
 
 export const createSortedLayout = createSelector(
-  getFullyFilteredData,
+  getCountryData,
   getColumns,
   getPadding,
   arrangeBy,
@@ -104,7 +104,7 @@ export const createSortedLayout = createSelector(
 )
 
 export const parseLocationData = createSelector(
-  getFullyFilteredData,
+  getCountryData,
   getElectricityMapLayoutConstants,
   getCountry,
   (records, layout, country) => {

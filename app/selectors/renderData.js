@@ -1,7 +1,10 @@
 import { fromJS } from 'immutable'
 
 import { createSelector } from './selectHelper'
-import { filterByTimelineAndMap, getActivityFilterPredicate } from './core'
+import { filterByTimeline, filterByTimelineAndMap, getActivityFilterPredicate } from './core'
+import { visualizationSettings } from './visualizationSettings'
+
+export const getCountry = (_, props = {}) => props.country
 
 export const calculateValueSum = (data, groupByRaw, valueKey) => {
   const groupByAll = [].concat(groupByRaw)
@@ -101,15 +104,29 @@ export const calculateValueWeighted = (data, groupByRaw, valueKey) => {
   return result
 }
 
-export const detailBreakdownValues = createSelector(
+export const getFullyFilteredData = createSelector(
+  getCountry,
+  visualizationSettings,
+  filterByTimeline,
   filterByTimelineAndMap,
   getActivityFilterPredicate,
+  (_, props = {}) => props.valueKey,
+  (country, settings, timeline, timelineAndMap, activityFilter, valueKey) =>
+    (country === settings.getIn(['selection', 'country'])
+      ? timeline
+      : timelineAndMap
+    ).filter((p) => {
+      if (valueKey && p.get(valueKey, '') === '') { return false }
+      return activityFilter(p)
+    }),
+)
+
+export const getFullyFilteredValues = createSelector(
+  getFullyFilteredData,
   (_, props = {}) => props.groupBy,
   (_, props = {}) => props.valueKey,
   (_, props = {}) => props.valueAverage || false,
-  (records, activityFilter, groupBy, valueKey, averageMode) => {
-    const filteredRecords = records
-      .filter(p => (p.get(valueKey, '') !== '' && activityFilter(p)))
+  (filteredRecords, groupBy, valueKey, averageMode) => {
     let data
     if (averageMode === 'weighted') {
       data = calculateValueWeighted(filteredRecords, groupBy, valueKey)
@@ -121,6 +138,8 @@ export const detailBreakdownValues = createSelector(
     return fromJS(data)
   },
 )
+
+export const detailBreakdownValues = getFullyFilteredValues
 
 export const detailBreakdownTotal = createSelector(
   detailBreakdownValues,
