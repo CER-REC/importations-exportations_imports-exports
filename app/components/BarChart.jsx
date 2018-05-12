@@ -257,7 +257,7 @@ class BarChart extends Chart {
       // }
       return (
         <g key={`${point.get('year')}-${point.get('quarter')}-${valueKey}`} onClick={overflowClick}>
-          {this.renderLine(point, negativeValOffset, barHeight, colour, opacity, overflowBarHeight)}
+          {/*{this.renderLine(point, negativeValOffset, barHeight, colour, opacity, overflowBarHeight)}*/}
           {overflow}
         </g>
       )
@@ -286,9 +286,11 @@ class BarChart extends Chart {
       <g transform={this.getTransform()}>
         <g>
           {elements}
+          {/*}
           {this.orangeBarExplanation()}
           {this.blueBarExplanation()}
           {this.crudeBlueBarExplanation()}
+        */}
         </g>
         {/*
         <g transform={`translate(0 ${negativeValOffset})`}>
@@ -312,7 +314,7 @@ class BarChart extends Chart {
 
 export default connect(
   (state, props) => Object.assign({
-    // timelineGroup: timelineGrouping(state, props),
+    timelineGroup: timelineGrouping(state, props),
     timelineSelector: barChartSelector(state, props),
     selectedEnergy: state.importExportVisualization,
     // unit: visualizationSettings(state, props).get('amount'),
