@@ -17,7 +17,7 @@ import {
 import { setSelection } from '../actions/visualizationSettings'
 import './ElectricityMapLayout.scss'
 
-import { getElectricityMapLayout } from '../selectors/ElectricitySelector'
+import { getMapLayout } from '../selectors/mapLayout'
 import { binSelector } from '../selectors/data'
 /*
 import { arrangeBy, aggregateLocationSelector, aggregateFilterLocationSelector } from '../selectors/data'
@@ -265,7 +265,7 @@ class ElectricityMapLayout extends React.Component {
 const mapDispatchToProps = { onMapPieceClick: setSelection }
 
 const mapStateToProps = (state, props) => ({
-  layout: getElectricityMapLayout(state, props),
+  layout: getMapLayout(state, props),
   selection: visualizationSettings(state, props).get('selection'),
   /*
   dataPoints: aggregateLocationSelector(state, props),

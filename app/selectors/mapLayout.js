@@ -35,6 +35,12 @@ const getPadding = createSelector(
 
 const sortData = (points, sortBy) => {
   if (sortBy !== 'imports' && sortBy !== 'exports') { return points }
+  if (sortBy === 'amount') {
+    return points.sort((a, b) => (
+      b.reduce((acc, next) => acc + next, 0) -
+      a.reduce((acc, next) => acc + next, 0)
+    ))
+  }
   return points.sort((a, b) => (b.get(sortBy, 0) - a.get(sortBy, 0)))
 }
 
@@ -128,7 +134,7 @@ export const parseLocationData = createSelector(
   },
 )
 
-export const getElectricityMapLayout = createSelector(
+export const getMapLayout = createSelector(
   createSortedLayout,
   parseLocationData,
   arrangeBy,
@@ -136,6 +142,7 @@ export const getElectricityMapLayout = createSelector(
     switch (sortBy) {
       case 'exports':
       case 'imports':
+      case 'amount':
         return sortedPoints
       default:
         return locationPoints
