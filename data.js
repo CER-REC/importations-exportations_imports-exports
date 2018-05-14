@@ -304,13 +304,13 @@ const parsingIssue = {};
             }
             const transport = acc[point.period][point.activity].transport[point.transport] || 0
             acc[point.period][point.activity].transport[point.transport] = transport + point.value
-            
+
             const transportTotal = acc[point.period][point.activity].transport.total || 0
             acc[point.period][point.activity].transport.total = transportTotal + point.value
 
             const productSubtype = acc[point.period][point.activity].productSubtype[point.productSubtype] || 0
             acc[point.period][point.activity].productSubtype[point.productSubtype] = productSubtype + point.value
-            
+
             const productSubtypeTotal = acc[point.period][point.activity].productSubtype.total || 0
             acc[point.period][point.activity].productSubtype.total = productSubtypeTotal + point.value
 
@@ -319,38 +319,37 @@ const parsingIssue = {};
           }, {})
 
           Object.values(aggregatedValueByPeriod).forEach((point) => {
-            for (const [activity, values] of Object.entries(point)) {
-              if (!timelineScale[visName][unit][activity]){
+            Object.entries(point).forEach(([activity, values]) => {
+              if (!timelineScale[visName][unit][activity]) {
                 timelineScale[visName][unit][activity] = {
                   transport: {},
                   productSubtype: {},
-                  activityTotal: 0,   
+                  activityTotal: 0,
                 }
-                for (const [transport, value] of Object.entries(values.transport)) {
-                  if (!timelineScale[visName][unit][activity].transport){
+                Object.entries(values.transport).forEach(([transport, value]) => {
+                  if (!timelineScale[visName][unit][activity].transport) {
                     timelineScale[visName][unit][activity].transport = {}
                   }
-                  const transportValue  = timelineScale[visName][unit][activity].transport[transport] || 0
+                  const transportValue = timelineScale[visName][unit][activity].transport[transport] || 0
                   timelineScale[visName][unit][activity].transport[transport] = value > transportValue ? value : transportValue
-                }
-                for (const [productSubtype, value] of Object.entries(values.productSubtype)) {
-                 if (!timelineScale[visName][unit][activity].productSubtype){
+                })
+                Object.entries(values.productSubtype).forEach(([productSubtype, value]) => {
+                  if (!timelineScale[visName][unit][activity].productSubtype) {
                     timelineScale[visName][unit][activity].productSubtype = {}
-                  } 
-                  const productSubtypeValue  = timelineScale[visName][unit][activity].productSubtype[productSubtype] || 0
+                  }
+                  const productSubtypeValue = timelineScale[visName][unit][activity].productSubtype[productSubtype] || 0
                   timelineScale[visName][unit][activity].productSubtype[productSubtype] = value > productSubtypeValue ? value : productSubtypeValue
-                }
+                })
                 const activityTotal = timelineScale[visName][unit][activity].activityTotal || 0
                 timelineScale[visName][unit][activity].activityTotal = activityTotal > values.activityTotal ? activityTotal : values.activityTotal
               }
-            }
+            })
           })
-          
         })
         return timelineScale
       }, {})
-      output.scale = scalingValues
-      return output
+    output.scale = scalingValues
+    return output
   })
   // Output validation and write the file
   .then((finalOutput) => {
