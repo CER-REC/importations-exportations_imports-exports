@@ -32,6 +32,8 @@ import { handleInteractionWithTabIndex } from '../utilities'
 import { arrangeBy, binSelector, selection } from '../selectors/data'
 import { setSelection } from '../actions/visualizationSettings'
 
+const emptyMap = new Immutable.Map()
+
 const mapPieceTransformStartTop = (top, position, dimensions, mapPieceScale) => top + (position.get('y') * ((mapPieceScale * dimensions.get('height')) + dimensions.get('yAxisPadding')))
 const mapPieceTransformStartLeft = (left, position, dimensions, mapPieceScale) => left + (position.get('x') * ((mapPieceScale * dimensions.get('width')) + dimensions.get('xAxisPadding')))
 
@@ -386,8 +388,9 @@ class PaddLayout extends React.Component {
     const paddGroup = Constants.getIn(['dataloader', 'mapping', 'padd', props.country, props.paddGroup])
     // TODO Is this a good way of getting Canada's data?
     const data = props.data.getIn(['values', (paddGroup === 'ca' ? '' : paddGroup)])
-    if (!data) { return null }
-    const paddValue = data.reduce((acc, next) => acc + next, 0)
+    const paddValue = data
+      ? data.reduce((acc, next) => acc + next, 0)
+      : 0
     const color = this.getPaddColor(paddValue)
     const fillOpacity = this.getOpacityOfPadd(props, paddGroup)
     return (
@@ -426,21 +429,18 @@ class PaddLayout extends React.Component {
           this.props.left,
           this.props.top,
           color,
-          data.get('confidentialCount', 0),
-          data.get('totalCount', 0),
+          props.data.getIn(['confidential', paddGroup], emptyMap).reduce((a, n) => a + n, 0),
+          props.data.getIn(['totalPoints', paddGroup], emptyMap).reduce((a, n) => a + n, 0),
         )}
       </g>
     )
   }
-  renderPaddMapPiece() {
+
+  render() {
     if (this.props.arrangeBy === 'location' || this.props.country === 'ca') {
       return this.renderLocation(this.props)
     }
     return this.renderDefault(this.props)
-  }
-
-  render() {
-    return this.renderPaddMapPiece()
   }
 }
 
