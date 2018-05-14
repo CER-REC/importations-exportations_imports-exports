@@ -1,16 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
-import Immutable from 'immutable'
 
 import NaturalGasLiquidMapLayout from './NaturalGasLiquidMapLayout'
-
-const detailBreakDownData = Immutable.fromJS({
-  WA: 9589756,
-  VA: 465467,
-  ID: 4678971,
-  OR: 5548646,
-})
 
 const NaturalGasCanadaMapContainer = props => (
   // Scale is temporary adjustment as it's too small if we use dimensions

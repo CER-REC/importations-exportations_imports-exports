@@ -5,9 +5,9 @@ import { connect } from 'react-redux'
 import Constants from '../Constants'
 import Tr from '../TranslationTable'
 
-/*
 import CanadaMapContainer from './CanadaMapContainer'
 import USMapContainer from './USMapContainer'
+/*
 import PowerPoolContainer from './PowerPoolContainer'
 import PowerPoolGrouping from './PowerPoolGrouping'
 import ElectricityMapPieceActivityExplanation from './ElectricityMapPieceActivityExplanation'
@@ -24,10 +24,8 @@ import DetailSidebar from './DetailSidebar'
 
 const ElectricityVisualizationContainer = props => (
   <g>
+    <CanadaMapContainer {...props.canadaMap}  />
     {/*
-    <CanadaMapContainer
-      {...props.canadaMap}
-    />
     {!props.showImports ? null : (
       <BarChart
         {...props.importChart}
@@ -52,9 +50,9 @@ const ElectricityVisualizationContainer = props => (
         tabIndex={Constants.getIn(['tabIndex', 'start', 'visualization', 'timeline'])}
       />
     )}
-    <USMapContainer
-      {...props.usMap}
-    />
+    */}
+    <USMapContainer {...props.usMap} />
+    {/*
     <PowerPoolContainer
       {...props.powerPool}
     />
