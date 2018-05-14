@@ -5,9 +5,9 @@ import { connect } from 'react-redux'
 import Constants from '../Constants'
 import Tr from '../TranslationTable'
 
-/*
 import CanadaMapContainer from './CanadaMapContainer'
 import USMapContainer from './USMapContainer'
+/*
 import PowerPoolContainer from './PowerPoolContainer'
 import PowerPoolGrouping from './PowerPoolGrouping'
 import ElectricityMapPieceActivityExplanation from './ElectricityMapPieceActivityExplanation'
@@ -29,21 +29,18 @@ const ElectricityVisualizationContainer = (props) => {
       {...props.canadaMap}
     />
     */
-          <BarChart
-        {...props.importChart}
-        valueKey="activity"
-        activityValueKey="imports"
-        groupBy="period"
-        colour={Constants.getIn(['styleGuide', 'colours', 'ImportDefault'])}
-        tabIndex={Constants.getIn(['tabIndex', 'start', 'visualization', 'timeline'])}
-        //value={value}
-        //confidential={confidential}
-        //missing={missing}
-        //totalPoints={totalPoints}
-      />
-    // {!props.showImports ? null : (
-
-    // )}
+      // <BarChart
+      //   {...props.importChart}
+      //   valueKey="activity"
+      //   activityValueKey="imports"
+      //   groupBy="period"
+      //   colour={Constants.getIn(['styleGuide', 'colours', 'ImportDefault'])}
+      //   tabIndex={Constants.getIn(['tabIndex', 'start', 'visualization', 'timeline'])}
+      //   //value={value}
+      //   //confidential={confidential}
+      //   //missing={missing}
+      //   //totalPoints={totalPoints}
+      // />
     /*
     <Axis
       {...props.axisPosition}
@@ -60,9 +57,9 @@ const ElectricityVisualizationContainer = (props) => {
         tabIndex={Constants.getIn(['tabIndex', 'start', 'visualization', 'timeline'])}
       />
     )}
-    <USMapContainer
-      {...props.usMap}
-    />
+    */}
+    <USMapContainer {...props.usMap} />
+    {/*
     <PowerPoolContainer
       {...props.powerPool}
     />

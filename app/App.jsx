@@ -14,6 +14,7 @@ import Root from './components/Root'
 import Resized from './actionCreators/ResizeScreenCreator'
 import { LoadData as LoadDataCreator } from './actions/data'
 import { LoadBins as LoadBinsCreator } from './actions/bins'
+import { LoadScales as LoadScalesCreator } from './actions/scales'
 import Store from './Store'
 import { DismissComponent as DismissComponentCreator } from './actions/socialBar'
 import { ScreenshotMode } from './actions/screenshot'
@@ -68,6 +69,7 @@ Request({
   json: true,
 }).then((data) => { // eslint-disable-line no-undef
   store.dispatch(LoadBinsCreator(data.body.bins))
+  store.dispatch(LoadScalesCreator(data.body.scale))
   store.dispatch(LoadDataCreator(data.body.data))
 })
 

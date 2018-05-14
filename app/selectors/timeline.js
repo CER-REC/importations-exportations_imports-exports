@@ -1,11 +1,12 @@
 import { fromJS } from 'immutable'
 
 import { createSelector } from './selectHelper'
-import { getVisualizationData, getActivityFilterPredicate } from './core'
+import { getVisualizationData, getActivityFilterPredicate, filterByTimelineAndMap } from './core'
 import { } from './renderData'
 
 import {
   getAggregateKey,
+  unitSelector,
   getValueKey,
   selectedActivityGroup,
   timelineRange,
@@ -30,12 +31,42 @@ export const sortTimeline = createSelector(
   }),
 )
 
+export const timelineScaleBase = createSelector(
+  filterByTimelineAndMap,
+  getAggregateKey,
+  selectedVisualization,
+  (points, aggregateKey, vizName) => fromJS(points.reduce((acc, next) => {
+    if (vizName === 'crudeOil' && aggregateKey === 'activity' && next.get('destination') === 'ca') {
+      return acc
+    }
+
+    const period = next.get('period')
+    if (!acc.period.min || period < acc.period.min) { acc.period.min = period }
+    if (!acc.period.max || period > acc.period.max) { acc.period.max = period }
+
+    const key = next.get(aggregateKey)
+    if (!key) { return acc }
+
+    if (!acc.values[period]) { acc.values[period] = {} }
+    acc.values[period][key] = (acc.values[period][key] || 0) + next.get('value', 0)
+
+    return acc
+  }, { period: {}, values: {} })),
+)
+
+export const timelineYearScaleCalculation = createSelector(
+  timelineScaleBase,
+  scaleBase => ({
+    min: parseInt(scaleBase.getIn(['period', 'min'], '2000Q1').substr(0, 4), 10),
+    max: parseInt(scaleBase.getIn(['period', 'max'], '2000Q4').substr(0, 4), 10),
+  }),
+)
+
 export const timelinePositionCalculation = createSelector(
   sortTimeline,
-  timelineScale,
   timelineGrouping,
   visContentSize,
-  (points, timeLineScale, grouping, size) => {
+  (points, grouping, size) => {
     const scale = timeLineScale
     const groupPadding = Constants.getIn(['timeline', 'groupPadding'])
     const barPadding = Constants.getIn(['timeline', 'barPadding'])
@@ -125,4 +156,11 @@ export const timelinePositionCalculation = createSelector(
       }),
     }
   },
+)
+
+export const timelineData = createSelector(
+  timelinePositionCalculation,
+  timelineRange,
+  timelinePlayback,
+  (position, range, playback) => ({ timelineRange: range, timelinePlayback: playback, ...scale, ...position }),
 )

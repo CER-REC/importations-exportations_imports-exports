@@ -13,6 +13,8 @@ import TextBox from './TextBox'
 import { groupingBy as timelineGrouping } from '../selectors/data'
 import { toggleOutlier } from '../actions/chartOutliers'
 import { barChartSelector } from '../selectors/renderData'
+import { visualizationSettings } from '../selectors/visualizationSettings'
+import { timeLineScaleSelector } from '../selectors/data'
 
 import trSelector from '../selectors/translate'
 
@@ -184,7 +186,8 @@ class BarChart extends Chart {
   }
 
   render() {
-    console.log(this.props.timelineSelector.toJS())
+    return null
+    console.log(this.props.timeLineScaleSelector)
     const {
       bars: data,
       scale,
@@ -316,10 +319,10 @@ export default connect(
     timelineGroup: timelineGrouping(state, props),
     timelineSelector: barChartSelector(state, props),
     selectedEnergy: state.importExportVisualization,
+    timeLineScaleSelector: timeLineScaleSelector(state, props),
     unit: visualizationSettings(state, props).get('amount'),
     // tr: trSelector(state, props),
     expandedOutliers: state.chartOutliers,
-  }), 
-  timelineData(state, props),
+  }, timelineData(state, props)),
   { toggleOutlier },
 )(BarChart)

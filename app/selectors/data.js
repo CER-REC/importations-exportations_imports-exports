@@ -96,3 +96,14 @@ export const selectedPieces = createSelector(
     return acc
   }, new Immutable.List()),
 )
+
+export const timeLineScaleSelector = createSelector(
+  selectedVisualization,
+  amount,
+  visualizationSettings,
+  state => state.scales,
+  (vis, unit, visSettings, scale) => { 
+    const result = scale.getIn([vis, unit], emptyList)
+    return result
+  }
+)
