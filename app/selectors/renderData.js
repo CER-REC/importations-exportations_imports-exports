@@ -175,6 +175,7 @@ export const barChartValues = createSelector(
     } else {
       data = calculateValueSum(filteredRecords, groupBy, valueKey)
     }
+    console.log( data)
     return fromJS(data)
   },
 )

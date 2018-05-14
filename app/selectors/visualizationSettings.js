@@ -25,3 +25,8 @@ export const showExportsSelector = createSelector(
   visualizationSettings,
   settings => ['exports', 'importsExports', 'exportsForReimport'].includes(settings.get('activity')),
 )
+
+export const scaledLinkedSelector = createSelector(
+  visualizationSettings,
+  settings => settings.get('timeline'),
+)

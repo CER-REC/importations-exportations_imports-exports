@@ -29,18 +29,18 @@ const ElectricityVisualizationContainer = (props) => {
       {...props.canadaMap}
     />
     */
-      // <BarChart
-      //   {...props.importChart}
-      //   valueKey="activity"
-      //   activityValueKey="imports"
-      //   groupBy="period"
-      //   colour={Constants.getIn(['styleGuide', 'colours', 'ImportDefault'])}
-      //   tabIndex={Constants.getIn(['tabIndex', 'start', 'visualization', 'timeline'])}
-      //   //value={value}
-      //   //confidential={confidential}
-      //   //missing={missing}
-      //   //totalPoints={totalPoints}
-      // />
+      <BarChart
+        {...props.importChart}
+        valueKey="activity"
+        activityValueKey="imports"
+        groupBy="period"
+        colour={Constants.getIn(['styleGuide', 'colours', 'ImportDefault'])}
+        tabIndex={Constants.getIn(['tabIndex', 'start', 'visualization', 'timeline'])}
+        //value={value}
+        //confidential={confidential}
+        //missing={missing}
+        //totalPoints={totalPoints}
+      />
     /*
     <Axis
       {...props.axisPosition}

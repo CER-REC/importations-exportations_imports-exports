@@ -1,34 +1,43 @@
 import { fromJS } from 'immutable'
 
 import { createSelector } from './selectHelper'
-import { getVisualizationData, getActivityFilterPredicate, filterByTimelineAndMap } from './core'
-import { } from './renderData'
+import { getVisualizationData, getActivityFilterPredicate, filterByTimelineAndMap, filterByMap } from './core'
+import { barChartValues } from './renderData'
 
 import {
   getAggregateKey,
   unitSelector,
   getValueKey,
+  filterByHexSelector,
   selectedActivityGroup,
   timelineRange,
   timelinePlayback,
+  timeLineScaleSelector,
   groupingBy as timelineGrouping,
 } from './data'
 import { visualizationContentPosition as visContentSize } from './viewport/'
-import { visualizationSettings, selectedVisualization } from './visualizationSettings'
+import { visualizationSettings, selectedVisualization, scaledLinkedSelector } from './visualizationSettings'
 import Constants from '../Constants'
 
 export const getScaleKey = (state, props) => props.scaleKey || getValueKey(state, props)
 
 export const mapToValue = (data, key) => data.map(v => v.get(key))
 
+export const aggregateQuarter = createSelector(
+  filterByMap,
+  getAggregateKey,
+  selectedVisualization,
+  (points, aggregateKey, vizName) => {
+    const valueKeys = []
+    const result = aggregateQuarterPoints(points, valueKeys, aggregateKey, vizName)
+    return { points: fromJS(result), valueKeys }
+  },
+)
+
 export const sortTimeline = createSelector(
+  barChartValues,
   timelineGrouping,
-  ({ points }, grouping) => points.sort((a, b) => {
-    if (grouping === 'period') {
-      const year = a.get('year') - b.get('year')
-      return (year !== 0) ? year : (a.get('quarter') - b.get('quarter'))
-    }
-  }),
+  (points , grouping) => points,
 )
 
 export const timelineScaleBase = createSelector(
@@ -62,15 +71,37 @@ export const timelineYearScaleCalculation = createSelector(
   }),
 )
 
+export const timeLineScaleValue = createSelector(
+  timeLineScaleSelector,
+  scaledLinkedSelector,
+  (timeline, toggle) => {
+    console.log(timeline.toJS())
+    if(toggle.scaleLinked) {
+      const result = timeline.getIn(['exports', 'activityTotal']) > timeline.getIn(['imports', 'activityTotal']) ?
+       timeline.getIn(['exports', 'activityTotal']): timeline.getIn(['imports', 'activityTotal'])
+      return {
+        exports: result,
+        imports: result
+      } 
+    } 
+    return {
+        exports: timeline.getIn(['exports', 'activityTotal']),
+        imports: timeline.getIn(['imports', 'activityTotal'])
+    }
+  }
+)
+
 export const timelinePositionCalculation = createSelector(
   sortTimeline,
   timelineGrouping,
   visContentSize,
-  (points, grouping, size) => {
-    const scale = timeLineScale
+  timelineYearScaleCalculation,
+  timeLineScaleValue,
+  (points, grouping, size, scaleRange, scaleValue) => {
+    const scale = scaleRange
     const groupPadding = Constants.getIn(['timeline', 'groupPadding'])
     const barPadding = Constants.getIn(['timeline', 'barPadding'])
-    const totalYears = (scale.x.max - scale.x.min)
+    const totalYears = (scale.max - scale.min)
     let offset = 0
     let lastPoint
     let barWidth
@@ -79,11 +110,10 @@ export const timelinePositionCalculation = createSelector(
 
     if (grouping === 'year') {
       const widthAfterPads = size.width
-        - (totalYears * groupPadding)
         - ((totalYears * 4) * barPadding)
       barWidth = widthAfterPads / ((totalYears + 1) * 4)
 
-      for (let y = scale.x.min; y <= scale.x.max; y += 1) {
+      for (let y = scale.min; y <= scale.max; y += 1) {
         labels.push({
           offsetX: (offset + ((barWidth + barPadding) * 2)) - (barWidth / 2),
           label: y.toString().substr(-2),
@@ -103,15 +133,15 @@ export const timelinePositionCalculation = createSelector(
       barWidth = widthAfterPads / ((totalYears + 1) * 4)
 
       const labelYears = [
-        scale.x.min + 2,
-        scale.x.min + Math.floor(totalYears / 3),
-        scale.x.max - Math.ceil(totalYears / 3),
-        scale.x.max - 2,
+        scale.min + 2,
+        scale.min + Math.floor(totalYears / 3),
+        scale.max - Math.ceil(totalYears / 3),
+        scale.max - 2,
       ]
       let quarterStart = 0
 
       for (let q = 1; q <= 4; q += 1) {
-        for (let y = scale.x.min; y <= scale.x.max; y += 1) {
+        for (let y = scale.min; y <= scale.max; y += 1) {
           if (labelYears.includes(y)) {
             labels.push({
               offsetX: offset,
@@ -159,8 +189,9 @@ export const timelinePositionCalculation = createSelector(
 )
 
 export const timelineData = createSelector(
-  timelinePositionCalculation,
   timelineRange,
   timelinePlayback,
-  (position, range, playback) => ({ timelineRange: range, timelinePlayback: playback, ...scale, ...position }),
+  timelineYearScaleCalculation,
+  timelinePositionCalculation,
+  (range, playback, scale, position) => ({ timelineRange: range, timelinePlayback: playback, ...scale, ...position }),
 )

@@ -10,11 +10,10 @@ import DetailSidebar from './DetailSidebar'
 // import ConfidentialCount from './ConfidentialCount'
 // import MissingDataCount from './MissingDataCount'
 import TextBox from './TextBox'
+import { timelineData, timeLineScaleValue } from '../selectors/timeline'
 import { groupingBy as timelineGrouping } from '../selectors/data'
-import { toggleOutlier } from '../actions/chartOutliers'
-import { barChartSelector } from '../selectors/renderData'
 import { visualizationSettings } from '../selectors/visualizationSettings'
-import { timeLineScaleSelector } from '../selectors/data'
+import { toggleOutlier } from '../actions/chartOutliers'
 
 import trSelector from '../selectors/translate'
 
@@ -23,7 +22,6 @@ import ExplanationDot from './ExplanationDot'
 class BarChart extends Chart {
   static propTypes = {
     ...Chart.propTypes,
-    groupBy: PropTypes.string.isRequired,
     valueKey: PropTypes.string.isRequired,
     detailSidebar: PropTypes.bool,
   }
@@ -32,12 +30,12 @@ class BarChart extends Chart {
     detailSidebar: true,
   }
 
-  constructor(props) {
-    super(props)
-    // this.state = {
-    //   // axisGuide: props.trueScale.get('max'),
-    // }
-  }
+  // constructor(props) {
+  //   super(props)
+  //   this.state = {
+  //     axisGuide: props.trueScale.get('max'),
+  //   }
+  // }
 
   componentWillReceiveProps(props) {
     // Reset the axis guide when the scale changes.
@@ -168,16 +166,12 @@ class BarChart extends Chart {
         stroke={colour}
         opacity={opacity}
         animate={{ y1: '1s' }}
-        //value={value}
-        //confidential={confidential}
-        //missing={missing}
-        //totalPoints={totalPoints}
       />
     )
   }
 
   calculateHeightPerUnit() {
-    return this.props.height / (this.props.scale.getIn(['y', 'max']) - this.props.scale.getIn(['y', 'min']))
+    return this.props.height / (this.props.scaleValue.get(this.props.activityValueKey) - 0)
   }
 
   calculateNegativePosition() {
@@ -186,30 +180,26 @@ class BarChart extends Chart {
   }
 
   render() {
-    return null
-    console.log(this.props.timeLineScaleSelector)
     const {
       bars: data,
       scale,
       height,
       flipped,
       valueKey,
-      activityValueKey,
       colour,
       layout,
       tabIndex,
       expandedOutliers,
     } = this.props
-    console.log(this.props.timelineSelector.toJS())
-    const dataValue = this.props.timelineSelector.get('values')
+
     const barSize = layout.get('barWidth')
 
     const heightPerUnit = this.calculateHeightPerUnit()
     const negativeValOffset = this.calculateNegativePosition()
 
-    const elements = dataValue.map((point) => {
+    const elements = data.map((point) => {
       const opacity = this.isTimelinePointFiltered(point) ? 0.5 : 1
-      const value = point.getIn(['values', activityValueKey], 0)
+      const value = point.getIn(['values', valueKey], 0)
 
       // Minimum 1px bar height
       let barHeight = (value < 0)
@@ -261,7 +251,7 @@ class BarChart extends Chart {
       }
       return (
         <g key={`${point.get('year')}-${point.get('quarter')}-${valueKey}`} onClick={overflowClick}>
-          {this.renderLine(point, negativeValOffset, barHeight, colour, opacity, overflowBarHeight)}}
+          {this.renderLine(point, negativeValOffset, barHeight, colour, opacity, overflowBarHeight)}
           {overflow}
         </g>
       )
@@ -294,7 +284,6 @@ class BarChart extends Chart {
           {this.blueBarExplanation()}
           {this.crudeBlueBarExplanation()}
         </g>
-        {/*
         <g transform={`translate(0 ${negativeValOffset})`}>
           <AxisGuide
             flipped={flipped}
@@ -308,7 +297,17 @@ class BarChart extends Chart {
             tabIndex={tabIndex||0}
           />
         </g>
-*/}
+        {/*
+        {!this.props.detailSidebar ? null : (
+          <DetailSidebar top={this.props.top} height={height}>
+            <div className="verticalAlign">
+              <div className="centered">
+                {flipped ? sidebarContent.reverse() : sidebarContent}
+              </div>
+            </div>
+          </DetailSidebar>
+        )}
+      */}
       </g>
     )
   }
@@ -317,12 +316,11 @@ class BarChart extends Chart {
 export default connect(
   (state, props) => Object.assign({
     timelineGroup: timelineGrouping(state, props),
-    timelineSelector: barChartSelector(state, props),
     selectedEnergy: state.importExportVisualization,
-    timeLineScaleSelector: timeLineScaleSelector(state, props),
     unit: visualizationSettings(state, props).get('amount'),
-    // tr: trSelector(state, props),
+    tr: trSelector(state, props),
     expandedOutliers: state.chartOutliers,
+    scaleValue: timeLineScaleValue(state, props),
   }, timelineData(state, props)),
   { toggleOutlier },
 )(BarChart)
