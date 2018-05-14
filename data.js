@@ -299,6 +299,7 @@ const parsingIssue = {};
               acc[point.period][point.activity] = {
                 transport: {},
                 productSubtype: {},
+                weightedAverage: { value: 0, divisor: 0 },
                 activityTotal: 0,
               }
             }
@@ -314,6 +315,12 @@ const parsingIssue = {};
             const productSubtypeTotal = acc[point.period][point.activity].productSubtype.total || 0
             acc[point.period][point.activity].productSubtype.total = productSubtypeTotal + point.value
 
+            const averageValue = acc[point.period][point.activity].weightedAverage.value || 0
+            acc[point.period][point.activity].weightedAverage.value = averageValue + point.forAverageValue
+
+            const averageDivisor = acc[point.period][point.activity].weightedAverage.divisor || 0
+            acc[point.period][point.activity].weightedAverage.divisor = averageDivisor + point.forAverageDivisor
+
             acc[point.period][point.activity].activityTotal += point.value
             return acc
           }, {})
@@ -325,6 +332,7 @@ const parsingIssue = {};
                   transport: {},
                   productSubtype: {},
                   activityTotal: 0,
+                  weightedAverage: 0,
                 }
               }
               Object.entries(values.transport).forEach(([transport, value]) => {
@@ -343,6 +351,13 @@ const parsingIssue = {};
               })
               const activityTotal = timelineScale[visName][unit][activity].activityTotal || 0
               timelineScale[visName][unit][activity].activityTotal = activityTotal > values.activityTotal ? activityTotal : values.activityTotal
+
+              const weightedAverage = timelineScale[visName][unit][activity].weightedAverage || 0
+              
+              if (values.weightedAverage.divisor !== 0) {
+                const calculateWeightedAverage = values.weightedAverage.value / values.weightedAverage.divisor
+                timelineScale[visName][unit][activity].weightedAverage = calculateWeightedAverage > weightedAverage ? calculateWeightedAverage: weightedAverage
+              }
             })
           })
         })
