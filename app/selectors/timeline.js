@@ -26,22 +26,23 @@ export const sortTimeline = createSelector(
     if (grouping === 'period') {
       const year = a.get('year') - b.get('year')
       return (year !== 0) ? year : (a.get('quarter') - b.get('quarter'))
-    }    
+    }
   }),
 )
 
 export const timelinePositionCalculation = createSelector(
   sortTimeline,
+  timelineScale,
   timelineGrouping,
   visContentSize,
-  (points, grouping, size) => {
-    const scale = 100
+  (points, timeLineScale, grouping, size) => {
+    const scale = timeLineScale
     const groupPadding = Constants.getIn(['timeline', 'groupPadding'])
     const barPadding = Constants.getIn(['timeline', 'barPadding'])
-    const totalYears = (100 - 0)
+    const totalYears = (scale.max - scale.min)
     let offset = 0
     let lastPoint
-    let barWidth = 4
+    let barWidth
     const labels = []
     let bars = points
 
