@@ -102,59 +102,61 @@ class NaturalGasMapContainer extends React.PureComponent {
         this.props.arrangeBy,
       )
       const portsCount = ports.count()
-      const maximunRows = portsCount > 7 ? Math.ceil(portsCount / 2) : portsCount
+      const maximumRows = portsCount > 7 ? Math.ceil(portsCount / 2) : portsCount
 
-      let renderingNumber = 1
+      let renderingNumber = 0
       let leftRendered = 0
       let row = 1
       let column = 0
       provinceRendered += 1
       const mapLayout = ports.map((port, key) => {
-        if(row > maximunRows) {
-          column += 1
-          row = 1
-          topPadding = 0
-        }
-        //x1 = left
-        //y1 = top
+        column = portsCount > 7 ? renderingNumber % 2 : 0
         let left = mapPieceTransformStartLeft(column, dimensions, mapPieceScale) + leftPadding
         const top = mapPieceTransformStartTop(row, dimensions, mapPieceScale) + topPadding
-        if (column === 0 && row === maximunRows && portsCount > 7 && portsCount%2 !== 0) {
+        if (column === 0 && row === maximumRows && portsCount > 7 && portsCount % 2 !== 0) {
           left += 24
         }
         topPadding += rowPadding
-        row +=1
 
         let styles = mapLayoutGrid.get('styles')
         let textClass = 'portLabel'
-        if(key === 'CNG' || key === 'LNG Other') {
+        if (key === 'CNG' || key === 'LNG Other') {
           styles = mapLayoutGrid.get('stylesVariant')
           textClass = 'portLabelWhite'
-        } 
+        }
 
-        return (<g key={`NaturalGasMapPiece_${province}_${key}`} 
-          {...handleInteractionWithTabIndex(tabIndex, this.onClick, key)}
-          transform={`scale(${mapPieceScale})`}>
+        const tilePosition = fromJS({ x: column, y: row })
+
+        if (portsCount <= 7 || column === 1) { row += 1 }
+        renderingNumber += 1
+
+        return (
+          <g
+            key={`NaturalGasMapPiece_${province}_${key}`}
+            {...handleInteractionWithTabIndex(tabIndex, this.onClick, key)}
+            transform={`scale(${mapPieceScale})`}
+          >
             <MapPiece
               value={port}
               confidential={this.props.data.getIn(['confidential', key])}
-              tilePosition={fromJS({ x: column, y: row })}
+              tilePosition={tilePosition}
               name={key}
               dimensions={dimensions}
               bins={this.props.bins}
               styles={styles}
               isMapPieceSelected={this.isMapPieceSelected(key, province)}
               isSelected={this.isSelected()}
-              isOrigin={true}
-              mapPieceKey='portName'
-              mapPieceStyleClass = {textClass}
+              isOrigin
+              mapPieceKey="portName"
+              mapPieceStyleClass={textClass}
               x1={left}
               y1={top}
             />
-          </g>)
+          </g>
+        )
       })
       const provinceTextPosition = portsCount > 7
-        ? (leftPadding + columnPadding + (dimensions.get('width') * mapPieceScale)) - 58
+        ? (leftPadding + columnPadding + (dimensions.get('width') * mapPieceScale)) - 38
         : (provinceRendered * 58) - 45
       leftPadding += (dimensions.get('width') * mapPieceScale) + columnPadding
       leftPadding = portsCount > 7
