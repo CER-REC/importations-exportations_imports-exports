@@ -36,6 +36,10 @@ const ElectricityVisualizationContainer = (props) => {
         groupBy="period"
         colour={Constants.getIn(['styleGuide', 'colours', 'ImportDefault'])}
         tabIndex={Constants.getIn(['tabIndex', 'start', 'visualization', 'timeline'])}
+        //value={value}
+        //confidential={confidential}
+        //missing={missing}
+        //totalPoints={totalPoints}
       />
     // {!props.showImports ? null : (
 

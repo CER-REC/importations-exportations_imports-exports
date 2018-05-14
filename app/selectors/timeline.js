@@ -39,7 +39,7 @@ export const timelinePositionCalculation = createSelector(
     const scale = timeLineScale
     const groupPadding = Constants.getIn(['timeline', 'groupPadding'])
     const barPadding = Constants.getIn(['timeline', 'barPadding'])
-    const totalYears = (scale.max - scale.min)
+    const totalYears = (scale.x.max - scale.x.min)
     let offset = 0
     let lastPoint
     let barWidth
@@ -52,7 +52,7 @@ export const timelinePositionCalculation = createSelector(
         - ((totalYears * 4) * barPadding)
       barWidth = widthAfterPads / ((totalYears + 1) * 4)
 
-      for (let y = 0; y <= 100; y += 1) {
+      for (let y = scale.x.min; y <= scale.x.max; y += 1) {
         labels.push({
           offsetX: (offset + ((barWidth + barPadding) * 2)) - (barWidth / 2),
           label: y.toString().substr(-2),
@@ -121,7 +121,7 @@ export const timelinePositionCalculation = createSelector(
         width: size.width,
         groupPadding,
         barPadding,
-        barWidth: 4,
+        barWidth,
       }),
     }
   },
