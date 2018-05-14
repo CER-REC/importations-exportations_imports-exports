@@ -14,14 +14,12 @@ import TRSelector from '../selectors/translate'
 import Tr from '../TranslationTable'
 import { getFullyFilteredValues } from '../selectors/renderData'
 
-  /*
 import PaddOne from './Padds/PaddOne'
 import PaddTwo from './Padds/PaddTwo'
 import PaddThree from './Padds/PaddThree'
 import PaddFour from './Padds/PaddFour'
 import PaddFive from './Padds/PaddFive'
 import PaddNonUSA from './Padds/PaddNonUSA'
-*/
 import ConfidentialIcon from './ConfidentialIcon'
 
 import ExplanationDot from './ExplanationDot'
@@ -305,14 +303,26 @@ class PaddLayout extends React.Component {
     })
   }
 
-  renderDefault(props) {
+  renderDefault() {
+    const { props } = this
     let left = 0
     const paddingBetweenSortedElement = 80
-    const layout = props.paddData
-      .sort((a, b) => b.get('value', 0) - a.get('value', 0))
-      .reduce((acc, paddDetails, paddGroup) => {
+    const allValues = props.data.get('values')
+    const viz = props.selectedEnergy
+    const layout = Constants.getIn(['dataloader', 'mapping', 'padd'])
+      .flatten()
+      .filter((_, k) => {
+        if (viz === 'naturalGasLiquids' && k === 'Non-USA') { return false }
+        if (viz === 'crudeOilExports' && k === 'Mexico') { return false }
+        return true
+      })
+      .map((_, k) => {
+        if (!allValues.has(k)) { return 0 }
+        return allValues.get(k, emptyMap).reduce((acc, next) => acc + next, 0)
+      })
+      .sort((a, b) => b - a)
+      .reduce((acc, paddValue, paddGroup) => {
         let paddLayout = null
-        const paddValue = paddDetails.get('value')
         const color = this.getPaddColor(paddValue)
         switch (paddGroup) {
           case 'PADD I':
@@ -334,8 +344,8 @@ class PaddLayout extends React.Component {
           case 'Non-USA':
             paddLayout = <PaddNonUSA color={color} />
             break
+          default: return acc
         }
-        if (paddLayout === null) { return acc }
 
         const fillOpacity = this.getOpacityOfPadd(props, paddGroup)
         paddLayout = (
@@ -354,8 +364,8 @@ class PaddLayout extends React.Component {
               0,
               0,
               color,
-              paddDetails.get('confidentialCount', 0),
-              paddDetails.get('totalCount', 0),
+              props.data.getIn(['confidential', paddGroup], emptyMap).reduce((a, n) => a + n, 0),
+              props.data.getIn(['totalPoints', paddGroup], emptyMap).reduce((a, n) => a + n, 0),
               left,
             )}
           </g>
@@ -379,7 +389,8 @@ class PaddLayout extends React.Component {
         return 'mapPieceText'
     }
   }
-  renderLocation(props) {
+  renderLocation() {
+    const { props } = this
     const mapLayoutGrid = MapLayoutGridConstant.getIn(['PaddLayout', props.country])
     const dimensions = mapLayoutGrid.get('dimensions')
     const styles = mapLayoutGrid.get('styles')
@@ -438,9 +449,9 @@ class PaddLayout extends React.Component {
 
   render() {
     if (this.props.arrangeBy === 'location' || this.props.country === 'ca') {
-      return this.renderLocation(this.props)
+      return this.renderLocation()
     }
-    return this.renderDefault(this.props)
+    return this.renderDefault()
   }
 }
 

@@ -55,8 +55,8 @@ export const getMapFilterPredicate = createSelector(
   selectedVisualization,
   (selectionState, selectedMapPieces, visualization) => (point) => {
     if (selectedMapPieces.count() === 0) { return true }
-    if (visualization === 'naturalGasLiquids' || visualization === 'crudeOil') {
-      if (visualization === 'crudeOil') {
+    if (visualization === 'naturalGasLiquids' || visualization === 'crudeOilExports') {
+      if (visualization === 'crudeOilExports') {
         if (point.get('destination') === 'ca' || selectionState.get('country') === 'ca') {
           return true
         }

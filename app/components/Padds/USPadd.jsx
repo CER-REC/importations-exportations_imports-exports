@@ -10,6 +10,11 @@ import { arrangeBy } from '../../selectors/data'
 const USPadd = (props) => {
   if (props.arrangeBy === 'location') {
     const paddList = Constants.getIn(['dataloader', 'mapping', 'padd', 'us'])
+      .filter((_, k) => {
+        if (props.viz === 'naturalGasLiquids' && k === 'Non-USA') { return false }
+        if (props.viz === 'crudeOilExports' && k === 'Mexico') { return false }
+        return true
+      })
     const padds = paddList.map(key => (<PaddLayout
       key={`Padd_us_${key}`}
       left={props.left}
@@ -45,6 +50,7 @@ const USPadd = (props) => {
 const mapStateToProps = (state, props) => ({
   arrangeBy: arrangeBy(state, props),
   viewport: state.viewport,
+  viz: state.importExportVisualization,
 })
 
 module.exports = connect(mapStateToProps)(USPadd)
