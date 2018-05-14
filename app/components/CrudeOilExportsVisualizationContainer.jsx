@@ -14,10 +14,8 @@ import DetailBreakdownHeader from './DetailBreakdownHeader'
 import * as CrudeOilViewport from '../selectors/viewport/crudeOilExports'
 import Constants from '../Constants'
 import { positionShape } from '../propTypeShapes'
-/*
 import USPadd from './Padds/USPadd'
 import CAPadd from './Padds/CAPadd'
-*/
 import { legendMapPosition } from '../selectors/viewport/menus'
 // import CrudeOilPieceActivityExplanation from './CrudeOilPieceActivityExplanation'
 import Tr from '../TranslationTable'
@@ -25,10 +23,8 @@ import Tr from '../TranslationTable'
 const categoryColours = Constants.getIn(['styleGuide', 'categoryColours'])
 const CrudeOilVisualizationContainer = props => (
   <g>
+    <CAPadd {...props.canadaPaddChart} />
     {/*
-    <CAPadd
-      {...props.canadaPaddChart}
-    />
     <StackedChart
       {...props.transportChart}
       aggregateKey="transport"
@@ -104,10 +100,8 @@ const CrudeOilVisualizationContainer = props => (
       colour={Constants.getIn(['styleGuide', 'colours', 'ExportDefault'])}
       tabIndex={Constants.getIn(['tabIndex', 'start', 'visualization', 'timeline'])}
     />
-    <USPadd
-      { ...props.usPaddChart}
-    />
     */}
+    <USPadd { ...props.usPaddChart} />
     <DetailSidebar
       {...props.usPaddChart}
     >
