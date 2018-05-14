@@ -7,7 +7,7 @@ import {
   selectedPieces,
   selectedActivityGroup,
 } from './data'
-import { selectedVisualization } from './visualizationSettings'
+import { visualizationSettings, selectedVisualization } from './visualizationSettings'
 
 // TODO: Reorganize logic for unit selector, since it is the main data
 export const getVisualizationData = unitSelector
@@ -100,5 +100,14 @@ export const getActivityFilterPredicate = createSelector(
       point.get('activityGroup') === activityGroup ||
       point.get('activity') === activityGroup
     )
+  },
+)
+
+export const getSubtypeFilterPredicate = createSelector(
+  visualizationSettings,
+  (settings) => {
+    const subtype = settings.get('subtype', '')
+    if (!subtype) { return () => true }
+    return point => point.get('productSubtype') === subtype
   },
 )

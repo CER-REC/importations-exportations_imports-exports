@@ -1,7 +1,12 @@
 import { fromJS } from 'immutable'
 
 import { createSelector } from './selectHelper'
-import { filterByTimeline, filterByTimelineAndMap, getActivityFilterPredicate } from './core'
+import {
+  filterByTimeline,
+  filterByTimelineAndMap,
+  getActivityFilterPredicate,
+  getSubtypeFilterPredicate,
+} from './core'
 import { visualizationSettings } from './visualizationSettings'
 
 export const getCountry = (_, props = {}) => props.country
@@ -110,14 +115,15 @@ export const getFullyFilteredData = createSelector(
   filterByTimeline,
   filterByTimelineAndMap,
   getActivityFilterPredicate,
+  getSubtypeFilterPredicate,
   (_, props = {}) => props.valueKey,
-  (country, settings, timeline, timelineAndMap, activityFilter, valueKey) =>
+  (country, settings, timeline, timelineAndMap, activityFilter, subtypeFilter, valueKey) =>
     (country === settings.getIn(['selection', 'country'])
       ? timeline
       : timelineAndMap
     ).filter((p) => {
       if (valueKey && p.get(valueKey, '') === '') { return false }
-      return activityFilter(p)
+      return activityFilter(p) && subtypeFilter(p)
     }),
 )
 
