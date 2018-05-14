@@ -286,7 +286,7 @@ class BarChart extends Chart {
       <g transform={this.getTransform()}>
         <g>
           {elements}
-          {/*}
+          {/*
           {this.orangeBarExplanation()}
           {this.blueBarExplanation()}
           {this.crudeBlueBarExplanation()}
