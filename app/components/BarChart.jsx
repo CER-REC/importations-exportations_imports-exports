@@ -185,7 +185,6 @@ class BarChart extends Chart {
       scale: scaleValue,
       height,
       flipped,
-      valueKey,
       activityValueKey,
       colour,
       layout,
