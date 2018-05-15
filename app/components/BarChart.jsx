@@ -10,7 +10,7 @@ import DetailSidebar from './DetailSidebar'
 // import ConfidentialCount from './ConfidentialCount'
 // import MissingDataCount from './MissingDataCount'
 import TextBox from './TextBox'
-import { timelineData, timeLineScaleValue } from '../selectors/timeline'
+import { timelineData, timeLineScaleValue, timeLineScaleValueByProductSubtype } from '../selectors/timeline'
 import { groupingBy as timelineGrouping } from '../selectors/data'
 import { visualizationSettings } from '../selectors/visualizationSettings'
 import { toggleOutlier } from '../actions/chartOutliers'
@@ -30,10 +30,17 @@ class BarChart extends Chart {
     detailSidebar: true,
   }
 
+  getScale = (props) => {
+    if (props.valueKey === 'productSubtype') {
+      return props.scaleByProductSubType.getIn([props.activityValueKey, props.productSubtype])
+    }
+    return props.scale.get(props.activityValueKey)
+  }
+
   constructor(props) {
     super(props)
     this.state = {
-      axisGuide: props.scale.get(this.props.activityValueKey).getIn(['y', 'max']),
+      axisGuide: this.getScale(props).getIn(['y', 'max']),
     }
   }
 
@@ -41,8 +48,8 @@ class BarChart extends Chart {
     // Reset the axis guide when the scale changes.
     // Watch scale since that changes the bar height, but use trueScale in order
     // to put the guide on top of the tallest bar
-    if (props.scale.get(this.props.activityValueKey).getIn(['y', 'max']) !== this.props.scale.get(this.props.activityValueKey).getIn(['y', 'max'])) {
-      this.updateAxisGuide(props.scale.get(this.props.activityValueKey).getIn(['y', 'max']))
+    if (this.getScale(props).getIn(['y', 'max']) !== this.getScale(this.props).getIn(['y', 'max'])) {
+      this.updateAxisGuide(this.getScale(props).getIn(['y', 'max']))
     }
   }
 
@@ -171,7 +178,7 @@ class BarChart extends Chart {
   }
 
   calculateHeightPerUnit() {
-    return this.props.height / (this.props.scale.getIn([this.props.activityValueKey, 'y', 'max']) - this.props.scale.getIn([this.props.activityValueKey, 'y', 'min']))
+    return this.props.height / (this.getScale(this.props).getIn(['y', 'max']) - this.getScale(this.props).getIn(['y', 'min']))
   }
 
   calculateNegativePosition() {
@@ -182,7 +189,6 @@ class BarChart extends Chart {
   render() {
     const {
       bars: data,
-      scale: scaleValue,
       height,
       flipped,
       activityValueKey,
@@ -192,8 +198,8 @@ class BarChart extends Chart {
       expandedOutliers,
     } = this.props
     const barSize = layout.get('barWidth')
-    const scale = scaleValue.get(activityValueKey)
-
+    const scale = this.getScale(this.props)
+    
     const heightPerUnit = this.calculateHeightPerUnit()
     const negativeValOffset = this.calculateNegativePosition()
 
@@ -320,6 +326,7 @@ export default connect(
     tr: trSelector(state, props),
     expandedOutliers: state.chartOutliers,
     scale: timeLineScaleValue(state, props),
+    scaleByProductSubType: timeLineScaleValueByProductSubtype(state, props)
   }, timelineData(state, props)),
   { toggleOutlier },
 )(BarChart)

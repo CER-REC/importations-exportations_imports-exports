@@ -71,14 +71,62 @@ export const timelineYearScaleCalculation = createSelector(
   }),
 )
 
+export const timeLineScaleValueByProductSubtype = createSelector(
+  timeLineScaleSelector,
+  timelineYearScaleCalculation,
+  scaledLinkedSelector,
+  (yaxis, xaxis, scaleLinked) => {
+    let scale = {}
+    yaxis.entrySeq().forEach(([activity, activityValue]) => {
+      if (!scale[activity]) {
+        scale[activity] = {}
+      }
+      if (activityValue.get('productSubtype')) {
+        activityValue.get('productSubtype').keySeq().forEach((productSubtype) => {
+          if (!scale[activity][productSubtype]) {
+            scale[activity][productSubtype] = {
+              y: {
+                min: 0,
+                max: 0,
+              },
+              x: {
+                min: xaxis.min,
+                max: xaxis.max,
+              },
+            }
+          }
+          if (scaleLinked) {
+            let result = yaxis.getIn(['exports', 'productSubtype', productSubtype]) > yaxis.getIn(['imports', 'productSubtype', productSubtype]) ?
+              yaxis.getIn(['exports', 'productSubtype', productSubtype])  : yaxis.getIn(['imports', 'productSubtype', productSubtype])
+            if (!result && !yaxis.getIn(['exports', 'productSubtype', productSubtype])) {
+              result = yaxis.getIn(['imports', 'productSubtype', productSubtype])
+            } else if (!result && !yaxis.getIn(['imports', 'productSubtype', productSubtype])) {
+              result = yaxis.getIn(['exports', 'productSubtype', productSubtype])
+            }
+            scale[activity][productSubtype].y.max = result
+          } else {
+            scale[activity][productSubtype].y.max = yaxis.getIn([activity, 'productSubtype', productSubtype]) 
+          }
+        })
+      }
+    })
+    return fromJS(scale)
+  },
+)
+
 export const timeLineScaleValue = createSelector(
   timeLineScaleSelector,
   timelineYearScaleCalculation,
   scaledLinkedSelector,
   (yaxis, xaxis, scaleLinked) => {
     if (scaleLinked) {
-      const result = yaxis.getIn(['exports', 'activityTotal']) > yaxis.getIn(['imports', 'activityTotal']) ?
+      let result = yaxis.getIn(['exports', 'activityTotal']) > yaxis.getIn(['imports', 'activityTotal']) ?
         yaxis.getIn(['exports', 'activityTotal']) : yaxis.getIn(['imports', 'activityTotal'])
+      if (!result && !yaxis.getIn(['exports', 'activityTotal'])) {
+        result = yaxis.getIn(['imports', 'activityTotal'])
+      } else if (!result && !yaxis.getIn(['imports', 'activityTotal'])) {
+        result = yaxis.getIn(['exports', 'activityTotal'])
+      }
       return fromJS({
         exports: {
           y: {
