@@ -171,7 +171,12 @@ class BarChart extends Chart {
   }
 
   calculateHeightPerUnit() {
-    return this.props.height / (this.props.scaleValue.get(this.props.activityValueKey) - 0)
+    const scaleValue = this.props.scaleValue
+    // const activiKey = scaleValue.map(p => p.getIn(['activityKey', this.props.activityValueKey]))
+    // console.log(activiKey) 
+    const hey = this.props.height / this.props.scaleValue
+    console.log(hey, 'heys')
+    return this.props.height / (this.props.scaleValue - 0)
   }
 
   calculateNegativePosition() {
