@@ -15,6 +15,11 @@ import trSelector from '../selectors/translate'
 
 const WorkspaceComputations = require('../computations/WorkspaceComputations.js')
 
+const parsePeriod = period => ({
+  year: parseInt(period.substr(0, 4), 10),
+  quarter: parseInt(period.substr(5), 10),
+})
+
 class TimelineSeek extends React.PureComponent {
   static propTypes = {
     seekPosition: PropTypes.shape({
@@ -26,7 +31,7 @@ class TimelineSeek extends React.PureComponent {
     left: PropTypes.number.isRequired,
     width: PropTypes.number.isRequired,
     height: PropTypes.number.isRequired,
-    data: PropTypes.instanceOf(Map).isRequired,
+    barPositions: PropTypes.instanceOf(Map).isRequired,
     timelineGroup: PropTypes.oneOf(['year', 'quarter']).isRequired,
     timelineRange: PropTypes.instanceOf(Map).isRequired,
     timelineFilter: PropTypes.func.isRequired,
@@ -62,35 +67,31 @@ class TimelineSeek extends React.PureComponent {
   }
 
   onArrowKey = (e) => {
-    const data = this.props.data.toList()
     const currentPosition = this.props.timelineRange.get(this.props.side)
-    const currentIndex = data.findIndex(p => (
-      p.get('year') === currentPosition.get('year') &&
-      p.get('quarter') === currentPosition.get('quarter')
-    ))
-
+    let newPosition = currentPosition.toJS()
     const direction = (e.key === 'ArrowRight' || e.key === 'PageDown') ? 1 : -1
-    const scale = (e.key === 'ArrowLeft' || e.key === 'ArrowRight') ? 1 : 4
 
-    const newPoint = data.get(currentIndex + (direction * scale)) || data.get(currentIndex)
-
-    const newOffsets = {
-      ...this.props.seekPosition,
-      [this.props.side]: newPoint.get('offsetX'),
+    if (this.props.timelineGroup === 'quarter') {
+      newPosition.year += direction
+      if (newPosition.year > this.props.yearScale.max) {
+        newPosition.quarter += 1
+        newPosition.year -= direction
+      } else if (newPosition.year < this.props.yearScale.min) {
+        newPosition.quarter -= 1
+        newPosition.year -= direction
+      }
+    } else {
+      newPosition.quarter += direction
+      if (newPosition.quarter > 4) { newPosition = { year: newPosition.year + 1, quarter: 1 } }
+      if (newPosition.quarter < 1) { newPosition = { year: newPosition.year - 1, quarter: 4 } }
     }
 
     const newRange = {
       ...this.props.timelineRange.toJS(),
-      [this.props.side]: {
-        year: newPoint.get('year'),
-        quarter: newPoint.get('quarter'),
-      },
+      [this.props.side]: newPosition,
     }
 
-    // Ensure the curtains can't overlap
-    if (newOffsets.start <= newOffsets.end) {
-      this.props.timelineFilter(fromJS(this.ensureRangeAllowed(newRange)))
-    }
+    this.props.timelineFilter(fromJS(this.ensureRangeAllowed(newRange)))
   }
 
   getOffsetFromPosition(position, side = this.props.side) {
@@ -117,28 +118,25 @@ class TimelineSeek extends React.PureComponent {
   }
 
   dragStop = (rawOffset) => {
-    const { data, side } = this.props
+    const { barPositions, side } = this.props
     const offset = (side === 'start')
       ? this.state.offset + rawOffset.x
       : this.state.offset - rawOffset.x
     const filterPoint = (side === 'start')
-      ? data.find(p => p.get('offsetX') > offset - 1)
-      : data.findLast(p => p.get('offsetX') < ((this.props.width - offset) + 1))
+      ? barPositions.findKey(p => p > offset - 1)
+      : barPositions.findLastKey(p => p < ((this.props.width - offset) + 1))
 
-    const newRange = this.props.timelineRange.set(side, {
-      year: filterPoint.get('year'),
-      quarter: filterPoint.get('quarter'),
-    }).toJS()
+    const newRange = this.props.timelineRange.set(side, parsePeriod(filterPoint)).toJS()
     this.props.timelineFilter(fromJS(this.ensureRangeAllowed(newRange)))
   }
 
   ensureRangeAllowed(newRangeRaw) {
-    const { data, side, timelineGroup } = this.props
+    const { barPositions, side, timelineGroup } = this.props
     const newRange = { ...newRangeRaw }
     if (timelineGroup === 'quarter') {
       const otherSide = (side === 'start') ? 'end' : 'start'
-      const firstPoint = data.first().toJS()
-      const lastPoint = data.last().toJS()
+      const firstPoint = parsePeriod(barPositions.keySeq().first())
+      const lastPoint = parsePeriod(barPositions.keySeq().last())
       if ((firstPoint.year !== newRange.start.year) ||
           (firstPoint.quarter !== newRange.start.quarter) ||
           (lastPoint.year !== newRange.end.year) ||
@@ -147,6 +145,14 @@ class TimelineSeek extends React.PureComponent {
         if (newRange.start.year > newRange.end.year) {
           newRange[otherSide].year = newRange[side].year
         }
+      }
+    } else {
+      const startOffset = barPositions.get(`${newRange.start.year}Q${newRange.start.quarter}`)
+      const endOffset = barPositions.get(`${newRange.end.year}Q${newRange.end.quarter}`)
+
+      if (startOffset > endOffset) {
+        // Ensure the curtains can't overlap
+        return this.props.timelineRange.toJS()
       }
     }
     return newRange
@@ -229,6 +235,7 @@ export default connect(
     timelineRange: timelineRange(state, props),
     timelineGroup: timelineGrouping(state, props),
     tr: trSelector(state, props),
+    yearScale: TimelineSelector.timelineYearScaleCalculation(state, props),
   }),
   { timelineFilter },
 )(TimelineSeek)

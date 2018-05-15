@@ -7,7 +7,7 @@ import DetailSidebar from './DetailSidebar'
 import ChartOptions from './ChartOptions'
 import TimelineSeek from './TimelineSeek'
 import TimelinePlay from './TimelinePlay'
-import { timelineSeekPositionSelector, timelineData } from '../selectors/timeline'
+import { timelineSeekPositionSelector, timelinePositionCalculation } from '../selectors/timeline'
 import Constants from '../Constants'
 
 class Axis extends React.PureComponent {
@@ -16,7 +16,7 @@ class Axis extends React.PureComponent {
     left: PropTypes.number.isRequired,
     width: PropTypes.number.isRequired,
     height: PropTypes.number.isRequired,
-    bars: PropTypes.instanceOf(Immutable.Map).isRequired,
+    barPositions: PropTypes.instanceOf(Immutable.Map).isRequired,
     labels: PropTypes.instanceOf(Immutable.List).isRequired,
     seekPosition: PropTypes.shape({
       start: PropTypes.number.isRequired,
@@ -49,7 +49,7 @@ class Axis extends React.PureComponent {
 
   seekControls() {
     const {
-      top, left, width, height, bars: data,tabIndex,
+      top, left, width, height, barPositions, tabIndex,
     } = this.props
     return (
       <g>
@@ -58,7 +58,7 @@ class Axis extends React.PureComponent {
           left={left}
           width={width}
           height={height}
-          data={data}
+          barPositions={barPositions}
           tabIndex={tabIndex}
         />
         <TimelineSeek
@@ -66,7 +66,7 @@ class Axis extends React.PureComponent {
           left={left}
           width={width}
           height={height}
-          data={data}
+          barPositions={barPositions}
           side="end"
           tabIndex={tabIndex}
         />
@@ -89,10 +89,10 @@ class Axis extends React.PureComponent {
       top,
       left,
       seekPosition,
+      barPositions,
       barWidth,
       width,
       height,
-      bars: data,
     } = this.props
     const elements = labels.map((label) => {
       const key = label.get('key', `label-${label.get('label')}`)
@@ -152,6 +152,7 @@ class Axis extends React.PureComponent {
   }
 }
 
-export default connect((state, props) => Object.assign({
+export default connect((state, props) => ({
   seekPosition: timelineSeekPositionSelector(state, props),
-}, timelineData(state, props)))(Axis)
+  ...timelinePositionCalculation(state, props),
+}))(Axis)
