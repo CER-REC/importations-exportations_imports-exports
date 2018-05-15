@@ -4,6 +4,7 @@ import { createSelector } from './selectHelper'
 import {
   filterByTimeline,
   filterByTimelineAndMap,
+  filterByMap,
   getActivityFilterPredicate,
   getSubtypeFilterPredicate,
 } from './core'
@@ -162,13 +163,18 @@ export const detailBreakdownSelector = createSelector(
 )
 
 export const barChartValues = createSelector(
-  getFullyFilteredData,
+  filterByMap,
   getActivityFilterPredicate,
+  getSubtypeFilterPredicate,
   (_, props = {}) => props.groupBy,
   (_, props = {}) => props.valueKey,
   (_, props = {}) => props.valueAverage || false,
-  (records, activityfilter, groupBy, valueKey, averageMode) => {
-    const filteredRecords = records.filter(p => p.get(valueKey, '') !== '')
+  (records, activityFilter, subtypeFilter, groupBy, valueKey, averageMode) => {
+    const filteredRecords = records.filter((p) => {
+      if (valueKey && p.get(valueKey, '') === '') { return false }
+      return activityFilter(p) && subtypeFilter(p)
+    })
+
     let data
     if (averageMode === 'weighted') {
       data = calculateValueWeighted(filteredRecords, groupBy, valueKey)
