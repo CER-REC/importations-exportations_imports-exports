@@ -161,14 +161,15 @@ class BarChart extends Chart {
     /></g>)
   }
 
-  renderLine(point, negativeValOffset, barHeight, colour, opacity, overflowBarHeight = 0) {
+  renderLine(point, period, negativeValOffset, barHeight, colour, opacity, overflowBarHeight = 0) {
+    const offsetX = this.props.barPositions.get(period)
     return (
       <AnimatedLine
-        x1={point.get('offsetX')}
-        x2={point.get('offsetX')}
+        x1={offsetX}
+        x2={offsetX}
         y2={this.props.height + negativeValOffset}
         y1={(this.props.height + negativeValOffset) - barHeight - overflowBarHeight}
-        key={`${point.get('year')}-${point.get('quarter')}-${this.props.valueKey}`}
+        key={`${period}-${this.props.valueKey}`}
         strokeWidth={this.props.layout.get('barWidth')}
         stroke={colour}
         opacity={opacity}
@@ -203,7 +204,7 @@ class BarChart extends Chart {
     const heightPerUnit = this.calculateHeightPerUnit()
     const negativeValOffset = this.calculateNegativePosition()
 
-    const elements = data.map((point) => {
+    const elements = data.get('values').map((point, period) => {
       const opacity = this.isTimelinePointFiltered(point) ? 0.5 : 1
       const value = point.get( activityValueKey, 0)
 
@@ -221,16 +222,20 @@ class BarChart extends Chart {
         let overflowText = null
         const barDirection = (value < 0 ? -1 : 1)
         overflowBarHeight = 17 * barDirection
+        const offsetX = this.props.barPositions.get(period)
         if (
           expandedOutliers.has(activityValueKey) &&
-          expandedOutliers.getIn([activityValueKey, value < 0 ? 'negative' : 'positive']) === point.get('period')
+          expandedOutliers.getIn([
+            activityValueKey,
+            value < 0 ? 'negative' : 'positive',
+          ]) === period
         ) {
           overflowBarHeight = 30 * barDirection
           let textOffset = ((height + negativeValOffset) - barHeight - overflowBarHeight)
           if (!flipped && value > 0) textOffset += 11
           else if (flipped && value < 0) textOffset -= 11
           overflowText = (
-            <g transform={`translate(${point.get('offsetX') + (barSize / 2) + 1} ${textOffset})`}>
+            <g transform={`translate(${offsetX + (barSize / 2) + 1} ${textOffset})`}>
               <g transform={flipped ? 'scale(1 -1)' : ''} className="chartOutlierText">
                 <TextBox
                   padding={0}
@@ -243,10 +248,10 @@ class BarChart extends Chart {
             </g>
           )
         }
-        overflowClick = () => this.props.toggleOutlier(activityValueKey, (value >= 0), point.get('period'))
+        overflowClick = () => this.props.toggleOutlier(activityValueKey, (value >= 0), period)
         overflow = (
           <g>
-            <g transform={`translate(${point.get('offsetX') - (barSize / 2)} ${(height + negativeValOffset + (value < 0 ? 10 : 0)) - barHeight})`}>
+            <g transform={`translate(${offsetX - (barSize / 2)} ${(height + negativeValOffset + (value < 0 ? 10 : 0)) - barHeight})`}>
               <g transform={flipped ? 'scale(1 -1) translate(0 10)' : ''}>
                 <polygon points="0,0 0,-5 5,-10 5,-5 0,0" fill="white" />
               </g>
@@ -256,8 +261,8 @@ class BarChart extends Chart {
         )
       }
       return (
-        <g key={`${point.get('year')}-${point.get('quarter')}-${activityValueKey}`} onClick={overflowClick}>
-          {this.renderLine(point, negativeValOffset, barHeight, colour, opacity, overflowBarHeight)}
+        <g key={`${period}-${activityValueKey}`} onClick={overflowClick}>
+          {this.renderLine(point, period, negativeValOffset, barHeight, colour, opacity, overflowBarHeight)}
           {overflow}
         </g>
       )

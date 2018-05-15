@@ -41,7 +41,7 @@ export const sortTimeline = createSelector(
 )
 
 export const timelineScaleBase = createSelector(
-  filterByTimelineAndMap,
+  filterByMap,
   getAggregateKey,
   selectedVisualization,
   (points, aggregateKey, vizName) => fromJS(points.reduce((acc, next) => {
@@ -176,22 +176,21 @@ export const timeLineScaleValue = createSelector(
 )
 
 export const timelinePositionCalculation = createSelector(
-  sortTimeline,
   timelineGrouping,
   visContentSize,
   timelineYearScaleCalculation,
-  (points, grouping, size, yaxisScale) => {
-    const scale = yaxisScale
+  (grouping, size, scale) => {
     const groupPadding = Constants.getIn(['timeline', 'groupPadding'])
     const barPadding = Constants.getIn(['timeline', 'barPadding'])
     const totalYears = (scale.max - scale.min)
     let offset = 0
     let barWidth
     const labels = []
-    let bars = points.get('values')
+    const barPositions = {}
     if (grouping === 'year') {
       const widthAfterPads = size.width
         - ((totalYears * 4) * barPadding)
+        - (totalYears * groupPadding)
       barWidth = widthAfterPads / ((totalYears + 1) * 4)
 
       for (let y = scale.min; y <= scale.max; y += 1) {
@@ -200,12 +199,7 @@ export const timelinePositionCalculation = createSelector(
           label: y.toString().substr(-2),
         })
         for (let q = 1; q <= 4; q += 1) {
-          if (bars.has(`${y}Q${q}`)) {
-            bars = bars.setIn([`${y}Q${q}`, 'offsetX'], offset)
-            bars = bars.setIn([`${y}Q${q}`, 'year'], y)
-            bars = bars.setIn([`${y}Q${q}`, 'quarter'], q)
-            bars = bars.setIn([`${y}Q${q}`, 'period'], `${y}Q${q}`)
-          }
+          barPositions[`${y}Q${q}`] = offset
           offset += barPadding + barWidth
         }
         offset += groupPadding
@@ -234,9 +228,7 @@ export const timelinePositionCalculation = createSelector(
             })
           }
 
-          if (bars.has(`${y}Q${q}`)) {
-            bars = bars.setIn([`${y}Q${q}`, 'offsetX'], offset)
-          }
+          barPositions[`${y}Q${q}`] = offset
           offset += barPadding + barWidth
         }
 
@@ -260,9 +252,8 @@ export const timelinePositionCalculation = createSelector(
     }
 
     return {
-      bars: fromJS(bars),
-      points,
-      labels: fromJS(labels),
+      labels: fromJS(labels).sortBy(l => l.get('offsetX')),
+      barPositions: fromJS(barPositions).sort(),
       layout: fromJS({
         width: size.width,
         groupPadding,
@@ -278,24 +269,25 @@ export const timelineData = createSelector(
   timelinePlayback,
   timelineYearScaleCalculation,
   timelinePositionCalculation,
-  (range, playback, scale, position) => ({ timelineRange: range, timelinePlayback: playback, ...scale, ...position }),
+  sortTimeline,
+  (range, playback, scale, position, data) => ({
+    timelineRange: range,
+    timelinePlayback: playback,
+    bars: data,
+    ...scale,
+    ...position,
+  }),
 )
 
 export const timelineSeekPositionSelector = createSelector(
-  timelineData,
+  timelineRange,
+  timelinePositionCalculation,
   visContentSize,
-  ({ bars, timelineRange: range }, size) => {
-    const start = bars.find(point => (
-      point.get('year') >= range.getIn(['start', 'year']) &&
-      point.get('quarter') >= range.getIn(['start', 'quarter'])
-    ))
-    const end = bars.findLast(point => (
-      point.get('year') <= range.getIn(['end', 'year']) &&
-      point.get('quarter') <= range.getIn(['end', 'quarter'])
-    ))
-    return {
-      start: (typeof start !== 'undefined' ? start.get('offsetX') : 0),
-      end: (typeof end !== 'undefined' ? end.get('offsetX') : size.width),
-    }
+  (range, { barPositions }, size) => {
+    const start = barPositions
+      .get(`${range.getIn(['start', 'year'])}Q${range.getIn(['start', 'quarter'])}`, 0)
+    const end = barPositions
+      .get(`${range.getIn(['end', 'year'])}Q${range.getIn(['end', 'quarter'])}`, size.width)
+    return { start, end }
   },
 )
