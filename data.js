@@ -119,14 +119,6 @@ const parsingIssue = {};
       destinationContinent: destinationRegion.get('continent') || '',
     }
   }))
-  // Add forAverageValue and forAverageDivisor to rate units
-  .then(points => points.map((point) => {
-    if (point.units === 'thousand m3/d' || point.units === 'm3/d') {
-      point.forAverageValue = point.value
-      point.forAverageDivisor = 1
-    }
-    return point
-  }))
   // Cluster the points into visualizations, units, and period
   .then(points => points.reduce((acc, point) => {
     if (!acc[point.product]) { acc[point.product] = {} }
@@ -137,7 +129,7 @@ const parsingIssue = {};
     if (!outUnit[point.period]) { outUnit[point.period] = [] }
 
     // Fix destinations for crude oil when not destined for a PADD
-    if (point.product === 'crudeOil' && point.destination === '') {
+    if (point.product === 'crudeOilExports' && point.destination === '') {
       point.destination = 'ca'
     }
 
@@ -236,7 +228,7 @@ const parsingIssue = {};
                     : Math.round(averageDest.value / averageDest.divisor),
                 }
               }
-              if (visName === 'crudeOil' || visName === 'naturalGasLiquids') {
+              if (visName === 'crudeOilExports' || visName === 'naturalGasLiquids') {
                 return {
                   ...acc,
                   [next.destination]:
@@ -299,20 +291,32 @@ const parsingIssue = {};
               acc[point.period][point.activity] = {
                 transport: {},
                 productSubtype: {},
+                weightedAverage: { value: 0, divisor: 0 },
                 activityTotal: 0,
               }
             }
-            const transport = acc[point.period][point.activity].transport[point.transport] || 0
-            acc[point.period][point.activity].transport[point.transport] = transport + point.value
+            if (point.transport !== '') {
+              const transport = acc[point.period][point.activity].transport[point.transport] || 0
+              acc[point.period][point.activity].transport[point.transport] = transport + point.value
 
-            const transportTotal = acc[point.period][point.activity].transport.total || 0
-            acc[point.period][point.activity].transport.total = transportTotal + point.value
+              const transportTotal = acc[point.period][point.activity].transport.total || 0
+              acc[point.period][point.activity].transport.total = transportTotal + point.value
+            }
 
-            const productSubtype = acc[point.period][point.activity].productSubtype[point.productSubtype] || 0
-            acc[point.period][point.activity].productSubtype[point.productSubtype] = productSubtype + point.value
-            
-            const productSubtypeTotal = acc[point.period][point.activity].productSubtype.total || 0
-            acc[point.period][point.activity].productSubtype.total = productSubtypeTotal + point.value
+            if (point.productSubtype !== '') {
+              const productSubtype = acc[point.period][point.activity].productSubtype[point.productSubtype] || 0
+              acc[point.period][point.activity].productSubtype[point.productSubtype] = productSubtype + point.value
+              
+              const productSubtypeTotal = acc[point.period][point.activity].productSubtype.total || 0
+              acc[point.period][point.activity].productSubtype.total = productSubtypeTotal + point.value              
+            }
+
+
+            const averageValue = acc[point.period][point.activity].weightedAverage.value || 0
+            acc[point.period][point.activity].weightedAverage.value = averageValue + point.forAverageValue
+
+            const averageDivisor = acc[point.period][point.activity].weightedAverage.divisor || 0
+            acc[point.period][point.activity].weightedAverage.divisor = averageDivisor + point.forAverageDivisor
 
             acc[point.period][point.activity].activityTotal += point.value
             return acc
@@ -322,27 +326,45 @@ const parsingIssue = {};
             Object.entries(point).forEach(([activity, values]) => {
               if (!timelineScale[visName][unit][activity]) {
                 timelineScale[visName][unit][activity] = {
-                  transport: {},
-                  productSubtype: {},
                   activityTotal: 0,
                 }
               }
               Object.entries(values.transport).forEach(([transport, value]) => {
-                if (!timelineScale[visName][unit][activity].transport) {
-                  timelineScale[visName][unit][activity].transport = {}
+                if (transport !== '') {
+                  if (!timelineScale[visName][unit][activity].transport) {
+                    timelineScale[visName][unit][activity].transport = {}
+                  }
+                  if (!timelineScale[visName][unit][activity].transport) {
+                    timelineScale[visName][unit][activity].transport = {}
+                  }
+                  const transportValue = timelineScale[visName][unit][activity].transport[transport] || 0
+                  timelineScale[visName][unit][activity].transport[transport] = value > transportValue ? value : transportValue
                 }
-                const transportValue = timelineScale[visName][unit][activity].transport[transport] || 0
-                timelineScale[visName][unit][activity].transport[transport] = value > transportValue ? value : transportValue
               })
               Object.entries(values.productSubtype).forEach(([productSubtype, value]) => {
-                if (!timelineScale[visName][unit][activity].productSubtype) {
-                  timelineScale[visName][unit][activity].productSubtype = {}
+                if (productSubtype !== '') {
+                  if (!timelineScale[visName][unit][activity].productSubtype) {
+                    timelineScale[visName][unit][activity].productSubtype = {}
+                  }
+                  if (!timelineScale[visName][unit][activity].productSubtype) {
+                    timelineScale[visName][unit][activity].productSubtype = {}
+                  }
+                  const productSubtypeValue = timelineScale[visName][unit][activity].productSubtype[productSubtype] || 0
+                  timelineScale[visName][unit][activity].productSubtype[productSubtype] = value > productSubtypeValue ? value : productSubtypeValue
                 }
-                const productSubtypeValue = timelineScale[visName][unit][activity].productSubtype[productSubtype] || 0
-                timelineScale[visName][unit][activity].productSubtype[productSubtype] = value > productSubtypeValue ? value : productSubtypeValue
               })
-              const activityTotal = timelineScale[visName][unit][activity].activityTotal || 0
-              timelineScale[visName][unit][activity].activityTotal = activityTotal > values.activityTotal ? activityTotal : values.activityTotal
+
+              if (['CN$/GJ', 'CAN$/MW.h'].includes(unit)) {
+                const activityTotal = timelineScale[visName][unit][activity].activityTotal || 0
+              
+                if (values.weightedAverage.divisor !== 0) {
+                  const calculateWeightedAverage = values.weightedAverage.value / values.weightedAverage.divisor
+                  timelineScale[visName][unit][activity].activityTotal = calculateWeightedAverage > activityTotal ? calculateWeightedAverage : activityTotal
+                }
+              } else {
+                const activityTotal = timelineScale[visName][unit][activity].activityTotal || 0
+                timelineScale[visName][unit][activity].activityTotal = activityTotal > values.activityTotal ? activityTotal : values.activityTotal
+              }
             })
           })
         })
