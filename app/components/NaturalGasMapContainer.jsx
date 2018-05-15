@@ -69,6 +69,7 @@ class NaturalGasMapContainer extends React.PureComponent {
     this.props.onMapPieceClick({
       provinces,
       ports,
+      country: 'ca',
     })
   }
 
@@ -204,6 +205,7 @@ const mapStateToprops = (state, props) => {
       ...props,
       valueKey: 'activity',
       groupBy: 'port',
+      country: 'ca',
     }),
   }
 }
