@@ -42,7 +42,7 @@ class BarChart extends Chart {
     // Reset the axis guide when the scale changes.
     // Watch scale since that changes the bar height, but use trueScale in order
     // to put the guide on top of the tallest bar
-    if (props.scaleValue.get(this.props.activityValueKey).get('max') !== this.props.scaleValue.get(this.props.activityValueKey).get('max')) {
+    if (props.scale.get(this.props.activityValueKey).getIn(['y', 'max']) !== this.props.scale.get(this.props.activityValueKey).getIn(['y', 'max'])) {
       //this.updateAxisGuide(props.trueScale.get('max'))
       this.updateAxisGuide(100)
     }
@@ -173,8 +173,7 @@ class BarChart extends Chart {
   }
 
   calculateHeightPerUnit() {
-    const scaleValue = this.props.scaleValue.get(this.props.activityValueKey)
-    return this.props.height / (scaleValue - 0)
+    return this.props.height / (this.props.scale.getIn([this.props.activityValueKey, 'y', 'max']) - this.props.scale.getIn([this.props.activityValueKey, 'y', 'min']))
   }
 
   calculateNegativePosition() {
@@ -185,25 +184,25 @@ class BarChart extends Chart {
   render() {
     const {
       bars: data,
-      scaleValue,
+      scale: scaleValue,
       height,
       flipped,
       valueKey,
+      activityValueKey,
       colour,
       layout,
       tabIndex,
       expandedOutliers,
     } = this.props
     const barSize = layout.get('barWidth')
-    const scale = scaleValue.get(this.props.activityValueKey)
+    const scale = scaleValue.get(activityValueKey)
 
     const heightPerUnit = this.calculateHeightPerUnit()
-    console.log(heightPerUnit)
     const negativeValOffset = this.calculateNegativePosition()
 
     const elements = data.map((point) => {
       const opacity = this.isTimelinePointFiltered(point) ? 0.5 : 1
-      const value = point.getIn(['values', valueKey], 0)
+      const value = point.get( activityValueKey, 0)
 
       // Minimum 1px bar height
       let barHeight = (value < 0)
@@ -220,8 +219,8 @@ class BarChart extends Chart {
         const barDirection = (value < 0 ? -1 : 1)
         overflowBarHeight = 17 * barDirection
         if (
-          expandedOutliers.has(valueKey) &&
-          expandedOutliers.getIn([valueKey, value < 0 ? 'negative' : 'positive']) === point.get('period')
+          expandedOutliers.has(activityValueKey) &&
+          expandedOutliers.getIn([activityValueKey, value < 0 ? 'negative' : 'positive']) === point.get('period')
         ) {
           overflowBarHeight = 30 * barDirection
           let textOffset = ((height + negativeValOffset) - barHeight - overflowBarHeight)
@@ -241,7 +240,7 @@ class BarChart extends Chart {
             </g>
           )
         }
-        overflowClick = () => this.props.toggleOutlier(valueKey, (value >= 0), point.get('period'))
+        overflowClick = () => this.props.toggleOutlier(activityValueKey, (value >= 0), point.get('period'))
         overflow = (
           <g>
             <g transform={`translate(${point.get('offsetX') - (barSize / 2)} ${(height + negativeValOffset + (value < 0 ? 10 : 0)) - barHeight})`}>
@@ -254,7 +253,7 @@ class BarChart extends Chart {
         )
       }
       return (
-        <g key={`${point.get('year')}-${point.get('quarter')}-${valueKey}`} onClick={overflowClick}>
+        <g key={`${point.get('year')}-${point.get('quarter')}-${activityValueKey}`} onClick={overflowClick}>
           {this.renderLine(point, negativeValOffset, barHeight, colour, opacity, overflowBarHeight)}
           {overflow}
         </g>
@@ -279,7 +278,6 @@ class BarChart extends Chart {
     //     aggregateKey={this.props.aggregateKey}
     //   />,
     // ]
-console.log(this.state)
     return (
       <g transform={this.getTransform()}>
         <g>
@@ -324,7 +322,7 @@ export default connect(
     unit: visualizationSettings(state, props).get('amount'),
     tr: trSelector(state, props),
     expandedOutliers: state.chartOutliers,
-    scaleValue: timeLineScaleValue(state, props),
+    scale: timeLineScaleValue(state, props),
   }, timelineData(state, props)),
   { toggleOutlier },
 )(BarChart)

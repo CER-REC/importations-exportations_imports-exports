@@ -75,8 +75,8 @@ export const timeLineScaleValue = createSelector(
   timeLineScaleSelector,
   timelineYearScaleCalculation,
   scaledLinkedSelector,
-  (yaxis, xaxis, toggle) => {
-    if (toggle.scaleLinked) {
+  (yaxis, xaxis, scaleLinked) => {
+    if (scaleLinked) {
       const result = yaxis.getIn(['exports', 'activityTotal']) > yaxis.getIn(['imports', 'activityTotal']) ?
         yaxis.getIn(['exports', 'activityTotal']) : yaxis.getIn(['imports', 'activityTotal'])
       return fromJS({
@@ -138,7 +138,6 @@ export const timelinePositionCalculation = createSelector(
     const barPadding = Constants.getIn(['timeline', 'barPadding'])
     const totalYears = (scale.max - scale.min)
     let offset = 0
-    let lastPoint
     let barWidth
     const labels = []
     let bars = points.get('values')
@@ -155,6 +154,9 @@ export const timelinePositionCalculation = createSelector(
         for (let q = 1; q <= 4; q += 1) {
           if (bars.has(`${y}Q${q}`)) {
             bars = bars.setIn([`${y}Q${q}`, 'offsetX'], offset)
+            bars = bars.setIn([`${y}Q${q}`, 'year'], y)
+            bars = bars.setIn([`${y}Q${q}`, 'quarter'], q)
+            bars = bars.setIn([`${y}Q${q}`, 'period'], `${y}Q${q}`)
           }
           offset += barPadding + barWidth
         }

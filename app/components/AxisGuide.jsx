@@ -26,7 +26,7 @@ class AxisGuide extends React.PureComponent {
       updatePosition: PropTypes.func.isRequired,
       position: PropTypes.number.isRequired,
       tr: PropTypes.func.isRequired,
-      scaleLinked: PropTypes.object.isRequired,
+      scaleLinked: PropTypes.bool.isRequired,
     }
   }
 
@@ -149,7 +149,7 @@ class AxisGuide extends React.PureComponent {
     /></g>)
   }
 
-  getBackgroundColour = () => this.props.scaleLinked.get('scaleLinked')
+  getBackgroundColour = () => this.props.scaleLinked
     ? Constants.getIn(['styleGuide', 'colours', 'SandExtraDark'])
     : Constants.getIn(['styleGuide', 'colours', (this.props.flipped ? 'ExportDefault' : 'ImportDefault')])
 
@@ -166,7 +166,7 @@ class AxisGuide extends React.PureComponent {
         transform={groupTransform}
       >
         <rect x={0} y={0} width={height + 4} height={height + 4} />
-        {this.props.scaleLinked.get('scaleLinked')
+        {this.props.scaleLinked
           ? <ScaleIcon.Linked {...imageProps} />
           : <ScaleIcon.Broken {...imageProps} />}
       </g>

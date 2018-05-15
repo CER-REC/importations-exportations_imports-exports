@@ -119,7 +119,7 @@ class ChartOptions extends React.PureComponent {
               {groupLabel} +
             </a>
           </div>
-        </div>                          
+        </div>                      
         <svg>{this.linkDataExplanation()}</svg>
       </div>
     )
