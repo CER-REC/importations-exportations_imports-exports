@@ -11,9 +11,9 @@ import DetailSidebar from './DetailSidebar'
 */
 import NaturalGasMapContainer from './NaturalGasMapContainer'
 import * as NaturalGasViewport from '../selectors/viewport/naturalGas'
-/*
+
 import { showImportsSelector, showExportsSelector } from '../selectors/visualizationSettings'
-import NaturalGasPieceActivityExplanation from './NaturalGasPieceActivityExplanation'*/
+/*import NaturalGasPieceActivityExplanation from './NaturalGasPieceActivityExplanation'*/
 import Constants from '../Constants'
 /*import {legendMapPosition} from '../selectors/viewport/menus'
 */
@@ -33,7 +33,7 @@ const NaturalGasVisualizationContainer = props => (
     <Axis
       {...props.axisPosition}
       barWidth={4}
-      tabIndex={Constants.getIn(['tabIndex', 'start', 'visualization', 'timeline'])}   
+      tabIndex={Constants.getIn(['tabIndex', 'start', 'visualization', 'timeline'])} 
     />
     {!props.showExports ? null : (
       <BarChart
@@ -65,8 +65,8 @@ export default connect((state, props) => ({
   mapTiles: NaturalGasViewport.mapTilesPosition(state, props),
   portMap: NaturalGasViewport.portMapPosition(state, props),
   /*
-  mapPieceActivityExplanation: legendMapPosition(state, props),
+  mapPieceActivityExplanation: legendMapPosition(state, props),*/
   showImports: showImportsSelector(state, props),
   showExports: showExportsSelector(state, props),
-  */
+  
 }))(NaturalGasVisualizationContainer)
