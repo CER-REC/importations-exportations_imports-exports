@@ -13,7 +13,7 @@ import PowerPoolGrouping from './PowerPoolGrouping'
 import ElectricityMapPieceActivityExplanation from './ElectricityMapPieceActivityExplanation'
 */
 import BarChart from './BarChart'
- //import Axis from './Axis'
+import Axis from './Axis'
 
 import * as ElectricityViewport from '../selectors/viewport/electricity'
 import { showImportsSelector, showExportsSelector } from '../selectors/visualizationSettings'
@@ -24,11 +24,10 @@ import DetailSidebar from './DetailSidebar'
 
 const ElectricityVisualizationContainer = (props) => {  
   return <g>
-    {/*
     <CanadaMapContainer
       {...props.canadaMap}
     />
-    */
+
       <BarChart
         {...props.importChart}
         valueKey="activity"
@@ -41,12 +40,13 @@ const ElectricityVisualizationContainer = (props) => {
         //missing={missing}
         //totalPoints={totalPoints}
       />
-    /*
+    
     <Axis
       {...props.axisPosition}
       barWidth={4}
       tabIndex={Constants.getIn(['tabIndex', 'start', 'visualization', 'timeline'])}
     />
+    {/*
     {!props.showExports ? null : (
       <BarChart
         {...props.exportChart}
@@ -126,7 +126,9 @@ export default connect((state, props) => ({
   /*
   powerPool: ElectricityViewport.powerPoolPosition(state, props),
   mapPieceActivityExplanation: legendMapPosition(state, props),
+  */
   axisPosition: ElectricityViewport.chartAxisPosition(state, props),
+  /*
   exportChart: ElectricityViewport.chartExportPosition(state, props),
   */
   showImports: showImportsSelector(state, props),

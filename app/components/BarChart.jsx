@@ -30,19 +30,21 @@ class BarChart extends Chart {
     detailSidebar: true,
   }
 
-  // constructor(props) {
-  //   super(props)
-  //   this.state = {
-  //     axisGuide: props.trueScale.get('max'),
-  //   }
-  // }
+  constructor(props) {
+    super(props)
+    this.state = {
+      //axisGuide: props.trueScale.get('max'),
+      axisGuide: 100,
+    }
+  }
 
   componentWillReceiveProps(props) {
     // Reset the axis guide when the scale changes.
     // Watch scale since that changes the bar height, but use trueScale in order
     // to put the guide on top of the tallest bar
-    if (props.scale.getIn(['y', 'max']) !== this.props.scale.getIn(['y', 'max'])) {
-      this.updateAxisGuide(props.trueScale.get('max'))
+    if (props.scaleValue.get(this.props.activityValueKey) !== this.props.scaleValue.get(this.props.activityValueKey)) {
+      //this.updateAxisGuide(props.trueScale.get('max'))
+      this.updateAxisGuide(100)
     }
   }
 
@@ -171,12 +173,9 @@ class BarChart extends Chart {
   }
 
   calculateHeightPerUnit() {
-    const scaleValue = this.props.scaleValue
-    // const activiKey = scaleValue.map(p => p.getIn(['activityKey', this.props.activityValueKey]))
-    // console.log(activiKey) 
-    const hey = this.props.height / this.props.scaleValue
-    console.log(hey, 'heys')
-    return this.props.height / (this.props.scaleValue - 0)
+    const scaleValue = this.props.scaleValue.get(this.props.activityValueKey)
+    console.log(scaleValue)
+    return this.props.height / (scaleValue - 0)
   }
 
   calculateNegativePosition() {
@@ -185,9 +184,10 @@ class BarChart extends Chart {
   }
 
   render() {
+    console.log(this.props)
     const {
       bars: data,
-      scale,
+      scaleValue,
       height,
       flipped,
       valueKey,
@@ -196,8 +196,8 @@ class BarChart extends Chart {
       tabIndex,
       expandedOutliers,
     } = this.props
-
     const barSize = layout.get('barWidth')
+    const scale = scaleValue.get(this.props.activityValueKey)
 
     const heightPerUnit = this.calculateHeightPerUnit()
     const negativeValOffset = this.calculateNegativePosition()
@@ -215,8 +215,8 @@ class BarChart extends Chart {
       let overflow = null
       let overflowBarHeight = 0
       let overflowClick = null
-      if (value > scale.getIn(['y', 'max']) || value < scale.getIn(['y', 'min'])) {
-        barHeight = (value < 0) ? 0 : scale.getIn(['y', 'max']) * heightPerUnit
+      if (value > scale || value < 0) {
+        barHeight = (value < 0) ? 0 : scale * heightPerUnit
         let overflowText = null
         const barDirection = (value < 0 ? -1 : 1)
         overflowBarHeight = 17 * barDirection
@@ -280,7 +280,7 @@ class BarChart extends Chart {
     //     aggregateKey={this.props.aggregateKey}
     //   />,
     // ]
-
+console.log(this.state)
     return (
       <g transform={this.getTransform()}>
         <g>
@@ -292,7 +292,7 @@ class BarChart extends Chart {
         <g transform={`translate(0 ${negativeValOffset})`}>
           <AxisGuide
             flipped={flipped}
-            scale={scale.get('y').toJS()}
+            scale={scale}
             position={this.state.axisGuide}
             chartHeight={height}
             heightPerUnit={heightPerUnit}

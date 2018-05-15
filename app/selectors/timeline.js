@@ -75,19 +75,19 @@ export const timeLineScaleValue = createSelector(
   timeLineScaleSelector,
   scaledLinkedSelector,
   (timeline, toggle) => {
-    console.log(timeline.toJS())
+    console.log(timeline)
     if(toggle.scaleLinked) {
       const result = timeline.getIn(['exports', 'activityTotal']) > timeline.getIn(['imports', 'activityTotal']) ?
        timeline.getIn(['exports', 'activityTotal']): timeline.getIn(['imports', 'activityTotal'])
-      return {
+      return fromJS({
         exports: result,
         imports: result
-      } 
+      }) 
     } 
-    return {
+    return fromJS({
         exports: timeline.getIn(['exports', 'activityTotal']),
         imports: timeline.getIn(['imports', 'activityTotal'])
-    }
+    })
   }
 )
 
@@ -106,7 +106,7 @@ export const timelinePositionCalculation = createSelector(
     let lastPoint
     let barWidth
     const labels = []
-    let bars = points
+    let bars = points.get('values')
 
     if (grouping === 'year') {
       const widthAfterPads = size.width
@@ -177,6 +177,7 @@ export const timelinePositionCalculation = createSelector(
 
     return {
       bars: fromJS(bars),
+      points,
       labels: fromJS(labels),
       layout: fromJS({
         width: size.width,
@@ -194,4 +195,23 @@ export const timelineData = createSelector(
   timelineYearScaleCalculation,
   timelinePositionCalculation,
   (range, playback, scale, position) => ({ timelineRange: range, timelinePlayback: playback, ...scale, ...position }),
+)
+
+export const timelineSeekPositionSelector = createSelector(
+  timelineData,
+  visContentSize,
+  ({ bars, timelineRange: range }, size) => {
+    const start = bars.find(point => (
+      point.get('year') >= range.getIn(['start', 'year']) &&
+      point.get('quarter') >= range.getIn(['start', 'quarter'])
+    ))
+    const end = bars.findLast(point => (
+      point.get('year') <= range.getIn(['end', 'year']) &&
+      point.get('quarter') <= range.getIn(['end', 'quarter'])
+    ))
+    return {
+      start: (typeof start !== 'undefined' ? start.get('offsetX') : 0),
+      end: (typeof end !== 'undefined' ? end.get('offsetX') : size.width),
+    }
+  },
 )

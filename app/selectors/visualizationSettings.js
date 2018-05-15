@@ -28,5 +28,5 @@ export const showExportsSelector = createSelector(
 
 export const scaledLinkedSelector = createSelector(
   visualizationSettings,
-  settings => settings.get('timeline'),
+  settings => settings.get('timeline','scaleLinked'),
 )

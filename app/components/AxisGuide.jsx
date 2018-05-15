@@ -6,8 +6,7 @@ import TextBox from './TextBox'
 import * as ScaleIcon from './ScaleIcon'
 import SVGDrag from './SVGDrag/'
 import Constants from '../Constants'
-import { visualizationSettings } from '../selectors/visualizationSettings'
-import { timelineScaleLinked } from '../selectors/timeline'
+import { visualizationSettings, scaledLinkedSelector } from '../selectors/visualizationSettings'
 import trSelector from '../selectors/translate'
 
 import { arrangeBy } from '../selectors/data'
@@ -27,7 +26,7 @@ class AxisGuide extends React.PureComponent {
       updatePosition: PropTypes.func.isRequired,
       position: PropTypes.number.isRequired,
       tr: PropTypes.func.isRequired,
-      scaleLinked: PropTypes.bool.isRequired,
+      scaleLinked: PropTypes.object.isRequired,
     }
   }
 
@@ -150,7 +149,7 @@ class AxisGuide extends React.PureComponent {
     /></g>)
   }
 
-  getBackgroundColour = () => this.props.scaleLinked
+  getBackgroundColour = () => this.props.scaleLinked.get('scaleLinked')
     ? Constants.getIn(['styleGuide', 'colours', 'SandExtraDark'])
     : Constants.getIn(['styleGuide', 'colours', (this.props.flipped ? 'ExportDefault' : 'ImportDefault')])
 
@@ -167,7 +166,7 @@ class AxisGuide extends React.PureComponent {
         transform={groupTransform}
       >
         <rect x={0} y={0} width={height + 4} height={height + 4} />
-        {this.props.scaleLinked
+        {this.props.scaleLinked.get('scaleLinked')
           ? <ScaleIcon.Linked {...imageProps} />
           : <ScaleIcon.Broken {...imageProps} />}
       </g>
@@ -235,5 +234,5 @@ export default connect((state, props) => ({
   arrangeBy: arrangeBy(state, props),
   unit: visualizationSettings(state, props).get('amount'),
   tr: trSelector(state, props),
-  scaleLinked: timelineScaleLinked(state, props),
+  scaleLinked: scaledLinkedSelector(state, props),
 }))(AxisGuide)
