@@ -1328,7 +1328,7 @@ const TranslationTable = fromJS({
         en: 'Minn / N. Dakota',
         fr: 'Minn. / Dakota N.',
       },
-      PJMPP: {
+      PJM: {
         en: 'Pennsylvania Jersey Maryland Power Pool',
         fr: 'Réseau commun Pennsylvanie NJ Maryland',
       },
