@@ -145,7 +145,14 @@ export const getFullyFilteredValues = createSelector(
   },
 )
 
-export const detailBreakdownValues = getFullyFilteredValues
+export const detailBreakdownValues = createSelector(
+  getFullyFilteredValues,
+  state => state.importExportVisualization,
+  (data, viz) => {
+    if (viz !== 'crudeOilExports') { return data }
+    return data.updateIn(['values', 'exports'], values => values.filter((_, k) => k !== 'ca'))
+  },
+)
 
 export const detailBreakdownTotal = createSelector(
   detailBreakdownValues,
