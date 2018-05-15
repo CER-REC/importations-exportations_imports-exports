@@ -10,7 +10,7 @@ import Axis from './Axis'
 import * as NaturalGasLiquidsViewport from '../selectors/viewport/naturalGasLiquids'
 import Constants from '../Constants'
 import Tr from '../TranslationTable'
-// import USPadd from './Padds/USPadd'
+import USPadd from './Padds/USPadd'
 import NaturalGasCanadaMapContainer from './NaturalGasCanadaMapContainer'
 // import { legendMapPosition } from '../selectors/viewport/menus'
 import { showImportsSelector, showExportsSelector } from '../selectors/visualizationSettings'
@@ -84,13 +84,8 @@ class NaturalGasLiquidsVisualizationContainer extends React.Component {
           </DetailSidebar>
         </g>
       )}
+      <USPadd aggregateKey="productSubtype" {...this.props.usPaddChart} />
       {/*
-      <g>
-        <USPadd
-          aggregateKey="productSubtype"
-          {...this.props.usPaddChart}
-        />
-      </g>
       <NaturalGasLiquidsMapPieceActivityExplanation
         {...this.props.mapPieceActivityExplanation}
       />
@@ -104,10 +99,8 @@ export default connect((state, props) => ({
   importChart: NaturalGasLiquidsViewport.chartImportPosition(state, props),
   // axisPosition: NaturalGasLiquidsViewport.chartAxisPosition(state, props),
   exportChart: NaturalGasLiquidsViewport.chartExportPosition(state, props),
-  /*
   usPaddChart: NaturalGasLiquidsViewport.usPaddPosition(state, props),
-  mapPieceActivityExplanation: legendMapPosition(state, props),
-  */
+  // mapPieceActivityExplanation: legendMapPosition(state, props),
   showImports: showImportsSelector(state, props),
   showExports: showExportsSelector(state, props),
 }))(NaturalGasLiquidsVisualizationContainer)
