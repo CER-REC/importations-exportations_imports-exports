@@ -75,29 +75,29 @@ export const timeLineScaleValue = createSelector(
   timeLineScaleSelector,
   timelineYearScaleCalculation,
   scaledLinkedSelector,
-  (xaxisScale, yaxisScale, toggle) => {
+  (yaxis, xaxis, toggle) => {
     if (toggle.scaleLinked) {
-      const result = xaxisScale.getIn(['exports', 'activityTotal']) > xaxisScale.getIn(['imports', 'activityTotal']) ?
-        xaxisScale.getIn(['exports', 'activityTotal']) : xaxisScale.getIn(['imports', 'activityTotal'])
+      const result = yaxis.getIn(['exports', 'activityTotal']) > yaxis.getIn(['imports', 'activityTotal']) ?
+        yaxis.getIn(['exports', 'activityTotal']) : yaxis.getIn(['imports', 'activityTotal'])
       return fromJS({
         exports: {
-          x: {
+          y: {
             min: 0,
             max: result,
           },
-          y: {
-            min: yaxisScale.min,
-            max: yaxisScale.max,
+          x: {
+            min: xaxis.min,
+            max: xaxis.max,
           },
         },
         imports: {
-          x: {
+          y: {
             min: 0,
             max: result,
           },
-          y: {
-            min: yaxisScale.min,
-            max: yaxisScale.max,
+          x: {
+            min: xaxis.min,
+            max: xaxis.max,
           },
         },
       })
@@ -105,22 +105,22 @@ export const timeLineScaleValue = createSelector(
     return fromJS({
       exports: {
         x: {
-          min: xaxisScale.getIn(['exports', 'activityTotal']),
-          max: xaxisScale.getIn(['exports', 'activityTotal']),
+          min: yaxis.getIn(['exports', 'activityTotal']),
+          max: yaxis.getIn(['exports', 'activityTotal']),
         },
         y: {
-          min: yaxisScale.min,
-          max: yaxisScale.max,
+          min: xaxis.min,
+          max: xaxis.max,
         },
       },
       imports: {
         x: {
-          min: xaxisScale.getIn(['imports', 'activityTotal']),
-          max: xaxisScale.getIn(['imports', 'activityTotal']),
+          min: yaxis.getIn(['imports', 'activityTotal']),
+          max: yaxis.getIn(['imports', 'activityTotal']),
         },
         y: {
-          min: yaxisScale.min,
-          max: yaxisScale.max,
+          min: xaxis.min,
+          max: xaxis.max,
         },
       },
     })
