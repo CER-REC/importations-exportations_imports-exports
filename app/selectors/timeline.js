@@ -73,22 +73,58 @@ export const timelineYearScaleCalculation = createSelector(
 
 export const timeLineScaleValue = createSelector(
   timeLineScaleSelector,
+  timelineYearScaleCalculation,
   scaledLinkedSelector,
-  (timeline, toggle) => {
-    console.log(timeline)
-    if(toggle.scaleLinked) {
-      const result = timeline.getIn(['exports', 'activityTotal']) > timeline.getIn(['imports', 'activityTotal']) ?
-       timeline.getIn(['exports', 'activityTotal']): timeline.getIn(['imports', 'activityTotal'])
+  (xaxisScale, yaxisScale, toggle) => {
+    if (toggle.scaleLinked) {
+      const result = xaxisScale.getIn(['exports', 'activityTotal']) > xaxisScale.getIn(['imports', 'activityTotal']) ?
+        xaxisScale.getIn(['exports', 'activityTotal']) : xaxisScale.getIn(['imports', 'activityTotal'])
       return fromJS({
-        exports: result,
-        imports: result
-      }) 
-    } 
+        exports: {
+          x: {
+            min: 0,
+            max: result,
+          },
+          y: {
+            min: yaxisScale.min,
+            max: yaxisScale.max,
+          },
+        },
+        imports: {
+          x: {
+            min: 0,
+            max: result,
+          },
+          y: {
+            min: yaxisScale.min,
+            max: yaxisScale.max,
+          },
+        },
+      })
+    }
     return fromJS({
-        exports: timeline.getIn(['exports', 'activityTotal']),
-        imports: timeline.getIn(['imports', 'activityTotal'])
+      exports: {
+        x: {
+          min: xaxisScale.getIn(['exports', 'activityTotal']),
+          max: xaxisScale.getIn(['exports', 'activityTotal']),
+        },
+        y: {
+          min: yaxisScale.min,
+          max: yaxisScale.max,
+        },
+      },
+      imports: {
+        x: {
+          min: xaxisScale.getIn(['imports', 'activityTotal']),
+          max: xaxisScale.getIn(['imports', 'activityTotal']),
+        },
+        y: {
+          min: yaxisScale.min,
+          max: yaxisScale.max,
+        },
+      },
     })
-  }
+  },
 )
 
 export const timelinePositionCalculation = createSelector(
@@ -96,9 +132,8 @@ export const timelinePositionCalculation = createSelector(
   timelineGrouping,
   visContentSize,
   timelineYearScaleCalculation,
-  timeLineScaleValue,
-  (points, grouping, size, scaleRange, scaleValue) => {
-    const scale = scaleRange
+  (points, grouping, size, yaxisScale) => {
+    const scale = yaxisScale
     const groupPadding = Constants.getIn(['timeline', 'groupPadding'])
     const barPadding = Constants.getIn(['timeline', 'barPadding'])
     const totalYears = (scale.max - scale.min)
@@ -107,7 +142,6 @@ export const timelinePositionCalculation = createSelector(
     let barWidth
     const labels = []
     let bars = points.get('values')
-
     if (grouping === 'year') {
       const widthAfterPads = size.width
         - ((totalYears * 4) * barPadding)

@@ -42,7 +42,7 @@ class BarChart extends Chart {
     // Reset the axis guide when the scale changes.
     // Watch scale since that changes the bar height, but use trueScale in order
     // to put the guide on top of the tallest bar
-    if (props.scaleValue.get(this.props.activityValueKey) !== this.props.scaleValue.get(this.props.activityValueKey)) {
+    if (props.scaleValue.get(this.props.activityValueKey).get('max') !== this.props.scaleValue.get(this.props.activityValueKey).get('max')) {
       //this.updateAxisGuide(props.trueScale.get('max'))
       this.updateAxisGuide(100)
     }
@@ -174,7 +174,6 @@ class BarChart extends Chart {
 
   calculateHeightPerUnit() {
     const scaleValue = this.props.scaleValue.get(this.props.activityValueKey)
-    console.log(scaleValue)
     return this.props.height / (scaleValue - 0)
   }
 
@@ -184,7 +183,6 @@ class BarChart extends Chart {
   }
 
   render() {
-    console.log(this.props)
     const {
       bars: data,
       scaleValue,
@@ -200,6 +198,7 @@ class BarChart extends Chart {
     const scale = scaleValue.get(this.props.activityValueKey)
 
     const heightPerUnit = this.calculateHeightPerUnit()
+    console.log(heightPerUnit)
     const negativeValOffset = this.calculateNegativePosition()
 
     const elements = data.map((point) => {
