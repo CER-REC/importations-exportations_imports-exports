@@ -15,22 +15,10 @@ import Constants from '../Constants'
 
 const selectedVisualization = state => state.importExportVisualization
 
-const getElectricityMapLayoutConstants = createSelector(
+const getMapLayoutConstants = createSelector(
   selectedVisualization,
   getCountry,
-  (visualization, country) => MapLayoutGridConstant.getIn([visualization, country, 'layout']),
-)
-
-const getColumns = createSelector(
-  selectedVisualization,
-  getCountry,
-  (visualization, country) => MapLayoutGridConstant.getIn([visualization, country, 'defaultColumns']),
-)
-
-const getPadding = createSelector(
-  selectedVisualization,
-  getCountry,
-  (visualization, country) => MapLayoutGridConstant.getIn([visualization, country, 'sortingRowPadding']),
+  (visualization, country) => MapLayoutGridConstant.getIn([visualization, country]),
 )
 
 const sortData = (points, sortBy) => {
@@ -61,12 +49,13 @@ const getTabIndexStart = (country) => {
 
 export const createSortedLayout = createSelector(
   getFullyFilteredData,
-  getColumns,
-  getPadding,
   arrangeBy,
   getCountry,
-  getElectricityMapLayoutConstants,
-  (records, columns, rowPadding, sortBy, country, layout) => {
+  getMapLayoutConstants,
+  (records, sortBy, country, gridConstants) => {
+    const layout = gridConstants.get('layout')
+    let columns = gridConstants.get('defaultColumns')
+    const rowPadding = gridConstants.get('sortRowPadding')
     // TODO: This should calculate averages in some cases
     const data = calculateValueSum(
       records,
@@ -111,9 +100,9 @@ export const createSortedLayout = createSelector(
 
 export const parseLocationData = createSelector(
   getFullyFilteredData,
-  getElectricityMapLayoutConstants,
+  getMapLayoutConstants,
   getCountry,
-  (records, layout, country) => {
+  (records, gridConstants, country) => {
     // TODO: This should calculate averages in some cases
     const data = calculateValueSum(records, ['originKey', 'destinationKey'], 'activity')
 
