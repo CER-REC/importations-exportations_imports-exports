@@ -22,6 +22,7 @@ const portsByProvince = fromJS(Constants.getIn(['dataloader', 'mapping', 'ports'
     acc[province].push(next.get('Port Name'))
     return acc
   }, {}))
+  .sortBy((_, k) => k, (a, b) => (b === 'CAD' ? -1 : a.localeCompare(b)))
 
 class NaturalGasMapContainer extends React.PureComponent {
   orderBy = (points, arrangeBy) => {
@@ -56,8 +57,8 @@ class NaturalGasMapContainer extends React.PureComponent {
         provinces = selection.get('provinces').delete(provinceExists)
       }
       ports = this.getAllPortsByProvinceName(provinces)
-    } else{
-      ports = selection.get('provinces').count() > 0 ?[]:selection.get('ports').toJS()
+    } else {
+      ports = selection.get('provinces').count() > 0 ? [] :selection.get('ports').toJS()
       const portExists = selection.get('ports').indexOf(portName)
       if (portExists === -1) {
         ports.push(portName)
@@ -156,7 +157,7 @@ class NaturalGasMapContainer extends React.PureComponent {
         )
       })
       const provinceTextPosition = portsCount > 7
-        ? (leftPadding + columnPadding + (dimensions.get('width') * mapPieceScale)) - 38
+        ? (leftPadding + columnPadding + (dimensions.get('width') * mapPieceScale)) - 58
         : (provinceRendered * 58) - 45
       leftPadding += (dimensions.get('width') * mapPieceScale) + columnPadding
       leftPadding = portsCount > 7
