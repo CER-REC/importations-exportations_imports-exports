@@ -3,10 +3,9 @@ import PropTypes from 'prop-types'
 import Immutable from 'immutable'
 import { connect } from 'react-redux'
 
-/*
+
 import BarChart from './BarChart'
 import Axis from './Axis'
-*/
 import * as NaturalGasLiquidsViewport from '../selectors/viewport/naturalGasLiquids'
 import Constants from '../Constants'
 import Tr from '../TranslationTable'
@@ -26,15 +25,14 @@ class NaturalGasLiquidsVisualizationContainer extends React.Component {
       />
       {!this.props.showImports ? null : (
         <g>
-          {/*
           <BarChart
             {...this.props.importChart}
-            valueKey="imports"
-            aggregateKey="activity"
+            valueKey="activity"
+            activityValueKey="imports"
+            groupBy="period"
             colour={Constants.getIn(['styleGuide', 'colours', 'ImportDefault'])}
             tabIndex={Constants.getIn(['tabIndex', 'start', 'visualization', 'timeline'])}
           />
-          */}
           <DetailSidebar {...this.props.importChart}>
             <DetailBreakdown
               {...this.props.importChart}
@@ -50,25 +48,22 @@ class NaturalGasLiquidsVisualizationContainer extends React.Component {
           </DetailSidebar>
         </g>
       )}
-      {/*
       <Axis
         {...this.props.axisPosition}
         barWidth={4}
         tabIndex={Constants.getIn(['tabIndex', 'start', 'visualization', 'timeline'])}
       />
-      */}
       {!this.props.showExports ? null : (
         <g>
-          {/*
           <BarChart
             {...this.props.exportChart}
-            valueKey="exports"
-            aggregateKey="activity"
             flipped
+            valueKey="activity"
+            activityValueKey="exports"
+            groupBy="period"
             colour={Constants.getIn(['styleGuide', 'colours', 'ExportDefault'])}
             tabIndex={Constants.getIn(['tabIndex', 'start', 'visualization', 'timeline'])}
           />
-          */}
           <DetailSidebar {...this.props.exportChart}>
             <DetailBreakdown
               {...this.props.exportChart}
@@ -97,7 +92,7 @@ class NaturalGasLiquidsVisualizationContainer extends React.Component {
 export default connect((state, props) => ({
   canadaMap: NaturalGasLiquidsViewport.canadaImportMap(state, props),
   importChart: NaturalGasLiquidsViewport.chartImportPosition(state, props),
-  // axisPosition: NaturalGasLiquidsViewport.chartAxisPosition(state, props),
+  axisPosition: NaturalGasLiquidsViewport.chartAxisPosition(state, props),
   exportChart: NaturalGasLiquidsViewport.chartExportPosition(state, props),
   usPaddChart: NaturalGasLiquidsViewport.usPaddPosition(state, props),
   // mapPieceActivityExplanation: legendMapPosition(state, props),

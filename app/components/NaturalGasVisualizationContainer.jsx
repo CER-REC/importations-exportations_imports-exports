@@ -3,29 +3,29 @@ import PropTypes from 'prop-types'
 import Immutable from 'immutable'
 import { connect } from 'react-redux'
 
-/*
+
 import BarChart from './BarChart'
 import Axis from './Axis'
-import PortMap from './PortMap'
+/*import PortMap from './PortMap'
 import DetailSidebar from './DetailSidebar'
 */
 import NaturalGasMapContainer from './NaturalGasMapContainer'
 import * as NaturalGasViewport from '../selectors/viewport/naturalGas'
 /*
 import { showImportsSelector, showExportsSelector } from '../selectors/visualizationSettings'
-import NaturalGasPieceActivityExplanation from './NaturalGasPieceActivityExplanation'
+import NaturalGasPieceActivityExplanation from './NaturalGasPieceActivityExplanation'*/
 import Constants from '../Constants'
-import {legendMapPosition} from '../selectors/viewport/menus'
+/*import {legendMapPosition} from '../selectors/viewport/menus'
 */
 
 const NaturalGasVisualizationContainer = props => (
   <g>
-    {/*
     {!props.showImports ? null : (
       <BarChart
         {...props.importChart}
-        valueKey="imports"
-        aggregateKey="activity"
+        valueKey="activity"
+        activityValueKey="imports"
+        groupBy="period"
         colour={Constants.getIn(['styleGuide', 'colours', 'ImportDefault'])}
         tabIndex={Constants.getIn(['tabIndex', 'start', 'visualization', 'timeline'])}
       />
@@ -33,19 +33,19 @@ const NaturalGasVisualizationContainer = props => (
     <Axis
       {...props.axisPosition}
       barWidth={4}
-      tabIndex={Constants.getIn(['tabIndex', 'start', 'visualization', 'timeline'])}    
+      tabIndex={Constants.getIn(['tabIndex', 'start', 'visualization', 'timeline'])}   
     />
     {!props.showExports ? null : (
       <BarChart
         {...props.exportChart}
-        valueKey="exports"
-        aggregateKey="activity"
+        valueKey="activity"
+        activityValueKey="exports"
+        groupBy="period"
         flipped
         colour={Constants.getIn(['styleGuide', 'colours', 'ExportDefault'])}
         tabIndex={Constants.getIn(['tabIndex', 'start', 'visualization', 'timeline'])}
       />
     )}
-    */}
     <NaturalGasMapContainer {...props.mapTiles} />
     {/*
     <DetailSidebar {...props.portMap} >
