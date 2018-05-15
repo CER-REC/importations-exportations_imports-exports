@@ -33,8 +33,7 @@ class BarChart extends Chart {
   constructor(props) {
     super(props)
     this.state = {
-      //axisGuide: props.trueScale.get('max'),
-      axisGuide: 100,
+      axisGuide: props.scale.get(this.props.activityValueKey).getIn(['y', 'max']),
     }
   }
 
@@ -43,8 +42,7 @@ class BarChart extends Chart {
     // Watch scale since that changes the bar height, but use trueScale in order
     // to put the guide on top of the tallest bar
     if (props.scale.get(this.props.activityValueKey).getIn(['y', 'max']) !== this.props.scale.get(this.props.activityValueKey).getIn(['y', 'max'])) {
-      //this.updateAxisGuide(props.trueScale.get('max'))
-      this.updateAxisGuide(100)
+      this.updateAxisGuide(props.scale.get(this.props.activityValueKey).getIn(['y', 'max']))
     }
   }
 
@@ -289,7 +287,7 @@ class BarChart extends Chart {
         <g transform={`translate(0 ${negativeValOffset})`}>
           <AxisGuide
             flipped={flipped}
-            scale={scale}
+            scale={scale.get('y')}
             position={this.state.axisGuide}
             chartHeight={height}
             heightPerUnit={heightPerUnit}
