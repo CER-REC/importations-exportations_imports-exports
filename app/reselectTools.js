@@ -10,17 +10,21 @@ import * as timeline from './selectors/timeline'
 import * as translate from './selectors/translate'
 import * as visualizationSettings from './selectors/visualizationSettings'
 
+const registerSelectors = obj => Object.entries(obj)
+  .filter(([, v]) => v.isSelector !== false)
+  .forEach(([k, v]) => ReselectTools.registerSelectors({ [k]: v }))
+
 export default (store) => {
   // Set up reselect tools
   ReselectTools.getStateWith(() => store.getState())
 
-  ReselectTools.registerSelectors(core)
-  ReselectTools.registerSelectors(data)
-  ReselectTools.registerSelectors(mapLayout)
-  ReselectTools.registerSelectors(menus)
-  ReselectTools.registerSelectors(Padd)
-  ReselectTools.registerSelectors(renderData)
-  ReselectTools.registerSelectors(timeline)
-  ReselectTools.registerSelectors(translate)
-  ReselectTools.registerSelectors(visualizationSettings)
+  registerSelectors(core)
+  registerSelectors(data)
+  registerSelectors(mapLayout)
+  registerSelectors(menus)
+  registerSelectors(Padd)
+  registerSelectors(renderData)
+  registerSelectors(timeline)
+  registerSelectors(translate)
+  registerSelectors(visualizationSettings)
 }

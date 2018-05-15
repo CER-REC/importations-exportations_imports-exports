@@ -46,6 +46,7 @@ export const calculateValueSum = (data, groupByRaw, valueKey) => {
   })
   return result
 }
+calculateValueSum.isSelector = false
 
 export const calculateValueAverage = (data, groupBy, valueKey) => {
   const result = calculateValueSum(data, groupBy, valueKey)
@@ -58,6 +59,7 @@ export const calculateValueAverage = (data, groupBy, valueKey) => {
 
   return result
 }
+calculateValueAverage.isSelector = false
 
 export const calculateValueWeighted = (data, groupByRaw, valueKey) => {
   const groupByAll = [].concat(groupByRaw)
@@ -108,6 +110,7 @@ export const calculateValueWeighted = (data, groupByRaw, valueKey) => {
 
   return result
 }
+calculateValueWeighted.isSelector = false
 
 export const getFullyFilteredData = createSelector(
   getCountry,

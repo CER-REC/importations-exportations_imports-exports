@@ -18,7 +18,8 @@ const selectedVisualization = state => state.importExportVisualization
 const getMapLayoutConstants = createSelector(
   selectedVisualization,
   getCountry,
-  (visualization, country) => MapLayoutGridConstant.getIn([visualization, country]),
+  (visualization, country) => MapLayoutGridConstant
+    .getIn([visualization, country], new Immutable.Map()),
 )
 
 const sortData = (points, sortBy) => {
@@ -53,9 +54,9 @@ export const createSortedLayout = createSelector(
   getCountry,
   getMapLayoutConstants,
   (records, sortBy, country, gridConstants) => {
-    const layout = gridConstants.get('layout')
-    let columns = gridConstants.get('defaultColumns')
-    const rowPadding = gridConstants.get('sortRowPadding')
+    const layout = gridConstants.get('layout', new Immutable.Map())
+    let columns = gridConstants.get('defaultColumns', 0)
+    const rowPadding = gridConstants.get('sortRowPadding', 0)
     // TODO: This should calculate averages in some cases
     const data = calculateValueSum(
       records,
@@ -103,6 +104,7 @@ export const parseLocationData = createSelector(
   getMapLayoutConstants,
   getCountry,
   (records, gridConstants, country) => {
+    const layout = gridConstants.get('layout', new Immutable.Map())
     // TODO: This should calculate averages in some cases
     const data = calculateValueSum(records, ['originKey', 'destinationKey'], 'activity')
 
