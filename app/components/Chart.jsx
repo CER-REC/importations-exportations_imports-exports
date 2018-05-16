@@ -5,7 +5,7 @@ import Immutable from 'immutable'
 class Chart extends React.PureComponent {
   static propTypes = {
     // Unused prop-types are used by reselect
-    aggregateKey: PropTypes.string.isRequired, // eslint-disable-line react/no-unused-prop-types
+    // aggregateKey: PropTypes.string.isRequired, // eslint-disable-line react/no-unused-prop-types
     scaleKey: PropTypes.string, // eslint-disable-line react/no-unused-prop-types
     top: PropTypes.number.isRequired,
     left: PropTypes.number.isRequired,
@@ -15,8 +15,8 @@ class Chart extends React.PureComponent {
     color: PropTypes.string, // eslint-disable-line react/no-unused-prop-types
     timelineRange: PropTypes.instanceOf(Immutable.Map).isRequired,
     timelinePlayback: PropTypes.oneOfType([
-      PropTypes.bool,
-      PropTypes.instanceOf(Immutable.Map),
+     PropTypes.bool,
+     PropTypes.instanceOf(Immutable.Map),
     ]).isRequired,
     timelineGroup: PropTypes.oneOf(['year', 'quarter']).isRequired,
   }

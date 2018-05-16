@@ -3,6 +3,7 @@ import { Types as visualizationSettingsTypes } from '../actions/visualizationSet
 import { Types as explanationTypes } from '../actions/explanations'
 import { timelineYearScaleCalculation } from '../selectors/timeline'
 import { activityOptions, arrangeByOptions } from '../selectors/menus'
+import SetVisualizationCreator from '../actionCreators/SetVisualizationCreator'
 
 let initializedFromURL = []
 
@@ -59,12 +60,16 @@ const initialVisualizationSettings = store => next => (action) => {
       meta: { visualization },
     }
     store.dispatch(initializeAction)
-    if(action.type === visualizationSettingsTypes.RESET_VISUALIZATION){
+    if (action.type === visualizationSettingsTypes.RESET_VISUALIZATION) {
       store.dispatch({
         type: explanationTypes.RESET_EXPLANATION,
       })
     }
   })
+
+  if (action.type === DataTypes.LOAD_DATA && !state.importExportVisualization) {
+    store.dispatch(SetVisualizationCreator('electricity'))
+  }
 }
 
 export default initialVisualizationSettings

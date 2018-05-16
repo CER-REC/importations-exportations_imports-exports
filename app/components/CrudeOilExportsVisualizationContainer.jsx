@@ -3,11 +3,10 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { fromJS } from 'immutable'
 
-/*
+
 import StackedChart from './StackedChart'
 import BarChart from './BarChart'
 import Axis from './Axis'
-*/
 import DetailSidebar from './DetailSidebar'
 import DetailBreakdown from './DetailBreakdown'
 import DetailBreakdownHeader from './DetailBreakdownHeader'
@@ -24,13 +23,13 @@ const categoryColours = Constants.getIn(['styleGuide', 'categoryColours'])
 const CrudeOilVisualizationContainer = props => (
   <g>
     <CAPadd {...props.canadaPaddChart} />
-    {/*
     <StackedChart
       {...props.transportChart}
-      aggregateKey="transport"
+      valueKey="transport"
+      activityValueKey="exports"
+      groupBy="period"
       scaleKey="total"
     />
-    */}
     <DetailSidebar
       {...props.transportChart}
     >
@@ -55,13 +54,13 @@ const CrudeOilVisualizationContainer = props => (
         />
       </div>
     </DetailSidebar>
-    {/*
     <StackedChart
       {...props.subtypeChart}
-      aggregateKey="productSubtype"
+      valueKey="productSubtype"
+      activityValueKey="exports"
+      groupBy="period"
       scaleKey="total"
     />
-    */}
     <DetailSidebar
       {...props.subtypeChart}
     >
@@ -85,7 +84,6 @@ const CrudeOilVisualizationContainer = props => (
         />
       </div>
     </DetailSidebar>
-    {/*
     <Axis
       {...props.axisPosition}
       barWidth={4}
@@ -94,13 +92,13 @@ const CrudeOilVisualizationContainer = props => (
     />
     <BarChart
       {...props.exportChart}
-      valueKey="exports"
-      aggregateKey="activity"
+      valueKey="activity"
+      activityValueKey="exports"
+      groupBy="period"
       flipped
       colour={Constants.getIn(['styleGuide', 'colours', 'ExportDefault'])}
       tabIndex={Constants.getIn(['tabIndex', 'start', 'visualization', 'timeline'])}
     />
-    */}
     <USPadd { ...props.usPaddChart} />
     <DetailSidebar
       {...props.usPaddChart}

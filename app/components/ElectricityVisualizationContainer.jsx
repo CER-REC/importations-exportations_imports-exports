@@ -11,10 +11,9 @@ import PowerPoolContainer from './PowerPoolContainer'
 import PowerPoolGrouping from './PowerPoolGrouping'
 import ElectricityMapPieceActivityExplanation from './ElectricityMapPieceActivityExplanation'
 
-/*
 import BarChart from './BarChart'
 import Axis from './Axis'
-*/
+
 import * as ElectricityViewport from '../selectors/viewport/electricity'
 import { showImportsSelector, showExportsSelector } from '../selectors/visualizationSettings'
 // import { legendMapPosition } from '../selectors/viewport/menus'
@@ -25,19 +24,25 @@ import DetailSidebar from './DetailSidebar'
 const nameMappingsUSAndPools = Tr.getIn(['country', 'us'])
   .merge(Tr.getIn(['country', 'powerpool']))
 
-const ElectricityVisualizationContainer = props => (
-  <g>
-    <CanadaMapContainer {...props.canadaMap}  />
-    {/*
-    {!props.showImports ? null : (
-      <BarChart
-        {...props.importChart}
-        valueKey="imports"
-        aggregateKey="activity"
-        colour={Constants.getIn(['styleGuide', 'colours', 'ImportDefault'])}
-        tabIndex={Constants.getIn(['tabIndex', 'start', 'visualization', 'timeline'])}
-      />
-    )}
+const ElectricityVisualizationContainer = (props) => { 
+  return (<g>
+    <CanadaMapContainer
+      {...props.canadaMap}
+    />
+
+    <BarChart
+      {...props.importChart}
+      valueKey="activity"
+      activityValueKey="imports"
+      groupBy="period"
+      colour={Constants.getIn(['styleGuide', 'colours', 'ImportDefault'])}
+      tabIndex={Constants.getIn(['tabIndex', 'start', 'visualization', 'timeline'])}
+      // value={value}
+      // confidential={confidential}
+      // missing={missing}
+      // totalPoints={totalPoints}
+    />
+
     <Axis
       {...props.axisPosition}
       barWidth={4}
@@ -46,14 +51,14 @@ const ElectricityVisualizationContainer = props => (
     {!props.showExports ? null : (
       <BarChart
         {...props.exportChart}
-        valueKey="exports"
-        aggregateKey="activity"
+        valueKey="activity"
+        activityValueKey="exports"
+        groupBy="period"
         flipped
         colour={Constants.getIn(['styleGuide', 'colours', 'ExportDefault'])}
         tabIndex={Constants.getIn(['tabIndex', 'start', 'visualization', 'timeline'])}
       />
     )}
-    */}
     <USMapContainer {...props.usMap} />
     <PowerPoolContainer
       {...props.powerPool}
@@ -95,8 +100,8 @@ const ElectricityVisualizationContainer = props => (
         />
       </DetailSidebar>
     )}
-  </g>
-)
+  </g>)
+}
 
 ElectricityVisualizationContainer.propTypes = {
   canadaMap: PropTypes.shape(positionShape).isRequired,
@@ -106,10 +111,11 @@ ElectricityVisualizationContainer.propTypes = {
   yaxis: PropTypes.number.isRequired,
   height: PropTypes.number.isRequired,
   powerPool: PropTypes.shape(positionShape).isRequired,
+  */
   importChart: PropTypes.shape(positionShape).isRequired,
   axisPosition: PropTypes.shape(positionShape).isRequired,
   exportChart: PropTypes.shape(positionShape).isRequired,
-  mapPieceActivityExplanation: PropTypes.shape(positionShape).isRequired,
+  /*mapPieceActivityExplanation: PropTypes.shape(positionShape).isRequired,
   */
   showImports: PropTypes.bool.isRequired,
   showExports: PropTypes.bool.isRequired,
@@ -118,13 +124,11 @@ ElectricityVisualizationContainer.propTypes = {
 export default connect((state, props) => ({
   canadaMap: ElectricityViewport.canadaMapPosition(state, props),
   usMap: ElectricityViewport.usMapPosition(state, props),
-  powerPool: ElectricityViewport.powerPoolPosition(state, props),
-  /*
-  mapPieceActivityExplanation: legendMapPosition(state, props),
   importChart: ElectricityViewport.chartImportPosition(state, props),
+  powerPool: ElectricityViewport.powerPoolPosition(state, props),
+  // mapPieceActivityExplanation: legendMapPosition(state, props),
   axisPosition: ElectricityViewport.chartAxisPosition(state, props),
   exportChart: ElectricityViewport.chartExportPosition(state, props),
-  */
   showImports: showImportsSelector(state, props),
   showExports: showExportsSelector(state, props),
 }))(ElectricityVisualizationContainer)

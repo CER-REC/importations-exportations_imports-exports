@@ -2,11 +2,11 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { fromJS } from 'immutable'
 
-/*
+
 import BarChart from './BarChart'
 import StackedChart from './StackedChart'
 import Axis from './Axis'
-*/
+
 import DetailSidebar from './DetailSidebar'
 import DetailBreakdown from './DetailBreakdown'
 import DetailBreakdownRow from './DetailBreakdownRow'
@@ -15,9 +15,7 @@ import DetailBreakdownRow from './DetailBreakdownRow'
 import * as RefinedPetroleumProductsViewport from '../selectors/viewport/refinedPetroleumProducts'
 import { arrangeBy, amount, filterByTimelineAndHexData } from '../selectors/data'
 import { detailBreakdownSelector } from '../selectors/renderData'
-/*
 import { timelineData } from '../selectors/timeline'
-*/
 import Constants from '../Constants'
 import Tr from '../TranslationTable'
 // import TrSelector from '../selectors/translate'
@@ -43,7 +41,7 @@ class RefinedPetroleumProductsVisualizationContainer extends React.Component {
     const categoryColours = Constants.getIn(['styleGuide', 'categoryColours'])
     return (
       <g>
-        {/*
+   
         <Axis
           {...positions.axis}
           barWidth={4}
@@ -53,11 +51,12 @@ class RefinedPetroleumProductsVisualizationContainer extends React.Component {
         />
         <StackedChart
           {...positions.chart}
-          aggregateKey="productSubtype"
+          valueKey="productSubtype"
+          activityValueKey="exports"
+          groupBy="period"
           scaleKey="total"
           flipped
         />
-        */}
         <DetailSidebar {...positions.chart}>
           <DetailBreakdown
             {...positions.chart}
@@ -90,7 +89,6 @@ class RefinedPetroleumProductsVisualizationContainer extends React.Component {
       const colour = categoryColours.getIn(['refinedPetroleumProducts', 'productSubtype', key], Constants.getIn(['styleGuide', 'colours', 'ExportDefault']))
       return (
         <g key={key}>
-          {/*
           <Axis
             {...positions[key].axis}
             barWidth={4}
@@ -101,14 +99,15 @@ class RefinedPetroleumProductsVisualizationContainer extends React.Component {
           />
           <BarChart
             {...positions[key].chart}
-            valueKey={key}
-            aggregateKey="productSubtype"
+            valueKey="productSubtype"
+            activityValueKey="exports"
+            productSubtype= {key}
+            groupBy="period"
             flipped
             colour={colour}
             detailSidebar={false}
             tabIndex={Constants.getIn(['tabIndex', 'start', 'visualization', 'timeline'])}
           />
-          */}
           <DetailSidebar
             {...positions[key].chart}
           >
@@ -170,9 +169,9 @@ export default connect((state, props) => ({
   language: state.language,
   */
   unit: amount(state, props),
-  /*
+  
   data: timelineData(state, { ...props, aggregateKey: 'productSubtype' }),
-  filteredData: filterByTimelineAndHexData(state, props),
+  /*filteredData: filterByTimelineAndHexData(state, props),
   */
   detailBreakdown: detailBreakdownSelector(state, {
     ...props,

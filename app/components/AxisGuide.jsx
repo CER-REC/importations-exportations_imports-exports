@@ -6,8 +6,7 @@ import TextBox from './TextBox'
 import * as ScaleIcon from './ScaleIcon'
 import SVGDrag from './SVGDrag/'
 import Constants from '../Constants'
-import { visualizationSettings } from '../selectors/visualizationSettings'
-import { timelineScaleLinked } from '../selectors/timeline'
+import { visualizationSettings, scaledLinkedSelector } from '../selectors/visualizationSettings'
 import trSelector from '../selectors/translate'
 
 import { arrangeBy } from '../selectors/data'
@@ -53,7 +52,7 @@ class AxisGuide extends React.PureComponent {
   }
 
   onArrowKey = (e) => {
-    if (this.props.scale.max === this.props.scale.min) { return }
+    if (this.props.scale.get('max') === this.props.scale.get('min')) { return }
     const direction = (e.key === 'ArrowUp' || e.key === 'PageUp') ? -1 : 1
     const scale = (e.key === 'ArrowUp' || e.key === 'ArrowDown') ? 1 : 10
 
@@ -68,32 +67,6 @@ class AxisGuide extends React.PureComponent {
       newY = 0
     }
     this.props.updatePosition(Math.round(newY / heightPerUnit))
-  }
-
-  adjustOffset(rawOffset) {
-    if (this.props.scale.max === this.props.scale.min) {
-      return { x: 0, y: this.props.scale.min }
-    }
-    const { heightPerUnit } = this.props
-    const flippedInverter = this.props.flipped ? -1 : 1
-    const currentY = (this.props.position - this.props.scale.min) * heightPerUnit
-    let newY = (currentY - (rawOffset.y * flippedInverter))
-
-    const offset = { x: 0, y: rawOffset.y }
-
-    if (newY > this.props.chartHeight) {
-      newY = this.props.chartHeight
-      offset.y = (this.props.chartHeight - currentY) * -1 * flippedInverter
-    } else if (newY < 0) {
-      newY = 0
-      offset.y = currentY * flippedInverter
-    }
-
-    this.setState({
-      positionDisplay: Math.round(newY / heightPerUnit) + this.props.scale.min,
-    })
-
-    return offset
   }
 
   dragStop() {
@@ -150,9 +123,9 @@ class AxisGuide extends React.PureComponent {
     /></g>)
   }
 
-  getBackgroundColour = () => this.props.scaleLinked
+  getBackgroundColour = () => (this.props.scaleLinked
     ? Constants.getIn(['styleGuide', 'colours', 'SandExtraDark'])
-    : Constants.getIn(['styleGuide', 'colours', (this.props.flipped ? 'ExportDefault' : 'ImportDefault')])
+    : Constants.getIn(['styleGuide', 'colours', (this.props.flipped ? 'ExportDefault' : 'ImportDefault')]))
 
   getScaleImage = ({ x, y, width, height }) => {
     const groupTransform = `translate(${x + width + 1} ${y - 2})`
@@ -174,12 +147,38 @@ class AxisGuide extends React.PureComponent {
     )
   }
 
+  adjustOffset(rawOffset) {
+    if (this.props.scale.get('max') === this.props.scale.get('min')) {
+      return { x: 0, y: this.props.scale.get('min') }
+    }
+    const { heightPerUnit } = this.props
+    const flippedInverter = this.props.flipped ? -1 : 1
+    const currentY = (this.props.position - this.props.scale.get('min')) * heightPerUnit
+    let newY = (currentY - (rawOffset.y * flippedInverter))
+
+    const offset = { x: 0, y: rawOffset.y }
+
+    if (newY > this.props.chartHeight) {
+      newY = this.props.chartHeight
+      offset.y = (this.props.chartHeight - currentY) * -1 * flippedInverter
+    } else if (newY < 0) {
+      newY = 0
+      offset.y = currentY * flippedInverter
+    }
+
+    this.setState({
+      positionDisplay: Math.round(newY / heightPerUnit) + this.props.scale.get('min'),
+    })
+
+    return offset
+  }
+
   render() {
     const text = `${this.state.positionDisplay.toLocaleString()} ${this.props.tr(['amounts', this.props.unit])}`
-    const offset = (this.props.position === this.props.scale.min)
+    const offset = (this.props.position === this.props.scale.get('min'))
       ? this.props.chartHeight
       : (this.props.chartHeight + (this.props.barSize / 2))
-        - ((this.props.position - this.props.scale.min) * this.props.heightPerUnit) - 2
+        - ((this.props.position - this.props.scale.get('min')) * this.props.heightPerUnit) - 2
     return (
       <SVGDrag
         invertedY={this.props.flipped}
@@ -235,5 +234,5 @@ export default connect((state, props) => ({
   arrangeBy: arrangeBy(state, props),
   unit: visualizationSettings(state, props).get('amount'),
   tr: trSelector(state, props),
-  scaleLinked: timelineScaleLinked(state, props),
+  scaleLinked: scaledLinkedSelector(state, props),
 }))(AxisGuide)

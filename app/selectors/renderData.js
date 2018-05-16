@@ -4,6 +4,7 @@ import { createSelector } from './selectHelper'
 import {
   filterByTimeline,
   filterByTimelineAndMap,
+  filterByMap,
   getActivityFilterPredicate,
   getSubtypeFilterPredicate,
 } from './core'
@@ -168,5 +169,42 @@ export const detailBreakdownTotal = createSelector(
 export const detailBreakdownSelector = createSelector(
   detailBreakdownValues,
   detailBreakdownTotal,
+  (result, total) => result.merge({ total }),
+)
+
+export const barChartValues = createSelector(
+  filterByMap,
+  getActivityFilterPredicate,
+  getSubtypeFilterPredicate,
+  (_, props = {}) => props.groupBy,
+  (_, props = {}) => props.valueKey,
+  (_, props = {}) => props.valueAverage || false,
+  (records, activityFilter, subtypeFilter, groupBy, valueKey, averageMode) => {
+    const filteredRecords = records.filter((p) => {
+      if (valueKey && p.get(valueKey, '') === '') { return false }
+      return activityFilter(p) && subtypeFilter(p)
+    })
+
+    let data
+    if (averageMode === 'weighted') {
+      data = calculateValueWeighted(filteredRecords, groupBy, valueKey)
+    } else {
+      data = calculateValueSum(filteredRecords, groupBy, valueKey)
+    }
+    return fromJS(data)
+  },
+)
+
+export const barChartTotal = createSelector(
+  barChartValues,
+  (_, props = {}) => props.showGroup,
+  (data, showGroup) => data.get('values')
+    .get(showGroup, fromJS({}))
+    .reduce((acc, next) => acc + next, 0),
+)
+
+export const barChartSelector = createSelector(
+  barChartValues,
+  barChartTotal,
   (result, total) => result.merge({ total }),
 )
