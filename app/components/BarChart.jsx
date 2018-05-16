@@ -208,11 +208,10 @@ class BarChart extends Chart {
       const opacity = this.isTimelinePointFiltered(point) ? 0.5 : 1
       let value
       if (productSubtype) {
-        value = point.get( productSubtype, 0)
+        value = point.get(productSubtype, 0)
       } else {
-        value = point.get( activityValueKey, 0)
+        value = point.get(activityValueKey, 0)
       }
-
       // Minimum 1px bar height
       let barHeight = (value < 0)
         ? Math.min(value * heightPerUnit, -1)

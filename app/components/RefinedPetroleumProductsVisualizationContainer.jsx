@@ -41,7 +41,7 @@ class RefinedPetroleumProductsVisualizationContainer extends React.Component {
     const categoryColours = Constants.getIn(['styleGuide', 'categoryColours'])
     return (
       <g>
-        {/*
+   
         <Axis
           {...positions.axis}
           barWidth={4}
@@ -51,11 +51,12 @@ class RefinedPetroleumProductsVisualizationContainer extends React.Component {
         />
         <StackedChart
           {...positions.chart}
-          aggregateKey="productSubtype"
+          valueKey="productSubtype"
+          activityValueKey="exports"
+          groupBy="period"
           scaleKey="total"
           flipped
         />
-        */}
         <DetailSidebar {...positions.chart}>
           <DetailBreakdown
             {...positions.chart}
