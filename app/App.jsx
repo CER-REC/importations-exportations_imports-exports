@@ -6,7 +6,6 @@ import { Provider } from 'react-redux'
 import React from 'react'
 import { AppContainer } from 'react-hot-loader'
 import Request from 'client-request/promise'
-import * as ReselectTools from 'reselect-tools'
 
 import Constants from './Constants'
 import RouteComputations from './computations/RouteComputations'
@@ -18,8 +17,7 @@ import { LoadScales as LoadScalesCreator } from './actions/scales'
 import Store from './Store'
 import { DismissComponent as DismissComponentCreator } from './actions/socialBar'
 import { ScreenshotMode } from './actions/screenshot'
-import * as DataSelectors from './selectors/data'
-import * as CoreSelectors from './selectors/core'
+import setupReselectTools from './reselectTools'
 
 const store = Store()
 
@@ -73,7 +71,4 @@ Request({
   store.dispatch(LoadDataCreator(data.body.data))
 })
 
-// Set up reselect tools
-ReselectTools.getStateWith(() => store.getState())
-ReselectTools.registerSelectors(DataSelectors)
-ReselectTools.registerSelectors(CoreSelectors)
+setupReselectTools(store)

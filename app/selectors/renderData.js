@@ -47,6 +47,7 @@ export const calculateValueSum = (data, groupByRaw, valueKey) => {
   })
   return result
 }
+calculateValueSum.isSelector = false
 
 export const calculateValueAverage = (data, groupBy, valueKey) => {
   const result = calculateValueSum(data, groupBy, valueKey)
@@ -59,6 +60,7 @@ export const calculateValueAverage = (data, groupBy, valueKey) => {
 
   return result
 }
+calculateValueAverage.isSelector = false
 
 export const calculateValueWeighted = (data, groupByRaw, valueKey) => {
   const groupByAll = [].concat(groupByRaw)
@@ -109,6 +111,7 @@ export const calculateValueWeighted = (data, groupByRaw, valueKey) => {
 
   return result
 }
+calculateValueWeighted.isSelector = false
 
 export const getFullyFilteredData = createSelector(
   getCountry,
@@ -146,7 +149,14 @@ export const getFullyFilteredValues = createSelector(
   },
 )
 
-export const detailBreakdownValues = getFullyFilteredValues
+export const detailBreakdownValues = createSelector(
+  getFullyFilteredValues,
+  state => state.importExportVisualization,
+  (data, viz) => {
+    if (viz !== 'crudeOilExports') { return data }
+    return data.updateIn(['values', 'exports'], values => values.filter((_, k) => k !== 'ca'))
+  },
+)
 
 export const detailBreakdownTotal = createSelector(
   detailBreakdownValues,

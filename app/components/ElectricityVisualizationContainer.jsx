@@ -7,11 +7,10 @@ import Tr from '../TranslationTable'
 
 import CanadaMapContainer from './CanadaMapContainer'
 import USMapContainer from './USMapContainer'
-/*
 import PowerPoolContainer from './PowerPoolContainer'
 import PowerPoolGrouping from './PowerPoolGrouping'
 import ElectricityMapPieceActivityExplanation from './ElectricityMapPieceActivityExplanation'
-*/
+
 import BarChart from './BarChart'
 import Axis from './Axis'
 
@@ -21,6 +20,9 @@ import { showImportsSelector, showExportsSelector } from '../selectors/visualiza
 import { positionShape } from '../propTypeShapes'
 import DetailBreakdown from './DetailBreakdown'
 import DetailSidebar from './DetailSidebar'
+
+const nameMappingsUSAndPools = Tr.getIn(['country', 'us'])
+  .merge(Tr.getIn(['country', 'powerpool']))
 
 const ElectricityVisualizationContainer = (props) => { 
   return (<g>
@@ -40,6 +42,7 @@ const ElectricityVisualizationContainer = (props) => {
       // missing={missing}
       // totalPoints={totalPoints}
     />
+
     <Axis
       {...props.axisPosition}
       barWidth={4}
@@ -57,13 +60,13 @@ const ElectricityVisualizationContainer = (props) => {
       />
     )}
     <USMapContainer {...props.usMap} />
-    {/*
     <PowerPoolContainer
       {...props.powerPool}
     />
     <PowerPoolGrouping
       {...props.powerPool}
     />
+    {/*
     <ElectricityMapPieceActivityExplanation
       {...props.mapPieceActivityExplanation}
     />
@@ -93,7 +96,7 @@ const ElectricityVisualizationContainer = (props) => {
           showHeader={false}
           color={Constants.getIn(['styleGuide', 'colours', 'ExportDefault'])}
           trContent={Tr.getIn(['detailBreakDown', 'electricity', 'exports'])}
-          nameMappings={Tr.getIn(['country', 'us'])}
+          nameMappings={nameMappingsUSAndPools}
         />
       </DetailSidebar>
     )}
@@ -122,10 +125,8 @@ export default connect((state, props) => ({
   canadaMap: ElectricityViewport.canadaMapPosition(state, props),
   usMap: ElectricityViewport.usMapPosition(state, props),
   importChart: ElectricityViewport.chartImportPosition(state, props),
-  /*
   powerPool: ElectricityViewport.powerPoolPosition(state, props),
-  mapPieceActivityExplanation: legendMapPosition(state, props),
-  */
+  // mapPieceActivityExplanation: legendMapPosition(state, props),
   axisPosition: ElectricityViewport.chartAxisPosition(state, props),
   exportChart: ElectricityViewport.chartExportPosition(state, props),
   showImports: showImportsSelector(state, props),
