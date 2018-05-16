@@ -10,8 +10,9 @@ import Axis from './Axis'
 import DetailSidebar from './DetailSidebar'
 import DetailBreakdown from './DetailBreakdown'
 import DetailBreakdownRow from './DetailBreakdownRow'
-// import ConfidentialCount from './ConfidentialCount'
-// import DetailTotal from './DetailTotal'
+import DetailTotal from './DetailTotal'
+import ConfidentialCount from './ConfidentialCount'
+import MissingDataCount from './MissingDataCount'
 import * as RefinedPetroleumProductsViewport from '../selectors/viewport/refinedPetroleumProducts'
 import { arrangeBy, amount, filterByTimelineAndHexData } from '../selectors/data'
 import { detailBreakdownSelector } from '../selectors/renderData'
@@ -70,13 +71,14 @@ class RefinedPetroleumProductsVisualizationContainer extends React.Component {
             trContent={fromJS({ body: {} }) /* Dummy content to make it render */}
             nameMappings={Tr.get('label')}
           />
-          {/*
           <ConfidentialCount
-            key="confidential"
-            valueKey="total"
-            aggregateKey="productSubtype"
+            valueKey="productSubtype"
+            groupBy="activitytotal"
           />
-          */}
+          <MissingDataCount
+            valueKey="productSubtype"
+            groupBy="activitytotal"
+          />
         </DetailSidebar>
       </g>
     )
@@ -116,19 +118,24 @@ class RefinedPetroleumProductsVisualizationContainer extends React.Component {
                 <DetailBreakdownRow
                   label={<strong>{key}</strong>}
                   value={detailBreakdown.getIn(['values', 'exports', key])}
+                  confidential={detailBreakdown.getIn(['confidential', 'exports', key])}
+                  totalPoints={detailBreakdown.getIn(['totalPoints', 'exports', key])}
                   unit={this.props.unit}
                   total={detailBreakdown.get('total')}
                   progressBarStyle={{ backgroundColor: colour }}
                 />
               </tbody>
             </table>
-            {/*
             <ConfidentialCount
-              key="confidential"
-              valueKey={key}
-              aggregateKey="productSubtype"
+              valueKey="activity"
+              groupBy="productSubtype"
+              showGroup={key}
             />
-            */}
+            <MissingDataCount
+              valueKey="activity"
+              groupBy="productSubtype"
+              showGroup={key}
+            />
           </DetailSidebar>
         </g>
       )
@@ -139,16 +146,15 @@ class RefinedPetroleumProductsVisualizationContainer extends React.Component {
   render() {
     return (
       <g>
-        {/*
         <DetailSidebar {...this.props.sidebarTotal}>
           <DetailTotal
-            key="total"
             type="exports"
-            valueKey="total"
-            aggregateKey="productSubtype"
+            showGroup="exports"
+            filterActivity="exports"
+            valueKey="activity"
+            groupBy="activity"
           />
         </DetailSidebar>
-        */}
         {this.props.arrangeBy === 'stack'
           ? this.renderStackedChart()
           : this.renderSeparateCharts()}
@@ -160,9 +166,7 @@ class RefinedPetroleumProductsVisualizationContainer extends React.Component {
 export default connect((state, props) => ({
   stackedChart: RefinedPetroleumProductsViewport.stackedChartPosition(state, props),
   individualCharts: RefinedPetroleumProductsViewport.individualChartsPosition(state, props),
-  /*
   sidebarTotal: RefinedPetroleumProductsViewport.sidebarTotalPosition(state, props),
-  */
   arrangeBy: arrangeBy(state, props),
   /*
   TRSelector: TrSelector(state, props),

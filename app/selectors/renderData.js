@@ -121,12 +121,15 @@ export const getFullyFilteredData = createSelector(
   getActivityFilterPredicate,
   getSubtypeFilterPredicate,
   (_, props = {}) => props.valueKey,
-  (country, settings, timeline, timelineAndMap, activityFilter, subtypeFilter, valueKey) =>
+  (_, props = {}) => props.groupBy,
+  (_, props = {}) => props.showGroup,
+  (country, settings, timeline, timelineAndMap, activityFilter, subtypeFilter, valueKey, groupBy, showGroup) =>
     (country === settings.getIn(['selection', 'country'])
       ? timeline
       : timelineAndMap
     ).filter((p) => {
       if (valueKey && p.get(valueKey, '') === '') { return false }
+      if (showGroup && p.get(groupBy, '') !== showGroup) { return false }
       return activityFilter(p) && subtypeFilter(p)
     }),
 )
