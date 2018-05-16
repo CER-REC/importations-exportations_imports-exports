@@ -5,7 +5,7 @@ import PropTypes from 'prop-types'
 import './DetailTotal.scss'
 import PercentageBar from './PercentageBar'
 import { visualizationSettings } from '../selectors/visualizationSettings'
-import { detailTotal } from '../selectors/details'
+import { detailBreakdownTotal } from '../selectors/renderData'
 import TR from '../TranslationTable'
 import { humanNumber } from '../utilities'
 
@@ -17,15 +17,15 @@ const DetailTotal = props => (
       <span className="totalType">
         {TR.getIn(['importExportMenu', props.type, props.language])}
       </span>
-      {props.average && !unitsWithoutPercentage.includes(props.amountUnit)
+      {props.valueAverage && !unitsWithoutPercentage.includes(props.amountUnit)
         ? ''
-        : ` ${TR.getIn(['detailTotal', (props.average ? 'average' : 'total'), props.language])}`}&nbsp;
-      {humanNumber(props.value, props.language)}&nbsp;
+        : ` ${TR.getIn(['detailTotal', (props.valueAverage ? 'average' : 'total'), props.language])}`}&nbsp;
+      {humanNumber(props.total, props.language)}&nbsp;
       {TR.getIn(['amounts', props.amountUnit, props.language])}&nbsp;
     </div>
     {unitsWithoutPercentage.includes(props.amountUnit)
       ? null
-      : <div className="detailBreakDownContainer"><PercentageBar width={props.percentage} /></div>
+      : <div className="detailBreakDownContainer"><PercentageBar width={100} /></div>
     }
   </div>
 )
@@ -34,13 +34,16 @@ DetailTotal.propTypes = {
   type: PropTypes.oneOf(['imports', 'exports']).isRequired,
   amountUnit: PropTypes.string.isRequired,
   language: PropTypes.string.isRequired,
-  value: PropTypes.number.isRequired,
-  average: PropTypes.bool.isRequired,
-  percentage: PropTypes.number.isRequired,
+  total: PropTypes.number.isRequired,
+  valueAverage: PropTypes.oneOf([false, true, 'weighted']),
+}
+
+DetailTotal.defaultProps = {
+  valueAverage: false,
 }
 
 export default connect((state, props) => ({
   amountUnit: visualizationSettings(state, props).get('amount'),
   language: state.language,
-  ...detailTotal(state, props),
+  total: detailBreakdownTotal(state, props),
 }))(DetailTotal)
