@@ -20,10 +20,13 @@ const DetailBreakdownBody = (props) => {
       return (
         <DetailBreakdownRow
           key={key /* eslint-disable-line react/no-array-index-key */}
+          name={[props.showGroup, key].join('-')}
           labelPrefix={bodyContent.getIn(['action', props.language])}
           label={name}
           labelSuffix={bodyContent.getIn(['suffix', props.language])}
           value={value}
+          confidential={props.data.getIn(['confidential', props.showGroup, key], 0)}
+          totalPoints={props.data.getIn(['totalPoints', props.showGroup, key], 0)}
           unit={props.amountUnit}
           total={total}
           colorBox={props.colorBox}
