@@ -32,7 +32,8 @@ const activityMap = {
 
 const productMap = {
   Electricity: 'electricity',
-  'Crude Oil': 'crudeOil',
+  'Crude Oil Imports': 'crudeOilImports',
+  'Crude Oil Exports': 'crudeOilExports',
   Gas: 'naturalGas',
   NGLs: 'naturalGasLiquids',
   RPPs: 'refinedPetroleumProducts',
@@ -68,28 +69,36 @@ const parsingIssue = {};
   },
 ))))
   // Map over the data and normalize it
-  .then(data => data.map(point => ({
-    period: stripNA(point.period),
-    year: parseInt(point.period.substr(0, 4), 10),
-    quarter: parseInt(point.period.substr(5, 1), 10),
-    product: productMap[point.product],
-    productSubtype: stripNA(point.productSubtype),
-    transport: stripNA(point.transport),
-    origin: stripNA(point.origin),
-    destination: stripNA(point.destination),
-    port: stripNA(point.port),
-    activityGroup: stripNA(activityGroupMap[point.activity]),
-    activity: stripNA(activityMap[point.activity]),
-    originalActivity: stripNA(point.activity),
-    units: stripNA(point.units),
-    confidential: (point.value.toLowerCase() === 'confidential'),
-    value: parseInt(stripNA(point.value), 10) || 0,
-    extrapolated: false,
-  })))
+  .then(data => data.map((point) => {
+    let product = ''
+    if (point.product === 'Crude Oil') {
+      const productName = `${point.product} ${point.activity}`
+      product = productMap[productName]
+    } else {
+      product = productMap[point.product]
+    }
+    return {
+      period: stripNA(point.period),
+      year: parseInt(point.period.substr(0, 4), 10),
+      quarter: parseInt(point.period.substr(5, 1), 10),
+      product,
+      productSubtype: stripNA(point.productSubtype),
+      transport: stripNA(point.transport),
+      origin: stripNA(point.origin),
+      destination: stripNA(point.destination),
+      port: stripNA(point.port),
+      activityGroup: stripNA(activityGroupMap[point.activity]),
+      activity: stripNA(activityMap[point.activity]),
+      originalActivity: stripNA(point.activity),
+      units: stripNA(point.units),
+      confidential: (point.value.toLowerCase() === 'confidential'),
+      value: parseInt(stripNA(point.value), 10) || 0,
+      extrapolated: false,
+    }
+  }))
   // Strip RPP/Crude imports, since they aren't used in the visualization right now
   .then(points => points.filter((point) => (
-    point.activity !== 'imports' ||
-    (point.product !== 'refinedPetroleumProducts' && point.product !== 'crudeOil')
+    point.activity !== 'imports' || point.product !== 'refinedPetroleumProducts'
   )))
   // Validate points
   .then(points => points.map((point) => {
@@ -104,17 +113,11 @@ const parsingIssue = {};
       ...point,
       country: originRegion.get('country') || '',
       originKey: originRegion.get('originKey') || '',
+      originContinent: originRegion.get('continent') || '',
       destinationCountry: destinationRegion.get('country') || '',
       destinationKey: destinationRegion.get('originKey') || '',
+      destinationContinent: destinationRegion.get('continent') || '',
     }
-  }))
-  // Add forAverageValue and forAverageDivisor to rate units
-  .then(points => points.map((point) => {
-    if (point.units === 'thousand m3/d' || point.units === 'm3/d') {
-      point.forAverageValue = point.value
-      point.forAverageDivisor = 1
-    }
-    return point
   }))
   // Cluster the points into visualizations, units, and period
   .then(points => points.reduce((acc, point) => {
@@ -126,7 +129,7 @@ const parsingIssue = {};
     if (!outUnit[point.period]) { outUnit[point.period] = [] }
 
     // Fix destinations for crude oil when not destined for a PADD
-    if (point.product === 'crudeOil' && point.destination === '') {
+    if (point.product === 'crudeOilExports' && point.destination === '') {
       point.destination = 'ca'
     }
 
@@ -225,7 +228,7 @@ const parsingIssue = {};
                     : Math.round(averageDest.value / averageDest.divisor),
                 }
               }
-              if (visName === 'crudeOil' || visName === 'naturalGasLiquids') {
+              if (visName === 'crudeOilExports' || visName === 'naturalGasLiquids') {
                 return {
                   ...acc,
                   [next.destination]:
@@ -270,6 +273,105 @@ const parsingIssue = {};
     valueBins.naturalGas['CN$/GJ'][4][1] = Number.MAX_SAFE_INTEGER
 
     return { data: output, bins: valueBins }
+  })
+  .then((output) => {
+    const scalingValues = Object.keys(output.data)
+      .reduce((timelineScale, visName) => {
+        timelineScale[visName] = {}
+        Object.keys(output.data[visName]).forEach((unit) => {
+          if (!timelineScale[visName][unit]) {
+            timelineScale[visName][unit] = {}
+          }
+          const unitPoints = Object.values(output.data[visName][unit])
+          const aggregatedValueByPeriod = Object.values(unitPoints).reduce((acc, point) => {
+            if (!acc[point.period]) {
+              acc[point.period] = {}
+            }
+            if (!acc[point.period][point.activity]) {
+              acc[point.period][point.activity] = {
+                transport: {},
+                productSubtype: {},
+                weightedAverage: { value: 0, divisor: 0 },
+                activityTotal: 0,
+              }
+            }
+            if (point.transport !== '') {
+              const transport = acc[point.period][point.activity].transport[point.transport] || 0
+              acc[point.period][point.activity].transport[point.transport] = transport + point.value
+
+              const transportTotal = acc[point.period][point.activity].transport.total || 0
+              acc[point.period][point.activity].transport.total = transportTotal + point.value
+            }
+
+            if (point.productSubtype !== '') {
+              const productSubtype = acc[point.period][point.activity].productSubtype[point.productSubtype] || 0
+              acc[point.period][point.activity].productSubtype[point.productSubtype] = productSubtype + point.value
+              
+              const productSubtypeTotal = acc[point.period][point.activity].productSubtype.total || 0
+              acc[point.period][point.activity].productSubtype.total = productSubtypeTotal + point.value              
+            }
+
+
+            const averageValue = acc[point.period][point.activity].weightedAverage.value || 0
+            acc[point.period][point.activity].weightedAverage.value = averageValue + point.forAverageValue
+
+            const averageDivisor = acc[point.period][point.activity].weightedAverage.divisor || 0
+            acc[point.period][point.activity].weightedAverage.divisor = averageDivisor + point.forAverageDivisor
+
+            acc[point.period][point.activity].activityTotal += point.value
+            return acc
+          }, {})
+
+          Object.entries(aggregatedValueByPeriod).forEach(([year, point]) => {
+            Object.entries(point).forEach(([activity, values]) => {
+              if (!timelineScale[visName][unit][activity]) {
+                timelineScale[visName][unit][activity] = {
+                  activityTotal: 0,
+                }
+              }
+              Object.entries(values.transport).forEach(([transport, value]) => {
+                if (transport !== '') {
+                  if (!timelineScale[visName][unit][activity].transport) {
+                    timelineScale[visName][unit][activity].transport = {}
+                  }
+                  if (!timelineScale[visName][unit][activity].transport) {
+                    timelineScale[visName][unit][activity].transport = {}
+                  }
+                  const transportValue = timelineScale[visName][unit][activity].transport[transport] || 0
+                  timelineScale[visName][unit][activity].transport[transport] = value > transportValue ? value : transportValue
+                }
+              })
+              Object.entries(values.productSubtype).forEach(([productSubtype, value]) => {
+                if (productSubtype !== '') {
+                  if (!timelineScale[visName][unit][activity].productSubtype) {
+                    timelineScale[visName][unit][activity].productSubtype = {}
+                  }
+                  if (!timelineScale[visName][unit][activity].productSubtype) {
+                    timelineScale[visName][unit][activity].productSubtype = {}
+                  }
+                  const productSubtypeValue = timelineScale[visName][unit][activity].productSubtype[productSubtype] || 0
+                  timelineScale[visName][unit][activity].productSubtype[productSubtype] = value > productSubtypeValue ? value : productSubtypeValue
+                }
+              })
+
+              if (['CN$/GJ', 'CAN$/MW.h'].includes(unit)) {
+                const activityTotal = timelineScale[visName][unit][activity].activityTotal || 0
+              
+                if (values.weightedAverage.divisor !== 0) {
+                  const calculateWeightedAverage = values.weightedAverage.value / values.weightedAverage.divisor
+                  timelineScale[visName][unit][activity].activityTotal = calculateWeightedAverage > activityTotal ? calculateWeightedAverage : activityTotal
+                }
+              } else {
+                const activityTotal = timelineScale[visName][unit][activity].activityTotal || 0
+                timelineScale[visName][unit][activity].activityTotal = activityTotal > values.activityTotal ? activityTotal : values.activityTotal
+              }
+            })
+          })
+        })
+        return timelineScale
+      }, {})
+    output.scale = scalingValues
+    return output
   })
   // Output validation and write the file
   .then((finalOutput) => {

@@ -10,15 +10,16 @@ import DetailBreakdownRow from './DetailBreakdownRow'
 const DetailBreakdownBody = (props) => {
   const bodyContent = props.trContent
   const total = props.total === false
-    ? props.data.reduce((acc, curr) => acc + curr)
+    ? props.data.get('total')
     : props.total
   const result = props.data
+    .getIn(['values', props.showGroup], new Immutable.Map())
     .sort((a, b) => (b - a))
     .map((value, key) => {
       const name = props.nameMappings.getIn([key, props.language], '')
       return (
         <DetailBreakdownRow
-          key={key}
+          key={key /* eslint-disable-line react/no-array-index-key */}
           labelPrefix={bodyContent.getIn(['action', props.language])}
           label={name}
           labelSuffix={bodyContent.getIn(['suffix', props.language])}

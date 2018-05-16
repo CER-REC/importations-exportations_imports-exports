@@ -1,6 +1,8 @@
 import { createSelector } from 'reselect'
 
-import { chartAxisPosition } from './electricity'
+// TODO: Temporary
+//import { chartAxisPosition } from './electricity'
+const chartAxisPosition = () => ({ top: 0 })
 import { activityOptions, arrangeByOptions, amountOptions, subtypeOptions } from '../menus'
 import Constants from '../../Constants'
 
@@ -36,7 +38,7 @@ export const visSelectorPosition = createSelector(
     ...prev,
     top: prev.top + prev.height - 2,
     height: (
-      (Constants.getIn(['menuBar', 'visualizationPadding']) * 5) + 42
+      (Constants.getIn(['menuBar', 'visualizationPadding']) * 6) + 52
     ),
   }),
 )

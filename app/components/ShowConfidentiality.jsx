@@ -62,6 +62,9 @@ class ShowConfidentiality extends React.Component {
     if (this.props.energyType === 'electricity') {
       textString = `${this.props.Tr(['explanations', 'electricityConfidentiality'])}`
     }
+    if (this.props.energyType === 'refinedPetroleumProducts') {
+      textString = `${this.props.Tr(['explanations','confidentialValuesRefinedPetroleumProducts'])}`
+    }
     return (<g>
       <ExplanationDot
         scale="scale(1.8 -1.8) translate(0 -90)"

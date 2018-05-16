@@ -16,6 +16,7 @@ import { LoadBins as LoadBinsCreator } from './actions/bins'
 import Store from './Store'
 import { DismissComponent as DismissComponentCreator } from './actions/socialBar'
 import { ScreenshotMode } from './actions/screenshot'
+import setupReselectTools from './reselectTools'
 
 const store = Store()
 
@@ -67,3 +68,5 @@ Request({
   store.dispatch(LoadBinsCreator(data.body.bins))
   store.dispatch(LoadDataCreator(data.body.data))
 })
+
+setupReselectTools(store)

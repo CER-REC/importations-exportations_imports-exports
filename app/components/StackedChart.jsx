@@ -56,33 +56,6 @@ class StackedChart extends Chart {
     /></g>)
   }
 
-  confidentialityExplanation() {
-    if (this.props.selectedEnergy !== 'refinedPetroleumProducts') { return null}
-    return (<g>
-      <ExplanationDot
-        scale="scale(1)"
-        lineStroke="1"
-        textBoxWidth={140}
-        linePath="
-          M142.16,
-          173.94l24.26,
-          36.69a40.12,
-          40.12,0,0,0,
-          33.47,
-          18H322.2"
-        xPosition={698}
-        yPosition={350}
-        lineX={142.16}
-        lineY={173.94}
-        textX={40}
-        textY={58}
-        containerX={this.props.left}
-        containerY={this.props.top - 203}
-        name="confidentialityRefinedPetroleumProductsExplanation"
-        text={`${this.props.tr(['explanations','confidentialValuesRefinedPetroleumProducts'])}`}
-    /></g>)
-  }
-
   render() {
     const {
       bars: data,
@@ -148,7 +121,6 @@ class StackedChart extends Chart {
       <g transform={this.getTransform()}>
         {elements}
         {this.refinedPetroleumProductsBar()}
-        {this.confidentialityExplanation()}
         <AxisGuide
           flipped={this.props.flipped}
           scale={scale.get('y').toJS()}
