@@ -11,7 +11,11 @@ import DetailSidebar from './DetailSidebar'
 import NaturalGasMapContainer from './NaturalGasMapContainer'
 import * as NaturalGasViewport from '../selectors/viewport/naturalGas'
 
-import { showImportsSelector, showExportsSelector } from '../selectors/visualizationSettings'
+import {
+  visualizationSettings,
+  showImportsSelector,
+  showExportsSelector,
+} from '../selectors/visualizationSettings'
 /*import NaturalGasPieceActivityExplanation from './NaturalGasPieceActivityExplanation'*/
 import Constants from '../Constants'
 // import {legendMapPosition} from '../selectors/viewport/menus'
@@ -44,7 +48,10 @@ const NaturalGasVisualizationContainer = props => (
         tabIndex={Constants.getIn(['tabIndex', 'start', 'visualization', 'timeline'])}
       />
     )}
-    <NaturalGasMapContainer {...props.mapTiles} />
+    <NaturalGasMapContainer
+      {...props.mapTiles}
+      valueAverage={props.unit === 'CN$/GJ' ? 'weighted' : false}
+    />
     <DetailSidebar {...props.portMap} ><PortMap {...props.portMap} /></DetailSidebar>
     {/*
     <NaturalGasPieceActivityExplanation
@@ -64,5 +71,6 @@ export default connect((state, props) => ({
   mapPieceActivityExplanation: legendMapPosition(state, props),*/
   showImports: showImportsSelector(state, props),
   showExports: showExportsSelector(state, props),
+  unit: visualizationSettings(state, props).get('amount'),
   
 }))(NaturalGasVisualizationContainer)
