@@ -10,8 +10,8 @@ import Tr from '../TranslationTable'
 import TrSelector from '../selectors/translate'
 import '../styles/Common.scss'
 
-const Root = ({ dataLoadingComplete, viewport, language}) => {
-  if (dataLoadingComplete) { return <div><Workspace /></div> }
+const Root = ({ vis, dataLoadingComplete, viewport, language}) => {
+  if (vis && dataLoadingComplete) { return <div><Workspace /></div> }
 
   const loaderStyle = {
     height: viewport.get('y'),
@@ -56,6 +56,7 @@ Root.propTypes = {
 const mapStateToProps = (state, props) => ({
   viewport: state.viewport,
   dataLoadingComplete: state.dataLoadingComplete,
+  vis: state.importExportVisualization,
   language: state.language,
 })
 

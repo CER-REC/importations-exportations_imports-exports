@@ -1,6 +1,6 @@
 import Constants from '../Constants'
 
-const ImportExportVisualizationReducer = (state = 'electricity', action) => {
+const ImportExportVisualizationReducer = (state = '', action) => {
   switch (action.type) {
     case 'SetVisualization':
     // Only valid visualization name is allowed i.e. 'electricity',
