@@ -10,6 +10,9 @@ import Axis from './Axis'
 import DetailSidebar from './DetailSidebar'
 import DetailBreakdown from './DetailBreakdown'
 import DetailBreakdownHeader from './DetailBreakdownHeader'
+import DetailTotal from './DetailTotal'
+import ConfidentialCount from './ConfidentialCount'
+import MissingDataCount from './MissingDataCount'
 import * as CrudeOilViewport from '../selectors/viewport/crudeOilExports'
 import Constants from '../Constants'
 import { positionShape } from '../propTypeShapes'
@@ -53,6 +56,11 @@ const CrudeOilVisualizationContainer = props => (
           nameMappings={Tr.get('label')}
         />
       </div>
+      <ConfidentialCount
+        valueKey="transport"
+        filterActivity="exports"
+        groupBy="activity"
+      />
     </DetailSidebar>
     <StackedChart
       {...props.subtypeChart}
@@ -83,6 +91,11 @@ const CrudeOilVisualizationContainer = props => (
           nameMappings={Tr.get('label')}
         />
       </div>
+      <ConfidentialCount
+        valueKey="productSubtype"
+        filterActivity="exports"
+        groupBy="activity"
+      />
     </DetailSidebar>
     <Axis
       {...props.axisPosition}
@@ -99,7 +112,30 @@ const CrudeOilVisualizationContainer = props => (
       colour={Constants.getIn(['styleGuide', 'colours', 'ExportDefault'])}
       tabIndex={Constants.getIn(['tabIndex', 'start', 'visualization', 'timeline'])}
     />
-    <USPadd { ...props.usPaddChart} />
+    <DetailSidebar {...props.exportChart}>
+      <div className="verticalAlign">
+        <div className="centered">
+          <DetailTotal
+            type="exports"
+            filterActivity="exports"
+            showGroup="exports"
+            groupBy="activity"
+            valueKey="activity"
+          />
+          <ConfidentialCount
+            valueKey="destinationKey"
+            filterActivity="exports"
+            groupBy="activity"
+          />
+          <MissingDataCount
+            valueKey="destinationKey"
+            filterActivity="exports"
+            groupBy="activity"
+          />
+        </div>
+      </div>
+    </DetailSidebar>
+    <USPadd {...props.usPaddChart} />
     <DetailSidebar
       {...props.usPaddChart}
     >
