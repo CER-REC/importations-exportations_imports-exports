@@ -976,6 +976,64 @@ const TranslationTable = fromJS({
         },
       },
     },
+    crudeOilImports: {
+      defaultText: {
+        en: 'Data not available when map is filtered',
+        fr: 'Ces données ne sont pas disponibles quand un filtre est actif',
+      },
+      exports: {
+        header: {
+          type: {
+            en: 'Exports',
+            fr: 'Exportations',
+          },
+          action: {
+            en: 'to',
+            fr: 'par',
+          },
+          adjective: {
+            en: '',
+            fr: '',
+          },
+          place: {
+            en: 'PADDS',
+            fr: 'PADDS',
+          },
+        },
+        body: {
+          action: {
+            en: 'to',
+            fr: 'à',
+          },
+        },
+      },
+      imports: {
+        header: {
+          type: {
+            en: 'Imports',
+            fr: 'Importations',
+          },
+          action: {
+            en: 'to',
+            fr: 'par',
+          },
+          adjective: {
+            en: 'selected',
+            fr: 'ces',
+          },
+          place: {
+            en: 'Regions',
+            fr: 'Régions',
+          },
+        },
+        body: {
+          action: {
+            en: 'from',
+            fr: 'de',
+          },
+        },
+      },
+    },
     naturalGasLiquids: {
       defaultText: {
         en: 'This visualization shows imports to Canada and exports from Canada between the years $0 and $1. Drag the timeline bar to change. Click a region to view detail',

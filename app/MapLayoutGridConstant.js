@@ -305,6 +305,83 @@ const MapLayoutGridConstant = fromJS({
       ],
     },
   },
+  crudeOilImports: {
+    world: {
+      mapPieceScale: 3,
+      defaultColumns: 12,
+      sortingRowPadding: -0.5,
+      dimensions: {
+        height: 37.09,
+        width: 38.75,
+        yAxisPadding: 5,
+        xAxisPadding: 9,
+      },
+      styles: {
+        color: '#ede3cb',
+        labelPosition: 'down',
+        arrowPosition: 'up',
+        arrowSpacing: -1,
+        bottomMargin: 5,
+        topMargin: 5,
+        confidentialStyle: {
+          fill: '#999',
+          stroke: '#999',
+          exclamationFill: '#fff',
+        },
+      },
+      layout: [
+        {
+          name: 'northAmerica', originKey: 'northAmerica', x: 0, y: 0,
+        },
+        {
+          name: 'europe', originKey: 'europe', x: 0.5, y: 0,
+        },
+        {
+          name: 'southAmerica', originKey: 'southAmerica', x: 0.25, y: 0.35,
+        },
+        {
+          name: 'africa', originKey: 'africa', x: 0.65, y: 0.35,
+        },
+        {
+          name: 'oceania', originKey: 'oceania', x: 1, y: 0.35,
+        },
+      ],
+    },
+    powerpool: {
+      mapPieceScale: 0.9,
+      defaultColumns: 12,
+      dimensions: {
+        height: 37.09,
+        width: 38.75,
+        yAxisPadding: 8.528,
+        xAxisPadding: 12.528,
+      },
+      styles: {
+        color: '#ede3cb',
+        labelPosition: 'down',
+        arrowPosition: 'up',
+        arrowSpacing: -1,
+        bottomMargin: 5,
+        topMargin: 5,
+        confidentialStyle: {
+          fill: '#999',
+          stroke: '#999',
+          exclamationFill: '#fff',
+        },
+      },
+      layout: [
+        {
+          name: 'MN/ND', originKey: 'MN/ND', x: 0, y: 0,
+        },
+        {
+          name: 'NE-ISO', originKey: 'NE-ISO', x: 1, y: 0,
+        },
+        {
+          name: 'PJMPP', originKey: 'PJMPP', x: 2, y: 0,
+        },
+      ],
+    },
+  },
   naturalGasLiquids: {
     ca: {
       mapPieceScale: 1,
