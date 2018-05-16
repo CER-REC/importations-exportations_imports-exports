@@ -193,6 +193,7 @@ class BarChart extends Chart {
       height,
       flipped,
       activityValueKey,
+      productSubtype,
       colour,
       layout,
       tabIndex,
@@ -200,13 +201,17 @@ class BarChart extends Chart {
     } = this.props
     const barSize = layout.get('barWidth')
     const scale = this.getScale(this.props)
-    
     const heightPerUnit = this.calculateHeightPerUnit()
     const negativeValOffset = this.calculateNegativePosition()
 
     const elements = data.get('values').map((point, period) => {
       const opacity = this.isTimelinePointFiltered(point) ? 0.5 : 1
-      const value = point.get( activityValueKey, 0)
+      let value
+      if (productSubtype) {
+        value = point.get( productSubtype, 0)
+      } else {
+        value = point.get( activityValueKey, 0)
+      }
 
       // Minimum 1px bar height
       let barHeight = (value < 0)
