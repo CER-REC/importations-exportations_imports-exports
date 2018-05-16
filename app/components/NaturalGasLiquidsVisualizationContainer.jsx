@@ -16,6 +16,9 @@ import { showImportsSelector, showExportsSelector } from '../selectors/visualiza
 // import NaturalGasLiquidsMapPieceActivityExplanation from './NaturalGasLiquidsMapPieceActivityExplanation'
 import DetailSidebar from './DetailSidebar'
 import DetailBreakdown from './DetailBreakdown'
+import DetailTotal from './DetailTotal'
+import ConfidentialCount from './ConfidentialCount'
+import MissingDataCount from './MissingDataCount'
 
 class NaturalGasLiquidsVisualizationContainer extends React.Component {
   render() {
@@ -33,7 +36,7 @@ class NaturalGasLiquidsVisualizationContainer extends React.Component {
             colour={Constants.getIn(['styleGuide', 'colours', 'ImportDefault'])}
             tabIndex={Constants.getIn(['tabIndex', 'start', 'visualization', 'timeline'])}
           />
-          <DetailSidebar {...this.props.importChart}>
+          <DetailSidebar {...this.props.canadaMap}>
             <DetailBreakdown
               {...this.props.importChart}
               groupBy="activity"
@@ -45,6 +48,32 @@ class NaturalGasLiquidsVisualizationContainer extends React.Component {
               trContent={Tr.getIn(['detailBreakDown', 'naturalGasLiquids', 'imports'])}
               nameMappings={Tr.get('subType')}
             />
+          </DetailSidebar>
+          <DetailSidebar {...this.props.importChart}>
+            <div className="verticalAlign">
+              <div className="centered">
+                <MissingDataCount
+                  valueKey="destinationKey"
+                  filterActivity="imports"
+                  groupBy="activity"
+                  country="ca"
+                />
+                <ConfidentialCount
+                  valueKey="destinationKey"
+                  filterActivity="imports"
+                  groupBy="activity"
+                  country="ca"
+                />
+                <DetailTotal
+                  type="imports"
+                  filterActivity="imports"
+                  showGroup="imports"
+                  groupBy="activity"
+                  valueKey="activity"
+                  country="ca"
+                />
+              </div>
+            </div>
           </DetailSidebar>
         </g>
       )}
@@ -64,7 +93,7 @@ class NaturalGasLiquidsVisualizationContainer extends React.Component {
             colour={Constants.getIn(['styleGuide', 'colours', 'ExportDefault'])}
             tabIndex={Constants.getIn(['tabIndex', 'start', 'visualization', 'timeline'])}
           />
-          <DetailSidebar {...this.props.exportChart}>
+          <DetailSidebar {...this.props.usPaddChart}>
             <DetailBreakdown
               {...this.props.exportChart}
               groupBy="activity"
@@ -76,6 +105,32 @@ class NaturalGasLiquidsVisualizationContainer extends React.Component {
               trContent={Tr.getIn(['detailBreakDown', 'naturalGasLiquids', 'exports'])}
               nameMappings={Tr.get('subType')}
             />
+          </DetailSidebar>
+          <DetailSidebar {...this.props.exportChart}>
+            <div className="verticalAlign">
+              <div className="centered">
+                <DetailTotal
+                  type="exports"
+                  filterActivity="exports"
+                  showGroup="exports"
+                  groupBy="activity"
+                  valueKey="activity"
+                  country="us"
+                />
+                <ConfidentialCount
+                  valueKey="destinationKey"
+                  filterActivity="exports"
+                  groupBy="activity"
+                  country="us"
+                />
+                <MissingDataCount
+                  valueKey="destinationKey"
+                  filterActivity="exports"
+                  groupBy="activity"
+                  country="us"
+                />
+              </div>
+            </div>
           </DetailSidebar>
         </g>
       )}
