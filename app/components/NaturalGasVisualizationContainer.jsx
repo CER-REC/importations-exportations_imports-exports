@@ -11,23 +11,22 @@ import DetailSidebar from './DetailSidebar'
 import NaturalGasMapContainer from './NaturalGasMapContainer'
 import * as NaturalGasViewport from '../selectors/viewport/naturalGas'
 
-import {
-  visualizationSettings,
-  showImportsSelector,
-  showExportsSelector,
-} from '../selectors/visualizationSettings'
+import { amount } from '../selectors/data'
+import { showImportsSelector, showExportsSelector } from '../selectors/visualizationSettings'
 /*import NaturalGasPieceActivityExplanation from './NaturalGasPieceActivityExplanation'*/
 import Constants from '../Constants'
 // import {legendMapPosition} from '../selectors/viewport/menus'
 
-const NaturalGasVisualizationContainer = props => (
-  <g>
+const NaturalGasVisualizationContainer = (props) => {
+  const weighted = props.unit === 'CN$/GJ' ? 'weighted' : false
+  return (<g>
     {!props.showImports ? null : (
       <BarChart
         {...props.importChart}
         valueKey="activity"
         activityValueKey="imports"
         groupBy="period"
+        valueAverage={weighted}
         colour={Constants.getIn(['styleGuide', 'colours', 'ImportDefault'])}
         tabIndex={Constants.getIn(['tabIndex', 'start', 'visualization', 'timeline'])}
       />
@@ -43,23 +42,21 @@ const NaturalGasVisualizationContainer = props => (
         valueKey="activity"
         activityValueKey="exports"
         groupBy="period"
+        valueAverage={weighted}
         flipped
         colour={Constants.getIn(['styleGuide', 'colours', 'ExportDefault'])}
         tabIndex={Constants.getIn(['tabIndex', 'start', 'visualization', 'timeline'])}
       />
     )}
-    <NaturalGasMapContainer
-      {...props.mapTiles}
-      valueAverage={props.unit === 'CN$/GJ' ? 'weighted' : false}
-    />
+    <NaturalGasMapContainer {...props.mapTiles} valueAverage={weighted} />
     <DetailSidebar {...props.portMap} ><PortMap {...props.portMap} /></DetailSidebar>
     {/*
     <NaturalGasPieceActivityExplanation
       {...props.mapPieceActivityExplanation}
     />
     */}
-  </g>
-)
+  </g>)
+}
 
 export default connect((state, props) => ({
   importChart: NaturalGasViewport.chartImportPosition(state, props),
@@ -69,8 +66,8 @@ export default connect((state, props) => ({
   portMap: NaturalGasViewport.portMapPosition(state, props),
   /*
   mapPieceActivityExplanation: legendMapPosition(state, props),*/
+  unit: amount(state, props),
   showImports: showImportsSelector(state, props),
   showExports: showExportsSelector(state, props),
-  unit: visualizationSettings(state, props).get('amount'),
   
 }))(NaturalGasVisualizationContainer)
