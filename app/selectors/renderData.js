@@ -157,7 +157,11 @@ export const detailBreakdownValues = createSelector(
   state => state.importExportVisualization,
   (data, viz) => {
     if (viz !== 'crudeOilExports') { return data }
-    return data.updateIn(['values', 'exports'], values => values.filter((_, k) => k !== 'ca'))
+    return data.updateIn(
+      ['values', 'exports'],
+      fromJS({}),
+      values => values.filter((_, k) => k !== 'ca'),
+    )
   },
 )
 

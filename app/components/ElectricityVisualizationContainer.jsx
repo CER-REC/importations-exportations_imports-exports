@@ -65,23 +65,20 @@ const ElectricityVisualizationContainer = (props) => {
                 filterActivity="imports"
                 groupBy="activity"
                 valueAverage={weighted}
-                country="ca"
               />
               <ConfidentialCount
                 valueKey="destinationKey"
                 filterActivity="imports"
                 groupBy="activity"
                 valueAverage={weighted}
-                country="ca"
               />
               <DetailTotal
                 type="imports"
                 filterActivity="imports"
                 showGroup="imports"
                 groupBy="activity"
-                valueKey="activity"
+                valueKey="destinationKey"
                 valueAverage={weighted}
-                country="ca"
               />
             </div>
           </div>
@@ -114,23 +111,20 @@ const ElectricityVisualizationContainer = (props) => {
                 filterActivity="exports"
                 showGroup="exports"
                 groupBy="activity"
-                valueKey="activity"
+                valueKey="destinationKey"
                 valueAverage={weighted}
-                country="us"
               />
               <ConfidentialCount
                 valueKey="destinationKey"
                 filterActivity="exports"
                 groupBy="activity"
                 valueAverage={weighted}
-                country="us"
               />
               <MissingDataCount
                 valueKey="destinationKey"
                 filterActivity="exports"
                 groupBy="activity"
                 valueAverage={weighted}
-                country="us"
               />
             </div>
           </div>
