@@ -18,7 +18,7 @@ import Constants from '../Constants'
 // import {legendMapPosition} from '../selectors/viewport/menus'
 
 const NaturalGasVisualizationContainer = (props) => {
-  const weighted = props.amountValue === "CN$/GJ"? "weighted": false
+  const weighted = props.unit === 'CN$/GJ' ? 'weighted' : false
   return (<g>
     {!props.showImports ? null : (
       <BarChart
@@ -48,7 +48,7 @@ const NaturalGasVisualizationContainer = (props) => {
         tabIndex={Constants.getIn(['tabIndex', 'start', 'visualization', 'timeline'])}
       />
     )}
-    <NaturalGasMapContainer {...props.mapTiles} />
+    <NaturalGasMapContainer {...props.mapTiles} valueAverage={weighted} />
     <DetailSidebar {...props.portMap} ><PortMap {...props.portMap} /></DetailSidebar>
     {/*
     <NaturalGasPieceActivityExplanation
@@ -66,7 +66,7 @@ export default connect((state, props) => ({
   portMap: NaturalGasViewport.portMapPosition(state, props),
   /*
   mapPieceActivityExplanation: legendMapPosition(state, props),*/
-  amountValue: amount(state, props),
+  unit: amount(state, props),
   showImports: showImportsSelector(state, props),
   showExports: showExportsSelector(state, props),
   

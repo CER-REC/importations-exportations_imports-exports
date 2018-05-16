@@ -26,11 +26,9 @@ const nameMappingsUSAndPools = Tr.getIn(['country', 'us'])
   .merge(Tr.getIn(['country', 'powerpool']))
 
 const ElectricityVisualizationContainer = (props) => { 
-  const weighted = props.amountValue === "CAN$/MW.h"? "weighted": false
+  const weighted = props.unit === 'CAN$/MW.h' ? 'weighted' : false
   return (<g>
-    <CanadaMapContainer
-      {...props.canadaMap}
-    />
+    <CanadaMapContainer {...props.canadaMap} valueAverage={weighted} />
 
     <BarChart
       {...props.importChart}
@@ -63,13 +61,9 @@ const ElectricityVisualizationContainer = (props) => {
         tabIndex={Constants.getIn(['tabIndex', 'start', 'visualization', 'timeline'])}
       />
     )}
-    <USMapContainer {...props.usMap} />
-    <PowerPoolContainer
-      {...props.powerPool}
-    />
-    <PowerPoolGrouping
-      {...props.powerPool}
-    />
+    <USMapContainer {...props.usMap} valueAverage={weighted} />
+    <PowerPoolContainer {...props.powerPool} />
+    <PowerPoolGrouping {...props.powerPool} />
     {/*
     <ElectricityMapPieceActivityExplanation
       {...props.mapPieceActivityExplanation}
@@ -133,7 +127,7 @@ export default connect((state, props) => ({
   // mapPieceActivityExplanation: legendMapPosition(state, props),
   axisPosition: ElectricityViewport.chartAxisPosition(state, props),
   exportChart: ElectricityViewport.chartExportPosition(state, props),
-  amountValue: amount(state, props),
+  unit: amount(state, props),
   showImports: showImportsSelector(state, props),
   showExports: showExportsSelector(state, props),
 }))(ElectricityVisualizationContainer)

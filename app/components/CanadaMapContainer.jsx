@@ -13,6 +13,7 @@ const CanadaMapContainer = props => (
       left={props.left}
       top={props.top}
       country="ca"
+      valueAverage={props.valueAverage}
     />
   </g>
 )

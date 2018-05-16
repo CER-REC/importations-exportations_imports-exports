@@ -3,13 +3,11 @@ import Immutable, { fromJS } from 'immutable'
 import { createSelector } from './selectHelper'
 import { arrangeBy } from './data'
 import {
-  getVisualizationData,
-  filterByTimeline,
-  filterByTimelineAndMap,
-  getActivityFilterPredicate,
-} from './core'
-import { calculateValueSum, getCountry, getFullyFilteredData } from './renderData'
-import { visualizationSettings } from './visualizationSettings'
+  calculateValueSum,
+  calculateValueWeighted,
+  getCountry,
+  getFullyFilteredData,
+} from './renderData'
 import MapLayoutGridConstant from '../MapLayoutGridConstant'
 import Constants from '../Constants'
 
@@ -103,10 +101,12 @@ export const parseLocationData = createSelector(
   getFullyFilteredData,
   getMapLayoutConstants,
   getCountry,
-  (records, gridConstants, country) => {
+  (_, props = {}) => props.valueAverage || false,
+  (records, gridConstants, country, averageMode) => {
     const layout = gridConstants.get('layout', new Immutable.Map())
-    // TODO: This should calculate averages in some cases
-    const data = calculateValueSum(records, ['originKey', 'destinationKey'], 'activity')
+    const data = averageMode === 'weighted'
+      ? calculateValueWeighted(records, ['originKey', 'destinationKey'], 'activity')
+      : calculateValueSum(records, ['originKey', 'destinationKey'], 'activity')
 
     let tabIndex = getTabIndexStart(country)
     const tabIndexes = {}

@@ -9,6 +9,7 @@ const USMapContainer = (props) => (
       left={props.left}
       top={props.top}
       country="us"
+      valueAverage={props.valueAverage}
     />
   </g>
 )
@@ -16,6 +17,5 @@ const USMapContainer = (props) => (
 const mapStateToProps = state => ({
   viewport: state.viewport,
 })
-
 
 export default connect(mapStateToProps)(USMapContainer)
