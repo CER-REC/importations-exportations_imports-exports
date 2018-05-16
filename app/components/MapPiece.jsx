@@ -29,6 +29,7 @@ class MapPiece extends React.Component {
     isOrigin: PropTypes.bool,
     arrangeBy: PropTypes.string.isRequired,
     activity: PropTypes.string.isRequired,
+    overrideArroWPosition: PropTypes.bool,
   }
 
   static defaultProps = {
@@ -411,9 +412,15 @@ class MapPiece extends React.Component {
   }
 
   render() {
-    let arrowTransform = `translate(${Constants.getIn(['mapPieceArrowStyle', 'x'])}, ${Constants.getIn(['mapPieceArrowStyle', 'y']) + 0.5})`
+    let arrowStyle = {}
+    if (this.props.overrideArroWPosition) {
+      arrowStyle = this.props.styles.get('mapPieceArrowStyle')
+    } else {
+      arrowStyle = Constants.get('mapPieceArrowStyle')
+    }
+    let arrowTransform = `translate(${arrowStyle.get('x')}, ${arrowStyle.getIn('y') + 0.5})`
     if (this.props.styles.get('arrowPosition') === 'down') {
-      arrowTransform = `translate(${Constants.getIn(['mapPieceArrowStyle', 'x'])}, ${this.props.dimensions.get('height') - Constants.getIn(['mapPieceArrowStyle', 'y']) + 4})`
+      arrowTransform = `translate(${arrowStyle.getIn('x')}, ${this.props.dimensions.get('height') - arrowStyle.getIn('y') + 4})`
     }
 
     let stroke = 'none'
@@ -483,6 +490,7 @@ class MapPiece extends React.Component {
         <polygon
           stroke={stroke}
           fill={this.props.styles.get('color')}
+          transform={!this.props.scaleMappiece?`scale(1)`:`scale(${this.props.scaleMappiece})` }
           points="37.09 9.68 18.54 0 0 9.68 0 29.05 18.54 38.73 37.09 29.05 37.09 9.68"
         />
         {this.renderMapPieceLabel()}

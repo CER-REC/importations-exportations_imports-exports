@@ -17,7 +17,7 @@ import {
 import { setSelection } from '../actions/visualizationSettings'
 import './ElectricityMapLayout.scss'
 
-import { getMapLayout } from '../selectors/mapLayout'
+import { getMapLayout } from '../selectors/worldMapLayout'
 import { binSelector } from '../selectors/data'
 
 import { handleInteractionWithTabIndex } from '../utilities'
@@ -77,11 +77,11 @@ class WorldMapLayout extends React.Component {
 
     // fetching nested values
     const mapLayoutGrid = MapLayoutGridConstant.getIn([type, this.props.country])
-    console.log(mapLayoutGrid)
     const dimensions = mapLayoutGrid.get('dimensions')
     const styles = mapLayoutGrid.get('styles')
     const { layout } = this.props
     const mapPieceScale = mapLayoutGrid.get('mapPieceScale')
+
     const xaxis = this.props.left
     const yaxis = this.props.top
     const isSelected = this.isSelected()
@@ -90,6 +90,7 @@ class WorldMapLayout extends React.Component {
       .sortBy((_, key) => key)
       .map((position, key) => {
         const humanName = this.props.Tr(['country', this.props.country, key])
+        
         const value = layout.getIn(['values', key], emptyMap)
         return (
           <g key={`mapPieceKey_${this.props.country}_${key}`}>
@@ -108,7 +109,6 @@ class WorldMapLayout extends React.Component {
                 value.get('exports', 0).toLocaleString(),
                 this.props.unit,
               )}
-              transform={`scale(${mapPieceScale})`}
             >
               <MapPiece
                 value={value}
@@ -120,16 +120,19 @@ class WorldMapLayout extends React.Component {
                 legends={MapLayoutGridConstant.getIn([type, 'legends'])}
                 bins={this.props.bins}
                 styles={styles}
+                scaleMappiece={mapPieceScale}
                 isMapPieceSelected={this.isMapPieceSelected(key, this.props.country)}
                 isSelected={isSelected}
                 mapPieceStyleClass="mapPieceText"
+                overrideArroWPosition={true}
+                overrideTextPosition={true}
                 isOrigin={(this.props.selection.get('country') === this.props.country)}
                 x1={mapPieceTransformStartXaxis(position, dimensions, mapPieceScale)}
                 y1={mapPieceTransformStartYaxis(position, dimensions, mapPieceScale)}
                 containerX={this.props.left}
                 containerY={this.props.top}
                 country={this.props.country}
-                name={key}
+                name={humanName}
               />
             </g>
           </g>

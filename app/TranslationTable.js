@@ -1395,6 +1395,32 @@ const TranslationTable = fromJS({
         fr: "Réseau d'électricité",
       },
     },
+    world: {
+      northAmerica: {
+        en: 'U.S.\nand\nMexico',
+        fr: 'États-Unis\net\nMexique',
+      },
+      africa: {
+        en: 'Africa',
+        fr: 'Afrique',
+      },
+      oceania: {
+        en: 'Australia\nand\nOceania',
+        fr: 'Australie\net\nOcéanie',
+      },
+      asia: {
+        en: 'Asia',
+        fr: 'Asie',
+      },
+      europe: {
+        en: 'Europe',
+        fr: "L'Europe",
+      },
+      southAmerica: {
+        en: 'South\nAmerica',
+        fr: 'Amérique\ndu sud',
+      },
+    },
   },
   Padd: {
     ca: {

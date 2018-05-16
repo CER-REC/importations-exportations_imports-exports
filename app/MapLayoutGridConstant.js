@@ -307,12 +307,12 @@ const MapLayoutGridConstant = fromJS({
   },
   crudeOilImports: {
     world: {
-      mapPieceScale: 3,
-      defaultColumns: 12,
-      sortingRowPadding: -0.5,
+      mapPieceScale: 2,
+      defaultColumns: 3,
+      sortingRowPadding: -10,
       dimensions: {
         height: 37.09,
-        width: 38.75,
+        width: 70,
         yAxisPadding: 5,
         xAxisPadding: 9,
       },
@@ -320,30 +320,45 @@ const MapLayoutGridConstant = fromJS({
         color: '#ede3cb',
         labelPosition: 'down',
         arrowPosition: 'up',
-        arrowSpacing: -1,
+        arrowSpacing: 5,
         bottomMargin: 5,
-        topMargin: 5,
+        topMargin: 0,
         confidentialStyle: {
           fill: '#999',
           stroke: '#999',
           exclamationFill: '#fff',
         },
+        mapPieceTextStyle: {
+          x: 10.68,
+          y: 10,
+        },
+        mapPieceArrowStyle: {
+          x: 18,
+          y: 8,
+        },
+        mapPieceArrowStyleCenter: {
+          x: -1,
+          y: 10,
+        },
       },
       layout: [
         {
-          name: 'northAmerica', originKey: 'northAmerica', x: 0, y: 0,
+          name: 'northAmerica', originKey: 'northAmerica', x: -0.25, y: 0,
         },
         {
-          name: 'europe', originKey: 'europe', x: 0.5, y: 0,
+          name: 'europe', originKey: 'europe', x: 1.25, y: 0,
         },
         {
-          name: 'southAmerica', originKey: 'southAmerica', x: 0.25, y: 0.35,
+          name: 'asia', originKey: 'asia', x: 1.90, y: 0,
         },
         {
-          name: 'africa', originKey: 'africa', x: 0.65, y: 0.35,
+          name: 'southAmerica', originKey: 'southAmerica', x: 0.25, y: 1,
         },
         {
-          name: 'oceania', originKey: 'oceania', x: 1, y: 0.35,
+          name: 'africa', originKey: 'africa', x: 0.90, y: 1,
+        },
+        {
+          name: 'oceania', originKey: 'oceania', x: 2.25, y: 1,
         },
       ],
     },
