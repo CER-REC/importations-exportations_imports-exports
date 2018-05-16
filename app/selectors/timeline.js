@@ -19,14 +19,15 @@ import { visualizationContentPosition as visContentSize } from './viewport/'
 import { visualizationSettings, selectedVisualization, scaledLinkedSelector } from './visualizationSettings'
 import Constants from '../Constants'
 
-export const getScaleKey = (state, props) => props.scaleKey || getValueKey(state, props)
+export const getScaleKey = (state, props = {}) => props.scaleKey || getValueKey(state, props)
 
 export const mapToValue = (data, key) => data.map(v => v.get(key))
+mapToValue.isSelector = false
 
 export const sortTimeline = createSelector(
   barChartValues,
   timelineGrouping,
-  (points , grouping) => points,
+  (points, grouping) => points,
 )
 
 export const timelineScaleBase = createSelector(
