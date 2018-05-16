@@ -2,7 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
 import { geoConicConformal, geoPath } from 'd3-geo'
-import { getSelectionSettings } from '../selectors/NaturalGasSelector'
+import { visualizationSettings } from '../selectors/visualizationSettings'
 import { feature } from 'topojson-client'
 import Request from 'client-request/promise'
 import Tr from '../TranslationTable'
@@ -201,7 +201,7 @@ const mapStateToprops = (state, props) => {
   return {
     viewport: state.viewport,
     tr: trSelector(state, props),
-    selectionSettings: getSelectionSettings(state, props),
+    selectionSettings: visualizationSettings(state, props).get('selection'),
     language: state.language,
   }
 }

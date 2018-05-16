@@ -6,9 +6,9 @@ import { connect } from 'react-redux'
 /*
 import BarChart from './BarChart'
 import Axis from './Axis'
+*/
 import PortMap from './PortMap'
 import DetailSidebar from './DetailSidebar'
-*/
 import NaturalGasMapContainer from './NaturalGasMapContainer'
 import * as NaturalGasViewport from '../selectors/viewport/naturalGas'
 /*
@@ -47,10 +47,8 @@ const NaturalGasVisualizationContainer = props => (
     )}
     */}
     <NaturalGasMapContainer {...props.mapTiles} />
+    <DetailSidebar {...props.portMap} ><PortMap {...props.portMap} /></DetailSidebar>
     {/*
-    <DetailSidebar {...props.portMap} >
-      <PortMap {...props.portMap} />
-    </DetailSidebar>
     <NaturalGasPieceActivityExplanation
       {...props.mapPieceActivityExplanation}
     />
