@@ -12,6 +12,8 @@ import { visualizationSettings } from '../selectors/visualizationSettings'
 import { handleInteractionWithTabIndex } from '../utilities'
 import { setSelection } from '../actions/visualizationSettings'
 
+const emptyMap = fromJS({})
+
 const mapPieceTransformStartTop = ( top, dimensions, mapPieceScale) =>  top * ((mapPieceScale * dimensions.get('height')) + dimensions.get('topPadding'))
 const mapPieceTransformStartLeft = ( left, dimensions, mapPieceScale) => (left * ((mapPieceScale * dimensions.get('width')) + dimensions.get('leftPadding')))
 
@@ -99,8 +101,12 @@ class NaturalGasMapContainer extends React.PureComponent {
     let topPadding = 0
     let provinceRendered = 0
     layout = portsByProvince.map((portNames, province) => {
+      console.log(portNames)
       const ports = this.orderBy(
-        this.props.data.get('values').filter((_, k) => portNames.includes(k)),
+        fromJS(portNames.reduce((acc, next) => {
+          acc[next] = this.props.data.getIn(['values', next], fromJS({}))
+          return acc
+        }, {})),
         this.props.arrangeBy,
       )
       const portsCount = ports.count()
@@ -140,7 +146,7 @@ class NaturalGasMapContainer extends React.PureComponent {
           >
             <MapPiece
               value={port}
-              confidential={this.props.data.getIn(['confidential', key])}
+              confidential={this.props.data.getIn(['confidential', key], emptyMap)}
               tilePosition={tilePosition}
               name={key}
               dimensions={dimensions}
