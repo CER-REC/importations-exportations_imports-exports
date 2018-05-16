@@ -155,21 +155,21 @@ export const timeLineScaleValue = createSelector(
     }
     return fromJS({
       exports: {
-        x: {
-          min: yaxis.getIn(['exports', 'activityTotal']),
+        y: {
+          min: 0,
           max: yaxis.getIn(['exports', 'activityTotal']),
         },
-        y: {
+        x: {
           min: xaxis.min,
           max: xaxis.max,
         },
       },
       imports: {
-        x: {
-          min: yaxis.getIn(['imports', 'activityTotal']),
+        y: {
+          min: 0,
           max: yaxis.getIn(['imports', 'activityTotal']),
         },
-        y: {
+        x: {
           min: xaxis.min,
           max: xaxis.max,
         },

@@ -101,7 +101,6 @@ class NaturalGasMapContainer extends React.PureComponent {
     let topPadding = 0
     let provinceRendered = 0
     layout = portsByProvince.map((portNames, province) => {
-      console.log(portNames)
       const ports = this.orderBy(
         fromJS(portNames.reduce((acc, next) => {
           acc[next] = this.props.data.getIn(['values', next], fromJS({}))
