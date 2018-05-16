@@ -14,6 +14,7 @@ import ElectricityMapPieceActivityExplanation from './ElectricityMapPieceActivit
 import BarChart from './BarChart'
 import Axis from './Axis'
 
+import { visualizationSettings } from '../selectors/visualizationSettings'
 import * as ElectricityViewport from '../selectors/viewport/electricity'
 import { showImportsSelector, showExportsSelector } from '../selectors/visualizationSettings'
 // import { legendMapPosition } from '../selectors/viewport/menus'
@@ -28,6 +29,7 @@ const ElectricityVisualizationContainer = (props) => {
   return (<g>
     <CanadaMapContainer
       {...props.canadaMap}
+      valueAverage={props.unit === 'CAN$/MW.h' ? 'weighted' : false}
     />
 
     <BarChart
@@ -59,13 +61,12 @@ const ElectricityVisualizationContainer = (props) => {
         tabIndex={Constants.getIn(['tabIndex', 'start', 'visualization', 'timeline'])}
       />
     )}
-    <USMapContainer {...props.usMap} />
-    <PowerPoolContainer
-      {...props.powerPool}
+    <USMapContainer
+      {...props.usMap}
+      valueAverage={props.unit === 'CAN$/MW.h' ? 'weighted' : false}
     />
-    <PowerPoolGrouping
-      {...props.powerPool}
-    />
+    <PowerPoolContainer {...props.powerPool} />
+    <PowerPoolGrouping {...props.powerPool} />
     {/*
     <ElectricityMapPieceActivityExplanation
       {...props.mapPieceActivityExplanation}
@@ -131,4 +132,5 @@ export default connect((state, props) => ({
   exportChart: ElectricityViewport.chartExportPosition(state, props),
   showImports: showImportsSelector(state, props),
   showExports: showExportsSelector(state, props),
+  unit: visualizationSettings(state, props).get('amount'),
 }))(ElectricityVisualizationContainer)
