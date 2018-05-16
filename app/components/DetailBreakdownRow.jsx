@@ -8,7 +8,7 @@ import PercentageBar from './PercentageBar'
 import Tr from '../TranslationTable'
 import { humanNumber } from '../utilities'
 
-import ConfidentialIcon from './ConfidentialIcon'
+import { ConfidentialIconLogo } from './ConfidentialIcon'
 import MapLayoutGridConstant from '../MapLayoutGridConstant'
 import { arrangeBy } from '../selectors/data'
 import { visualizationSettings } from '../selectors/visualizationSettings'
@@ -20,25 +20,8 @@ const unitsWithoutPercentage = ['CAN$/MW.h', 'CN$/GJ']
 const PercentageBarConfidentialIcon = props => (
   <svg className="confidentialIcon">
     <g transform="translate(0 0) scale(0.8)">
-      <ConfidentialIcon
-        scale="scale(-4 0.76) translate(-200 0)"
-        text={`${props.confidential} / ${props.totalPoints} values confidential`}
-        containerX={830}
-        containerY={94}
-        linePath="
-          M142.16,
-          173.94l24.26,
-          36.69a40.12,
-          40.12,0,0,0,
-          33.47,
-          18H388.2"
-        lineX={142.16}
-        lineY={173.94}
-        textX={2}
-        textY={16}
-        xPosition={0}
-        yPosition={0}
-        name={`${props.visualization}-${props.name}`}
+      <ConfidentialIconLogo
+        tooltip={`${props.confidential} / ${props.totalPoints} values confidential`}
       />
     </g>
   </svg>
@@ -94,7 +77,6 @@ const DetailBreakdownRow = (props) => (
                 visualization={props.importExportVisualization}
                 confidential={props.confidential}
                 totalPoints={props.totalPoints}
-                name={props.name}
               />
             )}
         </td>
