@@ -10,7 +10,7 @@ export const ToggleConfidentialityMenu = () => ({
   payload: { },
 })
 
-const initialState = false
+const initialState = true
 export const reducer = (state = initialState, action) => {
   switch (action.type) {
     case Types.TOGGLE_CONFIDENTIALITY_MENU: return !state

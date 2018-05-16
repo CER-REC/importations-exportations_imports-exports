@@ -1,15 +1,34 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
+import Immutable from 'immutable'
 
 import './DetailBreakDown.scss'
 import PercentageBar from './PercentageBar'
 import Tr from '../TranslationTable'
 import { humanNumber } from '../utilities'
 
+import { ConfidentialIconLogo } from './ConfidentialIcon'
+import MapLayoutGridConstant from '../MapLayoutGridConstant'
+import { arrangeBy } from '../selectors/data'
+import { visualizationSettings } from '../selectors/visualizationSettings'
+
+import './DetailBreakDown.scss'
+
 const unitsWithoutPercentage = ['CAN$/MW.h', 'CN$/GJ']
 
-const DetailBreakdownRow = props => (
+const PercentageBarConfidentialIcon = props => (
+  <svg className="confidentialIcon">
+    <g transform="translate(0 0) scale(0.8)">
+      <ConfidentialIconLogo
+        tooltip={`${props.confidential} / ${props.totalPoints} values confidential`}
+      />
+    </g>
+  </svg>
+)
+
+const DetailBreakdownRow = (props) => (
+
   <tr className="detailBreakDownText">
     <td width={props.colorBox ? '14px' : '0px'} style={{ verticalAlign: 'baseline' }}>
       {!props.colorBox ? null : (
@@ -27,8 +46,12 @@ const DetailBreakdownRow = props => (
     <td width="100%">{/* Extra long so that it fills all available space */}
       {props.labelPrefix}
       <span className="detailBolded"> {props.label}</span>{props.labelSuffix}&nbsp;
-      <span style={{ display: 'inline-block' }}>{humanNumber(props.value, props.language)}</span>&nbsp;
-      <span style={{ display: 'inline-block' }}>{Tr.getIn(['amounts', props.unit, props.language])}</span>&nbsp;
+      <span style={{ display: 'inline-block' }}>
+        {humanNumber(props.value, props.language)}
+      </span>&nbsp;
+      <span style={{ display: 'inline-block' }}>
+        {Tr.getIn(['amounts', props.unit, props.language])}
+      </span>&nbsp;
       {unitsWithoutPercentage.includes(props.unit)
         ? null
         : (
@@ -38,14 +61,24 @@ const DetailBreakdownRow = props => (
         )
       }
     </td>
+
     {unitsWithoutPercentage.includes(props.unit)
       ? null
       : (
-        <td width="40px" style={{ display: 'inline-block' }}>
+        <td width="40px" style={{ display: 'inline-block', position: 'relative' }}>
           <PercentageBar
             style={{ backgroundColor: props.color, ...props.progressBarStyle }}
             width={((props.total === 0) ? 0.0 : (props.value / props.total) * 100)}
           />
+          {props.confidential === 0
+            ? null
+            : (
+              <PercentageBarConfidentialIcon
+                visualization={props.importExportVisualization}
+                confidential={props.confidential}
+                totalPoints={props.totalPoints}
+              />
+            )}
         </td>
       )
     }
@@ -72,4 +105,5 @@ DetailBreakdownRow.defaultProps = {
   progressBarStyle: {},
 }
 
-export default connect(({ language }) => ({ language }))(DetailBreakdownRow)
+export default connect(({ language, confidentialityMenu, importExportVisualization }) =>
+  ({ language, confidentialityMenu, importExportVisualization }))(DetailBreakdownRow)
