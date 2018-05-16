@@ -23,17 +23,6 @@ export const getScaleKey = (state, props) => props.scaleKey || getValueKey(state
 
 export const mapToValue = (data, key) => data.map(v => v.get(key))
 
-export const aggregateQuarter = createSelector(
-  filterByMap,
-  getAggregateKey,
-  selectedVisualization,
-  (points, aggregateKey, vizName) => {
-    const valueKeys = []
-    const result = aggregateQuarterPoints(points, valueKeys, aggregateKey, vizName)
-    return { points: fromJS(result), valueKeys }
-  },
-)
-
 export const sortTimeline = createSelector(
   barChartValues,
   timelineGrouping,
