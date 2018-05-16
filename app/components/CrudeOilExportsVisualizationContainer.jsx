@@ -137,7 +137,7 @@ const CrudeOilVisualizationContainer = props => (
     </DetailSidebar>
     <USPadd {...props.usPaddChart} />
     <DetailSidebar
-      {...props.usPaddChart}
+      {...props.exportBreakdown}
     >
       <DetailBreakdown
         height="100%"
@@ -175,5 +175,6 @@ export default connect((state, props) => ({
   exportChart: CrudeOilViewport.chartExportPosition(state, props),
   canadaPaddChart: CrudeOilViewport.canadaPaddPosition(state, props),
   usPaddChart: CrudeOilViewport.usPaddPosition(state, props),
+  exportBreakdown: CrudeOilViewport.exportBreakdown(state, props),
   mapPieceActivityExplanation: legendMapPosition(state, props),
 }))(CrudeOilVisualizationContainer)

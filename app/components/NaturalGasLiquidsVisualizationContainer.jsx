@@ -93,19 +93,6 @@ class NaturalGasLiquidsVisualizationContainer extends React.Component {
             colour={Constants.getIn(['styleGuide', 'colours', 'ExportDefault'])}
             tabIndex={Constants.getIn(['tabIndex', 'start', 'visualization', 'timeline'])}
           />
-          <DetailSidebar {...this.props.usPaddChart}>
-            <DetailBreakdown
-              {...this.props.exportChart}
-              groupBy="activity"
-              showGroup="exports"
-              valueKey="productSubtype"
-              valueAverage
-              showHeader={false}
-              color={Constants.getIn(['styleGuide', 'colours', 'ExportDefault'])}
-              trContent={Tr.getIn(['detailBreakDown', 'naturalGasLiquids', 'exports'])}
-              nameMappings={Tr.get('subType')}
-            />
-          </DetailSidebar>
           <DetailSidebar {...this.props.exportChart}>
             <div className="verticalAlign">
               <div className="centered">
@@ -132,6 +119,19 @@ class NaturalGasLiquidsVisualizationContainer extends React.Component {
               </div>
             </div>
           </DetailSidebar>
+          <DetailSidebar {...this.props.exportBreakdown}>
+            <DetailBreakdown
+              {...this.props.exportBreakdown}
+              groupBy="activity"
+              showGroup="exports"
+              valueKey="productSubtype"
+              valueAverage
+              showHeader={false}
+              color={Constants.getIn(['styleGuide', 'colours', 'ExportDefault'])}
+              trContent={Tr.getIn(['detailBreakDown', 'naturalGasLiquids', 'exports'])}
+              nameMappings={Tr.get('subType')}
+            />
+          </DetailSidebar>
         </g>
       )}
       <USPadd aggregateKey="productSubtype" {...this.props.usPaddChart} />
@@ -150,6 +150,7 @@ export default connect((state, props) => ({
   axisPosition: NaturalGasLiquidsViewport.chartAxisPosition(state, props),
   exportChart: NaturalGasLiquidsViewport.chartExportPosition(state, props),
   usPaddChart: NaturalGasLiquidsViewport.usPaddPosition(state, props),
+  exportBreakdown: NaturalGasLiquidsViewport.exportBreakdown(state, props),
   // mapPieceActivityExplanation: legendMapPosition(state, props),
   showImports: showImportsSelector(state, props),
   showExports: showExportsSelector(state, props),

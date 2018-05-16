@@ -61,6 +61,7 @@ class RefinedPetroleumProductsVisualizationContainer extends React.Component {
         <DetailSidebar {...positions.chart}>
           <DetailBreakdown
             {...positions.chart}
+            height="auto"
             groupBy="activity"
             valueKey="productSubtype"
             valueAverage
