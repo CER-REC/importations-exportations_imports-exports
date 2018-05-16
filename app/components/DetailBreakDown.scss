@@ -17,3 +17,12 @@
     color: #666;
   }
 }
+
+.confidentialIcon {
+  position: absolute;
+  margin-top: -2px;
+  margin-left: 15px;
+  z-index: 99999;
+  width: 12px;
+  height: 12px;
+}

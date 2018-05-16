@@ -34,7 +34,7 @@ class ExplanationDot extends React.Component {
   }
 
   explanationDot() {
-    return (<g 
+    return (<g
       transform={`translate(${this.props.xPosition} ${this.props.yPosition})`}>
       <circle fill="#ff708a" cx={0} cy={0} r={Constants.getIn(['explanationDot', 'radiusStart'])}/>
       <g transform={this.props.expanded ? ' rotate(45)' : ''}>
