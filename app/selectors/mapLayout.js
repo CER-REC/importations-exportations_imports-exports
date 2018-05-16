@@ -23,13 +23,13 @@ const getMapLayoutConstants = createSelector(
 )
 
 const sortData = (points, sortBy) => {
-  if (sortBy !== 'imports' && sortBy !== 'exports') { return points }
   if (sortBy === 'amount') {
     return points.sort((a, b) => (
       b.reduce((acc, next) => acc + next, 0) -
       a.reduce((acc, next) => acc + next, 0)
     ))
   }
+  if (sortBy !== 'imports' && sortBy !== 'exports') { return points }
   return points.sort((a, b) => (b.get(sortBy, 0) - a.get(sortBy, 0)))
 }
 
