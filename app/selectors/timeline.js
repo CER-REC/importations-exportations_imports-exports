@@ -61,46 +61,59 @@ export const timelineYearScaleCalculation = createSelector(
   }),
 )
 
+const scaleBytype = (yaxis, xaxis, scaleLinked, type)=>{
+  let scale = {}
+  yaxis.entrySeq().forEach(([activity, activityValue]) => {
+    if (!scale[activity]) {
+      scale[activity] = {}
+    }
+    if (activityValue.get(type)) {
+      activityValue.get(type).keySeq().forEach((category) => {
+        if (!scale[activity][category]) {
+          scale[activity][category] = {
+            y: {
+              min: 0,
+              max: 0,
+            },
+            x: {
+              min: xaxis.min,
+              max: xaxis.max,
+            },
+          }
+        }
+        if (scaleLinked) {
+          let result = yaxis.getIn(['exports', type, category]) > yaxis.getIn(['imports', type, category]) ?
+            yaxis.getIn(['exports', type, category])  : yaxis.getIn(['imports', type, category])
+          if (!result && !yaxis.getIn(['exports', type, category])) {
+            result = yaxis.getIn(['imports', type, category])
+          } else if (!result && !yaxis.getIn(['imports', type, category])) {
+            result = yaxis.getIn(['exports', type, category])
+          }
+          scale[activity][category].y.max = result
+        } else {
+          scale[activity][category].y.max = yaxis.getIn([activity, type, category]) 
+        }
+      })
+    }
+  })
+  return fromJS(scale)
+}
+
 export const timeLineScaleValueByProductSubtype = createSelector(
   timeLineScaleSelector,
   timelineYearScaleCalculation,
   scaledLinkedSelector,
   (yaxis, xaxis, scaleLinked) => {
-    let scale = {}
-    yaxis.entrySeq().forEach(([activity, activityValue]) => {
-      if (!scale[activity]) {
-        scale[activity] = {}
-      }
-      if (activityValue.get('productSubtype')) {
-        activityValue.get('productSubtype').keySeq().forEach((productSubtype) => {
-          if (!scale[activity][productSubtype]) {
-            scale[activity][productSubtype] = {
-              y: {
-                min: 0,
-                max: 0,
-              },
-              x: {
-                min: xaxis.min,
-                max: xaxis.max,
-              },
-            }
-          }
-          if (scaleLinked) {
-            let result = yaxis.getIn(['exports', 'productSubtype', productSubtype]) > yaxis.getIn(['imports', 'productSubtype', productSubtype]) ?
-              yaxis.getIn(['exports', 'productSubtype', productSubtype])  : yaxis.getIn(['imports', 'productSubtype', productSubtype])
-            if (!result && !yaxis.getIn(['exports', 'productSubtype', productSubtype])) {
-              result = yaxis.getIn(['imports', 'productSubtype', productSubtype])
-            } else if (!result && !yaxis.getIn(['imports', 'productSubtype', productSubtype])) {
-              result = yaxis.getIn(['exports', 'productSubtype', productSubtype])
-            }
-            scale[activity][productSubtype].y.max = result
-          } else {
-            scale[activity][productSubtype].y.max = yaxis.getIn([activity, 'productSubtype', productSubtype]) 
-          }
-        })
-      }
-    })
-    return fromJS(scale)
+    return scaleBytype(yaxis, xaxis, scaleLinked, 'productSubtype')
+  },
+)
+
+export const timeLineScaleValueByTransport = createSelector(
+  timeLineScaleSelector,
+  timelineYearScaleCalculation,
+  scaledLinkedSelector,
+  (yaxis, xaxis, scaleLinked) => {
+    return scaleBytype(yaxis, xaxis, scaleLinked, 'transport')
   },
 )
 

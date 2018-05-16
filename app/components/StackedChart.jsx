@@ -5,7 +5,7 @@ import Chart from './Chart'
 import AnimatedLine from './SVGAnimation/AnimatedLine'
 import AxisGuide from './AxisGuide'
 import Constants from '../Constants'
-import { timelineData, timeLineScaleValue, timeLineScaleValueByProductSubtype } from '../selectors/timeline'
+import { timelineData, timeLineScaleValue, timeLineScaleValueByProductSubtype, timeLineScaleValueByTransport } from '../selectors/timeline'
 import { groupingBy as timelineGrouping } from '../selectors/data'
 
 import trSelector from '../selectors/translate'
@@ -22,6 +22,9 @@ class StackedChart extends Chart {
   getScale = (props) => {
     if (props.productSubtype && props.valueKey === 'productSubtype') {
       return props.scaleByProductSubType.getIn([props.activityValueKey, props.productSubtype])
+    }
+    if (props.transport && props.valueKey === 'transport') {
+      return props.scaleByProductTransport.getIn([props.activityValueKey, props.transport])
     }
     return props.scale.get(props.activityValueKey)
   }
@@ -145,4 +148,5 @@ export default connect((state, props) => Object.assign({
   tr: trSelector(state, props),
   scale: timeLineScaleValue(state, props),
   scaleByProductSubType: timeLineScaleValueByProductSubtype(state, props),
+  scaleByProductTransport: timeLineScaleValueByTransport(state, props),
 }, timelineData(state, props)))(StackedChart)
