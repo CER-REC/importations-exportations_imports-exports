@@ -1428,6 +1428,10 @@ const TranslationTable = fromJS({
         en: 'CANADA',
         fr: 'CANADA',
       },
+      caImport: {
+        en: 'CUMULATIVE IMPORTS\nTO CANADA',
+        fr: 'IMPORTATIONS CUMULATIVES\nAU CANADA',
+      },
     },
     us: {
       'PADD I': {

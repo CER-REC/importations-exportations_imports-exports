@@ -14,7 +14,7 @@ import * as CrudeOilViewport from '../selectors/viewport/crudeOilImports'
 import Constants from '../Constants'
 import { positionShape } from '../propTypeShapes'
 import WorldMapContainer from './WorldMapContainer'
-import CAPadd from './Padds/CAPadd'
+import CAImportPadd from './Padds/CAImportPadd'
 import { legendMapPosition } from '../selectors/viewport/menus'
 // import CrudeOilPieceActivityExplanation from './CrudeOilPieceActivityExplanation'
 import Tr from '../TranslationTable'
@@ -22,7 +22,7 @@ import Tr from '../TranslationTable'
 const categoryColours = Constants.getIn(['styleGuide', 'categoryColours'])
 const CrudeOilImportsVisualizationContainer = props => (
   <g>
-    <CAPadd {...props.canadaPaddChart} />
+    <CAImportPadd {...props.canadaPaddChart} />
     <BarChart
       {...props.importChart}
       valueKey="activity"
