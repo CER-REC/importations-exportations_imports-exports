@@ -205,7 +205,7 @@ class BarChart extends Chart {
     const negativeValOffset = this.calculateNegativePosition()
 
     const elements = data.get('values').map((point, period) => {
-      const opacity = this.isTimelinePointFiltered(point) ? 0.5 : 1
+      const opacity = this.isTimelinePointFiltered(period) ? 0.5 : 1
       let value
       if (productSubtype) {
         value = point.get(productSubtype, 0)

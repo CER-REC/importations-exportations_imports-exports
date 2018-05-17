@@ -2,6 +2,8 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import Immutable from 'immutable'
 
+import { parsePeriod } from '../utilities'
+
 class Chart extends React.PureComponent {
   static propTypes = {
     // Unused prop-types are used by reselect
@@ -34,9 +36,8 @@ class Chart extends React.PureComponent {
       : `translate(${left} ${top})`
   }
 
-  isTimelinePointFiltered(point) {
-    const year = point.get('year')
-    const quarter = point.get('quarter')
+  isTimelinePointFiltered(period) {
+    const { year, quarter } = parsePeriod(period)
 
     if (this.props.timelinePlayback) {
       const playback = this.props.timelinePlayback.toJS()
