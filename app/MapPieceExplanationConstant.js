@@ -89,7 +89,7 @@ const MapPieceExplanationConstant = fromJS({
     },
 
   },
-  crudeOil: {
+  crudeOilExports: {
     datapoint: {
       name: 'BC',
       exports: 10,
