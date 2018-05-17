@@ -37,12 +37,12 @@ const CrudeOilImportsVisualizationContainer = props => (
       <DetailBreakdown
         height="100%"
         groupBy="activity"
-        showGroup="exports"
+        showGroup="imports"
         valueKey="destination"
         valueAverage
-        color={Constants.getIn(['styleGuide', 'colours', 'ExportDefault'])}
+        color={Constants.getIn(['styleGuide', 'colours', 'ImportDefault'])}
         trContent={Tr.getIn(['detailBreakDown', 'crudeOilImports', 'imports'])}
-        nameMappings={Tr.getIn(['Padd', 'us'])}
+        nameMappings={Tr.getIn(['Padd', 'ca'])}
       />
     </DetailSidebar>
     <Axis
