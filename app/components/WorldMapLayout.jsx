@@ -46,29 +46,35 @@ class WorldMapLayout extends React.Component {
     */
   }
 
-  onClick = (country, originKey) => {
+  onClick = (country, continentKey) => {
     const { selection } = this.props
-    let origins = [originKey]
+    let continents = [continentKey]
     if (selection.get('country') === country) {
-      const originKeyExists = selection.get('origins').indexOf(originKey)
+      const originKeyExists = selection.get('continents').indexOf(continentKey)
       if (originKeyExists === -1) {
-        origins = selection.get('origins').concat(originKey)
+        continents = selection.get('continents').concat(continentKey)
       } else {
-        origins = selection.get('origins').delete(originKeyExists)
+        continents = selection.get('continents').delete(originKeyExists)
       }
     }
+    
+    let filteredData = Constants.getIn(['dataloader', 'mapping', 'continent']).filter((point) => {
+      return continents.includes(point)
+    })
+    const origins = filteredData.keySeq().toArray()
     this.props.onMapPieceClick({
       country,
+      continents,
       origins,
     })
   }
   isMapPieceSelected(key, country) {
-    const isSelected = this.props.selection.get('origins').indexOf(key)
+    const isSelected = this.props.selection.get('continents').indexOf(key)
     if (isSelected !== -1) { return true }
     return this.props.selection.getIn(['destinations', country], new Immutable.List()).has(key)
   }
   isSelected() {
-    const length = this.props.selection.get('origins').count()
+    const length = this.props.selection.get('continents').count()
     return (length > 0)
   }
   renderMapPiece() {
@@ -90,7 +96,6 @@ class WorldMapLayout extends React.Component {
       .sortBy((_, key) => key)
       .map((position, key) => {
         const humanName = this.props.Tr(['country', this.props.country, key])
-        
         const value = layout.getIn(['values', key], emptyMap)
         return (
           <g key={`mapPieceKey_${this.props.country}_${key}`}>

@@ -10,6 +10,7 @@ import Axis from './Axis'
 import DetailSidebar from './DetailSidebar'
 import DetailBreakdown from './DetailBreakdown'
 import DetailBreakdownHeader from './DetailBreakdownHeader'
+import ConfidentialCount from './ConfidentialCount'
 import DetailTotal from './DetailTotal'
 import * as CrudeOilViewport from '../selectors/viewport/crudeOilImports'
 import Constants from '../Constants'
@@ -42,6 +43,12 @@ const CrudeOilImportsVisualizationContainer = props => (
         groupBy="activity"
         valueKey="destinationKey"
       />
+      <ConfidentialCount
+        valueKey="destinationKey"
+        filterActivity="imports"
+        groupBy="activity"
+        valueAverage
+      />
     </DetailSidebar>
     <Axis
       {...props.axisPosition}
@@ -54,7 +61,7 @@ const CrudeOilImportsVisualizationContainer = props => (
       {...props.worldChartPosition}
     >
       <DetailBreakdown
-        height="100%"
+        height="250px"
         groupBy="activity"
         showGroup="imports"
         valueKey="origin"

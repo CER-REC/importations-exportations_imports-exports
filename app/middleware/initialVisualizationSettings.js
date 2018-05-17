@@ -43,6 +43,7 @@ const initialVisualizationSettings = store => next => (action) => {
           selection: {
             country: null,
             origins: [],
+            continents: [],
             destinations: {},
             provinces: [],
             ports: [],
