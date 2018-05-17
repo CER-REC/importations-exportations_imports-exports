@@ -16,9 +16,9 @@ import * as NaturalGasViewport from '../selectors/viewport/naturalGas'
 
 import { amount } from '../selectors/data'
 import { showImportsSelector, showExportsSelector } from '../selectors/visualizationSettings'
-/*import NaturalGasPieceActivityExplanation from './NaturalGasPieceActivityExplanation'*/
+import NaturalGasPieceActivityExplanation from './NaturalGasPieceActivityExplanation'
 import Constants from '../Constants'
-// import {legendMapPosition} from '../selectors/viewport/menus'
+import {legendMapPosition} from '../selectors/viewport/menus'
 
 const NaturalGasVisualizationContainer = (props) => {
   const weighted = props.unit === 'CN$/GJ' ? 'weighted' : false
@@ -110,11 +110,9 @@ const NaturalGasVisualizationContainer = (props) => {
       )}
       <NaturalGasMapContainer {...props.mapTiles} valueAverage={weighted} />
       <DetailSidebar {...props.portMap} ><PortMap {...props.portMap} /></DetailSidebar>
-      {/*
       <NaturalGasPieceActivityExplanation
         {...props.mapPieceActivityExplanation}
       />
-      */}
     </g>
   )
 }
@@ -125,8 +123,7 @@ export default connect((state, props) => ({
   exportChart: NaturalGasViewport.chartExportPosition(state, props),
   mapTiles: NaturalGasViewport.mapTilesPosition(state, props),
   portMap: NaturalGasViewport.portMapPosition(state, props),
-  /*
-  mapPieceActivityExplanation: legendMapPosition(state, props),*/
+  mapPieceActivityExplanation: legendMapPosition(state, props),
   unit: amount(state, props),
   showImports: showImportsSelector(state, props),
   showExports: showExportsSelector(state, props),

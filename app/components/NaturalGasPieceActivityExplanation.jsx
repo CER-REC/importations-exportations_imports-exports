@@ -5,16 +5,20 @@ import MapPiece from './MapPiece'
 import MapPieceExplanationConstant from '../MapPieceExplanationConstant'
 import Tr from '../TranslationTable'
 import {visualizationSettings} from '../selectors/visualizationSettings'
+import Immutable from 'immutable'
 
 class NaturalGasPieceActivityExplanation extends React.Component {
   render() {
     let activity = 'importsExports'
+    const emptyMap = new Immutable.Map()
     if(['importsForReexport', 'exportsForReimport'].includes(this.props.activityGroup.get('activity'))){
       activity = this.props.activityGroup.get('activity')
     }
     return (<g transform={`translate(${this.props.left + 1},${this.props.top + 30})`}>
       <MapPiece
-        data={MapPieceExplanationConstant.getIn(['naturalGas', 'datapoint'])}
+        value={MapPieceExplanationConstant.getIn(['naturalGas', 'datapoint'])}
+        confidential={emptyMap}
+        tilePosition={emptyMap}
         dimensions={MapPieceExplanationConstant.getIn(['naturalGas', 'dimensions'])}
         legends={MapPieceExplanationConstant.getIn(['naturalGas', 'legends'])}
         styles={MapPieceExplanationConstant.getIn(['naturalGas', 'styles'])}
