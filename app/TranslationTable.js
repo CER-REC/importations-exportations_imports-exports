@@ -2517,6 +2517,18 @@ const TranslationTable = fromJS({
         },
       },
     },
+    crudeOilImports: {
+      imports: {
+        label: {
+          en: 'imports from CONTINENT',
+          fr: 'les importations de CONTINENT',
+        },
+        topText: {
+          en: 'CANADA',
+          fr: 'CANADA',
+        },
+      },
+    },
     naturalGasLiquids: {
       ca: {
         imports: {

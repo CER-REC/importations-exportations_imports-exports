@@ -120,6 +120,37 @@ const MapPieceExplanationConstant = fromJS({
       stroke: '#999',
     },
   },
+  crudeOilImports: {
+    datapoint: {
+      name: 'BC',
+      exports: 10,
+      imports: 10,
+      totalCount: 0,
+      confidentialCount: 0,
+    },
+    styles: {
+      color: 'white',
+      labelPosition: 'down',
+      arrowPosition: 'up',
+      arrowSpacing: -1,
+      bottomMargin: 5,
+      topMargin: 5,
+      confidentialStyle: {
+        fill: '#999',
+        stroke: '#999',
+        exclamationFill: '#fff',
+      },
+    },
+    legends: [{
+      lower: 1,
+      upper: 100,
+      imports: 'white',
+      exports: 'white',
+    }],
+    arrowProps: {
+      stroke: '#999',
+    },
+  },
   naturalGasLiquids: {
     ca: {
       datapoint: {

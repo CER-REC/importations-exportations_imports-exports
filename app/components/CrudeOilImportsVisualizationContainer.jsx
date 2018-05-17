@@ -18,7 +18,7 @@ import { positionShape } from '../propTypeShapes'
 import WorldMapContainer from './WorldMapContainer'
 import CAImportPadd from './Padds/CAImportPadd'
 import { legendMapPosition } from '../selectors/viewport/menus'
-// import CrudeOilPieceActivityExplanation from './CrudeOilPieceActivityExplanation'
+import CrudeOilImportPieceActivityExplanation from './CrudeOilImportPieceActivityExplanation'
 import Tr from '../TranslationTable'
 
 const categoryColours = Constants.getIn(['styleGuide', 'categoryColours'])
@@ -71,11 +71,9 @@ const CrudeOilImportsVisualizationContainer = props => (
         nameMappings={Tr.getIn(['Padd', 'world'])}
       />
     </DetailSidebar>
-    {/*
-    <CrudeOilPieceActivityExplanation
+    <CrudeOilImportPieceActivityExplanation
       {...props.mapPieceActivityExplanation}
     />
-    */}
   </g>
 )
 
