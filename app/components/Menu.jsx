@@ -163,6 +163,7 @@ class Menu extends React.PureComponent {
     const { Tr } = this.props
     const tabIndex = this.getTabIndex()
     const prefix = Tr(['menu', this.props.name, 'prefix'])
+    console.log(this.props.title, prefix)
     const title = {
       render: (this.props.title && this.props.title.render) || (
         <tspan>

@@ -6,7 +6,11 @@ import Constants from '../Constants'
 export const activityOptions = createSelector(
   selectedVisualization,
   (vis) => {
-    if (vis === 'crudeOil' || vis === 'refinedPetroleumProducts') {
+    if (vis === 'refinedPetroleumProducts') {
+      return ['exports']
+    } else if (vis === 'crudeOilImports') {
+      return ['imports']
+    } else if (vis === 'crudeOilExports') {
       return ['exports']
     } else if (vis === 'naturalGas') {
       return ['importsExports', 'importsForReexport', 'exportsForReimport']
@@ -17,12 +21,14 @@ export const activityOptions = createSelector(
 
 export const arrangeByOptions = createSelector(
   selectedVisualization,
-  vis => {
-    if (vis === 'crudeOil') {
+  vis =>{
+    if (vis === 'crudeOilExports') {
       return ['location', 'exports']
+    } else if (vis === 'crudeOilImports') {
+      return ['location', 'imports']
     } else if (vis === 'refinedPetroleumProducts') {
       return ['stack', 'split']
-    } else if(vis === 'naturalGasLiquids'){
+    } else if (vis === 'naturalGasLiquids') {
       return ['location', 'amount']
     }
     return ['location', 'imports', 'exports']
