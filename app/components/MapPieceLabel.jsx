@@ -30,7 +30,7 @@ class MapPieceLabel extends React.Component {
     if (this.props.name === 'PJMPP') {
       name = 'PJM'
     }
-    if (name.includes('\n')) {
+    if (name && name.includes('\n')) {
       const splitName = name.split('\n')
       return (
         <text className={this.props.styleClass} y={yAxis - 12} aria-hidden>

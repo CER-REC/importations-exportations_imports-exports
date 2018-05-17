@@ -69,7 +69,8 @@ export const explanationTogglePosition = createSelector(
   chartAxisPosition,
   (prev, chart) => ({
     ...prev,
-    top: chart.top - 5,
+    //top: chart.top - 5,
+    top: prev.top + 150,
     height: 20,
   }),
 )
@@ -87,7 +88,7 @@ export const legendMapPosition = createSelector(
   confidentialityTogglePosition,
   prev => ({
     ...prev,
-    top: prev.top + prev.height + 120,
+    top: prev.top + prev.height,
     height: 120,
   }),
 )

@@ -62,6 +62,7 @@ const initialState = fromJS({
   selection: {
     country: null,
     origins: [],
+    continents: [],
     destinations: {},
     provinces: [],
     ports: [],

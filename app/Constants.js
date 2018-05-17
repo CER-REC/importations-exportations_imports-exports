@@ -391,10 +391,10 @@ const Constants = fromJS({
         Suriname: 'southAmerica',
         Uruguay: 'southAmerica',
         Venezuela: 'southAmerica',
-        Columbia:'Columbia',
+        Columbia: 'southAmerica',
 
         // Africa
-        
+
         Algeria: 'africa',
         Angola: 'africa',
         Benin: 'africa',
