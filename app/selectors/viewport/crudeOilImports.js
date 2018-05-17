@@ -11,7 +11,7 @@ export const canadaPaddPosition = createSelector(
     top: visContent.top - 30,
     left: visContent.left + 1.3,
     width: visContent.width,
-    height: 150,
+    height: 170,
   }),
 )
 
@@ -46,7 +46,7 @@ export const worldChartPosition = createSelector(
   (axis, viewp) => {
     const top = viewp.get('changeHeightRatio') > 1.2 ? (axis.top + axis.height) : (axis.top + axis.height) 
     const result = {
-      top,
+      top: top + 10,
       left: axis.left,
       width: axis.width,
       height: 100,
