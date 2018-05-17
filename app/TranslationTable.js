@@ -29,7 +29,7 @@ const TranslationTable = fromJS({
 
   loader: {
     titleText: {
-      en:'loading visualisation',
+      en: 'loading visualisation',
       fr: 'visualisation en chargement',
     },
     imports: {
@@ -69,7 +69,7 @@ const TranslationTable = fromJS({
       fr: 'Cette visualisation présente les données trimestrielles sur le commerce de l’énergie entre le Canada et les États-Unis depuis 1985, à l’exception des données concernant l’électricité, qui ne sont disponibles que depuis 1990.',
     },
     p3: {
-      en: 'If you want to use the data for research and undertake your own review, all the data is downloadable and shareable. The chart images are also downloadable, and if you are interested in the source code for the visualizations, it is available on the government’s Open Government portal:',
+      en: 'If you want to use the data for research and undertake your own review, all the data is downloadable and shareable. The chart images are also downloadable, and if you are interested in the source code for the visualizations, it is available on the government’s Open Government portal: ',
       fr: 'Si vous souhaitez utiliser les données pour vos recherches ou pour en faire votre propre analyse, vous pouvez les télécharger et les partager. Il en est de même pour les graphiques. Quant au code source des visualisations, il est accessible sur le portail du « gouvernement ouvert » à l’adresse',
     },
     governmentPortalLink: {
@@ -295,7 +295,7 @@ const TranslationTable = fromJS({
           en: 'MOST EXPORTS',
           fr: 'PLUS D’EXPORTATIONS',
         },
-        amount:{
+        amount: {
           en: 'AMOUNT',
           fr: 'QUANTITÉ',
         },
@@ -775,8 +775,8 @@ const TranslationTable = fromJS({
   },
 
   bitlyShare: {
-    en: 'Visit this interactive visualization:',
-    fr: 'Visitez cette visualisation interactif:',
+    en: 'Visit this interactive visualization: ',
+    fr: 'Visitez cette visualisation interactif: ',
   },
 
   downloadable: {
@@ -1463,6 +1463,991 @@ const TranslationTable = fromJS({
         fr: 'MEXIQUE',
       },
     },
+    world: {
+      'United States': {
+        en: 'United States',
+        fr: 'United States_FR',
+      },
+      Alabama: {
+        en: 'Alabama',
+        fr: 'Alabama_FR',
+      },
+      Alaska: {
+        en: 'Alaska',
+        fr: 'Alaska_FR',
+      },
+      Arizona: {
+        en: 'Arizona',
+        fr: 'Arizona_FR',
+      },
+      Arkansas: {
+        en: 'Arkansas',
+        fr: 'Arkansas_FR',
+      },
+      California: {
+        en: 'California',
+        fr: 'California_FR',
+      },
+      Colorado: {
+        en: 'Colorado',
+        fr: 'Colorado_FR',
+      },
+      Connecticut: {
+        en: 'Connecticut',
+        fr: 'Connecticut_FR',
+      },
+      Delaware: {
+        en: 'Delaware',
+        fr: 'Delaware_FR',
+      },
+      Florida: {
+        en: 'Florida',
+        fr: 'Florida_FR',
+      },
+      Georgia: {
+        en: 'Georgia',
+        fr: 'Georgia_FR',
+      },
+      Hawaii: {
+        en: 'Hawaii',
+        fr: 'Hawaii_FR',
+      },
+      Idaho: {
+        en: 'Idaho',
+        fr: 'Idaho_FR',
+      },
+      Illinois: {
+        en: 'Illinois',
+        fr: 'Illinois_FR',
+      },
+      Indiana: {
+        en: 'Indiana',
+        fr: 'Indiana_FR',
+      },
+      Iowa: {
+        en: 'Iowa',
+        fr: 'Iowa_FR',
+      },
+      Kansas: {
+        en: 'Kansas',
+        fr: 'Kansas_FR',
+      },
+      Kentucky: {
+        en: 'Kentucky',
+        fr: 'Kentucky_FR',
+      },
+      Louisiana: {
+        en: 'Louisiana',
+        fr: 'Louisiana_FR',
+      },
+      Maine: {
+        en: 'Maine',
+        fr: 'Maine_FR',
+      },
+      Maryland: {
+        en: 'Maryland',
+        fr: 'Maryland_FR',
+      },
+      Massachusetts: {
+        en: 'Massachusetts',
+        fr: 'Massachusetts_FR',
+      },
+      Michigan: {
+        en: 'Michigan',
+        fr: 'Michigan_FR',
+      },
+      Minnesota: {
+        en: 'Minnesota',
+        fr: 'Minnesota_FR',
+      },
+      Mississippi: {
+        en: 'Mississippi',
+        fr: 'Mississippi_FR',
+      },
+      Missouri: {
+        en: 'Missouri',
+        fr: 'Missouri_FR',
+      },
+      Montana: {
+        en: 'Montana',
+        fr: 'Montana_FR',
+      },
+      Nebraska: {
+        en: 'Nebraska',
+        fr: 'Nebraska_FR',
+      },
+      Nevada: {
+        en: 'Nevada',
+        fr: 'Nevada_FR',
+      },
+      'New Hampshire': {
+        en: 'New Hampshire',
+        fr: 'New Hampshire_FR',
+      },
+      'New Jersey': {
+        en: 'New Jersey',
+        fr: 'New Jersey_FR',
+      },
+      'New Mexico': {
+        en: 'New Mexico',
+        fr: 'New Mexico_FR',
+      },
+      'New York': {
+        en: 'New York',
+        fr: 'New York_FR',
+      },
+      'North Carolina': {
+        en: 'North Carolina',
+        fr: 'North Carolina_FR',
+      },
+      'North Dakota': {
+        en: 'North Dakota',
+        fr: 'North Dakota_FR',
+      },
+      Ohio: {
+        en: 'Ohio',
+        fr: 'Ohio_FR',
+      },
+      Oklahoma: {
+        en: 'Oklahoma',
+        fr: 'Oklahoma_FR',
+      },
+      Oregon: {
+        en: 'Oregon',
+        fr: 'Oregon_FR',
+      },
+      Pennsylvania: {
+        en: 'Pennsylvania',
+        fr: 'Pennsylvania_FR',
+      },
+      'Rhode Island': {
+        en: 'Rhode Island',
+        fr: 'Rhode Island_FR',
+      },
+      'South Carolina': {
+        en: 'South Carolina',
+        fr: 'South Carolina_FR',
+      },
+      'South Dakota': {
+        en: 'South Dakota',
+        fr: 'South Dakota_FR',
+      },
+      Tennessee: {
+        en: 'Tennessee',
+        fr: 'Tennessee_FR',
+      },
+      Texas: {
+        en: 'Texas',
+        fr: 'Texas_FR',
+      },
+      Utah: {
+        en: 'Utah',
+        fr: 'Utah_FR',
+      },
+      Vermont: {
+        en: 'Vermont',
+        fr: 'Vermont_FR',
+      },
+      Virginia: {
+        en: 'Virginia',
+        fr: 'Virginia_FR',
+      },
+      Washington: {
+        en: 'Washington',
+        fr: 'Washington_FR',
+      },
+      'West Virginia': {
+        en: 'West Virginia',
+        fr: 'West Virginia_FR',
+      },
+      Wisconsin: {
+        en: 'Wisconsin',
+        fr: 'Wisconsin_FR',
+      },
+      Wyoming: {
+        en: 'Wyoming',
+        fr: 'Wyoming_FR',
+      },
+      Yukon: {
+        en: 'Yukon',
+        fr: 'Yukon_FR',
+      },
+      'Northwest Territories': {
+        en: 'Northwest Territories',
+        fr: 'Northwest Territories_FR',
+      },
+      Nunavut: {
+        en: 'Nunavut',
+        fr: 'Nunavut_FR',
+      },
+      'Newfoundland and Labrador': {
+        en: 'Newfoundland and Labrador',
+        fr: 'Newfoundland and Labrador_FR',
+      },
+      'Prince Edward Island': {
+        en: 'Prince Edward Island',
+        fr: 'Prince Edward Island_FR',
+      },
+      'British Columbia': {
+        en: 'British Columbia',
+        fr: 'British Columbia_FR',
+      },
+      Alberta: {
+        en: 'Alberta',
+        fr: 'Alberta_FR',
+      },
+      Saskatchewan: {
+        en: 'Saskatchewan',
+        fr: 'Saskatchewan_FR',
+      },
+      Manitoba: {
+        en: 'Manitoba',
+        fr: 'Manitoba_FR',
+      },
+      Ontario: {
+        en: 'Ontario',
+        fr: 'Ontario_FR',
+      },
+      Québec: {
+        en: 'Québec',
+        fr: 'Québec_FR',
+      },
+      'New Brunswick': {
+        en: 'New Brunswick',
+        fr: 'New Brunswick_FR',
+      },
+      'Nova Scotia': {
+        en: 'Nova Scotia',
+        fr: 'Nova Scotia_FR',
+      },
+      'Atlantic provinces and Quebec': {
+        en: 'Atlantic provinces and Quebec',
+        fr: 'Atlantic provinces and Quebec_FR',
+      },
+      'Other provinces and territories': {
+        en: 'Other provinces and territories',
+        fr: 'Other provinces and territories_FR',
+      },
+      Mexico: {
+        en: 'Mexico',
+        fr: 'Mexico_FR',
+      },
+
+      // south America
+      Argentina: {
+        en: 'Argentina',
+        fr: 'Argentina_FR',
+      },
+      Bolivia: {
+        en: 'Bolivia',
+        fr: 'Bolivia_FR',
+      },
+      Brazil: {
+        en: 'Brazil',
+        fr: 'Brazil_FR',
+      },
+      Chile: {
+        en: 'Chile',
+        fr: 'Chile_FR',
+      },
+      Colombia: {
+        en: 'Colombia',
+        fr: 'Colombia_FR',
+      },
+      Ecuador: {
+        en: 'Ecuador',
+        fr: 'Ecuador_FR',
+      },
+      'French Guiana': {
+        en: 'French Guiana',
+        fr: 'French Guiana_FR',
+      },
+      Guyana: {
+        en: 'Guyana',
+        fr: 'Guyana_FR',
+      },
+      Paraguay: {
+        en: 'Paraguay',
+        fr: 'Paraguay_FR',
+      },
+      Peru: {
+        en: 'Peru',
+        fr: 'Peru_FR',
+      },
+      Suriname: {
+        en: 'Suriname',
+        fr: 'Suriname_FR',
+      },
+      Uruguay: {
+        en: 'Uruguay',
+        fr: 'Uruguay_FR',
+      },
+      Venezuela: {
+        en: 'Venezuela',
+        fr: 'Venezuela_FR',
+      },
+      Columbia: {
+        en: 'Columbia',
+        fr: 'Columbia_FR',
+      },
+
+      // Africa
+      
+      Algeria: {
+        en: 'Algeria',
+        fr: 'Algeria_FR',
+      },
+      Angola: {
+        en: 'Angola',
+        fr: 'Angola_FR',
+      },
+      Benin: {
+        en: 'Benin',
+        fr: 'Benin_FR',
+      },
+      Botswana: {
+        en: 'Botswana',
+        fr: 'Botswana_FR',
+      },
+      'Burkina Faso': {
+        en: 'Burkina Faso',
+        fr: 'Burkina Faso_FR',
+      },
+      Burundi: {
+        en: 'Burundi',
+        fr: 'Burundi_FR',
+      },
+      Cameroon: {
+        en: 'Cameroon',
+        fr: 'Cameroon_FR',
+      },
+      'Cape Verde': {
+        en: 'Cape Verde',
+        fr: 'Cape Verde_FR',
+      },
+      'Central African Republic': {
+        en: 'Central African Republic',
+        fr: 'Central African Republic_FR',
+      },
+      Chad: {
+        en: 'Chad',
+        fr: 'Chad_FR',
+      },
+      Comoros: {
+        en: 'Comoros',
+        fr: 'Comoros_FR',
+      },
+      Congo: {
+        en: 'Congo',
+        fr: 'Congo_FR',
+      },
+      Zaire: {
+        en: 'Zaire',
+        fr: 'Zaire_FR',
+      },
+      "Côte d'Ivoire": {
+        en:"Côte d'Ivoire",
+        fr: "Côte d'Ivoire_FR",
+      },
+      Djibouti: {
+        en: 'Djibouti',
+        fr: 'Djibouti_FR',
+      },
+      Egypt: {
+        en: 'Egypt',
+        fr: 'Egypt_FR',
+      },
+      'Equatorial Guinea': {
+        en: 'Equatorial Guinea',
+        fr: 'Equatorial Guinea_FR',
+      },
+      Eritrea: {
+        en: 'Eritrea',
+        fr: 'Eritrea_FR',
+      },
+      Ethiopia: {
+        en: 'Ethiopia',
+        fr: 'Ethiopia_FR',
+      },
+      Gabon: {
+        en: 'Gabon',
+        fr: 'Gabon_FR',
+      },
+      'The Gambia': {
+        en: 'The Gambia',
+        fr: 'The Gambia_FR',
+      },
+      Ghana: {
+        en: 'Ghana',
+        fr: 'Ghana_FR',
+      },
+      Guinea: {
+        en: 'Guinea',
+        fr: 'Guinea_FR',
+      },
+      Guine: {
+        en: 'Guine',
+        fr: 'Guine_FR',
+      },
+      Kenya: {
+        en: 'Kenya',
+        fr: 'Kenya_FR',
+      },
+      Lesotho: {
+        en: 'Lesotho',
+        fr: 'Lesotho_FR',
+      },
+      Liberia: {
+        en: 'Liberia',
+        fr: 'Liberia_FR',
+      },
+      Libya: {
+        en: 'Libya',
+        fr: 'Libya_FR',
+      },
+      Madagascar: {
+        en: 'Madagascar',
+        fr: 'Madagascar_FR',
+      },
+      Malawi: {
+        en: 'Malawi',
+        fr: 'Malawi_FR',
+      },
+      Mali: {
+        en: 'Mali',
+        fr: 'Mali_FR',
+      },
+      Mauritania: {
+        en: 'Mauritania',
+        fr: 'Mauritania_FR',
+      },
+      Mauritius: {
+        en: 'Mauritius',
+        fr: 'Mauritius_FR',
+      },
+      Morocco: {
+        en: 'Morocco',
+        fr: 'Morocco_FR',
+      },
+      Mozambique: {
+        en: 'Mozambique',
+        fr: 'Mozambique_FR',
+      },
+      Namibia: {
+        en: 'Namibia',
+        fr: 'Namibia_FR',
+      },
+      Niger: {
+        en: 'Niger',
+        fr: 'Niger_FR',
+      },
+      Nigeria: {
+        en: 'Nigeria',
+        fr: 'Nigeria_FR',
+      },
+      Rwanda: {
+        en: 'Rwanda',
+        fr: 'Rwanda_FR',
+      },
+      'São Tomé and Príncipe': {
+        en: 'São Tomé and Príncipe',
+        fr: 'São Tomé and Príncipe_FR',
+      },
+      Senegal: {
+        en: 'Senegal',
+        fr: 'Senegal_FR',
+      },
+      Seychelles: {
+        en: 'Seychelles',
+        fr: 'Seychelles_FR',
+      },
+      'Sierra Leone': {
+        en: 'Sierra Leone',
+        fr: 'Sierra Leone_FR',
+      },
+      Somalia: {
+        en: 'Somalia',
+        fr: 'Somalia_FR',
+      },
+      'South Africa': {
+        en: 'South Africa',
+        fr: 'South Africa_FR',
+      },
+      'South Sudan': {
+        en: 'South Sudan',
+        fr: 'South Sudan_FR',
+      },
+      Sudan: {
+        en: 'Sudan',
+        fr: 'Sudan_FR',
+      },
+      Swaziland: {
+        en: 'Swaziland',
+        fr: 'Swaziland_FR',
+      },
+      Tanzania: {
+        en: 'Tanzania',
+        fr: 'Tanzania_FR',
+      },
+      Togo: {
+        en: 'Togo',
+        fr: 'Togo_FR',
+      },
+      Tunisia: {
+        en: 'Tunisia',
+        fr: 'Tunisia_FR',
+      },
+      Uganda: {
+        en: 'Uganda',
+        fr: 'Uganda_FR',
+      },
+      'Western Sahara': {
+        en: 'Western Sahara',
+        fr: 'Western Sahara_FR',
+      },
+      Zambia: {
+        en: 'Zambia',
+        fr: 'Zambia_FR',
+      },
+      Zimbabwe: {
+        en: 'Zimbabwe',
+        fr: 'Zimbabwe_FR',
+      },
+
+      // oceania
+      Australia: {
+        en: 'Australia',
+        fr: 'Australia_FR',
+      },
+      'Federated States of Micronesia': {
+        en: 'Federated States of Micronesia',
+        fr: 'Federated States of Micronesia_FR',
+      },
+      Fiji: {
+        en: 'Fiji',
+        fr: 'Fiji_FR',
+      },
+      Kiribati: {
+        en: 'Kiribati',
+        fr: 'Kiribati_FR',
+      },
+      'Marshall Islands': {
+        en: 'Marshall Islands',
+        fr: 'Marshall Islands_FR',
+      },
+      Nauru: {
+        en: 'Nauru',
+        fr: 'Nauru_FR',
+      },
+      'New Zealand': {
+        en: 'New Zealand',
+        fr: 'New Zealand_FR',
+      },
+      Palau: {
+        en: 'Palau',
+        fr: 'Palau_FR',
+      },
+      'Papua New Guinea': {
+        en: 'Papua New Guinea',
+        fr: 'Papua New Guinea_FR',
+      },
+      Samoa: {
+        en: 'Samoa',
+        fr: 'Samoa_FR',
+      },
+      'Solomon Islands': {
+        en: 'Solomon Islands',
+        fr: 'Solomon Islands_FR',
+      },
+      Tonga: {
+        en: 'Tonga',
+        fr: 'Tonga_FR',
+      },
+      Tuvalu: {
+        en: 'Tuvalu',
+        fr: 'Tuvalu_FR',
+      },
+      Vanuatu: {
+        en: 'Vanuatu',
+        fr: 'Vanuatu_FR',
+      },
+
+      // europe
+      Albania: {
+        en: 'Albania',
+        fr: 'Albania_FR',
+      },
+      Andorra: {
+        en: 'Andorra',
+        fr: 'Andorra_FR',
+      },
+      Austria: {
+        en: 'Austria',
+        fr: 'Austria_FR',
+      },
+      Belarus: {
+        en: 'Belarus',
+        fr: 'Belarus_FR',
+      },
+      Belgium: {
+        en: 'Belgium',
+        fr: 'Belgium_FR',
+      },
+      'Bosnia and Herzegovina': {
+        en: 'Bosnia and Herzegovina',
+        fr: 'Bosnia and Herzegovina_FR',
+      },
+      Bulgaria: {
+        en: 'Bulgaria',
+        fr: 'Bulgaria_FR',
+      },
+      Croatia: {
+        en: 'Croatia',
+        fr: 'Croatia_FR',
+      },
+      Cyprus: {
+        en: 'Cyprus',
+        fr: 'Cyprus_FR',
+      },
+      'Czech Republic': {
+        en: 'Czech Republic',
+        fr: 'Czech Republic_FR',
+      },
+      Denmark: {
+        en: 'Denmark',
+        fr: 'Denmark_FR',
+      },
+      Estonia: {
+        en: 'Estonia',
+        fr: 'Estonia_FR',
+      },
+      Finland: {
+        en: 'Finland',
+        fr: 'Finland_FR',
+      },
+      France: {
+        en: 'France',
+        fr: 'France_FR',
+      },
+      Germany: {
+        en: 'Germany',
+        fr: 'Germany_FR',
+      },
+      Greece: {
+        en: 'Greece',
+        fr: 'Greece_FR',
+      },
+      Hungary: {
+        en: 'Hungary',
+        fr: 'Hungary_FR',
+      },
+      Iceland: {
+        en: 'Iceland',
+        fr: 'Iceland_FR',
+      },
+      'Republic of Ireland': {
+        en: 'Republic of Ireland',
+        fr: 'Republic of Ireland_FR',
+      },
+      Italy: {
+        en: 'Italy',
+        fr: 'Italy_FR',
+      },
+      Kosovo: {
+        en: 'Kosovo',
+        fr: 'Kosovo_FR',
+      },
+      Latvia: {
+        en: 'Latvia',
+        fr: 'Latvia_FR',
+      },
+      Liechtenstein: {
+        en: 'Liechtenstein',
+        fr: 'Liechtenstein_FR',
+      },
+      Lithuania: {
+        en: 'Lithuania',
+        fr: 'Lithuania_FR',
+      },
+      Luxembourg: {
+        en: 'Luxembourg',
+        fr: 'Luxembourg_FR',
+      },
+      Macedonia: {
+        en: 'Macedonia',
+        fr: 'Macedonia_FR',
+      },
+      Malta: {
+        en: 'Malta',
+        fr: 'Malta_FR',
+      },
+      Moldova: {
+        en: 'Moldova',
+        fr: 'Moldova_FR',
+      },
+      Monaco: {
+        en: 'Monaco',
+        fr: 'Monaco_FR',
+      },
+      Montenegro: {
+        en: 'Montenegro',
+        fr: 'Montenegro_FR',
+      },
+      Netherlands: {
+        en: 'Netherlands',
+        fr: 'Netherlands_FR',
+      },
+      Norway: {
+        en: 'Norway',
+        fr: 'Norway_FR',
+      },
+      Poland: {
+        en: 'Poland',
+        fr: 'Poland_FR',
+      },
+      Portugal: {
+        en: 'Portugal',
+        fr: 'Portugal_FR',
+      },
+      Romania: {
+        en: 'Romania',
+        fr: 'Romania_FR',
+      },
+      Russia: {
+        en: 'Russia',
+        fr: 'Russia_FR',
+      },
+      'San Marino': {
+        en: 'San Marino',
+        fr: 'San Marino_FR',
+      },
+      Serbia: {
+        en: 'Serbia',
+        fr: 'Serbia_FR',
+      },
+      Slovakia: {
+        en: 'Slovakia',
+        fr: 'Slovakia_FR',
+      },
+      Slovenia: {
+        en: 'Slovenia',
+        fr: 'Slovenia_FR',
+      },
+      Spain: {
+        en: 'Spain',
+        fr: 'Spain_FR',
+      },
+      Sweden: {
+        en: 'Sweden',
+        fr: 'Sweden_FR',
+      },
+      Switzerland: {
+        en: 'Switzerland',
+        fr: 'Switzerland_FR',
+      },
+      Ukraine: {
+        en: 'Ukraine',
+        fr: 'Ukraine_FR',
+      },
+      'United Kingdom': {
+        en: 'United Kingdom',
+        fr: 'United Kingdom_FR',
+      },
+      'Vatican City': {
+        en: 'Vatican City',
+        fr: 'Vatican City_FR',
+      },
+
+      // asia
+      Afghanistan: {
+        en: 'Afghanistan',
+        fr: 'Afghanistan_FR',
+      },
+      Armenia: {
+        en: 'Armenia',
+        fr: 'Armenia_FR',
+      },
+      Azerbaijan: {
+        en: 'Azerbaijan',
+        fr: 'Azerbaijan_FR',
+      },
+      Bahrain: {
+        en: 'Bahrain',
+        fr: 'Bahrain_FR',
+      },
+      Bangladesh: {
+        en: 'Bangladesh',
+        fr: 'Bangladesh_FR',
+      },
+      Bhutan: {
+        en: 'Bhutan',
+        fr: 'Bhutan_FR',
+      },
+      Brunei: {
+        en: 'Brunei',
+        fr: 'Brunei_FR',
+      },
+      Cambodia: {
+        en: 'Cambodia',
+        fr: 'Cambodia_FR',
+      },
+      China: {
+        en: 'China',
+        fr: 'China_FR',
+      },
+      Taiwan: {
+        en: 'Taiwan',
+        fr: 'Taiwan_FR',
+      },
+      'East Timor': {
+        en: 'East Timor',
+        fr: 'East Timor_FR',
+      },
+      India: {
+        en: 'India',
+        fr: 'India_FR',
+      },
+      Indonesia: {
+        en: 'Indonesia',
+        fr: 'Indonesia_FR',
+      },
+      Iran: {
+        en: 'Iran',
+        fr: 'Iran_FR',
+      },
+      Iraq: {
+        en: 'Iraq',
+        fr: 'Iraq_FR',
+      },
+      Israel: {
+        en: 'Israel',
+        fr: 'Israel_FR',
+      },
+      Palestine: {
+        en: 'Palestine',
+        fr: 'Palestine_FR',
+      },
+      Japan: {
+        en: 'Japan',
+        fr: 'Japan_FR',
+      },
+      Jordan: {
+        en: 'Jordan',
+        fr: 'Jordan_FR',
+      },
+      Kazakhstan: {
+        en: 'Kazakhstan',
+        fr: 'Kazakhstan_FR',
+      },
+      Kuwait: {
+        en: 'Kuwait',
+        fr: 'Kuwait_FR',
+      },
+      Kyrgyzstan: {
+        en: 'Kyrgyzstan',
+        fr: 'Kyrgyzstan_FR',
+      },
+      Laos: {
+        en: 'Laos',
+        fr: 'Laos_FR',
+      },
+      Lebanon: {
+        en: 'Lebanon',
+        fr: 'Lebanon_FR',
+      },
+      Malaysia: {
+        en: 'Malaysia',
+        fr: 'Malaysia_FR',
+      },
+      Maldives: {
+        en: 'Maldives',
+        fr: 'Maldives_FR',
+      },
+      Mongolia: {
+        en: 'Mongolia',
+        fr: 'Mongolia_FR',
+      },
+      Myanmar: {
+        en: 'Myanmar',
+        fr: 'Myanmar_FR',
+      },
+      Nepal: {
+        en: 'Nepal',
+        fr: 'Nepal_FR',
+      },
+      'North Korea': {
+        en: 'North Korea',
+        fr: 'North Korea_FR',
+      },
+      Oman: {
+        en: 'Oman',
+        fr: 'Oman_FR',
+      },
+      Pakistan: {
+        en: 'Pakistan',
+        fr: 'Pakistan_FR',
+      },
+      Philippines: {
+        en: 'Philippines',
+        fr: 'Philippines_FR',
+      },
+      Qatar: {
+        en: 'Qatar',
+        fr: 'Qatar_FR',
+      },
+      'Saudi Arabia': {
+        en: 'Saudi Arabia',
+        fr: 'Saudi Arabia_FR',
+      },
+      Singapore: {
+        en: 'Singapore',
+        fr: 'Singapore_FR',
+      },
+      'South Korea': {
+        en: 'South Korea',
+        fr: 'South Korea_FR',
+      },
+      'Sri Lanka': {
+        en: 'Sri Lanka',
+        fr: 'Sri Lanka_FR',
+      },
+      Syria: {
+        en: 'Syria',
+        fr: 'Syria_FR',
+      },
+      Tajikistan: {
+        en: 'Tajikistan',
+        fr: 'Tajikistan_FR',
+      },
+      Thailand: {
+        en: 'Thailand',
+        fr: 'Thailand_FR',
+      },
+      Turkey: {
+        en: 'Turkey',
+        fr: 'Turkey_FR',
+      },
+      Turkmenistan: {
+        en: 'Turkmenistan',
+        fr: 'Turkmenistan_FR',
+      },
+      'United Arab Emirates': {
+        en: 'United Arab Emirates',
+        fr: 'United Arab Emirates_FR',
+      },
+      Uzbekistan: {
+        en: 'Uzbekistan',
+        fr: 'Uzbekistan_FR',
+      },
+      Vietnam: {
+        en: 'Vietnam',
+        fr: 'Vietnam_FR',
+      },
+      Yemen: {
+        en: 'Yemen',
+        fr: 'Yemen_FR',
+      },
+    }
   },
   unabbreviated: {
     mainMenuBar: {

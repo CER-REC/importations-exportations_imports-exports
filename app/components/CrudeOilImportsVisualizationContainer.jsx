@@ -10,6 +10,7 @@ import Axis from './Axis'
 import DetailSidebar from './DetailSidebar'
 import DetailBreakdown from './DetailBreakdown'
 import DetailBreakdownHeader from './DetailBreakdownHeader'
+import DetailTotal from './DetailTotal'
 import * as CrudeOilViewport from '../selectors/viewport/crudeOilImports'
 import Constants from '../Constants'
 import { positionShape } from '../propTypeShapes'
@@ -34,15 +35,12 @@ const CrudeOilImportsVisualizationContainer = props => (
     <DetailSidebar
       {...props.importChart}
     >
-      <DetailBreakdown
-        height="100%"
-        groupBy="activity"
+      <DetailTotal
+        type="imports"
+        filterActivity="imports"
         showGroup="imports"
-        valueKey="destination"
-        valueAverage
-        color={Constants.getIn(['styleGuide', 'colours', 'ImportDefault'])}
-        trContent={Tr.getIn(['detailBreakDown', 'crudeOilImports', 'imports'])}
-        nameMappings={Tr.getIn(['Padd', 'ca'])}
+        groupBy="activity"
+        valueKey="destinationKey"
       />
     </DetailSidebar>
     <Axis
@@ -59,11 +57,11 @@ const CrudeOilImportsVisualizationContainer = props => (
         height="100%"
         groupBy="activity"
         showGroup="imports"
-        valueKey="destination"
+        valueKey="origin"
         valueAverage
         color={Constants.getIn(['styleGuide', 'colours', 'ImportDefault'])}
         trContent={Tr.getIn(['detailBreakDown', 'crudeOilImports', 'imports'])}
-        nameMappings={Tr.getIn(['Padd', 'us'])}
+        nameMappings={Tr.getIn(['Padd', 'world'])}
       />
     </DetailSidebar>
     {/*
