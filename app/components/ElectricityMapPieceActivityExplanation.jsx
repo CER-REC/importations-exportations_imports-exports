@@ -11,6 +11,7 @@ class ElectricityMapPieceActivityExplanation extends React.Component {
     return (<g transform={`translate(${this.props.left + 1},${this.props.top})`}>
       <MapPiece
         value={MapPieceExplanationConstant.getIn(['electricity', 'ca', 'datapoint'])}
+        name={MapPieceExplanationConstant.getIn(['electricity', 'ca', 'datapoint','name'])}
         confidential={emptyMap}
         tilePosition={emptyMap}
         dimensions={MapPieceExplanationConstant.getIn(['electricity', 'ca', 'dimensions'])}
@@ -26,6 +27,7 @@ class ElectricityMapPieceActivityExplanation extends React.Component {
       <g transform="translate(0,70)">
         <MapPiece
           value={MapPieceExplanationConstant.getIn(['electricity', 'us', 'datapoint'])}
+          name={MapPieceExplanationConstant.getIn(['electricity', 'us', 'datapoint','name'])}
           confidential={emptyMap}
           tilePosition={emptyMap}
           dimensions={MapPieceExplanationConstant.getIn(['electricity', 'us', 'dimensions'])}
