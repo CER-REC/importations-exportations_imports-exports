@@ -162,7 +162,7 @@ const MapPieceExplanationConstant = fromJS({
       },
       dimensions: {
         height: 40.09,
-        width: 38.75,
+        width: 20.75,
         yAxisPadding: 8.528,
         xAxisPadding: 12.528,
       },
