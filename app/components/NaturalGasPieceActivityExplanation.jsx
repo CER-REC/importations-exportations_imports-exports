@@ -17,6 +17,7 @@ class NaturalGasPieceActivityExplanation extends React.Component {
     return (<g transform={`translate(${this.props.left + 1},${this.props.top + 30})`}>
       <MapPiece
         value={MapPieceExplanationConstant.getIn(['naturalGas', 'datapoint'])}
+        name={MapPieceExplanationConstant.getIn(['naturalGas', 'datapoint','name'])}
         confidential={emptyMap}
         tilePosition={emptyMap}
         dimensions={MapPieceExplanationConstant.getIn(['naturalGas', 'dimensions'])}
@@ -27,7 +28,7 @@ class NaturalGasPieceActivityExplanation extends React.Component {
         text={Tr.getIn(['legendMapTiles', 'naturalGas', activity])}
         x1={0}
         y1={0}
-        mapPieceKey='portName'
+        mapPieceKey='name'
         mapPieceStyleClass = 'mapPieceText'
         drawLabelLineImportY = {-32}
         drawLabelLabelImportY = {-28}
