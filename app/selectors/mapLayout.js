@@ -54,7 +54,7 @@ export const createSortedLayout = createSelector(
   (records, sortBy, country, gridConstants) => {
     const layout = gridConstants.get('layout', new Immutable.Map())
     let columns = gridConstants.get('defaultColumns', 0)
-    const rowPadding = gridConstants.get('sortRowPadding', 0)
+    const rowPadding = gridConstants.get('sortingRowPadding', 0)
     // TODO: This should calculate averages in some cases
     const data = calculateValueSum(
       records,
