@@ -92,7 +92,7 @@ const parsingIssue = {};
       originalActivity: stripNA(point.activity),
       units: stripNA(point.units),
       confidential: (point.value.toLowerCase() === 'confidential'),
-      value: parseInt(stripNA(point.value), 10) || 0,
+      value: parseFloat(stripNA(point.value)) || 0,
       extrapolated: false,
     }
   }))
