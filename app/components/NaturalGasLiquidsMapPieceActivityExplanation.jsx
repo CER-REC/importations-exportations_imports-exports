@@ -21,6 +21,8 @@ class NaturalGasLiquidsMapPieceActivityExplanation extends React.Component {
         confidential={emptyMap}
         tilePosition={emptyMap}
         value={MapPieceExplanationConstant.getIn(['naturalGasLiquids', 'ca', 'datapoint'])}
+        name={MapPieceExplanationConstant.getIn(['naturalGasLiquids', 'ca', 'datapoint','name'])}
+        mapPieceStyleClass = 'mapPieceText'
       />
       <g transform="translate(0,70)">
         <ImportExportArrow

@@ -229,7 +229,7 @@ const MapPieceExplanationConstant = fromJS({
   },
   naturalGas: {
     datapoint: {
-      portName: 'Aden',
+      name: 'Aden',
       exports: 10,
       imports: 10,
       totalCount: 0,

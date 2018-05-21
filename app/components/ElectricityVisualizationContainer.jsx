@@ -17,7 +17,7 @@ import Axis from './Axis'
 import { amount } from '../selectors/data'
 import * as ElectricityViewport from '../selectors/viewport/electricity'
 import { showImportsSelector, showExportsSelector } from '../selectors/visualizationSettings'
-// import { legendMapPosition } from '../selectors/viewport/menus'
+import { legendMapPosition } from '../selectors/viewport/menus'
 import { positionShape } from '../propTypeShapes'
 import DetailBreakdown from './DetailBreakdown'
 import DetailTotal from './DetailTotal'
@@ -145,11 +145,9 @@ const ElectricityVisualizationContainer = (props) => {
     <USMapContainer {...props.usMap} valueAverage={weighted} />
     <PowerPoolContainer {...props.powerPool} />
     <PowerPoolGrouping {...props.powerPool} />
-    {/*
     <ElectricityMapPieceActivityExplanation
       {...props.mapPieceActivityExplanation}
     />
-    */}
   </g>)
 }
 
@@ -165,8 +163,7 @@ ElectricityVisualizationContainer.propTypes = {
   importChart: PropTypes.shape(positionShape).isRequired,
   axisPosition: PropTypes.shape(positionShape).isRequired,
   exportChart: PropTypes.shape(positionShape).isRequired,
-  /*mapPieceActivityExplanation: PropTypes.shape(positionShape).isRequired,
-  */
+  mapPieceActivityExplanation: PropTypes.shape(positionShape).isRequired,
   showImports: PropTypes.bool.isRequired,
   showExports: PropTypes.bool.isRequired,
 }
@@ -176,7 +173,7 @@ export default connect((state, props) => ({
   usMap: ElectricityViewport.usMapPosition(state, props),
   importChart: ElectricityViewport.chartImportPosition(state, props),
   powerPool: ElectricityViewport.powerPoolPosition(state, props),
-  // mapPieceActivityExplanation: legendMapPosition(state, props),
+  mapPieceActivityExplanation: legendMapPosition(state, props),
   axisPosition: ElectricityViewport.chartAxisPosition(state, props),
   exportChart: ElectricityViewport.chartExportPosition(state, props),
   unit: amount(state, props),
