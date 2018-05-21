@@ -221,8 +221,9 @@ class BarChart extends Chart {
       let overflow = null
       let overflowBarHeight = 0
       let overflowClick = null
-      if (value > scale || value < 0) {
-        barHeight = (value < 0) ? 0 : scale * heightPerUnit
+      
+      if (value > scale.getIn(['y','max']) || value < 0) {
+        barHeight = (value < 0) ? 0 : scale.getIn(['y','max']) * heightPerUnit
         let overflowText = null
         const barDirection = (value < 0 ? -1 : 1)
         overflowBarHeight = 17 * barDirection
