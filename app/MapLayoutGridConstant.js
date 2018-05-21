@@ -360,6 +360,9 @@ const MapLayoutGridConstant = fromJS({
         {
           name: 'oceania', originKey: 'oceania', x: 2.25, y: 1,
         },
+        {
+          name: 'otherCountries', originKey: 'otherCountries', x: 2.5, y: 3,
+        },
       ],
     },
     powerpool: {

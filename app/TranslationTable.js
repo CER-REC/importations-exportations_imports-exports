@@ -1420,6 +1420,10 @@ const TranslationTable = fromJS({
         en: 'South\nAmerica',
         fr: 'Amérique\ndu sud',
       },
+      otherCountries: {
+        en: 'Other\nCountries',
+        fr: 'Autres\npays',
+      },
     },
   },
   Padd: {
