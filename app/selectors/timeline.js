@@ -1,22 +1,19 @@
 import { fromJS } from 'immutable'
 
 import { createSelector } from './selectHelper'
-import { getVisualizationData, getActivityFilterPredicate, filterByTimelineAndMap, filterByMap } from './core'
+import { getVisualizationData } from './core'
 import { barChartValues } from './renderData'
 
 import {
   getAggregateKey,
-  unitSelector,
   getValueKey,
-  filterByHexSelector,
-  selectedActivityGroup,
   timelineRange,
   timelinePlayback,
   timeLineScaleSelector,
   groupingBy as timelineGrouping,
 } from './data'
 import { visualizationContentPosition as visContentSize } from './viewport/'
-import { visualizationSettings, selectedVisualization, scaledLinkedSelector } from './visualizationSettings'
+import { selectedVisualization, scaledLinkedSelector } from './visualizationSettings'
 import Constants from '../Constants'
 
 export const getScaleKey = (state, props = {}) => props.scaleKey || getValueKey(state, props)
@@ -24,14 +21,8 @@ export const getScaleKey = (state, props = {}) => props.scaleKey || getValueKey(
 export const mapToValue = (data, key) => data.map(v => v.get(key))
 mapToValue.isSelector = false
 
-export const sortTimeline = createSelector(
-  barChartValues,
-  timelineGrouping,
-  (points, grouping) => points,
-)
-
 export const timelineScaleBase = createSelector(
-  filterByMap,
+  getVisualizationData,
   getAggregateKey,
   selectedVisualization,
   (points, aggregateKey, vizName) => fromJS(points.reduce((acc, next) => {
@@ -61,8 +52,8 @@ export const timelineYearScaleCalculation = createSelector(
   }),
 )
 
-const scaleBytype = (yaxis, xaxis, scaleLinked, type)=>{
-  let scale = {}
+const scaleBytype = (yaxis, xaxis, scaleLinked, type) => {
+  const scale = {}
   yaxis.entrySeq().forEach(([activity, activityValue]) => {
     if (!scale[activity]) {
       scale[activity] = {}
@@ -82,8 +73,9 @@ const scaleBytype = (yaxis, xaxis, scaleLinked, type)=>{
           }
         }
         if (scaleLinked) {
-          let result = yaxis.getIn(['exports', type, category]) > yaxis.getIn(['imports', type, category]) ?
-            yaxis.getIn(['exports', type, category])  : yaxis.getIn(['imports', type, category])
+          let result = yaxis.getIn(['exports', type, category]) > yaxis.getIn(['imports', type, category])
+            ? yaxis.getIn(['exports', type, category])
+            : yaxis.getIn(['imports', type, category])
           if (!result && !yaxis.getIn(['exports', type, category])) {
             result = yaxis.getIn(['imports', type, category])
           } else if (!result && !yaxis.getIn(['imports', type, category])) {
@@ -91,7 +83,7 @@ const scaleBytype = (yaxis, xaxis, scaleLinked, type)=>{
           }
           scale[activity][category].y.max = result
         } else {
-          scale[activity][category].y.max = yaxis.getIn([activity, type, category]) 
+          scale[activity][category].y.max = yaxis.getIn([activity, type, category])
         }
       })
     }
@@ -103,18 +95,14 @@ export const timeLineScaleValueByProductSubtype = createSelector(
   timeLineScaleSelector,
   timelineYearScaleCalculation,
   scaledLinkedSelector,
-  (yaxis, xaxis, scaleLinked) => {
-    return scaleBytype(yaxis, xaxis, scaleLinked, 'productSubtype')
-  },
+  (yaxis, xaxis, scaleLinked) => scaleBytype(yaxis, xaxis, scaleLinked, 'productSubtype'),
 )
 
 export const timeLineScaleValueByTransport = createSelector(
   timeLineScaleSelector,
   timelineYearScaleCalculation,
   scaledLinkedSelector,
-  (yaxis, xaxis, scaleLinked) => {
-    return scaleBytype(yaxis, xaxis, scaleLinked, 'transport')
-  },
+  (yaxis, xaxis, scaleLinked) => scaleBytype(yaxis, xaxis, scaleLinked, 'transport'),
 )
 
 export const timeLineScaleValue = createSelector(
@@ -272,7 +260,7 @@ export const timelineData = createSelector(
   timelinePlayback,
   timelineYearScaleCalculation,
   timelinePositionCalculation,
-  sortTimeline,
+  barChartValues,
   (range, playback, scale, position, data) => ({
     timelineRange: range,
     timelinePlayback: playback,
