@@ -42,7 +42,6 @@ class NaturalGasLiquidsVisualizationContainer extends React.Component {
               groupBy="activity"
               showGroup="imports"
               valueKey="productSubtype"
-              valueAverage
               showHeader={false}
               color={Constants.getIn(['styleGuide', 'colours', 'ImportDefault'])}
               trContent={Tr.getIn(['detailBreakDown', 'naturalGasLiquids', 'imports'])}
@@ -69,8 +68,7 @@ class NaturalGasLiquidsVisualizationContainer extends React.Component {
                   filterActivity="imports"
                   showGroup="imports"
                   groupBy="activity"
-                  valueKey="activity"
-                  country="ca"
+                  valueKey="productSubtype"
                 />
               </div>
             </div>
@@ -101,8 +99,7 @@ class NaturalGasLiquidsVisualizationContainer extends React.Component {
                   filterActivity="exports"
                   showGroup="exports"
                   groupBy="activity"
-                  valueKey="activity"
-                  country="us"
+                  valueKey="productSubtype"
                 />
                 <ConfidentialCount
                   valueKey="destinationKey"
@@ -125,7 +122,6 @@ class NaturalGasLiquidsVisualizationContainer extends React.Component {
               groupBy="activity"
               showGroup="exports"
               valueKey="productSubtype"
-              valueAverage
               showHeader={false}
               color={Constants.getIn(['styleGuide', 'colours', 'ExportDefault'])}
               trContent={Tr.getIn(['detailBreakDown', 'naturalGasLiquids', 'exports'])}
