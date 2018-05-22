@@ -91,7 +91,7 @@ class StackedChart extends Chart {
     const heightPerUnit = height / (scale.getIn(['y', 'max']) - scale.getIn(['y', 'min']))
    
     const elements = data.get('values').map((point, period) => {
-      const opacity = this.isTimelinePointFiltered(point) ? 0.5 : 1
+      const opacity = this.isTimelinePointFiltered(period) ? 0.5 : 1
       let offsetY = 0
       let stackIndex = 0
       const lines = point
