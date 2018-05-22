@@ -77,7 +77,7 @@ const ElectricityVisualizationContainer = (props) => {
                 filterActivity="imports"
                 showGroup="imports"
                 groupBy="activity"
-                valueKey="destinationKey"
+                valueKey={weighted === 'weighted' ? 'activity' : 'destinationKey'}
                 valueAverage={weighted}
               />
             </div>
