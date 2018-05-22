@@ -41,7 +41,8 @@ const CrudeOilImportsVisualizationContainer = props => (
         filterActivity="imports"
         showGroup="imports"
         groupBy="activity"
-        valueKey="destinationKey"
+        valueKey="origin"
+        valueAverage
       />
       <ConfidentialCount
         valueKey="destinationKey"
