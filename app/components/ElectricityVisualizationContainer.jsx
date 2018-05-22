@@ -30,7 +30,8 @@ import ConfidentialCount from './ConfidentialCount'
 import MissingDataCount from './MissingDataCount'
 import DetailSidebar from './DetailSidebar'
 
-const nameMappingsUSAndPools = Tr.getIn(['country', 'us'])
+const nameMappings = Tr.getIn(['country', 'us'])
+  .merge(Tr.getIn(['country', 'ca']))
   .merge(Tr.getIn(['country', 'powerpool']))
 
 const ElectricityVisualizationContainer = (props) => {
@@ -49,18 +50,18 @@ const ElectricityVisualizationContainer = (props) => {
           colour={Constants.getIn(['styleGuide', 'colours', 'ImportDefault'])}
           tabIndex={Constants.getIn(['tabIndex', 'start', 'visualization', 'timeline'])}
         />
-        {!props.hasSelection ? null : (
+        {!props.selectedCountry ? null : (
           <DetailSidebar {...props.canadaMap}>
             <DetailBreakdown
               {...props.canadaMap}
               filterActivity="imports"
               groupBy="activity"
-              valueKey="destinationKey"
+              valueKey={props.selectedCountry === 'ca' ? 'originKey' : 'destinationKey'}
               valueAverage={weighted}
               showGroup="imports"
               color={Constants.getIn(['styleGuide', 'colours', 'ImportDefault'])}
               trContent={Tr.getIn(['detailBreakDown', 'electricity', 'imports'])}
-              nameMappings={Tr.getIn(['country', 'ca'])}
+              nameMappings={nameMappings}
             />
           </DetailSidebar>
         )}
@@ -136,18 +137,18 @@ const ElectricityVisualizationContainer = (props) => {
             </div>
           </div>
         </DetailSidebar>
-        {!props.hasSelection ? null : (
+        {!props.selectedCountry ? null : (
           <DetailSidebar {...props.usMap} height={props.usMap.height - 40}>
             <DetailBreakdown
               {...props.usMap}
               height={props.usMap.height - 40}
               groupBy="activity"
-              valueKey="destinationKey"
+              valueKey={props.selectedCountry === 'us' ? 'originKey' : 'destinationKey'}
               valueAverage={weighted}
               showGroup="exports"
               color={Constants.getIn(['styleGuide', 'colours', 'ExportDefault'])}
               trContent={Tr.getIn(['detailBreakDown', 'electricity', 'exports'])}
-              nameMappings={nameMappingsUSAndPools}
+              nameMappings={nameMappings}
             />
           </DetailSidebar>
         )}
@@ -190,6 +191,6 @@ export default connect((state, props) => ({
   unit: amount(state, props),
   showImports: showImportsSelector(state, props),
   showExports: showExportsSelector(state, props),
-  hasSelection: visualizationSettings(state, props)
-    .getIn(['selection', 'origins'], new List()).count() !== 0,
+  selectedCountry: visualizationSettings(state, props)
+    .getIn(['selection', 'country'], ''),
 }))(ElectricityVisualizationContainer)
