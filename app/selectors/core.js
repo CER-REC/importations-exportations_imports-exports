@@ -2,7 +2,7 @@ import { createSelector } from './selectHelper'
 import {
   unitSelector,
   groupingBy,
-  timelineRange,
+  timelineFilterRange,
   selection,
   selectedPieces,
   selectedActivityGroup,
@@ -13,7 +13,7 @@ import { visualizationSettings, selectedVisualization } from './visualizationSet
 export const getVisualizationData = unitSelector
 
 export const getTimelineFilterPredicate = createSelector(
-  timelineRange,
+  timelineFilterRange,
   groupingBy,
   (range, groupBy) => (point) => {
     if (groupBy === 'year') {
