@@ -75,7 +75,7 @@ class ElectricityMapLayout extends React.Component {
       let result = ''
       let transform ='0 0'
       switch (key) {
-        case 'PJMPP':
+        case 'PJM':
           transform = (this.props.viewport.get('changeWidthRatio')) > 1.2 ?'scale(0.985 1.02) translate(-250 -352)': 'scale(0.98 1.01) translate(-246.5 -343)'
           result = (<polygon
             className="powerPoolOutline"

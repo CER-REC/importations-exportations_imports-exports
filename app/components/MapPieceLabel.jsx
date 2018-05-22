@@ -27,7 +27,7 @@ class MapPieceLabel extends React.Component {
 
   renderText(name, xAxis, yAxis){
     if (name === 'ATL-Q') {return null}
-    if (this.props.name === 'PJMPP') {
+    if (this.props.name === 'PJM') {
       name = 'PJM'
     }
     if (name && name.includes('\n')) {
