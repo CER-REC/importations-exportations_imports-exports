@@ -312,13 +312,14 @@ const MapLayoutGridConstant = fromJS({
       sortingRowPadding: 0.5,
       dimensions: {
         height: 37.09,
-        width: 70,
+        width: 74,
         yAxisPadding: 5,
         xAxisPadding: 9,
       },
       styles: {
         color: '#ede3cb',
         labelPosition: 'down',
+        labelLineSpacing: 14,
         arrowPosition: 'up',
         arrowSpacing: 5,
         bottomMargin: 5,

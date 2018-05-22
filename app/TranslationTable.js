@@ -1421,8 +1421,8 @@ const TranslationTable = fromJS({
         fr: 'Amérique\ndu sud',
       },
       otherCountries: {
-        en: 'Other\nCountries',
-        fr: 'Autres\npays',
+        en: 'Low Volume\nContributions',
+        fr: 'Contributions\nà faible\nvolume',
       },
     },
   },
@@ -2453,8 +2453,8 @@ const TranslationTable = fromJS({
       },
 
       'Other countries': {
-        en: 'Other Countries',
-        fr: 'Other Countries FR',
+        en: 'Collected Low Volume Contributions',
+        fr: 'Collected Low Volume Contributions FR',
       },
     }
   },
