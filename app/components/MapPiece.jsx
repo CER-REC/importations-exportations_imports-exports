@@ -398,17 +398,20 @@ class MapPiece extends React.Component {
   }
 
   renderMapPieceLabel() {
-    return <MapPieceLabel
+    return (
+      <MapPieceLabel
         labelPosition={this.props.styles.get('labelPosition')}
         topMargin={this.props.styles.get('bottomMargin')}
         bottomMargin={this.props.styles.get('topMargin')}
         mapPieceWidth={this.props.dimensions.get('width')}
         mapPieceHeight={this.props.dimensions.get('height')}
+        mapPieceKey={this.props.mapPieceKey}
         name={this.props.name}
         mapPieceProps={this.props.mapPieceProps}
         styleClass={this.props.mapPieceStyleClass}
-        text = {this.props.text}
+        text={this.props.text}
       />
+    )
   }
 
   render() {

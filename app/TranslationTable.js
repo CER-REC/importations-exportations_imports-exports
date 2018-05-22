@@ -2451,6 +2451,11 @@ const TranslationTable = fromJS({
         en: 'Yemen',
         fr: 'Yemen_FR',
       },
+
+      'Other countries': {
+        en: 'Other Countries',
+        fr: 'Other Countries FR',
+      },
     }
   },
   unabbreviated: {

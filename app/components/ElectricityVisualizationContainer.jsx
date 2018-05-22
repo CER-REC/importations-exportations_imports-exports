@@ -77,7 +77,7 @@ const ElectricityVisualizationContainer = (props) => {
                 filterActivity="imports"
                 showGroup="imports"
                 groupBy="activity"
-                valueKey="destinationKey"
+                valueKey={weighted === 'weighted' ? 'activity' : 'destinationKey'}
                 valueAverage={weighted}
               />
             </div>
@@ -129,9 +129,10 @@ const ElectricityVisualizationContainer = (props) => {
             </div>
           </div>
         </DetailSidebar>
-        <DetailSidebar {...props.usMap}>
+        <DetailSidebar {...props.usMap} height={props.usMap.height - 40}>
           <DetailBreakdown
             {...props.usMap}
+            height={props.usMap.height - 40}
             groupBy="activity"
             valueKey="destinationKey"
             valueAverage={weighted}
