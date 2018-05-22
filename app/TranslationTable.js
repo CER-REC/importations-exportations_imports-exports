@@ -925,21 +925,25 @@ const TranslationTable = fromJS({
       },
       exports: {
         header: {
+          prefix: {
+            en: '',
+            fr: 'Destination',
+          },
           type: {
             en: 'Exports',
-            fr: 'Exportations',
+            fr: 'd’exportation',
           },
           action: {
-            en: 'to',
-            fr: 'par',
+            en: '',
+            fr: '',
           },
           adjective: {
             en: '',
             fr: '',
           },
           place: {
-            en: 'PADDS',
-            fr: 'PADDS',
+            en: 'Destination',
+            fr: '',
           },
         },
         body: {
@@ -981,32 +985,6 @@ const TranslationTable = fromJS({
         en: 'Data not available when map is filtered',
         fr: 'Ces données ne sont pas disponibles quand un filtre est actif',
       },
-      exports: {
-        header: {
-          type: {
-            en: 'Exports',
-            fr: 'Exportations',
-          },
-          action: {
-            en: 'to',
-            fr: 'par',
-          },
-          adjective: {
-            en: '',
-            fr: '',
-          },
-          place: {
-            en: 'PADDS',
-            fr: 'PADDS',
-          },
-        },
-        body: {
-          action: {
-            en: 'to',
-            fr: 'à',
-          },
-        },
-      },
       imports: {
         header: {
           type: {
@@ -1018,12 +996,12 @@ const TranslationTable = fromJS({
             fr: 'par',
           },
           adjective: {
-            en: 'selected',
-            fr: 'ces',
+            en: '',
+            fr: '',
           },
           place: {
-            en: 'Regions',
-            fr: 'Régions',
+            en: 'Canada',
+            fr: 'Canada',
           },
         },
         body: {

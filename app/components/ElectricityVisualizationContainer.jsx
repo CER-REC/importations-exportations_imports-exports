@@ -137,6 +137,7 @@ const ElectricityVisualizationContainer = (props) => {
             valueKey="destinationKey"
             valueAverage={weighted}
             showGroup="exports"
+            color={Constants.getIn(['styleGuide', 'colours', 'ExportDefault'])}
             trContent={Tr.getIn(['detailBreakDown', 'electricity', 'exports'])}
             nameMappings={nameMappingsUSAndPools}
           />

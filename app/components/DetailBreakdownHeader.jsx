@@ -5,21 +5,19 @@ import Immutable from 'immutable'
 import './DetailBreakDown.scss'
 import '../styles/Fonts.scss'
 
-class DetailBreakdownHeader extends React.Component { 
-  render() {
-    const { props } = this
-    const headerContent = props.trContent
-    return (
-      <div className={`header ${props.type}`}>
-        <span style={{ color: props.color }}>{headerContent.getIn(['type', props.language], '').toUpperCase()}</span>&nbsp;
-        {headerContent.getIn(['action', props.language], '')}&nbsp;
-        {headerContent.getIn(['adjective', props.language], '')}&nbsp;
-        {headerContent.getIn(['place', props.language], '')}&nbsp;
-      </div>
-    )
-  }
-}
+const withSpace = text => (text ? `${text} ` : '')
 
+export const DetailBreakdownHeader = ({ trContent, language, ...props }) => (
+  <div className={`header ${props.type}`}>
+    {withSpace(trContent.getIn(['prefix', language], ''))}
+    <span style={{ color: props.color }}>
+      {withSpace(trContent.getIn(['type', language], '').toUpperCase())}
+    </span>
+    {withSpace(trContent.getIn(['action', language], ''))}
+    {withSpace(trContent.getIn(['adjective', language], ''))}
+    {withSpace(trContent.getIn(['place', language], ''))}
+  </div>
+)
 
 DetailBreakdownHeader.propTypes = {
   color: PropTypes.string.isRequired,
@@ -28,6 +26,4 @@ DetailBreakdownHeader.propTypes = {
   language: PropTypes.string.isRequired,
 }
 
-export default connect((state, props) => ({
-  language: state.language,
-}))(DetailBreakdownHeader)
+export default connect(({ language }) => ({ language }))(DetailBreakdownHeader)
