@@ -18,7 +18,7 @@ import { setSelection } from '../actions/visualizationSettings'
 import './ElectricityMapLayout.scss'
 
 import { getMapLayout } from '../selectors/mapLayout'
-import { binSelector } from '../selectors/data'
+import { arrangeBy, binSelector } from '../selectors/data'
 /*
 import { arrangeBy, aggregateLocationSelector, aggregateFilterLocationSelector } from '../selectors/data'
 import DetailSidebar from './DetailSidebar'
@@ -182,9 +182,7 @@ class ElectricityMapLayout extends React.Component {
                 country={this.props.country}
                 name={key}
               />
-              {/*
-              {this.getPowerPoolsOutline(position.get('name'), this.props.country, xaxis, yaxis, position, dimensions, mapPieceScale)}
-              */}
+              {this.getPowerPoolsOutline(key, this.props.country, xaxis, yaxis, position, dimensions, mapPieceScale)}
             </g>
           </g>
         )
@@ -269,9 +267,8 @@ const mapStateToProps = (state, props) => ({
   selection: visualizationSettings(state, props).get('selection'),
   /*
   dataPoints: aggregateLocationSelector(state, props),
-  filteredDataPoints: aggregateFilterLocationSelector(state,props),
+  filteredDataPoints: aggregateFilterLocationSelector(state,props),  */
   arrangeBy: arrangeBy(state, props),
-  */
   bins: binSelector(state, props),
   Tr: TrSelector(state, props),
   unit: visualizationSettings(state, props).get('amount'),
