@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
+import { List } from 'immutable'
 
 import Constants from '../Constants'
 import Tr from '../TranslationTable'
@@ -16,7 +17,11 @@ import Axis from './Axis'
 
 import { amount } from '../selectors/data'
 import * as ElectricityViewport from '../selectors/viewport/electricity'
-import { showImportsSelector, showExportsSelector } from '../selectors/visualizationSettings'
+import {
+  showImportsSelector,
+  showExportsSelector,
+  visualizationSettings,
+} from '../selectors/visualizationSettings'
 import { legendMapPosition } from '../selectors/viewport/menus'
 import { positionShape } from '../propTypeShapes'
 import DetailBreakdown from './DetailBreakdown'
@@ -25,7 +30,8 @@ import ConfidentialCount from './ConfidentialCount'
 import MissingDataCount from './MissingDataCount'
 import DetailSidebar from './DetailSidebar'
 
-const nameMappingsUSAndPools = Tr.getIn(['country', 'us'])
+const nameMappings = Tr.getIn(['country', 'us'])
+  .merge(Tr.getIn(['country', 'ca']))
   .merge(Tr.getIn(['country', 'powerpool']))
 
 const ElectricityVisualizationContainer = (props) => {
@@ -44,19 +50,21 @@ const ElectricityVisualizationContainer = (props) => {
           colour={Constants.getIn(['styleGuide', 'colours', 'ImportDefault'])}
           tabIndex={Constants.getIn(['tabIndex', 'start', 'visualization', 'timeline'])}
         />
-        <DetailSidebar {...props.canadaMap}>
-          <DetailBreakdown
-            {...props.canadaMap}
-            filterActivity="imports"
-            groupBy="activity"
-            valueKey="destinationKey"
-            valueAverage={weighted}
-            showGroup="imports"
-            color={Constants.getIn(['styleGuide', 'colours', 'ImportDefault'])}
-            trContent={Tr.getIn(['detailBreakDown', 'electricity', 'imports'])}
-            nameMappings={Tr.getIn(['country', 'ca'])}
-          />
-        </DetailSidebar>
+        {!props.selectedCountry ? null : (
+          <DetailSidebar {...props.canadaMap}>
+            <DetailBreakdown
+              {...props.canadaMap}
+              filterActivity="imports"
+              groupBy="activity"
+              valueKey={props.selectedCountry === 'ca' ? 'originKey' : 'destinationKey'}
+              valueAverage={weighted}
+              showGroup="imports"
+              color={Constants.getIn(['styleGuide', 'colours', 'ImportDefault'])}
+              trContent={Tr.getIn(['detailBreakDown', 'electricity', 'imports'])}
+              nameMappings={nameMappings}
+            />
+          </DetailSidebar>
+        )}
         <DetailSidebar {...props.importChart}>
           <div className="verticalAlign">
             <div className="centered">
@@ -129,18 +137,21 @@ const ElectricityVisualizationContainer = (props) => {
             </div>
           </div>
         </DetailSidebar>
-        <DetailSidebar {...props.usMap} height={props.usMap.height - 40}>
-          <DetailBreakdown
-            {...props.usMap}
-            height={props.usMap.height - 40}
-            groupBy="activity"
-            valueKey="destinationKey"
-            valueAverage={weighted}
-            showGroup="exports"
-            trContent={Tr.getIn(['detailBreakDown', 'electricity', 'exports'])}
-            nameMappings={nameMappingsUSAndPools}
-          />
-        </DetailSidebar>
+        {!props.selectedCountry ? null : (
+          <DetailSidebar {...props.usMap} height={props.usMap.height - 40}>
+            <DetailBreakdown
+              {...props.usMap}
+              height={props.usMap.height - 40}
+              groupBy="activity"
+              valueKey={props.selectedCountry === 'us' ? 'originKey' : 'destinationKey'}
+              valueAverage={weighted}
+              showGroup="exports"
+              color={Constants.getIn(['styleGuide', 'colours', 'ExportDefault'])}
+              trContent={Tr.getIn(['detailBreakDown', 'electricity', 'exports'])}
+              nameMappings={nameMappings}
+            />
+          </DetailSidebar>
+        )}
       </React.Fragment>
     )}
     <USMapContainer {...props.usMap} valueAverage={weighted} />
@@ -180,4 +191,6 @@ export default connect((state, props) => ({
   unit: amount(state, props),
   showImports: showImportsSelector(state, props),
   showExports: showExportsSelector(state, props),
+  selectedCountry: visualizationSettings(state, props)
+    .getIn(['selection', 'country'], ''),
 }))(ElectricityVisualizationContainer)
