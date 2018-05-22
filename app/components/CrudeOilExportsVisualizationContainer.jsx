@@ -13,6 +13,7 @@ import DetailBreakdownHeader from './DetailBreakdownHeader'
 import DetailTotal from './DetailTotal'
 import ConfidentialCount from './ConfidentialCount'
 import MissingDataCount from './MissingDataCount'
+import ExplanationDot from './ExplanationDot'
 import * as CrudeOilViewport from '../selectors/viewport/crudeOilExports'
 import Constants from '../Constants'
 import { positionShape } from '../propTypeShapes'
@@ -114,7 +115,7 @@ const CrudeOilVisualizationContainer = props => (
     />
     <DetailSidebar {...props.exportChart}>
       <div className="verticalAlign">
-        <div className="centered">
+        <div className="centered" style={{ position: 'relative' }}>
           <DetailTotal
             type="exports"
             filterActivity="exports"
@@ -133,6 +134,30 @@ const CrudeOilVisualizationContainer = props => (
             filterActivity="exports"
             groupBy="activity"
           />
+          <svg width="12" height="12" style={{ position: 'absolute', top: 1, left: -9 }}>
+            <ExplanationDot
+              scale="scale(0.7) scale(-1 1)"
+              lineStroke="1.3"
+              textBoxWidth={110}
+              linePath="
+                M142.16,
+                173.94l24.26,
+                36.69a40.12,
+                40.12,0,0,0,
+                33.47,
+                18H344.2"
+              xPosition={5}
+              yPosition={5}
+              lineX={344.16}
+              lineY={173}
+              textX={0}
+              textY={42}
+              containerX={(props.exportChart.left + props.exportChart.width) - 143}
+              containerY={props.exportChart.top + 36}
+              name="crudeExportsTotal"
+              text={Tr.getIn(['explanations', 'crudeExportsTotal', props.language])}
+            />
+          </svg>
         </div>
       </div>
     </DetailSidebar>
@@ -166,6 +191,7 @@ CrudeOilVisualizationContainer.propTypes = {
   subtypeChart: PropTypes.shape(positionShape).isRequired,
   axisPosition: PropTypes.shape(positionShape).isRequired,
   exportChart: PropTypes.shape(positionShape).isRequired,
+  language: PropTypes.string.isRequired,
 }
 
 export default connect((state, props) => ({
@@ -177,4 +203,5 @@ export default connect((state, props) => ({
   usPaddChart: CrudeOilViewport.usPaddPosition(state, props),
   exportBreakdown: CrudeOilViewport.exportBreakdown(state, props),
   mapPieceActivityExplanation: legendMapPosition(state, props),
+  language: state.language,
 }))(CrudeOilVisualizationContainer)
