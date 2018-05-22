@@ -287,8 +287,12 @@ const parsingIssue = {};
             if (!acc[point.period]) {
               acc[point.period] = {}
             }
-            if (!acc[point.period][point.activity]) {
-              acc[point.period][point.activity] = {
+            let rawActivity = point.activity
+            if (point.activityGroup !== 'importsExports') {
+              rawActivity = point.activityGroup
+            }
+            if (!acc[point.period][rawActivity]) {
+              acc[point.period][rawActivity] = {
                 transport: {},
                 productSubtype: {},
                 weightedAverage: { value: 0, divisor: 0 },
@@ -296,29 +300,29 @@ const parsingIssue = {};
               }
             }
             if (point.transport !== '') {
-              const transport = acc[point.period][point.activity].transport[point.transport] || 0
-              acc[point.period][point.activity].transport[point.transport] = transport + point.value
+              const transport = acc[point.period][rawActivity].transport[point.transport] || 0
+              acc[point.period][rawActivity].transport[point.transport] = transport + point.value
 
-              const transportTotal = acc[point.period][point.activity].transport.total || 0
-              acc[point.period][point.activity].transport.total = transportTotal + point.value
+              const transportTotal = acc[point.period][rawActivity].transport.total || 0
+              acc[point.period][rawActivity].transport.total = transportTotal + point.value
             }
 
             if (point.productSubtype !== '') {
-              const productSubtype = acc[point.period][point.activity].productSubtype[point.productSubtype] || 0
-              acc[point.period][point.activity].productSubtype[point.productSubtype] = productSubtype + point.value
+              const productSubtype = acc[point.period][rawActivity].productSubtype[point.productSubtype] || 0
+              acc[point.period][rawActivity].productSubtype[point.productSubtype] = productSubtype + point.value
               
-              const productSubtypeTotal = acc[point.period][point.activity].productSubtype.total || 0
-              acc[point.period][point.activity].productSubtype.total = productSubtypeTotal + point.value              
+              const productSubtypeTotal = acc[point.period][rawActivity].productSubtype.total || 0
+              acc[point.period][rawActivity].productSubtype.total = productSubtypeTotal + point.value              
             }
 
-            const averageValue = acc[point.period][point.activity].weightedAverage.value || 0
-            acc[point.period][point.activity].weightedAverage.value = averageValue + point.forAverageValue
+            const averageValue = acc[point.period][rawActivity].weightedAverage.value || 0
+            acc[point.period][rawActivity].weightedAverage.value = averageValue + point.forAverageValue
 
-            const averageDivisor = acc[point.period][point.activity].weightedAverage.divisor || 0
-            acc[point.period][point.activity].weightedAverage.divisor = averageDivisor + point.forAverageDivisor
+            const averageDivisor = acc[point.period][rawActivity].weightedAverage.divisor || 0
+            acc[point.period][rawActivity].weightedAverage.divisor = averageDivisor + point.forAverageDivisor
 
             if (visName !== 'crudeOilExports' || (!point.transport && !point.productSubtype)) {
-              acc[point.period][point.activity].activityTotal += point.value
+              acc[point.period][rawActivity].activityTotal += point.value
             }
 
             return acc
@@ -372,6 +376,7 @@ const parsingIssue = {};
         })
         return timelineScale
       }, {})
+
     output.scale = scalingValues
     return output
   })

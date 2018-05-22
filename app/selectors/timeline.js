@@ -11,6 +11,7 @@ import {
   timelinePlayback,
   timeLineScaleSelector,
   groupingBy as timelineGrouping,
+  selectedActivityGroup
 } from './data'
 import { visualizationContentPosition as visContentSize } from './viewport/'
 import { selectedVisualization, scaledLinkedSelector } from './visualizationSettings'
@@ -109,14 +110,17 @@ export const timeLineScaleValue = createSelector(
   timeLineScaleSelector,
   timelineYearScaleCalculation,
   scaledLinkedSelector,
-  (yaxis, xaxis, scaleLinked) => {
+  selectedActivityGroup,
+  (yaxis, xaxis, scaleLinked, activityGroup) => {
+    const exportsText = activityGroup === 'importsExports' ? 'exports': activityGroup
+    const importsText = activityGroup === 'importsExports' ? 'imports': activityGroup
     if (scaleLinked) {
-      let result = yaxis.getIn(['exports', 'activityTotal']) > yaxis.getIn(['imports', 'activityTotal']) ?
-        yaxis.getIn(['exports', 'activityTotal']) : yaxis.getIn(['imports', 'activityTotal'])
-      if (!result && !yaxis.getIn(['exports', 'activityTotal'])) {
-        result = yaxis.getIn(['imports', 'activityTotal'])
-      } else if (!result && !yaxis.getIn(['imports', 'activityTotal'])) {
-        result = yaxis.getIn(['exports', 'activityTotal'])
+      let result = yaxis.getIn([exportsText, 'activityTotal']) > yaxis.getIn([importsText, 'activityTotal']) ?
+        yaxis.getIn([exportsText, 'activityTotal']) : yaxis.getIn([importsText, 'activityTotal'])
+      if (!result && !yaxis.getIn([exportsText, 'activityTotal'])) {
+        result = yaxis.getIn([importsText, 'activityTotal'])
+      } else if (!result && !yaxis.getIn([importsText, 'activityTotal'])) {
+        result = yaxis.getIn([exportsText, 'activityTotal'])
       }
       return fromJS({
         exports: {
@@ -145,7 +149,7 @@ export const timeLineScaleValue = createSelector(
       exports: {
         y: {
           min: 0,
-          max: yaxis.getIn(['exports', 'activityTotal']),
+          max: yaxis.getIn([exportsText, 'activityTotal']),
         },
         x: {
           min: xaxis.min,
@@ -155,7 +159,7 @@ export const timeLineScaleValue = createSelector(
       imports: {
         y: {
           min: 0,
-          max: yaxis.getIn(['imports', 'activityTotal']),
+          max: yaxis.getIn([importsText, 'activityTotal']),
         },
         x: {
           min: xaxis.min,
