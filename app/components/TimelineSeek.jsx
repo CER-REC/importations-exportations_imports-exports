@@ -8,17 +8,13 @@ import Constants from '../Constants'
 import { timelineFilter } from '../actions/visualizationSettings'
 import { timelineRange, groupingBy as timelineGrouping } from '../selectors/data'
 import * as TimelineSelector from '../selectors/timeline'
+import { parsePeriod } from '../utilities'
 
 import ExplanationDot from './ExplanationDot'
 
 import trSelector from '../selectors/translate'
 
 const WorkspaceComputations = require('../computations/WorkspaceComputations.js')
-
-const parsePeriod = period => ({
-  year: parseInt(period.substr(0, 4), 10),
-  quarter: parseInt(period.substr(5), 10),
-})
 
 class TimelineSeek extends React.PureComponent {
   static propTypes = {

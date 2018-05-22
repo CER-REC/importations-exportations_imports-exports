@@ -92,7 +92,7 @@ const parsingIssue = {};
       originalActivity: stripNA(point.activity),
       units: stripNA(point.units),
       confidential: (point.value.toLowerCase() === 'confidential'),
-      value: parseInt(stripNA(point.value), 10) || 0,
+      value: parseFloat(stripNA(point.value)) || 0,
       extrapolated: false,
     }
   }))
@@ -311,14 +311,16 @@ const parsingIssue = {};
               acc[point.period][point.activity].productSubtype.total = productSubtypeTotal + point.value              
             }
 
-
             const averageValue = acc[point.period][point.activity].weightedAverage.value || 0
             acc[point.period][point.activity].weightedAverage.value = averageValue + point.forAverageValue
 
             const averageDivisor = acc[point.period][point.activity].weightedAverage.divisor || 0
             acc[point.period][point.activity].weightedAverage.divisor = averageDivisor + point.forAverageDivisor
 
-            acc[point.period][point.activity].activityTotal += point.value
+            if (visName !== 'crudeOilExports' || (!point.transport && !point.productSubtype)) {
+              acc[point.period][point.activity].activityTotal += point.value
+            }
+
             return acc
           }, {})
 

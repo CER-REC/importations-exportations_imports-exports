@@ -564,7 +564,7 @@ const Constants = fromJS({
         Vietnam: 'asia',
         Yemen: 'asia',
 
-        'Other countries': 'Other countries',
+        'Other countries': 'otherCountries',
       },
       country: {
         ca: {

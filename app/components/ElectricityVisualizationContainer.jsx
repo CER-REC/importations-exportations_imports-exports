@@ -111,7 +111,7 @@ const ElectricityVisualizationContainer = (props) => {
                 filterActivity="exports"
                 showGroup="exports"
                 groupBy="activity"
-                valueKey="destinationKey"
+                valueKey={weighted === 'weighted' ? 'activity' : 'destinationKey'}
                 valueAverage={weighted}
               />
               <ConfidentialCount

@@ -36,3 +36,8 @@ export const handleInteractionWithTabIndex = (tabIndex, func, ...boundArgs) => {
   event.tabIndex = tabIndex
   return event
 }
+
+export const parsePeriod = period => ({
+  year: parseInt(period.substr(0, 4), 10),
+  quarter: parseInt(period.substr(5), 10),
+})

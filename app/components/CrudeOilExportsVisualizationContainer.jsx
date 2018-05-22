@@ -120,7 +120,7 @@ const CrudeOilVisualizationContainer = props => (
             filterActivity="exports"
             showGroup="exports"
             groupBy="activity"
-            valueKey="activity"
+            valueKey="destination"
             valueAverage
           />
           <ConfidentialCount
