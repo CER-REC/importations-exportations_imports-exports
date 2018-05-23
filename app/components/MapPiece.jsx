@@ -460,6 +460,11 @@ class MapPiece extends React.Component {
       containerX += 13
     }
 
+    let strokeWidth = 1
+    if(this.props.dimensions.get('strokeWidth')){
+      strokeWidth = this.props.dimensions.get('strokeWidth')
+    }
+
     const confidentialCount = this.props.confidential.reduce((acc, next) => acc + next, 0)
     let confidentialIcon = null
     if (confidentialCount !== 0 && this.props.confidentialityMenu) {
@@ -493,6 +498,7 @@ class MapPiece extends React.Component {
       <g className={`mapPiece ${this.props.legend ? 'legend' : ''}`}>
         <polygon
           stroke={stroke}
+          strokeWidth={strokeWidth}
           fill={this.props.styles.get('color')}
           transform={!this.props.scaleMappiece?`scale(1)`:`scale(${this.props.scaleMappiece})` }
           points="37.09 9.68 18.54 0 0 9.68 0 29.05 18.54 38.73 37.09 29.05 37.09 9.68"
