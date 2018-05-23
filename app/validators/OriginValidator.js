@@ -12,7 +12,7 @@ export const originNameValidator = (origin) => {
     originKey: '',
     error: '',
     isValid: false,
-    continent:'',
+    continent: '',
 
   }
   // check if it exists in either of the country
@@ -29,20 +29,20 @@ export const originNameValidator = (origin) => {
     result.isValid = true
   } else {
     // check continent list if thats present there then its a country
-      if(inContinent) {
-        result.country = origin
-        result.originKey = origin
-        result.isValid = true
-      } else {
-        // also return on console that data is not valid
-        // and also the state name with all value
-        result.error = `Not a valid mapping ${origin}`
-      }
+    if (inContinent) {
+      result.country = origin
+      result.originKey = origin
+      result.isValid = true
+    } else {
+      // also return on console that data is not valid
+      // and also the state name with all value
+      result.error = `Not a valid mapping ${origin}`
+    }
   }
-  if(inContinent){
+  if (inContinent) {
     result.continent = inContinent
   } else {
-    result.error = `${result.error} Continent Mapping is missing ${origin}` 
+    result.error = `${result.error} Continent Mapping is missing ${origin}`
   }
   return Immutable.fromJS(result)
 }

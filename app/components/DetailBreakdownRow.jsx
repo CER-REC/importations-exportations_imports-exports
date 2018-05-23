@@ -27,7 +27,7 @@ const PercentageBarConfidentialIcon = props => (
   </svg>
 )
 
-const DetailBreakdownRow = (props) => (
+const DetailBreakdownRow = props => (
 
   <tr className="detailBreakDownText">
     <td width={props.colorBox ? '14px' : '0px'} style={{ verticalAlign: 'baseline' }}>

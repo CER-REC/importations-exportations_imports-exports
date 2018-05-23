@@ -39,7 +39,7 @@ class StackedChart extends Chart {
   updateAxisGuide = position => this.setState({ axisGuide: position })
 
   refinedPetroleumProductsBar() {
-    if (this.props.selectedEnergy !== 'refinedPetroleumProducts') { return null}
+    if (this.props.selectedEnergy !== 'refinedPetroleumProducts') { return null }
     return (<g>
       <ExplanationDot
         scale="scale(1)"
@@ -62,8 +62,9 @@ class StackedChart extends Chart {
         containerX={this.props.left + 3}
         containerY={this.props.top + 260}
         name="stackedBarChartExplanation"
-        text={`${this.props.tr(['explanations','barsRefinedPetroleumProducts'])}`}
-    /></g>)
+        text={`${this.props.tr(['explanations', 'barsRefinedPetroleumProducts'])}`}
+      />
+            </g>)
   }
 
   render() {
@@ -86,10 +87,10 @@ class StackedChart extends Chart {
     const valueOrder = Object.entries(valueTotals)
       .sort(([, a], [, b]) => (a - b)) // Sort ascending
       .map(([key]) => key)
-      
+
     const scale = this.getScale(this.props)
     const heightPerUnit = height / (scale.getIn(['y', 'max']) - scale.getIn(['y', 'min']))
-   
+
     const elements = data.get('values').map((point, period) => {
       const opacity = this.isTimelinePointFiltered(period) ? 0.5 : 1
       let offsetY = 0

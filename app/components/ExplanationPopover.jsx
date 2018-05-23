@@ -35,8 +35,9 @@ class ExplanationPopover extends React.Component {
     const text = this.props.text
     if (text.includes('\n')) {
       let splitText = text.split('\n')
-      splitText = splitText.map(text => <span key={text}>{text}<br/></span>)
-      return <div style={{
+      splitText = splitText.map(text => <span key={text}>{text}<br /></span>)
+      return (<div
+        style={{
         position: 'relative',
         top: this.props.textY - 3,
         left: this.props.textX,
@@ -46,9 +47,12 @@ class ExplanationPopover extends React.Component {
         background: 'white',
         opacity: '0.9',
       }}
-        className="explanationText">{splitText}</div>
+        className="explanationText"
+      >{splitText}
+              </div>)
     }
-    return <div style={{
+    return (<div
+      style={{
           position: 'relative',
           top: this.props.textY - 3,
           left: this.props.textX,
@@ -58,9 +62,10 @@ class ExplanationPopover extends React.Component {
           background: 'white',
           opacity: '0.9',
         }}
-      className="explanationText">
+      className="explanationText"
+    >
       {text}
-        {/*
+      {/*
         <svg>
           <g transform={`translate(${this.props.textBoxWidth - 40} 2)`}>
             <polyline
@@ -80,19 +85,20 @@ class ExplanationPopover extends React.Component {
           </g>
         </svg>
         */}
-    </div>
+            </div>)
   }
 
   render() {
-    if(!this.props.expanded) { return null }
-    return <div style={{
+    if (!this.props.expanded) { return null }
+    return (<div style={{
           position: 'absolute',
           top: this.props.containerY + this.props.yPosition,
           left: this.props.containerX + this.props.xPosition,
-        }}>
-        {this.drawText()}
+        }}
+    >
+      {this.drawText()}
       <div style={{ position: 'absolute', top: 0, left: 0 }}>{this.drawLine()}</div>
-    </div>
+            </div>)
   }
 }
 

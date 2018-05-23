@@ -11,7 +11,7 @@ class ElectricityMapPieceActivityExplanation extends React.Component {
     return (<g transform={`translate(${this.props.left + 1},${this.props.top})`}>
       <MapPiece
         value={MapPieceExplanationConstant.getIn(['electricity', 'ca', 'datapoint'])}
-        name={MapPieceExplanationConstant.getIn(['electricity', 'ca', 'datapoint','name'])}
+        name={MapPieceExplanationConstant.getIn(['electricity', 'ca', 'datapoint', 'name'])}
         confidential={emptyMap}
         tilePosition={emptyMap}
         dimensions={MapPieceExplanationConstant.getIn(['electricity', 'ca', 'dimensions'])}
@@ -21,13 +21,13 @@ class ElectricityMapPieceActivityExplanation extends React.Component {
         arrowProps={MapPieceExplanationConstant.getIn(['electricity', 'ca', 'arrowProps'])}
         mapPieceProps={MapPieceExplanationConstant.getIn(['electricity', 'ca', 'mapPieceProps'])}
         text={Tr.getIn(['legendMapTiles', 'electricity', 'ca'])}
-        mapPieceKey='name'
-        mapPieceStyleClass = 'mapPieceText'
+        mapPieceKey="name"
+        mapPieceStyleClass="mapPieceText"
       />
       <g transform="translate(0,70)">
         <MapPiece
           value={MapPieceExplanationConstant.getIn(['electricity', 'us', 'datapoint'])}
-          name={MapPieceExplanationConstant.getIn(['electricity', 'us', 'datapoint','name'])}
+          name={MapPieceExplanationConstant.getIn(['electricity', 'us', 'datapoint', 'name'])}
           confidential={emptyMap}
           tilePosition={emptyMap}
           dimensions={MapPieceExplanationConstant.getIn(['electricity', 'us', 'dimensions'])}
@@ -37,8 +37,8 @@ class ElectricityMapPieceActivityExplanation extends React.Component {
           arrowProps={MapPieceExplanationConstant.getIn(['electricity', 'us', 'arrowProps'])}
           mapPieceProps={MapPieceExplanationConstant.getIn(['electricity', 'us', 'mapPieceProps'])}
           text={Tr.getIn(['legendMapTiles', 'electricity', 'us'])}
-          mapPieceKey='name'
-          mapPieceStyleClass = 'mapPieceText'
+          mapPieceKey="name"
+          mapPieceStyleClass="mapPieceText"
         />
       </g>
             </g>)

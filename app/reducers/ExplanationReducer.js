@@ -1,21 +1,20 @@
 const Immutable = require('immutable')
 
 const defaults = Immutable.fromJS({
-  isActive:false,
+  isActive: false,
   explanationDot: null,
 })
 
 const ExplanationReducer = (state = defaults, action) => {
-  switch(action.type) {
+  switch (action.type) {
+    case 'ExplanationSummoned':
+      return state.merge({ isActive: true, explanationDot: action.explanationDot })
 
-  case 'ExplanationSummoned':
-    return state.merge({isActive:true, explanationDot: action.explanationDot})
+    case 'ExplanationDismissed':
+      return state.merge({ isActive: false, explanationDot: null })
 
-  case 'ExplanationDismissed':
-    return state.merge({isActive:false, explanationDot: null})
-
-  default:
-    return state
+    default:
+      return state
   }
 }
 

@@ -100,7 +100,7 @@ export const naturalGasLiquidsDetailBreakdownValues = createSelector(
   (_, props) => props,
   (selection, subtype, country, padd, layout, props) => {
 */
-    /*
+/*
      * NGL - Canada
      *   layout
      *   selection.origins

@@ -73,10 +73,10 @@ class ElectricityMapLayout extends React.Component {
   getPowerPoolsOutline(key, country, xaxis, yaxis, position, dimensions, mapPieceScale) {
     if (this.isMapPieceSelected(key, country) && this.props.selection.get('country') === 'powerpool' && this.props.arrangeBy === 'location') {
       let result = ''
-      let transform ='0 0'
+      let transform = '0 0'
       switch (key) {
         case 'PJM':
-          transform = (this.props.viewport.get('changeWidthRatio')) > 1.2 ?'scale(0.985 1.02) translate(-250 -352)': 'scale(0.98 1.01) translate(-246.5 -343)'
+          transform = (this.props.viewport.get('changeWidthRatio')) > 1.2 ? 'scale(0.985 1.02) translate(-250 -352)' : 'scale(0.98 1.01) translate(-246.5 -343)'
           result = (<polygon
             className="powerPoolOutline"
             points="121.5,148.5 143.7,139.3 166,148.5 166,175.3 187.7,186.8 210.5,175.3 232.6,186.5 255.7,175.3
@@ -86,7 +86,7 @@ class ElectricityMapLayout extends React.Component {
           />)
           break
         case 'MN/ND':
-          transform = (this.props.viewport.get('changeWidthRatio')) > 1.2 ?'scale(1 1.01) translate(-457 -354)': 'scale(1 1.01) translate(-453 -345)'
+          transform = (this.props.viewport.get('changeWidthRatio')) > 1.2 ? 'scale(1 1.01) translate(-457 -354)' : 'scale(1 1.01) translate(-453 -345)'
           result = (<polygon
             className="powerPoolOutline"
             points="154.5,149.5 176.8,140.3 198.8,149.5 221,140.3 243.7,149.5 243.7,176.3 221,187.8 198.8,175.8
@@ -94,7 +94,7 @@ class ElectricityMapLayout extends React.Component {
           />)
           break
         case 'NE-ISO':
-          transform = (this.props.viewport.get('changeWidthRatio')) > 1.2 ?'scale(1) translate(-162 -374)': 'translate(-158 -364)'
+          transform = (this.props.viewport.get('changeWidthRatio')) > 1.2 ? 'scale(1) translate(-162 -374)' : 'translate(-158 -364)'
           result = (<polygon
             className="powerPoolOutline"
             points="144.3,128.1 167,118.9 189,128.2 211.2,118.9 233.2,128.2 233.2,155.1 255.6,167.5 255.6,194.3
@@ -246,7 +246,7 @@ class ElectricityMapLayout extends React.Component {
   /*
    * TODO: Port top/height changes into ElectricityVisualizationContainer
   renderDetailSidebar() {
-    const top = this.props.viewport.get('changeHeightRatio') > 1.2 ? 40 : 0 
+    const top = this.props.viewport.get('changeHeightRatio') > 1.2 ? 40 : 0
     return (<DetailSidebar top={this.props.top + top} height={Constants.getIn(['detailBreakDown', this.props.country, 'height'], 0)}>
       {this.renderDetailBreakdown()}
     </DetailSidebar>)

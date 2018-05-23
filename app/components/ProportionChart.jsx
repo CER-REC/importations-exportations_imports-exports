@@ -78,7 +78,7 @@ class ProportionChart extends Chart {
     </g>)
   }
 
-  renderDetailSideBar(data, aggregateKey, categoryColours, selectionState, selectedEnergy){
+  renderDetailSideBar(data, aggregateKey, categoryColours, selectionState, selectedEnergy) {
     const aggregateKeyList = []
     let prefix = ''
     let suffix = ''
@@ -97,10 +97,10 @@ class ProportionChart extends Chart {
       content = Tr.getIn(['detailBreakDown', 'crudeOil', 'defaultText', this.props.language])
     } else {
       const breakdown = this.calculateBreakdown()
-      content = <span><table width="100%" className="detailBreakDownContainer" style={{ padding: '8px 0', height: '90px', overflowY: 'auto' }}>
+      content = (<span><table width="100%" className="detailBreakDownContainer" style={{ padding: '8px 0', height: '90px', overflowY: 'auto' }}>
         <tbody>
           {Object.entries(breakdown.values).sort((x, y) => y[1] - x[1]).map((key, i) => {
-            const colour = categoryColours.getIn([selectedEnergy,aggregateKey, key[0]], Constants.getIn(['styleGuide', 'colours', 'ExportDefault']))
+            const colour = categoryColours.getIn([selectedEnergy, aggregateKey, key[0]], Constants.getIn(['styleGuide', 'colours', 'ExportDefault']))
             let label = <span> <strong style={{ display: 'inline-block' }} className="detailBolded">{Tr.getIn(['label', key[0], this.props.language])}</strong> </span>
             if (this.props.language === 'fr' && aggregateKey !== 'transport') {
               label = <span><strong style={{ display: 'inline-block' }} className="detailBolded">{Tr.getIn(['label', key[0], this.props.language])}</strong> </span>
@@ -109,7 +109,7 @@ class ProportionChart extends Chart {
               <DetailBreakdownRow
                 key={key}
                 colorBox={<div
-                          style={{
+                  style={{
                             display: 'inline-block',
                             width: '8px',
                             height: '8px',
@@ -128,24 +128,25 @@ class ProportionChart extends Chart {
             )
           })}
         </tbody>
-      </table>
-      <ConfidentialCount
-        key="confidential"
-        valueKey="total"
-        aggregateKey={aggregateKey}
-      /></span>
+                       </table>
+        <ConfidentialCount
+          key="confidential"
+          valueKey="total"
+          aggregateKey={aggregateKey}
+        />
+                 </span>)
     }
-    return <DetailSidebar
-          {...dimensions}
-        > 
-        <div className="crudeTriangle" />
-       <DetailBreakdownHeader
-          trContent={trContent}
-          color="black"
-          type="crudeOilTypeMode"
-        />   
-          {content}
-    </DetailSidebar>
+    return (<DetailSidebar
+      {...dimensions}
+    >
+      <div className="crudeTriangle" />
+      <DetailBreakdownHeader
+        trContent={trContent}
+        color="black"
+        type="crudeOilTypeMode"
+      />
+      {content}
+            </DetailSidebar>)
   }
   render() {
     const {
@@ -205,7 +206,7 @@ class ProportionChart extends Chart {
     return (
       <g transform={this.getTransform()}>
         {elements}
-        {this.renderDetailSideBar(data, this.props.aggregateKey ,categoryColours, selectionState, this.props.selectedEnergy)}
+        {this.renderDetailSideBar(data, this.props.aggregateKey, categoryColours, selectionState, this.props.selectedEnergy)}
         {this.crudeExplanation(data, this.props.aggregateKey)}
       </g>
     )

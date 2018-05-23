@@ -19,7 +19,7 @@ export const ConfidentialIconLogo = props => (
     {props.tooltip ? <title>{props.tooltip}</title> : null}
     <path
       fill={props.expanded ? '#999' : '#fff'}
-      stroke='#999'
+      stroke="#999"
       d="M7.83.5A7.33,7.33,0,1,1,.5,7.83,7.33,7.33,0,0,1,7.83.5Z"
     />
     <path
@@ -53,24 +53,25 @@ class ConfidentialIcon extends React.Component {
     return (<g transform={`translate(${this.props.xPosition} ${this.props.yPosition})`}>
       <a
         role="menuItem"
-        {...handleInteraction(this.props.onClick, this.props.name)}>
-          {this.confidentialityIcon()}
+        {...handleInteraction(this.props.onClick, this.props.name)}
+      >
+        {this.confidentialityIcon()}
       </a>
-    <PopoverPortal>
-      <ConfidentialityPopover
-        scale={this.props.scale}
-        containerX={this.props.containerX}
-        containerY={this.props.containerY}
-        text={this.props.text}
-        lineX={this.props.lineX}
-        lineY={this.props.lineY}
-        textX={this.props.textX}
-        textY={this.props.textY}
-        xPosition={this.props.xPosition}
-        yPosition={this.props.yPosition}
-        expanded={this.props.expanded}
-      />
-    </PopoverPortal>
+      <PopoverPortal>
+        <ConfidentialityPopover
+          scale={this.props.scale}
+          containerX={this.props.containerX}
+          containerY={this.props.containerY}
+          text={this.props.text}
+          lineX={this.props.lineX}
+          lineY={this.props.lineY}
+          textX={this.props.textX}
+          textY={this.props.textY}
+          xPosition={this.props.xPosition}
+          yPosition={this.props.yPosition}
+          expanded={this.props.expanded}
+        />
+      </PopoverPortal>
     </g>)
   }
 }

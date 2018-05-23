@@ -14,8 +14,8 @@ import { setSelection } from '../actions/visualizationSettings'
 
 const emptyMap = fromJS({})
 
-const mapPieceTransformStartTop = ( top, dimensions, mapPieceScale) =>  top * ((mapPieceScale * dimensions.get('height')) + dimensions.get('topPadding'))
-const mapPieceTransformStartLeft = ( left, dimensions, mapPieceScale) => (left * ((mapPieceScale * dimensions.get('width')) + dimensions.get('leftPadding')))
+const mapPieceTransformStartTop = (top, dimensions, mapPieceScale) => top * ((mapPieceScale * dimensions.get('height')) + dimensions.get('topPadding'))
+const mapPieceTransformStartLeft = (left, dimensions, mapPieceScale) => (left * ((mapPieceScale * dimensions.get('width')) + dimensions.get('leftPadding')))
 
 const portsByProvince = fromJS(Constants.getIn(['dataloader', 'mapping', 'ports'])
   .reduce((acc, next) => {
@@ -37,20 +37,20 @@ class NaturalGasMapContainer extends React.PureComponent {
     }
   }
 
-  getAllPortsByProvinceName = (provinces) =>{
-    const portList = Constants.getIn(['dataloader','mapping','ports'])
-    let result = portList.filter(port=> provinces.includes(port.get('Province')))
+  getAllPortsByProvinceName = (provinces) => {
+    const portList = Constants.getIn(['dataloader', 'mapping', 'ports'])
+    let result = portList.filter(port => provinces.includes(port.get('Province')))
     result = result.reduce((acc, nextValue) => {
       acc.push(nextValue.get('Port Name'))
-      return  acc
+      return acc
     }, [])
     return result
   }
-  onClick = ( portName, provinceName = null) => {
-    const selection =  this.props.selectionSettings
+  onClick = (portName, provinceName = null) => {
+    const selection = this.props.selectionSettings
     let ports = []
     let provinces = []
-    if(provinceName !== null){
+    if (provinceName !== null) {
       provinces = [provinceName]
       const provinceExists = selection.get('provinces').indexOf(provinceName)
       if (provinceExists === -1) {
@@ -60,7 +60,7 @@ class NaturalGasMapContainer extends React.PureComponent {
       }
       ports = this.getAllPortsByProvinceName(provinces)
     } else {
-      ports = selection.get('provinces').count() > 0 ? [] :selection.get('ports').toJS()
+      ports = selection.get('provinces').count() > 0 ? [] : selection.get('ports').toJS()
       const portExists = selection.get('ports').indexOf(portName)
       if (portExists === -1) {
         ports.push(portName)
@@ -112,7 +112,7 @@ class NaturalGasMapContainer extends React.PureComponent {
       const maximumRows = portsCount > 7 ? Math.ceil(portsCount / 2) : portsCount
 
       let renderingNumber = 0
-      let leftRendered = 0
+      const leftRendered = 0
       let row = 1
       let column = 0
       provinceRendered += 1
@@ -172,26 +172,39 @@ class NaturalGasMapContainer extends React.PureComponent {
       column += 1
       topPadding = 0
       row = 0
-      if(portsCount > 7){
+      if (portsCount > 7) {
         provinceRendered += 0.75
       }
       const isProvinceSelected = this.props.selectionSettings.get('provinces').indexOf(province)
-      const provinceClass = isProvinceSelected !== -1 ? 'provinceSelected': 'provinceDeselected'
+      const provinceClass = isProvinceSelected !== -1 ? 'provinceSelected' : 'provinceDeselected'
       const provinceTextColor = isProvinceSelected !== -1 ? 'portSelectedProvinceLabel' : 'portProvinceLabel'
 
       return (
         <g className="paddLayout" key={`NaturalGasMap_${province}`} >
-          <rect className = {provinceClass} x={ provinceTextPosition - 9} y={dimensions.get('topPadding')}
-            width='32' height="15" fill="none" stroke="#a99372" strokeWidth="0.75"/>
-          <text className={provinceTextColor} x={ provinceTextPosition -3} y={dimensions.get('topPadding') + 13} 
-          {...handleInteractionWithTabIndex(tabIndex, this.onClick, '', province)}>{province}</text>
+          <rect
+            className={provinceClass}
+            x={provinceTextPosition - 9}
+            y={dimensions.get('topPadding')}
+            width="32"
+            height="15"
+            fill="none"
+            stroke="#a99372"
+            strokeWidth="0.75"
+          />
+          <text
+            className={provinceTextColor}
+            x={provinceTextPosition - 3}
+            y={dimensions.get('topPadding') + 13}
+            {...handleInteractionWithTabIndex(tabIndex, this.onClick, '', province)}
+          >{province}
+          </text>
           {mapLayout.toArray()}
         </g>
       )
-    } )
+    })
 
     return (
-      <g key='NaturalGasMapContainer' transform={`scale(${this.props.viewport.get('changeWidthRatio')} ${this.props.viewport.get('changeHeightRatio')}) translate(${this.props.left} ${this.props.top})`}>
+      <g key="NaturalGasMapContainer" transform={`scale(${this.props.viewport.get('changeWidthRatio')} ${this.props.viewport.get('changeHeightRatio')}) translate(${this.props.left} ${this.props.top})`}>
         {layout.toArray()}
       </g>
     )
@@ -199,20 +212,18 @@ class NaturalGasMapContainer extends React.PureComponent {
 }
 const mapDispatchToProps = { onMapPieceClick: setSelection }
 
-const mapStateToprops = (state, props) => {
-  return {
-    arrangeBy: arrangeBy(state, props),
-    bins: binSelector(state, props),
-    //selector: aggregateLocationNaturalGasSelector(state, props),
-    selectionSettings: visualizationSettings(state, props).get('selection'),
-    viewport: state.viewport,
-    data: getFullyFilteredValues(state, {
-      ...props,
-      valueKey: 'activity',
-      groupBy: 'port',
-      country: 'ca',
-    }),
-  }
-}
+const mapStateToprops = (state, props) => ({
+  arrangeBy: arrangeBy(state, props),
+  bins: binSelector(state, props),
+  // selector: aggregateLocationNaturalGasSelector(state, props),
+  selectionSettings: visualizationSettings(state, props).get('selection'),
+  viewport: state.viewport,
+  data: getFullyFilteredValues(state, {
+    ...props,
+    valueKey: 'activity',
+    groupBy: 'port',
+    country: 'ca',
+  }),
+})
 
 export default connect(mapStateToprops, mapDispatchToProps)(NaturalGasMapContainer)

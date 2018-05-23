@@ -92,7 +92,8 @@ class BarChart extends Chart {
         containerY={this.props.top}
         name={`${this.props.selectedEnergy} importBarChartExplanation`}
         text={textString}
-    /></g>)
+      />
+            </g>)
   }
 
   blueBarExplanation() {
@@ -121,7 +122,8 @@ class BarChart extends Chart {
         containerY={this.props.left + 68}
         name={`${this.props.selectedEnergy} exportBarChartExplanation`}
         text={`${this.props.tr(['explanations', 'barChartExport'])}`}
-    /></g>)
+      />
+            </g>)
   }
 
   crudeBlueBarExplanation() {
@@ -154,11 +156,12 @@ class BarChart extends Chart {
         lineY={173}
         textX={46}
         textY={58}
-        containerX={this.props.left + 3 }
+        containerX={this.props.left + 3}
         containerY={containerY}
         name={`${this.props.selectedEnergy} exportBarChartExplanation`}
         text={textString}
-    /></g>)
+      />
+            </g>)
   }
 
   renderLine(point, period, negativeValOffset, barHeight, colour, opacity, overflowBarHeight = 0) {
@@ -221,9 +224,9 @@ class BarChart extends Chart {
       let overflow = null
       let overflowBarHeight = 0
       let overflowClick = null
-      
-      if (value > scale.getIn(['y','max']) || value < 0) {
-        barHeight = (value < 0) ? 0 : scale.getIn(['y','max']) * heightPerUnit
+
+      if (value > scale.getIn(['y', 'max']) || value < 0) {
+        barHeight = (value < 0) ? 0 : scale.getIn(['y', 'max']) * heightPerUnit
         let overflowText = null
         const barDirection = (value < 0 ? -1 : 1)
         overflowBarHeight = 17 * barDirection
@@ -309,7 +312,7 @@ class BarChart extends Chart {
             updatePosition={this.updateAxisGuide}
             width={this.props.width}
             barSize={barSize}
-            tabIndex={tabIndex||0}
+            tabIndex={tabIndex || 0}
           />
         </g>
         {/*
@@ -336,7 +339,7 @@ export default connect(
     tr: trSelector(state, props),
     expandedOutliers: state.chartOutliers,
     scale: timeLineScaleValue(state, props),
-    scaleByProductSubType: timeLineScaleValueByProductSubtype(state, props)
+    scaleByProductSubType: timeLineScaleValueByProductSubtype(state, props),
   }, timelineData(state, props)),
   { toggleOutlier },
 )(BarChart)
