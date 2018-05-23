@@ -11,7 +11,7 @@ import {
   timelinePlayback,
   timeLineScaleSelector,
   groupingBy as timelineGrouping,
-  selectedActivityGroup
+  selectedActivityGroup,
 } from './data'
 import { visualizationContentPosition as visContentSize } from './viewport/'
 import { selectedVisualization, scaledLinkedSelector } from './visualizationSettings'
@@ -112,8 +112,8 @@ export const timeLineScaleValue = createSelector(
   scaledLinkedSelector,
   selectedActivityGroup,
   (yaxis, xaxis, scaleLinked, activityGroup) => {
-    const exportsText = activityGroup === 'importsExports' ? 'exports': activityGroup
-    const importsText = activityGroup === 'importsExports' ? 'imports': activityGroup
+    const exportsText = activityGroup === 'importsExports' ? 'exports' : activityGroup
+    const importsText = activityGroup === 'importsExports' ? 'imports' : activityGroup
     if (scaleLinked) {
       let result = yaxis.getIn([exportsText, 'activityTotal']) > yaxis.getIn([importsText, 'activityTotal']) ?
         yaxis.getIn([exportsText, 'activityTotal']) : yaxis.getIn([importsText, 'activityTotal'])

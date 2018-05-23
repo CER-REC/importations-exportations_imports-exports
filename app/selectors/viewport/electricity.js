@@ -67,13 +67,13 @@ export const usMapPosition = createSelector(
   chartExportPosition,
   viewport,
   (prev, viewp) => {
-    const top = viewp.get('changeHeightRatio') > 1.2 ? (prev.top + prev.height - 60) : (prev.top + prev.height + 10 ) 
+    const top = viewp.get('changeHeightRatio') > 1.2 ? (prev.top + prev.height - 60) : (prev.top + prev.height + 10)
     const result = {
       // Move down by 35px to give barchart space for negative values and outliers
       top: top + 35,
-      left: prev.left - viewp.get('changeWidthRatio')*30,
+      left: prev.left - viewp.get('changeWidthRatio') * 30,
       width: prev.width,
-      height: viewp.get('changeHeightRatio')*220,
+      height: viewp.get('changeHeightRatio') * 220,
     }
     return result
   },
@@ -83,8 +83,8 @@ export const powerPoolPosition = createSelector(
   usMapPosition,
   viewport,
   (prev, viewp) => {
-    const top = viewp.get('changeHeightRatio') > 1.2 ? (prev.top + prev.height - 50) : (prev.top + prev.height - 10) 
-    const left = viewp.get('changeWidthRatio') > 1.2 ? (prev.width + viewp.get('changeWidthRatio') - 100) : (prev.width + viewp.get('changeWidthRatio')*100) 
+    const top = viewp.get('changeHeightRatio') > 1.2 ? (prev.top + prev.height - 50) : (prev.top + prev.height - 10)
+    const left = viewp.get('changeWidthRatio') > 1.2 ? (prev.width + viewp.get('changeWidthRatio') - 100) : (prev.width + viewp.get('changeWidthRatio') * 100)
     const result = {
       top,
       left,

@@ -11,10 +11,10 @@ class CrudeOilPieceActivityExplanation extends React.Component {
       <g transform="translate(10,50)">
         <ImportExportArrow
           arrowSpacing={MapPieceExplanationConstant.getIn(['crudeOilExports', 'styles', 'arrowSpacing'])}
-          type='exports'
-          color='#fff'
+          type="exports"
+          color="#fff"
           arrowProps={MapPieceExplanationConstant.getIn(['crudeOilExports', 'arrowProps'])}
-          text= {Tr.getIn(['legendMapTiles','crudeOilExports'])}
+          text={Tr.getIn(['legendMapTiles', 'crudeOilExports'])}
         />
       </g>
     </g>)

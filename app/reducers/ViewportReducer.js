@@ -10,7 +10,7 @@ const defaults = Immutable.fromJS({
 const ViewportReducer = (state = defaults, action) => {
   switch (action.type) {
     case 'ResizeScreen':
-      return state.set('x', action.x).set('y', action.y). set('changeWidthRatio', action.changeWidthRatio).set('changeHeightRatio', action.changeHeightRatio)
+      return state.set('x', action.x).set('y', action.y).set('changeWidthRatio', action.changeWidthRatio).set('changeHeightRatio', action.changeHeightRatio)
     default:
       return state
   }

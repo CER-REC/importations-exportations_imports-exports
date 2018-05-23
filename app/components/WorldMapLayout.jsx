@@ -6,13 +6,8 @@ import PropTypes from 'prop-types'
 import MapPiece from './MapPiece'
 import MapLayoutGridConstant from '../MapLayoutGridConstant'
 import Constants from '../Constants'
-import Tr from '../TranslationTable'
 import TrSelector from '../selectors/translate'
-import {
-  visualizationSettings,
-  showImportsSelector,
-  showExportsSelector,
-} from '../selectors/visualizationSettings'
+import { visualizationSettings } from '../selectors/visualizationSettings'
 
 import { setSelection } from '../actions/visualizationSettings'
 import './ElectricityMapLayout.scss'
@@ -33,17 +28,15 @@ const mapPieceTransformStartYaxis = (position, dimensions, mapPieceScale) =>
 
 class WorldMapLayout extends React.Component {
   static propTypes = {
-    /*
     selection: PropTypes.instanceOf(Immutable.Map).isRequired,
-    dataPoints: PropTypes.instanceOf(Immutable.Map).isRequired,
-    filteredDataPoints: PropTypes.instanceOf(Immutable.Map).isRequired,
     onMapPieceClick: PropTypes.func.isRequired,
-    arrangeBy: PropTypes.string.isRequired,
-    layout: PropTypes.instanceOf(Immutable.List).isRequired,
+    layout: PropTypes.instanceOf(Immutable.Map).isRequired,
+    bins: PropTypes.instanceOf(Immutable.List).isRequired,
+    Tr: PropTypes.func.isRequired,
+    unit: PropTypes.string.isRequired,
     top: PropTypes.number.isRequired,
     left: PropTypes.number.isRequired,
     country: PropTypes.string.isRequired,
-    */
   }
 
   onClick = (country, continentKey) => {
@@ -57,10 +50,7 @@ class WorldMapLayout extends React.Component {
         continents = selection.get('continents').delete(originKeyExists)
       }
     }
-    
-    let filteredData = Constants.getIn(['dataloader', 'mapping', 'continent']).filter((point) => {
-      return continents.includes(point)
-    })
+    const filteredData = Constants.getIn(['dataloader', 'mapping', 'continent']).filter(point => continents.includes(point))
     const origins = filteredData.keySeq().toArray()
     this.props.onMapPieceClick({
       country,
@@ -88,8 +78,6 @@ class WorldMapLayout extends React.Component {
     const { layout } = this.props
     const mapPieceScale = mapLayoutGrid.get('mapPieceScale')
 
-    const xaxis = this.props.left
-    const yaxis = this.props.top
     const isSelected = this.isSelected()
     return layout
       .get('tilePositions')
@@ -129,8 +117,8 @@ class WorldMapLayout extends React.Component {
                 isMapPieceSelected={this.isMapPieceSelected(key, this.props.country)}
                 isSelected={isSelected}
                 mapPieceStyleClass="mapPieceText"
-                overrideArroWPosition={true}
-                overrideTextPosition={true}
+                overrideArroWPosition
+                overrideTextPosition
                 isOrigin={(this.props.selection.get('country') === this.props.country)}
                 x1={mapPieceTransformStartXaxis(position, dimensions, mapPieceScale)}
                 y1={mapPieceTransformStartYaxis(position, dimensions, mapPieceScale)}
@@ -146,9 +134,11 @@ class WorldMapLayout extends React.Component {
       .toArray()
   }
   render() {
-    return (<g>
-      {this.renderMapPiece()}
-    </g>)
+    return (
+      <g>
+        {this.renderMapPiece()}
+      </g>
+    )
   }
 }
 

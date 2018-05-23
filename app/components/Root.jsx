@@ -10,7 +10,9 @@ import Tr from '../TranslationTable'
 import TrSelector from '../selectors/translate'
 import '../styles/Common.scss'
 
-const Root = ({ vis, dataLoadingComplete, viewport, language}) => {
+const Root = ({
+  vis, dataLoadingComplete, viewport, language,
+}) => {
   if (vis && dataLoadingComplete) { return <div><Workspace /></div> }
 
   const loaderStyle = {
@@ -18,9 +20,9 @@ const Root = ({ vis, dataLoadingComplete, viewport, language}) => {
     width: viewport.get('x'),
   }
 
-  return <div style={loaderStyle}>
-    
-      <div className="containerOne">    
+  return (<div style={loaderStyle}>
+
+    <div className="containerOne">
       <p className="loadingVisualization">{Tr.getIn(['loader', 'titleText', language])}</p>
 
       <div className="titleContainer">
@@ -30,21 +32,20 @@ const Root = ({ vis, dataLoadingComplete, viewport, language}) => {
         </span>
       </div>
 
-          <p className="loadingVisualizationTwo">{Tr.getIn(['loader', 'titleText_2', language])}</p>
-      </div>
-
-        <div className="circle-elements containerTwo">
-            <div className="circle export"/>
-            <div className="circle export"/>
-            <div className="circle export"/>
-            <div className="circle import"/>
-            <div className="circle import"/>
-            <div className="circle import"/>
-            <div className="circle import"/>
-            <div className="circle export"/>
-        </div>
+      <p className="loadingVisualizationTwo">{Tr.getIn(['loader', 'titleText_2', language])}</p>
     </div>
 
+    <div className="circle-elements containerTwo">
+      <div className="circle export" />
+      <div className="circle export" />
+      <div className="circle export" />
+      <div className="circle import" />
+      <div className="circle import" />
+      <div className="circle import" />
+      <div className="circle import" />
+      <div className="circle export" />
+    </div>
+          </div>)
 }
 
 Root.propTypes = {

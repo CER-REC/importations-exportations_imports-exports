@@ -19,7 +19,7 @@ export const chartTransportPosition = createSelector(
   canadaPaddPosition,
   viewport,
   (canadaPadd, viewp) => {
-    const top = viewp.get('changeHeightRatio') > 1.2? canadaPadd.top + canadaPadd.height - 30: canadaPadd.top + canadaPadd.height - 70
+    const top = viewp.get('changeHeightRatio') > 1.2 ? canadaPadd.top + canadaPadd.height - 30 : canadaPadd.top + canadaPadd.height - 70
     const result = {
       top,
       left: canadaPadd.left,

@@ -45,10 +45,11 @@ class AboutWindow extends React.Component {
         <p className="intro">
           <span>
             {Tr.getIn(['aboutWindow', 'p3', this.props.language])}&nbsp;
-          <a
-            href={Tr.getIn(['aboutWindow', 'governmentPortalLink', this.props.language])}>
-            {Tr.getIn(['aboutWindow', 'governmentPortalLink', this.props.language])}
-          </a>
+            <a
+              href={Tr.getIn(['aboutWindow', 'governmentPortalLink', this.props.language])}
+            >
+              {Tr.getIn(['aboutWindow', 'governmentPortalLink', this.props.language])}
+            </a>
           </span>
         </p>
         <p className="intro">
@@ -61,7 +62,8 @@ class AboutWindow extends React.Component {
             {Tr.getIn(['aboutWindow', 'p5_1', this.props.language])}
           </span>
           <a
-            href={Tr.getIn(['aboutWindow', 'emailLink', this.props.language])}>
+            href={Tr.getIn(['aboutWindow', 'emailLink', this.props.language])}
+          >
             {Tr.getIn(['aboutWindow', 'emailLink', this.props.language])}
           </a>
           <span>
@@ -173,7 +175,7 @@ class AboutWindow extends React.Component {
           <span>
             { Tr.getIn(['aboutWindow', 'attributions', this.props.language])}
           </span>
-        </p>  
+        </p>
         <p className="aboutSubheading">
           <span>
             { Tr.getIn(['aboutWindow', 'map', this.props.language])}

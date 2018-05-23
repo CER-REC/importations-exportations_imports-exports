@@ -1,6 +1,6 @@
 import { createSelector } from 'reselect'
 
-import { visualizationContentPosition,viewport } from './index'
+import { visualizationContentPosition, viewport } from './index'
 import Constants from '../../Constants'
 
 const axisHeight = Constants.getIn(['timeline', 'axisHeight'])
@@ -30,7 +30,7 @@ export const individualChartsPosition = createSelector(
   (startPos, viewp) => {
     let lastPos = startPos
     const positions = {}
-    const height =  viewp.get('changeWidthRatio')  > 1.2 ? 100: 75
+    const height = viewp.get('changeWidthRatio') > 1.2 ? 100 : 75
     const types = [
       'Partially Processed Oil',
       'Jet Fuel',

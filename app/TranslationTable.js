@@ -1778,7 +1778,7 @@ const TranslationTable = fromJS({
       },
 
       // Africa
-      
+
       Algeria: {
         en: 'Algeria',
         fr: 'Algeria_FR',
@@ -1832,7 +1832,7 @@ const TranslationTable = fromJS({
         fr: 'Zaire_FR',
       },
       "Côte d'Ivoire": {
-        en:"Côte d'Ivoire",
+        en: "Côte d'Ivoire",
         fr: "Côte d'Ivoire_FR",
       },
       Djibouti: {
@@ -2438,7 +2438,7 @@ const TranslationTable = fromJS({
         en: 'Collected Low Volume Contributions',
         fr: 'Collected Low Volume Contributions FR',
       },
-    }
+    },
   },
   unabbreviated: {
     mainMenuBar: {
@@ -2872,15 +2872,15 @@ const TranslationTable = fromJS({
         en: 'East\nHereford',
         fr: 'East\nHereford',
       },
-      'Napierville': {
+      Napierville: {
         en: 'Napier-\nville',
         fr: 'Napier-\nville',
       },
-      'Philipsburg': {
+      Philipsburg: {
         en: 'Philips-\nburg',
         fr: 'Philips-\nburg',
       },
-      'Brunswick': {
+      Brunswick: {
         en: 'Bruns-\nwick',
         fr: 'Bruns-\nwick',
       },
@@ -2888,7 +2888,7 @@ const TranslationTable = fromJS({
         en: 'St\nStephen',
         fr: 'St\nStephen',
       },
-      'CNG': {
+      CNG: {
         en: 'CNG',
         fr: 'GNC',
       },

@@ -480,8 +480,8 @@ const MapLayoutGridConstant = fromJS({
       dimensions: {
         height: 37.09,
         width: 38.75,
-        yAxisPadding: -8.1, //8
-        xAxisPadding: -1.9, //12
+        yAxisPadding: -8.1, // 8
+        xAxisPadding: -1.9, // 12
       },
       styles: {
         bottomMargin: 15,
@@ -570,8 +570,8 @@ const MapLayoutGridConstant = fromJS({
       dimensions: {
         height: 37.09,
         width: 38.75,
-        yAxisPadding: -8.1, //8
-        xAxisPadding: -1.9, //12
+        yAxisPadding: -8.1, // 8
+        xAxisPadding: -1.9, // 12
       },
       styles: {
         bottomMargin: 15,
@@ -653,8 +653,8 @@ const MapLayoutGridConstant = fromJS({
       dimensions: {
         height: 37.09,
         width: 38.75,
-        yAxisPadding: -8.1, //8
-        xAxisPadding: -1.9, //12
+        yAxisPadding: -8.1, // 8
+        xAxisPadding: -1.9, // 12
       },
       styles: {
         bottomMargin: 15,

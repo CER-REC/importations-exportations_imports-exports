@@ -45,7 +45,7 @@ export const getPointsByCountry = createSelector(
 
 const getNaturalGasLiquidsImportAndExport = createSelector(
   getPointsByCountry,
-  (points) => points.map(region => region.set('values', region.get('sumForAvg'))),
+  points => points.map(region => region.set('values', region.get('sumForAvg'))),
 )
 
 const sortData = points => points
@@ -94,7 +94,7 @@ export const createSortedLayout = createSelector(
         x,
         y: row,
       })
-      
+
       // Column value is updated for the next iteration
       column += 1
     })

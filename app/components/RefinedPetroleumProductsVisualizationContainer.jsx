@@ -42,7 +42,7 @@ class RefinedPetroleumProductsVisualizationContainer extends React.Component {
     const categoryColours = Constants.getIn(['styleGuide', 'categoryColours'])
     return (
       <g>
-   
+
         <Axis
           {...positions.axis}
           barWidth={4}
@@ -104,7 +104,7 @@ class RefinedPetroleumProductsVisualizationContainer extends React.Component {
             {...positions[key].chart}
             valueKey="productSubtype"
             activityValueKey="exports"
-            productSubtype= {key}
+            productSubtype={key}
             groupBy="period"
             flipped
             colour={colour}
@@ -174,9 +174,9 @@ export default connect((state, props) => ({
   language: state.language,
   */
   unit: amount(state, props),
-  
+
   data: timelineData(state, { ...props, aggregateKey: 'productSubtype' }),
-  /*filteredData: filterByTimelineAndHexData(state, props),
+  /* filteredData: filterByTimelineAndHexData(state, props),
   */
   detailBreakdown: detailBreakdownSelector(state, {
     ...props,

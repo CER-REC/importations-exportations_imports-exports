@@ -1,5 +1,5 @@
 import React from 'react'
-import {connect} from 'react-redux'
+import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { geoConicConformal, geoPath } from 'd3-geo'
 import { visualizationSettings } from '../selectors/visualizationSettings'
@@ -117,14 +117,15 @@ class PortMap extends React.PureComponent {
         textX={20}
         textY={29}
         containerX={this.props.left + scaleContainerX - 87}
-        containerY={this.props.top + scaleContainerY + 13} 
+        containerY={this.props.top + scaleContainerY + 13}
         name="portMapDot"
-        text={`${this.props.tr(['explanations','portNaturalGas'])}`}
-    /></g>)
+        text={`${this.props.tr(['explanations', 'portNaturalGas'])}`}
+      />
+            </g>)
   }
 
-  renderDots(ports, projection){
-    if(ports === null){
+  renderDots(ports, projection) {
+    if (ports === null) {
       return null
     }
     return ports.map((port) => {
@@ -133,38 +134,36 @@ class PortMap extends React.PureComponent {
         type: 'Point',
         coordinates: [port.get('Longitude'), port.get('Latitude')],
       })
-      const fillColor = portSelected? Constants.getIn(['styleGuide', 'colours', 'NeutralMedium']) : Constants.getIn(['styleGuide', 'colours', 'SandMedium'])
+      const fillColor = portSelected ? Constants.getIn(['styleGuide', 'colours', 'NeutralMedium']) : Constants.getIn(['styleGuide', 'colours', 'SandMedium'])
       return (<g transform="translate(0 -80)" key={port.get('Port Name')}>
         <path
           d={position}
           fill={fillColor}
         />
-        </g>
+      </g>
       )
     })
   }
-  getPortMapLabel(){
-    if(this.props.selectionSettings.get('provinces').count() > 0){
-      if(this.props.selectionSettings.get('provinces').count() > 1){
-        return Tr.getIn(['portMap','multiple', this.props.language])
-      } else {
-        return Tr.getIn(['country', 'ca', this.props.selectionSettings.get('provinces').first(), this.props.language]) 
+  getPortMapLabel() {
+    if (this.props.selectionSettings.get('provinces').count() > 0) {
+      if (this.props.selectionSettings.get('provinces').count() > 1) {
+        return Tr.getIn(['portMap', 'multiple', this.props.language])
       }
-    }else if(this.props.selectionSettings.get('ports').count() > 0){
-      if(this.props.selectionSettings.get('ports').count() > 1){
-          return Tr.getIn(['portMap','multiple', this.props.language])
-      } else {
-        return Tr.getIn(['portMap','portName', this.props.selectionSettings.get('ports').first(), this.props.language], this.props.selectionSettings.get('ports').first())
+      return Tr.getIn(['country', 'ca', this.props.selectionSettings.get('provinces').first(), this.props.language])
+    } else if (this.props.selectionSettings.get('ports').count() > 0) {
+      if (this.props.selectionSettings.get('ports').count() > 1) {
+        return Tr.getIn(['portMap', 'multiple', this.props.language])
       }
+      return Tr.getIn(['portMap', 'portName', this.props.selectionSettings.get('ports').first(), this.props.language], this.props.selectionSettings.get('ports').first())
     }
-    return Tr.getIn(['portMap', 'default', this.props.language]) 
+    return Tr.getIn(['portMap', 'default', this.props.language])
   }
   render() {
     if (!this.state.topoData.bbox) { return null }
     const projection = geoPath().projection(this.projection())
     let nonSelected = null
     let selected = null
-    if(this.isSelected()){
+    if (this.isSelected()) {
       nonSelected = Ports.filter(port => !this.isPortSelected(port.get('Port Name'), port.get('Province')))
       selected = Ports.filter(port => this.isPortSelected(port.get('Port Name'), port.get('Province')))
     } else {
@@ -174,7 +173,7 @@ class PortMap extends React.PureComponent {
     const portDotsSelected = this.renderDots(selected, projection)
     return (
       <svg width="100%" height="100%" viewBox={`0 0 ${viewbox.width} ${viewbox.height}`}>
-      <text className="portName">{this.getPortMapLabel()}</text>
+        <text className="portName">{this.getPortMapLabel()}</text>
         <g className="regions" transform="translate(0 -80)">
           {
             this.state.regions.map((d, i) => (
@@ -190,20 +189,18 @@ class PortMap extends React.PureComponent {
           }
         </g>
         {this.portMapExplanation()}
-        {(nonSelected !== null && portDotsNonSelected.count() > 0)?portDotsNonSelected.toArray():null}
+        {(nonSelected !== null && portDotsNonSelected.count() > 0) ? portDotsNonSelected.toArray() : null}
         {portDotsSelected.toArray()}
       </svg>
     )
   }
 }
 
-const mapStateToprops = (state, props) => {
-  return {
-    viewport: state.viewport,
-    tr: trSelector(state, props),
-    selectionSettings: visualizationSettings(state, props).get('selection'),
-    language: state.language,
-  }
-}
+const mapStateToprops = (state, props) => ({
+  viewport: state.viewport,
+  tr: trSelector(state, props),
+  selectionSettings: visualizationSettings(state, props).get('selection'),
+  language: state.language,
+})
 
 export default connect(mapStateToprops)(PortMap)

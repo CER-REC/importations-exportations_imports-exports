@@ -12,8 +12,8 @@ export const LoadScales = scales => ({
 const initialState = fromJS({})
 export const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case Types.LOAD_SCALES: 
-    return fromJS(action.payload.scales)
+    case Types.LOAD_SCALES:
+      return fromJS(action.payload.scales)
     default: return state
   }
 }

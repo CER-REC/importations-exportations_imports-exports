@@ -132,7 +132,7 @@ const createSortedLayout = createSelector(
   },
 )
 
-const getTabIndexStart = (country) =>{
+const getTabIndexStart = (country) => {
   let tabIndex = 0
   switch (country) {
     case 'ca':

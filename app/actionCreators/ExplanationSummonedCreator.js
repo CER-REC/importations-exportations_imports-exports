@@ -1,8 +1,8 @@
 
-function ExplanationSummonedCreator (explanationDot) {
+function ExplanationSummonedCreator(explanationDot) {
   return {
     type: 'ExplanationSummoned',
-    explanationDot: explanationDot,
+    explanationDot,
   }
 }
 

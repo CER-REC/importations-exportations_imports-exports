@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 
 import Constants from '../Constants'
 import PopoverPortal from './PopoverPortal'
+
 const Tr = require('../TranslationTable.js')
 
 class ConfidentialityPopover extends React.Component {
@@ -28,16 +29,19 @@ class ConfidentialityPopover extends React.Component {
 
     return (<svg>
       <g transform={`scale(0.4) ${scaleLine} ${transformString}`}>
-        <path d="M142.16, 173.94l24.26, 36.69a40.12, 40.12,0,0,0, 33.47, 18H378.2"
+        <path
+          d="M142.16, 173.94l24.26, 36.69a40.12, 40.12,0,0,0, 33.47, 18H378.2"
           stroke="#999"
           strokeWidth="1.8"
-          fill="transparent" />
+          fill="transparent"
+        />
       </g>
     </svg>)
   }
 
   drawText() {
-    return <div style={{
+    return (<div
+      style={{
           position: 'relative',
           top: this.props.textY,
           left: this.props.textX,
@@ -46,21 +50,23 @@ class ConfidentialityPopover extends React.Component {
           background: 'white',
           opacity: '0.9',
         }}
-      className="confidentialityText">
+      className="confidentialityText"
+    >
       {this.props.text}
-    </div>
+            </div>)
   }
 
   render() {
-    if(!this.props.expanded) { return null }
-    return <div style={{
+    if (!this.props.expanded) { return null }
+    return (<div style={{
           position: 'absolute',
           left: this.props.containerX + this.props.xPosition,
           top: this.props.containerY + this.props.yPosition,
-        }}>
-        {this.drawText()}
-      <div style={{ position: 'absolute', top: 0, left: 0}}>{this.drawLine()}</div>
-    </div>
+        }}
+    >
+      {this.drawText()}
+      <div style={{ position: 'absolute', top: 0, left: 0 }}>{this.drawLine()}</div>
+            </div>)
   }
 }
 

@@ -1,7 +1,7 @@
 import { createSelector } from 'reselect'
 
 // TODO: Temporary
-//import { chartAxisPosition } from './electricity'
+// import { chartAxisPosition } from './electricity'
 const chartAxisPosition = () => ({ top: 0 })
 import { activityOptions, arrangeByOptions, amountOptions, subtypeOptions } from '../menus'
 import Constants from '../../Constants'
@@ -69,7 +69,7 @@ export const explanationTogglePosition = createSelector(
   chartAxisPosition,
   (prev, chart) => ({
     ...prev,
-    //top: chart.top - 5,
+    // top: chart.top - 5,
     top: prev.top + 150,
     height: 20,
   }),

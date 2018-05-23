@@ -18,7 +18,7 @@ class ImportExportArrow extends React.Component {
     arrowProps: null,
   }
 
-  breakLine(className, text, x, y){
+  breakLine(className, text, x, y) {
     if (text.includes('\n')) {
       const splitName = text.split('\n')
       return (

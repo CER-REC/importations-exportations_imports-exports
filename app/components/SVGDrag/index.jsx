@@ -134,7 +134,7 @@ class SVGDrag extends React.PureComponent {
         onTouchEnd={this.onDragStop}
         transform={`translate(${offset.x} ${offset.y})`}
         className="SVGDrag"
-        tabIndex={this.props.tabIndex||0}
+        tabIndex={this.props.tabIndex || 0}
         onKeyDown={this.onKeyDown}
         aria-label={this.props['aria-label']}
         aria-live={this.state.isDragging ? 'off' : 'assertive'}

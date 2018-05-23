@@ -119,15 +119,18 @@ class AxisGuide extends React.PureComponent {
         containerX={220}
         containerY={containerY}
         name={`${this.props.selectedEnergy} timeLineRangeDot`}
-        text={`${this.props.tr(['explanations','timelineRange'])}`}
-    /></g>)
+        text={`${this.props.tr(['explanations', 'timelineRange'])}`}
+      />
+            </g>)
   }
 
   getBackgroundColour = () => (this.props.scaleLinked
     ? Constants.getIn(['styleGuide', 'colours', 'SandExtraDark'])
     : Constants.getIn(['styleGuide', 'colours', (this.props.flipped ? 'ExportDefault' : 'ImportDefault')]))
 
-  getScaleImage = ({ x, y, width, height }) => {
+  getScaleImage = ({
+    x, y, width, height,
+  }) => {
     const groupTransform = `translate(${x + width + 1} ${y - 2})`
     const imageProps = {
       fill: 'white',

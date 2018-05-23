@@ -34,22 +34,22 @@ class Header extends React.Component {
   }
 
   resetExplanation() {
-    let textString = `${this.props.Tr(['explanations','reset'])}`
+    let textString = `${this.props.Tr(['explanations', 'reset'])}`
     let dotName = 'electricityTitleExplanation'
     if (this.props.selectedEnergy === 'crudeOil') {
-      textString = `${this.props.Tr(['explanations','resetCrudeOil'])}`
+      textString = `${this.props.Tr(['explanations', 'resetCrudeOil'])}`
       dotName = 'crudeOilTitleExplanation'
     }
     if (this.props.selectedEnergy === 'naturalGas') {
-      textString = `${this.props.Tr(['explanations','resetNaturalGas'])}`
+      textString = `${this.props.Tr(['explanations', 'resetNaturalGas'])}`
       dotName = 'naturalGasTitleExplanation'
     }
     if (this.props.selectedEnergy === 'naturalGasLiquids') {
-      textString = `${this.props.Tr(['explanations','resetNaturalGasLiquids'])}`
+      textString = `${this.props.Tr(['explanations', 'resetNaturalGasLiquids'])}`
       dotName = 'naturalGasLiquidsTitleExplanation'
     }
     if (this.props.selectedEnergy === 'refinedPetroleumProducts') {
-      textString = `${this.props.Tr(['explanations','resetRefinedPetroleumProducts'])}`
+      textString = `${this.props.Tr(['explanations', 'resetRefinedPetroleumProducts'])}`
       dotName = 'refinedPetroleumProductsTitleExplanation'
     }
     return (
@@ -87,15 +87,15 @@ class Header extends React.Component {
   leftHeading() {
     const { Tr } = this.props
     const energyType = this.props.selectedEnergy
-    let color = (energyType === 'crudeOil' || energyType === 'refinedPetroleumProducts')
+    const color = (energyType === 'crudeOil' || energyType === 'refinedPetroleumProducts')
       ? '#DCDCDC'
       : ' '
     return (
       <div className="leftHeader">
-        <div className="headingImports" style={{ color: color }}>
+        <div className="headingImports" style={{ color }}>
           {Tr(['mainHeading', 'imports'])}
         </div>&nbsp;
-        <div className="headingBase" style={{ color: color }}>
+        <div className="headingBase" style={{ color }}>
           {Tr(['mainHeading', 'ampersand'])}
         </div>&nbsp;
         <div className="headingExports">
@@ -158,22 +158,22 @@ class Header extends React.Component {
         </div>
       </div>)
     }
-      return (<div className="importsLink">
-          <div className="importsSubheading">
-            {Tr(['mainHeading', 'base_1'])}
-            <div className="importsSubheadingEnergy">
-              { Tr(['mainHeading', 'refinedPetroleumProducts']) }
-            </div>
-            {Tr(['mainHeading', 'base_2'])}{Tr(['mainHeading', 'base_2_5_refinedPetroleumProducts'])}     
-          <a href={Tr(['mainHeading', 'refinedPetroleumProductsLink_04'])}>{Tr(['mainHeading', 'refinedPetroleumProductsStats_04'])}</a>
-            {Tr(['mainHeading', 'closingBracket'])}
+    return (<div className="importsLink">
+      <div className="importsSubheading">
+        {Tr(['mainHeading', 'base_1'])}
+        <div className="importsSubheadingEnergy">
+          { Tr(['mainHeading', 'refinedPetroleumProducts']) }
         </div>
-      </div>)
+        {Tr(['mainHeading', 'base_2'])}{Tr(['mainHeading', 'base_2_5_refinedPetroleumProducts'])}
+        <a href={Tr(['mainHeading', 'refinedPetroleumProductsLink_04'])}>{Tr(['mainHeading', 'refinedPetroleumProductsStats_04'])}</a>
+        {Tr(['mainHeading', 'closingBracket'])}
+      </div>
+            </div>)
   }
 
   metaBar() {
     const { Tr } = this.props
-    const tabIndex = Constants.getIn(['tabIndex','start', 'menuBar'])
+    const tabIndex = Constants.getIn(['tabIndex', 'start', 'menuBar'])
     const transformMetaBarIcons = `translate(${this.props.viewport.get('x') - Constants.getIn(['metaBar', 'iconMargin'])}, 0)`
     let resetX = `${this.props.viewport.get('x') - Constants.getIn(['metaBar', 'resetTextOffset'])}`
     if (this.props.language === 'fr') {
@@ -245,8 +245,8 @@ const mapStateToProps = (state, props) => ({
 
 
 const mapDispatchToProps = dispatch => ({
-  onClick() {dispatch(ShowAboutWindowCreator('about'))},
-  onResetClick(){dispatch(resetVisualization())},
+  onClick() { dispatch(ShowAboutWindowCreator('about')) },
+  onResetClick() { dispatch(resetVisualization()) },
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header)

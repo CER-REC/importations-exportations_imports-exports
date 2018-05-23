@@ -17,8 +17,8 @@ class Chart extends React.PureComponent {
     color: PropTypes.string, // eslint-disable-line react/no-unused-prop-types
     timelineRange: PropTypes.instanceOf(Immutable.Map).isRequired,
     timelinePlayback: PropTypes.oneOfType([
-     PropTypes.bool,
-     PropTypes.instanceOf(Immutable.Map),
+      PropTypes.bool,
+      PropTypes.instanceOf(Immutable.Map),
     ]).isRequired,
     timelineGroup: PropTypes.oneOf(['year', 'quarter']).isRequired,
   }
