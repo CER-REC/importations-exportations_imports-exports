@@ -41,3 +41,22 @@ export const parsePeriod = period => ({
   year: parseInt(period.substr(0, 4), 10),
   quarter: parseInt(period.substr(5), 10),
 })
+
+export const analyticsReporter = (category, action, filter, eventDetail) => {
+  if (typeof window.dataLayer === 'undefined') {
+    console.warn('Google Tag Manager not found.')
+  }
+
+  if (typeof window.dataLayer === 'undefined') { return }
+
+    const dataObject = {
+      event: 'visualization interaction',
+      category: category,
+      action: action,
+      filter: filter,
+      label: eventDetail,
+      visualization: 'import-export',
+    }
+    console.log('Sending GA report:', dataObject)
+    return window.dataLayer.push(dataObject)
+}

@@ -18,6 +18,8 @@ import Store from './Store'
 import { DismissComponent as DismissComponentCreator } from './actions/socialBar'
 import { ScreenshotMode } from './actions/screenshot'
 import setupReselectTools from './reselectTools'
+import { SetUpAnalytics as LoadAnalyticsCreator } from './actions/analytics'
+import { analyticsReporter as AnalyticsReporter } from './utilities'
 
 const store = Store()
 
@@ -48,6 +50,8 @@ function windowClickHandler() {
 }
 
 DomReady(() => {
+  store.dispatch(LoadAnalyticsCreator(new AnalyticsReporter()))
+
   resizeScreenHandler()
   window.addEventListener('resize', resizeScreenHandler)
   window.addEventListener('click', windowClickHandler)

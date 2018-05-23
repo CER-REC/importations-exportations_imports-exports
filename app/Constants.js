@@ -771,5 +771,18 @@ const Constants = fromJS({
       socialBar: 200,
     },
   },
+  analyticsCategory: {
+    mapPiece: 'map piece',
+    padd: 'padd',
+    socialBar: 'social bar',
+    headerLinks: 'header links',
+    detailSidebar: 'detail side bar',
+    explanations: 'explanations',
+    confidentiality: 'confidentiality',
+    barOutlier: 'bar outlier',
+    menuBar: 'menu bar',
+    timeline: 'time line',
+    wikimediaCommons: 'wikimedia commons',
+  },
 })
 export default Constants
