@@ -315,6 +315,7 @@ const MapLayoutGridConstant = fromJS({
         width: 74,
         yAxisPadding: 5,
         xAxisPadding: 9,
+        strokeWidth: 0.25,
       },
       styles: {
         color: '#ede3cb',
