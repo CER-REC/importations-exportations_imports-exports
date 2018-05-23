@@ -1,21 +1,21 @@
-.dataDownloadWindow {
+dialog.dataDownload {
   width:570px;
   height: auto;
-}
 
-.subtext {
-  position: relative;
-  left: 14%;
-  text-align: center;
-  width: 65%;
-  padding-bottom: 20px;
-}
+  .subtext {
+    position: relative;
+    left: 14%;
+    text-align: center;
+    width: 65%;
+    padding-bottom: 20px;
+  }
 
-.dataDownloadImage {
-  cursor: pointer;
-  padding-bottom: 20px;
-  margin-left: 38%;
-  width: 150px;
-  height: auto;
-  top: 50%;
+  .dataDownloadImage {
+    cursor: pointer;
+    padding-bottom: 20px;
+    margin-left: 38%;
+    width: 150px;
+    height: auto;
+    top: 50%;
+  }
 }

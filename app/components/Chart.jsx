@@ -2,10 +2,12 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import Immutable from 'immutable'
 
+import { parsePeriod } from '../utilities'
+
 class Chart extends React.PureComponent {
   static propTypes = {
     // Unused prop-types are used by reselect
-    aggregateKey: PropTypes.string.isRequired, // eslint-disable-line react/no-unused-prop-types
+    // aggregateKey: PropTypes.string.isRequired, // eslint-disable-line react/no-unused-prop-types
     scaleKey: PropTypes.string, // eslint-disable-line react/no-unused-prop-types
     top: PropTypes.number.isRequired,
     left: PropTypes.number.isRequired,
@@ -15,8 +17,8 @@ class Chart extends React.PureComponent {
     color: PropTypes.string, // eslint-disable-line react/no-unused-prop-types
     timelineRange: PropTypes.instanceOf(Immutable.Map).isRequired,
     timelinePlayback: PropTypes.oneOfType([
-      PropTypes.bool,
-      PropTypes.instanceOf(Immutable.Map),
+     PropTypes.bool,
+     PropTypes.instanceOf(Immutable.Map),
     ]).isRequired,
     timelineGroup: PropTypes.oneOf(['year', 'quarter']).isRequired,
   }
@@ -34,9 +36,8 @@ class Chart extends React.PureComponent {
       : `translate(${left} ${top})`
   }
 
-  isTimelinePointFiltered(point) {
-    const year = point.get('year')
-    const quarter = point.get('quarter')
+  isTimelinePointFiltered(period) {
+    const { year, quarter } = parsePeriod(period)
 
     if (this.props.timelinePlayback) {
       const playback = this.props.timelinePlayback.toJS()

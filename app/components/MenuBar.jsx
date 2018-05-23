@@ -44,6 +44,7 @@ class MenuBar extends React.Component {
   }
 
   renderActivityMenu() {
+    if (this.props.importExportVisualization.startsWith('crudeOil')) { return null }
     const { Tr } = this.props
     const title = (this.props.visualizationSettings.get('activity') !== 'importsExports')
       ? null
@@ -106,6 +107,7 @@ class MenuBar extends React.Component {
   }
 
   render() {
+    
     return (
       <g className="MenuBar">
         {this.renderActivityMenu()}

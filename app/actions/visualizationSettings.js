@@ -62,6 +62,7 @@ const initialState = fromJS({
   selection: {
     country: null,
     origins: [],
+    continents: [],
     destinations: {},
     provinces: [],
     ports: [],
@@ -111,7 +112,8 @@ const subReducer = visualization => (state = initialState, action) => {
 
 export const reducer = combineReducers([
   'electricity',
-  'crudeOil',
+  'crudeOilImports',
+  'crudeOilExports',
   'naturalGas',
   'naturalGasLiquids',
   'refinedPetroleumProducts',

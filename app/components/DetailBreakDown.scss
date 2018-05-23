@@ -16,17 +16,13 @@
     background: #fff;
     color: #666;
   }
-  .percentage-bar {
-    background-color: $sand-medium;
-    width: 38px;
-    position: relative;
-    float: right;
-    margin-top: -2px;
-    right: -7px;
-  }
-    
-  .percentage-bar > span {
-    height: 12px;
-    display: block;
-  }
+}
+
+.confidentialIcon {
+  position: absolute;
+  margin-top: -2px;
+  margin-left: 15px;
+  z-index: 99999;
+  width: 12px;
+  height: 12px;
 }

@@ -1,19 +1,25 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { fromJS } from 'immutable'
+
 
 import BarChart from './BarChart'
 import StackedChart from './StackedChart'
 import Axis from './Axis'
+
 import DetailSidebar from './DetailSidebar'
-import ConfidentialCount from './ConfidentialCount'
+import DetailBreakdown from './DetailBreakdown'
 import DetailBreakdownRow from './DetailBreakdownRow'
 import DetailTotal from './DetailTotal'
+import ConfidentialCount from './ConfidentialCount'
+import MissingDataCount from './MissingDataCount'
 import * as RefinedPetroleumProductsViewport from '../selectors/viewport/refinedPetroleumProducts'
 import { arrangeBy, amount, filterByTimelineAndHexData } from '../selectors/data'
+import { detailBreakdownSelector } from '../selectors/renderData'
 import { timelineData } from '../selectors/timeline'
 import Constants from '../Constants'
 import Tr from '../TranslationTable'
-import TrSelector from '../selectors/translate'
+// import TrSelector from '../selectors/translate'
 
 const subtypes = [
   'Partially Processed Oil',
@@ -24,22 +30,19 @@ const subtypes = [
 ]
 
 class RefinedPetroleumProductsVisualizationContainer extends React.Component {
-   calculateBreakdown() {
-    return this.props.filteredData.reduce((acc, next) => {
-      const type = next.get('productSubtype')
-      if(!subtypes.includes(type)){return acc}
-      acc.total += next.get('value',0)
-      acc.values[type] = (acc.values[type] || 0) + next.get('value', 0)
-      return acc
-    }, { total: 0, values: {} })
+  calculateBreakdown() {
+    return {
+      values: this.props.detailBreakdownValues.toJS(),
+      total: this.props.detailBreakdownValues.get('exports').max(),
+    }
   }
 
   renderStackedChart() {
-    const { stackedChart: positions, selectedEnergy } = this.props
+    const { stackedChart: positions } = this.props
     const categoryColours = Constants.getIn(['styleGuide', 'categoryColours'])
-    const breakdown = this.calculateBreakdown()
     return (
       <g>
+   
         <Axis
           {...positions.axis}
           barWidth={4}
@@ -49,43 +52,33 @@ class RefinedPetroleumProductsVisualizationContainer extends React.Component {
         />
         <StackedChart
           {...positions.chart}
-          aggregateKey="productSubtype"
+          valueKey="productSubtype"
+          activityValueKey="exports"
+          groupBy="period"
           scaleKey="total"
           flipped
         />
-        <DetailSidebar
-          {...positions.chart}
-        >
-          <table width="100%" className="detailBreakDownContainer" style={{ padding: '8px 0' }}>
-            <tbody>
-              {Object.entries(breakdown.values).sort((x, y) => y[1] - x[1]).map((key, i) => {
-                const colour = categoryColours.getIn([selectedEnergy, key[0]], Constants.getIn(['styleGuide', 'colours', 'ExportDefault']))
-                return (
-                  <DetailBreakdownRow
-                    key={key}
-                    colorBox={<div
-                          style={{
-                            display: 'inline-block',
-                            width: '8px',
-                            height: '8px',
-                            marginRight: '4px',
-                            backgroundColor: colour,
-                          }}
-                        />}
-                    label={<strong style={{display: 'inline-block' }}>{Tr.getIn(['label', key[0], this.props.language])}</strong>}
-                    value={key[1]}
-                    unit={this.props.unit}
-                    total={breakdown.total}
-                    progressBarStyle={{ backgroundColor: colour }}
-                  />
-                )
-              })}
-            </tbody>
-          </table>
+        <DetailSidebar {...positions.chart}>
+          <DetailBreakdown
+            {...positions.chart}
+            height="auto"
+            groupBy="activity"
+            valueKey="productSubtype"
+            valueAverage
+            showGroup="exports"
+            showHeader={false}
+            colors={categoryColours.getIn(['refinedPetroleumProducts', 'productSubtype'])}
+            colorBox
+            trContent={fromJS({ body: {} }) /* Dummy content to make it render */}
+            nameMappings={Tr.get('label')}
+          />
           <ConfidentialCount
-            key="confidential"
-            valueKey="total"
-            aggregateKey="productSubtype"
+            valueKey="productSubtype"
+            groupBy="activitytotal"
+          />
+          <MissingDataCount
+            valueKey="productSubtype"
+            groupBy="activitytotal"
           />
         </DetailSidebar>
       </g>
@@ -93,11 +86,10 @@ class RefinedPetroleumProductsVisualizationContainer extends React.Component {
   }
 
   renderSeparateCharts() {
-    const { individualCharts: positions , selectedEnergy} = this.props
+    const { individualCharts: positions, detailBreakdown } = this.props
     const categoryColours = Constants.getIn(['styleGuide', 'categoryColours'])
-    const breakdown = this.calculateBreakdown()
     const charts = subtypes.map((key, i) => {
-      const colour = categoryColours.getIn([selectedEnergy, key], Constants.getIn(['styleGuide', 'colours', 'ExportDefault']))
+      const colour = categoryColours.getIn(['refinedPetroleumProducts', 'productSubtype', key], Constants.getIn(['styleGuide', 'colours', 'ExportDefault']))
       return (
         <g key={key}>
           <Axis
@@ -110,8 +102,10 @@ class RefinedPetroleumProductsVisualizationContainer extends React.Component {
           />
           <BarChart
             {...positions[key].chart}
-            valueKey={key}
-            aggregateKey="productSubtype"
+            valueKey="productSubtype"
+            activityValueKey="exports"
+            productSubtype= {key}
+            groupBy="period"
             flipped
             colour={colour}
             detailSidebar={false}
@@ -124,17 +118,24 @@ class RefinedPetroleumProductsVisualizationContainer extends React.Component {
               <tbody>
                 <DetailBreakdownRow
                   label={<strong>{key}</strong>}
-                  value={breakdown.values[key]}
+                  value={detailBreakdown.getIn(['values', 'exports', key])}
+                  confidential={detailBreakdown.getIn(['confidential', 'exports', key])}
+                  totalPoints={detailBreakdown.getIn(['totalPoints', 'exports', key])}
                   unit={this.props.unit}
-                  total={breakdown.total}
+                  total={detailBreakdown.get('total')}
                   progressBarStyle={{ backgroundColor: colour }}
                 />
               </tbody>
             </table>
             <ConfidentialCount
-              key="confidential"
-              valueKey={key}
-              aggregateKey="productSubtype"
+              valueKey="activity"
+              groupBy="productSubtype"
+              showGroup={key}
+            />
+            <MissingDataCount
+              valueKey="activity"
+              groupBy="productSubtype"
+              showGroup={key}
             />
           </DetailSidebar>
         </g>
@@ -148,10 +149,11 @@ class RefinedPetroleumProductsVisualizationContainer extends React.Component {
       <g>
         <DetailSidebar {...this.props.sidebarTotal}>
           <DetailTotal
-            key="total"
             type="exports"
-            valueKey="total"
-            aggregateKey="productSubtype"
+            showGroup="exports"
+            filterActivity="exports"
+            valueKey="activity"
+            groupBy="activity"
           />
         </DetailSidebar>
         {this.props.arrangeBy === 'stack'
@@ -163,14 +165,24 @@ class RefinedPetroleumProductsVisualizationContainer extends React.Component {
 }
 
 export default connect((state, props) => ({
-  selectedEnergy: state.importExportVisualization,
   stackedChart: RefinedPetroleumProductsViewport.stackedChartPosition(state, props),
   individualCharts: RefinedPetroleumProductsViewport.individualChartsPosition(state, props),
   sidebarTotal: RefinedPetroleumProductsViewport.sidebarTotalPosition(state, props),
   arrangeBy: arrangeBy(state, props),
+  /*
   TRSelector: TrSelector(state, props),
   language: state.language,
+  */
   unit: amount(state, props),
+  
   data: timelineData(state, { ...props, aggregateKey: 'productSubtype' }),
-  filteredData: filterByTimelineAndHexData(state, props),
+  /*filteredData: filterByTimelineAndHexData(state, props),
+  */
+  detailBreakdown: detailBreakdownSelector(state, {
+    ...props,
+    groupBy: 'activity',
+    valueKey: 'productSubtype',
+    showGroup: 'exports',
+    valueAverage: true,
+  }),
 }))(RefinedPetroleumProductsVisualizationContainer)

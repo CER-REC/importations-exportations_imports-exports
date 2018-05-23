@@ -79,7 +79,8 @@ class TextBox extends React.PureComponent {
       : ''
     const unsizedContent =
       (this.props.unsizedContent && this.props.unsizedContent(this.state)) || null
-    return (
+      return (
+
       <g transform={transform}>
         {unsizedContent}
         <rect
@@ -100,4 +101,6 @@ class TextBox extends React.PureComponent {
   }
 }
 
+
 export default TextBox
+

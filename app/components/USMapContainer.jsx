@@ -3,22 +3,19 @@ import { connect } from 'react-redux'
 import ElectricityMapLayout from './ElectricityMapLayout.jsx'
 import Immutable from 'immutable'
 
-class USMapContainer extends React.Component {
-  render() {
-    return (
-      <g transform={`scale(${this.props.viewport.get('changeWidthRatio')} ${this.props.viewport.get('changeHeightRatio')}) translate(${this.props.left} ${this.props.top})`}> <ElectricityMapLayout
-        left={this.props.left}
-        top={this.props.top}
-        country="us"
-      />
-      </g>)
-  }
-}
+const USMapContainer = (props) => (
+  <g transform={`scale(${props.viewport.get('changeWidthRatio')} ${props.viewport.get('changeHeightRatio')}) translate(${props.left} ${props.top})`}>
+    <ElectricityMapLayout
+      left={props.left}
+      top={props.top}
+      country="us"
+      valueAverage={props.valueAverage}
+    />
+  </g>
+)
 
 const mapStateToProps = state => ({
   viewport: state.viewport,
-
 })
-
 
 export default connect(mapStateToProps)(USMapContainer)

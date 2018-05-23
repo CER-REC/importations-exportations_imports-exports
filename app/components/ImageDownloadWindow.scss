@@ -1,32 +1,31 @@
+dialog.imageDownload {
+  width: 550px;
+  height: 560px;
 
-.imageDownloadWindow {
-  width:550px;
-  height: auto;
-}
+  .imageDownloadHeading {
+    position: relative;
+    margin-left: 25px;
+    top:30px;
+  }
 
-.imageDownloadHeading {
-  position: relative;
-  margin-left: 25px;
-  top:30px;
-}
+  .imagePreview {
+    position: absolute;
+    margin-top: 40px;
+    margin-left: 28px;
+    width: 430px;
+    height: auto;
+  }
 
-.imagePreview {
-  position: absolute;
-  margin-top: 40px;
-  margin-left: 28px;
-  width: 430px;
-  height: auto;
-}
+  .saveImage {
+    position: relative;
+    cursor: pointer;
+    margin-left: 25px;
+    margin-top: 410px;
+  }
 
-.saveImage {
-  position: relative;
-  cursor: pointer;
-  margin-left: 25px;
-  margin-top: 410px;
-}
-
-.bitlyText {
-  position: absolute;
-  margin-top: 340px;
-  margin-left: 63px;
+  .bitlyText {
+    position: absolute;
+    margin-top: 340px;
+    margin-left: 63px;
+  }
 }

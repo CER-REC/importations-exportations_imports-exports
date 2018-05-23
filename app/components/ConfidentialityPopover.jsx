@@ -24,9 +24,10 @@ class ConfidentialityPopover extends React.Component {
 
   drawLine() {
     const transformString = `translate(${-this.props.lineX} ${-this.props.lineY})`
+    const scaleLine = `${this.props.scale}`
 
     return (<svg>
-      <g transform={`scale(0.4) ${transformString}`}>
+      <g transform={`scale(0.4) ${scaleLine} ${transformString}`}>
         <path d="M142.16, 173.94l24.26, 36.69a40.12, 40.12,0,0,0, 33.47, 18H378.2"
           stroke="#999"
           strokeWidth="1.8"

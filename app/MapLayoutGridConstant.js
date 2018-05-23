@@ -273,7 +273,7 @@ const MapLayoutGridConstant = fromJS({
           name: 'NE-ISO', originKey: 'NE-ISO', x: 1, y: 0,
         },
         {
-          name: 'PJM PP', originKey: 'PJMPP', x: 2, y: 0,
+          name: 'PJM', originKey: 'PJM', x: 2, y: 0,
         },
       ],
     },
@@ -288,7 +288,7 @@ const MapLayoutGridConstant = fromJS({
         'RI',
         'VT',
       ],
-      PJMPP: [
+      PJM: [
         'DE',
         'IL',
         'IN',
@@ -302,6 +302,102 @@ const MapLayoutGridConstant = fromJS({
         'TN',
         'VA',
         'WV',
+      ],
+    },
+  },
+  crudeOilImports: {
+    world: {
+      mapPieceScale: 2,
+      defaultColumns: 3,
+      sortingRowPadding: 0.5,
+      dimensions: {
+        height: 37.09,
+        width: 74,
+        yAxisPadding: 5,
+        xAxisPadding: 9,
+      },
+      styles: {
+        color: '#ede3cb',
+        labelPosition: 'down',
+        labelLineSpacing: 14,
+        arrowPosition: 'up',
+        arrowSpacing: 5,
+        bottomMargin: 5,
+        topMargin: 0,
+        confidentialStyle: {
+          fill: '#999',
+          stroke: '#999',
+          exclamationFill: '#fff',
+        },
+        mapPieceTextStyle: {
+          x: 10.68,
+          y: 10,
+        },
+        mapPieceArrowStyle: {
+          x: 18,
+          y: 8,
+        },
+        mapPieceArrowStyleCenter: {
+          x: -1,
+          y: 10,
+        },
+      },
+      layout: [
+        {
+          name: 'northAmerica', originKey: 'northAmerica', x: -0.25, y: 0,
+        },
+        {
+          name: 'europe', originKey: 'europe', x: 1.25, y: 0,
+        },
+        {
+          name: 'asia', originKey: 'asia', x: 1.90, y: 0,
+        },
+        {
+          name: 'southAmerica', originKey: 'southAmerica', x: 0.25, y: 1,
+        },
+        {
+          name: 'africa', originKey: 'africa', x: 0.90, y: 1,
+        },
+        {
+          name: 'oceania', originKey: 'oceania', x: 2.25, y: 1,
+        },
+        {
+          name: 'otherCountries', originKey: 'otherCountries', x: 2.5, y: 3,
+        },
+      ],
+    },
+    powerpool: {
+      mapPieceScale: 0.9,
+      defaultColumns: 12,
+      dimensions: {
+        height: 37.09,
+        width: 38.75,
+        yAxisPadding: 8.528,
+        xAxisPadding: 12.528,
+      },
+      styles: {
+        color: '#ede3cb',
+        labelPosition: 'down',
+        arrowPosition: 'up',
+        arrowSpacing: -1,
+        bottomMargin: 5,
+        topMargin: 5,
+        confidentialStyle: {
+          fill: '#999',
+          stroke: '#999',
+          exclamationFill: '#fff',
+        },
+      },
+      layout: [
+        {
+          name: 'MN/ND', originKey: 'MN/ND', x: 0, y: 0,
+        },
+        {
+          name: 'NE-ISO', originKey: 'NE-ISO', x: 1, y: 0,
+        },
+        {
+          name: 'PJM', originKey: 'PJM', x: 2, y: 0,
+        },
       ],
     },
   },
@@ -464,6 +560,88 @@ const MapLayoutGridConstant = fromJS({
         },
         {
           paddGroup: 'ca', name: 'NS', originKey: 'NS', x: 7.5, y: 1,
+        },
+      ],
+    },
+    caImport: {
+      mapPieceScale: 1,
+      sortingRowPadding: 1.5,
+      dimensions: {
+        height: 37.09,
+        width: 38.75,
+        yAxisPadding: -8.1, //8
+        xAxisPadding: -1.9, //12
+      },
+      styles: {
+        bottomMargin: 15,
+        topMargin: 5,
+        confidentialStyle: {
+          fill: '#fff',
+          stroke: '#999',
+          exclamationFill: '#999',
+        },
+        crudeOilImports: {
+          xPadding: 70,
+          yPadding: 260,
+          xExportPadding: 130,
+          yExportPadding: 200,
+          scaleingAdjustmentX: -110,
+          scaleingAdjustmentY: -15,
+        },
+      },
+      arrow: {
+        fontClass: 'paddArrowCanadaFonts',
+        textTranslate: {
+          caImport: { left: -170, top: 100 },
+        },
+        orderBy: {
+          location: {
+            caImport: { left: 353, top: -100 },
+          },
+          default: {
+            caImport: { left: 350, top: -110 },
+          },
+        },
+      },
+      layout: [
+        {
+          paddGroup: 'caImport', name: 'YT', originKey: 'YT', x: 1, y: 0,
+        },
+        {
+          paddGroup: 'caImport', name: 'NT', originKey: 'NT', x: 2, y: 0,
+        },
+        {
+          paddGroup: 'caImport', name: 'NU', originKey: 'NU', x: 3, y: 0,
+        },
+        {
+          paddGroup: 'caImport', name: 'PE', originKey: 'PE', x: 6, y: 0,
+        },
+        {
+          paddGroup: 'caImport', name: 'NL', originKey: 'NL', x: 7, y: 0,
+        },
+        {
+          paddGroup: 'caImport', name: 'BC', originKey: 'BC', x: 0.5, y: 1,
+        },
+        {
+          paddGroup: 'caImport', name: 'AB', originKey: 'AB', x: 1.5, y: 1,
+        },
+        {
+          paddGroup: 'caImport', name: 'SK', originKey: 'SK', x: 2.5, y: 1,
+        },
+        {
+          paddGroup: 'caImport', name: 'MB', originKey: 'MB', x: 3.5, y: 1,
+        },
+        {
+          paddGroup: 'caImport', name: 'ON', originKey: 'ON', x: 4.5, y: 1,
+        },
+        {
+          paddGroup: 'caImport', name: 'QC', originKey: 'QC', x: 5.5, y: 1,
+        },
+        {
+          paddGroup: 'caImport', name: 'NB', originKey: 'NB', x: 6.5, y: 1,
+        },
+        {
+          paddGroup: 'caImport', name: 'NS', originKey: 'NS', x: 7.5, y: 1,
         },
       ],
     },
@@ -728,6 +906,19 @@ const MapLayoutGridConstant = fromJS({
         exclamationFill: '#fff',
       },
     },
+    stylesVariant: {
+      color: '#a99372',
+      labelPosition: 'down',
+      arrowPosition: 'down',
+      arrowSpacing: -12,
+      bottomMargin: 5,
+      topMargin: 15,
+      confidentialStyle: {
+        fill: '#999',
+        stroke: '#999',
+        exclamationFill: '#fff',
+      },
+    },
     layout: [
       'BC',
       'AB',
@@ -736,6 +927,7 @@ const MapLayoutGridConstant = fromJS({
       'ON',
       'QC',
       'NB',
+      'CAD',
     ],
   },
 })

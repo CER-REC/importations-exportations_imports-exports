@@ -10,7 +10,7 @@ import { timelineScaleLinked } from '../selectors/timeline'
 import { groupingBy as timelineGroupingSelector } from '../selectors/data'
 import trSelector from '../selectors/translate'
 import { handleInteractionWithTabIndex } from '../utilities'
-import {visualizationSettings} from '../selectors/visualizationSettings'
+import {visualizationSettings, scaledLinkedSelector} from '../selectors/visualizationSettings'
 
 import ExplanationDot from './ExplanationDot'
 import tr from '../TranslationTable'
@@ -119,8 +119,7 @@ class ChartOptions extends React.PureComponent {
               {groupLabel} +
             </a>
           </div>
-          <div className="detailBarArrow" />
-        </div>                          
+        </div>                      
         <svg>{this.linkDataExplanation()}</svg>
       </div>
     )
@@ -130,7 +129,7 @@ class ChartOptions extends React.PureComponent {
 export default connect(
   (state, props) => ({
     selectedEnergy: state.importExportVisualization,
-    scaleLinked: timelineScaleLinked(state, props),
+    scaleLinked: scaledLinkedSelector(state, props),
     activityGroup: visualizationSettings(state, props),
     timelineGroup: timelineGroupingSelector(state, props),
     tr: trSelector(state, props),

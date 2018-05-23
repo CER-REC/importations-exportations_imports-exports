@@ -12,6 +12,7 @@ import ExpandElectricityAmountMenuReducer from './reducers/ExpandElectricityAmou
 import { reducer as ModalReducer } from './actions/modal'
 import { reducer as DataReducer } from './actions/data'
 import { reducer as BinsReducer } from './actions/bins'
+import { reducer as ScalesReducer } from './actions/scales'
 import { reducer as ScreenshotReducer } from './actions/screenshot'
 import { reducer as visualizationSettings } from './actions/visualizationSettings'
 import { reducer as DataLoadCompleteReducer } from './actions/DataLoadComplete'
@@ -21,6 +22,7 @@ import { reducer as activeMenu } from './actions/activeMenu'
 import { reducer as ConfidentialityMenuReducer } from './actions/confidentialityMenu'
 import { reducer as ConfidentialityPopoverReducer } from './actions/confidentiality'
 import { reducer as timelinePlayback } from './actions/timelinePlayback'
+import { reducer as chartOutliers } from './actions/chartOutliers'
 
 const mergeDeep = (old, merge) => {
   if (old === Object(old) && Array.isArray(old) === false) {
@@ -46,6 +48,7 @@ const nestedReducers = combineReducers({
   expandElectricitySortMenu: ExpandElectricitySortMenuReducer,
   data: DataReducer,
   bins: BinsReducer,
+  scales: ScalesReducer,
   dataLoadingComplete: DataLoadCompleteReducer,
   visualizationSettings,
   expandSocialBar: SocialBarReducer,
@@ -56,6 +59,7 @@ const nestedReducers = combineReducers({
   screenshot: ScreenshotReducer,
   activeMenu,
   timelinePlayback,
+  chartOutliers,
 })
 
 export default (initialState = {}, action) => {

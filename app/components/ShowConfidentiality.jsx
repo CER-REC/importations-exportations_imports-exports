@@ -12,13 +12,6 @@ import ExplanationDot from './ExplanationDot'
 
 import '../styles/Fonts.scss'
 
-const triangleLine = (
-  <g transform="translate(0 -3)">
-    <polyline fill="black" points="0 8 0 0 9.1 8.1 0 8.1" />
-    <line stroke="black" x1="0.5" y1="7.6" x2="180" y2="7.6" />
-  </g>
-)
-
 class ShowConfidentiality extends React.Component {
   static get propTypes() {
     return {
@@ -29,7 +22,7 @@ class ShowConfidentiality extends React.Component {
   }
 
   icon() {
-    return <g transform="translate(11 -12) scale(0.84)" className="confidentialityIcon">
+    return <g transform="translate(0 -12) scale(0.84)" className="confidentialityIcon">
       <path
         fill='#fff'
         stroke='#999'
@@ -51,13 +44,13 @@ class ShowConfidentiality extends React.Component {
     }
     return (
       <text
-        x={27}
+        x={16}
         y={0}
         className="showHideConfidentiality"
         fill="#999"
       >
         {confidentialityText}
-        <tspan dx="8">
+        <tspan dx="6">
           {sign}
         </tspan>
       </text>
@@ -68,6 +61,9 @@ class ShowConfidentiality extends React.Component {
     let textString = `${this.props.Tr(['explanations', 'confidentiality'])}`
     if (this.props.energyType === 'electricity') {
       textString = `${this.props.Tr(['explanations', 'electricityConfidentiality'])}`
+    }
+    if (this.props.energyType === 'refinedPetroleumProducts') {
+      textString = `${this.props.Tr(['explanations','confidentialValuesRefinedPetroleumProducts'])}`
     }
     return (<g>
       <ExplanationDot
@@ -104,7 +100,6 @@ class ShowConfidentiality extends React.Component {
       >
         {this.icon()}
         {this.showText()}
-        {triangleLine}
         {this.confidentialityExplanation()}
       </g>
     )

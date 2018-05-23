@@ -64,13 +64,24 @@ export const usPaddPosition = createSelector(
   chartExportPosition,
   viewport,
   (chartPosition, viewp) => {
-    const top = viewp.get('changeHeightRatio') > 1.2 ? (chartPosition.top + chartPosition.height - 80) : (chartPosition.top + chartPosition.height) 
-    const result = {
+    const top = viewp.get('changeHeightRatio') > 1.2
+      ? ((chartPosition.top + chartPosition.height) - 80)
+      : (chartPosition.top + chartPosition.height)
+    return {
       top,
       left: chartPosition.left,
       width: chartPosition.width,
       height: 100,
     }
-    return result
   },
+)
+
+export const exportBreakdown = createSelector(
+  chartExportPosition,
+  chartPosition => ({
+    top: chartPosition.top + chartPosition.height,
+    left: chartPosition.left,
+    width: chartPosition.width,
+    height: 100,
+  }),
 )

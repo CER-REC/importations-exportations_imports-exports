@@ -27,6 +27,29 @@ const TranslationTable = fromJS({
     },
   },
 
+  loader: {
+    titleText: {
+      en: 'loading visualisation',
+      fr: 'visualisation en chargement',
+    },
+    imports: {
+      en: 'Imports',
+      fr: 'Importations',
+    },
+    and: {
+      en: 'and',
+      fr: 'et',
+    },
+    exports: {
+      en: 'Exports',
+      fr: 'Exportations',
+    },
+    titleText_2: {
+      en: 'of Energy Products to and from Canada',
+      fr: 'des produits énergétiques à destination et en provenance du Canada',
+    },
+  },
+
   methodologyLinks: {
     en: 'data/Export-Import-Data-Methodology-EN.pdf',
     fr: 'data/Export-Import-Data-Methodology-FR.pdf',
@@ -46,7 +69,7 @@ const TranslationTable = fromJS({
       fr: 'Cette visualisation présente les données trimestrielles sur le commerce de l’énergie entre le Canada et les États-Unis depuis 1985, à l’exception des données concernant l’électricité, qui ne sont disponibles que depuis 1990.',
     },
     p3: {
-      en: 'If you want to use the data for research and undertake your own review, all the data is downloadable and shareable. The chart images are also downloadable, and if you are interested in the source code for the visualizations, it is available on the government’s Open Government portal:',
+      en: 'If you want to use the data for research and undertake your own review, all the data is downloadable and shareable. The chart images are also downloadable, and if you are interested in the source code for the visualizations, it is available on the government’s Open Government portal: ',
       fr: 'Si vous souhaitez utiliser les données pour vos recherches ou pour en faire votre propre analyse, vous pouvez les télécharger et les partager. Il en est de même pour les graphiques. Quant au code source des visualisations, il est accessible sur le portail du « gouvernement ouvert » à l’adresse',
     },
     governmentPortalLink: {
@@ -167,9 +190,13 @@ const TranslationTable = fromJS({
       en: 'Electricity',
       fr: 'Électricité',
     },
-    crudeOil: {
-      en: 'Crude Oil',
-      fr: 'Pétrole brut',
+    crudeOilImports: {
+      en: 'Crude Oil Imports',
+      fr: 'Pétrole brut TODO',
+    },
+    crudeOilExports: {
+      en: 'Crude Oil Exports',
+      fr: 'Pétrole brut TODO',
     },
     naturalGas: {
       en: 'Natural Gas',
@@ -229,24 +256,24 @@ const TranslationTable = fromJS({
     activity: {
       options: {
         imports: {
-          en: 'Imports',
-          fr: 'Importations',
+          en: 'IMPORTS',
+          fr: 'IMPORTATIONS',
         },
         exports: {
-          en: 'Exports',
-          fr: 'Exportations',
+          en: 'EXPORTS',
+          fr: 'EXPORTATIONS',
         },
         importsExports: {
           en: 'Imports and Exports',
           fr: 'Importations et exportations',
         },
         importsForReexport: {
-          en: 'Temporary Imports',
-          fr: 'Importations temporaires',
+          en: 'TEMPORARY IMPORTS',
+          fr: 'IMPORTATIONS TEMPORAIRES',
         },
         exportsForReimport: {
-          en: 'Temporary Exports',
-          fr: 'Exportations temporaires',
+          en: 'TEMPORARY EXPORTS',
+          fr: 'EXPORTATIONS TEMPORAIRES',
         },
       },
     },
@@ -268,7 +295,7 @@ const TranslationTable = fromJS({
           en: 'MOST EXPORTS',
           fr: 'PLUS D’EXPORTATIONS',
         },
-        amount:{
+        amount: {
           en: 'AMOUNT',
           fr: 'QUANTITÉ',
         },
@@ -528,8 +555,8 @@ const TranslationTable = fromJS({
       fr: 'La flèche orientée vers le haut montre la quantité totale d’électricité importée de l’État de Washington par les régions canadiennes pendant la période sélectionnée dans le diagramme à barres ci-dessus.',
     },
     powerpool: {
-      en: 'A power pool is a grouping of states that imports and exports electricity as a unit. Individual states may also have additional imports and exports.',
-      fr: 'Un réseau commun est un regroupement d’états américains qui importe et exporte de l’électricité conjointement. Chacun des états du regroupement peut également importer et exporter de l’électricité individuellement.',
+      en: 'A power pool is a grouping of states that imports and exports electricity as a unit. Individual states may also have additional imports and exports. \nMN/ND: Minnesota/North Dakota \nNE-ISO: New England Independent System Operator \nPJM: Pennsylvania, Jersey, Maryland (PJM has since expanded to include all or parts of Delaware, Illinois, Indiana, Kentucky, Maryland, Michigan, New Jersey, North Carolina, Ohio, Pennsylvania, Tennessee, Virginia, West Virginia and the District of Columbia)',
+      fr: 'Un réseau commun est un regroupement d’états américains qui importe et exporte de l’électricité conjointement. Chacun des états du regroupement peut également importer et exporter de l’électricité individuellement. MN/ND : Minnesota/Dakota du Nord NE-ISO : New England Independent System Operator PJM : Pennsylvanie, New Jersey et Maryland (comprend désormais certaines parties du Delaware, de l’Illinois, de l’Indiana, du Kentucky, du Maryland, du Michigan, du New Jersey, de la Caroline du Nord, de l’Ohio, de la Pennsylvanie, du Tennessee, de la Virginie, de la Virginie-Occidentale et du District of Columbia)',
     },
     barChartImport: {
       en: 'Each orange bar shows the total electricity that Canadian regions imported during a single quarter.',
@@ -660,12 +687,24 @@ const TranslationTable = fromJS({
       fr: 'La quantité de produits pétroliers raffinés est indiquée en milliers de m³/j (milliers de mètres cubes par jour), ce qui correspond à 6 290 barils par jour.',
     },
     confidentialValuesRefinedPetroleumProducts: {
-      en: 'With only 13 refineries in Canada the data for RPPs is often deemed confidential as individual companies may become identifiable which could have a negative financial impact. Learn more in our methodology.',
-      fr: 'Parce que le Canada ne compte que 13 raffineries, les données relatives aux produits pétroliers raffinés sont souvent confidentielles afin qu’il ne soit pas possible d’identifier une société en particulier, ce qui pourrait avoir une incidence financière négative sur elle.  La méthode contient de plus amples renseignements.',
+      en: 'With relatively few refineries in Canada the data for RPPs is often deemed confidential as individual companies may become identifiable which could have a negative financial impact. Learn more in our methodology.',
+      fr: 'Le Canada comptant assez peu de raffineries, les données relatives aux produits pétroliers raffinés sont souvent confidentielles afin qu’il ne soit pas possible d’identifier une société en particulier, ce qui pourrait avoir une incidence financière négative sur elle. La méthode contient de plus amples renseignements.',
     },
     barsRefinedPetroleumProducts: {
       en: 'Bars are pointed downwards because they represent exports from Canada.',
       fr: 'Les barres sont orientées vers le bas parce qu’elles représentent les exportations du Canada.',
+    },
+    cng: {
+      en: 'The locations where CNG has crossed the border included in the “Other CNG” category include: North Portal and St. Stephen',
+      fr: 'GNC signifie « gaz naturel comprimé ». Les points d’importation du GNC compris dans la catégorie « Autres GNC » sont North Portal et St. Stephen.',
+    },
+    lng: {
+      en: 'LNG stands for liquefied natural gas which is natural gas that had been cooled to -162 Celsius in order to reach its liquid state. In changing from a gas to a liquid, the volume shrinks by a factor of 600 which allows the volume to be transported across oceans by ship and overland by tanker truck. Canada imports offshore LNG into a single terminal in New Brunswick called Canaport. This imported LNG is eventually warmed to resume its gaseous state and is then transported by pipeline as regular natural gas.',
+      fr: 'Le gaz naturel liquéfié (« GNL ») est un gaz naturel qui a été refroidi jusqu’à sa liquéfaction, à -162 degrés Celsius. Pendant son changement d’état de gaz à liquide, son volume diminue par un facteur de 600, ce qui permet le transport du produit par bateau et camion. Les importations de GNL du Canada arrivent au seul terminal méthanier au pays, Canaport, au Nouveau-Brunswick. Le GNL est ensuite réchauffé jusqu’à ce qu’il retrouve son état gazeux et est ensuite transporté par pipeline, comme du gaz naturel régulier.',
+    },
+    crudeExportsTotal: {
+      en: 'Note that the sum of Mode of Transportation, Type of Crude or Explore Destination may not match the Total due to the exclusion of confidential values in one or more of these datasets.',
+      fr: 'Notez que la somme du mode de transport, du type de pétrole brut ou de la destination d’exportation pourrait ne pas correspondre au total en raison de l’exclusion des valeurs confidentielles dans un ou plusieurs de ces ensembles de données.',
     },
   },
 
@@ -707,9 +746,13 @@ const TranslationTable = fromJS({
       en: 'electricity',
       fr: 'électricité',
     },
-    crudeOil: {
-      en: 'crude-oil',
-      fr: 'pétrole-brut',
+    crudeOilImports: {
+      en: 'crude-oil-imports',
+      fr: 'pétrole-brut-imports',
+    },
+    crudeOilExports: {
+      en: 'crude-oil-exports',
+      fr: 'pétrole-brut-exports',
     },
     naturalGas: {
       en: 'natural-gas',
@@ -736,8 +779,8 @@ const TranslationTable = fromJS({
   },
 
   bitlyShare: {
-    en: 'Visit this interactive visualization:',
-    fr: 'Visitez cette visualisation interactif:',
+    en: 'Visit this interactive visualization: ',
+    fr: 'Visitez cette visualisation interactif: ',
   },
 
   downloadable: {
@@ -819,7 +862,7 @@ const TranslationTable = fromJS({
         },
       },
     },
-    crudeOil: {
+    crudeOilExports: {
       defaultText: {
         en: 'Data not available when map is filtered',
         fr: 'Ces données ne sont pas disponibles quand un filtre est actif',
@@ -851,6 +894,12 @@ const TranslationTable = fromJS({
             fr: '',
           },
         },
+        body: {
+          action: {
+            en: 'Export by',
+            fr: 'Exportations par',
+          },
+        },
       },
       productSubtype: {
         header: {
@@ -871,24 +920,34 @@ const TranslationTable = fromJS({
             fr: '',
           },
         },
+        body: {
+          suffix: {
+            en: ' Crude Oil',
+            fr: ' Pétrole brut',
+          },
+        },
       },
       exports: {
         header: {
+          prefix: {
+            en: '',
+            fr: 'Destination',
+          },
           type: {
             en: 'Exports',
-            fr: 'Exportations',
+            fr: 'd’exportation',
           },
           action: {
-            en: 'to',
-            fr: 'par',
+            en: '',
+            fr: '',
           },
           adjective: {
             en: '',
             fr: '',
           },
           place: {
-            en: 'PADDS',
-            fr: 'PADDS',
+            en: 'Destination',
+            fr: '',
           },
         },
         body: {
@@ -915,6 +974,38 @@ const TranslationTable = fromJS({
           place: {
             en: 'Regions',
             fr: 'Régions',
+          },
+        },
+        body: {
+          action: {
+            en: 'from',
+            fr: 'de',
+          },
+        },
+      },
+    },
+    crudeOilImports: {
+      defaultText: {
+        en: 'Data not available when map is filtered',
+        fr: 'Ces données ne sont pas disponibles quand un filtre est actif',
+      },
+      imports: {
+        header: {
+          type: {
+            en: 'Imports',
+            fr: 'Importations',
+          },
+          action: {
+            en: 'to',
+            fr: 'par',
+          },
+          adjective: {
+            en: '',
+            fr: '',
+          },
+          place: {
+            en: 'Canada',
+            fr: 'Canada',
           },
         },
         body: {
@@ -986,12 +1077,12 @@ const TranslationTable = fromJS({
   },
   subType: {
     Butane: {
-      en: 'BUTANE',
-      fr: 'BUTANE',
+      en: 'Butane',
+      fr: 'Butane',
     },
     Propane: {
-      en: 'PROPANE',
-      fr: 'PROPANE',
+      en: 'Propane',
+      fr: 'Propane',
     },
     propaneButane: {
       en: 'Butane and Propane',
@@ -1058,8 +1149,8 @@ const TranslationTable = fromJS({
         fr: 'Nouvelle-Écosse',
       },
       'ATL-Q': {
-        en: 'Atlantic Regions\nand Quebec',
-        fr: 'Régions atlantiques\n et le Québec',
+        en: 'Québec and\nAtlantic Regions',
+        fr: 'Québec et les\nRégions Atlantiques',
       },
     },
     us: {
@@ -1277,7 +1368,7 @@ const TranslationTable = fromJS({
         en: 'Minn / N. Dakota',
         fr: 'Minn. / Dakota N.',
       },
-      PJMPP: {
+      PJM: {
         en: 'Pennsylvania Jersey Maryland Power Pool',
         fr: 'Réseau commun Pennsylvanie NJ Maryland',
       },
@@ -1286,12 +1377,46 @@ const TranslationTable = fromJS({
         fr: "Réseau d'électricité",
       },
     },
+    world: {
+      northAmerica: {
+        en: 'U.S.\nand\nMexico',
+        fr: 'États-Unis\net\nMexique',
+      },
+      africa: {
+        en: 'Africa',
+        fr: 'Afrique',
+      },
+      oceania: {
+        en: 'Australia\nand\nOceania',
+        fr: 'Australie\net\nOcéanie',
+      },
+      asia: {
+        en: 'Asia',
+        fr: 'Asie',
+      },
+      europe: {
+        en: 'Europe',
+        fr: "L'Europe",
+      },
+      southAmerica: {
+        en: 'South\nAmerica',
+        fr: 'Amérique\ndu sud',
+      },
+      otherCountries: {
+        en: 'Low Volume\nContributions',
+        fr: 'Contributions\nà faible\nvolume',
+      },
+    },
   },
   Padd: {
     ca: {
       ca: {
         en: 'CANADA',
         fr: 'CANADA',
+      },
+      caImport: {
+        en: 'CUMULATIVE IMPORTS\nTO CANADA',
+        fr: 'IMPORTATIONS CUMULATIVES\nAU CANADA',
       },
     },
     us: {
@@ -1324,6 +1449,996 @@ const TranslationTable = fromJS({
         fr: 'MEXIQUE',
       },
     },
+    world: {
+      'United States': {
+        en: 'United States',
+        fr: 'United States_FR',
+      },
+      Alabama: {
+        en: 'Alabama',
+        fr: 'Alabama_FR',
+      },
+      Alaska: {
+        en: 'Alaska',
+        fr: 'Alaska_FR',
+      },
+      Arizona: {
+        en: 'Arizona',
+        fr: 'Arizona_FR',
+      },
+      Arkansas: {
+        en: 'Arkansas',
+        fr: 'Arkansas_FR',
+      },
+      California: {
+        en: 'California',
+        fr: 'California_FR',
+      },
+      Colorado: {
+        en: 'Colorado',
+        fr: 'Colorado_FR',
+      },
+      Connecticut: {
+        en: 'Connecticut',
+        fr: 'Connecticut_FR',
+      },
+      Delaware: {
+        en: 'Delaware',
+        fr: 'Delaware_FR',
+      },
+      Florida: {
+        en: 'Florida',
+        fr: 'Florida_FR',
+      },
+      Georgia: {
+        en: 'Georgia',
+        fr: 'Georgia_FR',
+      },
+      Hawaii: {
+        en: 'Hawaii',
+        fr: 'Hawaii_FR',
+      },
+      Idaho: {
+        en: 'Idaho',
+        fr: 'Idaho_FR',
+      },
+      Illinois: {
+        en: 'Illinois',
+        fr: 'Illinois_FR',
+      },
+      Indiana: {
+        en: 'Indiana',
+        fr: 'Indiana_FR',
+      },
+      Iowa: {
+        en: 'Iowa',
+        fr: 'Iowa_FR',
+      },
+      Kansas: {
+        en: 'Kansas',
+        fr: 'Kansas_FR',
+      },
+      Kentucky: {
+        en: 'Kentucky',
+        fr: 'Kentucky_FR',
+      },
+      Louisiana: {
+        en: 'Louisiana',
+        fr: 'Louisiana_FR',
+      },
+      Maine: {
+        en: 'Maine',
+        fr: 'Maine_FR',
+      },
+      Maryland: {
+        en: 'Maryland',
+        fr: 'Maryland_FR',
+      },
+      Massachusetts: {
+        en: 'Massachusetts',
+        fr: 'Massachusetts_FR',
+      },
+      Michigan: {
+        en: 'Michigan',
+        fr: 'Michigan_FR',
+      },
+      Minnesota: {
+        en: 'Minnesota',
+        fr: 'Minnesota_FR',
+      },
+      Mississippi: {
+        en: 'Mississippi',
+        fr: 'Mississippi_FR',
+      },
+      Missouri: {
+        en: 'Missouri',
+        fr: 'Missouri_FR',
+      },
+      Montana: {
+        en: 'Montana',
+        fr: 'Montana_FR',
+      },
+      Nebraska: {
+        en: 'Nebraska',
+        fr: 'Nebraska_FR',
+      },
+      Nevada: {
+        en: 'Nevada',
+        fr: 'Nevada_FR',
+      },
+      'New Hampshire': {
+        en: 'New Hampshire',
+        fr: 'New Hampshire_FR',
+      },
+      'New Jersey': {
+        en: 'New Jersey',
+        fr: 'New Jersey_FR',
+      },
+      'New Mexico': {
+        en: 'New Mexico',
+        fr: 'New Mexico_FR',
+      },
+      'New York': {
+        en: 'New York',
+        fr: 'New York_FR',
+      },
+      'North Carolina': {
+        en: 'North Carolina',
+        fr: 'North Carolina_FR',
+      },
+      'North Dakota': {
+        en: 'North Dakota',
+        fr: 'North Dakota_FR',
+      },
+      Ohio: {
+        en: 'Ohio',
+        fr: 'Ohio_FR',
+      },
+      Oklahoma: {
+        en: 'Oklahoma',
+        fr: 'Oklahoma_FR',
+      },
+      Oregon: {
+        en: 'Oregon',
+        fr: 'Oregon_FR',
+      },
+      Pennsylvania: {
+        en: 'Pennsylvania',
+        fr: 'Pennsylvania_FR',
+      },
+      'Rhode Island': {
+        en: 'Rhode Island',
+        fr: 'Rhode Island_FR',
+      },
+      'South Carolina': {
+        en: 'South Carolina',
+        fr: 'South Carolina_FR',
+      },
+      'South Dakota': {
+        en: 'South Dakota',
+        fr: 'South Dakota_FR',
+      },
+      Tennessee: {
+        en: 'Tennessee',
+        fr: 'Tennessee_FR',
+      },
+      Texas: {
+        en: 'Texas',
+        fr: 'Texas_FR',
+      },
+      Utah: {
+        en: 'Utah',
+        fr: 'Utah_FR',
+      },
+      Vermont: {
+        en: 'Vermont',
+        fr: 'Vermont_FR',
+      },
+      Virginia: {
+        en: 'Virginia',
+        fr: 'Virginia_FR',
+      },
+      Washington: {
+        en: 'Washington',
+        fr: 'Washington_FR',
+      },
+      'West Virginia': {
+        en: 'West Virginia',
+        fr: 'West Virginia_FR',
+      },
+      Wisconsin: {
+        en: 'Wisconsin',
+        fr: 'Wisconsin_FR',
+      },
+      Wyoming: {
+        en: 'Wyoming',
+        fr: 'Wyoming_FR',
+      },
+      Yukon: {
+        en: 'Yukon',
+        fr: 'Yukon_FR',
+      },
+      'Northwest Territories': {
+        en: 'Northwest Territories',
+        fr: 'Northwest Territories_FR',
+      },
+      Nunavut: {
+        en: 'Nunavut',
+        fr: 'Nunavut_FR',
+      },
+      'Newfoundland and Labrador': {
+        en: 'Newfoundland and Labrador',
+        fr: 'Newfoundland and Labrador_FR',
+      },
+      'Prince Edward Island': {
+        en: 'Prince Edward Island',
+        fr: 'Prince Edward Island_FR',
+      },
+      'British Columbia': {
+        en: 'British Columbia',
+        fr: 'British Columbia_FR',
+      },
+      Alberta: {
+        en: 'Alberta',
+        fr: 'Alberta_FR',
+      },
+      Saskatchewan: {
+        en: 'Saskatchewan',
+        fr: 'Saskatchewan_FR',
+      },
+      Manitoba: {
+        en: 'Manitoba',
+        fr: 'Manitoba_FR',
+      },
+      Ontario: {
+        en: 'Ontario',
+        fr: 'Ontario_FR',
+      },
+      Québec: {
+        en: 'Québec',
+        fr: 'Québec_FR',
+      },
+      'New Brunswick': {
+        en: 'New Brunswick',
+        fr: 'New Brunswick_FR',
+      },
+      'Nova Scotia': {
+        en: 'Nova Scotia',
+        fr: 'Nova Scotia_FR',
+      },
+      'Atlantic provinces and Quebec': {
+        en: 'Atlantic provinces and Quebec',
+        fr: 'Atlantic provinces and Quebec_FR',
+      },
+      'Other provinces and territories': {
+        en: 'Other provinces and territories',
+        fr: 'Other provinces and territories_FR',
+      },
+      Mexico: {
+        en: 'Mexico',
+        fr: 'Mexico_FR',
+      },
+
+      // south America
+      Argentina: {
+        en: 'Argentina',
+        fr: 'Argentina_FR',
+      },
+      Bolivia: {
+        en: 'Bolivia',
+        fr: 'Bolivia_FR',
+      },
+      Brazil: {
+        en: 'Brazil',
+        fr: 'Brazil_FR',
+      },
+      Chile: {
+        en: 'Chile',
+        fr: 'Chile_FR',
+      },
+      Colombia: {
+        en: 'Colombia',
+        fr: 'Colombia_FR',
+      },
+      Ecuador: {
+        en: 'Ecuador',
+        fr: 'Ecuador_FR',
+      },
+      'French Guiana': {
+        en: 'French Guiana',
+        fr: 'French Guiana_FR',
+      },
+      Guyana: {
+        en: 'Guyana',
+        fr: 'Guyana_FR',
+      },
+      Paraguay: {
+        en: 'Paraguay',
+        fr: 'Paraguay_FR',
+      },
+      Peru: {
+        en: 'Peru',
+        fr: 'Peru_FR',
+      },
+      Suriname: {
+        en: 'Suriname',
+        fr: 'Suriname_FR',
+      },
+      Uruguay: {
+        en: 'Uruguay',
+        fr: 'Uruguay_FR',
+      },
+      Venezuela: {
+        en: 'Venezuela',
+        fr: 'Venezuela_FR',
+      },
+      Columbia: {
+        en: 'Columbia',
+        fr: 'Columbia_FR',
+      },
+
+      // Africa
+      
+      Algeria: {
+        en: 'Algeria',
+        fr: 'Algeria_FR',
+      },
+      Angola: {
+        en: 'Angola',
+        fr: 'Angola_FR',
+      },
+      Benin: {
+        en: 'Benin',
+        fr: 'Benin_FR',
+      },
+      Botswana: {
+        en: 'Botswana',
+        fr: 'Botswana_FR',
+      },
+      'Burkina Faso': {
+        en: 'Burkina Faso',
+        fr: 'Burkina Faso_FR',
+      },
+      Burundi: {
+        en: 'Burundi',
+        fr: 'Burundi_FR',
+      },
+      Cameroon: {
+        en: 'Cameroon',
+        fr: 'Cameroon_FR',
+      },
+      'Cape Verde': {
+        en: 'Cape Verde',
+        fr: 'Cape Verde_FR',
+      },
+      'Central African Republic': {
+        en: 'Central African Republic',
+        fr: 'Central African Republic_FR',
+      },
+      Chad: {
+        en: 'Chad',
+        fr: 'Chad_FR',
+      },
+      Comoros: {
+        en: 'Comoros',
+        fr: 'Comoros_FR',
+      },
+      Congo: {
+        en: 'Congo',
+        fr: 'Congo_FR',
+      },
+      Zaire: {
+        en: 'Zaire',
+        fr: 'Zaire_FR',
+      },
+      "Côte d'Ivoire": {
+        en:"Côte d'Ivoire",
+        fr: "Côte d'Ivoire_FR",
+      },
+      Djibouti: {
+        en: 'Djibouti',
+        fr: 'Djibouti_FR',
+      },
+      Egypt: {
+        en: 'Egypt',
+        fr: 'Egypt_FR',
+      },
+      'Equatorial Guinea': {
+        en: 'Equatorial Guinea',
+        fr: 'Equatorial Guinea_FR',
+      },
+      Eritrea: {
+        en: 'Eritrea',
+        fr: 'Eritrea_FR',
+      },
+      Ethiopia: {
+        en: 'Ethiopia',
+        fr: 'Ethiopia_FR',
+      },
+      Gabon: {
+        en: 'Gabon',
+        fr: 'Gabon_FR',
+      },
+      'The Gambia': {
+        en: 'The Gambia',
+        fr: 'The Gambia_FR',
+      },
+      Ghana: {
+        en: 'Ghana',
+        fr: 'Ghana_FR',
+      },
+      Guinea: {
+        en: 'Guinea',
+        fr: 'Guinea_FR',
+      },
+      Guine: {
+        en: 'Guine',
+        fr: 'Guine_FR',
+      },
+      Kenya: {
+        en: 'Kenya',
+        fr: 'Kenya_FR',
+      },
+      Lesotho: {
+        en: 'Lesotho',
+        fr: 'Lesotho_FR',
+      },
+      Liberia: {
+        en: 'Liberia',
+        fr: 'Liberia_FR',
+      },
+      Libya: {
+        en: 'Libya',
+        fr: 'Libya_FR',
+      },
+      Madagascar: {
+        en: 'Madagascar',
+        fr: 'Madagascar_FR',
+      },
+      Malawi: {
+        en: 'Malawi',
+        fr: 'Malawi_FR',
+      },
+      Mali: {
+        en: 'Mali',
+        fr: 'Mali_FR',
+      },
+      Mauritania: {
+        en: 'Mauritania',
+        fr: 'Mauritania_FR',
+      },
+      Mauritius: {
+        en: 'Mauritius',
+        fr: 'Mauritius_FR',
+      },
+      Morocco: {
+        en: 'Morocco',
+        fr: 'Morocco_FR',
+      },
+      Mozambique: {
+        en: 'Mozambique',
+        fr: 'Mozambique_FR',
+      },
+      Namibia: {
+        en: 'Namibia',
+        fr: 'Namibia_FR',
+      },
+      Niger: {
+        en: 'Niger',
+        fr: 'Niger_FR',
+      },
+      Nigeria: {
+        en: 'Nigeria',
+        fr: 'Nigeria_FR',
+      },
+      Rwanda: {
+        en: 'Rwanda',
+        fr: 'Rwanda_FR',
+      },
+      'São Tomé and Príncipe': {
+        en: 'São Tomé and Príncipe',
+        fr: 'São Tomé and Príncipe_FR',
+      },
+      Senegal: {
+        en: 'Senegal',
+        fr: 'Senegal_FR',
+      },
+      Seychelles: {
+        en: 'Seychelles',
+        fr: 'Seychelles_FR',
+      },
+      'Sierra Leone': {
+        en: 'Sierra Leone',
+        fr: 'Sierra Leone_FR',
+      },
+      Somalia: {
+        en: 'Somalia',
+        fr: 'Somalia_FR',
+      },
+      'South Africa': {
+        en: 'South Africa',
+        fr: 'South Africa_FR',
+      },
+      'South Sudan': {
+        en: 'South Sudan',
+        fr: 'South Sudan_FR',
+      },
+      Sudan: {
+        en: 'Sudan',
+        fr: 'Sudan_FR',
+      },
+      Swaziland: {
+        en: 'Swaziland',
+        fr: 'Swaziland_FR',
+      },
+      Tanzania: {
+        en: 'Tanzania',
+        fr: 'Tanzania_FR',
+      },
+      Togo: {
+        en: 'Togo',
+        fr: 'Togo_FR',
+      },
+      Tunisia: {
+        en: 'Tunisia',
+        fr: 'Tunisia_FR',
+      },
+      Uganda: {
+        en: 'Uganda',
+        fr: 'Uganda_FR',
+      },
+      'Western Sahara': {
+        en: 'Western Sahara',
+        fr: 'Western Sahara_FR',
+      },
+      Zambia: {
+        en: 'Zambia',
+        fr: 'Zambia_FR',
+      },
+      Zimbabwe: {
+        en: 'Zimbabwe',
+        fr: 'Zimbabwe_FR',
+      },
+
+      // oceania
+      Australia: {
+        en: 'Australia',
+        fr: 'Australia_FR',
+      },
+      'Federated States of Micronesia': {
+        en: 'Federated States of Micronesia',
+        fr: 'Federated States of Micronesia_FR',
+      },
+      Fiji: {
+        en: 'Fiji',
+        fr: 'Fiji_FR',
+      },
+      Kiribati: {
+        en: 'Kiribati',
+        fr: 'Kiribati_FR',
+      },
+      'Marshall Islands': {
+        en: 'Marshall Islands',
+        fr: 'Marshall Islands_FR',
+      },
+      Nauru: {
+        en: 'Nauru',
+        fr: 'Nauru_FR',
+      },
+      'New Zealand': {
+        en: 'New Zealand',
+        fr: 'New Zealand_FR',
+      },
+      Palau: {
+        en: 'Palau',
+        fr: 'Palau_FR',
+      },
+      'Papua New Guinea': {
+        en: 'Papua New Guinea',
+        fr: 'Papua New Guinea_FR',
+      },
+      Samoa: {
+        en: 'Samoa',
+        fr: 'Samoa_FR',
+      },
+      'Solomon Islands': {
+        en: 'Solomon Islands',
+        fr: 'Solomon Islands_FR',
+      },
+      Tonga: {
+        en: 'Tonga',
+        fr: 'Tonga_FR',
+      },
+      Tuvalu: {
+        en: 'Tuvalu',
+        fr: 'Tuvalu_FR',
+      },
+      Vanuatu: {
+        en: 'Vanuatu',
+        fr: 'Vanuatu_FR',
+      },
+
+      // europe
+      Albania: {
+        en: 'Albania',
+        fr: 'Albania_FR',
+      },
+      Andorra: {
+        en: 'Andorra',
+        fr: 'Andorra_FR',
+      },
+      Austria: {
+        en: 'Austria',
+        fr: 'Austria_FR',
+      },
+      Belarus: {
+        en: 'Belarus',
+        fr: 'Belarus_FR',
+      },
+      Belgium: {
+        en: 'Belgium',
+        fr: 'Belgium_FR',
+      },
+      'Bosnia and Herzegovina': {
+        en: 'Bosnia and Herzegovina',
+        fr: 'Bosnia and Herzegovina_FR',
+      },
+      Bulgaria: {
+        en: 'Bulgaria',
+        fr: 'Bulgaria_FR',
+      },
+      Croatia: {
+        en: 'Croatia',
+        fr: 'Croatia_FR',
+      },
+      Cyprus: {
+        en: 'Cyprus',
+        fr: 'Cyprus_FR',
+      },
+      'Czech Republic': {
+        en: 'Czech Republic',
+        fr: 'Czech Republic_FR',
+      },
+      Denmark: {
+        en: 'Denmark',
+        fr: 'Denmark_FR',
+      },
+      Estonia: {
+        en: 'Estonia',
+        fr: 'Estonia_FR',
+      },
+      Finland: {
+        en: 'Finland',
+        fr: 'Finland_FR',
+      },
+      France: {
+        en: 'France',
+        fr: 'France_FR',
+      },
+      Germany: {
+        en: 'Germany',
+        fr: 'Germany_FR',
+      },
+      Greece: {
+        en: 'Greece',
+        fr: 'Greece_FR',
+      },
+      Hungary: {
+        en: 'Hungary',
+        fr: 'Hungary_FR',
+      },
+      Iceland: {
+        en: 'Iceland',
+        fr: 'Iceland_FR',
+      },
+      'Republic of Ireland': {
+        en: 'Republic of Ireland',
+        fr: 'Republic of Ireland_FR',
+      },
+      Italy: {
+        en: 'Italy',
+        fr: 'Italy_FR',
+      },
+      Kosovo: {
+        en: 'Kosovo',
+        fr: 'Kosovo_FR',
+      },
+      Latvia: {
+        en: 'Latvia',
+        fr: 'Latvia_FR',
+      },
+      Liechtenstein: {
+        en: 'Liechtenstein',
+        fr: 'Liechtenstein_FR',
+      },
+      Lithuania: {
+        en: 'Lithuania',
+        fr: 'Lithuania_FR',
+      },
+      Luxembourg: {
+        en: 'Luxembourg',
+        fr: 'Luxembourg_FR',
+      },
+      Macedonia: {
+        en: 'Macedonia',
+        fr: 'Macedonia_FR',
+      },
+      Malta: {
+        en: 'Malta',
+        fr: 'Malta_FR',
+      },
+      Moldova: {
+        en: 'Moldova',
+        fr: 'Moldova_FR',
+      },
+      Monaco: {
+        en: 'Monaco',
+        fr: 'Monaco_FR',
+      },
+      Montenegro: {
+        en: 'Montenegro',
+        fr: 'Montenegro_FR',
+      },
+      Netherlands: {
+        en: 'Netherlands',
+        fr: 'Netherlands_FR',
+      },
+      Norway: {
+        en: 'Norway',
+        fr: 'Norway_FR',
+      },
+      Poland: {
+        en: 'Poland',
+        fr: 'Poland_FR',
+      },
+      Portugal: {
+        en: 'Portugal',
+        fr: 'Portugal_FR',
+      },
+      Romania: {
+        en: 'Romania',
+        fr: 'Romania_FR',
+      },
+      Russia: {
+        en: 'Russia',
+        fr: 'Russia_FR',
+      },
+      'San Marino': {
+        en: 'San Marino',
+        fr: 'San Marino_FR',
+      },
+      Serbia: {
+        en: 'Serbia',
+        fr: 'Serbia_FR',
+      },
+      Slovakia: {
+        en: 'Slovakia',
+        fr: 'Slovakia_FR',
+      },
+      Slovenia: {
+        en: 'Slovenia',
+        fr: 'Slovenia_FR',
+      },
+      Spain: {
+        en: 'Spain',
+        fr: 'Spain_FR',
+      },
+      Sweden: {
+        en: 'Sweden',
+        fr: 'Sweden_FR',
+      },
+      Switzerland: {
+        en: 'Switzerland',
+        fr: 'Switzerland_FR',
+      },
+      Ukraine: {
+        en: 'Ukraine',
+        fr: 'Ukraine_FR',
+      },
+      'United Kingdom': {
+        en: 'United Kingdom',
+        fr: 'United Kingdom_FR',
+      },
+      'Vatican City': {
+        en: 'Vatican City',
+        fr: 'Vatican City_FR',
+      },
+
+      // asia
+      Afghanistan: {
+        en: 'Afghanistan',
+        fr: 'Afghanistan_FR',
+      },
+      Armenia: {
+        en: 'Armenia',
+        fr: 'Armenia_FR',
+      },
+      Azerbaijan: {
+        en: 'Azerbaijan',
+        fr: 'Azerbaijan_FR',
+      },
+      Bahrain: {
+        en: 'Bahrain',
+        fr: 'Bahrain_FR',
+      },
+      Bangladesh: {
+        en: 'Bangladesh',
+        fr: 'Bangladesh_FR',
+      },
+      Bhutan: {
+        en: 'Bhutan',
+        fr: 'Bhutan_FR',
+      },
+      Brunei: {
+        en: 'Brunei',
+        fr: 'Brunei_FR',
+      },
+      Cambodia: {
+        en: 'Cambodia',
+        fr: 'Cambodia_FR',
+      },
+      China: {
+        en: 'China',
+        fr: 'China_FR',
+      },
+      Taiwan: {
+        en: 'Taiwan',
+        fr: 'Taiwan_FR',
+      },
+      'East Timor': {
+        en: 'East Timor',
+        fr: 'East Timor_FR',
+      },
+      India: {
+        en: 'India',
+        fr: 'India_FR',
+      },
+      Indonesia: {
+        en: 'Indonesia',
+        fr: 'Indonesia_FR',
+      },
+      Iran: {
+        en: 'Iran',
+        fr: 'Iran_FR',
+      },
+      Iraq: {
+        en: 'Iraq',
+        fr: 'Iraq_FR',
+      },
+      Israel: {
+        en: 'Israel',
+        fr: 'Israel_FR',
+      },
+      Palestine: {
+        en: 'Palestine',
+        fr: 'Palestine_FR',
+      },
+      Japan: {
+        en: 'Japan',
+        fr: 'Japan_FR',
+      },
+      Jordan: {
+        en: 'Jordan',
+        fr: 'Jordan_FR',
+      },
+      Kazakhstan: {
+        en: 'Kazakhstan',
+        fr: 'Kazakhstan_FR',
+      },
+      Kuwait: {
+        en: 'Kuwait',
+        fr: 'Kuwait_FR',
+      },
+      Kyrgyzstan: {
+        en: 'Kyrgyzstan',
+        fr: 'Kyrgyzstan_FR',
+      },
+      Laos: {
+        en: 'Laos',
+        fr: 'Laos_FR',
+      },
+      Lebanon: {
+        en: 'Lebanon',
+        fr: 'Lebanon_FR',
+      },
+      Malaysia: {
+        en: 'Malaysia',
+        fr: 'Malaysia_FR',
+      },
+      Maldives: {
+        en: 'Maldives',
+        fr: 'Maldives_FR',
+      },
+      Mongolia: {
+        en: 'Mongolia',
+        fr: 'Mongolia_FR',
+      },
+      Myanmar: {
+        en: 'Myanmar',
+        fr: 'Myanmar_FR',
+      },
+      Nepal: {
+        en: 'Nepal',
+        fr: 'Nepal_FR',
+      },
+      'North Korea': {
+        en: 'North Korea',
+        fr: 'North Korea_FR',
+      },
+      Oman: {
+        en: 'Oman',
+        fr: 'Oman_FR',
+      },
+      Pakistan: {
+        en: 'Pakistan',
+        fr: 'Pakistan_FR',
+      },
+      Philippines: {
+        en: 'Philippines',
+        fr: 'Philippines_FR',
+      },
+      Qatar: {
+        en: 'Qatar',
+        fr: 'Qatar_FR',
+      },
+      'Saudi Arabia': {
+        en: 'Saudi Arabia',
+        fr: 'Saudi Arabia_FR',
+      },
+      Singapore: {
+        en: 'Singapore',
+        fr: 'Singapore_FR',
+      },
+      'South Korea': {
+        en: 'South Korea',
+        fr: 'South Korea_FR',
+      },
+      'Sri Lanka': {
+        en: 'Sri Lanka',
+        fr: 'Sri Lanka_FR',
+      },
+      Syria: {
+        en: 'Syria',
+        fr: 'Syria_FR',
+      },
+      Tajikistan: {
+        en: 'Tajikistan',
+        fr: 'Tajikistan_FR',
+      },
+      Thailand: {
+        en: 'Thailand',
+        fr: 'Thailand_FR',
+      },
+      Turkey: {
+        en: 'Turkey',
+        fr: 'Turkey_FR',
+      },
+      Turkmenistan: {
+        en: 'Turkmenistan',
+        fr: 'Turkmenistan_FR',
+      },
+      'United Arab Emirates': {
+        en: 'United Arab Emirates',
+        fr: 'United Arab Emirates_FR',
+      },
+      Uzbekistan: {
+        en: 'Uzbekistan',
+        fr: 'Uzbekistan_FR',
+      },
+      Vietnam: {
+        en: 'Vietnam',
+        fr: 'Vietnam_FR',
+      },
+      Yemen: {
+        en: 'Yemen',
+        fr: 'Yemen_FR',
+      },
+
+      'Other countries': {
+        en: 'Collected Low Volume Contributions',
+        fr: 'Collected Low Volume Contributions FR',
+      },
+    }
   },
   unabbreviated: {
     mainMenuBar: {
@@ -1377,7 +2492,7 @@ const TranslationTable = fromJS({
         },
       },
     },
-    crudeOil: {
+    crudeOilExports: {
       exports: {
         label: {
           en: 'exports into US PADD',
@@ -1386,6 +2501,18 @@ const TranslationTable = fromJS({
         bottomText: {
           en: 'PADD',
           fr: 'PADD',
+        },
+        topText: {
+          en: 'CANADA',
+          fr: 'CANADA',
+        },
+      },
+    },
+    crudeOilImports: {
+      imports: {
+        label: {
+          en: 'imports from CONTINENT',
+          fr: 'les importations de CONTINENT',
         },
         topText: {
           en: 'CANADA',
@@ -1512,6 +2639,10 @@ const TranslationTable = fromJS({
       en: 'Total',
       fr: 'Total',
     },
+    average: {
+      en: 'AVG',
+      fr: 'MOY.',
+    },
   },
 
   timelinePlay: {
@@ -1545,8 +2676,8 @@ const TranslationTable = fromJS({
       fr: 'Sélections Multiples',
     },
     default: {
-      en: 'Port Locations',
-      fr: 'Emplacements de Port',
+      en: 'Import & Export Points',
+      fr: "Points d'importation & d'exportation",
     },
     portName: {
       Aden: {
@@ -1568,10 +2699,6 @@ const TranslationTable = fromJS({
       Sierra: {
         en: 'Sierra',
         fr: 'Sierra',
-      },
-      Blaine: {
-        en: 'Blaine',
-        fr: 'Blaine',
       },
       Huntingdon: {
         en: 'Huntingdon',
@@ -1653,21 +2780,9 @@ const TranslationTable = fromJS({
         en: 'St Clair',
         fr: 'St Clair',
       },
-      Armstrong: {
-        en: 'Armstrong',
-        fr: 'Armstrong',
-      },
-      Champlain: {
-        en: 'Champlain',
-        fr: 'Champlain',
-      },
       'East Hereford': {
         en: 'East Hereford',
         fr: 'East Hereford',
-      },
-      'Highgate Springs': {
-        en: 'Highgate Springs',
-        fr: 'Highgate Springs',
       },
       Highwater: {
         en: 'Highwater',
@@ -1697,13 +2812,17 @@ const TranslationTable = fromJS({
         en: 'North Portal',
         fr: 'North Portal',
       },
-      'Port of Estevan': {
-        en: 'Port of Estevan',
-        fr: 'Port of Estevan',
-      },
       'Willow Creek': {
         en: 'Willow Creek',
         fr: 'Willow Creek',
+      },
+      CNG: {
+        en: 'CNG',
+        fr: 'GNC',
+      },
+      'LNG Other': {
+        en: 'LNG Other',
+        fr: 'GNL Autre',
       },
     },
   },
@@ -1720,10 +2839,6 @@ const TranslationTable = fromJS({
       'North Portal': {
         en: 'North\nPortal',
         fr: 'North\nPortal',
-      },
-      'Port of Estevan': {
-        en: 'Port of\nEstevan',
-        fr: 'Port of\nEstevan',
       },
       'Willow Creek': {
         en: 'Willow\nCreek',
@@ -1753,21 +2868,9 @@ const TranslationTable = fromJS({
         en: 'Sault Ste\nMarie',
         fr: 'Sault Ste\nMarie',
       },
-      'Armstrong': {
-        en: 'Arm-\nstrong',
-        fr: 'Arm-\nstrong',
-      },
-      'Champlain': {
-        en: 'Cham-\nplain',
-        fr: 'Cham-\nplain',
-      },
       'East Hereford': {
         en: 'East\nHereford',
         fr: 'East\nHereford',
-      },
-      'Highgate Springs': {
-        en: 'Highgate\nSprings',
-        fr: 'Highgate\nSprings',
       },
       'Napierville': {
         en: 'Napier-\nville',
@@ -1784,6 +2887,14 @@ const TranslationTable = fromJS({
       'St Stephen': {
         en: 'St\nStephen',
         fr: 'St\nStephen',
+      },
+      'CNG': {
+        en: 'CNG',
+        fr: 'GNC',
+      },
+      'LNG Other': {
+        en: 'LNG\nOther',
+        fr: 'GNL\nAutre',
       },
     },
   },

@@ -69,7 +69,7 @@ class DataDownloadWindow extends React.Component {
 
   render() {
     return (
-      <div id="dataDownloadWindow" className="dataDownloadWindow">
+      <div>
         { this.closeButton() }
         { this.heading() }
         { this.subtext() }

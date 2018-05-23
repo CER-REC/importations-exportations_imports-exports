@@ -3,11 +3,17 @@ import React from 'react'
 import MapPiece from './MapPiece'
 import MapPieceExplanationConstant from '../MapPieceExplanationConstant'
 import Tr from '../TranslationTable'
+import Immutable from 'immutable'
+
 class ElectricityMapPieceActivityExplanation extends React.Component {
   render() {
+    const emptyMap = new Immutable.Map()
     return (<g transform={`translate(${this.props.left + 1},${this.props.top})`}>
       <MapPiece
-        data={MapPieceExplanationConstant.getIn(['electricity', 'ca', 'datapoint'])}
+        value={MapPieceExplanationConstant.getIn(['electricity', 'ca', 'datapoint'])}
+        name={MapPieceExplanationConstant.getIn(['electricity', 'ca', 'datapoint','name'])}
+        confidential={emptyMap}
+        tilePosition={emptyMap}
         dimensions={MapPieceExplanationConstant.getIn(['electricity', 'ca', 'dimensions'])}
         legends={MapPieceExplanationConstant.getIn(['electricity', 'ca', 'legends'])}
         legend
@@ -20,7 +26,10 @@ class ElectricityMapPieceActivityExplanation extends React.Component {
       />
       <g transform="translate(0,70)">
         <MapPiece
-          data={MapPieceExplanationConstant.getIn(['electricity', 'us', 'datapoint'])}
+          value={MapPieceExplanationConstant.getIn(['electricity', 'us', 'datapoint'])}
+          name={MapPieceExplanationConstant.getIn(['electricity', 'us', 'datapoint','name'])}
+          confidential={emptyMap}
+          tilePosition={emptyMap}
           dimensions={MapPieceExplanationConstant.getIn(['electricity', 'us', 'dimensions'])}
           legends={MapPieceExplanationConstant.getIn(['electricity', 'us', 'legends'])}
           legend

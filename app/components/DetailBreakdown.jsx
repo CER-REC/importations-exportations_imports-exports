@@ -5,56 +5,64 @@ import Immutable from 'immutable'
 
 import './DetailBreakDown.scss'
 
-import { humanNumber } from '../utilities'
 import DetailBreakdownHeader from './DetailBreakdownHeader'
 import DetailBreakdownBody from './DetailBreakdownBody'
-import { visualizationSettings } from '../selectors/visualizationSettings'
+import { detailBreakdownSelector } from '../selectors/renderData'
 
-class DetailBreakdown extends React.Component {
-  render() {
-    const { props } = this
-    //TR.getIn(['detailBreakDown', props.energyType, props.type])
-    if (typeof props.data !== 'undefined' && props.data.count() > 0) {
-      return (
-        <div className="detailBreakDown">
-          <DetailBreakdownHeader
-            trContent= {props.trContent.get('header')}
+const DetailBreakdown = (props) => {
+  const { data } = props
+  if (data.get('values', new Immutable.Map()).count() === 0) { return null }
+  return (
+    <div className={`detailBreakDown ${props.showGroup}`}>
+      {!props.showHeader ? null : (
+        <DetailBreakdownHeader
+          trContent={props.trContent.get('header')}
+          color={props.color}
+          type={props.showGroup}
+        />
+      )}
+      <table className="detailBreakDownContainer" style={{ height: props.height }}>
+        <tbody>
+          <DetailBreakdownBody
+            trContent={props.trContent.get('body')}
             color={props.color}
-            type={props.type}
+            colors={props.colors}
+            data={data}
+            nameMappings={props.nameMappings}
+            total={props.total}
+            colorBox={props.colorBox}
+            showGroup={props.showGroup}
           />
-          <table className ='detailBreakDownContainer'  style={{ height: props.height }}>
-            <tbody>
-              <DetailBreakdownBody 
-                trContent= {props.trContent.get('body')}
-                color= {props.color}
-                data= {props.data}
-                nameMappings= {props.nameMappings}
-              />
-            </tbody>
-          </table>
-        </div>
-      )
-    } return null
-  }
+        </tbody>
+      </table>
+    </div>
+  )
 }
 
 DetailBreakdown.defaultProps = {
-  trContent: new Immutable.Map(),
-  data: new Immutable.Map(),
-  nameMappings: new Immutable.Map(),
-  defaultContent: '',
+  total: false,
+  showHeader: true,
+  colorBox: false,
+  color: '',
+  colors: null,
 }
 
 DetailBreakdown.propTypes = {
-  amountUnit: PropTypes.string.isRequired,
-  language: PropTypes.string.isRequired,
-  defaultContent: PropTypes.string.isRequired,
-  data: PropTypes.instanceOf(Immutable.Map).isRequired,
+  height: PropTypes.oneOfType([
+    PropTypes.number,
+    PropTypes.string,
+  ]).isRequired,
   trContent: PropTypes.instanceOf(Immutable.Map).isRequired,
   nameMappings: PropTypes.instanceOf(Immutable.Map).isRequired,
+  showHeader: PropTypes.bool,
+  colorBox: PropTypes.bool,
+  color: PropTypes.string,
+  colors: PropTypes.instanceOf(Immutable.Map),
+  showGroup: PropTypes.string.isRequired,
+  data: PropTypes.instanceOf(Immutable.Map).isRequired,
+  total: PropTypes.bool,
 }
 
 export default connect((state, props) => ({
-  amountUnit: visualizationSettings(state, props).get('amount'),
-  language: state.language,
+  data: detailBreakdownSelector(state, props),
 }))(DetailBreakdown)

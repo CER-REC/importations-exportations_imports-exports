@@ -6,9 +6,13 @@ import PropTypes from 'prop-types'
 import PaddMapPiece from './PaddMapPiece'
 import MapLayoutGridConstant from '../MapLayoutGridConstant'
 import Constants from '../Constants'
+/*
 import { PaddSelector } from '../selectors/Padd'
+import { aggregateLocationPaddData } from '../selectors/data'
+*/
 import TRSelector from '../selectors/translate'
 import Tr from '../TranslationTable'
+import { getFullyFilteredValues } from '../selectors/renderData'
 
 import PaddOne from './Padds/PaddOne'
 import PaddTwo from './Padds/PaddTwo'
@@ -22,28 +26,32 @@ import ExplanationDot from './ExplanationDot'
 
 import { handleInteractionWithTabIndex } from '../utilities'
 
-import ElectricitySelector from '../selectors/ElectricitySelector'
-import { arrangeBy, binSelector, sortAggregatedLocationsSelector, selection } from '../selectors/data'
+// import ElectricitySelector from '../selectors/ElectricitySelector'
+import { arrangeBy, binSelector, selection } from '../selectors/data'
 import { setSelection } from '../actions/visualizationSettings'
+
+const emptyMap = new Immutable.Map()
 
 const mapPieceTransformStartTop = (top, position, dimensions, mapPieceScale) => top + (position.get('y') * ((mapPieceScale * dimensions.get('height')) + dimensions.get('yAxisPadding')))
 const mapPieceTransformStartLeft = (left, position, dimensions, mapPieceScale) => left + (position.get('x') * ((mapPieceScale * dimensions.get('width')) + dimensions.get('xAxisPadding')))
 
 class PaddLayout extends React.Component {
   static propTypes = {
+    /*
     arrangeBy: PropTypes.string.isRequired,
     top: PropTypes.number.isRequired,
     left: PropTypes.number.isRequired,
     country: PropTypes.string.isRequired,
     confidentialityMenu: PropTypes.bool.isRequired,
     selectedEnergy: PropTypes.string.isRequired,
+    */
   }
   getColorIndex(value){
     return this.props.bins.findIndex(range => range.get(0) <= value && value < range.get(1))
   }
   getPaddColor(value) {
-    if (!value || value === -1) { value = 0 }
-    if (value === 0) {return 'rgb(237, 227, 203)'}
+    if (!value || value === -1) { value = 0 } // eslint-disable-line no-param-reassign
+    if (value === 0) { return 'rgb(237, 227, 203)' }
     const index = this.getColorIndex(value)
     return Constants.getIn(
       ['styleGuide', 'exportColours', index],
@@ -74,6 +82,7 @@ class PaddLayout extends React.Component {
       return (<g transform="translate(145 143)">
         <ConfidentialIcon
           styles={style.get('confidentialStyle')}
+          scale='scale(1)'
           text={`${confidentialCount} / ${totalCount} ${this.props.TRSelector('valuesConfidential')}`}
           containerX={paddContainerX}
           containerY={paddContainerY}
@@ -270,9 +279,12 @@ class PaddLayout extends React.Component {
   }
   onPaddClick( props, paddGroup ) {
     const { selctionState } = props
+    let { country } = props
     let origins = []
-    let country = props.country
-    if (selctionState.get('country') === country) {
+    if (country === 'ca') {
+      origins = []
+      country = null
+    } else if (selctionState.get('country') === country) {
       const paddGroupExists = selctionState.get('origins').indexOf(paddGroup)
       if (paddGroupExists === -1) {
         origins = selctionState.get('origins').push(paddGroup).toJS()
@@ -292,18 +304,26 @@ class PaddLayout extends React.Component {
     })
   }
 
-  renderDefault(props) {
-    const paddData = Array
-      .from(props.Padd)
-      .sort((a, b) => b[1].get('value') - a[1].get('value'))
+  renderDefault() {
+    const { props } = this
     let left = 0
     const paddingBetweenSortedElement = 80
-    const layout = paddData.reduce((acc, currentValue) => {
-      let paddLayout = null
-      if (currentValue[0] !== 'ca') {
-        const paddGroup = currentValue[1].get('destination')
-        const text = props.TRSelector(['Padd', props.country, paddGroup])
-        const paddValue = (props.selctionState.get('origins').count() > 0 && props.selctionState.get('country') === 'ca' && props.selectedEnergy === 'naturalGasLiquids')? 0: currentValue[1].get('value')
+    const allValues = props.data.get('values')
+    const viz = props.selectedEnergy
+    const layout = Constants.getIn(['dataloader', 'mapping', 'padd'])
+      .flatten()
+      .filter((_, k) => {
+        if (viz === 'naturalGasLiquids' && k === 'Non-USA') { return false }
+        if (viz === 'crudeOilExports' && k === 'Mexico') { return false }
+        return true
+      })
+      .map((_, k) => {
+        if (!allValues.has(k)) { return 0 }
+        return allValues.get(k, emptyMap).reduce((acc, next) => acc + next, 0)
+      })
+      .sort((a, b) => b - a)
+      .reduce((acc, paddValue, paddGroup) => {
+        let paddLayout = null
         const color = this.getPaddColor(paddValue)
         switch (paddGroup) {
           case 'PADD I':
@@ -316,7 +336,7 @@ class PaddLayout extends React.Component {
             paddLayout = <PaddThree color={color} />
             break
           case 'PADD IV':
-            paddLayout = <PaddFour color={color} />
+            paddLayout = <g transform="translate(10 0)"><PaddFour color={color} /></g>
             break
           case 'PADD V':
             paddLayout = <PaddFive color={color} />
@@ -325,35 +345,43 @@ class PaddLayout extends React.Component {
           case 'Non-USA':
             paddLayout = <PaddNonUSA color={color} />
             break
+          default: return acc
         }
-        if (paddLayout !== null) {
-          paddLayout = (<g className="paddLayout" fillOpacity={this.getOpacityOfPadd(props, paddGroup)}  key={`${props.arrangeBy}_${currentValue[1].get('destination')}`} transform={`translate(${left} 0)`}
-              {...handleInteractionWithTabIndex(this.getTabIndex(props.country), this.onPaddClick, props, paddGroup)}
-            >
-            {paddLayout}
-            { this.getArrow(
-                props.arrangeBy, 
-                paddGroup, 
-                0, 
-                0, 
-                color, 
-                currentValue[1].get('confidentialCount', 0), 
-                currentValue[1].get('totalCount'), 
-                left
-              ) }
-          </g>)
-          acc.push(paddLayout)
-          left += paddingBetweenSortedElement
-        }
-      }
 
-      return acc
-    }, [])
+        const fillOpacity = this.getOpacityOfPadd(props, paddGroup)
+        paddLayout = (
+          <g
+            className="paddLayout"
+            fillOpacity={fillOpacity}
+            strokeOpacity={fillOpacity === 1 ? 1 : 0}
+            key={`${props.arrangeBy}_${paddGroup}`}
+            transform={`translate(${left} 0)`}
+            {...handleInteractionWithTabIndex(this.getTabIndex(props.country), this.onPaddClick, props, paddGroup)}
+          >
+            {paddLayout}
+            {this.getArrow(
+              props.arrangeBy,
+              paddGroup,
+              0,
+              0,
+              color,
+              props.data.getIn(['confidential', paddGroup], emptyMap).reduce((a, n) => a + n, 0),
+              props.data.getIn(['totalPoints', paddGroup], emptyMap).reduce((a, n) => a + n, 0),
+              left,
+            )}
+          </g>
+        )
+        acc.push(paddLayout)
+        left += paddingBetweenSortedElement
+
+        return acc
+      }, [])
     return layout
   }
   getMapPieceTextColor(value){
     const index = this.getColorIndex(value)
     switch(index){
+      case -1:
       case 2:
       case 3:
       case 4:
@@ -362,66 +390,69 @@ class PaddLayout extends React.Component {
         return 'mapPieceText'
     }
   }
-  renderLocation(props) {
+  renderLocation() {
+    const { props } = this
     const mapLayoutGrid = MapLayoutGridConstant.getIn(['PaddLayout', props.country])
     const dimensions = mapLayoutGrid.get('dimensions')
     const styles = mapLayoutGrid.get('styles')
     const mapPieceScale = mapLayoutGrid.get('mapPieceScale')
     const layout = mapLayoutGrid.get('layout').filter(point => point.get('paddGroup') === props.paddGroup)
     const paddGroup = Constants.getIn(['dataloader', 'mapping', 'padd', props.country, props.paddGroup])
-    const data = props.Padd.get(paddGroup)
-    if(data){
-    const paddValue = (props.selctionState.get('origins').count() > 0 && props.selctionState.get('country') === 'ca' && props.selectedEnergy === 'naturalGasLiquids')? 0: data.get('value')
+    // TODO Is this a good way of getting Canada's data?
+    const data = props.data.getIn(['values', (paddGroup === 'ca' ? '' : paddGroup)])
+    const paddValue = data
+      ? data.reduce((acc, next) => acc + next, 0)
+      : 0
     const color = this.getPaddColor(paddValue)
-    return (<g className="paddLayout" fillOpacity={this.getOpacityOfPadd(props, paddGroup)}
-      {...handleInteractionWithTabIndex(this.getTabIndex(props.country) , this.onPaddClick, props, paddGroup)}
-        >
+    const fillOpacity = this.getOpacityOfPadd(props, paddGroup)
+    return (
+      <g
+        className="paddLayout"
+        fillOpacity={fillOpacity}
+        strokeOpacity={fillOpacity === 1 ? 1 : 0}
+        {...handleInteractionWithTabIndex(this.getTabIndex(props.country) , this.onPaddClick, props, paddGroup)}
+      >
         <filter id="paddOutline">
-          <feMorphology operator="dilate" in="SourceAlpha" radius="1.5"/>
-          <feColorMatrix result="recolored" type="matrix" values="-1 0 0 1 0, 0 -1 0 1 0, 0 0 -1 1 0, 0 0 0 1 0"/>
+          <feMorphology operator="dilate" in="SourceAlpha" radius="1.5" />
+          <feColorMatrix result="recolored" type="matrix" values="-1 0 0 1 0, 0 -1 0 1 0, 0 0 -1 1 0, 0 0 0 1 0" />
           <feMerge>
-            <feMergeNode in="recolored"/>
-            <feMergeNode in="SourceGraphic"/>
+            <feMergeNode in="recolored" />
+            <feMergeNode in="SourceGraphic" />
           </feMerge>
         </filter>
         <g filter="url(#paddOutline)" >
-        {layout.map((position, key) => (
-          <PaddMapPiece
-            key={`paddLayout_${props.country}_${position.get('name')}`}
-            originKey={position.get('originKey')}
-            dimensions={dimensions}
-            styles={styles}
-            color={color}
-            left={mapPieceTransformStartLeft(props.left, position, dimensions, mapPieceScale)}
-            top={mapPieceTransformStartTop(props.top, position, dimensions, mapPieceScale)}
-            mapPieceStyleClass={this.getMapPieceTextColor(paddValue)}
-            isLabelRquired={props.arrangeBy === 'location'}
-          />
-        ))}
+          {layout.map((position, key) => (
+            <PaddMapPiece
+              key={`paddLayout_${props.country}_${position.get('name')}`}
+              originKey={position.get('originKey')}
+              dimensions={dimensions}
+              styles={styles}
+              color={color}
+              left={mapPieceTransformStartLeft(props.left, position, dimensions, mapPieceScale)}
+              top={mapPieceTransformStartTop(props.top, position, dimensions, mapPieceScale)}
+              mapPieceStyleClass={this.getMapPieceTextColor(paddValue)}
+              isLabelRquired={props.arrangeBy === 'location'}
+            />
+          ))}
         </g>
         {this.getArrow(
-        this.props.arrangeBy,
-        this.props.paddGroup,
-        this.props.left,
-        this.props.top,
-        color,
-        data.get('confidentialCount', 0),
-        data.get('totalCount', 0),
-      )}
-    </g>)
-    }
-    return null
-  }
-  renderPaddMapPiece() {
-    if (this.props.arrangeBy === 'location' || this.props.country === 'ca') {
-      return this.renderLocation(this.props)
-    } else {
-      return this.renderDefault(this.props)
-    }
+          this.props.arrangeBy,
+          this.props.paddGroup,
+          this.props.left,
+          this.props.top,
+          color,
+          props.data.getIn(['confidential', paddGroup], emptyMap).reduce((a, n) => a + n, 0),
+          props.data.getIn(['totalPoints', paddGroup], emptyMap).reduce((a, n) => a + n, 0),
+        )}
+      </g>
+    )
   }
 
   render() {
-    return this.renderPaddMapPiece()
+    if (this.props.arrangeBy === 'location' || this.props.country === 'ca') {
+      return this.renderLocation()
+    }
+    return this.renderDefault()
   }
 }
 
@@ -432,11 +463,17 @@ const mapStateToProps = (state, props) => ({
   selctionState: selection(state, props),
   arrangeBy: arrangeBy(state, props),
   bins: binSelector(state, props),
-  Padd: PaddSelector(state, props),
+  // Padd: PaddSelector(state, props),
   TRSelector: TRSelector(state, props),
   confidentialityMenu: state.confidentialityMenu,
   selectedEnergy: state.importExportVisualization,
   expandCollapseConfidentiality: state.expandCollapseConfidentiality,
+  // paddData: aggregateLocationPaddData(state, props),
+  data: getFullyFilteredValues(state, {
+    ...props,
+    valueKey: 'activity',
+    groupBy: ['originKey', 'destinationKey'],
+  }),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(PaddLayout)

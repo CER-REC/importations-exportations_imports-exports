@@ -26,11 +26,12 @@ class MapPieceLabel extends React.Component {
   }
 
   renderText(name, xAxis, yAxis){
-    if (name.includes('\n')) {
+    if (name === 'ATL-Q') {return null}
+    if (name && name.includes('\n')) {
       const splitName = name.split('\n')
       return (
-        <text className={this.props.styleClass} y={yAxis - 12} aria-hidden>
-          {splitName.map(text => <tspan key={text} x={xAxis} dy="10">{text}</tspan>)}
+        <text className={this.props.styleClass} y={yAxis - this.props.labelLineSpacing - 2} aria-hidden>
+          {splitName.map(text => <tspan key={text} x={xAxis} dy={this.props.labelLineSpacing}>{text}</tspan>)}
         </text>
       )
     }

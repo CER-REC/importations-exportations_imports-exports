@@ -62,8 +62,7 @@ class ImageDownloadWindow extends React.Component {
   }
 
   render() {
-    return <div
-      className="imageDownloadWindow">
+    return <div>
       {this.imagePreview()}
       {this.closeButton()}
       {this.heading()}

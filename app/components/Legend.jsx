@@ -26,8 +26,7 @@ class Legend extends React.Component {
     const transformImportColumn = `translate(${Constants.getIn(['legend', 'importColumn'])} 0)`
     let zeroArrow = ''
     let yPosition = 10
-    if (this.props.importExportVisualization === 'crudeOil'
-      || this.props.importExportVisualization === 'naturalGasLiquids') {
+    if (this.props.importExportVisualization !== 'electricity') {
       yPosition = 33
       zeroArrow = <LegendArrow
           colour="#ede3cb"
@@ -67,8 +66,7 @@ class Legend extends React.Component {
     const transformExportColumn = `translate(${Constants.getIn(['legend', 'exportColumn'])} 0)`
     let zeroArrow = ''
     let yPosition = 10
-    if (this.props.importExportVisualization === 'crudeOil'
-      || this.props.importExportVisualization === 'naturalGasLiquids') {
+    if (this.props.importExportVisualization !== 'electricity') {
       yPosition = 33
       zeroArrow = <LegendArrow
           exportArrow="rotate(180, 15, 5.5)"
@@ -105,26 +103,50 @@ class Legend extends React.Component {
     const bins = this.props.bins.toJS()
     let transformString = `translate(${Constants.getIn(['legend', 'textValuePosition'])} 0)`
     let zeroText = ''
-    if (this.props.importExportVisualization === 'crudeOil'
-      || this.props.importExportVisualization === 'naturalGasLiquids') {
+    if (this.props.importExportVisualization !== 'electricity') {
       zeroText = '0'
       transformString = `translate(${Constants.getIn(['legend', 'textValuePosition'])} 21)`
     }
     const humanNumberLang = v => humanNumber(v, this.props.language)
     return (
         <g transform={transformString}>
-          {bins.map((value, i) => (
-            <g key={`bin-${i}`}>
-              <text className="theLegendValues" y={(i * 20) + 20}>
-                {`>${humanNumberLang(value[0])}`}
-              </text>
-              <text className="theLegendValues" y={(i * 20) + 20} x="38">
-                {`- ${humanNumberLang(value[1])}`}
-              </text>
-            </g>
-          ))} <g transform="translate(0 0)">
+          {bins.map((value, i) => {
+            if (value[0] === Number.MIN_SAFE_INTEGER && this.props.importExportVisualization === 'electricity') {
+              return (
+                <text className="theLegendValues" y={(i * 20) + 20} x="34" key={`bin-${i}`}>
+                  &le;{humanNumberLang(value[1])}
+                </text>
+              )
+            }
+
+            if (value[0] === Number.MIN_SAFE_INTEGER && this.props.importExportVisualization === 'naturalGas') {
+              return (
+                <text className="theLegendValues" y={(i * 20) + 20} x="34" key={`bin-${i}`}>
+                  ={humanNumberLang(value[1])}
+                </text>
+              )
+            }
+
+            if (value[1] === Number.MAX_SAFE_INTEGER) {
+              return (
+                <text className="theLegendValues" y={(i * 20) + 20} key={`bin-${i}`}>
+                  &gt;{humanNumberLang(value[0])}
+                </text>
+              )
+            }
+
+            return (
+              <g key={`bin-${i}`}>
+                <text className="theLegendValues" y={(i * 20) + 20}>
+                  {`>${humanNumberLang(value[0])}`}
+                </text>
+                <text className="theLegendValues" y={(i * 20) + 20} x="38">
+                  {`- ${humanNumberLang(value[1])}`}
+                </text>
+              </g>
+            )
+          })}
           <text className="theLegendValues">{zeroText}</text>
-          </g>
         </g>
     )
   }

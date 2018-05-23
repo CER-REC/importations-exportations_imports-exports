@@ -3,8 +3,10 @@ import { connect } from 'react-redux'
 
 import { visualizationContainerPosition, visualizationContentPosition, menuWidth } from '../selectors/viewport/'
 import WorkspaceComputations from '../computations/WorkspaceComputations'
+// TODO: Temporary while reworking selectors
 import ElectricityVisualizationContainer from './ElectricityVisualizationContainer'
-import CrudeOilVisualizationContainer from './CrudeOilVisualizationContainer'
+import CrudeOilExportsVisualizationContainer from './CrudeOilExportsVisualizationContainer'
+import CrudeOilImportsVisualizationContainer from './CrudeOilImportsVisualizationContainer'
 import NaturalGasVisualizationContainer from './NaturalGasVisualizationContainer'
 import NaturalGasLiquidsVisualizationContainer from './NaturalGasLiquidsVisualizationContainer'
 import RefinedPetroleumProductsVisualizationContainer from './RefinedPetroleumProductsVisualizationContainer'
@@ -27,8 +29,11 @@ class VisualizationContainer extends React.Component {
     let VisComponent = null
     if (!this.state || this.state.mountedForFirefoxSVGFilterBug !== true) { return null }
     switch (visualizationContainerType) {
-      case 'crudeOil':
-        VisComponent = CrudeOilVisualizationContainer
+      case 'crudeOilImports':
+        VisComponent = CrudeOilImportsVisualizationContainer
+        break
+      case 'crudeOilExports':
+        VisComponent = CrudeOilExportsVisualizationContainer
         break
       case 'naturalGas':
         VisComponent = NaturalGasVisualizationContainer

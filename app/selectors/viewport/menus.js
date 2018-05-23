@@ -1,6 +1,8 @@
 import { createSelector } from 'reselect'
 
-import { chartAxisPosition } from './electricity'
+// TODO: Temporary
+//import { chartAxisPosition } from './electricity'
+const chartAxisPosition = () => ({ top: 0 })
 import { activityOptions, arrangeByOptions, amountOptions, subtypeOptions } from '../menus'
 import Constants from '../../Constants'
 
@@ -36,7 +38,7 @@ export const visSelectorPosition = createSelector(
     ...prev,
     top: prev.top + prev.height - 2,
     height: (
-      (Constants.getIn(['menuBar', 'visualizationPadding']) * 5) + 5
+      (Constants.getIn(['menuBar', 'visualizationPadding']) * 6) + 52
     ),
   }),
 )
@@ -67,7 +69,8 @@ export const explanationTogglePosition = createSelector(
   chartAxisPosition,
   (prev, chart) => ({
     ...prev,
-    top: chart.top - 5,
+    //top: chart.top - 5,
+    top: prev.top + 150,
     height: 20,
   }),
 )
@@ -85,7 +88,7 @@ export const legendMapPosition = createSelector(
   confidentialityTogglePosition,
   prev => ({
     ...prev,
-    top: prev.top + prev.height + 120,
+    top: prev.top + prev.height,
     height: 120,
   }),
 )

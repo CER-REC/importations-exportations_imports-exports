@@ -79,7 +79,7 @@ export default (store) => {
       'visualizationPaths',
       state.importExportVisualization,
       state.language,
-    ])
+    ], '')
     history.push(`${baseURL}${visualizationPath}?config=${compressed}`)
     updatingHistory = false
   }
