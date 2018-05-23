@@ -35,14 +35,33 @@ class ExplanationDot extends React.Component {
 
   explanationDot() {
     return (<g
-      transform={`translate(${this.props.xPosition} ${this.props.yPosition})`}>
-      <circle fill="#ff708a" cx={0} cy={0} r={Constants.getIn(['explanationDot', 'radiusStart'])}/>
+      transform={`translate(${this.props.xPosition} ${this.props.yPosition})`}
+    >
+      <circle fill="#ff708a" cx={0} cy={0} r={Constants.getIn(['explanationDot', 'radiusStart'])} />
       <g transform={this.props.expanded ? ' rotate(45)' : ''}>
         <g transform="translate(-5 -5)">
-          <line fill="none" stroke="#fff" strokeWidth="0.75" strokeLinecap="round" strokeMiterlimit="10"
-            x1="4.86" y1="1.95" x2="4.86" y2="7.77" />
-          <line fill="none" stroke="#fff" strokeWidth="0.75" strokeLinecap="round" strokeMiterlimit="10"
-            x1="7.77" y1="4.86" x2="1.95" y2="4.86" />
+          <line
+            fill="none"
+            stroke="#fff"
+            strokeWidth="0.75"
+            strokeLinecap="round"
+            strokeMiterlimit="10"
+            x1="4.86"
+            y1="1.95"
+            x2="4.86"
+            y2="7.77"
+          />
+          <line
+            fill="none"
+            stroke="#fff"
+            strokeWidth="0.75"
+            strokeLinecap="round"
+            strokeMiterlimit="10"
+            x1="7.77"
+            y1="4.86"
+            x2="1.95"
+            y2="4.86"
+          />
         </g>
       </g>
     </g>)
@@ -56,8 +75,8 @@ class ExplanationDot extends React.Component {
         r={Constants.getIn(['explanationDot', 'radiusStart'])}
         cx={0}
         cy={0}
-        fill="#ff708a">
-        </circle>
+        fill="#ff708a"
+      />
     </g>)
   }
 
@@ -65,30 +84,31 @@ class ExplanationDot extends React.Component {
     if (!this.props.showExplanations) {
       return null
     }
-    return (<g><a 
+    return (<g><a
       role="menuItem"
-      {...handleInteraction(this.props.onClick, this.props.name)}>
+      {...handleInteraction(this.props.onClick, this.props.name)}
+    >
       {this.dotAnimation()}
       {this.explanationDot()}
     </a>
-    <PopoverPortal>
-      <ExplanationPopover
-        text={this.props.text}
-        textBoxWidth={this.props.textBoxWidth}
-        scale={this.props.scale}
-        lineStroke={this.props.lineStroke}
-        linePath={this.props.linePath}
-        lineX={this.props.lineX}
-        lineY={this.props.lineY}
-        textX={this.props.textX}
-        textY={this.props.textY}
-        containerX={this.props.containerX}
-        containerY={this.props.containerY}
-        xPosition={this.props.xPosition}
-        yPosition={this.props.yPosition}
-        expanded={this.props.expanded}
-      />
-    </PopoverPortal>
+      <PopoverPortal>
+        <ExplanationPopover
+          text={this.props.text}
+          textBoxWidth={this.props.textBoxWidth}
+          scale={this.props.scale}
+          lineStroke={this.props.lineStroke}
+          linePath={this.props.linePath}
+          lineX={this.props.lineX}
+          lineY={this.props.lineY}
+          textX={this.props.textX}
+          textY={this.props.textY}
+          containerX={this.props.containerX}
+          containerY={this.props.containerY}
+          xPosition={this.props.xPosition}
+          yPosition={this.props.yPosition}
+          expanded={this.props.expanded}
+        />
+      </PopoverPortal>
     </g>)
   }
 }

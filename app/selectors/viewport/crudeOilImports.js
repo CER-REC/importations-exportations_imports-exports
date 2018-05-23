@@ -19,7 +19,7 @@ export const chartImportPosition = createSelector(
   canadaPaddPosition,
   viewport,
   (canadaPadd, viewp) => {
-    const top = viewp.get('changeHeightRatio') > 1.2? canadaPadd.top + canadaPadd.height - 30: canadaPadd.top + canadaPadd.height - 70
+    const top = viewp.get('changeHeightRatio') > 1.2 ? canadaPadd.top + canadaPadd.height - 30 : canadaPadd.top + canadaPadd.height - 70
     const result = {
       top,
       left: canadaPadd.left,
@@ -44,7 +44,7 @@ export const worldChartPosition = createSelector(
   chartAxisPosition,
   viewport,
   (axis, viewp) => {
-    const top = viewp.get('changeHeightRatio') > 1.2 ? (axis.top + axis.height) : (axis.top + axis.height) 
+    const top = viewp.get('changeHeightRatio') > 1.2 ? (axis.top + axis.height) : (axis.top + axis.height)
     const result = {
       top: top + 10,
       left: axis.left,

@@ -43,18 +43,22 @@ const Workspace = ({ svgSize, detailSidebarPosition, portalSvgSize }) => (
         width: detailSidebarPosition.width,
       }}
     />
-    <div id="popoverPortal"
-      style={{ position: 'absolute',
-        top: Constants.get('topHeightMargin')
-      }}>
-    </div>
+    <div
+      id="popoverPortal"
+      style={{
+ position: 'absolute',
+        top: Constants.get('topHeightMargin'),
+      }}
+    />
     <ModalSelector />
 
-    <div id="popoverPortal"
-      style={{ position: 'absolute',
-        top: Constants.get('topHeightMargin')
-    }}>
-    </div>
+    <div
+      id="popoverPortal"
+      style={{
+ position: 'absolute',
+        top: Constants.get('topHeightMargin'),
+    }}
+    />
   </div>
 )
 

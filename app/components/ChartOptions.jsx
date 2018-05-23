@@ -10,7 +10,7 @@ import { timelineScaleLinked } from '../selectors/timeline'
 import { groupingBy as timelineGroupingSelector } from '../selectors/data'
 import trSelector from '../selectors/translate'
 import { handleInteractionWithTabIndex } from '../utilities'
-import {visualizationSettings, scaledLinkedSelector} from '../selectors/visualizationSettings'
+import { visualizationSettings, scaledLinkedSelector } from '../selectors/visualizationSettings'
 
 import ExplanationDot from './ExplanationDot'
 import tr from '../TranslationTable'
@@ -31,7 +31,7 @@ class ChartOptions extends React.PureComponent {
   static get defaultProps() {
     return {
       canChangeScale: true,
-      tabIndex:0,
+      tabIndex: 0,
     }
   }
 
@@ -59,9 +59,10 @@ class ChartOptions extends React.PureComponent {
         containerX={leftPad + 890}
         containerY={314}
         name="linkDataIcon"
-        text={`${this.props.tr(['explanations','linkedDataIcon'])}`}
-    /></g>)
-  } 
+        text={`${this.props.tr(['explanations', 'linkedDataIcon'])}`}
+      />
+            </g>)
+  }
 
   scaleLinkedChanged = () => this.props.setScaleLinked(!this.props.scaleLinked)
 
@@ -107,7 +108,7 @@ class ChartOptions extends React.PureComponent {
           paddingLeft: `${leftPad}px`,
         }}
         className="chartOptionsWrapper"
-      >        
+      >
         {this.renderScaleToggle()}
         <div className="chartOptions">
           {/* Using a div to fix an IE11 bug with the detail bar arrow wrapping */}
@@ -119,7 +120,7 @@ class ChartOptions extends React.PureComponent {
               {groupLabel} +
             </a>
           </div>
-        </div>                      
+        </div>
         <svg>{this.linkDataExplanation()}</svg>
       </div>
     )

@@ -26,7 +26,7 @@ class SocialBar extends React.Component {
 
     }
   }
-  
+
   static get defaultProps() {
     return {
       tabIndex: Constants.getIn(['tabIndex', 'start', 'socialBar']),
@@ -87,7 +87,7 @@ class SocialBar extends React.Component {
   componentDidMount() {
     if (this.props.screenshot) {
       this.makeBitlyPromise().then((url) => {
-        this.setState({ screenshotURL: url });
+        this.setState({ screenshotURL: url })
       })
     }
   }
@@ -123,7 +123,7 @@ class SocialBar extends React.Component {
     this.props.onClick()
   }
 
-  methodologyClick() { 
+  methodologyClick() {
     if (!this.props.expandSocialBar) { return this.props.controlArrowClick() }
     const appRoot = RouteComputations.appRoot(this.props.language)
     window.open(`${appRoot}${Tr.getIn(['methodologyLinks', this.props.language])}`)
@@ -181,7 +181,7 @@ class SocialBar extends React.Component {
       y={viewPort + Constants.getIn(['socialBar', 'shareIconMargin'], 0)}
       xlinkHref="images/share.svg"
       {...handleInteractionWithTabIndex(this.props.tabIndex, this.props.controlArrowClick)}
-        />)
+    />)
   }
 
   icons() {
@@ -352,10 +352,10 @@ class SocialBar extends React.Component {
     }
     if (this.props.screenshot) {
       return (<g transform={`translate(${translate})`}>
-        <g transform = {`translate(0  ${this.props.viewport.get('y')})`}>
+        <g transform={`translate(0  ${this.props.viewport.get('y')})`}>
           {this.nebLogo()}
         </g>
-        <g transform = {`translate(${this.props.viewport.get('x') - 75} ${this.props.viewport.get('y') + 50})`}>
+        <g transform={`translate(${this.props.viewport.get('x') - 75} ${this.props.viewport.get('y') + 50})`}>
           {this.bitlyLink()}
         </g>
       </g>)

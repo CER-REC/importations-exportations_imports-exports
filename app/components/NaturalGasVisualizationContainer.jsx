@@ -18,7 +18,7 @@ import { amount } from '../selectors/data'
 import { showImportsSelector, showExportsSelector } from '../selectors/visualizationSettings'
 import NaturalGasPieceActivityExplanation from './NaturalGasPieceActivityExplanation'
 import Constants from '../Constants'
-import {legendMapPosition} from '../selectors/viewport/menus'
+import { legendMapPosition } from '../selectors/viewport/menus'
 
 const NaturalGasVisualizationContainer = (props) => {
   const weighted = props.unit === 'CN$/GJ' ? 'weighted' : false
@@ -66,7 +66,7 @@ const NaturalGasVisualizationContainer = (props) => {
       <Axis
         {...props.axisPosition}
         barWidth={4}
-        tabIndex={Constants.getIn(['tabIndex', 'start', 'visualization', 'timeline'])} 
+        tabIndex={Constants.getIn(['tabIndex', 'start', 'visualization', 'timeline'])}
       />
       {!props.showExports ? null : (
         <React.Fragment>
@@ -127,5 +127,5 @@ export default connect((state, props) => ({
   unit: amount(state, props),
   showImports: showImportsSelector(state, props),
   showExports: showExportsSelector(state, props),
-  
+
 }))(NaturalGasVisualizationContainer)

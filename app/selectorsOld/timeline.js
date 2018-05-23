@@ -66,7 +66,7 @@ const aggregateQuarterPoints = (points, valueKeys, aggregateKey, vizName) => {
         acc[period].sumForAvg[key].value += next.get('forAverageValue', 0)
         acc[period].sumForAvg[key].divisor += next.get('forAverageDivisor', 0)
       }
-      // if next has quantity for average --- 
+      // if next has quantity for average ---
       // true - acc period has sumForAverage key object ---
       // make sure if sfA exists also has key - either import or exports
       // adding actual values based on data point
@@ -301,7 +301,9 @@ export const timelineData = createSelector(
   timelinePositionCalculation,
   timelineRange,
   timelinePlayback,
-  (scale, position, range, playback) => ({ timelineRange: range, timelinePlayback: playback, ...scale, ...position }),
+  (scale, position, range, playback) => ({
+    timelineRange: range, timelinePlayback: playback, ...scale, ...position,
+  }),
 )
 
 export const timelineSeekPositionSelector = createSelector(

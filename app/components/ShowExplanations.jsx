@@ -23,23 +23,23 @@ class ShowExplanations extends React.Component {
   }
 
   dot() {
-    return <circle
+    return (<circle
       cx={Constants.getIn(['showExplanations', 'labelOffset']) - 6}
       cy={-5}
       r={Constants.getIn(['explanationDot', 'radiusStart'])}
       fill="#ff708a"
-    />
+    />)
   }
 
   showText() {
     const { Tr } = this.props
 
-    let sign='+'
+    let sign = '+'
     let textColour = '#999999'
     const explanationsText = Tr('explanationShown')
     if (this.props.showExplanations) {
       textColour = '#ff708a'
-      sign='-'
+      sign = '-'
     }
 
     return (
@@ -55,7 +55,7 @@ class ShowExplanations extends React.Component {
   }
 
   render() {
-    const tabIndex = Constants.getIn(['tabIndex','start', 'menuBar'])
+    const tabIndex = Constants.getIn(['tabIndex', 'start', 'menuBar'])
     return (
       <g
         transform={`translate(${this.props.left} ${this.props.top})`}

@@ -59,9 +59,7 @@ export const timelineFilterRange = createSelector(
 
 export const groupingBy = createSelector(
   visualizationSettings,
-  settings => {
-    return settings.getIn(['timeline', 'grouping'])
-  }
+  settings => settings.getIn(['timeline', 'grouping']),
 )
 
 const dataSelector = state => state.data
@@ -104,8 +102,8 @@ export const timeLineScaleSelector = createSelector(
   amount,
   visualizationSettings,
   state => state.scales,
-  (vis, unit, visSettings, scale) => { 
+  (vis, unit, visSettings, scale) => {
     const result = scale.getIn([vis, unit])
     return result
-  }
+  },
 )

@@ -40,7 +40,7 @@ class DataDownloadWindow extends React.Component {
   subtext() {
     return (
       <p className="subtext">
-        {Tr.getIn(['dataDownloadModal','subtext', this.props.language])}
+        {Tr.getIn(['dataDownloadModal', 'subtext', this.props.language])}
       </p>
     )
   }
@@ -48,17 +48,17 @@ class DataDownloadWindow extends React.Component {
   fileNameText() {
     return (
       <p className="subtext">
-        NEB 2018-DD-MM data.csv 
+        NEB 2018-DD-MM data.csv
       </p>
     )
   }
 
   shareButton() {
-    return <img
+    return (<img
       className="dataDownloadImage"
       src="images/download_file.svg"
       onClick={this.downloadDataClick}
-    />
+    />)
   }
 
   downloadDataClick() {

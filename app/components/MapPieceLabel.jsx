@@ -25,8 +25,8 @@ class MapPieceLabel extends React.Component {
     return labelElement
   }
 
-  renderText(name, xAxis, yAxis){
-    if (name === 'ATL-Q') {return null}
+  renderText(name, xAxis, yAxis) {
+    if (name === 'ATL-Q') { return null }
     if (name && name.includes('\n')) {
       const splitName = name.split('\n')
       return (

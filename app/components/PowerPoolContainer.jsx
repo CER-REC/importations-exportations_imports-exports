@@ -16,14 +16,15 @@ class PowerPoolContainer extends React.Component {
 
   powerpoolLabel() {
     return (<text
-      className="powerPoolLabel">
+      className="powerPoolLabel"
+    >
       {Tr.getIn(['country', 'powerpool', 'powerPools', this.props.language])}
     </text>)
   }
 
   powerpoolExplanation() {
-    const scaleContainerX = this.props.viewport.get('changeWidthRatio')  > 1.2 ? -7: -42
-    const scaleContainerY = this.props.viewport.get('changeHeightRatio')  > 1.2 ? -40: -30
+    const scaleContainerX = this.props.viewport.get('changeWidthRatio') > 1.2 ? -7 : -42
+    const scaleContainerY = this.props.viewport.get('changeHeightRatio') > 1.2 ? -40 : -30
     return (<g>
       <ExplanationDot
         scale="scale(1 -1) translate(0 -100)"
@@ -42,11 +43,12 @@ class PowerPoolContainer extends React.Component {
         lineY={173.94}
         textX={45}
         textY={48}
-        containerX={this.props.viewport.get('changeWidthRatio')*(this.props.top + scaleContainerX)}
-        containerY={this.props.viewport.get('changeHeightRatio')*(this.props.left   + scaleContainerY)}
-        text={`${Tr.getIn(['explanations','powerpool', this.props.language])}`}
+        containerX={this.props.viewport.get('changeWidthRatio') * (this.props.top + scaleContainerX)}
+        containerY={this.props.viewport.get('changeHeightRatio') * (this.props.left + scaleContainerY)}
+        text={`${Tr.getIn(['explanations', 'powerpool', this.props.language])}`}
         name="powerpoolExplanation"
-    /></g>)
+      />
+            </g>)
   }
 
   render() {
@@ -54,7 +56,8 @@ class PowerPoolContainer extends React.Component {
     // TODO: scale map dynamically when screen size change
     return (<g transform={
       `scale(${this.props.viewport.get('changeWidthRatio')} ${this.props.viewport.get('changeHeightRatio')}) 
-      translate(${this.props.left} ${this.props.top})`}>
+      translate(${this.props.left} ${this.props.top})`}
+    >
       <g transform="translate(35 -15)">
         {this.powerpoolLabel()}
         {this.powerpoolExplanation()}
@@ -64,7 +67,7 @@ class PowerPoolContainer extends React.Component {
         top={this.props.top}
         country="powerpool"
       />
-      </g>)
+    </g>)
   }
 }
 

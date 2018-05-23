@@ -28,9 +28,9 @@ class Legend extends React.Component {
     let yPosition = 10
     if (this.props.importExportVisualization !== 'electricity') {
       yPosition = 33
-      zeroArrow = <LegendArrow
-          colour="#ede3cb"
-        />
+      zeroArrow = (<LegendArrow
+        colour="#ede3cb"
+      />)
     }
     return (
       <g
@@ -68,10 +68,10 @@ class Legend extends React.Component {
     let yPosition = 10
     if (this.props.importExportVisualization !== 'electricity') {
       yPosition = 33
-      zeroArrow = <LegendArrow
-          exportArrow="rotate(180, 15, 5.5)"
-          colour="#ede3cb"
-        />
+      zeroArrow = (<LegendArrow
+        exportArrow="rotate(180, 15, 5.5)"
+        colour="#ede3cb"
+      />)
     }
     return (
       <g
@@ -109,8 +109,8 @@ class Legend extends React.Component {
     }
     const humanNumberLang = v => humanNumber(v, this.props.language)
     return (
-        <g transform={transformString}>
-          {bins.map((value, i) => {
+      <g transform={transformString}>
+        {bins.map((value, i) => {
             if (value[0] === Number.MIN_SAFE_INTEGER && this.props.importExportVisualization === 'electricity') {
               return (
                 <text className="theLegendValues" y={(i * 20) + 20} x="34" key={`bin-${i}`}>
@@ -146,8 +146,8 @@ class Legend extends React.Component {
               </g>
             )
           })}
-          <text className="theLegendValues">{zeroText}</text>
-        </g>
+        <text className="theLegendValues">{zeroText}</text>
+      </g>
     )
   }
 

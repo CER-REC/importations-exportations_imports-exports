@@ -176,7 +176,7 @@ const CrudeOilVisualizationContainer = props => (
         nameMappings={Tr.getIn(['Padd', 'us'])}
       />
     </DetailSidebar>
-    
+
     <CrudeOilPieceActivityExplanation
       {...props.mapPieceActivityExplanation}
     />

@@ -57,17 +57,17 @@ class NaturalGasLiquidMapLayout extends React.Component {
   }
 
   isMapPieceSelected(key, country) {
-    if(this.props.country !== this.props.selection.get('country')){return false}
+    if (this.props.country !== this.props.selection.get('country')) { return false }
     return this.props.selection.get('origins').includes(key)
   }
   isSelected() {
-    if(this.props.country !== this.props.selection.get('country')){return false}
+    if (this.props.country !== this.props.selection.get('country')) { return false }
     const count = this.props.selection.get('origins').count()
     return (count > 0)
   }
 
   renderMapPiece() {
-    const productSubType = this.props.sType === ''?'propaneButane':this.props.sType
+    const productSubType = this.props.sType === '' ? 'propaneButane' : this.props.sType
     // Data from constant file
     const type = this.props.importExportVisualization
 
@@ -87,7 +87,7 @@ class NaturalGasLiquidMapLayout extends React.Component {
       .get('tilePositions')
       .map((position, key) => {
         const humanName = this.props.Tr(['country', this.props.country, key])
-        if(typeof humanName === 'undefined'){
+        if (typeof humanName === 'undefined') {
           return null
         }
 
@@ -96,7 +96,7 @@ class NaturalGasLiquidMapLayout extends React.Component {
             <g
               className="mappiece"
               {...handleInteractionWithTabIndex(tabIndex, this.onClick, this.props.country, key)}
-              aria-label={this.props.Tr('mapTileLabel', humanName, position.getIn(['subType',productSubType,'imports'],0).toLocaleString(), position.getIn(['subType',productSubType,'exports'], 0).toLocaleString(), this.props.unit)}
+              aria-label={this.props.Tr('mapTileLabel', humanName, position.getIn(['subType', productSubType, 'imports'], 0).toLocaleString(), position.getIn(['subType', productSubType, 'exports'], 0).toLocaleString(), this.props.unit)}
               transform={`scale(${mapPieceScale})`}
             >
               <MapPiece
@@ -131,12 +131,13 @@ class NaturalGasLiquidMapLayout extends React.Component {
       })
       .toArray()
   }
-  renderATLQOutline(){
-    if(this.props.arrangeBy !== 'location'){ return null}
-    return <polygon
-     transform="scale(0.86 0.92) translate(305.5 33)"
-     className="ATLQOutline"
-     points="56.49 0.56 84.57 15.56 114.25 0.56 142.43 15.56 142.43 42.81 169.22 56.74 169.22 85.56 142.43 99.06 114.25 85.56 84.57 99.06 56.49 85.56 25.89 99.06 0.5 85.56 0.5 56.74 26.89 42.81 26.89 15.56 56.49 0.56"/>
+  renderATLQOutline() {
+    if (this.props.arrangeBy !== 'location') { return null }
+    return (<polygon
+      transform="scale(0.86 0.92) translate(305.5 33)"
+      className="ATLQOutline"
+      points="56.49 0.56 84.57 15.56 114.25 0.56 142.43 15.56 142.43 42.81 169.22 56.74 169.22 85.56 142.43 99.06 114.25 85.56 84.57 99.06 56.49 85.56 25.89 99.06 0.5 85.56 0.5 56.74 26.89 42.81 26.89 15.56 56.49 0.56"
+    />)
   }
 
   render() {

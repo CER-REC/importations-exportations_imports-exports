@@ -37,7 +37,7 @@ class ImportPaddLayout extends React.Component {
     country: PropTypes.string.isRequired,
     selectedEnergy: PropTypes.string.isRequired,
   }
-  getColorIndex(value){
+  getColorIndex(value) {
     return this.props.bins.findIndex(range => range.get(0) <= value && value < range.get(1))
   }
   getPaddColor(value) {
@@ -51,9 +51,9 @@ class ImportPaddLayout extends React.Component {
   }
 
   renderConfidentialPopover(leftPadding, paddGroupId, style, confidentialCount, totalCount, left, top, transformTranslate) {
-    const energyType = "crudeOil"
-    const scaleingAdjustmentX = this.props.viewport.get('changeWidthRatio')  > 1.2 ? -17:style.getIn([ energyType, 'scaleingAdjustmentX'], 0)
-    const scaleingAdjustmentY = this.props.viewport.get('changeHeightRatio')  > 1.2 ? -12:style.getIn([ energyType, 'scaleingAdjustmentY'], 0)
+    const energyType = 'crudeOil'
+    const scaleingAdjustmentX = this.props.viewport.get('changeWidthRatio') > 1.2 ? -17 : style.getIn([energyType, 'scaleingAdjustmentX'], 0)
+    const scaleingAdjustmentY = this.props.viewport.get('changeHeightRatio') > 1.2 ? -12 : style.getIn([energyType, 'scaleingAdjustmentY'], 0)
     const xPosition = 36
     const yPosition = 13
     const paddContainerX = this.props.left + left + 135 + scaleingAdjustmentX
@@ -63,7 +63,7 @@ class ImportPaddLayout extends React.Component {
       return (<g transform="translate(145 143)">
         <ConfidentialIcon
           styles={style.get('confidentialStyle')}
-          scale='scale(1)'
+          scale="scale(1)"
           text={`${confidentialCount} / ${totalCount} ${this.props.TRSelector('valuesConfidential')}`}
           containerX={paddContainerX}
           containerY={paddContainerY}
@@ -91,20 +91,21 @@ class ImportPaddLayout extends React.Component {
     const transformText = mapLayoutGrid.getIn(['arrow', 'textTranslate', paddGroupId])
     const text = this.props.TRSelector(['Padd', country, paddGroupId])
     const style = mapLayoutGrid.get('styles', false)
-    const confidentialIcon = this.renderConfidentialPopover( 
-      leftPadding, 
-      paddGroupId, 
-      style, 
-      confidentialCount, 
-      totalCount, 
-      left, 
-      top, 
-      transformTranslate)
+    const confidentialIcon = this.renderConfidentialPopover(
+      leftPadding,
+      paddGroupId,
+      style,
+      confidentialCount,
+      totalCount,
+      left,
+      top,
+      transformTranslate,
+    )
     let scaleContainerX = 0
     let scaleContainerY = 0
     let canadaExplanation = null
-    scaleContainerX = this.props.viewport.get('changeWidthRatio')  > 1.2 ? 10: -100
-    scaleContainerY = this.props.viewport.get('changeHeightRatio')  > 1.2 ? 0: -10
+    scaleContainerX = this.props.viewport.get('changeWidthRatio') > 1.2 ? 10 : -100
+    scaleContainerY = this.props.viewport.get('changeHeightRatio') > 1.2 ? 0 : -10
     canadaExplanation = (<g transform="translate(145 143)">
       <ExplanationDot
         scale="scale(1)"
@@ -127,7 +128,7 @@ class ImportPaddLayout extends React.Component {
         containerX={this.props.left + 330 + scaleContainerX}
         containerY={this.props.top + 14 + scaleContainerY}
         name="canadaExplanation"
-        text={`${this.props.TRSelector(['explanations','canadaPaddCrudeOil'])}`}
+        text={`${this.props.TRSelector(['explanations', 'canadaPaddCrudeOil'])}`}
       />
     </g>)
 
@@ -139,26 +140,26 @@ class ImportPaddLayout extends React.Component {
     </g>)
   }
 
-  breakLine( text, x, y){
+  breakLine(text, x, y) {
     if (text.includes('\n')) {
       const splitName = text.split('\n')
       return (
-        <text textAnchor='middle' y={y - 20} aria-hidden>
+        <text textAnchor="middle" y={y - 20} aria-hidden>
           {splitName.map(text => <tspan key={text} x={x} dy="13">{text}</tspan>)}
         </text>
       )
     }
-    return <text  y={y} x={x}>{text}</text>
+    return <text y={y} x={x}>{text}</text>
   }
 
-  getTabIndex(country){
+  getTabIndex(country) {
     return Constants.getIn(['tabIndex', 'start', 'visualization', 'caPadd'])
   }
 
-  onPaddClick( props, paddGroup ) {
+  onPaddClick(props, paddGroup) {
   }
 
-  getMapPieceTextColor(value){
+  getMapPieceTextColor(value) {
     return 'mapPieceText'
   }
   renderDefault() {
@@ -171,7 +172,7 @@ class ImportPaddLayout extends React.Component {
     const paddGroup = Constants.getIn(['dataloader', 'mapping', 'padd', 'ca', props.paddGroup])
     // TODO Is this a good way of getting Canada's data?
     const data = props.data.getIn(['values', 'ca'])
-    
+
     const paddValue = data
       ? data.reduce((acc, next) => acc + next, 0)
       : 0
@@ -180,7 +181,7 @@ class ImportPaddLayout extends React.Component {
     return (
       <g
         className="paddLayout"
-        {...handleInteractionWithTabIndex(this.getTabIndex(props.country) , this.onPaddClick, props, paddGroup)}
+        {...handleInteractionWithTabIndex(this.getTabIndex(props.country), this.onPaddClick, props, paddGroup)}
       >
         {layout.map((position, key) => (
           <PaddMapPiece

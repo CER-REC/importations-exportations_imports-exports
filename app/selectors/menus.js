@@ -21,7 +21,7 @@ export const activityOptions = createSelector(
 
 export const arrangeByOptions = createSelector(
   selectedVisualization,
-  vis =>{
+  (vis) => {
     if (vis === 'crudeOilExports') {
       return ['location', 'exports']
     } else if (vis === 'crudeOilImports') {
@@ -32,7 +32,7 @@ export const arrangeByOptions = createSelector(
       return ['location', 'amount']
     }
     return ['location', 'imports', 'exports']
-  }
+  },
 )
 
 export const amountOptions = state =>

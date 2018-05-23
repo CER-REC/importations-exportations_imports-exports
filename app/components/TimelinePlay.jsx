@@ -99,8 +99,9 @@ class TimelinePlay extends React.PureComponent {
         containerX={this.props.left - 143}
         containerY={this.props.top + 1}
         name={`${this.props.selectedEnergy} timePlayDot`}
-        text={`${this.props.tr(['explanations','playButton'])}`}
-    /></g>)
+        text={`${this.props.tr(['explanations', 'playButton'])}`}
+      />
+            </g>)
   }
 
   renderIcon() {
@@ -133,7 +134,7 @@ class TimelinePlay extends React.PureComponent {
         transform={`translate(${this.props.left} ${this.props.top})`}
         role="link"
         aria-label={label}
-        {...handleInteractionWithTabIndex(this.props.tabIndex||0, this.onClick)}
+        {...handleInteractionWithTabIndex(this.props.tabIndex || 0, this.onClick)}
       >
         <g transform={`scale(${scale})`} className="playButton">
           {this.renderIcon()}

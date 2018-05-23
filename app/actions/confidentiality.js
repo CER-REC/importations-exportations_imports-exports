@@ -13,11 +13,11 @@ export const ExpandCollapseConfidentiality = icon => ({
 const initialState = new List()
 export const reducer = (state = initialState, action) => {
   switch (action.type) {
-
     case Types.EXPAND_COLLAPSE_CONFIDENTIALITY:
       return state.contains(action.payload.icon)
         ? state.filter(icon => icon !== action.payload.icon)
         : state.concat(action.payload.icon)
     case visualizationSettings.RESET_VISUALIZATION_STATE: return initialState
-    default: return state }
+    default: return state
+  }
 }

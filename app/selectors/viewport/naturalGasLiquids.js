@@ -13,8 +13,8 @@ export const canadaImportMap = createSelector(
   arrangeBy,
   visualizationSettings,
   (visContent, viewp, arrange, activity) => {
-    const left = viewp.get('changeWidthRatio') > 1.2 ? (visContent.left + 80) : (visContent.left) 
-    
+    const left = viewp.get('changeWidthRatio') > 1.2 ? (visContent.left + 80) : (visContent.left)
+
     let top = visContent.top
     if (arrange === 'amount') {
       top = visContent.top + 50
@@ -41,7 +41,7 @@ export const chartImportPosition = createSelector(
   viewport,
   (visContent, viewp) => {
     const left = viewp.get('changeWidthRatio') > 1.2 ? (visContent.left - 80) : (visContent.left)
-    const top = viewp.get('changeHeightRatio') > 1.2 ? (visContent.top + visContent.height +20) : (visContent.top + visContent.height)
+    const top = viewp.get('changeHeightRatio') > 1.2 ? (visContent.top + visContent.height + 20) : (visContent.top + visContent.height)
     const result = {
       top,
       left,
@@ -78,11 +78,11 @@ export const usPaddPosition = createSelector(
   arrangeBy,
   visualizationSettings,
   (chartPosition, viewp, arrange, activity) => {
-    let top = viewp.get('changeHeightRatio') > 1.2 ? (chartPosition.top + chartPosition.height - 40) : (chartPosition.top + chartPosition.height + 20) 
+    let top = viewp.get('changeHeightRatio') > 1.2 ? (chartPosition.top + chartPosition.height - 40) : (chartPosition.top + chartPosition.height + 20)
     const left = viewp.get('changeWidthRatio') > 1.2 ? (chartPosition.left + 20) : (chartPosition.left)
 
     if (arrange === 'amount' && ['imports'].includes(activity.get('activity'))) {
-      top = viewp.get('changeHeightRatio') > 1.2 ? (chartPosition.top + chartPosition.height - 140) : (chartPosition.top + chartPosition.height - 60) 
+      top = viewp.get('changeHeightRatio') > 1.2 ? (chartPosition.top + chartPosition.height - 140) : (chartPosition.top + chartPosition.height - 60)
     }
 
     const result = {

@@ -178,9 +178,10 @@ class TimelineSeek extends React.PureComponent {
         textY={112}
         containerX={this.props.left + this.state.offset - 169}
         containerY={this.props.top + 5}
-        text={`${this.props.tr(['explanations','timeSeek'])}`}
+        text={`${this.props.tr(['explanations', 'timeSeek'])}`}
         name={`${this.props.selectedEnergy} timeSeekDot`}
-    /></g>)
+      />
+            </g>)
   }
 
   render() {
@@ -204,7 +205,7 @@ class TimelineSeek extends React.PureComponent {
           invertedX={side !== 'start'}
           onArrowKey={this.onArrowKey}
           aria-label={label}
-          tabIndex={tabIndex||0}
+          tabIndex={tabIndex || 0}
         >
           <g
             transform={`translate(${this.state.offset - xOffset} 0) scale(${scale})`}

@@ -27,18 +27,19 @@ class ImageDownloadWindow extends React.Component {
   }
 
   closeButton() {
-    return <img
+    return (<img
       className="closeButton"
       src="images/hide_(close).svg"
       onClick={this.handleClose}
-    />
+    />)
   }
 
   heading() {
-    return <p
-      className="imageDownloadHeading">
+    return (<p
+      className="imageDownloadHeading"
+    >
       { Tr.getIn(['imageDownload', this.props.language]).toUpperCase() }
-      </p>
+    </p>)
   }
 
   imagePreview() {
@@ -54,20 +55,21 @@ class ImageDownloadWindow extends React.Component {
   }
 
   saveImageButton() {
-    return <p
+    return (<p
       className="saveImage"
-      onClick={this.saveImageClick}>
+      onClick={this.saveImageClick}
+    >
       { Tr.getIn(['saveImage', this.props.language]).toUpperCase() }
-    </p>
+            </p>)
   }
 
   render() {
-    return <div>
+    return (<div>
       {this.imagePreview()}
       {this.closeButton()}
       {this.heading()}
       {this.saveImageButton()}
-    </div>
+            </div>)
   }
 }
 

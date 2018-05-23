@@ -258,7 +258,7 @@ export const aggregateLocationSelector = createSelector(
     const result = Immutable.fromJS(points.reduce((acc, next) => {
       const origin = next.get('origin') || next.get('port')
       const originKey = next.get('originKey')
-      acc = mapPieceLocationDataStructure(acc, next, origin, originKey, 'country','destinationKey', 'destinationCountry')
+      acc = mapPieceLocationDataStructure(acc, next, origin, originKey, 'country', 'destinationKey', 'destinationCountry')
 
       const destination = next.get('destination') || next.get('port')
       const destinationKey = next.get('destinationKey')
@@ -275,7 +275,7 @@ export const aggregateFilterLocationSelector = createSelector(
     const result = Immutable.fromJS(points.reduce((acc, next) => {
       const origin = next.get('origin') || next.get('port')
       const originKey = next.get('originKey')
-      acc = mapPieceLocationDataStructure(acc, next, origin, originKey, 'country','destinationKey', 'destinationCountry')
+      acc = mapPieceLocationDataStructure(acc, next, origin, originKey, 'country', 'destinationKey', 'destinationCountry')
 
       const destination = next.get('destination') || next.get('port')
       const destinationKey = next.get('destinationKey')
@@ -303,7 +303,7 @@ export const aggregateLocationPaddSelector = createSelector(
     missingpPadds = missingpPadds.merge(Constants.getIn(['dataloader', 'mapping', 'padd', 'ca'], Immutable.fromJS({})))
     let paddData = points.reduce((acc, next) => {
       const subtype = next.get('productSubtype')
-      let destination = next.get('destinationKey') === ''? next.get('destination'): next.get('destinationKey')
+      let destination = next.get('destinationKey') === '' ? next.get('destination') : next.get('destinationKey')
       if (typeof destination === 'undefined') {
         return acc
       }
@@ -351,9 +351,9 @@ export const aggregateLocationPaddSelector = createSelector(
     }, {})
 
     missingpPadds.forEach((data, paddName) => {
-      if(viz === 'naturalGasLiquids' && paddName === 'Non-USA'){
+      if (viz === 'naturalGasLiquids' && paddName === 'Non-USA') {
         return
-      }else if(viz === 'crudeOil' && paddName === 'Mexico'){
+      } else if (viz === 'crudeOil' && paddName === 'Mexico') {
         return
       }
       paddData[paddName] = {}
@@ -443,10 +443,10 @@ export const aggregateLocationNaturalGasSelector = createSelector(
   (points) => {
     const ports = Constants.getIn(['dataloader', 'mapping', 'ports'], Immutable.fromJS({}))
     let missingPorts = Constants.getIn(['dataloader', 'mapping', 'ports'], Immutable.fromJS({}))
-    let portData = points.reduce((acc, next) => {
+    const portData = points.reduce((acc, next) => {
       const port = ports.get(next.get('port'))
       if (typeof port === 'undefined') {
-        //console.log(`missing data for ${next.get('port')} in the constant list.`)
+        // console.log(`missing data for ${next.get('port')} in the constant list.`)
         return acc
       }
       const province = port.get('Province')
@@ -458,7 +458,7 @@ export const aggregateLocationNaturalGasSelector = createSelector(
       missingPorts = missingPorts.delete(portName)
       if (!acc[province][portName]) {
         acc[province][portName] = {
-          portName
+          portName,
         }
         acc[province][portName].activities = {}
       }
@@ -487,7 +487,7 @@ export const aggregateLocationNaturalGasSelector = createSelector(
       accPort.confidentialCount = (confidentialCount + next.get('confidential'))
       return acc
     }, {})
-    //create ports with the empty data and push it
+    // create ports with the empty data and push it
     missingPorts.forEach((port, portName) => {
       const province = port.get('Province')
       if (!portData[province]) {
@@ -495,7 +495,7 @@ export const aggregateLocationNaturalGasSelector = createSelector(
       }
       if (!portData[province][portName]) {
         portData[province][portName] = {
-          portName
+          portName,
         }
       }
     })

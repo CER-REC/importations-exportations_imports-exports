@@ -51,12 +51,12 @@ class Menu extends React.PureComponent {
   }
 
   importExportExplanation() {
-    let textString = `${this.props.Tr(['explanations','importExport'])}`
+    let textString = `${this.props.Tr(['explanations', 'importExport'])}`
     const xPosition = (this.props.language === 'en') ? 173 : 220
     if (this.props.selectedEnergy === 'naturalGas') {
-      textString = `${this.props.Tr(['explanations','importExportMenuNaturalGas'])}`
+      textString = `${this.props.Tr(['explanations', 'importExportMenuNaturalGas'])}`
     }
-    if (this.props.name !== 'activity' 
+    if (this.props.name !== 'activity'
       || this.props.selectedEnergy === 'crudeOil'
       || this.props.selectedEnergy === 'refinedPetroleumProducts') { return }
     return (<g>
@@ -81,22 +81,23 @@ class Menu extends React.PureComponent {
         containerY={this.props.top - 50}
         text={textString}
         name={`${this.props.selectedEnergy} importExportExplanation`}
-    /></g>)
+      />
+            </g>)
   }
 
   amountExplanation() {
-    let textString = `${this.props.Tr(['explanations','amount'])}`
+    let textString = `${this.props.Tr(['explanations', 'amount'])}`
     if (this.props.selectedEnergy === 'crudeOil') {
-      textString = `${this.props.Tr(['explanations','amountCrude'])}`
+      textString = `${this.props.Tr(['explanations', 'amountCrude'])}`
     }
     if (this.props.selectedEnergy === 'naturalGas') {
-      textString = `${this.props.Tr(['explanations','amountNaturalGas'])}`
+      textString = `${this.props.Tr(['explanations', 'amountNaturalGas'])}`
     }
     if (this.props.selectedEnergy === 'naturalGasLiquids') {
-      textString = `${this.props.Tr(['explanations','amountNaturalGasLiquids'])}`
+      textString = `${this.props.Tr(['explanations', 'amountNaturalGasLiquids'])}`
     }
     if (this.props.selectedEnergy === 'refinedPetroleumProducts') {
-      textString = `${this.props.Tr(['explanations','amountRefinedPetroleumProducts'])}`
+      textString = `${this.props.Tr(['explanations', 'amountRefinedPetroleumProducts'])}`
     }
     let yPosition = 212
     if (this.props.expanded && (this.props.setActiveMenu !== 'amount')) {
@@ -125,7 +126,8 @@ class Menu extends React.PureComponent {
         containerY={-102}
         text={textString}
         name={`${this.props.selectedEnergy} amountExplanation`}
-    /></g>)
+      />
+            </g>)
   }
 
   arrangedByExplanation() {
@@ -151,9 +153,10 @@ class Menu extends React.PureComponent {
         textY={48}
         containerX={2}
         containerY={-102}
-        text={`${this.props.Tr(['explanations','arrangeByRefinedPetroleumProducts'])}`}
+        text={`${this.props.Tr(['explanations', 'arrangeByRefinedPetroleumProducts'])}`}
         name="arrangedByRefinedPetroleumProductsExplanation"
-    /></g>)
+      />
+            </g>)
   }
 
   renderTitle() {
@@ -195,14 +198,14 @@ class Menu extends React.PureComponent {
       </g>
     )
   }
-  getTabIndex(){
-    return Constants.getIn(['tabIndex','start', 'menuBar'])
+  getTabIndex() {
+    return Constants.getIn(['tabIndex', 'start', 'menuBar'])
   }
   renderOptions() {
     if (!this.props.expanded) { return null }
     const { Tr } = this.props
     const tabIndex = this.getTabIndex()
-    const styleClass = this.props.name !== 'amount'?'menuOption':''
+    const styleClass = this.props.name !== 'amount' ? 'menuOption' : ''
     const options = this.props.options
       .filter(v => (v !== this.props.selected))
       .map(option => (
@@ -236,9 +239,9 @@ class Menu extends React.PureComponent {
         {this.renderTitle()}
         {this.renderOptions()}
       </g>
-        {this.amountExplanation()}
-        {this.importExportExplanation()}
-        {this.arrangedByExplanation()}
+      {this.amountExplanation()}
+      {this.importExportExplanation()}
+      {this.arrangedByExplanation()}
     </g>
     )
   }
