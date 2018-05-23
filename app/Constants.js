@@ -208,7 +208,8 @@ const Constants = fromJS({
   },
 
   appHost: 'https://apps2.neb-one.gc.ca',
-  screenshotPath: 'screenshot',
+  appScreenshotPath: 'screenshot',
+  serviceScreenshotPath: 'screenshotv2',
 
   screenshotWidth: 1138,
   screenshotHeight: 930,

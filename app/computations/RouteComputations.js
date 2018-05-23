@@ -77,7 +77,7 @@ const RouteComputations = {
   },
 
   screenshotMode() {
-    return !!document.location.pathname.match(`/${Constants.get('screenshotPath')}$`)
+    return !!document.location.pathname.match(`/${Constants.get('appScreenshotPath')}$`)
   },
 
   applicationPath(language) {
@@ -94,11 +94,11 @@ const RouteComputations = {
 
   screenshotParameter(language) {
     // The double-encode of the search is correct
-    return encodeURIComponent(`${RouteComputations.applicationPath(language)}${Constants.get('screenshotPath')}${encodeURIComponent(document.location.search)}`)
+    return encodeURIComponent(`${RouteComputations.applicationPath(language)}${Constants.get('appScreenshotPath')}${encodeURIComponent(document.location.search)}`)
   },
 
   screenshotURL(language) {
-    let path = `${RouteComputations.screenshotOrigin()}/${Constants.get('screenshotPath')}/`
+    let path = `${RouteComputations.screenshotOrigin()}/${Constants.get('serviceScreenshotPath')}/`
     path += `?pageUrl=${RouteComputations.screenshotParameter(language)}`
     path += `&width=${Constants.get('screenshotWidth')}&height=${Constants.get('screenshotHeight')}`
     path += `&host=${document.location.host}`

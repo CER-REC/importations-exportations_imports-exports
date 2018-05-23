@@ -69,6 +69,9 @@ Request({
   store.dispatch(LoadBinsCreator(data.body.bins))
   store.dispatch(LoadScalesCreator(data.body.scale))
   store.dispatch(LoadDataCreator(data.body.data))
+
+  // Consumed by the screenshot-service renderer
+  window.visualizationDoneRendering = true
 })
 
 setupReselectTools(store)
