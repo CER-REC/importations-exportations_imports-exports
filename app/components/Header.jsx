@@ -36,9 +36,13 @@ class Header extends React.Component {
   resetExplanation() {
     let textString = `${this.props.Tr(['explanations', 'reset'])}`
     let dotName = 'electricityTitleExplanation'
-    if (this.props.selectedEnergy === 'crudeOil') {
-      textString = `${this.props.Tr(['explanations', 'resetCrudeOil'])}`
-      dotName = 'crudeOilTitleExplanation'
+    if (this.props.selectedEnergy === 'crudeOilImports') {
+      textString = `${this.props.Tr(['explanations', 'resetCrudeOilImports'])}`
+      dotName = 'crudeOilImportsTitleExplanation'
+    }
+    if (this.props.selectedEnergy === 'crudeOilExports') {
+      textString = `${this.props.Tr(['explanations', 'resetCrudeOilExports'])}`
+      dotName = 'crudeOilExportsTitleExplanation'
     }
     if (this.props.selectedEnergy === 'naturalGas') {
       textString = `${this.props.Tr(['explanations', 'resetNaturalGas'])}`

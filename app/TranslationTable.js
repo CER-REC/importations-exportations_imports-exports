@@ -564,23 +564,27 @@ const TranslationTable = fromJS({
     },
     reset: {
       en: 'This visualization shows electricity imports to Canada and exports from Canada between the years 1990 and 2017. Drag the timeline bar to change. Click a region to view details.',
-      fr: 'Les données interactives montrent les importations et les exportations canadiennes d’électricité. Cliquez sur les points roses pour obtenir de l’aide pour lire les données.',
+      fr: 'TODO',
     },
-    resetCrudeOil: {
-      en: "This data visualization shows Canada's quarterly exports of crude oil. Click the pink dots to guide you through how to read the data.",
-      fr: 'Les données interactives montrent les exportations de pétrole brut du Canada par trimestre. Cliquez sur les points roses pour obtenir de l’aide pour lire les données.',
+    resetCrudeOilImports: {
+      en: 'This visualization shows crude oil imports to Canada between the years 1985 and 2017. Drag the timeline bar to change. Click a region to view details.',
+      fr: 'TODO',
+    },
+    resetCrudeOilExports: {
+      en: 'This visualization shows crude oil exports from Canada between the years 1985 and 2017. Drag the timeline bar to change. Click a region to view details.',
+      fr: 'TODO',
     },
     resetNaturalGas: {
-      en: 'This data visualization shows imports and exports of natural gas at ports along the Canada-USA border. Click the pink dots to guide you through how to read the data.',
-      fr: 'Les données interactives montrent les importations et les exportations de gaz naturel en provenance et à destination de ports situés le long de la frontière canado-américaine. Cliquez sur les points roses pour obtenir de l’aide pour lire les données.',
+      en: 'This visualization shows natural gas imports to Canada and exports from Canada between the years 1985 and 2017. Drag the timeline bar to change. Click a region to view details.',
+      fr: 'TODO',
     },
     resetNaturalGasLiquids: {
-      en: 'This data visualization shows imports of Natural Gas Liquids (NGLs) from the USA into Canadian regions (top) and exports of NGLs from Canada into regions of the USA called PADDs (bottom). Click the pink dots to guide you through how to read the data.',
-      fr: 'Les données interactives montrent les importations de liquides de gaz naturel (« LGN ») en provenance des États-Unis et à destination des régions canadiennes (haut) et les exportations de LGN du Canada à destination de régions PADD des États-Unis (bas). Cliquez sur les points roses pour obtenir de l’aide pour lire les données.',
+      en: 'This visualization shows natural gas liquid imports to Canada and exports from Canada between the years 1990 and 2017. Drag the timeline bar to change. Click a region to view details.',
+      fr: 'TODO',
     },
     resetRefinedPetroleumProducts: {
-      en: 'This data visualization shows Canada’s quarterly exports of refined petroleum products (RPPs). Click the pink dots to guide you through how to read the data.',
-      fr: 'Les données interactives montrent les exportations de produits pétroliers raffinés (« PPR ») du Canada par trimestre. Cliquez sur les points roses pour obtenir de l’aide pour lire les données.',
+      en: 'This visualization shows refined petroleum product exports from Canada between the years 1985 and 2017. Drag the timeline bar to change. Click a region to view details.',
+      fr: 'TODO',
     },
     canadaPaddCrudeOil: {
       en: 'The colour of this region and its down arrow shows the total amount of crude oil that Canada exported during the time period selected in the bar chart below.',
