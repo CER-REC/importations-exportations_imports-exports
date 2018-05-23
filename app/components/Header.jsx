@@ -63,12 +63,12 @@ class Header extends React.Component {
           lineStroke="1"
           textBoxWidth={230}
           linePath=""
-          xPosition={900}
+          xPosition={1000}
           yPosition={65}
           lineX={142.16}
           lineY={173}
-          textX={40}
-          textY={58}
+          textX={-100}
+          textY={-58}
           containerX={0}
           containerY={0}
           name={dotName}
