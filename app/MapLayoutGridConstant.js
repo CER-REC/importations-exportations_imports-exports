@@ -345,25 +345,25 @@ const MapLayoutGridConstant = fromJS({
       },
       layout: [
         {
-          name: 'northAmerica', originKey: 'northAmerica', x: -0.25, y: 0,
+          name: 'northAmerica', originKey: 'northAmerica', x: -0.05, y: 0,
         },
         {
-          name: 'europe', originKey: 'europe', x: 1.25, y: 0,
+          name: 'europe', originKey: 'europe', x: 1.2, y: 0,
         },
         {
-          name: 'asia', originKey: 'asia', x: 1.90, y: 0,
+          name: 'asia', originKey: 'asia', x: 1.75, y: 0,
         },
         {
-          name: 'southAmerica', originKey: 'southAmerica', x: 0.25, y: 1,
+          name: 'southAmerica', originKey: 'southAmerica', x: 0.2, y: 0.85,
         },
         {
-          name: 'africa', originKey: 'africa', x: 0.90, y: 1,
+          name: 'africa', originKey: 'africa', x: 0.90, y: 0.85,
         },
         {
-          name: 'oceania', originKey: 'oceania', x: 2.25, y: 1,
+          name: 'oceania', originKey: 'oceania', x: 2.1, y: 1.25,
         },
         {
-          name: 'otherCountries', originKey: 'otherCountries', x: 2.5, y: 3,
+          name: 'otherCountries', originKey: 'otherCountries', x: 2.1, y: 3,
         },
       ],
     },

@@ -36,20 +36,26 @@ const CrudeOilImportsVisualizationContainer = props => (
     <DetailSidebar
       {...props.importChart}
     >
-      <DetailTotal
-        type="imports"
-        filterActivity="imports"
-        showGroup="imports"
-        groupBy="activity"
-        valueKey="origin"
-        valueAverage
-      />
-      <ConfidentialCount
-        valueKey="destinationKey"
-        filterActivity="imports"
-        groupBy="activity"
-        valueAverage
-      />
+      <div className="verticalAlign">
+        <div className="centered">
+          <DetailTotal
+            type="imports"
+            filterActivity="imports"
+            showGroup="imports"
+            groupBy="activity"
+            valueKey="origin"
+            valueAverage
+          />
+          <div className="confidentialSpacing">
+            <ConfidentialCount
+              valueKey="destinationKey"
+              filterActivity="imports"
+              groupBy="activity"
+              valueAverage
+            />
+          </div>
+        </div>
+      </div>
     </DetailSidebar>
     <Axis
       {...props.axisPosition}
