@@ -25,8 +25,8 @@ const portsByProvince = fromJS(Constants.getIn(['dataloader', 'mapping', 'ports'
     return acc
   }, {}))
   .sortBy((_, k) => k, (a, b) => {
-    if (a === 'CAD') { return 1 }
-    if (b === 'CAD') { return -1 }
+    if (a === 'CAN') { return 1 }
+    if (b === 'CAN') { return -1 }
     return a.localeCompare(b)
   })
 
