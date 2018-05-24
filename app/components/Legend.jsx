@@ -114,7 +114,7 @@ class Legend extends React.Component {
             if (value[0] === Number.MIN_SAFE_INTEGER && this.props.importExportVisualization === 'electricity') {
               return (
                 <text className="theLegendValues" y={(i * 20) + 20} x="34" key={`bin-${i}`}>
-                  &le;{humanNumberLang(value[1])}
+                  &nbsp;&le; {humanNumberLang(value[1])}
                 </text>
               )
             }
@@ -122,7 +122,7 @@ class Legend extends React.Component {
             if (value[0] === Number.MIN_SAFE_INTEGER && this.props.importExportVisualization === 'naturalGas') {
               return (
                 <text className="theLegendValues" y={(i * 20) + 20} x="34" key={`bin-${i}`}>
-                  ={humanNumberLang(value[1])}
+                  &emsp;{humanNumberLang(value[1])}
                 </text>
               )
             }
@@ -146,7 +146,7 @@ class Legend extends React.Component {
               </g>
             )
           })}
-        <text className="theLegendValues">{zeroText}</text>
+        <text className="theLegendValues">&nbsp;&nbsp;{zeroText}</text>
       </g>
     )
   }
