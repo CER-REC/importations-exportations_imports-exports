@@ -143,7 +143,7 @@ const ElectricityVisualizationContainer = (props) => {
               {...props.usMap}
               height={props.usMap.height - 40}
               groupBy="activity"
-              valueKey={props.selectedCountry === 'us' ? 'originKey' : 'destinationKey'}
+              valueKey={props.selectedCountry === 'ca' ? 'destinationKey' : 'originKey'}
               valueAverage={weighted}
               showGroup="exports"
               color={Constants.getIn(['styleGuide', 'colours', 'ExportDefault'])}
