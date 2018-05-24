@@ -1145,7 +1145,7 @@ const TranslationTable = fromJS({
         fr: 'Ontario',
       },
       QC: {
-        en: 'Québec',
+        en: 'Quebec',
         fr: 'Québec',
       },
       NB: {
@@ -1703,7 +1703,7 @@ const TranslationTable = fromJS({
         fr: 'Ontario_FR',
       },
       Québec: {
-        en: 'Québec',
+        en: 'Quebec',
         fr: 'Québec_FR',
       },
       'New Brunswick': {
