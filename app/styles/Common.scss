@@ -12,13 +12,13 @@
 .mapPiece.legend { cursor: inherit; }
 
 /* Safari */
-@-webkit-keyframes spin{
+@-webkit-keyframes import-export-spinner {
   0%,
   100% { -webkit-opacity: 0.1; }
   30% { -webkit-opacity: 1; }
 }
 
-@keyframes spin {
+@keyframes import-export-spinner {
   0%,
   100% { opacity: 0.1; }
   30% { opacity: 1; }
@@ -49,8 +49,8 @@
 }
 
 .circle-elements div {
-  -webkit-animation: spin 2.4s 0s infinite both ease-out;
-  animation: spin 2.4s 0s infinite both ease-out;
+  -webkit-animation: import-export-spinner 2.4s 0s infinite both ease-out;
+  animation: import-export-spinner 2.4s 0s infinite both ease-out;
   margin: 0;
   padding: 0;
   top: calc(50% + 100px);

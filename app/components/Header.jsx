@@ -36,9 +36,13 @@ class Header extends React.Component {
   resetExplanation() {
     let textString = `${this.props.Tr(['explanations', 'reset'])}`
     let dotName = 'electricityTitleExplanation'
-    if (this.props.selectedEnergy === 'crudeOil') {
-      textString = `${this.props.Tr(['explanations', 'resetCrudeOil'])}`
-      dotName = 'crudeOilTitleExplanation'
+    if (this.props.selectedEnergy === 'crudeOilImports') {
+      textString = `${this.props.Tr(['explanations', 'resetCrudeOilImports'])}`
+      dotName = 'crudeOilImportsTitleExplanation'
+    }
+    if (this.props.selectedEnergy === 'crudeOilExports') {
+      textString = `${this.props.Tr(['explanations', 'resetCrudeOilExports'])}`
+      dotName = 'crudeOilExportsTitleExplanation'
     }
     if (this.props.selectedEnergy === 'naturalGas') {
       textString = `${this.props.Tr(['explanations', 'resetNaturalGas'])}`
@@ -61,22 +65,16 @@ class Header extends React.Component {
         <ExplanationDot
           scale="scale(1)"
           lineStroke="1"
-          textBoxWidth={250}
-          linePath="
-            M142.16,
-            173.94l24.26,
-            36.69a40.12,
-            40.12,0,0,0,
-            33.47,
-            18H423.2"
-          xPosition={800}
-          yPosition={57}
+          textBoxWidth={230}
+          linePath=""
+          xPosition={1000}
+          yPosition={65}
           lineX={142.16}
           lineY={173}
-          textX={40}
-          textY={58}
+          textX={-100}
+          textY={-58}
           containerX={0}
-          containerY={-70}
+          containerY={0}
           name={dotName}
           text={textString}
         />
