@@ -74,6 +74,11 @@ export const createSortedLayout = createSelector(
     const tabIndexes = {}
     const tilePositions = {}
     orderedValues.forEach((value, region) => {
+      if (region === 'otherCountries') {
+        const position = layout.find(layoutData => layoutData.get('originKey') === region)
+        tilePositions[region] = { x: position.get('x'), y: position.get('y') }
+        return
+      }
       if (column >= columns) {
         column = 0
         row += 1
