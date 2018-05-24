@@ -161,3 +161,25 @@ td, th { padding: 0; }
 .confidentialSpacing {
   padding-top:4px;
 }
+
+.cofidentialTooltip {
+    position: relative;
+}
+
+.cofidentialTooltip .tooltiptext {
+    visibility: hidden;
+    width: 150px;
+    background-color: white;
+    text-align: center;
+    border:#999 1px solid;
+    position: absolute;
+    z-index: 1;
+    top: -5px;
+    right: 105%;
+}
+
+.cofidentialTooltip .show {
+    visibility: visible;
+    -webkit-animation: fadeIn 1s;
+    animation: fadeIn 1s;
+}

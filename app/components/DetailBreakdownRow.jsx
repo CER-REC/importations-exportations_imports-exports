@@ -17,15 +17,31 @@ import './DetailBreakDown.scss'
 
 const unitsWithoutPercentage = ['CAN$/MW.h', 'CN$/GJ']
 
-const PercentageBarConfidentialIcon = props => (
-  <svg className="confidentialIcon">
-    <g transform="translate(0 0) scale(0.8)">
-      <ConfidentialIconLogo
-        tooltip={`${props.confidential} / ${props.totalPoints} values confidential`}
-      />
-    </g>
-  </svg>
-)
+class PercentageBarConfidentialIcon extends React.Component {
+  constructor(props) {
+    super(props)
+    this.handleClick = this.handleClick.bind(this);
+    this.state = { active: false }
+  }
+
+  handleClick() {
+    this.setState({ active: !this.state.active })
+  }
+
+  render() {
+    const toggleClass = this.state.active ? 'show' : ''
+    return (
+      <div className="cofidentialTooltip" onClick={this.handleClick}>
+        <svg className="confidentialIcon">
+          <g transform="translate(0 0) scale(0.8)">
+            <ConfidentialIconLogo/>
+          </g>
+        </svg>
+        <span className={`tooltiptext confidentialityText ${toggleClass}`}>{`${this.props.confidential} / ${this.props.totalPoints} values confidential`}</span>
+      </div>
+    )
+  }
+}
 
 const DetailBreakdownRow = props => (
 

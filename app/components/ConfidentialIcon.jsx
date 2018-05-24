@@ -16,7 +16,6 @@ import './ConfidentialIcon.scss'
 
 export const ConfidentialIconLogo = props => (
   <g className="confidentialityIcon">
-    {props.tooltip ? <title>{props.tooltip}</title> : null}
     <path
       fill={props.expanded ? '#999' : '#fff'}
       stroke="#999"
