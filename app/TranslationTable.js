@@ -65,7 +65,7 @@ const TranslationTable = fromJS({
       fr: 'Cet outil en ligne trace un portrait des importations au Canada et des exportations du Canada des produits énergétiques. Il fait partie de l’initiative de visualisation des données de l’Office national de l’énergie. Échelonnée sur trois ans, cette initiative vise à transformer la manière dont l’Office structure et diffuse ses données. Elle a pour objectif de favoriser un processus décisionnel fondé sur la preuve et de faciliter la compréhension des questions liées aux réseaux énergétiques et pipeliniers du Canada, grâce à des visualisations interactives, faciles à utiliser.',
     },
     p2: {
-      en: 'This visualization show quarterly energy trade data between Canada and the USA since 1985, with the exception of electricity data which is available back to 1990.',
+      en: 'This visualization show quarterly energy trade data between Canada and the U.S. since 1985, with the exception of electricity data which is available back to 1990.',
       fr: 'Cette visualisation présente les données trimestrielles sur le commerce de l’énergie entre le Canada et les États-Unis depuis 1985, à l’exception des données concernant l’électricité, qui ne sont disponibles que depuis 1990.',
     },
     p3: {
@@ -607,7 +607,7 @@ const TranslationTable = fromJS({
       fr: 'La quantité de pétrole brut est indiquée en milliers de m³/j (milliers de mètres cubes par jour), ce qui correspond à 6 290 barils par jour.  ',
     },
     padd: {
-      en: 'PADD stands for Petroleum Administration for Defense District. The US is divided into 5 districts which are commonly used for analysis of regional supply and demand dynamics.',
+      en: 'PADD stands for Petroleum Administration for Defense District. The U.S. is divided into 5 districts which are commonly used for analysis of regional supply and demand dynamics.',
       fr: 'PADD signifie Petroleum Administration for Defense District. Les États-Unis sont divisés en cinq districts PADD aux fins d’analyse de la dynamique de l’offre et de la demande régionales.',
     },
     linkedDataIcon: {
@@ -659,7 +659,7 @@ const TranslationTable = fromJS({
       fr: 'La quantité de gaz naturel est indiquée en millier de m³/j, ce qui correspond à 35 314 pieds cubes par jour. $ CA/GJ indique le prix moyen pondéré du gaz naturel par gigajoule. Le ménage albertain moyen consomme environ 120 GJ de gaz naturel par année. (lien dans la colonne K)',
     },
     albertaArrowNaturalGasLiquids: {
-      en: 'The up arrow shows the total NGLs that Alberta imported from the USA during the time period selected in the bar chart below.',
+      en: 'The up arrow shows the total NGLs that Alberta imported from the U.S. during the time period selected in the bar chart below.',
       fr: 'La flèche orientée vers le haut montre la quantité totale de LGN importée des États-Unis par l’Alberta pendant la période sélectionnée dans le diagramme à barres ci-après.',
     },
     atlqNaturalGasLiquids: {
@@ -713,8 +713,12 @@ const TranslationTable = fromJS({
   },
 
   mainSubheading: {
-    en: 'This visualization shows the quarterly energy trade data between Canada and the USA for various energy sources.',
+    en: 'This visualization shows the quarterly energy trade data between Canada and the U.S. for various energy sources.',
     fr: 'Cette visualisation illustre les données trimestrielles sur les échanges énergétiques entre le Canada et les États-Unis pour diverses sources d’énergie.',
+  },
+  mainSubheadingCrudeOilImports: {
+    en: 'This visualization shows the quarterly energy trade data between Canada and the world for various energy sources.',
+    fr: 'Cette visualisation illustre les données trimestrielles sur les échanges énergétiques entre le Canada et le monde pour diverses sources d’énergie.',
   },
   resetLabel: {
     en: 'reset',
@@ -1445,7 +1449,7 @@ const TranslationTable = fromJS({
         fr: 'PADD V',
       },
       'Non-USA': {
-        en: 'NON-USA',
+        en: 'NON-U.S.',
         fr: 'HORS É.-U.',
       },
       Mexico: {
@@ -1455,8 +1459,8 @@ const TranslationTable = fromJS({
     },
     world: {
       'United States': {
-        en: 'United States',
-        fr: 'United States_FR',
+        en: 'U.S.',
+        fr: 'US_FR',
       },
       Alabama: {
         en: 'Alabama',
@@ -2240,8 +2244,8 @@ const TranslationTable = fromJS({
         fr: 'Ukraine_FR',
       },
       'United Kingdom': {
-        en: 'United Kingdom',
-        fr: 'United Kingdom_FR',
+        en: 'U.K.',
+        fr: 'UK_FR',
       },
       'Vatican City': {
         en: 'Vatican City',
@@ -2480,13 +2484,13 @@ const TranslationTable = fromJS({
       us: {
         imports: {
           label: {
-            en: 'imports from USA',
+            en: 'imports from U.S.',
             fr: 'importations des États-Unis',
           },
         },
         exports: {
           label: {
-            en: 'exports into USA',
+            en: 'exports into U.S.',
             fr: 'exportations aux États-Unis',
           },
         },
@@ -2499,7 +2503,7 @@ const TranslationTable = fromJS({
     crudeOilExports: {
       exports: {
         label: {
-          en: 'exports into US PADD',
+          en: 'exports into U.S. PADD',
           fr: 'exportations au PADD',
         },
         bottomText: {
@@ -2546,7 +2550,7 @@ const TranslationTable = fromJS({
       us: {
         exports: {
           label: {
-            en: 'exports into US PADD',
+            en: 'exports into U.S. PADD',
             fr: 'exportations au PADD',
           },
           bottomText: {

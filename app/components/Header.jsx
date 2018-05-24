@@ -88,6 +88,9 @@ class Header extends React.Component {
     const importsColour = (energyType === 'crudeOilExports' || energyType === 'refinedPetroleumProducts')
       ? '#DCDCDC'
       : ' '
+    const subheading = (energyType === 'crudeOilImports')
+      ? Tr(['mainSubheadingCrudeOilImports'])
+      : Tr(['mainSubheading'])
     const exportsColour = (energyType === 'crudeOilImports')
       ? '#DCDCDC'
       : ' '
@@ -109,7 +112,7 @@ class Header extends React.Component {
           {Tr(['mainHeading', 'base'])}
         </div>
         <p className="subheading">
-          {Tr(['mainSubheading'])}
+          { subheading }
         </p>
       </div>
     )

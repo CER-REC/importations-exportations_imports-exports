@@ -70,7 +70,7 @@ const DetailBreakdownRow = props => (
             style={{ backgroundColor: props.color, ...props.progressBarStyle }}
             width={((props.total === 0) ? 0.0 : (props.value / props.total) * 100)}
           />
-          {props.confidential === 0
+          {props.confidential === 0 || !props.confidentialityMenu
             ? null
             : (
               <PercentageBarConfidentialIcon
