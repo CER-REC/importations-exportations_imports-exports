@@ -132,7 +132,7 @@ class NaturalGasMapContainer extends React.PureComponent {
         if (key === 'CNG' || key === 'LNG Other') {
           styles = mapLayoutGrid.get('stylesVariant')
           textClass = 'portLabelWhite'
-          left += 38
+          left += this.props.viewport.get('changeWidthRatio') > 1.2 ? 38 : 20
         }
 
         const tilePosition = fromJS({ x: column, y: row })
@@ -182,7 +182,7 @@ class NaturalGasMapContainer extends React.PureComponent {
       const provinceClass = isProvinceSelected !== -1 ? 'provinceSelected' : 'provinceDeselected'
       const provinceTextColor = isProvinceSelected !== -1 ? 'portSelectedProvinceLabel' : 'portProvinceLabel'
       if (province === 'CAN') {
-        provinceTextPosition += 35
+        provinceTextPosition += this.props.viewport.get('changeWidthRatio') > 1.2 ? 35 : 20
       }
       return (
         <g className="paddLayout" key={`NaturalGasMap_${province}`} >
