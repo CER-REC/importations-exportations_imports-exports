@@ -38,13 +38,11 @@ const CrudeOilVisualizationContainer = props => (
       {...props.transportChart}
     >
       <div className="crudeTriangle" />
-      <div style={{ left: -20 }}>
       <DetailBreakdownHeader
         trContent={Tr.getIn(['detailBreakDown', 'crudeOilExports', 'transport', 'header'])}
         color="black"
         type="crudeOilTypeMode"
       />
-      </div>
       <div style={{ height: 'calc(100% - 20px)', overflow: 'auto' }}>
         <DetailBreakdown
           height="100%"
