@@ -47,6 +47,9 @@ function windowClickHandler() {
   store.dispatch(DismissComponentCreator())
 }
 
+let finishedData = false
+let finishedDom = false
+
 DomReady(() => {
   resizeScreenHandler()
   window.addEventListener('resize', resizeScreenHandler)
@@ -60,6 +63,10 @@ DomReady(() => {
   )
 
   ReactDOM.render(app, document.getElementById('reactRoot'))
+
+  finishedDom = true
+  // Consumed by the screenshot-service renderer
+  window.visualizationDoneRendering = (finishedData && finishedDom)
 })
 
 Request({
@@ -70,8 +77,9 @@ Request({
   store.dispatch(LoadScalesCreator(data.body.scale))
   store.dispatch(LoadDataCreator(data.body.data))
 
+  finishedData = true
   // Consumed by the screenshot-service renderer
-  window.visualizationDoneRendering = true
+  window.visualizationDoneRendering = (finishedData && finishedDom)
 })
 
 setupReselectTools(store)
