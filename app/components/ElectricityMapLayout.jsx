@@ -19,15 +19,7 @@ import './ElectricityMapLayout.scss'
 
 import { getMapLayout } from '../selectors/mapLayout'
 import { arrangeBy, binSelector } from '../selectors/data'
-/*
-import { arrangeBy, aggregateLocationSelector, aggregateFilterLocationSelector } from '../selectors/data'
-import DetailSidebar from './DetailSidebar'
-import DetailBreakdown from './DetailBreakdown'
-*/
 import { handleInteractionWithTabIndex } from '../utilities'
-/*
-import { timelineYearScaleCalculation } from '../selectors/timeline'
-*/
 
 const emptyMap = new Immutable.Map()
 
@@ -190,69 +182,6 @@ class ElectricityMapLayout extends React.Component {
       .toArray()
   }
 
-  /*
-  renderDetailBreakdown() {
-    const detailBreakdownData = Constants.getIn(['detailBreakDown', this.props.country])
-    if (typeof detailBreakdownData === 'undefined' ||
-        !detailBreakdownData.get('required', false)) {
-      return null
-    }
-
-    const activity = detailBreakdownData.get('type')
-
-    let total = 0
-    if (this.props[`${activity}Enabled`] === false) { return null }
-    const data = Immutable.fromJS(this.props.selection.get('destinations')
-      .reduce((acc, nextValue) => {
-        return nextValue.reduce((accumulator, stateOrProvince, key) => {
-          const regionData = this.props.filteredDataPoints.get(key)
-          if (!regionData) { return acc }
-          // If averages are enabled, calculate the largest value out of all regions
-          if (regionData.get('sumForAvg') && total !== false) {
-            total = Math.max(total, Math.abs(regionData.getIn(['sumForAvg', detailBreakdownData.get('type')], 0)))
-          } else {
-            total = false
-          }
-          if (!regionData.get(activity)) { return acc }
-          if (regionData.has('sumForAvg')) {
-            acc[key] = regionData.getIn(['sumForAvg', activity])
-          } else {
-            acc[key] = regionData.get(activity)
-          }
-          return acc
-        }, {})
-      }, {}))
-      .sort((a, b) => (b - a))
-
-    const countries = Tr.get('country').filter((points, country) => this.props.selection.get('destinations').has(country))
-    const nameMappings = countries.reduce((acc, nextValue) => acc.concat(nextValue), new Immutable.Map())
-
-    return (<DetailBreakdown
-      aggregateKey="activity"
-      valueKey={detailBreakdownData.get('type')}
-      type={detailBreakdownData.get('type')}
-      trContent={Tr.getIn(['detailBreakDown', 'electricity', detailBreakdownData.get('type')])}
-      veritcalPosition={detailBreakdownData.get('displayPosition')}
-      color={detailBreakdownData.get('color')}
-      height={detailBreakdownData.get('height')}
-      showDefault={detailBreakdownData.get('showDefault', false)}
-      nameMappings={nameMappings}
-      defaultContent={this.props.TrSelector(['detailBreakDown', 'electricity', 'defaultText'], this.props.timelineYears.min, this.props.timelineYears.max)}
-      total={total}
-    />)
-  }
-  */
-
-  /*
-   * TODO: Port top/height changes into ElectricityVisualizationContainer
-  renderDetailSidebar() {
-    const top = this.props.viewport.get('changeHeightRatio') > 1.2 ? 40 : 0
-    return (<DetailSidebar top={this.props.top + top} height={Constants.getIn(['detailBreakDown', this.props.country, 'height'], 0)}>
-      {this.renderDetailBreakdown()}
-    </DetailSidebar>)
-  }
-  */
-
   render() {
     return (<g>
       {this.renderMapPiece()}
@@ -265,18 +194,10 @@ const mapDispatchToProps = { onMapPieceClick: setSelection }
 const mapStateToProps = (state, props) => ({
   layout: getMapLayout(state, props),
   selection: visualizationSettings(state, props).get('selection'),
-  /*
-  dataPoints: aggregateLocationSelector(state, props),
-  filteredDataPoints: aggregateFilterLocationSelector(state,props),  */
   arrangeBy: arrangeBy(state, props),
   bins: binSelector(state, props),
   Tr: TrSelector(state, props),
   unit: visualizationSettings(state, props).get('amount'),
-  /*
-  importsEnabled: showImportsSelector(state, props),
-  exportsEnabled: showExportsSelector(state, props),
-  timelineYears: timelineYearScaleCalculation(state, props),
-  */
   viewport: state.viewport,
 })
 

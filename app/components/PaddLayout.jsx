@@ -6,10 +6,6 @@ import PropTypes from 'prop-types'
 import PaddMapPiece from './PaddMapPiece'
 import MapLayoutGridConstant from '../MapLayoutGridConstant'
 import Constants from '../Constants'
-/*
-import { PaddSelector } from '../selectors/Padd'
-import { aggregateLocationPaddData } from '../selectors/data'
-*/
 import TRSelector from '../selectors/translate'
 import Tr from '../TranslationTable'
 import { getFullyFilteredValues } from '../selectors/renderData'
@@ -26,7 +22,6 @@ import ExplanationDot from './ExplanationDot'
 
 import { handleInteractionWithTabIndex } from '../utilities'
 
-// import ElectricitySelector from '../selectors/ElectricitySelector'
 import { arrangeBy, binSelector, selection } from '../selectors/data'
 import { setSelection } from '../actions/visualizationSettings'
 
@@ -464,12 +459,10 @@ const mapStateToProps = (state, props) => ({
   selctionState: selection(state, props),
   arrangeBy: arrangeBy(state, props),
   bins: binSelector(state, props),
-  // Padd: PaddSelector(state, props),
   TRSelector: TRSelector(state, props),
   confidentialityMenu: state.confidentialityMenu,
   selectedEnergy: state.importExportVisualization,
   expandCollapseConfidentiality: state.expandCollapseConfidentiality,
-  // paddData: aggregateLocationPaddData(state, props),
   data: getFullyFilteredValues(state, {
     ...props,
     valueKey: 'activity',
