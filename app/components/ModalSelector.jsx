@@ -31,12 +31,12 @@ class ModalSelector extends React.PureComponent {
     ref.showModal()
   }
 
-  dialogClosed = () => {
-    this.props.CloseModal()
-    if (this.lastFocus) { this.lastFocus.focus() }
-  }
+  dialogClosed = () => { if (this.lastFocus) { this.lastFocus.focus() } }
 
-  close = () => { if (this.dialog) { this.dialog.close() } }
+  close = () => {
+    this.props.CloseModal()
+    if (this.dialog) { this.dialog.close() }
+  }
 
   renderContent() {
     const { modal } = this.props
