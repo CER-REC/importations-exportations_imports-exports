@@ -252,7 +252,7 @@ const Constants = fromJS({
           'Jet Fuel': 'rgb(60, 246, 178)',
           'Heavy Fuel Oil': 'rgb(3, 201, 201)',
           'Motor Gasoline': 'rgb(34, 111, 124)',
-          'Middle Distillate': 'rgb(25, 60, 97)',
+          'Middle Distillate': 'rgb(17, 44, 73)',
         },
       },
       crudeOilExports: {
