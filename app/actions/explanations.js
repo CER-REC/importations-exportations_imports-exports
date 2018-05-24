@@ -10,7 +10,7 @@ export const ExpandCollapseExplanation = dot => ({
   payload: { dot },
 })
 
-const initialState = new List(['electricityTitleExplanation', 'crudeOilTitleExplanation',
+const initialState = new List(['electricityTitleExplanation', 'crudeOilImportsTitleExplanation', 'crudeOilExportsTitleExplanation',
   'naturalGasTitleExplanation', 'naturalGasLiquidsTitleExplanation',
   'refinedPetroleumProductsTitleExplanation'])
 export const reducer = (state = initialState, action) => {
