@@ -474,24 +474,28 @@ class MapPiece extends React.Component {
     if (confidentialCount !== 0 && this.props.confidentialityMenu) {
       const totalPoints = this.props.totalPoints.reduce((acc, next) => acc + next, 0)
       const valueString = `${confidentialCount} / ${totalPoints} ${this.props.tr('valuesConfidential')}`
+      let confidentialContainerX = containerX
+      let confidentialContainerY = containerY
+      let xPosition = 30
+      if (this.props.country === 'world') {
+        confidentialContainerX += 25
+        confidentialContainerY += 5
+        xPosition += 15
+      }
+      confidentialContainerX *= this.props.viewport.get('changeWidthRatio')
+      confidentialContainerY *= this.props.viewport.get('changeHeightRatio')
       confidentialIcon = (
         <ConfidentialIcon
           styles={this.props.styles.get('confidentialStyle')}
           text={valueString}
-          containerX={this.props.viewport.get('changeWidthRatio') * containerX}
-          containerY={this.props.viewport.get('changeHeightRatio') * containerY}
-          linePath="
-            M142.16,
-            173.94l24.26,
-            36.69a40.12,
-            40.12,0,0,0,
-            33.47,
-            18H378.2"
+          containerX={confidentialContainerX}
+          containerY={confidentialContainerY}
+          scale="scale(1)"
           lineX={142.16}
           lineY={173}
           textX={15}
           textY={24}
-          xPosition={30}
+          xPosition={xPosition}
           yPosition={0}
           name={`${this.props.selectedEnergy}${this.props.name}`}
         />

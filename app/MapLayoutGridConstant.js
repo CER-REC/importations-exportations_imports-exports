@@ -309,7 +309,7 @@ const MapLayoutGridConstant = fromJS({
     world: {
       mapPieceScale: 2,
       defaultColumns: 3,
-      sortingRowPadding: 0.5,
+      sortingRowPadding: 0.25,
       dimensions: {
         height: 37.09,
         width: 74,
