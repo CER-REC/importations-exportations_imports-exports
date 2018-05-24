@@ -88,6 +88,7 @@ const CrudeOilVisualizationContainer = props => (
           valueAverage
           showHeader={false}
           colors={categoryColours.getIn(['crudeOilExports', 'productSubtype'])}
+          colorBox
           trContent={Tr.getIn(['detailBreakDown', 'crudeOilExports', 'productSubtype'])}
           nameMappings={Tr.get('label')}
         />
