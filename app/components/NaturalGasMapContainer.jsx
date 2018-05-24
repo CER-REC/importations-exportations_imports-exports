@@ -132,6 +132,7 @@ class NaturalGasMapContainer extends React.PureComponent {
         if (key === 'CNG' || key === 'LNG Other') {
           styles = mapLayoutGrid.get('stylesVariant')
           textClass = 'portLabelWhite'
+          left += 38
         }
 
         const tilePosition = fromJS({ x: column, y: row })
@@ -164,7 +165,7 @@ class NaturalGasMapContainer extends React.PureComponent {
           </g>
         )
       })
-      const provinceTextPosition = portsCount > 7
+      let provinceTextPosition = portsCount > 7
         ? (leftPadding + columnPadding + (dimensions.get('width') * mapPieceScale)) - 58
         : (provinceRendered * 58) - 45
       leftPadding += (dimensions.get('width') * mapPieceScale) + columnPadding
@@ -180,7 +181,9 @@ class NaturalGasMapContainer extends React.PureComponent {
       const isProvinceSelected = this.props.selectionSettings.get('provinces').indexOf(province)
       const provinceClass = isProvinceSelected !== -1 ? 'provinceSelected' : 'provinceDeselected'
       const provinceTextColor = isProvinceSelected !== -1 ? 'portSelectedProvinceLabel' : 'portProvinceLabel'
-
+      if (province === 'CAN') {
+        provinceTextPosition += 35
+      }
       return (
         <g className="paddLayout" key={`NaturalGasMap_${province}`} >
           <rect
@@ -205,8 +208,10 @@ class NaturalGasMapContainer extends React.PureComponent {
       )
     })
 
+    const widthRatio = this.props.viewport.get('changeWidthRatio') > 1.2 ? this.props.viewport.get('changeWidthRatio') : 0.975
+
     return (
-      <g key="NaturalGasMapContainer" transform={`scale(${this.props.viewport.get('changeWidthRatio')} ${this.props.viewport.get('changeHeightRatio')}) translate(${this.props.left} ${this.props.top})`}>
+      <g key="NaturalGasMapContainer" transform={`scale(${widthRatio} ${this.props.viewport.get('changeHeightRatio')}) translate(${this.props.left} ${this.props.top})`}>
         {layout.toArray()}
       </g>
     )
