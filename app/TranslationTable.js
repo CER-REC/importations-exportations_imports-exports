@@ -2443,8 +2443,8 @@ const TranslationTable = fromJS({
       },
 
       'Other countries': {
-        en: 'Collected Low Volume Contributions',
-        fr: 'Collected Low Volume Contributions FR',
+        en: 'Low Volume Contributions',
+        fr: 'Low Volume Contributions FR',
       },
     },
   },
