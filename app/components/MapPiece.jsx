@@ -477,7 +477,7 @@ class MapPiece extends React.Component {
     let confidentialIcon = null
     if (confidentialCount !== 0 && this.props.confidentialityMenu) {
       const totalPoints = this.props.totalPoints.reduce((acc, next) => acc + next, 0)
-      const valueString = `${confidentialCount} of ${totalPoints} ${this.props.tr('valuesConfidential')}`
+      const valueString = `${confidentialCount} / ${totalPoints} ${this.props.tr('valuesConfidential')}`
       let confidentialContainerX = containerX
       let confidentialContainerY = containerY
       confidentialContainerX *= this.props.viewport.get('changeWidthRatio')

@@ -61,7 +61,7 @@ class ImportPaddLayout extends React.Component {
       return (<g transform="translate(145 143)">
         <ConfidentialIcon
           styles={style.get('confidentialStyle')}
-          text={`${confidentialCount} of ${totalCount} ${this.props.TRSelector('valuesConfidential')}`}
+          text={`${confidentialCount} / ${totalCount} ${this.props.TRSelector('valuesConfidential')}`}
           containerX={paddContainerX}
           containerY={paddContainerY}
           textX={18}
