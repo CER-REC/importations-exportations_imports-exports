@@ -24,14 +24,18 @@ const portsByProvince = fromJS(Constants.getIn(['dataloader', 'mapping', 'ports'
     acc[province].push(next.get('Port Name'))
     return acc
   }, {}))
-  .sortBy((_, k) => k, (a, b) => (b === 'CAD' ? -1 : a.localeCompare(b)))
+  .sortBy((_, k) => k, (a, b) => {
+    if (a === 'CAD') { return 1 }
+    if (b === 'CAD') { return -1 }
+    return a.localeCompare(b)
+  })
 
 class NaturalGasMapContainer extends React.PureComponent {
-  orderBy = (points, arrangeBy) => {
-    switch (arrangeBy) {
+  orderBy = (points, arrangeByVal) => {
+    switch (arrangeByVal) {
       case 'exports':
       case 'imports':
-        return points.sort((a, b) => b.get(arrangeBy, 0) - a.get(arrangeBy, 0))
+        return points.sort((a, b) => b.get(arrangeBy, 0) - a.get(arrangeByVal, 0))
       default:
         return points.sortBy((_, k) => k, (a, b) => a.localeCompare(b))
     }
@@ -46,6 +50,7 @@ class NaturalGasMapContainer extends React.PureComponent {
     }, [])
     return result
   }
+
   onClick = (portName, provinceName = null) => {
     const selection = this.props.selectionSettings
     let ports = []
