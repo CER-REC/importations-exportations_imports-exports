@@ -747,10 +747,10 @@ const Constants = fromJS({
           'Port Name': 'Willow Creek', Province: 'SK', Latitude: 49.00086, Longitude: -109.73312, '': '', Description: '', Capacity: '',
         },
         CNG: {
-          'Port Name': 'CNG', Province: 'CAD', Latitude: 0, Longitude: 0, '': '', Description: '', Capacity: '',
+          'Port Name': 'CNG', Province: 'CAN', Latitude: 0, Longitude: 0, '': '', Description: '', Capacity: '',
         },
         'LNG Other': {
-          'Port Name': 'LNG Other', Province: 'CAD', Latitude: 0, Longitude: 0, '': '', Description: '', Capacity: '',
+          'Port Name': 'LNG Other', Province: 'CAN', Latitude: 0, Longitude: 0, '': '', Description: '', Capacity: '',
         },
       },
     },
