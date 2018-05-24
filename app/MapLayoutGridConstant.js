@@ -928,7 +928,7 @@ const MapLayoutGridConstant = fromJS({
       'ON',
       'QC',
       'NB',
-      'CAD',
+      'CAN',
     ],
   },
 })

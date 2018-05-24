@@ -252,7 +252,7 @@ const Constants = fromJS({
           'Jet Fuel': 'rgb(60, 246, 178)',
           'Heavy Fuel Oil': 'rgb(3, 201, 201)',
           'Motor Gasoline': 'rgb(34, 111, 124)',
-          'Middle Distillate': 'rgb(25, 60, 97)',
+          'Middle Distillate': 'rgb(17, 44, 73)',
         },
       },
       crudeOilExports: {
@@ -747,10 +747,10 @@ const Constants = fromJS({
           'Port Name': 'Willow Creek', Province: 'SK', Latitude: 49.00086, Longitude: -109.73312, '': '', Description: '', Capacity: '',
         },
         CNG: {
-          'Port Name': 'CNG', Province: 'CAD', Latitude: 0, Longitude: 0, '': '', Description: '', Capacity: '',
+          'Port Name': 'CNG', Province: 'CAN', Latitude: 0, Longitude: 0, '': '', Description: '', Capacity: '',
         },
         'LNG Other': {
-          'Port Name': 'LNG Other', Province: 'CAD', Latitude: 0, Longitude: 0, '': '', Description: '', Capacity: '',
+          'Port Name': 'LNG Other', Province: 'CAN', Latitude: 0, Longitude: 0, '': '', Description: '', Capacity: '',
         },
       },
     },
