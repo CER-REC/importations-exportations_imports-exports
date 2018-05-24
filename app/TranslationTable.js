@@ -1145,7 +1145,7 @@ const TranslationTable = fromJS({
         fr: 'Ontario',
       },
       QC: {
-        en: 'Québec',
+        en: 'Quebec',
         fr: 'Québec',
       },
       NB: {
@@ -1157,7 +1157,7 @@ const TranslationTable = fromJS({
         fr: 'Nouvelle-Écosse',
       },
       'ATL-Q': {
-        en: 'Québec and\nAtlantic Regions',
+        en: 'Quebec and\nAtlantic Regions',
         fr: 'Québec et les\nRégions Atlantiques',
       },
     },
@@ -1703,7 +1703,7 @@ const TranslationTable = fromJS({
         fr: 'Ontario_FR',
       },
       Québec: {
-        en: 'Québec',
+        en: 'Quebec',
         fr: 'Québec_FR',
       },
       'New Brunswick': {
@@ -2443,8 +2443,8 @@ const TranslationTable = fromJS({
       },
 
       'Other countries': {
-        en: 'Collected Low Volume Contributions',
-        fr: 'Collected Low Volume Contributions FR',
+        en: 'Low Volume Contributions',
+        fr: 'Low Volume Contributions FR',
       },
     },
   },
