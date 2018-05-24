@@ -30,7 +30,7 @@ class ConfidentialityPopover extends React.Component {
           height: 'auto',
           width: 160,
           background: 'white',
-          border: '#999 0.25px solid',
+          border: '#999 1px solid',
           opacity: '0.9',
         }}
       className="confidentialityText"

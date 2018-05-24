@@ -450,6 +450,7 @@ class MapPiece extends React.Component {
     let scaleContainerX = this.props.viewport.get('changeWidthRatio') > 1.2 ? -7 : -13
     let scaleContainerY = this.props.viewport.get('changeHeightRatio') > 1.2 ? 8 : 8
     let textY = -34
+    let textX = -80
     if (this.props.selectedEnergy === 'electricity' && this.props.arrangeBy === 'imports') {
       scaleContainerX = this.props.viewport.get('changeWidthRatio') > 1.2 ? 10 : 10
     }
@@ -472,7 +473,9 @@ class MapPiece extends React.Component {
     if (this.props.dimensions.get('strokeWidth')) {
       strokeWidth = this.props.dimensions.get('strokeWidth')
     }
-
+    if (this.props.country === 'world') {
+      textX = -55
+    }
     const confidentialCount = this.props.confidential.reduce((acc, next) => acc + next, 0)
     let confidentialIcon = null
     if (confidentialCount !== 0 && this.props.confidentialityMenu) {
@@ -488,7 +491,7 @@ class MapPiece extends React.Component {
           text={valueString}
           containerX={confidentialContainerX}
           containerY={confidentialContainerY}
-          textX={-80}
+          textX={textX}
           textY={textY}
           xPosition={30}
           yPosition={0}
