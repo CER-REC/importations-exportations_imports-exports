@@ -374,8 +374,8 @@ const TranslationTable = fromJS({
   },
 
   valuesConfidential: {
-    en: 'values confidential',
-    fr: 'valeurs confidentiel',
+    en: 'values Confidential',
+    fr: 'valeurs Confidentiel',
   },
 
   amounts: {
