@@ -449,6 +449,7 @@ class MapPiece extends React.Component {
 
     let scaleContainerX = this.props.viewport.get('changeWidthRatio') > 1.2 ? -7 : -13
     let scaleContainerY = this.props.viewport.get('changeHeightRatio') > 1.2 ? 8 : 8
+    let textY = -34
     if (this.props.selectedEnergy === 'electricity' && this.props.arrangeBy === 'imports') {
       scaleContainerX = this.props.viewport.get('changeWidthRatio') > 1.2 ? 10 : 10
     }
@@ -459,6 +460,9 @@ class MapPiece extends React.Component {
       scaleContainerY = this.props.viewport.get('changeHeightRatio') > 1.2 ? 65 : 80
       containerX = this.props.x1 * MapLayoutGridConstant.getIn(['naturalGasLiquids', 'ca', 'mapPieceScale'], 1) + scaleContainerX
       containerY = this.props.y1 * MapLayoutGridConstant.getIn(['naturalGasLiquids', 'ca', 'mapPieceScale'], 1) + scaleContainerY
+    }
+    if (this.props.selectedEnergy === 'naturalGasLiquids' && this.props.arrangeBy !== 'location') {
+      textY = 10
     }
     if (this.props.country && this.props.country === 'powerpool') {
       containerX += 13
@@ -473,15 +477,9 @@ class MapPiece extends React.Component {
     let confidentialIcon = null
     if (confidentialCount !== 0 && this.props.confidentialityMenu) {
       const totalPoints = this.props.totalPoints.reduce((acc, next) => acc + next, 0)
-      const valueString = `${confidentialCount} / ${totalPoints} ${this.props.tr('valuesConfidential')}`
+      const valueString = `${confidentialCount} of ${totalPoints} ${this.props.tr('valuesConfidential')}`
       let confidentialContainerX = containerX
       let confidentialContainerY = containerY
-      let xPosition = 30
-      if (this.props.country === 'world') {
-        confidentialContainerX += 25
-        confidentialContainerY += 5
-        xPosition += 15
-      }
       confidentialContainerX *= this.props.viewport.get('changeWidthRatio')
       confidentialContainerY *= this.props.viewport.get('changeHeightRatio')
       confidentialIcon = (
@@ -490,12 +488,9 @@ class MapPiece extends React.Component {
           text={valueString}
           containerX={confidentialContainerX}
           containerY={confidentialContainerY}
-          scale="scale(1)"
-          lineX={142.16}
-          lineY={173}
-          textX={15}
-          textY={24}
-          xPosition={xPosition}
+          textX={-80}
+          textY={textY}
+          xPosition={30}
           yPosition={0}
           name={`${this.props.selectedEnergy}${this.props.name}`}
         />
