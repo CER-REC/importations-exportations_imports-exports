@@ -20,6 +20,7 @@ const DetailBreakdownBody = (props) => {
       return (
         <DetailBreakdownRow
           key={key /* eslint-disable-line react/no-array-index-key */}
+          name={`${props.amountUnit}-${props.showGroup}-${key}`}
           labelPrefix={bodyContent.getIn(['action', props.language])}
           label={name}
           labelSuffix={bodyContent.getIn(['suffix', props.language])}

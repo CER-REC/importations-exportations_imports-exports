@@ -12,20 +12,35 @@ import { ConfidentialIconLogo } from './ConfidentialIcon'
 import MapLayoutGridConstant from '../MapLayoutGridConstant'
 import { arrangeBy } from '../selectors/data'
 import { visualizationSettings } from '../selectors/visualizationSettings'
+import { ExpandCollapseConfidentiality } from '../actions/confidentiality'
+import { handleInteraction } from '../utilities'
 
 import './DetailBreakDown.scss'
 
 const unitsWithoutPercentage = ['CAN$/MW.h', 'CN$/GJ']
 
-const PercentageBarConfidentialIcon = props => (
-  <svg className="confidentialIcon">
-    <g transform="translate(0 0) scale(0.8)">
-      <ConfidentialIconLogo
-        tooltip={`${props.confidential} / ${props.totalPoints} values confidential`}
-      />
-    </g>
-  </svg>
+const PercentageBarConfidentialIconUnconnected = props => (
+  <div
+    className="cofidentialTooltip"
+    {...handleInteraction(props.onClick, props.name)}
+  >
+    <svg className="confidentialIcon">
+      <g transform="translate(0 0) scale(0.8)">
+        <ConfidentialIconLogo />
+      </g>
+    </svg>
+    <span
+      className={`tooltiptext confidentialityText ${props.expanded ? 'show' : ''}`}
+    >
+      {`${props.confidential} / ${props.totalPoints} values confidential`}
+    </span>
+  </div>
 )
+
+const PercentageBarConfidentialIcon = connect(
+  (state, props) => ({ expanded: state.openConfidentiality.contains(props.name) }),
+  { onClick: ExpandCollapseConfidentiality }
+)(PercentageBarConfidentialIconUnconnected)
 
 const DetailBreakdownRow = props => (
 
@@ -74,9 +89,9 @@ const DetailBreakdownRow = props => (
             ? null
             : (
               <PercentageBarConfidentialIcon
-                visualization={props.importExportVisualization}
                 confidential={props.confidential}
                 totalPoints={props.totalPoints}
+                name={`${props.importExportVisualization}-${props.name}`}
               />
             )}
         </td>
