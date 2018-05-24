@@ -703,7 +703,7 @@ const TranslationTable = fromJS({
       fr: 'Le gaz naturel liquéfié (« GNL ») est un gaz naturel qui a été refroidi jusqu’à sa liquéfaction, à -162 degrés Celsius. Pendant son changement d’état de gaz à liquide, son volume diminue par un facteur de 600, ce qui permet le transport du produit par bateau et camion. Les importations de GNL du Canada arrivent au seul terminal méthanier au pays, Canaport, au Nouveau-Brunswick. Le GNL est ensuite réchauffé jusqu’à ce qu’il retrouve son état gazeux et est ensuite transporté par pipeline, comme du gaz naturel régulier.',
     },
     crudeExportsTotal: {
-      en: 'Note that the sum of Mode of Transportation, Type of Crude or Explore Destination may not match the Total due to the exclusion of confidential values in one or more of these datasets.',
+      en: 'Note that the sum of Mode of Transportation, Type of Crude or Export Destination may not match the Total due to the exclusion of confidential values in one or more of these datasets.',
       fr: 'Notez que la somme du mode de transport, du type de pétrole brut ou de la destination d’exportation pourrait ne pas correspondre au total en raison de l’exclusion des valeurs confidentielles dans un ou plusieurs de ces ensembles de données.',
     },
   },
