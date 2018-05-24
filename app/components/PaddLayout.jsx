@@ -64,6 +64,14 @@ class PaddLayout extends React.Component {
       paddContainerX = this.props.viewport.get('changeWidthRatio') * (this.props.left + left + transformTranslate.get('left') + style.getIn([energyType, 'xExportPadding'], 0) + leftPadding)
       paddContainerY = this.props.viewport.get('changeHeightRatio') * (this.props.top + top + transformTranslate.get('top') + style.getIn([energyType, 'yExportPadding'], 0))
     }
+    if (energyType === 'crudeOilExports') {
+      paddContainerX = this.props.viewport.get('changeWidthRatio') * (this.props.left + transformTranslate.get('left') + style.getIn([energyType, 'xExportPadding'], 0) + 135)
+      paddContainerY = this.props.viewport.get('changeHeightRatio') * (this.props.top + transformTranslate.get('top') + style.getIn([energyType, 'yExportPadding'], 0) + 150)
+    }
+    if (energyType === 'crudeOilExports' && this.props.arrangeBy !== 'location') {
+      paddContainerX = this.props.viewport.get('changeWidthRatio') * (this.props.left + transformTranslate.get('left') + style.getIn([energyType, 'xExportPadding'], 0) + leftPadding + 130)
+      paddContainerY = this.props.viewport.get('changeHeightRatio') * (this.props.top + top + transformTranslate.get('top') + style.getIn([energyType, 'yExportPadding'], 0) + 200)
+    }
     let xPosition = 30
     let yPosition = 0
     if (paddGroupId === 'ca') {
