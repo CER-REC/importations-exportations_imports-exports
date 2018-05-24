@@ -17,6 +17,7 @@ const emptyMap = fromJS({})
 const mapPieceTransformStartTop = (top, dimensions, mapPieceScale) => top * ((mapPieceScale * dimensions.get('height')) + dimensions.get('topPadding'))
 const mapPieceTransformStartLeft = (left, dimensions, mapPieceScale) => (left * ((mapPieceScale * dimensions.get('width')) + dimensions.get('leftPadding')))
 
+const provinceOrder = ['BC', 'AB', 'SK', 'MB', 'ON', 'QC', 'NB', 'CAN']
 const portsByProvince = fromJS(Constants.getIn(['dataloader', 'mapping', 'ports'])
   .reduce((acc, next) => {
     const province = next.get('Province')
@@ -24,11 +25,7 @@ const portsByProvince = fromJS(Constants.getIn(['dataloader', 'mapping', 'ports'
     acc[province].push(next.get('Port Name'))
     return acc
   }, {}))
-  .sortBy((_, k) => k, (a, b) => {
-    if (a === 'CAN') { return 1 }
-    if (b === 'CAN') { return -1 }
-    return a.localeCompare(b)
-  })
+  .sortBy((_, k) => k, (a, b) => provinceOrder.indexOf(a) - provinceOrder.indexOf(b))
 
 class NaturalGasMapContainer extends React.PureComponent {
   orderBy = (points, arrangeByVal) => {
