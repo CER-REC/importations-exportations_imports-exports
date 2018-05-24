@@ -42,7 +42,7 @@ export const mapTilesPosition = createSelector(
     const top = viewp.get('changeHeightRatio') > 1.2
       ? chartPosition.top + chartPosition.height - 30
       : chartPosition.top + chartPosition.height - 10
-    const left = viewp.get('changeWidthRatio') > 1.2 ? chartPosition.left - 20 : chartPosition.left
+    const left = viewp.get('changeWidthRatio') > 1.2 ? chartPosition.left - 50 : chartPosition.left - 10
     const result = {
       top,
       left,
