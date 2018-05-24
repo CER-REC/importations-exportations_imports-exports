@@ -87,18 +87,24 @@ class Header extends React.Component {
   leftHeading() {
     const { Tr } = this.props
     const energyType = this.props.selectedEnergy
-    const color = (energyType === 'crudeOil' || energyType === 'refinedPetroleumProducts')
+    const importsColour = (energyType === 'crudeOilExports' || energyType === 'refinedPetroleumProducts')
       ? '#DCDCDC'
       : ' '
+    const exportsColour = (energyType === 'crudeOilImports')
+      ? '#DCDCDC'
+      : ' '
+    const offColour = (energyType === 'crudeOilImports' || energyType === 'crudeOilExports' || energyType === 'refinedPetroleumProducts')
+      ? '#DCDCDC'
+      : ''
     return (
       <div className="leftHeader">
-        <div className="headingImports" style={{ color }}>
+        <div className="headingImports" style={{ color: importsColour }}>
           {Tr(['mainHeading', 'imports'])}
         </div>&nbsp;
-        <div className="headingBase" style={{ color }}>
+        <div className="headingBase" style={{ color: offColour }}>
           {Tr(['mainHeading', 'ampersand'])}
         </div>&nbsp;
-        <div className="headingExports">
+        <div className="headingExports" style={{ color: exportsColour }}>
           {Tr(['mainHeading', 'exports'])}
         </div>&nbsp;
         <div className="headingBase">
