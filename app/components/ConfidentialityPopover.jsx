@@ -45,8 +45,9 @@ class ConfidentialityPopover extends React.Component {
           position: 'relative',
           top: this.props.textY,
           left: this.props.textX,
+          paddingLeft: '5px',
           height: 'auto',
-          width: 75,
+          width: 80,
           background: 'white',
           opacity: '0.9',
         }}
