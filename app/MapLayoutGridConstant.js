@@ -908,7 +908,7 @@ const MapLayoutGridConstant = fromJS({
       },
     },
     stylesVariant: {
-      color: '#a99372',
+      color: 'rgb(168, 147, 114)',
       labelPosition: 'down',
       arrowPosition: 'down',
       arrowSpacing: -12,
