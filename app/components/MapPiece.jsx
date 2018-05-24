@@ -88,11 +88,6 @@ class MapPiece extends React.Component {
   }
 
   drawArrow(type) {
-    /*
-    let dataKey = !this.props.dataKey? []: this.props.dataKey.slice(0)
-    dataKey.push(type)
-    if (this.props.data.getIn(dataKey, 0) === 0) { return null}
-    */
     const value = this.props.value.get(type, 0)
     if (value === 0) { return null }
 
