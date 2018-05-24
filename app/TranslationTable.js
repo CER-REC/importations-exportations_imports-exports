@@ -1455,8 +1455,8 @@ const TranslationTable = fromJS({
     },
     world: {
       'United States': {
-        en: 'United States',
-        fr: 'United States_FR',
+        en: 'US',
+        fr: 'US',
       },
       Alabama: {
         en: 'Alabama',
@@ -2240,8 +2240,8 @@ const TranslationTable = fromJS({
         fr: 'Ukraine_FR',
       },
       'United Kingdom': {
-        en: 'United Kingdom',
-        fr: 'United Kingdom_FR',
+        en: 'UK',
+        fr: 'UK_FR',
       },
       'Vatican City': {
         en: 'Vatican City',
