@@ -60,11 +60,11 @@ class BarChart extends Chart {
     let xPosition = 90
     if (this.props.selectedEnergy === 'naturalGas') {
       textString = `${this.props.tr(['explanations', 'orangeBarNaturalGas'])}`
-      xPosition = 590
+      xPosition = this.props.viewport.get('changeWidthRatio') > 1.2 ? 590 : 330
     }
     if (this.props.selectedEnergy === 'naturalGasLiquids') {
       textString = `${this.props.tr(['explanations', 'orangeBarNaturalGasLiquids'])}`
-      xPosition = 590
+      xPosition = this.props.viewport.get('changeWidthRatio') > 1.2 ? 590 : 360
     }
     if (this.props.selectedEnergy === 'crudeOilImports') {
       textString = `${this.props.tr(['explanations', 'barChartCrudeOilImports'])}`
@@ -129,6 +129,7 @@ class BarChart extends Chart {
 
   crudeBlueBarExplanation() {
     const negativeValOffset = this.calculateNegativePosition()
+    const scaleContainerX = this.props.viewport.get('changeHeightRatio') > 1.2 ? 0 : -170
     let yPosition = 0
     let textString = `${this.props.tr(['explanations', 'blueBarCrude'])}`
     let containerY = this.props.top + 100
@@ -151,7 +152,7 @@ class BarChart extends Chart {
           40.12,0,0,0,
           33.47,
           18H288.2"
-        xPosition={632}
+        xPosition={632 + scaleContainerX}
         yPosition={yPosition + negativeValOffset}
         lineX={142.16}
         lineY={173}

@@ -146,13 +146,13 @@ class Menu extends React.PureComponent {
           33.47,
           18H378.2"
         xPosition={xPosition}
-        yPosition={190}
+        yPosition={220}
         lineX={142.16}
         lineY={173.94}
         textX={45}
         textY={48}
         containerX={2}
-        containerY={-102}
+        containerY={-104}
         text={`${this.props.Tr(['explanations', 'arrangeByRefinedPetroleumProducts'])}`}
         name="arrangedByRefinedPetroleumProductsExplanation"
       />

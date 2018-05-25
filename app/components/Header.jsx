@@ -34,8 +34,8 @@ class Header extends React.Component {
   }
 
   resetExplanation() {
-    const scaleContainerX = this.props.viewport.get('changeWidthRatio') > 1.2 ? 0 : -200
-    const scaleContainerY = this.props.viewport.get('changeHeightRatio') > 1.2 ? 0 : 30
+    const scaleContainerX = this.props.viewport.get('changeWidthRatio') > 1.2 ? 1000 : 800
+    const scaleContainerY = this.props.viewport.get('changeHeightRatio') > 1.2 ? 65 : 50
     let textString = `${this.props.Tr(['explanations', 'reset'])}`
     let dotName = 'electricityTitleExplanation'
     if (this.props.selectedEnergy === 'crudeOilImports') {
@@ -69,14 +69,14 @@ class Header extends React.Component {
           lineStroke="1"
           textBoxWidth={230}
           linePath=""
-          xPosition={1000}
-          yPosition={65}
+          xPosition={scaleContainerX}
+          yPosition={scaleContainerY}
           lineX={142.16}
           lineY={173}
           textX={-100}
           textY={-58}
-          containerX={scaleContainerX}
-          containerY={scaleContainerY}
+          containerX={0}
+          containerY={0}
           name={dotName}
           text={textString}
         />
