@@ -771,18 +771,32 @@ const Constants = fromJS({
       socialBar: 200,
     },
   },
-  analyticsCategory: {
-    mapPiece: 'map piece',
-    padd: 'padd',
-    socialBar: 'social bar',
-    headerLinks: 'header links',
-    detailSidebar: 'detail side bar',
-    explanations: 'explanations',
-    confidentiality: 'confidentiality',
-    barOutlier: 'bar outlier',
-    menuBar: 'menu bar',
-    timeline: 'time line',
-    wikimediaCommons: 'wikimedia commons',
+  analytics: {
+    parentVizualizationName: 'Import Export Viualization',
+    events: {
+      visualizationInteration: 'Visualization Interaction',
+    },
+    action: {
+      clicked: 'clicked',
+      dragged: 'dragged',
+      selected: 'selected',
+      unselected: 'unselected',
+    },
+    category: {
+      mapPiece: 'map piece',
+      padd: 'padd',
+      axisGuide: 'axis guidw',
+      socialBar: 'social bar',
+      headerLinks: 'header links',
+      detailSidebar: 'detail side bar',
+      explanations: 'explanations',
+      confidentiality: 'confidentiality',
+      barOutlier: 'bar outlier',
+      menuBar: 'menu bar',
+      timeline: 'time line',
+      wikimediaCommons: 'wikimedia commons',
+    },
+
   },
 })
 export default Constants

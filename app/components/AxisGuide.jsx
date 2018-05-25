@@ -7,6 +7,8 @@ import * as ScaleIcon from './ScaleIcon'
 import SVGDrag from './SVGDrag/'
 import Constants from '../Constants'
 import { visualizationSettings, scaledLinkedSelector } from '../selectors/visualizationSettings'
+import { analyticsReporter } from '../utilities'
+
 import trSelector from '../selectors/translate'
 
 import { arrangeBy } from '../selectors/data'
@@ -70,6 +72,17 @@ class AxisGuide extends React.PureComponent {
   }
 
   dragStop() {
+    /** Analytics reporting: start */
+    // Creating event detail
+    const eventDetail = this.state.positionDisplay
+    // report even to analytics
+    analyticsReporter(
+      Constants.getIn(['analytics', 'category', 'axisGuide']),
+      Constants.getIn(['analytics', 'action', 'dragged']),
+      eventDetail,
+    )
+    /** Analytics reporting: Finish */
+
     this.props.updatePosition(this.state.positionDisplay)
   }
 

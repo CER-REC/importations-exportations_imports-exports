@@ -19,7 +19,7 @@ import './ElectricityMapLayout.scss'
 
 import { getMapLayout } from '../selectors/mapLayout'
 import { arrangeBy, binSelector } from '../selectors/data'
-import { handleInteractionWithTabIndex } from '../utilities'
+import { handleInteractionWithTabIndex, analyticsReporter } from '../utilities'
 
 const emptyMap = new Immutable.Map()
 
@@ -56,6 +56,18 @@ class ElectricityMapLayout extends React.Component {
         origins = selection.get('origins').delete(originKeyExists)
       }
     }
+
+    /** Analytics reporting: start */
+    // Creating event detail
+    const eventDetail = `${country}  ${originKey}`
+    // report even to analytics
+    analyticsReporter(
+      Constants.getIn(['analytics', 'category', 'mapPiece']),
+      Constants.getIn(['analytics', 'action', 'clicked']),
+      eventDetail,
+    )
+    /** Analytics reporting: Finish */
+
     this.props.onMapPieceClick({
       country,
       origins,

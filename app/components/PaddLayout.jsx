@@ -20,7 +20,7 @@ import ConfidentialIcon from './ConfidentialIcon'
 
 import ExplanationDot from './ExplanationDot'
 
-import { handleInteractionWithTabIndex } from '../utilities'
+import { handleInteractionWithTabIndex, analyticsReporter } from '../utilities'
 
 import { arrangeBy, binSelector, selection } from '../selectors/data'
 import { setSelection } from '../actions/visualizationSettings'
@@ -298,6 +298,17 @@ class PaddLayout extends React.Component {
     } else {
       origins = [paddGroup]
     }
+
+    /** Analytics reporting: start */
+    // Creating event detail
+    const eventDetail = paddGroup
+    // report even to analytics
+    analyticsReporter(
+      Constants.getIn(['analytics', 'category', 'padd']),
+      Constants.getIn(['analytics', 'action', 'clicked']),
+      eventDetail,
+    )
+    /** Analytics reporting: Finish */
 
     props.savePaddState({
       country,
