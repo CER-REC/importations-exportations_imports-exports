@@ -107,6 +107,9 @@ class Legend extends React.Component {
       zeroText = '0'
       transformString = `translate(${Constants.getIn(['legend', 'textValuePosition'])} 21)`
     }
+    if (this.props.importExportVisualization === 'crudeOilImports') {
+      transformString = `translate(45 21)`
+    }
     const humanNumberLang = v => humanNumber(v, this.props.language)
     return (
       <g transform={transformString}>
@@ -155,9 +158,15 @@ class Legend extends React.Component {
     const visualizationContainerType = this.props.importExportVisualization
     const transformCrudeOil = `translate(${Constants.getIn(['legend', 'crudeOilLegendPosition'])} 0)`
     switch (visualizationContainerType) {
-      case 'crudeOil': return (
+      case 'crudeOilExports': return (
         <g transform={transformCrudeOil}>
           {this.exportColumn()}
+          {this.textValues()}
+        </g>
+      )
+      case 'crudeOilImports': return (
+        <g>
+          {this.importColumn()}
           {this.textValues()}
         </g>
       )

@@ -87,7 +87,7 @@ class Menu extends React.PureComponent {
 
   amountExplanation() {
     let textString = `${this.props.Tr(['explanations', 'amount'])}`
-    if (this.props.selectedEnergy === 'crudeOil') {
+    if (this.props.selectedEnergy === 'crudeOilExports' || this.props.selectedEnergy === 'crudeOilImports') {
       textString = `${this.props.Tr(['explanations', 'amountCrude'])}`
     }
     if (this.props.selectedEnergy === 'naturalGas') {
@@ -99,7 +99,7 @@ class Menu extends React.PureComponent {
     if (this.props.selectedEnergy === 'refinedPetroleumProducts') {
       textString = `${this.props.Tr(['explanations', 'amountRefinedPetroleumProducts'])}`
     }
-    let yPosition = 212
+    let yPosition = 240
     if (this.props.expanded && (this.props.setActiveMenu !== 'amount')) {
       yPosition = 228
     }

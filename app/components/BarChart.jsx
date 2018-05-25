@@ -66,6 +66,9 @@ class BarChart extends Chart {
       textString = `${this.props.tr(['explanations', 'orangeBarNaturalGasLiquids'])}`
       xPosition = 590
     }
+    if (this.props.selectedEnergy === 'crudeOilImports') {
+      textString = `${this.props.tr(['explanations', 'barChartCrudeOilImports'])}`
+    }
     if (this.props.flipped) { return null }
     return (<g>
       <ExplanationDot
