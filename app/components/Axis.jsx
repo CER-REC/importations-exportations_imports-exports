@@ -124,9 +124,6 @@ class Axis extends React.PureComponent {
       )
     })
     const endWidth = width - seekPosition.end
-    /* (seekPosition.end === data.last().get('offsetX'))
-      ? 0
-      : width - seekPosition.end */
     return (
       <g>
         <rect

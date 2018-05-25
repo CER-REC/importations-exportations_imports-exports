@@ -114,15 +114,15 @@ class Legend extends React.Component {
             if (value[0] === Number.MIN_SAFE_INTEGER && this.props.importExportVisualization === 'electricity') {
               return (
                 <text className="theLegendValues" y={(i * 20) + 20} x="34" key={`bin-${i}`}>
-                  &le;{humanNumberLang(value[1])}
+                  &nbsp;&le; {humanNumberLang(value[1])}
                 </text>
               )
             }
 
             if (value[0] === Number.MIN_SAFE_INTEGER && this.props.importExportVisualization === 'naturalGas') {
               return (
-                <text className="theLegendValues" y={(i * 20) + 20} x="34" key={`bin-${i}`}>
-                  ={humanNumberLang(value[1])}
+                <text className="theLegendValues" y={(i * 20) + 20} x="44" key={`bin-${i}`}>
+                  {humanNumberLang(value[1])}
                 </text>
               )
             }
@@ -130,7 +130,7 @@ class Legend extends React.Component {
             if (value[1] === Number.MAX_SAFE_INTEGER) {
               return (
                 <text className="theLegendValues" y={(i * 20) + 20} key={`bin-${i}`}>
-                  &gt;{humanNumberLang(value[0])}
+                  &gt; {humanNumberLang(value[0])}
                 </text>
               )
             }
@@ -138,7 +138,7 @@ class Legend extends React.Component {
             return (
               <g key={`bin-${i}`}>
                 <text className="theLegendValues" y={(i * 20) + 20}>
-                  {`>${humanNumberLang(value[0])}`}
+                  {`> ${humanNumberLang(value[0])}`}
                 </text>
                 <text className="theLegendValues" y={(i * 20) + 20} x="38">
                   {`- ${humanNumberLang(value[1])}`}
@@ -146,7 +146,7 @@ class Legend extends React.Component {
               </g>
             )
           })}
-        <text className="theLegendValues">{zeroText}</text>
+        <text className="theLegendValues" x="8">{zeroText}</text>
       </g>
     )
   }

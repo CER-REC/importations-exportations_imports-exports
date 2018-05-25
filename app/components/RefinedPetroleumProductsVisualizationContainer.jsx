@@ -169,15 +169,8 @@ export default connect((state, props) => ({
   individualCharts: RefinedPetroleumProductsViewport.individualChartsPosition(state, props),
   sidebarTotal: RefinedPetroleumProductsViewport.sidebarTotalPosition(state, props),
   arrangeBy: arrangeBy(state, props),
-  /*
-  TRSelector: TrSelector(state, props),
-  language: state.language,
-  */
   unit: amount(state, props),
-
   data: timelineData(state, { ...props, aggregateKey: 'productSubtype' }),
-  /* filteredData: filterByTimelineAndHexData(state, props),
-  */
   detailBreakdown: detailBreakdownSelector(state, {
     ...props,
     groupBy: 'activity',

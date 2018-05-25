@@ -6,10 +6,6 @@ import PropTypes from 'prop-types'
 import PaddMapPiece from './PaddMapPiece'
 import MapLayoutGridConstant from '../MapLayoutGridConstant'
 import Constants from '../Constants'
-/*
-import { PaddSelector } from '../selectors/Padd'
-import { aggregateLocationPaddData } from '../selectors/data'
-*/
 import TRSelector from '../selectors/translate'
 import Tr from '../TranslationTable'
 import { getFullyFilteredValues } from '../selectors/renderData'
@@ -26,7 +22,6 @@ import ExplanationDot from './ExplanationDot'
 
 import { handleInteractionWithTabIndex } from '../utilities'
 
-// import ElectricitySelector from '../selectors/ElectricitySelector'
 import { arrangeBy, binSelector, selection } from '../selectors/data'
 import { setSelection } from '../actions/visualizationSettings'
 
@@ -69,6 +64,14 @@ class PaddLayout extends React.Component {
       paddContainerX = this.props.viewport.get('changeWidthRatio') * (this.props.left + left + transformTranslate.get('left') + style.getIn([energyType, 'xExportPadding'], 0) + leftPadding)
       paddContainerY = this.props.viewport.get('changeHeightRatio') * (this.props.top + top + transformTranslate.get('top') + style.getIn([energyType, 'yExportPadding'], 0))
     }
+    if (energyType === 'crudeOilExports') {
+      paddContainerX = this.props.viewport.get('changeWidthRatio') * (this.props.left + transformTranslate.get('left') + style.getIn([energyType, 'xExportPadding'], 0) + 135)
+      paddContainerY = this.props.viewport.get('changeHeightRatio') * (this.props.top + transformTranslate.get('top') + style.getIn([energyType, 'yExportPadding'], 0) + 150)
+    }
+    if (energyType === 'crudeOilExports' && this.props.arrangeBy !== 'location') {
+      paddContainerX = this.props.viewport.get('changeWidthRatio') * (this.props.left + transformTranslate.get('left') + style.getIn([energyType, 'xExportPadding'], 0) + leftPadding + 130)
+      paddContainerY = this.props.viewport.get('changeHeightRatio') * (this.props.top + top + transformTranslate.get('top') + style.getIn([energyType, 'yExportPadding'], 0) + 200)
+    }
     let xPosition = 30
     let yPosition = 0
     if (paddGroupId === 'ca') {
@@ -82,14 +85,11 @@ class PaddLayout extends React.Component {
       return (<g transform="translate(145 143)">
         <ConfidentialIcon
           styles={style.get('confidentialStyle')}
-          scale="scale(1)"
           text={`${confidentialCount} / ${totalCount} ${this.props.TRSelector('valuesConfidential')}`}
           containerX={paddContainerX}
           containerY={paddContainerY}
-          lineX={142.16}
-          lineY={173}
-          textX={18}
-          textY={23}
+          textX={-80}
+          textY={-38}
           xPosition={xPosition}
           yPosition={yPosition}
           name={`${paddGroupId}${this.props.selectedEnergy}Confidentiality`}
@@ -464,12 +464,10 @@ const mapStateToProps = (state, props) => ({
   selctionState: selection(state, props),
   arrangeBy: arrangeBy(state, props),
   bins: binSelector(state, props),
-  // Padd: PaddSelector(state, props),
   TRSelector: TRSelector(state, props),
   confidentialityMenu: state.confidentialityMenu,
   selectedEnergy: state.importExportVisualization,
   expandCollapseConfidentiality: state.expandCollapseConfidentiality,
-  // paddData: aggregateLocationPaddData(state, props),
   data: getFullyFilteredValues(state, {
     ...props,
     valueKey: 'activity',

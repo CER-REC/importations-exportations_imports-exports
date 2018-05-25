@@ -17,6 +17,7 @@ const emptyMap = fromJS({})
 const mapPieceTransformStartTop = (top, dimensions, mapPieceScale) => top * ((mapPieceScale * dimensions.get('height')) + dimensions.get('topPadding'))
 const mapPieceTransformStartLeft = (left, dimensions, mapPieceScale) => (left * ((mapPieceScale * dimensions.get('width')) + dimensions.get('leftPadding')))
 
+const provinceOrder = ['BC', 'AB', 'SK', 'MB', 'ON', 'QC', 'NB', 'CAN']
 const portsByProvince = fromJS(Constants.getIn(['dataloader', 'mapping', 'ports'])
   .reduce((acc, next) => {
     const province = next.get('Province')
@@ -24,14 +25,14 @@ const portsByProvince = fromJS(Constants.getIn(['dataloader', 'mapping', 'ports'
     acc[province].push(next.get('Port Name'))
     return acc
   }, {}))
-  .sortBy((_, k) => k, (a, b) => (b === 'CAD' ? -1 : a.localeCompare(b)))
+  .sortBy((_, k) => k, (a, b) => provinceOrder.indexOf(a) - provinceOrder.indexOf(b))
 
 class NaturalGasMapContainer extends React.PureComponent {
-  orderBy = (points, arrangeBy) => {
-    switch (arrangeBy) {
+  orderBy = (points, arrangeByVal) => {
+    switch (arrangeByVal) {
       case 'exports':
       case 'imports':
-        return points.sort((a, b) => b.get(arrangeBy, 0) - a.get(arrangeBy, 0))
+        return points.sort((a, b) => b.get(arrangeBy, 0) - a.get(arrangeByVal, 0))
       default:
         return points.sortBy((_, k) => k, (a, b) => a.localeCompare(b))
     }
@@ -46,6 +47,7 @@ class NaturalGasMapContainer extends React.PureComponent {
     }, [])
     return result
   }
+
   onClick = (portName, provinceName = null) => {
     const selection = this.props.selectionSettings
     let ports = []
@@ -130,6 +132,7 @@ class NaturalGasMapContainer extends React.PureComponent {
         if (key === 'CNG' || key === 'LNG Other') {
           styles = mapLayoutGrid.get('stylesVariant')
           textClass = 'portLabelWhite'
+          left += this.props.viewport.get('changeWidthRatio') > 1.2 ? 38 : 20
         }
 
         const tilePosition = fromJS({ x: column, y: row })
@@ -162,7 +165,7 @@ class NaturalGasMapContainer extends React.PureComponent {
           </g>
         )
       })
-      const provinceTextPosition = portsCount > 7
+      let provinceTextPosition = portsCount > 7
         ? (leftPadding + columnPadding + (dimensions.get('width') * mapPieceScale)) - 58
         : (provinceRendered * 58) - 45
       leftPadding += (dimensions.get('width') * mapPieceScale) + columnPadding
@@ -178,7 +181,9 @@ class NaturalGasMapContainer extends React.PureComponent {
       const isProvinceSelected = this.props.selectionSettings.get('provinces').indexOf(province)
       const provinceClass = isProvinceSelected !== -1 ? 'provinceSelected' : 'provinceDeselected'
       const provinceTextColor = isProvinceSelected !== -1 ? 'portSelectedProvinceLabel' : 'portProvinceLabel'
-
+      if (province === 'CAN') {
+        provinceTextPosition += this.props.viewport.get('changeWidthRatio') > 1.2 ? 35 : 20
+      }
       return (
         <g className="paddLayout" key={`NaturalGasMap_${province}`} >
           <rect
@@ -203,8 +208,10 @@ class NaturalGasMapContainer extends React.PureComponent {
       )
     })
 
+    const widthRatio = this.props.viewport.get('changeWidthRatio') > 1.2 ? this.props.viewport.get('changeWidthRatio') : 0.975
+
     return (
-      <g key="NaturalGasMapContainer" transform={`scale(${this.props.viewport.get('changeWidthRatio')} ${this.props.viewport.get('changeHeightRatio')}) translate(${this.props.left} ${this.props.top})`}>
+      <g key="NaturalGasMapContainer" transform={`scale(${widthRatio} ${this.props.viewport.get('changeHeightRatio')}) translate(${this.props.left} ${this.props.top})`}>
         {layout.toArray()}
       </g>
     )

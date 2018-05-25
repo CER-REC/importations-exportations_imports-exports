@@ -6,9 +6,6 @@ import Chart from './Chart'
 import AnimatedLine from './SVGAnimation/AnimatedLine'
 import AxisGuide from './AxisGuide'
 import DetailSidebar from './DetailSidebar'
-// import DetailTotal from './DetailTotal'
-// import ConfidentialCount from './ConfidentialCount'
-// import MissingDataCount from './MissingDataCount'
 import TextBox from './TextBox'
 import { timelineData, timeLineScaleValue, timeLineScaleValueByProductSubtype } from '../selectors/timeline'
 import { groupingBy as timelineGrouping } from '../selectors/data'
@@ -276,24 +273,6 @@ class BarChart extends Chart {
       )
     }).toArray()
 
-    // const sidebarContent = [
-    //   <MissingDataCount
-    //     key="missing"
-    //     valueKey={this.props.valueKey}
-    //     aggregateKey={this.props.aggregateKey}
-    //   />,
-    //   <ConfidentialCount
-    //     key="confidential"
-    //     valueKey={this.props.valueKey}
-    //     aggregateKey={this.props.aggregateKey}
-    //   />,
-    //   <DetailTotal
-    //     key="total"
-    //     type={flipped ? 'exports' : 'imports'}
-    //     valueKey={this.props.valueKey}
-    //     aggregateKey={this.props.aggregateKey}
-    //   />,
-    // ]
     return (
       <g transform={this.getTransform()}>
         <g>
@@ -315,17 +294,6 @@ class BarChart extends Chart {
             tabIndex={tabIndex || 0}
           />
         </g>
-        {/*
-        {!this.props.detailSidebar ? null : (
-          <DetailSidebar top={this.props.top} height={height}>
-            <div className="verticalAlign">
-              <div className="centered">
-                {flipped ? sidebarContent.reverse() : sidebarContent}
-              </div>
-            </div>
-          </DetailSidebar>
-        )}
-      */}
       </g>
     )
   }

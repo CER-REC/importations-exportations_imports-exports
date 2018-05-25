@@ -259,6 +259,7 @@
   color: #666;
   font-family: $fira-sans-condensed-semibold;
   margin-top: -20px;
+  margin-left: 10px;
 }
 
 #detailSidebar {
@@ -318,8 +319,9 @@
 }
 .confidentialityText {
   font-family:$fira-sans-condensed;
-  font-size: 9.5px;
+  font-size: 11.5px;
   color: #999;
+  text-align: center;
 }
 .portLabel{
   font-family: $fira-sans-condensed;

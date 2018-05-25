@@ -88,11 +88,6 @@ class MapPiece extends React.Component {
   }
 
   drawArrow(type) {
-    /*
-    let dataKey = !this.props.dataKey? []: this.props.dataKey.slice(0)
-    dataKey.push(type)
-    if (this.props.data.getIn(dataKey, 0) === 0) { return null}
-    */
     const value = this.props.value.get(type, 0)
     if (value === 0) { return null }
 
@@ -454,6 +449,8 @@ class MapPiece extends React.Component {
 
     let scaleContainerX = this.props.viewport.get('changeWidthRatio') > 1.2 ? -7 : -13
     let scaleContainerY = this.props.viewport.get('changeHeightRatio') > 1.2 ? 8 : 8
+    let textY = -34
+    let textX = -80
     if (this.props.selectedEnergy === 'electricity' && this.props.arrangeBy === 'imports') {
       scaleContainerX = this.props.viewport.get('changeWidthRatio') > 1.2 ? 10 : 10
     }
@@ -465,6 +462,9 @@ class MapPiece extends React.Component {
       containerX = this.props.x1 * MapLayoutGridConstant.getIn(['naturalGasLiquids', 'ca', 'mapPieceScale'], 1) + scaleContainerX
       containerY = this.props.y1 * MapLayoutGridConstant.getIn(['naturalGasLiquids', 'ca', 'mapPieceScale'], 1) + scaleContainerY
     }
+    if (this.props.selectedEnergy === 'naturalGasLiquids' && this.props.arrangeBy !== 'location') {
+      textY = 10
+    }
     if (this.props.country && this.props.country === 'powerpool') {
       containerX += 13
     }
@@ -473,29 +473,26 @@ class MapPiece extends React.Component {
     if (this.props.dimensions.get('strokeWidth')) {
       strokeWidth = this.props.dimensions.get('strokeWidth')
     }
-
+    if (this.props.country === 'world') {
+      textX = -55
+    }
     const confidentialCount = this.props.confidential.reduce((acc, next) => acc + next, 0)
     let confidentialIcon = null
     if (confidentialCount !== 0 && this.props.confidentialityMenu) {
       const totalPoints = this.props.totalPoints.reduce((acc, next) => acc + next, 0)
       const valueString = `${confidentialCount} / ${totalPoints} ${this.props.tr('valuesConfidential')}`
+      let confidentialContainerX = containerX
+      let confidentialContainerY = containerY
+      confidentialContainerX *= this.props.viewport.get('changeWidthRatio')
+      confidentialContainerY *= this.props.viewport.get('changeHeightRatio')
       confidentialIcon = (
         <ConfidentialIcon
           styles={this.props.styles.get('confidentialStyle')}
           text={valueString}
-          containerX={this.props.viewport.get('changeWidthRatio') * containerX}
-          containerY={this.props.viewport.get('changeHeightRatio') * containerY}
-          linePath="
-            M142.16,
-            173.94l24.26,
-            36.69a40.12,
-            40.12,0,0,0,
-            33.47,
-            18H378.2"
-          lineX={142.16}
-          lineY={173}
-          textX={15}
-          textY={24}
+          containerX={confidentialContainerX}
+          containerY={confidentialContainerY}
+          textX={textX}
+          textY={textY}
           xPosition={30}
           yPosition={0}
           name={`${this.props.selectedEnergy}${this.props.name}`}

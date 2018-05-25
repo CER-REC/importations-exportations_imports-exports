@@ -12,13 +12,13 @@
 .mapPiece.legend { cursor: inherit; }
 
 /* Safari */
-@-webkit-keyframes spin{
+@-webkit-keyframes import-export-spinner {
   0%,
   100% { -webkit-opacity: 0.1; }
   30% { -webkit-opacity: 1; }
 }
 
-@keyframes spin {
+@keyframes import-export-spinner {
   0%,
   100% { opacity: 0.1; }
   30% { opacity: 1; }
@@ -49,8 +49,8 @@
 }
 
 .circle-elements div {
-  -webkit-animation: spin 2.4s 0s infinite both ease-out;
-  animation: spin 2.4s 0s infinite both ease-out;
+  -webkit-animation: import-export-spinner 2.4s 0s infinite both ease-out;
+  animation: import-export-spinner 2.4s 0s infinite both ease-out;
   margin: 0;
   padding: 0;
   top: calc(50% + 100px);
@@ -152,9 +152,34 @@ td, th { padding: 0; }
   display: inline-block;
   width: 0;
   height: 0;
-  margin-left: -6px;
+  margin-left: 0px;
   margin-top: 0px;
   border-style: solid;
   border-width: 6px 6px 6px 0;
   border-color: transparent #666 transparent transparent;
+}
+.confidentialSpacing {
+  padding-top:4px;
+}
+
+.cofidentialTooltip {
+    position: relative;
+}
+
+.cofidentialTooltip .tooltiptext {
+    visibility: hidden;
+    width: 150px;
+    background-color: white;
+    text-align: center;
+    border:#999 1px solid;
+    position: absolute;
+    z-index: 1;
+    top: -5px;
+    right: 105%;
+}
+
+.cofidentialTooltip .show {
+    visibility: visible;
+    -webkit-animation: fadeIn 1s;
+    animation: fadeIn 1s;
 }

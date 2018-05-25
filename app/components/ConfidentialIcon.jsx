@@ -16,7 +16,6 @@ import './ConfidentialIcon.scss'
 
 export const ConfidentialIconLogo = props => (
   <g className="confidentialityIcon">
-    {props.tooltip ? <title>{props.tooltip}</title> : null}
     <path
       fill={props.expanded ? '#999' : '#fff'}
       stroke="#999"
@@ -35,8 +34,6 @@ class ConfidentialIcon extends React.Component {
       containerX: PropTypes.number.isRequired,
       containerY: PropTypes.number.isRequired,
       text: PropTypes.string.isRequired,
-      lineX: PropTypes.number.isRequired,
-      lineY: PropTypes.number.isRequired,
       textX: PropTypes.number.isRequired,
       textY: PropTypes.number.isRequired,
       xPosition: PropTypes.number.isRequired,
@@ -59,12 +56,9 @@ class ConfidentialIcon extends React.Component {
       </a>
       <PopoverPortal>
         <ConfidentialityPopover
-          scale={this.props.scale}
           containerX={this.props.containerX}
           containerY={this.props.containerY}
           text={this.props.text}
-          lineX={this.props.lineX}
-          lineY={this.props.lineY}
           textX={this.props.textX}
           textY={this.props.textY}
           xPosition={this.props.xPosition}

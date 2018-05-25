@@ -65,7 +65,7 @@ const TranslationTable = fromJS({
       fr: 'Cet outil en ligne trace un portrait des importations au Canada et des exportations du Canada des produits énergétiques. Il fait partie de l’initiative de visualisation des données de l’Office national de l’énergie. Échelonnée sur trois ans, cette initiative vise à transformer la manière dont l’Office structure et diffuse ses données. Elle a pour objectif de favoriser un processus décisionnel fondé sur la preuve et de faciliter la compréhension des questions liées aux réseaux énergétiques et pipeliniers du Canada, grâce à des visualisations interactives, faciles à utiliser.',
     },
     p2: {
-      en: 'This visualization show quarterly energy trade data between Canada and the USA since 1985, with the exception of electricity data which is available back to 1990.',
+      en: 'This visualization show quarterly energy trade data between Canada and the U.S. since 1985, with the exception of electricity data which is available back to 1990.',
       fr: 'Cette visualisation présente les données trimestrielles sur le commerce de l’énergie entre le Canada et les États-Unis depuis 1985, à l’exception des données concernant l’électricité, qui ne sont disponibles que depuis 1990.',
     },
     p3: {
@@ -374,8 +374,8 @@ const TranslationTable = fromJS({
   },
 
   valuesConfidential: {
-    en: 'values confidential',
-    fr: 'valeurs confidentiel',
+    en: 'values Confidential',
+    fr: 'valeurs Confidentiel',
   },
 
   amounts: {
@@ -563,12 +563,28 @@ const TranslationTable = fromJS({
       fr: 'Chaque barre orange montre la quantité totale d’électricité que les régions canadiennes ont importée au cours d’un trimestre.',
     },
     reset: {
-      en: 'This data visualization shows Canadian imports and exports of electricity. Click the pink dots to guide you through how to read the data.',
-      fr: 'Les données interactives montrent les importations et les exportations canadiennes d’électricité. Cliquez sur les points roses pour obtenir de l’aide pour lire les données.',
+      en: 'This visualization shows electricity imports to Canada and exports from Canada between the years 1990 and 2017. Drag the timeline bar to change. Click a region to view details.',
+      fr: 'Cette visualisation montre les importations d’électricité à destination du Canada et les exportations en provenance du Canada entre les années 1990 et 2017. Faites glisser les poignées pour sélectionner une autre période. Cliquez sur une région pour voir les détails.',
     },
-    resetCrudeOil: {
-      en: "This data visualization shows Canada's quarterly exports of crude oil. Click the pink dots to guide you through how to read the data.",
-      fr: 'Les données interactives montrent les exportations de pétrole brut du Canada par trimestre. Cliquez sur les points roses pour obtenir de l’aide pour lire les données.',
+    resetCrudeOilImports: {
+      en: 'This visualization shows crude oil imports to Canada between the years 1985 and 2017. Drag the timeline bar to change. Click a region to view details.',
+      fr: 'Cette visualisation montre les importations de pétrole brut à destination du Canada entre les années 1985 et 2017. Faites glisser les poignées pour sélectionner une autre période. Cliquez sur une région pour voir les détails.',
+    },
+    resetCrudeOilExports: {
+      en: 'This visualization shows crude oil exports from Canada between the years 1985 and 2017. Drag the timeline bar to change. Click a region to view details.',
+      fr: 'Cette visualisation montre les exportations de pétrole brut en provenance du Canada entre les années 1985 et 2017. Faites glisser les poignées pour sélectionner une autre période. Cliquez sur une région pour voir les détails.',
+    },
+    resetNaturalGas: {
+      en: 'This visualization shows natural gas imports to Canada and exports from Canada between the years 1985 and 2017. Drag the timeline bar to change. Click a region to view details.',
+      fr: 'Cette visualisation montre les importations de gaz naturel à destination du Canada et les exportations en provenance du Canada entre les années 1985 et 2017. Faites glisser les poignées pour sélectionner une autre période. Cliquez sur une région pour voir les détails.',
+    },
+    resetNaturalGasLiquids: {
+      en: 'This visualization shows natural gas liquid imports to Canada and exports from Canada between the years 1990 and 2017. Drag the timeline bar to change. Click a region to view details.',
+      fr: 'Cette visualisation montre les importations de liquides de gaz naturel à destination du Canada et les exportations en provenance du Canada entre les années 1990 et 2017. Faites glisser les poignées pour sélectionner une autre période. Cliquez sur une région pour voir les détails.',
+    },
+    resetRefinedPetroleumProducts: {
+      en: 'This visualization shows refined petroleum product exports from Canada between the years 1985 and 2017. Drag the timeline bar to change. Click a region to view details.',
+      fr: 'Cette visualisation montre les exportations de produit pétrolier raffiné en provenance du Canada entre les années 1985 et 2017. Faites glisser les poignées pour sélectionner une autre période. Cliquez sur une région pour voir les détails.',
     },
     canadaPaddCrudeOil: {
       en: 'The colour of this region and its down arrow shows the total amount of crude oil that Canada exported during the time period selected in the bar chart below.',
@@ -591,7 +607,7 @@ const TranslationTable = fromJS({
       fr: 'La quantité de pétrole brut est indiquée en milliers de m³/j (milliers de mètres cubes par jour), ce qui correspond à 6 290 barils par jour.  ',
     },
     padd: {
-      en: 'PADD stands for Petroleum Administration for Defense District. The US is divided into 5 districts which are commonly used for analysis of regional supply and demand dynamics.',
+      en: 'PADD stands for Petroleum Administration for Defense District. The U.S. is divided into 5 districts which are commonly used for analysis of regional supply and demand dynamics.',
       fr: 'PADD signifie Petroleum Administration for Defense District. Les États-Unis sont divisés en cinq districts PADD aux fins d’analyse de la dynamique de l’offre et de la demande régionales.',
     },
     linkedDataIcon: {
@@ -613,10 +629,6 @@ const TranslationTable = fromJS({
     vermontArrow: {
       en: 'The down arrow shows the total electricity that Canadian regions exported to Vermont during the time period selected above.',
       fr: 'La flèche orientée vers le bas montre la quantité totale d’électricité que les régions canadiennes ont exportée vers le Vermont pendant la période sélectionnée dans le diagramme à barres ci-dessus.',
-    },
-    resetNaturalGas: {
-      en: 'This data visualization shows imports and exports of natural gas at ports along the Canada-USA border. Click the pink dots to guide you through how to read the data.',
-      fr: 'Les données interactives montrent les importations et les exportations de gaz naturel en provenance et à destination de ports situés le long de la frontière canado-américaine. Cliquez sur les points roses pour obtenir de l’aide pour lire les données.',
     },
     orangeBarNaturalGas: {
       en: 'Orange bars show the total natural gas that Canada imported in a single quarter; blue bars show exports.',
@@ -646,12 +658,8 @@ const TranslationTable = fromJS({
       en: 'Natural gas is measured in 10³ m³/d, which is 35,314 cubic feet. $CAN/GJ is the weighted average price per gigajoule of natural gas. The average Albertan household uses approximately 120 GJs of natural gas per year.',
       fr: 'La quantité de gaz naturel est indiquée en millier de m³/j, ce qui correspond à 35 314 pieds cubes par jour. $ CA/GJ indique le prix moyen pondéré du gaz naturel par gigajoule. Le ménage albertain moyen consomme environ 120 GJ de gaz naturel par année. (lien dans la colonne K)',
     },
-    resetNaturalGasLiquids: {
-      en: 'This data visualization shows imports of Natural Gas Liquids (NGLs) from the USA into Canadian regions (top) and exports of NGLs from Canada into regions of the USA called PADDs (bottom). Click the pink dots to guide you through how to read the data.',
-      fr: 'Les données interactives montrent les importations de liquides de gaz naturel (« LGN ») en provenance des États-Unis et à destination des régions canadiennes (haut) et les exportations de LGN du Canada à destination de régions PADD des États-Unis (bas). Cliquez sur les points roses pour obtenir de l’aide pour lire les données.',
-    },
     albertaArrowNaturalGasLiquids: {
-      en: 'The up arrow shows the total NGLs that Alberta imported from the USA during the time period selected in the bar chart below.',
+      en: 'The up arrow shows the total NGLs that Alberta imported from the U.S. during the time period selected in the bar chart below.',
       fr: 'La flèche orientée vers le haut montre la quantité totale de LGN importée des États-Unis par l’Alberta pendant la période sélectionnée dans le diagramme à barres ci-après.',
     },
     atlqNaturalGasLiquids: {
@@ -673,10 +681,6 @@ const TranslationTable = fromJS({
     amountNaturalGasLiquids: {
       en: 'Natural gas liquids production is measured in 10³ m³/d (thousand cubic metres per day), which equals 6290 barrels per day.',
       fr: 'La production de liquides de gaz naturel est indiquée en milliers de m³/j (milliers de mètres cubes par jour), ce qui correspond à 6 290 barils par jour.',
-    },
-    resetRefinedPetroleumProducts: {
-      en: 'This data visualization shows Canada’s quarterly exports of refined petroleum products (RPPs). Click the pink dots to guide you through how to read the data.',
-      fr: 'Les données interactives montrent les exportations de produits pétroliers raffinés (« PPR ») du Canada par trimestre. Cliquez sur les points roses pour obtenir de l’aide pour lire les données.',
     },
     arrangeByRefinedPetroleumProducts: {
       en: 'Switch between seeing the different types of refined petroleum products stacked in one bar chart or as individual bar charts.',
@@ -703,14 +707,18 @@ const TranslationTable = fromJS({
       fr: 'Le gaz naturel liquéfié (« GNL ») est un gaz naturel qui a été refroidi jusqu’à sa liquéfaction, à -162 degrés Celsius. Pendant son changement d’état de gaz à liquide, son volume diminue par un facteur de 600, ce qui permet le transport du produit par bateau et camion. Les importations de GNL du Canada arrivent au seul terminal méthanier au pays, Canaport, au Nouveau-Brunswick. Le GNL est ensuite réchauffé jusqu’à ce qu’il retrouve son état gazeux et est ensuite transporté par pipeline, comme du gaz naturel régulier.',
     },
     crudeExportsTotal: {
-      en: 'Note that the sum of Mode of Transportation, Type of Crude or Explore Destination may not match the Total due to the exclusion of confidential values in one or more of these datasets.',
+      en: 'Note that the sum of Mode of Transportation, Type of Crude or Export Destination may not match the Total due to the exclusion of confidential values in one or more of these datasets.',
       fr: 'Notez que la somme du mode de transport, du type de pétrole brut ou de la destination d’exportation pourrait ne pas correspondre au total en raison de l’exclusion des valeurs confidentielles dans un ou plusieurs de ces ensembles de données.',
     },
   },
 
   mainSubheading: {
-    en: 'This visualization shows the quarterly energy trade data between Canada and the USA for various energy sources.',
+    en: 'This visualization shows the quarterly energy trade data between Canada and the U.S. for various energy sources.',
     fr: 'Cette visualisation illustre les données trimestrielles sur les échanges énergétiques entre le Canada et les États-Unis pour diverses sources d’énergie.',
+  },
+  mainSubheadingCrudeOilImports: {
+    en: 'This visualization shows the quarterly energy trade data between Canada and the world for various energy sources.',
+    fr: 'Cette visualisation illustre les données trimestrielles sur les échanges énergétiques entre le Canada et le monde pour diverses sources d’énergie.',
   },
   resetLabel: {
     en: 'reset',
@@ -1137,7 +1145,7 @@ const TranslationTable = fromJS({
         fr: 'Ontario',
       },
       QC: {
-        en: 'Québec',
+        en: 'Quebec',
         fr: 'Québec',
       },
       NB: {
@@ -1149,7 +1157,7 @@ const TranslationTable = fromJS({
         fr: 'Nouvelle-Écosse',
       },
       'ATL-Q': {
-        en: 'Québec and\nAtlantic Regions',
+        en: 'Quebec and\nAtlantic Regions',
         fr: 'Québec et les\nRégions Atlantiques',
       },
     },
@@ -1441,7 +1449,7 @@ const TranslationTable = fromJS({
         fr: 'PADD V',
       },
       'Non-USA': {
-        en: 'NON-USA',
+        en: 'NON-U.S.',
         fr: 'HORS É.-U.',
       },
       Mexico: {
@@ -1451,8 +1459,8 @@ const TranslationTable = fromJS({
     },
     world: {
       'United States': {
-        en: 'United States',
-        fr: 'United States_FR',
+        en: 'U.S.',
+        fr: 'US_FR',
       },
       Alabama: {
         en: 'Alabama',
@@ -1695,7 +1703,7 @@ const TranslationTable = fromJS({
         fr: 'Ontario_FR',
       },
       Québec: {
-        en: 'Québec',
+        en: 'Quebec',
         fr: 'Québec_FR',
       },
       'New Brunswick': {
@@ -2236,8 +2244,8 @@ const TranslationTable = fromJS({
         fr: 'Ukraine_FR',
       },
       'United Kingdom': {
-        en: 'United Kingdom',
-        fr: 'United Kingdom_FR',
+        en: 'U.K.',
+        fr: 'UK_FR',
       },
       'Vatican City': {
         en: 'Vatican City',
@@ -2435,8 +2443,8 @@ const TranslationTable = fromJS({
       },
 
       'Other countries': {
-        en: 'Collected Low Volume Contributions',
-        fr: 'Collected Low Volume Contributions FR',
+        en: 'Low Volume Contributions',
+        fr: 'Low Volume Contributions FR',
       },
     },
   },
@@ -2476,13 +2484,13 @@ const TranslationTable = fromJS({
       us: {
         imports: {
           label: {
-            en: 'imports from USA',
+            en: 'imports from U.S.',
             fr: 'importations des États-Unis',
           },
         },
         exports: {
           label: {
-            en: 'exports into USA',
+            en: 'exports into U.S.',
             fr: 'exportations aux États-Unis',
           },
         },
@@ -2495,7 +2503,7 @@ const TranslationTable = fromJS({
     crudeOilExports: {
       exports: {
         label: {
-          en: 'exports into US PADD',
+          en: 'exports into U.S. PADD',
           fr: 'exportations au PADD',
         },
         bottomText: {
@@ -2542,7 +2550,7 @@ const TranslationTable = fromJS({
       us: {
         exports: {
           label: {
-            en: 'exports into US PADD',
+            en: 'exports into U.S. PADD',
             fr: 'exportations au PADD',
           },
           bottomText: {

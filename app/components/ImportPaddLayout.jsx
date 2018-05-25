@@ -16,8 +16,6 @@ import { getFullyFilteredValues } from '../selectors/renderData'
 
 import ConfidentialIcon from './ConfidentialIcon'
 
-import ExplanationDot from './ExplanationDot'
-
 import { handleInteractionWithTabIndex } from '../utilities'
 
 import { arrangeBy, binSelector, selection } from '../selectors/data'
@@ -63,12 +61,9 @@ class ImportPaddLayout extends React.Component {
       return (<g transform="translate(145 143)">
         <ConfidentialIcon
           styles={style.get('confidentialStyle')}
-          scale="scale(1)"
           text={`${confidentialCount} / ${totalCount} ${this.props.TRSelector('valuesConfidential')}`}
           containerX={paddContainerX}
           containerY={paddContainerY}
-          lineX={142.16}
-          lineY={173}
           textX={18}
           textY={23}
           xPosition={xPosition}
@@ -107,29 +102,7 @@ class ImportPaddLayout extends React.Component {
     scaleContainerX = this.props.viewport.get('changeWidthRatio') > 1.2 ? 10 : -100
     scaleContainerY = this.props.viewport.get('changeHeightRatio') > 1.2 ? 0 : -10
     canadaExplanation = (<g transform="translate(145 143)">
-      <ExplanationDot
-        scale="scale(1)"
-        lineStroke="1"
-        textBoxWidth={140}
-        textBoxHeight={150}
-        linePath="
-          M142.16,
-          173.94l24.26,
-          36.69a40.12,
-          40.12,0,0,0,
-          33.47,
-          18H328.2"
-        xPosition={50}
-        yPosition={-10}
-        lineX={142.16}
-        lineY={173}
-        textX={46}
-        textY={58}
-        containerX={this.props.left + 330 + scaleContainerX}
-        containerY={this.props.top + 14 + scaleContainerY}
-        name="canadaExplanation"
-        text={`${this.props.TRSelector(['explanations', 'canadaPaddCrudeOil'])}`}
-      />
+      
     </g>)
 
     return (<g className={fontClassName} transform={`translate(${left + transformTranslate.get('left')} ${top + transformTranslate.get('top')})`}>

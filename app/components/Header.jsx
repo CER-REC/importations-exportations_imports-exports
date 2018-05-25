@@ -36,9 +36,13 @@ class Header extends React.Component {
   resetExplanation() {
     let textString = `${this.props.Tr(['explanations', 'reset'])}`
     let dotName = 'electricityTitleExplanation'
-    if (this.props.selectedEnergy === 'crudeOil') {
-      textString = `${this.props.Tr(['explanations', 'resetCrudeOil'])}`
-      dotName = 'crudeOilTitleExplanation'
+    if (this.props.selectedEnergy === 'crudeOilImports') {
+      textString = `${this.props.Tr(['explanations', 'resetCrudeOilImports'])}`
+      dotName = 'crudeOilImportsTitleExplanation'
+    }
+    if (this.props.selectedEnergy === 'crudeOilExports') {
+      textString = `${this.props.Tr(['explanations', 'resetCrudeOilExports'])}`
+      dotName = 'crudeOilExportsTitleExplanation'
     }
     if (this.props.selectedEnergy === 'naturalGas') {
       textString = `${this.props.Tr(['explanations', 'resetNaturalGas'])}`
@@ -61,22 +65,16 @@ class Header extends React.Component {
         <ExplanationDot
           scale="scale(1)"
           lineStroke="1"
-          textBoxWidth={250}
-          linePath="
-            M142.16,
-            173.94l24.26,
-            36.69a40.12,
-            40.12,0,0,0,
-            33.47,
-            18H423.2"
-          xPosition={800}
-          yPosition={57}
+          textBoxWidth={230}
+          linePath=""
+          xPosition={1000}
+          yPosition={65}
           lineX={142.16}
           lineY={173}
-          textX={40}
-          textY={58}
+          textX={-100}
+          textY={-58}
           containerX={0}
-          containerY={-70}
+          containerY={0}
           name={dotName}
           text={textString}
         />
@@ -87,25 +85,34 @@ class Header extends React.Component {
   leftHeading() {
     const { Tr } = this.props
     const energyType = this.props.selectedEnergy
-    const color = (energyType === 'crudeOil' || energyType === 'refinedPetroleumProducts')
+    const importsColour = (energyType === 'crudeOilExports' || energyType === 'refinedPetroleumProducts')
       ? '#DCDCDC'
       : ' '
+    const subheading = (energyType === 'crudeOilImports')
+      ? Tr(['mainSubheadingCrudeOilImports'])
+      : Tr(['mainSubheading'])
+    const exportsColour = (energyType === 'crudeOilImports')
+      ? '#DCDCDC'
+      : ' '
+    const offColour = (energyType === 'crudeOilImports' || energyType === 'crudeOilExports' || energyType === 'refinedPetroleumProducts')
+      ? '#DCDCDC'
+      : ''
     return (
       <div className="leftHeader">
-        <div className="headingImports" style={{ color }}>
+        <div className="headingImports" style={{ color: importsColour }}>
           {Tr(['mainHeading', 'imports'])}
         </div>&nbsp;
-        <div className="headingBase" style={{ color }}>
+        <div className="headingBase" style={{ color: offColour }}>
           {Tr(['mainHeading', 'ampersand'])}
         </div>&nbsp;
-        <div className="headingExports">
+        <div className="headingExports" style={{ color: exportsColour }}>
           {Tr(['mainHeading', 'exports'])}
         </div>&nbsp;
         <div className="headingBase">
           {Tr(['mainHeading', 'base'])}
         </div>
         <p className="subheading">
-          {Tr(['mainSubheading'])}
+          { subheading }
         </p>
       </div>
     )
