@@ -375,6 +375,7 @@ const Constants = fromJS({
         'New Brunswick': 'northAmerica',
         'Nova Scotia': 'northAmerica',
         'Atlantic provinces and Quebec': 'northAmerica',
+        'Atlantic provinces': 'northAmerica',
         'Other provinces and territories': 'northAmerica',
         Mexico: 'northAmerica',
 
