@@ -254,7 +254,6 @@ const TranslationTable = fromJS({
       fr: 'de ',
     },
     ofElectricity: {
-      en: 'of',
       fr: 'd’',
     },
     activity: {
