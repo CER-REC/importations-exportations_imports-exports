@@ -97,6 +97,7 @@ class BarChart extends Chart {
   }
 
   blueBarExplanation() {
+    const scaleContainerY = this.props.viewport.get('changeHeightRatio') > 1.2 ? 0 : -40
     if (!this.props.flipped || this.props.selectedEnergy !== 'electricity') { return null }
     const negativeValOffset = this.calculateNegativePosition()
     return (<g>
@@ -119,7 +120,7 @@ class BarChart extends Chart {
         textX={76}
         textY={146}
         containerX={this.props.left - 278}
-        containerY={this.props.left + 68}
+        containerY={this.props.left + scaleContainerY + 68}
         name={`${this.props.selectedEnergy} exportBarChartExplanation`}
         text={`${this.props.tr(['explanations', 'barChartExport'])}`}
       />
@@ -136,7 +137,7 @@ class BarChart extends Chart {
       yPosition = 35
       containerY = this.props.top + 32
     }
-    if (!this.props.flipped || (this.props.selectedEnergy !== 'crudeOil' && this.props.selectedEnergy !== 'naturalGasLiquids')) { return null }
+    if (!this.props.flipped || (this.props.selectedEnergy !== 'crudeOilExports' && this.props.selectedEnergy !== 'naturalGasLiquids')) { return null }
     return (<g>
       <ExplanationDot
         scale="scale(1)"
@@ -304,6 +305,7 @@ class BarChart extends Chart {
 
 export default connect(
   (state, props) => Object.assign({
+    viewport: state.viewport,
     timelineGroup: timelineGrouping(state, props),
     selectedEnergy: state.importExportVisualization,
     unit: visualizationSettings(state, props).get('amount'),

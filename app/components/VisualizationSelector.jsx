@@ -75,7 +75,7 @@ const VisualizationSelector = (props) => {
         </g>
       )
 
-      let prefix = ''
+      let prefix = null
       let transformString = ''
       if (props.language === 'fr' && props.importExportVisualization === 'electricity') {
         console.log('yes')
