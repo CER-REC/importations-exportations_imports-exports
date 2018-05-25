@@ -117,9 +117,9 @@ export const analyticsDataSelector = createSelector(
   visualizationSettings,
   analyticsConstants,
   getLanguage,
-  (vizualization, filter, constants, language) => {
+  (visualization, filter, constants, language) => {
     return {
-      vizualization,
+      visualization,
       filter: JSON.stringify(filter.toJS()),
       language,
       parentVisualzation: constants.get('parentVizualizationName'),
