@@ -120,7 +120,7 @@ export const analyticsDataSelector = createSelector(
   (vizualization, filter, constants, language) => {
     return {
       vizualization,
-      filter: filter.toJS(),
+      filter: JSON.stringify(filter.toJS()),
       language,
       parentVisualzation: constants.get('parentVizualizationName'),
       event: constants.getIn(['events', 'visualizationInteration']),
