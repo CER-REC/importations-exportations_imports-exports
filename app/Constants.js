@@ -785,7 +785,7 @@ const Constants = fromJS({
     category: {
       mapPiece: 'map piece',
       padd: 'padd',
-      axisGuide: 'axis guidw',
+      axisGuide: 'axis guide',
       socialBar: 'social bar',
       headerLinks: 'header links',
       detailSidebar: 'detail side bar',
