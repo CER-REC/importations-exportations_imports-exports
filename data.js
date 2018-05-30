@@ -39,6 +39,8 @@ const productMap = {
   RPPs: 'refinedPetroleumProducts',
 }
 
+const rateUnits = ['thousand m3/d', 'm3/d']
+
 const printingValidationError = (errorArray, region, point, type) => {
   // Printing error on the UI so that data can be verified
   if (region.get('isValid') === false) {
@@ -212,14 +214,14 @@ const parsingIssue = {};
           const averageData = {}
           const regionValues = unitPoints
             .reduce((acc, next) => {
-              if (next.forAverageDivisor) {
+              if (next.forAverageDivisor || rateUnits.includes(unit)) {
                 const destination = next.destination || next.origin || next.port
                 if (!averageData[destination]) {
                   averageData[destination] = { value: 0, divisor: 0 }
                 }
                 const averageDest = averageData[destination]
-                averageDest.value += next.forAverageValue
-                averageDest.divisor += next.forAverageDivisor
+                averageDest.value += (rateUnits.includes(unit) ? next.value : next.forAverageValue)
+                averageDest.divisor += (rateUnits.includes(unit) ? 1 : next.forAverageDivisor)
 
                 return {
                   ...acc,
