@@ -154,6 +154,7 @@ class RefinedPetroleumProductsVisualizationContainer extends React.Component {
             filterActivity="exports"
             valueKey="activity"
             groupBy="activity"
+            average
           />
         </DetailSidebar>
         {this.props.arrangeBy === 'stack'
