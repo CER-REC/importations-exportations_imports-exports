@@ -735,7 +735,7 @@ const TranslationTable = fromJS({
   socialBarText: {
     about: {
       en: 'about',
-      fr: 'à propos de la',
+      fr: 'à propos',
     },
     methodology: {
       en: 'methodology',
