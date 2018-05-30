@@ -76,9 +76,9 @@ class AxisGuide extends React.PureComponent {
   timeLineRangeExplanation() {
     let containerY = this.props.chartHeight + (this.props.barSize / 2)
       - (this.props.position * this.props.heightPerUnit) - 2 + 210
-    if (this.props.selectedEnergy === 'crudeOil') {
+    if (this.props.selectedEnergy === 'crudeOilExports') {
       containerY = this.props.chartHeight - (this.props.barSize / 2)
-      + (this.props.position * this.props.heightPerUnit) - 2 + 305
+      + (this.props.position * this.props.heightPerUnit) - 38
     }
     if (this.props.selectedEnergy === 'naturalGas') {
       containerY = this.props.chartHeight + (this.props.barSize / 2)
@@ -95,7 +95,7 @@ class AxisGuide extends React.PureComponent {
     if (this.props.selectedEnergy === 'refinedPetroleumProducts'
       && this.props.arrangeBy === 'split') { return null }
     if (this.props.flipped
-      && (this.props.selectedEnergy !== 'crudeOil'
+      && (this.props.selectedEnergy === 'crudeOilExports'
       && this.props.selectedEnergy !== 'refinedPetroleumProducts')) { return null }
     return (<g>
       <ExplanationDot

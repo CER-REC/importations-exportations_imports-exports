@@ -39,6 +39,7 @@ class StackedChart extends Chart {
   updateAxisGuide = position => this.setState({ axisGuide: position })
 
   refinedPetroleumProductsBar() {
+    const scaleContainerX = this.props.viewport.get('changeWidthRatio') > 1.2 ? 670 : 472
     if (this.props.selectedEnergy !== 'refinedPetroleumProducts') { return null }
     return (<g>
       <ExplanationDot
@@ -53,7 +54,7 @@ class StackedChart extends Chart {
           40.12,0,0,0,
           33.47,
           18H288.2"
-        xPosition={670}
+        xPosition={scaleContainerX}
         yPosition={120}
         lineX={142.16}
         lineY={173}
@@ -144,6 +145,7 @@ class StackedChart extends Chart {
 }
 
 export default connect((state, props) => Object.assign({
+  viewport: state.viewport,
   selectedEnergy: state.importExportVisualization,
   timelineGroup: timelineGrouping(state, props),
   tr: trSelector(state, props),

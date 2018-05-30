@@ -26,7 +26,7 @@ const PercentageBarConfidentialIconUnconnected = props => (
   >
     <svg className="confidentialIcon">
       <g transform="translate(0 0) scale(0.8)">
-        <ConfidentialIconLogo />
+        <ConfidentialIconLogo expanded={props.expanded} />
       </g>
     </svg>
     <span

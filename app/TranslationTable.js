@@ -29,7 +29,7 @@ const TranslationTable = fromJS({
 
   loader: {
     titleText: {
-      en: 'loading visualisation',
+      en: 'loading visualization',
       fr: 'visualisation en chargement',
     },
     imports: {
@@ -251,6 +251,9 @@ const TranslationTable = fromJS({
 
     of: {
       en: 'of',
+      fr: 'de ',
+    },
+    ofElectricity: {
       fr: 'd’',
     },
     activity: {
@@ -562,6 +565,10 @@ const TranslationTable = fromJS({
       en: 'Each orange bar shows the total electricity that Canadian regions imported during a single quarter.',
       fr: 'Chaque barre orange montre la quantité totale d’électricité que les régions canadiennes ont importée au cours d’un trimestre.',
     },
+    barChartCrudeOilImports: {
+      en: 'Each orange bar shows the total crude oil that Canadian regions imported during a single quarter.',
+      fr: 'Chaque barre orange montre la quantité totale de pétrole brut que les régions canadiennes ont importée au cours d’un trimestre.',
+    },
     reset: {
       en: 'This visualization shows electricity imports to Canada and exports from Canada between the years 1990 and 2017. Drag the timeline bar to change. Click a region to view details.',
       fr: 'Cette visualisation montre les importations d’électricité à destination du Canada et les exportations en provenance du Canada entre les années 1990 et 2017. Faites glisser les poignées pour sélectionner une autre période. Cliquez sur une région pour voir les détails.',
@@ -663,8 +670,8 @@ const TranslationTable = fromJS({
       fr: 'La flèche orientée vers le haut montre la quantité totale de LGN importée des États-Unis par l’Alberta pendant la période sélectionnée dans le diagramme à barres ci-après.',
     },
     atlqNaturalGasLiquids: {
-      en: 'The Atlantic regions and Quebec are grouped due to confidentiality rules that prevent reporting of data when minimal companies are reporting in a region. Learn more about our confidentiality rules in our methodology.',
-      fr: 'Les régions de l’Atlantique et du Québec sont regroupées en raison de règles de confidentialité qui interdisent la publication de données relatives à une région ne comptant que peu de sociétés. La méthode fait état des règles de confidentialité.',
+      en: 'Quebec and the Atlantic regions are grouped due to confidentiality rules that prevent reporting of data when minimal companies are reporting in a region. Learn more about our confidentiality rules in our methodology.',
+      fr: 'Québec et les régions de l’Atlantique sont regroupées en raison de règles de confidentialité qui interdisent la publication de données relatives à une région ne comptant que peu de sociétés. La méthode fait état des règles de confidentialité.',
     },
     orangeBarNaturalGasLiquids: {
       en: 'Each orange bar shows the total amount of natural gas liquids that Canada imported during a single quarter.',

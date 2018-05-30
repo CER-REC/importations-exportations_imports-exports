@@ -172,7 +172,7 @@ class PaddLayout extends React.Component {
       paddIExplanationcontainerX = this.props.viewport.get('changeWidthRatio') * (this.props.left + left + scaleContainerX)
       paddIExplanationcontainerY = this.props.viewport.get('changeHeightRatio') * (this.props.top + top - scaleContainerY)
     }
-    if (this.props.arrangeBy === 'exports' && this.props.selectedEnergy === 'crudeOil') {
+    if (this.props.arrangeBy === 'exports' && this.props.selectedEnergy === 'crudeOilExports') {
       scaleContainerX = this.props.viewport.get('changeWidthRatio') > 1.2 ? 148 : 145
       scaleContainerY = this.props.viewport.get('changeHeightRatio') > 1.2 ? 0 : 0
       paddIExplanationcontainerX = this.props.viewport.get('changeWidthRatio') * (this.props.left + left + scaleContainerX)
@@ -223,7 +223,7 @@ class PaddLayout extends React.Component {
       paddVExplanationcontainerX = this.props.viewport.get('changeWidthRatio') * (this.props.left + left + scaleContainerX)
       paddVExplanationcontainerY = this.props.viewport.get('changeHeightRatio') * (this.props.top + top - scaleContainerY)
     }
-    if (this.props.arrangeBy === 'exports' && this.props.selectedEnergy === 'crudeOil') {
+    if (this.props.arrangeBy === 'exports' && this.props.selectedEnergy === 'crudeOilExports') {
       scaleContainerX = this.props.viewport.get('changeWidthRatio') > 1.2 ? 230 : 225
       scaleContainerY = this.props.viewport.get('changeHeightRatio') > 1.2 ? 0 : 0
       paddVExplanationcontainerX = this.props.viewport.get('changeWidthRatio') * (this.props.left + left + scaleContainerX)

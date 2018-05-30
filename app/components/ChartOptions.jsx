@@ -36,6 +36,8 @@ class ChartOptions extends React.PureComponent {
   }
 
   linkDataExplanation() {
+    const scaleContainerX = this.props.viewport.get('changeHeightRatio') > 1.2 ? 0 : -200
+    const scaleContainerY = this.props.viewport.get('changeHeightRatio') > 1.2 ? 0 : -40
     if (this.props.selectedEnergy !== 'electricity' || this.props.activityGroup.get('activity') !== 'importsExports') { return }
     const leftPad = Constants.getIn(['visualizationDetailContainer', 'leftPadding'])
     return (<g>
@@ -56,8 +58,8 @@ class ChartOptions extends React.PureComponent {
         lineY={173.94}
         textX={40}
         textY={58}
-        containerX={leftPad + 890}
-        containerY={314}
+        containerX={scaleContainerX + leftPad + 890}
+        containerY={scaleContainerY + 314}
         name="linkDataIcon"
         text={`${this.props.tr(['explanations', 'linkedDataIcon'])}`}
       />
@@ -129,6 +131,7 @@ class ChartOptions extends React.PureComponent {
 
 export default connect(
   (state, props) => ({
+    viewport: state.viewport,
     selectedEnergy: state.importExportVisualization,
     scaleLinked: scaledLinkedSelector(state, props),
     activityGroup: visualizationSettings(state, props),
