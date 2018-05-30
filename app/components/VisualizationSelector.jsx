@@ -78,7 +78,6 @@ const VisualizationSelector = (props) => {
       let prefix = null
       let transformString = ''
       if (props.language === 'fr' && props.importExportVisualization === 'electricity') {
-        console.log('yes')
         prefix = SelectedPrefix(Tr(['menu', 'ofElectricity']))
         transformString = 'translate(14 0)'
       }
