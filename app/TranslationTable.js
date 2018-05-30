@@ -570,8 +570,8 @@ const TranslationTable = fromJS({
       fr: 'Chaque barre orange montre la quantité totale de pétrole brut que les régions canadiennes ont importée au cours d’un trimestre.',
     },
     reset: {
-      en: 'This visualization shows electricity imports to Canada and exports from Canada between the years 1990 and 2017. Drag the timeline bar to change. Click a region to view details.',
-      fr: 'Cette visualisation montre les importations d’électricité à destination du Canada et les exportations en provenance du Canada entre les années 1990 et 2017. Faites glisser les poignées pour sélectionner une autre période. Cliquez sur une région pour voir les détails.',
+      en: 'This visualization shows electricity imports to Canada and exports from Canada between the years 1990 and 2017. Drag the timeline bar to change. Click a region to view details. Value includes capacity charge.',
+      fr: 'Cette visualisation montre les importations d’électricité à destination du Canada et les exportations en provenance du Canada entre les années 1990 et 2017. Faites glisser les poignées pour sélectionner une autre période. Cliquez sur une région pour voir les détails. La valeur inclut la charge de capacité.',
     },
     resetCrudeOilImports: {
       en: 'This visualization shows crude oil imports to Canada between the years 1985 and 2017. Drag the timeline bar to change. Click a region to view details.',
@@ -612,6 +612,14 @@ const TranslationTable = fromJS({
     amountCrude: {
       en: 'Crude oil is measured in 10³ m³/d (thousand cubic metres per day), which is 6290 barrels per day.',
       fr: 'La quantité de pétrole brut est indiquée en milliers de m³/j (milliers de mètres cubes par jour), ce qui correspond à 6 290 barils par jour.  ',
+    },
+    inconsistencies: {
+      en: 'All of the data presented here is considered non-confidential when summed or averaged on a quarterly basis. Any other period selected by the user (multi-quarter, annual, multi-annual) reflects a sum or average of this same data. \nOther NEB data sources provide data considered non-confidential when summed or averaged over different periods (monthly, annual) and this can result in different values than are indicated here (less data may be non-confidential monthly, more data may be non-confidential annually). Both are correct for the original period on which they are based, although the values may be different.',
+      fr: 'TODO',
+    },
+    modeCrude: {
+      en: 'Pipeline volumes include minor volumes exported by truck. In most instances, these trucked volumes would be considered confidential if indicated separately. Further, in quarters where Marine volumes are confidential (occurs in 14 quarters between 1985 and 1995), these Marine volumes are included in Pipeline volumes. This is done to prevent the back-calculation of confidential values.',
+      fr: 'TODO',
     },
     padd: {
       en: 'PADD stands for Petroleum Administration for Defense District. The U.S. is divided into 5 districts which are commonly used for analysis of regional supply and demand dynamics.',
