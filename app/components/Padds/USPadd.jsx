@@ -40,6 +40,7 @@ const USPadd = (props) => {
         paddingX={0}
         paddingY={0}
         country="us"
+        valueAverage={props.valueAverage}
         aggregateKey={props.aggregateKey}
         valueKey={props.valueKey}
       />
