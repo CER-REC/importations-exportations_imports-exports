@@ -43,6 +43,30 @@ const CrudeOilVisualizationContainer = props => (
         color="black"
         type="crudeOilTypeMode"
       />
+      <svg width="12" height="12" style={{ position: 'absolute', top: 1, left: 150 }}>
+        <ExplanationDot
+          scale="scale(1) scale(-1 1)"
+          lineStroke="1"
+          textBoxWidth={170}
+          linePath="
+            M142.16,
+            173.94l24.26,
+            36.69a40.12,
+            40.12,0,0,0,
+            33.47,
+            18H344.2"
+          xPosition={5}
+          yPosition={5}
+          lineX={344.16}
+          lineY={173}
+          textX={0}
+          textY={58}
+          containerX={(props.exportChart.left + props.exportChart.width) - 46}
+          containerY={props.exportChart.top - 235}
+          name="crudeExportsModeOfTransportation"
+          text={Tr.getIn(['explanations', 'modeCrude', props.language])}
+        />
+      </svg>
       <div style={{ height: 'calc(100% - 20px)', overflow: 'auto' }}>
         <DetailBreakdown
           height="100%"
