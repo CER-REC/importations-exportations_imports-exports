@@ -618,7 +618,7 @@ const TranslationTable = fromJS({
       fr: 'TODO',
     },
     modeCrude: {
-      en: 'Pipeline volumes include minor volumes exported by truck. In most instances, these trucked volumes would be considered confidential if indicated separately. Further, in quarters where Marine volumes are confidential (occurs in 14 quarters between 1985 and 1995), these Marine volumes are included in Pipeline volumes. This is done to prevent the back-calculation of confidential values.',
+      en: 'Pipeline volumes include minor volumes exported by truck. In most instances, these trucked volumes would be considered confidential if indicated separately. Further, in quarters where Marine volumes are confidential (occurs in 14 quarters between 1985 and 1995), these Marine volumes are included in Pipeline volumes. Further, in quarters where Rail volumes are confidential (occurs in six quarters between 1992 and 2011), these rail volumes are included in Pipeline volumes. This is done to prevent the back-calculation of confidential values.',
       fr: 'TODO',
     },
     padd: {
