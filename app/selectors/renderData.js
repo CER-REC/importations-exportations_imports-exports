@@ -186,12 +186,16 @@ export const barChartValues = createSelector(
   (_, props = {}) => props.groupBy,
   (_, props = {}) => props.valueKey,
   (_, props = {}) => props.valueAverage || false,
-  (records, activityFilter, subtypeFilter, groupBy, valueKey, averageMode) => {
+  (_, props = {}) => props.activityValueKey || false,
+  (records, activityFilter, subtypeFilter, groupBy, valueKey, averageMode, activityValueKey) => {
     const filteredRecords = records.filter((p) => {
       if (valueKey && p.get(valueKey, '') === '') { return false }
       if (p.get('product') === 'crudeOilExports' && valueKey === 'activity') {
         // If there is a subtype or transport, filter them out
         if (p.get('productSubtype', '') || p.get('transport')) { return false }
+      }
+      if (activityValueKey) {
+        return p.get('activity') === activityValueKey && subtypeFilter(p)
       }
       return activityFilter(p) && subtypeFilter(p)
     })
