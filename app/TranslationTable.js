@@ -570,8 +570,8 @@ const TranslationTable = fromJS({
       fr: 'Chaque barre orange montre la quantité totale de pétrole brut que les régions canadiennes ont importée au cours d’un trimestre.',
     },
     reset: {
-      en: 'This visualization shows electricity imports to Canada and exports from Canada between the years 1990 and 2017. Drag the timeline bar to change. Click a region to view details.',
-      fr: 'Cette visualisation montre les importations d’électricité à destination du Canada et les exportations en provenance du Canada entre les années 1990 et 2017. Faites glisser les poignées pour sélectionner une autre période. Cliquez sur une région pour voir les détails.',
+      en: 'This visualization shows electricity imports to Canada and exports from Canada between the years 1990 and 2017. Drag the timeline bar to change. Click a region to view details. Value includes capacity charge.',
+      fr: 'Cette visualisation montre les importations d’électricité à destination du Canada et les exportations en provenance du Canada entre les années 1990 et 2017. Faites glisser les poignées pour sélectionner une autre période. Cliquez sur une région pour voir les détails. La valeur inclut la charge de capacité.',
     },
     resetCrudeOilImports: {
       en: 'This visualization shows crude oil imports to Canada between the years 1985 and 2017. Drag the timeline bar to change. Click a region to view details.',
@@ -612,6 +612,14 @@ const TranslationTable = fromJS({
     amountCrude: {
       en: 'Crude oil is measured in 10³ m³/d (thousand cubic metres per day), which is 6290 barrels per day.',
       fr: 'La quantité de pétrole brut est indiquée en milliers de m³/j (milliers de mètres cubes par jour), ce qui correspond à 6 290 barils par jour.  ',
+    },
+    inconsistencies: {
+      en: 'All of the data presented here is considered non-confidential when summed or averaged on a quarterly basis. Any other period selected by the user (multi-quarter, annual, multi-annual) reflects a sum or average of this same data. \n\nOther NEB data sources provide data considered non-confidential when summed or averaged over different periods (monthly, annual) and this can result in different values than are indicated here (less data may be non-confidential monthly, more data may be non-confidential annually). Both are correct for the original period on which they are based, although the values may be different.',
+      fr: 'Toutes les données présentées ici sont jugées non confidentielles lorsqu’elles représentent une somme ou une moyenne calculée trimestriellement. Toute période choisie par l’utilisateur (plurisemestrielle, annuelle, pluriannuelle) correspond à une somme ou une moyenne des mêmes données. \n\nD’autres sources de données de l’Office fournissent des données jugées non confidentielles représentant une somme ou une moyenne sur diverses périodes (mensuelle, annuelle); cela peut donner lieu à des valeurs différentes, comme indiqué ici (une quantité inférieure de données pourraient être jugées non confidentielles mensuellement, une quantité supérieure de données pourraient être jugées non confidentielles annuellement). Dans les deux cas, les quantités sont exactes pour la période originale sur laquelle elles se fondent, bien que les valeurs puissent être différentes.',
+    },
+    modeCrude: {
+      en: 'Pipeline volumes include minor volumes exported by truck. In most instances, these trucked volumes would be considered confidential if indicated separately. Further, in quarters where Marine volumes are confidential (occurs in 14 quarters between 1985 and 1995), these Marine volumes are included in Pipeline volumes. Further, in quarters where Rail volumes are confidential (occurs in six quarters between 1992 and 2011), these rail volumes are included in Pipeline volumes. This is done to prevent the back-calculation of confidential values.',
+      fr: 'Les volumes transportés par pipeline comprennent de faibles volumes transportés par camion. Dans la plupart des cas, ces volumes seraient jugés confidentiels s’ils étaient présentés séparément. En outre, aux semestres où les volumes transportés par voie maritime sont jugés confidentiels (14 semestres de 1985 à 1995), ceux-ci sont inclus dans les volumes transportés par pipeline. Aux semestres où les volumes transportés par chemin de fer sont jugés confidentiels (six semestres de 1992 à 2011), ceux-ci sont inclus dans les volumes transportés par pipeline également. On cherche ainsi à éviter le calcul rétroactif des valeurs confidentielles.',
     },
     padd: {
       en: 'PADD stands for Petroleum Administration for Defense District. The U.S. is divided into 5 districts which are commonly used for analysis of regional supply and demand dynamics.',

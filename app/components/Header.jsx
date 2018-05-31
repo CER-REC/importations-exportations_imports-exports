@@ -120,37 +120,6 @@ class Header extends React.Component {
     )
   }
 
-  crudeOilImportsLink() {
-    const { Tr } = this.props
-    const language = this.props.language
-    const energyType = this.props.selectedEnergy
-    if (energyType !== 'crudeOil') { return }
-    if (language === 'fr') {
-      return (<div className="importsLink">
-        <div className="importsSubheading">
-          {Tr(['mainHeading', 'base_1'])} {Tr(['mainHeading', 'base_1_5_crude'])}
-          <div className="importsSubheadingEnergy">{ Tr(['mainHeading', 'crudeOil']) }</div>
-          {Tr(['mainHeading', 'base_2'])}{Tr(['mainHeading', 'base_2_5_crude'])}
-          <a href={Tr(['mainHeading', 'crudeOilStatsLink_01'])}>{Tr(['mainHeading', 'crudeOilStats_01'])}</a>
-          {Tr(['mainHeading', 'and'])}
-          <a href={Tr(['mainHeading', 'crudeOilStatsLink_03'])}>{Tr(['mainHeading', 'crudeOilStats_03'])}</a>
-          {Tr(['mainHeading', 'deCansim'])}{Tr(['mainHeading', 'closingBracket'])}
-        </div>
-      </div>)
-    }
-    return (<div className="importsLink">
-      <div className="importsSubheading">
-        {Tr(['mainHeading', 'base_1'])}
-        <div className="importsSubheadingEnergy">{ Tr(['mainHeading', 'crudeOil']) }</div>
-        {Tr(['mainHeading', 'base_2'])} {Tr(['mainHeading', 'base_2_5_crude'])}
-        <a href={Tr(['mainHeading', 'crudeOilStatsLink_01'])}>{Tr(['mainHeading', 'crudeOilStats_01'])}</a>
-        {Tr(['mainHeading', 'and'])}
-        <a href={Tr(['mainHeading', 'crudeOilStatsLink_03'])}>{Tr(['mainHeading', 'crudeOilStats_03'])}</a>
-        {Tr(['mainHeading', 'closingBracket'])}
-      </div>
-    </div>)
-  }
-
   refinedPetroleumProductsImportsLink() {
     const { Tr } = this.props
     const language = this.props.language
@@ -236,7 +205,6 @@ class Header extends React.Component {
         {this.leftHeading()}
         {this.props.screenshot ? null : this.metaBar()}
         {this.resetExplanation()}
-        {this.crudeOilImportsLink()}
         {this.refinedPetroleumProductsImportsLink()}
       </div>
     )
