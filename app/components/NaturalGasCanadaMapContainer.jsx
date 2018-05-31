@@ -13,6 +13,7 @@ const NaturalGasCanadaMapContainer = props => (
       left={props.left}
       top={props.top}
       country="ca"
+      valueAverage
     />
   </g>
 )

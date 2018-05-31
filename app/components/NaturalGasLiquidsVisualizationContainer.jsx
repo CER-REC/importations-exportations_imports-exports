@@ -141,7 +141,6 @@ class NaturalGasLiquidsVisualizationContainer extends React.Component {
       <USPadd
       aggregateKey="productSubtype"
       valueAverage
-      isAverageException
       {...this.props.usPaddChart}
       />
       <NaturalGasLiquidsMapPieceActivityExplanation
