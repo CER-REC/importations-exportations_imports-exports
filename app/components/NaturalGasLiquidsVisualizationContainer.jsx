@@ -138,10 +138,12 @@ class NaturalGasLiquidsVisualizationContainer extends React.Component {
           </DetailSidebar>
         </g>
       )}
-      <USPadd 
-      aggregateKey="productSubtype" 
-      {...this.props.usPaddChart} 
-      valueAverage />
+      <USPadd
+      aggregateKey="productSubtype"
+      valueAverage
+      isAverageException
+      {...this.props.usPaddChart}
+      />
       <NaturalGasLiquidsMapPieceActivityExplanation
         {...this.props.mapPieceActivityExplanation}
       />

@@ -21,7 +21,7 @@ import Constants from '../Constants'
 import { legendMapPosition } from '../selectors/viewport/menus'
 
 const NaturalGasVisualizationContainer = (props) => {
-  const weighted = props.unit === 'CN$/GJ' ? 'weighted' : false
+  const weighted = props.unit === 'CN$/GJ' ? 'weighted' : true
   return (
     <g>
       {!props.showImports ? null : (

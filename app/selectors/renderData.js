@@ -60,6 +60,18 @@ export const calculateValueAverage = (data, groupBy, valueKey) => {
 
   return result
 }
+
+export const calculateValueAverageBySubType = (data, groupBy, valueKey) => {
+  const result = calculateValueSum(data, groupBy, valueKey)
+
+  Object.keys(result.values).forEach((groupKey) => {
+    Object.keys(result.values[groupKey]).forEach((vk) => {
+      result.values[groupKey][vk] /= result.totalPoints[groupKey][vk]
+    })
+  })
+  return result
+}
+
 calculateValueAverage.isSelector = false
 
 export const calculateValueWeighted = (data, groupByRaw, valueKey) => {
@@ -136,15 +148,19 @@ export const getFullyFilteredData = createSelector(
 
 export const getFullyFilteredValues = createSelector(
   getFullyFilteredData,
+  state => state.importExportVisualization,
   (_, props = {}) => props.groupBy,
   (_, props = {}) => props.valueKey,
   (_, props = {}) => props.valueAverage || false,
-  (filteredRecords, groupBy, valueKey, averageMode) => {
+  (_, props = {}) => props.isAverageException || false,
+  (filteredRecords, selectedVisualization, groupBy, valueKey, averageMode, isAverageException) => {
     let data
     if (averageMode === 'weighted') {
       data = calculateValueWeighted(filteredRecords, groupBy, valueKey)
     } else if (averageMode === true) {
-      data = calculateValueAverage(filteredRecords, groupBy, valueKey)
+      data = (selectedVisualization === 'naturalGasLiquids' && isAverageException)
+        ? calculateValueAverageBySubType(filteredRecords, groupBy, valueKey)
+        : calculateValueAverage(filteredRecords, groupBy, valueKey)
     } else {
       data = calculateValueSum(filteredRecords, groupBy, valueKey)
     }

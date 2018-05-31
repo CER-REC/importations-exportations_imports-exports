@@ -5,6 +5,7 @@ import { arrangeBy } from './data'
 import {
   calculateValueSum,
   calculateValueWeighted,
+  calculateValueAverage,
   getCountry,
   getFullyFilteredData,
 } from './renderData'
@@ -106,9 +107,14 @@ export const parseLocationData = createSelector(
   (_, props = {}) => props.valueAverage || false,
   (records, gridConstants, country, averageMode) => {
     const layout = gridConstants.get('layout', new Immutable.Map())
-    const data = averageMode === 'weighted'
-      ? calculateValueWeighted(records, ['originContinent', 'destinationContinent'], 'activity')
-      : calculateValueSum(records, ['originContinent', 'destinationContinent'], 'activity')
+    let data
+    if (averageMode === 'weighted') {
+      data = calculateValueWeighted(records, ['originContinent', 'destinationContinent'], 'activity')
+    } else if (averageMode === true) {
+      data = calculateValueAverage(records, ['originContinent', 'destinationContinent'], 'activity')
+    } else {
+      data = calculateValueSum(records, ['originContinent', 'destinationContinent'], 'activity')
+    }
 
     let tabIndex = getTabIndexStart(country)
     const tabIndexes = {}
