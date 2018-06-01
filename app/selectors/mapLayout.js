@@ -117,15 +117,15 @@ export const parseLocationData = createSelector(
         Object.entries(data.values).forEach(([key, value]) => {
           if (key.toLowerCase().includes('padd') || key.toLowerCase().includes('mexico')) return
           if (!calculatedValues[key]) {
-            calculatedValues[key] = {}
+            calculatedValues[key] = { imports:0 }
           }
           Object.entries(value).forEach(([subtype, amt]) => {
-            calculatedValues[key].imports = amt
+            calculatedValues[key].imports += amt
           })
         })
         data.values = calculatedValues
       } else {
-        data = calculateValueSum(records, ['originKey', 'destinationKey'], 'activity')
+        data = calculateValueAverage(records, ['originKey', 'destinationKey'], 'activity')
       }
     } else {
       data = calculateValueSum(records, ['originKey', 'destinationKey'], 'activity')
