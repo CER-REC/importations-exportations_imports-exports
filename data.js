@@ -217,17 +217,34 @@ const parsingIssue = {};
               if (next.forAverageDivisor || rateUnits.includes(unit)) {
                 const destination = next.destination || next.origin || next.port
                 if (!averageData[destination]) {
-                  averageData[destination] = { value: 0, divisor: 0 }
+                  if (visName === 'naturalGasLiquids') {
+                    averageData[destination] = {
+                      Propane: { value: 0, divisor: 0 },
+                      Butane: { value: 0, divisor: 0 },
+                    }
+                  } else {
+                    averageData[destination] = { value: 0, divisor: 0 }
+                  }
                 }
                 const averageDest = averageData[destination]
-                averageDest.value += (rateUnits.includes(unit) ? next.value : next.forAverageValue)
-                averageDest.divisor += (rateUnits.includes(unit) ? 1 : next.forAverageDivisor)
-
-                return {
-                  ...acc,
-                  [destination]: (averageDest.quantity === 0)
-                    ? 0
-                    : Math.round(averageDest.value / averageDest.divisor),
+                if (visName === 'naturalGasLiquids') {
+                  averageDest[next.productSubtype].value += (rateUnits.includes(unit) ? next.value : next.forAverageValue)
+                  averageDest[next.productSubtype].divisor += (rateUnits.includes(unit) ? 1 : next.forAverageDivisor)
+                  return {
+                    ...acc,
+                    [destination]: (averageDest['Propane'].quantity + averageDest['Butane'].quantity === 0)
+                      ? 0
+                      : Math.round(averageDest['Propane'].value / averageDest['Propane'].divisor) + Math.round(averageDest['Butane'].value / averageDest['Butane'].divisor),
+                  }
+                } else {
+                  averageDest.value += (rateUnits.includes(unit) ? next.value : next.forAverageValue)
+                  averageDest.divisor += (rateUnits.includes(unit) ? 1 : next.forAverageDivisor)
+                  return {
+                    ...acc,
+                    [destination]: (averageDest.quantity === 0)
+                      ? 0
+                      : Math.round(averageDest.value / averageDest.divisor),
+                  }
                 }
               }
               if (visName === 'crudeOilExports' || visName === 'naturalGasLiquids') {

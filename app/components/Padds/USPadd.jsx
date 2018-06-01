@@ -23,6 +23,7 @@ const USPadd = (props) => {
       paddingX={MapLayoutGridConstant.getIn(['PaddLayout', 'us', 'padding', key, 'left'], 0)}
       paddingY={MapLayoutGridConstant.getIn(['PaddLayout', 'us', 'padding', key, 'top'], 0)}
       country="us"
+      valueKeyException={props.valueKeyException}
       valueAverage={props.valueAverage}
       aggregateKey={props.aggregateKey}
       valueKey={props.valueKey}

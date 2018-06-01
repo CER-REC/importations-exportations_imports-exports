@@ -141,12 +141,17 @@ export const getFullyFilteredValues = createSelector(
   (_, props = {}) => props.groupBy,
   (_, props = {}) => props.valueKey,
   (_, props = {}) => props.valueAverage || false,
-  (filteredRecords, selectedVisualization, groupBy, valueKey, averageMode) => {
+  (_, props = {}) => props.aggregateKey || false,
+  (filteredRecords, selectedVisualization, groupBy, valueKey, averageMode, aggregateKey) => {
     let data
     if (averageMode === 'weighted') {
       data = calculateValueWeighted(filteredRecords, groupBy, valueKey)
     } else if (averageMode === true) {
-      data = calculateValueAverage(filteredRecords, groupBy, valueKey)
+      if (selectedVisualization === 'naturalGasLiquids' && aggregateKey) {
+        data = calculateValueAverage(filteredRecords, groupBy, aggregateKey)
+      } else {
+        data = calculateValueAverage(filteredRecords, groupBy, valueKey)
+      }
     } else {
       data = calculateValueSum(filteredRecords, groupBy, valueKey)
     }
