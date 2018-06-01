@@ -258,12 +258,12 @@ const Constants = fromJS({
       naturalGasLiquids: {
         productSubtype: {
           imports: {
-            Propane: 'rgb(202, 253, 113)',
-            Butane: 'rgb(60, 246, 178)',
+            Propane: 'rgb(244, 154, 130)',
+            Butane: 'rgb(127, 92, 91)',
           },
           exports: {
-            Propane: 'rgb(17, 44, 73)',
-            Butane: 'rgb(34, 111, 124)',
+            Propane: 'rgb(114, 151, 206)',
+            Butane: 'rgb(73, 93, 114)',
           },
         },
       },
