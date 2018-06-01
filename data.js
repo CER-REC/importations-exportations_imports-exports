@@ -210,7 +210,24 @@ const parsingIssue = {};
         // Loop over the units in this vis
         Object.keys(output[visName]).forEach((unit) => {
           // Take the values from the object for this unit
-          const unitPoints = Object.values(output[visName][unit])
+          let unitPoints = Object.values(output[visName][unit])
+          if (visName === 'crudeOilImports') {
+            // This is a dirty workaround for calculating bins by continent.
+            // We group all of the values for each continent and period into a
+            // single value, so that we average by (continent*periods) points
+            // instead of (countries*periods) points
+            unitPoints = Object.values(unitPoints.reduce((acc, next) => {
+              if (!acc[`${next.originContinent}-${next.period}`]) {
+                acc[`${next.originContinent}-${next.period}`] = {
+                  destination: next.originContinent,
+                  value: 0,
+                }
+              }
+              acc[`${next.originContinent}-${next.period}`].value += next.value
+              return acc
+            }, {}))
+          }
+
           const averageData = {}
           const regionValues = unitPoints
             .reduce((acc, next) => {
