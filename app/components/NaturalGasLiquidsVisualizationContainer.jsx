@@ -45,7 +45,6 @@ class NaturalGasLiquidsVisualizationContainer extends React.Component {
               valueKey="productSubtype"
               showGroup="imports"
               showHeader={false}
-              valueAverage
               colors={Constants.getIn(['styleGuide', 'categoryColours', 'naturalGasLiquids', 'productSubtype','imports'])}
               colorBox
               trContent={Tr.getIn(['detailBreakDown', 'naturalGasLiquids', 'imports'])}
@@ -71,7 +70,6 @@ class NaturalGasLiquidsVisualizationContainer extends React.Component {
                   type="imports"
                   filterActivity="imports"
                   showGroup="imports"
-                  valueAverage
                   groupBy="activity"
                   valueKey="productSubtype"
                 />
@@ -104,7 +102,6 @@ class NaturalGasLiquidsVisualizationContainer extends React.Component {
                   filterActivity="exports"
                   showGroup="exports"
                   groupBy="activity"
-                  valueAverage
                   valueKey="productSubtype"
                 />
                 <ConfidentialCount
@@ -130,7 +127,6 @@ class NaturalGasLiquidsVisualizationContainer extends React.Component {
               valueKey="productSubtype"
               showGroup="exports"
               showHeader={false}
-              valueAverage
               colors={Constants.getIn(['styleGuide', 'categoryColours', 'naturalGasLiquids', 'productSubtype', 'exports'])}
               colorBox
               trContent={Tr.getIn(['detailBreakDown', 'naturalGasLiquids', 'exports'])}
