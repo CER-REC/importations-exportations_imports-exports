@@ -149,6 +149,7 @@ class NaturalGasMapContainer extends React.PureComponent {
             <MapPiece
               value={port}
               confidential={this.props.data.getIn(['confidential', key], emptyMap)}
+              totalPoints={this.props.data.getIn(['totalPoints', key], emptyMap)}
               tilePosition={tilePosition}
               name={key}
               dimensions={dimensions}
