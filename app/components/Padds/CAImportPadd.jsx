@@ -16,6 +16,7 @@ const CAImportPadd = props => (
       paddingX={15}
       paddingY={0}
       country="ca"
+      valueAverage
     />
   </g>
 )
