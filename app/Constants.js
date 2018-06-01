@@ -322,6 +322,7 @@ const Constants = fromJS({
         },
       },
       continent: {
+        Canada: 'northAmerica',
         'United States': 'northAmerica',
         Alabama: 'northAmerica',
         Alaska: 'northAmerica',
@@ -386,8 +387,7 @@ const Constants = fromJS({
         Québec: 'northAmerica',
         'New Brunswick': 'northAmerica',
         'Nova Scotia': 'northAmerica',
-        'Atlantic provinces and Quebec': 'northAmerica',
-        'Atlantic provinces': 'northAmerica',
+        'Atlantic provinces and Québec': 'northAmerica',
         'Other provinces and territories': 'northAmerica',
         Mexico: 'northAmerica',
 
@@ -595,8 +595,7 @@ const Constants = fromJS({
           Québec: 'QC',
           'New Brunswick': 'NB',
           'Nova Scotia': 'NS',
-          'Atlantic provinces and Quebec': 'ATL-Q',
-          'Atlantic provinces': 'ATL',
+          'Atlantic provinces and Québec': 'ATL-Q',
           'Other provinces and territories': 'OtherProvinces',
         },
         us: {
