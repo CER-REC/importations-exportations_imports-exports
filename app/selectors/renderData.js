@@ -60,6 +60,7 @@ export const calculateValueAverage = (data, groupBy, valueKey) => {
 
   return result
 }
+
 calculateValueAverage.isSelector = false
 
 export const calculateValueWeighted = (data, groupByRaw, valueKey) => {
@@ -136,15 +137,21 @@ export const getFullyFilteredData = createSelector(
 
 export const getFullyFilteredValues = createSelector(
   getFullyFilteredData,
+  state => state.importExportVisualization,
   (_, props = {}) => props.groupBy,
   (_, props = {}) => props.valueKey,
   (_, props = {}) => props.valueAverage || false,
-  (filteredRecords, groupBy, valueKey, averageMode) => {
+  (_, props = {}) => props.aggregateKey || false,
+  (filteredRecords, selectedVisualization, groupBy, valueKey, averageMode, aggregateKey) => {
     let data
     if (averageMode === 'weighted') {
       data = calculateValueWeighted(filteredRecords, groupBy, valueKey)
     } else if (averageMode === true) {
-      data = calculateValueAverage(filteredRecords, groupBy, valueKey)
+      if (selectedVisualization === 'naturalGasLiquids' && aggregateKey) {
+        data = calculateValueAverage(filteredRecords, groupBy, aggregateKey)
+      } else {
+        data = calculateValueAverage(filteredRecords, groupBy, valueKey)
+      }
     } else {
       data = calculateValueSum(filteredRecords, groupBy, valueKey)
     }
@@ -186,12 +193,16 @@ export const barChartValues = createSelector(
   (_, props = {}) => props.groupBy,
   (_, props = {}) => props.valueKey,
   (_, props = {}) => props.valueAverage || false,
-  (records, activityFilter, subtypeFilter, groupBy, valueKey, averageMode) => {
+  (_, props = {}) => props.activityValueKey || false,
+  (records, activityFilter, subtypeFilter, groupBy, valueKey, averageMode, activityValueKey) => {
     const filteredRecords = records.filter((p) => {
       if (valueKey && p.get(valueKey, '') === '') { return false }
       if (p.get('product') === 'crudeOilExports' && valueKey === 'activity') {
         // If there is a subtype or transport, filter them out
         if (p.get('productSubtype', '') || p.get('transport')) { return false }
+      }
+      if (activityValueKey) {
+        return p.get('activity') === activityValueKey && subtypeFilter(p)
       }
       return activityFilter(p) && subtypeFilter(p)
     })

@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 
 
 import BarChart from './BarChart'
+import StackedChart from './StackedChart'
 import Axis from './Axis'
 import * as NaturalGasLiquidsViewport from '../selectors/viewport/naturalGasLiquids'
 import Constants from '../Constants'
@@ -24,26 +25,28 @@ class NaturalGasLiquidsVisualizationContainer extends React.Component {
   render() {
     return (<g>
       <NaturalGasCanadaMapContainer
+        aggregateKey="productSubtype"
         {...this.props.canadaMap}
       />
       {!this.props.showImports ? null : (
         <g>
-          <BarChart
+          <StackedChart
             {...this.props.importChart}
-            valueKey="activity"
+            valueKey="productSubtype"
             activityValueKey="imports"
             groupBy="period"
-            colour={Constants.getIn(['styleGuide', 'colours', 'ImportDefault'])}
-            tabIndex={Constants.getIn(['tabIndex', 'start', 'visualization', 'timeline'])}
+            scaleKey="total"
           />
           <DetailSidebar {...this.props.canadaMap}>
             <DetailBreakdown
               {...this.props.importChart}
+              height="auto"
               groupBy="activity"
-              showGroup="imports"
               valueKey="productSubtype"
+              showGroup="imports"
               showHeader={false}
-              color={Constants.getIn(['styleGuide', 'colours', 'ImportDefault'])}
+              colors={Constants.getIn(['styleGuide', 'categoryColours', 'naturalGasLiquids', 'productSubtype','imports'])}
+              colorBox
               trContent={Tr.getIn(['detailBreakDown', 'naturalGasLiquids', 'imports'])}
               nameMappings={Tr.get('subType')}
             />
@@ -82,14 +85,14 @@ class NaturalGasLiquidsVisualizationContainer extends React.Component {
       />
       {!this.props.showExports ? null : (
         <g>
-          <BarChart
+          <StackedChart
             {...this.props.exportChart}
-            flipped
-            valueKey="activity"
+            valueKey="productSubtype"
             activityValueKey="exports"
             groupBy="period"
-            colour={Constants.getIn(['styleGuide', 'colours', 'ExportDefault'])}
-            tabIndex={Constants.getIn(['tabIndex', 'start', 'visualization', 'timeline'])}
+            scaleKey="total"
+            valueAverage
+            flipped
           />
           <DetailSidebar {...this.props.exportChart}>
             <div className="verticalAlign">
@@ -119,18 +122,24 @@ class NaturalGasLiquidsVisualizationContainer extends React.Component {
           <DetailSidebar {...this.props.exportBreakdown}>
             <DetailBreakdown
               {...this.props.exportBreakdown}
+              height="auto"
               groupBy="activity"
-              showGroup="exports"
               valueKey="productSubtype"
+              showGroup="exports"
               showHeader={false}
-              color={Constants.getIn(['styleGuide', 'colours', 'ExportDefault'])}
+              colors={Constants.getIn(['styleGuide', 'categoryColours', 'naturalGasLiquids', 'productSubtype', 'exports'])}
+              colorBox
               trContent={Tr.getIn(['detailBreakDown', 'naturalGasLiquids', 'exports'])}
               nameMappings={Tr.get('subType')}
             />
           </DetailSidebar>
         </g>
       )}
-      <USPadd aggregateKey="productSubtype" {...this.props.usPaddChart} />
+      <USPadd
+      aggregateKey="productSubtype"
+      valueAverage
+      {...this.props.usPaddChart}
+      />
       <NaturalGasLiquidsMapPieceActivityExplanation
         {...this.props.mapPieceActivityExplanation}
       />

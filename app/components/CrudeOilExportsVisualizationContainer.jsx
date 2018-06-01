@@ -26,7 +26,7 @@ import Tr from '../TranslationTable'
 const categoryColours = Constants.getIn(['styleGuide', 'categoryColours'])
 const CrudeOilVisualizationContainer = props => (
   <g>
-    <CAPadd {...props.canadaPaddChart} />
+    <CAPadd valueAverage {...props.canadaPaddChart} />
     <StackedChart
       {...props.transportChart}
       valueKey="transport"
@@ -186,7 +186,7 @@ const CrudeOilVisualizationContainer = props => (
         </div>
       </div>
     </DetailSidebar>
-    <USPadd {...props.usPaddChart} />
+    <USPadd valueAverage {...props.usPaddChart}/>
     <DetailSidebar
       {...props.exportBreakdown}
     >

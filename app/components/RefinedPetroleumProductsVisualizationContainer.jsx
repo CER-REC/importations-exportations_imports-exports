@@ -152,8 +152,9 @@ class RefinedPetroleumProductsVisualizationContainer extends React.Component {
             type="exports"
             showGroup="exports"
             filterActivity="exports"
-            valueKey="activity"
+            valueKey="productSubtype"
             groupBy="activity"
+            valueAverage
           />
         </DetailSidebar>
         {this.props.arrangeBy === 'stack'

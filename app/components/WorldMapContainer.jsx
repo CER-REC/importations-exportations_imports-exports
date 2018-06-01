@@ -9,6 +9,7 @@ const WorldMapContainer = props => (
       left={props.left}
       top={props.top}
       country="world"
+      valueAverage
     />
   </g>
 )

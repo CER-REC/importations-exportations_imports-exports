@@ -39,6 +39,8 @@ const productMap = {
   RPPs: 'refinedPetroleumProducts',
 }
 
+const rateUnits = ['thousand m3/d', 'm3/d']
+
 const printingValidationError = (errorArray, region, point, type) => {
   // Printing error on the UI so that data can be verified
   if (region.get('isValid') === false) {
@@ -208,24 +210,58 @@ const parsingIssue = {};
         // Loop over the units in this vis
         Object.keys(output[visName]).forEach((unit) => {
           // Take the values from the object for this unit
-          const unitPoints = Object.values(output[visName][unit])
+          let unitPoints = Object.values(output[visName][unit])
+          if (visName === 'crudeOilImports') {
+            // This is a dirty workaround for calculating bins by continent.
+            // We group all of the values for each continent and period into a
+            // single value, so that we average by (continent*periods) points
+            // instead of (countries*periods) points
+            unitPoints = Object.values(unitPoints.reduce((acc, next) => {
+              if (!acc[`${next.originContinent}-${next.period}`]) {
+                acc[`${next.originContinent}-${next.period}`] = {
+                  destination: next.originContinent,
+                  value: 0,
+                }
+              }
+              acc[`${next.originContinent}-${next.period}`].value += next.value
+              return acc
+            }, {}))
+          }
+
           const averageData = {}
           const regionValues = unitPoints
             .reduce((acc, next) => {
-              if (next.forAverageDivisor) {
+              if (next.forAverageDivisor || rateUnits.includes(unit)) {
                 const destination = next.destination || next.origin || next.port
                 if (!averageData[destination]) {
-                  averageData[destination] = { value: 0, divisor: 0 }
+                  if (visName === 'naturalGasLiquids') {
+                    averageData[destination] = {
+                      Propane: { value: 0, divisor: 0 },
+                      Butane: { value: 0, divisor: 0 },
+                    }
+                  } else {
+                    averageData[destination] = { value: 0, divisor: 0 }
+                  }
                 }
                 const averageDest = averageData[destination]
-                averageDest.value += next.forAverageValue
-                averageDest.divisor += next.forAverageDivisor
-
-                return {
-                  ...acc,
-                  [destination]: (averageDest.quantity === 0)
-                    ? 0
-                    : Math.round(averageDest.value / averageDest.divisor),
+                if (visName === 'naturalGasLiquids') {
+                  averageDest[next.productSubtype].value += (rateUnits.includes(unit) ? next.value : next.forAverageValue)
+                  averageDest[next.productSubtype].divisor += (rateUnits.includes(unit) ? 1 : next.forAverageDivisor)
+                  return {
+                    ...acc,
+                    [destination]: (averageDest['Propane'].quantity + averageDest['Butane'].quantity === 0)
+                      ? 0
+                      : Math.round(averageDest['Propane'].value / averageDest['Propane'].divisor) + Math.round(averageDest['Butane'].value / averageDest['Butane'].divisor),
+                  }
+                } else {
+                  averageDest.value += (rateUnits.includes(unit) ? next.value : next.forAverageValue)
+                  averageDest.divisor += (rateUnits.includes(unit) ? 1 : next.forAverageDivisor)
+                  return {
+                    ...acc,
+                    [destination]: (averageDest.quantity === 0)
+                      ? 0
+                      : Math.round(averageDest.value / averageDest.divisor),
+                  }
                 }
               }
               if (visName === 'crudeOilExports' || visName === 'naturalGasLiquids') {

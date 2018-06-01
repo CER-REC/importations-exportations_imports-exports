@@ -5,6 +5,7 @@ import { arrangeBy } from './data'
 import {
   calculateValueSum,
   calculateValueWeighted,
+  calculateValueAverage,
   getCountry,
   getFullyFilteredData,
 } from './renderData'
@@ -101,12 +102,32 @@ export const parseLocationData = createSelector(
   getFullyFilteredData,
   getMapLayoutConstants,
   getCountry,
+  selectedVisualization,
   (_, props = {}) => props.valueAverage || false,
-  (records, gridConstants, country, averageMode) => {
+  (_, props = {}) => props.aggregateKey || false,
+  (records, gridConstants, country, visualization, averageMode, aggregateKey) => {
     const layout = gridConstants.get('layout', new Immutable.Map())
-    const data = averageMode === 'weighted'
-      ? calculateValueWeighted(records, ['originKey', 'destinationKey'], 'activity')
-      : calculateValueSum(records, ['originKey', 'destinationKey'], 'activity')
+    let data
+    if (averageMode === 'weighted') {
+      data = calculateValueWeighted(records, ['originKey', 'destinationKey'], 'activity')
+    } else if (averageMode === true) {
+      if (visualization === 'naturalGasLiquids' && aggregateKey) {
+        data = calculateValueSum(records, ['originKey', 'destinationKey'], aggregateKey)
+        const calculatedValues = {}
+        Object.entries(data.values).forEach(([key, value]) => {
+          if (key.toLowerCase().includes('padd') || key.toLowerCase().includes('mexico')) return
+          if (!calculatedValues[key]) {
+            calculatedValues[key] = {}
+          }
+          calculatedValues[key].imports = value.Propane + value.Butane
+        })
+        data.values = calculatedValues
+      } else {
+        data = calculateValueSum(records, ['originKey', 'destinationKey'], 'activity')
+      }
+    } else {
+      data = calculateValueSum(records, ['originKey', 'destinationKey'], 'activity')
+    }
 
     let tabIndex = getTabIndexStart(country)
     const tabIndexes = {}

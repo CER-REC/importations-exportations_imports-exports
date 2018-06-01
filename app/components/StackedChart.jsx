@@ -36,6 +36,15 @@ class StackedChart extends Chart {
     }
   }
 
+  componentWillReceiveProps(props) {
+    // Reset the axis guide when the scale changes.
+    // Watch scale since that changes the bar height, but use trueScale in order
+    // to put the guide on top of the tallest bar
+    if (this.getScale(props).getIn(['y', 'max']) !== this.getScale(this.props).getIn(['y', 'max'])) {
+      this.updateAxisGuide(this.getScale(props).getIn(['y', 'max']))
+    }
+  }
+
   updateAxisGuide = position => this.setState({ axisGuide: position })
 
   refinedPetroleumProductsBar() {
@@ -99,9 +108,12 @@ class StackedChart extends Chart {
       const lines = point
         .sortBy((v, k) => k, (a, b) => (valueOrder.indexOf(a) - valueOrder.indexOf(b)))
         .map((value, type) => {
-          const colorPath = this.props.valueKey
-            ? [selectedEnergy, this.props.valueKey, type]
-            : [selectedEnergy, type]
+          let colorPath = [selectedEnergy, type]
+          if (this.props.valueKey) {
+            colorPath = this.props.activityValueKey && selectedEnergy === 'naturalGasLiquids'
+              ? [selectedEnergy, this.props.valueKey, this.props.activityValueKey, type]
+              : [selectedEnergy, this.props.valueKey, type]
+          }
           const lineColor = categoryColours.getIn(colorPath, Constants.getIn(['styleGuide', 'colours', 'ExportDefault']))
           const offsetX = this.props.barPositions.get(period)
           const line = (

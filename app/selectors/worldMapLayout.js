@@ -5,6 +5,7 @@ import { arrangeBy } from './data'
 import {
   calculateValueSum,
   calculateValueWeighted,
+  calculateValueAverage,
   getCountry,
   getFullyFilteredData,
 } from './renderData'
@@ -46,21 +47,41 @@ const getTabIndexStart = (country) => {
   return tabIndex
 }
 
-export const createSortedLayout = createSelector(
+export const getWorldMapValues = createSelector(
   getFullyFilteredData,
+  (recordsRaw) => {
+    const seenContinentPeriods = [];
+    const records = recordsRaw.reduce((acc, next) => {
+      const continent = next.get('originContinent')
+      const seen = seenContinentPeriods.includes(`${continent}-${next.get('period')}`)
+      if (!seen) { seenContinentPeriods.push(`${continent}-${next.get('period')}`) }
+      if (!acc[continent]) {
+        acc[continent] = next.merge({
+          value: 0,
+          forAverageValue: 0,
+          forAverageDivisor: 0,
+          origin: continent,
+          originKey: continent,
+          country: continent,
+        }).toJS()
+      }
+      acc[continent].forAverageValue += next.get('value')
+      acc[continent].forAverageDivisor += (seen ? 0 : 1)
+      return acc
+    }, {})
+    return calculateValueWeighted(fromJS(records), 'originContinent', 'activity')
+  },
+)
+
+export const createSortedLayout = createSelector(
+  getWorldMapValues,
   arrangeBy,
   getCountry,
   getMapLayoutConstants,
-  (records, sortBy, country, gridConstants) => {
+  (data, sortBy, country, gridConstants) => {
     const layout = gridConstants.get('layout', new Immutable.Map())
     const columns = gridConstants.get('defaultColumns', 0)
     const rowPadding = gridConstants.get('sortingRowPadding', 0)
-    // TODO: This should calculate averages in some cases
-    const data = calculateValueSum(
-      records,
-      'originContinent',
-      'activity',
-    )
     const valuesToSort = {}
     layout.forEach((v) => {
       valuesToSort[v.get('name')] = data.values[v.get('name')] || {}
@@ -100,29 +121,24 @@ export const createSortedLayout = createSelector(
 )
 
 export const parseLocationData = createSelector(
-  getFullyFilteredData,
+  getWorldMapValues,
   getMapLayoutConstants,
   getCountry,
-  (_, props = {}) => props.valueAverage || false,
-  (records, gridConstants, country, averageMode) => {
+  (data, gridConstants, country, averageMode) => {
     const layout = gridConstants.get('layout', new Immutable.Map())
-    const data = averageMode === 'weighted'
-      ? calculateValueWeighted(records, 'originContinent', 'activity')
-      : calculateValueSum(records, 'originContinent', 'activity')
 
     let tabIndex = getTabIndexStart(country)
     const tabIndexes = {}
     const tilePositions = {}
 
-    if (records.count() !== 0 && typeof layout !== 'undefined') {
-      layout.forEach((region) => {
-        const originKey = region.get('originKey')
-        tabIndexes[originKey] = tabIndex
-        tabIndex += 1
+    layout.forEach((region) => {
+      const originKey = region.get('originKey')
+      tabIndexes[originKey] = tabIndex
+      tabIndex += 1
 
-        tilePositions[originKey] = { x: region.get('x'), y: region.get('y') }
-      })
-    }
+      tilePositions[originKey] = { x: region.get('x'), y: region.get('y') }
+    })
+
     return fromJS({ ...data, tabIndexes, tilePositions })
   },
 )

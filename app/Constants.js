@@ -255,6 +255,18 @@ const Constants = fromJS({
           'Middle Distillate': 'rgb(17, 44, 73)',
         },
       },
+      naturalGasLiquids: {
+        productSubtype: {
+          imports: {
+            Propane: 'rgb(244, 154, 130)',
+            Butane: 'rgb(127, 92, 91)',
+          },
+          exports: {
+            Propane: 'rgb(114, 151, 206)',
+            Butane: 'rgb(73, 93, 114)',
+          },
+        },
+      },
       crudeOilExports: {
         transport: {
           Marine: 'rgb(184, 184, 244)',
