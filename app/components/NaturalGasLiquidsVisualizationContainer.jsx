@@ -25,6 +25,7 @@ class NaturalGasLiquidsVisualizationContainer extends React.Component {
   render() {
     return (<g>
       <NaturalGasCanadaMapContainer
+        aggregateKey="productSubtype"
         {...this.props.canadaMap}
       />
       {!this.props.showImports ? null : (
