@@ -90,7 +90,7 @@ class NaturalGasLiquidMapLayout extends React.Component {
         if (typeof humanName === 'undefined') {
           return null
         }
-
+        console.log(key, layout.getIn(['values', key], emptyMap).toJS())
         return (
           <g key={`mapPieceKey_${this.props.country}_${key}`}>
             <g

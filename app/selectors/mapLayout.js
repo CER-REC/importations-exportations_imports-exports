@@ -119,7 +119,9 @@ export const parseLocationData = createSelector(
           if (!calculatedValues[key]) {
             calculatedValues[key] = {}
           }
-          calculatedValues[key].imports = value.Propane + value.Butane
+          Object.entries(value).forEach(([subtype, amt]) => {
+            calculatedValues[key].imports = amt
+          })
         })
         data.values = calculatedValues
       } else {
