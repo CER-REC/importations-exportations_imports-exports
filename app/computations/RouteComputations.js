@@ -98,8 +98,8 @@ const RouteComputations = {
   },
 
   screenshotURL(language) {
-    let path = `${RouteComputations.screenshotOrigin()}/${Constants.get('serviceScreenshotPath')}/`
-    path += `?pageUrl=${RouteComputations.screenshotParameter(language)}`
+    let path = `${RouteComputations.screenshotOrigin()}/${Constants.get('serviceScreenshotPath')}/?v=2`
+    path += `&pageUrl=${RouteComputations.screenshotParameter(language)}`
     path += `&width=${Constants.get('screenshotWidth')}&height=${Constants.get('screenshotHeight')}`
     path += `&host=${document.location.host}`
     return path

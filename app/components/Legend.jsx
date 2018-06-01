@@ -9,6 +9,7 @@ import Tr from '../TranslationTable'
 import { humanNumber } from '../utilities'
 import { binSelector } from '../selectors/data'
 import { legendBinsPosition } from '../selectors/viewport/menus'
+import { visualizationSettings } from '../selectors/visualizationSettings'
 
 import '../styles/Fonts.scss'
 import './Legend.scss'
@@ -19,6 +20,7 @@ class Legend extends React.Component {
       language: PropTypes.string.isRequired,
       importExportVisualization: PropTypes.string.isRequired,
       bins: PropTypes.instanceOf(Immutable.List).isRequired,
+      amountUnit: PropTypes.string.isRequired,
     }
   }
 
@@ -101,18 +103,29 @@ class Legend extends React.Component {
 
   textValues() {
     const bins = this.props.bins.toJS()
+    const unit = this.props.amountUnit
     let transformString = `translate(${Constants.getIn(['legend', 'textValuePosition'])} 0)`
     let zeroText = ''
+    let unitY
     if (this.props.importExportVisualization !== 'electricity') {
       zeroText = '0'
       transformString = `translate(${Constants.getIn(['legend', 'textValuePosition'])} 21)`
+      unitY = -20
     }
     if (this.props.importExportVisualization === 'crudeOilImports') {
-      transformString = `translate(45 21)`
+      transformString = 'translate(45 21)'
     }
     const humanNumberLang = v => humanNumber(v, this.props.language)
     return (
       <g transform={transformString}>
+
+        <text
+          className="theLegendHeading"
+          x={0}
+          y={unitY}
+        > {unit}
+        </text>
+
         {bins.map((value, i) => {
             if (value[0] === Number.MIN_SAFE_INTEGER && this.props.importExportVisualization === 'electricity') {
               return (
@@ -206,6 +219,7 @@ class Legend extends React.Component {
 const mapStateToProps = (state, props) => ({
   viewport: state.viewport,
   language: state.language,
+  amountUnit: visualizationSettings(state, props).get('amount'),
   importExportVisualization: state.importExportVisualization,
   bins: binSelector(state, props),
   ...legendBinsPosition(state, props),

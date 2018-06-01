@@ -46,6 +46,14 @@ class SocialBar extends React.Component {
     this.state = { screenshotURL: Constants.get('appHost') }
   }
 
+  componentDidMount() {
+    if (this.props.screenshot) {
+      this.makeBitlyPromise().then((url) => {
+        this.setState({ screenshotURL: url })
+      })
+    }
+  }
+
   makeBitlyPromise() {
     const bitlyEndpoint = RouteComputations.bitlyEndpoint(this.props.language)
     const shortenUrl = RouteComputations.bitlyParameter(this.props.language)
@@ -82,14 +90,6 @@ class SocialBar extends React.Component {
         return response.body.data.url
       })
       .catch(() => Constants.get('appHost'))
-  }
-
-  componentDidMount() {
-    if (this.props.screenshot) {
-      this.makeBitlyPromise().then((url) => {
-        this.setState({ screenshotURL: url })
-      })
-    }
   }
 
   greyBar() {
@@ -314,7 +314,7 @@ class SocialBar extends React.Component {
     let downloadImageTextX = '-6.35em'
     if (this.props.language === 'fr') {
       aboutTextX = '-4.5em'
-      methodologyTextX = '-6.1em'
+      methodologyTextX = '-3.8em'
       downloadDataTextX = '-5.9em'
       downloadImageTextX = '-11.6em'
     }

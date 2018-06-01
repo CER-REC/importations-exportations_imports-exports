@@ -59,7 +59,7 @@ export const createSortedLayout = createSelector(
     // TODO: This should calculate averages in some cases
     const data = calculateValueSum(
       records,
-      ['originContinent', 'destinationContinent'],
+      'originContinent',
       'activity',
     )
     const valuesToSort = {}
@@ -109,11 +109,11 @@ export const parseLocationData = createSelector(
     const layout = gridConstants.get('layout', new Immutable.Map())
     let data
     if (averageMode === 'weighted') {
-      data = calculateValueWeighted(records, ['originContinent', 'destinationContinent'], 'activity')
+      data = calculateValueWeighted(records, 'originContinent', 'activity')
     } else if (averageMode === true) {
-      data = calculateValueAverage(records, ['originContinent', 'destinationContinent'], 'activity')
+      data = calculateValueAverage(records, 'originContinent', 'activity')
     } else {
-      data = calculateValueSum(records, ['originContinent', 'destinationContinent'], 'activity')
+      data = calculateValueSum(records, 'originContinent', 'activity')
     }
 
     let tabIndex = getTabIndexStart(country)

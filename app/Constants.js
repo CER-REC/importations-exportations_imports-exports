@@ -209,7 +209,7 @@ const Constants = fromJS({
 
   appHost: 'https://apps2.neb-one.gc.ca',
   appScreenshotPath: 'screenshot',
-  serviceScreenshotPath: 'screenshotv2',
+  serviceScreenshotPath: 'screenshot',
 
   screenshotWidth: 1138,
   screenshotHeight: 930,
@@ -387,6 +387,7 @@ const Constants = fromJS({
         'New Brunswick': 'northAmerica',
         'Nova Scotia': 'northAmerica',
         'Atlantic provinces and Quebec': 'northAmerica',
+        'Atlantic provinces': 'northAmerica',
         'Other provinces and territories': 'northAmerica',
         Mexico: 'northAmerica',
 
