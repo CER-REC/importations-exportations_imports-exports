@@ -49,12 +49,60 @@ export const calculateValueSum = (data, groupByRaw, valueKey) => {
 }
 calculateValueSum.isSelector = false
 
-export const calculateValueAverage = (data, groupBy, valueKey) => {
-  const result = calculateValueSum(data, groupBy, valueKey)
+export const calculateValueAverage = (data, groupByRaw, valueKey, averageByRaw) => {
+  const averageBy = averageByRaw || valueKey
+  const groupByAll = [].concat(groupByRaw)
+  const result = data.reduce((acc, next) => {
+    groupByAll.forEach((groupBy) => {
+      const rowGroup = next.get(groupBy)
+      const rowKey = next.get(valueKey)
+      const avgKey = next.get(averageBy)
+
+      if (!acc.values[rowGroup]) { acc.values[rowGroup] = {} }
+      if (!acc.values[rowGroup][rowKey]) { acc.values[rowGroup][rowKey] = {} }
+      if (!acc.values[rowGroup][rowKey][avgKey]) { acc.values[rowGroup][rowKey][avgKey] = 0 }
+      if (!acc.totalPoints[rowGroup]) { acc.totalPoints[rowGroup] = {} }
+      if (!acc.totalPoints[rowGroup][rowKey]) { acc.totalPoints[rowGroup][rowKey] = {} }
+      if (!acc.totalPoints[rowGroup][rowKey][avgKey]) { acc.totalPoints[rowGroup][rowKey][avgKey] = 0 }
+      if (!acc.confidential[rowGroup]) { acc.confidential[rowGroup] = {} }
+      if (!acc.confidential[rowGroup][rowKey]) { acc.confidential[rowGroup][rowKey] = 0 }
+      if (!acc.missing[rowGroup]) { acc.missing[rowGroup] = {} }
+      if (!acc.missing[rowGroup][rowKey]) { acc.missing[rowGroup][rowKey] = 0 }
+
+      acc.values[rowGroup][rowKey][avgKey] += next.get('value', 0)
+      acc.totalPoints[rowGroup][rowKey][avgKey] += 1
+      if (next.get('confidential', false)) {
+        acc.confidential[rowGroup][rowKey] += 1
+      }
+      if (next.get('destination') === '(blank)') {
+        acc.missing[rowGroup][rowKey] += 1
+      }
+    })
+
+    return acc
+  }, {
+    values: {},
+    totalPoints: {},
+    confidential: {},
+    missing: {},
+  })
 
   Object.keys(result.values).forEach((groupKey) => {
     Object.keys(result.values[groupKey]).forEach((vk) => {
-      result.values[groupKey][vk] /= result.totalPoints[groupKey][vk]
+      let totalPoints = 0
+      let sum = 0
+      let averageByCount = 0
+      Object.keys(result.values[groupKey][vk]).forEach((avgKeyFlatten) => {
+        totalPoints += result.totalPoints[groupKey][vk][avgKeyFlatten]
+        sum += result.values[groupKey][vk][avgKeyFlatten]
+        averageByCount += 1
+      })
+      // If valueKey and averageBy are the same, get an overall average, otherwise
+      // sum by valueKey and average across averageBy
+      result.values[groupKey][vk] = (valueKey === averageBy)
+        ? sum / totalPoints
+        : sum / averageByCount
+      result.totalPoints[groupKey][vk] = totalPoints
     })
   })
 
@@ -142,15 +190,16 @@ export const getFullyFilteredValues = createSelector(
   (_, props = {}) => props.valueKey,
   (_, props = {}) => props.valueAverage || false,
   (_, props = {}) => props.aggregateKey || false,
-  (filteredRecords, selectedVisualization, groupBy, valueKey, averageMode, aggregateKey) => {
+  (_, props = {}) => props.averageBy,
+  (filteredRecords, selectedVisualization, groupBy, valueKey, averageMode, aggregateKey, averageBy) => {
     let data
     if (averageMode === 'weighted') {
       data = calculateValueWeighted(filteredRecords, groupBy, valueKey)
     } else if (averageMode === true) {
       if (selectedVisualization === 'naturalGasLiquids' && aggregateKey) {
-        data = calculateValueAverage(filteredRecords, groupBy, aggregateKey)
+        data = calculateValueAverage(filteredRecords, groupBy, aggregateKey, averageBy)
       } else {
-        data = calculateValueAverage(filteredRecords, groupBy, valueKey)
+        data = calculateValueAverage(filteredRecords, groupBy, valueKey, averageBy)
       }
     } else {
       data = calculateValueSum(filteredRecords, groupBy, valueKey)
