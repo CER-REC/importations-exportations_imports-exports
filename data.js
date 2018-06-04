@@ -110,14 +110,19 @@ const parsingIssue = {};
 
     printingValidationError(parsingIssue, originRegion, point, 'origin')
     printingValidationError(parsingIssue, destinationRegion, point, 'destination')
-
+    let destinationCountry= destinationRegion.get('country') || ''
+    let destinationKey = destinationRegion.get('originKey') || ''
+    if (point.product === 'crudeOilImports' && destinationCountry === 'Canada') {
+      destinationCountry = 'ca'
+      destinationKey = 'ca'
+    }
     return {
       ...point,
       country: originRegion.get('country') || '',
       originKey: originRegion.get('originKey') || '',
       originContinent: originRegion.get('continent') || '',
-      destinationCountry: destinationRegion.get('country') || '',
-      destinationKey: destinationRegion.get('originKey') || '',
+      destinationCountry,
+      destinationKey,
       destinationContinent: destinationRegion.get('continent') || '',
     }
   }))
@@ -131,7 +136,7 @@ const parsingIssue = {};
     if (!outUnit[point.period]) { outUnit[point.period] = [] }
 
     // Fix destinations for crude oil when not destined for a PADD
-    if (point.product === 'crudeOilExports' && point.destination === '') {
+    if ((point.product === 'crudeOilExports' || point.product === 'crudeOilImports') && point.destination === '') {
       point.destination = 'ca'
     }
 
