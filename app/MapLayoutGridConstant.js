@@ -310,6 +310,7 @@ const MapLayoutGridConstant = fromJS({
       mapPieceScale: 2,
       defaultColumns: 3,
       sortingRowPadding: 0.25,
+      mapPieceScaleVariant: 1,
       dimensions: {
         height: 37.09,
         width: 74,
@@ -343,6 +344,32 @@ const MapLayoutGridConstant = fromJS({
           y: 10,
         },
       },
+      stylesVariant: {
+        color: '#ede3cb',
+        labelPosition: 'down',
+        labelLineSpacing: 14,
+        arrowPosition: 'up',
+        arrowSpacing: 5,
+        bottomMargin: 5,
+        topMargin: 0,
+        confidentialStyle: {
+          fill: '#999',
+          stroke: '#999',
+          exclamationFill: '#fff',
+        },
+        mapPieceTextStyle: {
+          x: 10.68,
+          y: 10,
+        },
+        mapPieceArrowStyle: {
+          x: 0,
+          y: -16,
+        },
+        mapPieceArrowStyleCenter: {
+          x: -1,
+          y: 10,
+        },
+      },
       layout: [
         {
           name: 'northAmerica', originKey: 'northAmerica', x: -0.05, y: 0,
@@ -363,7 +390,7 @@ const MapLayoutGridConstant = fromJS({
           name: 'oceania', originKey: 'oceania', x: 2.1, y: 1.25,
         },
         {
-          name: 'otherCountries', originKey: 'otherCountries', x: 2.1, y: 3,
+          name: 'otherCountries', originKey: 'otherCountries', x: 4.1, y: 6.5,
         },
       ],
     },

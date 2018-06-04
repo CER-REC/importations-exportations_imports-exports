@@ -6,6 +6,7 @@ import PropTypes from 'prop-types'
 import MapPiece from './MapPiece'
 import MapLayoutGridConstant from '../MapLayoutGridConstant'
 import Constants from '../Constants'
+import Tr from '../TranslationTable'
 import TrSelector from '../selectors/translate'
 import { visualizationSettings } from '../selectors/visualizationSettings'
 
@@ -67,6 +68,7 @@ class WorldMapLayout extends React.Component {
     const length = this.props.selection.get('continents').count()
     return (length > 0)
   }
+
   renderMapPiece() {
     // Data from constant file
     const type = 'crudeOilImports'
@@ -74,9 +76,9 @@ class WorldMapLayout extends React.Component {
     // fetching nested values
     const mapLayoutGrid = MapLayoutGridConstant.getIn([type, this.props.country])
     const dimensions = mapLayoutGrid.get('dimensions')
-    const styles = mapLayoutGrid.get('styles')
+    let styles = mapLayoutGrid.get('styles')
     const { layout } = this.props
-    const mapPieceScale = mapLayoutGrid.get('mapPieceScale')
+    let mapPieceScale = mapLayoutGrid.get('mapPieceScale')
 
     const isSelected = this.isSelected()
     return layout
@@ -85,6 +87,14 @@ class WorldMapLayout extends React.Component {
       .map((position, key) => {
         const humanName = this.props.Tr(['country', this.props.country, key])
         const value = layout.getIn(['values', key], emptyMap)
+        if (key === 'otherCountries') {
+          mapPieceScale = mapLayoutGrid.get('mapPieceScaleVariant')
+          styles = mapLayoutGrid.get('stylesVariant')
+        }
+        if (key === 'southAmerica') {
+          mapPieceScale = mapLayoutGrid.get('mapPieceScale')
+          styles = mapLayoutGrid.get('styles')
+        }
         return (
           <g key={`mapPieceKey_${this.props.country}_${key}`}>
             <g
