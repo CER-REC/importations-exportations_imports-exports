@@ -31,6 +31,10 @@ class MapPieceLabel extends React.Component {
       xAxis = 20
       yAxis = -40
     }
+    if (name === 'Contributions\nà faible volume') {
+      xAxis = 20
+      yAxis = -40
+    }
     if (name && name.includes('\n')) {
       const splitName = name.split('\n')
       return (

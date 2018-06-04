@@ -1427,7 +1427,7 @@ const TranslationTable = fromJS({
       },
       otherCountries: {
         en: 'Low Volume\nContributions',
-        fr: 'Contributions\nà faible\nvolume',
+        fr: 'Contributions\nà faible volume',
       },
     },
   },
