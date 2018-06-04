@@ -466,10 +466,18 @@ class MapPiece extends React.Component {
     if (this.props.selectedEnergy === 'naturalGasLiquids' && this.props.arrangeBy !== 'location') {
       textY = 10
     }
+    if (this.props.selectedEnergy === 'naturalGas') {
+      scaleContainerX = this.props.viewport.get('changeWidthRatio') > 1.2 ? 185 : 195
+      scaleContainerY = this.props.viewport.get('changeHeightRatio') > 1.2 ? 230 : 240
+      containerX = this.props.x1 * MapLayoutGridConstant.getIn(['naturalGas', 'mapPieceScale'], 1) + scaleContainerX
+      containerY = this.props.y1 * MapLayoutGridConstant.getIn(['naturalGas', 'mapPieceScale'], 1) + scaleContainerY
+    }
     if (this.props.country && this.props.country === 'powerpool') {
       containerX += 13
     }
-
+    if (this.props.selectedEnergy === 'naturalGas') {
+      textY = 12
+    }
     let strokeWidth = 1
     if (this.props.dimensions.get('strokeWidth')) {
       strokeWidth = this.props.dimensions.get('strokeWidth')
