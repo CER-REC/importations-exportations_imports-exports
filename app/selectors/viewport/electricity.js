@@ -13,7 +13,7 @@ export const canadaMapPosition = createSelector(
     return {
       // Move up by 30px to give barchart space for negative values and outliers
       top: visContent.top - 30,
-      left: visContent.left + (viewp.get('changeWidthRatio') * 50),
+      left: visContent.left + (viewp.get('changeWidthRatio') * 50) - 30,
       width: visContent.width,
       height,
     }
@@ -27,7 +27,7 @@ export const chartImportPosition = createSelector(
     const result = {
       // Move down by 30px to give barchart space for negative values and outliers
       top: prev.top + prev.height + 30,
-      left: prev.left - (viewp.get('changeWidthRatio') * 50),
+      left: prev.left - (viewp.get('changeWidthRatio') * 50) + 30,
       width: prev.width,
       height: 100,
     }

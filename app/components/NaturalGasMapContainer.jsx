@@ -182,8 +182,10 @@ class NaturalGasMapContainer extends React.PureComponent {
       const isProvinceSelected = this.props.selectionSettings.get('provinces').indexOf(province)
       const provinceClass = isProvinceSelected !== -1 ? 'provinceSelected' : 'provinceDeselected'
       const provinceTextColor = isProvinceSelected !== -1 ? 'portSelectedProvinceLabel' : 'portProvinceLabel'
+      let provinceText = provinceTextPosition - 1
       if (province === 'CAN') {
         provinceTextPosition += this.props.viewport.get('changeWidthRatio') > 1.2 ? 35 : 20
+        provinceText = provinceTextPosition - 4
       }
       return (
         <g className="paddLayout" key={`NaturalGasMap_${province}`} >
@@ -199,7 +201,7 @@ class NaturalGasMapContainer extends React.PureComponent {
           />
           <text
             className={provinceTextColor}
-            x={provinceTextPosition - 3}
+            x={provinceText}
             y={dimensions.get('topPadding') + 13}
             {...handleInteractionWithTabIndex(tabIndex, this.onClick, '', province)}
           >{province}
