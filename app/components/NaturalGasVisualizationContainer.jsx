@@ -55,8 +55,9 @@ const NaturalGasVisualizationContainer = (props) => {
                   filterActivity="imports"
                   showGroup="imports"
                   groupBy="activity"
-                  valueKey="activity"
+                  valueKey="port"
                   valueAverage={weighted}
+                  averageBy="period"
                 />
               </div>
             </div>
@@ -88,8 +89,9 @@ const NaturalGasVisualizationContainer = (props) => {
                   filterActivity="exports"
                   showGroup="exports"
                   groupBy="activity"
-                  valueKey="activity"
+                  valueKey="port"
                   valueAverage={weighted}
+                  averageBy="period"
                 />
                 <ConfidentialCount
                   valueKey="destinationKey"
