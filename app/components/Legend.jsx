@@ -156,8 +156,11 @@ class Legend extends React.Component {
                 <text className="theLegendValues" y={(i * 20) + 20}>
                   {`> ${humanNumberLang(value[0])}`}
                 </text>
-                <text className="theLegendValues" y={(i * 20) + 20} x="38">
-                  {`- ${humanNumberLang(value[1])}`}
+                <text className="theLegendValues" y={(i * 20) + 20} x="44">
+                  -
+                </text>
+                <text className="theLegendValues" y={(i * 20) + 20} x="58">
+                  {`${humanNumberLang(value[1])}`}
                 </text>
               </g>
             )

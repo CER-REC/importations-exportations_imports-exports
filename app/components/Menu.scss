@@ -13,4 +13,10 @@
   .menuOption, .uppercase {
     text-transform: uppercase;
   }
+
+  .menuOption .prefix {
+    text-transform: none;
+    font-family: "FiraSansCondensed", sans-serif;
+    fill: #999;
+  }
 }

@@ -27,11 +27,7 @@ class MapPieceLabel extends React.Component {
 
   renderText(name, xAxis, yAxis) {
     if (name === 'ATL-Q') { return null }
-    if (name === 'Low Volume\nContributions') {
-      xAxis = 20
-      yAxis = -40
-    }
-    if (name === 'Contributions\nà faible volume') {
+    if (name === 'Low Volume\nContributions' || name === 'Contributions\nà faible volume') {
       xAxis = 20
       yAxis = -40
     }

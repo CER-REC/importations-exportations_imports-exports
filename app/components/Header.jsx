@@ -34,7 +34,7 @@ class Header extends React.Component {
   }
 
   resetExplanation() {
-    const scaleContainerX = this.props.viewport.get('changeWidthRatio') > 1.2 ? 1000 : 800
+    const scaleContainerX = this.props.viewport.get('changeWidthRatio') > 1.2 ? 910 : 710
     const scaleContainerY = this.props.viewport.get('changeHeightRatio') > 1.2 ? 65 : 50
     let textString = `${this.props.Tr(['explanations', 'reset'])}`
     let dotName = 'electricityTitleExplanation'
@@ -75,7 +75,7 @@ class Header extends React.Component {
           lineY={173}
           textX={-100}
           textY={-58}
-          containerX={0}
+          containerX={100}
           containerY={0}
           name={dotName}
           text={textString}
