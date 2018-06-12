@@ -13,25 +13,6 @@ const textOffset = Constants.getIn(['menuBar', 'textLabelOffset'])
   + Constants.getIn(['menuBar', 'expandedMenuTextMargin'])
 
 const SelectedPrefix = memoize((of) => {
-  const UnmemoizedSelectedPrefix = ({ y, height }) => (
-    <g>
-      <rect
-        x={-textOffset}
-        y={y - 1}
-        width={textOffset + 1}
-        height={height + 2}
-        fill="#666"
-      />
-      <text x={3} y={0} fill="#999" textAnchor="end" aria-hidden>{of}&nbsp;</text>
-    </g>
-  )
-
-  UnmemoizedSelectedPrefix.propTypes = {
-    y: PropTypes.number.isRequired,
-    height: PropTypes.number.isRequired,
-  }
-
-  return UnmemoizedSelectedPrefix
 })
 
 const VisualizationSelector = (props) => {
@@ -76,14 +57,13 @@ const VisualizationSelector = (props) => {
       )
 
       let prefix = null
-      let transformString = ''
       if (props.language === 'fr' && props.importExportVisualization === 'electricity') {
-        prefix = SelectedPrefix(Tr(['menu', 'ofElectricity']))
-        transformString = 'translate(14 0)'
+        prefix =
+          <tspan className="prefix" aria-hidden>{Tr(['menu', 'ofElectricity'])}&nbsp;</tspan>
       }
       if (props.language === 'fr' && props.importExportVisualization !== 'electricity') {
-        prefix = SelectedPrefix(Tr(['menu', 'of']))
-        transformString = 'translate(18 0)'
+        prefix =
+          <tspan className="prefix" aria-hidden>{Tr(['menu', 'of'])}&nbsp;</tspan>
       }
 
       if (option === props.importExportVisualization) {
@@ -96,16 +76,13 @@ const VisualizationSelector = (props) => {
             tabIndex={tabIndex}
             aria-label={Tr(['unabbreviated', 'mainMenuBar', option])}
           >
-            <g transform={transformString}>
-              <TextBox
-                padding={1}
-                boxStyles={{ fill: '#666' }}
-                textStyles={{ className: 'bold menuOption', style: { fill: '#fff' } }}
-                unsizedContent={prefix}
-              >
-                &nbsp;{translated}&nbsp;
-              </TextBox>
-            </g>
+            <TextBox
+              padding={1}
+              boxStyles={{ fill: '#666' }}
+              textStyles={{ className: 'bold menuOption', style: { fill: '#fff' } }}
+            >
+              &nbsp;{prefix}{translated}&nbsp;
+            </TextBox>
           </g>
         )
       }
