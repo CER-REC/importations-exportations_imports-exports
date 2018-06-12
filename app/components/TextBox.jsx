@@ -85,12 +85,12 @@ class TextBox extends React.PureComponent {
         {unsizedContent}
         <rect
           {...this.props.boxStyles}
-          width={this.state.width + (this.props.padding * 2) + 3}
+          width={this.state.width + (this.props.padding * 2)}
           height={this.state.height + (this.props.padding * 2)}
           x={this.state.x - this.props.padding}
           y={this.state.y - this.props.padding}
         />
-        <text transform='translate(2 0)'
+        <text
           {...this.props.textStyles}
           ref={this.trackTextRef}
         >

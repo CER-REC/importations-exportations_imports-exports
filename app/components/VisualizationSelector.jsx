@@ -90,7 +90,7 @@ const VisualizationSelector = (props) => {
         el = (
           <g
             key={option}
-            transform={`translate(3 ${yOffset})`}
+            transform={`translate(4 ${yOffset})`}
             aria-current
             role="menuitem"
             tabIndex={tabIndex}
@@ -103,7 +103,7 @@ const VisualizationSelector = (props) => {
                 textStyles={{ className: 'bold menuOption', style: { fill: '#fff' } }}
                 unsizedContent={prefix}
               >
-                {translated}&nbsp;
+                &nbsp;{translated}&nbsp;
               </TextBox>
             </g>
           </g>
