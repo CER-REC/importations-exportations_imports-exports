@@ -250,10 +250,9 @@ export const barChartValues = createSelector(
         // If there is a subtype or transport, filter them out
         if (p.get('productSubtype', '') || p.get('transport')) { return false }
       }
-      if (activityValueKey) {
-        return p.get('activity') === activityValueKey && subtypeFilter(p)
-      }
-      return activityFilter(p) && subtypeFilter(p)
+      if (!activityFilter(p) || !subtypeFilter(p)) { return false }
+      if (activityValueKey) { return p.get('activity') === activityValueKey }
+      return true
     })
 
     let data
