@@ -1,6 +1,6 @@
 {
   "name": "import-export-visualization",
-  "version": "1.2.4",
+  "version": "1.2.5",
   "description": "visualization of import export data for the NEB",
   "main": "index.js",
   "scripts": {
