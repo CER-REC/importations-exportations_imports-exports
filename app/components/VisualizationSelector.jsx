@@ -90,7 +90,7 @@ const VisualizationSelector = (props) => {
         el = (
           <g
             key={option}
-            transform={`translate(4 ${yOffset})`}
+            transform={`translate(3 ${yOffset})`}
             aria-current
             role="menuitem"
             tabIndex={tabIndex}
