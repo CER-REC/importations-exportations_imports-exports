@@ -50,7 +50,7 @@ const ElectricityVisualizationContainer = (props) => {
           colour={Constants.getIn(['styleGuide', 'colours', 'ImportDefault'])}
           tabIndex={Constants.getIn(['tabIndex', 'start', 'visualization', 'timeline'])}
         />
-        {!props.selectedCountry ? null : (
+        {props.selectedTiles === 0 ? null : (
           <DetailSidebar {...props.canadaMap}>
             <DetailBreakdown
               {...props.canadaMap}
@@ -137,7 +137,7 @@ const ElectricityVisualizationContainer = (props) => {
             </div>
           </div>
         </DetailSidebar>
-        {!props.selectedCountry ? null : (
+        {props.selectedTiles === 0 ? null : (
           <DetailSidebar {...props.usMap} height={props.usMap.height - 40}>
             <DetailBreakdown
               {...props.usMap}
@@ -191,6 +191,8 @@ export default connect((state, props) => ({
   unit: amount(state, props),
   showImports: showImportsSelector(state, props),
   showExports: showExportsSelector(state, props),
+  selectedTiles: visualizationSettings(state, props)
+    .getIn(['selection', 'origins']).count(),
   selectedCountry: visualizationSettings(state, props)
     .getIn(['selection', 'country'], ''),
 }))(ElectricityVisualizationContainer)
