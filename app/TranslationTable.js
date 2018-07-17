@@ -853,8 +853,8 @@ const TranslationTable = fromJS({
         },
         body: {
           action: {
-            en: 'to',
-            fr: 'à',
+            en: 'from',
+            fr: 'de',
           },
         },
       },
@@ -879,8 +879,8 @@ const TranslationTable = fromJS({
         },
         body: {
           action: {
-            en: 'from',
-            fr: 'de',
+            en: 'to',
+            fr: 'à',
           },
         },
       },
