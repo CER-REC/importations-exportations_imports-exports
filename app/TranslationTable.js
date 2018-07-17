@@ -839,16 +839,16 @@ const TranslationTable = fromJS({
             fr: 'Exportations',
           },
           action: {
-            en: 'from',
-            fr: 'de',
+            en: '',
+            fr: '',
           },
           adjective: {
-            en: 'selected',
-            fr: 'ces',
+            en: '',
+            fr: '',
           },
           place: {
-            en: 'Regions',
-            fr: 'Régions',
+            en: '',
+            fr: '',
           },
         },
         body: {
@@ -865,16 +865,16 @@ const TranslationTable = fromJS({
             fr: 'Importations',
           },
           action: {
-            en: 'to',
-            fr: 'par',
+            en: '',
+            fr: '',
           },
           adjective: {
-            en: 'selected',
-            fr: 'ces',
+            en: '',
+            fr: '',
           },
           place: {
-            en: 'Regions',
-            fr: 'Régions',
+            en: '',
+            fr: '',
           },
         },
         body: {
