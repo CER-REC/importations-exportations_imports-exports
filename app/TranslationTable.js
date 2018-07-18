@@ -838,18 +838,6 @@ const TranslationTable = fromJS({
             en: 'Exports',
             fr: 'Exportations',
           },
-          action: {
-            en: '',
-            fr: '',
-          },
-          adjective: {
-            en: '',
-            fr: '',
-          },
-          place: {
-            en: '',
-            fr: '',
-          },
         },
         body: {
           action: {
@@ -863,18 +851,6 @@ const TranslationTable = fromJS({
           type: {
             en: 'Imports',
             fr: 'Importations',
-          },
-          action: {
-            en: '',
-            fr: '',
-          },
-          adjective: {
-            en: '',
-            fr: '',
-          },
-          place: {
-            en: '',
-            fr: '',
           },
         },
         body: {
