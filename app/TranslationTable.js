@@ -808,8 +808,8 @@ const TranslationTable = fromJS({
 
   downloadable: {
     csv: {
-      en: 'data.csv',
-      fr: 'data.csv',
+      en: 'NEB 2018-DD-MM Data.csv',
+      fr: 'NEB 2018-DD-MM Les données.csv',
     },
   },
 
