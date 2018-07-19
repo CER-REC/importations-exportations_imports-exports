@@ -25,6 +25,7 @@ const DetailBreakdown = (props) => {
         <tbody>
           <DetailBreakdownBody
             trContent={props.trContent.get('body')}
+            selectedCountry={props.selectedCountry}
             color={props.color}
             colors={props.colors}
             data={data}
@@ -61,6 +62,7 @@ DetailBreakdown.propTypes = {
   showGroup: PropTypes.string.isRequired,
   data: PropTypes.instanceOf(Immutable.Map).isRequired,
   total: PropTypes.bool,
+  selectedCountry: PropTypes.string.isRequired,
 }
 
 export default connect((state, props) => ({
