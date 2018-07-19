@@ -39,7 +39,7 @@ const DetailBreakdownBody = (props) => {
         <DetailBreakdownRow
           key={key /* eslint-disable-line react/no-array-index-key */}
           name={`${props.amountUnit}-${props.showGroup}-${key}`}
-          labelPrefix={(SwitchLabelPrefixOnUS(bodyContent.getIn(['action', props.language]), props.language, props.selectedCountry, props.showGroup))}
+          labelPrefix={(SwitchLabelPrefixOnUS(bodyContent.getIn(['action', props.language]), props.selectedCountry))}
           label={name}
           labelSuffix={bodyContent.getIn(['suffix', props.language])}
           value={value}
