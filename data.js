@@ -64,7 +64,7 @@ const humanNumber = (v) => {
 const parsingIssue = {};
 
 (new Promise(resolve => resolve(csvParse(
-  fs.readFileSync(Path.resolve(__dirname, 'public/data/data.csv')),
+  fs.readFileSync(Path.resolve(__dirname, 'public/data/NEB_imports_exports_data.csv')),
   {
     // Use the callback method to replace the file headers with our own
     columns: () => ['period', 'product', 'productSubtype', 'transport', 'origin', 'destination', 'port', 'activity', 'units', 'value'],
