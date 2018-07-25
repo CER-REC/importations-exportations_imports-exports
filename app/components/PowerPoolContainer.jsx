@@ -15,25 +15,19 @@ class PowerPoolContainer extends React.Component {
   }
 
   powerpoolLabel() {
-    if (this.props.language !== 'en') {
-      return (
-        <g transform="translate(2.5 0)">
-          <text
-            className="powerPoolLabel"
-          >
-            {Tr.getIn(['country', 'powerpool', 'powerPools', this.props.language])}
-          </text>
-        </g>)
-    }
-    return (
-      <g transform="translate(25 0)">
-        <text
-          className="powerPoolLabel"
-        >
-          {Tr.getIn(['country', 'powerpool', 'powerPools', this.props.language])}
-        </text>
-      </g>
+    const powerPoolText = (
+      <text className="powerPoolLabel" >
+        {Tr.getIn(['country', 'powerpool', 'powerPools', this.props.language])}
+      </text>)
+    const positionedPowerPoolText = (this.props.language !== 'en') ? (
+      <g transform="translate(2.5 0)">
+        {powerPoolText}
+      </g>) : (
+        <g transform="translate(25 0)">
+          {powerPoolText}
+        </g>
     )
+    return positionedPowerPoolText
   }
 
   powerpoolExplanation() {
