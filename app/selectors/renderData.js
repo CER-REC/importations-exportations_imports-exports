@@ -265,6 +265,8 @@ export const barChartValues = createSelector(
   },
 )
 
+export const filterData = createSelector(barChartValues, values => values)
+
 export const barChartTotal = createSelector(
   barChartValues,
   (_, props = {}) => props.showGroup,

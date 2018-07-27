@@ -11,9 +11,8 @@ import { timelineData, timeLineScaleValue, timeLineScaleValueByProductSubtype } 
 import { groupingBy as timelineGrouping } from '../selectors/data'
 import { visualizationSettings } from '../selectors/visualizationSettings'
 import { toggleOutlier } from '../actions/chartOutliers'
-
 import trSelector from '../selectors/translate'
-
+import { filterData } from '../selectors/renderData'
 import ExplanationDot from './ExplanationDot'
 
 class BarChart extends Chart {
@@ -42,6 +41,11 @@ class BarChart extends Chart {
   }
 
   componentWillReceiveProps(props) {
+    console.log('This is all the props')
+    console.log(this.props.fullprops)
+
+    console.log('This is all the state')
+    console.log(this.props.fullstate)
     // Reset the axis guide when the scale changes.
     // Watch scale since that changes the bar height, but use trueScale in order
     // to put the guide on top of the tallest bar
@@ -204,6 +208,9 @@ class BarChart extends Chart {
       tabIndex,
       expandedOutliers,
     } = this.props
+    // console.log(this.props.timelineData.bars.getIn(['values']))
+    console.log('This is the timelinedata from the filter function')
+    console.log(this.props.timelineData)
     const barSize = layout.get('barWidth')
     const scale = this.getScale(this.props)
     const heightPerUnit = this.calculateHeightPerUnit()
@@ -309,11 +316,14 @@ export default connect(
     viewport: state.viewport,
     timelineGroup: timelineGrouping(state, props),
     selectedEnergy: state.importExportVisualization,
+    fullState: state.viewport,
+    fullprops: props,
     unit: visualizationSettings(state, props).get('amount'),
     tr: trSelector(state, props),
     expandedOutliers: state.chartOutliers,
     scale: timeLineScaleValue(state, props),
     scaleByProductSubType: timeLineScaleValueByProductSubtype(state, props),
+    timelineData: filterData(state, props),
   }, timelineData(state, props)),
   { toggleOutlier },
 )(BarChart)

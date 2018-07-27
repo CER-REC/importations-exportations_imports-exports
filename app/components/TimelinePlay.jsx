@@ -1,13 +1,14 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-
 import { setTimelinePlayback, resetTimelinePlayback } from '../actions/timelinePlayback'
 import { timelineYearScaleCalculation } from '../selectors/timeline'
 import { timelineRange, timelinePlayback, groupingBy as timelineGrouping } from '../selectors/data'
 import trSelector from '../selectors/translate'
 import tr from '../TranslationTable'
 import { handleInteractionWithTabIndex } from '../utilities'
+import { barChartValues } from '../selectors/renderData'
+
 
 import ExplanationDot from './ExplanationDot'
 
@@ -41,12 +42,18 @@ class TimelinePlay extends React.PureComponent {
 
   onClick() {
     if (this.state.playInterval) { return this.resetPlay() }
-
     const { timelineScale: yearScale } = this.props
     this.setState({
       playInterval: setInterval(() => {
         const { year: playbackYear, quarter: playbackQuarter } = this.props.timelinePlayback.toJS()
+        // console.log('timelinePlayback')
+        // console.log(this.props.timelinePlayback.toJS())
+        // console.log(this.props.timelinePlayback)
         const { year: endYear, quarter: endQuarter } = this.props.timelineRange.get('end').toJS()
+        // ---------> <------------//
+        // console.log('timelineRange')
+        // console.log(this.props.timelineRange) // --> has two entries that of start and end that can be accessed (in a map format)
+        // --------> <------------//
         if (playbackYear >= endYear && playbackQuarter >= endQuarter) {
           this.resetPlay()
           return
@@ -126,6 +133,8 @@ class TimelinePlay extends React.PureComponent {
   }
 
   render() {
+    // console.log(this.props.timelineData.bars.getIn(['values']))
+    // console.log(this.props.barChartValues)
     const label = this.props.tr(['timelinePlay', this.state.playInterval ? 'stop' : 'start'])
     const scale = (this.props.height / 17.37) // 17.37 is the height of the SVG
     const xOffset = 9.17 * scale // 9.17 is the width of the SVG
@@ -153,6 +162,7 @@ export default connect(
     selectedEnergy: state.importExportVisualization,
     timelineScale: timelineYearScaleCalculation(state, props),
     tr: trSelector(state, props),
+    barChartValues: barChartValues(state, props),
   }),
   { setTimelinePlayback, resetTimelinePlayback },
 )(TimelinePlay)
