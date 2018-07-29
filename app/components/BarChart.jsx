@@ -41,11 +41,6 @@ class BarChart extends Chart {
   }
 
   componentWillReceiveProps(props) {
-    console.log('This is all the props')
-    console.log(this.props.fullprops)
-
-    console.log('This is all the state')
-    console.log(this.props.fullstate)
     // Reset the axis guide when the scale changes.
     // Watch scale since that changes the bar height, but use trueScale in order
     // to put the guide on top of the tallest bar
@@ -209,8 +204,6 @@ class BarChart extends Chart {
       expandedOutliers,
     } = this.props
     // console.log(this.props.timelineData.bars.getIn(['values']))
-    console.log('This is the timelinedata from the filter function')
-    console.log(this.props.timelineData)
     const barSize = layout.get('barWidth')
     const scale = this.getScale(this.props)
     const heightPerUnit = this.calculateHeightPerUnit()
@@ -323,7 +316,6 @@ export default connect(
     expandedOutliers: state.chartOutliers,
     scale: timeLineScaleValue(state, props),
     scaleByProductSubType: timeLineScaleValueByProductSubtype(state, props),
-    timelineData: filterData(state, props),
   }, timelineData(state, props)),
   { toggleOutlier },
 )(BarChart)

@@ -6,12 +6,10 @@ import { timelineYearScaleCalculation } from '../selectors/timeline'
 import { timelineRange, timelinePlayback, groupingBy as timelineGrouping } from '../selectors/data'
 import trSelector from '../selectors/translate'
 import tr from '../TranslationTable'
-import { handleInteractionWithTabIndex } from '../utilities'
+import { handleInteractionWithTabIndex, parsePeriod } from '../utilities'
 import { barChartValues } from '../selectors/renderData'
-
-
+import { fromJS } from 'immutable'
 import ExplanationDot from './ExplanationDot'
-
 class TimelinePlay extends React.PureComponent {
   static propTypes = {
     height: PropTypes.number.isRequired,
@@ -40,20 +38,24 @@ class TimelinePlay extends React.PureComponent {
     }
   }
 
+  setStartingPoint() {
+    const { values } = this.props.barChartValues.toJS()
+    const first = Object.keys(values).sort()[0]
+    const { year, quarter } = parsePeriod(first)
+    const startObject = {
+      start: { year, quarter },
+    }
+    return fromJS(startObject)
+  }
+
   onClick() {
     if (this.state.playInterval) { return this.resetPlay() }
     const { timelineScale: yearScale } = this.props
     this.setState({
       playInterval: setInterval(() => {
         const { year: playbackYear, quarter: playbackQuarter } = this.props.timelinePlayback.toJS()
-        // console.log('timelinePlayback')
-        // console.log(this.props.timelinePlayback.toJS())
-        // console.log(this.props.timelinePlayback)
+
         const { year: endYear, quarter: endQuarter } = this.props.timelineRange.get('end').toJS()
-        // ---------> <------------//
-        // console.log('timelineRange')
-        // console.log(this.props.timelineRange) // --> has two entries that of start and end that can be accessed (in a map format)
-        // --------> <------------//
         if (playbackYear >= endYear && playbackQuarter >= endQuarter) {
           this.resetPlay()
           return
@@ -63,7 +65,7 @@ class TimelinePlay extends React.PureComponent {
         if (this.props.timelineGrouping === 'quarter') {
           year += 1
           if (year > endYear) {
-            year = this.props.timelineRange.getIn(['start', 'year'])
+            year = this.setStartingPoint().getIn(['start', 'year'])
             quarter += 1
           }
         } else {
@@ -78,8 +80,8 @@ class TimelinePlay extends React.PureComponent {
       }, 2000),
     })
     this.props.setTimelinePlayback(
-      this.props.timelineRange.getIn(['start', 'year']),
-      this.props.timelineRange.getIn(['start', 'quarter']),
+      this.setStartingPoint().getIn(['start', 'year']),
+      this.setStartingPoint().getIn(['start', 'quarter']),
     )
   }
 
