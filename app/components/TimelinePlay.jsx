@@ -38,6 +38,25 @@ class TimelinePlay extends React.PureComponent {
     }
   }
 
+  renderNoDataLine() {
+    const { values } = this.props.barChartValues.toJS()
+    const keys = Object.keys(values).sort()
+    if (keys.length === 0) {
+      return (
+        <line
+          x1="30"
+          x2="640"
+          y1="8"
+          y2="8"
+          stroke="#a99372"
+          strokeWidth="3"
+          fill="black"
+        />
+      )
+    }
+    return null
+  }
+
   setStartingPoint() {
     const { values } = this.props.barChartValues.toJS()
     const keys = Object.keys(values).sort()
@@ -62,27 +81,8 @@ class TimelinePlay extends React.PureComponent {
     return fromJS(startObject)
   }
 
-  renderNoDataLine() {
-    const { values } = this.props.barChartValues.toJS()
-    const keys = Object.keys(values).sort()
-    if (keys.length === 0) {
-      return (
-        <line
-          x1="30"
-          x2="640"
-          y1="8"
-          y2="8"
-          stroke="#a99372"
-          strokeWidth="3"
-          fill="black"
-        />
-      )
-    }
-    return null
-  }
 
   onClick() {
-    console.log(this.setStartingPoint().toJS())
     if (this.state.playInterval) { return this.resetPlay() }
     const { timelineScale: yearScale } = this.props
     this.setState({
@@ -169,8 +169,6 @@ class TimelinePlay extends React.PureComponent {
   }
 
   render() {
-    // console.log(this.props.timelineData.bars.getIn(['values']))
-    // console.log(this.props.barChartValues)
     const label = this.props.tr(['timelinePlay', this.state.playInterval ? 'stop' : 'start'])
     const scale = (this.props.height / 17.37) // 17.37 is the height of the SVG
     const xOffset = 9.17 * scale // 9.17 is the width of the SVG
