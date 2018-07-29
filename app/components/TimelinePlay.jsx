@@ -40,15 +40,49 @@ class TimelinePlay extends React.PureComponent {
 
   setStartingPoint() {
     const { values } = this.props.barChartValues.toJS()
-    const first = Object.keys(values).sort()[0]
-    const { year, quarter } = parsePeriod(first)
-    const startObject = {
-      start: { year, quarter },
+    const keys = Object.keys(values).sort()
+    const timelineStart = this.props.timelineRange.toJS().start
+    const timelineEnd = this.props.timelineRange.toJS().end
+    let startObject = {}
+    if (keys.length > 0) {
+      const first = Object.keys(values).sort()[0]
+      const { year, quarter } = parsePeriod(first)
+      startObject =
+      (timelineStart.year > year) ? ({
+        start: { year: timelineStart.year, quarter: timelineStart.quarter },
+      }) : ({
+        start: { year, quarter },
+      })
+    } else {
+      startObject = {
+        start: { year: timelineEnd.year, quarter: timelineEnd.quarter },
+      }
     }
+
     return fromJS(startObject)
   }
 
+  renderNoDataLine() {
+    const { values } = this.props.barChartValues.toJS()
+    const keys = Object.keys(values).sort()
+    if (keys.length === 0) {
+      return (
+        <line
+          x1="30"
+          x2="640"
+          y1="8"
+          y2="8"
+          stroke="#a99372"
+          strokeWidth="3"
+          fill="black"
+        />
+      )
+    }
+    return null
+  }
+
   onClick() {
+    console.log(this.setStartingPoint().toJS())
     if (this.state.playInterval) { return this.resetPlay() }
     const { timelineScale: yearScale } = this.props
     this.setState({
@@ -149,6 +183,7 @@ class TimelinePlay extends React.PureComponent {
       >
         <g transform={`scale(${scale})`} className="playButton">
           {this.renderIcon()}
+          {this.renderNoDataLine()}
         </g>
         {this.playButtonExplanation()}
       </g>
