@@ -35,6 +35,16 @@ class Chart extends React.PureComponent {
       ? `scale(1,-1) translate(${left} ${-top - height})`
       : `translate(${left} ${top})`
   }
+  findMaxValues(props = this.props) {
+    const { bars, valueKey, activityValueKey } = props
+    const values = bars.get('values')
+      .map(point => (valueKey === 'productSubtype' || valueKey === 'transport'
+        ? point.reduce((acc, next) => (acc + next), 0)
+        : point.get(activityValueKey, 0)
+      ))
+      .toArray()
+    return Math.max(0, ...values)
+  }
 
   isTimelinePointFiltered(period) {
     const { year, quarter } = parsePeriod(period)

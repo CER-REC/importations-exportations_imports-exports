@@ -37,16 +37,21 @@ class BarChart extends Chart {
   constructor(props) {
     super(props)
     this.state = {
-      axisGuide: this.getScale(props).getIn(['y', 'max']),
+      axisGuide: this.findMaxValues(this.props),
     }
   }
 
-  componentWillReceiveProps(props) {
+  componentWillReceiveProps(nextProps) {
     // Reset the axis guide when the scale changes.
     // Watch scale since that changes the bar height, but use trueScale in order
     // to put the guide on top of the tallest bar
-    if (this.getScale(props).getIn(['y', 'max']) !== this.getScale(this.props).getIn(['y', 'max'])) {
-      this.updateAxisGuide(this.getScale(props).getIn(['y', 'max']))
+    // Also, update axis only when the max values change
+    if (this.getScale(nextProps).getIn(['y', 'max']) !== this.getScale(this.props).getIn(['y', 'max'])) {
+      this.updateAxisGuide(this.findMaxValues())
+    }
+    const nextMax = this.findMaxValues(nextProps)
+    if (this.findMaxValues(this.props) !== nextMax) {
+      this.updateAxisGuide(nextMax)
     }
   }
 
@@ -297,6 +302,8 @@ class BarChart extends Chart {
             width={this.props.width}
             barSize={barSize}
             tabIndex={tabIndex || 0}
+            valueKey="activity"
+            groupBy="period"
           />
         </g>
       </g>
