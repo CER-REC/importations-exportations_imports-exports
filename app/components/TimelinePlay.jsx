@@ -8,7 +8,7 @@ import trSelector from '../selectors/translate'
 import tr from '../TranslationTable'
 import { handleInteractionWithTabIndex, parsePeriod } from '../utilities'
 import { barChartValues } from '../selectors/renderData'
-import { fromJS } from 'immutable'
+import { fromJS, keySeq } from 'immutable'
 import ExplanationDot from './ExplanationDot'
 class TimelinePlay extends React.PureComponent {
   static propTypes = {
@@ -39,9 +39,9 @@ class TimelinePlay extends React.PureComponent {
   }
 
   renderNoDataLine() {
-    const { values } = this.props.barChartValues.toJS()
-    const keys = Object.keys(values).sort()
-    if (keys.length === 0) {
+    const points = this.props.barChartValues.get('values')
+    const keys = (points.keySeq())
+    if (keys.size === 0) {
       return (
         <line
           x1="30"
@@ -58,29 +58,27 @@ class TimelinePlay extends React.PureComponent {
   }
 
   setStartingPoint() {
-    const { values } = this.props.barChartValues.toJS()
-    const keys = Object.keys(values).sort()
-    const timelineStart = this.props.timelineRange.toJS().start
-    const timelineEnd = this.props.timelineRange.toJS().end
-    let startObject = {}
-    if (keys.length > 0) {
-      const first = Object.keys(values).sort()[0]
-      const { year, quarter } = parsePeriod(first)
-      startObject =
-      (timelineStart.year > year) ? ({
-        start: { year: timelineStart.year, quarter: timelineStart.quarter },
+    const sortedPeriod = this.props.barChartValues.get('values').keySeq().sort((a, b) => ((a < b) ? -1 : 1))
+    let timelinePlayStart = {}
+    if (sortedPeriod.size > 0) {
+      const { year: dataYear, quarter: dataQuarter } = parsePeriod(sortedPeriod.first())
+      const timelineYear = this.props.timelineRange.getIn(['start', 'year'])
+      const timelineQuarter = this.props.timelineRange.getIn(['start', 'quarter'])
+      // Checks if user changed curtains
+      timelinePlayStart = (timelineYear > dataYear) ? ({
+        start: { year: timelineYear, quarter: timelineQuarter },
       }) : ({
-        start: { year, quarter },
+        start: { year: dataYear, quarter: dataQuarter },
       })
     } else {
-      startObject = {
-        start: { year: timelineEnd.year, quarter: timelineEnd.quarter },
+      // Start Timeline near the end if no data available
+      const VizTimelineEnd = this.props.timelineRange.get('end')
+      timelinePlayStart = {
+        start: { year: VizTimelineEnd.get('year'), quarter: VizTimelineEnd.get('quarter') },
       }
     }
-
-    return fromJS(startObject)
+    return fromJS(timelinePlayStart)
   }
-
 
   onClick() {
     if (this.state.playInterval) { return this.resetPlay() }
