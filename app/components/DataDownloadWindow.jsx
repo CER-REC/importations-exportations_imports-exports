@@ -8,6 +8,11 @@ import { handleInteraction } from '../utilities'
 import './DataDownloadWindow.scss'
 
 class DataDownloadWindow extends React.Component {
+  constructor(props) {
+    super(props)
+    this.downloadDataClick = this.downloadDataClick.bind(this)
+  }
+
   static get propTypes() {
     return {
       closeModal: PropTypes.func.isRequired,
@@ -15,10 +20,6 @@ class DataDownloadWindow extends React.Component {
     }
   }
 
-  constructor(props) {
-    super(props)
-    this.downloadDataClick = this.downloadDataClick.bind(this)
-  }
 
   closeButton() {
     return (<img
@@ -46,9 +47,10 @@ class DataDownloadWindow extends React.Component {
   }
 
   fileNameText() {
+    const displayName = Tr.getIn(['downloadable', 'csv', this.props.language])
     return (
       <p className="subtext">
-        NEB 2018-DD-MM data.csv
+        {displayName}
       </p>
     )
   }
