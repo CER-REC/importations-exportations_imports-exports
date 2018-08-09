@@ -23,7 +23,6 @@ import { reducer as ConfidentialityMenuReducer } from './actions/confidentiality
 import { reducer as ConfidentialityPopoverReducer } from './actions/confidentiality'
 import { reducer as timelinePlayback } from './actions/timelinePlayback'
 import { reducer as chartOutliers } from './actions/chartOutliers'
-import { barData as barData } from './actions/barData'
 
 const mergeDeep = (old, merge) => {
   if (old === Object(old) && Array.isArray(old) === false) {
@@ -61,7 +60,6 @@ const nestedReducers = combineReducers({
   activeMenu,
   timelinePlayback,
   chartOutliers,
-  barData,
 })
 
 export default (initialState = {}, action) => {
@@ -71,11 +69,3 @@ export default (initialState = {}, action) => {
   }
   return nestedReducers(state, action)
 }
-
-// import { createSelector } from './selectors/selectHelper'
-  
-//  export const barChartValues = (state) => state
-//  export const displaybarChartValues = createSelector(
-//     barChartValues,
-//     data => data)
-  
