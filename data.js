@@ -61,10 +61,15 @@ const humanNumber = (v) => {
   return Math.ceil(v / scale) * scale
 }
 
-const parsingIssue = {};
+const parsingIssue = {}
+// Creating a french CSV file with English Data
+const englishData = fs.readFileSync(Path.resolve(__dirname, 'public/data/NEB_imports_exports_data.csv'), 'utf8')
+const frenchData = englishData.split('\n')
+frenchData[0] = 'Période,Produit,Sous-Type de Produit/Catégorie/Article,Mode de Transport,Origine,Destination,Port,Activité,Unité,Valeurs'
+fs.writeFileSync(Path.resolve(__dirname, 'public/data/NEB_importations_exportations_les_données.csv'), frenchData.join('\n'));
 
 (new Promise(resolve => resolve(csvParse(
-  fs.readFileSync(Path.resolve(__dirname, 'public/data/NEB_imports_exports_data.csv')),
+  englishData,
   {
     // Use the callback method to replace the file headers with our own
     columns: () => ['period', 'product', 'productSubtype', 'transport', 'origin', 'destination', 'port', 'activity', 'units', 'value'],
