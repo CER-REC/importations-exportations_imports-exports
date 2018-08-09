@@ -63,9 +63,9 @@ const humanNumber = (v) => {
 
 const parsingIssue = {}
 // Creating a french CSV file with English Data
-const englishData = fs.readFileSync(Path.resolve(__dirname, 'public/data/NEB_imports_exports_data.csv'), 'utf8')
-const frenchData = englishData.split('\n')
-frenchData[0] = 'Période,Produit,Sous-Type de Produit/Catégorie/Article,Mode de Transport,Origine,Destination,Port,Activité,Unité,Valeurs'
+const englishData = fs.readFileSync(Path.resolve(__dirname, 'public/data/NEB_imports_exports_data.csv'), 'utf8');
+const frenchData = englishData.split('\n');
+frenchData[0] = 'Période,Produit,Sous-Type de Produit/Catégorie/Article,Mode de Transport,Origine,Destination,Port,Activité,Unité,Valeurs';
 fs.writeFileSync(Path.resolve(__dirname, 'public/data/NEB_importations_exportations_les_données.csv'), frenchData.join('\n'));
 
 (new Promise(resolve => resolve(csvParse(
@@ -356,9 +356,9 @@ fs.writeFileSync(Path.resolve(__dirname, 'public/data/NEB_importations_exportati
             if (point.productSubtype !== '') {
               const productSubtype = acc[point.period][rawActivity].productSubtype[point.productSubtype] || 0
               acc[point.period][rawActivity].productSubtype[point.productSubtype] = productSubtype + point.value
-              
+
               const productSubtypeTotal = acc[point.period][rawActivity].productSubtype.total || 0
-              acc[point.period][rawActivity].productSubtype.total = productSubtypeTotal + point.value              
+              acc[point.period][rawActivity].productSubtype.total = productSubtypeTotal + point.value
             }
 
             const averageValue = acc[point.period][rawActivity].weightedAverage.value || 0
@@ -408,7 +408,7 @@ fs.writeFileSync(Path.resolve(__dirname, 'public/data/NEB_importations_exportati
 
               if (['CN$/GJ', 'CAN$/MW.h'].includes(unit)) {
                 const activityTotal = timelineScale[visName][unit][activity].activityTotal || 0
-              
+
                 if (values.weightedAverage.divisor !== 0) {
                   const calculateWeightedAverage = values.weightedAverage.value / values.weightedAverage.divisor
                   timelineScale[visName][unit][activity].activityTotal = calculateWeightedAverage > activityTotal ? calculateWeightedAverage : activityTotal
