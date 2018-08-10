@@ -18,6 +18,7 @@ import Store from './Store'
 import { DismissComponent as DismissComponentCreator } from './actions/socialBar'
 import { ScreenshotMode } from './actions/screenshot'
 import setupReselectTools from './reselectTools'
+import { analyticsReporter as AnalyticsReporter, prepareAnalytics } from './utilities'
 
 const store = Store()
 
@@ -83,3 +84,4 @@ Request({
 })
 
 setupReselectTools(store)
+prepareAnalytics(store)
