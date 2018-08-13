@@ -9,7 +9,7 @@ import RouteComputations from '../computations/RouteComputations'
 import Constants from '../Constants'
 import Tr from '../TranslationTable'
 import WorkspaceComputations from '../computations/WorkspaceComputations'
-import { handleInteractionWithTabIndex } from '../utilities'
+import { handleInteractionWithTabIndex, analyticsReporter } from '../utilities'
 
 import { ExpandSocialBar } from '../actions/socialBar'
 
@@ -120,16 +120,19 @@ class SocialBar extends React.Component {
 
   aboutThisProjectClick() {
     if (!this.props.expandSocialBar) { return this.props.controlArrowClick() }
+    this.showAnalytics('about')
     this.props.onClick()
   }
 
   methodologyClick() {
     if (!this.props.expandSocialBar) { return this.props.controlArrowClick() }
+    this.showAnalytics('methodology')
     const appRoot = RouteComputations.appRoot(this.props.language)
     window.open(`${appRoot}${Tr.getIn(['methodologyLinks', this.props.language])}`)
   }
 
   twitterClick() {
+    this.showAnalytics('twitter')
     this.makeBitlyPromise().then((url) => {
       const twitterUrl = `https://twitter.com/intent/tweet?url=${url}`
       window.open(twitterUrl, 'targetWindow', 'width=650,height=650')
@@ -138,6 +141,7 @@ class SocialBar extends React.Component {
 
   emailClick() {
     const self = this
+    self.showAnalytics('email')
     this.makeBitlyPromise().then((url) => {
       const emailBody = `${url}%0A%0A ${Tr.getIn(['shareEmail', 'body', self.props.language])}`
 
@@ -148,6 +152,7 @@ class SocialBar extends React.Component {
   }
 
   facebookClick() {
+    this.showAnalytics('facebook')
     this.makeBitlyPromise().then((url) => {
       const facebookUrl = `https://www.facebook.com/sharer/sharer.php?u=${url}`
       window.open(facebookUrl, 'targetWindow', 'width=650,height=650')
@@ -155,6 +160,7 @@ class SocialBar extends React.Component {
   }
 
   linkedInClick() {
+    this.showAnalytics('linkedIn')
     this.makeBitlyPromise().then((url) => {
       const linkedinUrl = `https://www.linkedin.com/shareArticle?mini=true&url=${url}&summary=${url}`
       window.open(linkedinUrl, 'targetWindow', 'width=650,height=650')
@@ -163,11 +169,13 @@ class SocialBar extends React.Component {
 
   downloadImageClick() {
     if (!this.props.expandSocialBar) { return this.props.controlArrowClick() }
+    this.showAnalytics('download image')
     this.props.imageDownloadClick()
   }
 
   downloadDataClick() {
     if (!this.props.expandSocialBar) { return this.props.controlArrowClick() }
+    this.showAnalytics('download data')
     this.props.dataDownloadClick()
   }
 
@@ -342,6 +350,15 @@ class SocialBar extends React.Component {
         {this.state.screenshotURL}
       </tspan>
     </text>
+    )
+  }
+
+  showAnalytics(text) {
+    const eventDetail = text
+    analyticsReporter(
+      Constants.getIn(['analytics', 'category', 'socialBar']),
+      Constants.getIn(['analytics', 'action', 'clicked']),
+      eventDetail,
     )
   }
 

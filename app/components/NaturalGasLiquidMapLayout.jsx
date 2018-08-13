@@ -16,7 +16,7 @@ import { getMapLayout } from '../selectors/mapLayout'
 import './ElectricityMapLayout.scss'
 
 import { arrangeBy, binSelector, subType } from '../selectors/data'
-import { handleInteractionWithTabIndex } from '../utilities'
+import { handleInteractionWithTabIndex, analyticsReporter } from '../utilities'
 
 import './NaturalGasLiquidMapLayout.scss'
 
@@ -50,6 +50,14 @@ class NaturalGasLiquidMapLayout extends React.Component {
     } else {
       origins = [originKey]
     }
+    /** Analytics reporting: start */
+    const eventDetail = `${country} ${originKey}`
+    analyticsReporter(
+      Constants.getIn(['analytics', 'category', 'mapPiece']),
+      Constants.getIn(['analytics', 'action', 'clicked']),
+      eventDetail,
+    )
+    /** Analytics reporting: Finish */
     this.props.onMapPieceClick({
       country,
       origins,

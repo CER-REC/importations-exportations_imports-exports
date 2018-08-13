@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import memoize from 'memoize-immutable'
 
 import TextBox from './TextBox'
-import { handleInteractionWithTabIndex } from '../utilities'
+import { handleInteractionWithTabIndex, analyticsReporter } from '../utilities'
 import Constants from '../Constants'
 import TrSelector from '../selectors/translate'
 import setVisualization from '../actionCreators/SetVisualizationCreator'
@@ -14,6 +14,15 @@ const textOffset = Constants.getIn(['menuBar', 'textLabelOffset'])
 
 const SelectedPrefix = memoize((of) => {
 })
+
+const showAnalytics = (props) => {
+  const eventDetail = `${props.importExportVisualization}`
+  analyticsReporter(
+    Constants.getIn(['analytics', 'category', 'menuBar']),
+    Constants.getIn(['analytics', 'action', 'clicked']),
+    eventDetail,
+  )
+}
 
 const VisualizationSelector = (props) => {
   const { Tr, importExportVisualization } = props
@@ -80,6 +89,7 @@ const VisualizationSelector = (props) => {
               padding={1}
               boxStyles={{ fill: '#666' }}
               textStyles={{ className: 'bold menuOption', style: { fill: '#fff' } }}
+              onClick={showAnalytics(props)}
             >
               &nbsp;{prefix}{translated}&nbsp;
             </TextBox>

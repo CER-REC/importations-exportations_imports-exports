@@ -9,7 +9,7 @@ import MapLayoutGridConstant from '../MapLayoutGridConstant'
 import { arrangeBy, binSelector } from '../selectors/data'
 import { getFullyFilteredValues } from '../selectors/renderData'
 import { visualizationSettings } from '../selectors/visualizationSettings'
-import { handleInteractionWithTabIndex } from '../utilities'
+import { handleInteractionWithTabIndex, analyticsReporter } from '../utilities'
 import { setSelection } from '../actions/visualizationSettings'
 
 const emptyMap = fromJS({})
@@ -70,6 +70,16 @@ class NaturalGasMapContainer extends React.PureComponent {
         ports = selection.get('ports').delete(portExists)
       }
     }
+/** Analytics reporting: start */
+    const eventDetail = `${portName}`
+    analyticsReporter(
+      Constants.getIn(['analytics', 'category', 'mapPiece']),
+      Constants.getIn(['analytics', 'action', 'clicked']),
+      eventDetail,
+    )
+    /** Analytics reporting: Finish */
+
+
     this.props.onMapPieceClick({
       provinces,
       ports,

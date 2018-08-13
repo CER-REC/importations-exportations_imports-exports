@@ -806,7 +806,8 @@ const Constants = fromJS({
       confidentiality: 'confidentiality',
       barOutlier: 'bar outlier',
       menuBar: 'menu bar',
-      timeline: 'time line',
+      timeline: 'timeline',
+      timelineGroup: 'timeline group',
       wikimediaCommons: 'wikimedia commons',
     },
 

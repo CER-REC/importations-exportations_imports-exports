@@ -9,13 +9,18 @@ import { setScaleLinked, setGrouping } from '../actions/visualizationSettings'
 import { timelineScaleLinked } from '../selectors/timeline'
 import { groupingBy as timelineGroupingSelector } from '../selectors/data'
 import trSelector from '../selectors/translate'
-import { handleInteractionWithTabIndex } from '../utilities'
+import { handleInteractionWithTabIndex, analyticsReporter } from '../utilities'
 import { visualizationSettings, scaledLinkedSelector } from '../selectors/visualizationSettings'
 
 import ExplanationDot from './ExplanationDot'
 import tr from '../TranslationTable'
 
 class ChartOptions extends React.PureComponent {
+  constructor(props) {
+    super(props)
+    this.changeTimelineGroup = this.changeTimelineGroup.bind(this)
+  }
+
   static get propTypes() {
     return {
       setScaleLinked: PropTypes.func.isRequired,
@@ -33,6 +38,15 @@ class ChartOptions extends React.PureComponent {
       canChangeScale: true,
       tabIndex: 0,
     }
+  }
+
+  showAnalytics(detail) {
+    const eventDetail = detail
+    analyticsReporter(
+      Constants.getIn(['analytics', 'category', 'timelineGroup']),
+      Constants.getIn(['analytics', 'action', 'clicked']),
+      eventDetail,
+    )
   }
 
   linkDataExplanation() {
@@ -68,8 +82,10 @@ class ChartOptions extends React.PureComponent {
 
   scaleLinkedChanged = () => this.props.setScaleLinked(!this.props.scaleLinked)
 
-  changeTimelineGroup = () =>
+  changeTimelineGroup = () => {
     this.props.setGrouping(this.props.timelineGroup === 'year' ? 'quarter' : 'year')
+    this.showAnalytics(this.props.timelineGroup === 'year' ? 'quarter' : 'year')
+  }
 
   renderScaleToggle() {
     if (this.props.canChangeScale === false || this.props.activityGroup.get('activity') !== 'importsExports') { return null }
@@ -116,7 +132,7 @@ class ChartOptions extends React.PureComponent {
           {/* Using a div to fix an IE11 bug with the detail bar arrow wrapping */}
           <div className="detailGroupToggle">
             <a
-              {...handleInteractionWithTabIndex(this.props.tabIndex, this.changeTimelineGroup)}
+              {...handleInteractionWithTabIndex(this.props.tabIndex, this.changeTimelineGroup)}          
               aria-label={groupLabel}
             >
               {groupLabel} +

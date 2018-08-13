@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 
 import TextBox from './TextBox'
 import Constants from '../Constants'
-import { handleInteractionWithTabIndex } from '../utilities'
+import { handleInteractionWithTabIndex, analyticsReporter } from '../utilities'
 import { setActiveMenu } from '../actions/activeMenu'
 import TrSelector from '../selectors/translate'
 import Tr from '../TranslationTable'
@@ -41,8 +41,14 @@ class Menu extends React.PureComponent {
     selected: '',
   }
 
+  constructor(props) {
+    super(props)
+    this.onChange = this.onChange.bind(this)
+  }
+
   onChange = (option) => {
     this.props.onChange(option)
+    this.showAnalytics(`${this.props.name} ${option}`)
     this.props.setActiveMenu('')
   }
 
@@ -232,6 +238,15 @@ class Menu extends React.PureComponent {
       </g>
     )
   }
+
+showAnalytics(label) {
+    const eventDetail = label
+    analyticsReporter(
+      Constants.getIn(['analytics', 'category', 'menuBar']),
+      Constants.getIn(['analytics', 'action', 'clicked']),
+      eventDetail,
+  )
+}
 
   render() {
     return (<g>

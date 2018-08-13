@@ -60,7 +60,7 @@ export const analyticsReporter = (category, action, eventDetail) => {
     console.warn('Google Tag Manager not found.')
   }
 
-  if (typeof window.dataLayer === 'undefined') { return }
+  if (typeof window.dataLayer === 'undefined') { return null }
 
   const analyticsObject = analyticsDataSelector(getState(), {})
 

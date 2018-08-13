@@ -10,7 +10,7 @@ import ConfidentialityPopover from './ConfidentialityPopover'
 
 import { ExpandCollapseConfidentiality } from '../actions/confidentiality'
 
-import { handleInteraction } from '../utilities'
+import { handleInteraction, analyticsReporter } from '../utilities'
 
 import './ConfidentialIcon.scss'
 
@@ -29,6 +29,10 @@ export const ConfidentialIconLogo = props => (
 )
 
 class ConfidentialIcon extends React.Component {
+  constructor(props) {
+    super(props)
+    this.showAnalyticsAndExpandConfidential = this.showAnalyticsAndExpandConfidential.bind(this)
+  }
   static get propTypes() {
     return {
       containerX: PropTypes.number.isRequired,
@@ -39,6 +43,8 @@ class ConfidentialIcon extends React.Component {
       xPosition: PropTypes.number.isRequired,
       yPosition: PropTypes.number.isRequired,
       expanded: PropTypes.bool.isRequired,
+      onClick: PropTypes.func.isRequired,
+      name: PropTypes.string.isRequired,
     }
   }
 
@@ -46,11 +52,21 @@ class ConfidentialIcon extends React.Component {
     return <ConfidentialIconLogo expanded={this.props.expanded} />
   }
 
+  showAnalyticsAndExpandConfidential() {
+    this.props.onClick(this.props.name)
+    const eventDetail = this.props.text
+    analyticsReporter(
+      Constants.getIn(['analytics', 'category', 'confidentiality']),
+      Constants.getIn(['analytics', 'action', 'clicked']),
+      eventDetail,
+    )
+  }
+
   render() {
     return (<g transform={`translate(${this.props.xPosition} ${this.props.yPosition})`}>
       <a
         role="menuItem"
-        {...handleInteraction(this.props.onClick, this.props.name)}
+        {...handleInteraction(this.showAnalyticsAndExpandConfidential)}
       >
         {this.confidentialityIcon()}
       </a>
