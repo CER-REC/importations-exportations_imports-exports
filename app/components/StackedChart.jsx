@@ -32,7 +32,7 @@ class StackedChart extends Chart {
   constructor(props) {
     super(props)
     this.state = {
-      axisGuide: this.findMaxValues(this.props),
+      axisGuide: this.maxValueWithOutlier(),
     }
   }
 
@@ -40,12 +40,9 @@ class StackedChart extends Chart {
     // Reset the axis guide when the scale changes.
     // Watch scale since that changes the bar height, but use trueScale in order
     // to put the guide on top of the tallest bar
-    if (this.getScale(nextProps).getIn(['y', 'max']) !== this.getScale(this.props).getIn(['y', 'max'])) {
-      this.updateAxisGuide(this.findMaxValues())
-    }
-    const nextMax = this.findMaxValues(nextProps)
-    if (this.findMaxValues(this.props) !== nextMax) {
-      this.updateAxisGuide(nextMax)
+    const maxValue = Math.min(this.findMaxValues(nextProps), this.getScale(nextProps).getIn(['y', 'max']))
+    if (this.findMaxValues(this.props) !== maxValue) {
+      this.updateAxisGuide(maxValue)
     }
   }
 

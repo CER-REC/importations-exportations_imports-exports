@@ -46,6 +46,10 @@ class Chart extends React.PureComponent {
     return Math.max(0, ...values)
   }
 
+  maxValueWithOutlier() {
+    return Math.min(this.findMaxValues(), this.getScale(this.props).getIn(['y', 'max']))
+  }
+
   isTimelinePointFiltered(period) {
     const { year, quarter } = parsePeriod(period)
 

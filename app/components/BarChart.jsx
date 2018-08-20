@@ -37,20 +37,15 @@ class BarChart extends Chart {
   constructor(props) {
     super(props)
     this.state = {
-      axisGuide: this.maxValueWithOutlier(this.findMaxValues()),
+      axisGuide: this.maxValueWithOutlier(),
     }
   }
 
-  maxValueWithOutlier(maxValue) {
-    const maxScale = this.getScale(this.props).getIn(['y', 'max'])
-    return (maxValue > maxScale) ? maxScale : maxValue
-  }
   componentWillReceiveProps(nextProps) {
     // Reset the axis guide when the scale changes.
     // Watch scale since that changes the bar height, but use trueScale in order
     // to put the guide on top of the tallest bar
-    // Updates when max value changes and checks for outliers
-    const maxValue = (this.findMaxValues(nextProps) > this.getScale(nextProps).getIn(['y', 'max'])) ? this.getScale(nextProps).getIn(['y', 'max']) : this.findMaxValues(nextProps)
+    const maxValue = Math.min(this.findMaxValues(nextProps), this.getScale(nextProps).getIn(['y', 'max']))
     if (this.findMaxValues(this.props) !== maxValue) {
       this.updateAxisGuide(maxValue)
     }
