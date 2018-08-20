@@ -38,25 +38,6 @@ class TimelinePlay extends React.PureComponent {
     }
   }
 
-  renderNoDataLine() {
-    const points = this.props.barChartValues.get('values')
-    const keys = (points.keySeq())
-    if (keys.size === 0) {
-      return (
-        <line
-          x1="30"
-          x2="640"
-          y1="8"
-          y2="8"
-          stroke="#a99372"
-          strokeWidth="3"
-          fill="black"
-        />
-      )
-    }
-    return null
-  }
-
   setStartingPoint() {
     const sortedPeriod = this.props.barChartValues.get('values').keySeq().sort((a, b) => ((a < b) ? -1 : 1))
     let timelinePlayStart = {}
@@ -179,7 +160,6 @@ class TimelinePlay extends React.PureComponent {
       >
         <g transform={`scale(${scale})`} className="playButton">
           {this.renderIcon()}
-          {this.renderNoDataLine()}
         </g>
         {this.playButtonExplanation()}
       </g>
