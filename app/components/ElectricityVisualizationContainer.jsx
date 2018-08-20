@@ -57,6 +57,7 @@ const ElectricityVisualizationContainer = (props) => {
               filterActivity="imports"
               groupBy="activity"
               valueKey={props.selectedCountry === 'ca' ? 'originKey' : 'destinationKey'}
+              selectedCountry={props.selectedCountry}
               valueAverage={weighted}
               showGroup="imports"
               color={Constants.getIn(['styleGuide', 'colours', 'ImportDefault'])}
@@ -144,10 +145,11 @@ const ElectricityVisualizationContainer = (props) => {
               height={props.usMap.height - 40}
               groupBy="activity"
               valueKey={props.selectedCountry === 'ca' ? 'destinationKey' : 'originKey'}
+              selectedCountry={props.selectedCountry}
               valueAverage={weighted}
               showGroup="exports"
               color={Constants.getIn(['styleGuide', 'colours', 'ExportDefault'])}
-              trContent={Tr.getIn(['detailBreakDown', 'electricity', 'exports'])}
+              trContent={Tr.getIn(['detailBreakDown', 'electricity','exports'])}
               nameMappings={nameMappings}
             />
           </DetailSidebar>
