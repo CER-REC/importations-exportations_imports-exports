@@ -30,6 +30,7 @@ const mapPieceTransformStartYaxis = (position, dimensions, mapPieceScale) =>
   position.get('y') *
     ((mapPieceScale * dimensions.get('height')) + dimensions.get('yAxisPadding'))
 
+
 class ElectricityMapLayout extends React.Component {
   static propTypes = {
     /*
@@ -45,6 +46,11 @@ class ElectricityMapLayout extends React.Component {
     */
   }
 
+  constructor(props) {
+    super(props)
+    this.onClick = this.onClick.bind(this)
+  }
+
   onClick = (country, originKey) => {
     const { selection } = this.props
     let origins = [originKey]
@@ -57,17 +63,25 @@ class ElectricityMapLayout extends React.Component {
       }
     }
 
+
+
     /** Analytics reporting: start */
     // Creating event detail
     const eventDetail = `${country}  ${originKey}`
-    // report even to analytics
-    analyticsReporter(
-      Constants.getIn(['analytics', 'category', 'mapPiece']),
-      Constants.getIn(['analytics', 'action', 'clicked']),
-      eventDetail,
-    )
+    if (this.isMapPieceSelected(originKey, country)) {
+      analyticsReporter(
+        Constants.getIn(['analytics', 'category', 'mapPiece']),
+        Constants.getIn(['analytics', 'action', 'unselected']),
+        eventDetail,
+      )
+    } else {
+      analyticsReporter(
+        Constants.getIn(['analytics', 'category', 'mapPiece']),
+        Constants.getIn(['analytics', 'action', 'selected']),
+        eventDetail,
+      )
+    }
     /** Analytics reporting: Finish */
-
     this.props.onMapPieceClick({
       country,
       origins,

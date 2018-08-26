@@ -28,6 +28,11 @@ const mapPieceTransformStartYaxis = (position, dimensions, mapPieceScale) =>
     ((mapPieceScale * dimensions.get('height')) + dimensions.get('yAxisPadding'))
 
 class WorldMapLayout extends React.Component {
+
+  constructor(props) {
+    super(props)
+    this.onClick = this.onClick.bind(this)
+  }
   static propTypes = {
     selection: PropTypes.instanceOf(Immutable.Map).isRequired,
     onMapPieceClick: PropTypes.func.isRequired,
@@ -53,12 +58,21 @@ class WorldMapLayout extends React.Component {
     }
     /** Analytics reporting: start */
     const eventDetail = `${continentKey}`
-    analyticsReporter(
-      Constants.getIn(['analytics', 'category', 'mapPiece']),
-      Constants.getIn(['analytics', 'action', 'clicked']),
-      eventDetail,
-    )
+    if (this.isMapPieceSelected(continentKey, country)) {
+      analyticsReporter(
+        Constants.getIn(['analytics', 'category', 'mapPiece']),
+        Constants.getIn(['analytics', 'action', 'unselected']),
+        eventDetail,
+      )
+    } else {
+      analyticsReporter(
+        Constants.getIn(['analytics', 'category', 'mapPiece']),
+        Constants.getIn(['analytics', 'action', 'selected']),
+        eventDetail,
+      )
+    }
     /** Analytics reporting: Finish */
+
     const filteredData = Constants.getIn(['dataloader', 'mapping', 'continent']).filter(point => continents.includes(point))
     const origins = filteredData.keySeq().toArray()
     this.props.onMapPieceClick({

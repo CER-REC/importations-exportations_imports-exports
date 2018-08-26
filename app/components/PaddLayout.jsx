@@ -31,6 +31,7 @@ const mapPieceTransformStartTop = (top, position, dimensions, mapPieceScale) => 
 const mapPieceTransformStartLeft = (left, position, dimensions, mapPieceScale) => left + (position.get('x') * ((mapPieceScale * dimensions.get('width')) + dimensions.get('xAxisPadding')))
 
 class PaddLayout extends React.Component {
+
   static propTypes = {
     /*
     arrangeBy: PropTypes.string.isRequired,
@@ -40,6 +41,11 @@ class PaddLayout extends React.Component {
     confidentialityMenu: PropTypes.bool.isRequired,
     selectedEnergy: PropTypes.string.isRequired,
     */
+  }
+
+  constructor(props) {
+    super(props)
+    this.onPaddClick = this.onPaddClick.bind(this)
   }
   getColorIndex(value) {
     return this.props.bins.findIndex(range => range.get(0) <= value && value < range.get(1))
@@ -303,11 +309,18 @@ class PaddLayout extends React.Component {
     // Creating event detail
     const eventDetail = paddGroup
     // report even to analytics
-    analyticsReporter(
-      Constants.getIn(['analytics', 'category', 'padd']),
-      Constants.getIn(['analytics', 'action', 'clicked']),
-      eventDetail,
-    )
+    if (origins.indexOf(paddGroup) > -1) {
+      analyticsReporter(
+        Constants.getIn(['analytics', 'category', 'padd']),
+        Constants.getIn(['analytics', 'action', 'selected']),
+        eventDetail,
+      )} else {
+        analyticsReporter(
+          Constants.getIn(['analytics', 'category', 'padd']),
+          Constants.getIn(['analytics', 'action', 'unselected']),
+          eventDetail,
+        )
+      }
     /** Analytics reporting: Finish */
 
     props.savePaddState({

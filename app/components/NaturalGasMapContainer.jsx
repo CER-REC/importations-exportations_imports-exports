@@ -28,6 +28,11 @@ const portsByProvince = fromJS(Constants.getIn(['dataloader', 'mapping', 'ports'
   .sortBy((_, k) => k, (a, b) => provinceOrder.indexOf(a) - provinceOrder.indexOf(b))
 
 class NaturalGasMapContainer extends React.PureComponent {
+
+  constructor(props) {
+    super(props)
+    this.onClick = this.onClick.bind(this)
+  }
   orderBy = (points, arrangeByVal) => {
     switch (arrangeByVal) {
       case 'exports':
@@ -72,14 +77,21 @@ class NaturalGasMapContainer extends React.PureComponent {
     }
 /** Analytics reporting: start */
     const eventDetail = `${portName}`
-    analyticsReporter(
-      Constants.getIn(['analytics', 'category', 'mapPiece']),
-      Constants.getIn(['analytics', 'action', 'clicked']),
-      eventDetail,
-    )
+    if (this.isMapPieceSelected(portName, provinceName)) {
+      analyticsReporter(
+        Constants.getIn(['analytics', 'category', 'mapPiece']),
+        Constants.getIn(['analytics', 'action', 'unselected']),
+        eventDetail,
+      )
+    } else {
+      analyticsReporter(
+        Constants.getIn(['analytics', 'category', 'mapPiece']),
+        Constants.getIn(['analytics', 'action', 'selected']),
+        eventDetail,
+      )
+    }
+
     /** Analytics reporting: Finish */
-
-
     this.props.onMapPieceClick({
       provinces,
       ports,
