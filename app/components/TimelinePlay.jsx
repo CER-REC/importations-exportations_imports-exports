@@ -2,12 +2,13 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
+import Constants from '../Constants'
 import { setTimelinePlayback, resetTimelinePlayback } from '../actions/timelinePlayback'
 import { timelineYearScaleCalculation } from '../selectors/timeline'
 import { timelineRange, timelinePlayback, groupingBy as timelineGrouping } from '../selectors/data'
 import trSelector from '../selectors/translate'
 import tr from '../TranslationTable'
-import { handleInteractionWithTabIndex } from '../utilities'
+import { handleInteractionWithTabIndex, analyticsReporter } from '../utilities'
 
 import ExplanationDot from './ExplanationDot'
 
@@ -24,6 +25,8 @@ class TimelinePlay extends React.PureComponent {
     super(props)
     this.onClick = this.onClick.bind(this)
     this.state = { playInterval: null }
+    this.onClick = this.onClick.bind(this)
+    this.resetPlay = this.resetPlay.bind(this)
   }
 
   componentWillUnmount() {
@@ -39,9 +42,17 @@ class TimelinePlay extends React.PureComponent {
     }
   }
 
+  showAnalytics(text) {
+    const eventDetail = text
+    analyticsReporter(
+      Constants.getIn(['analytics', 'category', 'timeline']),
+      Constants.getIn(['analytics', 'action', 'clicked']),
+      eventDetail,
+    )
+  }
   onClick() {
     if (this.state.playInterval) { return this.resetPlay() }
-
+    this.showAnalytics('Start Play Button')
     const { timelineScale: yearScale } = this.props
     this.setState({
       playInterval: setInterval(() => {

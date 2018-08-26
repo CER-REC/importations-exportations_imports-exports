@@ -9,11 +9,15 @@ import ExplanationPopover from './ExplanationPopover'
 
 import { ExpandCollapseExplanation } from '../actions/explanations'
 
-import { handleInteraction } from '../utilities'
+import { handleInteraction, analyticsReporter } from '../utilities'
 
 import './ExplanationDot.scss'
 
 class ExplanationDot extends React.Component {
+  constructor(props) {
+    super(props)
+    this.showAnalyticsAndShowExplanation = this.showAnalyticsAndShowExplanation.bind(this)
+  }
   static get propTypes() {
     return {
       xPosition: PropTypes.number.isRequired,
@@ -80,13 +84,31 @@ class ExplanationDot extends React.Component {
     </g>)
   }
 
+  showAnalyticsAndShowExplanation() {
+    const eventDetail = this.props.name
+    this.props.onClick(this.props.name)
+    if (this.props.expanded === false) {
+      analyticsReporter(
+        Constants.getIn(['analytics', 'category', 'confidentiality']),
+        Constants.getIn(['analytics', 'action', 'selected']),
+        eventDetail,
+      )
+    } else {
+      analyticsReporter(
+        Constants.getIn(['analytics', 'category', 'confidentiality']),
+        Constants.getIn(['analytics', 'action', 'unselected']),
+        eventDetail,
+      )
+    }
+  }
+
   render() {
     if (!this.props.showExplanations) {
       return null
     }
     return (<g><a
       role="menuItem"
-      {...handleInteraction(this.props.onClick, this.props.name)}
+      {...handleInteraction(this.showAnalyticsAndShowExplanation)}
     >
       {this.dotAnimation()}
       {this.explanationDot()}

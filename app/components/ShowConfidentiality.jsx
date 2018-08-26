@@ -6,13 +6,19 @@ import Constants from '../Constants'
 import TrSelector from '../selectors/translate'
 import { confidentialityTogglePosition } from '../selectors/viewport/menus'
 import { ToggleConfidentialityMenu } from '../actions/confidentialityMenu'
-import { handleInteractionWithTabIndex } from '../utilities'
+import { handleInteractionWithTabIndex, analyticsReporter } from '../utilities'
 
 import ExplanationDot from './ExplanationDot'
 
 import '../styles/Fonts.scss'
 
 class ShowConfidentiality extends React.Component {
+
+  constructor(props) {
+    super(props)
+    this.showAnalyticsAndConfidentialToggle = this.showAnalyticsAndConfidentialToggle.bind(this)
+  }
+
   static get propTypes() {
     return {
       Tr: PropTypes.func.isRequired,
@@ -91,13 +97,23 @@ class ShowConfidentiality extends React.Component {
             </g>)
   }
 
+  showAnalyticsAndConfidentialToggle() {
+    const eventDetail = 'Confidential Toggle'
+    analyticsReporter(
+      Constants.getIn(['analytics', 'category', 'confidentiality']),
+      Constants.getIn(['analytics', 'action', 'clicked']),
+      eventDetail,
+    )
+    this.props.onClick()
+  }
+
   render() {
     const tabIndex = Constants.getIn(['tabIndex', 'start', 'menuBar'])
     return (
       <g
         transform={`translate(${this.props.left} ${this.props.top})`}
         role="menuitem"
-        {...handleInteractionWithTabIndex(tabIndex, this.props.onClick)}
+        {...handleInteractionWithTabIndex(tabIndex, this.showAnalyticsAndConfidentialToggle)}
       >
         {this.icon()}
         {this.showText()}

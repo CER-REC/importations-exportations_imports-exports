@@ -809,6 +809,7 @@ const Constants = fromJS({
       timeline: 'timeline',
       timelineGroup: 'timeline group',
       wikimediaCommons: 'wikimedia commons',
+      reset: 'reset',
     },
 
   },

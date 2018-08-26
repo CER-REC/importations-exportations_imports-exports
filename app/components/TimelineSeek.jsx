@@ -8,7 +8,7 @@ import Constants from '../Constants'
 import { timelineFilter } from '../actions/visualizationSettings'
 import { timelineRange, groupingBy as timelineGrouping } from '../selectors/data'
 import * as TimelineSelector from '../selectors/timeline'
-import { parsePeriod } from '../utilities'
+import { parsePeriod, analyticsReporter } from '../utilities'
 
 import ExplanationDot from './ExplanationDot'
 
@@ -42,6 +42,7 @@ class TimelineSeek extends React.PureComponent {
     this.state = {
       offset: this.getOffsetFromPosition(props.seekPosition[props.side]),
     }
+    this.dragStop = this.dragStop.bind(this)
     // Get the position of the other side, so that we don't drag past it
     const otherSide = props.side === 'start' ? 'end' : 'start'
     this.otherSideLimit =
@@ -113,7 +114,17 @@ class TimelineSeek extends React.PureComponent {
     return offset
   }
 
+  showAnalytics(text){
+    const eventDetail = text
+    analyticsReporter(
+      Constants.getIn(['analytics', 'category', 'timeline']),
+      Constants.getIn(['analytics', 'action', 'dragged']),
+      eventDetail,
+    )
+  }
+
   dragStop = (rawOffset) => {
+    this.showAnalytics('Curtain Drag')
     const { barPositions, side } = this.props
     const offset = (side === 'start')
       ? this.state.offset + rawOffset.x

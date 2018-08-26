@@ -5,7 +5,7 @@ import PropTypes from 'prop-types'
 
 import Constants from '../Constants'
 import { OpenModal as ShowAboutWindowCreator } from '../actions/modal'
-import { handleInteractionWithTabIndex } from '../utilities'
+import { handleInteractionWithTabIndex, analyticsReporter } from '../utilities'
 import TrSelector from '../selectors/translate'
 
 import ExplanationDot from './ExplanationDot'
@@ -27,12 +27,21 @@ class Header extends React.Component {
   constructor(props) {
     super(props)
     this.resetClick = this.resetClick.bind(this)
+    this.refinedPetroleumProductsImportsLink = this.refinedPetroleumProductsImportsLink.bind(this)
   }
 
   resetClick() {
     this.props.onResetClick()
+    this.showAnalytics('reset')
   }
-
+  showAnalytics(text) {
+    const eventDetail = (text === 'reset') ? ('reset') : ('CANSIM')
+    analyticsReporter(
+      Constants.getIn(['analytics', 'category', 'headerLinks']),
+      Constants.getIn(['analytics', 'action', 'clicked']),
+      eventDetail,
+    )
+  }
   resetExplanation() {
     const scaleContainerX = this.props.viewport.get('changeWidthRatio') > 1.2 ? 910 : 710
     const scaleContainerY = this.props.viewport.get('changeHeightRatio') > 1.2 ? 65 : 50
@@ -121,32 +130,37 @@ class Header extends React.Component {
   }
 
   refinedPetroleumProductsImportsLink() {
-    const { Tr } = this.props
-    const language = this.props.language
+    const { Tr, language } = this.props
     const energyType = this.props.selectedEnergy
-    if (energyType !== 'refinedPetroleumProducts') { return }
+    if (energyType !== 'refinedPetroleumProducts') { return null }
     if (language === 'fr') {
-      return (<div className="importsLink">
+      return (
+        <div className="importsLink">
+          <div className="importsSubheading">
+            {Tr(['mainHeading', 'base_1'])} {Tr(['mainHeading', 'base_1_5_refinedPetroleumProducts'])}
+            <div className="importsSubheadingEnergy">{ Tr(['mainHeading', 'refinedPetroleumProducts']) }</div>
+            {Tr(['mainHeading', 'base_2'])}{Tr(['mainHeading', 'base_2_5_refinedPetroleumProducts'])}
+            <a href={Tr(['mainHeading', 'refinedPetroleumProductsLink_04'])} onClick={this.showAnalytics}>{Tr(['mainHeading', 'refinedPetroleumProductsStats_04'])}</a>
+            {Tr(['mainHeading', 'deCansim'])}{Tr(['mainHeading', 'closingBracket'])}
+          </div>
+        </div>)
+    }
+    return (
+      <div className="importsLink">
         <div className="importsSubheading">
-          {Tr(['mainHeading', 'base_1'])} {Tr(['mainHeading', 'base_1_5_refinedPetroleumProducts'])}
-          <div className="importsSubheadingEnergy">{ Tr(['mainHeading', 'refinedPetroleumProducts']) }</div>
+          {Tr(['mainHeading', 'base_1'])}
+          <div className="importsSubheadingEnergy">
+            { Tr(['mainHeading', 'refinedPetroleumProducts']) }
+          </div>
           {Tr(['mainHeading', 'base_2'])}{Tr(['mainHeading', 'base_2_5_refinedPetroleumProducts'])}
-          <a href={Tr(['mainHeading', 'refinedPetroleumProductsLink_04'])}>{Tr(['mainHeading', 'refinedPetroleumProductsStats_04'])}</a>
-          {Tr(['mainHeading', 'deCansim'])}{Tr(['mainHeading', 'closingBracket'])}
+          <a
+            href={Tr(['mainHeading', 'refinedPetroleumProductsLink_04'])}
+            onClick={this.showAnalytics}
+          >{Tr(['mainHeading', 'refinedPetroleumProductsStats_04'])}
+          </a>
+          {Tr(['mainHeading', 'closingBracket'])}
         </div>
       </div>)
-    }
-    return (<div className="importsLink">
-      <div className="importsSubheading">
-        {Tr(['mainHeading', 'base_1'])}
-        <div className="importsSubheadingEnergy">
-          { Tr(['mainHeading', 'refinedPetroleumProducts']) }
-        </div>
-        {Tr(['mainHeading', 'base_2'])}{Tr(['mainHeading', 'base_2_5_refinedPetroleumProducts'])}
-        <a href={Tr(['mainHeading', 'refinedPetroleumProductsLink_04'])}>{Tr(['mainHeading', 'refinedPetroleumProductsStats_04'])}</a>
-        {Tr(['mainHeading', 'closingBracket'])}
-      </div>
-            </div>)
   }
 
   metaBar() {
