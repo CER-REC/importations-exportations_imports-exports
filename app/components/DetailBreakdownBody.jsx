@@ -7,6 +7,24 @@ import './DetailBreakDown.scss'
 import { visualizationSettings } from '../selectors/visualizationSettings'
 import DetailBreakdownRow from './DetailBreakdownRow'
 
+function SwitchLabelPrefixOnUS(defaultResult, selectedCountry) {
+  if (selectedCountry === 'us') {
+    switch (defaultResult) {
+      case 'to':
+        return 'from'
+      case 'from':
+        return 'to'
+      case 'à':
+        return 'de'
+      case 'de':
+        return 'à'
+      default:
+        return null
+    }
+  }
+  return defaultResult
+}
+
 const DetailBreakdownBody = (props) => {
   const bodyContent = props.trContent
   const total = props.total === false
@@ -21,7 +39,7 @@ const DetailBreakdownBody = (props) => {
         <DetailBreakdownRow
           key={key /* eslint-disable-line react/no-array-index-key */}
           name={`${props.amountUnit}-${props.showGroup}-${key}`}
-          labelPrefix={bodyContent.getIn(['action', props.language])}
+          labelPrefix={(SwitchLabelPrefixOnUS(bodyContent.getIn(['action', props.language]), props.selectedCountry))}
           label={name}
           labelSuffix={bodyContent.getIn(['suffix', props.language])}
           value={value}

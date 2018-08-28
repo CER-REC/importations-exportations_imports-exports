@@ -43,6 +43,8 @@ class Axis extends React.PureComponent {
         left={this.props.left - 30}
         height={this.props.height}
         tabIndex={this.props.tabIndex || 0}
+        valueKey="activity"
+        groupBy="period"
       />
     )
   }
