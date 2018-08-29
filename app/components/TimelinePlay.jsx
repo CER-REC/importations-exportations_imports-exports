@@ -76,7 +76,7 @@ class TimelinePlay extends React.PureComponent {
 
   onClick() {
     if (this.state.playInterval) { return this.resetPlay() }
-    this.showAnalytics('Start Play Button')
+    this.showAnalytics('Play Button')
     const { timelineScale: yearScale } = this.props
     this.setState({
       playInterval: setInterval(() => {
