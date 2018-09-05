@@ -1,16 +1,15 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-
 import { setTimelinePlayback, resetTimelinePlayback } from '../actions/timelinePlayback'
 import { timelineYearScaleCalculation } from '../selectors/timeline'
 import { timelineRange, timelinePlayback, groupingBy as timelineGrouping } from '../selectors/data'
 import trSelector from '../selectors/translate'
 import tr from '../TranslationTable'
-import { handleInteractionWithTabIndex } from '../utilities'
-
+import { handleInteractionWithTabIndex, parsePeriod } from '../utilities'
+import { barChartValues } from '../selectors/renderData'
+import { fromJS, keySeq } from 'immutable'
 import ExplanationDot from './ExplanationDot'
-
 class TimelinePlay extends React.PureComponent {
   static propTypes = {
     height: PropTypes.number.isRequired,
@@ -39,13 +38,36 @@ class TimelinePlay extends React.PureComponent {
     }
   }
 
+  setStartingPoint() {
+    const sortedPeriod = this.props.barChartValues.get('values').keySeq().sort((a, b) => ((a < b) ? -1 : 1))
+    let timelinePlayStart = {}
+    if (sortedPeriod.size > 0) {
+      const { year: dataYear, quarter: dataQuarter } = parsePeriod(sortedPeriod.first())
+      const timelineYear = this.props.timelineRange.getIn(['start', 'year'])
+      const timelineQuarter = this.props.timelineRange.getIn(['start', 'quarter'])
+      // Checks if user changed curtains
+      timelinePlayStart = (timelineYear > dataYear) ? ({
+        start: { year: timelineYear, quarter: timelineQuarter },
+      }) : ({
+        start: { year: dataYear, quarter: dataQuarter },
+      })
+    } else {
+      // Start Timeline near the end if no data available
+      const VizTimelineEnd = this.props.timelineRange.get('end')
+      timelinePlayStart = {
+        start: { year: VizTimelineEnd.get('year'), quarter: VizTimelineEnd.get('quarter') },
+      }
+    }
+    return fromJS(timelinePlayStart)
+  }
+
   onClick() {
     if (this.state.playInterval) { return this.resetPlay() }
-
     const { timelineScale: yearScale } = this.props
     this.setState({
       playInterval: setInterval(() => {
         const { year: playbackYear, quarter: playbackQuarter } = this.props.timelinePlayback.toJS()
+
         const { year: endYear, quarter: endQuarter } = this.props.timelineRange.get('end').toJS()
         if (playbackYear >= endYear && playbackQuarter >= endQuarter) {
           this.resetPlay()
@@ -56,7 +78,7 @@ class TimelinePlay extends React.PureComponent {
         if (this.props.timelineGrouping === 'quarter') {
           year += 1
           if (year > endYear) {
-            year = this.props.timelineRange.getIn(['start', 'year'])
+            year = this.setStartingPoint().getIn(['start', 'year'])
             quarter += 1
           }
         } else {
@@ -71,8 +93,8 @@ class TimelinePlay extends React.PureComponent {
       }, 2000),
     })
     this.props.setTimelinePlayback(
-      this.props.timelineRange.getIn(['start', 'year']),
-      this.props.timelineRange.getIn(['start', 'quarter']),
+      this.setStartingPoint().getIn(['start', 'year']),
+      this.setStartingPoint().getIn(['start', 'quarter']),
     )
   }
 
@@ -153,6 +175,7 @@ export default connect(
     selectedEnergy: state.importExportVisualization,
     timelineScale: timelineYearScaleCalculation(state, props),
     tr: trSelector(state, props),
+    barChartValues: barChartValues(state, props),
   }),
   { setTimelinePlayback, resetTimelinePlayback },
 )(TimelinePlay)

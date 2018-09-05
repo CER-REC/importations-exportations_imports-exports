@@ -808,8 +808,8 @@ const TranslationTable = fromJS({
 
   downloadable: {
     csv: {
-      en: 'data.csv',
-      fr: 'data.csv',
+      en: 'NEB_imports_exports_data.csv',
+      fr: 'NEB_importations_exportations_les_données.csv',
     },
   },
 
@@ -838,18 +838,6 @@ const TranslationTable = fromJS({
             en: 'Exports',
             fr: 'Exportations',
           },
-          action: {
-            en: 'from',
-            fr: 'de',
-          },
-          adjective: {
-            en: 'selected',
-            fr: 'ces',
-          },
-          place: {
-            en: 'Regions',
-            fr: 'Régions',
-          },
         },
         body: {
           action: {
@@ -863,18 +851,6 @@ const TranslationTable = fromJS({
           type: {
             en: 'Imports',
             fr: 'Importations',
-          },
-          action: {
-            en: 'to',
-            fr: 'par',
-          },
-          adjective: {
-            en: 'selected',
-            fr: 'ces',
-          },
-          place: {
-            en: 'Regions',
-            fr: 'Régions',
           },
         },
         body: {

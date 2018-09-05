@@ -11,9 +11,7 @@ import { timelineData, timeLineScaleValue, timeLineScaleValueByProductSubtype } 
 import { groupingBy as timelineGrouping } from '../selectors/data'
 import { visualizationSettings } from '../selectors/visualizationSettings'
 import { toggleOutlier } from '../actions/chartOutliers'
-
 import trSelector from '../selectors/translate'
-
 import ExplanationDot from './ExplanationDot'
 
 class BarChart extends Chart {
