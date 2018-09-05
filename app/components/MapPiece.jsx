@@ -115,7 +115,7 @@ class MapPiece extends React.Component {
   newBrunswickExplanation() {
     if (this.props.selectedEnergy === 'electricity'
       && this.props.name === 'NB') {
-      const scaleContainerX = this.props.viewport.get('changeWidthRatio') > 1.2 ? 290 : 270
+      const scaleContainerX = this.props.viewport.get('changeWidthRatio') > 1.2 ? 255 : 270
       const scaleContainerY = this.props.viewport.get('changeHeightRatio') > 1.2 ? 45 : 40
       return (<g>
         <ExplanationDot

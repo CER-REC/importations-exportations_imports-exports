@@ -29,11 +29,42 @@ class Chart extends React.PureComponent {
     scaleKey: '', // The selector will default this to the valueKey if not set
   }
 
+  componentWillReceiveProps(nextProps) {
+    // Reset the axis guide when the scale changes.
+    // Watch scale since that changes the bar height, but use trueScale in order
+    // to put the guide on top of the tallest bar
+    const maxValue = Math.min(
+      this.findMaxValues(nextProps),
+      this.getScale(nextProps).getIn(['y', 'max']),
+    )
+    // There is a floating point issue where the number doesn't exactly match.
+    // This will give it a slight variance to prevent unintentional resets
+    const difference = Math.abs(this.findMaxValues(this.props) - maxValue)
+    if (difference > 0.1) {
+      this.updateAxisGuide(maxValue)
+    }
+  }
+
   getTransform() {
     const { left, top, height } = this.props
     return (this.props.flipped === true)
       ? `scale(1,-1) translate(${left} ${-top - height})`
       : `translate(${left} ${top})`
+  }
+
+  findMaxValues(props = this.props) {
+    const { bars, valueKey, activityValueKey } = props
+    const values = bars.get('values')
+      .map(point => (valueKey === 'productSubtype' || valueKey === 'transport'
+        ? point.reduce((acc, next) => (acc + next), 0)
+        : point.get(activityValueKey, 0)
+      ))
+      .toArray()
+    return Math.max(0, ...values)
+  }
+
+  maxValueWithOutlier() {
+    return Math.min(this.findMaxValues(), this.getScale(this.props).getIn(['y', 'max']))
   }
 
   isTimelinePointFiltered(period) {
@@ -60,6 +91,8 @@ class Chart extends React.PureComponent {
     }
     return false
   }
+
+  updateAxisGuide = (position) => this.setState({ axisGuide: position })
 
   render() {
     return null
