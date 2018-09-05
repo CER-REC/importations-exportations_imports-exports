@@ -52,7 +52,7 @@ class PowerPoolContainer extends React.Component {
           lineY={173.94}
           textX={45}
           textY={48}
-          containerX={this.props.viewport.get('changeWidthRatio') * (this.props.top + scaleContainerX)}
+          containerX={this.props.viewport.get('changeWidthRatio') * (this.props.top + scaleContainerX) - 45}
           containerY={this.props.viewport.get('changeHeightRatio') * (this.props.left + scaleContainerY)}
           text={`${Tr.getIn(['explanations', 'powerpool', this.props.language])}`}
           name="powerpoolExplanation"
