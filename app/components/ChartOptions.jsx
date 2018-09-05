@@ -16,11 +16,6 @@ import ExplanationDot from './ExplanationDot'
 import tr from '../TranslationTable'
 
 class ChartOptions extends React.PureComponent {
-  constructor(props) {
-    super(props)
-    this.changeTimelineGroup = this.changeTimelineGroup.bind(this)
-  }
-
   static get propTypes() {
     return {
       setScaleLinked: PropTypes.func.isRequired,

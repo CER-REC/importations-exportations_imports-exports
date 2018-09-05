@@ -35,14 +35,6 @@ class SocialBar extends React.Component {
   }
   constructor(props) {
     super(props)
-    this.aboutThisProjectClick = this.aboutThisProjectClick.bind(this)
-    this.methodologyClick = this.methodologyClick.bind(this)
-    this.twitterClick = this.twitterClick.bind(this)
-    this.emailClick = this.emailClick.bind(this)
-    this.facebookClick = this.facebookClick.bind(this)
-    this.linkedInClick = this.linkedInClick.bind(this)
-    this.downloadImageClick = this.downloadImageClick.bind(this)
-    this.downloadDataClick = this.downloadDataClick.bind(this)
     this.state = { screenshotURL: Constants.get('appHost') }
   }
 
@@ -118,20 +110,20 @@ class SocialBar extends React.Component {
     )
   }
 
-  aboutThisProjectClick() {
+  aboutThisProjectClick = () => {
     if (!this.props.expandSocialBar) { return this.props.controlArrowClick() }
     this.showAnalytics('about')
     this.props.onClick()
   }
 
-  methodologyClick() {
+  methodologyClick = () => {
     if (!this.props.expandSocialBar) { return this.props.controlArrowClick() }
     this.showAnalytics('methodology')
     const appRoot = RouteComputations.appRoot(this.props.language)
     window.open(`${appRoot}${Tr.getIn(['methodologyLinks', this.props.language])}`)
   }
 
-  twitterClick() {
+  twitterClick = () => {
     this.showAnalytics('twitter')
     this.makeBitlyPromise().then((url) => {
       const twitterUrl = `https://twitter.com/intent/tweet?url=${url}`
@@ -139,7 +131,7 @@ class SocialBar extends React.Component {
     })
   }
 
-  emailClick() {
+  emailClick = () => {
     const self = this
     self.showAnalytics('email')
     this.makeBitlyPromise().then((url) => {
@@ -151,7 +143,7 @@ class SocialBar extends React.Component {
     })
   }
 
-  facebookClick() {
+  facebookClick = () => {
     this.showAnalytics('facebook')
     this.makeBitlyPromise().then((url) => {
       const facebookUrl = `https://www.facebook.com/sharer/sharer.php?u=${url}`
@@ -159,7 +151,7 @@ class SocialBar extends React.Component {
     })
   }
 
-  linkedInClick() {
+  linkedInClick = () => {
     this.showAnalytics('linkedIn')
     this.makeBitlyPromise().then((url) => {
       const linkedinUrl = `https://www.linkedin.com/shareArticle?mini=true&url=${url}&summary=${url}`
@@ -167,13 +159,13 @@ class SocialBar extends React.Component {
     })
   }
 
-  downloadImageClick() {
+  downloadImageClick = () => {
     if (!this.props.expandSocialBar) { return this.props.controlArrowClick() }
     this.showAnalytics('download image')
     this.props.imageDownloadClick()
   }
 
-  downloadDataClick() {
+  downloadDataClick = () => {
     if (!this.props.expandSocialBar) { return this.props.controlArrowClick() }
     this.showAnalytics('download data')
     this.props.dataDownloadClick()

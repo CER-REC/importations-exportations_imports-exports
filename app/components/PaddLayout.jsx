@@ -43,10 +43,6 @@ class PaddLayout extends React.Component {
     */
   }
 
-  constructor(props) {
-    super(props)
-    this.onPaddClick = this.onPaddClick.bind(this)
-  }
   getColorIndex(value) {
     return this.props.bins.findIndex(range => range.get(0) <= value && value < range.get(1))
   }
@@ -284,7 +280,7 @@ class PaddLayout extends React.Component {
     }
     return Constants.getIn(['tabIndex', 'start', 'visualization', 'usPadd'])
   }
-  onPaddClick(props, paddGroup) {
+  onPaddClick = (props, paddGroup) => {
     const { selctionState } = props
     let { country } = props
     let origins = []
@@ -309,18 +305,12 @@ class PaddLayout extends React.Component {
     // Creating event detail
     const eventDetail = paddGroup
     // report even to analytics
-    if (origins.indexOf(paddGroup) > -1) {
-      analyticsReporter(
-        Constants.getIn(['analytics', 'category', 'padd']),
-        Constants.getIn(['analytics', 'action', 'selected']),
-        eventDetail,
-      )} else {
-        analyticsReporter(
-          Constants.getIn(['analytics', 'category', 'padd']),
-          Constants.getIn(['analytics', 'action', 'unselected']),
-          eventDetail,
-        )
-      }
+    const paddGroupNumber = origins.indexOf(paddGroup)
+    analyticsReporter(
+      Constants.getIn(['analytics', 'category', 'padd']),
+      Constants.getIn(['analytics', 'action', ((paddGroupNumber > -1) ? 'selected' : 'unselected')]),
+      eventDetail,
+    )
     /** Analytics reporting: Finish */
 
     props.savePaddState({

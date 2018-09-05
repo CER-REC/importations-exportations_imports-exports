@@ -46,11 +46,6 @@ class ElectricityMapLayout extends React.Component {
     */
   }
 
-  constructor(props) {
-    super(props)
-    this.onClick = this.onClick.bind(this)
-  }
-
   onClick = (country, originKey) => {
     const { selection } = this.props
     let origins = [originKey]
@@ -68,16 +63,11 @@ class ElectricityMapLayout extends React.Component {
     /** Analytics reporting: start */
     // Creating event detail
     const eventDetail = `${country}  ${originKey}`
+    // let selected = this.isMapPieceSelected(originKey, country)
     if (this.isMapPieceSelected(originKey, country)) {
       analyticsReporter(
         Constants.getIn(['analytics', 'category', 'mapPiece']),
-        Constants.getIn(['analytics', 'action', 'unselected']),
-        eventDetail,
-      )
-    } else {
-      analyticsReporter(
-        Constants.getIn(['analytics', 'category', 'mapPiece']),
-        Constants.getIn(['analytics', 'action', 'selected']),
+        Constants.getIn(['analytics', 'action', (this.isMapPieceSelected(originKey, country) ? 'unselected' : 'selected')]),
         eventDetail,
       )
     }

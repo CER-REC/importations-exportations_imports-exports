@@ -15,11 +15,6 @@ import '../styles/Fonts.scss'
 
 class ShowExplanations extends React.Component {
 
-  constructor(props) {
-    super(props)
-    this.showAnalyticsAndExplanationToggle = this.showAnalyticsAndExplanationToggle.bind(this)
-  }
-
   static get propTypes() {
     return {
       onClick: PropTypes.func.isRequired,
@@ -37,7 +32,7 @@ class ShowExplanations extends React.Component {
     />)
   }
 
-  showAnalyticsAndExplanationToggle() {
+  showAnalyticsAndExplanationToggle = () => {
     const eventDetail = 'Explanation Toggle'
     analyticsReporter(
       Constants.getIn(['analytics', 'category', 'explanations']),

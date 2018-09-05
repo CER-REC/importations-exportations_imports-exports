@@ -41,11 +41,6 @@ class Menu extends React.PureComponent {
     selected: '',
   }
 
-  constructor(props) {
-    super(props)
-    this.onChange = this.onChange.bind(this)
-  }
-
   onChange = (option) => {
     this.props.onChange(option)
     this.showAnalytics(`${this.props.name} ${option}`)

@@ -14,10 +14,7 @@ import { handleInteraction, analyticsReporter } from '../utilities'
 import './ExplanationDot.scss'
 
 class ExplanationDot extends React.Component {
-  constructor(props) {
-    super(props)
-    this.showAnalyticsAndShowExplanation = this.showAnalyticsAndShowExplanation.bind(this)
-  }
+
   static get propTypes() {
     return {
       xPosition: PropTypes.number.isRequired,
@@ -84,22 +81,16 @@ class ExplanationDot extends React.Component {
     </g>)
   }
 
-  showAnalyticsAndShowExplanation() {
+  showAnalyticsAndShowExplanation = () => {
     const eventDetail = this.props.name
     this.props.onClick(this.props.name)
-    if (this.props.expanded === false) {
-      analyticsReporter(
-        Constants.getIn(['analytics', 'category', 'confidentiality']),
-        Constants.getIn(['analytics', 'action', 'selected']),
-        eventDetail,
-      )
-    } else {
-      analyticsReporter(
-        Constants.getIn(['analytics', 'category', 'confidentiality']),
-        Constants.getIn(['analytics', 'action', 'unselected']),
-        eventDetail,
-      )
-    }
+    let selected = this.props.expanded
+
+    analyticsReporter(
+      Constants.getIn(['analytics', 'category', 'confidentiality']),
+      Constants.getIn(['analytics', 'action', (selected ? 'unselected' : 'selected')]),
+      eventDetail,
+    )
   }
 
   render() {

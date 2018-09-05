@@ -62,7 +62,7 @@ DetailBreakdown.propTypes = {
   showGroup: PropTypes.string.isRequired,
   data: PropTypes.instanceOf(Immutable.Map).isRequired,
   total: PropTypes.bool,
-  selectedCountry: PropTypes.string.isRequired,
+  selectedCountry: PropTypes.string,
 }
 
 export default connect((state, props) => ({

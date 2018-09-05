@@ -43,8 +43,6 @@ class AxisGuide extends React.PureComponent {
     this.state = {
       positionDisplay: props.position,
     }
-    this.adjustOffset = this.adjustOffset.bind(this)
-    this.dragStop = this.dragStop.bind(this)
   }
 
   componentWillReceiveProps(props) {
@@ -71,7 +69,7 @@ class AxisGuide extends React.PureComponent {
     this.props.updatePosition(Math.round(newY / heightPerUnit))
   }
 
-  dragStop() {
+  dragStop = () => {
     /** Analytics reporting: start */
     // Creating event detail
     const eventDetail = this.state.positionDisplay
@@ -163,7 +161,7 @@ class AxisGuide extends React.PureComponent {
     )
   }
 
-  adjustOffset(rawOffset) {
+  adjustOffset = (rawOffset) => {
     if (this.props.scale.get('max') === this.props.scale.get('min')) {
       return { x: 0, y: this.props.scale.get('min') }
     }

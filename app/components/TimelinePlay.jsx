@@ -23,17 +23,14 @@ class TimelinePlay extends React.PureComponent {
 
   constructor(props) {
     super(props)
-    this.onClick = this.onClick.bind(this)
     this.state = { playInterval: null }
-    this.onClick = this.onClick.bind(this)
-    this.resetPlay = this.resetPlay.bind(this)
   }
 
   componentWillUnmount() {
     this.resetPlay()
   }
 
-  resetPlay() {
+  resetPlay = () => {
     const { timelineScale: yearScale } = this.props
     if (this.state.playInterval) {
       clearInterval(this.state.playInterval)
@@ -74,7 +71,7 @@ class TimelinePlay extends React.PureComponent {
     return fromJS(timelinePlayStart)
   }
 
-  onClick() {
+  onClick = () =>  {
     if (this.state.playInterval) { return this.resetPlay() }
     this.showAnalytics('Play Button')
     const { timelineScale: yearScale } = this.props

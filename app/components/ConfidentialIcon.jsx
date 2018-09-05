@@ -29,10 +29,6 @@ export const ConfidentialIconLogo = props => (
 )
 
 class ConfidentialIcon extends React.Component {
-  constructor(props) {
-    super(props)
-    this.showAnalyticsAndExpandConfidential = this.showAnalyticsAndExpandConfidential.bind(this)
-  }
   static get propTypes() {
     return {
       containerX: PropTypes.number.isRequired,
@@ -52,7 +48,7 @@ class ConfidentialIcon extends React.Component {
     return <ConfidentialIconLogo expanded={this.props.expanded} />
   }
 
-  showAnalyticsAndExpandConfidential() {
+  showAnalyticsAndExpandConfidential = () => {
     this.props.onClick(this.props.name)
     const eventDetail = this.props.text
     analyticsReporter(

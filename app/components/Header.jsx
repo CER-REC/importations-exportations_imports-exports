@@ -24,13 +24,7 @@ class Header extends React.Component {
     }
   }
 
-  constructor(props) {
-    super(props)
-    this.resetClick = this.resetClick.bind(this)
-    this.refinedPetroleumProductsImportsLink = this.refinedPetroleumProductsImportsLink.bind(this)
-  }
-
-  resetClick() {
+  resetClick = () => {
     this.props.onResetClick()
     this.showAnalytics('reset')
   }
@@ -129,7 +123,7 @@ class Header extends React.Component {
     )
   }
 
-  refinedPetroleumProductsImportsLink() {
+  refinedPetroleumProductsImportsLink = () => {
     const { Tr, language } = this.props
     const energyType = this.props.selectedEnergy
     if (energyType !== 'refinedPetroleumProducts') { return null }

@@ -14,11 +14,6 @@ import '../styles/Fonts.scss'
 
 class ShowConfidentiality extends React.Component {
 
-  constructor(props) {
-    super(props)
-    this.showAnalyticsAndConfidentialToggle = this.showAnalyticsAndConfidentialToggle.bind(this)
-  }
-
   static get propTypes() {
     return {
       Tr: PropTypes.func.isRequired,
@@ -97,7 +92,7 @@ class ShowConfidentiality extends React.Component {
             </g>)
   }
 
-  showAnalyticsAndConfidentialToggle() {
+  showAnalyticsAndConfidentialToggle = () => {
     const eventDetail = 'Confidential Toggle'
     analyticsReporter(
       Constants.getIn(['analytics', 'category', 'confidentiality']),
