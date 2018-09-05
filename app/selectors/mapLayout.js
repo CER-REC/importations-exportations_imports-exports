@@ -135,7 +135,7 @@ export const parseLocationData = createSelector(
     const tabIndexes = {}
     const tilePositions = {}
 
-    if (records.count() !== 0 && typeof layout !== 'undefined') {
+    if (typeof layout !== 'undefined') {
       layout.forEach((region) => {
         const originKey = region.get('originKey')
         tabIndexes[originKey] = tabIndex
