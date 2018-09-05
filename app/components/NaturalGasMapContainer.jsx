@@ -73,7 +73,6 @@ class NaturalGasMapContainer extends React.PureComponent {
     }
 /** Analytics reporting: start */
     const eventDetail = `${portName}`
-    // let selected = this.isMapPieceSelected(portName, provinceName)
     analyticsReporter(
       Constants.getIn(['analytics', 'category', 'mapPiece']),
       Constants.getIn(['analytics', 'action', (this.isMapPieceSelected(portName, provinceName) ? 'unselected' : 'selected') ]),

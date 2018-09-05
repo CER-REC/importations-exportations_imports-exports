@@ -52,7 +52,6 @@ class NaturalGasLiquidMapLayout extends React.Component {
     }
     /** Analytics reporting: start */
     const eventDetail = `${country} ${originKey}`
-    // let selected = this.isMapPieceSelected(originKey, country)
     analyticsReporter(
       Constants.getIn(['analytics', 'category', 'mapPiece']),
       Constants.getIn(['analytics', 'action', (this.isMapPieceSelected(originKey, country) ? 'unselected' : 'selected')]),

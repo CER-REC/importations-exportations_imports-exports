@@ -63,7 +63,6 @@ class ElectricityMapLayout extends React.Component {
     /** Analytics reporting: start */
     // Creating event detail
     const eventDetail = `${country}  ${originKey}`
-    // let selected = this.isMapPieceSelected(originKey, country)
     analyticsReporter(
       Constants.getIn(['analytics', 'category', 'mapPiece']),
       Constants.getIn(['analytics', 'action', (this.isMapPieceSelected(originKey, country) ? 'unselected' : 'selected')]),
