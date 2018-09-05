@@ -36,18 +36,6 @@ class StackedChart extends Chart {
     }
   }
 
-  componentWillReceiveProps(nextProps) {
-    // Reset the axis guide when the scale changes.
-    // Watch scale since that changes the bar height, but use trueScale in order
-    // to put the guide on top of the tallest bar
-    const maxValue = Math.min(this.findMaxValues(nextProps), this.getScale(nextProps).getIn(['y', 'max']))
-    if (this.findMaxValues(this.props) !== maxValue) {
-      this.updateAxisGuide(maxValue)
-    }
-  }
-
-  updateAxisGuide = position => this.setState({ axisGuide: position })
-
   refinedPetroleumProductsBar() {
     const scaleContainerX = this.props.viewport.get('changeWidthRatio') > 1.2 ? 670 : 472
     if (this.props.selectedEnergy !== 'refinedPetroleumProducts') { return null }

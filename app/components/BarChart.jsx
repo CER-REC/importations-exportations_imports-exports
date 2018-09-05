@@ -39,20 +39,6 @@ class BarChart extends Chart {
     }
   }
 
-  componentWillReceiveProps(nextProps) {
-    // Reset the axis guide when the scale changes.
-    // Watch scale since that changes the bar height, but use trueScale in order
-    // to put the guide on top of the tallest bar
-    const maxValue = Math.min(this.findMaxValues(nextProps), this.getScale(nextProps).getIn(['y', 'max']))
-    if (this.findMaxValues(this.props) !== maxValue) {
-      this.updateAxisGuide(maxValue)
-    }
-  }
-
-  updateAxisGuide = (position) => {
-    this.setState({ axisGuide: position })
-  }
-
   orangeBarExplanation() {
     const negativeValOffset = this.calculateNegativePosition()
     let textString = `${this.props.tr(['explanations', 'barChartImport'])}`
