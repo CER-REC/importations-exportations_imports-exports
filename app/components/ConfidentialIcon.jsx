@@ -51,9 +51,10 @@ class ConfidentialIcon extends React.Component {
   showAnalyticsAndExpandConfidential = () => {
     this.props.onClick(this.props.name)
     const eventDetail = this.props.text
+    const selected = this.props.expanded
     analyticsReporter(
       Constants.getIn(['analytics', 'category', 'confidentiality']),
-      Constants.getIn(['analytics', 'action', 'clicked']),
+      Constants.getIn(['analytics', 'action', selected ? 'unselected' : 'selected']),
       eventDetail,
     )
   }
