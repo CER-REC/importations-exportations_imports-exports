@@ -1,4 +1,5 @@
 import TR from './TranslationTable'
+import { analyticsDataSelector } from './selectors/data'
 
 const numLocale = (v, decimals = 2) => v.toLocaleString(undefined, { maximumFractionDigits: decimals })
 export const humanNumber = (valueRaw, language, maxCharacters = 4) => {
@@ -41,3 +42,34 @@ export const parsePeriod = period => ({
   year: parseInt(period.substr(0, 4), 10),
   quarter: parseInt(period.substr(5), 10),
 })
+
+let getState
+export const prepareAnalytics = (store) => { getState = () => store.getState() }
+
+/**
+ * [description]
+ * @param  {[type]} analyticsObject [analyticsDataSelector from selector/data.js]
+ * @param  {[type]} category        [category Constant.getIn(['analytics','category'])]
+ * @param  {[type]} action          [action Constant.getIn(['analytics','action'])]
+ * @param  {[type]} eventDetail     [plain text for additional detail for example in map piece we ca send name e.g. "NY"]
+ * @return {[type]}                 [returns a updated object for analytics]
+ */
+
+export const analyticsReporter = (category, action, eventDetail) => {
+  if (typeof window.dataLayer === 'undefined') {
+    console.warn('Google Tag Manager not found.')
+  }
+
+  if (typeof window.dataLayer === 'undefined') { return null }
+
+  const analyticsObject = analyticsDataSelector(getState(), {})
+
+  const dataObject = {
+    ...analyticsObject,
+    action,
+    category,
+    label: eventDetail,
+  }
+  console.log('Sending GA report:', dataObject)
+  return window.dataLayer.push(dataObject)
+}

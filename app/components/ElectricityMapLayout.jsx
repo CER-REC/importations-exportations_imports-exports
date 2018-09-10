@@ -19,7 +19,7 @@ import './ElectricityMapLayout.scss'
 
 import { getMapLayout } from '../selectors/mapLayout'
 import { arrangeBy, binSelector } from '../selectors/data'
-import { handleInteractionWithTabIndex } from '../utilities'
+import { handleInteractionWithTabIndex, analyticsReporter } from '../utilities'
 
 const emptyMap = new Immutable.Map()
 
@@ -29,6 +29,7 @@ const mapPieceTransformStartXaxis = (position, dimensions, mapPieceScale) =>
 const mapPieceTransformStartYaxis = (position, dimensions, mapPieceScale) =>
   position.get('y') *
     ((mapPieceScale * dimensions.get('height')) + dimensions.get('yAxisPadding'))
+
 
 class ElectricityMapLayout extends React.Component {
   static propTypes = {
@@ -56,6 +57,18 @@ class ElectricityMapLayout extends React.Component {
         origins = selection.get('origins').delete(originKeyExists)
       }
     }
+
+
+
+    /** Analytics reporting: start */
+    // Creating event detail
+    const eventDetail = `${country}  ${originKey}`
+    analyticsReporter(
+      Constants.getIn(['analytics', 'category', 'mapPiece']),
+      Constants.getIn(['analytics', 'action', (this.isMapPieceSelected(originKey, country) ? 'unselected' : 'selected')]),
+      eventDetail,
+    )
+    /** Analytics reporting: Finish */
     this.props.onMapPieceClick({
       country,
       origins,

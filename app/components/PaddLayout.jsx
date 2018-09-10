@@ -20,7 +20,7 @@ import ConfidentialIcon from './ConfidentialIcon'
 
 import ExplanationDot from './ExplanationDot'
 
-import { handleInteractionWithTabIndex } from '../utilities'
+import { handleInteractionWithTabIndex, analyticsReporter } from '../utilities'
 
 import { arrangeBy, binSelector, selection } from '../selectors/data'
 import { setSelection } from '../actions/visualizationSettings'
@@ -31,6 +31,7 @@ const mapPieceTransformStartTop = (top, position, dimensions, mapPieceScale) => 
 const mapPieceTransformStartLeft = (left, position, dimensions, mapPieceScale) => left + (position.get('x') * ((mapPieceScale * dimensions.get('width')) + dimensions.get('xAxisPadding')))
 
 class PaddLayout extends React.Component {
+
   static propTypes = {
     /*
     arrangeBy: PropTypes.string.isRequired,
@@ -41,6 +42,7 @@ class PaddLayout extends React.Component {
     selectedEnergy: PropTypes.string.isRequired,
     */
   }
+
   getColorIndex(value) {
     return this.props.bins.findIndex(range => range.get(0) <= value && value < range.get(1))
   }
@@ -278,7 +280,7 @@ class PaddLayout extends React.Component {
     }
     return Constants.getIn(['tabIndex', 'start', 'visualization', 'usPadd'])
   }
-  onPaddClick(props, paddGroup) {
+  onPaddClick = (props, paddGroup) => {
     const { selctionState } = props
     let { country } = props
     let origins = []
@@ -298,6 +300,18 @@ class PaddLayout extends React.Component {
     } else {
       origins = [paddGroup]
     }
+
+    /** Analytics reporting: start */
+    // Creating event detail
+    const eventDetail = paddGroup
+    // report even to analytics
+    const paddGroupNumber = origins.indexOf(paddGroup)
+    analyticsReporter(
+      Constants.getIn(['analytics', 'category', 'padd']),
+      Constants.getIn(['analytics', 'action', ((paddGroupNumber > -1) ? 'selected' : 'unselected')]),
+      eventDetail,
+    )
+    /** Analytics reporting: Finish */
 
     props.savePaddState({
       country,

@@ -9,7 +9,7 @@ import RouteComputations from '../computations/RouteComputations'
 import Constants from '../Constants'
 import Tr from '../TranslationTable'
 import WorkspaceComputations from '../computations/WorkspaceComputations'
-import { handleInteractionWithTabIndex } from '../utilities'
+import { handleInteractionWithTabIndex, analyticsReporter } from '../utilities'
 
 import { ExpandSocialBar } from '../actions/socialBar'
 
@@ -35,14 +35,6 @@ class SocialBar extends React.Component {
   }
   constructor(props) {
     super(props)
-    this.aboutThisProjectClick = this.aboutThisProjectClick.bind(this)
-    this.methodologyClick = this.methodologyClick.bind(this)
-    this.twitterClick = this.twitterClick.bind(this)
-    this.emailClick = this.emailClick.bind(this)
-    this.facebookClick = this.facebookClick.bind(this)
-    this.linkedInClick = this.linkedInClick.bind(this)
-    this.downloadImageClick = this.downloadImageClick.bind(this)
-    this.downloadDataClick = this.downloadDataClick.bind(this)
     this.state = { screenshotURL: Constants.get('appHost') }
   }
 
@@ -118,26 +110,30 @@ class SocialBar extends React.Component {
     )
   }
 
-  aboutThisProjectClick() {
+  aboutThisProjectClick = () => {
     if (!this.props.expandSocialBar) { return this.props.controlArrowClick() }
+    this.showAnalytics('about')
     this.props.onClick()
   }
 
-  methodologyClick() {
+  methodologyClick = () => {
     if (!this.props.expandSocialBar) { return this.props.controlArrowClick() }
+    this.showAnalytics('methodology')
     const appRoot = RouteComputations.appRoot(this.props.language)
     window.open(`${appRoot}${Tr.getIn(['methodologyLinks', this.props.language])}`)
   }
 
-  twitterClick() {
+  twitterClick = () => {
+    this.showAnalytics('twitter')
     this.makeBitlyPromise().then((url) => {
       const twitterUrl = `https://twitter.com/intent/tweet?url=${url}`
       window.open(twitterUrl, 'targetWindow', 'width=650,height=650')
     })
   }
 
-  emailClick() {
+  emailClick = () => {
     const self = this
+    self.showAnalytics('email')
     this.makeBitlyPromise().then((url) => {
       const emailBody = `${url}%0A%0A ${Tr.getIn(['shareEmail', 'body', self.props.language])}`
 
@@ -147,27 +143,31 @@ class SocialBar extends React.Component {
     })
   }
 
-  facebookClick() {
+  facebookClick = () => {
+    this.showAnalytics('facebook')
     this.makeBitlyPromise().then((url) => {
       const facebookUrl = `https://www.facebook.com/sharer/sharer.php?u=${url}`
       window.open(facebookUrl, 'targetWindow', 'width=650,height=650')
     })
   }
 
-  linkedInClick() {
+  linkedInClick = () => {
+    this.showAnalytics('linkedIn')
     this.makeBitlyPromise().then((url) => {
       const linkedinUrl = `https://www.linkedin.com/shareArticle?mini=true&url=${url}&summary=${url}`
       window.open(linkedinUrl, 'targetWindow', 'width=650,height=650')
     })
   }
 
-  downloadImageClick() {
+  downloadImageClick = () => {
     if (!this.props.expandSocialBar) { return this.props.controlArrowClick() }
+    this.showAnalytics('download image')
     this.props.imageDownloadClick()
   }
 
-  downloadDataClick() {
+  downloadDataClick = () => {
     if (!this.props.expandSocialBar) { return this.props.controlArrowClick() }
+    this.showAnalytics('download data')
     this.props.dataDownloadClick()
   }
 
@@ -342,6 +342,15 @@ class SocialBar extends React.Component {
         {this.state.screenshotURL}
       </tspan>
     </text>
+    )
+  }
+
+  showAnalytics(text) {
+    const eventDetail = text
+    analyticsReporter(
+      Constants.getIn(['analytics', 'category', 'socialBar']),
+      Constants.getIn(['analytics', 'action', 'clicked']),
+      eventDetail,
     )
   }
 

@@ -8,12 +8,13 @@ import { explanationTogglePosition } from '../selectors/viewport/menus'
 
 import ToggleExplanation from '../actionCreators/ShowExplanationsCreator'
 import WorkspaceComputations from '../computations/WorkspaceComputations'
-import { handleInteractionWithTabIndex } from '../utilities'
+import { handleInteractionWithTabIndex, analyticsReporter } from '../utilities'
 
 import '../styles/Fonts.scss'
 
 
 class ShowExplanations extends React.Component {
+
   static get propTypes() {
     return {
       onClick: PropTypes.func.isRequired,
@@ -29,6 +30,16 @@ class ShowExplanations extends React.Component {
       r={Constants.getIn(['explanationDot', 'radiusStart'])}
       fill="#ff708a"
     />)
+  }
+
+  showAnalyticsAndExplanationToggle = () => {
+    const eventDetail = 'Explanation Toggle'
+    analyticsReporter(
+      Constants.getIn(['analytics', 'category', 'explanations']),
+      Constants.getIn(['analytics', 'action', 'clicked']),
+      eventDetail,
+    )
+    this.props.onClick()
   }
 
   showText() {
@@ -60,7 +71,7 @@ class ShowExplanations extends React.Component {
       <g
         transform={`translate(${this.props.left} ${this.props.top})`}
         role="menuitem"
-        {...handleInteractionWithTabIndex(tabIndex, this.props.onClick)}
+        {...handleInteractionWithTabIndex(tabIndex, this.showAnalyticsAndExplanationToggle)}
       >
         {this.dot()}
         {this.showText()}

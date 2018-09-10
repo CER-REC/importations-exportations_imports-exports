@@ -1,15 +1,17 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
+import { fromJS, keySeq } from 'immutable'
+import Constants from '../Constants'
 import { setTimelinePlayback, resetTimelinePlayback } from '../actions/timelinePlayback'
 import { timelineYearScaleCalculation } from '../selectors/timeline'
 import { timelineRange, timelinePlayback, groupingBy as timelineGrouping } from '../selectors/data'
 import trSelector from '../selectors/translate'
 import tr from '../TranslationTable'
-import { handleInteractionWithTabIndex, parsePeriod } from '../utilities'
+import { handleInteractionWithTabIndex, parsePeriod, analyticsReporter } from '../utilities'
 import { barChartValues } from '../selectors/renderData'
-import { fromJS, keySeq } from 'immutable'
 import ExplanationDot from './ExplanationDot'
+
 class TimelinePlay extends React.PureComponent {
   static propTypes = {
     height: PropTypes.number.isRequired,
@@ -21,7 +23,6 @@ class TimelinePlay extends React.PureComponent {
 
   constructor(props) {
     super(props)
-    this.onClick = this.onClick.bind(this)
     this.state = { playInterval: null }
   }
 
@@ -29,13 +30,22 @@ class TimelinePlay extends React.PureComponent {
     this.resetPlay()
   }
 
-  resetPlay() {
+  resetPlay = () => {
     const { timelineScale: yearScale } = this.props
     if (this.state.playInterval) {
       clearInterval(this.state.playInterval)
       this.setState({ playInterval: null })
       this.props.resetTimelinePlayback()
     }
+  }
+
+  showAnalytics(text) {
+    const eventDetail = text
+    analyticsReporter(
+      Constants.getIn(['analytics', 'category', 'timeline']),
+      Constants.getIn(['analytics', 'action', 'clicked']),
+      eventDetail,
+    )
   }
 
   setStartingPoint() {
@@ -61,8 +71,9 @@ class TimelinePlay extends React.PureComponent {
     return fromJS(timelinePlayStart)
   }
 
-  onClick() {
+  onClick = () =>  {
     if (this.state.playInterval) { return this.resetPlay() }
+    this.showAnalytics('Play Button')
     const { timelineScale: yearScale } = this.props
     this.setState({
       playInterval: setInterval(() => {

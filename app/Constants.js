@@ -784,5 +784,34 @@ const Constants = fromJS({
       socialBar: 200,
     },
   },
+  analytics: {
+    parentVizualizationName: 'import export visualization',
+    events: {
+      visualizationInteraction: 'visualization interaction',
+    },
+    action: {
+      clicked: 'clicked',
+      dragged: 'dragged',
+      selected: 'selected',
+      unselected: 'unselected',
+    },
+    category: {
+      mapPiece: 'map piece',
+      padd: 'padd',
+      axisGuide: 'axis guide',
+      socialBar: 'social bar',
+      headerLinks: 'header links',
+      detailSidebar: 'detail side bar',
+      explanations: 'explanations',
+      confidentiality: 'confidentiality',
+      barOutlier: 'bar outlier',
+      menuBar: 'menu bar',
+      timeline: 'timeline',
+      timelineGroup: 'timeline group',
+      wikimediaCommons: 'wikimedia commons',
+      reset: 'reset',
+    },
+
+  },
 })
 export default Constants

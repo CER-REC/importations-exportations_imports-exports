@@ -16,7 +16,7 @@ import './ElectricityMapLayout.scss'
 import { getMapLayout } from '../selectors/worldMapLayout'
 import { binSelector } from '../selectors/data'
 
-import { handleInteractionWithTabIndex } from '../utilities'
+import { handleInteractionWithTabIndex, analyticsReporter } from '../utilities'
 
 const emptyMap = new Immutable.Map()
 
@@ -28,6 +28,10 @@ const mapPieceTransformStartYaxis = (position, dimensions, mapPieceScale) =>
     ((mapPieceScale * dimensions.get('height')) + dimensions.get('yAxisPadding'))
 
 class WorldMapLayout extends React.Component {
+
+  constructor(props) {
+    super(props)
+  }
   static propTypes = {
     selection: PropTypes.instanceOf(Immutable.Map).isRequired,
     onMapPieceClick: PropTypes.func.isRequired,
@@ -51,6 +55,17 @@ class WorldMapLayout extends React.Component {
         continents = selection.get('continents').delete(originKeyExists)
       }
     }
+    /** Analytics reporting: start */
+    const eventDetail = `${continentKey}`
+    const selected = this.isMapPieceSelected(continentKey, country)
+    analyticsReporter(
+      Constants.getIn(['analytics', 'category', 'mapPiece']),
+      Constants.getIn(['analytics', 'action', (selected ? 'unselected' : 'selected')]),
+      eventDetail,
+    )
+
+    /** Analytics reporting: Finish */
+
     const filteredData = Constants.getIn(['dataloader', 'mapping', 'continent']).filter(point => continents.includes(point))
     const origins = filteredData.keySeq().toArray()
     this.props.onMapPieceClick({

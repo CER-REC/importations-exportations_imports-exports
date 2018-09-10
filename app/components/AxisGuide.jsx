@@ -7,6 +7,8 @@ import * as ScaleIcon from './ScaleIcon'
 import SVGDrag from './SVGDrag/'
 import Constants from '../Constants'
 import { visualizationSettings, scaledLinkedSelector } from '../selectors/visualizationSettings'
+import { analyticsReporter } from '../utilities'
+
 import trSelector from '../selectors/translate'
 
 import { arrangeBy } from '../selectors/data'
@@ -41,8 +43,6 @@ class AxisGuide extends React.PureComponent {
     this.state = {
       positionDisplay: props.position,
     }
-    this.adjustOffset = this.adjustOffset.bind(this)
-    this.dragStop = this.dragStop.bind(this)
   }
 
   componentWillReceiveProps(props) {
@@ -69,7 +69,18 @@ class AxisGuide extends React.PureComponent {
     this.props.updatePosition(Math.round(newY / heightPerUnit))
   }
 
-  dragStop() {
+  dragStop = () => {
+    /** Analytics reporting: start */
+    // Creating event detail
+    const eventDetail = this.state.positionDisplay
+    // report even to analytics
+    analyticsReporter(
+      Constants.getIn(['analytics', 'category', 'axisGuide']),
+      Constants.getIn(['analytics', 'action', 'dragged']),
+      eventDetail,
+    )
+    /** Analytics reporting: Finish */
+
     this.props.updatePosition(this.state.positionDisplay)
   }
 
@@ -150,7 +161,7 @@ class AxisGuide extends React.PureComponent {
     )
   }
 
-  adjustOffset(rawOffset) {
+  adjustOffset = (rawOffset) => {
     if (this.props.scale.get('max') === this.props.scale.get('min')) {
       return { x: 0, y: this.props.scale.get('min') }
     }

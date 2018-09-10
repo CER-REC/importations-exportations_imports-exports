@@ -8,10 +8,6 @@ import { handleInteraction } from '../utilities'
 import './DataDownloadWindow.scss'
 
 class DataDownloadWindow extends React.Component {
-  constructor(props) {
-    super(props)
-    this.downloadDataClick = this.downloadDataClick.bind(this)
-  }
 
   static get propTypes() {
     return {
@@ -63,7 +59,7 @@ class DataDownloadWindow extends React.Component {
     />)
   }
 
-  downloadDataClick() {
+  downloadDataClick = () => {
     const appRoot = RouteComputations.appRoot(this.props.language)
     const fileName = Tr.getIn(['downloadable', 'csv', this.props.language])
     window.open(`${appRoot}data/${fileName}`, 'data:text/csv;charset=utf-8,data/')

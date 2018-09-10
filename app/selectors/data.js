@@ -10,6 +10,8 @@ import {
   selectedVisualization,
 } from './visualizationSettings'
 
+export const analyticsConstants = () => Constants.get('analytics')
+
 const emptyMap = new Immutable.Map()
 const emptyList = new Immutable.List()
 
@@ -17,6 +19,8 @@ export const getAggregateKey = (_, props = {}) => props.aggregateKey
 export const getValueKey = (_, props = {}) => props.valueKey
 
 export const timelinePlayback = state => state.timelinePlayback
+
+export const getLanguage = state => state.language
 
 export const subType = createSelector(
   visualizationSettings,
@@ -105,5 +109,21 @@ export const timeLineScaleSelector = createSelector(
   (vis, unit, visSettings, scale) => {
     const result = scale.getIn([vis, unit])
     return result
+  },
+)
+
+export const analyticsDataSelector = createSelector(
+  selectedVisualization,
+  visualizationSettings,
+  analyticsConstants,
+  getLanguage,
+  (visualization, filter, constants, language) => {
+    return {
+      visualization,
+      filter: JSON.stringify(filter.toJS()),
+      language,
+      parentVisualzation: constants.get('parentVizualizationName'),
+      event: constants.getIn(['events', 'visualizationInteraction']),
+    }
   },
 )
