@@ -87,7 +87,7 @@ class ExplanationDot extends React.Component {
     let selected = this.props.expanded
 
     analyticsReporter(
-      Constants.getIn(['analytics', 'category', 'confidentiality']),
+      Constants.getIn(['analytics', 'category', 'explanations']),
       Constants.getIn(['analytics', 'action', (selected ? 'unselected' : 'selected')]),
       eventDetail,
     )
