@@ -13,6 +13,7 @@ import { visualizationSettings } from '../selectors/visualizationSettings'
 import { toggleOutlier } from '../actions/chartOutliers'
 import trSelector from '../selectors/translate'
 import ExplanationDot from './ExplanationDot'
+import { product } from '../../node_modules/simple-statistics';
 
 class BarChart extends Chart {
   static propTypes = {
@@ -189,6 +190,7 @@ class BarChart extends Chart {
       tabIndex,
       expandedOutliers,
     } = this.props
+
     const barSize = layout.get('barWidth')
     const scale = this.getScale(this.props)
     const heightPerUnit = this.calculateHeightPerUnit()
@@ -273,6 +275,7 @@ class BarChart extends Chart {
         </g>
         <g transform={`translate(0 ${negativeValOffset})`}>
           <AxisGuide
+            productSubType={this.props.productSubtype}
             flipped={flipped}
             scale={scale.get('y')}
             position={this.state.axisGuide}

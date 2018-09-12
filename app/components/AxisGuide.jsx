@@ -84,31 +84,34 @@ class AxisGuide extends React.PureComponent {
     this.props.updatePosition(this.state.positionDisplay)
   }
 
-  timeLineRangeExplanation() {
-    let containerY = this.props.chartHeight + (this.props.barSize / 2)
-      - (this.props.position * this.props.heightPerUnit) - 2 + 210
-    if (this.props.selectedEnergy === 'crudeOilExports') {
-      containerY = this.props.chartHeight - (this.props.barSize / 2)
-      + (this.props.position * this.props.heightPerUnit) - 38
+  timeLineRangeExplanation = () => {
+    let containerY = 0
+
+    if (this.props.selectedEnergy === 'electricity' && !this.props.flipped) {
+      containerY = 310 - (this.props.position * this.props.heightPerUnit)
+    } else if (this.props.selectedEnergy === 'crudeOilImports') {
+      containerY = 275 - (this.props.position * this.props.heightPerUnit)
+    } else if (this.props.selectedEnergy === 'crudeOilExports' && this.props.flipped) {
+      containerY = (this.props.position * this.props.heightPerUnit) + 400
+    } else if (this.props.selectedEnergy === 'naturalGas' && !this.props.flipped) {
+      containerY = (170 - (this.props.position * this.props.heightPerUnit))
+    } else if (this.props.selectedEnergy === 'refinedPetroleumProducts' && this.props.arrangeBy === 'stack') {
+      containerY = (this.props.position * this.props.heightPerUnit) + 90
+    } else if (this.props.selectedEnergy === 'refinedPetroleumProducts' && this.props.arrangeBy !== 'stack' && this.props.productSubType === 'Partially Processed Oil') {        
+      containerY = (this.props.position * this.props.heightPerUnit) + 50
+    } else if (this.props.selectedEnergy === 'naturalGasLiquids' && !this.props.flipped) {
+      containerY = (this.props.arrangeBy === 'amount') ? 395 - (this.props.position * this.props.heightPerUnit) : 345 - (this.props.position * this.props.heightPerUnit)
     }
-    if (this.props.selectedEnergy === 'naturalGas') {
-      containerY = this.props.chartHeight + (this.props.barSize / 2)
-      - (this.props.position * this.props.heightPerUnit) - 2 + 72
+
+    if (containerY !== 0) {
+      return this.renderExplanationDot(containerY)
     }
-    if (this.props.selectedEnergy === 'naturalGasLiquids') {
-      containerY = this.props.chartHeight + (this.props.barSize / 2)
-      - (this.props.position * this.props.heightPerUnit) - 2 + 240
-    }
-    if (this.props.selectedEnergy === 'refinedPetroleumProducts') {
-      containerY = this.props.chartHeight + (this.props.barSize / 2)
-      + (this.props.position * this.props.heightPerUnit) - 413
-    }
-    if (this.props.selectedEnergy === 'refinedPetroleumProducts'
-      && this.props.arrangeBy === 'split') { return null }
-    if (this.props.flipped
-      && (this.props.selectedEnergy === 'crudeOilExports'
-      && this.props.selectedEnergy !== 'refinedPetroleumProducts')) { return null }
-    return (<g>
+
+    return null
+  }
+
+  renderExplanationDot = (containerY) => (
+  <g>
       <ExplanationDot
         scale="scale(1)"
         lineStroke="1"
@@ -133,7 +136,6 @@ class AxisGuide extends React.PureComponent {
         text={`${this.props.tr(['explanations', 'timelineRange'])}`}
       />
             </g>)
-  }
 
   getBackgroundColour = () => (this.props.scaleLinked
     ? Constants.getIn(['styleGuide', 'colours', 'SandExtraDark'])
