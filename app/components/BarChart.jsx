@@ -258,11 +258,10 @@ class BarChart extends Chart {
         )
       }
       return (
-        <g key={`${period}-${activityValueKey}`} onClick={overflowClick}>
+        <g style={{ cursor: (overflowBarHeight > 0 ? 'pointer' : 'default') }} key={`${period}-${activityValueKey}`} onClick={overflowClick}>
           {this.renderLine(point, period, negativeValOffset, barHeight, colour, opacity, overflowBarHeight)}
           {overflow}
-        </g>
-      )
+        </g>)
     }).toArray()
 
     return (

@@ -123,7 +123,13 @@ class StackedChart extends Chart {
           return line
         })
         .toArray()
-      return <g key={`${period}-${this.props.activityValueKey}`}>{lines}</g>
+      return (
+        <g
+          style={{ cursor: 'default' }}
+          key={`${period}-${this.props.activityValueKey}`}
+        >
+          {lines}
+        </g>)
     }).toArray()
     return (
       <g transform={this.getTransform()}>

@@ -102,6 +102,7 @@ class Axis extends React.PureComponent {
         return (
           <text
             className="timelineLabel"
+            style={{ cursor: 'default' }}
             key={key}
             x={left + label.get('offsetX')}
             y={top + (height / 2)}
