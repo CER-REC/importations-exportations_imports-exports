@@ -16,7 +16,7 @@ const SelectedPrefix = memoize((of) => {
 })
 
 let renderAnalytics = false
-
+let changedVisualization;
 class VisualizationSelector extends React.PureComponent {
 
   static propTypes = {
@@ -30,13 +30,15 @@ class VisualizationSelector extends React.PureComponent {
   static defaultProps = {
     left: 0,
   }
-
   componentDidMount() {
     renderAnalytics = true
   }
 
+  componentWillReceiveProps(nextProps) {
+    changedVisualization = (nextProps.importExportVisualization !== this.props.importExportVisualization) ? true : false
+  }
   showAnalytics() {
-    if (renderAnalytics) {
+    if (renderAnalytics && changedVisualization) {
       const eventDetail = `${this.props.importExportVisualization}`
       analyticsReporter(
         Constants.getIn(['analytics', 'category', 'menuBar']),
