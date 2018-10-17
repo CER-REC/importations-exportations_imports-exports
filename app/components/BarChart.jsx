@@ -274,6 +274,7 @@ class BarChart extends Chart {
         </g>
         <g transform={`translate(0 ${negativeValOffset})`}>
           <AxisGuide
+            viewportWidthRatio={this.props.viewport.get('changeWidthRatio')}
             productSubType={this.props.productSubtype}
             flipped={flipped}
             scale={scale.get('y')}

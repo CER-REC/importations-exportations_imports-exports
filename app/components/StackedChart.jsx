@@ -136,6 +136,7 @@ class StackedChart extends Chart {
         {elements}
         {this.refinedPetroleumProductsBar()}
         <AxisGuide
+          viewportWidthRatio={this.props.viewport.get('changeWidthRatio')}
           flipped={this.props.flipped}
           scale={scale.get('y')}
           position={this.state.axisGuide}
