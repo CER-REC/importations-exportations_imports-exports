@@ -64,7 +64,7 @@ const humanNumber = (v) => {
 const parsingIssue = {}
 // Creating a french CSV file with English Data
 const englishData = fs.readFileSync(Path.resolve(__dirname, 'public/data/NEB_imports_exports_data.csv'), 'utf8');
-const frenchData = englishData.split('\n')
+const frenchData = englishData.split('\n');
 frenchData[0] = 'Période,Produit,Sous-Type de Produit/Catégorie/Article,Mode de Transport,Origine,Destination,Port,Activité,Unité,Valeurs';
 fs.writeFileSync(Path.resolve(__dirname, 'public/data/NEB_importations_exportations_les_donnees.csv'), frenchData.join('\n'), 'utf8');
 
