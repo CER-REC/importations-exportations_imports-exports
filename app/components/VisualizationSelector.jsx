@@ -1,10 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import memoize from 'memoize-immutable'
 
 import TextBox from './TextBox'
-import { handleInteraction, handleInteractionWithTabIndex, analyticsReporter } from '../utilities'
+import { handleInteractionWithTabIndex, analyticsReporter } from '../utilities'
 import Constants from '../Constants'
 import TrSelector from '../selectors/translate'
 import setVisualization from '../actionCreators/SetVisualizationCreator'
@@ -12,13 +11,7 @@ import setVisualization from '../actionCreators/SetVisualizationCreator'
 const textOffset = Constants.getIn(['menuBar', 'textLabelOffset'])
   + Constants.getIn(['menuBar', 'expandedMenuTextMargin'])
 
-const SelectedPrefix = memoize((of) => {
-})
-
-let renderAnalytics = false
-let changedVisualization;
 class VisualizationSelector extends React.PureComponent {
-
   static propTypes = {
     importExportVisualization: PropTypes.string.isRequired,
     setVisualization: PropTypes.func.isRequired,
@@ -30,26 +23,17 @@ class VisualizationSelector extends React.PureComponent {
   static defaultProps = {
     left: 0,
   }
-  componentDidMount() {
-    renderAnalytics = true
-  }
-
-  componentWillReceiveProps(nextProps) {
-    changedVisualization = (nextProps.importExportVisualization !== this.props.importExportVisualization) ? true : false
-  }
-  showAnalytics() {
-    if (renderAnalytics && changedVisualization) {
-      const eventDetail = `${this.props.importExportVisualization}`
-      analyticsReporter(
-        Constants.getIn(['analytics', 'category', 'menuBar']),
-        Constants.getIn(['analytics', 'action', 'clicked']),
-        eventDetail,
-      )
-    }
+  setVisualization = (visualization) => {
+    this.props.setVisualization(visualization)
+    analyticsReporter(
+      Constants.getIn(['analytics', 'category', 'menuBar']),
+      Constants.getIn(['analytics', 'action', 'clicked']),
+      visualization,
+    )
   }
 
   render() {
-    const { Tr, importExportVisualization } = this.props
+    const { Tr } = this.props
     let yOffset = Constants.getIn(['menuBar', 'visualizationPadding'])
     const tabIndex = Constants.getIn(['tabIndex', 'start', 'menuBar'])
     const options = ['electricity', 'crudeOilImports', 'crudeOilExports', 'naturalGas', 'naturalGasLiquids', 'refinedPetroleumProducts']
@@ -66,7 +50,7 @@ class VisualizationSelector extends React.PureComponent {
             transform={`translate(0 ${yOffset})`}
             x={textOffset}
             className="menuOption"
-            {...handleInteractionWithTabIndex(tabIndex, this.props.setVisualization, option)}
+            {...handleInteractionWithTabIndex(tabIndex, this.setVisualization, option)}
             role="menuitem"
             aria-label={Tr(['unabbreviated', 'mainMenuBar', option])}
           >
@@ -113,7 +97,6 @@ class VisualizationSelector extends React.PureComponent {
                 padding={1}
                 boxStyles={{ fill: '#666' }}
                 textStyles={{ className: 'bold menuOption', style: { fill: '#fff' } }}
-                {...handleInteraction(this.showAnalytics())}
               >
                 &nbsp;{prefix}{translated}&nbsp;
               </TextBox>
