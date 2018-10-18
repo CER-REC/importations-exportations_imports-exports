@@ -66,7 +66,7 @@ const parsingIssue = {}
 const englishData = fs.readFileSync(Path.resolve(__dirname, 'public/data/NEB_imports_exports_data.csv'), 'utf8');
 const frenchData = englishData.split('\n');
 frenchData[0] = 'Période,Produit,Sous-Type de Produit/Catégorie/Article,Mode de Transport,Origine,Destination,Port,Activité,Unité,Valeurs';
-fs.writeFileSync(Path.resolve(__dirname, 'public/data/NEB_importations_exportations_les_données.csv'), frenchData.join('\n'));
+fs.writeFileSync(Path.resolve(__dirname, 'public/data/NEB_importations_exportations_les_donnees.csv'), frenchData.join('\n'), 'utf8');
 
 (new Promise(resolve => resolve(csvParse(
   englishData,

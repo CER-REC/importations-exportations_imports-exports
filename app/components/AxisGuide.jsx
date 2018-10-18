@@ -86,13 +86,14 @@ class AxisGuide extends React.PureComponent {
 
   timeLineRangeExplanation = () => {
     let containerY = 0
+    const widthRatioDifference = (this.props.viewportWidthRatio > 1.2) ? 0 : 35
 
     if (this.props.selectedEnergy === 'electricity' && !this.props.flipped) {
-      containerY = 310 - (this.props.position * this.props.heightPerUnit)
+      containerY = (310 - widthRatioDifference) - (this.props.position * this.props.heightPerUnit)
     } else if (this.props.selectedEnergy === 'crudeOilImports') {
-      containerY = 275 - (this.props.position * this.props.heightPerUnit)
+      containerY = (275 - widthRatioDifference) - (this.props.position * this.props.heightPerUnit)
     } else if (this.props.selectedEnergy === 'crudeOilExports' && this.props.flipped) {
-      containerY = (this.props.position * this.props.heightPerUnit) + 400
+      containerY = (this.props.position * this.props.heightPerUnit) + (400 - widthRatioDifference) 
     } else if (this.props.selectedEnergy === 'naturalGas' && !this.props.flipped) {
       containerY = (170 - (this.props.position * this.props.heightPerUnit))
     } else if (this.props.selectedEnergy === 'refinedPetroleumProducts' && this.props.arrangeBy === 'stack') {
@@ -100,7 +101,7 @@ class AxisGuide extends React.PureComponent {
     } else if (this.props.selectedEnergy === 'refinedPetroleumProducts' && this.props.arrangeBy !== 'stack' && this.props.productSubType === 'Partially Processed Oil') {        
       containerY = (this.props.position * this.props.heightPerUnit) + 50
     } else if (this.props.selectedEnergy === 'naturalGasLiquids' && !this.props.flipped) {
-      containerY = (this.props.arrangeBy === 'amount') ? 395 - (this.props.position * this.props.heightPerUnit) : 345 - (this.props.position * this.props.heightPerUnit)
+      containerY = (this.props.arrangeBy === 'amount') ? (395 - widthRatioDifference) - (this.props.position * this.props.heightPerUnit) : (345 - widthRatioDifference ) - (this.props.position * this.props.heightPerUnit)
     }
 
     if (containerY !== 0) {
@@ -190,6 +191,7 @@ class AxisGuide extends React.PureComponent {
   }
 
   render() {
+    
     const text = `${this.state.positionDisplay.toLocaleString()} ${this.props.tr(['amounts', this.props.unit])}`
     const offset = (this.props.position === this.props.scale.get('min'))
       ? this.props.chartHeight
