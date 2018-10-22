@@ -181,7 +181,7 @@ class TimelineSeek extends React.PureComponent {
           40.12,0,0,0,
           33.47,
           18H250.2"
-        xPosition={0}
+        xPosition={-3.5}
         yPosition={14}
         lineX={222.16}
         lineY={173.94}
