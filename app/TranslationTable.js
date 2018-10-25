@@ -574,24 +574,24 @@ const TranslationTable = fromJS({
       fr: 'Cette visualisation montre les importations d’électricité à destination du Canada et les exportations en provenance du Canada entre les années 1990 et 2018. Faites glisser les poignées pour sélectionner une autre période. Cliquez sur une région pour voir les détails. La valeur inclut la charge de capacité.',
     },
     resetCrudeOilImports: {
-      en: 'This visualization shows crude oil imports to Canada between the years 1985 and 2017. Drag the timeline bar to change. Click a region to view details.',
-      fr: 'Cette visualisation montre les importations de pétrole brut à destination du Canada entre les années 1985 et 2017. Faites glisser les poignées pour sélectionner une autre période. Cliquez sur une région pour voir les détails.',
+      en: 'This visualization shows crude oil imports to Canada between the years 1985 and 2018. Drag the timeline bar to change. Click a region to view details.',
+      fr: 'Cette visualisation montre les importations de pétrole brut à destination du Canada entre les années 1985 et 2018. Faites glisser les poignées pour sélectionner une autre période. Cliquez sur une région pour voir les détails.',
     },
     resetCrudeOilExports: {
-      en: 'This visualization shows crude oil exports from Canada between the years 1985 and 2017. Drag the timeline bar to change. Click a region to view details.',
-      fr: 'Cette visualisation montre les exportations de pétrole brut en provenance du Canada entre les années 1985 et 2017. Faites glisser les poignées pour sélectionner une autre période. Cliquez sur une région pour voir les détails.',
+      en: 'This visualization shows crude oil exports from Canada between the years 1985 and 2018. Drag the timeline bar to change. Click a region to view details.',
+      fr: 'Cette visualisation montre les exportations de pétrole brut en provenance du Canada entre les années 1985 et 2018. Faites glisser les poignées pour sélectionner une autre période. Cliquez sur une région pour voir les détails.',
     },
     resetNaturalGas: {
-      en: 'This visualization shows natural gas imports to Canada and exports from Canada between the years 1985 and 2017. Drag the timeline bar to change. Click a region to view details.',
-      fr: 'Cette visualisation montre les importations de gaz naturel à destination du Canada et les exportations en provenance du Canada entre les années 1985 et 2017. Faites glisser les poignées pour sélectionner une autre période. Cliquez sur une région pour voir les détails.',
+      en: 'This visualization shows natural gas imports to Canada and exports from Canada between the years 1985 and 2018. Drag the timeline bar to change. Click a region to view details.',
+      fr: 'Cette visualisation montre les importations de gaz naturel à destination du Canada et les exportations en provenance du Canada entre les années 1985 et 2018. Faites glisser les poignées pour sélectionner une autre période. Cliquez sur une région pour voir les détails.',
     },
     resetNaturalGasLiquids: {
-      en: 'This visualization shows natural gas liquid imports to Canada and exports from Canada between the years 1990 and 2017. Drag the timeline bar to change. Click a region to view details.',
-      fr: 'Cette visualisation montre les importations de liquides de gaz naturel à destination du Canada et les exportations en provenance du Canada entre les années 1990 et 2017. Faites glisser les poignées pour sélectionner une autre période. Cliquez sur une région pour voir les détails.',
+      en: 'This visualization shows natural gas liquid imports to Canada and exports from Canada between the years 1990 and 2018. Drag the timeline bar to change. Click a region to view details.',
+      fr: 'Cette visualisation montre les importations de liquides de gaz naturel à destination du Canada et les exportations en provenance du Canada entre les années 1990 et 2018. Faites glisser les poignées pour sélectionner une autre période. Cliquez sur une région pour voir les détails.',
     },
     resetRefinedPetroleumProducts: {
-      en: 'This visualization shows refined petroleum product exports from Canada between the years 1985 and 2017. Drag the timeline bar to change. Click a region to view details.',
-      fr: 'Cette visualisation montre les exportations de produit pétrolier raffiné en provenance du Canada entre les années 1985 et 2017. Faites glisser les poignées pour sélectionner une autre période. Cliquez sur une région pour voir les détails.',
+      en: 'This visualization shows refined petroleum product exports from Canada between the years 1985 and 2018. Drag the timeline bar to change. Click a region to view details.',
+      fr: 'Cette visualisation montre les exportations de produit pétrolier raffiné en provenance du Canada entre les années 1985 et 2018. Faites glisser les poignées pour sélectionner une autre période. Cliquez sur une région pour voir les détails.',
     },
     canadaPaddCrudeOil: {
       en: 'The colour of this region and its down arrow shows the total amount of crude oil that Canada exported during the time period selected in the bar chart below.',
