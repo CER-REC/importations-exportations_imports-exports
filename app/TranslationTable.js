@@ -570,8 +570,8 @@ const TranslationTable = fromJS({
       fr: 'Chaque barre orange montre la quantité totale de pétrole brut que les régions canadiennes ont importée au cours d’un trimestre.',
     },
     reset: {
-      en: 'This visualization shows electricity imports to Canada and exports from Canada between the years 1990 and 2017. Drag the timeline bar to change. Click a region to view details. Value includes capacity charge.',
-      fr: 'Cette visualisation montre les importations d’électricité à destination du Canada et les exportations en provenance du Canada entre les années 1990 et 2017. Faites glisser les poignées pour sélectionner une autre période. Cliquez sur une région pour voir les détails. La valeur inclut la charge de capacité.',
+      en: 'This visualization shows electricity imports to Canada and exports from Canada between the years 1990 and 2018. Drag the timeline bar to change. Click a region to view details. Value includes capacity charge.',
+      fr: 'Cette visualisation montre les importations d’électricité à destination du Canada et les exportations en provenance du Canada entre les années 1990 et 2018. Faites glisser les poignées pour sélectionner une autre période. Cliquez sur une région pour voir les détails. La valeur inclut la charge de capacité.',
     },
     resetCrudeOilImports: {
       en: 'This visualization shows crude oil imports to Canada between the years 1985 and 2017. Drag the timeline bar to change. Click a region to view details.',
