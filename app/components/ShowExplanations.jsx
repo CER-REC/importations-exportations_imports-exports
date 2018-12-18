@@ -6,7 +6,7 @@ import Constants from '../Constants'
 import TrSelector from '../selectors/translate'
 import { explanationTogglePosition } from '../selectors/viewport/menus'
 
-import ToggleExplanation from '../actionCreators/ShowExplanationsCreator'
+import ToggleExplanation from '../actions/ShowExplanationsCreator'
 import WorkspaceComputations from '../computations/WorkspaceComputations'
 import { handleInteractionWithTabIndex, analyticsReporter } from '../utilities'
 

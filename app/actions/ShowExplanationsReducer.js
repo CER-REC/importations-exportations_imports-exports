@@ -1,5 +1,3 @@
-import { Types as visualizationSettings } from '../actions/visualizationSettings'
-
 const defaultState = true
 
 const ShowExplanationsReducer = (state = defaultState, action) => {

@@ -3,7 +3,7 @@ import { Types as visualizationSettingsTypes } from '../actions/visualizationSet
 import { Types as explanationTypes } from '../actions/explanations'
 import { timelineYearScaleCalculation } from '../selectors/timeline'
 import { activityOptions, arrangeByOptions } from '../selectors/menus'
-import SetVisualizationCreator from '../actionCreators/SetVisualizationCreator'
+import SetVisualizationCreator from '../actions/SetVisualizationCreator'
 
 let initializedFromURL = []
 
