@@ -5,10 +5,6 @@ import ViewportReducer from './actions/ViewportReducer'
 import ImportExportVisualizationReducer from './actions/ImportExportVisualizationReducer'
 import LanguageReducer from './actions/LanguageReducer'
 import ShowExplanationsReducer from './actions/ShowExplanationsReducer'
-import ElectricityExplanationReducer from './actions/ElectricityExplanationReducer'
-import ExpandImportExportMenuReducer from './actions/ExpandImportExportMenuReducer'
-import ExpandElectricitySortMenuReducer from './actions/ExpandElectricitySortMenuReducer'
-import ExpandElectricityAmountMenuReducer from './actions/ExpandElectricityAmountMenuReducer'
 import { reducer as ModalReducer } from './actions/modal'
 import { reducer as DataReducer } from './actions/data'
 import { reducer as BinsReducer } from './actions/bins'
@@ -41,11 +37,7 @@ const nestedReducers = combineReducers({
   viewport: ViewportReducer,
   importExportVisualization: ImportExportVisualizationReducer,
   language: LanguageReducer,
-  electricityExplanation: ElectricityExplanationReducer,
   showExplanations: ShowExplanationsReducer,
-  expandImportExportMenu: ExpandImportExportMenuReducer,
-  expandElectricityAmountMenu: ExpandElectricityAmountMenuReducer,
-  expandElectricitySortMenu: ExpandElectricitySortMenuReducer,
   data: DataReducer,
   bins: BinsReducer,
   scales: ScalesReducer,
