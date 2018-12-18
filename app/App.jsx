@@ -10,7 +10,7 @@ import Request from 'client-request/promise'
 import Constants from './Constants'
 import RouteComputations from './computations/RouteComputations'
 import Root from './components/Root'
-import Resized from './actions/ResizeScreenCreator'
+import { resizeScreen } from './actions/viewport'
 import { LoadData as LoadDataCreator } from './actions/data'
 import { LoadBins as LoadBinsCreator } from './actions/bins'
 import { LoadScales as LoadScalesCreator } from './actions/scales'
@@ -40,7 +40,7 @@ function resizeScreenHandler() {
   const changeWidthRatio = w / 900
   const changeHeightRatio = h / 600
 
-  store.dispatch(Resized(w, h, changeWidthRatio, changeHeightRatio))
+  store.dispatch(resizeScreen(w, h, changeWidthRatio, changeHeightRatio))
 }
 
 // Handles collapsing the social bar.

@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux'
 import { Iterable } from 'immutable'
 
-import ViewportReducer from './actions/ViewportReducer'
+import { reducer as ViewportReducer } from './actions/viewport'
 import { reducer as SetVisualizationReducer } from './actions/setVisualization'
 import { reducer as LanguageReducer } from './actions/language'
 import ShowExplanationsReducer from './actions/ShowExplanationsReducer'
