@@ -1,4 +1,3 @@
-
 export const Types = {
   OPEN_MODAL: 'openModal',
   CLOSE_MODAL: 'closeModal',

@@ -6,7 +6,7 @@ import TextBox from './TextBox'
 import { handleInteractionWithTabIndex, analyticsReporter } from '../utilities'
 import Constants from '../Constants'
 import TrSelector from '../selectors/translate'
-import setVisualization from '../actionCreators/SetVisualizationCreator'
+import { setVisualization } from '../actions/setVisualization'
 
 const textOffset = Constants.getIn(['menuBar', 'textLabelOffset'])
   + Constants.getIn(['menuBar', 'expandedMenuTextMargin'])

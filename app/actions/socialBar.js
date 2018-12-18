@@ -1,4 +1,3 @@
-
 export const Types = {
   EXPAND_SOCIALBAR: 'expandSocialBar',
   DISMISS_COMPONENT: 'dismissComponent',

@@ -1,14 +1,10 @@
 import { combineReducers } from 'redux'
 import { Iterable } from 'immutable'
 
-import ViewportReducer from './reducers/ViewportReducer'
-import ImportExportVisualizationReducer from './reducers/ImportExportVisualizationReducer'
-import LanguageReducer from './reducers/LanguageReducer'
-import ShowExplanationsReducer from './reducers/ShowExplanationsReducer'
-import ElectricityExplanationReducer from './reducers/ElectricityExplanationReducer'
-import ExpandImportExportMenuReducer from './reducers/ExpandImportExportMenuReducer'
-import ExpandElectricitySortMenuReducer from './reducers/ExpandElectricitySortMenuReducer'
-import ExpandElectricityAmountMenuReducer from './reducers/ExpandElectricityAmountMenuReducer'
+import { reducer as ViewportReducer } from './actions/viewport'
+import { reducer as SetVisualizationReducer } from './actions/setVisualization'
+import { reducer as LanguageReducer } from './actions/language'
+import { reducer as ExplanationsEnabledReducer } from './actions/explanationsEnabled'
 import { reducer as ModalReducer } from './actions/modal'
 import { reducer as DataReducer } from './actions/data'
 import { reducer as BinsReducer } from './actions/bins'
@@ -39,13 +35,9 @@ const mergeDeep = (old, merge) => {
 
 const nestedReducers = combineReducers({
   viewport: ViewportReducer,
-  importExportVisualization: ImportExportVisualizationReducer,
+  importExportVisualization: SetVisualizationReducer,
   language: LanguageReducer,
-  electricityExplanation: ElectricityExplanationReducer,
-  showExplanations: ShowExplanationsReducer,
-  expandImportExportMenu: ExpandImportExportMenuReducer,
-  expandElectricityAmountMenu: ExpandElectricityAmountMenuReducer,
-  expandElectricitySortMenu: ExpandElectricitySortMenuReducer,
+  showExplanations: ExplanationsEnabledReducer,
   data: DataReducer,
   bins: BinsReducer,
   scales: ScalesReducer,
