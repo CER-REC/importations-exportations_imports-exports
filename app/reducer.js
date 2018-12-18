@@ -4,7 +4,7 @@ import { Iterable } from 'immutable'
 import { reducer as ViewportReducer } from './actions/viewport'
 import { reducer as SetVisualizationReducer } from './actions/setVisualization'
 import { reducer as LanguageReducer } from './actions/language'
-import ShowExplanationsReducer from './actions/ShowExplanationsReducer'
+import { reducer as ExplanationsEnabledReducer } from './actions/explanationsEnabled'
 import { reducer as ModalReducer } from './actions/modal'
 import { reducer as DataReducer } from './actions/data'
 import { reducer as BinsReducer } from './actions/bins'
@@ -37,7 +37,7 @@ const nestedReducers = combineReducers({
   viewport: ViewportReducer,
   importExportVisualization: SetVisualizationReducer,
   language: LanguageReducer,
-  showExplanations: ShowExplanationsReducer,
+  showExplanations: ExplanationsEnabledReducer,
   data: DataReducer,
   bins: BinsReducer,
   scales: ScalesReducer,

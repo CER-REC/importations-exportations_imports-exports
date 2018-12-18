@@ -6,18 +6,16 @@ import Constants from '../Constants'
 import TrSelector from '../selectors/translate'
 import { explanationTogglePosition } from '../selectors/viewport/menus'
 
-import ToggleExplanation from '../actions/ShowExplanationsCreator'
+import { enableExplanations } from '../actions/explanationsEnabled'
 import WorkspaceComputations from '../computations/WorkspaceComputations'
 import { handleInteractionWithTabIndex, analyticsReporter } from '../utilities'
 
 import '../styles/Fonts.scss'
 
-
 class ShowExplanations extends React.Component {
-
   static get propTypes() {
     return {
-      onClick: PropTypes.func.isRequired,
+      enableExplanations: PropTypes.func.isRequired,
       showExplanations: PropTypes.bool.isRequired,
       Tr: PropTypes.func.isRequired,
     }
@@ -39,7 +37,7 @@ class ShowExplanations extends React.Component {
       Constants.getIn(['analytics', 'action', 'clicked']),
       eventDetail,
     )
-    this.props.onClick()
+    this.props.enableExplanations(!this.props.showExplanations)
   }
 
   showText() {
@@ -86,8 +84,6 @@ const mapStateToProps = (state, props) => ({
   ...explanationTogglePosition(state, props),
 })
 
-const mapDispatchToProps = {
-  onClick: ToggleExplanation,
-}
+const mapDispatchToProps = { enableExplanations }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ShowExplanations)
