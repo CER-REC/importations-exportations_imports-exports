@@ -2,7 +2,7 @@ import { combineReducers } from 'redux'
 import { Iterable } from 'immutable'
 
 import ViewportReducer from './actions/ViewportReducer'
-import ImportExportVisualizationReducer from './actions/ImportExportVisualizationReducer'
+import { reducer as SetVisualizationReducer } from './actions/setVisualization'
 import LanguageReducer from './actions/LanguageReducer'
 import ShowExplanationsReducer from './actions/ShowExplanationsReducer'
 import { reducer as ModalReducer } from './actions/modal'
@@ -35,7 +35,7 @@ const mergeDeep = (old, merge) => {
 
 const nestedReducers = combineReducers({
   viewport: ViewportReducer,
-  importExportVisualization: ImportExportVisualizationReducer,
+  importExportVisualization: SetVisualizationReducer,
   language: LanguageReducer,
   showExplanations: ShowExplanationsReducer,
   data: DataReducer,
