@@ -3,7 +3,7 @@ import { Iterable } from 'immutable'
 
 import ViewportReducer from './actions/ViewportReducer'
 import { reducer as SetVisualizationReducer } from './actions/setVisualization'
-import LanguageReducer from './actions/LanguageReducer'
+import { reducer as LanguageReducer } from './actions/language'
 import ShowExplanationsReducer from './actions/ShowExplanationsReducer'
 import { reducer as ModalReducer } from './actions/modal'
 import { reducer as DataReducer } from './actions/data'
