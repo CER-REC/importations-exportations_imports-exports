@@ -15,7 +15,7 @@ These items are represented as URL parameters:
 Language is also represented, but is inferred from the application path.
 See applicationPath in TranslationTable.js
 
-pathnames are subject to change depending on the final name given by NEB
+pathnames are subject to change depending on the final name given by CER
 
 In each case, the meaning of an element's absence from the URL is specified, and
 the element is not added to the URL bar if the current state matches the
@@ -87,7 +87,7 @@ const RouteComputations = {
   // A string for the root of the application, a suitable place for making rest
   // requests or building other URLs. E.g.:
   // http://localhost:3003/imports-exports/
-  // https://apps2.neb-one.gc.ca/importations-exportations/
+  // https://apps2.cer-rec.gc.ca/importations-exportations/
   appRoot(language) {
     return `${document.location.origin}${RouteComputations.applicationPath(language)}`
   },
