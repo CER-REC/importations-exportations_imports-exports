@@ -76,10 +76,6 @@ const RouteComputations = {
     return 'en'
   },
 
-  screenshotMode() {
-    return !!document.location.pathname.match(`/${Constants.get('appScreenshotPath')}$`)
-  },
-
   applicationPath(language) {
     return Tr.getIn(['applicationPath', language])
   },
@@ -90,29 +86,6 @@ const RouteComputations = {
   // https://apps2.neb-one.gc.ca/importations-exportations/
   appRoot(language) {
     return `${document.location.origin}${RouteComputations.applicationPath(language)}`
-  },
-
-  screenshotParameter(language) {
-    // The double-encode of the search is correct
-    return encodeURIComponent(`${RouteComputations.applicationPath(language)}${Constants.get('appScreenshotPath')}${encodeURIComponent(document.location.search)}`)
-  },
-
-  screenshotURL(language) {
-    let path = `${RouteComputations.screenshotOrigin()}/${Constants.get('serviceScreenshotPath')}/?v=2`
-    path += `&pageUrl=${RouteComputations.screenshotParameter(language)}`
-    path += `&width=${Constants.get('screenshotWidth')}&height=${Constants.get('screenshotHeight')}`
-    path += `&host=${document.location.host}`
-    return path
-  },
-
-  screenshotOrigin() {
-    switch (process.env.NODE_ENV) {
-      case 'development':
-        return 'http://localhost:3002'
-      case 'production':
-      default:
-        return document.location.origin
-    }
   },
 }
 

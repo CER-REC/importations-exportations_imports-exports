@@ -14,15 +14,14 @@ We hope we are hitting the mark. Your feedback is essential.
 Email us with your comments and ideas: energyindesign@neb-one.gc.ca. We look forward to hearing from you.
 
 ## About this Repository
-This repository includes the code and data needed to run a local version of the imports exports visualization app. 
+This repository includes the code and data needed to run a local version of the imports exports visualization app.
 
-You can download and run the application code to see how it was built and explore the data on your own computer. (If you only want to explore the visualization, you may want to [view the app](https://apps2.neb-one.gc.ca/imports-exports) on the NEB's website.) 
+You can download and run the application code to see how it was built and explore the data on your own computer. (If you only want to explore the visualization, you may want to [view the app](https://apps2.neb-one.gc.ca/imports-exports) on the NEB's website.)
 
 ## Prerequisites
 
 - [Node + NPM](https://nodejs.org/en/) > v6.10
 - Git
-- *optional* [Screenshot Service](https://github.com/NEBGitHub/screenshot-service_service-copie-d-ecran) application
 
 ## Installing and Running
 
@@ -105,13 +104,12 @@ Vous pouvez nous la faire parvenir, ainsi que vos suggestions, à l’adresse : 
 
 ## Le référentiel
 
-Le référentiel contient le code et les données nécessaires à l’utilisation d’une version locale de l’application de visualisation des incidents. Vous pouvez télécharger et exécuter le code d’application pour voir comment il a été construit et examiner les données sur votre propre ordinateur. (Si vous voulez simplement explorer les possibilités de visualisation, vous pouvez [voir l’application ](http://apps2.neb-one.gc.ca/importations-exportations) sur le site Web de l’Office.) 
+Le référentiel contient le code et les données nécessaires à l’utilisation d’une version locale de l’application de visualisation des incidents. Vous pouvez télécharger et exécuter le code d’application pour voir comment il a été construit et examiner les données sur votre propre ordinateur. (Si vous voulez simplement explorer les possibilités de visualisation, vous pouvez [voir l’application ](http://apps2.neb-one.gc.ca/importations-exportations) sur le site Web de l’Office.)
 
 ## Produits préalables
 
 - [Node + NPM](https://nodejs.org/fr/) > v6.10
 - Git
-- *facultatif* [Service de prise d’instantané d’écran](https://github.com/NEBGitHub/screenshot-service_service-copie-d-ecran)
 
 ## Installation et utilisation
 
@@ -178,4 +176,3 @@ Icône Méthodologie : [ Créée par Rflor](https://thenounproject.com/rflor/col
 Icône réinitialiser : [Créée par Mooms,](https://thenounproject.com/search/?q=reset&i=1033424), tirée de [thenounproject.com](http://thenounproject.com/) et portant la licence [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/deed.en).
 
 Icône Facebook : Créée par Elegant Themes, tirée de [www.flaticon.com](https://www.flaticon.com) et portant la licence [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/deed.en).
-

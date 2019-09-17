@@ -753,10 +753,6 @@ const TranslationTable = fromJS({
       en: 'download data',
       fr: 'téléchargement de données',
     },
-    downloadImage: {
-      en: 'download image',
-      fr: 'téléchargement d’images',
-    },
   },
 
   applicationPath: {
@@ -789,11 +785,6 @@ const TranslationTable = fromJS({
       en: 'refined-petroleum-products',
       fr: 'produits-pétroliers-raffinés',
     },
-  },
-
-  imageDownload: {
-    en: 'Image Download',
-    fr: 'Téléchargement d’image',
   },
 
   saveImage: {

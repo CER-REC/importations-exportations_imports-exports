@@ -17,11 +17,6 @@ const DevelopmentPageMiddleware = () => {
 
   const router = Express.Router()
 
-  router.get('/screenshot', (req, res) => {
-    res.render('screenshot')
-  })
-
-
   router.get('/', (req, res) => {
     res.render('app', { title: 'WET 4.0.20' })
   })
