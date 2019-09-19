@@ -87,7 +87,7 @@ const RouteComputations = {
   // A string for the root of the application, a suitable place for making rest
   // requests or building other URLs. E.g.:
   // http://localhost:3003/imports-exports/
-  // https://apps2.cer-rec.gc.ca/importations-exportations/
+  // https://www.cer-rec.gc.ca/importations-exportations/
   appRoot(language) {
     return `${document.location.origin}${RouteComputations.applicationPath(language)}`
   },

@@ -1,7 +1,7 @@
 La version française suit.
 
 
-# [Import Export Visualization](https://apps2.cer-rec.gc.ca/imports-exports/)
+# [Import Export Visualization](https://www.cer-rec.gc.ca/imports-exports/)
 
 ## About
 
@@ -16,7 +16,7 @@ Email us with your comments and ideas: energyindesign@cer-rec.gc.ca. We look for
 ## About this Repository
 This repository includes the code and data needed to run a local version of the imports exports visualization app.
 
-You can download and run the application code to see how it was built and explore the data on your own computer. (If you only want to explore the visualization, you may want to [view the app](https://apps2.cer-rec.gc.ca/imports-exports) on the CER's website.)
+You can download and run the application code to see how it was built and explore the data on your own computer. (If you only want to explore the visualization, you may want to [view the app](https://www.cer-rec.gc.ca/imports-exports) on the CER's website.)
 
 ## Prerequisites
 
@@ -90,7 +90,7 @@ Reset icon: [Reset by Mooms](https://thenounproject.com/search/?q=reset&i=103342
 Facebook icon: By Elegant Themes from [www.flaticon.com](https://www.flaticon.com). Licensed under [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/deed.en).
 
 
-# [Visualisation des importations exportations](https://apps2.cer-rec.gc.ca/importations-exportations/)
+# [Visualisation des importations exportations](https://www.cer-rec.gc.ca/importations-exportations/)
 
 ## Le Projet
 
@@ -105,7 +105,7 @@ Vous pouvez nous la faire parvenir, ainsi que vos suggestions, à l’adresse : 
 
 ## Le référentiel
 
-Le référentiel contient le code et les données nécessaires à l’utilisation d’une version locale de l’application de visualisation des incidents. Vous pouvez télécharger et exécuter le code d’application pour voir comment il a été construit et examiner les données sur votre propre ordinateur. (Si vous voulez simplement explorer les possibilités de visualisation, vous pouvez [voir l’application ](http://apps2.cer-rec.gc.ca/importations-exportations) sur le site Web de la Régie.)
+Le référentiel contient le code et les données nécessaires à l’utilisation d’une version locale de l’application de visualisation des incidents. Vous pouvez télécharger et exécuter le code d’application pour voir comment il a été construit et examiner les données sur votre propre ordinateur. (Si vous voulez simplement explorer les possibilités de visualisation, vous pouvez [voir l’application ](http://www.cer-rec.gc.ca/importations-exportations) sur le site Web de la Régie.)
 
 ## Produits préalables
 

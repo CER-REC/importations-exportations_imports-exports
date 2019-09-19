@@ -207,7 +207,7 @@ const Constants = fromJS({
     refinedPetroleumProducts: ['thousand m3/d'],
   },
 
-  appHost: 'https://apps2.cer-rec.gc.ca',
+  appHost: 'https://www.cer-rec.gc.ca',
   appScreenshotPath: 'screenshot',
   serviceScreenshotPath: 'screenshot',
 
