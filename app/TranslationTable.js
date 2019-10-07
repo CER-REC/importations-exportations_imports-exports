@@ -69,8 +69,8 @@ const TranslationTable = fromJS({
       fr: 'Cette visualisation présente les données trimestrielles sur le commerce de l’énergie entre le Canada et les États-Unis depuis 1985, à l’exception des données concernant l’électricité, qui ne sont disponibles que depuis 1990.',
     },
     p3: {
-      en: 'If you want to use the data for research and undertake your own review, all the data is downloadable and shareable. The chart images are also downloadable, and if you are interested in the source code for the visualizations, it is available on the government’s Open Government portal: ',
-      fr: 'Si vous souhaitez utiliser les données pour vos recherches ou pour en faire votre propre analyse, vous pouvez les télécharger et les partager. Il en est de même pour les graphiques. Quant au code source des visualisations, il est accessible sur le portail du « gouvernement ouvert » à l’adresse',
+      en: 'If you want to use the data for research and undertake your own review, all the data is downloadable and shareable. If you are interested in the source code for the visualizations, it is available on the government’s Open Government portal: ',
+      fr: 'Si vous souhaitez utiliser les données pour vos recherches ou pour en faire votre propre analyse, vous pouvez les télécharger et les partager. Quant au code source des visualisations, il est accessible sur le portail du « gouvernement ouvert » à l’adresse',
     },
     governmentPortalLink: {
       en: 'open.canada.ca',
@@ -753,10 +753,6 @@ const TranslationTable = fromJS({
       en: 'download data',
       fr: 'téléchargement de données',
     },
-    downloadImage: {
-      en: 'download image',
-      fr: 'téléchargement d’images',
-    },
   },
 
   applicationPath: {
@@ -789,11 +785,6 @@ const TranslationTable = fromJS({
       en: 'refined-petroleum-products',
       fr: 'produits-pétroliers-raffinés',
     },
-  },
-
-  imageDownload: {
-    en: 'Image Download',
-    fr: 'Téléchargement d’image',
   },
 
   saveImage: {

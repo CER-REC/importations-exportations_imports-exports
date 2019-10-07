@@ -2,7 +2,7 @@
 @import "./FontVariables.scss";
 
 
-// NB: The fonts stylesheet only needs to be imported into the project once, 
+// NB: The fonts stylesheet only needs to be imported into the project once,
 // at the root. If you want to use font variables, import FontVariables.scss
 // instead.
 
@@ -174,12 +174,6 @@
   color: $explanation;
 }
 
-.imageDownloadHeading {
-  font-family: $fira-sans-condensed;
-  font-size: 22px;
-  color: $neutral-medium;
-}
-
 .saveImage {
   font-family: $fira-sans-condensed;
   font-size: 18px;
@@ -281,7 +275,7 @@
     font-family: $fira-sans-condensed;
     font-size: 13px;
     color: $neutral-dark;
-    
+
     .totalType {
       font-family: $fira-sans-condensed-semibold;
     }

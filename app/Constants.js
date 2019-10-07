@@ -67,7 +67,7 @@ const Constants = fromJS({
     controlArrowMargin: 30,
     controlArrowY: -62,
     width: 25,
-    height: 125,
+    height: 101,
     iconSize: 15,
     iconMarginY: 26,
     expandedWidth: 110,
@@ -76,10 +76,9 @@ const Constants = fromJS({
     expandedIconXFr: 190,
     iconMargin: 30,
     downloadDataIconMargin: 54,
-    downloadImageIconMargin: 78,
-    shareIconMargin: 102,
+    shareIconMargin: 78,
     iconX: 128,
-    iconY: 29,
+    iconY: 4,
     twitterMargin: 37,
     facebookMargin: 67,
     linkedinMargin: 95,
@@ -126,10 +125,6 @@ const Constants = fromJS({
     radiusStart: 4.5,
     radiusEnd: 15.5,
     yOffset: 5,
-  },
-
-  imageDownload: {
-    previewImageWidth: 430,
   },
 
   visualizationTypes: [
@@ -208,11 +203,6 @@ const Constants = fromJS({
   },
 
   appHost: 'https://apps2.cer-rec.gc.ca',
-  appScreenshotPath: 'screenshot',
-  serviceScreenshotPath: 'screenshot',
-
-  screenshotWidth: 1138,
-  screenshotHeight: 930,
 
   styleGuide: {
     colours: {

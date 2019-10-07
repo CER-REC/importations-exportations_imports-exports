@@ -22,7 +22,6 @@ class SocialBar extends React.Component {
     return {
       language: PropTypes.string.isRequired,
       viewport: PropTypes.instanceOf(Immutable.Map).isRequired,
-      screenshot: PropTypes.bool.isRequired,
 
     }
   }
@@ -31,18 +30,6 @@ class SocialBar extends React.Component {
     return {
       tabIndex: Constants.getIn(['tabIndex', 'start', 'socialBar']),
 
-    }
-  }
-  constructor(props) {
-    super(props)
-    this.state = { screenshotURL: Constants.get('appHost') }
-  }
-
-  componentDidMount() {
-    if (this.props.screenshot) {
-      this.makeBitlyPromise().then((url) => {
-        this.setState({ screenshotURL: url })
-      })
     }
   }
 
@@ -89,7 +76,7 @@ class SocialBar extends React.Component {
       x={this.props.viewport.get('x') - Constants.getIn(['menuBar', 'barWidth'])}
       y={this.props.viewport.get('y') + Constants.getIn(['socialBar', 'topMargin'])}
       width={Constants.getIn(['menuBar', 'barWidth'])}
-      height={125}
+      height={Constants.getIn(['socialBar', 'height'])}
       fill="#666666"
     />)
   }
@@ -157,12 +144,6 @@ class SocialBar extends React.Component {
       const linkedinUrl = `https://www.linkedin.com/shareArticle?mini=true&url=${url}&summary=${url}`
       window.open(linkedinUrl, 'targetWindow', 'width=650,height=650')
     })
-  }
-
-  downloadImageClick = () => {
-    if (!this.props.expandSocialBar) { return this.props.controlArrowClick() }
-    this.showAnalytics('download image')
-    this.props.imageDownloadClick()
   }
 
   downloadDataClick = () => {
@@ -235,14 +216,6 @@ class SocialBar extends React.Component {
             xlinkHref="images/download_file.svg"
             {...handleInteractionWithTabIndex(this.props.tabIndex, this.downloadDataClick)}
           />
-          <image
-            className="socialBarIcon"
-            height={Constants.getIn(['socialBar', 'iconSize'])}
-            width={Constants.getIn(['socialBar', 'iconSize'])}
-            y={viewPort + Constants.getIn(['socialBar', 'downloadImageIconMargin'], 0)}
-            xlinkHref="images/download_image.svg"
-            {...handleInteractionWithTabIndex(this.props.tabIndex, this.downloadImageClick)}
-          />
           {this.shareIcon()}
         </g>
       </g>
@@ -311,38 +284,18 @@ class SocialBar extends React.Component {
     let aboutTextX = '0.0em'
     let methodologyTextX = '-2.6em'
     let downloadDataTextX = '-5.6em'
-    let downloadImageTextX = '-6.35em'
     if (this.props.language === 'fr') {
       aboutTextX = '-4.5em'
       methodologyTextX = '-3.8em'
       downloadDataTextX = '-5.9em'
-      downloadImageTextX = '-11.6em'
     }
     return (<g transform={transformString}>
       <text className="socialBarText">
         <tspan dx={aboutTextX} dy="0.1em" {...handleInteractionWithTabIndex(this.props.tabIndex, this.aboutThisProjectClick)}> {Tr.getIn(['socialBarText', 'about', this.props.language])}</tspan>
         <tspan dx={methodologyTextX} dy="1.8em" {...handleInteractionWithTabIndex(this.props.tabIndex, this.methodologyClick)}> {Tr.getIn(['socialBarText', 'methodology', this.props.language])}</tspan>
         <tspan dx={downloadDataTextX} dy="1.8em" {...handleInteractionWithTabIndex(this.props.tabIndex, this.downloadDataClick)}> {Tr.getIn(['socialBarText', 'downloadData', this.props.language])}</tspan>
-        <tspan dx={downloadImageTextX} dy="1.8em" {...handleInteractionWithTabIndex(this.props.tabIndex, this.downloadImageClick)}> {Tr.getIn(['socialBarText', 'downloadImage', this.props.language])}</tspan>
       </text>
     </g>)
-  }
-
-  nebLogo() {
-    return (<image
-      width={300}
-      xlinkHref="images/logolarge.jpg"
-    />)
-  }
-
-  bitlyLink() {
-    return (<text className="bitlyText">
-      { Tr.getIn(['bitlyShare', this.props.language])}&nbsp;
-      <tspan dx="-13.9em" dy="1.4em">
-        {this.state.screenshotURL}
-      </tspan>
-    </text>
-    )
   }
 
   showAnalytics(text) {
@@ -359,16 +312,6 @@ class SocialBar extends React.Component {
     if (this.props.viewport.get('changeHeightRatio') < 1.2) {
       translate = '0 35'
     }
-    if (this.props.screenshot) {
-      return (<g transform={`translate(${translate})`}>
-        <g transform={`translate(0  ${this.props.viewport.get('y')})`}>
-          {this.nebLogo()}
-        </g>
-        <g transform={`translate(${this.props.viewport.get('x') - 75} ${this.props.viewport.get('y') + 50})`}>
-          {this.bitlyLink()}
-        </g>
-      </g>)
-    }
     return (<g transform={`translate(${translate})`}>
       {this.controlArrow()}
       {this.icons()}
@@ -382,16 +325,12 @@ class SocialBar extends React.Component {
 const mapStateToProps = state => ({
   viewport: state.viewport,
   language: state.language,
-  screenshot: state.screenshot,
   expandSocialBar: state.expandSocialBar,
 })
 
 const mapDispatchToProps = dispatch => ({
   onClick() {
     dispatch(OpenModal('about'))
-  },
-  imageDownloadClick() {
-    dispatch(OpenModal('imageDownload'))
   },
   controlArrowClick() {
     dispatch(ExpandSocialBar())

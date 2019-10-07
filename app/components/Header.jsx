@@ -211,7 +211,7 @@ class Header extends React.Component {
     return (
       <div style={{ height: Constants.get('topHeightMargin') }}>
         {this.leftHeading()}
-        {this.props.screenshot ? null : this.metaBar()}
+        {this.metaBar()}
         {this.resetExplanation()}
         {this.refinedPetroleumProductsImportsLink()}
       </div>
@@ -224,7 +224,6 @@ const mapStateToProps = (state, props) => ({
   viewport: state.viewport,
   language: state.language,
   selectedEnergy: state.importExportVisualization,
-  screenshot: state.screenshot,
   Tr: TrSelector(state, props),
 })
 

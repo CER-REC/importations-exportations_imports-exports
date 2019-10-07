@@ -22,7 +22,6 @@ You can download and run the application code to see how it was built and explor
 
 - [Node + NPM](https://nodejs.org/en/) > v6.10
 - Git
-- *optional* [Screenshot Service](https://github.com/NEBGitHub/screenshot-service_service-copie-d-ecran) application
 
 ## Installing and Running
 
@@ -111,7 +110,6 @@ Le référentiel contient le code et les données nécessaires à l’utilisatio
 
 - [Node + NPM](https://nodejs.org/fr/) > v6.10
 - Git
-- *facultatif* [Service de prise d’instantané d’écran](https://github.com/NEBGitHub/screenshot-service_service-copie-d-ecran)
 
 ## Installation et utilisation
 
