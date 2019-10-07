@@ -61,8 +61,8 @@ const TranslationTable = fromJS({
       fr: 'LE PROJET',
     },
     p1: {
-      en: 'This online tool portrays imports and exports of energy products to and from Canada. It is part of the National Energy Board’s (NEB) Data Visualization Initiative (DVI). The DVI is a three-year initiative to transform how the NEB structures and shares data. The objective is to enable evidence-based decision making and remove barriers to understanding Canada’s energy and pipeline systems through the use of user-friendly interactive visualizations.',
-      fr: 'Cet outil en ligne trace un portrait des importations au Canada et des exportations du Canada des produits énergétiques. Il fait partie de l’initiative de visualisation des données de l’Office national de l’énergie. Échelonnée sur trois ans, cette initiative vise à transformer la manière dont l’Office structure et diffuse ses données. Elle a pour objectif de favoriser un processus décisionnel fondé sur la preuve et de faciliter la compréhension des questions liées aux réseaux énergétiques et pipeliniers du Canada, grâce à des visualisations interactives, faciles à utiliser.',
+      en: 'This online tool portrays imports and exports of energy products to and from Canada. It is part of the Canada Energy Regulator’s (CER) Data Visualization Initiative (DVI). The DVI is a three-year initiative to transform how the CER structures and shares data. The objective is to enable evidence-based decision making and remove barriers to understanding Canada’s energy and pipeline systems through the use of user-friendly interactive visualizations.',
+      fr: 'Cet outil en ligne trace un portrait des importations au Canada et des exportations du Canada des produits énergétiques. Il fait partie de l’initiative de visualisation des données de la Régie de l’énergie du Canada. Échelonnée sur trois ans, cette initiative vise à transformer la manière dont la Régie (anciennement appelée l’Office national de l’énergie) structure et diffuse ses données. Elle a pour objectif de favoriser un processus décisionnel fondé sur la preuve et de faciliter la compréhension des questions liées aux réseaux énergétiques et pipeliniers du Canada, grâce à des visualisations interactives, faciles à utiliser.',
     },
     p2: {
       en: 'This visualization show quarterly energy trade data between Canada and the U.S. since 1985, with the exception of electricity data which is available back to 1990.',
@@ -85,8 +85,8 @@ const TranslationTable = fromJS({
       fr: 'Vous pouvez nous la faire parvenir, ainsi que vos suggestions, à l’adresse ',
     },
     emailLink: {
-      en: 'energyindesign@neb-one.gc.ca',
-      fr: 'conceptionenergie@neb-one.gc.ca',
+      en: 'energyindesign@cer-rec.gc.ca',
+      fr: 'conceptionenergie@cer-rec.gc.ca',
     },
     p5_2: {
       en: '. We look forward to hearing from you.',
@@ -546,8 +546,8 @@ const TranslationTable = fromJS({
       fr: 'Certaines valeurs ont été exclues de cette visualisation en raison de règles de confidentialité. Cliquez ici pour voir où ces valeurs apparaissent ou pour obtenir plus d’information sur la méthodologie.',
     },
     electricityConfidentiality: {
-      en: 'Electricity data is available publicly with the origins, destinations, volumes, and prices aggregated monthly by permit number. An exception is that there are no prices provided for Manitoba Hydro contract-specific permits due to a legal requirement and the NEB’s confidentiality rules.',
-      fr: 'Les données sur l’électricité sont accessibles au public. Elles précisent les points d’origine et de destination, la quantité et le prix, de manière agrégée mensuellement, par numéro de permis. Il y a une exception à cette règle : aucune valeur n’est indiquée pour les permis propres à un contrat en particulier de Manitoba Hydro en raison d’une obligation juridique et des règles de l’Office en matière de confidentialité.',
+      en: 'Electricity data is available publicly with the origins, destinations, volumes, and prices aggregated monthly by permit number. An exception is that there are no prices provided for Manitoba Hydro contract-specific permits due to a legal requirement and the CER confidentiality rules.',
+      fr: 'Les données sur l’électricité sont accessibles au public. Elles précisent les points d’origine et de destination, la quantité et le prix, de manière agrégée mensuellement, par numéro de permis. Il y a une exception à cette règle : aucune valeur n’est indiquée pour les permis propres à un contrat en particulier de Manitoba Hydro en raison d’une obligation juridique et des règles de la Régie en matière de confidentialité.',
     },
     barChartExport: {
       en: 'Each blue bar shows the total electricity that Canadian regions exported during a single quarter.',
@@ -614,8 +614,8 @@ const TranslationTable = fromJS({
       fr: 'La quantité de pétrole brut est indiquée en milliers de m³/j (milliers de mètres cubes par jour), ce qui correspond à 6 290 barils par jour.  ',
     },
     inconsistencies: {
-      en: 'All of the data presented here is considered non-confidential when summed or averaged on a quarterly basis. Any other period selected by the user (multi-quarter, annual, multi-annual) reflects a sum or average of this same data. \n\nOther NEB data sources provide data considered non-confidential when summed or averaged over different periods (monthly, annual) and this can result in different values than are indicated here (less data may be non-confidential monthly, more data may be non-confidential annually). Both are correct for the original period on which they are based, although the values may be different.',
-      fr: 'Toutes les données présentées ici sont jugées non confidentielles lorsqu’elles représentent une somme ou une moyenne calculée trimestriellement. Toute période choisie par l’utilisateur (plurisemestrielle, annuelle, pluriannuelle) correspond à une somme ou une moyenne des mêmes données. \n\nD’autres sources de données de l’Office fournissent des données jugées non confidentielles représentant une somme ou une moyenne sur diverses périodes (mensuelle, annuelle); cela peut donner lieu à des valeurs différentes, comme indiqué ici (une quantité inférieure de données pourraient être jugées non confidentielles mensuellement, une quantité supérieure de données pourraient être jugées non confidentielles annuellement). Dans les deux cas, les quantités sont exactes pour la période originale sur laquelle elles se fondent, bien que les valeurs puissent être différentes.',
+      en: 'All of the data presented here is considered non-confidential when summed or averaged on a quarterly basis. Any other period selected by the user (multi-quarter, annual, multi-annual) reflects a sum or average of this same data. \n\nOther CER data sources provide data considered non-confidential when summed or averaged over different periods (monthly, annual) and this can result in different values than are indicated here (less data may be non-confidential monthly, more data may be non-confidential annually). Both are correct for the original period on which they are based, although the values may be different.',
+      fr: 'Toutes les données présentées ici sont jugées non confidentielles lorsqu’elles représentent une somme ou une moyenne calculée trimestriellement. Toute période choisie par l’utilisateur (plurisemestrielle, annuelle, pluriannuelle) correspond à une somme ou une moyenne des mêmes données. \n\nD’autres sources de données de la Régie fournissent des données jugées non confidentielles représentant une somme ou une moyenne sur diverses périodes (mensuelle, annuelle); cela peut donner lieu à des valeurs différentes, comme indiqué ici (une quantité inférieure de données pourraient être jugées non confidentielles mensuellement, une quantité supérieure de données pourraient être jugées non confidentielles annuellement). Dans les deux cas, les quantités sont exactes pour la période originale sur laquelle elles se fondent, bien que les valeurs puissent être différentes.',
     },
     modeCrude: {
       en: 'Pipeline volumes include minor volumes exported by truck. In most instances, these trucked volumes would be considered confidential if indicated separately. Further, in quarters where Marine volumes are confidential (occurs in 14 quarters between 1985 and 1995), these Marine volumes are included in Pipeline volumes. Further, in quarters where Rail volumes are confidential (occurs in six quarters between 1992 and 2011), these rail volumes are included in Pipeline volumes. This is done to prevent the back-calculation of confidential values.',
@@ -808,8 +808,8 @@ const TranslationTable = fromJS({
 
   downloadable: {
     csv: {
-      en: 'NEB_imports_exports_data.csv',
-      fr: 'NEB_importations_exportations_les_donnees.csv',
+      en: 'CER_imports_exports_data.csv',
+      fr: 'REC_importations_exportations_les_donnees.csv',
     },
   },
 

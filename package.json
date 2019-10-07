@@ -1,7 +1,7 @@
 {
   "name": "import-export-visualization",
   "version": "1.3.5",
-  "description": "visualization of import export data for the NEB",
+  "description": "visualization of import export data for the CER",
   "main": "index.js",
   "scripts": {
     "build:data": "babel-node ./data.js",
