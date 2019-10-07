@@ -10,7 +10,7 @@ function handler(request, res) {
       url: 'https://bit.ly/2E2w5zr',
       hash: 'asdfdsfkl',
       global_hash: 'asdcxb',
-      long_url: 'https://www.cer-rec.gc.ca/imports-exports',
+      long_url: 'https://apps2.cer-rec.gc.ca/imports-exports',
       new_hash: 0,
     },
   }))
