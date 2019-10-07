@@ -49,7 +49,6 @@
     "mustache": "^2.3.0",
     "mustache-express": "^1.2.5",
     "node-sass": "^4.5.3",
-    "nsp": "^2.7.0",
     "prop-types": "^15.6.0",
     "query-string": "^5.0.0",
     "re-reselect": "^2.0.0",
