@@ -1,6 +1,6 @@
 {
   "name": "import-export-visualization",
-  "version": "1.4.1",
+  "version": "1.4.2",
   "description": "visualization of import export data for the CER",
   "main": "index.js",
   "scripts": {
