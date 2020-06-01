@@ -777,7 +777,7 @@ const Constants = fromJS({
   analytics: {
     parentVizualizationName: 'import export visualization',
     events: {
-      visualizationInteraction: 'ImportExport interaction',
+      visualizationInteraction: 'visualization interaction',
     },
     action: {
       clicked: 'clicked',
