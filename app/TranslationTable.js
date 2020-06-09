@@ -728,12 +728,12 @@ const TranslationTable = fromJS({
   },
 
   mainSubheading: {
-    en: 'This visualization shows the quarterly energy trade data between Canada and the U.S. for various energy sources.',
-    fr: 'Cette visualisation illustre les données trimestrielles sur les échanges énergétiques entre le Canada et les États-Unis pour diverses sources d’énergie.',
+    en: 'This visualization shows the quarterly energy trade data between Canada and the U.S. for various energy sources. New data is added quarterly. The last update was: 2019-12-31.',
+    fr: 'Cette visualisation illustre les données trimestrielles sur les échanges énergétiques entre le Canada et les États-Unis pour diverses sources d’énergie. De nouvelles données sont ajoutées tous les trimestres. Plus récente mise à jour : 2019-12-31.',
   },
   mainSubheadingCrudeOilImports: {
-    en: 'This visualization shows the quarterly energy trade data between Canada and the world for various energy sources.',
-    fr: 'Cette visualisation illustre les données trimestrielles sur les échanges énergétiques entre le Canada et le monde pour diverses sources d’énergie.',
+    en: 'This visualization shows the quarterly energy trade data between Canada and the world for various energy sources. New data is added quarterly. The last update was: 2019-12-31.',
+    fr: 'Cette visualisation illustre les données trimestrielles sur les échanges énergétiques entre le Canada et le monde pour diverses sources d’énergie. De nouvelles données sont ajoutées tous les trimestres. Plus récente mise à jour : 2019-12-31.',
   },
   resetLabel: {
     en: 'reset',
