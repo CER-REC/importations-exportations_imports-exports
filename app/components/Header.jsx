@@ -209,10 +209,11 @@ class Header extends React.Component {
 
   render() {
     return (
-      <div style={{ height: Constants.get('topHeightMargin') }}>
+      <div style={{ height: Constants.get('topHeightMargin'), marginBottom: 20 }}>
         {this.leftHeading()}
         {this.metaBar()}
         {this.resetExplanation()}
+        <br />
         {this.refinedPetroleumProductsImportsLink()}
       </div>
     )
