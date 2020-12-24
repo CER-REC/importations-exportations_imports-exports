@@ -20,32 +20,33 @@ const Root = ({
     width: viewport.get('x'),
   }
 
-  return (<div style={loaderStyle}>
+  return (
+    <div className="vizualization" style={loaderStyle}>
 
-    <div className="containerOne">
-      <p className="loadingVisualization">{Tr.getIn(['loader', 'titleText', language])}</p>
+      <div className="containerOne">
+        <p className="loadingVisualization">{Tr.getIn(['loader', 'titleText', language])}</p>
 
-      <div className="titleContainer">
-        <span className="loadingImports">{Tr.getIn(['loader', 'imports', language])}
-          <span className="loadingAnd"> {Tr.getIn(['loader', 'and', language])} </span>
-          <span className="loadingExports">{Tr.getIn(['loader', 'exports', language])}</span>
-        </span>
+        <div className="titleContainer">
+          <span className="loadingImports">{Tr.getIn(['loader', 'imports', language])}
+            <span className="loadingAnd"> {Tr.getIn(['loader', 'and', language])} </span>
+            <span className="loadingExports">{Tr.getIn(['loader', 'exports', language])}</span>
+          </span>
+        </div>
+
+        <p className="loadingVisualizationTwo">{Tr.getIn(['loader', 'titleText_2', language])}</p>
       </div>
 
-      <p className="loadingVisualizationTwo">{Tr.getIn(['loader', 'titleText_2', language])}</p>
-    </div>
-
-    <div className="circle-elements containerTwo">
-      <div className="circle export" />
-      <div className="circle export" />
-      <div className="circle export" />
-      <div className="circle import" />
-      <div className="circle import" />
-      <div className="circle import" />
-      <div className="circle import" />
-      <div className="circle export" />
-    </div>
-          </div>)
+      <div className="circle-elements containerTwo">
+        <div className="circle export" />
+        <div className="circle export" />
+        <div className="circle export" />
+        <div className="circle import" />
+        <div className="circle import" />
+        <div className="circle import" />
+        <div className="circle import" />
+        <div className="circle export" />
+      </div>
+    </div>)
 }
 
 Root.propTypes = {
