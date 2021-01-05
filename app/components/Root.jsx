@@ -18,8 +18,6 @@ const Root = ({
   const loaderStyle = {
     height: viewport.get('y'),
     width: viewport.get('x'),
-    // reset the line height in the new CER template
-    lineHeight: 'normal',
   }
 
   return (

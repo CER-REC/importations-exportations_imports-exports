@@ -31,6 +31,8 @@
   left: 50%;
   transform: translate(-50%, -50%);
   width: 100%;
+    // reset the line height in the new CER template
+  line-height: normal;
 }
 
 .containerTwo {
@@ -39,6 +41,8 @@
   top: calc(50% - .45em);
   left: calc(50% - .45em);
   left: -webkit-calc(50% - .45em);
+    // reset the line height in the new CER template
+  line-height: normal;
 }
 
 .titleContainer {
