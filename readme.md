@@ -11,7 +11,7 @@ If you want to use the data for research and undertake your own review, all the 
 
 We hope we are hitting the mark. Your feedback is essential.
 
-Email us with your comments and ideas: energyindesign@cer-rec.gc.ca. We look forward to hearing from you.
+Email us with your comments and ideas: data.donnees@cer-rec.gc.ca. We look forward to hearing from you.
 
 ## About this Repository
 This repository includes the code and data needed to run a local version of the imports exports visualization app.

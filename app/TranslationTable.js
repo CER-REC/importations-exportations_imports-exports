@@ -25,13 +25,13 @@ const TranslationTable = fromJS({
       en: 'Reset Visualization',
       fr: 'Réinitialisation de la visualisation',
     },
-    emailBody:{
-      en:'Imports & Exports of Energy Products to and from Canada is an interactive tool that allows users to visualize, download, and share the Canada Energy Regulator’s (CER) quarterly data import and export volumes and prices. The visualized data includes imports of natural gas including LNG, NGLs and electricity. The visualized data also includes exports of crude oil, refined petroleum products (RPPs), natural gas, natural gas liquids (NGLs) and electricity.',
-      fr:'L’outil interactif sur les Importations & Exportations de produits énergétiques du Canada permet aux utilisateurs de visualiser, télécharger et partager les données recueillies tous les trimestres par la Régie de l’énergie du Canada sur les volumes et la valeur des importations et des exportations. Les visualisations de données portent sur les importations de gaz naturel, dont le GNL et les LGN, de pétrole brut et d’électricité. Les exportations de pétrole brut, de produits pétroliers raffinés (PPR), de gaz naturel, de liquides de gaz naturel (LGN), ainsi que d’électricité sont aussi représentées visuellement.',
+    emailBody: {
+      en: 'Imports & Exports of Energy Products to and from Canada is an interactive tool that allows users to visualize, download, and share the Canada Energy Regulator’s (CER) quarterly data import and export volumes and prices. The visualized data includes imports of natural gas including LNG, NGLs and electricity. The visualized data also includes exports of crude oil, refined petroleum products (RPPs), natural gas, natural gas liquids (NGLs) and electricity.',
+      fr: 'L’outil interactif sur les Importations & Exportations de produits énergétiques du Canada permet aux utilisateurs de visualiser, télécharger et partager les données recueillies tous les trimestres par la Régie de l’énergie du Canada sur les volumes et la valeur des importations et des exportations. Les visualisations de données portent sur les importations de gaz naturel, dont le GNL et les LGN, de pétrole brut et d’électricité. Les exportations de pétrole brut, de produits pétroliers raffinés (PPR), de gaz naturel, de liquides de gaz naturel (LGN), ainsi que d’électricité sont aussi représentées visuellement.',
     },
-    emailSubject:{
-      en:'Imports & Exports of Energy Products to and from Canada Visualization',
-      fr:'Visualisation sur les Importations & Exportations de produits énergétiques du Canada',
+    emailSubject: {
+      en: 'Imports & Exports of Energy Products to and from Canada Visualization',
+      fr: 'Visualisation sur les Importations & Exportations de produits énergétiques du Canada',
     },
   },
 
@@ -93,8 +93,8 @@ const TranslationTable = fromJS({
       fr: 'Vous pouvez nous la faire parvenir, ainsi que vos suggestions, à l’adresse ',
     },
     emailLink: {
-      en: 'energyindesign@cer-rec.gc.ca',
-      fr: 'conceptionenergie@cer-rec.gc.ca',
+      en: 'data.donnees@cer-rec.gc.ca',
+      fr: 'data.donnees@cer-rec.gc.ca',
     },
     p5_2: {
       en: '. We look forward to hearing from you.',
@@ -169,8 +169,8 @@ const TranslationTable = fromJS({
       fr: 'Carte produite par Fonadier illustrant les provinces et territoires selon les signalements de cas de grippe A (H1N1), tirée de',
     },
     map_2: {
-      en: 'Wikimedia Commons',
-      fr: 'Wikimedia Commons',
+      en: ' Wikimedia Commons',
+      fr: ' Wikimedia Commons',
     },
     map_3: {
       en: ' (Re-coloured and rotated from original.)',
