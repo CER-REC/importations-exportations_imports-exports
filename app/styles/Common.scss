@@ -24,6 +24,11 @@
   30% { opacity: 1; }
 }
 
+// reset the line height in the new CER template
+#reactRoot {
+	line-height: normal;
+}
+
 .containerOne {
   position: absolute;
   top: -webkit-calc(50% - .45em);
