@@ -36,6 +36,7 @@
   left: 50%;
   transform: translate(-50%, -50%);
   width: 100%;
+  text-align: center
 }
 
 .containerTwo {
@@ -44,13 +45,6 @@
   top: calc(50% - .45em);
   left: calc(50% - .45em);
   left: -webkit-calc(50% - .45em);
-}
-
-.titleContainer {
-  position: absolute;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  margin-top: 0.5%;
 }
 
 .circle-elements div {
