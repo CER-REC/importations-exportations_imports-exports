@@ -46,7 +46,7 @@ class AboutWindow extends React.Component {
           <span>
             {Tr.getIn(['aboutWindow', 'p3', this.props.language])}&nbsp;
             <a
-              href={Tr.getIn(['aboutWindow', 'governmentPortalLink', this.props.language])}
+              href={`https://${Tr.getIn(['aboutWindow', 'governmentPortalLink', this.props.language])}`}
             >
               {Tr.getIn(['aboutWindow', 'governmentPortalLink', this.props.language])}
             </a>
