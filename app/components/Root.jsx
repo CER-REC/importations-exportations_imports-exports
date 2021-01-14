@@ -26,7 +26,7 @@ const Root = ({
       <div className="containerOne">
         <p className="loadingVisualization">{Tr.getIn(['loader', 'titleText', language])}</p>
 
-        <div className="titleContainer">
+        <div>
           <span className="loadingImports">{Tr.getIn(['loader', 'imports', language])}
             <span className="loadingAnd"> {Tr.getIn(['loader', 'and', language])} </span>
             <span className="loadingExports">{Tr.getIn(['loader', 'exports', language])}</span>

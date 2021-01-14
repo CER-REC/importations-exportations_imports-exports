@@ -66,7 +66,7 @@ const TranslationTable = fromJS({
   aboutWindow: {
     heading: {
       en: 'ABOUT THIS PROJECT',
-      fr: 'LE PROJET',
+      fr: 'À PROPOS',
     },
     p1: {
       en: 'This online tool portrays imports and exports of energy products to and from Canada. It is part of the Canada Energy Regulator’s (CER) Data Visualization Initiative (DVI). The DVI is a three-year initiative to transform how the CER structures and shares data. The objective is to enable evidence-based decision making and remove barriers to understanding Canada’s energy and pipeline systems through the use of user-friendly interactive visualizations.',
