@@ -62,7 +62,7 @@ class AboutWindow extends React.Component {
             {Tr.getIn(['aboutWindow', 'p5_1', this.props.language])}
           </span>
           <a
-            href={Tr.getIn(['aboutWindow', 'emailLink', this.props.language])}
+            href={`mailto:${Tr.getIn(['aboutWindow', 'emailLink', this.props.language])}`}
           >
             {Tr.getIn(['aboutWindow', 'emailLink', this.props.language])}
           </a>

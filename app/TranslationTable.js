@@ -166,11 +166,11 @@ const TranslationTable = fromJS({
     },
     map_1: {
       en: 'Map showing provinces and territories reporting 2009 swine flu (H1N1) cases in Canada by Fonadier ',
-      fr: 'Carte produite par Fonadier illustrant les provinces et territoires selon les signalements de cas de grippe A (H1N1), tirée de',
+      fr: 'Carte produite par Fonadier illustrant les provinces et territoires selon les signalements de cas de grippe A (H1N1), tirée de ',
     },
     map_2: {
-      en: ' Wikimedia Commons',
-      fr: ' Wikimedia Commons',
+      en: 'Wikimedia Commons',
+      fr: 'Wikimedia Commons',
     },
     map_3: {
       en: ' (Re-coloured and rotated from original.)',
