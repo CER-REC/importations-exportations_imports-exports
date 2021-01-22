@@ -45,9 +45,14 @@ const printingValidationError = (errorArray, region, point, type) => {
   // Printing error on the UI so that data can be verified
   if (region.get('isValid') === false) {
     if (typeof errorArray[region.get('error')] === 'undefined') {
-      errorArray[region.get('error')] = { product: point.product, numberOfRows: 0, type }
+      errorArray[region.get('error')] = []
+    }
+
+    const record = errorArray[region.get('error')].find(entry => entry.product === point.product && entry.type === type);
+    if (record) {
+      record.numberOfRows = record.numberOfRows + 1
     } else {
-      errorArray[region.get('error')].numberOfRows = errorArray[region.get('error')].numberOfRows + 1
+      errorArray[region.get('error')].push({ product: point.product, numberOfRows: 1, type })
     }
   }
   return errorArray
