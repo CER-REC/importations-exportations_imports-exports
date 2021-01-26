@@ -48,7 +48,7 @@ const printingValidationError = (errorArray, region, point, type) => {
       errorArray[region.get('error')] = []
     }
 
-    const record = errorArray[region.get('error')].find(entry => entry.product === point.product && entry.type === type);
+    const record = errorArray[region.get('error')].find(entry => entry.product === point.product && entry.type === type)
     if (record) {
       record.numberOfRows = record.numberOfRows + 1
     } else {
@@ -68,18 +68,18 @@ const humanNumber = (v) => {
 
 const parsingIssue = {}
 // Creating a french CSV file with English Data
-const englishData = fs.readFileSync(Path.resolve(__dirname, 'public/data/CER_imports_exports_data.csv'), 'utf8');
-const frenchData = englishData.split('\n');
-frenchData[0] = 'Période,Produit,Sous-Type de Produit/Catégorie/Article,Mode de Transport,Origine,Destination,Port,Activité,Unité,Valeurs';
-fs.writeFileSync(Path.resolve(__dirname, 'public/data/REC_importations_exportations_les_donnees.csv'), frenchData.join('\n'), 'utf8');
+const englishData = fs.readFileSync(Path.resolve(__dirname, 'public/data/CER_imports_exports_data.csv'), 'utf8')
+const frenchData = englishData.split('\n')
+frenchData[0] = 'Période,Produit,Sous-Type de Produit/Catégorie/Article,Mode de Transport,Origine,Destination,Port,Activité,Unité,Valeurs'
+fs.writeFileSync(Path.resolve(__dirname, 'public/data/REC_importations_exportations_les_donnees.csv'), frenchData.join('\n'), 'utf8')
 
-(new Promise(resolve => resolve(csvParse(
+new Promise(resolve => resolve(csvParse(
   englishData,
   {
     // Use the callback method to replace the file headers with our own
     columns: () => ['period', 'product', 'productSubtype', 'transport', 'origin', 'destination', 'port', 'activity', 'units', 'value'],
   },
-))))
+)))
   // Map over the data and normalize it
   .then(data => data.map((point) => {
     let product = ''
