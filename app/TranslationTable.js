@@ -25,6 +25,14 @@ const TranslationTable = fromJS({
       en: 'Reset Visualization',
       fr: 'Réinitialisation de la visualisation',
     },
+    emailBody: {
+      en: 'Imports & Exports of Energy Products to and from Canada is an interactive tool that allows users to visualize, download, and share the Canada Energy Regulator’s (CER) quarterly data import and export volumes and prices. The visualized data includes imports of natural gas including LNG, NGLs and electricity. The visualized data also includes exports of crude oil, refined petroleum products (RPPs), natural gas, natural gas liquids (NGLs) and electricity.',
+      fr: 'L’outil interactif sur les Importations & Exportations de produits énergétiques du Canada permet aux utilisateurs de visualiser, télécharger et partager les données recueillies tous les trimestres par la Régie de l’énergie du Canada sur les volumes et la valeur des importations et des exportations. Les visualisations de données portent sur les importations de gaz naturel, dont le GNL et les LGN, de pétrole brut et d’électricité. Les exportations de pétrole brut, de produits pétroliers raffinés (PPR), de gaz naturel, de liquides de gaz naturel (LGN), ainsi que d’électricité sont aussi représentées visuellement.',
+    },
+    emailSubject: {
+      en: 'Imports & Exports of Energy Products to and from Canada Visualization',
+      fr: 'Visualisation sur les Importations & Exportations de produits énergétiques du Canada',
+    },
   },
 
   loader: {
@@ -58,7 +66,7 @@ const TranslationTable = fromJS({
   aboutWindow: {
     heading: {
       en: 'ABOUT THIS PROJECT',
-      fr: 'LE PROJET',
+      fr: 'À PROPOS',
     },
     p1: {
       en: 'This online tool portrays imports and exports of energy products to and from Canada. It is part of the Canada Energy Regulator’s (CER) Data Visualization Initiative (DVI). The DVI is a three-year initiative to transform how the CER structures and shares data. The objective is to enable evidence-based decision making and remove barriers to understanding Canada’s energy and pipeline systems through the use of user-friendly interactive visualizations.',
@@ -85,8 +93,8 @@ const TranslationTable = fromJS({
       fr: 'Vous pouvez nous la faire parvenir, ainsi que vos suggestions, à l’adresse ',
     },
     emailLink: {
-      en: 'energyindesign@cer-rec.gc.ca',
-      fr: 'conceptionenergie@cer-rec.gc.ca',
+      en: 'data.donnees@cer-rec.gc.ca',
+      fr: 'data.donnees@cer-rec.gc.ca',
     },
     p5_2: {
       en: '. We look forward to hearing from you.',
@@ -158,7 +166,7 @@ const TranslationTable = fromJS({
     },
     map_1: {
       en: 'Map showing provinces and territories reporting 2009 swine flu (H1N1) cases in Canada by Fonadier ',
-      fr: 'Carte produite par Fonadier illustrant les provinces et territoires selon les signalements de cas de grippe A (H1N1), tirée de',
+      fr: 'Carte produite par Fonadier illustrant les provinces et territoires selon les signalements de cas de grippe A (H1N1), tirée de ',
     },
     map_2: {
       en: 'Wikimedia Commons',
@@ -728,12 +736,12 @@ const TranslationTable = fromJS({
   },
 
   mainSubheading: {
-    en: 'This visualization shows the quarterly energy trade data between Canada and the U.S. for various energy sources. New data is added quarterly. The last update was: 2019-12-31.',
-    fr: 'Cette visualisation illustre les données trimestrielles sur les échanges énergétiques entre le Canada et les États-Unis pour diverses sources d’énergie. De nouvelles données sont ajoutées tous les trimestres. Plus récente mise à jour : 2019-12-31.',
+    en: 'This visualization shows the quarterly energy trade data between Canada and the U.S. for various energy sources. New data is added quarterly. The last update was: 2021-03-31.',
+    fr: 'Cette visualisation illustre les données trimestrielles sur les échanges énergétiques entre le Canada et les États-Unis pour diverses sources d’énergie. De nouvelles données sont ajoutées tous les trimestres. Plus récente mise à jour : 2021-03-31.',
   },
   mainSubheadingCrudeOilImports: {
-    en: 'This visualization shows the quarterly energy trade data between Canada and the world for various energy sources. New data is added quarterly. The last update was: 2019-12-31.',
-    fr: 'Cette visualisation illustre les données trimestrielles sur les échanges énergétiques entre le Canada et le monde pour diverses sources d’énergie. De nouvelles données sont ajoutées tous les trimestres. Plus récente mise à jour : 2019-12-31.',
+    en: 'This visualization shows the quarterly energy trade data between Canada and the world for various energy sources. New data is added quarterly. The last update was: 2021-03-31.',
+    fr: 'Cette visualisation illustre les données trimestrielles sur les échanges énergétiques entre le Canada et le monde pour diverses sources d’énergie. De nouvelles données sont ajoutées tous les trimestres. Plus récente mise à jour : 2021-03-31.',
   },
   resetLabel: {
     en: 'reset',

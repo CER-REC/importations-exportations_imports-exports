@@ -122,10 +122,10 @@ class SocialBar extends React.Component {
     const self = this
     self.showAnalytics('email')
     this.makeBitlyPromise().then((url) => {
-      const emailBody = `${url}%0A%0A ${Tr.getIn(['shareEmail', 'body', self.props.language])}`
+      const subject = encodeURIComponent(Tr.getIn(['socialBar', 'emailSubject', self.props.language]))
+      const bodyText = encodeURIComponent(Tr.getIn(['socialBar', 'emailBody', self.props.language]))
 
-      const emailUrl = `mailto:?subject=${Tr.getIn(['shareEmail', 'subject', self.props.language])} &body= ${emailBody}`
-
+      const emailUrl = `mailto:?subject=${subject}&body=${encodeURIComponent(url)}%0A%0A${bodyText}`
       window.location.href = emailUrl
     })
   }
