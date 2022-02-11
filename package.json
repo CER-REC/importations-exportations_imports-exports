@@ -19,7 +19,7 @@
   "author": "Patrick King, Rahul Bhaskar, Charlie Cheung",
   "license": "Open Government Liscense - Canada",
   "dependencies": {
-    "ajv": "^5.2.2",
+    "ajv": "^6.12.3",
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
